@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Square = styled.div`
@@ -6,7 +7,7 @@ const Square = styled.div`
   align-items: center;
   width: 100%;
   height: 80px;
-  background-color: pink;
+  background-color: whitesmoke;
 `;
 
 function Footer() {
