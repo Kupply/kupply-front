@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import JoinMForm from "../components/JoinMForm";
-import MainCarousel from "../components/MainCarousel";
+import Carousel from "../components/Carousel";
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ const ContainerSubText = styled.text`
 function MainPage() {
   return (
     <Wrapper>
-      <MainCarousel />
+      <Carousel />
       <JoinMainContainer>
         <ContainerMainText>
           당신이 찾고 있던 이중전공에 대한 모든 정보가 바로 이곳에!
