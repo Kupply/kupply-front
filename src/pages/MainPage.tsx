@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import JoinMForm from "../components/JoinMForm";
+import MainCarousel from "../components/MainCarousel";
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,47 +10,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 800px;
   background: white;
-`;
-
-const BoxWrapper = styled.div`
-  width: 80%;
-  height: 300px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  margin-top: 80px;
-  margin-bottom: 0; 
-  padding-bottom: 0;
-`;
-
-const MainBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 600px;
-  height: 300px;
-  background: pink;
-`;
-
-const LeftButton = styled.button`
-  width: 0;
-  height: 0;
-  background: white;
-  border-top: 50px solid white;
-  border-bottom: 50px solid white;
-  border-left: 50px solid white;
-  border-right: 50px solid pink;
-`;
-
-const RightButton = styled.button`
-  width: 0;
-  height: 0;
-  background: white;
-  border-top: 50px solid white;
-  border-bottom: 50px solid white;
-  border-left: 50px solid pink;
-  border-right: 50px solid white;
 `;
 
 /* width 및 height 등 세부 픽셀 값 피그마와 상이함 주의 
@@ -63,10 +23,10 @@ const JoinMainContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: white;
-`
+`;
 
 const ContainerMainText = styled.h3`
-  color: #2C323A;
+  color: #2c323a;
   text-align: center;
   font-family: Pretendard;
   font-size: 38px;
@@ -75,10 +35,10 @@ const ContainerMainText = styled.h3`
   line-height: normal;
   margin-top: 0;
   margin-bottom: 12px;
-`
+`;
 
 const ContainerSubText = styled.text`
-  color: #2C323A;
+  color: #2c323a;
   text-align: center;
   font-family: Pretendard;
   font-size: 20px;
@@ -86,26 +46,22 @@ const ContainerSubText = styled.text`
   font-weight: 500;
   line-height: normal;
   margin-bottom: 34px;
-`
+`;
 
 function MainPage() {
   return (
     <Wrapper>
-      
-      <BoxWrapper>
-        <LeftButton />
-        <MainBox>
-          <h1>2023년 2학기 이중전공 지원자 현황</h1>
-        </MainBox>
-        <RightButton />
-      </BoxWrapper>
-      
+      <MainCarousel />
       <JoinMainContainer>
-        <ContainerMainText>당신이 찾고 있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
-        <ContainerSubText>간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.</ContainerSubText>
-        <JoinMForm onClick={ ()=>{} } />
+        <ContainerMainText>
+          당신이 찾고 있던 이중전공에 대한 모든 정보가 바로 이곳에!
+        </ContainerMainText>
+        <ContainerSubText>
+          간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점
+          비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.
+        </ContainerSubText>
+        <JoinMForm onClick={() => {}} />
       </JoinMainContainer>
-
     </Wrapper>
   );
 }
