@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const data = [
@@ -41,14 +41,14 @@ const CarouselWrapper = styled.div`
 `;
 
 const MainImage = styled.img`
-  width: 70%;
+  width: 1100px;
   height: 474px;
 `;
 
 const SubImage = styled.img`
   width: 776px;
   height: 350px;
-  opacity: 50%;
+  opacity: 40%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -60,11 +60,11 @@ const ButtonWrapper = styled.div`
   margin-bottom: 70px;
 `;
 
-const Button = styled.button<{ index: number }>`
+const Button = styled.button<{ name: number; index: number }>`
   width: 40px;
   height: 8px;
-  background: ${(props) => (props.key === props.index ? "pink" : "gray")};
-  opacity: 50%;
+  background: ${(props) => (props.name === props.index ? "pink" : "gray")};
+  opacity: 80%;
   border: none;
 `;
 
@@ -74,7 +74,7 @@ const LeftArrow = styled.button`
   background: none;
   border: none;
   position: absolute;
-  left: 520px;
+  left: 540px;
   color: white;
 `;
 
@@ -84,7 +84,7 @@ const RightArrow = styled.button`
   background: none;
   border: none;
   position: absolute;
-  right: 520px;
+  right: 540px;
   color: white;
 `;
 
@@ -96,10 +96,19 @@ function Carousel() {
     else return index;
   };
 
+  const autoChange = () => {
+    setIndex((prevIndex) => getIndex(prevIndex + 1));
+  };
+
+  useEffect(() => {
+    const timer = setInterval(autoChange, 6000);
+    return () => clearInterval(timer);
+  }, [index]);
+
   return (
     <Wrapper>
       <CarouselWrapper>
-        <SubImage src={data[getIndex(index + 1)].image} />
+        <SubImage src={data[getIndex(index - 1)].image} />
         <LeftArrow onClick={() => setIndex(getIndex(index - 1))}>
           <h1>{"<"}</h1>
         </LeftArrow>
@@ -107,13 +116,13 @@ function Carousel() {
         <RightArrow onClick={() => setIndex(getIndex(index + 1))}>
           <h1>{">"}</h1>
         </RightArrow>
-        <SubImage src={data[getIndex(index - 1)].image} />
+        <SubImage src={data[getIndex(index + 1)].image} />
       </CarouselWrapper>
       <ButtonWrapper>
-        <Button onClick={() => setIndex(0)} key={0} index={index} />
-        <Button onClick={() => setIndex(1)} key={1} index={index} />
-        <Button onClick={() => setIndex(2)} key={2} index={index} />
-        <Button onClick={() => setIndex(3)} key={3} index={index} />
+        <Button onClick={() => setIndex(0)} name={0} index={index} />
+        <Button onClick={() => setIndex(1)} name={1} index={index} />
+        <Button onClick={() => setIndex(2)} name={2} index={index} />
+        <Button onClick={() => setIndex(3)} name={3} index={index} />
       </ButtonWrapper>
     </Wrapper>
   );

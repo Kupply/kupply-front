@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 800px;
+  height: 900px;
   background: white;
 `;
 
@@ -17,9 +17,8 @@ const Wrapper = styled.div`
 const JoinMainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1000px;
+  width: 1200px;
   height: 192px;
-  margin-top: 113px;
   justify-content: center;
   align-items: center;
   background: white;
