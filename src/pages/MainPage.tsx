@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import JoinMForm from "../components/JoinMForm";
-import MainCarousel from "../components/MainCarousel";
+import Carousel from "../components/Carousel";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 800px;
+  height: 900px;
   background: white;
 `;
 
@@ -17,9 +17,8 @@ const Wrapper = styled.div`
 const JoinMainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1000px;
+  width: 1200px;
   height: 192px;
-  margin-top: 113px;
   justify-content: center;
   align-items: center;
   background: white;
@@ -51,7 +50,7 @@ const ContainerSubText = styled.text`
 function MainPage() {
   return (
     <Wrapper>
-      <MainCarousel />
+      <Carousel />
       <JoinMainContainer>
         <ContainerMainText>
           당신이 찾고 있던 이중전공에 대한 모든 정보가 바로 이곳에!
