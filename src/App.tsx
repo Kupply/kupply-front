@@ -8,6 +8,8 @@ import PreviousPage from "./pages/PreviousPage";
 import MyBoardPage from "./pages/MyBoardPage";
 import CommunityPage from "./pages/CommunityPage";
 import JoinPage from "./pages/JoinPage";
+import LabelPrimaryButton from "./assets/buttons/label/LabelPriButton";
+import LabelPrimaryWideButton from "./assets/buttons/label/LabelPriWideButton";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/join" element={<JoinPage />} />
         </Routes>
+        <LabelPrimaryButton />
         <Footer />
       </div>
     </BrowserRouter>
