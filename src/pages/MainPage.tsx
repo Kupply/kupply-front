@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import JoinMForm from "../components/JoinMForm";
 import Carousel from "../components/Carousel";
+import Header from "../assets/Header";
 
 const Wrapper = styled.div`
   display: flex;
