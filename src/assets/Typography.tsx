@@ -39,7 +39,7 @@ const Container = styled.div<TypographyProps>`
 `;
 
 function Typography(props: TypographyProps) {
-  const { children, size, ...rest } = props;
+  const { children, size = "bodyText", ...rest } = props;
   return (
     <Container size={size} {...rest}>
       {children}

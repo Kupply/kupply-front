@@ -1,3 +1,5 @@
+// 디자이너 요청으로 추후 작업 재개 예정
+
 import React, { useState } from "react";
 import styled from "styled-components";
 
