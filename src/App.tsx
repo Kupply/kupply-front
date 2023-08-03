@@ -17,7 +17,7 @@ function App() {
 		<BrowserRouter>
 			<GlobalStyle />
 			<div className="App">
-				<Header menu="join" />
+				<Header logined />
 				<Routes>
 					<Route path="/" element={<MainPage />} />
 					<Route path="/login" element={<LoginPage />} />
