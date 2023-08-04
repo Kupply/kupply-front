@@ -3,6 +3,7 @@ import styled from "styled-components";
 import JoinMForm from "../components/JoinMForm";
 import Carousel from "../components/Carousel";
 import Header from "../assets/Header";
+import TextFieldBox from "../assets/TextFieldBox";
 
 const Wrapper = styled.div`
   display: flex;
