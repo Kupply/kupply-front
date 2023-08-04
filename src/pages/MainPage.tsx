@@ -4,6 +4,10 @@ import JoinMForm from "../components/JoinMForm";
 import Carousel from "../components/Carousel";
 import Header from "../assets/Header";
 import TextFieldBox from "../assets/TextFieldBox";
+import VerificationBox from "../assets/VerificationBox";
+import NextButton from "../assets/NextButton";
+import Step4Button from "../assets/Step4Button";
+import Typography from "../assets/Typography";
 
 const Wrapper = styled.div`
   display: flex;
