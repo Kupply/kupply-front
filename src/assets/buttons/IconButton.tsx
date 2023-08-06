@@ -1,10 +1,18 @@
+// 수정 필요 (svg - children 으로 받아오기)
+
 import React from "react";
 import styled, { css } from "styled-components";
 
 const paddingMapping = {
-  small: "8px 26px",
-  medium: "16px 32px",
-  large: "24px 34px",
+  small: "9px",
+  medium: "16px",
+  large: "22px",
+};
+
+const imageSizeMapping = {
+  small: "18px",
+  medium: "20px",
+  large: "24px",
 };
 
 const colorMapping = {
@@ -12,16 +20,23 @@ const colorMapping = {
     color: white;
     background-color: #d85888;
 
-    // not in disabled state && hovering
     &:hover:not(:disabled) {
       background: rgba(216, 88, 136, 0.75);
       box-shadow: 0px 4px 12px 0px rgba(216, 88, 136, 0.25);
     }
 
-    // not in disabled state && being activated or clicked (after pressing a button)
+    &:hover:not(:disabled) {
+      background: rgba(216, 88, 136, 0.75);
+      box-shadow: 0px 4px 12px 0px rgba(216, 88, 136, 0.25);
+    }
+
     &:active:not(:disabled) {
       color: #d85888;
       background-color: rgba(216, 88, 136, 0.1);
+    }
+
+    &:active:not(:disabled) > svg > path {
+      fill: #d85888;
     }
   `,
   secondary: css`
@@ -30,14 +45,21 @@ const colorMapping = {
 
     &:hover:not(:disabled) {
       background: rgba(216, 88, 136, 0.1);
-
       border: none;
+    }
+
+    &:hover:not(:disabled) > svg > path {
+      fill: #d85888;
     }
 
     &:active:not(:disabled) {
       color: white;
       border: none;
       background: #d85888;
+    }
+
+    &:disabled > svg > path {
+      fill: #d85888;
     }
   `,
 };
@@ -49,28 +71,31 @@ const ButtonWrapper = styled.button<{
   transition: 0.25s ease-in-out;
   justify-content: center;
   align-items: center;
+  border-radius: 999px;
   padding: ${(props) => paddingMapping[props.size]};
-  border-radius: ${(props) => (props.size === "small" ? "6px" : "10px")};
-
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 100% */
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.445;
+    opacity: 0.45;
   }
 
   ${(props) => colorMapping[props.buttonType]};
+
+  & > svg {
+    width: ${(props) => imageSizeMapping[props.size]};
+    height: ${(props) => imageSizeMapping[props.size]};
+    transition: 0.25s ease-in-out;
+    stroke: d85888;
+  }
 `;
-export interface LabelButtonProps
+
+export interface IconButtonProps
   extends React.ComponentPropsWithoutRef<"button"> {
   buttonType: "primary" | "secondary";
   size: "small" | "medium" | "large";
 }
-export default function LabelButton(props: LabelButtonProps) {
+
+// 수정 필요
+export default function IconButton(props: IconButtonProps) {
   return <ButtonWrapper {...props}>{props.children}</ButtonWrapper>;
 }
