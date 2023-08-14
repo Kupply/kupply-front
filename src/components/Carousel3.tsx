@@ -87,7 +87,7 @@ function Carousel3() {
           <Text>아직 1지망과 2지망을 고민중 이신가요?</Text>
         </TextWrapper>
         <TextWrapper>
-          <Text>지난 학기 </Text>
+          <Text>지난 학기&nbsp;</Text>
           <BoldText>성적 커트라인 한눈에 비교</BoldText>
           <Text>하고 결정하세요.</Text>
         </TextWrapper>

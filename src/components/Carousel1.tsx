@@ -87,7 +87,7 @@ function Carousel1() {
           <Text>지난학기, 지지난학기 경영학과 커트라인까지</Text>
         </TextWrapper>
         <TextWrapper>
-          <BoldText>한번에 모아서</BoldText>
+          <BoldText>한번에 모아서&nbsp;</BoldText>
           <Text>보여드릴게요.</Text>
         </TextWrapper>
       </ContentWrapper>

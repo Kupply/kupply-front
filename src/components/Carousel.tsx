@@ -66,7 +66,7 @@ function Carousel() {
   };
 
   useEffect(() => {
-    const timer = setInterval(autoChange, 6000);
+    const timer = setInterval(autoChange, 8000);
     return () => clearInterval(timer);
   }, [current]);
 
