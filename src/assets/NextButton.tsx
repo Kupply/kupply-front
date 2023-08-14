@@ -31,7 +31,7 @@ const Text = styled.text`
 function NextButton(props: NextButtonProps) {
   const { children = "Next", active = false, ...rest } = props;
   return (
-    <Button active={active} {...rest}>
+    <Button active={active} disabled={!active} {...rest}>
       <Text>{children}</Text>
     </Button>
   );

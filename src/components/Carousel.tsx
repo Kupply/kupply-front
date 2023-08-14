@@ -1,129 +1,89 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-
-const data = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1520052205864-92d242b3a76b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBpbmt8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1571149828506-c48f1610314b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHBpbmt8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60",
-  },
-  {
-    image:
-      "https://plus.unsplash.com/premium_photo-1668104452882-2ae0969bb2cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHBpbmt8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1570475735025-6cd1cd5c779d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHBpbmt8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60",
-  },
-];
+import Carousel1 from "./Carousel1";
+import Carousel2 from "./Carousel2";
+import Carousel3 from "./Carousel3";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 600px;
+  height: 630px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const CarouselWrapper = styled.div`
-  width: 100%;
-  height: 474px;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 70px;
-  overflow: hidden;
-  margin-bottom: 30px;
-`;
-
-const MainImage = styled.img`
-  width: 1100px;
-  height: 474px;
-`;
-
-const SubImage = styled.img`
-  width: 776px;
-  height: 350px;
-  opacity: 40%;
-`;
-
-const ButtonWrapper = styled.div`
-  width: 200px;
-  height: 8px;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 70px;
-`;
-
-const Button = styled.button<{ name: number; index: number }>`
-  width: 40px;
-  height: 8px;
-  background: ${(props) => (props.name === props.index ? "pink" : "gray")};
-  opacity: 80%;
-  border: none;
-`;
-
 const LeftArrow = styled.button`
-  width: 60px;
-  height: 60px;
-  background: none;
-  border: none;
+  width: 32px;
+  height: 32px;
   position: absolute;
-  left: 540px;
-  color: white;
+  left: 100px;
+  top: 300px;
+  flex-shrink: 0;
+  background-image: url("design_image/carousel/carousel_left_button.png");
+  background-size: cover;
+  border: none;
+  cursor: pointer;
 `;
 
 const RightArrow = styled.button`
-  width: 60px;
-  height: 60px;
-  background: none;
-  border: none;
+  width: 32px;
+  height: 32px;
   position: absolute;
-  right: 540px;
-  color: white;
+  right: 100px;
+  top: 300px;
+  flex-shrink: 0;
+  background-image: url("design_image/carousel/carousel_right_button.png");
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+`;
+
+const CircleButton = styled.button<{ name: number; current: number }>`
+  width: ${(props) => (props.name === props.current ? "10px" : "8px")};
+  height: ${(props) => (props.name === props.current ? "10px" : "8px")};
+  position: absolute;
+  top: 580px;
+  left: ${(props) =>
+    props.name === 0 ? "910px" : props.name === 1 ? "940px" : "970px"};
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.name === props.current
+      ? "rgba(255, 255, 255, 1.00)"
+      : "rgba(255, 255, 255, 0.30)"};
+  border: none;
+  cursor: pointer;
 `;
 
 function Carousel() {
-  const [index, setIndex] = useState(0);
-  const getIndex = (index: number) => {
-    if (index === -1) return data.length - 1;
-    else if (index === data.length) return 0;
-    else return index;
+  const [current, setCurrent] = useState(0);
+  const getCurrent = (current: number) => {
+    if (current === 3) return 0;
+    else return current;
   };
 
   const autoChange = () => {
-    setIndex((prevIndex) => getIndex(prevIndex + 1));
+    setCurrent((prevCurrent) => getCurrent(prevCurrent + 1));
   };
 
   useEffect(() => {
     const timer = setInterval(autoChange, 6000);
     return () => clearInterval(timer);
-  }, [index]);
+  }, [current]);
 
   return (
     <Wrapper>
-      <CarouselWrapper>
-        <SubImage src={data[getIndex(index - 1)].image} />
-        <LeftArrow onClick={() => setIndex(getIndex(index - 1))}>
-          <h1>{"<"}</h1>
-        </LeftArrow>
-        <MainImage src={data[index].image} />
-        <RightArrow onClick={() => setIndex(getIndex(index + 1))}>
-          <h1>{">"}</h1>
-        </RightArrow>
-        <SubImage src={data[getIndex(index + 1)].image} />
-      </CarouselWrapper>
-      <ButtonWrapper>
-        <Button onClick={() => setIndex(0)} name={0} index={index} />
-        <Button onClick={() => setIndex(1)} name={1} index={index} />
-        <Button onClick={() => setIndex(2)} name={2} index={index} />
-        <Button onClick={() => setIndex(3)} name={3} index={index} />
-      </ButtonWrapper>
+      <LeftArrow onClick={() => setCurrent(getCurrent(current - 1))} />
+      {current === 0 ? (
+        <Carousel1></Carousel1>
+      ) : current === 1 ? (
+        <Carousel2></Carousel2>
+      ) : (
+        <Carousel3></Carousel3>
+      )}
+      <RightArrow onClick={() => setCurrent(getCurrent(current + 1))} />
+      <CircleButton onClick={() => setCurrent(0)} name={0} current={current} />
+      <CircleButton onClick={() => setCurrent(1)} name={1} current={current} />
+      <CircleButton onClick={() => setCurrent(2)} name={2} current={current} />
     </Wrapper>
   );
 }
