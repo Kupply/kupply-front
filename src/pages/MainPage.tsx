@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Carousel from "../components/Carousel";
 import LabelButton from "../assets/buttons/LabelButton";
 import { useNavigate } from "react-router-dom";
+import MultiStepProgressBar from "../assets/MultiStepProgressBar";
+import DropDown from "../assets/dropDown/dropDown";
 
 const Wrapper = styled.div`
   display: flex;
@@ -111,6 +113,10 @@ function MainPage() {
           </LabelButton>
         </JoinWrapper>
       </JoinMainContainer>
+      <DropDown
+        title={"1지망 이중전공 선택"}
+        optionList={[{ value: "경영학과" }, { value: "컴퓨터학과" }]}
+      />
     </Wrapper>
   );
 }
