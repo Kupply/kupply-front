@@ -131,6 +131,12 @@ function MultiStepProgressBar() {
           </StepItem>
         ))}
       </ProgressBarContainer>
+
+      {!complete && (
+        <NextButton onClick={handleNext}>
+          {currentStep === steps.length ? "FINISH" : "NEXT"}
+        </NextButton>
+      )}
     </>
   );
 }

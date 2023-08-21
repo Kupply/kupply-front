@@ -29,11 +29,11 @@ const sizeMapping: Record<SizeOptions, string[]> = {
 
 export interface TypographyProps extends React.ComponentPropsWithoutRef<"div"> {
   size?: SizeOptions;
-  color: string /* 윤진 수정 */;
+  color?: string /* 윤진 수정 */;
 }
 
 const Container = styled.div<TypographyProps>`
-  // color: #141414;
+  color: ${(props) => props.color};
   font-family: Pretendard;
   font-style: normal;
   line-height: 100%; /* 100% 로 수정 - 윤진 */
@@ -42,9 +42,9 @@ const Container = styled.div<TypographyProps>`
 `;
 
 function Typography(props: TypographyProps) {
-  const { children, size = "bodyText", ...rest } = props;
+  const { children, size = "bodyText", color = "#141414", ...rest } = props;
   return (
-    <Container size={size} {...rest}>
+    <Container size={size} color={color} {...rest}>
       {children}
     </Container>
   );

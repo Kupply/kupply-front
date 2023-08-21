@@ -13,25 +13,25 @@ import SettingsPage from "./pages/SettingsPage";
 import { GlobalStyle } from "./globalStyle";
 
 function App() {
-	return (
-		<BrowserRouter>
-			<GlobalStyle />
-			<div className="App">
-				<Header logined />
-				<Routes>
-					<Route path="/" element={<MainPage />} />
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="/previous" element={<PreviousPage />} />
-					<Route path="/myboard" element={<MyBoardPage />} />
-					<Route path="/community" element={<CommunityPage />} />
-					<Route path="/join" element={<JoinPage />} />
-					<Route path="/message" element={<MessagePage />} />
-					<Route path="/settings" element={<SettingsPage />} />
-				</Routes>
-				<Footer />
-			</div>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <GlobalStyle />
+      <div className="App">
+        <Header logined={false} />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/previous" element={<PreviousPage />} />
+          <Route path="/myboard" element={<MyBoardPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/join" element={<JoinPage />} />
+          <Route path="/message" element={<MessagePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
