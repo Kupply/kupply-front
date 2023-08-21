@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+/* 2023.08.21 수정사항: 타이포그래피 에셋 사용 시 (기존) 사이즈 선택에서 (변경) 사이즈 및 색 까지 선택 가능도록 수정 (프롭스 처리)  */
+
 type SizeOptions =
   | "heading1"
   | "heading2"
@@ -27,13 +29,14 @@ const sizeMapping: Record<SizeOptions, string[]> = {
 
 export interface TypographyProps extends React.ComponentPropsWithoutRef<"div"> {
   size?: SizeOptions;
+  color: string /* 윤진 수정 */;
 }
 
 const Container = styled.div<TypographyProps>`
-  color: #141414;
+  // color: #141414;
   font-family: Pretendard;
   font-style: normal;
-  line-height: 50px;
+  line-height: 100%; /* 100% 로 수정 - 윤진 */
   font-size: ${(props) => sizeMapping[props.size || "bodyText"][0]};
   font-weight: ${(props) => sizeMapping[props.size || "bodyText"][1]};
 `;

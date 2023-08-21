@@ -5,6 +5,8 @@ import LabelButton from "../assets/buttons/LabelButton";
 import { useNavigate } from "react-router-dom";
 import MultiStepProgressBar from "../assets/MultiStepProgressBar";
 import DropDown from "../assets/dropDown/dropDown";
+import VerificationButton from "../assets/buttons/VerificatinoButton";
+import CheckFieldBox from "../assets/CheckFieldBox";
 
 const Wrapper = styled.div`
   display: flex;
@@ -115,8 +117,14 @@ function MainPage() {
       </JoinMainContainer>
       <DropDown
         title={"1지망 이중전공 선택"}
-        optionList={[{ value: "경영학과" }, { value: "컴퓨터학과" }]}
+        optionList={[
+          { value1: "경영학과", value2: "경영대학" },
+          { value1: "경제학과", value2: "정경대학" },
+          { value1: "컴퓨터학과", value2: "정보대학" },
+        ]}
       />
+      <VerificationButton></VerificationButton>
+      <CheckFieldBox>개인정보 수집, 이용목적 동의 약관</CheckFieldBox>
     </Wrapper>
   );
 }
