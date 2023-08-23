@@ -38,7 +38,7 @@ const DirectButton = styled.button`
 const ButtonText = styled.text`
   color: #d85888;
   text-align: center;
-  font-family: Gmarket Sans;
+  font-family: GmarketSans;
   font-size: 20px;
   font-style: normal;
   font-weight: 300;

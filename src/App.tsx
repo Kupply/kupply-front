@@ -16,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <div className="App">
+      <div style={{ marginTop: "96px" }}>
         <Header logined={false} />
         <Routes>
           <Route path="/" element={<MainPage />} />

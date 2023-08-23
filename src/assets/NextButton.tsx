@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+/* 23.08.22 디자인 변경 수정 완료 - 버튼 background 색상 */
+
 export interface NextButtonProps
   extends React.ComponentPropsWithoutRef<"button"> {
   active?: boolean;
@@ -14,8 +16,11 @@ const Button = styled.button<NextButtonProps>`
   align-items: center;
   gap: 8px;
   border-radius: 10px;
-  opacity: 0.75;
-  background: ${(props) => (props.active ? "#D85888" : "#EEE")};
+  opacity: ${(props) => (props.active ? "null" : "0.75")}; // 수정
+  background: ${(props) =>
+    props.active
+      ? "rgba(216, 88, 136, 0.80)"
+      : "var(--df-grey-2, #DFDFDF)"}; // 수정
 `;
 
 const Text = styled.text`
@@ -29,7 +34,7 @@ const Text = styled.text`
 `;
 
 function NextButton(props: NextButtonProps) {
-  const { children = "Next", active = false, ...rest } = props;
+  const { children = "다음", active = true, ...rest } = props;
   return (
     <Button active={active} disabled={!active} {...rest}>
       <Text>{children}</Text>

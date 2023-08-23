@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Carousel from "../components/Carousel";
 import LabelButton from "../assets/buttons/LabelButton";
 import { useNavigate } from "react-router-dom";
+import NextButton from "../assets/NextButton";
+import PrevButton from "../assets/PrevButton";
 
 const Wrapper = styled.div`
   display: flex;
@@ -109,6 +111,8 @@ function MainPage() {
           </LabelButton>
         </JoinWrapper>
       </JoinMainContainer>
+      <NextButton />
+      <PrevButton />
     </Wrapper>
   );
 }

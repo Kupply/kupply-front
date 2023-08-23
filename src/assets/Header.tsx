@@ -14,9 +14,10 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   display: flex;
-  background: rgba(255, 255, 255, 0.2);
+  background: #fff;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 `;
 
 const FlexContainer = styled.div`
@@ -110,7 +111,7 @@ export default function Header({ logined }: HeaderProps) {
             buttonType="secondary"
             onClick={handleJoinClick}
           >
-            Join!
+            Log in
           </LabelButton>
         )}
       </FlexContainer>
