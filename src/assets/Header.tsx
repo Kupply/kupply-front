@@ -10,6 +10,7 @@ import LabelButton from "./buttons/LabelButton";
 const Wrapper = styled.div`
   align-items: center;
   width: 100%;
+  max-width: 1920px;
   height: 96px;
   position: fixed;
   top: 0;
