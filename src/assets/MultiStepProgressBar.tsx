@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import NextButton from "./NextButton";
 
-interface StepProps {
+/*
+[ 컴포넌트 이식 방법 ]
+(예시) 
+*/
+
+export interface StepProps {
   isActive: boolean;
   isComplete: boolean;
   stepType: "active" | "inactive" | "complete";
+}
+
+export interface MultiStepProgressBarProps {
+  steps: Array<number>;
+  currentStep: number;
+  complete: boolean;
+  handleNext: Function;
+  handlePrev: Function;
 }
 
 // 막대바 디자인
@@ -84,7 +97,12 @@ const ProgressBarContainer = styled.div`
   justify-content: space-between;
 `;
 
-function MultiStepProgressBar() {
+export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
+  const { steps = "[1, 2, 3, 4, 5]", complete = "false", ...rest } = props;
+
+  /* 
+  (컴포넌트 재사용성 제고를 위해 모두 프롭스 처리)
+
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [complete, setComplete] = useState<boolean>(false);
@@ -97,54 +115,61 @@ function MultiStepProgressBar() {
     }
   };
 
+  const handlePrev = () => {
+    if (currentStep === steps.length) {
+      // 마지막 단계
+      setComplete(false);
+    }
+    if (currentStep !== steps[0]) {
+      // 첫 단계일 때는 미동작
+      setCurrentStep((prev) => prev - 1);
+    }
+  };
+*/
+
   return (
     <>
       <ProgressBarContainer>
-        {steps.map((step, i) => (
+        {props.steps.map((step, i) => (
           <StepItem
             key={i}
-            isActive={currentStep === i + 1}
-            isComplete={i + 1 < currentStep || complete}
+            isActive={props.currentStep === i + 1}
+            isComplete={i + 1 < props.currentStep || props.complete}
             stepType={
-              currentStep === i + 1
+              props.currentStep === i + 1
                 ? "active"
-                : currentStep < i + 1
+                : props.currentStep < i + 1
                 ? "inactive"
                 : "complete"
             }
           >
             <Step
-              isActive={currentStep === i + 1}
-              isComplete={i + 1 < currentStep || complete}
+              isActive={props.currentStep === i + 1}
+              isComplete={i + 1 < props.currentStep || props.complete}
               stepType={
-                currentStep === i + 1
+                props.currentStep === i + 1
                   ? "active"
-                  : currentStep < i + 1
+                  : props.currentStep < i + 1
                   ? "inactive"
                   : "complete"
               }
             >
-              {currentStep > i + 1 ? (
+              {props.currentStep > i + 1 ? (
                 <img src="../../design_image/fi_check.svg" alt="ERROR" />
               ) : null}
             </Step>
           </StepItem>
         ))}
       </ProgressBarContainer>
-
-      {!complete && (
-        <NextButton onClick={handleNext}>
-          {currentStep === steps.length ? "FINISH" : "NEXT"}
-        </NextButton>
-      )}
     </>
   );
 }
 
 /* 
 
-페이지에 따라 버튼과 프로그래스바 위치가 상이하기 때문에, 버튼 코드는 주석 처리하였습니다.
-버튼 클릭에 따른 프로그래스 바 동작을 보고 싶다면, 주석을 해제해주세요.
+{!props.complete && props.PrevButton};
+{!props.complete && props.NextButton};
+    
 
 {!complete && (
         <NextButton onClick={handleNext}>
@@ -153,5 +178,3 @@ function MultiStepProgressBar() {
       )}
 
 */
-
-export default MultiStepProgressBar;

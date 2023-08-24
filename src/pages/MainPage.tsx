@@ -111,8 +111,6 @@ function MainPage() {
           </LabelButton>
         </JoinWrapper>
       </JoinMainContainer>
-      <NextButton />
-      <PrevButton />
     </Wrapper>
   );
 }
