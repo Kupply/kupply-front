@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import NextButton from "./NextButton";
 
-/*
-[ 컴포넌트 이식 방법 ]
-(예시) 
-*/
-
 export interface StepProps {
   isActive: boolean;
   isComplete: boolean;
@@ -29,6 +24,7 @@ const StepItem = styled.div<StepProps>`
   justify-content: center;
   align-items: center;
   width: 20rem;
+  height: 100%;
 
   &:not(:first-child):before {
     content: "";
@@ -45,8 +41,8 @@ const StepItem = styled.div<StepProps>`
 
 // 원(step) 디자인
 const Step = styled.div<StepProps>`
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.875rem; // 16xp = 1rem 기준
+  height: 1.875rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,11 +59,11 @@ const Step = styled.div<StepProps>`
       &::after {
         content: "";
         position: absolute;
-        width: 1.25rem;
-        height: 1.25rem;
+        width: 50%;
+        height: 50%;
         background-color: white;
         border-radius: 50%;
-        z-index: -1;
+        z-index: 2;
       }
     `}
 
@@ -93,6 +89,7 @@ const Step = styled.div<StepProps>`
 `;
 
 const ProgressBarContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;

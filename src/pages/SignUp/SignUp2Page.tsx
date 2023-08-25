@@ -36,7 +36,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 45px;
-  padding-bottom: 48px;
+  padding-bottom: 25px;
 `;
 
 const FormWrapper = styled.div`
@@ -44,8 +44,7 @@ const FormWrapper = styled.div`
   // flex-direction: column;
   width: 816px;
   height: 850px;
-  padding: 42px 94px 78px 94px;
-  padding-left: 94px;
+  padding: 67px 94px 78px 94px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
@@ -121,13 +120,15 @@ export default function SignUp2Page() {
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar
-        steps={steps}
-        currentStep={currentStep}
-        complete={complete}
-        handleNext={handleNext}
-        handlePrev={handlePrev}
-      />
+      <div style={{ width: "976.8px", height: "30px" }}>
+        <MultiStepProgressBar
+          steps={steps}
+          currentStep={currentStep}
+          complete={complete}
+          handleNext={handleNext}
+          handlePrev={handlePrev}
+        />
+      </div>
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 2</StepIndicator>
