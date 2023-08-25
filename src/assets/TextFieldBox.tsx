@@ -13,7 +13,7 @@ const baseWrapper = css`
 const defaultWrapper = css`
   align-items: center;
   background: none;
-  border: 1px solid #eee;
+  border: 1px solid #b9b9b9;
 `;
 
 const hoverWrapper = css`
