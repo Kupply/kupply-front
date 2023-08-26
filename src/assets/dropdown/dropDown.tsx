@@ -99,7 +99,7 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
   width: 628px;
   height: 68px;
   border-radius: 10px;
-  border: 1px solid #eee;
+  border: 1px solid #b9b9b9;
   background: #fff;
 
   display: flex;
@@ -117,8 +117,7 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
   opacity: 0.8;
 
   ${(props) =>
-    props.isOpen &&
-    props.isSelected &&
+    (props.isOpen || props.isSelected) && // 선택 이후 스타일 변화가 유지되도록 변경
     css`
       border: 1px solid #d85888;
       color: #d85888;

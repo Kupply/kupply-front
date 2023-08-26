@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
 const baseWrapper = css`
@@ -189,22 +190,67 @@ const TextFieldWrapper = styled.div<TextFieldBoxProps>`
 
 function TextFieldBox(props: TextFieldBoxProps) {
   const {
-    children,
-    state = "default",
     errorMessage = "Invalid Message",
     helpMessage = "Help Message",
     ...rest
   } = props;
+
+  //Textfield의 상태를 state로 관리
+  const [state, setState] = useState<StateOptions>("default");
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const onMouseEnter = () => {
+    if (state === "default") {
+      setState("hover");
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (state === "hover") {
+      if (rest.value === "") setState("default");
+      else setState("filled");
+    }
+  };
+
+  const onClick = () => {
+    setState("focused");
+  };
+
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      if (
+        ref.current !== null &&
+        !ref.current.contains(e.target as Node) &&
+        state === "focused"
+      ) {
+        if (rest.value === "") setState("default");
+        else setState("filled");
+      }
+    };
+
+    window.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      window.removeEventListener("click", handleDocumentClick);
+    };
+  }, [rest.value, state]);
+
   return (
     <>
-      <TextFieldWrapper state={state}>
+      <TextFieldWrapper
+        state={state}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
+        ref={ref}
+      >
         {state === "default" || state === "hover" ? (
-          <PlaceHolder>{children}</PlaceHolder>
+          <PlaceHolder>{rest.placeholder}</PlaceHolder>
         ) : state === "focused" ? (
           <>
             <MessageBox>
               <HelpMessage>{helpMessage}</HelpMessage>
-              <Input />
+              <Input value={rest.value} onChange={rest.onChange} />
             </MessageBox>
             <img
               src="../../design_image/text_field/x_circle.png"
@@ -226,7 +272,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "filled" ? (
           <>
-            <CorrectText>{children}</CorrectText>
+            <CorrectText>{rest.value}</CorrectText>
             <img
               src="../../design_image/text_field/check_circle.png"
               width="28px"
@@ -235,7 +281,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "error" ? (
           <>
-            <ErrorText>{children}</ErrorText>
+            <ErrorText>{rest.value}</ErrorText>
             <img
               src="../../design_image/text_field/alert_circle.png"
               width="28px"
@@ -244,7 +290,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "loading" ? (
           <>
-            <CorrectText>{children}</CorrectText>
+            <CorrectText>{rest.value}</CorrectText>
             <img
               src="../../design_image/text_field/loading.png"
               width="28px"

@@ -6,6 +6,7 @@ import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
+import DropDown from "../../assets/dropdown/dropDown";
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]
@@ -87,7 +88,18 @@ const ContentsList = styled.div`
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 18px;
+  margin-top: 34px;
 `;
+// state를 부모 컴포넌트에서 넘겨 주기 위해 추가
+type StateOptions =
+  | "default"
+  | "hover"
+  | "focused"
+  | "typing"
+  | "filled"
+  | "error"
+  | "loading"
+  | "password";
 
 export default function SignUp2Page() {
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
@@ -97,6 +109,10 @@ export default function SignUp2Page() {
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(2); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
+
+  const [name, setName] = useState<string>("");
+  const [stdID, setStdID] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
@@ -155,7 +171,13 @@ export default function SignUp2Page() {
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
             </div>
-            <TextFieldBox>홍길동</TextFieldBox>
+            <TextFieldBox
+              placeholder="홍길동"
+              value={name}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setName(e.target.value);
+              }}
+            ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
@@ -168,7 +190,51 @@ export default function SignUp2Page() {
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
             </div>
-            <TextFieldBox>학번 10자리</TextFieldBox>
+            <TextFieldBox
+              placeholder="학번 10자리"
+              value={stdID}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setStdID(e.target.value);
+              }}
+            ></TextFieldBox>
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <div style={{ display: "flex" }}>
+              <Typography
+                size="mediumText"
+                bold="700"
+                style={{ opacity: "0.8" }}
+              >
+                본전공(1전공)
+              </Typography>
+              <Typography size="mediumText">을 입력해주세요.</Typography>
+            </div>
+            <DropDown
+              title="전공선택"
+              optionList={[
+                { value1: "컴퓨터학과", value2: "정보대학" },
+                { value1: "경영학과", value2: "경영대학" },
+              ]}
+            ></DropDown>
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <div style={{ display: "flex" }}>
+              <Typography
+                size="mediumText"
+                bold="700"
+                style={{ opacity: "0.8" }}
+              >
+                전화번호
+              </Typography>
+              <Typography size="mediumText">를 입력해주세요.</Typography>
+            </div>
+            <TextFieldBox
+              placeholder="마케팅 및 새로운 소식 수신을 위한 휴대폰 11자리"
+              value={phone}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPhone(e.target.value);
+              }}
+            ></TextFieldBox>
           </ContentsWrapper>
         </ContentsList>
         <ButtonsWrapper>
