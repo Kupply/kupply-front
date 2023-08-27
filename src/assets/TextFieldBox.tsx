@@ -179,6 +179,7 @@ const stateMapping = {
 export interface TextFieldBoxProps
   extends React.ComponentPropsWithoutRef<"input"> {
   state?: StateOptions;
+  setState: (state: StateOptions) => void;
   errorMessage?: string;
   helpMessage?: string;
 }
@@ -190,13 +191,13 @@ const TextFieldWrapper = styled.div<TextFieldBoxProps>`
 
 function TextFieldBox(props: TextFieldBoxProps) {
   const {
+    state = "default",
+    setState,
     errorMessage = "Invalid Message",
     helpMessage = "Help Message",
     ...rest
   } = props;
 
-  //Textfield의 상태를 state로 관리
-  const [state, setState] = useState<StateOptions>("default");
   const ref = useRef<HTMLDivElement | null>(null);
 
   const onMouseEnter = () => {
@@ -233,12 +234,13 @@ function TextFieldBox(props: TextFieldBoxProps) {
     return () => {
       window.removeEventListener("click", handleDocumentClick);
     };
-  }, [rest.value, state]);
+  }, [rest.value, state, setState]);
 
   return (
     <>
       <TextFieldWrapper
         state={state}
+        setState={setState}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onClick={onClick}

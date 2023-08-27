@@ -111,18 +111,35 @@ export default function SignUp2Page() {
 
   /* 각 input들의 값을 state를 사용하여 관리 */
   const [name, setName] = useState<string>("");
+  const [nameState, setNameState] = useState<StateOptions>("default");
   const [stdID, setStdID] = useState<string>("");
+  const [stdIDState, setStdIDState] = useState<StateOptions>("default");
   const [phone, setPhone] = useState<string>("");
+  const [phoneState, setPhoneState] = useState<StateOptions>("default");
   const [dropdownValue, setdropDownValue] = useState<string>("");
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
-    if (!!name && !!stdID && !!phone && !!dropdownValue && !complete) {
+    if (
+      nameState === "filled" &&
+      stdIDState === "filled" &&
+      phoneState === "filled" &&
+      !!dropdownValue &&
+      !complete
+    ) {
       setComplete(true);
-    } else if (!(!!name && !!stdID && !!phone && !!dropdownValue) && complete) {
+    } else if (
+      !(
+        nameState === "filled" &&
+        stdIDState === "filled" &&
+        phoneState === "filled" &&
+        !!dropdownValue
+      ) &&
+      complete
+    ) {
       setComplete(false);
     }
-  }, [name, stdID, phone, dropdownValue, complete]);
+  }, [nameState, stdIDState, phoneState, dropdownValue, complete]);
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
@@ -187,6 +204,8 @@ export default function SignUp2Page() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setName(e.target.value);
               }}
+              state={nameState}
+              setState={setNameState}
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -206,6 +225,8 @@ export default function SignUp2Page() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setStdID(e.target.value);
               }}
+              state={stdIDState}
+              setState={setStdIDState}
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -246,6 +267,8 @@ export default function SignUp2Page() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPhone(e.target.value);
               }}
+              state={phoneState}
+              setState={setPhoneState}
             ></TextFieldBox>
           </ContentsWrapper>
         </ContentsList>
