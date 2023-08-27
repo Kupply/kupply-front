@@ -108,7 +108,7 @@ const Input = styled.input`
   caret-color: #d85888;
 `;
 
-const CorrectText = styled.text`
+const CorrectText = styled.input`
   width: 546px;
   height: 18px;
   font-size: 18px;
@@ -118,9 +118,11 @@ const CorrectText = styled.text`
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+  background: #fff;
+  ${(props) => props.type === "password" && "color: black;"}
 `;
 
-const ErrorText = styled.text`
+const ErrorText = styled.input`
   width: 546px;
   height: 18px;
   font-size: 18px;
@@ -131,6 +133,7 @@ const ErrorText = styled.text`
   font-weight: 400;
   line-height: 18px;
   opacity: 0.8;
+  background: #fff;
 `;
 
 const ErrorMessageWrapper = styled.div`
@@ -180,6 +183,7 @@ export interface TextFieldBoxProps
   extends React.ComponentPropsWithoutRef<"input"> {
   state?: StateOptions;
   setState: (state: StateOptions) => void;
+  setValue: (value: string) => void;
   errorMessage?: string;
   helpMessage?: string;
 }
@@ -193,8 +197,9 @@ function TextFieldBox(props: TextFieldBoxProps) {
   const {
     state = "default",
     setState,
+    setValue,
     errorMessage = "Invalid Message",
-    helpMessage = "Help Message",
+    helpMessage = "",
     ...rest
   } = props;
 
@@ -241,6 +246,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
       <TextFieldWrapper
         state={state}
         setState={setState}
+        setValue={setValue}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
@@ -252,12 +258,19 @@ function TextFieldBox(props: TextFieldBoxProps) {
           <>
             <MessageBox>
               <HelpMessage>{helpMessage}</HelpMessage>
-              <Input value={rest.value} onChange={rest.onChange} />
+              <Input
+                value={rest.value}
+                onChange={rest.onChange}
+                type={rest.type}
+              />
             </MessageBox>
             <img
               src="../../design_image/text_field/x_circle.png"
               width="28px"
               height="28px"
+              onClick={() => {
+                setValue("");
+              }}
             />
           </>
         ) : state === "typing" ? (
@@ -274,7 +287,11 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "filled" ? (
           <>
-            <CorrectText>{rest.value}</CorrectText>
+            <CorrectText
+              type={rest.type}
+              value={rest.value}
+              disabled
+            ></CorrectText>
             <img
               src="../../design_image/text_field/check_circle.png"
               width="28px"
@@ -283,7 +300,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "error" ? (
           <>
-            <ErrorText>{rest.value}</ErrorText>
+            <ErrorText type={rest.type} value={rest.value} disabled></ErrorText>
             <img
               src="../../design_image/text_field/alert_circle.png"
               width="28px"

@@ -206,6 +206,8 @@ export default function SignUp2Page() {
               }}
               state={nameState}
               setState={setNameState}
+              setValue={setName}
+              helpMessage="이름 입력"
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -227,6 +229,8 @@ export default function SignUp2Page() {
               }}
               state={stdIDState}
               setState={setStdIDState}
+              setValue={setStdID}
+              helpMessage="학번 입력"
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -269,6 +273,8 @@ export default function SignUp2Page() {
               }}
               state={phoneState}
               setState={setPhoneState}
+              setValue={setPhone}
+              helpMessage="휴대폰 번호 입력"
             ></TextFieldBox>
           </ContentsWrapper>
         </ContentsList>
