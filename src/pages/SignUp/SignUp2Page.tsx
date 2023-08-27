@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "../../assets/Typography";
@@ -7,7 +7,6 @@ import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
 import DropDown from "../../assets/dropdown/dropDown";
-
 /*
 [ 참고 사항 - TextFieldBox State Option ]
   default /  hover /  focused /  typing /  filled /  error /  loading /  password
@@ -110,9 +109,20 @@ export default function SignUp2Page() {
   const [currentStep, setCurrentStep] = useState<number>(2); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
+  /* 각 input들의 값을 state를 사용하여 관리 */
   const [name, setName] = useState<string>("");
   const [stdID, setStdID] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [dropdownValue, setdropDownValue] = useState<string>("");
+
+  /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
+  useEffect(() => {
+    if (!!name && !!stdID && !!phone && !!dropdownValue && !complete) {
+      setComplete(true);
+    } else if (!(!!name && !!stdID && !!phone && !!dropdownValue) && complete) {
+      setComplete(false);
+    }
+  }, [name, stdID, phone, dropdownValue, complete]);
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
@@ -215,6 +225,8 @@ export default function SignUp2Page() {
                 { value1: "컴퓨터학과", value2: "정보대학" },
                 { value1: "경영학과", value2: "경영대학" },
               ]}
+              value={dropdownValue}
+              setValue={setdropDownValue}
             ></DropDown>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -239,7 +251,7 @@ export default function SignUp2Page() {
         </ContentsList>
         <ButtonsWrapper>
           <PrevButton />
-          <NextButton />
+          <NextButton active={complete} />
         </ButtonsWrapper>
       </FormWrapper>
     </Wrapper>
