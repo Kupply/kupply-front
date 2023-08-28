@@ -12,8 +12,6 @@ export interface MultiStepProgressBarProps {
   steps: Array<number>;
   currentStep: number;
   complete: boolean;
-  handleNext: Function;
-  handlePrev: Function;
 }
 
 // 막대바 디자인
@@ -46,7 +44,7 @@ const Step = styled.div<StepProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 2;
   position: relative;
   border-radius: 50%;
 
@@ -125,7 +123,7 @@ export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
 */
 
   return (
-    <>
+    <div style={{ width: "976.8px", height: "30px" }}>
       <ProgressBarContainer>
         {props.steps.map((step, i) => (
           <StepItem
@@ -158,7 +156,7 @@ export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
           </StepItem>
         ))}
       </ProgressBarContainer>
-    </>
+    </div>
   );
 }
 
