@@ -3,13 +3,17 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "../../assets/Typography";
 import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
+import Timer from "../../components/Timer";
+import VerificationBox from "../../assets/VerificationBox";
 
 /*
-주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
-*/
+ 수정해야할 사항 목록
+ 1. 타이머 위치
+ 2. Verification Box 크기 (에셋 컴포넌트 수정 필요)
+ 3. 각 버튼에 이벤트 주입
+ */
 
 const Wrapper = styled.div`
   display: flex;
@@ -61,7 +65,7 @@ const StepIndicator = styled.div`
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 8px;
 `;
 
 const ContentsTitleWrapper = styled.div`
@@ -71,7 +75,7 @@ const ContentsTitleWrapper = styled.div`
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 35px;
 `;
 
 const ButtonsWrapper = styled.div`
@@ -79,10 +83,24 @@ const ButtonsWrapper = styled.div`
   gap: 18px;
 `;
 
+const VerifiBoxWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const SubContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 159.24px;
+  margin-bottom: 171px;
+`;
+
+// 이전 페이지인 'JOIN' 버튼에 onClick 이벤트 주입 필요
 export default function SignUp1Page() {
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
-
   /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
@@ -93,8 +111,12 @@ export default function SignUp1Page() {
     navigate("/signUp2");
   };
 
-  const handlePrev = () => {
-    navigate("/signUp2"); // 비활성화 처리 필요 (수정 필요, 현재는 임의로 넣은 페이지)
+  const handleReSent = () => {
+    // 모달 이벤트 작성 필요 w/ 애니메이션
+  };
+
+  const handleNotSent = () => {
+    // 모달 이벤트 작성 필요 w/ 애니메이션
   };
 
   return (
@@ -114,10 +136,101 @@ export default function SignUp1Page() {
         steps={steps}
         currentStep={currentStep}
         complete={complete}
-        handleNext={handleNext}
-        handlePrev={handlePrev} // 비활성화 처리 필요
       />
-      <FormWrapper></FormWrapper>
+      <FormWrapper>
+        <ContentsTitleWrapper>
+          <StepIndicator>Step 1</StepIndicator>
+          <Typography size="largeText">고려대학생 인증하기</Typography>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="630"
+            height="2"
+            viewBox="0 0 630 2"
+            fill="none"
+          >
+            <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
+          </svg>
+        </ContentsTitleWrapper>
+        <ContentsList>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <ContentsWrapper>
+              <Typography size="mediumText" bold="700">
+                인증번호가 전송되었습니다.
+              </Typography>
+              <Typography size="normalText">
+                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를
+                입력해주세요.
+              </Typography>
+            </ContentsWrapper>
+            <div>
+              <Typography size="largeText" color="#D85888">
+                <Timer setTime={3}></Timer>
+              </Typography>
+            </div>
+          </div>
+          <VerifiBoxWrapper>
+            <VerificationBox active={true}></VerificationBox>
+            <VerificationBox active={true}></VerificationBox>
+            <VerificationBox active={false}></VerificationBox>
+            <VerificationBox active={false}></VerificationBox>
+            <VerificationBox active={false}></VerificationBox>
+            <VerificationBox active={false}></VerificationBox>
+          </VerifiBoxWrapper>
+        </ContentsList>
+        <SubContentsWrapper>
+          <button onClick={handleReSent}>
+            <div style={{ gap: "4.97px", display: "flex" }}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+              >
+                <g opacity="0.8" clip-path="url(#clip0_1466_5915)">
+                  <path
+                    d="M13.3269 2.31445V5.78668H9.85034"
+                    stroke="#D85888"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.8725 8.68063C11.4959 9.74539 10.7829 10.6591 9.84113 11.2839C8.89933 11.9088 7.77969 12.211 6.65093 12.1451C5.52218 12.0791 4.44546 11.6486 3.58304 10.9183C2.72061 10.188 2.1192 9.19754 1.86943 8.09617C1.61966 6.9948 1.73507 5.84219 2.19826 4.81203C2.66145 3.78187 3.44732 2.92997 4.43747 2.3847C5.42761 1.83943 6.56837 1.63034 7.68785 1.78893C8.80733 1.94752 9.84488 2.4652 10.6441 3.26396L13.3269 5.78711"
+                    stroke="#D85888"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1466_5915">
+                    <rect width="13.9064" height="13.8889" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+              <Typography
+                size="smallText"
+                color="rgba(216, 88, 136, 0.80)"
+                style={{ textDecorationLine: "underline" }}
+              >
+                인증번호 다시받기
+              </Typography>
+            </div>
+          </button>
+          <button onClick={handleNotSent}>
+            <Typography
+              size="smallText"
+              color="rgba(216, 88, 136, 0.80)"
+              style={{ textDecorationLine: "underline" }}
+            >
+              아직 인증번호를 받지 못하셨나요?
+            </Typography>
+          </button>
+        </SubContentsWrapper>
+        <ButtonsWrapper>
+          <PrevButton active={false} />
+          <NextButton onClick={handleNext} />
+        </ButtonsWrapper>
+      </FormWrapper>
     </Wrapper>
   );
 }
