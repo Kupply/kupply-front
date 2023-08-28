@@ -6,7 +6,6 @@ import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
-import DropDown from "../../assets/dropdown/dropDown";
 /*
 [ 참고 사항 - TextFieldBox State Option ]
   default /  hover /  focused /  typing /  filled /  error /  loading /  password
@@ -257,6 +256,10 @@ export default function SignUp3Page() {
               helpMessage="고려대학교 이메일을 입력해 주세요"
               errorMessage="아이디가 고려대학교 이메일 형식이 아닙니다."
             ></TextFieldBox>
+            {/* 이미지 추가가 필요해요! */}
+            <Typography size="details" color="#A8A8A8">
+              쿠플라이 아이디는 고려대학교 이메일입니다.
+            </Typography>
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
