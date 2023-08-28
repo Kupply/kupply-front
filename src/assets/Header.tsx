@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   background: #fff;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 3;
 `;
 
 const FlexContainer = styled.div`

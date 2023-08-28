@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../assets/Logo";
 import Typography, { TypographyProps } from "../assets/Typography";
@@ -27,14 +28,14 @@ const ShortcutWrapper = styled.div`
 const ShortcutImage1 = styled.div`
   width: 31px;
   height: 40.844px;
-  background-image: url("design_image/KUlogo1.png"); // 수정 필요
+  background-image: url("design_image/KUlogo1.png");
   background-size: cover;
 `;
 
 const ShortcutImage2 = styled.div`
   width: 29px;
   height: 38.813px;
-  background-image: url("design_image/KUlogo2.png"); // 수정 필요
+  background-image: url("design_image/KUlogo2.png");
   background-size: cover;
 `;
 
@@ -117,7 +118,12 @@ export default function Footer() {
               <Typography size="smallText" bold="600">
                 고려대학교 포탈
               </Typography>
-              <ConnectLink>바로가기</ConnectLink>
+              <Link
+                to="https://portal.korea.ac.kr/front/Intro.kpd"
+                target="_blank"
+              >
+                <ConnectLink>바로가기</ConnectLink>
+              </Link>
             </ShortcutContents>
           </ShortcutWrapper>
           <ShortcutWrapper style={{ marginLeft: "58px" }}>
@@ -126,7 +132,12 @@ export default function Footer() {
               <Typography size="smallText" bold="600">
                 고려대학교 교육정보
               </Typography>
-              <ConnectLink>바로가기</ConnectLink>
+              <Link
+                to="https://registrar.korea.ac.kr/eduinfo/info/major_double.do"
+                target="_blank"
+              >
+                <ConnectLink>바로가기</ConnectLink>
+              </Link>
             </ShortcutContents>
           </ShortcutWrapper>
         </ContentsWrapper>
