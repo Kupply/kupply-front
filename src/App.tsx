@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/signup3" element={<SignUp3Page />} />
         <Route path="/signup4" element={<SignUp4Page />} />
         <Route path="/signup4-candidate" element={<SignUp4PageCandidate />} />
-        <Route path="/signup4-passer1" element={<SignUp4PagePasser />} />
+        <Route path="/signup4-passer" element={<SignUp4PagePasser />} />
         <Route path="/signup5" element={<SignUp5Page />} />
       </Routes>
       <Footer />
