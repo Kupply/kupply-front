@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
 const baseWrapper = css`
@@ -107,7 +108,7 @@ const Input = styled.input`
   caret-color: #d85888;
 `;
 
-const CorrectText = styled.text`
+const CorrectText = styled.input`
   width: 546px;
   height: 18px;
   font-size: 18px;
@@ -117,9 +118,11 @@ const CorrectText = styled.text`
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+  background: #fff;
+  ${(props) => props.type === "password" && "color: black;"}
 `;
 
-const ErrorText = styled.text`
+const ErrorText = styled.input`
   width: 546px;
   height: 18px;
   font-size: 18px;
@@ -130,6 +133,7 @@ const ErrorText = styled.text`
   font-weight: 400;
   line-height: 18px;
   opacity: 0.8;
+  background: #fff;
 `;
 
 const ErrorMessageWrapper = styled.div`
@@ -178,6 +182,8 @@ const stateMapping = {
 export interface TextFieldBoxProps
   extends React.ComponentPropsWithoutRef<"input"> {
   state?: StateOptions;
+  setState: (state: StateOptions) => void;
+  setValue: (value: string) => void;
   errorMessage?: string;
   helpMessage?: string;
 }
@@ -189,27 +195,82 @@ const TextFieldWrapper = styled.div<TextFieldBoxProps>`
 
 function TextFieldBox(props: TextFieldBoxProps) {
   const {
-    children,
     state = "default",
+    setState,
+    setValue,
     errorMessage = "Invalid Message",
-    helpMessage = "Help Message",
+    helpMessage = "",
     ...rest
   } = props;
+
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const onMouseEnter = () => {
+    if (state === "default") {
+      setState("hover");
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (state === "hover") {
+      if (rest.value === "") setState("default");
+      else setState("filled");
+    }
+  };
+
+  const onClick = () => {
+    setState("focused");
+  };
+
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      if (
+        ref.current !== null &&
+        !ref.current.contains(e.target as Node) &&
+        state === "focused"
+      ) {
+        if (rest.value === "") setState("default");
+        else setState("filled");
+      }
+    };
+
+    window.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      window.removeEventListener("click", handleDocumentClick);
+    };
+  }, [rest.value, state, setState]);
+
   return (
     <>
-      <TextFieldWrapper state={state}>
+      <TextFieldWrapper
+        state={state}
+        setState={setState}
+        setValue={setValue}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
+        ref={ref}
+      >
         {state === "default" || state === "hover" ? (
-          <PlaceHolder>{children}</PlaceHolder>
+          <PlaceHolder>{rest.placeholder}</PlaceHolder>
         ) : state === "focused" ? (
           <>
             <MessageBox>
               <HelpMessage>{helpMessage}</HelpMessage>
-              <Input />
+              <Input
+                value={rest.value}
+                onChange={rest.onChange}
+                type={rest.type}
+              />
             </MessageBox>
             <img
               src="../../design_image/text_field/x_circle.png"
               width="28px"
               height="28px"
+              onClick={() => {
+                setValue("");
+              }}
             />
           </>
         ) : state === "typing" ? (
@@ -226,7 +287,11 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "filled" ? (
           <>
-            <CorrectText>{children}</CorrectText>
+            <CorrectText
+              type={rest.type}
+              value={rest.value}
+              disabled
+            ></CorrectText>
             <img
               src="../../design_image/text_field/check_circle.png"
               width="28px"
@@ -235,7 +300,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "error" ? (
           <>
-            <ErrorText>{children}</ErrorText>
+            <ErrorText type={rest.type} value={rest.value} disabled></ErrorText>
             <img
               src="../../design_image/text_field/alert_circle.png"
               width="28px"
@@ -244,7 +309,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "loading" ? (
           <>
-            <CorrectText>{children}</CorrectText>
+            <CorrectText>{rest.value}</CorrectText>
             <img
               src="../../design_image/text_field/loading.png"
               width="28px"
