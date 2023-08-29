@@ -14,6 +14,8 @@ export interface DropDownOption {
 export interface DropDownProps {
   title: string;
   optionList: DropDownOption[];
+  value: string;
+  setValue: (str: string) => void;
 }
 
 export interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
@@ -30,11 +32,9 @@ export interface InputButtonProps extends React.ComponentPropsWithoutRef<"button
   isSelected: boolean;
 }
 
-function DropDown({ title, optionList }: DropDownProps) {
-  const [dropDownList, setDropDownList] = useState<DropDownOption[]>([]); // 드롭다운 메뉴의 옵션 리스트
-  const [selectedValue, setSeletedValue] = useState("");
+function DropDown({ title, optionList, value, setValue }: DropDownProps) {
   const [isOpen, ref, toggleIsOpen] = useDetectClose(false);
-  const isSelected: boolean = !!selectedValue;
+  const isSelected: boolean = !!value;
 
   /*
   const handleOptionChange = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,6 +52,7 @@ function DropDown({ title, optionList }: DropDownProps) {
         isSelected={isSelected}
         onClick={toggleIsOpen}
         type="button"
+
         value={selectedValue || title}
       />
       <AngleDown isOpen={isOpen} isSelected={isSelected}>
@@ -68,24 +69,26 @@ function DropDown({ title, optionList }: DropDownProps) {
           />
         </svg>
       </AngleDown>
+
       {isOpen && (
         <div style={{ display: "flex", flexDirection: "column", bottom: 28, position: "relative" }}>
           <OptionContainer>
             {optionList.map((data) => {
               return (
                 <OptionWrapper
-                  isSelectedValue={selectedValue === data.value1 ? true : false}
+                  isSelectedValue={value === data.value1 ? true : false}
                   key={data.value1}
                   // type="button"
                   // onClick={handleOptionChange}
                   onClick={() => {
-                    setSeletedValue(data.value1);
+                    setValue(data.value1);
                     toggleIsOpen(); // 해결 필요 1 - 옵션 선태 시 옵션 창 닫기 구현이 안됨.
                   }}
                 >
                   {data.value1}
                   <CollegeWrapper
                     size={"normalText"}
+
                     color={selectedValue === data.value1 ? "var(--primary, #d85888)" : "#141414"}
                   >
                     {data.value2}
@@ -124,7 +127,7 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
   width: 628px;
   height: 68px;
   border-radius: 10px;
-  border: 1px solid #eee;
+  border: 1px solid #b9b9b9;
   background: #fff;
 
   display: flex;
@@ -142,6 +145,7 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
   opacity: 0.8;
 
   ${(props) =>
+
     ((props.isOpen && props.isSelected) || (!props.isOpen && props.isSelected)) &&
     css`
       border: 1px solid #d85888;
