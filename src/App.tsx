@@ -13,7 +13,7 @@ import SettingsPage from "./pages/SettingsPage";
 import SignUp1Page from "./pages/SignUp/SignUp1Page";
 import SignUp2Page from "./pages/SignUp/SignUp2Page";
 import SignUp3Page from "./pages/SignUp/SignUp3Page";
-import SignUp4Page from "./pages/SignUp/SignUp4Page";
+import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from "./pages/SignUp/SignUp4Page";
 import SignUp5Page from "./pages/SignUp/SignUp5Page";
 
 export default function App() {
@@ -26,13 +26,15 @@ export default function App() {
         <Route path="/previous" element={<PreviousPage />} />
         <Route path="/myboard" element={<MyBoardPage />} />
         <Route path="/community" element={<CommunityPage />} />
-        <Route path="/join" element={<SignUp2Page />} />
+        <Route path="/join" element={<SignUp4Page />} />
         <Route path="/message" element={<MessagePage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/signup1" element={<SignUp1Page />} />
         <Route path="/signup2" element={<SignUp2Page />} />
         <Route path="/signup3" element={<SignUp3Page />} />
         <Route path="/signup4" element={<SignUp4Page />} />
+        <Route path="/signup4-candidate" element={<SignUp4PageCandidate />} />
+        <Route path="/signup4-passer1" element={<SignUp4PagePasser />} />
         <Route path="/signup5" element={<SignUp5Page />} />
       </Routes>
       <Footer />
