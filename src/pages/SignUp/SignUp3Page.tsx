@@ -213,8 +213,6 @@ export default function SignUp3Page() {
           steps={steps}
           currentStep={currentStep}
           complete={complete}
-          handleNext={handleNext}
-          handlePrev={handlePrev}
         />
       </div>
       <FormWrapper>

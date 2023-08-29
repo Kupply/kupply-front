@@ -163,15 +163,11 @@ export default function SignUp2Page() {
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <div style={{ width: "976.8px", height: "30px" }}>
-        <MultiStepProgressBar
-          steps={steps}
-          currentStep={currentStep}
-          complete={complete}
-          handleNext={handleNext}
-          handlePrev={handlePrev}
-        />
-      </div>
+      <MultiStepProgressBar
+        steps={steps}
+        currentStep={currentStep}
+        complete={complete}
+      />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 2</StepIndicator>
