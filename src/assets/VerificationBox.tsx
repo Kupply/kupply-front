@@ -5,10 +5,11 @@ import styled from "styled-components";
 
 export interface VerificationBoxProps
   extends React.ComponentPropsWithoutRef<"input"> {
-  isEntered?: boolean;
+  value: string;
+  setValue: (arg0: string) => void;
 }
 
-const InputWrapper = styled.input<VerificationBoxProps>`
+const InputWrapper = styled.input<{ isEntered?: boolean }>`
   width: 75px;
   height: 75px;
   display: flex;
@@ -35,18 +36,22 @@ const InputWrapper = styled.input<VerificationBoxProps>`
   }
 `;
 
-export default function VerificationBox() {
+export default function VerificationBox({
+  setValue,
+  value,
+}: VerificationBoxProps) {
   const [isEntered, setIsEntered] = useState<boolean>(false);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") setIsEntered(false);
-    else setIsEntered(true);
+    else {
+      setIsEntered(true);
+      setValue(e.target.value);
+    }
   };
 
   return (
-    <InputWrapper
-      onChange={handleChange}
-      maxLength={1}
-      isEntered={isEntered}
-    ></InputWrapper>
+    <InputWrapper onChange={handleChange} maxLength={1} isEntered={isEntered}>
+      {value}
+    </InputWrapper>
   );
 }
