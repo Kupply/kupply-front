@@ -11,8 +11,7 @@ import VerificationBox from "../../assets/VerificationBox";
 /*
  수정해야할 사항 목록
  1. 타이머 위치
- 2. Verification Box 크기 (에셋 컴포넌트 수정 필요)
- 3. 각 버튼에 이벤트 주입
+ 2. 각 버튼에 이벤트 주입 (텍스트버튼, 다음버튼)
  */
 
 const Wrapper = styled.div`
@@ -105,9 +104,26 @@ export default function SignUp1Page() {
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
+  const [inputComplete, setInputComplete] = useState<boolean>(false);
+  const [verificationBoxes, setVerificationBoxes] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
-  /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
+  const handleBoxChange = (index: number, isEntered: boolean) => {
+    const updatedBoxes = [...verificationBoxes];
+    updatedBoxes[index] = isEntered;
+    setVerificationBoxes(updatedBoxes);
+  };
+
   const handleNext = () => {
+    if (verificationBoxes.every((box) => box === true)) {
+      setInputComplete(true);
+    }
     navigate("/signUp2");
   };
 
@@ -169,12 +185,12 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox active={true}></VerificationBox>
-            <VerificationBox active={true}></VerificationBox>
-            <VerificationBox active={false}></VerificationBox>
-            <VerificationBox active={false}></VerificationBox>
-            <VerificationBox active={false}></VerificationBox>
-            <VerificationBox active={false}></VerificationBox>
+            <VerificationBox></VerificationBox>
+            <VerificationBox></VerificationBox>
+            <VerificationBox></VerificationBox>
+            <VerificationBox></VerificationBox>
+            <VerificationBox></VerificationBox>
+            <VerificationBox></VerificationBox>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
@@ -228,7 +244,10 @@ export default function SignUp1Page() {
         </SubContentsWrapper>
         <ButtonsWrapper>
           <PrevButton active={false} />
-          <NextButton onClick={handleNext} />
+          <NextButton
+            active={inputComplete ? true : false}
+            onClick={handleNext}
+          />
         </ButtonsWrapper>
       </FormWrapper>
     </Wrapper>
