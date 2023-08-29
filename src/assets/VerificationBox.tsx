@@ -3,10 +3,9 @@ import styled from "styled-components";
 
 // 자동 넘어가기
 
-export interface VerificationBoxProps extends React.ComponentPropsWithoutRef<"input"> {
+export interface VerificationBoxProps
+  extends React.ComponentPropsWithoutRef<"input"> {
   isEntered?: boolean;
-  value?: string;
-  onValueChange?: (value: string) => void;
 }
 
 const InputWrapper = styled.input<VerificationBoxProps>`
@@ -16,8 +15,10 @@ const InputWrapper = styled.input<VerificationBoxProps>`
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  border: ${(props) => (props.isEntered ? "1px solid #D85888" : "1px solid #b9b9b9")};
-  box-shadow: ${(props) => (props.isEntered ? "0px 4px 12px 0px rgba(216, 88, 136, 0.2)" : "null")};
+  border: ${(props) =>
+    props.isEntered ? "1px solid #D85888" : "1px solid #b9b9b9"};
+  box-shadow: ${(props) =>
+    props.isEntered ? "0px 4px 12px 0px rgba(216, 88, 136, 0.2)" : "null"};
   background: var(--white, #fff);
   color: var(--main-black, #141414);
   font-family: Pretendard;
@@ -34,26 +35,18 @@ const InputWrapper = styled.input<VerificationBoxProps>`
   }
 `;
 
-export default function VerificationBox(props: VerificationBoxProps) {
-  const { value, onValueChange } = props;
-
+export default function VerificationBox() {
   const [isEntered, setIsEntered] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>(value || "");
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setInputValue(newValue);
-
-    if (newValue === "") {
-      setIsEntered(false);
-    } else {
-      setIsEntered(true);
-    }
-
-    if (onValueChange) {
-      onValueChange(newValue);
-    }
+    if (e.target.value === "") setIsEntered(false);
+    else setIsEntered(true);
   };
 
-  return <InputWrapper onChange={handleChange} maxLength={1} isEntered={isEntered} value={inputValue} />;
+  return (
+    <InputWrapper
+      onChange={handleChange}
+      maxLength={1}
+      isEntered={isEntered}
+    ></InputWrapper>
+  );
 }
