@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "../../assets/Typography";
@@ -104,6 +104,24 @@ export default function SignUp1Page() {
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
+
+  const [num1, setNum1] = useState<string>("");
+  const [num2, setNum2] = useState<string>("");
+  const [num3, setNum3] = useState<string>("");
+  const [num4, setNum4] = useState<string>("");
+  const [num5, setNum5] = useState<string>("");
+  const [num6, setNum6] = useState<string>("");
+  const [nextButton, setNextButton] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!!num1 && !!num2 && !!num3 && !!num4 && !!num6 && !!num6) {
+      setNextButton(true);
+    } else {
+      setNextButton(false);
+    }
+  }, [num1, num2, num3, num4, num5, num6]);
+
+  /*
   const [inputComplete, setInputComplete] = useState<boolean>(false);
   const [verificationBoxes, setVerificationBoxes] = useState<boolean[]>([
     false,
@@ -120,10 +138,13 @@ export default function SignUp1Page() {
     setVerificationBoxes(updatedBoxes);
   };
 
+  */
   const handleNext = () => {
+    /*
     if (verificationBoxes.every((box) => box === true)) {
       setInputComplete(true);
     }
+    */
     navigate("/signUp2");
   };
 
@@ -185,12 +206,12 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
+            <VerificationBox value={num1} setValue={setNum1}></VerificationBox>
+            <VerificationBox value={num2} setValue={setNum2}></VerificationBox>
+            <VerificationBox value={num3} setValue={setNum3}></VerificationBox>
+            <VerificationBox value={num4} setValue={setNum4}></VerificationBox>
+            <VerificationBox value={num5} setValue={setNum5}></VerificationBox>
+            <VerificationBox value={num6} setValue={setNum6}></VerificationBox>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
@@ -244,10 +265,7 @@ export default function SignUp1Page() {
         </SubContentsWrapper>
         <ButtonsWrapper>
           <PrevButton active={false} />
-          <NextButton
-            active={inputComplete ? true : false}
-            onClick={handleNext}
-          />
+          <NextButton active={nextButton} onClick={handleNext} />
         </ButtonsWrapper>
       </FormWrapper>
     </Wrapper>

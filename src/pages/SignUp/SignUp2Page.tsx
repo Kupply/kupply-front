@@ -6,7 +6,8 @@ import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
-import DropDown from "../../assets/dropdown/dropDown";
+import DropDown from "../../assets/dropDown/dropDown";
+
 /*
 [ 참고 사항 - TextFieldBox State Option ]
   default /  hover /  focused /  typing /  filled /  error /  loading /  password

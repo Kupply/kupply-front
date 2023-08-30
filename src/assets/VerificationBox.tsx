@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 
-// 자동 넘어가기
+// 자동 넘어가기 구현 필요
 
 export interface VerificationBoxProps
   extends React.ComponentPropsWithoutRef<"input"> {
