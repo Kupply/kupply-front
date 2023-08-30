@@ -218,8 +218,15 @@ function TextFieldBox(props: TextFieldBoxProps) {
     }
   };
 
-  const onClick = () => {
+  const onFocus = () => {
     setState("focused");
+  };
+
+  const onBlur = () => {
+    if (state === "focused") {
+      if (rest.value === "") setState("default");
+      else setState("filled");
+    }
   };
 
   useEffect(() => {
@@ -249,8 +256,10 @@ function TextFieldBox(props: TextFieldBoxProps) {
         setValue={setValue}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
         ref={ref}
+        tabIndex={rest.tabIndex || 0}
       >
         {state === "default" || state === "hover" ? (
           <PlaceHolder>{rest.placeholder}</PlaceHolder>
@@ -262,6 +271,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
                 value={rest.value}
                 onChange={rest.onChange}
                 type={rest.type}
+                autoFocus
               />
             </MessageBox>
             <img
