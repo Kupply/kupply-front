@@ -6,7 +6,7 @@ import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
-import DropDown from "../../assets/dropDown/dropDown";
+import DropDown from "../../assets/dropdown/dropDown";
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]
@@ -227,7 +227,7 @@ export default function SignUp2Page() {
               state={stdIDState}
               setState={setStdIDState}
               setValue={setStdID}
-              helpMessage="학번 입력"
+              helpMessage="학번 10자리"
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>

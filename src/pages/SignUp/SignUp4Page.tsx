@@ -8,7 +8,7 @@ import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
 import Step4Button from "../../assets/Step4Button";
 import VerificationBox from "../../assets/VerificationBox";
-import DropDown from "../../assets/dropDown/dropDown";
+import DropDown from "../../assets/dropdown/dropDown";
 
 // TODO:
 // 자동 넘어가기.
