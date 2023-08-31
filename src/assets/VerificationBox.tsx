@@ -40,7 +40,7 @@ export default function VerificationBox(props: VerificationBoxProps) {
   const [inputValue, setInputValue] = useState<string>(value || "");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    const newValue = e.target.value.replace(/[^0-9]/g, "");
     setInputValue(newValue);
 
     if (newValue === "") {
