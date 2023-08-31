@@ -10,9 +10,6 @@ import Step4Button from "../../assets/Step4Button";
 import VerificationBox from "../../assets/VerificationBox";
 import DropDown from "../../assets/dropdown/dropDown";
 
-// TODO:
-// 자동 넘어가기.
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
