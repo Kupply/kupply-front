@@ -162,29 +162,16 @@ export default function SignUp1Page() {
         <Typography size="title1" style={{ lineHeight: "131.579%" }}>
           환영합니다
         </Typography>
-        <Typography
-          size="mediumText"
-          style={{ opacity: "0.8", marginTop: "5px" }}
-        >
+        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar
-        steps={steps}
-        currentStep={currentStep}
-        complete={complete}
-      />
+      <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 1</StepIndicator>
           <Typography size="largeText">고려대학생 인증하기</Typography>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="630"
-            height="2"
-            viewBox="0 0 630 2"
-            fill="none"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
         </ContentsTitleWrapper>
@@ -195,8 +182,7 @@ export default function SignUp1Page() {
                 인증번호가 전송되었습니다.
               </Typography>
               <Typography size="normalText">
-                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를
-                입력해주세요.
+                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를 입력해주세요.
               </Typography>
             </ContentsWrapper>
             <div>
@@ -206,24 +192,18 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox value={num1} setValue={setNum1}></VerificationBox>
-            <VerificationBox value={num2} setValue={setNum2}></VerificationBox>
-            <VerificationBox value={num3} setValue={setNum3}></VerificationBox>
-            <VerificationBox value={num4} setValue={setNum4}></VerificationBox>
-            <VerificationBox value={num5} setValue={setNum5}></VerificationBox>
-            <VerificationBox value={num6} setValue={setNum6}></VerificationBox>
+            <VerificationBox name="pin-1" value={num1} setValue={setNum1}></VerificationBox>
+            <VerificationBox name="pin-2" value={num2} setValue={setNum2}></VerificationBox>
+            <VerificationBox name="pin-3" value={num3} setValue={setNum3}></VerificationBox>
+            <VerificationBox name="pin-4" value={num4} setValue={setNum4}></VerificationBox>
+            <VerificationBox name="pin-5" value={num5} setValue={setNum5}></VerificationBox>
+            <VerificationBox name="pin-6" value={num6} setValue={setNum6}></VerificationBox>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
           <button onClick={handleReSent}>
             <div style={{ gap: "4.97px", display: "flex" }}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <g opacity="0.8" clip-path="url(#clip0_1466_5915)">
                   <path
                     d="M13.3269 2.31445V5.78668H9.85034"
@@ -244,21 +224,13 @@ export default function SignUp1Page() {
                   </clipPath>
                 </defs>
               </svg>
-              <Typography
-                size="smallText"
-                color="rgba(216, 88, 136, 0.80)"
-                style={{ textDecorationLine: "underline" }}
-              >
+              <Typography size="smallText" color="rgba(216, 88, 136, 0.80)" style={{ textDecorationLine: "underline" }}>
                 인증번호 다시받기
               </Typography>
             </div>
           </button>
           <button onClick={handleNotSent}>
-            <Typography
-              size="smallText"
-              color="rgba(216, 88, 136, 0.80)"
-              style={{ textDecorationLine: "underline" }}
-            >
+            <Typography size="smallText" color="rgba(216, 88, 136, 0.80)" style={{ textDecorationLine: "underline" }}>
               아직 인증번호를 받지 못하셨나요?
             </Typography>
           </button>

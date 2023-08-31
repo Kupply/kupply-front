@@ -12,8 +12,6 @@ import DropDown from "../../assets/dropDown/dropDown";
 
 // TODO:
 // 자동 넘어가기.
-// 학점이랑 학기 숫자 제한?
-// 합격자 마지막 페이지 랜더링
 
 const Wrapper = styled.div`
   display: flex;
@@ -294,10 +292,10 @@ export function SignUp4PageCandidate() {
               <Typography size="mediumText">을 소수점 두 자리까지 기입해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox value={GPA1} setValue={setGPA1} />
+              <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
               <Dot size="mediumText">.</Dot>
-              <VerificationBox value={GPA2} setValue={setGPA2} />
-              <VerificationBox value={GPA3} setValue={setGPA3} />
+              <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
+              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -308,10 +306,10 @@ export function SignUp4PageCandidate() {
               <Typography size="mediumText">를 입력해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox value={hopeSemester1} setValue={setHopeSemester1}></VerificationBox>
-              <VerificationBox value={hopeSemester2} setValue={setHopeSemester2}></VerificationBox>
+              <VerificationBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1}></VerificationBox>
+              <VerificationBox name="semester-2" value={hopeSemester2} setValue={setHopeSemester2}></VerificationBox>
               <Dash size="mediumText">-</Dash>
-              <VerificationBox value={hopeSemester3} setValue={setHopeSemester3}></VerificationBox>
+              <VerificationBox name="semester-3" value={hopeSemester3} setValue={setHopeSemester3}></VerificationBox>
             </VerifiBoxWrapper>
           </ContentsWrapper>
         </ContentsList>
@@ -411,10 +409,10 @@ export function SignUp4PagePasser() {
               <Typography size="mediumText">을 소수점 두 자리까지 기입해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox value={GPA1} setValue={setGPA1} />
+              <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
               <Dot size="mediumText">.</Dot>
-              <VerificationBox value={GPA1} setValue={setGPA2} />
-              <VerificationBox value={GPA1} setValue={setGPA3} />
+              <VerificationBox name="gpa-2" value={GPA1} setValue={setGPA2} />
+              <VerificationBox name="gpa-3" value={GPA1} setValue={setGPA3} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -425,10 +423,10 @@ export function SignUp4PagePasser() {
               <Typography size="mediumText">를 입력해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox value={passSemester1} setValue={setPassSemester1}></VerificationBox>
-              <VerificationBox value={passSemester2} setValue={setPassSemester2}></VerificationBox>
+              <VerificationBox name="semester-1" value={passSemester1} setValue={setPassSemester1}></VerificationBox>
+              <VerificationBox name="semester-2" value={passSemester2} setValue={setPassSemester2}></VerificationBox>
               <Dash size="mediumText">-</Dash>
-              <VerificationBox value={passSemester3} setValue={setPassSemester3}></VerificationBox>
+              <VerificationBox name="semester-3" value={passSemester3} setValue={setPassSemester3}></VerificationBox>
             </VerifiBoxWrapper>
           </ContentsWrapper>
         </ContentsList>
