@@ -1,12 +1,11 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent, useRef } from "react";
 import styled from "styled-components";
-
-// 자동 넘어가기 구현 필요
 
 export interface VerificationBoxProps extends React.ComponentPropsWithoutRef<"input"> {
   isEntered?: boolean;
   value?: string;
   setValue?: (value: string) => void;
+  name: string;
 }
 
 const InputWrapper = styled.input<VerificationBoxProps>`
@@ -34,10 +33,13 @@ const InputWrapper = styled.input<VerificationBoxProps>`
 `;
 
 export default function VerificationBox(props: VerificationBoxProps) {
-  const { value, setValue } = props;
+  const { value, setValue, name } = props;
+  const [fieldName, fieldIndex] = name.split("-");
 
   const [isEntered, setIsEntered] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>(value || "");
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.replace(/[^0-9]/g, "");
@@ -52,7 +54,37 @@ export default function VerificationBox(props: VerificationBoxProps) {
     if (setValue) {
       setValue(newValue);
     }
+
+    const nextSibling = document.querySelector(
+      `input[name="${fieldName}-${parseInt(fieldIndex, 10) + 1}"]`
+    ) as HTMLInputElement;
+
+    if (newValue !== "" && nextSibling) {
+      nextSibling.focus();
+    }
   };
 
-  return <InputWrapper onChange={handleChange} maxLength={1} isEntered={isEntered} value={inputValue} />;
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && !inputValue) {
+      const prevSibling = document.querySelector(
+        `input[name="${fieldName}-${parseInt(fieldIndex, 10) - 1}"]`
+      ) as HTMLInputElement;
+
+      if (prevSibling) {
+        prevSibling.focus();
+      }
+    }
+  };
+
+  return (
+    <InputWrapper
+      onChange={handleChange}
+      onKeyDown={handleKeyDown}
+      maxLength={1}
+      isEntered={isEntered}
+      value={inputValue}
+      name={name}
+      ref={inputRef}
+    />
+  );
 }
