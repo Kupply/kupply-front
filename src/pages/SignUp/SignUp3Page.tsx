@@ -109,7 +109,7 @@ export default function SignUp3Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [ID, setID] = useState<string>("");
+  const [ID, setID] = useState<string>("bruce1115@korea.ac.kr");
   const [IDState, setIDState] = useState<StateOptions>("default");
   const [password, setPassword] = useState<string>("");
   const [passwordState, setPasswordState] = useState<StateOptions>("default");
@@ -243,16 +243,13 @@ export default function SignUp3Page() {
               </Typography>
             </div>
             <TextFieldBox
-              placeholder="홍길동"
               value={ID}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setID(e.target.value);
               }}
-              state={IDState}
-              setState={setIDState}
-              setValue={setID}
-              helpMessage="고려대학교 이메일을 입력해 주세요"
-              errorMessage="아이디가 고려대학교 이메일 형식이 아닙니다."
+              state={"filled"}
+              setState={() => {}}
+              setValue={() => {}}
             ></TextFieldBox>
             {/* 이미지 추가가 필요해요! */}
             <Typography size="details" color="#A8A8A8">
