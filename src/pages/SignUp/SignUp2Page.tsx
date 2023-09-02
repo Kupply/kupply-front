@@ -7,6 +7,7 @@ import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
 import DropDown from "../../assets/dropdown/dropDown";
+
 /*
 [ 참고 사항 - TextFieldBox State Option ]
   default /  hover /  focused /  typing /  filled /  error /  loading /  password
@@ -163,15 +164,11 @@ export default function SignUp2Page() {
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <div style={{ width: "976.8px", height: "30px" }}>
-        <MultiStepProgressBar
-          steps={steps}
-          currentStep={currentStep}
-          complete={complete}
-          handleNext={handleNext}
-          handlePrev={handlePrev}
-        />
-      </div>
+      <MultiStepProgressBar
+        steps={steps}
+        currentStep={currentStep}
+        complete={complete}
+      />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 2</StepIndicator>
@@ -230,7 +227,7 @@ export default function SignUp2Page() {
               state={stdIDState}
               setState={setStdIDState}
               setValue={setStdID}
-              helpMessage="학번 입력"
+              helpMessage="학번 10자리"
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
