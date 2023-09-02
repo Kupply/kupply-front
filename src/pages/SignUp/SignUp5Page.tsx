@@ -20,7 +20,26 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-bottom: 400px; // 임시로 지정 수정 필요?
+  // padding-bottom: 400px; // 임시로 지정 수정 필요?
+  background: #FCFAFB;
+  /* Webkit 기반의 브라우저 (예: Chrome, Safari)에서 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox에서 스크롤바 숨기기 */
+  scrollbar-width: none;
+
+  /* Internet Explorer에서 스크롤바 숨기기 */
+  -ms-overflow-style: none;
+`;
+
+const Wrapper2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const TitleWrapper = styled.div`
@@ -29,12 +48,12 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 45px;
-  padding-bottom: 48px;
+  padding-bottom: 25px;
 `;
 
 const FormWrapper = styled.div`
-  // display: flex;
-  // flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
   width: 816px;
   height: 850px;
   padding: 42px 94px 78px 94px;
@@ -42,6 +61,7 @@ const FormWrapper = styled.div`
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
+  margin-top: 25px;
 `;
 
 const StepIndicator = styled.div`
@@ -63,37 +83,84 @@ const StepIndicator = styled.div`
 `;
 
 const ContentsTitleWrapper = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 `;
 
 const TextTitleWrapper = styled.div`
-  display: flex;
-  gap: 18px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  display: inline-flex;
+  // padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: center;
 `;
+
+const TextTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 23px;
+`;
+
 
 const TextOutBox = styled.div`
   width: 628px;
   height: 228px;
+  flex-shrink: 0;
   border-radius: 10px;
-  background-color: #ffffff;
-  border: 1px solid #eeeeee;
+  background: var(--White, #FFF);
+  border: 1px solid #EEE;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8px;
-  margin-top: 22px;
-  margin-bottom: 22px;
+  //margin-top: 22px;
+  //margin-bottom: 22px;
 `;
 
 const TextBox = styled.div`
-  // 스크롤바 숨기기 왜 안될까...
   width: 594px;
   height: 204px;
-  background-color: #ffffff;
-  margin: 8px;
+  padding: 8px;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
   overflow-y: auto;
+`;
+
+const ButtonsTextWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  //margin-top: 33px;
+  //margin-bottom: 22px;
+  //margin-top: 22px;
+  //margin-bottom: 22px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 18px;
+  margin-top: 5px;
+  margin-bottom: 50px;
+`;
+
+const FixedWidth = css` // 628px 너무 길어서 길이 조절했습니다 
+  width: 475px;
+`
+
+const NextButtonFixedWidth = styled(NextButton)`
+  ${FixedWidth}
+`
+
+const ScrollBox = styled.div`
+  display: inline-flex;
+  height: 80%;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  overflow-y: auto;
+  gap: 20px;
 
   /* Webkit 기반의 브라우저 (예: Chrome, Safari)에서 스크롤바 숨기기 */
   ::-webkit-scrollbar {
@@ -107,14 +174,12 @@ const TextBox = styled.div`
   -ms-overflow-style: none;
 `;
 
-const ButtonsWrapper = styled.div`
-  display: flex;
-  gap: 18px;
-  align-items: center;
-`;
-
 const ArrowImage = styled.img`
-  margin-left: 8px;
+  //display: flex;
+  width: 28px;
+  height: 28px;
+  justify-content: center;
+  align-items: center;
   vertical-align: middle;
 `;
 
@@ -183,7 +248,7 @@ const CustomCheckButton: React.FC<CustomCheckButtonProps> = ({
   );
 };
 
-export default function SignUp5Page() {
+function SignUp5Page() {
   /*각 체크박스의 상태를 state로 관리*/
   const [allChecked, setAllChecked] = useState(false);
   const [individualChecks, setIndividualChecks] = useState({
@@ -212,6 +277,14 @@ export default function SignUp5Page() {
   }, [allChecked]);
 
   useEffect(() => {
+    if (allStateAgreed()) {
+      setAllChecked(true);
+    } else {
+      setAllChecked(false);
+    }
+  }, [individualChecks]);
+
+  useEffect(() => {
     setIsButtonActive(allStateAgreed());
   }, [individualChecks]);
 
@@ -226,7 +299,7 @@ export default function SignUp5Page() {
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
     if (isButtonActive) {
-      navigate("/signUp6");
+      navigate("/signupcomplete");
     } else {
       alert("모든 약관에 동의해주세요.");
     }
@@ -273,17 +346,29 @@ export default function SignUp5Page() {
         </ContentsTitleWrapper>
 
         <TextTitleWrapper>
-          <CustomCheckButton isChecked={allChecked} onChange={setAllChecked} />
-          <Typography size="largeText">
-            약관 전체동의 하기
-            <ArrowImage
-              src="design_image/carousel/carousel_right_button.png"
-              alt="right arrow"
+          <TextTitle>
+            <CustomCheckButton 
+              isChecked={allChecked} 
+              onChange={setAllChecked} 
             />
-          </Typography>
+            <Typography 
+              size="largeText"
+              style={{
+                fontWeight: "600", 
+                marginBottom: "-5px",
+                justifyContent: "center"
+              }} 
+            >
+              약관 전체동의 하기
+              <ArrowImage   // 위치가 좀 이상해서 수정 필요
+                src="design_image/carousel/carousel_right_button.png"
+                alt="right arrow"
+              />
+            </Typography>
+          </TextTitle>
         </TextTitleWrapper>
-
-        <ButtonsWrapper>
+      <ScrollBox>
+        <ButtonsTextWrapper>
           <CustomCheckButton
             isChecked={individualChecks.first}
             onChange={(newCheckedValue) =>
@@ -293,17 +378,28 @@ export default function SignUp5Page() {
               }))
             }
           />
-          <Typography size="largeText">
+            <Typography 
+              size="mediumText"
+              style={{
+                fontWeight: "600", 
+                marginBottom: "-5px",
+                justifyContent: "center"
+              }} 
+            >
             개인정보 수집, 이용목적 동의 약관
             <ArrowImage
               src="design_image/carousel/carousel_right_button.png"
               alt="right arrow"
             />
           </Typography>
-        </ButtonsWrapper>
+        </ButtonsTextWrapper>
 
         <TextOutBox>
           <TextBox>
+            <Typography 
+                size="mediumText"
+                style={{fontWeight: "400"}}
+              >
             「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
             개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
             개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
@@ -319,10 +415,11 @@ export default function SignUp5Page() {
             개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
             제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
             아래 항목에 명시된 범위에서만 활용됩니다.
+            </Typography>
           </TextBox>
         </TextOutBox>
 
-        <ButtonsWrapper>
+        <ButtonsTextWrapper>
           <CustomCheckButton
             isChecked={individualChecks.second}
             onChange={(newCheckedValue) =>
@@ -332,17 +429,28 @@ export default function SignUp5Page() {
               }))
             }
           />
-          <Typography size="largeText">
-            커뮤니티 이용수칙 준수-1
+          <Typography 
+              size="mediumText"
+              style={{
+                fontWeight: "600", 
+                marginBottom: "-5px",
+                justifyContent: "center"
+              }} 
+            >
+            커뮤니티 이용수칙 준수 - 1
             <ArrowImage
               src="design_image/carousel/carousel_right_button.png"
               alt="right arrow"
             />
           </Typography>
-        </ButtonsWrapper>
+        </ButtonsTextWrapper>
 
         <TextOutBox>
           <TextBox>
+            <Typography 
+                size="mediumText"
+                style={{fontWeight: "400"}} 
+              >
             「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
             개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
             개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
@@ -358,10 +466,11 @@ export default function SignUp5Page() {
             개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
             제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
             아래 항목에 명시된 범위에서만 활용됩니다.
+            </Typography>
           </TextBox>
         </TextOutBox>
 
-        <ButtonsWrapper>
+        <ButtonsTextWrapper>
           <CustomCheckButton
             isChecked={individualChecks.third}
             onChange={(newCheckedValue) =>
@@ -371,17 +480,28 @@ export default function SignUp5Page() {
               }))
             }
           />
-          <Typography size="largeText">
-            커뮤니티 이용수칙 준수-2
+          <Typography 
+              size="mediumText"
+              style={{
+                fontWeight: "600", 
+                marginBottom: "-5px",
+                justifyContent: "center"
+              }} 
+            >
+            커뮤니티 이용수칙 준수 - 2
             <ArrowImage
               src="design_image/carousel/carousel_right_button.png"
               alt="right arrow"
             />
           </Typography>
-        </ButtonsWrapper>
+        </ButtonsTextWrapper>
 
         <TextOutBox>
           <TextBox>
+            <Typography 
+                size="mediumText"
+                style={{fontWeight: "400"}} 
+              >
             「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
             개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
             개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
@@ -397,10 +517,11 @@ export default function SignUp5Page() {
             개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
             제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
             아래 항목에 명시된 범위에서만 활용됩니다.
+            </Typography>
           </TextBox>
         </TextOutBox>
 
-        <ButtonsWrapper>
+        <ButtonsTextWrapper>
           <CustomCheckButton
             isChecked={individualChecks.fourth}
             onChange={(newCheckedValue) =>
@@ -410,17 +531,28 @@ export default function SignUp5Page() {
               }))
             }
           />
-          <Typography size="largeText">
-            커뮤니티 이용수칙 준수-3
+          <Typography 
+              size="mediumText"
+              style={{
+                fontWeight: "600", 
+                marginBottom: "-5px",
+                justifyContent: "center"
+              }} 
+            >
+            커뮤니티 이용수칙 준수 - 3
             <ArrowImage
               src="design_image/carousel/carousel_right_button.png"
               alt="right arrow"
             />
           </Typography>
-        </ButtonsWrapper>
+        </ButtonsTextWrapper>
 
         <TextOutBox>
           <TextBox>
+            <Typography 
+                size="mediumText"
+                style={{fontWeight: "400"}} 
+              >
             「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
             개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
             개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
@@ -436,16 +568,65 @@ export default function SignUp5Page() {
             개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
             제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
             아래 항목에 명시된 범위에서만 활용됩니다.
+            </Typography>
           </TextBox>
         </TextOutBox>
-
+        
         <ButtonsWrapper>
           <PrevButton />
-          <NextButton active={isButtonActive} onClick={handleNext}>
+          <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>
             Next
-          </NextButton>
+          </NextButtonFixedWidth>
         </ButtonsWrapper>
+
+        </ScrollBox>
       </FormWrapper>
     </Wrapper>
   );
-}
+};
+
+const TitleOutBox = styled.div`
+  width: 877px;
+  height: 411px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+function SignUp5Complete() {
+  return (
+    <Wrapper2>
+      <TitleOutBox>
+        <div style={{ textAlign: "center" }}>
+          <Typography size="heading1" style={{ lineHeight: "104.167%" }}>
+            축하합니다!
+          </Typography>
+          <div style={{ marginTop: "24px" }}>
+            <Typography
+              size="largeText"
+              style={{ opacity: "0.8", lineHeight: "30px", fontWeight: "500" }}
+            >
+              이제 쿠플라이의 회원이 되셨습니다. 
+              <br />
+              로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
+            </Typography>
+          </div>
+        </div>
+      </TitleOutBox>
+
+      <img 
+        src="design_image/0001.gif" 
+        alt="completeImage"
+        style={{
+          position: "absolute",
+          width: "781px",
+          height: "836px",
+          left: "570px",
+          top: "283px",
+        }}
+     />
+    </Wrapper2>
+  );
+};
+
+export {SignUp5Page, SignUp5Complete};

@@ -185,12 +185,24 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
-            <VerificationBox></VerificationBox>
+            <VerificationBox value={""} setValue={function (arg0: string): void {
+              throw new Error("Function not implemented.");
+            } }></VerificationBox>
+            <VerificationBox value={""} setValue={function (arg0: string): void {
+              throw new Error("Function not implemented.");
+            } }></VerificationBox>
+            <VerificationBox value={""} setValue={function (arg0: string): void {
+              throw new Error("Function not implemented.");
+            } }></VerificationBox>
+            <VerificationBox value={""} setValue={function (arg0: string): void {
+              throw new Error("Function not implemented.");
+            } }></VerificationBox>
+            <VerificationBox value={""} setValue={function (arg0: string): void {
+              throw new Error("Function not implemented.");
+            } }></VerificationBox>
+            <VerificationBox value={""} setValue={function (arg0: string): void {
+              throw new Error("Function not implemented.");
+            } }></VerificationBox>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
