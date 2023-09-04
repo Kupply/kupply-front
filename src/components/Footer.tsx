@@ -54,7 +54,7 @@ const ConnectLink = styled(Typography)<TypographyProps>`
 
 const MenuButton = styled.button`
   display: flex;
-  justify-content: space-between;
+  width: auto;
   color: rgba(20, 20, 20, 0.7);
   font-family: Pretendard;
   font-size: 14px;
@@ -66,8 +66,8 @@ const MenuButton = styled.button`
 const MenuWrapper = styled.div`
   display: flex;
   width: auto;
-  gap: 1.354%;
-  // justify-content: space-between;
+  gap: 20px;
+  justify-content: space-between;
 `;
 
 const HorizontalLine = styled.div`
@@ -142,7 +142,9 @@ export default function Footer() {
           </ShortcutWrapper>
         </ContentsWrapper>
       </ContentsWrapper>
-      <HorizontalLine />
+      <ContentsWrapper>
+        <HorizontalLine></HorizontalLine>
+      </ContentsWrapper>
       <ContentsWrapper style={{ marginTop: "28.89px" }}>
         <ContentsWrapper style={{ marginRight: "539px" }}>
           <Typography

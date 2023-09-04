@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  width: 1920px;
+  width: 100%;
+  max-width: 1920px;
   height: 630px;
   display: flex;
   flex-direction: column;
@@ -72,22 +73,17 @@ const BoldText = styled.div`
 `;
 
 function Carousel3() {
-  const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate("/myboard");
-  };
-
   return (
     <Wrapper>
       <ContentWrapper>
-        <DirectButton onClick={handleButtonClick}>
+        <DirectButton>
           <ButtonText>마이보드</ButtonText>
         </DirectButton>
         <TextWrapper>
           <Text>아직 1지망과 2지망을 고민중 이신가요?</Text>
         </TextWrapper>
         <TextWrapper>
-          <Text>지난 학기 </Text>
+          <Text>지난 학기&nbsp;</Text>
           <BoldText>성적 커트라인 한눈에 비교</BoldText>
           <Text>하고 결정하세요.</Text>
         </TextWrapper>
