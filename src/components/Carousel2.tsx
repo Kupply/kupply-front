@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  width: 1920px;
+  width: 100%;
+  max-width: 1920px;
   height: 630px;
   display: flex;
   flex-direction: column;
@@ -38,7 +39,7 @@ const DirectButton = styled.button`
 const ButtonText = styled.text`
   color: #d85888;
   text-align: center;
-  font-family: Gmarket Sans;
+  font-family: GmarketSans;
   font-size: 20px;
   font-style: normal;
   font-weight: 300;
@@ -72,15 +73,10 @@ const BoldText = styled.div`
 `;
 
 function Carousel2() {
-  const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate("/previous");
-  };
-
   return (
     <Wrapper>
       <ContentWrapper>
-        <DirectButton onClick={handleButtonClick}>
+        <DirectButton>
           <ButtonText>실시간 비교</ButtonText>
         </DirectButton>
         <TextWrapper>

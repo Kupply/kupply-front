@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Carousel from "../components/Carousel";
 import LabelButton from "../assets/buttons/LabelButton";
 import { useNavigate } from "react-router-dom";
+import NextButton from "../assets/NextButton";
+import PrevButton from "../assets/PrevButton";
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,8 +16,6 @@ const Wrapper = styled.div`
   gap: 80px;
 `;
 
-/* width 및 height 등 세부 픽셀 값 피그마와 상이함 주의 
-(피그마 숫자대로 넣으면,화면이 원하는 그림으로 나오지 않음) */
 const JoinMainContainer = styled.div`
   display: flex;
   flex-direction: column;

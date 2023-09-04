@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+/*
+[ props 설명서 ] 
+*/
+
 type SizeOptions =
   | "heading1"
   | "heading2"
@@ -12,7 +16,7 @@ type SizeOptions =
   | "smallText"
   | "details";
 
-const sizeMapping: Record<SizeOptions, string[]> = {
+export const sizeMapping: Record<SizeOptions, string[]> = {
   heading1: ["48px", "700"],
   heading2: ["40px", "700"],
   title1: ["38px", "700"],
@@ -27,21 +31,29 @@ const sizeMapping: Record<SizeOptions, string[]> = {
 
 export interface TypographyProps extends React.ComponentPropsWithoutRef<"div"> {
   size?: SizeOptions;
+  color?: string;
+  bold?: string;
 }
 
 const Container = styled.div<TypographyProps>`
-  color: #141414;
+  color: ${(props) => props.color};
   font-family: Pretendard;
   font-style: normal;
-  line-height: 50px;
+  line-height: 100%;
   font-size: ${(props) => sizeMapping[props.size || "bodyText"][0]};
-  font-weight: ${(props) => sizeMapping[props.size || "bodyText"][1]};
+  font-weight: ${(props) =>
+    props.bold || sizeMapping[props.size || "bodyText"][1]};
 `;
 
 function Typography(props: TypographyProps) {
-  const { children, size = "bodyText", ...rest } = props;
+  const { children, size = "bodyText", color = "#141414", ...rest } = props;
   return (
-    <Container size={size} {...rest}>
+    <Container
+      size={size}
+      color={color}
+      bold={sizeMapping[props.size || "bodyText"][1]}
+      {...rest}
+    >
       {children}
     </Container>
   );
