@@ -5,6 +5,7 @@ import LabelButton from "../assets/buttons/LabelButton";
 import { useNavigate } from "react-router-dom";
 import NextButton from "../assets/NextButton";
 import PrevButton from "../assets/PrevButton";
+import Modal from "../assets/Modal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ const Wrapper = styled.div`
 const JoinMainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  width: 1400px;
   height: 192px;
   justify-content: center;
   align-items: center;
@@ -90,7 +91,7 @@ function MainPage() {
       <Carousel />
       <JoinMainContainer>
         <ContainerMainText>
-          당신을 찾고 있던 이중전공에 대한 모든 정보가 바로 이곳에!
+          당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!
         </ContainerMainText>
         <ContainerSubText>
           간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점

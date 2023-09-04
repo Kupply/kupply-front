@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  width: 1920px;
+  width: 100%;
+  max-width: 1920px;
   height: 630px;
   display: flex;
   flex-direction: column;
@@ -72,22 +73,17 @@ const BoldText = styled.div`
 `;
 
 function Carousel1() {
-  const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate("/previous");
-  };
-
   return (
     <Wrapper>
       <ContentWrapper>
-        <DirectButton onClick={handleButtonClick}>
+        <DirectButton>
           <ButtonText>합격자료</ButtonText>
         </DirectButton>
         <TextWrapper>
           <Text>지난학기, 지지난학기 경영학과 커트라인까지</Text>
         </TextWrapper>
         <TextWrapper>
-          <BoldText>한번에 모아서</BoldText>
+          <BoldText>한번에 모아서&nbsp;</BoldText>
           <Text>보여드릴게요.</Text>
         </TextWrapper>
       </ContentWrapper>

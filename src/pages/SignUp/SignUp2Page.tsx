@@ -7,6 +7,7 @@ import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
 import DropDown from "../../assets/dropdown/dropDown";
+
 /*
 [ 참고 사항 - TextFieldBox State Option ]
   default /  hover /  focused /  typing /  filled /  error /  loading /  password
@@ -118,6 +119,30 @@ export default function SignUp2Page() {
   const [phoneState, setPhoneState] = useState<StateOptions>("default");
   const [dropdownValue, setdropDownValue] = useState<string>("");
 
+  /* 학번의 유효성 검사 */
+  useEffect(() => {
+    const passwordCheck = /^\d{10}$/;
+    if (stdIDState === "filled") {
+      if (!passwordCheck.test(stdID)) setStdIDState("error");
+      else setStdIDState("filled");
+    }
+  }, [stdID, stdIDState]);
+
+  /* 전화번호 유효성 검사 + '-' 넣은 형식으로 바꾸기*/
+  useEffect(() => {
+    const phoneCheck = /^010\d{8}$/;
+    const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
+    if (phoneState === "filled") {
+      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone)) setPhoneState("error");
+      else {
+        const newphoneNumber = phone;
+        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+
+        setPhone(newPhone);
+      }
+    }
+  }, [phone, phoneState]);
+
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
     if (
@@ -226,7 +251,8 @@ export default function SignUp2Page() {
               state={stdIDState}
               setState={setStdIDState}
               setValue={setStdID}
-              helpMessage="학번 입력"
+              helpMessage="학번 10자리"
+              errorMessage="학번이 10자리 숫자가 아닙니다."
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -271,6 +297,7 @@ export default function SignUp2Page() {
               setState={setPhoneState}
               setValue={setPhone}
               helpMessage="휴대폰 번호 입력"
+              errorMessage="휴대폰 번호는 010으로 시작하는 11자리 번호여야 합니다."
             ></TextFieldBox>
           </ContentsWrapper>
         </ContentsList>

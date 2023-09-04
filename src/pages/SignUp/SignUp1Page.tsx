@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Typography from "../../assets/Typography";
 import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
 import Timer from "../../components/Timer";
 import VerificationBox from "../../assets/VerificationBox";
+import AlertSmall from "../../assets/alert/AlertSmall";
 
 /*
  수정해야할 사항 목록
@@ -96,39 +97,43 @@ const SubContentsWrapper = styled.div`
   margin-bottom: 171px;
 `;
 
-// 이전 페이지인 'JOIN' 버튼에 onClick 이벤트 주입 필요
 export default function SignUp1Page() {
-  /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
-  /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
+
+  // progressBar 관련
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
-  const [inputComplete, setInputComplete] = useState<boolean>(false);
-  const [verificationBoxes, setVerificationBoxes] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
 
-  const handleBoxChange = (index: number, isEntered: boolean) => {
-    const updatedBoxes = [...verificationBoxes];
-    updatedBoxes[index] = isEntered;
-    setVerificationBoxes(updatedBoxes);
-  };
+  // verificationBox 관련
+  const [num1, setNum1] = useState<string>("");
+  const [num2, setNum2] = useState<string>("");
+  const [num3, setNum3] = useState<string>("");
+  const [num4, setNum4] = useState<string>("");
+  const [num5, setNum5] = useState<string>("");
+  const [num6, setNum6] = useState<string>("");
+  const [nextButton, setNextButton] = useState<boolean>(false);
+
+  // verificationBox 모두 입력시 자동 버튼 활성화 관련련
+  useEffect(() => {
+    if (!!num1 && !!num2 && !!num3 && !!num4 && !!num6 && !!num6) {
+      setNextButton(true);
+    } else {
+      setNextButton(false);
+    }
+  }, [num1, num2, num3, num4, num5, num6]);
 
   const handleNext = () => {
-    if (verificationBoxes.every((box) => box === true)) {
-      setInputComplete(true);
-    }
     navigate("/signUp2");
   };
 
-  const handleReSent = () => {
-    // 모달 이벤트 작성 필요 w/ 애니메이션
+  // 모달 이벤트 작성 필요 w/ 애니메이션
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const handleReSent = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget) {
+      setIsModalOpen((prev) => !prev);
+      // onClose();
+    }
   };
 
   const handleNotSent = () => {
@@ -185,24 +190,38 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox value={""} setValue={function (arg0: string): void {
-              throw new Error("Function not implemented.");
-            } }></VerificationBox>
-            <VerificationBox value={""} setValue={function (arg0: string): void {
-              throw new Error("Function not implemented.");
-            } }></VerificationBox>
-            <VerificationBox value={""} setValue={function (arg0: string): void {
-              throw new Error("Function not implemented.");
-            } }></VerificationBox>
-            <VerificationBox value={""} setValue={function (arg0: string): void {
-              throw new Error("Function not implemented.");
-            } }></VerificationBox>
-            <VerificationBox value={""} setValue={function (arg0: string): void {
-              throw new Error("Function not implemented.");
-            } }></VerificationBox>
-            <VerificationBox value={""} setValue={function (arg0: string): void {
-              throw new Error("Function not implemented.");
-            } }></VerificationBox>
+
+            <VerificationBox
+              name="pin-1"
+              value={num1}
+              setValue={setNum1}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-2"
+              value={num2}
+              setValue={setNum2}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-3"
+              value={num3}
+              setValue={setNum3}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-4"
+              value={num4}
+              setValue={setNum4}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-5"
+              value={num5}
+              setValue={setNum5}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-6"
+              value={num6}
+              setValue={setNum6}
+            ></VerificationBox>
+
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
@@ -254,12 +273,15 @@ export default function SignUp1Page() {
             </Typography>
           </button>
         </SubContentsWrapper>
+        {isModalOpen && (
+          <AlertSmall
+            mainText={"새로운 인증번호를 발송했습니다."}
+            subText={"메일함을 확인해주세요!"}
+          />
+        )}
         <ButtonsWrapper>
           <PrevButton active={false} />
-          <NextButton
-            active={inputComplete ? true : false}
-            onClick={handleNext}
-          />
+          <NextButton active={nextButton} onClick={handleNext} />
         </ButtonsWrapper>
       </FormWrapper>
     </Wrapper>

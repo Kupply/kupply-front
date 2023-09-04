@@ -32,7 +32,8 @@ export default function App() {
         <Route path="/previous" element={<PreviousPage />} />
         <Route path="/myboard" element={<MyBoardPage />} />
         <Route path="/community" element={<CommunityPage />} />
-        <Route path="/join" element={<SignUp5Page />} />
+        <Route path="/join" element={<SignUp1Page />} />
+
         <Route path="/message" element={<MessagePage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/signup1" element={<SignUp1Page />} />
@@ -40,7 +41,6 @@ export default function App() {
         <Route path="/signup3" element={<SignUp3Page />} />
         <Route path="/signup4" element={<SignUp4Page />} />
         <Route path="/signup4-candidate" element={<SignUp4PageCandidate />} />
-        <Route path="/signup4-passer" element={<SignUp4PagePasser />} />
         <Route path="/signup5" element={<SignUp5Page />} />
         <Route path="/signupcomplete" element={<SignUp5Complete />} />
       </Routes>

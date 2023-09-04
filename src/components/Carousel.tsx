@@ -17,7 +17,7 @@ const LeftArrow = styled.button`
   height: 32px;
   position: absolute;
   left: 100px;
-  top: 300px;
+  top: 370px;
   flex-shrink: 0;
   background-image: url("design_image/carousel/carousel_left_button.png");
   background-size: cover;
@@ -29,8 +29,8 @@ const RightArrow = styled.button`
   width: 32px;
   height: 32px;
   position: absolute;
-  right: 100px;
-  top: 300px;
+  left: 1770px;
+  top: 370px;
   flex-shrink: 0;
   background-image: url("design_image/carousel/carousel_right_button.png");
   background-size: cover;
@@ -42,9 +42,9 @@ const CircleButton = styled.button<{ name: number; current: number }>`
   width: ${(props) => (props.name === props.current ? "10px" : "8px")};
   height: ${(props) => (props.name === props.current ? "10px" : "8px")};
   position: absolute;
-  top: 580px;
+  top: 650px;
   left: ${(props) =>
-    props.name === 0 ? "910px" : props.name === 1 ? "940px" : "970px"};
+    props.name === 0 ? "920px" : props.name === 1 ? "950px" : "980px"};
   border-radius: 50%;
   background-color: ${(props) =>
     props.name === props.current
@@ -66,7 +66,7 @@ function Carousel() {
   };
 
   useEffect(() => {
-    const timer = setInterval(autoChange, 6000);
+    const timer = setInterval(autoChange, 8000);
     return () => clearInterval(timer);
   }, [current]);
 

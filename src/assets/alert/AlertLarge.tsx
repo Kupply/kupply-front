@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Typography from "../Typography";
 import AlertIconCheck from "./AlertIconCheck";
 
+// 2023.09.04 수정중 by 윤진
+
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
