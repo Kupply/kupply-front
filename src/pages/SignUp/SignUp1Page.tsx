@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Typography from "../../assets/Typography";
 import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
 import Timer from "../../components/Timer";
 import VerificationBox from "../../assets/VerificationBox";
+import AlertSmall from "../../assets/alert/AlertSmall";
 
 /*
  수정해야할 사항 목록
@@ -96,15 +97,15 @@ const SubContentsWrapper = styled.div`
   margin-bottom: 171px;
 `;
 
-// 이전 페이지인 'JOIN' 버튼에 onClick 이벤트 주입 필요
 export default function SignUp1Page() {
-  /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
-  /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
+
+  // progressBar 관련
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
+  // verificationBox 관련
   const [num1, setNum1] = useState<string>("");
   const [num2, setNum2] = useState<string>("");
   const [num3, setNum3] = useState<string>("");
@@ -113,6 +114,7 @@ export default function SignUp1Page() {
   const [num6, setNum6] = useState<string>("");
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  // verificationBox 모두 입력시 자동 버튼 활성화 관련련
   useEffect(() => {
     if (!!num1 && !!num2 && !!num3 && !!num4 && !!num6 && !!num6) {
       setNextButton(true);
@@ -121,35 +123,17 @@ export default function SignUp1Page() {
     }
   }, [num1, num2, num3, num4, num5, num6]);
 
-  /*
-  const [inputComplete, setInputComplete] = useState<boolean>(false);
-  const [verificationBoxes, setVerificationBoxes] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
-
-  const handleBoxChange = (index: number, isEntered: boolean) => {
-    const updatedBoxes = [...verificationBoxes];
-    updatedBoxes[index] = isEntered;
-    setVerificationBoxes(updatedBoxes);
-  };
-
-  */
   const handleNext = () => {
-    /*
-    if (verificationBoxes.every((box) => box === true)) {
-      setInputComplete(true);
-    }
-    */
     navigate("/signUp2");
   };
 
-  const handleReSent = () => {
-    // 모달 이벤트 작성 필요 w/ 애니메이션
+  // 모달 이벤트 작성 필요 w/ 애니메이션
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const handleReSent = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget) {
+      setIsModalOpen((prev) => !prev);
+      // onClose();
+    }
   };
 
   const handleNotSent = () => {
@@ -162,16 +146,29 @@ export default function SignUp1Page() {
         <Typography size="title1" style={{ lineHeight: "131.579%" }}>
           환영합니다
         </Typography>
-        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
+        <Typography
+          size="mediumText"
+          style={{ opacity: "0.8", marginTop: "5px" }}
+        >
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
+      <MultiStepProgressBar
+        steps={steps}
+        currentStep={currentStep}
+        complete={complete}
+      />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 1</StepIndicator>
           <Typography size="largeText">고려대학생 인증하기</Typography>
-          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="630"
+            height="2"
+            viewBox="0 0 630 2"
+            fill="none"
+          >
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
         </ContentsTitleWrapper>
@@ -182,7 +179,8 @@ export default function SignUp1Page() {
                 인증번호가 전송되었습니다.
               </Typography>
               <Typography size="normalText">
-                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를 입력해주세요.
+                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를
+                입력해주세요.
               </Typography>
             </ContentsWrapper>
             <div>
@@ -192,18 +190,48 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox name="pin-1" value={num1} setValue={setNum1}></VerificationBox>
-            <VerificationBox name="pin-2" value={num2} setValue={setNum2}></VerificationBox>
-            <VerificationBox name="pin-3" value={num3} setValue={setNum3}></VerificationBox>
-            <VerificationBox name="pin-4" value={num4} setValue={setNum4}></VerificationBox>
-            <VerificationBox name="pin-5" value={num5} setValue={setNum5}></VerificationBox>
-            <VerificationBox name="pin-6" value={num6} setValue={setNum6}></VerificationBox>
+            <VerificationBox
+              name="pin-1"
+              value={num1}
+              setValue={setNum1}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-2"
+              value={num2}
+              setValue={setNum2}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-3"
+              value={num3}
+              setValue={setNum3}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-4"
+              value={num4}
+              setValue={setNum4}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-5"
+              value={num5}
+              setValue={setNum5}
+            ></VerificationBox>
+            <VerificationBox
+              name="pin-6"
+              value={num6}
+              setValue={setNum6}
+            ></VerificationBox>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
           <button onClick={handleReSent}>
             <div style={{ gap: "4.97px", display: "flex" }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+              >
                 <g opacity="0.8" clip-path="url(#clip0_1466_5915)">
                   <path
                     d="M13.3269 2.31445V5.78668H9.85034"
@@ -224,17 +252,31 @@ export default function SignUp1Page() {
                   </clipPath>
                 </defs>
               </svg>
-              <Typography size="smallText" color="rgba(216, 88, 136, 0.80)" style={{ textDecorationLine: "underline" }}>
+              <Typography
+                size="smallText"
+                color="rgba(216, 88, 136, 0.80)"
+                style={{ textDecorationLine: "underline" }}
+              >
                 인증번호 다시받기
               </Typography>
             </div>
           </button>
           <button onClick={handleNotSent}>
-            <Typography size="smallText" color="rgba(216, 88, 136, 0.80)" style={{ textDecorationLine: "underline" }}>
+            <Typography
+              size="smallText"
+              color="rgba(216, 88, 136, 0.80)"
+              style={{ textDecorationLine: "underline" }}
+            >
               아직 인증번호를 받지 못하셨나요?
             </Typography>
           </button>
         </SubContentsWrapper>
+        {isModalOpen && (
+          <AlertSmall
+            mainText={"새로운 인증번호를 발송했습니다."}
+            subText={"메일함을 확인해주세요!"}
+          />
+        )}
         <ButtonsWrapper>
           <PrevButton active={false} />
           <NextButton active={nextButton} onClick={handleNext} />
