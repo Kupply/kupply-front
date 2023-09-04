@@ -142,7 +142,8 @@ const ErrorMessageWrapper = styled.div`
   width: 592px;
   height: 12px;
   padding-top: 5px;
-  gap: 8px;
+  padding-left: 18px;
+  gap: 4px;
   border: none;
   background: none;
 `;
