@@ -92,14 +92,13 @@ const ButtonsWrapper = styled.div`
 const InfoMessageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 4px;
   margin-left: 20px;
 `;
 
 const InfoImageWrapper = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: row;
+  width: 12px;
 `;
 
 const CircleImage = styled.svg`
