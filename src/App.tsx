@@ -29,7 +29,6 @@ export default function App() {
         <Route path="/previous" element={<PreviousPage />} />
         <Route path="/myboard" element={<MyBoardPage />} />
         <Route path="/community" element={<CommunityPage />} />
-        <Route path="/join" element={<SignUp4Page />} />
         <Route path="/join" element={<SignUp1Page />} />
         <Route path="/message" element={<MessagePage />} />
         <Route path="/settings" element={<SettingsPage />} />

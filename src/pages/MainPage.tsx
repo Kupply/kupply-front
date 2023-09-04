@@ -5,6 +5,7 @@ import LabelButton from "../assets/buttons/LabelButton";
 import { useNavigate } from "react-router-dom";
 import NextButton from "../assets/NextButton";
 import PrevButton from "../assets/PrevButton";
+import Modal from "../assets/Modal";
 
 const Wrapper = styled.div`
   display: flex;
