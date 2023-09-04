@@ -190,6 +190,7 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
+
             <VerificationBox
               name="pin-1"
               value={num1}
@@ -220,6 +221,7 @@ export default function SignUp1Page() {
               value={num6}
               setValue={setNum6}
             ></VerificationBox>
+
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>

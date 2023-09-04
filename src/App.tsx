@@ -17,7 +17,10 @@ import {
   SignUp4PageCandidate,
   SignUp4PagePasser,
 } from "./pages/SignUp/SignUp4Page";
-import SignUp5Page from "./pages/SignUp/SignUp5Page";
+import {
+  SignUp5Page,
+  SignUp5Complete,
+} from "./pages/SignUp/SignUp5Page";
 
 export default function App() {
   return (
@@ -30,6 +33,7 @@ export default function App() {
         <Route path="/myboard" element={<MyBoardPage />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/join" element={<SignUp1Page />} />
+
         <Route path="/message" element={<MessagePage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/signup1" element={<SignUp1Page />} />
@@ -38,6 +42,7 @@ export default function App() {
         <Route path="/signup4" element={<SignUp4Page />} />
         <Route path="/signup4-candidate" element={<SignUp4PageCandidate />} />
         <Route path="/signup5" element={<SignUp5Page />} />
+        <Route path="/signupcomplete" element={<SignUp5Complete />} />
       </Routes>
       <Footer />
     </div>
