@@ -88,6 +88,32 @@ const ButtonsWrapper = styled.div`
   gap: 18px;
   margin-top: 34px;
 `;
+
+const InfoMessageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-left: 20px;
+`;
+
+const InfoImageWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+`;
+
+const CircleImage = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const CheckImage = styled.svg`
+  position: absolute;
+  top: 3px;
+  left: 3px;
+`;
+
 // state를 부모 컴포넌트에서 넘겨 주기 위해 추가
 type StateOptions =
   | "default"
@@ -253,10 +279,60 @@ export default function SignUp3Page() {
               setState={() => {}}
               setValue={() => {}}
             ></TextFieldBox>
-            {/* 이미지 추가가 필요해요! */}
-            <Typography size="details" color="#A8A8A8">
-              쿠플라이 아이디는 고려대학교 이메일입니다.
-            </Typography>
+            <InfoMessageWrapper>
+              <InfoImageWrapper>
+                <CircleImage
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_2213_3136)">
+                    <path
+                      d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z"
+                      stroke="#A8A8A8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2213_3136">
+                      <rect width="12" height="12" fill="white" />
+                    </clipPath>
+                  </defs>
+                </CircleImage>
+                <CheckImage
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="6"
+                  height="6"
+                  viewBox="0 0 6 6"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_2213_3138)">
+                    <path
+                      d="M4.66659 1.75L2.37492 4.04167L1.33325 3"
+                      stroke="#A8A8A8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2213_3138">
+                      <rect
+                        width="5"
+                        height="5"
+                        fill="white"
+                        transform="translate(0.5 0.5)"
+                      />
+                    </clipPath>
+                  </defs>
+                </CheckImage>
+              </InfoImageWrapper>
+              <Typography size="details" color="#A8A8A8">
+                쿠플라이 아이디는 고려대학교 이메일입니다.
+              </Typography>
+            </InfoMessageWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
