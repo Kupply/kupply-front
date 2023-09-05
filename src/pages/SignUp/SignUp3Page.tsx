@@ -88,6 +88,31 @@ const ButtonsWrapper = styled.div`
   gap: 18px;
   margin-top: 34px;
 `;
+
+const InfoMessageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin-left: 20px;
+`;
+
+const InfoImageWrapper = styled.div`
+  position: relative;
+  width: 12px;
+`;
+
+const CircleImage = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const CheckImage = styled.svg`
+  position: absolute;
+  top: 3px;
+  left: 3px;
+`;
+
 // state를 부모 컴포넌트에서 넘겨 주기 위해 추가
 type StateOptions =
   | "default"
@@ -98,6 +123,11 @@ type StateOptions =
   | "error"
   | "loading"
   | "password";
+
+type errorMessageType = {
+  passwordErrorMessage: string;
+  nicknameErrorMessage: string;
+};
 
 export default function SignUp3Page() {
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
@@ -110,18 +140,20 @@ export default function SignUp3Page() {
 
   /* 각 input들의 값을 state를 사용하여 관리 */
   const [ID, setID] = useState<string>("bruce1115@korea.ac.kr");
-  const [IDState, setIDState] = useState<StateOptions>("default");
   const [password, setPassword] = useState<string>("");
   const [passwordState, setPasswordState] = useState<StateOptions>("default");
   const [password2, setPassword2] = useState<string>("");
   const [password2State, setPassword2State] = useState<StateOptions>("default");
   const [nickname, setNickname] = useState<string>("");
   const [nicknameState, setnicknameState] = useState<StateOptions>("default");
+  const [errorMessages, setErrorMessages] = useState<errorMessageType>({
+    passwordErrorMessage: "",
+    nicknameErrorMessage: "",
+  });
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
     if (
-      IDState === "filled" &&
       passwordState === "filled" &&
       password2State === "filled" &&
       nicknameState === "filled" &&
@@ -130,7 +162,6 @@ export default function SignUp3Page() {
       setComplete(true);
     } else if (
       !(
-        IDState === "filled" &&
         passwordState === "filled" &&
         password2State === "filled" &&
         nicknameState === "filled"
@@ -139,36 +170,32 @@ export default function SignUp3Page() {
     ) {
       setComplete(false);
     }
-  }, [IDState, passwordState, password2State, nicknameState, complete]);
+  }, [passwordState, password2State, nicknameState, complete]);
 
-  /* ID의 유효성 검사 */
-  useEffect(() => {
-    const IDcheck = /@korea\.ac\.kr$/;
-    if (IDState === "filled") {
-      if (!IDcheck.test(ID)) setIDState("error");
-      else setIDState("filled");
-    }
-  }, [ID, IDState]);
-
-  /* password의 유효성 검사 */
+  /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   useEffect(() => {
     const passwordCheck =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
     if (passwordState === "filled") {
-      if (!passwordCheck.test(password)) setPasswordState("error");
-      else setPasswordState("filled");
+      if (!passwordCheck.test(password)) {
+        let errorMessage = "비밀번호가 ";
+
+        if (!/(?=.*[a-z])/.test(password)) {
+          errorMessage += " 소문자를 포함하고 있지 않아요!";
+        } else if (!/(?=.*[A-Z])/.test(password)) {
+          errorMessage += " 대문자를 포함하고 있지 않아요!";
+        } else if (!/(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-])/.test(password)) {
+          errorMessage += " 특수 문자를 포함하고 있지 않아요!";
+        } else if (password.length < 8)
+          errorMessage += " 최소 8자 이상이어야 해요!";
+        setErrorMessages({
+          ...errorMessages,
+          passwordErrorMessage: errorMessage,
+        });
+        setPasswordState("error");
+      } else setPasswordState("filled");
     }
   }, [password, passwordState]);
-
-  /* password2의 유효성 검사 */
-  useEffect(() => {
-    const password2Check =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
-    if (password2State === "filled") {
-      if (!password2Check.test(password2)) setPassword2State("error");
-      else setPassword2State("filled");
-    }
-  }, [password2, password2State]);
 
   /* password2의 일치 여부 검사 */
   useEffect(() => {
@@ -251,10 +278,60 @@ export default function SignUp3Page() {
               setState={() => {}}
               setValue={() => {}}
             ></TextFieldBox>
-            {/* 이미지 추가가 필요해요! */}
-            <Typography size="details" color="#A8A8A8">
-              쿠플라이 아이디는 고려대학교 이메일입니다.
-            </Typography>
+            <InfoMessageWrapper>
+              <InfoImageWrapper>
+                <CircleImage
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_2213_3136)">
+                    <path
+                      d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z"
+                      stroke="#A8A8A8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2213_3136">
+                      <rect width="12" height="12" fill="white" />
+                    </clipPath>
+                  </defs>
+                </CircleImage>
+                <CheckImage
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="6"
+                  height="6"
+                  viewBox="0 0 6 6"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_2213_3138)">
+                    <path
+                      d="M4.66659 1.75L2.37492 4.04167L1.33325 3"
+                      stroke="#A8A8A8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2213_3138">
+                      <rect
+                        width="5"
+                        height="5"
+                        fill="white"
+                        transform="translate(0.5 0.5)"
+                      />
+                    </clipPath>
+                  </defs>
+                </CheckImage>
+              </InfoImageWrapper>
+              <Typography size="details" color="#A8A8A8">
+                쿠플라이 아이디는 고려대학교 이메일입니다.
+              </Typography>
+            </InfoMessageWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
@@ -277,7 +354,7 @@ export default function SignUp3Page() {
               setState={setPasswordState}
               setValue={setPassword}
               helpMessage="비밀번호는 <8자 이상/1개 이상의 대,소문자/1개 이상의 특수문자>가 포함되어야 합니다."
-              errorMessage="유효하지 않은 비밀번호에요."
+              errorMessage={errorMessages.passwordErrorMessage}
               type="password"
             ></TextFieldBox>
           </ContentsWrapper>

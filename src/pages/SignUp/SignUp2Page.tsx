@@ -133,10 +133,14 @@ export default function SignUp2Page() {
     const phoneCheck = /^010\d{8}$/;
     const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
     if (phoneState === "filled") {
-      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone)) setPhoneState("error");
+      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone))
+        setPhoneState("error");
       else {
         const newphoneNumber = phone;
-        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+        const newPhone = newphoneNumber.replace(
+          /(\d{3})(\d{4})(\d{4})/,
+          "$1-$2-$3"
+        );
 
         setPhone(newPhone);
       }
