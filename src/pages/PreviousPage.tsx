@@ -44,7 +44,7 @@ const PreviousPage = () => {
       <SegmentedWrapper>
         <SegmentedPicker
           state={activeIdx === 0 ? "active" : hoveredIdx === 0 ? "hover" : "default"}
-          semester="종합"
+          semester="누적"
           onClick={() => handleButtonClick(0)}
           onMouseEnter={() => handleMouseEnter(0)}
           onMouseLeave={handleMouseLeave}
@@ -91,13 +91,13 @@ const PreviousPage = () => {
           onMouseEnter={() => handleMouseEnter(6)}
           onMouseLeave={handleMouseLeave}
         />
-        {/* <SegmentedPicker
-        state={activeIdx === 7 ? "active" : hoveredIdx === 7 ? "hover" : "default"}
-        semester="2020-1R"
-        onClick={() => handleButtonClick(7)}
-        onMouseEnter={() => handleMouseEnter(7)}
-        onMouseLeave={handleMouseLeave}
-      /> */}
+        <SegmentedPicker
+          state={activeIdx === 7 ? "active" : hoveredIdx === 7 ? "hover" : "default"}
+          semester="2020-1R"
+          onClick={() => handleButtonClick(7)}
+          onMouseEnter={() => handleMouseEnter(7)}
+          onMouseLeave={handleMouseLeave}
+        />
       </SegmentedWrapper>
     </Wrapper>
   );
