@@ -30,15 +30,6 @@ const activeWrapper = css`
   border-radius: 5px;
 `;
 
-const TextBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  height: 100%;
-`;
-
 const Semester = styled.text<SegmentedPickerProps>`
   color: ${(props) => (props.state === "default" ? "#141414cc" : props.state === "hover" ? "#d85888" : "#ffffff")};
   font-family: Pretendard;
@@ -64,11 +55,7 @@ function SegmentedPicker(props: SegmentedPickerProps) {
 
   return (
     <SegmentedPickerWrapper state={state} {...rest}>
-      <TextBox>
-        <Semester state={state} {...rest}>
-          {semester}
-        </Semester>
-      </TextBox>
+      <Semester state={state}>{semester}</Semester>
     </SegmentedPickerWrapper>
   );
 }
