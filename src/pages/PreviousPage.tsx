@@ -10,11 +10,131 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
+const MajorWrapper = styled.div`
+  height: 145px;
+  width: 100%;
+  display: flex;
+  padding-left: 103px;
+`;
+
+const PreviousIconBox = styled.div`
+  height: 60px;
+  width: 60px;
+  background-color: pink;
+  margin: 54px 9px 31px 103px;
+`;
+
+const MajorIconBox = styled.div`
+  width: 60px;
+  height: 78.77px;
+  background-color: green;
+  margin: 46.4px 30px 19.82px 0px;
+`;
+
+const MajorTextKorean = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 48px;
+  font-weight: 700;
+  font-style: normal;
+  text-align: center;
+  margin: 60.54px 0px 33.96px 0px;
+`;
+
+const MajorTextEnglish = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 36px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin: 78.72px 0px 42.04px 18.91px;
+`;
+
 const SegmentedWrapper = styled.div`
   display: flex;
   gap: 18px;
-  padding: 48px 128px 20px 128px;
+  padding: 6px 197px;
   align-items: center;
+`;
+
+const DescriptionBox = styled.div`
+  display: inline-flex;
+  gap: 8px;
+`;
+
+const SelectionInfoWrapper = styled.div`
+  // background-color: #ffffff99;
+  background-color: blue;
+  border: 1px solid;
+  border-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 200px #1414140d;
+  height: 126px;
+  width: 1665px;
+  margin-top: 36px;
+`;
+
+const PasserGPAInfoWrapper = styled.div`
+  height: 573px;
+  width: 1665px;
+  // background-color: #ffffff99;
+  background-color: red;
+  border: 1px solid;
+  border-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 200px #1414140d;
+  margin-top: 18px;
+`;
+
+const Description = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 23px 0px 0px 36px;
+`;
+
+const KeywordWrapper = styled.div`
+  gap: 16px;
+  height: 144px;
+  width: 1665px;
+  background-color: #ffffff99;
+  border: 1px solid;
+  border-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 200px #1414140d;
+  margin-top: 18px;
+`;
+
+const KeywordContainer = styled.div`
+  display: flex;
+  gap: 22px;
+  padding: 16px 0px 0px 36px;
+`;
+
+const KeywordBox = styled.div`
+  align-items: center;
+  background-color: #ffffff99;
+  border: 1px solid;
+  border-color: #f5bdbd;
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px 26px;
+  position: relative;
+`;
+
+const Keyword = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  text-align: center;
 `;
 
 const PreviousPage = () => {
@@ -23,7 +143,6 @@ const PreviousPage = () => {
 
   const handleButtonClick = (idx: number) => {
     if (activeIdx !== idx) {
-      // Clicked on the currently active item, toggle it off
       setActiveIdx(idx);
     }
   };
@@ -38,9 +157,12 @@ const PreviousPage = () => {
 
   return (
     <Wrapper>
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 1920 2" fill="none">
-        <path d="M0 1H1920" stroke="#141414" stroke-linecap="round" stroke-width="0.3" stroke-opacity="0.25" />
-      </svg>
+      <MajorWrapper>
+        <PreviousIconBox />
+        <MajorIconBox />
+        <MajorTextKorean>경영대학</MajorTextKorean>
+        <MajorTextEnglish>Business School</MajorTextEnglish>
+      </MajorWrapper>
       <SegmentedWrapper>
         <SegmentedPicker
           state={activeIdx === 0 ? "active" : hoveredIdx === 0 ? "hover" : "default"}
@@ -99,6 +221,39 @@ const PreviousPage = () => {
           onMouseLeave={handleMouseLeave}
         />
       </SegmentedWrapper>
+      <SelectionInfoWrapper />
+      <PasserGPAInfoWrapper />
+      <KeywordWrapper>
+        <DescriptionBox>
+          <Description>자기소개서 합격 키워드</Description>
+        </DescriptionBox>
+        <KeywordContainer>
+          <KeywordBox>
+            <Keyword>리더쉽</Keyword>
+          </KeywordBox>
+          <KeywordBox>
+            <Keyword>목표달성</Keyword>
+          </KeywordBox>
+          <KeywordBox>
+            <Keyword>소통</Keyword>
+          </KeywordBox>
+          <KeywordBox>
+            <Keyword>비즈니스의 이해</Keyword>
+          </KeywordBox>
+          <KeywordBox>
+            <Keyword>도전과 극복</Keyword>
+          </KeywordBox>
+          <KeywordBox>
+            <Keyword>비전</Keyword>
+          </KeywordBox>
+          <KeywordBox>
+            <Keyword>자기개발</Keyword>
+          </KeywordBox>
+          <KeywordBox>
+            <Keyword>팀 내 소통</Keyword>
+          </KeywordBox>
+        </KeywordContainer>
+      </KeywordWrapper>
     </Wrapper>
   );
 };
