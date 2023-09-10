@@ -5,9 +5,11 @@ import Typography from "../../assets/Typography";
 import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
+import LoginButton from "../../assets/LoginButton";
 import PrevButton from "../../assets/PrevButton";
 import CheckButton from "../../assets/CheckButton";
 import { check } from "prettier";
+import {ScrollBarSmall, ScrollBarLarge} from "../../assets/ScrollButton";
 
 /*
 주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
@@ -20,18 +22,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  // padding-bottom: 400px; // 임시로 지정 수정 필요?
   background: #FCFAFB;
-  /* Webkit 기반의 브라우저 (예: Chrome, Safari)에서 스크롤바 숨기기 */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Firefox에서 스크롤바 숨기기 */
-  scrollbar-width: none;
-
-  /* Internet Explorer에서 스크롤바 숨기기 */
-  -ms-overflow-style: none;
 `;
 
 const Wrapper2 = styled.div`
@@ -52,8 +43,6 @@ const TitleWrapper = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  //display: flex;
-  //flex-direction: column;
   width: 816px;
   height: 850px;
   padding: 42px 94px 78px 94px;
@@ -88,10 +77,9 @@ const ContentsTitleWrapper = styled.div`
 
 const TextTitleWrapper = styled.div`
   display: inline-flex;
-  // padding: 10px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   text-align: center;
 `;
 
@@ -99,9 +87,8 @@ const TextTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 23px;
+  margin-bottom: 11px;
 `;
-
 
 const TextOutBox = styled.div`
   width: 628px;
@@ -114,8 +101,6 @@ const TextOutBox = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px;
-  //margin-top: 22px;
-  //margin-bottom: 22px;
 `;
 
 const TextBox = styled.div`
@@ -132,17 +117,16 @@ const ButtonsTextWrapper = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  //margin-top: 33px;
-  //margin-bottom: 22px;
-  //margin-top: 22px;
-  //margin-bottom: 22px;
+  margin-top: 22px;
+  margin-bottom: 22px;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 18px;
-  margin-top: 5px;
+  margin-top: 20px;
   margin-bottom: 50px;
+  margin-right: 18px;
 `;
 
 const FixedWidth = css` // 628px 너무 길어서 길이 조절했습니다 
@@ -160,18 +144,8 @@ const ScrollBox = styled.div`
   align-items: flex-start;
   flex-shrink: 0;
   overflow-y: auto;
-  gap: 20px;
-
-  /* Webkit 기반의 브라우저 (예: Chrome, Safari)에서 스크롤바 숨기기 */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Firefox에서 스크롤바 숨기기 */
-  scrollbar-width: none;
-
-  /* Internet Explorer에서 스크롤바 숨기기 */
-  -ms-overflow-style: none;
+  overflow-x: hidden;  
+  // gap: 20px;
 `;
 
 const ArrowImage = styled.img`
@@ -309,6 +283,8 @@ function SignUp5Page() {
     navigate("/signUp4");
   };
 
+  const [scrollActive, setActive] = useState(false);
+
   return (
     <Wrapper>
       <TitleWrapper>
@@ -367,7 +343,9 @@ function SignUp5Page() {
             </Typography>
           </TextTitle>
         </TextTitleWrapper>
+
       <ScrollBox>
+        <ScrollBarLarge isChecked={scrollActive}> 
         <ButtonsTextWrapper>
           <CustomCheckButton
             isChecked={individualChecks.first}
@@ -396,26 +374,28 @@ function SignUp5Page() {
 
         <TextOutBox>
           <TextBox>
-            <Typography 
-                size="mediumText"
-                style={{fontWeight: "400"}}
-              >
-            「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-            개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-            개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-            개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-            해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-            통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-            범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-            수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-            제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-            활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-            개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-            제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-            아래 항목에 명시된 범위에서만 활용됩니다.
-            </Typography>
+            <ScrollBarSmall isChecked={scrollActive}>
+              <Typography 
+                    size="mediumText"
+                    style={{fontWeight: "400"}}
+                  >
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
+                개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
+                개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
+                해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
+                통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
+                범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
+                수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
+                제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
+                활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
+                제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
+            </ScrollBarSmall>
           </TextBox>
         </TextOutBox>
 
@@ -446,27 +426,29 @@ function SignUp5Page() {
         </ButtonsTextWrapper>
 
         <TextOutBox>
-          <TextBox>
-            <Typography 
-                size="mediumText"
-                style={{fontWeight: "400"}} 
-              >
-            「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-            개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-            개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-            개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-            해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-            통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-            범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-            수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-            제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-            활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-            개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-            제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-            아래 항목에 명시된 범위에서만 활용됩니다.
-            </Typography>
+        <TextBox>
+            <ScrollBarSmall isChecked={scrollActive}>
+              <Typography 
+                    size="mediumText"
+                    style={{fontWeight: "400"}}
+                  >
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
+                개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
+                개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
+                해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
+                통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
+                범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
+                수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
+                제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
+                활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
+                제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
+            </ScrollBarSmall>
           </TextBox>
         </TextOutBox>
 
@@ -497,27 +479,29 @@ function SignUp5Page() {
         </ButtonsTextWrapper>
 
         <TextOutBox>
-          <TextBox>
-            <Typography 
-                size="mediumText"
-                style={{fontWeight: "400"}} 
-              >
-            「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-            개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-            개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-            개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-            해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-            통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-            범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-            수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-            제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-            활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-            개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-            제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-            아래 항목에 명시된 범위에서만 활용됩니다.
-            </Typography>
+        <TextBox>
+            <ScrollBarSmall isChecked={scrollActive}>
+              <Typography 
+                    size="mediumText"
+                    style={{fontWeight: "400"}}
+                  >
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
+                개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
+                개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
+                해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
+                통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
+                범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
+                수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
+                제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
+                활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
+                제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
+            </ScrollBarSmall>
           </TextBox>
         </TextOutBox>
 
@@ -548,27 +532,29 @@ function SignUp5Page() {
         </ButtonsTextWrapper>
 
         <TextOutBox>
-          <TextBox>
-            <Typography 
-                size="mediumText"
-                style={{fontWeight: "400"}} 
-              >
-            「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-            개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-            개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-            개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-            해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-            통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-            범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-            고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-            수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-            제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-            활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-            개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-            제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-            아래 항목에 명시된 범위에서만 활용됩니다.
-            </Typography>
+        <TextBox>
+            <ScrollBarSmall isChecked={scrollActive}>
+              <Typography 
+                    size="mediumText"
+                    style={{fontWeight: "400"}}
+                  >
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
+                개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
+                개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
+                해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
+                통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
+                범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
+                고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
+                수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
+                제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
+                활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
+                제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
+            </ScrollBarSmall>
           </TextBox>
         </TextOutBox>
         
@@ -579,6 +565,7 @@ function SignUp5Page() {
           </NextButtonFixedWidth>
         </ButtonsWrapper>
 
+        </ScrollBarLarge>
         </ScrollBox>
       </FormWrapper>
     </Wrapper>
@@ -593,7 +580,25 @@ const TitleOutBox = styled.div`
   align-items: center;
 `;
 
+const LonginButtonWrapper = styled.div`
+  display: flex;
+  width: 628px;
+  padding: 24px 34px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background: var(--Primary-color, #D85888);
+`;
+
 function SignUp5Complete() {
+
+  const [isButtonActive, setIsButtionActive] = useState(true);
+  const navigate = useNavigate();
+  const handleNext = () => {
+    navigate("/login");
+  };
+
   return (
     <Wrapper2>
       <TitleOutBox>
@@ -618,13 +623,27 @@ function SignUp5Complete() {
         src="design_image/0001.gif" 
         alt="completeImage"
         style={{
+          //background: "url(<path-to-image>) lightgray 50% / cover no-repeat",
           position: "absolute",
           width: "781px",
           height: "836px",
           left: "570px",
-          top: "283px",
+          top: "269px",
         }}
      />
+
+      <LonginButtonWrapper
+        style = {{ position: "relative", top: "511px", left: "646" }}>
+        <LoginButton active={isButtonActive} onClick={handleNext}>
+          <Typography 
+            size="bodyText"
+            color="var(--White, #FFF)"
+          >
+            로그인하고 쿠플라이로 이동하기
+          </Typography>
+        </LoginButton>
+      </LonginButtonWrapper>
+
     </Wrapper2>
   );
 };
