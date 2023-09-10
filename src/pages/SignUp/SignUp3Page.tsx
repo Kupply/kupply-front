@@ -6,6 +6,7 @@ import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
 import TextFieldBox from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
+import NicknameCheckButton from "../../assets/NicknameCheckButton";
 /*
 [ 참고 사항 - TextFieldBox State Option ]
   default /  hover /  focused /  typing /  filled /  error /  loading /  password
@@ -124,6 +125,13 @@ type StateOptions =
   | "loading"
   | "password";
 
+type NicknameCheckStateOptions =
+  | "default"
+  | "hover"
+  | "loading"
+  | "filled"
+  | "error";
+
 type errorMessageType = {
   passwordErrorMessage: string;
   nicknameErrorMessage: string;
@@ -146,6 +154,8 @@ export default function SignUp3Page() {
   const [password2State, setPassword2State] = useState<StateOptions>("default");
   const [nickname, setNickname] = useState<string>("");
   const [nicknameState, setnicknameState] = useState<StateOptions>("default");
+  const [nicknameCheck, setNicknameCheckState] =
+    useState<NicknameCheckStateOptions>("default");
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: "",
     nicknameErrorMessage: "",
@@ -416,6 +426,10 @@ export default function SignUp3Page() {
           <NextButton active={complete} />
         </ButtonsWrapper>
       </FormWrapper>
+      <NicknameCheckButton
+        state={nicknameCheck}
+        setState={setNicknameCheckState}
+      ></NicknameCheckButton>
     </Wrapper>
   );
 }
