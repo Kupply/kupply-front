@@ -114,15 +114,7 @@ const CheckImage = styled.svg`
 `;
 
 // state를 부모 컴포넌트에서 넘겨 주기 위해 추가
-type StateOptions =
-  | "default"
-  | "hover"
-  | "focused"
-  | "typing"
-  | "filled"
-  | "error"
-  | "loading"
-  | "password";
+type StateOptions = "default" | "hover" | "focused" | "typing" | "filled" | "error" | "loading" | "password";
 
 type errorMessageType = {
   passwordErrorMessage: string;
@@ -153,29 +145,16 @@ export default function SignUp3Page() {
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
-    if (
-      passwordState === "filled" &&
-      password2State === "filled" &&
-      nicknameState === "filled" &&
-      !complete
-    ) {
+    if (passwordState === "filled" && password2State === "filled" && nicknameState === "filled" && !complete) {
       setComplete(true);
-    } else if (
-      !(
-        passwordState === "filled" &&
-        password2State === "filled" &&
-        nicknameState === "filled"
-      ) &&
-      complete
-    ) {
+    } else if (!(passwordState === "filled" && password2State === "filled" && nicknameState === "filled") && complete) {
       setComplete(false);
     }
   }, [passwordState, password2State, nicknameState, complete]);
 
   /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   useEffect(() => {
-    const passwordCheck =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
+    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
     if (passwordState === "filled") {
       if (!passwordCheck.test(password)) {
         let errorMessage = "비밀번호가 ";
@@ -186,8 +165,7 @@ export default function SignUp3Page() {
           errorMessage += " 대문자를 포함하고 있지 않아요!";
         } else if (!/(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-])/.test(password)) {
           errorMessage += " 특수 문자를 포함하고 있지 않아요!";
-        } else if (password.length < 8)
-          errorMessage += " 최소 8자 이상이어야 해요!";
+        } else if (password.length < 8) errorMessage += " 최소 8자 이상이어야 해요!";
         setErrorMessages({
           ...errorMessages,
           passwordErrorMessage: errorMessage,
@@ -199,12 +177,7 @@ export default function SignUp3Page() {
 
   /* password2의 일치 여부 검사 */
   useEffect(() => {
-    if (
-      !!password &&
-      !!password2 &&
-      passwordState === "filled" &&
-      password2State === "filled"
-    ) {
+    if (!!password && !!password2 && passwordState === "filled" && password2State === "filled") {
       if (password === password2) {
         setPassword2State("filled");
       } else {
@@ -228,44 +201,25 @@ export default function SignUp3Page() {
         <Typography size="title1" style={{ lineHeight: "131.579%" }}>
           환영합니다
         </Typography>
-        <Typography
-          size="mediumText"
-          style={{ opacity: "0.8", marginTop: "5px" }}
-        >
+        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
       <div style={{ width: "976.8px", height: "30px" }}>
-        <MultiStepProgressBar
-          steps={steps}
-          currentStep={currentStep}
-          complete={complete}
-        />
+        <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       </div>
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 3</StepIndicator>
-          <Typography size="largeText">
-            쿠플라이 비밀번호와 닉네임 설정하기
-          </Typography>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="630"
-            height="2"
-            viewBox="0 0 630 2"
-            fill="none"
-          >
+          <Typography size="largeText">쿠플라이 비밀번호와 닉네임 설정하기</Typography>
+          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
         </ContentsTitleWrapper>
         <ContentsList>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 쿠플라이 아이디
               </Typography>
             </div>
@@ -280,13 +234,7 @@ export default function SignUp3Page() {
             ></TextFieldBox>
             <InfoMessageWrapper>
               <InfoImageWrapper>
-                <CircleImage
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                >
+                <CircleImage xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <g clip-path="url(#clip0_2213_3136)">
                     <path
                       d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z"
@@ -301,13 +249,7 @@ export default function SignUp3Page() {
                     </clipPath>
                   </defs>
                 </CircleImage>
-                <CheckImage
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="6"
-                  height="6"
-                  viewBox="0 0 6 6"
-                  fill="none"
-                >
+                <CheckImage xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
                   <g clip-path="url(#clip0_2213_3138)">
                     <path
                       d="M4.66659 1.75L2.37492 4.04167L1.33325 3"
@@ -318,12 +260,7 @@ export default function SignUp3Page() {
                   </g>
                   <defs>
                     <clipPath id="clip0_2213_3138">
-                      <rect
-                        width="5"
-                        height="5"
-                        fill="white"
-                        transform="translate(0.5 0.5)"
-                      />
+                      <rect width="5" height="5" fill="white" transform="translate(0.5 0.5)" />
                     </clipPath>
                   </defs>
                 </CheckImage>
@@ -335,11 +272,7 @@ export default function SignUp3Page() {
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 비밀번호
               </Typography>
               <Typography size="mediumText">를 입력해주세요.</Typography>
@@ -361,11 +294,7 @@ export default function SignUp3Page() {
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
               <Typography size="mediumText">비밀번호를&nbsp;</Typography>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 확인
               </Typography>
               <Typography size="mediumText">해&nbsp;주세요.</Typography>
@@ -386,14 +315,8 @@ export default function SignUp3Page() {
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
-              <Typography size="mediumText">
-                쿠플라이에서 사용할&nbsp;
-              </Typography>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText">쿠플라이에서 사용할&nbsp;</Typography>
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 닉네임
               </Typography>
               <Typography size="mediumText">을 설정해주세요.</Typography>
@@ -412,8 +335,8 @@ export default function SignUp3Page() {
           </ContentsWrapper>
         </ContentsList>
         <ButtonsWrapper>
-          <PrevButton />
-          <NextButton active={complete} />
+          <PrevButton onClick={handlePrev} />
+          <NextButton active={complete} onClick={handleNext} />
         </ButtonsWrapper>
       </FormWrapper>
     </Wrapper>

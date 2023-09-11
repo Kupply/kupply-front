@@ -115,14 +115,10 @@ export default function SignUp2Page() {
     const phoneCheck = /^010\d{8}$/;
     const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
     if (phoneState === "filled") {
-      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone))
-        setPhoneState("error");
+      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone)) setPhoneState("error");
       else {
         const newphoneNumber = phone;
-        const newPhone = newphoneNumber.replace(
-          /(\d{3})(\d{4})(\d{4})/,
-          "$1-$2-$3"
-        );
+        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
 
         setPhone(newPhone);
       }
@@ -131,21 +127,10 @@ export default function SignUp2Page() {
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
-    if (
-      nameState === "filled" &&
-      stdIDState === "filled" &&
-      phoneState === "filled" &&
-      !!dropdownValue &&
-      !complete
-    ) {
+    if (nameState === "filled" && stdIDState === "filled" && phoneState === "filled" && !!dropdownValue && !complete) {
       setComplete(true);
     } else if (
-      !(
-        nameState === "filled" &&
-        stdIDState === "filled" &&
-        phoneState === "filled" &&
-        !!dropdownValue
-      ) &&
+      !(nameState === "filled" && stdIDState === "filled" && phoneState === "filled" && !!dropdownValue) &&
       complete
     ) {
       setComplete(false);
@@ -167,40 +152,23 @@ export default function SignUp2Page() {
         <Typography size="title1" style={{ lineHeight: "131.579%" }}>
           환영합니다
         </Typography>
-        <Typography
-          size="mediumText"
-          style={{ opacity: "0.8", marginTop: "5px" }}
-        >
+        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar
-        steps={steps}
-        currentStep={currentStep}
-        complete={complete}
-      />
+      <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 2</StepIndicator>
           <Typography size="largeText">사용자 기본 정보 입력하기</Typography>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="630"
-            height="2"
-            viewBox="0 0 630 2"
-            fill="none"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
         </ContentsTitleWrapper>
         <ContentsList>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 이름
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
@@ -219,11 +187,7 @@ export default function SignUp2Page() {
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 고려대학교 학번
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
@@ -243,11 +207,7 @@ export default function SignUp2Page() {
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 본전공(1전공)
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
@@ -264,11 +224,7 @@ export default function SignUp2Page() {
           </ContentsWrapper>
           <ContentsWrapper>
             <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
                 전화번호
               </Typography>
               <Typography size="mediumText">를 입력해주세요.</Typography>
@@ -288,8 +244,8 @@ export default function SignUp2Page() {
           </ContentsWrapper>
         </ContentsList>
         <ButtonsWrapper>
-          <PrevButton />
-          <NextButton active={complete} />
+          <PrevButton onClick={handlePrev} />
+          <NextButton active={complete} onClick={handleNext} />
         </ButtonsWrapper>
       </FormWrapper>
     </Wrapper>
