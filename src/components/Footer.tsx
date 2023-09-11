@@ -15,7 +15,7 @@ const FooterWrapper = styled.div`
   height: 262px;
   background: #f9f9f9;
   padding: 41.84px 128px 42.78px 128px; // 상우하좌 순서
-  box-sizing: border-box; //
+  box-sizing: border-box;
 `;
 
 const ShortcutWrapper = styled.div`
