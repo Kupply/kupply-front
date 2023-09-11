@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-/*
-[ props 설명서 ] 
-*/
-
 type SizeOptions =
   | "heading1"
   | "heading2"

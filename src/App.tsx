@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import styled from "styled-components";
-import Header from "./assets/Header";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
@@ -17,10 +16,7 @@ import {
   SignUp4PageCandidate,
   SignUp4PagePasser,
 } from "./pages/SignUp/SignUp4Page";
-import {
-  SignUp5Page,
-  SignUp5Complete,
-} from "./pages/SignUp/SignUp5Page";
+import { SignUp5Page, SignUp5Complete } from "./pages/SignUp/SignUp5Page";
 
 export default function App() {
   return (

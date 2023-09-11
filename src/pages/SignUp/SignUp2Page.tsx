@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Typography from "../../assets/Typography";
 import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import TextFieldBox from "../../assets/TextFieldBox";
+import TextFieldBox, { StateOptions } from "../../assets/TextFieldBox";
 import NextButton from "../../assets/NextButton";
 import PrevButton from "../../assets/PrevButton";
 import DropDown from "../../assets/dropdown/dropDown";
@@ -13,14 +13,6 @@ import DropDown from "../../assets/dropdown/dropDown";
   default /  hover /  focused /  typing /  filled /  error /  loading /  password
   자세한 사항: TextFieldBox.tsx 
 };
-*/
-
-/* 
-[ 추후 수정 사항  - 오윤진이 기억해두려고 작성한 내용]
-1. Input 입력 수행도에 따라 NextButton 의 상태 props 통해 지정 필요 
-2. Input 입력 서버로 전송
-3. handleNext handlePrev 함수 수정
-4. ProgressBar 크기 수정
 */
 
 const Wrapper = styled.div`
@@ -90,16 +82,6 @@ const ButtonsWrapper = styled.div`
   gap: 18px;
   margin-top: 34px;
 `;
-// state를 부모 컴포넌트에서 넘겨 주기 위해 추가
-type StateOptions =
-  | "default"
-  | "hover"
-  | "focused"
-  | "typing"
-  | "filled"
-  | "error"
-  | "loading"
-  | "password";
 
 export default function SignUp2Page() {
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */

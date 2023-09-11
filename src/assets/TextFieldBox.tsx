@@ -159,7 +159,7 @@ const ErrorMessage = styled.text`
   opacity: 0.8;
 `;
 
-type StateOptions =
+export type StateOptions =
   | "default"
   | "hover"
   | "focused"
