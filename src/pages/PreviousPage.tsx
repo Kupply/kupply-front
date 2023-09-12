@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PreviousPage = () => {
-    return <div>PreviousPage</div>;
-  };
-   
-  export default PreviousPage;
+  return <a href="previous/0">PreviousDetailPage</a>;
+};
+
+export default PreviousPage;

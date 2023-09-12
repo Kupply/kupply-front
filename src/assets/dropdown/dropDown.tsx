@@ -14,6 +14,8 @@ export interface DropDownOption {
 export interface DropDownProps {
   title: string;
   optionList: DropDownOption[];
+  value: string;
+  setValue: (str: string) => void;
 }
 
 export interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
@@ -31,11 +33,9 @@ export interface InputButtonProps
   isSelected: boolean;
 }
 
-function DropDown({ title, optionList }: DropDownProps) {
-  const [dropDownList, setDropDownList] = useState<DropDownOption[]>([]); // 드롭다운 메뉴의 옵션 리스트
-  const [selectedValue, setSeletedValue] = useState("");
+function DropDown({ title, optionList, value, setValue }: DropDownProps) {
   const [isOpen, ref, toggleIsOpen] = useDetectClose(false);
-  const isSelected: boolean = !!selectedValue;
+  const isSelected: boolean = !!value;
 
   /*
   const handleOptionChange = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,20 +53,42 @@ function DropDown({ title, optionList }: DropDownProps) {
         isSelected={isSelected}
         onClick={toggleIsOpen}
         type="button"
-        value={selectedValue || title}
-      ></InputWrapper>
+        value={value || title}
+      />
+      <AngleDown isOpen={isOpen} isSelected={isSelected}>
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19.8333 10.6984C19.6147 10.4811 19.319 10.3591 19.0108 10.3591C18.7026 10.3591 18.4069 10.4811 18.1883 10.6984L14 14.8284L9.86998 10.6984C9.65139 10.4811 9.3557 10.3591 9.04748 10.3591C8.73926 10.3591 8.44357 10.4811 8.22498 10.6984C8.11563 10.8068 8.02884 10.9359 7.96961 11.078C7.91038 11.2202 7.87988 11.3727 7.87988 11.5267C7.87988 11.6807 7.91038 11.8332 7.96961 11.9754C8.02884 12.1176 8.11563 12.2466 8.22498 12.3551L13.1716 17.3017C13.2801 17.4111 13.4091 17.4979 13.5513 17.5571C13.6935 17.6163 13.846 17.6468 14 17.6468C14.154 17.6468 14.3065 17.6163 14.4487 17.5571C14.5908 17.4979 14.7199 17.4111 14.8283 17.3017L19.8333 12.3551C19.9427 12.2466 20.0295 12.1176 20.0887 11.9754C20.1479 11.8332 20.1784 11.6807 20.1784 11.5267C20.1784 11.3727 20.1479 11.2202 20.0887 11.078C20.0295 10.9359 19.9427 10.8068 19.8333 10.6984Z"
+            fill="#B9B9B9"
+          />
+        </svg>
+      </AngleDown>
+
       {isOpen && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            bottom: 28,
+            position: "relative",
+          }}
+        >
           <OptionContainer>
             {optionList.map((data) => {
               return (
                 <OptionWrapper
-                  isSelectedValue={selectedValue === data.value1 ? true : false}
+                  isSelectedValue={value === data.value1 ? true : false}
                   key={data.value1}
                   // type="button"
                   // onClick={handleOptionChange}
                   onClick={() => {
-                    setSeletedValue(data.value1);
+                    setValue(data.value1);
                     toggleIsOpen(); // 해결 필요 1 - 옵션 선태 시 옵션 창 닫기 구현이 안됨.
                   }}
                 >
@@ -74,7 +96,7 @@ function DropDown({ title, optionList }: DropDownProps) {
                   <CollegeWrapper
                     size={"normalText"}
                     color={
-                      selectedValue === data.value1
+                      value === data.value1
                         ? "var(--primary, #d85888)"
                         : "#141414"
                     }
@@ -95,11 +117,28 @@ export default DropDown;
 
 /* 이하는 스타일 적용 */
 
+const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
+  position: relative;
+  bottom: 47px;
+  left: 585px;
+  height: 0;
+
+  svg > path {
+    fill: ${(props) => (props.isOpen && !props.isSelected ? "#d85888" : "")};
+    transition: fill 0.25s ease-in-out;
+  }
+
+  svg {
+    transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+    transition: transform 0.25s ease-in-out;
+  }
+`;
+
 const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
   width: 628px;
   height: 68px;
   border-radius: 10px;
-  border: 1px solid #eee;
+  border: 1px solid #b9b9b9;
   background: #fff;
 
   display: flex;
@@ -117,8 +156,8 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
   opacity: 0.8;
 
   ${(props) =>
-    props.isOpen &&
-    props.isSelected &&
+    ((props.isOpen && props.isSelected) ||
+      (!props.isOpen && props.isSelected)) &&
     css`
       border: 1px solid #d85888;
       color: #d85888;
