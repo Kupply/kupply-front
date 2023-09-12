@@ -12,11 +12,7 @@ import SettingsPage from "./pages/SettingsPage";
 import SignUp1Page from "./pages/SignUp/SignUp1Page";
 import SignUp2Page from "./pages/SignUp/SignUp2Page";
 import SignUp3Page from "./pages/SignUp/SignUp3Page";
-import {
-  SignUp4Page,
-  SignUp4PageCandidate,
-  SignUp4PagePasser,
-} from "./pages/SignUp/SignUp4Page";
+import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from "./pages/SignUp/SignUp4Page";
 import SignUp5Page from "./pages/SignUp/SignUp5Page";
 
 export default function App() {
