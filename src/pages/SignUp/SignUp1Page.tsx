@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import NextButton from "../../assets/NextButton";
-import PrevButton from "../../assets/PrevButton";
-import Timer from "../../components/Timer";
-import VerificationBox from "../../assets/VerificationBox";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import NextButton from '../../assets/buttons/NextButton';
+import PrevButton from '../../assets/buttons/PrevButton';
+import Timer from '../../components/Timer';
+import VerificationBox from '../../assets/VerificationBox';
+import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
+import SignUpLarge1 from './modals/SignUpLarge1';
+import SignUpLarge2 from './modals/SignUpLarge2';
+import SignUpLarge3 from './modals/SignUpLarge3';
 
 /*
  수정해야할 사항 목록
  1. 타이머 위치
- 2. 각 버튼에 이벤트 주입 (텍스트버튼, 다음버튼)
  */
 
 const Wrapper = styled.div`
@@ -96,23 +99,38 @@ const SubContentsWrapper = styled.div`
   margin-bottom: 171px;
 `;
 
-// 이전 페이지인 'JOIN' 버튼에 onClick 이벤트 주입 필요
+const TextButton = styled.button`
+  display: flex;
+  gap: 4.97px;
+  color: rgba(216, 88, 136, 0.8);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  text-decoration-line: underline;
+
+  cursor: pointer;
+`;
+
 export default function SignUp1Page() {
-  /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
-  /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
+
+  // progressBar 관련
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
-  const [num1, setNum1] = useState<string>("");
-  const [num2, setNum2] = useState<string>("");
-  const [num3, setNum3] = useState<string>("");
-  const [num4, setNum4] = useState<string>("");
-  const [num5, setNum5] = useState<string>("");
-  const [num6, setNum6] = useState<string>("");
+  // verificationBox 관련
+  const [num1, setNum1] = useState<string>('');
+  const [num2, setNum2] = useState<string>('');
+  const [num3, setNum3] = useState<string>('');
+  const [num4, setNum4] = useState<string>('');
+  const [num5, setNum5] = useState<string>('');
+  const [num6, setNum6] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  // verificationBox 관련
   useEffect(() => {
     if (!!num1 && !!num2 && !!num3 && !!num4 && !!num6 && !!num6) {
       setNextButton(true);
@@ -121,48 +139,73 @@ export default function SignUp1Page() {
     }
   }, [num1, num2, num3, num4, num5, num6]);
 
-  /*
-  const [inputComplete, setInputComplete] = useState<boolean>(false);
-  const [verificationBoxes, setVerificationBoxes] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
-
-  const handleBoxChange = (index: number, isEntered: boolean) => {
-    const updatedBoxes = [...verificationBoxes];
-    updatedBoxes[index] = isEntered;
-    setVerificationBoxes(updatedBoxes);
-  };
-
-  */
   const handleNext = () => {
-    /*
-    if (verificationBoxes.every((box) => box === true)) {
-      setInputComplete(true);
-    }
-    */
-    navigate("/signUp2");
+    navigate('/signUp2');
   };
 
-  const handleReSent = () => {
-    // 모달 이벤트 작성 필요 w/ 애니메이션
-  };
+  // modal 관련
+  const [currentModal, setCurrentModal] = useState<number>(1);
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const onClickToggleModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+    setCurrentModal(1); // 현재 모달창 (step) 초기화
+    console.log(isOpenModal); // 디버그 목적
+  }, [isOpenModal]);
 
-  const handleNotSent = () => {
-    // 모달 이벤트 작성 필요 w/ 애니메이션
-  };
+  // modal 2 - 3 email value 전달 관련
+  const [email, setEmail] = useState<string>('');
+  const [emailState, setEmailState] = useState<StateOptions>('default');
 
   return (
     <Wrapper>
+      {(() => {
+        switch (currentModal) {
+          case 1:
+            return (
+              <SignUpLarge1
+                currentModal={currentModal}
+                isOpenModal={isOpenModal}
+                setCurrentModal={setCurrentModal}
+                setOpenModal={setOpenModal}
+                onClickModal={onClickToggleModal}
+              />
+            );
+          case 2:
+            return (
+              <SignUpLarge2
+                currentModal={currentModal}
+                isOpenModal={isOpenModal}
+                setCurrentModal={setCurrentModal}
+                setOpenModal={setOpenModal}
+                onClickModal={onClickToggleModal}
+                email={email}
+                emailState={emailState}
+                setEmail={setEmail}
+                setEmailState={setEmailState}
+              />
+            );
+
+          case 3:
+            return (
+              <SignUpLarge3
+                currentModal={currentModal}
+                isOpenModal={isOpenModal}
+                setCurrentModal={setCurrentModal}
+                setOpenModal={setOpenModal}
+                onClickModal={onClickToggleModal}
+                email={email}
+              />
+            );
+
+          default:
+            return null;
+        }
+      })()}
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
@@ -176,7 +219,7 @@ export default function SignUp1Page() {
           </svg>
         </ContentsTitleWrapper>
         <ContentsList>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ContentsWrapper>
               <Typography size="mediumText" bold="700">
                 인증번호가 전송되었습니다.
@@ -201,8 +244,8 @@ export default function SignUp1Page() {
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
-          <button onClick={handleReSent}>
-            <div style={{ gap: "4.97px", display: "flex" }}>
+          <button>
+            <div style={{ gap: '4.97px', display: 'flex' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <g opacity="0.8" clip-path="url(#clip0_1466_5915)">
                   <path
@@ -224,16 +267,10 @@ export default function SignUp1Page() {
                   </clipPath>
                 </defs>
               </svg>
-              <Typography size="smallText" color="rgba(216, 88, 136, 0.80)" style={{ textDecorationLine: "underline" }}>
-                인증번호 다시받기
-              </Typography>
+              <TextButton>인증번호 다시받기</TextButton>
             </div>
           </button>
-          <button onClick={handleNotSent}>
-            <Typography size="smallText" color="rgba(216, 88, 136, 0.80)" style={{ textDecorationLine: "underline" }}>
-              아직 인증번호를 받지 못하셨나요?
-            </Typography>
-          </button>
+          <TextButton onClick={onClickToggleModal}>아직 인증번호를 받지 못하셨나요?</TextButton>
         </SubContentsWrapper>
         <ButtonsWrapper>
           <PrevButton active={false} />

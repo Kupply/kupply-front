@@ -121,6 +121,7 @@ const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
   position: relative;
   bottom: 47px;
   left: 585px;
+  height: 0;
 
   svg > path {
     fill: ${(props) => (props.isOpen && !props.isSelected ? "#d85888" : "")};

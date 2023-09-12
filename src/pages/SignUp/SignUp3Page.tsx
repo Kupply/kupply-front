@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import TextFieldBox from "../../assets/TextFieldBox";
-import NextButton from "../../assets/NextButton";
-import PrevButton from "../../assets/PrevButton";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import TextFieldBox from '../../assets/TextFieldBox';
+import NextButton from '../../assets/buttons/NextButton';
+import PrevButton from '../../assets/buttons/PrevButton';
 /*
 [ 참고 사항 - TextFieldBox State Option ]
   default /  hover /  focused /  typing /  filled /  error /  loading /  password
@@ -88,16 +88,38 @@ const ButtonsWrapper = styled.div`
   gap: 18px;
   margin-top: 34px;
 `;
+
+const InfoMessageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin-left: 20px;
+`;
+
+const InfoImageWrapper = styled.div`
+  position: relative;
+  width: 12px;
+`;
+
+const CircleImage = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const CheckImage = styled.svg`
+  position: absolute;
+  top: 3px;
+  left: 3px;
+`;
+
 // state를 부모 컴포넌트에서 넘겨 주기 위해 추가
-type StateOptions =
-  | "default"
-  | "hover"
-  | "focused"
-  | "typing"
-  | "filled"
-  | "error"
-  | "loading"
-  | "password";
+type StateOptions = 'default' | 'hover' | 'focused' | 'typing' | 'filled' | 'error' | 'loading' | 'password';
+
+type errorMessageType = {
+  passwordErrorMessage: string;
+  nicknameErrorMessage: string;
+};
 
 export default function SignUp3Page() {
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
@@ -109,163 +131,148 @@ export default function SignUp3Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [ID, setID] = useState<string>("");
-  const [IDState, setIDState] = useState<StateOptions>("default");
-  const [password, setPassword] = useState<string>("");
-  const [passwordState, setPasswordState] = useState<StateOptions>("default");
-  const [password2, setPassword2] = useState<string>("");
-  const [password2State, setPassword2State] = useState<StateOptions>("default");
-  const [nickname, setNickname] = useState<string>("");
-  const [nicknameState, setnicknameState] = useState<StateOptions>("default");
+  const [ID, setID] = useState<string>('bruce1115@korea.ac.kr');
+  const [password, setPassword] = useState<string>('');
+  const [passwordState, setPasswordState] = useState<StateOptions>('default');
+  const [password2, setPassword2] = useState<string>('');
+  const [password2State, setPassword2State] = useState<StateOptions>('default');
+  const [nickname, setNickname] = useState<string>('');
+  const [nicknameState, setnicknameState] = useState<StateOptions>('default');
+  const [errorMessages, setErrorMessages] = useState<errorMessageType>({
+    passwordErrorMessage: '',
+    nicknameErrorMessage: '',
+  });
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
-    if (
-      IDState === "filled" &&
-      passwordState === "filled" &&
-      password2State === "filled" &&
-      nicknameState === "filled" &&
-      !complete
-    ) {
+    if (passwordState === 'filled' && password2State === 'filled' && nicknameState === 'filled' && !complete) {
       setComplete(true);
-    } else if (
-      !(
-        IDState === "filled" &&
-        passwordState === "filled" &&
-        password2State === "filled" &&
-        nicknameState === "filled"
-      ) &&
-      complete
-    ) {
+    } else if (!(passwordState === 'filled' && password2State === 'filled' && nicknameState === 'filled') && complete) {
       setComplete(false);
     }
-  }, [IDState, passwordState, password2State, nicknameState, complete]);
+  }, [passwordState, password2State, nicknameState, complete]);
 
-  /* ID의 유효성 검사 */
+  /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   useEffect(() => {
-    const IDcheck = /@korea\.ac\.kr$/;
-    if (IDState === "filled") {
-      if (!IDcheck.test(ID)) setIDState("error");
-      else setIDState("filled");
-    }
-  }, [ID, IDState]);
+    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
+    if (passwordState === 'filled') {
+      if (!passwordCheck.test(password)) {
+        let errorMessage = '비밀번호가 ';
 
-  /* password의 유효성 검사 */
-  useEffect(() => {
-    const passwordCheck =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
-    if (passwordState === "filled") {
-      if (!passwordCheck.test(password)) setPasswordState("error");
-      else setPasswordState("filled");
+        if (!/(?=.*[a-z])/.test(password)) {
+          errorMessage += ' 소문자를 포함하고 있지 않아요!';
+        } else if (!/(?=.*[A-Z])/.test(password)) {
+          errorMessage += ' 대문자를 포함하고 있지 않아요!';
+        } else if (!/(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-])/.test(password)) {
+          errorMessage += ' 특수 문자를 포함하고 있지 않아요!';
+        } else if (password.length < 8) errorMessage += ' 최소 8자 이상이어야 해요!';
+        setErrorMessages({
+          ...errorMessages,
+          passwordErrorMessage: errorMessage,
+        });
+        setPasswordState('error');
+      } else setPasswordState('filled');
     }
   }, [password, passwordState]);
 
-  /* password2의 유효성 검사 */
-  useEffect(() => {
-    const password2Check =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
-    if (password2State === "filled") {
-      if (!password2Check.test(password2)) setPassword2State("error");
-      else setPassword2State("filled");
-    }
-  }, [password2, password2State]);
-
   /* password2의 일치 여부 검사 */
   useEffect(() => {
-    if (
-      !!password &&
-      !!password2 &&
-      passwordState === "filled" &&
-      password2State === "filled"
-    ) {
+    if (!!password && !!password2 && passwordState === 'filled' && password2State === 'filled') {
       if (password === password2) {
-        setPassword2State("filled");
+        setPassword2State('filled');
       } else {
-        setPassword2State("error");
+        setPassword2State('error');
       }
     }
   }, [password, passwordState, password2, password2State]);
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate("/signUp4");
+    navigate('/signUp4');
   };
 
   const handlePrev = () => {
-    navigate("/signUp2");
+    navigate('/signUp2');
   };
 
   return (
     <Wrapper>
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography
-          size="mediumText"
-          style={{ opacity: "0.8", marginTop: "5px" }}
-        >
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <div style={{ width: "976.8px", height: "30px" }}>
-        <MultiStepProgressBar
-          steps={steps}
-          currentStep={currentStep}
-          complete={complete}
-        />
+      <div style={{ width: '976.8px', height: '30px' }}>
+        <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       </div>
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 3</StepIndicator>
-          <Typography size="largeText">
-            쿠플라이 비밀번호와 닉네임 설정하기
-          </Typography>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="630"
-            height="2"
-            viewBox="0 0 630 2"
-            fill="none"
-          >
+          <Typography size="largeText">쿠플라이 비밀번호와 닉네임 설정하기</Typography>
+          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
         </ContentsTitleWrapper>
         <ContentsList>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 쿠플라이 아이디
               </Typography>
             </div>
             <TextFieldBox
-              placeholder="홍길동"
               value={ID}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setID(e.target.value);
               }}
-              state={IDState}
-              setState={setIDState}
-              setValue={setID}
-              helpMessage="고려대학교 이메일을 입력해 주세요"
-              errorMessage="아이디가 고려대학교 이메일 형식이 아닙니다."
+              state={'filled'}
+              setState={() => {}}
+              setValue={() => {}}
             ></TextFieldBox>
-            {/* 이미지 추가가 필요해요! */}
-            <Typography size="details" color="#A8A8A8">
-              쿠플라이 아이디는 고려대학교 이메일입니다.
-            </Typography>
+            <InfoMessageWrapper>
+              <InfoImageWrapper>
+                <CircleImage xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <g clip-path="url(#clip0_2213_3136)">
+                    <path
+                      d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z"
+                      stroke="#A8A8A8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2213_3136">
+                      <rect width="12" height="12" fill="white" />
+                    </clipPath>
+                  </defs>
+                </CircleImage>
+                <CheckImage xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                  <g clip-path="url(#clip0_2213_3138)">
+                    <path
+                      d="M4.66659 1.75L2.37492 4.04167L1.33325 3"
+                      stroke="#A8A8A8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2213_3138">
+                      <rect width="5" height="5" fill="white" transform="translate(0.5 0.5)" />
+                    </clipPath>
+                  </defs>
+                </CheckImage>
+              </InfoImageWrapper>
+              <Typography size="details" color="#A8A8A8">
+                쿠플라이 아이디는 고려대학교 이메일입니다.
+              </Typography>
+            </InfoMessageWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 비밀번호
               </Typography>
               <Typography size="mediumText">를 입력해주세요.</Typography>
@@ -280,18 +287,14 @@ export default function SignUp3Page() {
               setState={setPasswordState}
               setValue={setPassword}
               helpMessage="비밀번호는 <8자 이상/1개 이상의 대,소문자/1개 이상의 특수문자>가 포함되어야 합니다."
-              errorMessage="유효하지 않은 비밀번호에요."
+              errorMessage={errorMessages.passwordErrorMessage}
               type="password"
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: 'flex' }}>
               <Typography size="mediumText">비밀번호를&nbsp;</Typography>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 확인
               </Typography>
               <Typography size="mediumText">해&nbsp;주세요.</Typography>
@@ -311,15 +314,9 @@ export default function SignUp3Page() {
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText">
-                쿠플라이에서 사용할&nbsp;
-              </Typography>
-              <Typography
-                size="mediumText"
-                bold="700"
-                style={{ opacity: "0.8" }}
-              >
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText">쿠플라이에서 사용할&nbsp;</Typography>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 닉네임
               </Typography>
               <Typography size="mediumText">을 설정해주세요.</Typography>
@@ -338,8 +335,8 @@ export default function SignUp3Page() {
           </ContentsWrapper>
         </ContentsList>
         <ButtonsWrapper>
-          <PrevButton />
-          <NextButton active={complete} />
+          <PrevButton onClick={handlePrev} />
+          <NextButton active={complete} onClick={handleNext} />
         </ButtonsWrapper>
       </FormWrapper>
     </Wrapper>
