@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import TextFieldBox from "../../assets/TextFieldBox";
-import NextButton from "../../assets/NextButton";
-import PrevButton from "../../assets/PrevButton";
-import NicknameCheckButton from "../../assets/NicknameCheckButton";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import TextFieldBox from '../../assets/TextFieldBox';
+import NextButton from '../../assets/buttons/NextButton';
+import PrevButton from '../../assets/buttons/PrevButton';
+import NicknameCheckButton from '../../assets/NicknameCheckButton';
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]
@@ -126,12 +126,7 @@ const NicknameCheckButtonWrapper = styled.div`
 // state를 부모 컴포넌트에서 넘겨 주기 위해 추가
 type StateOptions = 'default' | 'hover' | 'focused' | 'typing' | 'filled' | 'error' | 'loading' | 'password';
 
-type NicknameCheckStateOptions =
-  | "default"
-  | "hover"
-  | "loading"
-  | "filled"
-  | "error";
+type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
 type errorMessageType = {
   passwordErrorMessage: string;
@@ -148,15 +143,14 @@ export default function SignUp3Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [ID, setID] = useState<string>("bruce1115@korea.ac.kr");
-  const [password, setPassword] = useState<string>("");
-  const [passwordState, setPasswordState] = useState<StateOptions>("default");
-  const [password2, setPassword2] = useState<string>("");
-  const [password2State, setPassword2State] = useState<StateOptions>("default");
-  const [nickname, setNickname] = useState<string>("");
-  const [nicknameState, setnicknameState] = useState<StateOptions>("default");
-  const [nicknameCheck, setNicknameCheckState] =
-    useState<NicknameCheckStateOptions>("default");
+  const [ID, setID] = useState<string>('bruce1115@korea.ac.kr');
+  const [password, setPassword] = useState<string>('');
+  const [passwordState, setPasswordState] = useState<StateOptions>('default');
+  const [password2, setPassword2] = useState<string>('');
+  const [password2State, setPassword2State] = useState<StateOptions>('default');
+  const [nickname, setNickname] = useState<string>('');
+  const [nicknameState, setnicknameState] = useState<StateOptions>('default');
+  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('default');
 
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: '',
@@ -208,24 +202,18 @@ export default function SignUp3Page() {
 
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
   useEffect(() => {
-    if (nicknameCheck === "error" && nicknameState !== "focused") {
-      setnicknameState("error");
+    if (nicknameCheck === 'error' && nicknameState !== 'focused') {
+      setnicknameState('error');
       setErrorMessages({
         ...errorMessages,
-        nicknameErrorMessage: "중복되는 닉네임이에요!",
+        nicknameErrorMessage: '중복되는 닉네임이에요!',
       });
-    } else if (nicknameCheck !== "filled") {
-      if (
-        !(
-          nicknameState === "default" ||
-          nicknameState === "focused" ||
-          nicknameState === "hover"
-        )
-      ) {
-        setnicknameState("error");
+    } else if (nicknameCheck !== 'filled') {
+      if (!(nicknameState === 'default' || nicknameState === 'focused' || nicknameState === 'hover')) {
+        setnicknameState('error');
         setErrorMessages({
           ...errorMessages,
-          nicknameErrorMessage: "닉네임 중복 검사를 완료해 주세요.",
+          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
         });
       }
     }
@@ -233,17 +221,17 @@ export default function SignUp3Page() {
 
   //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
   useEffect(() => {
-    setNicknameCheckState("default");
+    setNicknameCheckState('default');
   }, [nickname]);
 
   //중복 체크의 결과에 따라 nicknameState가 바뀐다.
   useEffect(() => {
-    if (nicknameCheck === "filled") setnicknameState("filled");
-    else if (nicknameCheck === "error") {
-      setnicknameState("error");
+    if (nicknameCheck === 'filled') setnicknameState('filled');
+    else if (nicknameCheck === 'error') {
+      setnicknameState('error');
       setErrorMessages({
         ...errorMessages,
-        nicknameErrorMessage: "중복되는 닉네임이에요!",
+        nicknameErrorMessage: '중복되는 닉네임이에요!',
       });
     }
   }, [nicknameCheck]);
@@ -395,14 +383,11 @@ export default function SignUp3Page() {
               helpMessage="닉네임"
               errorMessage={errorMessages.nicknameErrorMessage}
             ></TextFieldBox>
-            {nickname === "" || nicknameState === "filled" ? (
+            {nickname === '' || nicknameState === 'filled' ? (
               <></>
             ) : (
               <NicknameCheckButtonWrapper>
-                <NicknameCheckButton
-                  state={nicknameCheck}
-                  setState={setNicknameCheckState}
-                ></NicknameCheckButton>
+                <NicknameCheckButton state={nicknameCheck} setState={setNicknameCheckState}></NicknameCheckButton>
               </NicknameCheckButtonWrapper>
             )}
           </ContentsWrapper>
