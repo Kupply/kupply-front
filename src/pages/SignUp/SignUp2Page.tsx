@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import TextFieldBox, { StateOptions } from "../../assets/TextFieldBox";
-import NextButton from "../../assets/NextButton";
-import PrevButton from "../../assets/PrevButton";
-import DropDown from "../../assets/dropdown/dropDown";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
+import NextButton from '../../assets/buttons/NextButton';
+import PrevButton from '../../assets/buttons/PrevButton';
+import DropDown from '../../assets/dropdown/dropDown';
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]
@@ -93,20 +93,20 @@ export default function SignUp2Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [name, setName] = useState<string>("");
-  const [nameState, setNameState] = useState<StateOptions>("default");
-  const [stdID, setStdID] = useState<string>("");
-  const [stdIDState, setStdIDState] = useState<StateOptions>("default");
-  const [phone, setPhone] = useState<string>("");
-  const [phoneState, setPhoneState] = useState<StateOptions>("default");
-  const [dropdownValue, setdropDownValue] = useState<string>("");
+  const [name, setName] = useState<string>('');
+  const [nameState, setNameState] = useState<StateOptions>('default');
+  const [stdID, setStdID] = useState<string>('');
+  const [stdIDState, setStdIDState] = useState<StateOptions>('default');
+  const [phone, setPhone] = useState<string>('');
+  const [phoneState, setPhoneState] = useState<StateOptions>('default');
+  const [dropdownValue, setdropDownValue] = useState<string>('');
 
   /* 학번의 유효성 검사 */
   useEffect(() => {
     const passwordCheck = /^\d{10}$/;
-    if (stdIDState === "filled") {
-      if (!passwordCheck.test(stdID)) setStdIDState("error");
-      else setStdIDState("filled");
+    if (stdIDState === 'filled') {
+      if (!passwordCheck.test(stdID)) setStdIDState('error');
+      else setStdIDState('filled');
     }
   }, [stdID, stdIDState]);
 
@@ -114,11 +114,11 @@ export default function SignUp2Page() {
   useEffect(() => {
     const phoneCheck = /^010\d{8}$/;
     const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
-    if (phoneState === "filled") {
-      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone)) setPhoneState("error");
+    if (phoneState === 'filled') {
+      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone)) setPhoneState('error');
       else {
         const newphoneNumber = phone;
-        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 
         setPhone(newPhone);
       }
@@ -127,10 +127,10 @@ export default function SignUp2Page() {
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
-    if (nameState === "filled" && stdIDState === "filled" && phoneState === "filled" && !!dropdownValue && !complete) {
+    if (nameState === 'filled' && stdIDState === 'filled' && phoneState === 'filled' && !!dropdownValue && !complete) {
       setComplete(true);
     } else if (
-      !(nameState === "filled" && stdIDState === "filled" && phoneState === "filled" && !!dropdownValue) &&
+      !(nameState === 'filled' && stdIDState === 'filled' && phoneState === 'filled' && !!dropdownValue) &&
       complete
     ) {
       setComplete(false);
@@ -139,20 +139,20 @@ export default function SignUp2Page() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate("/signUp3");
+    navigate('/signUp3');
   };
 
   const handlePrev = () => {
-    navigate("/signUp1");
+    navigate('/signUp1');
   };
 
   return (
     <Wrapper>
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
@@ -167,8 +167,8 @@ export default function SignUp2Page() {
         </ContentsTitleWrapper>
         <ContentsList>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 이름
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
@@ -186,8 +186,8 @@ export default function SignUp2Page() {
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 고려대학교 학번
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
@@ -206,8 +206,8 @@ export default function SignUp2Page() {
             ></TextFieldBox>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 본전공(1전공)
               </Typography>
               <Typography size="mediumText">을 입력해주세요.</Typography>
@@ -215,16 +215,16 @@ export default function SignUp2Page() {
             <DropDown
               title="전공선택"
               optionList={[
-                { value1: "컴퓨터학과", value2: "정보대학" },
-                { value1: "경영학과", value2: "경영대학" },
+                { value1: '컴퓨터학과', value2: '정보대학' },
+                { value1: '경영학과', value2: '경영대학' },
               ]}
               value={dropdownValue}
               setValue={setdropDownValue}
             ></DropDown>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 전화번호
               </Typography>
               <Typography size="mediumText">를 입력해주세요.</Typography>

@@ -5,9 +5,6 @@ import VerificationButton from '../../../assets/buttons/VerificationButton';
 import Typography from '../../../assets/Typography';
 import ModalLarge from '../../../components/ModalLarge';
 
-// 2. 다시 받기 하면 작은 모달 w/ 애니메이션
-// 3. verification 버튼 호버
-
 export interface ModalProps {
   currentModal: number;
   isOpenModal: boolean;

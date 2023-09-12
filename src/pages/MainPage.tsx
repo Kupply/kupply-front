@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Carousel from '../components/Carousel';
+import Carousel from '../components/carousel/Carousel';
 import LabelButton from '../assets/buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
-import NextButton from '../assets/NextButton';
-import PrevButton from '../assets/PrevButton';
-import Modal from '../components/ModalLarge';
+import NextButton from '../assets/buttons/NextButton';
+import PrevButton from '../assets/buttons/PrevButton';
 
 const Wrapper = styled.div`
   display: flex;

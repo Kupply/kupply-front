@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import TextFieldBox from "../../assets/TextFieldBox";
-import NextButton from "../../assets/NextButton";
-import PrevButton from "../../assets/PrevButton";
-import Step4Button from "../../assets/Step4Button";
-import VerificationBox from "../../assets/VerificationBox";
-import DropDown from "../../assets/dropdown/dropDown";
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import TextFieldBox from '../../assets/TextFieldBox';
+import NextButton from '../../assets/buttons/NextButton';
+import PrevButton from '../../assets/buttons/PrevButton';
+import Step4Button from '../../components/Step4Button';
+import VerificationBox from '../../assets/VerificationBox';
+import DropDown from '../../assets/dropdown/dropDown';
 
 const Wrapper = styled.div`
   display: flex;
@@ -109,9 +109,9 @@ export function SignUp4Page() {
   const [currentStep, setCurrentStep] = useState<number>(4); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
-  const [candidateState, setCandidateState] = useState<"default" | "clicked" | "unactive">("default");
-  const [passerState, setPasserState] = useState<"default" | "clicked" | "unactive">("default");
-  const [nextPathState, setNextPathState] = useState<string>("");
+  const [candidateState, setCandidateState] = useState<'default' | 'clicked' | 'unactive'>('default');
+  const [passerState, setPasserState] = useState<'default' | 'clicked' | 'unactive'>('default');
+  const [nextPathState, setNextPathState] = useState<string>('');
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = (nextPath: string) => {
@@ -119,32 +119,32 @@ export function SignUp4Page() {
   };
 
   const handlePrev = () => {
-    navigate("/signUp3");
+    navigate('/signUp3');
   };
 
   const handleButtonClick = (buttonState: string) => {
-    if (buttonState === "candidate" && candidateState !== "clicked") {
-      setCandidateState("clicked");
-      setPasserState("unactive");
-      setNextPathState("/signUp4-candidate");
-    } else if (buttonState === "passer" && passerState !== "clicked") {
-      setPasserState("clicked");
-      setCandidateState("unactive");
-      setNextPathState("/signUp4-passer");
+    if (buttonState === 'candidate' && candidateState !== 'clicked') {
+      setCandidateState('clicked');
+      setPasserState('unactive');
+      setNextPathState('/signUp4-candidate');
+    } else if (buttonState === 'passer' && passerState !== 'clicked') {
+      setPasserState('clicked');
+      setCandidateState('unactive');
+      setNextPathState('/signUp4-passer');
     }
   };
 
   return (
     <Wrapper>
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <div style={{ width: "976.8px", height: "30px" }}>
+      <div style={{ width: '976.8px', height: '30px' }}>
         <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       </div>
       <FormWrapper>
@@ -157,23 +157,23 @@ export function SignUp4Page() {
         </ContentsTitleWrapper>
         <ContentsList>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 쿠플라이에서 원하는 서비스를 선택해주세요.
               </Typography>
             </div>
             <Step4Button
               state={candidateState}
               double={false}
-              onClick={() => handleButtonClick("candidate")}
+              onClick={() => handleButtonClick('candidate')}
             ></Step4Button>
-            <Step4Button state={passerState} double={true} onClick={() => handleButtonClick("passer")}></Step4Button>
+            <Step4Button state={passerState} double={true} onClick={() => handleButtonClick('passer')}></Step4Button>
           </ContentsWrapper>
         </ContentsList>
         <AliasButtonsWrapper>
           <PrevButton onClick={handlePrev} />
           <NextButton
-            active={candidateState === "clicked" || passerState === "clicked"}
+            active={candidateState === 'clicked' || passerState === 'clicked'}
             onClick={() => handleNext(nextPathState)}
           />
         </AliasButtonsWrapper>
@@ -191,14 +191,14 @@ export function SignUp4PageCandidate() {
   const [currentStep, setCurrentStep] = useState<number>(4); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
-  const [hopeMajor1, setHopeMajor1] = useState<string>("");
-  const [hopeMajor2, setHopeMajor2] = useState<string>("");
-  const [GPA1, setGPA1] = useState<string>("");
-  const [GPA2, setGPA2] = useState<string>("");
-  const [GPA3, setGPA3] = useState<string>("");
-  const [hopeSemester1, setHopeSemester1] = useState<string>("");
-  const [hopeSemester2, setHopeSemester2] = useState<string>("");
-  const [hopeSemester3, setHopeSemester3] = useState<string>("");
+  const [hopeMajor1, setHopeMajor1] = useState<string>('');
+  const [hopeMajor2, setHopeMajor2] = useState<string>('');
+  const [GPA1, setGPA1] = useState<string>('');
+  const [GPA2, setGPA2] = useState<string>('');
+  const [GPA3, setGPA3] = useState<string>('');
+  const [hopeSemester1, setHopeSemester1] = useState<string>('');
+  const [hopeSemester2, setHopeSemester2] = useState<string>('');
+  const [hopeSemester3, setHopeSemester3] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
   useEffect(() => {
@@ -219,35 +219,35 @@ export function SignUp4PageCandidate() {
   }, [hopeMajor1, hopeMajor2, GPA1, GPA2, GPA3, hopeSemester1, hopeSemester2, hopeSemester3]);
 
   const optionList = [
-    { value1: "경영학과", value2: "경영대학" },
-    { value1: "경제학과", value2: "정경대학" },
-    { value1: "통계학과", value2: "정경대학" },
-    { value1: "정치외교학과", value2: "정경대학" },
-    { value1: "국제학부", value2: "국제학부" },
-    { value1: "컴퓨터학과", value2: "정보대학" },
-    { value1: "심리학부", value2: "심리학부" },
+    { value1: '경영학과', value2: '경영대학' },
+    { value1: '경제학과', value2: '정경대학' },
+    { value1: '통계학과', value2: '정경대학' },
+    { value1: '정치외교학과', value2: '정경대학' },
+    { value1: '국제학부', value2: '국제학부' },
+    { value1: '컴퓨터학과', value2: '정보대학' },
+    { value1: '심리학부', value2: '심리학부' },
   ];
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate("/signUp5");
+    navigate('/signUp5');
   };
 
   const handlePrev = () => {
-    navigate("/signUp4");
+    navigate('/signUp4');
   };
 
   return (
     <Wrapper>
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <div style={{ width: "976.8px", height: "30px" }}>
+      <div style={{ width: '976.8px', height: '30px' }}>
         <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       </div>
       <FormWrapper>
@@ -260,9 +260,9 @@ export function SignUp4PageCandidate() {
         </ContentsTitleWrapper>
         <ContentsList>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: 'flex' }}>
               <Typography size="mediumText">희망하는&nbsp;</Typography>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 이중전공
               </Typography>
               <Typography size="mediumText">을 선택해주세요.</Typography>
@@ -281,9 +281,9 @@ export function SignUp4PageCandidate() {
             />
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: 'flex' }}>
               <Typography size="mediumText">현재&nbsp;</Typography>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 학점
               </Typography>
               <Typography size="mediumText">을 소수점 두 자리까지 기입해주세요.</Typography>
@@ -296,8 +296,8 @@ export function SignUp4PageCandidate() {
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 희망 이중 지원학기
               </Typography>
               <Typography size="mediumText">를 입력해주세요.</Typography>
@@ -328,13 +328,13 @@ export function SignUp4PagePasser() {
   const [currentStep, setCurrentStep] = useState<number>(4); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
-  const [doubleMajor, setDoubleMajor] = useState<string>("");
-  const [GPA1, setGPA1] = useState<string>("");
-  const [GPA2, setGPA2] = useState<string>("");
-  const [GPA3, setGPA3] = useState<string>("");
-  const [passSemester1, setPassSemester1] = useState<string>("");
-  const [passSemester2, setPassSemester2] = useState<string>("");
-  const [passSemester3, setPassSemester3] = useState<string>("");
+  const [doubleMajor, setDoubleMajor] = useState<string>('');
+  const [GPA1, setGPA1] = useState<string>('');
+  const [GPA2, setGPA2] = useState<string>('');
+  const [GPA3, setGPA3] = useState<string>('');
+  const [passSemester1, setPassSemester1] = useState<string>('');
+  const [passSemester2, setPassSemester2] = useState<string>('');
+  const [passSemester3, setPassSemester3] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
   useEffect(() => {
@@ -346,25 +346,25 @@ export function SignUp4PagePasser() {
   }, [doubleMajor, GPA1, GPA2, GPA3, passSemester1, passSemester2, passSemester3]);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate("/signUp5");
+    navigate('/signUp5');
   };
 
   const handlePrev = () => {
-    navigate("/signUp4");
+    navigate('/signUp4');
   };
 
   return (
     <Wrapper>
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
 
-      <div style={{ width: "976.8px", height: "30px" }}>
+      <div style={{ width: '976.8px', height: '30px' }}>
         <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       </div>
       <FormWrapper>
@@ -377,8 +377,8 @@ export function SignUp4PagePasser() {
         </ContentsTitleWrapper>
         <ContentsList>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 진입한 이중전공
               </Typography>
               <Typography size="mediumText">을 선택해주세요.</Typography>
@@ -386,21 +386,21 @@ export function SignUp4PagePasser() {
             <DropDown
               title="진입 이중전공 선택"
               optionList={[
-                { value1: "경영학과", value2: "경영대학" },
-                { value1: "경제학과", value2: "정경대학" },
-                { value1: "통계학과", value2: "정경대학" },
-                { value1: "정치외교학과", value2: "정경대학" },
-                { value1: "국제학부", value2: "국제학부" },
-                { value1: "컴퓨터학과", value2: "정보대학" },
-                { value1: "심리학부", value2: "심리학부" },
+                { value1: '경영학과', value2: '경영대학' },
+                { value1: '경제학과', value2: '정경대학' },
+                { value1: '통계학과', value2: '정경대학' },
+                { value1: '정치외교학과', value2: '정경대학' },
+                { value1: '국제학부', value2: '국제학부' },
+                { value1: '컴퓨터학과', value2: '정보대학' },
+                { value1: '심리학부', value2: '심리학부' },
               ]}
               value={doubleMajor}
               setValue={setDoubleMajor}
             />
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 지원 당시의 학점
               </Typography>
               <Typography size="mediumText">을 소수점 두 자리까지 기입해주세요.</Typography>
@@ -413,8 +413,8 @@ export function SignUp4PagePasser() {
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
-            <div style={{ display: "flex" }}>
-              <Typography size="mediumText" bold="700" style={{ opacity: "0.8" }}>
+            <div style={{ display: 'flex' }}>
+              <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                 이중전공 진입 학기
               </Typography>
               <Typography size="mediumText">를 입력해주세요.</Typography>

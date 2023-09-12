@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/base/Header';
+import Footer from './components/base/Footer';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import PreviousPage from './pages/PreviousPage';
