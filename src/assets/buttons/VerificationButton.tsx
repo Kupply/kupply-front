@@ -1,5 +1,7 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
+
+// 이슈: onClick prop 으로 추가 여부
 
 const ButtonWrapper = styled.button`
   display: flex;
@@ -30,8 +32,15 @@ const ButtonWrapper = styled.button`
   }
 `;
 
-function VerificationButton() {
-  return <ButtonWrapper>인증번호 다시 받기</ButtonWrapper>;
+export interface VerificationButtonProps {
+  onClick: () => void;
+}
+
+function VerificationButton({
+  onClick,
+  children,
+}: PropsWithChildren<VerificationButtonProps>) {
+  return <ButtonWrapper onClick={onClick}>{children}</ButtonWrapper>;
 }
 
 export default VerificationButton;

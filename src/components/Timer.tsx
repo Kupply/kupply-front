@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export interface TImerProps {
   setTime: number; // (분) 기준
+  // setTimeLeft: () => void; // 타이머 초기화 목적
 }
 
 export default function Timer({ setTime }: TImerProps) {

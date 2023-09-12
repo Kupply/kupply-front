@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Typography from "../assets/Typography";
-import NextButton from "../assets/NextButton";
+import React from 'react';
+import styled from 'styled-components';
+import Typography from '../assets/Typography';
+import NextButton from '../assets/buttons/NextButton';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -46,7 +46,7 @@ const LogoText = styled.text`
   align-items: center;
   justify-content: center;
   color: #000;
-  font-family: "GmarketSans";
+  font-family: 'GmarketSans';
   font-size: 2.1em; // (참고) 폰트크기의 기본값은 16px
   font-style: normal;
   line-height: normal;
@@ -107,7 +107,7 @@ function LoginPage() {
           <LogoImage src="../../design_image/logo.png" />
           <LogoText>쿠플라이</LogoText>
         </LogoBox>
-        <Typography size="mediumText" style={{ marginBottom: "50px" }}>
+        <Typography size="mediumText" style={{ marginBottom: '50px' }}>
           고려대학교 메일로 이용하는 쿠플라이의 모든 서비스
         </Typography>
         <TextFieldBox>

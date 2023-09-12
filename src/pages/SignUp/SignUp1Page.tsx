@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import NextButton from "../../assets/NextButton";
-import PrevButton from "../../assets/PrevButton";
-import Timer from "../../components/Timer";
-import VerificationBox from "../../assets/VerificationBox";
-import AlertSmall from "../../assets/alert/AlertSmall";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import NextButton from '../../assets/buttons/NextButton';
+import PrevButton from '../../assets/buttons/PrevButton';
+import Timer from '../../components/Timer';
+import VerificationBox from '../../assets/VerificationBox';
+import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
+import SignUpLarge1 from './modals/SignUpLarge1';
+import SignUpLarge2 from './modals/SignUpLarge2';
+import SignUpLarge3 from './modals/SignUpLarge3';
 
 /*
  수정해야할 사항 목록
  1. 타이머 위치
- 2. 각 버튼에 이벤트 주입 (텍스트버튼, 다음버튼)
  */
 
 const Wrapper = styled.div`
@@ -97,6 +99,20 @@ const SubContentsWrapper = styled.div`
   margin-bottom: 171px;
 `;
 
+const TextButton = styled.button`
+  display: flex;
+  gap: 4.97px;
+  color: rgba(216, 88, 136, 0.8);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  text-decoration-line: underline;
+
+  cursor: pointer;
+`;
+
 export default function SignUp1Page() {
   const navigate = useNavigate();
 
@@ -106,15 +122,15 @@ export default function SignUp1Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   // verificationBox 관련
-  const [num1, setNum1] = useState<string>("");
-  const [num2, setNum2] = useState<string>("");
-  const [num3, setNum3] = useState<string>("");
-  const [num4, setNum4] = useState<string>("");
-  const [num5, setNum5] = useState<string>("");
-  const [num6, setNum6] = useState<string>("");
+  const [num1, setNum1] = useState<string>('');
+  const [num2, setNum2] = useState<string>('');
+  const [num3, setNum3] = useState<string>('');
+  const [num4, setNum4] = useState<string>('');
+  const [num5, setNum5] = useState<string>('');
+  const [num6, setNum6] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
-  // verificationBox 모두 입력시 자동 버튼 활성화 관련련
+  // verificationBox 관련
   useEffect(() => {
     if (!!num1 && !!num2 && !!num3 && !!num4 && !!num6 && !!num6) {
       setNextButton(true);
@@ -124,63 +140,92 @@ export default function SignUp1Page() {
   }, [num1, num2, num3, num4, num5, num6]);
 
   const handleNext = () => {
-    navigate("/signUp2");
+    navigate('/signUp2');
   };
 
-  // 모달 이벤트 작성 필요 w/ 애니메이션
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const handleReSent = (e: React.MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) {
-      setIsModalOpen((prev) => !prev);
-      // onClose();
-    }
-  };
+  // modal 관련
+  const [currentModal, setCurrentModal] = useState<number>(1);
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const onClickToggleModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+    setCurrentModal(1); // 현재 모달창 (step) 초기화
+    console.log(isOpenModal); // 디버그 목적
+  }, [isOpenModal]);
 
-  const handleNotSent = () => {
-    // 모달 이벤트 작성 필요 w/ 애니메이션
-  };
+  // modal 2 - 3 email value 전달 관련
+  const [email, setEmail] = useState<string>('');
+  const [emailState, setEmailState] = useState<StateOptions>('default');
 
   return (
     <Wrapper>
+      {(() => {
+        switch (currentModal) {
+          case 1:
+            return (
+              <SignUpLarge1
+                currentModal={currentModal}
+                isOpenModal={isOpenModal}
+                setCurrentModal={setCurrentModal}
+                setOpenModal={setOpenModal}
+                onClickModal={onClickToggleModal}
+              />
+            );
+          case 2:
+            return (
+              <SignUpLarge2
+                currentModal={currentModal}
+                isOpenModal={isOpenModal}
+                setCurrentModal={setCurrentModal}
+                setOpenModal={setOpenModal}
+                onClickModal={onClickToggleModal}
+                email={email}
+                emailState={emailState}
+                setEmail={setEmail}
+                setEmailState={setEmailState}
+              />
+            );
+
+          case 3:
+            return (
+              <SignUpLarge3
+                currentModal={currentModal}
+                isOpenModal={isOpenModal}
+                setCurrentModal={setCurrentModal}
+                setOpenModal={setOpenModal}
+                onClickModal={onClickToggleModal}
+                email={email}
+              />
+            );
+
+          default:
+            return null;
+        }
+      })()}
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography
-          size="mediumText"
-          style={{ opacity: "0.8", marginTop: "5px" }}
-        >
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar
-        steps={steps}
-        currentStep={currentStep}
-        complete={complete}
-      />
+      <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 1</StepIndicator>
           <Typography size="largeText">고려대학생 인증하기</Typography>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="630"
-            height="2"
-            viewBox="0 0 630 2"
-            fill="none"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
         </ContentsTitleWrapper>
         <ContentsList>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ContentsWrapper>
               <Typography size="mediumText" bold="700">
                 인증번호가 전송되었습니다.
               </Typography>
               <Typography size="normalText">
-                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를
-                입력해주세요.
+                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를 입력해주세요.
               </Typography>
             </ContentsWrapper>
             <div>
@@ -190,50 +235,18 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-
-            <VerificationBox
-              name="pin-1"
-              value={num1}
-              setValue={setNum1}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-2"
-              value={num2}
-              setValue={setNum2}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-3"
-              value={num3}
-              setValue={setNum3}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-4"
-              value={num4}
-              setValue={setNum4}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-5"
-              value={num5}
-              setValue={setNum5}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-6"
-              value={num6}
-              setValue={setNum6}
-            ></VerificationBox>
-
+            <VerificationBox name="pin-1" value={num1} setValue={setNum1}></VerificationBox>
+            <VerificationBox name="pin-2" value={num2} setValue={setNum2}></VerificationBox>
+            <VerificationBox name="pin-3" value={num3} setValue={setNum3}></VerificationBox>
+            <VerificationBox name="pin-4" value={num4} setValue={setNum4}></VerificationBox>
+            <VerificationBox name="pin-5" value={num5} setValue={setNum5}></VerificationBox>
+            <VerificationBox name="pin-6" value={num6} setValue={setNum6}></VerificationBox>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
-          <button onClick={handleReSent}>
-            <div style={{ gap: "4.97px", display: "flex" }}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-              >
+          <button>
+            <div style={{ gap: '4.97px', display: 'flex' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <g opacity="0.8" clip-path="url(#clip0_1466_5915)">
                   <path
                     d="M13.3269 2.31445V5.78668H9.85034"
@@ -254,31 +267,11 @@ export default function SignUp1Page() {
                   </clipPath>
                 </defs>
               </svg>
-              <Typography
-                size="smallText"
-                color="rgba(216, 88, 136, 0.80)"
-                style={{ textDecorationLine: "underline" }}
-              >
-                인증번호 다시받기
-              </Typography>
+              <TextButton>인증번호 다시받기</TextButton>
             </div>
           </button>
-          <button onClick={handleNotSent}>
-            <Typography
-              size="smallText"
-              color="rgba(216, 88, 136, 0.80)"
-              style={{ textDecorationLine: "underline" }}
-            >
-              아직 인증번호를 받지 못하셨나요?
-            </Typography>
-          </button>
+          <TextButton onClick={onClickToggleModal}>아직 인증번호를 받지 못하셨나요?</TextButton>
         </SubContentsWrapper>
-        {isModalOpen && (
-          <AlertSmall
-            mainText={"새로운 인증번호를 발송했습니다."}
-            subText={"메일함을 확인해주세요!"}
-          />
-        )}
         <ButtonsWrapper>
           <PrevButton active={false} />
           <NextButton active={nextButton} onClick={handleNext} />

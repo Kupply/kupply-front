@@ -1,11 +1,11 @@
 /* eslint-disable no-restricted-globals */
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import Logo from "./Logo";
-import HeaderButton from "./buttons/header/HeaderButton";
-import MailButton from "./buttons/header/MailButton";
-import SettingButton from "./buttons/header/SettingButton";
-import LabelButton from "./buttons/LabelButton";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import Logo from '../../assets/Logo';
+import HeaderButton from '../../assets/buttons/header/HeaderButton';
+import MailButton from '../../assets/buttons/header/MailButton';
+import SettingButton from '../../assets/buttons/header/SettingButton';
+import LabelButton from '../../assets/buttons/LabelButton';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -57,22 +57,22 @@ export interface HeaderProps {
 export default function Header({ logined }: HeaderProps) {
   const navigate = useNavigate();
   const handleMenu1Click = () => {
-    navigate("/previous");
+    navigate('/previous');
   };
   const handleMenu2Click = () => {
-    navigate("/myboard");
+    navigate('/myboard');
   };
   const handleMenu3Click = () => {
-    navigate("/community");
+    navigate('/community');
   };
   const handleSettingsClick = () => {
-    navigate("/settings");
+    navigate('/settings');
   };
   const handleMessageClick = () => {
-    navigate("/message");
+    navigate('/message');
   };
   const handleJoinClick = () => {
-    navigate("/join");
+    navigate('/join');
   };
 
   return (
@@ -81,22 +81,13 @@ export default function Header({ logined }: HeaderProps) {
         <LeftButtonsContainer>
           <Logo />
           <HeaderButtonContainer>
-            <HeaderButton
-              onClick={handleMenu1Click}
-              activated={location.pathname === "/previous"}
-            >
+            <HeaderButton onClick={handleMenu1Click} activated={location.pathname === '/previous'}>
               합격자료
             </HeaderButton>
-            <HeaderButton
-              onClick={handleMenu2Click}
-              activated={location.pathname === "/myboard"}
-            >
+            <HeaderButton onClick={handleMenu2Click} activated={location.pathname === '/myboard'}>
               마이보드
             </HeaderButton>
-            <HeaderButton
-              onClick={handleMenu3Click}
-              activated={location.pathname === "/community"}
-            >
+            <HeaderButton onClick={handleMenu3Click} activated={location.pathname === '/community'}>
               커뮤니티
             </HeaderButton>
           </HeaderButtonContainer>
@@ -107,11 +98,7 @@ export default function Header({ logined }: HeaderProps) {
             <SettingButton onClick={handleSettingsClick} />
           </HeaderIconButtonContainer>
         ) : (
-          <LabelButton
-            size="medium"
-            buttonType="secondary"
-            onClick={handleJoinClick}
-          >
+          <LabelButton size="medium" buttonType="secondary" onClick={handleJoinClick}>
             Log in
           </LabelButton>
         )}

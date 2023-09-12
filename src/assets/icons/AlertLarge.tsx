@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Typography from "../Typography";
-import AlertIconCheck from "./AlertIconCheck";
+import AlertIconCheck from "./AlertIconExclamation";
 
 // 2023.09.04 수정중 by 윤진
 

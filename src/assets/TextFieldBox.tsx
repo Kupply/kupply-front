@@ -171,7 +171,7 @@ const EyeIcon = styled.div<{ state: string }>`
     `}
 `;
 
-type StateOptions =
+export type StateOptions =
   | "default"
   | "hover"
   | "focused"
