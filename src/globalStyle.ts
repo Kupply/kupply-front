@@ -1,16 +1,25 @@
-import { createGlobalStyle } from "styled-components";
-import GmarketSans from "./fonts/GmarketSans.woff2";
+import { createGlobalStyle } from 'styled-components';
+import GmarketSans from './fonts/GmarketSans.woff2';
+import Pretendard from './fonts/Pretendard.woff2';
 
 export const GlobalStyle = createGlobalStyle`
-  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
-  
+  // @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"); 
   // @import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
   // local 통해 import 하는 방식으로 변경 (GmarketSans 오류 해결 목적 - file name unmatching)
+
   @font-face {
     font-family: 'GmarketSans';
     src: local('GmarketSans'), local('GmarketSans');
     font-style: normal;
     src: url(${GmarketSans}) format('truetype');
+    font-display: swap;
+  } 
+
+  @font-face {
+    font-family: 'Pretendard';
+    src: local('Pretendard'), local('Pretendard');
+    font-style: normal;
+    src: url(${Pretendard}) format('truetype');
     font-display: swap;
   } 
   
