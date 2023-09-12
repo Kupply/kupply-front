@@ -140,6 +140,7 @@ export default function SignUp1Page() {
   }, [num1, num2, num3, num4, num5, num6]);
 
   const handleNext = () => {
+    console.log('lalala');
     navigate('/signUp2');
   };
 

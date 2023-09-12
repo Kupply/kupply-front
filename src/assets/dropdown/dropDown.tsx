@@ -1,8 +1,8 @@
-import React from "react";
-import { useEffect, useState, MutableRefObject } from "react";
-import styled, { css } from "styled-components";
-import useDetectClose from "./useDetectClose";
-import Typography, { TypographyProps } from "../Typography";
+import React from 'react';
+import { useEffect, useState, MutableRefObject } from 'react';
+import styled, { css } from 'styled-components';
+import useDetectClose from './useDetectClose';
+import Typography, { TypographyProps } from '../Typography';
 
 // 3. 화살표 버튼 나타나게 처리
 
@@ -18,17 +18,16 @@ export interface DropDownProps {
   setValue: (str: string) => void;
 }
 
-export interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
+export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   isOpen: boolean;
   isSelected: boolean;
 }
 
-export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
+export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   isSelectedValue: boolean;
 }
 
-export interface InputButtonProps
-  extends React.ComponentPropsWithoutRef<"button"> {
+export interface InputButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   isOpen: boolean;
   isSelected: boolean;
 }
@@ -56,13 +55,7 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
         value={value || title}
       />
       <AngleDown isOpen={isOpen} isSelected={isSelected}>
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 28 28"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M19.8333 10.6984C19.6147 10.4811 19.319 10.3591 19.0108 10.3591C18.7026 10.3591 18.4069 10.4811 18.1883 10.6984L14 14.8284L9.86998 10.6984C9.65139 10.4811 9.3557 10.3591 9.04748 10.3591C8.73926 10.3591 8.44357 10.4811 8.22498 10.6984C8.11563 10.8068 8.02884 10.9359 7.96961 11.078C7.91038 11.2202 7.87988 11.3727 7.87988 11.5267C7.87988 11.6807 7.91038 11.8332 7.96961 11.9754C8.02884 12.1176 8.11563 12.2466 8.22498 12.3551L13.1716 17.3017C13.2801 17.4111 13.4091 17.4979 13.5513 17.5571C13.6935 17.6163 13.846 17.6468 14 17.6468C14.154 17.6468 14.3065 17.6163 14.4487 17.5571C14.5908 17.4979 14.7199 17.4111 14.8283 17.3017L19.8333 12.3551C19.9427 12.2466 20.0295 12.1176 20.0887 11.9754C20.1479 11.8332 20.1784 11.6807 20.1784 11.5267C20.1784 11.3727 20.1479 11.2202 20.0887 11.078C20.0295 10.9359 19.9427 10.8068 19.8333 10.6984Z"
             fill="#B9B9B9"
@@ -73,10 +66,10 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
       {isOpen && (
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
+            display: 'flex',
+            flexDirection: 'column',
             bottom: 28,
-            position: "relative",
+            position: 'relative',
           }}
         >
           <OptionContainer>
@@ -94,12 +87,8 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
                 >
                   {data.value1}
                   <CollegeWrapper
-                    size={"normalText"}
-                    color={
-                      value === data.value1
-                        ? "var(--primary, #d85888)"
-                        : "#141414"
-                    }
+                    size={'normalText'}
+                    color={value === data.value1 ? 'var(--primary, #d85888)' : '#141414'}
                   >
                     {data.value2}
                   </CollegeWrapper>
@@ -121,15 +110,15 @@ const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
   position: relative;
   bottom: 47px;
   left: 585px;
-  height: 0;
+  height: 2px;
 
   svg > path {
-    fill: ${(props) => (props.isOpen && !props.isSelected ? "#d85888" : "")};
+    fill: ${(props) => (props.isOpen && !props.isSelected ? '#d85888' : '')};
     transition: fill 0.25s ease-in-out;
   }
 
   svg {
-    transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+    transform: ${(props) => (props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
     transition: transform 0.25s ease-in-out;
   }
 `;
@@ -156,8 +145,7 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
   opacity: 0.8;
 
   ${(props) =>
-    ((props.isOpen && props.isSelected) ||
-      (!props.isOpen && props.isSelected)) &&
+    ((props.isOpen && props.isSelected) || (!props.isOpen && props.isSelected)) &&
     css`
       border: 1px solid #d85888;
       color: #d85888;
@@ -168,14 +156,14 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
 
   // 해결 필요 2 - 버튼이 입력창 위로 보이지 않음.
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     right: 18px;
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
-    background-image: url("../../design_image/u_angle-down.svg");
+    background-image: url('../../design_image/u_angle-down.svg');
     background-size: cover;
     z-index: 1; /* Add this line */
   }
@@ -224,6 +212,9 @@ const InputButtonWrapper = styled.button<{
 */
 
 const OptionContainer = styled.div`
+  position: absolute;
+  z-index: 999;
+  top: 30px;
   display: flex;
   flex-direction: column;
   width: 629px;
