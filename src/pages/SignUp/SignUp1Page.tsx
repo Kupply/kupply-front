@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/MultiStepProgressBar";
-import NextButton from "../../assets/NextButton";
-import PrevButton from "../../assets/PrevButton";
-import Timer from "../../components/Timer";
-import VerificationBox from "../../assets/VerificationBox";
-import TextFieldBox, { StateOptions } from "../../assets/TextFieldBox";
-import SignUpLarge1 from "./modals/SignUpLarge1";
-import SignUpLarge2 from "./modals/SignUpLarge2";
-import SignUpLarge3 from "./modals/SignUpLarge3";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import NextButton from '../../assets/buttons/NextButton';
+import PrevButton from '../../assets/buttons/PrevButton';
+import Timer from '../../components/Timer';
+import VerificationBox from '../../assets/VerificationBox';
+import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
+import SignUpLarge1 from './modals/SignUpLarge1';
+import SignUpLarge2 from './modals/SignUpLarge2';
+import SignUpLarge3 from './modals/SignUpLarge3';
 
 /*
  수정해야할 사항 목록
@@ -122,12 +122,12 @@ export default function SignUp1Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   // verificationBox 관련
-  const [num1, setNum1] = useState<string>("");
-  const [num2, setNum2] = useState<string>("");
-  const [num3, setNum3] = useState<string>("");
-  const [num4, setNum4] = useState<string>("");
-  const [num5, setNum5] = useState<string>("");
-  const [num6, setNum6] = useState<string>("");
+  const [num1, setNum1] = useState<string>('');
+  const [num2, setNum2] = useState<string>('');
+  const [num3, setNum3] = useState<string>('');
+  const [num4, setNum4] = useState<string>('');
+  const [num5, setNum5] = useState<string>('');
+  const [num6, setNum6] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
   // verificationBox 관련
@@ -140,7 +140,7 @@ export default function SignUp1Page() {
   }, [num1, num2, num3, num4, num5, num6]);
 
   const handleNext = () => {
-    navigate("/signUp2");
+    navigate('/signUp2');
   };
 
   // modal 관련
@@ -153,8 +153,8 @@ export default function SignUp1Page() {
   }, [isOpenModal]);
 
   // modal 2 - 3 email value 전달 관련
-  const [email, setEmail] = useState<string>("");
-  const [emailState, setEmailState] = useState<StateOptions>("default");
+  const [email, setEmail] = useState<string>('');
+  const [emailState, setEmailState] = useState<StateOptions>('default');
 
   return (
     <Wrapper>
@@ -202,44 +202,30 @@ export default function SignUp1Page() {
         }
       })()}
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           환영합니다
         </Typography>
-        <Typography
-          size="mediumText"
-          style={{ opacity: "0.8", marginTop: "5px" }}
-        >
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar
-        steps={steps}
-        currentStep={currentStep}
-        complete={complete}
-      />
+      <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 1</StepIndicator>
           <Typography size="largeText">고려대학생 인증하기</Typography>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="630"
-            height="2"
-            viewBox="0 0 630 2"
-            fill="none"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
         </ContentsTitleWrapper>
         <ContentsList>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ContentsWrapper>
               <Typography size="mediumText" bold="700">
                 인증번호가 전송되었습니다.
               </Typography>
               <Typography size="normalText">
-                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를
-                입력해주세요.
+                고려대학교 이메일 주소로 발송된 인증번호 여섯자리를 입력해주세요.
               </Typography>
             </ContentsWrapper>
             <div>
@@ -249,48 +235,18 @@ export default function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox
-              name="pin-1"
-              value={num1}
-              setValue={setNum1}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-2"
-              value={num2}
-              setValue={setNum2}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-3"
-              value={num3}
-              setValue={setNum3}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-4"
-              value={num4}
-              setValue={setNum4}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-5"
-              value={num5}
-              setValue={setNum5}
-            ></VerificationBox>
-            <VerificationBox
-              name="pin-6"
-              value={num6}
-              setValue={setNum6}
-            ></VerificationBox>
+            <VerificationBox name="pin-1" value={num1} setValue={setNum1}></VerificationBox>
+            <VerificationBox name="pin-2" value={num2} setValue={setNum2}></VerificationBox>
+            <VerificationBox name="pin-3" value={num3} setValue={setNum3}></VerificationBox>
+            <VerificationBox name="pin-4" value={num4} setValue={setNum4}></VerificationBox>
+            <VerificationBox name="pin-5" value={num5} setValue={setNum5}></VerificationBox>
+            <VerificationBox name="pin-6" value={num6} setValue={setNum6}></VerificationBox>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
           <button>
-            <div style={{ gap: "4.97px", display: "flex" }}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-              >
+            <div style={{ gap: '4.97px', display: 'flex' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <g opacity="0.8" clip-path="url(#clip0_1466_5915)">
                   <path
                     d="M13.3269 2.31445V5.78668H9.85034"
@@ -314,9 +270,7 @@ export default function SignUp1Page() {
               <TextButton>인증번호 다시받기</TextButton>
             </div>
           </button>
-          <TextButton onClick={onClickToggleModal}>
-            아직 인증번호를 받지 못하셨나요?
-          </TextButton>
+          <TextButton onClick={onClickToggleModal}>아직 인증번호를 받지 못하셨나요?</TextButton>
         </SubContentsWrapper>
         <ButtonsWrapper>
           <PrevButton active={false} />

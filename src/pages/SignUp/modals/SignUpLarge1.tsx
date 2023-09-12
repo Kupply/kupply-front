@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
-import styled from "styled-components";
-import AlertIconExclamation from "../../../assets/icons/AlertIconExclamation";
-import VerificationButton from "../../../assets/buttons/VerificationButton";
-import Typography from "../../../assets/Typography";
-import Modal from "../../../components/Modal";
+import { useState, useCallback } from 'react';
+import styled from 'styled-components';
+import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
+import VerificationButton from '../../../assets/buttons/VerificationButton';
+import Typography from '../../../assets/Typography';
+import Modal from '../../../components/base/Modal';
 
 // 두번째 Verification Button 에 대한 onClick 이벤트 변경
 
@@ -16,13 +16,7 @@ export interface ModalProps {
 }
 
 export default function SignUpLarge1(props: ModalProps) {
-  const {
-    currentModal,
-    isOpenModal,
-    setCurrentModal,
-    setOpenModal,
-    onClickModal,
-  } = props;
+  const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal } = props;
 
   const onClickNextModal = () => {
     setCurrentModal(currentModal + 1);
@@ -33,27 +27,9 @@ export default function SignUpLarge1(props: ModalProps) {
       {isOpenModal && (
         <Modal onClickToggleModal={onClickModal}>
           <PrevButton>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-            >
-              <path
-                d="M34 23L26 30"
-                stroke="#434343"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M26 30L34 38"
-                stroke="#434343"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <path d="M34 23L26 30" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M26 30L34 38" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </PrevButton>
           <CloseButton
@@ -61,13 +37,7 @@ export default function SignUpLarge1(props: ModalProps) {
               setOpenModal(!isOpenModal);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -76,29 +46,17 @@ export default function SignUpLarge1(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: "20.15%" }}></div>
+          <div style={{ height: '20.15%' }}></div>
           <AlertIconExclamation width="113px" height="113px" />
-          <Typography
-            size="largeText"
-            color="#141414"
-            style={{ marginTop: "25px" }}
-          >
+          <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             아직 인증번호를 받지 못하셨나요?
           </Typography>
-          <Typography
-            size="mediumText"
-            color="#141414"
-            style={{ marginTop: "24px" }}
-          >
+          <Typography size="mediumText" color="#141414" style={{ marginTop: '24px' }}>
             새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
           </Typography>
           <ActionWrapper>
-            <VerificationButton onClick={onClickNextModal}>
-              인증번호 다시 받기
-            </VerificationButton>
-            <VerificationButton onClick={onClickNextModal}>
-              이메일 주소 변경하기
-            </VerificationButton>
+            <VerificationButton onClick={onClickNextModal}>인증번호 다시 받기</VerificationButton>
+            <VerificationButton onClick={onClickNextModal}>이메일 주소 변경하기</VerificationButton>
           </ActionWrapper>
         </Modal>
       )}

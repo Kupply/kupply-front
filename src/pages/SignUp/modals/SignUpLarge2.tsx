@@ -1,10 +1,10 @@
-import { useState, useCallback } from "react";
-import styled from "styled-components";
-import AlertIconExclamation from "../../../assets/icons/AlertIconExclamation";
-import TextFieldBox, { StateOptions } from "../../../assets/TextFieldBox";
-import SubmitButton from "../../../assets/buttons/SubmitButton";
-import Typography from "../../../assets/Typography";
-import Modal from "../../../components/Modal";
+import { useState, useCallback } from 'react';
+import styled from 'styled-components';
+import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
+import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
+import SubmitButton from '../../../assets/buttons/SubmitButton';
+import Typography from '../../../assets/Typography';
+import Modal from '../../../components/base/Modal';
 
 export interface ModalProps {
   currentModal: number;
@@ -44,27 +44,9 @@ export default function SignUpLarge2(props: ModalProps) {
               setCurrentModal(currentModal - 1);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-            >
-              <path
-                d="M34 23L26 30"
-                stroke="#434343"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M26 30L34 38"
-                stroke="#434343"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <path d="M34 23L26 30" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M26 30L34 38" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </PrevButton>
           <CloseButton
@@ -72,13 +54,7 @@ export default function SignUpLarge2(props: ModalProps) {
               setOpenModal(!isOpenModal);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -87,20 +63,12 @@ export default function SignUpLarge2(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: "20.15%" }}></div>
+          <div style={{ height: '20.15%' }}></div>
           <AlertIconExclamation width="113px" height="113px" />
-          <Typography
-            size="largeText"
-            color="#141414"
-            style={{ marginTop: "25px" }}
-          >
+          <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             인증번호를 받을 고려대 이메일 주소를 입력해주세요!
           </Typography>
-          <Typography
-            size="mediumText"
-            color="#141414"
-            style={{ marginTop: "24px" }}
-          >
+          <Typography size="mediumText" color="#141414" style={{ marginTop: '24px' }}>
             고려대학교 이메일 주소를 정확히 기입해주세요.
           </Typography>
           <ActionWrapper>

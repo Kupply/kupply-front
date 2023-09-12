@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
-import styled from "styled-components";
-import AlertIconCheck from "../../../assets/icons/AlertIconCheck";
-import LabelButton from "../../../assets/buttons/LabelButton";
-import Typography from "../../../assets/Typography";
-import Modal from "../../../components/Modal";
+import { useState, useCallback } from 'react';
+import styled from 'styled-components';
+import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
+import LabelButton from '../../../assets/buttons/LabelButton';
+import Typography from '../../../assets/Typography';
+import Modal from '../../../components/base/Modal';
 
 export interface ModalProps {
   currentModal: number;
@@ -15,14 +15,7 @@ export interface ModalProps {
 }
 
 export default function SignUpLarge3(props: ModalProps) {
-  const {
-    currentModal,
-    isOpenModal,
-    setCurrentModal,
-    setOpenModal,
-    onClickModal,
-    email,
-  } = props;
+  const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal, email } = props;
 
   return (
     <Main>
@@ -33,13 +26,7 @@ export default function SignUpLarge3(props: ModalProps) {
               setOpenModal(!isOpenModal);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -48,32 +35,24 @@ export default function SignUpLarge3(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: "274px" }}></div>
+          <div style={{ height: '274px' }}></div>
           <AlertIconCheck width="113px" height="113px" />
-          <Typography
-            size="largeText"
-            color="#141414"
-            style={{ marginTop: "25px" }}
-          >
+          <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             새로운 인증번호를 발송했습니다.
           </Typography>
           <Typography
             size="mediumText"
             color="#141414"
             style={{
-              marginTop: "24px",
-              textAlign: "center",
+              marginTop: '24px',
+              textAlign: 'center',
             }}
           >
             {email} 메일함을 다시 확인해주세요.
             <br /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요!
           </Typography>
           <ActionWrapper>
-            <LabelButton
-              buttonType="primary"
-              size="medium"
-              onClick={onClickModal}
-            >
+            <LabelButton buttonType="primary" size="medium" onClick={onClickModal}>
               확인
             </LabelButton>
           </ActionWrapper>
