@@ -8,6 +8,7 @@ import PrevButton from '../../assets/buttons/PrevButton';
 import Timer from '../../components/Timer';
 import VerificationBox from '../../assets/VerificationBox';
 import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
+import SignUpSmall from './modals/SignUpSmall';
 import SignUpLarge1 from './modals/SignUpLarge1';
 import SignUpLarge2 from './modals/SignUpLarge2';
 import SignUpLarge3 from './modals/SignUpLarge3';
@@ -99,7 +100,9 @@ const SubContentsWrapper = styled.div`
   margin-bottom: 171px;
 `;
 
+// 푸터 버튼과 동일 에셋이라고 한다.
 const TextButton = styled.button`
+  transition: 0.25s ease-in-out;
   display: flex;
   gap: 4.97px;
   color: rgba(216, 88, 136, 0.8);
@@ -111,6 +114,15 @@ const TextButton = styled.button`
   text-decoration-line: underline;
 
   cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
+
+  // 도형 아이콘 색깔 변경 고려
+  &:hover svg g path {
+    stroke: black;
+  }
 `;
 
 export default function SignUp1Page() {
@@ -144,9 +156,16 @@ export default function SignUp1Page() {
   };
 
   // modal 관련
-  const [currentModal, setCurrentModal] = useState<number>(1);
+  const [currentModal, setCurrentModal] = useState<number>(100); // 임의 값으로 초기화
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const onClickToggleModal = useCallback(() => {
+  // small modal 관련
+  const onClickToggleSmallModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+    setCurrentModal(0);
+    console.log(isOpenModal);
+  }, [isOpenModal]);
+  // large modal 관련
+  const onClickToggleLargeModal = useCallback(() => {
     setOpenModal(!isOpenModal);
     setCurrentModal(1); // 현재 모달창 (step) 초기화
     console.log(isOpenModal); // 디버그 목적
@@ -160,6 +179,17 @@ export default function SignUp1Page() {
     <Wrapper>
       {(() => {
         switch (currentModal) {
+          case 0:
+            return (
+              <SignUpSmall
+                currentModal={currentModal}
+                isOpenModal={isOpenModal}
+                setCurrentModal={setCurrentModal}
+                setOpenModal={setOpenModal}
+                onClickModal={onClickToggleSmallModal}
+              />
+            );
+
           case 1:
             return (
               <SignUpLarge1
@@ -167,7 +197,7 @@ export default function SignUp1Page() {
                 isOpenModal={isOpenModal}
                 setCurrentModal={setCurrentModal}
                 setOpenModal={setOpenModal}
-                onClickModal={onClickToggleModal}
+                onClickModal={onClickToggleLargeModal}
               />
             );
           case 2:
@@ -177,7 +207,7 @@ export default function SignUp1Page() {
                 isOpenModal={isOpenModal}
                 setCurrentModal={setCurrentModal}
                 setOpenModal={setOpenModal}
-                onClickModal={onClickToggleModal}
+                onClickModal={onClickToggleLargeModal}
                 email={email}
                 emailState={emailState}
                 setEmail={setEmail}
@@ -186,13 +216,14 @@ export default function SignUp1Page() {
             );
 
           case 3:
+            // setTimerTime(3);
             return (
               <SignUpLarge3
                 currentModal={currentModal}
                 isOpenModal={isOpenModal}
                 setCurrentModal={setCurrentModal}
                 setOpenModal={setOpenModal}
-                onClickModal={onClickToggleModal}
+                onClickModal={onClickToggleLargeModal}
                 email={email}
               />
             );
@@ -230,7 +261,7 @@ export default function SignUp1Page() {
             </ContentsWrapper>
             <div>
               <Typography size="largeText" color="#D85888">
-                <Timer setTime={3}></Timer>
+                <Timer setTime={3} currentModal={currentModal}></Timer>
               </Typography>
             </div>
           </div>
@@ -244,7 +275,7 @@ export default function SignUp1Page() {
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
-          <button>
+          <TextButton onClick={onClickToggleSmallModal}>
             <div style={{ gap: '4.97px', display: 'flex' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <g opacity="0.8" clip-path="url(#clip0_1466_5915)">
@@ -267,10 +298,10 @@ export default function SignUp1Page() {
                   </clipPath>
                 </defs>
               </svg>
-              <TextButton>인증번호 다시받기</TextButton>
+              인증번호 다시받기
             </div>
-          </button>
-          <TextButton onClick={onClickToggleModal}>아직 인증번호를 받지 못하셨나요?</TextButton>
+          </TextButton>
+          <TextButton onClick={onClickToggleLargeModal}>아직 인증번호를 받지 못하셨나요?</TextButton>
         </SubContentsWrapper>
         <ButtonsWrapper>
           <PrevButton active={false} />
