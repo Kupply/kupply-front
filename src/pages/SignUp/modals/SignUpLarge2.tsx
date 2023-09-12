@@ -4,7 +4,7 @@ import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
 import SubmitButton from '../../../assets/buttons/SubmitButton';
 import Typography from '../../../assets/Typography';
-import ModalLarge from '../../../components/ModalLarge';
+import ModalLarge from '../../../components/base/ModalLarge';
 
 export interface ModalProps {
   currentModal: number;
