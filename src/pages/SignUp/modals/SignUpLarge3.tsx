@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
-import styled from "styled-components";
-import AlertIconCheck from "../../../assets/icons/AlertIconCheck";
-import LabelButton from "../../../assets/buttons/LabelButton";
-import Typography from "../../../assets/Typography";
-import Modal from "../../../components/Modal";
+import { useState, useCallback } from 'react';
+import styled from 'styled-components';
+import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
+import LabelButton from '../../../assets/buttons/LabelButton';
+import Typography from '../../../assets/Typography';
+import ModalLarge from '../../../components/ModalLarge';
 
 export interface ModalProps {
   currentModal: number;
@@ -15,31 +15,18 @@ export interface ModalProps {
 }
 
 export default function SignUpLarge3(props: ModalProps) {
-  const {
-    currentModal,
-    isOpenModal,
-    setCurrentModal,
-    setOpenModal,
-    onClickModal,
-    email,
-  } = props;
+  const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal, email } = props;
 
   return (
     <Main>
       {isOpenModal && (
-        <Modal onClickToggleModal={onClickModal}>
+        <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton
             onClick={() => {
               setOpenModal(!isOpenModal);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -48,36 +35,28 @@ export default function SignUpLarge3(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: "274px" }}></div>
+          <div style={{ height: '274px' }}></div>
           <AlertIconCheck width="113px" height="113px" />
-          <Typography
-            size="largeText"
-            color="#141414"
-            style={{ marginTop: "25px" }}
-          >
+          <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             새로운 인증번호를 발송했습니다.
           </Typography>
           <Typography
             size="mediumText"
             color="#141414"
             style={{
-              marginTop: "24px",
-              textAlign: "center",
+              marginTop: '24px',
+              textAlign: 'center',
             }}
           >
             {email} 메일함을 다시 확인해주세요.
             <br /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요!
           </Typography>
           <ActionWrapper>
-            <LabelButton
-              buttonType="primary"
-              size="medium"
-              onClick={onClickModal}
-            >
+            <LabelButton buttonType="primary" size="medium" onClick={onClickModal}>
               확인
             </LabelButton>
           </ActionWrapper>
-        </Modal>
+        </ModalLarge>
       )}
     </Main>
   );
@@ -85,25 +64,12 @@ export default function SignUpLarge3(props: ModalProps) {
 
 const Main = styled.main`
   width: 100%;
-  height: 100vh;
+  height: 1px; // 버튼 안눌림 이슈 수정
   display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
   z-index: 20; // Modal.tsx 와 상이한 stacking context
-`;
-
-// 추가 코드 (Dialog Button 대체)
-const TextButton = styled.button`
-  display: flex;
-  gap: 4.97px;
-  color: rgba(216, 88, 136, 0.8);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  text-decoration-line: underline;
 `;
 
 const CloseButton = styled.button`

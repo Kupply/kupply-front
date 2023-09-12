@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import Carousel from "../components/Carousel";
-import LabelButton from "../assets/buttons/LabelButton";
-import { useNavigate } from "react-router-dom";
-import NextButton from "../assets/NextButton";
-import PrevButton from "../assets/PrevButton";
-import Modal from "../components/Modal";
+import React from 'react';
+import styled from 'styled-components';
+import Carousel from '../components/Carousel';
+import LabelButton from '../assets/buttons/LabelButton';
+import { useNavigate } from 'react-router-dom';
+import NextButton from '../assets/NextButton';
+import PrevButton from '../assets/PrevButton';
+import Modal from '../components/ModalLarge';
 
 const Wrapper = styled.div`
   display: flex;
@@ -83,30 +83,24 @@ const TextFieldBox = styled.input`
 function MainPage() {
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate("/join");
+    navigate('/join');
   };
 
   return (
     <Wrapper>
       <Carousel />
       <JoinMainContainer>
-        <ContainerMainText>
-          당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!
-        </ContainerMainText>
+        <ContainerMainText>당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
         <ContainerSubText>
-          간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점
-          비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.
+          간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
+          이용해보세요.
         </ContainerSubText>
         <JoinWrapper>
           <TextFieldBox placeholder="Bright@korea.ac.kr" />
-          <LabelButton
-            buttonType="primary"
-            size="large"
-            onClick={handleButtonClick}
-          >
+          <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
             <img
               src="../../design_image/kupply_icon.png"
-              style={{ width: "20px", height: "20px", marginRight: "8px" }}
+              style={{ width: '20px', height: '20px', marginRight: '8px' }}
             />
             Join!
           </LabelButton>
