@@ -155,9 +155,9 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
         setState("filled");
       }, 2000);
 
-      //   await setTimeout(() => {
-      //     setState("error");
-      //   }, 2000);
+      // await setTimeout(() => {
+      //   setState("error");
+      // }, 2000);
     }
   };
 

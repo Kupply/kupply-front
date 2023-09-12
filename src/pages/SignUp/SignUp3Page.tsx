@@ -69,6 +69,7 @@ const StepIndicator = styled.div`
 `;
 
 const ContentsWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -112,6 +113,13 @@ const CheckImage = styled.svg`
   position: absolute;
   top: 3px;
   left: 3px;
+`;
+
+const NicknameCheckButtonWrapper = styled.div`
+  position: absolute;
+  top: 50.5px;
+  left: 490px;
+  z-index: 9999;
 `;
 
 // state를 부모 컴포넌트에서 넘겨 주기 위해 추가
@@ -222,6 +230,48 @@ export default function SignUp3Page() {
       }
     }
   }, [password, passwordState, password2, password2State]);
+
+  //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
+  useEffect(() => {
+    if (nicknameCheck === "error" && nicknameState !== "focused") {
+      setnicknameState("error");
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: "중복되는 닉네임이에요!",
+      });
+    } else if (nicknameCheck !== "filled") {
+      if (
+        !(
+          nicknameState === "default" ||
+          nicknameState === "focused" ||
+          nicknameState === "hover"
+        )
+      ) {
+        setnicknameState("error");
+        setErrorMessages({
+          ...errorMessages,
+          nicknameErrorMessage: "닉네임 중복 검사를 완료해 주세요.",
+        });
+      }
+    }
+  }, [nicknameState]);
+
+  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
+  useEffect(() => {
+    setNicknameCheckState("default");
+  }, [nickname]);
+
+  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
+  useEffect(() => {
+    if (nicknameCheck === "filled") setnicknameState("filled");
+    else if (nicknameCheck === "error") {
+      setnicknameState("error");
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: "중복되는 닉네임이에요!",
+      });
+    }
+  }, [nicknameCheck]);
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
@@ -418,7 +468,18 @@ export default function SignUp3Page() {
               setState={setnicknameState}
               setValue={setNickname}
               helpMessage="닉네임"
+              errorMessage={errorMessages.nicknameErrorMessage}
             ></TextFieldBox>
+            {nickname === "" || nicknameState === "filled" ? (
+              <></>
+            ) : (
+              <NicknameCheckButtonWrapper>
+                <NicknameCheckButton
+                  state={nicknameCheck}
+                  setState={setNicknameCheckState}
+                ></NicknameCheckButton>
+              </NicknameCheckButtonWrapper>
+            )}
           </ContentsWrapper>
         </ContentsList>
         <ButtonsWrapper>
@@ -426,10 +487,6 @@ export default function SignUp3Page() {
           <NextButton active={complete} />
         </ButtonsWrapper>
       </FormWrapper>
-      <NicknameCheckButton
-        state={nicknameCheck}
-        setState={setNicknameCheckState}
-      ></NicknameCheckButton>
     </Wrapper>
   );
 }
