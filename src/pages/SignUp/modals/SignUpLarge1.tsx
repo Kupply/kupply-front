@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import VerificationButton from '../../../assets/buttons/VerificationButton';
 import Typography from '../../../assets/Typography';
-import Modal from '../../../components/base/Modal';
-
-// 두번째 Verification Button 에 대한 onClick 이벤트 변경
+import ModalLarge from '../../../components/base/ModalLarge';
 
 export interface ModalProps {
   currentModal: number;
@@ -18,20 +16,10 @@ export interface ModalProps {
 export default function SignUpLarge1(props: ModalProps) {
   const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal } = props;
 
-  const onClickNextModal = () => {
-    setCurrentModal(currentModal + 1);
-  };
-
   return (
     <Main>
       {isOpenModal && (
-        <Modal onClickToggleModal={onClickModal}>
-          <PrevButton>
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <path d="M34 23L26 30" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M26 30L34 38" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </PrevButton>
+        <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton
             onClick={() => {
               setOpenModal(!isOpenModal);
@@ -55,10 +43,22 @@ export default function SignUpLarge1(props: ModalProps) {
             새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
           </Typography>
           <ActionWrapper>
-            <VerificationButton onClick={onClickNextModal}>인증번호 다시 받기</VerificationButton>
-            <VerificationButton onClick={onClickNextModal}>이메일 주소 변경하기</VerificationButton>
+            <VerificationButton
+              onClick={() => {
+                setCurrentModal(currentModal + 2);
+              }}
+            >
+              인증번호 다시 받기
+            </VerificationButton>
+            <VerificationButton
+              onClick={() => {
+                setCurrentModal(currentModal + 1);
+              }}
+            >
+              이메일 주소 변경하기
+            </VerificationButton>
           </ActionWrapper>
-        </Modal>
+        </ModalLarge>
       )}
     </Main>
   );
@@ -66,25 +66,12 @@ export default function SignUpLarge1(props: ModalProps) {
 
 const Main = styled.main`
   width: 100%;
-  height: 100vh;
+  height: 1px; // 버튼 안눌림 이슈 수정
   display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
   z-index: 20; // Modal.tsx 와 상이한 stacking context
-`;
-
-// 추가 코드 (Dialog Button 대체)
-const TextButton = styled.button`
-  display: flex;
-  gap: 4.97px;
-  color: rgba(216, 88, 136, 0.8);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  text-decoration-line: underline;
 `;
 
 const CloseButton = styled.button`

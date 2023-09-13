@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from "react";
-import styled from "styled-components";
+import React, { PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
 // 이슈: onClick prop 으로 추가 여부
 
@@ -36,10 +36,7 @@ export interface VerificationButtonProps {
   onClick: () => void;
 }
 
-function VerificationButton({
-  onClick,
-  children,
-}: PropsWithChildren<VerificationButtonProps>) {
+function VerificationButton({ onClick, children }: PropsWithChildren<VerificationButtonProps>) {
   return <ButtonWrapper onClick={onClick}>{children}</ButtonWrapper>;
 }
 
