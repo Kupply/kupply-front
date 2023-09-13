@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
@@ -139,9 +139,15 @@ export default function SignUp1Page() {
     }
   }, [num1, num2, num3, num4, num5, num6]);
 
+  const location = useLocation();
+  const emailID = { ...location.state };
+
   const handleNext = () => {
-    console.log('lalala');
-    navigate('/signUp2');
+    navigate('/signup2', {
+      state: {
+        ID: emailID,
+      },
+    });
   };
 
   // modal 관련
