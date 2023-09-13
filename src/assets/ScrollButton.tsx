@@ -27,6 +27,7 @@ const ScrollbarSmall = styled.button<{ isChecked: boolean; isHovered: boolean }>
     background: ${({ isChecked }) => isChecked ? "rgba(216, 88, 136, 0.8)" : "rgba(238, 238, 238, 0.7)"};
     border-radius: 10px;
     min-height: 30%;
+    box-shadow: ${({ isChecked }) => isChecked ? "0px 4px 12px 0px rgba(216, 88, 136, 0.25)" : "transparent"};
   }
 
   &::-webkit-scrollbar-thumb:hover {
@@ -46,10 +47,20 @@ const ScrollbarSmall = styled.button<{ isChecked: boolean; isHovered: boolean }>
 	  background: transparent;
   }
     
-  /* Firefox에서 스크롤바 숨기기 */
+  .scrollbarWrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  /* Firefox에서 스크롤바 색상 너비만 변경 가능 */
   scrollbar-width: none;
 
-  /* Internet Explorer에서 스크롤바 숨기기 */
+  /* Internet Explorer에서 스크롤바 숨기기: 개발 지원 불가 */
   -ms-overflow-style: none;
 `;
 
@@ -76,6 +87,7 @@ const ScrollbarLarge = styled.button<{ isChecked: boolean; isHovered: boolean }>
     background: ${({ isChecked }) => isChecked ? "rgba(216, 88, 136, 0.8)" : "rgba(238, 238, 238, 0.7)"};
     border-radius: 999px;;
     min-height: 30%;
+    box-shadow: ${({ isChecked }) => isChecked ? "0px 4px 12px 0px rgba(216, 88, 136, 0.25)" : "transparent"};
   }
 
   &::-webkit-scrollbar-thumb:hover {
@@ -93,6 +105,16 @@ const ScrollbarLarge = styled.button<{ isChecked: boolean; isHovered: boolean }>
 
   &::-webkit-scrollbar-corner {
 	  background: transparent;
+  }
+
+  .scrollbarWrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
   }
     
   /* Firefox에서 스크롤바 숨기기 */
@@ -113,25 +135,28 @@ function ScrollBarSmall(props: ScrollButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <ScrollbarSmall
-      isChecked={isChecked || scrollActive}
+    <ScrollbarSmall   
+      isChecked={isChecked || scrollActive} 
       isHovered={isHovered}
-      onMouseEnter={() => {
-        setIsHovered(true);
-      }}
-      onMouseLeave={() => {
-        setIsHovered(false);
-      }}
-      onMouseDown={(e) => {
-        e.stopPropagation();
-        setActive(true);
-      }}
-      onMouseUp={(e) => {
-        e.stopPropagation();
-        setActive(false);
-      }}
     >
       {children}
+      <div
+        className="scrollbar-handler"
+        onMouseEnter={() => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+        }}
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          setActive(true);
+        }}
+        onMouseUp={(e) => {
+          e.stopPropagation();
+          setActive(false);
+        }}
+      ></div>
     </ScrollbarSmall>
   );
 }
@@ -142,25 +167,28 @@ function ScrollBarLarge(props: ScrollButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <ScrollbarLarge
-      isChecked={isChecked || scrollActive}
+    <ScrollbarLarge   
+      isChecked={isChecked || scrollActive} 
       isHovered={isHovered}
-      onMouseEnter={() => {
-        setIsHovered(true);
-      }}
-      onMouseLeave={() => {
-        setIsHovered(false);
-      }}
-      onMouseDown={(e) => {
-        e.stopPropagation();
-        setActive(true);
-      }}
-      onMouseUp={(e) => {
-        e.stopPropagation();
-        setActive(false);
-      }}
     >
-        {children}
+      {children}
+      <div
+        className="scrollbar-handler"
+        onMouseEnter={() => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+        }}
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          setActive(true);
+        }}
+        onMouseUp={(e) => {
+          e.stopPropagation();
+          setActive(false);
+        }}
+      ></div>
     </ScrollbarLarge>
   );
 }

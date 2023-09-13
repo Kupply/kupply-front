@@ -10,6 +10,7 @@ import PrevButton from "../../assets/PrevButton";
 import CheckButton from "../../assets/CheckButton";
 import { check } from "prettier";
 import {ScrollBarSmall, ScrollBarLarge} from "../../assets/ScrollButton";
+import { Index } from "typeorm";
 
 /*
 주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
@@ -31,6 +32,7 @@ const Wrapper2 = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  background: #FCFAFB;
 `;
 
 const TitleWrapper = styled.div`
@@ -219,14 +221,7 @@ function SignUp5Page() {
         third: true,
         fourth: true,
       });
-    } else {
-      setIndividualChecks({
-        first: false,
-        second: false,
-        third: false,
-        fourth: false,
-      });
-    }
+    } 
   }, [allChecked]);
 
   useEffect(() => {
@@ -546,18 +541,34 @@ const TitleOutBox = styled.div`
   justify-content: center;
   align-items: center;
   background: linear-gradient(180deg, #FCFAFB 69.56%, rgba(252, 250, 251, 0.00) 115.91%);
+  z-index: 10;
 `;
 
 const LonginButtonWrapper = styled.div`
   display: flex;
   width: 628px;
-  padding: 24px 34px;
+  height: 68px;
+  top: 985px;
+  left: 646px;
+  padding: 16px 32px;
   justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 10px;
   background: var(--Primary-color, #D85888);
+  position: absolute;
+  z-index: 10;
 `;
+
+const ImageWrapper = styled.div`
+  width: 781px;
+  height: 836px;
+  left: 569px;
+  top: 286px;
+  flex-shrink: 0;
+  background: #FCFAFB; // url(design_image/background_image.webp), lightgray 50% / cover no-repeat;
+  z-index: 1;
+`
 
 function SignUp5Complete() {
 
@@ -583,31 +594,35 @@ function SignUp5Complete() {
           </div>
         </div>
       </TitleOutBox>
-
-      <img
-        src="design_image/check_ani.webp"
-        alt="completeImage"
-        style={{
-          background: "url(design_image/background_image.webp), lightgray 50% / cover no-repeat",
-          position: "absolute",
-          width: "781px",
-          height: "836px",
-          //left: "570px",
-          //top: "269px",
-        }}
-     />
-
-      <LonginButtonWrapper
-        style = {{ position: "relative", top: "511px", left: "646" }}>
-        <LoginButton active={isButtonActive} onClick={handleNext}>
-          <Typography 
-            size="bodyText"
-            color="var(--White, #FFF)"
-          >
-            로그인하고 쿠플라이로 이동하기
-          </Typography>
-        </LoginButton>
-      </LonginButtonWrapper>
+        <ImageWrapper>
+          <img
+            src="design_image/check_ani.webp"
+            alt="completeImage"
+            style={{
+              background: "url(design_image/check_ani.webp), lightgray 50% / cover no-repeat",
+              position: "absolute",
+              width: "781px",
+              height: "836px", 
+              left: "577px",
+              top: "286px",
+            }}
+          />
+        <LonginButtonWrapper>
+          <div style={{
+            left: "77px",
+            bottom: "69px",
+            }}
+          />
+          <LoginButton active={isButtonActive} onClick={handleNext}>
+            <Typography 
+              size="bodyText"
+              color="var(--White, #FFF)"
+            >
+              로그인하고 쿠플라이로 이동하기
+            </Typography>
+          </LoginButton>
+        </LonginButtonWrapper>
+      </ImageWrapper>
 
     </Wrapper2>
   );

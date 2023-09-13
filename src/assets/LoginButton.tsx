@@ -8,12 +8,12 @@ export interface LoginButtonProps
 
 const Button = styled.button<LoginButtonProps>`
   display: flex;
-  width: 560px;
-  height: 20px;
-  padding: 24px 34px;
+  width: 628px;
+  height: 68px;
   justify-content: center;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
   border-radius: 10px;
   background: var(--Primary-color, #D85888);
 `;
