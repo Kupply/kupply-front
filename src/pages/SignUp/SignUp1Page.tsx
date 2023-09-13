@@ -127,7 +127,6 @@ const TextButton = styled.button`
 
 export default function SignUp1Page() {
   const navigate = useNavigate();
-
   // progressBar 관련
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
@@ -152,12 +151,13 @@ export default function SignUp1Page() {
   }, [num1, num2, num3, num4, num5, num6]);
 
   const location = useLocation();
-  const emailID = { ...location.state };
+  const emailID = location.state.emailID;
+  console.log(emailID);
 
   const handleNext = () => {
     navigate('/signup2', {
       state: {
-        ID: emailID,
+        emailID: emailID,
       },
     });
   };

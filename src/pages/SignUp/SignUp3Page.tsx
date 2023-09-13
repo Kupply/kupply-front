@@ -135,7 +135,8 @@ type errorMessageType = {
 
 export default function SignUp3Page() {
   const location = useLocation();
-  const emailID = { ...location.state };
+  const emailID = location.state.emailID;
+
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
 

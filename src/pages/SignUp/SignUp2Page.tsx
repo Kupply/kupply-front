@@ -138,13 +138,13 @@ export default function SignUp2Page() {
   }, [nameState, stdIDState, phoneState, dropdownValue, complete]);
 
   const location = useLocation();
-  const emailID = { ...location.state };
-
+  const emailID = location.state.emailID;
+  console.log(emailID);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
     navigate('/signup3', {
       state: {
-        ID: emailID,
+        emailID: emailID,
       },
     });
   };
