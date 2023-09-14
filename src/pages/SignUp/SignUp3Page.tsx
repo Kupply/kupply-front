@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
@@ -134,6 +134,9 @@ type errorMessageType = {
 };
 
 export default function SignUp3Page() {
+  const location = useLocation();
+  const emailID = location.state.emailID;
+
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
 
@@ -143,7 +146,7 @@ export default function SignUp3Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [ID, setID] = useState<string>('bruce1115@korea.ac.kr');
+  const [ID, setID] = useState<string>(emailID);
   const [password, setPassword] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
   const [password2, setPassword2] = useState<string>('');
