@@ -390,7 +390,11 @@ export default function SignUp3Page() {
               <></>
             ) : (
               <NicknameCheckButtonWrapper>
-                <NicknameCheckButton state={nicknameCheck} setState={setNicknameCheckState}></NicknameCheckButton>
+                <NicknameCheckButton
+                  nickname={nickname}
+                  state={nicknameCheck}
+                  setState={setNicknameCheckState}
+                ></NicknameCheckButton>
               </NicknameCheckButtonWrapper>
             )}
           </ContentsWrapper>
