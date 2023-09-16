@@ -1,9 +1,9 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
-export type StateOptions = "default" | "hover" | "active";
+export type StateOptions = 'default' | 'hover' | 'active';
 
-export interface SegmentedPickerProps extends React.ComponentPropsWithRef<"div"> {
+export interface SegmentedPickerProps extends React.ComponentPropsWithRef<'div'> {
   state?: StateOptions;
   semester?: string;
 }
@@ -18,7 +18,7 @@ const baseWrapper = css`
 
 const defaultWrapper = css`
   align-items: center;
-  background: #ffffff;
+  background: none;
   border: none;
 `;
 
@@ -31,7 +31,7 @@ const activeWrapper = css`
 `;
 
 const Semester = styled.text<SegmentedPickerProps>`
-  color: ${(props) => (props.state === "default" ? "#141414cc" : props.state === "hover" ? "#d85888" : "#ffffff")};
+  color: ${(props) => (props.state === 'default' ? '#141414cc' : props.state === 'hover' ? '#d85888' : '#ffffff')};
   font-family: Pretendard;
   font-size: 20px;
   font-style: normal;
@@ -47,11 +47,11 @@ const stateMapping = {
 
 const SegmentedPickerWrapper = styled.div<SegmentedPickerProps>`
   ${baseWrapper}
-  ${(props) => stateMapping[props.state || "default"]}
+  ${(props) => stateMapping[props.state || 'default']}
 `;
 
 function SegmentedPicker(props: SegmentedPickerProps) {
-  const { state = "default", semester, ...rest } = props;
+  const { state = 'default', semester, ...rest } = props;
 
   return (
     <SegmentedPickerWrapper state={state} {...rest}>
