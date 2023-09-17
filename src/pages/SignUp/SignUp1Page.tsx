@@ -13,11 +13,6 @@ import SignUpLarge1 from './modals/SignUpLarge1';
 import SignUpLarge2 from './modals/SignUpLarge2';
 import SignUpLarge3 from './modals/SignUpLarge3';
 
-/*
- 수정해야할 사항 목록
- 1. 타이머 위치
- */
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -266,7 +261,7 @@ export default function SignUp1Page() {
                 고려대학교 이메일 주소로 발송된 인증번호 여섯자리를 입력해주세요.
               </Typography>
             </ContentsWrapper>
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
               <Typography size="largeText" color="#D85888">
                 <Timer setTime={3} currentModal={currentModal}></Timer>
               </Typography>
