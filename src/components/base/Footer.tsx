@@ -5,6 +5,8 @@ import Logo from '../../assets/Logo';
 import Typography, { TypographyProps } from '../../assets/Typography';
 import { sizeMapping } from '../../assets/Typography';
 
+// 추후 수정: 절대값 px 을 상대값 % 로 바꿔야 함.
+
 const FooterWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -12,7 +14,7 @@ const FooterWrapper = styled.div`
   // align-items: center;
   width: 100%;
   max-width: 1920px;
-  height: 262px;
+  height: 20.1%; // 262px; (262/1248 = 20.1)
   background: #f9f9f9;
   padding: 41.84px 128px 42.78px 128px; // 상우하좌 순서
   box-sizing: border-box;

@@ -1,16 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1920px;
-  height: 630px;
+  height: 100%; //630px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
   background-size: cover;
-  background-image: url("/design_image/carousel/carousel3.png");
+  background-image: url('/design_image/carousel/carousel3.png');
 `;
 
 const ContentWrapper = styled.div`
