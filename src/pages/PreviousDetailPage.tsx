@@ -82,7 +82,7 @@ const PreviousDetailPage = () => {
     },
     {
       gpa: 4.25,
-      num: 20,
+      num: 11,
     },
     {
       gpa: 4.1,
@@ -130,7 +130,7 @@ const PreviousDetailPage = () => {
   const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
 
   useEffect(() => {
-    const hasEnoughData = lineData.length > 10;
+    const hasEnoughData = lineData.length > 100;
     setEnoughData(hasEnoughData);
   }, [lineData]);
 
@@ -422,6 +422,7 @@ const WarningIcon = styled.img`
 
 const SegmentedWrapper = styled.div`
   display: flex;
+  width: 1665px;
   gap: 18px;
   padding: 6px 197px;
   align-items: center;
@@ -635,9 +636,10 @@ const Container = styled.div`
 `;
 
 const CollectingWrapper = styled.div`
-  background-color: rgba(247, 247, 247, 0.96);
+  background-color: #f7f7f773;
   border-radius: 5px;
   box-shadow: 0px 0px 28px #1414140d;
+  backdrop-filter: blur(10px);
   height: 699px;
   width: 1665px;
   margin-top: 18px;
