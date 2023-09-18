@@ -1,4 +1,5 @@
-import { styled } from "styled-components";
+import { useRef } from 'react';
+import { styled } from 'styled-components';
 
 export interface SearchBarProps {
   value: string;
@@ -6,19 +7,14 @@ export interface SearchBarProps {
 }
 
 const SearchBar = ({ value, setValue }: SearchBarProps) => {
+  const ref: React.MutableRefObject<HTMLInputElement | null> = useRef(null);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
   return (
     <Container>
       <SvgContainer>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -27,34 +23,17 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
           />
         </svg>
       </SvgContainer>
-      <Input value={value} onChange={onChange} placeholder="관심 학부 검색하기" />
+      <Input ref={ref} value={value} onChange={onChange} placeholder="관심 학부 검색하기" />
       <ButtonContainer>
         <Button
           onClick={() => {
-            setValue("");
+            setValue('');
+            if (ref.current) ref.current.focus();
           }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="44"
-            height="44"
-            viewBox="0 0 60 60"
-            fill="none"
-          >
-            <path
-              d="M36 24L24 36"
-              stroke="#141414"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M24 24L36 36"
-              stroke="#141414"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 60 60" fill="none">
+            <path d="M36 24L24 36" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M24 24L36 36" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </Button>
       </ButtonContainer>
