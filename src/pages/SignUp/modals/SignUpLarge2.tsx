@@ -4,7 +4,7 @@ import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
 import SubmitButton from '../../../assets/buttons/SubmitButton';
 import Typography from '../../../assets/Typography';
-import Modal from '../../../components/base/Modal';
+import ModalLarge from '../../../components/base/ModalLarge';
 
 export interface ModalProps {
   currentModal: number;
@@ -38,7 +38,7 @@ export default function SignUpLarge2(props: ModalProps) {
   return (
     <Main>
       {isOpenModal && (
-        <Modal onClickToggleModal={onClickModal}>
+        <ModalLarge onClickToggleModal={onClickModal}>
           <PrevButton
             onClick={() => {
               setCurrentModal(currentModal - 1);
@@ -88,7 +88,7 @@ export default function SignUpLarge2(props: ModalProps) {
               }}
             />
           </ActionWrapper>
-        </Modal>
+        </ModalLarge>
       )}
     </Main>
   );
@@ -96,25 +96,12 @@ export default function SignUpLarge2(props: ModalProps) {
 
 const Main = styled.main`
   width: 100%;
-  height: 100vh;
+  height: 1px; // 버튼 안눌림 이슈 수정
   display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
   z-index: 20; // Modal.tsx 와 상이한 stacking context
-`;
-
-// 추가 코드 (Dialog Button 대체)
-const TextButton = styled.button`
-  display: flex;
-  gap: 4.97px;
-  color: rgba(216, 88, 136, 0.8);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  text-decoration-line: underline;
 `;
 
 const CloseButton = styled.button`

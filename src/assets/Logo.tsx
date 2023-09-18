@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const LogoWrapper = styled.button`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center; // 수평 중앙
+  align-items: center; // 수직 중앙
   border: none;
   background: none;
   width: 188px;
@@ -18,7 +18,7 @@ const LogoTextWrapper = styled.text`
   flex-direction: column;
   align-items: center;
   color: #000;
-  font-family: "GmarketSans";
+  font-family: 'GmarketSans';
   font-size: 2.1em; // (참고) 폰트크기의 기본값은 16px
   font-style: normal;
   line-height: normal;
@@ -36,7 +36,7 @@ const LogoImage = styled.img`
 function Logo() {
   const navigate = useNavigate();
   const LogoWrapperClick = () => {
-    navigate("/");
+    navigate('/');
   };
   return (
     <LogoWrapper onClick={LogoWrapperClick}>

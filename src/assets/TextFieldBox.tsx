@@ -401,7 +401,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           </>
         ) : state === "error" ? (
           <>
-            <ErrorText type={rest.type} value={rest.value} disabled></ErrorText>
+            <ErrorText type={textType} value={rest.value} disabled></ErrorText>
             {textType === "password" ? (
               <EyeIcon
                 onMouseDown={(e) => {
