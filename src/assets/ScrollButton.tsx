@@ -1,31 +1,42 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const ScrollbarSmall = styled.button<{ isChecked: boolean }>`
+const ScrollbarSmall = styled.button<{ isChecked: boolean; isHovered: boolean }>`
   display: inline-block;
-  width: auto;  
-  height: 100%;      
-  flex-shrink: 0;
-  border-radius: 10px;
+  width: 594px;
+  height: 204px; 
+  padding: 8px;
+  gap: 8px;
+  justify-content: left;
+  align-items: left;
   overflow-y: overlay;
   overflow-x: hidden;
+  flex-shrink: 0;
+  border-radius: 10px;
   box-sizing: border-box;
   color: white;  
+  position: relative;
   
   /* Webkit 기반의 브라우저 Chrome, Safari */
   &::-webkit-scrollbar {
     width: 6px;
+    height: 100%;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${({ isChecked }) => isChecked ? "#D85888" : "rgba(238, 238, 238, 0.7)"};
+    background: ${({ isChecked }) => isChecked ? "rgba(216, 88, 136, 0.8)" : "rgba(238, 238, 238, 0.7)"};
     border-radius: 10px;
     min-height: 30%;
+    box-shadow: ${({ isChecked }) => isChecked ? "0px 4px 12px 0px rgba(216, 88, 136, 0.25)" : "transparent"};
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(216, 88, 136, 0.8);
   }
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background: rgba(238, 238, 238, 0.2);
+    background: ${({ isChecked }) => isChecked ? "rgba(238, 238, 238, 0.5)" : "rgba(238, 238, 238, 0.2)"};
   }
 
   &::-webkit-scrollbar-button {
@@ -33,25 +44,36 @@ const ScrollbarSmall = styled.button<{ isChecked: boolean }>`
   }
 
   &::-webkit-scrollbar-corner {
-	  background: transparent;
+     background: transparent;
   }
     
-  /* Firefox에서 스크롤바 숨기기 */
+  .scrollbarWrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  /* Firefox에서 스크롤바 색상 너비만 변경 가능 */
   scrollbar-width: none;
 
-  /* Internet Explorer에서 스크롤바 숨기기 */
+  /* Internet Explorer에서 스크롤바 숨기기: 개발 지원 불가 */
   -ms-overflow-style: none;
 `;
 
-
-const ScrollbarLarge = styled.button<{ isChecked: boolean }>`
+const ScrollbarLarge = styled.button<{ isChecked: boolean; isHovered: boolean }>`
   display: inline-block;
   width: auto;  
-  height: 100%;               
+  height: 80%;           
+  flex-direction: column;
+  align-items: flex-start;
   flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;     
   border-radius: 10px;
-  overflow-y: overlay;
-  overflow-x: hidden;
   box-sizing: border-box;
   color: white;  
  
@@ -62,14 +84,19 @@ const ScrollbarLarge = styled.button<{ isChecked: boolean }>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${({ isChecked }) => isChecked ? "#D85888" : "rgba(238, 238, 238, 0.6)"};
+    background: ${({ isChecked }) => isChecked ? "rgba(216, 88, 136, 0.8)" : "rgba(238, 238, 238, 0.7)"};
     border-radius: 999px;;
     min-height: 30%;
+    box-shadow: ${({ isChecked }) => isChecked ? "0px 4px 12px 0px rgba(216, 88, 136, 0.25)" : "transparent"};
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(216, 88, 136, 0.8);
   }
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background: rgba(238, 238, 238, 0.2);
+    background: ${({ isChecked }) => isChecked ? "rgba(238, 238, 238, 0.5)" : "rgba(238, 238, 238, 0.2)"};
   }
 
   &::-webkit-scrollbar-button {
@@ -77,7 +104,17 @@ const ScrollbarLarge = styled.button<{ isChecked: boolean }>`
   }
 
   &::-webkit-scrollbar-corner {
-	  background: transparent;
+     background: transparent;
+  }
+
+  .scrollbarWrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
   }
     
   /* Firefox에서 스크롤바 숨기기 */
@@ -95,15 +132,31 @@ export interface ScrollButtonProps
 function ScrollBarSmall(props: ScrollButtonProps) {
   const { children = "내용", isChecked = false, ...rest } = props;
   const [scrollActive, setActive] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <ScrollbarSmall
-      isChecked={scrollActive}
-        onClick={() => {
-          setActive(!scrollActive);
-        }}
+    <ScrollbarSmall   
+      isChecked={isChecked || scrollActive} 
+      isHovered={isHovered}
     >
       {children}
+      <div
+        className="scrollbar-handler"
+        onMouseEnter={() => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+        }}
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          setActive(true);
+        }}
+        onMouseUp={(e) => {
+          e.stopPropagation();
+          setActive(false);
+        }}
+      ></div>
     </ScrollbarSmall>
   );
 }
@@ -111,15 +164,31 @@ function ScrollBarSmall(props: ScrollButtonProps) {
 function ScrollBarLarge(props: ScrollButtonProps) {
   const { children = "내용", isChecked = false, ...rest } = props;
   const [scrollActive, setActive] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <ScrollbarLarge
-      isChecked={scrollActive}
-        onClick={() => {
-          setActive(!scrollActive);
-        }}
+    <ScrollbarLarge   
+      isChecked={isChecked || scrollActive} 
+      isHovered={isHovered}
     >
       {children}
+      <div
+        className="scrollbar-handler"
+        onMouseEnter={() => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+        }}
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          setActive(true);
+        }}
+        onMouseUp={(e) => {
+          e.stopPropagation();
+          setActive(false);
+        }}
+      ></div>
     </ScrollbarLarge>
   );
 }

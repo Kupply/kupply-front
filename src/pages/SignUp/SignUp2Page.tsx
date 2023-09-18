@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
@@ -137,9 +137,16 @@ export default function SignUp2Page() {
     }
   }, [nameState, stdIDState, phoneState, dropdownValue, complete]);
 
+  const location = useLocation();
+  const emailID = location.state.emailID;
+  console.log(emailID);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signUp3');
+    navigate('/signup3', {
+      state: {
+        emailID: emailID,
+      },
+    });
   };
 
   const handlePrev = () => {

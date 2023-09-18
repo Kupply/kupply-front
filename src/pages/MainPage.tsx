@@ -1,17 +1,15 @@
-import React from 'react';
 import styled from 'styled-components';
 import Carousel from '../components/carousel/Carousel';
 import LabelButton from '../assets/buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
-import NextButton from '../assets/buttons/NextButton';
-import PrevButton from '../assets/buttons/PrevButton';
+import React, { useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 1500px;
+  height: 100%;
   background: white;
   gap: 80px;
 `;
@@ -80,9 +78,15 @@ const TextFieldBox = styled.input`
 `;
 
 function MainPage() {
+  const [ID, setID] = useState<string>('');
+
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate('/join');
+    navigate('/join', {
+      state: {
+        emailID: ID,
+      },
+    });
   };
 
   return (
@@ -95,7 +99,13 @@ function MainPage() {
           이용해보세요.
         </ContainerSubText>
         <JoinWrapper>
-          <TextFieldBox placeholder="Bright@korea.ac.kr" />
+          <TextFieldBox
+            placeholder="Bright@korea.ac.kr"
+            value={ID}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setID(e.target.value);
+            }}
+          />
           <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
             <img
               src="../../design_image/kupply_icon.png"

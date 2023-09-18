@@ -78,13 +78,14 @@ const HorizontalLine = styled.div`
 
 const ContentsWrapper = styled.div`
   display: flex; // 가로 정렬
+  width: auto;
 `;
 
 export default function Footer() {
   return (
     <FooterWrapper>
       <Logo />
-      <ContentsWrapper style={{ marginTop: '26.1px', marginBottom: '46.35px', gap: '793px' }}>
+      <ContentsWrapper style={{ marginTop: '26.1px', marginBottom: '46.35px', gap: '767px' }}>
         <ContentsWrapper>
           <div>
             <Typography size="smallText" bold="600">
@@ -105,7 +106,7 @@ export default function Footer() {
             </Typography>
             <div style={{ height: '8.05px' }}></div>
             <Typography size="smallText" color="rgba(20, 20, 20, 0.70)">
-              kupply@gmail.com
+              kupply.devkor@gmail.com
             </Typography>
           </div>
         </ContentsWrapper>
@@ -137,8 +138,8 @@ export default function Footer() {
       <ContentsWrapper>
         <HorizontalLine></HorizontalLine>
       </ContentsWrapper>
-      <ContentsWrapper style={{ marginTop: '28.89px' }}>
-        <ContentsWrapper style={{ marginRight: '539px' }}>
+      <ContentsWrapper style={{ marginTop: '28.89px', gap: '498px' }}>
+        <ContentsWrapper>
           <Typography size="smallText" color="#A8A8A8" style={{ marginRight: '58px' }}>
             Copyright ⓒ 2023 kupply. all rights reserved.
           </Typography>
@@ -161,7 +162,7 @@ export default function Footer() {
             <path d="M1 0.212891V13.1635" stroke="#A8A8A8" stroke-width="0.5" />
           </svg>
           <Typography size="smallText" color="#A8A8A8">
-            kupply@gmail.com
+            kupply.devkor@gmail.com
           </Typography>
         </ContentsWrapper>
       </ContentsWrapper>

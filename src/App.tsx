@@ -16,15 +16,26 @@ import SignUp3Page from './pages/SignUp/SignUp3Page';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/SignUp/SignUp4Page';
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 
+const Wrapper = styled.div`
+  width: 100vw; // 1920px;
+  height: 100vw; // 1248px; // Footer 요소가 포함이 되지 않는 관계로, Footer 높이를 제외한 높이
+  max-width: 1920px;
+  max-height: 1510px;
+  aspect-ratio: 1920/1248;
+  margin-top: 96px;
+  box-sizing: border-box;
+`;
+
+// marginTop 은 Header 에 페이지가 가리지 않게 하기 위해서.
 export default function App() {
   return (
-    <div style={{ width: '1920px', height: '1510px', marginTop: '96px' }}>
+    <Wrapper>
       <Header logined={false} />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/previous" element={<PreviousPage />} />
-        <Route path="/previous/:majorId" element={<PreviousDetailPage />} />
+        <Route path="/previous/:majorName" element={<PreviousDetailPage />} />
         <Route path="/myboard" element={<MyBoardPage />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/join" element={<SignUp1Page />} />
@@ -40,6 +51,6 @@ export default function App() {
         <Route path="/signupcomplete" element={<SignUp5Complete />} />
       </Routes>
       <Footer />
-    </div>
+    </Wrapper>
   );
 }
