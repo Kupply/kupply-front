@@ -2,16 +2,14 @@ import styled from 'styled-components';
 import Carousel from '../components/carousel/Carousel';
 import LabelButton from '../assets/buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import NextButton from '../assets/buttons/NextButton';
-import PrevButton from '../assets/buttons/PrevButton';
+import React, { useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 1500px;
+  height: 100%;
   background: white;
   gap: 80px;
 `;

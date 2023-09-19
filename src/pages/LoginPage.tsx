@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
+import LoginModal from './LoginModal';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -31,7 +34,7 @@ const LogoBox = styled.div`
   gap: 10.955px;
   flex-shrink: 0;
   margin-top: 118px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 `;
 
 const LogoImage = styled.img`
@@ -54,7 +57,7 @@ const LogoText = styled.text`
   letter-spacing: 1.177px;
 `;
 
-const TextFieldBox = styled.div`
+const TextFieldWrapper = styled.div`
   display: flex;
   width: 628px;
   flex-direction: column;
@@ -62,15 +65,52 @@ const TextFieldBox = styled.div`
   margin-bottom: 34px;
 `;
 
-const TextField = styled.input`
+const IDField = styled.input<{ isFilled: boolean }>`
   display: flex;
-  width: 628px;
+  width: 592px;
   padding: 25px 18px;
   align-items: flex-start;
   gap: 8px;
   border-radius: 10px;
-  border: 1px solid #b9b9b9;
+  border: ${(props) => (props.isFilled ? '1px solid #D85888' : '1px solid #b9b9b9')};
   background: #fff;
+  box-shadow: 0px 0px 12px 0px rgba(216, 88 136, 0.1);
+  color: #d85888;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  &::placeholder {
+    color: rgba(185, 185, 185, 0.8);
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+  }
+`;
+
+const PasswordField = styled.input<{ isFilled: boolean }>`
+  display: flex;
+  width: 592px;
+  padding: 25px 18px;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 10px;
+  border: ${(props) => (props.isFilled ? '1px solid #D85888' : '1px solid #b9b9b9')};
+  background: #fff;
+  font-size: 18px;
+  letter-spacing: 5px;
+  &::placeholder {
+    color: rgba(185, 185, 185, 0.8);
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0px;
+  }
 `;
 
 const TextBox = styled.div`
@@ -78,12 +118,24 @@ const TextBox = styled.div`
   width: 628px;
 `;
 
+const CheckButton = styled.button<{ checked: boolean }>`
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background-image: url(${(props) =>
+    props.checked ? 'design_image/Check_Circle.png' : 'design_image/D_Check-circle.png'});
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  margin-right: 4px;
+`;
+
 const LinkBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   margin-top: 66px;
   margin-bottom: 87px;
 `;
@@ -100,6 +152,20 @@ const Link = styled.button`
 `;
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const handleLink2Click = () => {
+    navigate('/join');
+  };
+
+  const [ID, setID] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [isChecked, setIsChecked] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
   return (
     <Wrapper>
       <LoginBox>
@@ -107,37 +173,59 @@ function LoginPage() {
           <LogoImage src="../../design_image/logo.png" />
           <LogoText>쿠플라이</LogoText>
         </LogoBox>
-        <Typography size="mediumText" style={{ marginBottom: '50px' }}>
+        <Typography size="mediumText" style={{ marginBottom: '85px' }}>
           고려대학교 메일로 이용하는 쿠플라이의 모든 서비스
         </Typography>
-        <TextFieldBox>
+        <TextFieldWrapper>
           <TextBox>
             <Typography size="mediumText" bold="700">
               쿠플라이 아이디
             </Typography>
+            <Typography size="mediumText">를 입력해주세요.</Typography>
           </TextBox>
-          <TextField />
-        </TextFieldBox>
-        <TextFieldBox>
+          <IDField
+            placeholder="0000@korea.ac.kr"
+            value={ID}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setID(e.target.value);
+            }}
+            isFilled={ID !== ''}
+          />
+        </TextFieldWrapper>
+        <TextFieldWrapper>
           <TextBox>
             <Typography size="mediumText" bold="700">
               비밀번호
             </Typography>
             <Typography size="mediumText">를 입력해주세요.</Typography>
           </TextBox>
-          <TextField />
-        </TextFieldBox>
+          <PasswordField
+            type="password"
+            placeholder="비밀번호 입력"
+            value={password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setPassword(e.target.value);
+            }}
+            isFilled={password !== ''}
+          />
+        </TextFieldWrapper>
         <TextBox>
-          <Typography size="mediumText" bold="600" color="#A8A8A8">
+          <CheckButton checked={isChecked} onClick={() => setIsChecked((prevState) => !prevState)}></CheckButton>
+          <Typography size="mediumText" bold="600" color={isChecked ? '#D85888' : '#A8A8A8'}>
             로그인 상태 유지
           </Typography>
         </TextBox>
         <LinkBox>
-          <Link>비밀번호를 잊으셨나요?</Link>
-          <Link>회원가입</Link>
+          <Link style={{ marginBottom: '8px' }} onClick={toggleModal}>
+            비밀번호를 잊으셨나요?
+          </Link>
+          <Link onClick={handleLink2Click}>회원가입</Link>
         </LinkBox>
-        <NextButton active={false}>로그인</NextButton>
+        <NextButton active={ID !== '' && password !== ''} disabled={ID === '' || password === ''}>
+          로그인
+        </NextButton>
       </LoginBox>
+      {isModalVisible && <LoginModal />}
     </Wrapper>
   );
 }
