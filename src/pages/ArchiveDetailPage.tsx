@@ -9,22 +9,22 @@ type MajorOptions =
   | 'economics'
   | 'psychology'
   | 'statistics'
-  | 'media'
-  | 'computer'
-  | 'food'
   | 'mathematics'
-  | 'chemistry';
+  | 'chemistry'
+  | 'media'
+  | 'food'
+  | 'computer';
 
 const majorNameMapping = {
   business: ['경영대학', 'Business School'],
   economics: ['경제학과', 'Department of Economics'],
   psychology: ['심리학부', 'School of Psychology'],
   statistics: ['통계학과', 'Department of Statistics'],
-  media: ['미디어학부', 'Schoole of Media and Communication'],
-  computer: ['컴퓨터학과', 'Department of Computer Science and Engineering'],
-  food: ['식품자원경제학과', 'Department of Food and Resources'],
   mathematics: ['수학과', 'Department of Mathematics'],
   chemistry: ['화학과', 'Department of Chemistry'],
+  media: ['미디어학부', 'School of Media & Communication'],
+  food: ['식품자원경제학과', 'Department of Food & Resources'],
+  computer: ['컴퓨터학과', 'Department of Computer Science & Engineering'],
 };
 
 const semesterMapping: string[] = [
@@ -162,7 +162,13 @@ const PreviousDetailPage = () => {
         <MajorIconBox />
         <MajorTextBox>
           <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
-          <MajorTextEnglish>{majorEngishName}</MajorTextEnglish>
+          {majorName === 'food' || majorName === 'computer' ? (
+            <MajorTextEnglishSmall>{majorEngishName}</MajorTextEnglishSmall>
+          ) : majorName === 'media' ? (
+            <MajorTextEnglishMiddle>{majorEngishName}</MajorTextEnglishMiddle>
+          ) : (
+            <MajorTextEnglishLarge>{majorEngishName}</MajorTextEnglishLarge>
+          )}
         </MajorTextBox>
         <WarningTextBox>
           <WarningIcon src="../../design_image/previous_detail/D_alert-circle.png" />
@@ -388,15 +394,32 @@ const MajorTextKorean = styled.text`
   // margin: 60.54px 0px 33.96px 0px;
 `;
 
-const MajorTextEnglish = styled.text`
+const MajorTextEnglishLarge = styled.text`
   color: #141414;
   font-family: Pretendard;
   font-size: 36px;
   font-weight: 500;
   font-style: normal;
   text-align: center;
-  margin-top: 78.72px;
-  // margin: 78.72px 0px 42.04px 18.91px;
+  margin-top: 77px;
+`;
+const MajorTextEnglishMiddle = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin-top: 77px;
+`;
+const MajorTextEnglishSmall = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin-top: 77px;
 `;
 
 const WarningTextBox = styled.div`
