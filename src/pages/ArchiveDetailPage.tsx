@@ -42,7 +42,7 @@ const PreviousDetailPage = () => {
   const navigate = useNavigate();
 
   const handlePrev = () => {
-    navigate('/previous');
+    navigate('/archive');
   };
 
   const { majorName } = useParams() as { majorName: MajorOptions };
