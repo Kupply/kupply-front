@@ -1,7 +1,8 @@
-import { hover } from "@testing-library/user-event/dist/hover";
-import React from "react";
-import { useState, useEffect, useRef } from "react";
-import styled, { css, keyframes } from "styled-components";
+import { hover } from '@testing-library/user-event/dist/hover';
+import React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import styled, { css, keyframes } from 'styled-components';
+import axios from 'axios';
 
 const baseButton = css`
   height: 24px;
@@ -67,8 +68,7 @@ const loadingRotate = keyframes`
 const LoadingImage = styled.svg`
   position: relative;
   z-index: 1;
-  animation: ${loadingMove} 0.25s ease, ${loadingRotate} 1s linear infinite,
-    forwards;
+  animation: ${loadingMove} 0.25s ease, ${loadingRotate} 1s linear infinite, forwards;
 `;
 
 const ButtonText = css`
@@ -93,7 +93,7 @@ const CompleteButtonText = css`
   font-weight: 500;
 `;
 
-type StateOptions = "default" | "hover" | "loading" | "filled" | "error";
+type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
 const stateMapping = {
   default: defaultButtonStyle,
@@ -111,53 +111,66 @@ const textStateMapping = {
   loading: ButtonText,
 };
 
-export interface NicknameCheckButtonProps
-  extends React.ComponentPropsWithoutRef<"button"> {
+export interface NicknameCheckButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   state: StateOptions;
+  nickname: string;
   setState: (value: StateOptions) => void;
 }
 
-export interface NicknameCheckButtonTextProps
-  extends React.ComponentPropsWithoutRef<"div"> {
+export interface NicknameCheckButtonTextProps extends React.ComponentPropsWithoutRef<'div'> {
   children: string;
   state: StateOptions;
 }
 
 const NicknameCheckButtonComponent = styled.button<NicknameCheckButtonProps>`
   ${baseButton}
-  ${(props) => stateMapping[props.state || "default"]}
+  ${(props) => stateMapping[props.state || 'default']}
 `;
 
 const NicknameCheckButtonTextComponent = styled.div<NicknameCheckButtonTextProps>`
-  ${(props) => textStateMapping[props.state || "default"]}
+  ${(props) => textStateMapping[props.state || 'default']}
 `;
 
+// isSuccess가 success이면 성공, fail이면 실패이다.
+const nicknameCheckAPI = async (nickname: string) => {
+  const url = 'http://localhost:8080/auth/nicknameCheck'; // 만든 API 주소로 바뀌어야 함.
+  try {
+    const response = await axios.post(url, {
+      nickname: nickname,
+    });
+
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 function NicknameCheckButton(props: NicknameCheckButtonProps) {
-  const { state = "default", setState } = props;
+  const { state = 'default', setState, nickname = '' } = props;
 
   const onMouseEnter = () => {
-    if (state === "default") {
-      setState("hover");
+    if (state === 'default') {
+      setState('hover');
     }
   };
 
   const onMouseLeave = () => {
-    if (state === "hover") {
-      setState("default");
+    if (state === 'hover') {
+      setState('default');
     }
   };
 
   const onMouseDown = async () => {
-    if (state === "hover" || state === "default") {
-      await setState("loading");
+    if (state === 'hover' || state === 'default') {
+      setState('loading');
 
-      await setTimeout(() => {
-        setState("filled");
-      }, 2000);
+      const APIResponse = await nicknameCheckAPI(nickname);
 
-      // await setTimeout(() => {
-      //   setState("error");
-      // }, 2000);
+      setTimeout(() => {
+        if (APIResponse?.data.isSuccess === true) setState('filled');
+        else setState('error');
+      }, 1000);
     }
   };
 
@@ -165,19 +178,14 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
     <>
       <NicknameCheckButtonComponent
         state={state}
+        nickname={nickname}
         setState={setState}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onMouseDown={onMouseDown}
       >
-        {state === "loading" ? (
-          <LoadingImage
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
+        {state === 'loading' ? (
+          <LoadingImage xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -192,14 +200,8 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
               fill="#D85888"
             />
           </LoadingImage>
-        ) : state === "filled" ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
+        ) : state === 'filled' ? (
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M9.99984 18.3334C14.6022 18.3334 18.3332 14.6024 18.3332 10C18.3332 5.39765 14.6022 1.66669 9.99984 1.66669C5.39746 1.66669 1.6665 5.39765 1.6665 10C1.6665 14.6024 5.39746 18.3334 9.99984 18.3334Z"
               fill="white"
@@ -212,14 +214,8 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
               stroke-linejoin="round"
             />
           </svg>
-        ) : state === "error" ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
+        ) : state === 'error' ? (
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M9.99984 18.3334C14.6022 18.3334 18.3332 14.6024 18.3332 10C18.3332 5.39765 14.6022 1.66669 9.99984 1.66669C5.39746 1.66669 1.6665 5.39765 1.6665 10C1.6665 14.6024 5.39746 18.3334 9.99984 18.3334Z"
               fill="white"
@@ -244,9 +240,7 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
         ) : (
           <></>
         )}
-        <NicknameCheckButtonTextComponent state={state}>
-          중복 확인
-        </NicknameCheckButtonTextComponent>
+        <NicknameCheckButtonTextComponent state={state}>중복 확인</NicknameCheckButtonTextComponent>
       </NicknameCheckButtonComponent>
     </>
   );

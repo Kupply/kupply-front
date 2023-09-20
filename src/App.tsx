@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
@@ -18,11 +18,10 @@ import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 
 const Wrapper = styled.div`
   width: 100vw; // 1920px;
-  height: 100vw; // 1248px; // Footer 요소가 포함이 되지 않는 관계로, Footer 높이를 제외한 높이
+  height: 100vh; //1248px; // Footer 요소가 포함이 되지 않는 관계로, Footer 높이를 제외한 높이
   max-width: 1920px;
   max-height: 1510px;
-  aspect-ratio: 1920/1248;
-  margin-top: 96px;
+  margin-top: 53.6px; // header 높이와 동일 (구체적인 헤더 높이의 기준을 알 수 없어 우선 px 값으로 지정)
   box-sizing: border-box;
 `;
 
