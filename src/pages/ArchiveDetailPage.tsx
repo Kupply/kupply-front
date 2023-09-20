@@ -5,26 +5,26 @@ import SegmentedPicker from '../assets/SegmentedPicker';
 import GpaLineChart, { Data, LineData } from '../assets/GpaLineChart';
 
 type MajorOptions =
-  | 'business-school'
-  | 'department-of-economics'
-  | 'school-of-psychology'
-  | 'department-of-statistics'
-  | 'school-of-media-and-communication'
-  | 'department-of-computer-science-and-engineering'
-  | 'department-of-food-and-resources'
-  | 'department-of-mathematics'
-  | 'department-of-chemistry';
+  | 'business'
+  | 'economics'
+  | 'psychology'
+  | 'statistics'
+  | 'media'
+  | 'computer'
+  | 'food'
+  | 'mathematics'
+  | 'chemistry';
 
 const majorNameMapping = {
-  'business-school': ['경영대학', 'Business School'],
-  'department-of-economics': ['경제학과', 'Department of Economics'],
-  'school-of-psychology': ['심리학부', 'School of Psychology'],
-  'department-of-statistics': ['통계학과', 'Department of Statistics'],
-  'school-of-media-and-communication': ['미디어학부', 'Schoole of Media and Communication'],
-  'department-of-computer-science-and-engineering': ['컴퓨터학과', 'Department of Computer Science and Engineering'],
-  'department-of-food-and-resources': ['식품자원경제학과', 'Department of Food and Resources'],
-  'department-of-mathematics': ['수학과', 'Department of Mathematics'],
-  'department-of-chemistry': ['화학과', 'Department of Chemistry'],
+  business: ['경영대학', 'Business School'],
+  economics: ['경제학과', 'Department of Economics'],
+  psychology: ['심리학부', 'School of Psychology'],
+  statistics: ['통계학과', 'Department of Statistics'],
+  media: ['미디어학부', 'Schoole of Media and Communication'],
+  computer: ['컴퓨터학과', 'Department of Computer Science and Engineering'],
+  food: ['식품자원경제학과', 'Department of Food and Resources'],
+  mathematics: ['수학과', 'Department of Mathematics'],
+  chemistry: ['화학과', 'Department of Chemistry'],
 };
 
 const semesterMapping: string[] = [
@@ -130,7 +130,7 @@ const PreviousDetailPage = () => {
   const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
 
   useEffect(() => {
-    const hasEnoughData = lineData.length > 100;
+    const hasEnoughData = lineData.length > 1;
     setEnoughData(hasEnoughData);
   }, [lineData]);
 
@@ -157,7 +157,7 @@ const PreviousDetailPage = () => {
     <Wrapper>
       <MajorWrapper>
         <PreviousIconWrapper>
-          <PreviousIconBox onClick={handlePrev} src="../../design_image/previous_detail/fi_x-circle.png" />
+          <PreviousIconBox onClick={handlePrev} src="../../design_image/previous_detail/D_Previous icon.png" />
         </PreviousIconWrapper>
         <MajorIconBox />
         <MajorTextBox>
@@ -165,7 +165,7 @@ const PreviousDetailPage = () => {
           <MajorTextEnglish>{majorEngishName}</MajorTextEnglish>
         </MajorTextBox>
         <WarningTextBox>
-          <WarningIcon src="../../design_image/previous_detail/fi_alert-circle.png" />
+          <WarningIcon src="../../design_image/previous_detail/D_alert-circle.png" />
           <WarningText>
             본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
           </WarningText>
@@ -185,7 +185,7 @@ const PreviousDetailPage = () => {
       </SegmentedWrapper>
       <SelectionInfoWrapper>
         <SelectionInfoDescriptionBox>
-          <DescriptionIcon src="../../design_image/previous_detail/fi_user.png" />
+          <DescriptionIcon src="../../design_image/previous_detail/user_D_Outline.png" />
           <Description>
             {semesterMapping[activeIdx]} {majorKoreanName} 이중전공 선발 정보
           </Description>
@@ -312,6 +312,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  padding-left: 50px;
 
   &::before,
   &::after {
