@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   max-width: 1920px;
-  height: 96px;
+  height: 7.7%; // 96px; (96/1248 = 7.7)
   position: fixed;
   top: 0;
   display: flex;
