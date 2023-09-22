@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
 import LoginModal from './LoginModal';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -151,7 +152,12 @@ const Link = styled.button`
   text-transform: uppercase;
 `;
 
-function LoginPage() {
+export interface LoginPageProps {
+  setLogin: (state: boolean) => void;
+}
+
+function LoginPage(props: LoginPageProps) {
+  const { setLogin } = props;
   const navigate = useNavigate();
   const handleLink2Click = () => {
     navigate('/join');
@@ -164,6 +170,26 @@ function LoginPage() {
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
+  };
+
+  // login API 접근
+  const onLoginClick = async () => {
+    const url = 'http://localhost:8080/auth/login';
+    try {
+      await axios.post(url, {
+        email: ID,
+        password: password,
+        isRememberOn: isChecked,
+      });
+      //로그인 상태를 유지하기 위해 localStorage에 로그인 여부와 ID를 저장 후 login 상태를 true로 바꾸고 메인 페이지로 보낸다.
+      window.localStorage.setItem('isLogin', 'true');
+      window.localStorage.setItem('loginedUser', ID);
+      setLogin(true);
+      navigate('/');
+    } catch (err) {
+      // 이후 수정 필요함.
+      alert(err);
+    }
   };
 
   return (
@@ -221,7 +247,11 @@ function LoginPage() {
           </Link>
           <Link onClick={handleLink2Click}>회원가입</Link>
         </LinkBox>
-        <NextButton active={ID !== '' && password !== ''} disabled={ID === '' || password === ''}>
+        <NextButton
+          active={ID !== '' && password !== ''}
+          disabled={ID === '' || password === ''}
+          onClick={onLoginClick}
+        >
           로그인
         </NextButton>
       </LoginBox>

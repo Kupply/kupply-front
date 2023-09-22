@@ -6,6 +6,7 @@ import HeaderButton from '../../assets/buttons/header/HeaderButton';
 import MailButton from '../../assets/buttons/header/MailButton';
 import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -52,9 +53,10 @@ const LeftButtonsContainer = styled.div`
 
 export interface HeaderProps {
   logined: boolean;
+  setLogin: (state: boolean) => void;
 }
 
-export default function Header({ logined }: HeaderProps) {
+export default function Header({ logined, setLogin }: HeaderProps) {
   const navigate = useNavigate();
   const handleMenu1Click = () => {
     navigate('/previous');
@@ -73,6 +75,19 @@ export default function Header({ logined }: HeaderProps) {
   };
   const handleLoginClick = () => {
     navigate('/login');
+  };
+
+  const onLogoutClick = async () => {
+    const url = 'http://localhost:8080/auth/logout';
+    try {
+      await axios.get(url);
+      window.localStorage.clear();
+      setLogin(false);
+      navigate('/');
+    } catch (err) {
+      // 이후 수정 필요함.
+      alert(err);
+    }
   };
 
   return (
@@ -94,6 +109,9 @@ export default function Header({ logined }: HeaderProps) {
         </LeftButtonsContainer>
         {logined ? (
           <HeaderIconButtonContainer>
+            <LabelButton size="medium" buttonType="secondary" onClick={onLogoutClick}>
+              Log out
+            </LabelButton>
             <MailButton onClick={handleMessageClick} />
             <SettingButton onClick={handleSettingsClick} />
           </HeaderIconButtonContainer>

@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect, createContext } from 'react';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
@@ -13,6 +14,7 @@ import SettingsPage from './pages/SettingsPage';
 import SignUp1Page from './pages/SignUp/SignUp1Page';
 import SignUp2Page from './pages/SignUp/SignUp2Page';
 import SignUp3Page from './pages/SignUp/SignUp3Page';
+import AuthRequired from './AuthRequired';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/SignUp/SignUp4Page';
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 
@@ -28,18 +30,27 @@ const Wrapper = styled.div`
 
 // marginTop 은 Header 에 페이지가 가리지 않게 하기 위해서.
 export default function App() {
+  const [isLogined, setisLogined] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
+
   return (
     <Wrapper>
-      <Header logined={false} />
+      <Header logined={isLogined} setLogin={setisLogined} />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/previous" element={<PreviousPage />} />
-        <Route path="/previous/:majorName" element={<PreviousDetailPage />} />
-        <Route path="/myboard" element={<MyBoardPage />} />
-        <Route path="/community" element={<CommunityPage />} />
+        <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
+        <Route element={<AuthRequired />}>
+          <Route path="/previous" element={<PreviousPage />} />
+          <Route path="/previous/:majorName" element={<PreviousDetailPage />} />
+          <Route path="/myboard" element={<MyBoardPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/message" element={<MessagePage />} />
+        </Route>
         <Route path="/join" element={<SignUp1Page />} />
-        <Route path="/message" element={<MessagePage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/signup1" element={<SignUp1Page />} />
         <Route path="/signup2" element={<SignUp2Page />} />
