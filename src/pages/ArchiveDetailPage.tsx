@@ -3,28 +3,41 @@ import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import SegmentedPicker from '../assets/SegmentedPicker';
 import GpaLineChart, { Data, LineData } from '../assets/GpaLineChart';
+import axios from 'axios';
 
 type MajorOptions =
-  | 'business-school'
-  | 'department-of-economics'
-  | 'school-of-psychology'
-  | 'department-of-statistics'
-  | 'school-of-media-and-communication'
-  | 'department-of-computer-science-and-engineering'
-  | 'department-of-food-and-resources'
-  | 'department-of-mathematics'
-  | 'department-of-chemistry';
+  | 'business'
+  | 'economics'
+  | 'psychology'
+  | 'statistics'
+  | 'mathematics'
+  | 'chemistry'
+  | 'media'
+  | 'food'
+  | 'computer';
 
 const majorNameMapping = {
-  'business-school': ['경영대학', 'Business School'],
-  'department-of-economics': ['경제학과', 'Department of Economics'],
-  'school-of-psychology': ['심리학부', 'School of Psychology'],
-  'department-of-statistics': ['통계학과', 'Department of Statistics'],
-  'school-of-media-and-communication': ['미디어학부', 'Schoole of Media and Communication'],
-  'department-of-computer-science-and-engineering': ['컴퓨터학과', 'Department of Computer Science and Engineering'],
-  'department-of-food-and-resources': ['식품자원경제학과', 'Department of Food and Resources'],
-  'department-of-mathematics': ['수학과', 'Department of Mathematics'],
-  'department-of-chemistry': ['화학과', 'Department of Chemistry'],
+  business: ['경영대학', 'Business School'],
+  economics: ['경제학과', 'Department of Economics'],
+  psychology: ['심리학부', 'School of Psychology'],
+  statistics: ['통계학과', 'Department of Statistics'],
+  mathematics: ['수학과', 'Department of Mathematics'],
+  chemistry: ['화학과', 'Department of Chemistry'],
+  media: ['미디어학부', 'School of Media & Communication'],
+  food: ['식품자원경제학과', 'Department of Food & Resources'],
+  computer: ['컴퓨터학과', 'Department of Computer Science & Engineering'],
+};
+
+const collegeNameMapping = {
+  business: 'business',
+  economics: 'political',
+  psychology: 'psycho',
+  statistics: 'political',
+  mathematics: 'science',
+  chemistry: 'science',
+  media: 'media',
+  food: 'bio',
+  computer: 'info',
 };
 
 const semesterMapping: string[] = [
@@ -38,27 +51,34 @@ const semesterMapping: string[] = [
   '2020-1R',
 ];
 
-const PreviousDetailPage = () => {
+const semesterForAPI: string[] = ['all', '2023-1', '2022-2', '2022-1', '2021-2', '2021-1', '2020-2', '2020-1'];
+
+const ArchiveDetailPage = () => {
   const navigate = useNavigate();
 
   const handlePrev = () => {
-    navigate('/previous');
+    navigate('/archive');
   };
 
   const { majorName } = useParams() as { majorName: MajorOptions };
   const majorKoreanName = majorNameMapping[majorName][0];
   const majorEngishName = majorNameMapping[majorName][1];
+  const majorSymbolPath = `../../design_image/previous_detail/${collegeNameMapping[majorName]}.png`;
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [enoughData, setEnoughData] = useState<boolean>(false);
 
-  // FIXME: axios, ajax?로 받아온 누적 데이터 값으로 초기값 설정.
-  const [numOfSelection, setNumOfSelection] = useState<number>(11);
-  const [numOfApplication, setNumOfApplication] = useState<number>(11);
-  const [competitionRate, setCompetitionRate] = useState<number>(1.11);
-  let initPasserGpaInfos: number[] = [1.11, 1.11, 1.11, 1.11];
-  const [passerGpaInfos, setPasserGpaInfos] = useState<number[]>(initPasserGpaInfos);
+  const [numOfSelection, setNumOfSelection] = useState<number>(0); // FIXME: 모집요강에서?
+  const [numOfApplication, setNumOfApplication] = useState<number>(0);
+  const [competitionRate, setCompetitionRate] = useState<number>(0); // numOfSelection / numOfApplication
+
+  const [lineData, setLineData] = useState<LineData>([]);
+  const [meanGpa, setMeanGpa] = useState<Data>({ gpa: 0, num: 0 });
+  const [medianGpa, setMedianGpa] = useState<Data>({ gpa: 0, num: 0 });
+  const [modeGpa, setModeGpa] = useState<Data>({ gpa: 0, num: 0 });
+  const [minGpa, setMinGpa] = useState<Data>({ gpa: 0, num: 0 });
+
   let initKeywords: string[] = [
     '리더쉽',
     '목표달성',
@@ -71,78 +91,52 @@ const PreviousDetailPage = () => {
   ];
   const [keywords, setKeywords] = useState<string[]>(initKeywords);
 
-  const tmpRandomData = [
-    {
-      gpa: 4.5,
-      num: 7,
-    },
-    {
-      gpa: 4.3,
-      num: 10,
-    },
-    {
-      gpa: 4.25,
-      num: 11,
-    },
-    {
-      gpa: 4.1,
-      num: 9,
-    },
-    {
-      gpa: 4.0,
-      num: 7,
-    },
-    {
-      gpa: 3.9,
-      num: 7,
-    },
-    {
-      gpa: 3.75,
-      num: 7,
-    },
-    {
-      gpa: 3.6,
-      num: 6,
-    },
-    {
-      gpa: 3.5,
-      num: 5,
-    },
-    {
-      gpa: 3.35,
-      num: 4,
-    },
-    {
-      gpa: 3.0,
-      num: 2,
-    },
-  ];
+  // 누적 데이터로 default 값 setting
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const APIresponse = await axios.get(`http://localhost:8000/pastData/${majorName}/all`);
+        const data = APIresponse.data.pastData;
+        console.log(data);
 
-  const tmpMeanGpa = { gpa: 3.75, num: 7 };
-  const tmpMedianGpa = { gpa: 4.0, num: 7 };
-  const tmpModeGpa = { gpa: 4.25, num: 11 };
-  const tmpMinGpa = { gpa: 3.0, num: 2 };
+        setNumOfApplication(data.overallData.numberOfData);
+        setLineData(data.passedData.passedGPACountArray);
+        setMeanGpa(data.passedData.passedMeanGPAData);
+        setMedianGpa(data.passedData.passedMedianGPAData);
+        setModeGpa(data.passedData.passedModeGPAData);
+        setMinGpa(data.passedData.passedMinimumGPAData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-  const [lineData, setLineData] = useState<LineData>(tmpRandomData);
-  const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
-  const [medianGpa, setMedianGpa] = useState<Data>(tmpMedianGpa);
-  const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
-  const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
+    fetchInitialData();
+  }, [majorName]);
 
   useEffect(() => {
-    const hasEnoughData = lineData.length > 100;
+    const hasEnoughData = lineData.length >= 0;
     setEnoughData(hasEnoughData);
   }, [lineData]);
 
-  const handleButtonClick = (idx: number) => {
+  const handleButtonClick = async (idx: number) => {
     if (activeIdx !== idx) {
       setActiveIdx(idx);
     }
 
-    // 여기서 axios 요청으로 보여줄 데이터들 받고 setSomething으로 변경?
-    setNumOfSelection((idx + 1) * 11);
-    setNumOfApplication((idx + 1) * 11);
-    setCompetitionRate(((idx + 1) * 111) / 100);
+    try {
+      const semester = semesterForAPI[idx];
+      const APIresponse = await axios.get(`http://localhost:8000/pastData/${majorName}/${semester}`);
+      const data = APIresponse.data.pastData;
+
+      setNumOfApplication(data.overallData.numberOfData);
+      setLineData(data.passedData.passedGPACountArray);
+      setMeanGpa(data.passedData.passedMeanGPAData);
+      setMedianGpa(data.passedData.passedMedianGPAData);
+      setModeGpa(data.passedData.passedModeGPAData);
+      setMinGpa(data.passedData.passedMinimumGPAData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleMouseEnter = (idx: number) => {
@@ -157,15 +151,21 @@ const PreviousDetailPage = () => {
     <Wrapper>
       <MajorWrapper>
         <PreviousIconWrapper>
-          <PreviousIconBox onClick={handlePrev} src="../../design_image/previous_detail/fi_x-circle.png" />
+          <PreviousIconBox onClick={handlePrev} src="../../design_image/previous_detail/D_Previous icon.png" />
         </PreviousIconWrapper>
-        <MajorIconBox />
+        <MajorIconBox src={majorSymbolPath} />
         <MajorTextBox>
           <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
-          <MajorTextEnglish>{majorEngishName}</MajorTextEnglish>
+          {majorName === 'food' || majorName === 'computer' ? (
+            <MajorTextEnglishSmall>{majorEngishName}</MajorTextEnglishSmall>
+          ) : majorName === 'media' ? (
+            <MajorTextEnglishMiddle>{majorEngishName}</MajorTextEnglishMiddle>
+          ) : (
+            <MajorTextEnglishLarge>{majorEngishName}</MajorTextEnglishLarge>
+          )}
         </MajorTextBox>
         <WarningTextBox>
-          <WarningIcon src="../../design_image/previous_detail/fi_alert-circle.png" />
+          <WarningIcon src="../../design_image/previous_detail/D_alert-circle.png" />
           <WarningText>
             본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
           </WarningText>
@@ -185,7 +185,7 @@ const PreviousDetailPage = () => {
       </SegmentedWrapper>
       <SelectionInfoWrapper>
         <SelectionInfoDescriptionBox>
-          <DescriptionIcon src="../../design_image/previous_detail/fi_user.png" />
+          <DescriptionIcon src="../../design_image/previous_detail/user_D_Outline.png" />
           <Description>
             {semesterMapping[activeIdx]} {majorKoreanName} 이중전공 선발 정보
           </Description>
@@ -240,7 +240,7 @@ const PreviousDetailPage = () => {
                 <PasserMeanGPAIcon />
                 <PasserGPAInfoTextBox>
                   <Text>합격자 학점 평균값</Text>
-                  <Text>{passerGpaInfos[0]}</Text>
+                  <Text>{meanGpa.gpa}</Text>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
               <svg xmlns="http://www.w3.org/2000/svg" width="300" height="1" viewBox="0 0 300 1" fill="none">
@@ -250,7 +250,7 @@ const PreviousDetailPage = () => {
                 <PasserMedianGPAIcon />
                 <PasserGPAInfoTextBox>
                   <Text>합격자 학점 중위값</Text>
-                  <Text>{passerGpaInfos[1]}</Text>
+                  <Text>{medianGpa.gpa}</Text>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
               <svg xmlns="http://www.w3.org/2000/svg" width="300" height="1" viewBox="0 0 300 1" fill="none">
@@ -260,7 +260,9 @@ const PreviousDetailPage = () => {
                 <PasserModeGPAIcon />
                 <PasserGPAInfoTextBox>
                   <Text>합격자 학점 최빈값</Text>
-                  <Text>{passerGpaInfos[2]} (11명)</Text>
+                  <Text>
+                    {modeGpa.gpa} ({modeGpa.num}명)
+                  </Text>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
               <svg xmlns="http://www.w3.org/2000/svg" width="300" height="1" viewBox="0 0 300 1" fill="none">
@@ -270,7 +272,7 @@ const PreviousDetailPage = () => {
                 <PasserMinGPAIcon />
                 <PasserGPAInfoTextBox>
                   <Text>합격자 학점 최저값</Text>
-                  <Text>{passerGpaInfos[3]}</Text>
+                  <Text>{minGpa.gpa}</Text>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
             </PasserGPAInfoAnalyticsWrapper>
@@ -303,7 +305,7 @@ const PreviousDetailPage = () => {
   );
 };
 
-export default PreviousDetailPage;
+export default ArchiveDetailPage;
 
 const Wrapper = styled.div`
   display: flex;
@@ -341,7 +343,6 @@ const MajorWrapper = styled.div`
   height: 145px;
   width: 100%;
   display: flex;
-  padding-left: 103px;
 `;
 
 const PreviousIconWrapper = styled.button`
@@ -365,7 +366,7 @@ const PreviousIconBox = styled.img`
 const MajorIconBox = styled.img`
   width: 60px;
   height: 78.77px;
-  background-color: pink;
+  background-color: none;
   margin: 46.4px 30px 19.82px 0px;
 `;
 
@@ -373,7 +374,7 @@ const MajorTextBox = styled.div`
   display: flex;
   width: 920px;
   height: 100%;
-  gap: 18.91px;
+  gap: 20px;
 `;
 
 const MajorTextKorean = styled.text`
@@ -383,19 +384,35 @@ const MajorTextKorean = styled.text`
   font-weight: 700;
   font-style: normal;
   text-align: center;
-  margin-top: 60.54px;
-  // margin: 60.54px 0px 33.96px 0px;
+  margin-top: 59px;
 `;
 
-const MajorTextEnglish = styled.text`
+const MajorTextEnglishLarge = styled.text`
   color: #141414;
   font-family: Pretendard;
   font-size: 36px;
   font-weight: 500;
   font-style: normal;
   text-align: center;
-  margin-top: 78.72px;
-  // margin: 78.72px 0px 42.04px 18.91px;
+  margin-top: 77px;
+`;
+const MajorTextEnglishMiddle = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 30px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin-top: 77px;
+`;
+const MajorTextEnglishSmall = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin-top: 77px;
 `;
 
 const WarningTextBox = styled.div`
@@ -488,6 +505,7 @@ const SelectionInfoWrapper = styled.div`
   margin-top: 36px;
   align-items: center;
   display: flex;
+  padding-left: 128px;
 `;
 
 const SelectionInfoContentsWrapper = styled.div`
@@ -520,6 +538,7 @@ const PasserGPAInfoWrapper = styled.div`
   border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
   margin-top: 18px;
+  padding-left: 128px;
   position: relative;
   z-index: 1;
 `;
@@ -595,6 +614,7 @@ const KeywordWrapper = styled.div`
   border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
   margin-top: 18px;
+  padding-left: 128px;
   position: relative;
   z-index: 1;
 `;
@@ -672,3 +692,55 @@ const CollectingDetailText = styled.text`
   text-align: center;
   white-space: pre-wrap;
 `;
+
+// const tmpRandomData = [
+//   {
+//     gpa: 4.5,
+//     num: 7,
+//   },
+//   {
+//     gpa: 4.3,
+//     num: 10,
+//   },
+//   {
+//     gpa: 4.25,
+//     num: 11,
+//   },
+//   {
+//     gpa: 4.1,
+//     num: 9,
+//   },
+//   {
+//     gpa: 4.0,
+//     num: 7,
+//   },
+//   {
+//     gpa: 3.9,
+//     num: 7,
+//   },
+//   {
+//     gpa: 3.75,
+//     num: 7,
+//   },
+//   {
+//     gpa: 3.6,
+//     num: 6,
+//   },
+//   {
+//     gpa: 3.5,
+//     num: 5,
+//   },
+//   {
+//     gpa: 3.35,
+//     num: 4,
+//   },
+//   {
+//     gpa: 3.0,
+//     num: 2,
+//   },
+// ];
+
+// const tmpMeanGpa = { gpa: 3.75, num: 7 };
+// const tmpMedianGpa = { gpa: 4.0, num: 7 };
+// const tmpModeGpa = { gpa: 4.25, num: 11 };
+// const tmpMinGpa = { gpa: 3.0, num: 2 };

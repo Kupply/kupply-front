@@ -169,13 +169,13 @@ const formattedMedianData: (number | null)[] = Array.from({ length: 166 }, () =>
 const formattedModeData: (number | null)[] = Array.from({ length: 166 }, () => null);
 const formattedMinData: (number | null)[] = Array.from({ length: 166 }, () => null);
 
-const meanGpaPoint = new Image();
+const meanGpaPoint = new Image(65, 65);
 meanGpaPoint.src = '../../design_image/previous_detail/meanGpaPoint.png';
-const medianGpaPoint = new Image();
+const medianGpaPoint = new Image(65, 65);
 medianGpaPoint.src = '../../design_image/previous_detail/medianGpaPoint.png';
-const modeGpaPoint = new Image();
+const modeGpaPoint = new Image(65, 65);
 modeGpaPoint.src = '../../design_image/previous_detail/modeGpaPoint.png';
-const minGpaPoint = new Image();
+const minGpaPoint = new Image(65, 65);
 minGpaPoint.src = '../../design_image/previous_detail/minGpaPoint.png';
 const nullPoint = new Image();
 
@@ -299,7 +299,7 @@ export default function GpaLineChart(prop: GpaLineChartProps) {
               data.labels[index] === '4.00' ||
               data.labels[index] === '4.50'
             ) {
-              return data.labels[index];
+              return data.labels[index].substring(0, 3);
             }
             return '';
           },
