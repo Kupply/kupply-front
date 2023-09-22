@@ -121,7 +121,19 @@ const TextButton = styled.button`
 `;
 
 export default function SignUp1Page() {
+  //navigate 관련 코드. emailID가 안 왔으면 정상 경로가 아니므로 메인 페이지로 보낸다.
   const navigate = useNavigate();
+  const receivedData = useLocation().state;
+
+  useEffect(() => {
+    if (!receivedData) navigate('/');
+  }, []);
+
+  const handleNext = () => {
+    navigate('/signup2', {
+      state: { emailID: receivedData.emailID },
+    });
+  };
   // progressBar 관련
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
@@ -144,17 +156,6 @@ export default function SignUp1Page() {
       setNextButton(false);
     }
   }, [num1, num2, num3, num4, num5, num6]);
-
-  const location = useLocation();
-  const emailID = location.state.emailID;
-
-  const handleNext = () => {
-    navigate('/signup2', {
-      state: {
-        emailID: emailID,
-      },
-    });
-  };
 
   // modal 관련
   const [currentModal, setCurrentModal] = useState<number>(100); // 임의 값으로 초기화

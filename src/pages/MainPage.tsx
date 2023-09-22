@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Carousel from '../components/carousel/Carousel';
 import LabelButton from '../assets/buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -81,12 +81,18 @@ function MainPage() {
   const [ID, setID] = useState<string>('');
 
   const navigate = useNavigate();
+  //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
   const handleButtonClick = () => {
-    navigate('/join', {
-      state: {
-        emailID: ID,
-      },
-    });
+    const IDPattern = /.+@korea\.ac\.kr$/;
+    if (IDPattern.test(ID)) {
+      navigate('/join', {
+        state: {
+          emailID: ID,
+        },
+      });
+    } else {
+      alert('형식에 맞는 이메일이 아닙니다.');
+    }
   };
 
   return (

@@ -137,14 +137,16 @@ export default function SignUp2Page() {
     }
   }, [nameState, stdIDState, phoneState, dropdownValue, complete]);
 
-  const location = useLocation();
-  const emailID = location.state.emailID;
-  console.log(emailID);
+  const receivedData = useLocation().state;
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!receivedData) navigate('/');
+  }, []);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
     navigate('/signup3', {
       state: {
-        emailID: emailID,
+        emailID: receivedData.emailID,
       },
     });
   };

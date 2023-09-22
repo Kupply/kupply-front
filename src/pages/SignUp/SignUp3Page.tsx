@@ -134,19 +134,13 @@ type errorMessageType = {
 };
 
 export default function SignUp3Page() {
-  const location = useLocation();
-  const emailID = location.state.emailID;
-
-  /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
-  const navigate = useNavigate();
-
   /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(3); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [ID, setID] = useState<string>(emailID);
+  const [ID, setID] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
   const [password2, setPassword2] = useState<string>('');
@@ -159,6 +153,17 @@ export default function SignUp3Page() {
     passwordErrorMessage: '',
     nicknameErrorMessage: '',
   });
+
+  /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
+  const navigate = useNavigate();
+  const receivedData = useLocation().state;
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!receivedData) navigate('/');
+    else {
+      setID(receivedData.emailID);
+    }
+  }, []);
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
@@ -241,7 +246,11 @@ export default function SignUp3Page() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signUp4');
+    navigate('/signup4', {
+      state: {
+        emailID: receivedData.emailID,
+      },
+    });
   };
 
   const handlePrev = () => {

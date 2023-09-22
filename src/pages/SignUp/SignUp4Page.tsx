@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
@@ -103,6 +103,11 @@ const VerifiBoxWrapper = styled.div`
 export function SignUp4Page() {
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
+  const receivedData = useLocation().state;
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!receivedData) navigate('/');
+  }, []);
 
   /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
   const steps = [1, 2, 3, 4, 5];
@@ -115,7 +120,11 @@ export function SignUp4Page() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = (nextPath: string) => {
-    navigate(nextPath);
+    navigate(nextPath, {
+      state: {
+        emailID: receivedData.emailID,
+      },
+    });
   };
 
   const handlePrev = () => {
@@ -201,6 +210,12 @@ export function SignUp4PageCandidate() {
   const [hopeSemester3, setHopeSemester3] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  const receivedData = useLocation().state;
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!receivedData) navigate('/');
+  }, []);
+
   useEffect(() => {
     if (
       !!hopeMajor1 &&
@@ -230,7 +245,11 @@ export function SignUp4PageCandidate() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signUp5');
+    navigate('/signup5', {
+      state: {
+        emailID: receivedData.emailID,
+      },
+    });
   };
 
   const handlePrev = () => {
@@ -337,6 +356,12 @@ export function SignUp4PagePasser() {
   const [passSemester3, setPassSemester3] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  const receivedData = useLocation().state;
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!receivedData) navigate('/');
+  }, []);
+
   useEffect(() => {
     if (!!doubleMajor && !!GPA1 && !!GPA2 && !!GPA3 && !!passSemester1 && !!passSemester2 && !!passSemester3) {
       setNextButton(true);
@@ -346,7 +371,11 @@ export function SignUp4PagePasser() {
   }, [doubleMajor, GPA1, GPA2, GPA3, passSemester1, passSemester2, passSemester3]);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signUp5');
+    navigate('/signup5', {
+      state: {
+        emailID: receivedData.emailID,
+      },
+    });
   };
 
   const handlePrev = () => {
