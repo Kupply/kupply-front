@@ -27,8 +27,8 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
   };
   const navigate = useNavigate();
 
-  const handleMenu2Click = () => {
-    navigate('/myboard');
+  const handleClick = () => {
+    navigate('/previous/' + eng);
   };
   return (
     <Container onMouseEnter={onHover} onMouseLeave={onHover}>
@@ -120,7 +120,7 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
               </SvgNotch>
             </>
           )}
-          <Button>
+          <Button onClick={handleClick}>
             <>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path

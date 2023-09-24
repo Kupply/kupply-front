@@ -147,7 +147,6 @@ export default function SignUp1Page() {
 
   const location = useLocation();
   const emailID = location.state.emailID;
-  console.log(emailID);
 
   const handleNext = () => {
     navigate('/signup2', {

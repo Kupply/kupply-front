@@ -25,25 +25,18 @@ const Wrapper = styled.div`
   background: #FCFAFB;
 `;
 
-const Wrapper2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background: #FCFAFB;
-`;
-
 const TitleWrapper = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
   padding-top: 45px;
-  padding-bottom: 25px;
+  padding-bottom: 48px;
 `;
 
 const FormWrapper = styled.div`
+  // display: flex;
+  // flex-direction: column;
   width: 816px;
   height: 850px;
   padding: 42px 94px 78px 94px;
@@ -73,7 +66,7 @@ const StepIndicator = styled.div`
 `;
 
 const ContentsTitleWrapper = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 `;
 
 const TextTitleWrapper = styled.div`
@@ -212,37 +205,32 @@ function SignUp5Page() {
     return Object.values(individualChecks).every((val) => val);
   };
 
-  useEffect(() => {
-    if (allChecked) {
+  const handleAllCheckedClick = (isChecked: boolean) => {
+    if (isChecked) {
       setIndividualChecks({
         first: true,
         second: true,
         third: true,
         fourth: true,
       });
-    } 
-  }, [allChecked]);
-
-  useEffect(() => {
-    if (allStateAgreed()) {
-      setAllCheckedUI(true);
     } else {
-      setAllCheckedUI(false);
+      setIndividualChecks({
+        first: false,
+        second: false,
+        third: false,
+        fourth: false,
+      });
     }
-  }, [individualChecks]);
+    setAllChecked(isChecked);
+    setAllCheckedUI(isChecked);
+  };
 
   useEffect(() => {
-    if (allStateAgreed()) {
-      setAllChecked(true);
-    } else {
-      setAllChecked(false);
-    }
+    const isAllChecked = allStateAgreed();
+    setIsButtonActive(isAllChecked);
+    setAllCheckedUI(isAllChecked);  
   }, [individualChecks]);
-
-  useEffect(() => {
-    setIsButtonActive(allStateAgreed());
-  }, [individualChecks]);
-
+  
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
 
@@ -292,9 +280,9 @@ function SignUp5Page() {
         <TextTitleWrapper>
           <TextTitle>
             <CustomCheckButton 
-              isChecked={allChecked} 
+              isChecked={allCheckedUI} 
               onChange={(isChecked) => {
-                setAllChecked(isChecked);
+                handleAllCheckedClick(isChecked);
               }} 
             />
               <Typography
@@ -521,7 +509,7 @@ function SignUp5Page() {
           </TextOutBox>
           
           <ButtonsWrapper>
-            <PrevButton />
+            <PrevButton onClick={handlePrev} />
             <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>
               Next
             </NextButtonFixedWidth>
@@ -533,41 +521,15 @@ function SignUp5Page() {
   );
 }
 
-const TitleOutBox = styled.div`
-  width: 877px;
-  height: 411px;
+const Wrapper2 = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  //background: #FCFAFB;
   background: linear-gradient(180deg, #FCFAFB 69.56%, rgba(252, 250, 251, 0.00) 115.91%);
-  z-index: 10;
 `;
-
-const LonginButtonWrapper = styled.div`
-  display: flex;
-  width: 628px;
-  height: 68px;
-  top: 985px;
-  left: 646px;
-  padding: 16px 32px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 10px;
-  background: var(--Primary-color, #D85888);
-  position: absolute;
-  z-index: 10;
-`;
-
-const ImageWrapper = styled.div`
-  width: 781px;
-  height: 836px;
-  left: 569px;
-  top: 286px;
-  flex-shrink: 0;
-  background: #FCFAFB; // url(design_image/background_image.webp), lightgray 50% / cover no-repeat;
-  z-index: 1;
-`
 
 function SignUp5Complete() {
 
@@ -579,50 +541,37 @@ function SignUp5Complete() {
 
   return (
     <Wrapper2>
-      <TitleOutBox>
-        <div style={{ textAlign: "center" }}>
-          <Typography size="heading1" style={{ lineHeight: "104.167%" }}>
-            축하합니다!
+      <div style={{ textAlign: "center" }}>
+        <Typography size="heading1" style={{ marginTop: "140px", lineHeight: "104.167%" }}>
+          축하합니다!
+        </Typography>
+      </div>
+      <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+        <Typography size="largeText" style={{ marginTop: "24px", opacity: "0.8", lineHeight: "125%", fontWeight: "500" }}>
+          이제 쿠플라이의 회원이 되셨습니다.
+          <br />
+          로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
+        </Typography>
+      </div>
+      <img
+        src="design_image/check_ani.webp"
+        alt="completeImage"
+        style={{
+          width: "781px", height: "836px", 
+          background: "url(design_image/check_ani.webp), lightgray 50% / cover no-repeat",
+          transform: "translateY(-84px)",
+        }}
+      />
+      <div style={{ transform: "translateY(-221px)"}}>
+        <LoginButton active={isButtonActive} onClick={handleNext}>
+          <Typography 
+            size="bodyText"
+            color="var(--White, #FFF)"
+          >
+            로그인하고 쿠플라이로 이동하기
           </Typography>
-          <div style={{ marginTop: "24px" }}>
-            <Typography size="largeText" style={{ opacity: "0.8", lineHeight: "30px", fontWeight: "500" }}>
-              이제 쿠플라이의 회원이 되셨습니다.
-              <br />
-              로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
-            </Typography>
-          </div>
-        </div>
-      </TitleOutBox>
-        <ImageWrapper>
-          <img
-            src="design_image/check_ani.webp"
-            alt="completeImage"
-            style={{
-              background: "url(design_image/check_ani.webp), lightgray 50% / cover no-repeat",
-              position: "absolute",
-              width: "781px",
-              height: "836px", 
-              left: "577px",
-              top: "286px",
-            }}
-          />
-        <LonginButtonWrapper>
-          <div style={{
-            left: "77px",
-            bottom: "69px",
-            }}
-          />
-          <LoginButton active={isButtonActive} onClick={handleNext}>
-            <Typography 
-              size="bodyText"
-              color="var(--White, #FFF)"
-            >
-              로그인하고 쿠플라이로 이동하기
-            </Typography>
-          </LoginButton>
-        </LonginButtonWrapper>
-      </ImageWrapper>
-
+        </LoginButton>
+      </div>
     </Wrapper2>
   );
 }
