@@ -5,7 +5,6 @@ import Footer from './components/base/Footer';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import PreviousPage from './pages/PreviousPage';
-import PreviousDetailPage from './pages/PreviousDetailPage';
 import MyBoardPage from './pages/MyBoardPage';
 import CommunityPage from './pages/CommunityPage';
 import MessagePage from './pages/MessagePage';
@@ -35,7 +34,6 @@ export default function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/previous" element={<PreviousPage />} />
-        <Route path="/previous/:majorName" element={<PreviousDetailPage />} />
         <Route path="/myboard" element={<MyBoardPage />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/join" element={<SignUp1Page />} />
