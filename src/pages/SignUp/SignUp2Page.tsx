@@ -93,11 +93,11 @@ export default function SignUp2Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState<string>(sessionStorage.getItem('name') || '');
   const [nameState, setNameState] = useState<StateOptions>('default');
-  const [stdID, setStdID] = useState<string>('');
+  const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('default');
-  const [phone, setPhone] = useState<string>('');
+  const [phone, setPhone] = useState<string>(sessionStorage.getItem('phoneNumber') || '');
   const [phoneState, setPhoneState] = useState<StateOptions>('default');
   const [dropdownValue, setdropDownValue] = useState<string>('');
 
@@ -137,18 +137,17 @@ export default function SignUp2Page() {
     }
   }, [nameState, stdIDState, phoneState, dropdownValue, complete]);
 
-  const receivedData = useLocation().state;
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
-    if (!receivedData) navigate('/');
+    if (!sessionStorage.getItem('email')) navigate('/');
   }, []);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signup3', {
-      state: {
-        emailID: receivedData.emailID,
-      },
-    });
+    sessionStorage.setItem('name', name);
+    sessionStorage.setItem('studentId', stdID);
+    sessionStorage.setItem('firstMajor', dropdownValue);
+    sessionStorage.setItem('phoneNumber', phone);
+    navigate('/signup3');
   };
 
   const handlePrev = () => {

@@ -140,12 +140,12 @@ export default function SignUp3Page() {
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [ID, setID] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [ID, setID] = useState<string>(sessionStorage.getItem('email') || '');
+  const [password, setPassword] = useState<string>(sessionStorage.getItem('password') || '');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
   const [password2, setPassword2] = useState<string>('');
   const [password2State, setPassword2State] = useState<StateOptions>('default');
-  const [nickname, setNickname] = useState<string>('');
+  const [nickname, setNickname] = useState<string>(sessionStorage.getItem('nickname') || '');
   const [nicknameState, setnicknameState] = useState<StateOptions>('default');
   const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('default');
 
@@ -156,13 +156,10 @@ export default function SignUp3Page() {
 
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
-  const receivedData = useLocation().state;
+
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
-    if (!receivedData) navigate('/');
-    else {
-      setID(receivedData.emailID);
-    }
+    if (!sessionStorage.getItem('name')) navigate('/');
   }, []);
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
@@ -246,15 +243,13 @@ export default function SignUp3Page() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signup4', {
-      state: {
-        emailID: receivedData.emailID,
-      },
-    });
+    sessionStorage.setItem('password', password);
+    sessionStorage.setItem('nickname', nickname);
+    navigate('/signup4');
   };
 
   const handlePrev = () => {
-    navigate('/signUp2');
+    navigate('/signup2');
   };
 
   return (

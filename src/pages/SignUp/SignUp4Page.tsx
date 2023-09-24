@@ -103,11 +103,6 @@ const VerifiBoxWrapper = styled.div`
 export function SignUp4Page() {
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
-  const receivedData = useLocation().state;
-  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  useEffect(() => {
-    if (!receivedData) navigate('/');
-  }, []);
 
   /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
   const steps = [1, 2, 3, 4, 5];
@@ -118,13 +113,18 @@ export function SignUp4Page() {
   const [passerState, setPasserState] = useState<'default' | 'clicked' | 'unactive'>('default');
   const [nextPathState, setNextPathState] = useState<string>('');
 
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('nickname')) navigate('/');
+    else sessionStorage.removeItem('role');
+  }, []);
+
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = (nextPath: string) => {
-    navigate(nextPath, {
-      state: {
-        emailID: receivedData.emailID,
-      },
-    });
+    //role을 sessionStorage에 적고, 다음 단계로 보낸다.
+    if (candidateState === 'clicked') sessionStorage.setItem('role', 'candidate');
+    else if (passerState === 'clicked') sessionStorage.setItem('role', 'passer');
+    navigate(nextPath);
   };
 
   const handlePrev = () => {
@@ -210,10 +210,9 @@ export function SignUp4PageCandidate() {
   const [hopeSemester3, setHopeSemester3] = useState<string>('');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
-  const receivedData = useLocation().state;
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
-    if (!receivedData) navigate('/');
+    if (!sessionStorage.getItem('role')) navigate('/');
   }, []);
 
   useEffect(() => {
@@ -245,11 +244,11 @@ export function SignUp4PageCandidate() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signup5', {
-      state: {
-        emailID: receivedData.emailID,
-      },
-    });
+    sessionStorage.setItem('hopeMajor1', hopeMajor1);
+    sessionStorage.setItem('hopeMajor2', hopeMajor2);
+    sessionStorage.setItem('GPA', GPA1 + '.' + GPA2 + GPA3);
+    sessionStorage.setItem('hopeSemester', '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3);
+    navigate('/signup5');
   };
 
   const handlePrev = () => {
@@ -359,9 +358,8 @@ export function SignUp4PagePasser() {
   const receivedData = useLocation().state;
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
-    if (!receivedData) navigate('/');
+    if (!sessionStorage.getItem('role')) navigate('/');
   }, []);
-
   useEffect(() => {
     if (!!doubleMajor && !!GPA1 && !!GPA2 && !!GPA3 && !!passSemester1 && !!passSemester2 && !!passSemester3) {
       setNextButton(true);
@@ -371,11 +369,10 @@ export function SignUp4PagePasser() {
   }, [doubleMajor, GPA1, GPA2, GPA3, passSemester1, passSemester2, passSemester3]);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signup5', {
-      state: {
-        emailID: receivedData.emailID,
-      },
-    });
+    sessionStorage.setItem('secondMajor', doubleMajor);
+    sessionStorage.setItem('passedGPA', GPA1 + '.' + GPA2 + GPA3);
+    sessionStorage.setItem('passSemester', '20' + passSemester1 + passSemester2 + '-' + passSemester3);
+    navigate('/signup5');
   };
 
   const handlePrev = () => {

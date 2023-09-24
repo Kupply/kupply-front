@@ -133,7 +133,6 @@ export const sendEmail = async (email: string) => {
 export default function SignUp1Page() {
   //navigate 관련 코드. emailID가 안 왔으면 정상 경로가 아니므로 메인 페이지로 보낸다.
   const navigate = useNavigate();
-  const receivedData = useLocation().state;
 
   // progressBar 관련
   const steps = [1, 2, 3, 4, 5];
@@ -162,17 +161,14 @@ export default function SignUp1Page() {
   const [currentModal, setCurrentModal] = useState<number>(100); // 임의 값으로 초기화
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   // modal 2 - 3 email value 전달 관련
-  const [email, setEmail] = useState<string>('');
+  const [email, setEmail] = useState<string>(sessionStorage.getItem('email') || '');
   const [emailState, setEmailState] = useState<StateOptions>('default');
   //sendNum이 바뀌거나 isOpenModal이 0, 3이 되면 timer 초기화
   const [sendNum, setSendNum] = useState<number>(0);
 
   // emailID를 받지 않은 상태라면 main으로 보내고, 아니라면 email을 받은 값으로 설정한다.
   useEffect(() => {
-    if (!receivedData) navigate('/');
-    else {
-      setEmail(receivedData.emailID);
-    }
+    if (!sessionStorage.getItem('email')) navigate('/');
   }, []);
 
   // small modal 관련
@@ -183,8 +179,7 @@ export default function SignUp1Page() {
     //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
     if (!isOpenModal) {
       setSendNum(sendNum + 1);
-      if (email === '') await sendEmail(receivedData.emailID);
-      else await sendEmail(email);
+      await sendEmail(email);
     }
   }, [isOpenModal]);
   // large modal 관련
@@ -202,9 +197,7 @@ export default function SignUp1Page() {
     try {
       await axios.post(url, { email: email, code: entireCode });
 
-      navigate('/signup2', {
-        state: { emailID: email },
-      });
+      navigate('/signup2');
     } catch (err) {
       //에러 메시지 등 다른 처리 필요
       alert('올바른 인증번호가 아닙니다.');

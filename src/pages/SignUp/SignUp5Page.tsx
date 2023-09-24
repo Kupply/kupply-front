@@ -10,6 +10,7 @@ import PrevButton from '../../assets/buttons/PrevButton';
 import CheckButton from '../../assets/checkbox/CheckButton';
 import { check } from 'prettier';
 import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
+import axios from 'axios';
 
 /*
 주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
@@ -195,6 +196,37 @@ const CustomCheckButton: React.FC<CustomCheckButtonProps> = ({ isChecked, onChan
   );
 };
 
+const join = async (role: string) => {
+  const url = 'http://localhost:8080/auth/join'; // 만든 API 주소로 바뀌어야 함.
+  const commonData = {
+    name: sessionStorage.getItem('name'),
+    studentId: Number(sessionStorage.getItem('studentId')),
+    nickname: sessionStorage.getItem('nickname'),
+    phoneNumber: sessionStorage.getItem('phoneNumber'),
+    email: sessionStorage.getItem('email'),
+    password: sessionStorage.getItem('password'),
+    firstMajor: sessionStorage.getItem('firstMajor'),
+    role: sessionStorage.getItem('role'),
+  };
+  try {
+    if (role === 'passer') {
+      await axios.post(url, {
+        ...commonData,
+        passSemester: sessionStorage.getItem('passSemester'),
+        passGPA: parseFloat(sessionStorage.getItem('passedGPA') || ''),
+        secondMajor: sessionStorage.getItem('secondMajor'),
+      });
+    } else {
+      await axios.post(url, {
+        ...commonData,
+        hopeMajors: [sessionStorage.getItem('hopeMajor1'), sessionStorage.getItem('hopeMajor2')],
+      });
+    }
+  } catch (err) {
+    alert(err);
+  }
+};
+
 function SignUp5Page() {
   /*각 체크박스의 상태를 state로 관리*/
   const [allChecked, setAllChecked] = useState(false);
@@ -250,17 +282,14 @@ function SignUp5Page() {
   const receivedData = useLocation().state;
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
-    if (!receivedData) navigate('/');
+    if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
   }, []);
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isButtonActive) {
-      navigate('/signupcomplete', {
-        state: {
-          emailID: receivedData.emailID,
-        },
-      });
+      await join(sessionStorage.getItem('role') || '');
+      navigate('/signupcomplete');
     } else {
       alert('모든 약관에 동의해주세요.');
     }
@@ -534,6 +563,11 @@ function SignUp5Complete() {
   const handleNext = () => {
     navigate('/login');
   };
+
+  //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
 
   return (
     <Wrapper2>
