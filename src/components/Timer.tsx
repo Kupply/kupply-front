@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 export interface TImerProps {
   setTime: number; // (분) 기준
   currentModal: number;
+  sendNum: number;
   // setTimeLeft: () => void; // 타이머 초기화 목적
 }
 
-export default function Timer({ setTime, currentModal }: TImerProps) {
+export default function Timer({ setTime, currentModal, sendNum }: TImerProps) {
   const MINUTES_IN_MS = setTime * 60 * 1000;
   const INTERVAL = 1000; // 1초
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
@@ -19,7 +20,7 @@ export default function Timer({ setTime, currentModal }: TImerProps) {
       setTimeLeft(MINUTES_IN_MS);
       console.log('타이머 초기화');
     }
-  }, [currentModal, MINUTES_IN_MS]);
+  }, [currentModal, MINUTES_IN_MS, sendNum]);
 
   useEffect(() => {
     // setTimeLeft(MINUTES_IN_MS);

@@ -4,6 +4,7 @@ import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import VerificationButton from '../../../assets/buttons/VerificationButton';
 import Typography from '../../../assets/Typography';
 import ModalLarge from '../../../components/base/ModalLarge';
+import { sendEmail } from '../SignUp1Page';
 
 export interface ModalProps {
   currentModal: number;
@@ -11,10 +12,11 @@ export interface ModalProps {
   setCurrentModal: (currentModal: number) => void;
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수
+  email: string;
 }
 
 export default function SignUpLarge1(props: ModalProps) {
-  const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal } = props;
+  const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal, email } = props;
 
   return (
     <Main>
@@ -44,8 +46,9 @@ export default function SignUpLarge1(props: ModalProps) {
           </Typography>
           <ActionWrapper>
             <VerificationButton
-              onClick={() => {
+              onClick={async () => {
                 setCurrentModal(currentModal + 2);
+                await sendEmail(email);
               }}
             >
               인증번호 다시 받기

@@ -5,6 +5,7 @@ import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
 import SubmitButton from '../../../assets/buttons/SubmitButton';
 import Typography from '../../../assets/Typography';
 import ModalLarge from '../../../components/base/ModalLarge';
+import { sendEmail } from '../SignUp1Page';
 
 export interface ModalProps {
   currentModal: number;
@@ -83,8 +84,14 @@ export default function SignUpLarge2(props: ModalProps) {
               setValue={setEmail}
             />
             <SubmitButton
-              onClick={() => {
-                setCurrentModal(currentModal + 1);
+              onClick={async () => {
+                const IDPattern = /.+@korea\.ac\.kr$/;
+                if (IDPattern.test(email)) {
+                  setCurrentModal(currentModal + 1);
+                  await sendEmail(email);
+                } else {
+                  alert('형식에 맞지 않는 이메일 주소입니다.');
+                }
               }}
             />
           </ActionWrapper>
