@@ -36,7 +36,7 @@ const ScrollbarSmall = styled.button<{ isChecked: boolean; isHovered: boolean }>
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background: ${({ isChecked }) => isChecked ? "rgba(238, 238, 238, 0.5)" : "rgba(238, 238, 238, 0.2)"};
+    background: ${({ isChecked }) => isChecked ? "rgba(238, 238, 238, 0.7)" : "rgba(238, 238, 238, 0.2)"};
   }
 
   &::-webkit-scrollbar-button {
@@ -134,6 +134,8 @@ function ScrollBarSmall(props: ScrollButtonProps) {
   const [scrollActive, setActive] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  //console.log(scrollActive);
+
   return (
     <ScrollbarSmall   
       isChecked={isChecked || scrollActive} 
@@ -153,6 +155,7 @@ function ScrollBarSmall(props: ScrollButtonProps) {
           setActive(true);
         }}
         onMouseUp={(e) => {
+          console.log("Mouse up");
           e.stopPropagation();
           setActive(false);
         }}
@@ -166,6 +169,8 @@ function ScrollBarLarge(props: ScrollButtonProps) {
   const [scrollActive, setActive] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  //console.log(scrollActive);
+  
   return (
     <ScrollbarLarge   
       isChecked={isChecked || scrollActive} 
