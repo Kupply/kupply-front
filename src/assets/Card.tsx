@@ -16,6 +16,29 @@ export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   titleSrc: string;
 }
 
+type MajorOptions =
+  | 'Business School'
+  | 'Department of Economics'
+  | 'School of Psychology'
+  | 'Department of Statistics'
+  | 'Department of Mathematics'
+  | 'Department of Chemistry'
+  | 'School of Media & Communication'
+  | 'Department of Food & Resources'
+  | 'Department of Computer Science & Engineering';
+
+const majorParamMapping = {
+  'Business School': 'business',
+  'Department of Economics': 'economics',
+  'School of Psychology': 'psychology',
+  'Department of Statistics': 'statistics',
+  'Department of Mathematics': 'mathematics',
+  'Department of Chemistry': 'chemistry',
+  'School of Media & Communication': 'media',
+  'Department of Food & Resources': 'food',
+  'Department of Computer Science & Engineering': 'computer',
+};
+
 const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, titleSrc }: CardsProps) => {
   const [hover, setHover] = useState(false);
   const onHover = () => {
@@ -28,7 +51,7 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/previous/' + eng);
+    navigate('/archive/' + majorParamMapping[eng as MajorOptions]);
   };
   return (
     <Container onMouseEnter={onHover} onMouseLeave={onHover}>
