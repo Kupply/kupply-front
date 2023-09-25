@@ -29,15 +29,15 @@ const majorNameMapping = {
 };
 
 const collegeNameMapping = {
-  business: 'business',
-  economics: 'political',
-  psychology: 'psycho',
-  statistics: 'political',
-  mathematics: 'science',
-  chemistry: 'science',
-  media: 'media',
   food: 'bio',
+  media: 'media',
   computer: 'info',
+  business: 'business',
+  psychology: 'psycho',
+  chemistry: 'science',
+  mathematics: 'science',
+  economics: 'political',
+  statistics: 'political',
 };
 
 const semesterMapping: string[] = [
@@ -52,6 +52,58 @@ const semesterMapping: string[] = [
 ];
 
 const semesterForAPI: string[] = ['all', '2023-1', '2022-2', '2022-1', '2021-2', '2021-1', '2020-2', '2020-1'];
+
+const tmpRandomData = [
+  {
+    gpa: 4.5,
+    num: 7,
+  },
+  {
+    gpa: 4.3,
+    num: 10,
+  },
+  {
+    gpa: 4.25,
+    num: 11,
+  },
+  {
+    gpa: 4.1,
+    num: 9,
+  },
+  {
+    gpa: 4.0,
+    num: 7,
+  },
+  {
+    gpa: 3.9,
+    num: 7,
+  },
+  {
+    gpa: 3.75,
+    num: 7,
+  },
+  {
+    gpa: 3.6,
+    num: 6,
+  },
+  {
+    gpa: 3.5,
+    num: 5,
+  },
+  {
+    gpa: 3.35,
+    num: 4,
+  },
+  {
+    gpa: 3.0,
+    num: 2,
+  },
+];
+
+const tmpMeanGpa = { gpa: 3.75, num: 7 };
+const tmpMedianGpa = { gpa: 4.0, num: 7 };
+const tmpModeGpa = { gpa: 4.25, num: 11 };
+const tmpMinGpa = { gpa: 3.0, num: 2 };
 
 const ArchiveDetailPage = () => {
   const navigate = useNavigate();
@@ -71,7 +123,7 @@ const ArchiveDetailPage = () => {
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0); // FIXME: 모집요강에서?
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
-  const [competitionRate, setCompetitionRate] = useState<number>(0); // numOfSelection / numOfApplication
+  const [competitionRate, setCompetitionRate] = useState<number>(0); // FIXME: numOfSelection / numOfApplication
 
   const [lineData, setLineData] = useState<LineData>([]);
   const [meanGpa, setMeanGpa] = useState<Data>({ gpa: 0, num: 0 });
@@ -95,9 +147,8 @@ const ArchiveDetailPage = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8000/pastData/${majorName}/all`);
+        const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`);
         const data = APIresponse.data.pastData;
-        console.log(data);
 
         setNumOfApplication(data.overallData.numberOfData);
         setLineData(data.passedData.passedGPACountArray);
@@ -114,7 +165,15 @@ const ArchiveDetailPage = () => {
   }, [majorName]);
 
   useEffect(() => {
-    const hasEnoughData = lineData.length >= 0;
+    const hasEnoughData = lineData.length >= 10;
+    // FIXME: 지금은 일단 뭐라도 보이기 위해
+    if (!hasEnoughData) {
+      setLineData(tmpRandomData);
+      setMeanGpa(tmpMeanGpa);
+      setMedianGpa(tmpMedianGpa);
+      setModeGpa(tmpModeGpa);
+      setMinGpa(tmpMinGpa);
+    }
     setEnoughData(hasEnoughData);
   }, [lineData]);
 
@@ -198,15 +257,15 @@ const ArchiveDetailPage = () => {
             <Text>선발인원</Text>
             <SelectionInfoValue>{numOfSelection}명</SelectionInfoValue>
           </SelectionInfoContent>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1" height="72" viewBox="0 0 1 72" fill="none">
-            <path d="M1 0V72" stroke="#141414" stroke-linecap="round" stroke-width="1" stroke-opacity="0.25" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
+            <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
             <Text>지원자 수</Text>
             <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue>
           </SelectionInfoContent>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1" height="72" viewBox="0 0 1 72" fill="none">
-            <path d="M1 0V72" stroke="#141414" stroke-linecap="round" stroke-width="1" stroke-opacity="0.25" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
+            <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
             <Text>경쟁률</Text>
@@ -315,8 +374,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
-  position: relative;
+  max-width: 1920px;
 
   &::before,
   &::after {
@@ -345,6 +403,7 @@ const Wrapper = styled.div`
 const MajorWrapper = styled.div`
   height: 145px;
   width: 100%;
+  max-width: 1690px;
   display: flex;
 `;
 
@@ -356,7 +415,7 @@ const PreviousIconWrapper = styled.button`
   background: none;
   height: 60px;
   width: 60px;
-  margin: 54px 9px 31px 103px;
+  margin: 54px 9px 31px 0px;
 `;
 
 const PreviousIconBox = styled.img`
@@ -416,6 +475,7 @@ const MajorTextEnglishLarge = styled.text`
   text-align: center;
   margin-top: 77px;
 `;
+
 const MajorTextEnglishMiddle = styled.text`
   color: #141414;
   font-family: Pretendard;
@@ -425,6 +485,7 @@ const MajorTextEnglishMiddle = styled.text`
   text-align: center;
   margin-top: 77px;
 `;
+
 const MajorTextEnglishSmall = styled.text`
   color: #141414;
   font-family: Pretendard;
@@ -459,7 +520,8 @@ const WarningIcon = styled.img`
 
 const SegmentedWrapper = styled.div`
   display: flex;
-  width: 1665px;
+  width: 100%;
+  max-width: 1665px;
   gap: 18px;
   padding: 6px 197px;
   align-items: center;
@@ -712,55 +774,3 @@ const CollectingDetailText = styled.text`
   text-align: center;
   white-space: pre-wrap;
 `;
-
-// const tmpRandomData = [
-//   {
-//     gpa: 4.5,
-//     num: 7,
-//   },
-//   {
-//     gpa: 4.3,
-//     num: 10,
-//   },
-//   {
-//     gpa: 4.25,
-//     num: 11,
-//   },
-//   {
-//     gpa: 4.1,
-//     num: 9,
-//   },
-//   {
-//     gpa: 4.0,
-//     num: 7,
-//   },
-//   {
-//     gpa: 3.9,
-//     num: 7,
-//   },
-//   {
-//     gpa: 3.75,
-//     num: 7,
-//   },
-//   {
-//     gpa: 3.6,
-//     num: 6,
-//   },
-//   {
-//     gpa: 3.5,
-//     num: 5,
-//   },
-//   {
-//     gpa: 3.35,
-//     num: 4,
-//   },
-//   {
-//     gpa: 3.0,
-//     num: 2,
-//   },
-// ];
-
-// const tmpMeanGpa = { gpa: 3.75, num: 7 };
-// const tmpMedianGpa = { gpa: 4.0, num: 7 };
-// const tmpModeGpa = { gpa: 4.25, num: 11 };
-// const tmpMinGpa = { gpa: 3.0, num: 2 };
