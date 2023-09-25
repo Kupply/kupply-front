@@ -177,18 +177,20 @@ export default function SignUp3Page() {
 
   /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   useEffect(() => {
-    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
+    const passwordCheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*?])[a-zA-Z\d~!@#$%^&*?ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{8,20}$/;
     if (passwordState === 'filled') {
       if (!passwordCheck.test(password)) {
         let errorMessage = '비밀번호가 ';
 
-        if (!/(?=.*[a-z])/.test(password)) {
-          errorMessage += ' 소문자를 포함하고 있지 않아요!';
-        } else if (!/(?=.*[A-Z])/.test(password)) {
-          errorMessage += ' 대문자를 포함하고 있지 않아요!';
+        if (!/(?=.*[a-zA-Z])/.test(password)) {
+          errorMessage += ' 영문자를 포함하고 있지 않아요!';
         } else if (!/(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-])/.test(password)) {
           errorMessage += ' 특수 문자를 포함하고 있지 않아요!';
+        } else if (!/(?=.*[0-9])/.test(password)) {
+          errorMessage += ' 숫자를 포함하고 있지 않아요!';
         } else if (password.length < 8) errorMessage += ' 최소 8자 이상이어야 해요!';
+        else if (password.length > 20) errorMessage = '비밀번호는 20자를 넘어갈 수 없어요!';
+        else errorMessage = '비밀번호에 허용되지 않은 문자가 포함되었어요!';
         setErrorMessages({
           ...errorMessages,
           passwordErrorMessage: errorMessage,
@@ -211,7 +213,13 @@ export default function SignUp3Page() {
 
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
   useEffect(() => {
-    if (nicknameCheck === 'error' && nicknameState !== 'focused') {
+    if ((nickname.length === 1 || nickname.length > 10) && nicknameState !== 'focused') {
+      setnicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '닉네임은 2자 이상 10자 이하여야 해요.',
+      });
+    } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
       setnicknameState('error');
       setErrorMessages({
         ...errorMessages,
@@ -347,7 +355,7 @@ export default function SignUp3Page() {
               state={passwordState}
               setState={setPasswordState}
               setValue={setPassword}
-              helpMessage="비밀번호는 <8자 이상/1개 이상의 대,소문자/1개 이상의 특수문자>가 포함되어야 합니다."
+              helpMessage="비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다."
               errorMessage={errorMessages.passwordErrorMessage}
               type="password"
             ></TextFieldBox>
