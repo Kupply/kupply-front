@@ -202,17 +202,20 @@ export function SignUp4PageCandidate() {
 
   const [hopeMajor1, setHopeMajor1] = useState<string>('');
   const [hopeMajor2, setHopeMajor2] = useState<string>('');
-  const [GPA1, setGPA1] = useState<string>('');
-  const [GPA2, setGPA2] = useState<string>('');
-  const [GPA3, setGPA3] = useState<string>('');
-  const [hopeSemester1, setHopeSemester1] = useState<string>('');
-  const [hopeSemester2, setHopeSemester2] = useState<string>('');
-  const [hopeSemester3, setHopeSemester3] = useState<string>('');
+  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('GPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('GPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('GPA')?.charAt(3) || '');
+  const [hopeSemester1, setHopeSemester1] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const [hopeSemester2, setHopeSemester2] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
+    sessionStorage.removeItem('secondMajor');
+    sessionStorage.removeItem('passedGPA');
+    sessionStorage.removeItem('passSemester');
   }, []);
 
   useEffect(() => {
@@ -347,15 +350,14 @@ export function SignUp4PagePasser() {
   const [complete, setComplete] = useState<boolean>(false);
 
   const [doubleMajor, setDoubleMajor] = useState<string>('');
-  const [GPA1, setGPA1] = useState<string>('');
-  const [GPA2, setGPA2] = useState<string>('');
-  const [GPA3, setGPA3] = useState<string>('');
-  const [passSemester1, setPassSemester1] = useState<string>('');
-  const [passSemester2, setPassSemester2] = useState<string>('');
-  const [passSemester3, setPassSemester3] = useState<string>('');
+  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(3) || '');
+  const [passSemester1, setPassSemester1] = useState<string>(sessionStorage.getItem('passSemester')?.charAt(2) || '');
+  const [passSemester2, setPassSemester2] = useState<string>(sessionStorage.getItem('passSemester')?.charAt(3) || '');
+  const [passSemester3, setPassSemester3] = useState<string>(sessionStorage.getItem('passSemester')?.charAt(5) || '');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
-  const receivedData = useLocation().state;
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
@@ -434,8 +436,8 @@ export function SignUp4PagePasser() {
             <VerifiBoxWrapper>
               <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
               <Dot size="mediumText">.</Dot>
-              <VerificationBox name="gpa-2" value={GPA1} setValue={setGPA2} />
-              <VerificationBox name="gpa-3" value={GPA1} setValue={setGPA3} />
+              <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
+              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>

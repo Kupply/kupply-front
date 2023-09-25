@@ -141,7 +141,7 @@ export default function SignUp3Page() {
 
   /* 각 input들의 값을 state를 사용하여 관리 */
   const [ID, setID] = useState<string>(sessionStorage.getItem('email') || '');
-  const [password, setPassword] = useState<string>(sessionStorage.getItem('password') || '');
+  const [password, setPassword] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
   const [password2, setPassword2] = useState<string>('');
   const [password2State, setPassword2State] = useState<StateOptions>('default');
@@ -160,6 +160,10 @@ export default function SignUp3Page() {
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('name')) navigate('/');
+    else {
+      sessionStorage.removeItem('password'); //비밀번호는 삭제
+      if (nickname !== '') setnicknameState('filled');
+    }
   }, []);
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
