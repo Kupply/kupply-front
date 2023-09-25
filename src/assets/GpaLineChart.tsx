@@ -41,7 +41,6 @@ function getGradient(ctx: CanvasRenderingContext2D, chartArea: ChartArea) {
     height = chartHeight;
     gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
     gradient.addColorStop(0, '#FDF2F2');
-    // gradient.addColorStop(0.5, '#F5BdBd');
     gradient.addColorStop(1, '#D85888');
   }
 
@@ -63,7 +62,7 @@ const getOrCreateTooltip = (chart: any) => {
     tooltipEl.style.transition = 'all .1s ease';
 
     const table = document.createElement('table');
-    table.style.margin = '0px';
+    table.style.margin = '5px';
 
     tooltipEl.appendChild(table);
     chart.canvas.parentNode.appendChild(tooltipEl);
@@ -86,7 +85,7 @@ const externalTooltipHandler = (context: any) => {
   // Set Text
   if (tooltip.body) {
     const titleLines = tooltip.title || [];
-    const bodyLines = tooltip.body.map((b: any) => b.lines);
+    const bodyLines = tooltip.body[0].lines;
 
     const tableHead = document.createElement('thead');
 
@@ -95,6 +94,7 @@ const externalTooltipHandler = (context: any) => {
       tr.style.borderWidth = '0';
 
       const th = document.createElement('th');
+      th.style.textAlign = 'left';
       th.style.borderWidth = '0';
       const text = document.createTextNode(title);
 
@@ -104,6 +104,7 @@ const externalTooltipHandler = (context: any) => {
     });
 
     const tableBody = document.createElement('tbody');
+
     bodyLines.forEach((body: any, i: any) => {
       const colors = tooltip.labelColors[i];
 
@@ -125,7 +126,6 @@ const externalTooltipHandler = (context: any) => {
 
       const text = document.createTextNode(body);
 
-      td.appendChild(span);
       td.appendChild(text);
       tr.appendChild(td);
       tableBody.appendChild(tr);
@@ -148,12 +148,23 @@ const externalTooltipHandler = (context: any) => {
   // Display, position, and set styles for font
   tooltipEl.style.opacity = 1;
   tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-  tooltipEl.style.top = positionY + tooltip.caretY - tooltipEl.offsetHeight - 10 + 'px';
+  tooltipEl.style.top = positionY + tooltip.caretY - tooltipEl.offsetHeight - 15 + 'px';
   tooltipEl.style.font = tooltip.options.bodyFont.string;
   tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
   tooltipEl.style.background = 'white';
   tooltipEl.style.color = 'black';
   tooltipEl.style.boxShadow = '0px 0px 10px #b9b9b9';
+
+  const tableBody = tooltipEl.querySelector('tbody');
+  if (tableBody) {
+    const bodyRows = tableBody.querySelectorAll('tr');
+    bodyRows.forEach((row: any, i: any) => {
+      const td = row.querySelector('td');
+      if (td) {
+        td.style.fontWeight = '700';
+      }
+    });
+  }
 };
 
 let labels: string[] = [];
@@ -177,7 +188,6 @@ const modeGpaPoint = new Image(65, 65);
 modeGpaPoint.src = '../../design_image/previous_detail/modeGpaPoint.png';
 const minGpaPoint = new Image(65, 65);
 minGpaPoint.src = '../../design_image/previous_detail/minGpaPoint.png';
-const nullPoint = new Image();
 
 export default function GpaLineChart(prop: GpaLineChartProps) {
   const { lineData, meanGpa, medianGpa, modeGpa, minGpa, width, height } = prop;
@@ -338,22 +348,23 @@ export default function GpaLineChart(prop: GpaLineChartProps) {
       tooltip: {
         enabled: false,
         position: 'nearest' as const,
+        displayColors: false,
         external: externalTooltipHandler,
         callbacks: {
           title: function (tooltipItems: any) {
             if (+tooltipItems[0].label === meanGpa.gpa) {
               return '합격생 학점 평균값';
-            }
-            if (+tooltipItems[0].label === medianGpa.gpa) {
+            } else if (+tooltipItems[0].label === medianGpa.gpa) {
               return '합격생 학점 중위값';
-            }
-            if (+tooltipItems[0].label === modeGpa.gpa) {
+            } else if (+tooltipItems[0].label === modeGpa.gpa) {
               return '합격생 학점 최빈값';
-            }
-            if (+tooltipItems[0].label === minGpa.gpa) {
+            } else if (+tooltipItems[0].label === minGpa.gpa) {
               return '합격생 학점 최저값';
+            } else {
+              let gpa = tooltipItems[0].label;
+              if (gpa[3] === '0') gpa = gpa.substring(0, 3);
+              return '학점: ' + gpa;
             }
-            return '학점 ' + tooltipItems[0].label;
           },
           label: function (context: any) {
             let label = context.dataset.label || '';
@@ -365,17 +376,22 @@ export default function GpaLineChart(prop: GpaLineChartProps) {
                 context.parsed.x === modeIdx ||
                 context.parsed.x === minIdx
               ) {
-                if (label === '지원자') {
-                  label = '';
+                let gpa = (2.9 + context.parsed.x * 0.01).toFixed(2);
+                if (gpa[3] === '0') {
+                  gpa = gpa.substring(0, 3);
+                  label = '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' + gpa;
                 } else {
-                  label = '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' + (2.9 + context.parsed.x * 0.01).toFixed(2);
+                  label = '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' + gpa;
                 }
               } else {
-                label += ' ' + context.parsed.y + '명';
+                label = '지원자: ' + context.parsed.y + '명';
               }
             }
             return label;
           },
+        },
+        bodyFont: {
+          weight: 'bold' as const,
         },
       },
     },

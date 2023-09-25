@@ -153,7 +153,10 @@ const ArchiveDetailPage = () => {
         <PreviousIconWrapper>
           <PreviousIconBox onClick={handlePrev} src="../../design_image/previous_detail/D_Previous icon.png" />
         </PreviousIconWrapper>
-        <MajorIconBox src={majorSymbolPath} />
+        <MajorIconContainer>
+          <MajorIconBlur />
+          <MajorIconBox src={majorSymbolPath} />
+        </MajorIconContainer>
         <MajorTextBox>
           <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
           {majorName === 'food' || majorName === 'computer' ? (
@@ -325,7 +328,7 @@ const Wrapper = styled.div`
     filter: blur(150px);
     opacity: 0.7;
     background: radial-gradient(50% 50% at 50% 50%, rgba(232, 88, 136, 0.15) 0%, rgba(255, 175, 189, 0.05) 100%);
-    z-index: -1;
+    z-index: -2;
   }
 
   &::before {
@@ -363,11 +366,28 @@ const PreviousIconBox = styled.img`
   justify-content: center;
 `;
 
+const MajorIconContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
 const MajorIconBox = styled.img`
   width: 60px;
   height: 78.77px;
-  background-color: none;
   margin: 46.4px 30px 19.82px 0px;
+`;
+
+const MajorIconBlur = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  z-index: -1;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(146, 104, 83, 0.41) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 69.5px;
+
+  bottom: -15%;
+  left: -20%;
 `;
 
 const MajorTextBox = styled.div`
