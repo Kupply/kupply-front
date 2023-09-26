@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
@@ -10,6 +10,7 @@ import PrevButton from '../../assets/buttons/PrevButton';
 import CheckButton from '../../assets/checkbox/CheckButton';
 import { check } from 'prettier';
 import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
+import axios from 'axios';
 
 /*
 주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  background: #FCFAFB;
+  background: #fcfafb;
 `;
 
 const TitleWrapper = styled.div`
@@ -187,6 +188,37 @@ const CustomCheckButton: React.FC<CustomCheckButtonProps> = ({ isChecked, onChan
   );
 };
 
+const join = async (role: string) => {
+  const url = 'http://localhost:8080/auth/join'; // 만든 API 주소로 바뀌어야 함.
+  const commonData = {
+    name: sessionStorage.getItem('name'),
+    studentId: Number(sessionStorage.getItem('studentId')),
+    nickname: sessionStorage.getItem('nickname'),
+    phoneNumber: sessionStorage.getItem('phoneNumber'),
+    email: sessionStorage.getItem('email'),
+    password: sessionStorage.getItem('password'),
+    firstMajor: sessionStorage.getItem('firstMajor'),
+    role: sessionStorage.getItem('role'),
+  };
+  try {
+    if (role === 'passer') {
+      await axios.post(url, {
+        ...commonData,
+        passSemester: sessionStorage.getItem('passSemester'),
+        passGPA: parseFloat(sessionStorage.getItem('passedGPA') || ''),
+        secondMajor: sessionStorage.getItem('secondMajor'),
+      });
+    } else {
+      await axios.post(url, {
+        ...commonData,
+        hopeMajors: [sessionStorage.getItem('hopeMajor1'), sessionStorage.getItem('hopeMajor2')],
+      });
+    }
+  } catch (err) {
+    alert(err);
+  }
+};
+
 function SignUp5Page() {
   /*각 체크박스의 상태를 state로 관리*/
   const [allChecked, setAllChecked] = useState(false);
@@ -228,9 +260,9 @@ function SignUp5Page() {
   useEffect(() => {
     const isAllChecked = allStateAgreed();
     setIsButtonActive(isAllChecked);
-    setAllCheckedUI(isAllChecked);  
+    setAllCheckedUI(isAllChecked);
   }, [individualChecks]);
-  
+
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
 
@@ -239,17 +271,24 @@ function SignUp5Page() {
   const [currentStep, setCurrentStep] = useState<number>(5); // 회원가입 5 단계 페이지
   const [complete, setComplete] = useState<boolean>(true);
 
+  const receivedData = useLocation().state;
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
+  }, []);
+
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isButtonActive) {
-      navigate("/signupcomplete");
+      await join(sessionStorage.getItem('role') || '');
+      navigate('/signupcomplete');
     } else {
-      alert("모든 약관에 동의해주세요.");
+      alert('모든 약관에 동의해주세요.');
     }
   };
 
   const handlePrev = () => {
-    navigate("/signUp4");
+    navigate('/signUp4');
   };
 
   const [scrollActive, setActive] = useState(false);
@@ -257,15 +296,15 @@ function SignUp5Page() {
   return (
     <Wrapper>
       <TitleWrapper>
-        <Typography size="title1" style={{ lineHeight: "131.579%" }}>
+        <Typography size="title1" style={{ lineHeight: '131.579%' }}>
           거의 다왔습니다!
         </Typography>
-        <Typography size="mediumText" style={{ opacity: "0.8", marginTop: "5px" }}>
+        <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           쿠플라이의 몇 가지 약관을 확인하면 서비스를 이용하실 수 있어요.
         </Typography>
       </TitleWrapper>
 
-      <div style={{ width: "976.8px", height: "30px" }}>
+      <div style={{ width: '976.8px', height: '30px' }}>
         <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
       </div>
       <FormWrapper>
@@ -279,26 +318,26 @@ function SignUp5Page() {
 
         <TextTitleWrapper>
           <TextTitle>
-            <CustomCheckButton 
-              isChecked={allCheckedUI} 
+            <CustomCheckButton
+              isChecked={allCheckedUI}
               onChange={(isChecked) => {
                 handleAllCheckedClick(isChecked);
-              }} 
+              }}
             />
-              <Typography
-                size="largeText"
-                style={{
-                  fontWeight: "600",
-                  marginBottom: "-5px",
-                  justifyContent: "center",
-                }}
-              >
-                약관 전체동의 하기
-                <ArrowImage // 위치가 좀 이상해서 수정 필요
-                  src="design_image/carousel/carousel_right_button.png"
-                  alt="right arrow"
-                />
-              </Typography>
+            <Typography
+              size="largeText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
+              약관 전체동의 하기
+              <ArrowImage // 위치가 좀 이상해서 수정 필요
+                src="design_image/carousel/carousel_right_button.png"
+                alt="right arrow"
+              />
+            </Typography>
           </TextTitle>
         </TextTitleWrapper>
 
@@ -313,47 +352,35 @@ function SignUp5Page() {
                 }))
               }
             />
-              <Typography 
-                size="mediumText"
-                style={{
-                  fontWeight: "600",
-                  marginBottom: "-5px",
-                  justifyContent: "center",
-                }}
-              >
+            <Typography
+              size="mediumText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
               개인정보 수집, 이용목적 동의 약관
-              <ArrowImage
-                src="design_image/carousel/carousel_right_button.png"
-                alt="right arrow"
-              />
+              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
             </Typography>
           </ButtonsTextWrapper>
 
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
-                <Typography 
-                      size="mediumText"
-                      style={{fontWeight: "400", textAlign: "left"}}
-                    >
-                  「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-                  개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-                  개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-                  개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-                  해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-                  통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-                  범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-                  수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-                  제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-                  활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-                  개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-                  제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-                  아래 항목에 명시된 범위에서만 활용됩니다.
-                </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의
+                개인정보 수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보
+                제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교
+                소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된 범위에서만 활용됩니다. 「개인정보보호법」 등 관련
+                법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른
+                목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를 통해
+                열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
             </ScrollBarSmall>
           </TextOutBox>
-          
 
           <ButtonsTextWrapper>
             <CustomCheckButton
@@ -365,44 +392,33 @@ function SignUp5Page() {
                 }))
               }
             />
-            <Typography 
-                size="mediumText"
-                style={{
-                  fontWeight: "600",
-                  marginBottom: "-5px",
-                  justifyContent: "center",
-                }}
-              >
+            <Typography
+              size="mediumText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
               커뮤니티 이용수칙 준수 - 1
-              <ArrowImage
-                src="design_image/carousel/carousel_right_button.png"
-                alt="right arrow"
-              />
+              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
             </Typography>
           </ButtonsTextWrapper>
 
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
-                <Typography 
-                      size="mediumText"
-                      style={{fontWeight: "400", textAlign: "left"}}
-                    >
-                  「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-                  개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-                  개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-                  개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-                  해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-                  통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-                  범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-                  수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-                  제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-                  활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-                  개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-                  제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-                  아래 항목에 명시된 범위에서만 활용됩니다.
-                </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의
+                개인정보 수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보
+                제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교
+                소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된 범위에서만 활용됩니다. 「개인정보보호법」 등 관련
+                법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른
+                목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를 통해
+                열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
             </ScrollBarSmall>
           </TextOutBox>
 
@@ -416,44 +432,33 @@ function SignUp5Page() {
                 }))
               }
             />
-            <Typography 
-                size="mediumText"
-                style={{
-                  fontWeight: "600",
-                  marginBottom: "-5px",
-                  justifyContent: "center",
-                }}
-              >
+            <Typography
+              size="mediumText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
               커뮤니티 이용수칙 준수 - 2
-              <ArrowImage
-                src="design_image/carousel/carousel_right_button.png"
-                alt="right arrow"
-              />
+              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
             </Typography>
           </ButtonsTextWrapper>
 
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
-                <Typography 
-                      size="mediumText"
-                      style={{fontWeight: "400", textAlign: "left"}}
-                    >
-                  「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-                  개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-                  개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-                  개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-                  해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-                  통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-                  범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-                  수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-                  제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-                  활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-                  개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-                  제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-                  아래 항목에 명시된 범위에서만 활용됩니다.
-                </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의
+                개인정보 수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보
+                제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교
+                소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된 범위에서만 활용됩니다. 「개인정보보호법」 등 관련
+                법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른
+                목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를 통해
+                열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
             </ScrollBarSmall>
           </TextOutBox>
 
@@ -467,54 +472,42 @@ function SignUp5Page() {
                 }))
               }
             />
-            <Typography 
-                size="mediumText"
-                style={{
-                  fontWeight: "600",
-                  marginBottom: "-5px",
-                  justifyContent: "center",
-                }}
-              >
+            <Typography
+              size="mediumText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
               커뮤니티 이용수칙 준수 - 3
-              <ArrowImage
-                src="design_image/carousel/carousel_right_button.png"
-                alt="right arrow"
-              />
+              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
             </Typography>
           </ButtonsTextWrapper>
 
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
-                <Typography 
-                      size="mediumText"
-                      style={{fontWeight: "400", textAlign: "left"}}
-                    >
-                  「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어
-                  개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-                  개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는
-                  개인정보 제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며,
-                  해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를
-                  통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된
-                  범위에서만 활용됩니다. 「개인정보보호법」 등 관련 법규에 의거하여
-                  고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보
-                  수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다.
-                  제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른 목적으로는
-                  활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-                  개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다.
-                  제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-                  아래 항목에 명시된 범위에서만 활용됩니다.
-                </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의
+                개인정보 수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보
+                제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
+                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교
+                소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된 범위에서만 활용됩니다. 「개인정보보호법」 등 관련
+                법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
+                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른
+                목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를 통해
+                열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
+                아래 항목에 명시된 범위에서만 활용됩니다.
+              </Typography>
             </ScrollBarSmall>
           </TextOutBox>
-          
+
           <ButtonsWrapper>
             <PrevButton onClick={handlePrev} />
             <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>
               Next
             </NextButtonFixedWidth>
           </ButtonsWrapper>
-
         </ScrollBarLarge>
       </FormWrapper>
     </Wrapper>
@@ -532,12 +525,16 @@ const Wrapper2 = styled.div`
 `;
 
 function SignUp5Complete() {
-
   const [isButtonActive, setIsButtionActive] = useState(true);
   const navigate = useNavigate();
   const handleNext = () => {
-    navigate("/login");
+    navigate('/login');
   };
+
+  //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
 
   return (
     <Wrapper2>

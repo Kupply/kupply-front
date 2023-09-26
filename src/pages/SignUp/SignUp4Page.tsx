@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
@@ -103,8 +103,17 @@ export function SignUp4Page() {
   const [passerState, setPasserState] = useState<'default' | 'clicked' | 'unactive'>('default');
   const [nextPathState, setNextPathState] = useState<string>('');
 
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('nickname')) navigate('/');
+    else sessionStorage.removeItem('role');
+  }, []);
+
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = (nextPath: string) => {
+    //role을 sessionStorage에 적고, 다음 단계로 보낸다.
+    if (candidateState === 'clicked') sessionStorage.setItem('role', 'candidate');
+    else if (passerState === 'clicked') sessionStorage.setItem('role', 'passer');
     navigate(nextPath);
   };
 
@@ -183,13 +192,21 @@ export function SignUp4PageCandidate() {
 
   const [hopeMajor1, setHopeMajor1] = useState<string>('');
   const [hopeMajor2, setHopeMajor2] = useState<string>('');
-  const [GPA1, setGPA1] = useState<string>('');
-  const [GPA2, setGPA2] = useState<string>('');
-  const [GPA3, setGPA3] = useState<string>('');
-  const [hopeSemester1, setHopeSemester1] = useState<string>('');
-  const [hopeSemester2, setHopeSemester2] = useState<string>('');
-  const [hopeSemester3, setHopeSemester3] = useState<string>('');
+  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('GPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('GPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('GPA')?.charAt(3) || '');
+  const [hopeSemester1, setHopeSemester1] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const [hopeSemester2, setHopeSemester2] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [nextButton, setNextButton] = useState<boolean>(false);
+
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('role')) navigate('/');
+    sessionStorage.removeItem('secondMajor');
+    sessionStorage.removeItem('passedGPA');
+    sessionStorage.removeItem('passSemester');
+  }, []);
 
   useEffect(() => {
     if (
@@ -220,7 +237,11 @@ export function SignUp4PageCandidate() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signUp5');
+    sessionStorage.setItem('hopeMajor1', hopeMajor1);
+    sessionStorage.setItem('hopeMajor2', hopeMajor2);
+    sessionStorage.setItem('GPA', GPA1 + '.' + GPA2 + GPA3);
+    sessionStorage.setItem('hopeSemester', '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3);
+    navigate('/signup5');
   };
 
   const handlePrev = () => {
@@ -327,14 +348,18 @@ export function SignUp4PagePasser() {
   const [complete, setComplete] = useState<boolean>(false);
 
   const [doubleMajor, setDoubleMajor] = useState<string>('');
-  const [GPA1, setGPA1] = useState<string>('');
-  const [GPA2, setGPA2] = useState<string>('');
-  const [GPA3, setGPA3] = useState<string>('');
-  const [passSemester1, setPassSemester1] = useState<string>('');
-  const [passSemester2, setPassSemester2] = useState<string>('');
-  const [passSemester3, setPassSemester3] = useState<string>('');
+  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(3) || '');
+  const [passSemester1, setPassSemester1] = useState<string>(sessionStorage.getItem('passSemester')?.charAt(2) || '');
+  const [passSemester2, setPassSemester2] = useState<string>(sessionStorage.getItem('passSemester')?.charAt(3) || '');
+  const [passSemester3, setPassSemester3] = useState<string>(sessionStorage.getItem('passSemester')?.charAt(5) || '');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('role')) navigate('/');
+  }, []);
   useEffect(() => {
     if (!!doubleMajor && !!GPA1 && !!GPA2 && !!GPA3 && !!passSemester1 && !!passSemester2 && !!passSemester3) {
       setNextButton(true);
@@ -344,7 +369,10 @@ export function SignUp4PagePasser() {
   }, [doubleMajor, GPA1, GPA2, GPA3, passSemester1, passSemester2, passSemester3]);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signUp5');
+    sessionStorage.setItem('secondMajor', doubleMajor);
+    sessionStorage.setItem('passedGPA', GPA1 + '.' + GPA2 + GPA3);
+    sessionStorage.setItem('passSemester', '20' + passSemester1 + passSemester2 + '-' + passSemester3);
+    navigate('/signup5');
   };
 
   const handlePrev = () => {
@@ -410,8 +438,8 @@ export function SignUp4PagePasser() {
                   <circle cx="1" cy="1" r="1" fill="#141414" />
                 </svg>
               </div>
-              <VerificationBox name="gpa-2" value={GPA1} setValue={setGPA2} />
-              <VerificationBox name="gpa-3" value={GPA1} setValue={setGPA3} />
+              <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
+              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>

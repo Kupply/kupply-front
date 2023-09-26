@@ -134,24 +134,18 @@ type errorMessageType = {
 };
 
 export default function SignUp3Page() {
-  const location = useLocation();
-  const emailID = location.state.emailID;
-
-  /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
-  const navigate = useNavigate();
-
   /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(3); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
   /* 각 input들의 값을 state를 사용하여 관리 */
-  const [ID, setID] = useState<string>(emailID);
+  const [ID, setID] = useState<string>(sessionStorage.getItem('email') || '');
   const [password, setPassword] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
   const [password2, setPassword2] = useState<string>('');
   const [password2State, setPassword2State] = useState<StateOptions>('default');
-  const [nickname, setNickname] = useState<string>('');
+  const [nickname, setNickname] = useState<string>(sessionStorage.getItem('nickname') || '');
   const [nicknameState, setnicknameState] = useState<StateOptions>('default');
   const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('default');
 
@@ -159,6 +153,18 @@ export default function SignUp3Page() {
     passwordErrorMessage: '',
     nicknameErrorMessage: '',
   });
+
+  /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
+  const navigate = useNavigate();
+
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('name')) navigate('/');
+    else {
+      sessionStorage.removeItem('password'); //비밀번호는 삭제
+      if (nickname !== '') setnicknameState('filled');
+    }
+  }, []);
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
@@ -171,18 +177,20 @@ export default function SignUp3Page() {
 
   /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   useEffect(() => {
-    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
+    const passwordCheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*?])[a-zA-Z\d~!@#$%^&*?ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{8,20}$/;
     if (passwordState === 'filled') {
       if (!passwordCheck.test(password)) {
         let errorMessage = '비밀번호가 ';
 
-        if (!/(?=.*[a-z])/.test(password)) {
-          errorMessage += ' 소문자를 포함하고 있지 않아요!';
-        } else if (!/(?=.*[A-Z])/.test(password)) {
-          errorMessage += ' 대문자를 포함하고 있지 않아요!';
+        if (!/(?=.*[a-zA-Z])/.test(password)) {
+          errorMessage += ' 영문자를 포함하고 있지 않아요!';
         } else if (!/(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-])/.test(password)) {
           errorMessage += ' 특수 문자를 포함하고 있지 않아요!';
+        } else if (!/(?=.*[0-9])/.test(password)) {
+          errorMessage += ' 숫자를 포함하고 있지 않아요!';
         } else if (password.length < 8) errorMessage += ' 최소 8자 이상이어야 해요!';
+        else if (password.length > 20) errorMessage = '비밀번호는 20자를 넘어갈 수 없어요!';
+        else errorMessage = '비밀번호에 허용되지 않은 문자가 포함되었어요!';
         setErrorMessages({
           ...errorMessages,
           passwordErrorMessage: errorMessage,
@@ -205,7 +213,13 @@ export default function SignUp3Page() {
 
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
   useEffect(() => {
-    if (nicknameCheck === 'error' && nicknameState !== 'focused') {
+    if ((nickname.length === 1 || nickname.length > 10) && nicknameState !== 'focused') {
+      setnicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '닉네임은 2자 이상 10자 이하여야 해요.',
+      });
+    } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
       setnicknameState('error');
       setErrorMessages({
         ...errorMessages,
@@ -241,11 +255,13 @@ export default function SignUp3Page() {
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    navigate('/signUp4');
+    sessionStorage.setItem('password', password);
+    sessionStorage.setItem('nickname', nickname);
+    navigate('/signup4');
   };
 
   const handlePrev = () => {
-    navigate('/signUp2');
+    navigate('/signup2');
   };
 
   return (
@@ -339,7 +355,7 @@ export default function SignUp3Page() {
               state={passwordState}
               setState={setPasswordState}
               setValue={setPassword}
-              helpMessage="비밀번호는 <8자 이상/1개 이상의 대,소문자/1개 이상의 특수문자>가 포함되어야 합니다."
+              helpMessage="비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다."
               errorMessage={errorMessages.passwordErrorMessage}
               type="password"
             ></TextFieldBox>

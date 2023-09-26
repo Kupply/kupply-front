@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import Carousel from '../components/carousel/Carousel';
 import LabelButton from '../assets/buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -81,12 +82,31 @@ function MainPage() {
   const [ID, setID] = useState<string>('');
 
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate('/join', {
-      state: {
-        emailID: ID,
-      },
-    });
+
+  //회원가입 정보는 main에서는 지워져야 함.
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
+
+  const handleButtonClick = async () => {
+    //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
+    const IDPattern = /.+@korea\.ac\.kr$/;
+    if (IDPattern.test(ID)) {
+      //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
+      const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+      try {
+        await axios.post(url, { email: ID });
+
+        //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
+        window.sessionStorage.setItem('email', ID);
+        navigate('/join');
+      } catch (e) {
+        //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
+        alert(e);
+      }
+    } else {
+      alert('형식에 맞는 이메일이 아닙니다.');
+    }
   };
 
   return (

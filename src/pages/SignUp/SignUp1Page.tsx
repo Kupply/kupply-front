@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
@@ -119,9 +120,20 @@ const TextButton = styled.button`
     stroke: black;
   }
 `;
+export const sendEmail = async (email: string) => {
+  const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+  try {
+    await axios.post(url, { email: email });
+  } catch (e) {
+    //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
+    alert(e);
+  }
+};
 
 export default function SignUp1Page() {
+  //navigate 관련 코드. emailID가 안 왔으면 정상 경로가 아니므로 메인 페이지로 보낸다.
   const navigate = useNavigate();
+
   // progressBar 관련
   const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
@@ -145,25 +157,30 @@ export default function SignUp1Page() {
     }
   }, [num1, num2, num3, num4, num5, num6]);
 
-  const location = useLocation();
-  const emailID = location.state.emailID;
-
-  const handleNext = () => {
-    navigate('/signup2', {
-      state: {
-        emailID: emailID,
-      },
-    });
-  };
-
   // modal 관련
   const [currentModal, setCurrentModal] = useState<number>(100); // 임의 값으로 초기화
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  // modal 2 - 3 email value 전달 관련
+  const [email, setEmail] = useState<string>(sessionStorage.getItem('email') || '');
+  const [emailState, setEmailState] = useState<StateOptions>('default');
+  //sendNum이 바뀌거나 isOpenModal이 0, 3이 되면 timer 초기화
+  const [sendNum, setSendNum] = useState<number>(0);
+
+  // emailID를 받지 않은 상태라면 main으로 보내고, 아니라면 email을 받은 값으로 설정한다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('email')) navigate('/');
+  }, []);
+
   // small modal 관련
-  const onClickToggleSmallModal = useCallback(() => {
+  const onClickToggleSmallModal = useCallback(async () => {
     setOpenModal(!isOpenModal);
     setCurrentModal(0);
     console.log(isOpenModal);
+    //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
+    if (!isOpenModal) {
+      setSendNum(sendNum + 1);
+      await sendEmail(email);
+    }
   }, [isOpenModal]);
   // large modal 관련
   const onClickToggleLargeModal = useCallback(() => {
@@ -172,9 +189,20 @@ export default function SignUp1Page() {
     console.log(isOpenModal); // 디버그 목적
   }, [isOpenModal]);
 
-  // modal 2 - 3 email value 전달 관련
-  const [email, setEmail] = useState<string>('');
-  const [emailState, setEmailState] = useState<StateOptions>('default');
+  //버튼 클릭 시 API에 요청하여 번호가 맞는지 인증하고, 맞을 시에만 다음 페이지로 간다.
+  const handleNext = async () => {
+    const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
+    const url = 'http://localhost:8080/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
+    console.log(entireCode, email);
+    try {
+      await axios.post(url, { email: email, code: entireCode });
+
+      navigate('/signup2');
+    } catch (err) {
+      //에러 메시지 등 다른 처리 필요
+      alert('올바른 인증번호가 아닙니다.');
+    }
+  };
 
   return (
     <Wrapper>
@@ -194,6 +222,7 @@ export default function SignUp1Page() {
           case 1:
             return (
               <SignUpLarge1
+                email={email}
                 currentModal={currentModal}
                 isOpenModal={isOpenModal}
                 setCurrentModal={setCurrentModal}
@@ -262,7 +291,7 @@ export default function SignUp1Page() {
             </ContentsWrapper>
             <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
               <Typography size="largeText" color="#D85888">
-                <Timer setTime={3} currentModal={currentModal}></Timer>
+                <Timer setTime={3} sendNum={sendNum} currentModal={currentModal}></Timer>
               </Typography>
             </div>
           </div>

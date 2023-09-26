@@ -115,7 +115,6 @@ export interface ModalProps {
 
 export default function SignUpSmall(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
-
   // 모달창 2초간만 유지
   useEffect(() => {
     if (isOpenModal) {
