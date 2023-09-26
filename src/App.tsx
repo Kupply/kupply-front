@@ -6,7 +6,7 @@ import Footer from './components/base/Footer';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import PreviousPage from './pages/PreviousPage';
-import PreviousDetailPage from './pages/PreviousDetailPage';
+import ArchiveDetailPage from './pages/ArchiveDetailPage';
 import MyBoardPage from './pages/MyBoardPage';
 import CommunityPage from './pages/CommunityPage';
 import MessagePage from './pages/MessagePage';
@@ -43,8 +43,8 @@ export default function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
         <Route element={<AuthRequired />}>
-          <Route path="/previous" element={<PreviousPage />} />
-          <Route path="/previous/:majorName" element={<PreviousDetailPage />} />
+          <Route path="/archive" element={<PreviousPage />} />
+          <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
           <Route path="/myboard" element={<MyBoardPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/message" element={<MessagePage />} />

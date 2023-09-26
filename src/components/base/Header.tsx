@@ -59,7 +59,7 @@ export interface HeaderProps {
 export default function Header({ logined, setLogin }: HeaderProps) {
   const navigate = useNavigate();
   const handleMenu1Click = () => {
-    navigate('/previous');
+    navigate('/archive');
   };
   const handleMenu2Click = () => {
     navigate('/myboard');

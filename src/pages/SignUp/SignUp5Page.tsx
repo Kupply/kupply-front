@@ -26,26 +26,18 @@ const Wrapper = styled.div`
   background: #fcfafb;
 `;
 
-const Wrapper2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  //background: #FCFAFB;
-  background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);
-`;
-
 const TitleWrapper = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
   padding-top: 45px;
-  padding-bottom: 25px;
+  padding-bottom: 48px;
 `;
 
 const FormWrapper = styled.div`
+  // display: flex;
+  // flex-direction: column;
   width: 816px;
   height: 850px;
   padding: 42px 94px 78px 94px;
@@ -75,7 +67,7 @@ const StepIndicator = styled.div`
 `;
 
 const ContentsTitleWrapper = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 `;
 
 const TextTitleWrapper = styled.div`
@@ -522,39 +514,14 @@ function SignUp5Page() {
   );
 }
 
-const TitleOutBox = styled.div`
-  width: 877px;
-  height: 411px;
+const Wrapper2 = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  //background: linear-gradient(180deg, #FCFAFB 69.56%, rgba(252, 250, 251, 0.00) 115.91%);
-  z-index: 1;
-`;
-
-const LonginButtonWrapper = styled.div`
-  /* 로그인 위치 물어보기*/
-  display: flex;
-  width: 628px;
-  height: 68px;
-  top: 1300px; // 985px
-  padding: 16px 32px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 10px;
-  background: var(--Primary-color, #d85888);
-  position: absolute;
-  //z-index: 10;
-`;
-
-const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  background: #fcfafb; // url(design_image/background_image.webp), lightgray 50% / cover no-repeat;
-  //z-index: 1;
+  width: 100%;
+  height: 100%;
+  //background: #FCFAFB;
+  background: linear-gradient(180deg, #FCFAFB 69.56%, rgba(252, 250, 251, 0.00) 115.91%);
 `;
 
 function SignUp5Complete() {
@@ -571,38 +538,37 @@ function SignUp5Complete() {
 
   return (
     <Wrapper2>
-      <TitleOutBox>
-        <div style={{ marginTop: '173px', textAlign: 'center' }}>
-          <Typography size="heading1" style={{ lineHeight: '104.167%' }}>
-            축하합니다!
+      <div style={{ textAlign: "center" }}>
+        <Typography size="heading1" style={{ marginTop: "140px", lineHeight: "104.167%" }}>
+          축하합니다!
+        </Typography>
+      </div>
+      <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+        <Typography size="largeText" style={{ marginTop: "24px", opacity: "0.8", lineHeight: "125%", fontWeight: "500" }}>
+          이제 쿠플라이의 회원이 되셨습니다.
+          <br />
+          로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
+        </Typography>
+      </div>
+      <img
+        src="design_image/check_ani.webp"
+        alt="completeImage"
+        style={{
+          width: "781px", height: "836px", 
+          background: "url(design_image/check_ani.webp), lightgray 50% / cover no-repeat",
+          transform: "translateY(-84px)",
+        }}
+      />
+      <div style={{ transform: "translateY(-221px)"}}>
+        <LoginButton active={isButtonActive} onClick={handleNext}>
+          <Typography 
+            size="bodyText"
+            color="var(--White, #FFF)"
+          >
+            로그인하고 쿠플라이로 이동하기
           </Typography>
-
-          <div style={{ marginTop: '20px', textAlign: 'center' }}>
-            <Typography size="largeText" style={{ opacity: '0.8', lineHeight: '30px', fontWeight: '500' }}>
-              이제 쿠플라이의 회원이 되셨습니다.
-              <br />
-              로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
-            </Typography>
-          </div>
-        </div>
-      </TitleOutBox>
-      <ImageWrapper>
-        <img
-          src="design_image/check_ani.webp"
-          alt="completeImage"
-          style={{
-            background: 'url(design_image/check_ani.webp), lightgray 50% / cover no-repeat',
-            transform: 'translateY(-80px)',
-          }}
-        />
-        <LonginButtonWrapper>
-          <LoginButton active={isButtonActive} onClick={handleNext}>
-            <Typography size="bodyText" color="var(--White, #FFF)">
-              로그인하고 쿠플라이로 이동하기
-            </Typography>
-          </LoginButton>
-        </LonginButtonWrapper>
-      </ImageWrapper>
+        </LoginButton>
+      </div>
     </Wrapper2>
   );
 }

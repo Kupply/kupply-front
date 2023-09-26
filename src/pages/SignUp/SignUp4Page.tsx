@@ -85,19 +85,9 @@ const AliasButtonsWrapper = styled.div`
   margin-top: 140px;
 `;
 
-const Dot = styled(Typography)`
-  display: flex;
-  margin-top: auto;
-`;
-
-const Dash = styled(Typography)`
-  display: flex;
-  margin-top: 28px;
-`;
-
 const VerifiBoxWrapper = styled.div`
   display: flex;
-  gap: 18px;
+  gap: 13px;
 `;
 
 export function SignUp4Page() {
@@ -311,7 +301,11 @@ export function SignUp4PageCandidate() {
             </div>
             <VerifiBoxWrapper>
               <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
-              <Dot size="mediumText">.</Dot>
+              <div style={{ marginTop: 60 }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
+                  <circle cx="1" cy="1" r="1" fill="#141414" />
+                </svg>
+              </div>
               <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
               <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
             </VerifiBoxWrapper>
@@ -326,7 +320,11 @@ export function SignUp4PageCandidate() {
             <VerifiBoxWrapper>
               <VerificationBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1}></VerificationBox>
               <VerificationBox name="semester-2" value={hopeSemester2} setValue={setHopeSemester2}></VerificationBox>
-              <Dash size="mediumText">-</Dash>
+              <div style={{ marginTop: 26 }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
+                  <path stroke="#000" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
+                </svg>
+              </div>
               <VerificationBox name="semester-3" value={hopeSemester3} setValue={setHopeSemester3}></VerificationBox>
             </VerifiBoxWrapper>
           </ContentsWrapper>
@@ -435,7 +433,11 @@ export function SignUp4PagePasser() {
             </div>
             <VerifiBoxWrapper>
               <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
-              <Dot size="mediumText">.</Dot>
+              <div style={{ marginTop: 60 }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
+                  <circle cx="1" cy="1" r="1" fill="#141414" />
+                </svg>
+              </div>
               <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
               <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
             </VerifiBoxWrapper>
@@ -450,7 +452,11 @@ export function SignUp4PagePasser() {
             <VerifiBoxWrapper>
               <VerificationBox name="semester-1" value={passSemester1} setValue={setPassSemester1}></VerificationBox>
               <VerificationBox name="semester-2" value={passSemester2} setValue={setPassSemester2}></VerificationBox>
-              <Dash size="mediumText">-</Dash>
+              <div style={{ marginTop: 26 }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
+                  <path stroke="#000" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
+                </svg>
+              </div>
               <VerificationBox name="semester-3" value={passSemester3} setValue={setPassSemester3}></VerificationBox>
             </VerifiBoxWrapper>
           </ContentsWrapper>
