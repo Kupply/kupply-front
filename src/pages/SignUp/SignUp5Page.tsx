@@ -200,22 +200,18 @@ const join = async (role: string) => {
     firstMajor: sessionStorage.getItem('firstMajor'),
     role: sessionStorage.getItem('role'),
   };
-  try {
-    if (role === 'passer') {
-      await axios.post(url, {
-        ...commonData,
-        passSemester: sessionStorage.getItem('passSemester'),
-        passGPA: parseFloat(sessionStorage.getItem('passedGPA') || ''),
-        secondMajor: sessionStorage.getItem('secondMajor'),
-      });
-    } else {
-      await axios.post(url, {
-        ...commonData,
-        hopeMajors: [sessionStorage.getItem('hopeMajor1'), sessionStorage.getItem('hopeMajor2')],
-      });
-    }
-  } catch (err) {
-    alert(err);
+  if (role === 'passer') {
+    await axios.post(url, {
+      ...commonData,
+      passSemester: sessionStorage.getItem('passSemester'),
+      passGPA: parseFloat(sessionStorage.getItem('passedGPA') || ''),
+      secondMajor: sessionStorage.getItem('secondMajor'),
+    });
+  } else {
+    await axios.post(url, {
+      ...commonData,
+      hopeMajors: [sessionStorage.getItem('hopeMajor1'), sessionStorage.getItem('hopeMajor2')],
+    });
   }
 };
 
@@ -280,8 +276,12 @@ function SignUp5Page() {
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = async () => {
     if (isButtonActive) {
-      await join(sessionStorage.getItem('role') || '');
-      navigate('/signupcomplete');
+      try {
+        await join(sessionStorage.getItem('role') || '');
+        navigate('/signupcomplete');
+      } catch (e) {
+        alert(e);
+      }
     } else {
       alert('모든 약관에 동의해주세요.');
     }
