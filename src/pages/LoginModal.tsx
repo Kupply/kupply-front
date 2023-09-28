@@ -34,7 +34,7 @@ const LogoBox = styled.div`
   align-items: center;
   gap: 8.418px;
   flex-shrink: 0;
-  margin-top: 238px;
+  margin-top: 27%;
   margin-bottom: 39px;
 `;
 

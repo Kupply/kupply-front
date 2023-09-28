@@ -19,8 +19,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 110vh;
+  background-color: #fcfafb;
 `;
 
 const TitleWrapper = styled.div`
@@ -37,10 +38,12 @@ const FormWrapper = styled.div`
   // flex-direction: column;
   width: 816px;
   height: 850px;
-  padding: 67px 94px 78px 94px;
+  padding: 42px 94px 78px 94px;
+  padding-left: 94px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
+  margin-top: 25px;
 `;
 
 const StepIndicator = styled.div`
@@ -165,7 +168,7 @@ export default function SignUp2Page() {
     <Wrapper>
       <TitleWrapper>
         <Typography size="title1" style={{ lineHeight: '131.579%' }}>
-          환영합니다
+          환영합니다!
         </Typography>
         <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.

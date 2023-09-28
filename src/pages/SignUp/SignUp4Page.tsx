@@ -14,8 +14,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 110vh;
+  background-color: #fcfafb;
 `;
 
 const TitleWrapper = styled.div`
@@ -24,7 +25,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 45px;
-  padding-bottom: 48px;
+  padding-bottom: 25px;
 `;
 
 const FormWrapper = styled.div`
@@ -37,6 +38,7 @@ const FormWrapper = styled.div`
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
+  margin-top: 25px;
 `;
 
 const StepIndicator = styled.div`
@@ -137,7 +139,7 @@ export function SignUp4Page() {
     <Wrapper>
       <TitleWrapper>
         <Typography size="title1" style={{ lineHeight: '131.579%' }}>
-          환영합니다
+          환영합니다!
         </Typography>
         <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
@@ -252,7 +254,7 @@ export function SignUp4PageCandidate() {
     <Wrapper>
       <TitleWrapper>
         <Typography size="title1" style={{ lineHeight: '131.579%' }}>
-          환영합니다
+          환영합니다!
         </Typography>
         <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
