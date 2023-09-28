@@ -6,10 +6,11 @@ import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
 import LoginModal from './LoginModal';
 import axios from 'axios';
+import AlertMessage from '../assets/AlertMessage';
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 1511px;
+  width: 100vw;
+  height: 110vh;
   display: flex;
   justify-content: center;
   background-color: #fcfafb;
@@ -116,6 +117,7 @@ const PasswordField = styled.input<{ isFilled: boolean }>`
 
 const TextBox = styled.div`
   display: flex;
+  align-items: flex-end;
   width: 628px;
 `;
 
@@ -199,15 +201,14 @@ function LoginPage(props: LoginPageProps) {
           <LogoImage src="../../design_image/logo.png" />
           <LogoText>쿠플라이</LogoText>
         </LogoBox>
-        <Typography size="mediumText" style={{ marginBottom: '85px' }}>
-          고려대학교 메일로 이용하는 쿠플라이의 모든 서비스
-        </Typography>
+        <Typography size="mediumText">고려대학교 메일로 이용하는 쿠플라이의 모든 서비스</Typography>
         <TextFieldWrapper>
-          <TextBox>
+          <TextBox style={{ height: '105px' }}>
             <Typography size="mediumText" bold="700">
               쿠플라이 아이디
             </Typography>
             <Typography size="mediumText">를 입력해주세요.</Typography>
+            <AlertMessage />
           </TextBox>
           <IDField
             placeholder="0000@korea.ac.kr"

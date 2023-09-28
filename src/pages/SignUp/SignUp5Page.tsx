@@ -21,9 +21,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  background: #fcfafb;
+  width: 100vw;
+  height: 110vh;
+  background-color: #fcfafb;
 `;
 
 const TitleWrapper = styled.div`
@@ -32,7 +32,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 45px;
-  padding-bottom: 48px;
+  padding-bottom: 25px;
 `;
 
 const FormWrapper = styled.div`
@@ -521,7 +521,7 @@ const Wrapper2 = styled.div`
   width: 100%;
   height: 100%;
   //background: #FCFAFB;
-  background: linear-gradient(180deg, #FCFAFB 69.56%, rgba(252, 250, 251, 0.00) 115.91%);
+  background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);
 `;
 
 function SignUp5Complete() {
@@ -538,13 +538,16 @@ function SignUp5Complete() {
 
   return (
     <Wrapper2>
-      <div style={{ textAlign: "center" }}>
-        <Typography size="heading1" style={{ marginTop: "140px", lineHeight: "104.167%" }}>
+      <div style={{ textAlign: 'center' }}>
+        <Typography size="heading1" style={{ marginTop: '140px', lineHeight: '104.167%' }}>
           축하합니다!
         </Typography>
       </div>
-      <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-        <Typography size="largeText" style={{ marginTop: "24px", opacity: "0.8", lineHeight: "125%", fontWeight: "500" }}>
+      <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+        <Typography
+          size="largeText"
+          style={{ marginTop: '24px', opacity: '0.8', lineHeight: '125%', fontWeight: '500' }}
+        >
           이제 쿠플라이의 회원이 되셨습니다.
           <br />
           로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
@@ -554,17 +557,15 @@ function SignUp5Complete() {
         src="design_image/check_ani.webp"
         alt="completeImage"
         style={{
-          width: "781px", height: "836px", 
-          background: "url(design_image/check_ani.webp), lightgray 50% / cover no-repeat",
-          transform: "translateY(-84px)",
+          width: '781px',
+          height: '836px',
+          background: 'url(design_image/check_ani.webp), lightgray 50% / cover no-repeat',
+          transform: 'translateY(-84px)',
         }}
       />
-      <div style={{ transform: "translateY(-221px)"}}>
+      <div style={{ transform: 'translateY(-221px)' }}>
         <LoginButton active={isButtonActive} onClick={handleNext}>
-          <Typography 
-            size="bodyText"
-            color="var(--White, #FFF)"
-          >
+          <Typography size="bodyText" color="var(--White, #FFF)">
             로그인하고 쿠플라이로 이동하기
           </Typography>
         </LoginButton>

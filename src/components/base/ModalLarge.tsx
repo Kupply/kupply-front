@@ -31,8 +31,8 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 
 // 모달창 위치 조정 목적의 컨테이너
 const ModalContainer = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 90vh;
   position: fixed;
   display: flex;
   align-items: center;
@@ -41,8 +41,8 @@ const ModalContainer = styled.div`
 
 // 모달 창 (흰 색 컨텐츠 창)
 const DialogBox = styled.dialog`
-  width: 818px; // *전체화면에 대해 크기 조정 필요
-  height: 918px; // *전체화면에 대해 크기 조정 필요
+  width: 42vw; // *전체화면에 대해 크기 조정 필요
+  height: 81vh; // *전체화면에 대해 크기 조정 필요
   display: flex;
   flex-direction: column;
   align-items: center;

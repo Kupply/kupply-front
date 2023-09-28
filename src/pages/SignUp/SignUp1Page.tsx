@@ -18,8 +18,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 110vh;
+  background-color: #fcfafb;
 `;
 
 const TitleWrapper = styled.div`
@@ -28,7 +29,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 45px;
-  padding-bottom: 48px;
+  padding-bottom: 25px;
 `;
 
 const FormWrapper = styled.div`
@@ -41,8 +42,8 @@ const FormWrapper = styled.div`
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
+  margin-top: 25px;
 `;
-
 const StepIndicator = styled.div`
   display: inline-flex;
   padding: 8px 18px;
@@ -123,7 +124,7 @@ const TextButton = styled.button`
 export const sendEmail = async (email: string) => {
   const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
   try {
-    await axios.post(url, { email: email });
+    //await axios.post(url, { email: email });
   } catch (e) {
     //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
     alert(e);
@@ -195,7 +196,7 @@ export default function SignUp1Page() {
     const url = 'http://localhost:8080/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     console.log(entireCode, email);
     try {
-      await axios.post(url, { email: email, code: entireCode });
+      //await axios.post(url, { email: email, code: entireCode });
 
       navigate('/signup2');
     } catch (err) {
@@ -264,7 +265,7 @@ export default function SignUp1Page() {
       })()}
       <TitleWrapper>
         <Typography size="title1" style={{ lineHeight: '131.579%' }}>
-          환영합니다
+          환영합니다!
         </Typography>
         <Typography size="mediumText" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
