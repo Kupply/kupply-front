@@ -35,7 +35,7 @@ const majorParamMapping = {
   'Department of Mathematics': 'mathematics',
   'Department of Chemistry': 'chemistry',
   'School of Media & Communication': 'media',
-  'Department of Food & Resources': 'food',
+  'Department of Food & Resources': 'foodecon',
   'Department of Computer Science & Engineering': 'computer',
 };
 
