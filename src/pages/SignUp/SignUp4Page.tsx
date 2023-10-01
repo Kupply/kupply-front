@@ -105,11 +105,12 @@ export function SignUp4Page() {
   const [passerState, setPasserState] = useState<'default' | 'clicked' | 'unactive'>('default');
   const [nextPathState, setNextPathState] = useState<string>('');
 
+  /*
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('nickname')) navigate('/');
     else sessionStorage.removeItem('role');
-  }, []);
+  }, []);*/
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = (nextPath: string) => {
@@ -202,13 +203,14 @@ export function SignUp4PageCandidate() {
   const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  /*
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
     sessionStorage.removeItem('secondMajor');
     sessionStorage.removeItem('passedGPA');
     sessionStorage.removeItem('passSemester');
-  }, []);
+  }, []);*/
 
   useEffect(() => {
     if (
@@ -358,10 +360,11 @@ export function SignUp4PagePasser() {
   const [passSemester3, setPassSemester3] = useState<string>(sessionStorage.getItem('passSemester')?.charAt(5) || '');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  /*
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
-  }, []);
+  }, []);*/
   useEffect(() => {
     if (!!doubleMajor && !!GPA1 && !!GPA2 && !!GPA3 && !!passSemester1 && !!passSemester2 && !!passSemester3) {
       setNextButton(true);
