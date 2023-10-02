@@ -4,6 +4,8 @@ import Typography from '../assets/Typography';
 import InterestMajorEditButton from '../assets/buttons/InterestMajorEditButton';
 import MockApplicationButton from '../assets/buttons/MockApplication';
 import InterestMajorButton from '../assets/buttons/InterestMajorButton';
+import PieChartComponent from '../assets/MyBoardChart';
+
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -218,11 +220,12 @@ const MyBoardPage = () => {
         </BigMajorSymbolBox>
         <div style={{ marginTop: "-571px", marginLeft: "424px" }}>
           <CompetitionRateBox>
-            <CompetitionRateHeadBox style={{ marginTop: 0, marginLeft: 0 }}>
-              <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px" }}>
-                실시간 경쟁률
-              </Typography>
-            </CompetitionRateHeadBox>
+            <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px", marginBottom: "14px" }}>
+              실시간 경쟁률
+            </Typography>
+            <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+              <path d="M0 1L392 1" stroke="#DFDFDF"/>
+            </svg>
             <div style={{ display: 'flex', alignItems: 'baseline', marginTop: "52px", marginLeft: "36px" }}>
               <Typography size="heading1" style={{ color: "#D85888", lineHeight: "104.167%" }} >
                 {`3.14\u00A0`}
@@ -244,11 +247,12 @@ const MyBoardPage = () => {
         </div>
         <div style={{ marginTop: "23px", marginLeft: "424px" }}>
           <CompetitionRateBox>
-            <CompetitionRateHeadBox style={{ marginTop: 0, marginLeft: 0 }}>
-              <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px" }}>
-                실시간 지원자
-              </Typography>
-            </CompetitionRateHeadBox>
+            <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px", marginBottom: "14px" }}>
+              실시간 지원자
+            </Typography>
+            <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+              <path d="M0 1L392 1" stroke="#DFDFDF"/>
+            </svg>
             <div style={{ display: 'flex', alignItems: 'baseline', marginTop: "52px", marginLeft: "36px" }}>
               <Typography size="heading1" style={{ color: "#D85888", lineHeight: "104.167%" }} >
                 {`32\u00A0`}
@@ -273,8 +277,7 @@ const MyBoardPage = () => {
         </div>
         <div style={{ marginTop: "-575px", marginLeft: "847px" }}>
           <ThreeYearCumulativeDataBox>
-            <ThreeYearCumulativeDataHeadBox>
-              <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px" }}>
+          <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px" }}>
                 3개년 합격지표
               </Typography>
               <EachYearHeadBox style={{ marginTop: "10px", marginLeft: "16px" }}>
@@ -296,7 +299,10 @@ const MyBoardPage = () => {
                   </EachYearBox>
                 </div>
               </EachYearHeadBox>
-              <div style={{ display: 'flex', alignItems: 'center', marginTop: "55px" }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                <path d="M0 1L392 1" stroke="#DFDFDF"/>
+              </svg>
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: "41px" }}>
                 <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", fontWeight: "600", lineHeight: "90%", marginLeft: "36px" }}>
                   2024-1R 경영대학 모집정보
                 </Typography>
@@ -338,23 +344,22 @@ const MyBoardPage = () => {
                   4.12
                 </Typography>
               </div>
-            </ThreeYearCumulativeDataHeadBox>
           </ThreeYearCumulativeDataBox>
         </div>
       </div>
       <div style={{ marginLeft: "551px", marginTop: "30px" }}>
         <RangeBox>
-          <RangeHeadBox>
-            <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px" }}>
-              계단
-            </Typography>
-          </RangeHeadBox>
-          <div style={{ display: "flex", alignItems: "baseline", marginTop: "7px", marginLeft: "10px" }}>
-            <RangeFirstStepBox>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" width="247" height="174" viewBox="0 0 247 174" fill="none">
+          <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginTop: "26px", marginLeft: "36px", marginBottom: "14px" }}>
+            내 학점 위치 파악하기
+          </Typography>
+          <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
+            <path d="M0 1L1239 1" stroke="#DFDFDF"/>
+          </svg>
+          <div style={{ display: 'flex', alignItems: 'center', marginLeft: "10px", marginTop: "7px" }}>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="247" height="174" viewBox="0 0 247 174" fill="none">
                 <g filter="url(#filter0_d_3391_8955)">
-                  <path d="M30 25C30 22.2386 32.2386 20 35 20H212C214.761 20 217 22.2386 217 25V129C217 131.761 214.761 134 212 134H35C32.2386 134 30 131.761 30 129V25Z" fill="white"/>
+                  <path d="M30 25C30 22.2386 32.2386 20 35 20H212C214.761 20 217 22.2386 217 25V129C217 131.761 214.761 134 212 134H35C32.2386 134 30 131.761 30 129V25Z" fill="white" stroke="black" stroke-width="2"/>
                 </g>
                 <defs>
                   <filter id="filter0_d_3391_8955" x="0" y="0" width="247" height="174" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -369,11 +374,11 @@ const MyBoardPage = () => {
                   </filter>
                 </defs>
               </svg>
-            </RangeFirstStepBox>
-            <RangeSecondStepBox style={{ marginLeft: "-42px" }}>
+            </div>
+            <div style={{ marginLeft: "-73px" }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="260" height="174" viewBox="0 0 260 174" fill="none">
                 <g filter="url(#filter0_d_3391_8959)">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H225C227.761 134 230 131.761 230 129V25C230 22.2386 227.761 20 225 20H48Z" fill="white"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H225C227.761 134 230 131.761 230 129V25C230 22.2386 227.761 20 225 20H48Z" fill="white" stroke="black" stroke-width="2"/>
                 </g>
                 <defs>
                   <filter id="filter0_d_3391_8959" x="0" y="0" width="260" height="174" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -388,8 +393,8 @@ const MyBoardPage = () => {
                   </filter>
                 </defs>
               </svg>
-            </RangeSecondStepBox>
-            <RangeCurrentStepBox style={{ marginLeft: "-42px" }}>
+            </div>
+            <div style={{ marginLeft: "-73px" }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="259" height="174" viewBox="0 0 259 174" fill="none">
                 <g filter="url(#filter0_d_3391_8962)">
                   <mask id="path-1-inside-1_3391_8962" fill="white">
@@ -397,6 +402,7 @@ const MyBoardPage = () => {
                   </mask>
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H224C226.761 134 229 131.761 229 129V25C229 22.2386 226.761 20 224 20H48Z" fill="#E96D6D" fill-opacity="0.8" shape-rendering="crispEdges"/>
                   <path d="M43 35.4944L43.5 36.3605L44 36.0718V35.4944H43ZM30 43L29.5 42.134L28 43L29.5 43.866L30 43ZM43 50.5056H44V49.9282L43.5 49.6395L43 50.5056ZM44 25C44 22.7909 45.7909 21 48 21V19C44.6863 19 42 21.6863 42 25H44ZM44 35.4944V25H42V35.4944H44ZM42.5 34.6284L29.5 42.134L30.5 43.866L43.5 36.3605L42.5 34.6284ZM29.5 43.866L42.5 51.3716L43.5 49.6395L30.5 42.134L29.5 43.866ZM44 129V50.5056H42V129H44ZM48 133C45.7909 133 44 131.209 44 129H42C42 132.314 44.6863 135 48 135V133ZM224 133H48V135H224V133ZM228 129C228 131.209 226.209 133 224 133V135C227.314 135 230 132.314 230 129H228ZM228 25V129H230V25H228ZM224 21C226.209 21 228 22.7909 228 25H230C230 21.6863 227.314 19 224 19V21ZM48 21H224V19H48V21Z" fill="#E96D6D" mask="url(#path-1-inside-1_3391_8962)"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H224C226.761 134 229 131.761 229 129V25C229 22.2386 226.761 20 224 20H48Z" stroke="black" stroke-width="2"/>
                 </g>
                 <defs>
                   <filter id="filter0_d_3391_8962" x="0" y="0" width="259" height="174" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -411,11 +417,11 @@ const MyBoardPage = () => {
                   </filter>
                 </defs>
               </svg>
-            </RangeCurrentStepBox>
-            <RangeThridStepBox style={{ marginLeft: "-42px" }}>
+            </div>
+            <div style={{ marginLeft: "-73px" }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="260" height="174" viewBox="0 0 260 174" fill="none">
                 <g filter="url(#filter0_d_3391_8965)">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H225C227.761 134 230 131.761 230 129V25C230 22.2386 227.761 20 225 20H48Z" fill="white"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H225C227.761 134 230 131.761 230 129V25C230 22.2386 227.761 20 225 20H48Z" fill="white" stroke="black" stroke-width="2"/>
                 </g>
                 <defs>
                   <filter id="filter0_d_3391_8965" x="0" y="0" width="260" height="174" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -430,28 +436,40 @@ const MyBoardPage = () => {
                   </filter>
                 </defs>
               </svg>
-            </RangeThridStepBox>
-
+            </div>
           </div>
-          
-            
-          
-          
+          <div style={{ marginLeft: "828px", marginTop: "-145px" }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="2" height="102" viewBox="0 0 2 102" fill="none">
+              <path d="M1 101L0.999996 1" stroke="#DFDFDF" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginLeft: "883px", marginTop: "-91px" }}>
+            내 등수
+            <br />
+            상위 몇프로
+          </Typography>
         </RangeBox>
       </div>
       <div style={{ marginLeft: "551px", marginTop: "30px" }}>
         <Graph_1_1Box>
-          <Graph_1_1HeadBox>
-
-          </Graph_1_1HeadBox>
+          <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginLeft: "36px", marginTop: "26px", marginBottom: "14px" }}>
+            지원자 정보 살펴보기
+          </Typography>
+          <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
+            <path d="M0 1L674 1" stroke="#DFDFDF"/>
+          </svg>
+          <PieChartComponent />
         </Graph_1_1Box>
         <Graph_2_1Box style={{ marginTop: "20px" }}>
           
         </Graph_2_1Box>
-        <Graph_2Box style={{ marginTop: "-834px", marginLeft: "706px" }}>
-          <Graph_2HeadBox>
-
-          </Graph_2HeadBox>
+        <Graph_2Box style={{ marginTop: "-832px", marginLeft: "706px" }}>
+          <Typography size="bodyText" style={{ color: "var(--Main-Black, #141414)", marginLeft: "36px", marginTop: "26px", marginBottom: "14px" }}>
+            이중전공 지원자 학과 분포
+          </Typography>
+          <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
+            <path d="M0 1L535 1" stroke="#DFDFDF"/>
+          </svg>
         </Graph_2Box>
       </div>
     </Wrapper>
@@ -465,9 +483,6 @@ export default MyBoardPage;
 width: 1921px;
 height: 2378px;   
 */ 
-/*
-
-*/
 
 const Wrapper = styled.div`
   width: 100%; // 1920px;
@@ -486,7 +501,7 @@ const Wrapper = styled.div`
     filter: blur(75px);
     opacity: 0.7;
     background: radial-gradient(60.96% 60.96% at 58.12% 41.5%, rgba(216, 88, 136, 0.50) 0%, rgba(255, 175, 189, 0.05) 100%);
-    z-index: 0;
+    z-index: -1;
     top: -833px; 
     left: -1px; 
   }
@@ -500,7 +515,7 @@ const Wrapper = styled.div`
     filter: blur(75px);
     opacity: 0.5;
     background: radial-gradient(47.7% 47.7% at 50% 52.3%, rgba(232, 88, 136, 0.25) 0%, rgba(255, 255, 255, 0.00) 100%);
-    z-index: 0;
+    z-index: -1;
     top: 199px;
     right: -518px; 
   }
@@ -558,41 +573,6 @@ const BigMajorSymbolBox = styled.div`
   box-shadow: 0px 10px 30px 0px rgba(216, 88, 136, 0.10);
 `;
 
-const RealTimeBox = styled.div`   // 이거 사용하고 싶은데 색상이 좀 이상함..?
-  width: 393px;
-  height: 274px;
-  flex-shrink: 0;
-  position: relative;
-  border-radius: 10px;
-  border: 1px solid #EEE;
-  background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(9px);
-
-  &::before {
-    content: '';
-    width: 393px;
-    height: 65px;
-    flex-shrink: 0;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    border-radius: 10px 10px 0 0;
-    border: 1px solid #EEE;
-    background: rgba(255, 255, 255, 0.50);
-    backdrop-filter: blur(9px);
-  }
-`;
-
-const CompetitionRateHeadBox = styled.div`
-  width: 393px;
-  height: 65px;
-  flex-shrink: 0;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #EEE;
-  background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(9px);
-`;
-
 const CompetitionRateBox = styled.div`
   width: 393px;
   height: 274px;
@@ -616,16 +596,6 @@ const InterestCommunitySearchBox = styled.div`  // 그림만 해놓고 기능 �
   background: #FFF;
   /* Search bar Shadow */
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
-`;
-
-const ThreeYearCumulativeDataHeadBox = styled.div`  
-  width: 394px;
-  height: 112px;
-  flex-shrink: 0;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #EEE;
-  background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(9px);
 `;
 
 const ThreeYearCumulativeDataBox = styled.div`
@@ -655,16 +625,6 @@ const EachYearBox = styled.div`
   background: #D85888;
 `;
 
-const RangeHeadBox = styled.div`
-  width: 1241px;
-  height: 72px;
-  flex-shrink: 0;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #EEE;
-  background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(9px);
-`;
-
 const RangeBox = styled.div`
   width: 1241px;
   height: 252px;
@@ -672,16 +632,6 @@ const RangeBox = styled.div`
   border-radius: 10px;
   border: 1px solid #EEE;
   background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(9px);
-`;
-
-const Graph_1_1HeadBox = styled.div`
-  width: 676px;
-  height: 72px;
-  flex-shrink: 0;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #EEE;
-  background: var(--White, #FFF);
   backdrop-filter: blur(9px);
 `;
 
@@ -702,16 +652,6 @@ const Graph_2_1Box = styled.div`
   border-radius: 10px;
   border: 1px solid #EEE;
   background: rgba(255, 255, 255, 0.50);
-  backdrop-filter: blur(9px);
-`;
-
-const Graph_2HeadBox = styled.div`
-  width: 535px;
-  height: 72px;
-  flex-shrink: 0;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #EEE;
-  background: var(--White, #FFF);
   backdrop-filter: blur(9px);
 `;
 
@@ -765,44 +705,3 @@ const BigMajorSymbol = styled.img`
 `;
 
 // ----------------SVG----------------
-const VerticalBar = styled.svg`
-  width: 0px;
-  height: 100px;
-  flex-shrink: 0;
-  stroke-width: 1px;
-  stroke: var(--DF_Grey-2, #DFDFDF);
-`;
-
-const RangeFirstStepBox = styled.svg`
-  width: 187px;
-  height: 114px;
-  flex-shrink: 0;
-  fill: var(--White, #FFF);
-  filter: drop-shadow(0px 10px 30px rgba(129, 216, 88, 0.10));
-`;
-
-const RangeSecondStepBox = styled.svg`
-  width: 200px;
-  height: 114px;
-  flex-shrink: 0;
-  fill: var(--White, #FFF);
-  filter: drop-shadow(0px 10px 30px rgba(69, 102, 226, 0.10));
-`;
-
-const RangeThridStepBox = styled.svg`
-  width: 200px;
-  height: 114px;
-  flex-shrink: 0;
-  fill: var(--White, #FFF);
-  filter: drop-shadow(0px 10px 30px rgba(234, 9, 9, 0.20));
-`;
-
-const RangeCurrentStepBox = styled.svg`
-  width: 199px;
-  height: 114px;
-  flex-shrink: 0;
-  fill: rgba(233, 109, 109, 0.80);
-  stroke-width: 1px;
-  stroke: #E96D6D;
-  filter: drop-shadow(0px 10px 30px rgba(233, 109, 109, 0.20));
-`;
