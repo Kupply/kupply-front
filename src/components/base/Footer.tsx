@@ -12,7 +12,7 @@ const FooterWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
-  height: 20.1%; // 262px; (262/1248 = 20.1)
+  height: 262px; //(262/1248 = 20.1)
   background: #f9f9f9;
   padding: 41.84px 128px 42.78px 128px; // 상우하좌 순서
   box-sizing: border-box;
@@ -100,7 +100,7 @@ export default function Footer() {
               <MenuButton>환경설정</MenuButton>
             </MenuWrapper>
           </div>
-          <div style={{ marginLeft: '62px' }}>
+          <div style={{ marginLeft: '50px' }}>
             <Typography size="smallText" bold="600">
               문의
             </Typography>
@@ -140,7 +140,7 @@ export default function Footer() {
       </ContentsWrapper>
       <ContentsWrapper style={{ marginTop: '28.89px', gap: '498px' }}>
         <ContentsWrapper>
-          <Typography size="smallText" color="#A8A8A8" style={{ marginRight: '58px' }}>
+          <Typography size="smallText" color="#A8A8A8" style={{ marginRight: '38px' }}>
             Copyright ⓒ 2023 kupply. all rights reserved.
           </Typography>
           <MenuWrapper>
