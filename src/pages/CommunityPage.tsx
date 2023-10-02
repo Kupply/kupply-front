@@ -6,8 +6,8 @@ import SideBar from '../components/community/SideBar';
 import Main from '../components/community/Main';
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 1152px;
+  width: 100vw;
+  height: 1153px;
   display: flex;
   align-items: space-between;
 `;

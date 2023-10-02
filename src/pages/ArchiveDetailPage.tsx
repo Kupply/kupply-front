@@ -394,7 +394,7 @@ const Wrapper = styled.div`
 
 const MajorWrapper = styled.div`
   height: 145px;
-  width: 100%;
+  width: 100vw;
   max-width: 1690px;
   display: flex;
 `;

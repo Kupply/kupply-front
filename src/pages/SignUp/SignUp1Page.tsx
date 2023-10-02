@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 110vh;
+  height: 1153px;
   background-color: #fcfafb;
 `;
 
@@ -124,7 +124,7 @@ const TextButton = styled.button`
 export const sendEmail = async (email: string) => {
   const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
   try {
-    //await axios.post(url, { email: email });
+    await axios.post(url, { email: email });
   } catch (e) {
     //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
     alert(e);

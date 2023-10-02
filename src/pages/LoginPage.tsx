@@ -10,7 +10,7 @@ import AlertMessage from '../assets/AlertMessage';
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 110vh;
+  height: 1153px;
   display: flex;
   justify-content: center;
   background-color: #fcfafb;
