@@ -1,12 +1,13 @@
 /* eslint-disable no-restricted-globals */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 import Logo from '../../assets/Logo';
 import HeaderButton from '../../assets/buttons/header/HeaderButton';
 import MailButton from '../../assets/buttons/header/MailButton';
 import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
-import axios from 'axios';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -77,10 +78,13 @@ export default function Header({ logined, setLogin }: HeaderProps) {
     navigate('/login');
   };
 
+  const [, , removeCookie] = useCookies(['accessToken']);
+
   const onLogoutClick = async () => {
     const url = 'http://localhost:8080/auth/logout';
     try {
       await axios.get(url);
+      removeCookie('accessToken', { path: '/' });
       window.localStorage.clear();
       setLogin(false);
       navigate('/');

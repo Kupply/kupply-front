@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import SegmentedPicker from '../assets/SegmentedPicker';
 import GpaLineChart, { Data, LineData } from '../assets/GpaLineChart';
 import axios from 'axios';
@@ -143,11 +144,21 @@ const ArchiveDetailPage = () => {
   ];
   const [keywords, setKeywords] = useState<string[]>(initKeywords);
 
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
   // 누적 데이터로 default 값 setting
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`);
+        const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
         const data = APIresponse.data.pastData;
 
         setNumOfApplication(data.overallData.numberOfData);
@@ -165,7 +176,7 @@ const ArchiveDetailPage = () => {
   }, [majorName]);
 
   useEffect(() => {
-    const hasEnoughData = lineData.length >= 0;
+    const hasEnoughData = lineData.length > 0;
     setEnoughData(hasEnoughData);
   }, [lineData]);
 
@@ -176,7 +187,7 @@ const ArchiveDetailPage = () => {
 
     try {
       const semester = semesterForAPI[idx];
-      const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`);
+      const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
       const data = APIresponse.data.pastData;
 
       setNumOfApplication(data.overallData.numberOfData);

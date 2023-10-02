@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
 import LoginModal from './LoginModal';
-import axios from 'axios';
 import AlertMessage from '../assets/AlertMessage';
 
 const Wrapper = styled.div`
@@ -169,6 +169,7 @@ function LoginPage(props: LoginPageProps) {
   const [password, setPassword] = useState<string>('');
   const [isChecked, setIsChecked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [cookies, setCookies] = useCookies(['accessToken']);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -178,11 +179,21 @@ function LoginPage(props: LoginPageProps) {
   const onLoginClick = async () => {
     const url = 'http://localhost:8080/auth/login';
     try {
-      await axios.post(url, {
-        email: ID,
-        password: password,
-        isRememberOn: isChecked,
-      });
+      await axios
+        .post(url, {
+          email: ID,
+          password: password,
+          isRememberOn: isChecked,
+        })
+        .then((res) => {
+          const expireDate = new Date();
+          expireDate.setHours(expireDate.getHours() + 1);
+
+          setCookies('accessToken', res.data.data.accessToken, {
+            path: '/',
+            expires: expireDate,
+          });
+        });
       //로그인 상태를 유지하기 위해 localStorage에 로그인 여부와 ID를 저장 후 login 상태를 true로 바꾸고 메인 페이지로 보낸다.
       window.localStorage.setItem('isLogin', 'true');
       window.localStorage.setItem('loginedUser', ID);
