@@ -13,7 +13,7 @@ type MajorOptions =
   | 'mathematics'
   | 'chemistry'
   | 'media'
-  | 'food'
+  | 'foodecon'
   | 'computer';
 
 const majorNameMapping = {
@@ -24,12 +24,12 @@ const majorNameMapping = {
   mathematics: ['수학과', 'Department of Mathematics'],
   chemistry: ['화학과', 'Department of Chemistry'],
   media: ['미디어학부', 'School of Media & Communication'],
-  food: ['식품자원경제학과', 'Department of Food & Resources'],
+  foodecon: ['식품자원경제학과', 'Department of Food & Resources'],
   computer: ['컴퓨터학과', 'Department of Computer Science & Engineering'],
 };
 
 const collegeNameMapping = {
-  food: 'bio',
+  foodecon: 'bio',
   media: 'media',
   computer: 'info',
   business: 'business',
@@ -165,15 +165,7 @@ const ArchiveDetailPage = () => {
   }, [majorName]);
 
   useEffect(() => {
-    const hasEnoughData = lineData.length >= 10;
-    // FIXME: 지금은 일단 뭐라도 보이기 위해
-    if (!hasEnoughData) {
-      setLineData(tmpRandomData);
-      setMeanGpa(tmpMeanGpa);
-      setMedianGpa(tmpMedianGpa);
-      setModeGpa(tmpModeGpa);
-      setMinGpa(tmpMinGpa);
-    }
+    const hasEnoughData = lineData.length >= 0;
     setEnoughData(hasEnoughData);
   }, [lineData]);
 
@@ -184,7 +176,7 @@ const ArchiveDetailPage = () => {
 
     try {
       const semester = semesterForAPI[idx];
-      const APIresponse = await axios.get(`http://localhost:8000/pastData/${majorName}/${semester}`);
+      const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`);
       const data = APIresponse.data.pastData;
 
       setNumOfApplication(data.overallData.numberOfData);
@@ -218,7 +210,7 @@ const ArchiveDetailPage = () => {
         </MajorIconContainer>
         <MajorTextBox>
           <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
-          {majorName === 'food' || majorName === 'computer' ? (
+          {majorName === 'foodecon' || majorName === 'computer' ? (
             <MajorTextEnglishSmall>{majorEngishName}</MajorTextEnglishSmall>
           ) : majorName === 'media' ? (
             <MajorTextEnglishMiddle>{majorEngishName}</MajorTextEnglishMiddle>

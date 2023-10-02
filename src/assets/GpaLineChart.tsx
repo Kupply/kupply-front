@@ -189,12 +189,22 @@ modeGpaPoint.src = '../../design_image/previous_detail/modeGpaPoint.png';
 const minGpaPoint = new Image(65, 65);
 minGpaPoint.src = '../../design_image/previous_detail/minGpaPoint.png';
 
+const init = () => {
+  for (let i = 0; i < 166; i++) {
+    formattedLineData[i] = null;
+    formattedMeanData[i] = null;
+    formattedMedianData[i] = null;
+    formattedModeData[i] = null;
+    formattedMinData[i] = null;
+  }
+  formattedLineData[10] = 0;
+  formattedLineData[160] = 0;
+};
+
 export default function GpaLineChart(prop: GpaLineChartProps) {
   const { lineData, meanGpa, medianGpa, modeGpa, minGpa, width, height } = prop;
 
-  lineData.sort((lhs: Data, rhs: Data) => {
-    return lhs.gpa - rhs.gpa;
-  });
+  init();
 
   let idx: number;
   lineData.forEach((data) => {
