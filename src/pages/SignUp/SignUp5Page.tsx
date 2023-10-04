@@ -210,7 +210,10 @@ const join = async (role: string) => {
   } else {
     await axios.post(url, {
       ...commonData,
-      hopeMajors: [sessionStorage.getItem('hopeMajor1'), sessionStorage.getItem('hopeMajor2')],
+      curGPA: sessionStorage.getItem('GPA'),
+      hopeMajor1: sessionStorage.getItem('hopeMajor1'),
+      hopeMajor2: sessionStorage.getItem('hopeMajor2'),
+      hopeSemester: sessionStorage.getItem('hopeSemester'),
     });
   }
 };
