@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '../Typography';
 
 export interface InterestMajorProps extends React.ComponentPropsWithoutRef<'button'> {
-  active?: boolean;
+  onView?: boolean;
   children?: React.ReactNode;
 }
 
@@ -13,24 +12,43 @@ const Button = styled.button<InterestMajorProps>`
   height: 46px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   border-radius: 5px;
-  background: rgba(216, 88, 136, 0.23); // deafult, active
-  /*
-  &:disabled {
-    opacity: 0.5;
-    background: linear-gradient(93deg, #d85888 -24.37%, #f5bdbd 120.85%, rgba(253, 242, 242, 0.3) 161.07%);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 100%;
+
+  ${({ onView }) =>
+    onView
+      ? `
+      background: rgba(216, 88, 136, 0.1);
+      color: #d85888;
+      font-weight: 700;
+      `
+      : `
+      background: none;
+      color: #b9b9b9;
+      font-weight: 500;
+    `};
+
+  &:hover {
+    // While hovering
+    // Change to: "Hover";
+    // Animate: Dissolve;
+    animation-timing-function: ease-in-out;
+    animation-duration: 300ms;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 12px 0px rgba(216, 88, 136, 0.1);
+    color: #d85888;
   }
-  */
 `;
 
 function InterestMajorButton(props: InterestMajorProps) {
-  const { children = '1지망', active = false, ...rest } = props;
+  const { children = '1지망', onView = true, ...rest } = props;
   return (
-    <Button active={active} disabled={!active} {...rest}>
-      <Typography size="bodyText" color="#D85888">
-        {children}
-      </Typography>
+    <Button onView={onView} {...rest}>
+      {children}
     </Button>
   );
 }
