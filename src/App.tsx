@@ -7,7 +7,7 @@ import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import PreviousPage from './pages/PreviousPage';
 import ArchiveDetailPage from './pages/ArchiveDetailPage';
-import MyBoardPage from './pages/MyBoardPage';
+import MyBoardPage from './pages/MyBoard/MyBoardPage';
 import CommunityPage from './pages/CommunityPage';
 import MessagePage from './pages/MessagePage';
 import SettingsPage from './pages/SettingsPage';

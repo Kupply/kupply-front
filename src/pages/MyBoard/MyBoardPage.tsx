@@ -1,11 +1,11 @@
 import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-import Typography from '../assets/Typography';
-import { InterestMajorEditButton, EditButton } from '../assets/buttons/InterestMajorEditButton';
-import MockApplicationButton from '../assets/buttons/MockApplication';
-import InterestMajorButton from '../assets/buttons/InterestMajorButton';
-import PieChartComponent from '../assets/MyBoardChart';
-import { ProfileEditPage, InterestMajorPage, GpaPage, GpaSavePage, HopeSemester } from '../pages/MyBoardEditModal';
+import Typography from '../../assets/Typography';
+import { InterestMajorEditButton, EditButton } from '../../assets/buttons/InterestMajorEditButton';
+import MockApplicationButton from '../../assets/buttons/MockApplication';
+import InterestMajorButton from '../../assets/buttons/InterestMajorButton';
+import PieChartComponent from '../../assets/MyBoardChart';
+import { ProfileEditPage, InterestMajorPage, GpaPage, GpaSavePage, HopeSemester } from '../MyBoard/MyBoardEditModal';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
