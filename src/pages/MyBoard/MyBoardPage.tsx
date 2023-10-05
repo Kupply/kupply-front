@@ -1,12 +1,11 @@
-import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
-import { InterestMajorEditButton, EditButton } from '../../assets/buttons/InterestMajorEditButton';
-import MockApplicationButton from '../../assets/buttons/MockApplication';
-import InterestMajorButton from '../../assets/buttons/InterestMajorButton';
-import {PieChartComponent, HalfPieChartComponent, PlotChartComponent} from '../../assets/MyBoardChart';
-import { ProfileEditPage, InterestMajorPage, GpaPage, GpaSavePage, HopeSemester } from '../MyBoard/MyBoardEditModal';
-import SemesterButton from '../../assets/buttons/SemesterButton';
+import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
+import MockApplicationButton from '../../assets/myboardpage/MockApplication';
+import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
+import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/MyBoardChart';
+import SemesterButton from '../../assets/myboardpage/SemesterButton';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -16,11 +15,8 @@ import SemesterButton from '../../assets/buttons/SemesterButton';
 */
 
 /* 
-1지망, 2지망 바꾸려면, 서버로부터 데이터 받아오는 것 먼저 해야겠다. 
-
-로직) 
-1. 서버(DB)로부터 회원구분(도전생 or 진입생)에 따라 정보를 받아 리스트로 저장한다.
-2. 조건문(삼항조건문)에 따라 회원의 1지망, 2지망에 따라 다른 데이터를 보여준다. 
+수정사항 1: BigSymbol 크기 및 위치 수정
+수정사항 2: editButton 클릭 후에도 Active 버튼 유지
 */
 
 const major = {
@@ -148,7 +144,7 @@ export default function MyBoardPage() {
                 >
                   고대빵
                 </Typography>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Typography
                     size="bodyText"
                     style={{ color: 'rgba(20, 20, 20, 0.60)', fontWeight: '500', marginLeft: '6px' }}
@@ -413,45 +409,48 @@ export default function MyBoardPage() {
             <>
               <div style={{ marginLeft: '551px' }}>
                 <BigMajorSymbolBox style={{ marginTop: '32px' }}>
-                  <BigMajorSymbol
-                    src="design_image/major_symbol/bussiness_trans.png"
-                    alt="business school"
-                    style={{ marginTop: '107px', marginLeft: '105px' }}
-                  />
-                  <Typography
-                    size="title2"
+                  <BoxTitleText style={{ marginLeft: '136px' }}>1지망 관심전공</BoxTitleText>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                    <path d="M0 1L392 1" stroke="#DFDFDF" />
+                  </svg>
+                  <div
                     style={{
-                      lineHeight: '138.889%',
-                      marginTop: '34px',
-                      textAlign: 'center',
+                      width: '368px',
+                      height: '460px',
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
                     }}
                   >
-                    경영대학
-                  </Typography>
-                  <Typography
-                    size="largeText"
-                    style={{
-                      fontWeight: '500',
-                      opacity: '0.8',
-                      marginTop: '0px',
-                      textAlign: 'center',
-                    }}
-                  >
-                    Business School
-                  </Typography>
+                    <BigMajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
+                  </div>
+                  <div style={{ position: 'absolute', top: '403px', left: '105px' }}>
+                    <Typography
+                      size="title2"
+                      style={{
+                        lineHeight: '138.889%',
+                        marginTop: '34px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      경영대학
+                    </Typography>
+                    <Typography
+                      size="largeText"
+                      style={{
+                        fontWeight: '500',
+                        opacity: '0.8',
+                        marginTop: '0px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      Business School
+                    </Typography>
+                  </div>
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
                   <CompetitionRateBox>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        marginTop: '26px',
-                        marginLeft: '36px',
-                        marginBottom: '14px',
-                      }}
-                    >
-                      실시간 경쟁률
-                    </Typography>
+                    <BoxTitleText>실시간 경쟁률</BoxTitleText>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
@@ -487,22 +486,13 @@ export default function MyBoardPage() {
                     </div>
                   </CompetitionRateBox>
                 </div>
-                <div style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <CompetitionRateBox>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        marginTop: '26px',
-                        marginLeft: '36px',
-                        marginBottom: '14px',
-                      }}
-                    >
-                      실시간 지원자
-                    </Typography>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
-                      <path d="M0 1L392 1" stroke="#DFDFDF" />
-                    </svg>
-                    <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
+                <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
+                  <BoxTitleText>실시간 지원자</BoxTitleText>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                    <path d="M0 1L392 1" stroke="#DFDFDF" />
+                  </svg>
+                  <div style={{ paddingTop: '35px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
                         {`32\u00A0`}
                       </Typography>
@@ -521,30 +511,36 @@ export default function MyBoardPage() {
                           marginLeft: '13px',
                         }}
                       >
-                        {`\u00A0 명`}
+                        {`\u00A0 명 정원`}
                       </Typography>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '37px', marginLeft: '36px' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path
-                          d="M13.416 2.3335V5.8335H9.91602"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                        Last Update 5:58 PM
+                    <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
+                      <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
+                        32명의 지원자가 경영학과를 지원했습니다.
                       </Typography>
+                      <div style={{ display: 'flex', marginTop: '18px' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path
+                            d="M13.416 2.3335V5.8335H9.91602"
+                            stroke="#A8A8A8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
+                            stroke="#A8A8A8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
+                          Last Update 5:58 PM
+                        </Typography>
+                      </div>
                     </div>
-                  </CompetitionRateBox>
-                </div>
+                  </div>
+                </CompetitionRateBox>
+
                 <div style={{ marginTop: '-575px', marginLeft: '847px' }}>
                   <ThreeYearCumulativeDataBox>
                     <Typography
@@ -967,7 +963,7 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
                     <path d="M0 1L535 1" stroke="#DFDFDF" />
                   </svg>
-                  <PlotChartComponent/>
+                  <PlotChartComponent />
                 </Graph_2Box>
               </div>
             </>
@@ -975,45 +971,48 @@ export default function MyBoardPage() {
             <>
               <div style={{ marginLeft: '551px' }}>
                 <BigMajorSymbolBox style={{ marginTop: '32px' }}>
-                  <BigMajorSymbol
-                    src="design_image/major_symbol/media_trans.png"
-                    alt="School of Media and Communication"
-                    style={{ marginTop: '107px', marginLeft: '105px' }}
-                  />
-                  <Typography
-                    size="title2"
+                  <BoxTitleText style={{ marginLeft: '136px' }}>2지망 관심전공</BoxTitleText>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                    <path d="M0 1L392 1" stroke="#DFDFDF" />
+                  </svg>
+                  <div
                     style={{
-                      lineHeight: '138.889%',
-                      marginTop: '34px',
-                      textAlign: 'center',
+                      width: '368px',
+                      height: '460px',
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
                     }}
                   >
-                    미디어학부
-                  </Typography>
-                  <Typography
-                    size="largeText"
-                    style={{
-                      fontWeight: '500',
-                      opacity: '0.8',
-                      marginTop: '0px',
-                      textAlign: 'center',
-                    }}
-                  >
-                    School of Media and Communication
-                  </Typography>
+                    <BigMajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
+                  </div>
+                  <div style={{ position: 'absolute', top: '403px', left: '17px' }}>
+                    <Typography
+                      size="title2"
+                      style={{
+                        lineHeight: '138.889%',
+                        marginTop: '34px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      미디어학부
+                    </Typography>
+                    <Typography
+                      size="largeText"
+                      style={{
+                        fontWeight: '500',
+                        opacity: '0.8',
+                        marginTop: '0px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      School of Media and Communication
+                    </Typography>
+                  </div>
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
                   <CompetitionRateBox>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        marginTop: '26px',
-                        marginLeft: '36px',
-                        marginBottom: '14px',
-                      }}
-                    >
-                      실시간 경쟁률
-                    </Typography>
+                    <BoxTitleText>실시간 경쟁률</BoxTitleText>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
@@ -1049,22 +1048,13 @@ export default function MyBoardPage() {
                     </div>
                   </CompetitionRateBox>
                 </div>
-                <div style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <CompetitionRateBox>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        marginTop: '26px',
-                        marginLeft: '36px',
-                        marginBottom: '14px',
-                      }}
-                    >
-                      실시간 지원자
-                    </Typography>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
-                      <path d="M0 1L392 1" stroke="#DFDFDF" />
-                    </svg>
-                    <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
+                <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
+                  <BoxTitleText>실시간 지원자</BoxTitleText>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                    <path d="M0 1L392 1" stroke="#DFDFDF" />
+                  </svg>
+                  <div style={{ paddingTop: '35px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
                         {`32\u00A0`}
                       </Typography>
@@ -1083,30 +1073,36 @@ export default function MyBoardPage() {
                           marginLeft: '13px',
                         }}
                       >
-                        {`\u00A0 명`}
+                        {`\u00A0 명 정원`}
                       </Typography>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '37px', marginLeft: '36px' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path
-                          d="M13.416 2.3335V5.8335H9.91602"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                        Last Update 5:58 PM
+                    <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
+                      <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
+                        32명의 지원자가 경영학과를 지원했습니다.
                       </Typography>
+                      <div style={{ display: 'flex', marginTop: '18px' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path
+                            d="M13.416 2.3335V5.8335H9.91602"
+                            stroke="#A8A8A8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
+                            stroke="#A8A8A8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
+                          Last Update 5:58 PM
+                        </Typography>
+                      </div>
                     </div>
-                  </CompetitionRateBox>
-                </div>
+                  </div>
+                </CompetitionRateBox>
+
                 <div style={{ marginTop: '-575px', marginLeft: '847px' }}>
                   <ThreeYearCumulativeDataBox>
                     <Typography
@@ -1510,7 +1506,9 @@ export default function MyBoardPage() {
                     </svg>
                     <PieChartComponent />
                   </Graph_1_1Box>
-                  <Graph_2_1Box />
+                  <Graph_2_1Box>
+                    <HalfPieChartComponent />
+                  </Graph_2_1Box>
                 </div>
                 <Graph_2Box>
                   <Typography
@@ -1527,6 +1525,7 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
                     <path d="M0 1L535 1" stroke="#DFDFDF" />
                   </svg>
+                  <PlotChartComponent />
                 </Graph_2Box>
               </div>
             </>
@@ -1672,6 +1671,8 @@ const EachYearHeadBox = styled.div`
   border-radius: 5px;
   border: 1px solid #eee;
   box-shadow: 0px 2.91057px 145.52846px 0px rgba(20, 20, 20, 0.05);
+  margin-top: 10px;
+  margin-left: 16px;
 `;
 
 const RangeBox = styled.div`
@@ -1746,10 +1747,11 @@ const MajorSymbol = styled.img`
   margin-left: 15.29px; // 40.29
 `;
 
+// 문제의 파트
 const BigMajorSymbol = styled.img`
-  width: 184px;
-  height: 241px;
-  //background: url(<path-to-image>), lightgray -88.544px -85.232px / 200.309% 193.598% no-repeat;
+  width: 100%; // 184px;
+  height: 100%; // 241px;
+  object-fit: fill;
 `;
 
 // ----------------SVG----------------
@@ -1779,3 +1781,15 @@ const BlurMsg = styled.div`
   gap: 24px;
 `;
 // ---------------Blur Wrapper for non-applied user---------------
+
+const BoxTitleText = styled.div`
+  color: #141414;
+  font-family: Pretendard;
+  font-style: normal;
+  line-height: 100%;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 26px;
+  margin-left: 36px;
+  margin-bottom: 14px;
+`;

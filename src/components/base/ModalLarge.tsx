@@ -55,7 +55,7 @@ const DialogBox = styled.dialog`
   z-index: 10;
 `;
 
-// 모달 뒷 (검은) 배경
+// 모달 뒷 (검은) 배경 - 크기 문제 해결 필요
 const Backdrop = styled.div`
   width: 100%; // 100vw;
   height: 100%; // 100vh;
