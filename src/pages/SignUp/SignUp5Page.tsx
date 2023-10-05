@@ -210,7 +210,10 @@ const join = async (role: string) => {
   } else {
     await axios.post(url, {
       ...commonData,
-      hopeMajors: [sessionStorage.getItem('hopeMajor1'), sessionStorage.getItem('hopeMajor2')],
+      curGPA: sessionStorage.getItem('GPA'),
+      hopeMajor1: sessionStorage.getItem('hopeMajor1'),
+      hopeMajor2: sessionStorage.getItem('hopeMajor2'),
+      hopeSemester: sessionStorage.getItem('hopeSemester'),
     });
   }
 };
@@ -320,7 +323,7 @@ function SignUp5Page() {
 
   useEffect(() => {
     const isAllChecked = allStateAgreed();
-    setIsButtonActive(isAllChecked);
+    setIsButtonActive(individualChecks.first && individualChecks.second && individualChecks.third);
     setAllCheckedUI(isAllChecked);
   }, [individualChecks]);
 
