@@ -13,6 +13,7 @@ export interface ModalProps {
   onClickModal: () => void; // 함수;
 }
 
+/*
 export default function EditDefaultModal(props: ModalProps) {
   const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal } = props;
 
@@ -24,6 +25,7 @@ export default function EditDefaultModal(props: ModalProps) {
           <div style={{ height: '40px' }}></div>
           <EditModalHeaderButton isClicked={true}>나의 기본전공</EditModalHeaderButton>
 
+        
           <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             인증번호를 받을 고려대 이메일 주소를 입력해주세요!
           </Typography>
@@ -101,3 +103,4 @@ const ActionWrapper = styled.div`
   gap: 30px;
   margin-top: 72px;
 `;
+*/
