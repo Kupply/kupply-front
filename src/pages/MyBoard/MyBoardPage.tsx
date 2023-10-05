@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
-import { InterestMajorEditButton, EditButton } from '../../assets/myboardpage/InterestMajorEditButton';
+import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/MyBoardChart';
@@ -16,7 +16,8 @@ import SemesterButton from '../../assets/myboardpage/SemesterButton';
 */
 
 /* 
-수정사항: BigSymbol 크기 및 위치 수정 필요
+수정사항 1: BigSymbol 크기 및 위치 수정
+수정사항 2: editButton 클릭 후에도 Active 버튼 유지
 */
 
 const major = {
@@ -144,7 +145,7 @@ export default function MyBoardPage() {
                 >
                   고대빵
                 </Typography>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Typography
                     size="bodyText"
                     style={{ color: 'rgba(20, 20, 20, 0.60)', fontWeight: '500', marginLeft: '6px' }}
