@@ -1,11 +1,10 @@
-import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/MyBoardChart';
-import { ProfileEditPage, InterestMajorPage, GpaPage, GpaSavePage, HopeSemester } from '../MyBoard/MyBoardEditModal';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
 
 /* 
