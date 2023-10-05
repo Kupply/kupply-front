@@ -4,7 +4,7 @@ import Typography from '../../assets/Typography';
 import { InterestMajorEditButton, EditButton } from '../../assets/buttons/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/buttons/MockApplication';
 import InterestMajorButton from '../../assets/buttons/InterestMajorButton';
-import PieChartComponent from '../../assets/MyBoardChart';
+import {PieChartComponent, HalfPieChartComponent, PlotChartComponent} from '../../assets/MyBoardChart';
 import { ProfileEditPage, InterestMajorPage, GpaPage, GpaSavePage, HopeSemester } from '../MyBoard/MyBoardEditModal';
 
 /* 
@@ -952,7 +952,9 @@ export default function MyBoardPage() {
                     </svg>
                     <PieChartComponent />
                   </Graph_1_1Box>
-                  <Graph_2_1Box />
+                  <Graph_2_1Box>
+                    <HalfPieChartComponent />
+                  </Graph_2_1Box>
                 </div>
                 <Graph_2Box>
                   <Typography
@@ -969,6 +971,7 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
                     <path d="M0 1L535 1" stroke="#DFDFDF" />
                   </svg>
+                  <PlotChartComponent/>
                 </Graph_2Box>
               </div>
             </>
