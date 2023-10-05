@@ -258,7 +258,7 @@ function SignUp5Page() {
 
   useEffect(() => {
     const isAllChecked = allStateAgreed();
-    setIsButtonActive(isAllChecked);
+    setIsButtonActive(individualChecks.first && individualChecks.second && individualChecks.third);
     setAllCheckedUI(isAllChecked);
   }, [individualChecks]);
 
