@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import AlertIconExclamation from '../assets/icons/AlertIconExclamation';
-import VerificationButton from '../assets/buttons/VerificationButton';
-import Typography from '../assets/Typography';
-import ModalLarge from '../components/base/ModalLarge';
+import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
+import VerificationButton from '../../assets/buttons/VerificationButton';
+import Typography from '../../assets/Typography';
+import ModalLarge from '../../components/base/ModalLarge';
 
 export interface ModalProps {
   currentModal: number;
