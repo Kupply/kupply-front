@@ -6,6 +6,7 @@ import MockApplicationButton from '../../assets/buttons/MockApplication';
 import InterestMajorButton from '../../assets/buttons/InterestMajorButton';
 import PieChartComponent from '../../assets/MyBoardChart';
 import { ProfileEditPage, InterestMajorPage, GpaPage, GpaSavePage, HopeSemester } from '../MyBoard/MyBoardEditModal';
+import SemesterButton from '../../assets/buttons/SemesterButton';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -89,6 +90,28 @@ export default function MyBoardPage() {
     setOnViewMajor(2);
     console.log('2지망 선택');
   }, [onViewMajor]);
+
+  // 아래는 데이터를 보여주는 학기 버튼 선택 관련된 코드이다.
+  interface SemesterBtnStates {
+    '2023-1R': boolean;
+    '2022-2R': boolean;
+    '2022-1R': boolean;
+  }
+
+  const [semesterBtnStates, setSemesterBtnStates] = useState<SemesterBtnStates>({
+    '2023-1R': true,
+    '2022-2R': false,
+    '2022-1R': false,
+  });
+
+  const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
+    // Create a new object with updated isClicked values
+    const updatedBtnStates: SemesterBtnStates = { ...semesterBtnStates };
+    for (const key in semesterBtnStates) {
+      updatedBtnStates[key as keyof SemesterBtnStates] = key === buttonName;
+    }
+    setSemesterBtnStates(updatedBtnStates);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -530,51 +553,25 @@ export default function MyBoardPage() {
                     >
                       3개년 합격지표
                     </Typography>
-                    <EachYearHeadBox style={{ marginTop: '10px', marginLeft: '16px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '45px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2023-1R
-                          </Typography>
-                        </EachYearBox>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '4px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2022-2R
-                          </Typography>
-                        </EachYearBox>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '4px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2022-1R
-                          </Typography>
-                        </EachYearBox>
-                      </div>
+                    <EachYearHeadBox>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2023-1R']}
+                        onClick={() => handleSemesterBtnClick('2023-1R')}
+                      >
+                        2023-1R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-2R']}
+                        onClick={() => handleSemesterBtnClick('2022-2R')}
+                      >
+                        2022-2R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-1R']}
+                        onClick={() => handleSemesterBtnClick('2022-1R')}
+                      >
+                        2022-1R
+                      </SemesterButton>
                     </EachYearHeadBox>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -1115,51 +1112,25 @@ export default function MyBoardPage() {
                     >
                       3개년 합격지표
                     </Typography>
-                    <EachYearHeadBox style={{ marginTop: '10px', marginLeft: '16px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '45px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2023-1R
-                          </Typography>
-                        </EachYearBox>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '4px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2022-2R
-                          </Typography>
-                        </EachYearBox>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '4px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2022-1R
-                          </Typography>
-                        </EachYearBox>
-                      </div>
+                    <EachYearHeadBox>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2023-1R']}
+                        onClick={() => handleSemesterBtnClick('2023-1R')}
+                      >
+                        2023-1R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-2R']}
+                        onClick={() => handleSemesterBtnClick('2022-2R')}
+                      >
+                        2022-2R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-1R']}
+                        onClick={() => handleSemesterBtnClick('2022-1R')}
+                      >
+                        2022-1R
+                      </SemesterButton>
                     </EachYearHeadBox>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -1690,18 +1661,14 @@ const ThreeYearCumulativeDataBox = styled.div`
 `;
 
 const EachYearHeadBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 362px;
   height: 44px;
   border-radius: 5px;
   border: 1px solid #eee;
   box-shadow: 0px 2.91057px 145.52846px 0px rgba(20, 20, 20, 0.05);
-`;
-
-const EachYearBox = styled.div`
-  width: 88px;
-  height: 28px;
-  border-radius: 3.638px;
-  background: #d85888;
 `;
 
 const RangeBox = styled.div`

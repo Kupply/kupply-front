@@ -44,7 +44,7 @@ const Button = styled.button<InterestMajorProps>`
   }
 `;
 
-function InterestMajorButton(props: InterestMajorProps) {
+export default function InterestMajorButton(props: InterestMajorProps) {
   const { children = '1지망', onView = true, ...rest } = props;
   return (
     <Button onView={onView} {...rest}>
@@ -52,5 +52,3 @@ function InterestMajorButton(props: InterestMajorProps) {
     </Button>
   );
 }
-
-export default InterestMajorButton;
