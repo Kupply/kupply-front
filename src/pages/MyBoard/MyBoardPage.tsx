@@ -6,6 +6,7 @@ import MockApplicationButton from '../../assets/buttons/MockApplication';
 import InterestMajorButton from '../../assets/buttons/InterestMajorButton';
 import {PieChartComponent, HalfPieChartComponent, PlotChartComponent} from '../../assets/MyBoardChart';
 import { ProfileEditPage, InterestMajorPage, GpaPage, GpaSavePage, HopeSemester } from '../MyBoard/MyBoardEditModal';
+import SemesterButton from '../../assets/buttons/SemesterButton';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -73,7 +74,6 @@ const major = {
 export default function MyBoardPage() {
   const [isApplied, setIsApplied] = useState<boolean>(false);
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
-  // 회원의 1, 2지망 학과에 따라 다른 화면을 보여주어야 할 것이다. 현재는 하드코딩이므로 수정 필요하다.
   const [scrollY, setScrollY] = useState(0);
 
   const onClickApplication = useCallback(() => {
@@ -90,6 +90,28 @@ export default function MyBoardPage() {
     setOnViewMajor(2);
     console.log('2지망 선택');
   }, [onViewMajor]);
+
+  // 아래는 데이터를 보여주는 학기 버튼 선택 관련된 코드이다.
+  interface SemesterBtnStates {
+    '2023-1R': boolean;
+    '2022-2R': boolean;
+    '2022-1R': boolean;
+  }
+
+  const [semesterBtnStates, setSemesterBtnStates] = useState<SemesterBtnStates>({
+    '2023-1R': true,
+    '2022-2R': false,
+    '2022-1R': false,
+  });
+
+  const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
+    // Create a new object with updated isClicked values
+    const updatedBtnStates: SemesterBtnStates = { ...semesterBtnStates };
+    for (const key in semesterBtnStates) {
+      updatedBtnStates[key as keyof SemesterBtnStates] = key === buttonName;
+    }
+    setSemesterBtnStates(updatedBtnStates);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -381,9 +403,9 @@ export default function MyBoardPage() {
           </div>
         </LeftSideWrapper>
         <div style={{ marginTop: '-82px' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <InterestMajorButton onClick={onClickInterest1} style={{ marginTop: '154px', marginLeft: '551px' }} />
-            <InterestMajorButton onClick={onClickInterest2} style={{ marginTop: '154px', marginLeft: '18px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: '154px', marginLeft: '551px', gap: '18px' }}>
+            <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} />
+            <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2}>
               2지망
             </InterestMajorButton>
           </div>
@@ -531,51 +553,25 @@ export default function MyBoardPage() {
                     >
                       3개년 합격지표
                     </Typography>
-                    <EachYearHeadBox style={{ marginTop: '10px', marginLeft: '16px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '45px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2023-1R
-                          </Typography>
-                        </EachYearBox>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '4px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2022-2R
-                          </Typography>
-                        </EachYearBox>
-                        <EachYearBox style={{ marginTop: '8px', marginLeft: '4px' }}>
-                          <Typography
-                            size="smallText"
-                            style={{
-                              color: 'var(--White, #FFF)',
-                              fontWeight: '500',
-                              lineHeight: '103.949%',
-                              marginTop: '7px',
-                              marginLeft: '16px',
-                            }}
-                          >
-                            2022-1R
-                          </Typography>
-                        </EachYearBox>
-                      </div>
+                    <EachYearHeadBox>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2023-1R']}
+                        onClick={() => handleSemesterBtnClick('2023-1R')}
+                      >
+                        2023-1R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-2R']}
+                        onClick={() => handleSemesterBtnClick('2022-2R')}
+                      >
+                        2022-2R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-1R']}
+                        onClick={() => handleSemesterBtnClick('2022-1R')}
+                      >
+                        2022-1R
+                      </SemesterButton>
                     </EachYearHeadBox>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -975,7 +971,566 @@ export default function MyBoardPage() {
                 </Graph_2Box>
               </div>
             </>
-          ) : null}
+          ) : (
+            <>
+              <div style={{ marginLeft: '551px' }}>
+                <BigMajorSymbolBox style={{ marginTop: '32px' }}>
+                  <BigMajorSymbol
+                    src="design_image/major_symbol/media_trans.png"
+                    alt="School of Media and Communication"
+                    style={{ marginTop: '107px', marginLeft: '105px' }}
+                  />
+                  <Typography
+                    size="title2"
+                    style={{
+                      lineHeight: '138.889%',
+                      marginTop: '34px',
+                      textAlign: 'center',
+                    }}
+                  >
+                    미디어학부
+                  </Typography>
+                  <Typography
+                    size="largeText"
+                    style={{
+                      fontWeight: '500',
+                      opacity: '0.8',
+                      marginTop: '0px',
+                      textAlign: 'center',
+                    }}
+                  >
+                    School of Media and Communication
+                  </Typography>
+                </BigMajorSymbolBox>
+                <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
+                  <CompetitionRateBox>
+                    <Typography
+                      size="bodyText"
+                      style={{
+                        marginTop: '26px',
+                        marginLeft: '36px',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      실시간 경쟁률
+                    </Typography>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                      <path d="M0 1L392 1" stroke="#DFDFDF" />
+                    </svg>
+                    <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
+                      <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
+                        {`3.14\u00A0`}
+                      </Typography>
+                      <Typography
+                        size="heading1"
+                        style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
+                      >
+                        : 1
+                      </Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '37px', marginLeft: '36px' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                          d="M13.416 2.3335V5.8335H9.91602"
+                          stroke="#A8A8A8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
+                          stroke="#A8A8A8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
+                        Last Update 5:58 PM
+                      </Typography>
+                    </div>
+                  </CompetitionRateBox>
+                </div>
+                <div style={{ marginTop: '23px', marginLeft: '424px' }}>
+                  <CompetitionRateBox>
+                    <Typography
+                      size="bodyText"
+                      style={{
+                        marginTop: '26px',
+                        marginLeft: '36px',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      실시간 지원자
+                    </Typography>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                      <path d="M0 1L392 1" stroke="#DFDFDF" />
+                    </svg>
+                    <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
+                      <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
+                        {`32\u00A0`}
+                      </Typography>
+                      <Typography
+                        size="heading1"
+                        style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
+                      >
+                        / 12
+                      </Typography>
+                      <Typography
+                        size="normalText"
+                        style={{
+                          color: 'var(--Black2, #434343)',
+                          fontWeight: '400',
+                          lineHeight: '112.5%',
+                          marginLeft: '13px',
+                        }}
+                      >
+                        {`\u00A0 명`}
+                      </Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '37px', marginLeft: '36px' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                          d="M13.416 2.3335V5.8335H9.91602"
+                          stroke="#A8A8A8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
+                          stroke="#A8A8A8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
+                        Last Update 5:58 PM
+                      </Typography>
+                    </div>
+                  </CompetitionRateBox>
+                </div>
+                <div style={{ marginTop: '-575px', marginLeft: '847px' }}>
+                  <ThreeYearCumulativeDataBox>
+                    <Typography
+                      size="bodyText"
+                      style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
+                    >
+                      3개년 합격지표
+                    </Typography>
+                    <EachYearHeadBox>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2023-1R']}
+                        onClick={() => handleSemesterBtnClick('2023-1R')}
+                      >
+                        2023-1R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-2R']}
+                        onClick={() => handleSemesterBtnClick('2022-2R')}
+                      >
+                        2022-2R
+                      </SemesterButton>
+                      <SemesterButton
+                        isClicked={semesterBtnStates['2022-1R']}
+                        onClick={() => handleSemesterBtnClick('2022-1R')}
+                      >
+                        2022-1R
+                      </SemesterButton>
+                    </EachYearHeadBox>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                      <path d="M0 1L392 1" stroke="#DFDFDF" />
+                    </svg>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '41px' }}>
+                      <Typography
+                        size="bodyText"
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          lineHeight: '90%',
+                          marginLeft: '36px',
+                        }}
+                      >
+                        2024-1R 미디어학부 모집정보
+                      </Typography>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="60"
+                        height="60"
+                        viewBox="0 0 60 60"
+                        fill="none"
+                        style={{ marginLeft: '6px' }}
+                      >
+                        <path
+                          d="M26 37L34 30"
+                          stroke="#141414"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M34 30L26 22"
+                          stroke="#141414"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '51px' }}>
+                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
+                        24-1 선발 인원
+                      </Typography>
+                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '85px' }}>
+                        경쟁률
+                      </Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
+                      <Typography
+                        size="largeText"
+                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
+                      >
+                        25명
+                      </Typography>
+                      <Typography
+                        size="largeText"
+                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '143px' }}
+                      >
+                        3.59 : 1
+                      </Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
+                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
+                        합격자 평균 학점
+                      </Typography>
+                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '76px' }}>
+                        합격자 최저 학점
+                      </Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
+                      <Typography
+                        size="largeText"
+                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
+                      >
+                        4.23
+                      </Typography>
+                      <Typography
+                        size="largeText"
+                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '142px' }}
+                      >
+                        4.12
+                      </Typography>
+                    </div>
+                  </ThreeYearCumulativeDataBox>
+                </div>
+              </div>
+              <div style={{ marginLeft: '551px', marginTop: '30px' }}>
+                <RangeBox>
+                  <Typography
+                    size="bodyText"
+                    style={{
+                      color: 'var(--Main-Black, #141414)',
+                      marginTop: '26px',
+                      marginLeft: '36px',
+                      marginBottom: '14px',
+                    }}
+                  >
+                    내 학점 위치 파악하기
+                  </Typography>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
+                    <path d="M0 1L1239 1" stroke="#DFDFDF" />
+                  </svg>
+                  <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px', marginTop: '7px' }}>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="247"
+                        height="174"
+                        viewBox="0 0 247 174"
+                        fill="none"
+                      >
+                        <g filter="url(#filter0_d_3391_8955)">
+                          <path
+                            d="M30 25C30 22.2386 32.2386 20 35 20H212C214.761 20 217 22.2386 217 25V129C217 131.761 214.761 134 212 134H35C32.2386 134 30 131.761 30 129V25Z"
+                            fill="white"
+                            stroke="black"
+                            stroke-width="2"
+                          />
+                        </g>
+                        <defs>
+                          <filter
+                            id="filter0_d_3391_8955"
+                            x="0"
+                            y="0"
+                            width="247"
+                            height="174"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                          >
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feOffset dy="10" />
+                            <feGaussianBlur stdDeviation="15" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 0.505726 0 0 0 0 0.847059 0 0 0 0 0.345098 0 0 0 0.1 0"
+                            />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3391_8955" />
+                            <feBlend
+                              mode="normal"
+                              in="SourceGraphic"
+                              in2="effect1_dropShadow_3391_8955"
+                              result="shape"
+                            />
+                          </filter>
+                        </defs>
+                      </svg>
+                    </div>
+                    <div style={{ marginLeft: '-73px' }}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="260"
+                        height="174"
+                        viewBox="0 0 260 174"
+                        fill="none"
+                      >
+                        <g filter="url(#filter0_d_3391_8959)">
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H225C227.761 134 230 131.761 230 129V25C230 22.2386 227.761 20 225 20H48Z"
+                            fill="white"
+                            stroke="black"
+                            stroke-width="2"
+                          />
+                        </g>
+                        <defs>
+                          <filter
+                            id="filter0_d_3391_8959"
+                            x="0"
+                            y="0"
+                            width="260"
+                            height="174"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                          >
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feOffset dy="10" />
+                            <feGaussianBlur stdDeviation="15" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 0.270588 0 0 0 0 0.4 0 0 0 0 0.886275 0 0 0 0.1 0"
+                            />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3391_8959" />
+                            <feBlend
+                              mode="normal"
+                              in="SourceGraphic"
+                              in2="effect1_dropShadow_3391_8959"
+                              result="shape"
+                            />
+                          </filter>
+                        </defs>
+                      </svg>
+                    </div>
+                    <div style={{ marginLeft: '-73px' }}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="259"
+                        height="174"
+                        viewBox="0 0 259 174"
+                        fill="none"
+                      >
+                        <g filter="url(#filter0_d_3391_8962)">
+                          <mask id="path-1-inside-1_3391_8962" fill="white">
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H224C226.761 134 229 131.761 229 129V25C229 22.2386 226.761 20 224 20H48Z"
+                            />
+                          </mask>
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H224C226.761 134 229 131.761 229 129V25C229 22.2386 226.761 20 224 20H48Z"
+                            fill="#E96D6D"
+                            fill-opacity="0.8"
+                            shape-rendering="crispEdges"
+                          />
+                          <path
+                            d="M43 35.4944L43.5 36.3605L44 36.0718V35.4944H43ZM30 43L29.5 42.134L28 43L29.5 43.866L30 43ZM43 50.5056H44V49.9282L43.5 49.6395L43 50.5056ZM44 25C44 22.7909 45.7909 21 48 21V19C44.6863 19 42 21.6863 42 25H44ZM44 35.4944V25H42V35.4944H44ZM42.5 34.6284L29.5 42.134L30.5 43.866L43.5 36.3605L42.5 34.6284ZM29.5 43.866L42.5 51.3716L43.5 49.6395L30.5 42.134L29.5 43.866ZM44 129V50.5056H42V129H44ZM48 133C45.7909 133 44 131.209 44 129H42C42 132.314 44.6863 135 48 135V133ZM224 133H48V135H224V133ZM228 129C228 131.209 226.209 133 224 133V135C227.314 135 230 132.314 230 129H228ZM228 25V129H230V25H228ZM224 21C226.209 21 228 22.7909 228 25H230C230 21.6863 227.314 19 224 19V21ZM48 21H224V19H48V21Z"
+                            fill="#E96D6D"
+                            mask="url(#path-1-inside-1_3391_8962)"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H224C226.761 134 229 131.761 229 129V25C229 22.2386 226.761 20 224 20H48Z"
+                            stroke="black"
+                            stroke-width="2"
+                          />
+                        </g>
+                        <defs>
+                          <filter
+                            id="filter0_d_3391_8962"
+                            x="0"
+                            y="0"
+                            width="259"
+                            height="174"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                          >
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feOffset dy="10" />
+                            <feGaussianBlur stdDeviation="15" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 0.913725 0 0 0 0 0.427451 0 0 0 0 0.427451 0 0 0 0.2 0"
+                            />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3391_8962" />
+                            <feBlend
+                              mode="normal"
+                              in="SourceGraphic"
+                              in2="effect1_dropShadow_3391_8962"
+                              result="shape"
+                            />
+                          </filter>
+                        </defs>
+                      </svg>
+                    </div>
+                    <div style={{ marginLeft: '-73px' }}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="260"
+                        height="174"
+                        viewBox="0 0 260 174"
+                        fill="none"
+                      >
+                        <g filter="url(#filter0_d_3391_8965)">
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M48 20C45.2386 20 43 22.2386 43 25V35.4944L30 43L43 50.5056V129C43 131.761 45.2386 134 48 134H225C227.761 134 230 131.761 230 129V25C230 22.2386 227.761 20 225 20H48Z"
+                            fill="white"
+                            stroke="black"
+                            stroke-width="2"
+                          />
+                        </g>
+                        <defs>
+                          <filter
+                            id="filter0_d_3391_8965"
+                            x="0"
+                            y="0"
+                            width="260"
+                            height="174"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                          >
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feOffset dy="10" />
+                            <feGaussianBlur stdDeviation="15" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 0.916667 0 0 0 0 0.034375 0 0 0 0 0.034375 0 0 0 0.2 0"
+                            />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3391_8965" />
+                            <feBlend
+                              mode="normal"
+                              in="SourceGraphic"
+                              in2="effect1_dropShadow_3391_8965"
+                              result="shape"
+                            />
+                          </filter>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+                  <div style={{ marginLeft: '828px', marginTop: '-145px' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2" height="102" viewBox="0 0 2 102" fill="none">
+                      <path d="M1 101L0.999996 1" stroke="#DFDFDF" stroke-linecap="round" />
+                    </svg>
+                  </div>
+                  <Typography
+                    size="bodyText"
+                    style={{ color: 'var(--Main-Black, #141414)', marginLeft: '883px', marginTop: '-91px' }}
+                  >
+                    내 등수
+                    <br />
+                    상위 몇프로
+                  </Typography>
+                </RangeBox>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  marginLeft: '551px',
+                  marginTop: '30px',
+                  gap: '30px',
+                }}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  <Graph_1_1Box>
+                    <Typography
+                      size="bodyText"
+                      style={{
+                        color: 'var(--Main-Black, #141414)',
+                        marginLeft: '36px',
+                        marginTop: '26px',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      지원자 정보 살펴보기
+                    </Typography>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
+                      <path d="M0 1L674 1" stroke="#DFDFDF" />
+                    </svg>
+                    <PieChartComponent />
+                  </Graph_1_1Box>
+                  <Graph_2_1Box />
+                </div>
+                <Graph_2Box>
+                  <Typography
+                    size="bodyText"
+                    style={{
+                      color: 'var(--Main-Black, #141414)',
+                      marginLeft: '36px',
+                      marginTop: '26px',
+                      marginBottom: '14px',
+                    }}
+                  >
+                    이중전공 지원자 학과 분포
+                  </Typography>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
+                    <path d="M0 1L535 1" stroke="#DFDFDF" />
+                  </svg>
+                </Graph_2Box>
+              </div>
+            </>
+          )}
           {isApplied ? null : (
             <BlurWrapper>
               <BlurMsg>
@@ -993,7 +1548,6 @@ export default function MyBoardPage() {
     </>
   );
 }
-// null 수정 필요
 
 /* 
 전체 페이지 크기 (헤더, 풋터 포함)
@@ -1110,18 +1664,14 @@ const ThreeYearCumulativeDataBox = styled.div`
 `;
 
 const EachYearHeadBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 362px;
   height: 44px;
   border-radius: 5px;
   border: 1px solid #eee;
   box-shadow: 0px 2.91057px 145.52846px 0px rgba(20, 20, 20, 0.05);
-`;
-
-const EachYearBox = styled.div`
-  width: 88px;
-  height: 28px;
-  border-radius: 3.638px;
-  background: #d85888;
 `;
 
 const RangeBox = styled.div`
