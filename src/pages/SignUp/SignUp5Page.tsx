@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Typography from '../../assets/Typography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
-import TextFieldBox from '../../assets/TextFieldBox';
 import NextButton from '../../assets/buttons/NextButton';
 import LoginButton from '../../assets/buttons/LoginButton';
 import PrevButton from '../../assets/buttons/PrevButton';
-import CheckButton from '../../assets/checkbox/CheckButton';
 import { check } from 'prettier';
 import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
 import axios from 'axios';
+import { useTable } from 'react-table';
+import { AnyCnameRecord } from 'dns';
 
 /*
 주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
@@ -218,6 +218,71 @@ const join = async (role: string) => {
   }
 };
 
+/* 개인정보처리방침에 삽입되는 표
+const columnData = [
+  { accessor: 'objective', Header: '수집 이용목적' },
+  { accessor: 'contents', Header: '수집 내용' },
+  { accessor: 'method', Header: '수집 방법' },
+  { accessor: 'period', Header: '보유 및 이용기간' },
+];
+
+const columns = useMemo(() => columnData, []);
+const data = useMemo(
+  () => [
+    {
+      objective: '회원관리',
+      contents:
+        '- (필수항목): 고려대학교 이메일, 이름, 고려대학교 학번, 본전공(1전공), 아이디, 비밀번호, 닉네임, 희망 이중전공 1, 2지망 <br/> - (선택항목): 전화번호, 학점, 희망 이중 지원학기',
+      method: '회원가입',
+      period: '회원 탈퇴 시까지',
+    },
+  ],
+  [],
+);
+
+const [info, setInfo] = useState();
+const getTable = () => {
+  data.getTable().then(item => setInfo(item));
+};
+const data = useMemo(() => info, [info])
+
+
+const Table = ({ columns, data }: any) => {
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
+
+  return (
+    <TableSheet {...getTableProps()}>
+      <TableHead>
+        {headerGroups.map((header) => (
+          // header 배열 호출
+          <Header {...headerGroups.getHeaderGroupProps()}>
+            {header.headers.map((col) => (
+              // getHeaderProps 가 각 셀 순서에 맞게 header 호출
+              <Th {...col.getHeaderProps()}>{col.render('Header')}</Th>
+            ))}
+          </Header>
+        ))}
+      </TableHead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row);
+          return (
+            // 각 row data 호출
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => (
+                // 각 cell data 호출
+                <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+              ))}
+            </tr>
+          );
+        })}
+      </tbody>
+    </TableSheet>
+  );
+};
+*/
+
+// 페이지
 function SignUp5Page() {
   /*각 체크박스의 상태를 state로 관리*/
   const [allChecked, setAllChecked] = useState(false);
@@ -800,16 +865,142 @@ function SignUp5Page() {
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
               <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
-                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의
-                개인정보 수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보
-                제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교
-                소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된 범위에서만 활용됩니다. 「개인정보보호법」 등 관련
-                법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른
-                목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를 통해
-                열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-                아래 항목에 명시된 범위에서만 활용됩니다.
+                쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스(이하 “서비스”라
+                함)를 이용함과 동시에 온라인 상에서 각 운영 서비스에 제공한 개인정보가 보호받을 수 있도록 최선을 다하고
+                있습니다.
+                <br />
+                <br />
+                쿠플라이는 ‘개인정보보호법’에 따라 정보주체의 개인정보를 보호하고 있으며 이와 관련한 고충을 신속하고
+                원활하게 처리할 수 있도록 하기 위하여 ’개인정보보호법’ 제30조에 따라 다음과 같이 개인정보 처리방침을
+                수립하고 공개합니다. 서비스 운영팀은 개인정보처리방침을 홈페이지의 첫 화면에 공개함으로써 이용자들이
+                언제나 용이하게 확인할 수 있도록 조치하고 있습니다.
+                <br />
+                <br />
+                쿠플라이의 개인정보처리방침은 관련 법령 및 지침 변경이나 서비스 운영팀 내부 방침 변경 등으로 인하여
+                수시로 변경될 수 있으며, 개인정보처리방침의 지속적인 개선을 위하여 필요한 절차를 정하고 있습니다.
+                개인정보처리방침을 개정하는 경우 서비스 운영팀은 그 변경 사항을 홈페이지에 게시하여 이용자들이 개정된
+                사항을 쉽게 알아볼 수 있도록 하고 있습니다.
+                <br />
+                <br />
+                쿠플라이의 개인정보처리방침은 다음과 같은 내용을 담고 있습니다.
+                <br />
+                <br />
+              </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '600', textAlign: 'left' }}>
+                1. 정보 수집에 대한 동의
+                <br />
+                2. 개인정보 수집•이용 목적, 수집하는 개인정보의 항목 및 수집방법
+                <br />
+                3. 개인정보의 제3자 제공
+                <br />
+                4. 개인정보의 보유 및 이용 기간, 개인정보의 파기절차 및 방법
+                <br />
+                5. 개인정보 보호책임자 및 개인정보에 관한 민원 서비스
+                <br />
+                6. 개인정보의 안전성 확보조치에 관한 사항
+                <br />
+                7. 고지의 의무
+                <br />
+                <br />
+                <br />
+              </Typography>
+              <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                1. 정보 수집에 대한 동의
+              </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                (1) 쿠플라이는 개인정보를 개인의 동의 없이 수집하지 않습니다. 쿠플라이는 이용자들이 회사의
+                개인정보처리방침, 이용약관, 기타 서비스 정책 내용에 대하여 '동의' 버튼 또는 '취소' 버튼을 클릭할 수 있는
+                절차를 마련하여, '동의' 버튼을 클릭하면 개인정보 수집에 대해 동의한 것으로 봅니다. (2) 쿠플라이는
+                스크래핑 등의 기술을 이용하여 이용자의 데이터를 수집하는 행위를 불허합니다. 쿠플라이는 입력하신 정보를
+                이용자들에게 사전에 밝힌 목적 이외에 다른 목적으로는 사용하지 않으며, 외부로 유출하지 않습니다. 단,
+                쿠플라이에 링크되어 있는 웹사이트들이 개인정보를 수집하는 행위에 대해서는 본 ‘개인정보처리방침’이
+                적용되지 않음을 알려드립니다.
+                <br />
+                <br />
+                개인정보란 살아 있는 개인에 관한 정보로서 다음 어느 하나에 해당하는 정보를 말합니다.
+                <br />
+                - 성명, 주민등록번호 및 영상 등을 통하여 개인을 식별할 수 있는 정보
+                <br />
+                - 해당 정보만으로는 특정 개인을 식별할 수 없더라도 다른 정보와 쉽게 결합하여 알아볼 수 있는 정보, 이
+                경우 쉽게 결합할 수 있는지 여부는 다른 정보의 입수 가능성 등 개인을 알아보는 데 소요되는 시간, 비용,
+                기술 등을 합리적으로 고려하여야 합니다.
+                <br />- 가명정보
+              </Typography>
+              <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                2. 개인정보 수집, 이용 목적, 수집하는 개인정보의 항목 및 수집방법
+              </Typography>
+              <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                3. 개인정보의 제3자 제공
+              </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                쿠플라이는 이용자의 사전 동의 없이 개인정보를 외부에 제공하지 않습니다. 단, 이용자가 외부 제휴사의
+                서비스를 이용하기 위하여 개인정보 제공에 직접 동의를 한 경우, 그리고 관련 법령에 의거해 쿠플라이에
+                개인정보 제출 의무가 발생한 경우, 이용자의 생명이나 안전에 급박한 위험이 확인되어 이를 해소하기 위한
+                경우에 한하여 개인정보를 제공하고 있습니다.
+              </Typography>
+              <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                4. 개인정보의 보유 및 이용 기간, 개인정보의 파기절차 및 방법
+              </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                (1) 이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체 없이 파기합니다. 회원
+                탈퇴를 요청하거나 개인정보의 수집 및 이용에 대한 동의를 철회하는 경우, 수집 및 이용목적이 달성되거나
+                보유 및 이용기간이 종료한 경우 해당 개인정보를 지체 없이 파기합니다. 단, 관련 법령에 의하여 보존할
+                필요가 있는 경우 아래와 같이 관련 법령에서 정한 일정한 기간 동안 회원정보를 보관합니다.
+                <br />
+                - 서비스 이용 관련 개인정보 (로그인 방문 기록)
+                <br />
+                - 보존 근거: 통신비밀보호법
+                <br />
+                - 보존 기간: 3개월 이상
+                <br />
+                (2) 쿠플라이는 개인정보의 수집 및 이용목적이 달성된 개인정보는 재생이 불가능한 방법으로 파기하고
+                있습니다.
+              </Typography>
+              <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                5. 개인정보 보호책임자 및 개인정보에 관한 민원 서비스
+              </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                쿠플라이는 이용자의 개인정보 관련 문의사항 및 불만 처리 등을 위하여 아래와 같이 개인정보 보호 책임자를
+                지정하고 있습니다.
+                <br />
+                [개인정보 보호책임자]
+                <br />
+                - 이름: 오윤진
+                <br />
+                - 이메일: dhdbsrlw@korea.ac.kr
+                <br />
+                쿠플라이는 고려대학교 재학생들이 운영하는 서비스로서, 즉각적인 문의 응답은 어렵습니다. 다만, 개인정보
+                관련 민원 발생 시 아래 이메일로 문의주시면 최대한 빠르게 도와드리겠습니다.
+                <br />- 이메일: kupply.devkor@gmail.com
+                <br />
+                기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.
+                <br />
+                - 개인정보 분쟁조정위원회 (www.kopico.go.kr/ 1833-6972) <br />
+                - 개인정보침해신고센터 (privacy.kisa.or.kr / 국번없이 118) <br />
+                - 대검찰청 사이버범죄수사과 (www.spo.go.kr / 국번없이 1301) <br />- 경찰청 사이버수사국
+                (ecrm.police.go.kr / 국번없이 182)
+              </Typography>
+              <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                6.개인정보의 안전성 확보조치에 관한 사항
+              </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                쿠플라이는 이용자의 개인정보를 안전하게 관리하기 위하여 최선을 다하고 있으며, 개인정보보호법에 따라
+                개인정보를 안전하게 보호하고 있습니다. 또한 개인정보를 처리하는 인원을 최소한으로 제한하고 정기적인
+                교육과 비밀번호 변경을 통해 개인정보가 유출되지 않도록 안전하게 관리하고 있습니다. 다만, 이용자 본인의
+                부주의나 인터넷 상의 문제로 아이디, 비밀번호 등의 개인정보가 유출되어 발생한 문제에 대해 쿠플라이는
+                책임을 지지 않습니다.
+              </Typography>
+              <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                7. 고지의 의무
+              </Typography>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                개인정보처리방침의 내용의 추가, 삭제 및 수정이 있을 경우에는 시행하기 최소 7일 전에 홈페이지 등에
+                공지하도록 하겠습니다.
+                <br />
+                - 개인정보처리방침 버전 번호: v1.0
+                <br />
+                - 공고일자: 2023년 10월 10일
+                <br />- 시행일자:2023년 10울 20일
               </Typography>
             </ScrollBarSmall>
           </TextOutBox>

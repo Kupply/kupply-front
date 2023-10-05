@@ -7,14 +7,14 @@ import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import PreviousPage from './pages/PreviousPage';
 import ArchiveDetailPage from './pages/ArchiveDetailPage';
-import MyBoardPage from './pages/MyBoardPage';
+import MyBoardPage from './pages/MyBoard/MyBoardPage';
 import CommunityPage from './pages/CommunityPage';
 import MessagePage from './pages/MessagePage';
 import SettingsPage from './pages/SettingsPage';
 import SignUp1Page from './pages/SignUp/SignUp1Page';
 import SignUp2Page from './pages/SignUp/SignUp2Page';
 import SignUp3Page from './pages/SignUp/SignUp3Page';
-import AuthRequired from './AuthRequired';
+// import AuthRequired from './AuthRequired';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/SignUp/SignUp4Page';
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 
@@ -36,13 +36,14 @@ export default function App() {
     else setisLogined(false);
   }, []);
 
+  // element={<AuthRequired />}
   return (
     <Wrapper>
       <Header logined={isLogined} setLogin={setisLogined} />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
-        <Route element={<AuthRequired />}>
+        <Route>
           <Route path="/archive" element={<PreviousPage />} />
           <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
           <Route path="/myboard" element={<MyBoardPage />} />
