@@ -1,7 +1,8 @@
 import React , { useState, useEffect, Fragment } from "react";
-import { PieChart, Pie, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { ReferenceLine, PieChart, Pie, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, DotProps } from "recharts";
 import styled from "styled-components";
-import Typography from "./Typography";
+import Typography from "../Typography";
+import * as d3Scale from "d3-scale";
 
 const PieChartContainer = styled.div`
   width: 298px;
@@ -73,7 +74,7 @@ const ChartTitleBox = styled.div`
 
 const dataMajor = [
   { name: "경영학과",value: 2, avgGpa: 4.4, fill: "#787071", boxShadow: " 0px 16px 18px 0px rgba(120, 112, 113, 0.25)" },
-  { name: "정경대", value: 50, avgGpa: 3.5, fill: "#CC668C", boxShadow: "0px 16px 18px 0px rgba(204, 102, 140, 0.25)" },
+  { name: "정경대", value: 30, avgGpa: 3.5, fill: "#CC668C", boxShadow: "0px 16px 18px 0px rgba(204, 102, 140, 0.25)" },
   { name: "의과대학", value: 10, avgGpa: 3.0, fill: "#99D88E", boxShadow: "0px 16px 18px 0px rgba(147, 216, 136, 0.25)" },
   { name: "정보대학", value: 14, avgGpa: 4.2, fill: "#FFD35F", boxShadow: "0px 16px 18px 0px rgba(255, 211, 95, 0.25)" },
   { name: "미디어학부", value: 24, avgGpa: 4.0, fill: "#EEA6BC", boxShadow: "0px 16px 18px 0px rgba(238, 166, 188, 0.25)" },
@@ -90,7 +91,7 @@ const dataMajor = [
   { name: "국제대학", value: 6, avgGpa: 3.9, fill: "#58A2C6", boxShadow: "0px 16px 18px 0px rgba(88, 162, 198, 0.25)" },
   { name: "자유전공학부", value: 14, avgGpa: 3.7, fill: "#7BBEEE", boxShadow: "0px 16px 18px 0px rgba(123, 190, 238, 0.25)" },
   { name: "스마트모빌리티학부", value: 8, avgGpa: 4.12, fill: "#3F87F3", boxShadow: "0px 16px 18px 0px rgba(63, 135, 243, 0.25)" },
-  { name: "기타", value: 1, avgGpa: 2.8, fill: "#DFDFDF", boxShadow: "0px 18px 16px 0px rgba(223, 223, 223, 0.25)" } 
+  { name: "기타", value: 2, avgGpa: 1.5, fill: "#DFDFDF", boxShadow: "0px 18px 16px 0px rgba(223, 223, 223, 0.25)" } 
 ].sort((a,b) => b.value - a.value);
 
 const dataGrade = [
@@ -262,20 +263,9 @@ const HalfPieChartComponent = () => {
   )
 };
 
-interface HoverData {
-  Hoverdata: {
-    name: string;
-    value: number;
-    avgGpa: number;
-  };
-  fill: string;
-}
 
-interface CustomDatatipProps {
-  payload?: HoverData[] | undefined;
-  activeData?: typeof dataMajor[0] | null;
-}
 
+/**********PlotChart**********/
 const TooltipStyle = styled.div`
   width: 120px;
   height: 100px;
@@ -286,6 +276,25 @@ const TooltipStyle = styled.div`
   gap: 10px;
   background: rgba(255, 255, 255, 0.80);
 `;
+
+interface HoverData {
+  name: string;
+  value: number;
+  avgGpa: number;
+}
+
+interface DotData  {
+  cx: number;
+  cy: number;
+  name: string;
+  color: string;
+}
+
+interface CustomDatatipProps {
+  payload?: HoverData[] | undefined;
+  activeData?: typeof dataMajor[0] | null;
+  dotProps?: DotProps | null;
+}
 
 const CustomTooltip: React.FC<CustomDatatipProps> = ({ activeData }) => {
   if (activeData) {
@@ -317,24 +326,37 @@ const CustomTooltip: React.FC<CustomDatatipProps> = ({ activeData }) => {
   return null;
 };
 
-const CustomDot = (props: any) => {
-  const { cx, cy, payload } = props;
+const CustomDot: React.FC<{ dotProps: DotData }> = ({ dotProps }) => {
+  const { cx, cy, name, color } = dotProps;
   return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={9} 
-      fill={payload.fill} 
-      stroke={payload.fill} 
-      strokeWidth={1}
-    />
+    <>
+      <circle
+        cx={cx}
+        cy={cy}
+        r={9}
+        fill={color} 
+        stroke={color} 
+        strokeWidth={1}
+      />
+      <Typography size="smallText" style={{ color: color, textAlign: "center" }}>
+        {name}
+      </Typography>
+    </>
+  )
+};
+
+const CustomAxis = (props: any) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="468" height="12" viewBox="0 0 468 12" fill="none">
+      <path opacity="0.8" d="M1 5H0V7H1V5ZM468 6L458 0.226497V11.7735L468 6ZM1 7H459V5H1V7Z" fill="#B9B9B9"/>
+    </svg>
   );
 };
 
 const PlotChartComponent = () => {
 
   const maxValue = Math.max(...dataMajor.map(item => item.value));
-  const intervalY = maxValue <= 50 ? 10 : maxValue / 5;
+  const maxLength = maxValue <=50? 5 : (maxValue/10)+1;
   const [hoveredData, setHoveredData] = useState<typeof dataMajor[0] | null>(null);
 
   return(
@@ -343,38 +365,51 @@ const PlotChartComponent = () => {
         width={470}
         height={540}
       >
-        <CartesianGrid horizontal={true} vertical={true} />
+        <CartesianGrid horizontal={true} vertical={true} strokeDasharray="6 6" />
         <XAxis
           type="number" 
           dataKey="x" 
           name="지원자 평균 학점" 
           unit="" 
           domain={[0, 4.5]} 
-          interval="preserveStartEnd" 
-          ticks={[0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]}
+          ticks={[0.5, 1.5, 2.5, 3.5, 4.5]}
           />
         <YAxis
           type="number" 
           dataKey="y" 
           name="지원자" 
           unit="" 
-          interval={0}
-          domain={[0, maxValue]}
-          ticks={Array.from({ length: intervalY + 1 }, (_, i) => i * (maxValue / intervalY))}
+          domain={[0, maxLength]}
+          ticks={Array.from({ length: maxLength + 1 }, (_, i) => i * 10)}
         />
         <Tooltip content={<CustomTooltip activeData={hoveredData} />} />
         {dataMajor.map((data, index) => (
           <Scatter
             data={[{ x: data.avgGpa, y: data.value }]}
-            //shape={(props) => <CustomDot {...props} fill={data.fill} />}
             fill={data.fill}
             key={index}
+            shape={(props) => <CustomDot dotProps={{ cx: props.cx, cy: props.cy, name: data.name, color: data.fill }} />}
             onMouseOver={() => setHoveredData(data)}
             onMouseOut={() => setHoveredData(null)}
           />
         ))}
       </ScatterChart>
+      <div style={{ display: "flex", alignItems: "baseline", marginLeft: "56px", marginTop: "40px"}}>
+        <Typography size="bodyText" style={{ color: "var(--Black2, rgba(67, 67, 67, 0.80))", fontWeight: "400", lineHeight: "120%" }}>
+          x축
+        </Typography>
+        <Typography size="bodyText" style={{ color: "var(--Black2, #434343)", opacity: 0.8, fontWeight: "500", lineHeight: "24px" }}>
+          {`\u00A0`} 지원자 학점 평균
+        </Typography>
+        <Typography size="bodyText" style={{ color: "var(--Black2, rgba(67, 67, 67, 0.80))", fontWeight: "400", lineHeight: "120%", marginLeft: "30px" }}>
+          y축
+        </Typography>
+        <Typography size="bodyText" style={{ color: "var(--Black2, #434343)", opacity: 0.8, fontWeight: "500", lineHeight: "24px" }}>
+          {`\u00A0`} 지원자
+        </Typography>
+      </div>
     </PlotChartContainer>
+    
   )
 };
 
