@@ -41,18 +41,54 @@ const DepartmentCard = ({ name, eng, 경쟁률, 선발인원, min, mean, semeste
           </Typography>
         </ContentWrapper>
       </div>
+      <div style={{ display: 'flex', gap: '85px' }}>
+        <ContentWrapper>
+          <Typography size="mediumText" color="rgba(20, 20, 20, 0.60)">
+            합격자 평균 학점
+          </Typography>
+          <Typography size="largeText" style={{ fontWeight: '600' }}>
+            {mean}
+          </Typography>
+        </ContentWrapper>
+        <ContentWrapper>
+          <Typography size="mediumText" color="rgba(20, 20, 20, 0.60)">
+            합격자 최저 학점
+          </Typography>
+          <Typography size="largeText" style={{ fontWeight: '600' }}>
+            {min}
+          </Typography>
+        </ContentWrapper>
+      </div>
     </CardContainer>
   );
 };
 
-const CardContainer = styled.div<{ src: string }>`
+const CardContainer = styled.div<{ src?: string }>`
+  position: relative; /* 가상 요소를 포함하기 위해 부모 요소를 상대 위치로 설정 */
   width: 348px;
   height: 412px;
   border-radius: 10px;
   padding-left: 46px;
   padding-top: 82px;
   box-shadow: 0px 0px 20px 0px rgba(20, 20, 20, 0.25);
-  background: url(src), lightgray 20% / cover no-repeat;
+
+  /* 가상 요소를 사용하여 이미지에 blur 효과 추가 */
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(${(props) => props.src});
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: lightgray;
+    filter: blur(10px) opacity(50%); /* 이미지에 blur 효과 적용 */
+    border-radius: 10px; /* 부모와 같은 모양을 유지하기 위해 border-radius 추가 */
+  }
 `;
 
 const CardImage = styled.img`
@@ -82,7 +118,7 @@ const SubjectEng = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 112px;
+  width: 118px;
   gap: 9px;
   margin-bottom: 22px;
 `;

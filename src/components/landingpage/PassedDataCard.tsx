@@ -108,6 +108,8 @@ export default function PassedDataCard() {
         </SmallLinkButton>
       </SubjectWrapper>
       <DepartmentCard {...CardData[0]}></DepartmentCard>
+      <DepartmentCard {...CardData[0]}></DepartmentCard>
+      <DepartmentCard {...CardData[0]}></DepartmentCard>
     </Wrapper>
   );
 }
