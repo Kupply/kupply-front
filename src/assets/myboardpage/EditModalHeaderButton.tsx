@@ -38,9 +38,11 @@ export default function EditModalHeaderButton(props: EditModalHeaderButtonProps)
       <TextButton isClicked={isClicked} {...rest}>
         {children}
       </TextButton>
-      <svg xmlns="http://www.w3.org/2000/svg" width="168" height="4" viewBox="0 0 168 4" fill="none">
-        <path d="M2 2H166" stroke="#D85888" stroke-width="4" stroke-linecap="round" />
-      </svg>
+      {isClicked && (
+        <svg xmlns="http://www.w3.org/2000/svg" width="168" height="4" viewBox="0 0 168 4" fill="none">
+          <path d="M2 2H166" stroke="#D85888" stroke-width="4" stroke-linecap="round" />
+        </svg>
+      )}
     </div>
   );
 }
