@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
 import MainPage from './pages/MainPage';
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import PreviousPage from './pages/PreviousPage';
 import ArchiveDetailPage from './pages/ArchiveDetailPage';
@@ -60,6 +61,7 @@ export default function App() {
         <Route path="/signup4-passer" element={<SignUp4PagePasser />} />
         <Route path="/signup5" element={<SignUp5Page />} />
         <Route path="/signupcomplete" element={<SignUp5Complete />} />
+        <Route path="/landing" element={<LandingPage />} />
       </Routes>
       <Footer />
     </Wrapper>
