@@ -6,6 +6,7 @@ import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/MyBoardChart';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
+import EditDefaultModal from './EditModals/EditDefaultModal';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -71,6 +72,8 @@ export default function MyBoardPage() {
   const [isApplied, setIsApplied] = useState<boolean>(false);
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
+  // Edit Modal 관련
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   const onClickApplication = useCallback(() => {
     setIsApplied(true);
@@ -109,6 +112,12 @@ export default function MyBoardPage() {
     setSemesterBtnStates(updatedBtnStates);
   };
 
+  // 아래는 프로필 설정(수정) 버튼 클릭 시 뜨는 모달 창 관련 코드이다.
+  const onClickEditModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+    console.log(isOpenModal); // 디버그
+  }, [isOpenModal]);
+
   useEffect(() => {
     const handleScroll = () => {
       let newPositionY = window.scrollY - 200; // 내 노트북에는 화면 안에 모의지원버튼까지 보이지 않아서 임의로 조정해놨습니다
@@ -131,6 +140,9 @@ export default function MyBoardPage() {
   return (
     <>
       <Wrapper>
+        {isOpenModal ? (
+          <EditDefaultModal isOpenModal={isOpenModal} setOpenModal={setOpenModal} onClickModal={onClickEditModal} />
+        ) : null}
         <LeftSideWrapper>
           <div style={{ marginTop: '-82px' }}>
             <MyInformationBox translateY={scrollY}>
@@ -151,7 +163,7 @@ export default function MyBoardPage() {
                   >
                     도전자 님
                   </Typography>
-                  <EditButton />
+                  <EditButton onClick={onClickEditModal} />
                 </div>
               </div>
               <div style={{ marginTop: '15px' }}>
