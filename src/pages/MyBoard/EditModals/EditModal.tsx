@@ -25,7 +25,7 @@ export interface ModalProps {
   onClickModal: () => void; // 함수;
 }
 
-export default function EditDefaultModal(props: ModalProps) {
+export default function EditModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 

@@ -6,7 +6,7 @@ import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
-import EditDefaultModal from './EditModals/EditDefaultModal';
+import EditModal from './EditModals/EditModal';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -141,7 +141,7 @@ export default function MyBoardPage() {
     <>
       <Wrapper>
         {isOpenModal ? (
-          <EditDefaultModal isOpenModal={isOpenModal} setOpenModal={setOpenModal} onClickModal={onClickEditModal} />
+          <EditModal isOpenModal={isOpenModal} setOpenModal={setOpenModal} onClickModal={onClickEditModal} />
         ) : null}
         <LeftSideWrapper>
           <div style={{ marginTop: '-82px' }}>
@@ -947,9 +947,9 @@ export default function MyBoardPage() {
                   gap: '30px',
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   <Graph_1_1Box>
-                    <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                       <Typography
                         size="bodyText"
                         style={{
@@ -961,17 +961,43 @@ export default function MyBoardPage() {
                       >
                         지원자 정보 살펴보기
                       </Typography>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        style={{ marginLeft: "8px", marginTop: '14px' }}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        style={{ marginLeft: '8px', marginTop: '14px' }}
                       >
                         <g clip-path="url(#clip0_3942_9326)">
-                          <path d="M10.0013 18.3327C14.6037 18.3327 18.3346 14.6017 18.3346 9.99935C18.3346 5.39698 14.6037 1.66602 10.0013 1.66602C5.39893 1.66602 1.66797 5.39698 1.66797 9.99935C1.66797 14.6017 5.39893 18.3327 10.0013 18.3327Z" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M10.0078 6.66602L9.99948 6.66602" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M10.0078 13.334L10.0078 10.0007" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path
+                            d="M10.0013 18.3327C14.6037 18.3327 18.3346 14.6017 18.3346 9.99935C18.3346 5.39698 14.6037 1.66602 10.0013 1.66602C5.39893 1.66602 1.66797 5.39698 1.66797 9.99935C1.66797 14.6017 5.39893 18.3327 10.0013 18.3327Z"
+                            stroke="#141414"
+                            stroke-opacity="0.8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M10.0078 6.66602L9.99948 6.66602"
+                            stroke="#141414"
+                            stroke-opacity="0.8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M10.0078 13.334L10.0078 10.0007"
+                            stroke="#141414"
+                            stroke-opacity="0.8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
                         </g>
                         <defs>
                           <clipPath id="clip0_3942_9326">
-                            <rect width="20" height="20" fill="white"/>
+                            <rect width="20" height="20" fill="white" />
                           </clipPath>
                         </defs>
                       </svg>
@@ -1777,17 +1803,15 @@ const CharacterImage = styled.img`
 `;
 
 const MajorSymbol = styled.img`
-  //width: 48.345px;
-  //height: 63.473px;    이미지가 작아보여서 2배로 늘림
-  width: 96.69px;
-  height: 126.95px;
+  width: 48.345px;
+  height: 63.473px;
+  //margin-top: -12.4px; // 11.6
+  //margin-left: 15.29px; // 40.29
   position: absolute;
-  //background: url(<path-to-image>), lightgray -23.265px -22.448px / 200.309% 193.598% no-repeat;
-  margin-top: -12.4px; // 11.6
-  margin-left: 15.29px; // 40.29
+  left: 40.29px;
+  top: 11.6px;
 `;
 
-// 문제의 파트
 const BigMajorSymbol = styled.img`
   width: 100%; // 184px;
   height: 100%; // 241px;
