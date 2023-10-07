@@ -7,6 +7,7 @@ import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from './EditModals/EditModal';
+import ApplicationModal from './SubmitModals/ApplicationModal';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -69,12 +70,15 @@ const major = {
 };
 
 export default function MyBoardPage() {
-  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState<boolean>(true);
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
   // Edit Modal 관련
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [isOpenEditModal, setOpenEditModal] = useState<boolean>(false);
+  // Application Modal 관련
+  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(false);
 
+  // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.
   const onClickApplication = useCallback(() => {
     setIsApplied(true);
     console.log('모의지원 완료');
@@ -112,11 +116,16 @@ export default function MyBoardPage() {
     setSemesterBtnStates(updatedBtnStates);
   };
 
-  // 아래는 프로필 설정(수정) 버튼 클릭 시 뜨는 모달 창 관련 코드이다.
+  // 아래는 모달 창 관련 코드이다.
   const onClickEditModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-    console.log(isOpenModal); // 디버그
-  }, [isOpenModal]);
+    setOpenEditModal(!isOpenEditModal);
+    console.log(isOpenEditModal); // 디버그
+  }, [isOpenEditModal]);
+
+  const onClickApcModal = useCallback(() => {
+    setOpenApcModal(!isOpenApcModal);
+    console.log(isOpenApcModal); // 디버그
+  }, [isOpenApcModal]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -140,8 +149,15 @@ export default function MyBoardPage() {
   return (
     <>
       <Wrapper>
-        {isOpenModal ? (
-          <EditModal isOpenModal={isOpenModal} setOpenModal={setOpenModal} onClickModal={onClickEditModal} />
+        {isOpenEditModal ? (
+          <EditModal isOpenModal={isOpenEditModal} setOpenModal={setOpenEditModal} onClickModal={onClickEditModal} />
+        ) : null}
+        {isOpenApcModal ? (
+          <ApplicationModal
+            isOpenModal={isOpenApcModal}
+            setOpenModal={setOpenApcModal}
+            onClickModal={onClickApcModal}
+          />
         ) : null}
         <LeftSideWrapper>
           <div style={{ marginTop: '-82px' }}>
@@ -411,7 +427,7 @@ export default function MyBoardPage() {
                 <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
               </svg>
               <div style={{ marginTop: '44px', marginLeft: '128.01px' }}>
-                <MockApplicationButton onClick={onClickApplication} />
+                <MockApplicationButton onClick={onClickApcModal} />
               </div>
             </MyInformationBox>
           </div>
