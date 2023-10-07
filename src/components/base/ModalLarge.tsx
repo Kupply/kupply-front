@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 /* 모달의 큰 틀 1) Wrapper - 2) DialogBox - 3) Backdrop 으로 구성 */
@@ -8,6 +8,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 interface ModalProps {
   onClickToggleModal: () => void;
+  children: ReactNode; // Allow multiple children
   // 아무 인자를 받지 않고, void 를 return (=no return) 하는 함수
   // This kind of function is commonly used as a 'callback' or 'event handler' to specify what should happen when a modal is closed.
 }

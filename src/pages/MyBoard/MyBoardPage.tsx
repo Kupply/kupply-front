@@ -146,8 +146,8 @@ export default function MyBoardPage() {
         <LeftSideWrapper>
           <div style={{ marginTop: '-82px' }}>
             <MyInformationBox translateY={scrollY}>
-              <CharacterImageBox style={{ marginLeft: '128.01px', marginTop: '150px' }}>
-                <CharacterImage src="design_image/character/chick profile.png" alt="chick image" />
+              <CharacterImageBox>
+                <CharacterImage src="design_image/character/rectProfile/rectProfile1.png" alt="profile" />
               </CharacterImageBox>
               <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '128.01px' }}>
                 <Typography
@@ -202,7 +202,10 @@ export default function MyBoardPage() {
               <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
                 <InterestMajorBox>
                   <MajorSymbolShadow>
-                    <MajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
+                    <MajorSymbol
+                      src="design_image/major_symbol/trans/medium/bussiness_trans_medium.png"
+                      alt="business school"
+                    />
                     <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
                       <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_3779)" fill-opacity="0.7" />
                       <defs>
@@ -247,7 +250,10 @@ export default function MyBoardPage() {
               <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
                 <InterestMajorBox>
                   <MajorSymbolShadow>
-                    <MajorSymbol src="design_image/major_symbol/media_trans.png" alt="school fo media" />
+                    <MajorSymbol
+                      src="design_image/major_symbol/trans/medium/media_trans_medium.png"
+                      alt="school fo media"
+                    />
                     <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
                       <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_1679)" fill-opacity="0.7" />
                       <defs>
@@ -425,18 +431,21 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
-                  <div
-                    style={{
-                      width: '368px',
-                      height: '460px',
-                      display: 'block',
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
-                  >
-                    <BigMajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
-                  </div>
-                  <div style={{ position: 'absolute', top: '403px', left: '105px' }}>
+                  <div style={{ marginTop: '56px' }}>
+                    <div
+                      style={{
+                        width: '184px',
+                        height: '241px',
+                        display: 'block',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                      }}
+                    >
+                      <BigMajorSymbol
+                        src="design_image/major_symbol/trans/large/bussiness_trans_large.png"
+                        alt="business school"
+                      />
+                    </div>
                     <Typography
                       size="title2"
                       style={{
@@ -987,18 +996,21 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
-                  <div
-                    style={{
-                      width: '368px',
-                      height: '460px',
-                      display: 'block',
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
-                  >
-                    <BigMajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
-                  </div>
-                  <div style={{ position: 'absolute', top: '403px', left: '17px' }}>
+                  <div style={{ marginTop: '56px' }}>
+                    <div
+                      style={{
+                        width: '184px',
+                        height: '241px',
+                        display: 'block',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                      }}
+                    >
+                      <BigMajorSymbol
+                        src="design_image/major_symbol/trans/large/media_trans_large.png"
+                        alt="business school"
+                      />
+                    </div>
                     <Typography
                       size="title2"
                       style={{
@@ -1729,23 +1741,23 @@ const Graph_2Box = styled.div`
 
 // ----------------ImageBox----------------
 const CharacterImageBox = styled.div`
-  width: 111px;
-  height: 111px;
-  top: 0px;
-  left: 0px;
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 208, 208, 0.96);
-  border-radius: 10px;
+  margin-left: 128.01px;
+  margin-top: 150px;
 `;
 
 const CharacterImage = styled.img`
+  width: 111px;
+  height: 111px;
+  object-fit: cover;
+
+  /*
   width: 179.618px;
   height: 179.618px;
   //background: lightgray;
   position: absolute;
   top: 2.02x;
   left: -34px;
+  */
 `;
 
 const MajorSymbol = styled.img`
