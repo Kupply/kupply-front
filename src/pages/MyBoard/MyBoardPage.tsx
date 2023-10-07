@@ -4,7 +4,7 @@ import Typography from '../../assets/Typography';
 import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
-import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/MyBoardChart';
+import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditDefaultModal from './EditModals/EditDefaultModal';
 
@@ -504,7 +504,7 @@ export default function MyBoardPage() {
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
                   <div style={{ paddingTop: '35px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', marginLeft: '36px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
                         {`32\u00A0`}
                       </Typography>
@@ -938,19 +938,35 @@ export default function MyBoardPage() {
                   gap: '30px',
                 }}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                   <Graph_1_1Box>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        color: 'var(--Main-Black, #141414)',
-                        marginLeft: '36px',
-                        marginTop: '26px',
-                        marginBottom: '14px',
-                      }}
-                    >
-                      지원자 정보 살펴보기
-                    </Typography>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <Typography
+                        size="bodyText"
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          marginLeft: '36px',
+                          marginTop: '26px',
+                          marginBottom: '14px',
+                        }}
+                      >
+                        지원자 정보 살펴보기
+                      </Typography>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        style={{ marginLeft: "8px", marginTop: '14px' }}
+                      >
+                        <g clip-path="url(#clip0_3942_9326)">
+                          <path d="M10.0013 18.3327C14.6037 18.3327 18.3346 14.6017 18.3346 9.99935C18.3346 5.39698 14.6037 1.66602 10.0013 1.66602C5.39893 1.66602 1.66797 5.39698 1.66797 9.99935C1.66797 14.6017 5.39893 18.3327 10.0013 18.3327Z" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M10.0078 6.66602L9.99948 6.66602" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M10.0078 13.334L10.0078 10.0007" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_3942_9326">
+                            <rect width="20" height="20" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
                       <path d="M0 1L674 1" stroke="#DFDFDF" />
                     </svg>
