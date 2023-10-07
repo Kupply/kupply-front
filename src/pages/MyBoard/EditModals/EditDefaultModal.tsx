@@ -9,13 +9,15 @@ import EditModalHeaderButton from '../../../assets/myboardpage/EditModalHeaderBu
 import ImgCtrlButton from '../../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../../assets/dropdown/dropDown';
 import VerificationBox from '../../../assets/VerificationBox';
+import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
+import LabelButton from '../../../assets/buttons/LabelButton';
 
 /*
-수정 필요한 사항
-1. 내부 컨텐츠 추가
-2. 저장하기 버튼 onClick 이벤트에 DB 로의 데이터 전송 (기존정보 변경요청) 전송
-3. 각 헤더 버튼 앞에 아이콘 이미지 삽입 필요 
- */
+남은 개발
+1. 프로필 사진 변경 - 버튼화
+2. 인포 메세지 (헬프 메세지) 버튼화
+3. 텍스트필드 입력값 유효성 조건 만족여부에 따른 아이콘 변화
+*/
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -25,6 +27,7 @@ export interface ModalProps {
 
 export default function EditDefaultModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   // 각 버튼의 isClicked 값을 관리하기 위한 변수 선언
   const [headerButtonStates, setHeaderButtonStates] = useState<{
@@ -143,7 +146,57 @@ export default function EditDefaultModal(props: ModalProps) {
 
   return (
     <Main>
-      {isOpenModal && (
+      setCurrentModal(0); setIsSubmitted(false);
+      {isOpenModal && isSubmitted && (
+        <ModalLarge onClickToggleModal={onClickModal}>
+          <CloseButton
+            onClick={() => {
+              setOpenModal(!isOpenModal);
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M38.2071 23.2071C38.5976 22.8166 38.5976 22.1834 38.2071 21.7929C37.8166 21.4024 37.1834 21.4024 36.7929 21.7929L30 28.5858L23.2071 21.7929C22.8166 21.4024 22.1834 21.4024 21.7929 21.7929C21.4024 22.1834 21.4024 22.8166 21.7929 23.2071L28.5858 30L21.7929 36.7929C21.4024 37.1834 21.4024 37.8166 21.7929 38.2071C22.1834 38.5976 22.8166 38.5976 23.2071 38.2071L30 31.4142L36.7929 38.2071C37.1834 38.5976 37.8166 38.5976 38.2071 38.2071C38.5976 37.8166 38.5976 37.1834 38.2071 36.7929L31.4142 30L38.2071 23.2071Z"
+                fill="#141414"
+              />
+            </svg>
+          </CloseButton>
+          <AlertWrapper>
+            <AlertIconExclamation width="113px" height="113px" />
+            <Typography size="largeText" bold="700" style={{ marginTop: '25px' }}>
+              변경한 학점을 저장하시겠습니까?
+            </Typography>
+            <Typography size="mediumText" bold="500" style={{ marginTop: '24px', lineHeight: '136.111%' }}>
+              수정을 저장하면 이번 이중전공 지원 시즌 동안
+              <br />단 한 번의 학점 수정 기회가 남아요.
+            </Typography>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '22px', marginTop: '80px' }}>
+              <LabelButton
+                buttonType="secondary"
+                size="medium"
+                onClick={() => {
+                  setIsSubmitted(false);
+                }}
+              >
+                취소
+              </LabelButton>
+              <LabelButton
+                buttonType="primary"
+                size="medium"
+                onClick={() => {
+                  setOpenModal(!isOpenModal);
+                  setIsSubmitted(true);
+                }}
+              >
+                확인
+              </LabelButton>
+            </div>
+          </AlertWrapper>
+        </ModalLarge>
+      )}
+      {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton
             onClick={() => {
@@ -237,7 +290,7 @@ export default function EditDefaultModal(props: ModalProps) {
                   </div>
                 </div>
               </SubContentsWrapper>
-              <ContentsWrapper />
+
               <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>닉네임 변경하기</ContentsTitle>
@@ -358,7 +411,6 @@ export default function EditDefaultModal(props: ModalProps) {
               </div>
             </ContentsWrapper>
           )}
-
           <MoveButtonWrapper>
             <PrevButton
               onClick={() => {
@@ -369,7 +421,8 @@ export default function EditDefaultModal(props: ModalProps) {
             </PrevButton>
             <SubmitButton
               onClick={() => {
-                setOpenModal(!isOpenModal);
+                // setOpenModal(!isOpenModal);
+                setIsSubmitted(true);
               }}
             >
               저장하기
@@ -451,6 +504,15 @@ const CandidateImgsWrapper = styled.div`
 const VerifiBoxWrapper = styled.div`
   display: flex;
   gap: 13px;
+`;
+
+const AlertWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 628px;
+  align-items: center;
+  text-align: center;
+  margin: auto auto;
 `;
 
 const CloseButton = styled.button`
