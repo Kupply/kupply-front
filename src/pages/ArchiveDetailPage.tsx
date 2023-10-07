@@ -126,11 +126,11 @@ const ArchiveDetailPage = () => {
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
   const [competitionRate, setCompetitionRate] = useState<number>(0); // FIXME: numOfSelection / numOfApplication
 
-  const [lineData, setLineData] = useState<LineData>([]);
-  const [meanGpa, setMeanGpa] = useState<Data>({ gpa: 0, num: 0 });
-  const [medianGpa, setMedianGpa] = useState<Data>({ gpa: 0, num: 0 });
-  const [modeGpa, setModeGpa] = useState<Data>({ gpa: 0, num: 0 });
-  const [minGpa, setMinGpa] = useState<Data>({ gpa: 0, num: 0 });
+  const [lineData, setLineData] = useState<LineData>(tmpRandomData);
+  const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
+  const [medianGpa, setMedianGpa] = useState<Data>(tmpMedianGpa);
+  const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
+  const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
 
   let initKeywords: string[] = [
     '리더쉽',
@@ -167,6 +167,10 @@ const ArchiveDetailPage = () => {
         setMedianGpa(data.passedData.passedMedianGPAData);
         setModeGpa(data.passedData.passedModeGPAData);
         setMinGpa(data.passedData.passedMinimumGPAData);
+
+        if (data.passedData.passedGPACountArray.length > 0) {
+          setEnoughData(true);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -174,11 +178,6 @@ const ArchiveDetailPage = () => {
 
     fetchInitialData();
   }, [majorName]);
-
-  useEffect(() => {
-    const hasEnoughData = lineData.length > 0;
-    setEnoughData(hasEnoughData);
-  }, [lineData]);
 
   const handleButtonClick = async (idx: number) => {
     if (activeIdx !== idx) {
@@ -196,6 +195,17 @@ const ArchiveDetailPage = () => {
       setMedianGpa(data.passedData.passedMedianGPAData);
       setModeGpa(data.passedData.passedModeGPAData);
       setMinGpa(data.passedData.passedMinimumGPAData);
+
+      if (data.passedData.passedGPACountArray.length > 0) {
+        setEnoughData(true);
+      } else {
+        setEnoughData(false);
+        setLineData(tmpRandomData);
+        setMeanGpa(tmpMeanGpa);
+        setMedianGpa(tmpMedianGpa);
+        setModeGpa(tmpModeGpa);
+        setMinGpa(tmpMinGpa);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -296,8 +306,8 @@ const ArchiveDetailPage = () => {
                 medianGpa={medianGpa}
                 modeGpa={modeGpa}
                 minGpa={minGpa}
-                width={1088}
-                height={409}
+                width={1200}
+                height={470}
               />
             </PasserGPAInfoGraphWrapper>
             <PasserGPAInfoAnalyticsWrapper>
@@ -376,7 +386,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   max-width: 1920px;
 
   &::before,
@@ -393,12 +403,12 @@ const Wrapper = styled.div`
   }
 
   &::before {
-    top: -30%;
+    top: -5%;
     left: -30%;
   }
 
   &::after {
-    bottom: -30%;
+    bottom: -60%;
     right: -40%;
   }
 `;
@@ -441,22 +451,22 @@ const MajorIconBox = styled.img`
 
 const MajorIconBlur = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 70px;
+  height: 70px;
   opacity: 0.7;
   z-index: -1;
   background: radial-gradient(50% 50% at 50% 50%, rgba(146, 104, 83, 0.41) 0%, rgba(255, 255, 255, 0) 100%);
   border-radius: 69.5px;
 
-  bottom: -15%;
-  left: -20%;
+  bottom: 0%;
+  left: -10%;
 `;
 
 const MajorTextBox = styled.div`
-  display: flex;
-  width: 920px;
+  display: inline-flex;
+  width: 900px;
   height: 100%;
-  gap: 20px;
+  gap: 18px;
 `;
 
 const MajorTextKorean = styled.text`
@@ -523,7 +533,7 @@ const WarningIcon = styled.img`
 
 const SegmentedWrapper = styled.div`
   display: flex;
-  width: 100%;
+  width: 100vw;
   max-width: 1665px;
   gap: 18px;
   padding: 6px 197px;
@@ -532,23 +542,24 @@ const SegmentedWrapper = styled.div`
 `;
 
 const SelectionInfoDescriptionBox = styled.div`
-  display: inline-flex;
+  display: flex;
   width: 580px;
   gap: 8px;
-  padding-left: 36px;
   align-items: center;
   background: none;
+  margin-left: 36px;
 `;
 
 const PasserGPAInfoDescriptionWrapper = styled.div`
   display: flex;
-  padding: 33px 0px 0px 36px;
+  margin-left: 36px;
+  margin-top: 33px;
 `;
 
 const PasserGpaChartDescriptionBox = styled.div`
   display: inline-flex;
   gap: 8px;
-  width: 1229px;
+  margin-right: 997px;
   align-items: center;
 `;
 
@@ -561,7 +572,8 @@ const PasserGpaAnalyticDescriptionBox = styled.div`
 const KeywordDescriptionBox = styled.div`
   display: inline-flex;
   gap: 8px;
-  padding: 23px 0px 0px 36px;
+  margin-left: 36px;
+  margin-top: 23px;
   align-items: center;
 `;
 
@@ -586,15 +598,14 @@ const SelectionInfoWrapper = styled.div`
   border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
   height: 90px;
-  width: 1665px;
+  width: 100vw;
+  max-width: 1665px;
   margin-top: 36px;
   align-items: center;
   display: flex;
-  padding-left: 128px;
 `;
 
 const SelectionInfoContentsWrapper = styled.div`
-  margin-right: 142px;
   gap: 114px;
   display: flex;
 `;
@@ -616,31 +627,31 @@ const SelectionInfoValue = styled.text`
 
 const PasserGPAInfoWrapper = styled.div`
   height: 555px;
-  width: 1665px;
+  width: 100vw;
+  max-width: 1665px;
   background-color: #ffffff99;
   border: 1px solid;
   border-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
   margin-top: 18px;
-  padding-left: 128px;
   position: relative;
   z-index: 1;
 `;
 
 const PasserGPAInfoDetailsWrapper = styled.div`
   display: flex;
-  gap: 133px;
+  gap: 40px;
+  margin-left: 25px;
+  margin-top: 32px;
 `;
 
 const PasserGPAInfoGraphWrapper = styled.div`
-  height: 409px;
-  width: 1088px;
-  margin: 70px 0px 0px 44px;
+  display: inline-flex;
 `;
 
 const PasserGPAInfoAnalyticsWrapper = styled.div`
-  margin-top: 81px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 45px;
@@ -690,16 +701,19 @@ const PasserGPAInfoTextBox = styled.div`
 `;
 
 const KeywordWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   height: 126px;
-  width: 1665px;
+  width: 100vw;
+  max-width: 1665px;
   background-color: #ffffff99;
   border: 1px solid;
   border-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
   margin-top: 18px;
-  padding-left: 128px;
+  margin-bottom: 104px;
   position: relative;
   z-index: 1;
 `;
@@ -707,7 +721,7 @@ const KeywordWrapper = styled.div`
 const KeywordContainer = styled.div`
   display: flex;
   gap: 22px;
-  padding: 16px 0px 0px 36px;
+  margin-left: 36px;
 `;
 
 const KeywordBox = styled.div`
@@ -746,7 +760,8 @@ const CollectingWrapper = styled.div`
   box-shadow: 0px 0px 28px #1414140d;
   backdrop-filter: blur(10px);
   height: 699px;
-  width: 1665px;
+  width: 100vw;
+  max-width: 1665px;
   margin-top: 18px;
   justify-content: center;
   align-items: center;
