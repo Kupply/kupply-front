@@ -6,7 +6,8 @@ import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
-import EditDefaultModal from './EditModals/EditDefaultModal';
+import EditModal from './EditModals/EditModal';
+import ApplicationModal from './SubmitModals/ApplicationModal';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -69,12 +70,15 @@ const major = {
 };
 
 export default function MyBoardPage() {
-  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState<boolean>(true);
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
   // Edit Modal 관련
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [isOpenEditModal, setOpenEditModal] = useState<boolean>(false);
+  // Application Modal 관련
+  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(false);
 
+  // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.
   const onClickApplication = useCallback(() => {
     setIsApplied(true);
     console.log('모의지원 완료');
@@ -112,11 +116,16 @@ export default function MyBoardPage() {
     setSemesterBtnStates(updatedBtnStates);
   };
 
-  // 아래는 프로필 설정(수정) 버튼 클릭 시 뜨는 모달 창 관련 코드이다.
+  // 아래는 모달 창 관련 코드이다.
   const onClickEditModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-    console.log(isOpenModal); // 디버그
-  }, [isOpenModal]);
+    setOpenEditModal(!isOpenEditModal);
+    console.log(isOpenEditModal); // 디버그
+  }, [isOpenEditModal]);
+
+  const onClickApcModal = useCallback(() => {
+    setOpenApcModal(!isOpenApcModal);
+    console.log(isOpenApcModal); // 디버그
+  }, [isOpenApcModal]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -140,14 +149,21 @@ export default function MyBoardPage() {
   return (
     <>
       <Wrapper>
-        {isOpenModal ? (
-          <EditDefaultModal isOpenModal={isOpenModal} setOpenModal={setOpenModal} onClickModal={onClickEditModal} />
+        {isOpenEditModal ? (
+          <EditModal isOpenModal={isOpenEditModal} setOpenModal={setOpenEditModal} onClickModal={onClickEditModal} />
+        ) : null}
+        {isOpenApcModal ? (
+          <ApplicationModal
+            isOpenModal={isOpenApcModal}
+            setOpenModal={setOpenApcModal}
+            onClickModal={onClickApcModal}
+          />
         ) : null}
         <LeftSideWrapper>
           <div style={{ marginTop: '-82px' }}>
             <MyInformationBox translateY={scrollY}>
-              <CharacterImageBox style={{ marginLeft: '128.01px', marginTop: '150px' }}>
-                <CharacterImage src="design_image/character/chick profile.png" alt="chick image" />
+              <CharacterImageBox>
+                <CharacterImage src="design_image/character/rectProfile/rectProfile1.png" alt="profile" />
               </CharacterImageBox>
               <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '128.01px' }}>
                 <Typography
@@ -202,7 +218,10 @@ export default function MyBoardPage() {
               <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
                 <InterestMajorBox>
                   <MajorSymbolShadow>
-                    <MajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
+                    <MajorSymbol
+                      src="design_image/major_symbol/trans/medium/bussiness_trans_medium.png"
+                      alt="business school"
+                    />
                     <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
                       <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_3779)" fill-opacity="0.7" />
                       <defs>
@@ -247,7 +266,10 @@ export default function MyBoardPage() {
               <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
                 <InterestMajorBox>
                   <MajorSymbolShadow>
-                    <MajorSymbol src="design_image/major_symbol/media_trans.png" alt="school fo media" />
+                    <MajorSymbol
+                      src="design_image/major_symbol/trans/medium/media_trans_medium.png"
+                      alt="school fo media"
+                    />
                     <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
                       <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_1679)" fill-opacity="0.7" />
                       <defs>
@@ -405,7 +427,7 @@ export default function MyBoardPage() {
                 <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
               </svg>
               <div style={{ marginTop: '44px', marginLeft: '128.01px' }}>
-                <MockApplicationButton onClick={onClickApplication} />
+                <MockApplicationButton onClick={onClickApcModal} />
               </div>
             </MyInformationBox>
           </div>
@@ -425,18 +447,21 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
-                  <div
-                    style={{
-                      width: '368px',
-                      height: '460px',
-                      display: 'block',
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
-                  >
-                    <BigMajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
-                  </div>
-                  <div style={{ position: 'absolute', top: '403px', left: '105px' }}>
+                  <div style={{ marginTop: '56px' }}>
+                    <div
+                      style={{
+                        width: '184px',
+                        height: '241px',
+                        display: 'block',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                      }}
+                    >
+                      <BigMajorSymbol
+                        src="design_image/major_symbol/trans/large/bussiness_trans_large.png"
+                        alt="business school"
+                      />
+                    </div>
                     <Typography
                       size="title2"
                       style={{
@@ -938,9 +963,9 @@ export default function MyBoardPage() {
                   gap: '30px',
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   <Graph_1_1Box>
-                    <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                       <Typography
                         size="bodyText"
                         style={{
@@ -952,17 +977,43 @@ export default function MyBoardPage() {
                       >
                         지원자 정보 살펴보기
                       </Typography>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        style={{ marginLeft: "8px", marginTop: '14px' }}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        style={{ marginLeft: '8px', marginTop: '14px' }}
                       >
                         <g clip-path="url(#clip0_3942_9326)">
-                          <path d="M10.0013 18.3327C14.6037 18.3327 18.3346 14.6017 18.3346 9.99935C18.3346 5.39698 14.6037 1.66602 10.0013 1.66602C5.39893 1.66602 1.66797 5.39698 1.66797 9.99935C1.66797 14.6017 5.39893 18.3327 10.0013 18.3327Z" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M10.0078 6.66602L9.99948 6.66602" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M10.0078 13.334L10.0078 10.0007" stroke="#141414" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path
+                            d="M10.0013 18.3327C14.6037 18.3327 18.3346 14.6017 18.3346 9.99935C18.3346 5.39698 14.6037 1.66602 10.0013 1.66602C5.39893 1.66602 1.66797 5.39698 1.66797 9.99935C1.66797 14.6017 5.39893 18.3327 10.0013 18.3327Z"
+                            stroke="#141414"
+                            stroke-opacity="0.8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M10.0078 6.66602L9.99948 6.66602"
+                            stroke="#141414"
+                            stroke-opacity="0.8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M10.0078 13.334L10.0078 10.0007"
+                            stroke="#141414"
+                            stroke-opacity="0.8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
                         </g>
                         <defs>
                           <clipPath id="clip0_3942_9326">
-                            <rect width="20" height="20" fill="white"/>
+                            <rect width="20" height="20" fill="white" />
                           </clipPath>
                         </defs>
                       </svg>
@@ -1003,18 +1054,21 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
-                  <div
-                    style={{
-                      width: '368px',
-                      height: '460px',
-                      display: 'block',
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
-                  >
-                    <BigMajorSymbol src="design_image/major_symbol/bussiness_trans.png" alt="business school" />
-                  </div>
-                  <div style={{ position: 'absolute', top: '403px', left: '17px' }}>
+                  <div style={{ marginTop: '56px' }}>
+                    <div
+                      style={{
+                        width: '184px',
+                        height: '241px',
+                        display: 'block',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                      }}
+                    >
+                      <BigMajorSymbol
+                        src="design_image/major_symbol/trans/large/media_trans_large.png"
+                        alt="business school"
+                      />
+                    </div>
                     <Typography
                       size="title2"
                       style={{
@@ -1745,37 +1799,35 @@ const Graph_2Box = styled.div`
 
 // ----------------ImageBox----------------
 const CharacterImageBox = styled.div`
-  width: 111px;
-  height: 111px;
-  top: 0px;
-  left: 0px;
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 208, 208, 0.96);
-  border-radius: 10px;
+  margin-left: 128.01px;
+  margin-top: 150px;
 `;
 
 const CharacterImage = styled.img`
+  width: 111px;
+  height: 111px;
+  object-fit: cover;
+
+  /*
   width: 179.618px;
   height: 179.618px;
   //background: lightgray;
   position: absolute;
   top: 2.02x;
   left: -34px;
+  */
 `;
 
 const MajorSymbol = styled.img`
-  //width: 48.345px;
-  //height: 63.473px;    이미지가 작아보여서 2배로 늘림
-  width: 96.69px;
-  height: 126.95px;
+  width: 48.345px;
+  height: 63.473px;
+  //margin-top: -12.4px; // 11.6
+  //margin-left: 15.29px; // 40.29
   position: absolute;
-  //background: url(<path-to-image>), lightgray -23.265px -22.448px / 200.309% 193.598% no-repeat;
-  margin-top: -12.4px; // 11.6
-  margin-left: 15.29px; // 40.29
+  left: 40.29px;
+  top: 11.6px;
 `;
 
-// 문제의 파트
 const BigMajorSymbol = styled.img`
   width: 100%; // 184px;
   height: 100%; // 241px;
