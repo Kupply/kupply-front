@@ -288,6 +288,7 @@ export default function GpaLineChart(prop: GpaLineChartProps) {
   };
 
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     tooltips: {
       mode: 'nearest' as const,
@@ -359,6 +360,15 @@ export default function GpaLineChart(prop: GpaLineChartProps) {
         enabled: false,
         position: 'nearest' as const,
         displayColors: false,
+        // filter: function (tooltipItems: any) {
+        //   const dataIdx = tooltipItems.dataIndex;
+
+        //   if ((dataIdx === 10 || dataIdx === 160) && formattedLineData[dataIdx] === 0) {
+        //     return false;
+        //   }
+
+        //   return true;
+        // },
         external: externalTooltipHandler,
         callbacks: {
           title: function (tooltipItems: any) {
