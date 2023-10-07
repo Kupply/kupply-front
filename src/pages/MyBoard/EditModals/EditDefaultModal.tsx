@@ -8,6 +8,7 @@ import ModalLarge from '../../../components/base/ModalLarge';
 import EditModalHeaderButton from '../../../assets/myboardpage/EditModalHeaderButton';
 import ImgCtrlButton from '../../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../../assets/dropdown/dropDown';
+import VerificationBox from '../../../assets/VerificationBox';
 
 /*
 수정 필요한 사항
@@ -57,6 +58,79 @@ export default function EditDefaultModal(props: ModalProps) {
   const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('default');
   const [dropdownValue, setdropDownValue] = useState<string>('');
+  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(3) || '');
+  const [hopeSemester1, setHopeSemester1] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const [hopeSemester2, setHopeSemester2] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
+
+  // 고려대학교 전체 학과 리스트
+  const majorList = [
+    { value1: '경영학과', value2: '경영대학' },
+    { value1: '국어국문학과', value2: '문과대학' },
+    { value1: '철학과', value2: '문과대학' },
+    { value1: '한국사학과', value2: '문과대학' },
+    { value1: '사학과', value2: '문과대학' },
+    { value1: '사회학과', value2: '문과대학' },
+    { value1: '한문학과', value2: '문과대학' },
+    { value1: '영어영문학과', value2: '문과대학' },
+    { value1: '독어독문학과', value2: '문과대학' },
+    { value1: '불어불문학과', value2: '문과대학' },
+    { value1: '중어중문학과', value2: '문과대학' },
+    { value1: '노어노문학과', value2: '문과대학' },
+    { value1: '일어일문학과', value2: '문과대학' },
+    { value1: '서어서문학과', value2: '문과대학' },
+    { value1: '언어학과', value2: '문과대학' },
+    { value1: '생명과학부', value2: '생명과학대학' },
+    { value1: '생명공학부', value2: '생명과학대학' },
+    { value1: '식품공학과', value2: '생명과학대학' },
+    { value1: '환경생태공학부', value2: '생명과학대학' },
+    { value1: '식품자원경제학과', value2: '생명과학대학' },
+    { value1: '정치외교학과', value2: '정경대학' },
+    { value1: '경제학과', value2: '정경대학' },
+    { value1: '통계학과', value2: '정경대학' },
+    { value1: '행정학과', value2: '정경대학' },
+    { value1: '수학과', value2: '이과대학' },
+    { value1: '물리학과', value2: '이과대학' },
+    { value1: '화학과', value2: '이과대학' },
+    { value1: '지구환경과학과', value2: '이과대학' },
+    { value1: '화공생명공학과', value2: '공과대학' },
+    { value1: '신소재공학부', value2: '공과대학' },
+    { value1: '건축사회환경공학부', value2: '공과대학' },
+    { value1: '건축학과', value2: '공과대학' },
+    { value1: '기계공학부', value2: '공과대학' },
+    { value1: '산업경영공학부', value2: '공과대학' },
+    { value1: '전기전자공학부', value2: '공과대학' },
+    { value1: '반도체공학과', value2: '공과대학' },
+    { value1: '융합에너지공학과', value2: '공과대학' },
+    { value1: '차세대통신학과', value2: '공과대학' },
+    { value1: '의과대학', value2: '의과대학' },
+    { value1: '교육학과', value2: '사범대학' },
+    { value1: '국어교육과', value2: '사범대학' },
+    { value1: '영어교육과', value2: '사범대학' },
+    { value1: '지리교육과', value2: '사범대학' },
+    { value1: '역사교육과', value2: '사범대학' },
+    { value1: '가정교육과', value2: '사범대학' },
+    { value1: '수학교육과', value2: '사범대학' },
+    { value1: '체육교육과', value2: '사범대학' },
+    { value1: '간호학과', value2: '간호대학' },
+    { value1: '컴퓨터학과', value2: '정보대학' },
+    { value1: '데이터과학과', value2: '정보대학' },
+    { value1: '디자인조형학부', value2: '디자인조형학부' },
+    { value1: '국제학부', value2: '국제대학' },
+    { value1: '글로벌한국융합학부', value2: '국제대학' },
+    { value1: '미디어학부', value2: '미디어학부' },
+    { value1: '바이오의공학부', value2: '보건과학대학' },
+    { value1: '바이오시스템의과학부', value2: '보건과학대학' },
+    { value1: '보건환경융합과학부', value2: '보건과학대학' },
+    { value1: '보건정책관리학부', value2: '보건과학대학' },
+    { value1: '자유전공학부', value2: '자유전공학부' },
+    { value1: '스마트보안학부', value2: '스마트보안학부' },
+    { value1: '사이버국방학과', value2: '스마트보안학부' },
+    { value1: '심리학부', value2: '심리학부' },
+    { value1: '스마트모빌리티학부', value2: '스마트모빌리티학부' },
+  ];
 
   /* 
   모달 헤더 버튼 클릭에 따른 페이지 전환 위한 상태 관리
@@ -90,176 +164,200 @@ export default function EditDefaultModal(props: ModalProps) {
           </Typography>
           <div style={{ height: '40px' }}></div>
           <HeaderButtonWrapper>
-            <EditModalHeaderButton
+            <EditModalHeaderButton // 버튼 아이콘 삽입 필요
               isClicked={headerButtonStates.basicMajor}
-              onClick={() => handleHeaderButtonClick('basicMajor')}
+              onClick={() => {
+                handleHeaderButtonClick('basicMajor');
+                setCurrentModal(0);
+              }}
             >
               나의 기본정보
             </EditModalHeaderButton>
             <EditModalHeaderButton
               isClicked={headerButtonStates.interestMajor}
-              onClick={() => handleHeaderButtonClick('interestMajor')}
+              onClick={() => {
+                handleHeaderButtonClick('interestMajor');
+                setCurrentModal(1);
+              }}
             >
               관심 전공
             </EditModalHeaderButton>
             <EditModalHeaderButton
               isClicked={headerButtonStates.currentGPA}
-              onClick={() => handleHeaderButtonClick('currentGPA')}
+              onClick={() => {
+                handleHeaderButtonClick('currentGPA');
+                setCurrentModal(2);
+              }}
             >
               현재 내 학점
             </EditModalHeaderButton>
             <EditModalHeaderButton
               isClicked={headerButtonStates.desiredSemester}
-              onClick={() => handleHeaderButtonClick('desiredSemester')}
+              onClick={() => {
+                handleHeaderButtonClick('desiredSemester');
+                setCurrentModal(3);
+              }}
             >
-              희망 진입학기
+              희망 지원학기
             </EditModalHeaderButton>
           </HeaderButtonWrapper>
-
-          {() => {
-            switch (currentModal) {
-              case 0:
-                return (
-                  <ContentsWrapper>
-                    <SubContentsWrapper>
-                      <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
-                      <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-                        <CurrentImg src="design_image/character/rectProfile/rectProfile1.png" alt="current profile" />
-                        <div>
-                          <CandidateImgsWrapper>
-                            <CandidateImg
-                              src="design_image/character/rectProfile/rectProfile1.png"
-                              alt="candidate profile 1"
-                            />
-                            <CandidateImg
-                              src="design_image/character/rectProfile/rectProfile2.png"
-                              alt="candidate profile 2"
-                            />
-                            <CandidateImg
-                              src="design_image/character/rectProfile/rectProfile3.png"
-                              alt="candidate profile 3"
-                            />
-                            <CandidateImg
-                              src="design_image/character/rectProfile/rectProfile4.png"
-                              alt="candidate profile 4"
-                            />
-                          </CandidateImgsWrapper>
-                          <div style={{ gap: '5px', marginTop: '52px' }}>
-                            <ImgCtrlButton />
-                            <ImgCtrlButton>삭제</ImgCtrlButton>
-                          </div>
-                        </div>
-                      </div>
-                    </SubContentsWrapper>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
-                      <SubContentsWrapper>
-                        <ContentsTitle>닉네임 변경하기</ContentsTitle>
-                        <TextFieldBox
-                          value={nickname}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setNickname(e.target.value);
-                          }}
-                          state={nicknameState}
-                          setState={setNicknameState}
-                          setValue={setNickname}
-                        ></TextFieldBox>
-                      </SubContentsWrapper>
-                      <SubContentsWrapper>
-                        <ContentsTitle>학번 변경하기</ContentsTitle>
-                        <TextFieldBox
-                          value={stdID}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setStdID(e.target.value);
-                          }}
-                          state={stdIDState}
-                          setState={setStdIDState}
-                          setValue={setStdID}
-                        ></TextFieldBox>
-                      </SubContentsWrapper>
-                      <SubContentsWrapper>
-                        <ContentsTitle>본전공 변경하기</ContentsTitle>
-                        <DropDown
-                          title="전공선택"
-                          optionList={[
-                            { value1: '경영학과', value2: '경영대학' },
-                            { value1: '국어국문학과', value2: '문과대학' },
-                            { value1: '철학과', value2: '문과대학' },
-                            { value1: '한국사학과', value2: '문과대학' },
-                            { value1: '사학과', value2: '문과대학' },
-                            { value1: '사회학과', value2: '문과대학' },
-                            { value1: '한문학과', value2: '문과대학' },
-                            { value1: '영어영문학과', value2: '문과대학' },
-                            { value1: '독어독문학과', value2: '문과대학' },
-                            { value1: '불어불문학과', value2: '문과대학' },
-                            { value1: '중어중문학과', value2: '문과대학' },
-                            { value1: '노어노문학과', value2: '문과대학' },
-                            { value1: '일어일문학과', value2: '문과대학' },
-                            { value1: '서어서문학과', value2: '문과대학' },
-                            { value1: '언어학과', value2: '문과대학' },
-                            { value1: '생명과학부', value2: '생명과학대학' },
-                            { value1: '생명공학부', value2: '생명과학대학' },
-                            { value1: '식품공학과', value2: '생명과학대학' },
-                            { value1: '환경생태공학부', value2: '생명과학대학' },
-                            { value1: '식품자원경제학과', value2: '생명과학대학' },
-                            { value1: '정치외교학과', value2: '정경대학' },
-                            { value1: '경제학과', value2: '정경대학' },
-                            { value1: '통계학과', value2: '정경대학' },
-                            { value1: '행정학과', value2: '정경대학' },
-                            { value1: '수학과', value2: '이과대학' },
-                            { value1: '물리학과', value2: '이과대학' },
-                            { value1: '화학과', value2: '이과대학' },
-                            { value1: '지구환경과학과', value2: '이과대학' },
-                            { value1: '화공생명공학과', value2: '공과대학' },
-                            { value1: '신소재공학부', value2: '공과대학' },
-                            { value1: '건축사회환경공학부', value2: '공과대학' },
-                            { value1: '건축학과', value2: '공과대학' },
-                            { value1: '기계공학부', value2: '공과대학' },
-                            { value1: '산업경영공학부', value2: '공과대학' },
-                            { value1: '전기전자공학부', value2: '공과대학' },
-                            { value1: '반도체공학과', value2: '공과대학' },
-                            { value1: '융합에너지공학과', value2: '공과대학' },
-                            { value1: '차세대통신학과', value2: '공과대학' },
-                            { value1: '의과대학', value2: '의과대학' },
-                            { value1: '교육학과', value2: '사범대학' },
-                            { value1: '국어교육과', value2: '사범대학' },
-                            { value1: '영어교육과', value2: '사범대학' },
-                            { value1: '지리교육과', value2: '사범대학' },
-                            { value1: '역사교육과', value2: '사범대학' },
-                            { value1: '가정교육과', value2: '사범대학' },
-                            { value1: '수학교육과', value2: '사범대학' },
-                            { value1: '체육교육과', value2: '사범대학' },
-                            { value1: '간호학과', value2: '간호대학' },
-                            { value1: '컴퓨터학과', value2: '정보대학' },
-                            { value1: '데이터과학과', value2: '정보대학' },
-                            { value1: '디자인조형학부', value2: '디자인조형학부' },
-                            { value1: '국제학부', value2: '국제대학' },
-                            { value1: '글로벌한국융합학부', value2: '국제대학' },
-                            { value1: '미디어학부', value2: '미디어학부' },
-                            { value1: '바이오의공학부', value2: '보건과학대학' },
-                            { value1: '바이오시스템의과학부', value2: '보건과학대학' },
-                            { value1: '보건환경융합과학부', value2: '보건과학대학' },
-                            { value1: '보건정책관리학부', value2: '보건과학대학' },
-                            { value1: '자유전공학부', value2: '자유전공학부' },
-                            { value1: '스마트보안학부', value2: '스마트보안학부' },
-                            { value1: '사이버국방학과', value2: '스마트보안학부' },
-                            { value1: '심리학부', value2: '심리학부' },
-                            { value1: '스마트모빌리티학부', value2: '스마트모빌리티학부' },
-                          ]}
-                          value={dropdownValue}
-                          setValue={setdropDownValue}
-                        ></DropDown>
-                      </SubContentsWrapper>
+          {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
+            <ContentsWrapper
+              style={{
+                marginBottom: '101px',
+              }}
+            >
+              <SubContentsWrapper>
+                <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+                  <CurrentImg src="design_image/character/rectProfile/rectProfile1.png" alt="current profile" />
+                  <div>
+                    <CandidateImgsWrapper>
+                      <CandidateImg // 각 이미지들을 버튼으로 수정 필요, 이미지 업로드 기능 구현 필요
+                        src="design_image/character/rectProfile/rectProfile1.png"
+                        alt="candidate profile 1"
+                      />
+                      <CandidateImg
+                        src="design_image/character/rectProfile/rectProfile2.png"
+                        alt="candidate profile 2"
+                      />
+                      <CandidateImg
+                        src="design_image/character/rectProfile/rectProfile3.png"
+                        alt="candidate profile 3"
+                      />
+                      <CandidateImg
+                        src="design_image/character/rectProfile/rectProfile4.png"
+                        alt="candidate profile 4"
+                      />
+                    </CandidateImgsWrapper>
+                    <div style={{ gap: '5px', marginTop: '52px' }}>
+                      <ImgCtrlButton />
+                      <ImgCtrlButton>삭제</ImgCtrlButton>
                     </div>
-                  </ContentsWrapper>
-                );
-
-              case 1:
-                return null;
-
-              default:
-                return null;
-            }
-          }}
+                  </div>
+                </div>
+              </SubContentsWrapper>
+              <ContentsWrapper />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+                <SubContentsWrapper>
+                  <ContentsTitle>닉네임 변경하기</ContentsTitle>
+                  <TextFieldBox
+                    value={nickname}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setNickname(e.target.value);
+                    }}
+                    state={nicknameState}
+                    setState={setNicknameState}
+                    setValue={setNickname}
+                  ></TextFieldBox>
+                </SubContentsWrapper>
+                <SubContentsWrapper>
+                  <ContentsTitle>학번 변경하기</ContentsTitle>
+                  <TextFieldBox
+                    value={stdID}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setStdID(e.target.value);
+                    }}
+                    state={stdIDState}
+                    setState={setStdIDState}
+                    setValue={setStdID}
+                  ></TextFieldBox>
+                </SubContentsWrapper>
+                <SubContentsWrapper>
+                  <ContentsTitle>본전공 변경하기</ContentsTitle>
+                  <DropDown
+                    title="전공선택" // 수정필요
+                    optionList={majorList}
+                    value={dropdownValue}
+                    setValue={setdropDownValue}
+                  ></DropDown>
+                </SubContentsWrapper>
+              </div>
+            </ContentsWrapper>
+          )}
+          {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
+            <ContentsWrapper
+              style={{
+                marginBottom: '503px',
+              }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+                <SubContentsWrapper>
+                  <ContentsTitle>희망 관심전공 변경하기</ContentsTitle>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                    <DropDown
+                      title="전공선택" // 수정필요
+                      optionList={majorList}
+                      value={dropdownValue}
+                      setValue={setdropDownValue}
+                    ></DropDown>
+                    <DropDown
+                      title="전공선택" // 수정필요
+                      optionList={majorList}
+                      value={dropdownValue}
+                      setValue={setdropDownValue}
+                    ></DropDown>
+                  </div>
+                </SubContentsWrapper>
+              </div>
+            </ContentsWrapper>
+          )}
+          {currentModal === 2 && ( // '현재 내 학점' 버튼 클릭 시
+            <ContentsWrapper
+              style={{
+                marginBottom: '603px',
+              }}
+            >
+              <SubContentsWrapper>
+                <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
+                <VerifiBoxWrapper>
+                  <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
+                  <div style={{ marginTop: 60 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
+                      <circle cx="1" cy="1" r="1" fill="##D85888" />
+                    </svg>
+                  </div>
+                  <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
+                  <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
+                </VerifiBoxWrapper>
+              </SubContentsWrapper>
+            </ContentsWrapper>
+          )}
+          {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
+            <ContentsWrapper
+              style={{
+                marginBottom: '603px',
+              }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+                <SubContentsWrapper>
+                  <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
+                  <VerifiBoxWrapper>
+                    <VerificationBox
+                      name="semester-1"
+                      value={hopeSemester1}
+                      setValue={setHopeSemester1}
+                    ></VerificationBox>
+                    <VerificationBox
+                      name="semester-2"
+                      value={hopeSemester2}
+                      setValue={setHopeSemester2}
+                    ></VerificationBox>
+                    <div style={{ marginTop: 26 }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
+                        <path stroke="#D85888" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
+                      </svg>
+                    </div>
+                    <VerificationBox
+                      name="semester-3"
+                      value={hopeSemester3}
+                      setValue={setHopeSemester3}
+                    ></VerificationBox>
+                  </VerifiBoxWrapper>
+                </SubContentsWrapper>
+              </div>
+            </ContentsWrapper>
+          )}
 
           <MoveButtonWrapper>
             <PrevButton
@@ -308,11 +406,11 @@ const MoveButtonWrapper = styled.div`
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 628px;
   align-items: left;
   margin-left: auto;
   margin-right: auto;
   margin-top: 58px;
-  margin-bottom: 101px;
   gap: 35px;
 `;
 
@@ -348,6 +446,11 @@ const CandidateImgsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 14px;
+`;
+
+const VerifiBoxWrapper = styled.div`
+  display: flex;
+  gap: 13px;
 `;
 
 const CloseButton = styled.button`

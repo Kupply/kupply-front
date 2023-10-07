@@ -32,7 +32,7 @@ const TextButton = styled.button<EditModalHeaderButtonProps>`
 `;
 
 export default function EditModalHeaderButton(props: EditModalHeaderButtonProps) {
-  const { children = '나의 기본전공', isClicked = true, ...rest } = props; // default 설정
+  const { children = '나의 기본정보', isClicked = true, ...rest } = props; // default 설정
   return (
     <div style={{ position: 'relative' }}>
       <TextButton isClicked={isClicked} {...rest}>
