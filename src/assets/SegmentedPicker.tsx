@@ -45,7 +45,7 @@ const stateMapping = {
   active: activeWrapper,
 };
 
-const SegmentedPickerWrapper = styled.div<SegmentedPickerProps>`
+const SegmentedPickerWrapper = styled.button<SegmentedPickerProps>`
   ${baseWrapper}
   ${(props) => stateMapping[props.state || 'default']}
 `;
