@@ -41,7 +41,7 @@ const AlertImage = styled.img`
   margin-left: 8px;
 `;
 
-function AlertMessage({ message = '쿠플라이 아이디는 고려대학교 이메일 주소입니다,' }) {
+function AlertMessage({ message = '쿠플라이 아이디는 고려대학교 이메일 주소입니다.' }) {
   return (
     <Wrapper>
       <MessageWrapper>
