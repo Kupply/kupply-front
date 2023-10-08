@@ -161,15 +161,14 @@ const ArchiveDetailPage = () => {
         const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
         const data = APIresponse.data.pastData;
 
-        setNumOfApplication(data.overallData.numberOfData);
-        setLineData(data.passedData.passedGPACountArray);
-        setMeanGpa(data.passedData.passedMeanGPAData);
-        setMedianGpa(data.passedData.passedMedianGPAData);
-        setModeGpa(data.passedData.passedModeGPAData);
-        setMinGpa(data.passedData.passedMinimumGPAData);
-
         if (data.passedData.passedGPACountArray.length > 0) {
           setEnoughData(true);
+          setNumOfApplication(data.overallData.numberOfData);
+          setLineData(data.passedData.passedGPACountArray);
+          setMeanGpa(data.passedData.passedMeanGPAData);
+          setMedianGpa(data.passedData.passedMedianGPAData);
+          setModeGpa(data.passedData.passedModeGPAData);
+          setMinGpa(data.passedData.passedMinimumGPAData);
         }
       } catch (err) {
         console.log(err);
