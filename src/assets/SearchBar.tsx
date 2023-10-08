@@ -90,6 +90,7 @@ const Input = styled.input`
   padding-left: 70px;
   padding-right: 24px;
   border-radius: 10px;
+  box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
 
   transition: 0.3s ease-in-out;
   &::placeholder {
