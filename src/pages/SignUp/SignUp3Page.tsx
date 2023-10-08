@@ -138,7 +138,6 @@ type errorMessageType = {
 
 export default function SignUp3Page() {
   /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
-  const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(3); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
@@ -279,7 +278,7 @@ export default function SignUp3Page() {
         </Typography>
       </TitleWrapper>
       <div style={{ width: '976.8px', height: '30px' }}>
-        <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
+        <MultiStepProgressBar numberOfSteps={5} currentStep={currentStep} complete={complete} />
       </div>
       <FormWrapper>
         <ContentsTitleWrapper>
