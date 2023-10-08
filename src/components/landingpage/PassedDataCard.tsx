@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
-import DepartmentCard from '../../assets/DepartmentCard';
+import DepartmentCard from '../../assets/landingpage/DepartmentCard';
 
 const Wrapper = styled.div`
   width: 86%;

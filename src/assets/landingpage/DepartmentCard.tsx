@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import Typography from './Typography';
+import Typography from '../Typography';
 
 export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   name: string;
