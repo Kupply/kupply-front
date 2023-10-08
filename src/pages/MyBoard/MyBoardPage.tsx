@@ -95,6 +95,18 @@ const collegeNameMapping = {
   통계학과: 'political',
 };
 
+const collegeAPIMapping = {
+  식품자원경제학과: 'foodecon',
+  미디어학부: 'media',
+  컴퓨터학과: 'computer',
+  경영대학: 'business',
+  심리학부: 'psychology',
+  화학과: 'chemistry',
+  수학과: 'mathematics',
+  경제학과: 'economics',
+  통계학과: 'statistics',
+};
+
 // 위의 major 객체에서 한글 title로 영어 text 찾는 함수
 function getTextByTitle(targetTitle: string) {
   const majorText = Object.values(major).find((item) => item.title === targetTitle);
@@ -203,6 +215,48 @@ export default function MyBoardPage() {
     hopeSemester: '2023-2',
   });
 
+  // 좀 아닌 것 같지만 생각의 여유가 없기에
+  const [pastData1, setPastData1] = useState([
+    {
+      numOfSelection: 0,
+      numOfApplication: 0,
+      meanGpa: 0,
+      minGpa: 0,
+    },
+    {
+      numOfSelection: 0,
+      numOfApplication: 0,
+      meanGpa: 0,
+      minGpa: 0,
+    },
+    {
+      numOfSelection: 0,
+      numOfApplication: 0,
+      meanGpa: 0,
+      minGpa: 0,
+    },
+  ]);
+  const [pastData2, setPastData2] = useState([
+    {
+      numOfSelection: 0,
+      numOfApplication: 0,
+      meanGpa: 0,
+      minGpa: 0,
+    },
+    {
+      numOfSelection: 0,
+      numOfApplication: 0,
+      meanGpa: 0,
+      minGpa: 0,
+    },
+    {
+      numOfSelection: 0,
+      numOfApplication: 0,
+      meanGpa: 0,
+      minGpa: 0,
+    },
+  ]);
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -229,6 +283,52 @@ export default function MyBoardPage() {
     };
 
     getUserInfo();
+  }, []);
+
+  useEffect(() => {
+    const getPastData = async () => {
+      const semester = ['2023-1', '2022-2', '2022-1'];
+      const hopeMajor1 = collegeAPIMapping[userData.hopeMajor1 as MajorOptions];
+      const hopeMajor2 = collegeAPIMapping[userData.hopeMajor2 as MajorOptions];
+
+      const newPastData1 = [...pastData1];
+      for (let i = 0; i < semester.length; i++) {
+        try {
+          const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor1}/${semester[i]}`, config);
+          const data = APIresponse.data.pastData;
+
+          newPastData1[i] = {
+            numOfSelection: newPastData1[i].numOfSelection,
+            numOfApplication: data.overallData.numberOfData,
+            meanGpa: data.passedData.passedMeanGPAData.gpa,
+            minGpa: data.passedData.passedMinimumGPAData.gpa,
+          };
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      setPastData1(newPastData1);
+
+      const newPastData2 = [...pastData2];
+      for (let i = 0; i < semester.length; i++) {
+        try {
+          const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor2}/${semester[i]}`, config);
+          const data = APIresponse.data.pastData;
+
+          newPastData2[i] = {
+            numOfSelection: newPastData2[i].numOfSelection,
+            numOfApplication: data.overallData.numberOfData,
+            meanGpa: data.passedData.passedMeanGPAData.gpa,
+            minGpa: data.passedData.passedMinimumGPAData.gpa,
+          };
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      setPastData2(newPastData2);
+    };
+
+    getPastData();
   }, []);
 
   return (
@@ -803,10 +903,9 @@ export default function MyBoardPage() {
                     내 학점 위치 파악하기
                   </Typography>
                   <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
-                    <path d="M0 1L1239 1" stroke="#DFDFDF"/>
+                    <path d="M0 1L1239 1" stroke="#DFDFDF" />
                   </svg>
-                  <MyStageChart/>
-          
+                  <MyStageChart />
                 </RangeBox>
               </div>
               <div
@@ -1170,10 +1269,9 @@ export default function MyBoardPage() {
                     내 학점 위치 파악하기
                   </Typography>
                   <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
-                    <path d="M0 1L1239 1" stroke="#DFDFDF"/>
+                    <path d="M0 1L1239 1" stroke="#DFDFDF" />
                   </svg>
-                  <MyStageChart/>
-
+                  <MyStageChart />
                 </RangeBox>
               </div>
               <div
