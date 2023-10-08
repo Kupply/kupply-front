@@ -12,6 +12,7 @@ import VerificationBox from '../../../assets/VerificationBox';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
 import MockApplicationButton from '../../../assets/myboardpage/MockApplication';
+import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -19,9 +20,18 @@ export interface ModalProps {
   onClickModal: () => void; // 함수;
 }
 
+/*
+  모달창 고유번호
+  0 : STEP 1 기존 정보 확인하기
+  1 : STEP 2 지원 학기 입력하기
+  2 : STEP 3 자기소개서 첨부하기
+  3 : 모의지원 제출 확인
+  4 : 모의지원 완료 안내
+  */
+
 export default function ApplicationModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
-  const [currentModal, setCurrentModal] = useState<number>(0);
+  const [currentModal, setCurrentModal] = useState<number>(3);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(true);
 
   return (
@@ -42,33 +52,56 @@ export default function ApplicationModal(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <AlertWrapper>
-            <AlertIconExclamation width="113px" height="113px" />
-            <Typography size="largeText" bold="700" style={{ marginTop: '25px' }}>
-              모의지원을 완료 하시겠습니까?
-            </Typography>
-            <Typography size="mediumText" bold="500" style={{ marginTop: '10px', lineHeight: '136.111%' }}>
-              모의지원을 완료한 후에는 철회가 불가능합니다.
-            </Typography>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '22px',
-                marginTop: '50px',
-              }}
-            >
-              <LabelButton buttonType="secondary" size="medium" style={{ width: '627.232px', height: '68px' }}>
-                취소하기
-              </LabelButton>
-              <MockApplicationButton
-                style={{ width: '627.232px', height: '68px' }}
-                // 글자 디자인 수정 필요
+          {currentModal === 3 ? (
+            <AlertWrapper>
+              <AlertIconExclamation width="113px" height="113px" />
+              <Typography size="largeText" bold="700" style={{ marginTop: '25px' }}>
+                모의지원을 완료 하시겠습니까?
+              </Typography>
+              <Typography size="mediumText" bold="500" style={{ marginTop: '10px', lineHeight: '136.111%' }}>
+                모의지원을 완료한 후에는 철회가 불가능합니다.
+              </Typography>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '22px',
+                  marginTop: '50px',
+                }}
               >
-                모의지원 완료하기
-              </MockApplicationButton>
-            </div>
-          </AlertWrapper>
+                <LabelButton buttonType="secondary" size="medium" style={{ width: '627.232px', height: '68px' }}>
+                  취소하기
+                </LabelButton>
+                <MockApplicationButton
+                  onClick={() => {
+                    setCurrentModal(4); // 다음 창으로 이동
+                  }}
+                  style={{ width: '627.232px', height: '68px', fontSize: '20px' }}
+                  // 글자 디자인 수정 필요
+                >
+                  모의지원 완료하기
+                </MockApplicationButton>
+              </div>
+            </AlertWrapper>
+          ) : (
+            <AlertWrapper>
+              <AlertIconCheck width="113px" height="113px" />
+              <Typography size="largeText" bold="700" style={{ marginTop: '25px' }}>
+                모의지원이 완료되었습니다.
+              </Typography>
+              <Typography size="mediumText" bold="500" style={{ marginTop: '10px', lineHeight: '136.111%' }}>
+                고대빵 님의 이중전공 합격을 기원합니다.
+              </Typography>
+              <SubmitButton
+                onClick={() => {
+                  setOpenModal(!isOpenModal);
+                }}
+                style={{ marginTop: '107px' }}
+              >
+                확인
+              </SubmitButton>
+            </AlertWrapper>
+          )}
         </ModalLarge>
       )}
     </Main>
