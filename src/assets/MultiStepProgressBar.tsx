@@ -9,9 +9,37 @@ export interface StepProps {
 }
 
 export interface MultiStepProgressBarProps {
-  steps: Array<number>;
+  numberOfSteps: number;
+  // steps: Array<number>;
   currentStep: number;
   complete: boolean;
+}
+
+export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
+  const { numberOfSteps = 5, currentStep, complete = false, ...rest } = props;
+
+  return (
+    <div style={{ width: '976.8px', height: '30px' }}>
+      <ProgressBarContainer>
+        {Array.from({ length: numberOfSteps }).map((_, i) => (
+          <StepItem
+            key={i}
+            isActive={currentStep === i + 1}
+            isComplete={i + 1 < currentStep || complete}
+            stepType={currentStep === i + 1 ? 'active' : currentStep < i + 1 ? 'inactive' : 'complete'}
+          >
+            <Step
+              isActive={currentStep === i + 1}
+              isComplete={i + 1 < currentStep || complete}
+              stepType={currentStep === i + 1 ? 'active' : currentStep < i + 1 ? 'inactive' : 'complete'}
+            >
+              {currentStep > i + 1 ? <img src="../../design_image/fi_check.svg" alt="ERROR" /> : null}
+            </Step>
+          </StepItem>
+        ))}
+      </ProgressBarContainer>
+    </div>
+  );
 }
 
 // 막대바 디자인
@@ -91,10 +119,27 @@ const ProgressBarContainer = styled.div`
   justify-content: space-between;
 `;
 
-export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
-  const { steps = '[1, 2, 3, 4, 5]', complete = 'false', ...rest } = props;
+/* 
+10/09 프롭스 처리
+{props.steps.map((step, i) => (
+          <StepItem
+            key={i}
+            isActive={props.currentStep === i + 1}
+            isComplete={i + 1 < props.currentStep || props.complete}
+            stepType={props.currentStep === i + 1 ? 'active' : props.currentStep < i + 1 ? 'inactive' : 'complete'}
+          >
+            <Step
+              isActive={props.currentStep === i + 1}
+              isComplete={i + 1 < props.currentStep || props.complete}
+              stepType={props.currentStep === i + 1 ? 'active' : props.currentStep < i + 1 ? 'inactive' : 'complete'}
+            >
+              {props.currentStep > i + 1 ? <img src="../../design_image/fi_check.svg" alt="ERROR" /> : null}
+            </Step>
+          </StepItem>
+        ))}
+*/
 
-  /* 
+/* 
   (컴포넌트 재사용성 제고를 위해 모두 프롭스 처리)
 
   const steps = [1, 2, 3, 4, 5];
@@ -120,30 +165,6 @@ export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
     }
   };
 */
-
-  return (
-    <div style={{ width: '976.8px', height: '30px' }}>
-      <ProgressBarContainer>
-        {props.steps.map((step, i) => (
-          <StepItem
-            key={i}
-            isActive={props.currentStep === i + 1}
-            isComplete={i + 1 < props.currentStep || props.complete}
-            stepType={props.currentStep === i + 1 ? 'active' : props.currentStep < i + 1 ? 'inactive' : 'complete'}
-          >
-            <Step
-              isActive={props.currentStep === i + 1}
-              isComplete={i + 1 < props.currentStep || props.complete}
-              stepType={props.currentStep === i + 1 ? 'active' : props.currentStep < i + 1 ? 'inactive' : 'complete'}
-            >
-              {props.currentStep > i + 1 ? <img src="../../design_image/fi_check.svg" alt="ERROR" /> : null}
-            </Step>
-          </StepItem>
-        ))}
-      </ProgressBarContainer>
-    </div>
-  );
-}
 
 /* 
 

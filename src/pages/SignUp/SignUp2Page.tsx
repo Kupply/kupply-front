@@ -91,7 +91,6 @@ export default function SignUp2Page() {
   const navigate = useNavigate();
 
   /* Progress Bar 동작을 위한 리액트훅 및 함수 모음 (props로 전달) */
-  const steps = [1, 2, 3, 4, 5];
   const [currentStep, setCurrentStep] = useState<number>(2); // 회원가입 2 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
@@ -175,7 +174,7 @@ export default function SignUp2Page() {
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar steps={steps} currentStep={currentStep} complete={complete} />
+      <MultiStepProgressBar numberOfSteps={5} currentStep={currentStep} complete={complete} />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 2</StepIndicator>
