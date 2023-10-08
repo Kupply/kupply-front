@@ -5,10 +5,9 @@ import PrevButton from '../../../assets/buttons/PrevButton';
 import SubmitButton from '../../../assets/buttons/SubmitButton';
 import Typography from '../../../assets/Typography';
 import ModalLarge from '../../../components/base/ModalLarge';
-import EditModalHeaderButton from '../../../assets/myboardpage/EditModalHeaderButton';
-import ImgCtrlButton from '../../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../../assets/dropdown/dropDown';
 import VerificationBox from '../../../assets/VerificationBox';
+import MultiStepProgressBar from '../../../assets/MultiStepProgressBar';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
 import MockApplicationButton from '../../../assets/myboardpage/MockApplication';
@@ -120,13 +119,49 @@ export default function ApplicationModal(props: ModalProps) {
                 />
               </svg>
             </CloseButton>
-            {currentModal === 0 && (
-              <ModalTiteWrapper>
-                <Typography size="largeText">실지원 정보 확인하기</Typography>
-                <Typography size="mediumText" style={{ lineHeight: ' 136.111% ' }}>
-                  실제 이중전공 지원 시 입력한 정보와 달라진 정보를 수정해주세요.
-                </Typography>
-              </ModalTiteWrapper>
+            <ModalTiteWrapper>
+              <Typography size="largeText">실지원 정보 확인하기</Typography>
+              <Typography size="mediumText" style={{ lineHeight: ' 136.111% ' }}>
+                실제 이중전공 지원 시 입력한 정보와 달라진 정보를 수정해주세요.
+              </Typography>
+            </ModalTiteWrapper>
+            {currentModal === 0 && ( // 기존 정보 확인하기 단계
+              <div>
+                <ProgressBarWrapper>
+                  <MultiStepProgressBar numberOfSteps={3} currentStep={1} complete={true} />
+                  <ProgressBarTtitle style={{ paddingLeft: '135px' }}>
+                    STEP1
+                    <br />
+                    기존 정보 확인하기
+                  </ProgressBarTtitle>
+                  <ProgressBarTtitle style={{ color: '#DFDFDF' }}>STEP2</ProgressBarTtitle>
+                  <ProgressBarTtitle style={{ paddingLeft: '135px' }}>STEP3</ProgressBarTtitle>
+                </ProgressBarWrapper>
+              </div>
+            )}
+            {currentModal === 1 && ( // 지원학기 입력하기 단계
+              <div>
+                <ProgressBarWrapper>
+                  <MultiStepProgressBar numberOfSteps={3} currentStep={1} complete={true} />
+                  <ProgressBarTtitle>
+                    STEP2
+                    <br />
+                    지원학기 입력하기
+                  </ProgressBarTtitle>
+                </ProgressBarWrapper>
+              </div>
+            )}
+            {currentModal === 2 && ( // 자기소개서 첨부하기 단계
+              <div>
+                <ProgressBarWrapper>
+                  <MultiStepProgressBar numberOfSteps={3} currentStep={1} complete={true} />
+                  <ProgressBarTtitle>
+                    STEP3
+                    <br />
+                    자기소개서 첨부하기
+                  </ProgressBarTtitle>
+                </ProgressBarWrapper>
+              </div>
             )}
           </ModalLarge>
         ))}
@@ -171,4 +206,21 @@ const ModalTiteWrapper = styled.div`
   gap: 10px;
   align-items: center;
   margin-top: 55px;
+  margin-bottom: 18px;
+`;
+
+const ProgressBarTtitle = styled.text`
+  color: #e57c90;
+  text-align: left;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
+  margin-top: 8px;
+`;
+
+const ProgressBarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
