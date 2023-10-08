@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import Typography from '../../assets/Typography';
 import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
@@ -69,7 +71,46 @@ const major = {
   },
 };
 
+type MajorOptions =
+  | '경영대학'
+  | '경제학과'
+  | '심리학부'
+  | '통계학과'
+  | '수학과'
+  | '화학과'
+  | '미디어학부'
+  | '식품자원경제학과'
+  | '컴퓨터학과';
+
+const collegeNameMapping = {
+  식품자원경제학과: 'bio',
+  미디어학부: 'media',
+  컴퓨터학과: 'info',
+  경영대학: 'bussiness',
+  심리학부: 'psycho',
+  화학과: 'science',
+  수학과: 'science',
+  경제학과: 'political',
+  통계학과: 'political',
+};
+
+// 위의 major 객체에서 한글 title로 영어 text 찾는 함수
+function getTextByTitle(targetTitle: string) {
+  const majorText = Object.values(major).find((item) => item.title === targetTitle);
+  return majorText ? majorText.text : '';
+}
+
 export default function MyBoardPage() {
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
   const [isApplied, setIsApplied] = useState<boolean>(true);
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
@@ -146,6 +187,49 @@ export default function MyBoardPage() {
     };
   }, []);
 
+  // 서버로부터 받는 정보들
+  const [userData, setUserData] = useState({
+    userName: '고대빵',
+    userNickname: '잠만보',
+    userProfilePic: 'rectProfile1',
+    userProfileLink: '',
+    userRole: 'candidate',
+    firstMajor: '디자인조형학부',
+    studentId: '2020220037',
+    hopeMajor1: '경영대학',
+    hopeMajor2: '미디어학부',
+    curGPA: 4.2,
+    hopeSemester: '2023-2',
+  });
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        const userInfo = APIresponse.data.data.user;
+
+        setUserData({
+          ...userData,
+          userName: userInfo.name,
+          userNickname: userInfo.nickname,
+          userProfilePic: userInfo.profilePic,
+          userProfileLink: userInfo.profileLink,
+          userRole: userInfo.role,
+          firstMajor: userInfo.firstMajor,
+          studentId: userInfo.studentId,
+          hopeMajor1: userInfo.hopeMajor1,
+          hopeMajor2: userInfo.hopeMajor2,
+          curGPA: userInfo.curGPA,
+          hopeSemester: userInfo.hopeSemester,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getUserInfo();
+  }, []);
+
   return (
     <>
       <Wrapper>
@@ -163,21 +247,28 @@ export default function MyBoardPage() {
           <div style={{ marginTop: '-82px' }}>
             <MyInformationBox translateY={scrollY}>
               <CharacterImageBox>
-                <CharacterImage src="design_image/character/rectProfile/rectProfile1.png" alt="profile" />
+                <CharacterImage
+                  src={
+                    userData.userProfilePic === 'customProfile'
+                      ? userData.userProfileLink
+                      : `design_image/character/rectProfile/${userData.userProfilePic}.png`
+                  }
+                  alt="profile"
+                />
               </CharacterImageBox>
               <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '128.01px' }}>
                 <Typography
                   size="heading2"
                   style={{ color: 'var(--Main-Black, #141414)', marginTop: '20px', lineHeight: '125%' }}
                 >
-                  고대빵
+                  {userData.userName}
                 </Typography>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Typography
                     size="bodyText"
                     style={{ color: 'rgba(20, 20, 20, 0.60)', fontWeight: '500', marginLeft: '6px' }}
                   >
-                    도전자 님
+                    {userData.userRole === 'candidate' ? '도전자' : '합격자'} 님
                   </Typography>
                   <EditButton onClick={onClickEditModal} />
                 </div>
@@ -187,7 +278,7 @@ export default function MyBoardPage() {
                   size="bodyText"
                   style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '500', marginLeft: '128.01px' }}
                 >
-                  디자인조형학부 20학번
+                  {userData.firstMajor} {userData.studentId.substring(2, 4)}학번
                 </Typography>
               </div>
               <svg
@@ -219,8 +310,10 @@ export default function MyBoardPage() {
                 <InterestMajorBox>
                   <MajorSymbolShadow>
                     <MajorSymbol
-                      src="design_image/major_symbol/trans/medium/bussiness_trans_medium.png"
-                      alt="business school"
+                      src={`design_image/major_symbol/trans/medium/${
+                        collegeNameMapping[userData.hopeMajor1 as MajorOptions]
+                      }_trans_medium.png`}
+                      alt={getTextByTitle(userData.hopeMajor1)}
                     />
                     <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
                       <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_3779)" fill-opacity="0.7" />
@@ -247,7 +340,7 @@ export default function MyBoardPage() {
                       1지망
                     </Typography>
                     <Typography size="bodyText" style={{ color: 'var(--Main-Black, #141414)', marginTop: '16px' }}>
-                      경영대학
+                      {userData.hopeMajor1}
                     </Typography>
                     <Typography
                       size="normalText"
@@ -258,7 +351,7 @@ export default function MyBoardPage() {
                         opacity: 0.8,
                       }}
                     >
-                      Business School
+                      {getTextByTitle(userData.hopeMajor1)}
                     </Typography>
                   </div>
                 </InterestMajorBox>
@@ -267,8 +360,10 @@ export default function MyBoardPage() {
                 <InterestMajorBox>
                   <MajorSymbolShadow>
                     <MajorSymbol
-                      src="design_image/major_symbol/trans/medium/media_trans_medium.png"
-                      alt="school fo media"
+                      src={`design_image/major_symbol/trans/medium/${
+                        collegeNameMapping[userData.hopeMajor2 as MajorOptions]
+                      }_trans_medium.png`}
+                      alt={getTextByTitle(userData.hopeMajor2)}
                     />
                     <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
                       <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_1679)" fill-opacity="0.7" />
@@ -292,10 +387,10 @@ export default function MyBoardPage() {
                       size="bodyText"
                       style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', lineHeight: '20px' }}
                     >
-                      1지망
+                      2지망
                     </Typography>
                     <Typography size="bodyText" style={{ color: 'var(--Main-Black, #141414)', marginTop: '8px' }}>
-                      미디어학부
+                      {userData.hopeMajor2}
                     </Typography>
                     <Typography
                       size="normalText"
@@ -306,8 +401,7 @@ export default function MyBoardPage() {
                         opacity: 0.8,
                       }}
                     >
-                      School of Media
-                      <br /> Communication
+                      {getTextByTitle(userData.hopeMajor2)}
                     </Typography>
                   </div>
                 </InterestMajorBox>
@@ -359,7 +453,7 @@ export default function MyBoardPage() {
                   size="bodyText"
                   style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '71.74px' }}
                 >
-                  4.2
+                  {userData.curGPA}
                 </Typography>
               </div>
               <svg
@@ -413,7 +507,7 @@ export default function MyBoardPage() {
                   size="bodyText"
                   style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '59.4px' }}
                 >
-                  2023-2R
+                  {userData.hopeSemester}R
                 </Typography>
               </div>
               <svg
@@ -458,8 +552,10 @@ export default function MyBoardPage() {
                       }}
                     >
                       <BigMajorSymbol
-                        src="design_image/major_symbol/trans/large/bussiness_trans_large.png"
-                        alt="business school"
+                        src={`design_image/major_symbol/trans/large/${
+                          collegeNameMapping[userData.hopeMajor1 as MajorOptions]
+                        }_trans_large.png`}
+                        alt={getTextByTitle(userData.hopeMajor1)}
                       />
                     </div>
                     <Typography
@@ -470,7 +566,7 @@ export default function MyBoardPage() {
                         textAlign: 'center',
                       }}
                     >
-                      경영대학
+                      {userData.hopeMajor1}
                     </Typography>
                     <Typography
                       size="largeText"
@@ -481,7 +577,7 @@ export default function MyBoardPage() {
                         textAlign: 'center',
                       }}
                     >
-                      Business School
+                      {getTextByTitle(userData.hopeMajor1)}
                     </Typography>
                   </div>
                 </BigMajorSymbolBox>
@@ -553,7 +649,7 @@ export default function MyBoardPage() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
                       <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
-                        32명의 지원자가 경영학과를 지원했습니다.
+                        32명의 지원자가 {userData.hopeMajor1}를 지원했습니다.
                       </Typography>
                       <div style={{ display: 'flex', marginTop: '18px' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -619,7 +715,7 @@ export default function MyBoardPage() {
                           marginLeft: '36px',
                         }}
                       >
-                        2024-1R 경영대학 모집정보
+                        2024-1R {userData.hopeMajor1} 모집정보
                       </Typography>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1065,8 +1161,10 @@ export default function MyBoardPage() {
                       }}
                     >
                       <BigMajorSymbol
-                        src="design_image/major_symbol/trans/large/media_trans_large.png"
-                        alt="business school"
+                        src={`design_image/major_symbol/trans/large/${
+                          collegeNameMapping[userData.hopeMajor2 as MajorOptions]
+                        }_trans_large.png`}
+                        alt={getTextByTitle(userData.hopeMajor2)}
                       />
                     </div>
                     <Typography
@@ -1077,7 +1175,7 @@ export default function MyBoardPage() {
                         textAlign: 'center',
                       }}
                     >
-                      미디어학부
+                      {userData.hopeMajor2}
                     </Typography>
                     <Typography
                       size="largeText"
@@ -1088,7 +1186,7 @@ export default function MyBoardPage() {
                         textAlign: 'center',
                       }}
                     >
-                      School of Media and Communication
+                      {getTextByTitle(userData.hopeMajor2)}
                     </Typography>
                   </div>
                 </BigMajorSymbolBox>
@@ -1160,7 +1258,7 @@ export default function MyBoardPage() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
                       <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
-                        32명의 지원자가 경영학과를 지원했습니다.
+                        32명의 지원자가 {userData.hopeMajor2}를 지원했습니다.
                       </Typography>
                       <div style={{ display: 'flex', marginTop: '18px' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -1226,7 +1324,7 @@ export default function MyBoardPage() {
                           marginLeft: '36px',
                         }}
                       >
-                        2024-1R 미디어학부 모집정보
+                        2024-1R {userData.hopeMajor2} 모집정보
                       </Typography>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1617,7 +1715,8 @@ export default function MyBoardPage() {
               <BlurMsg>
                 <Typography size="largeText">쿠플라이에서 모의지원 후 열람 가능해요!</Typography>
                 <Typography size="mediumText" style={{ lineHeight: '136.111%' }}>
-                  모의지원을 완료한 후, 나와 함께 경영학과를 지원한 지원자의 실시간 지원통계를 열람해보세요.
+                  모의지원을 완료한 후, 나와 함께 {userData.hopeMajor1}를 지원한 지원자의 실시간 지원통계를
+                  열람해보세요.
                   <br />
                   모의지원하라는 홍보성 문구가 필요해요.
                 </Typography>
