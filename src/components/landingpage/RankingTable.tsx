@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
@@ -88,8 +88,39 @@ export default function RankingTable() {
     [],
   );
 
+  //아래 toggle을 설정한다.
+  const [isShowAll, setisShowAll] = useState<boolean>(false);
   return (
     <Wrapper>
+      <Typography color="#D85888" size="mediumText" style={{ textAlign: 'center', marginBottom: '13.5px' }}>
+        실시간 지원률
+      </Typography>
+      <Typography size="heading2" style={{ textAlign: 'center', marginBottom: '15px' }}>
+        쿠플라이 실시간 이중전공 모의지원 현황
+      </Typography>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <KupplyApplyButton>
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+            <path
+              d="M18.8327 1.66699L9.66602 10.8337"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M18.8327 1.66699L12.9993 18.3337L9.66602 10.8337L2.16602 7.50033L18.8327 1.66699Z"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <Typography color="white" size="bodyText">
+            쿠플라이 모의지원 하러가기
+          </Typography>
+        </KupplyApplyButton>
+      </div>
       <TextWrapper>
         <div style={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -169,9 +200,46 @@ export default function RankingTable() {
           </div>
         </HeaderData>
       </TableHeader>
-      {data.map((row) => (
-        <TableData {...row}></TableData>
-      ))}
+      {isShowAll
+        ? data.map((row) => <TableData {...row}></TableData>)
+        : data.slice(0, 5).map((row) => <TableData {...row}></TableData>)}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {isShowAll ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50"
+            height="51"
+            viewBox="0 0 50 51"
+            fill="none"
+            onClick={() => setisShowAll(false)}
+          >
+            <path
+              d="M37.5 31.2637L25 18.7637L12.5 31.2637"
+              stroke="#B9B9B9"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50"
+            height="51"
+            viewBox="0 0 50 51"
+            fill="none"
+            onClick={() => setisShowAll(true)}
+          >
+            <path
+              d="M12.5 18.7637L25 31.2637L37.5 18.7637"
+              stroke="#B9B9B9"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        )}
+      </div>
     </Wrapper>
   );
 }
@@ -181,8 +249,19 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 86%;
-  height: 1200px;
   background: rgba(255, 255, 255, 0.6);
+`;
+
+const KupplyApplyButton = styled.button`
+  display: flex;
+  width: 628px;
+  padding: 24px 34px;
+  border-radius: 10px;
+  background: linear-gradient(91deg, #d85888 -19.78%, #f5bdbd 89.21%, rgba(253, 242, 242, 0.3) 126.89%);
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 78px;
 `;
 
 const TextWrapper = styled.div`
