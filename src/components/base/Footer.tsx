@@ -78,6 +78,7 @@ const HorizontalLine = styled.div`
 
 const ContentsWrapper = styled.div`
   display: flex; // 가로 정렬
+  justify-content: space-between;
   width: auto;
 `;
 

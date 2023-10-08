@@ -1,22 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../assets/Logo';
-import Typography from '../assets/Typography';
-import SideBar from '../components/community/SideBar';
-import Main from '../components/community/Main';
+import Preview from '../components/landing/Preview';
+import FAQ from '../components/landing/FAQ';
+import Ending from '../components/landing/Ending';
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 1153px;
   display: flex;
-  align-items: space-between;
 `;
 
 const CommunityPage = () => {
   return (
     <Wrapper>
-      <SideBar />
-      <Main />
+      <Ending />
     </Wrapper>
   );
 };
