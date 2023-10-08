@@ -993,7 +993,7 @@ export default function MyBoardPage() {
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
                   <div style={{ paddingTop: '35px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', marginLeft: '36px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
                         {`32\u00A0`}
                       </Typography>
