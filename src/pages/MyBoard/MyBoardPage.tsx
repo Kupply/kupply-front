@@ -11,6 +11,7 @@ import MyStageChart from '../../assets/myboardpage/MyStage';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from './EditModals/EditModal';
 import ApplicationModal from './SubmitModals/ApplicationModal';
+import { HelpMessage } from '../../assets/myboardpage/HellpMessage';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -684,7 +685,10 @@ export default function MyBoardPage() {
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
                   <CompetitionRateBox>
-                    <BoxTitleText>실시간 경쟁률</BoxTitleText>
+                    <div style={{ display: "flex", alignItems: "baseline" }}>
+                      <BoxTitleText style={{ marginRight: "8px" }}>실시간 경쟁률</BoxTitleText>
+                      <HelpMessage/>
+                    </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
@@ -721,7 +725,10 @@ export default function MyBoardPage() {
                   </CompetitionRateBox>
                 </div>
                 <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <BoxTitleText>실시간 지원자</BoxTitleText>
+                  <div style={{ display: "flex", alignItems: "baseline" }}>
+                    <BoxTitleText style={{ marginRight: "8px" }}>실시간 지원자</BoxTitleText>
+                    <HelpMessage/>
+                  </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
@@ -781,7 +788,7 @@ export default function MyBoardPage() {
                       size="bodyText"
                       style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
                     >
-                      3개년 합격지표
+                      3학기 합격지표
                     </Typography>
                     <EachYearHeadBox>
                       <SemesterButton
@@ -1050,7 +1057,10 @@ export default function MyBoardPage() {
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
                   <CompetitionRateBox>
-                    <BoxTitleText>실시간 경쟁률</BoxTitleText>
+                    <div style={{ display: "flex", alignItems: "baseline" }}>
+                      <BoxTitleText style={{ marginRight: "8px" }}>실시간 경쟁률</BoxTitleText>
+                      <HelpMessage/>
+                    </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
@@ -1087,7 +1097,10 @@ export default function MyBoardPage() {
                   </CompetitionRateBox>
                 </div>
                 <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <BoxTitleText>실시간 지원자</BoxTitleText>
+                  <div style={{ display: "flex", alignItems: "baseline" }}>
+                    <BoxTitleText style={{ marginRight: "8px" }}>실시간 지원자</BoxTitleText>
+                    <HelpMessage/>
+                  </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
@@ -1147,7 +1160,7 @@ export default function MyBoardPage() {
                       size="bodyText"
                       style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
                     >
-                      3개년 합격지표
+                      3학기 합격지표
                     </Typography>
                     <EachYearHeadBox>
                       <SemesterButton
@@ -1455,7 +1468,7 @@ const ThreeYearCumulativeDataBox = styled.div`
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
   background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
-  backdrop-filter: blur(12px);
+  //backdrop-filter: blur(12px);
 `;
 
 const EachYearHeadBox = styled.div`
