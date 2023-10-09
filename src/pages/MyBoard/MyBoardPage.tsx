@@ -217,44 +217,71 @@ export default function MyBoardPage() {
   });
 
   // 좀 아닌 것 같지만 생각의 여유가 없기에
+  // FIXME: numOfSelection(선발인원)들 하드코딩으로 바꿔야 함.
   const [pastData1, setPastData1] = useState([
     {
-      numOfSelection: 0,
-      numOfApplication: 0,
+      numOfSelection: 10,
+      numOfApplication: 5,
+      competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
-      numOfSelection: 0,
-      numOfApplication: 0,
+      numOfSelection: 20,
+      numOfApplication: 5,
+      competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
-      numOfSelection: 0,
-      numOfApplication: 0,
+      numOfSelection: 30,
+      numOfApplication: 5,
+      competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
   ]);
   const [pastData2, setPastData2] = useState([
     {
-      numOfSelection: 0,
-      numOfApplication: 0,
+      numOfSelection: 40,
+      numOfApplication: 5,
+      competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
-      numOfSelection: 0,
-      numOfApplication: 0,
+      numOfSelection: 50,
+      numOfApplication: 5,
+      competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
-      numOfSelection: 0,
-      numOfApplication: 0,
+      numOfSelection: 60,
+      numOfApplication: 5,
+      competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
+    },
+  ]);
+
+  // 사용자 희망전공1, 2의 실시간 지원 현황 데이터
+  const [curData, setCurData] = useState([
+    {
+      curNumOfSelection: 10,
+      curApplyNum: 0,
+      curCompetitionRate: 0,
+      fullChartData: [],
+      halfChartData: [],
+      scatterChartData: [],
+    },
+    {
+      curNumOfSelection: 20,
+      curApplyNum: 0,
+      curCompetitionRate: 0,
+      fullChartData: [],
+      halfChartData: [],
+      scatterChartData: [],
     },
   ]);
 
@@ -278,6 +305,19 @@ export default function MyBoardPage() {
           curGPA: userInfo.curGPA,
           hopeSemester: userInfo.hopeSemester,
         });
+
+        // 모의지원 했는지.
+        setIsApplied(userInfo.isApplied);
+
+        sessionStorage.setItem('userProfilePic', userInfo.userProfilePic);
+        sessionStorage.setItem('userProfileLink', userInfo.userProfileLink);
+        sessionStorage.setItem('nickname', userInfo.nickname);
+        sessionStorage.setItem('studentId', userInfo.studentId);
+        sessionStorage.setItem('firstMajor', userInfo.firstMajor);
+        sessionStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+        sessionStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+        sessionStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+        sessionStorage.setItem('hopeSemester', userInfo.hopeSemester);
       } catch (err) {
         console.log(err);
       }
@@ -298,9 +338,15 @@ export default function MyBoardPage() {
           const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor1}/${semester[i]}`, config);
           const data = APIresponse.data.pastData;
 
+          let competitionRate = 0;
+          if (data.overallData.numberOfData > 0) {
+            competitionRate = +(data.overallData.numberOfData / newPastData1[i].numOfSelection).toFixed(2);
+          }
+
           newPastData1[i] = {
             numOfSelection: newPastData1[i].numOfSelection,
             numOfApplication: data.overallData.numberOfData,
+            competitionRate: competitionRate,
             meanGpa: data.passedData.passedMeanGPAData.gpa,
             minGpa: data.passedData.passedMinimumGPAData.gpa,
           };
@@ -316,9 +362,15 @@ export default function MyBoardPage() {
           const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor2}/${semester[i]}`, config);
           const data = APIresponse.data.pastData;
 
+          let competitionRate = 0;
+          if (data.overallData.numberOfData > 0) {
+            competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
+          }
+
           newPastData2[i] = {
             numOfSelection: newPastData2[i].numOfSelection,
             numOfApplication: data.overallData.numberOfData,
+            competitionRate: competitionRate,
             meanGpa: data.passedData.passedMeanGPAData.gpa,
             minGpa: data.passedData.passedMinimumGPAData.gpa,
           };
@@ -330,6 +382,39 @@ export default function MyBoardPage() {
     };
 
     getPastData();
+  }, []);
+
+  useEffect(() => {
+    const getCurData = async () => {
+      try {
+        const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
+        const data = APIresponse.data.data;
+
+        const newCurData = [...curData];
+
+        for (let i = 0; i < 2; i++) {
+          let curCompetitionRate = 0;
+          if (data[i].curApplyNum > 0) {
+            curCompetitionRate = newCurData[i].curNumOfSelection / data[i].curApplyNum;
+          }
+
+          newCurData[i] = {
+            curNumOfSelection: newCurData[i].curNumOfSelection,
+            curApplyNum: data[i].curApplyNum,
+            curCompetitionRate: curCompetitionRate,
+            fullChartData: data[i].fullChartData,
+            halfChartData: data[i].halfChartData,
+            scatterChartData: data[i].scatterChartData,
+          };
+        }
+
+        setCurData(newCurData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getCurData();
   }, []);
 
   return (
@@ -685,16 +770,16 @@ export default function MyBoardPage() {
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
                   <CompetitionRateBox>
-                    <div style={{ display: "flex", alignItems: "baseline" }}>
-                      <BoxTitleText style={{ marginRight: "8px" }}>실시간 경쟁률</BoxTitleText>
-                      <HelpMessage/>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                      <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
+                      <HelpMessage />
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
                     <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`3.14\u00A0`}
+                        {`${curData[0].curCompetitionRate}\u00A0`}
                       </Typography>
                       <Typography
                         size="heading1"
@@ -725,9 +810,9 @@ export default function MyBoardPage() {
                   </CompetitionRateBox>
                 </div>
                 <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <div style={{ display: "flex", alignItems: "baseline" }}>
-                    <BoxTitleText style={{ marginRight: "8px" }}>실시간 지원자</BoxTitleText>
-                    <HelpMessage/>
+                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
+                    <HelpMessage />
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -735,13 +820,13 @@ export default function MyBoardPage() {
                   <div style={{ paddingTop: '35px' }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`32\u00A0`}
+                        {`${curData[0].curApplyNum}\u00A0`}
                       </Typography>
                       <Typography
                         size="heading1"
                         style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
                       >
-                        / 12
+                        / {curData[0].curNumOfSelection}
                       </Typography>
                       <Typography
                         size="normalText"
@@ -757,7 +842,7 @@ export default function MyBoardPage() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
                       <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
-                        32명의 지원자가 {userData.hopeMajor1}를 지원했습니다.
+                        {curData[0].curApplyNum}명의 지원자가 {userData.hopeMajor1}를 지원했습니다.
                       </Typography>
                       <div style={{ display: 'flex', marginTop: '18px' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -823,7 +908,8 @@ export default function MyBoardPage() {
                           marginLeft: '36px',
                         }}
                       >
-                        2024-1R {userData.hopeMajor1} 모집정보
+                        {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
+                        {userData.hopeMajor1} 모집정보
                       </Typography>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -851,7 +937,8 @@ export default function MyBoardPage() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '51px' }}>
                       <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
-                        24-1 선발 인원
+                        {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
+                        인원
                       </Typography>
                       <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '85px' }}>
                         경쟁률
@@ -862,13 +949,23 @@ export default function MyBoardPage() {
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
                       >
-                        25명
+                        {semesterBtnStates['2023-1R']
+                          ? pastData1[0].numOfSelection
+                          : semesterBtnStates['2022-2R']
+                          ? pastData1[1].numOfSelection
+                          : pastData1[2].numOfSelection}
+                        명
                       </Typography>
                       <Typography
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '143px' }}
                       >
-                        3.59 : 1
+                        {semesterBtnStates['2023-1R']
+                          ? pastData1[0].competitionRate
+                          : semesterBtnStates['2022-2R']
+                          ? pastData1[1].competitionRate
+                          : pastData1[2].competitionRate}{' '}
+                        : 1
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
@@ -884,13 +981,21 @@ export default function MyBoardPage() {
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
                       >
-                        4.23
+                        {semesterBtnStates['2023-1R']
+                          ? pastData1[0].meanGpa
+                          : semesterBtnStates['2022-2R']
+                          ? pastData1[1].meanGpa
+                          : pastData1[2].meanGpa}
                       </Typography>
                       <Typography
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '142px' }}
                       >
-                        4.12
+                        {semesterBtnStates['2023-1R']
+                          ? pastData1[0].minGpa
+                          : semesterBtnStates['2022-2R']
+                          ? pastData1[1].minGpa
+                          : pastData1[2].minGpa}
                       </Typography>
                     </div>
                   </ThreeYearCumulativeDataBox>
@@ -1057,16 +1162,16 @@ export default function MyBoardPage() {
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
                   <CompetitionRateBox>
-                    <div style={{ display: "flex", alignItems: "baseline" }}>
-                      <BoxTitleText style={{ marginRight: "8px" }}>실시간 경쟁률</BoxTitleText>
-                      <HelpMessage/>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                      <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
+                      <HelpMessage />
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
                     <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`3.14\u00A0`}
+                        {`${curData[1].curCompetitionRate}\u00A0`}
                       </Typography>
                       <Typography
                         size="heading1"
@@ -1097,9 +1202,9 @@ export default function MyBoardPage() {
                   </CompetitionRateBox>
                 </div>
                 <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <div style={{ display: "flex", alignItems: "baseline" }}>
-                    <BoxTitleText style={{ marginRight: "8px" }}>실시간 지원자</BoxTitleText>
-                    <HelpMessage/>
+                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
+                    <HelpMessage />
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -1107,13 +1212,13 @@ export default function MyBoardPage() {
                   <div style={{ paddingTop: '35px' }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
                       <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`32\u00A0`}
+                        {`${curData[1].curApplyNum}\u00A0`}
                       </Typography>
                       <Typography
                         size="heading1"
                         style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
                       >
-                        / 12
+                        / {curData[1].curNumOfSelection}
                       </Typography>
                       <Typography
                         size="normalText"
@@ -1129,7 +1234,7 @@ export default function MyBoardPage() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
                       <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
-                        32명의 지원자가 {userData.hopeMajor2}를 지원했습니다.
+                        {curData[1].curApplyNum}명의 지원자가 {userData.hopeMajor2}를 지원했습니다.
                       </Typography>
                       <div style={{ display: 'flex', marginTop: '18px' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -1195,7 +1300,8 @@ export default function MyBoardPage() {
                           marginLeft: '36px',
                         }}
                       >
-                        2024-1R {userData.hopeMajor2} 모집정보
+                        {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
+                        {userData.hopeMajor2} 모집정보
                       </Typography>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1223,7 +1329,8 @@ export default function MyBoardPage() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '51px' }}>
                       <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
-                        24-1 선발 인원
+                        {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
+                        인원
                       </Typography>
                       <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '85px' }}>
                         경쟁률
@@ -1234,13 +1341,23 @@ export default function MyBoardPage() {
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
                       >
-                        25명
+                        {semesterBtnStates['2023-1R']
+                          ? pastData2[0].numOfSelection
+                          : semesterBtnStates['2022-2R']
+                          ? pastData2[1].numOfSelection
+                          : pastData2[2].numOfSelection}
+                        명
                       </Typography>
                       <Typography
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '143px' }}
                       >
-                        3.59 : 1
+                        {semesterBtnStates['2023-1R']
+                          ? pastData2[0].competitionRate
+                          : semesterBtnStates['2022-2R']
+                          ? pastData2[1].competitionRate
+                          : pastData2[2].competitionRate}{' '}
+                        : 1
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
@@ -1256,13 +1373,21 @@ export default function MyBoardPage() {
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
                       >
-                        4.23
+                        {semesterBtnStates['2023-1R']
+                          ? pastData2[0].meanGpa
+                          : semesterBtnStates['2022-2R']
+                          ? pastData2[1].meanGpa
+                          : pastData2[2].meanGpa}
                       </Typography>
                       <Typography
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '142px' }}
                       >
-                        4.12
+                        {semesterBtnStates['2023-1R']
+                          ? pastData2[0].minGpa
+                          : semesterBtnStates['2022-2R']
+                          ? pastData2[1].minGpa
+                          : pastData2[2].minGpa}
                       </Typography>
                     </div>
                   </ThreeYearCumulativeDataBox>

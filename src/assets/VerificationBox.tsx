@@ -1,7 +1,7 @@
-import React, { useState, ChangeEvent, KeyboardEvent, useRef } from "react";
-import styled from "styled-components";
+import React, { useState, ChangeEvent, KeyboardEvent, useRef } from 'react';
+import styled from 'styled-components';
 
-export interface VerificationBoxProps extends React.ComponentPropsWithoutRef<"input"> {
+export interface VerificationBoxProps extends React.ComponentPropsWithoutRef<'input'> {
   isEntered?: boolean;
   value?: string;
   setValue?: (value: string) => void;
@@ -15,8 +15,8 @@ const InputWrapper = styled.input<VerificationBoxProps>`
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  border: ${(props) => (props.isEntered ? "1px solid #D85888" : "1px solid #b9b9b9")};
-  box-shadow: ${(props) => (props.isEntered ? "0px 4px 12px 0px rgba(216, 88, 136, 0.2)" : "null")};
+  border: ${(props) => (props.isEntered ? '1px solid #D85888' : '1px solid #b9b9b9')};
+  box-shadow: ${(props) => (props.isEntered ? '0px 4px 12px 0px rgba(216, 88, 136, 0.2)' : 'null')};
   background: var(--white, #fff);
   color: var(--main-black, #141414);
   font-family: Pretendard;
@@ -33,19 +33,19 @@ const InputWrapper = styled.input<VerificationBoxProps>`
 `;
 
 export default function VerificationBox(props: VerificationBoxProps) {
-  const { value, setValue, name } = props;
-  const [fieldName, fieldIndex] = name.split("-");
+  const { value, setValue, name, isEntered: initIsEntered } = props;
+  const [fieldName, fieldIndex] = name.split('-');
 
-  const [isEntered, setIsEntered] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>(value || "");
+  const [isEntered, setIsEntered] = useState<boolean>(initIsEntered || false);
+  const [inputValue, setInputValue] = useState<string>(value || '');
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value.replace(/[^0-9]/g, "");
+    const newValue = e.target.value.replace(/[^0-9]/g, '');
     setInputValue(newValue);
 
-    if (newValue === "") {
+    if (newValue === '') {
       setIsEntered(false);
     } else {
       setIsEntered(true);
@@ -56,18 +56,18 @@ export default function VerificationBox(props: VerificationBoxProps) {
     }
 
     const nextSibling = document.querySelector(
-      `input[name="${fieldName}-${parseInt(fieldIndex, 10) + 1}"]`
+      `input[name="${fieldName}-${parseInt(fieldIndex, 10) + 1}"]`,
     ) as HTMLInputElement;
 
-    if (newValue !== "" && nextSibling) {
+    if (newValue !== '' && nextSibling) {
       nextSibling.focus();
     }
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace" && !inputValue) {
+    if (e.key === 'Backspace' && !inputValue) {
       const prevSibling = document.querySelector(
-        `input[name="${fieldName}-${parseInt(fieldIndex, 10) - 1}"]`
+        `input[name="${fieldName}-${parseInt(fieldIndex, 10) - 1}"]`,
       ) as HTMLInputElement;
 
       if (prevSibling) {

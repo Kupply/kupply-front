@@ -58,13 +58,15 @@ export default function EditModal(props: ModalProps) {
 
   // 각 input들의 값을 state를 사용하여 관리
   const [nickname, setNickname] = useState<string>(sessionStorage.getItem('nickname') || '');
-  const [nicknameState, setNicknameState] = useState<StateOptions>('default');
+  const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
   const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
-  const [stdIDState, setStdIDState] = useState<StateOptions>('default');
-  const [dropdownValue, setdropDownValue] = useState<string>('');
-  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(0) || '');
-  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(2) || '');
-  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('passedGPA')?.charAt(3) || '');
+  const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
+  const [firstMajor, setFirstMajor] = useState<string>(sessionStorage.getItem('firstMajor') || '');
+  const [hopeMajor1, setHopeMajor1] = useState<string>(sessionStorage.getItem('hopeMajor1') || '');
+  const [hopeMajor2, setHopeMajor2] = useState<string>(sessionStorage.getItem('hopeMajor2') || '');
+  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(3) || '');
   const [hopeSemester1, setHopeSemester1] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
   const [hopeSemester2, setHopeSemester2] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
   const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
@@ -326,8 +328,8 @@ export default function EditModal(props: ModalProps) {
                   <DropDown
                     title="전공선택" // 수정필요
                     optionList={majorList}
-                    value={dropdownValue}
-                    setValue={setdropDownValue}
+                    value={firstMajor}
+                    setValue={setFirstMajor}
                   ></DropDown>
                 </SubContentsWrapper>
               </div>
@@ -346,14 +348,14 @@ export default function EditModal(props: ModalProps) {
                     <DropDown
                       title="전공선택" // 수정필요
                       optionList={majorList}
-                      value={dropdownValue}
-                      setValue={setdropDownValue}
+                      value={hopeMajor1}
+                      setValue={setHopeMajor1}
                     ></DropDown>
                     <DropDown
                       title="전공선택" // 수정필요
                       optionList={majorList}
-                      value={dropdownValue}
-                      setValue={setdropDownValue}
+                      value={hopeMajor2}
+                      setValue={setHopeMajor2}
                     ></DropDown>
                   </div>
                 </SubContentsWrapper>
@@ -372,14 +374,14 @@ export default function EditModal(props: ModalProps) {
                   <ModalHelpMessage/>
                 </div>
                 <VerifiBoxWrapper>
-                  <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
+                  <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
                   <div style={{ marginTop: 60 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
                       <circle cx="1" cy="1" r="1" fill="##D85888" />
                     </svg>
                   </div>
-                  <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
-                  <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
+                  <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
+                  <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} />
                 </VerifiBoxWrapper>
               </SubContentsWrapper>
             </ContentsWrapper>
@@ -398,11 +400,13 @@ export default function EditModal(props: ModalProps) {
                       name="semester-1"
                       value={hopeSemester1}
                       setValue={setHopeSemester1}
+                      isEntered={true}
                     ></VerificationBox>
                     <VerificationBox
                       name="semester-2"
                       value={hopeSemester2}
                       setValue={setHopeSemester2}
+                      isEntered={true}
                     ></VerificationBox>
                     <div style={{ marginTop: 26 }}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
@@ -413,6 +417,7 @@ export default function EditModal(props: ModalProps) {
                       name="semester-3"
                       value={hopeSemester3}
                       setValue={setHopeSemester3}
+                      isEntered={true}
                     ></VerificationBox>
                   </VerifiBoxWrapper>
                 </SubContentsWrapper>
