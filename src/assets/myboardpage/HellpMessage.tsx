@@ -38,7 +38,8 @@ const MessageBox = styled.div<MessageBoxProps>`
   width: 528px;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.80);
-  border-radius: 10px;
+  //border-radius: 10px;
+  filter: drop-shadow(0px 0px 30px rgba(0,0,0,0.10));
 `;
 
 const ChartMessageBox = styled.div<MessageBoxProps>`
@@ -56,7 +57,8 @@ const ChartMessageBox = styled.div<MessageBoxProps>`
   width: 528px;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.80);
-  border-radius: 10px;
+  //border-radius: 10px;
+  filter: drop-shadow(0px 0px 30px rgba(0,0,0,0.10));
 `;
 
 const ModalMessageBox = styled.div<MessageBoxProps>`
@@ -76,6 +78,7 @@ const ModalMessageBox = styled.div<MessageBoxProps>`
   z-index: 1000;
   background: #FFF;
   //border-radius: 10px;
+  filter: drop-shadow(0px 0px 30px rgba(0,0,0,0.10));
 `;
 
 const StyledSvg = styled.svg<SvgProps>`
