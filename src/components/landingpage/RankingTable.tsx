@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 
+type orderOptions = 'descending' | 'ascending';
+
 export default function RankingTable() {
   //표의 데이터는 최초 한 번만 렌더링하도록 한다.
   const data = useMemo(
@@ -87,9 +89,20 @@ export default function RankingTable() {
     ],
     [],
   );
+  const ascendingData = data.map((item) => ({ ...item, rank: data.length + 1 - item.rank })).reverse();
 
   //아래 toggle을 설정한다.
   const [isShowAll, setisShowAll] = useState<boolean>(false);
+
+  //정렬 여부와 정렬 버튼의 색상을 설정한다.
+  const [order, setOrder] = useState<orderOptions>('descending');
+  const [orderColor, setOrderColor] = useState<string>('#A8A8A8');
+
+  const toggleOrder = () => {
+    if (order === 'descending') setOrder('ascending');
+    else setOrder('descending');
+  };
+
   return (
     <Wrapper>
       <Typography color="#D85888" size="mediumText" style={{ textAlign: 'center', marginBottom: '13.5px' }}>
@@ -122,17 +135,27 @@ export default function RankingTable() {
         </KupplyApplyButton>
       </div>
       <TextWrapper>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
+        <ToggleOrder
+          onClick={toggleOrder}
+          onMouseEnter={() => setOrderColor('#D85888')}
+          onMouseLeave={() => setOrderColor('#A8A8A8')}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path
               d="M9.80719 14.4737L12.4739 11.8071C12.536 11.7449 12.5853 11.6711 12.619 11.5899C12.6526 11.5087 12.6699 11.4217 12.6699 11.3338C12.6699 11.1562 12.5994 10.986 12.4739 10.8604C12.3483 10.7349 12.1781 10.6644 12.0005 10.6644C11.823 10.6644 11.6527 10.7349 11.5272 10.8604L10.0005 12.3938L10.0005 4.66709C10.0005 4.49027 9.93029 4.3207 9.80526 4.19568C9.68024 4.07066 9.51067 4.00042 9.33386 4.00042C9.15705 4.00042 8.98748 4.07066 8.86246 4.19568C8.73743 4.3207 8.66719 4.49027 8.66719 4.66708L8.66719 14.0004C8.66785 14.132 8.70745 14.2605 8.78101 14.3697C8.85456 14.4788 8.95878 14.5637 9.08053 14.6138C9.20193 14.6648 9.33574 14.6788 9.46507 14.6538C9.5944 14.6289 9.71344 14.5663 9.80719 14.4737ZM7.33386 11.3338L7.33386 2.00042C7.3332 1.8688 7.2936 1.74032 7.22005 1.63118C7.14649 1.52203 7.04227 1.4371 6.92053 1.38708C6.79912 1.33603 6.66531 1.32208 6.53598 1.347C6.40666 1.37192 6.28761 1.43458 6.19386 1.52708L3.52719 4.19375C3.46471 4.25573 3.41511 4.32946 3.38127 4.4107C3.34742 4.49194 3.33 4.57908 3.33 4.66708C3.33 4.75509 3.34742 4.84223 3.38127 4.92347C3.41511 5.00471 3.46471 5.07844 3.52719 5.14042C3.58917 5.2029 3.6629 5.2525 3.74414 5.28635C3.82538 5.32019 3.91252 5.33762 4.00053 5.33762C4.08854 5.33762 4.17567 5.32019 4.25691 5.28635C4.33815 5.2525 4.41189 5.2029 4.47386 5.14042L6.00053 3.60708L6.00053 11.3338C6.00053 11.5106 6.07076 11.6801 6.19579 11.8052C6.32081 11.9302 6.49038 12.0004 6.66719 12.0004C6.844 12.0004 7.01357 11.9302 7.1386 11.8052C7.26362 11.6801 7.33386 11.5106 7.33386 11.3338Z"
-              fill="#A8A8A8"
+              fill={orderColor}
             />
           </svg>
-          <Typography size="normalText" color="#A8A8A8">
-            높은 경쟁률 순
-          </Typography>
-        </div>
+          {order === 'descending' ? (
+            <Typography size="normalText" color={orderColor}>
+              높은 경쟁률 순
+            </Typography>
+          ) : (
+            <Typography size="normalText" color={orderColor}>
+              낮은 경쟁률 순
+            </Typography>
+          )}
+        </ToggleOrder>
         <div style={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
             <g clip-path="url(#clip0_4010_12381)">
@@ -168,23 +191,23 @@ export default function RankingTable() {
           <div style={{ display: 'flex', gap: '4px' }}>
             관심
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-              <g clip-path="url(#clip0_4167_16404)">
+              <g clip-path="url(#clip0_4239_14474)">
                 <path
-                  d="M9.99935 18.3473C14.6017 18.3473 18.3327 14.6164 18.3327 10.014C18.3327 5.41162 14.6017 1.68066 9.99935 1.68066C5.39698 1.68066 1.66602 5.41162 1.66602 10.014C1.66602 14.6164 5.39698 18.3473 9.99935 18.3473Z"
+                  d="M9.99935 19.2643C14.6017 19.2643 18.3327 15.5334 18.3327 10.931C18.3327 6.32862 14.6017 2.59766 9.99935 2.59766C5.39698 2.59766 1.66602 6.32862 1.66602 10.931C1.66602 15.5334 5.39698 19.2643 9.99935 19.2643Z"
                   stroke="#A8A8A8"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
                 <path
-                  d="M10.0078 6.68066L9.99948 6.68066"
+                  d="M10.0078 7.59766L9.99948 7.59766"
                   stroke="#A8A8A8"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
                 <path
-                  d="M10.0078 13.3467L10.0078 10.0133"
+                  d="M10.0078 14.2656L10.0078 10.9323"
                   stroke="#A8A8A8"
                   stroke-width="2"
                   stroke-linecap="round"
@@ -192,17 +215,24 @@ export default function RankingTable() {
                 />
               </g>
               <defs>
-                <clipPath id="clip0_4167_16404">
-                  <rect width="20" height="20" fill="white" transform="translate(0 0.0136719)" />
+                <clipPath id="clip0_4239_14474">
+                  <rect width="20" height="20" fill="white" transform="translate(0 0.931641)" />
                 </clipPath>
               </defs>
             </svg>
           </div>
+          <Info>
+            <InfoBody>사용자들의 희망 이중전공을 기준으로 집계된 것으로, 실제 지원과 차이가 있을 수 있습니다.</InfoBody>
+          </Info>
         </HeaderData>
       </TableHeader>
-      {isShowAll
+      {isShowAll && order === 'descending'
         ? data.map((row) => <TableData {...row}></TableData>)
-        : data.slice(0, 5).map((row) => <TableData {...row}></TableData>)}
+        : !isShowAll && order === 'descending'
+        ? data.slice(0, 5).map((row) => <TableData {...row}></TableData>)
+        : isShowAll && order === 'ascending'
+        ? ascendingData.map((row) => <TableData {...row}></TableData>)
+        : ascendingData.slice(0, 5).map((row) => <TableData {...row}></TableData>)}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {isShowAll ? (
           <svg
@@ -271,6 +301,19 @@ const TextWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const ToggleOrder = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  cursor: pointer;
+
+  &:hover {
+    svg path {
+      fill: #d85888; // hover 시 SVG 이미지의 색상 변경
+    }
+  }
+`;
+
 const TableHeader = styled.div`
   border-bottom: 1px solid #dfdfdf;
   border-top: 1px solid #dfdfdf;
@@ -323,5 +366,50 @@ const HeaderData = styled.div`
   &:nth-child(7) {
     width: 220px;
     padding-right: 100px;
+  }
+
+  &:nth-child(8) {
+    position: relative;
+  }
+`;
+
+const Info = styled.div`
+  position: absolute;
+  bottom: 50px;
+  right: -140px;
+  opacity: 0;
+  ${HeaderData}:hover & {
+    opacity: 1;
+  }
+`;
+
+const InfoBody = styled.div`
+  position: relative;
+  width: 294px;
+  height: 34px;
+  border-radius: 6px;
+  display: flex;
+  padding: 10px 8px;
+  background: rgba(20, 20, 20, 0.6);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px; /* 114.286% */
+
+  //화살표 만들기
+  &::after {
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    border: 9px solid transparent;
+    border-bottom-width: 0;
+    border-top-color: rgba(20, 20, 20, 0.6);
+    top: 54px;
+    right: 142px;
   }
 `;

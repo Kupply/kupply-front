@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '../assets/Typography';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
 
