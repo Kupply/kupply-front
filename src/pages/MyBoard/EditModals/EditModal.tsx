@@ -11,6 +11,7 @@ import DropDown from '../../../assets/dropdown/dropDown';
 import VerificationBox from '../../../assets/VerificationBox';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
+import {ModalHelpMessage} from '../../../assets/myboardpage/HellpMessage';
 
 /*
 남은 개발
@@ -143,7 +144,7 @@ export default function EditModal(props: ModalProps) {
   3: 희망 진입학기
   */
   const [currentModal, setCurrentModal] = useState<number>(0);
-
+  const [currentSrc, setCurrentSrc] = useState("design_image/character/rectProfile/rectProfile1.png");
   return (
     <Main>
       setCurrentModal(0); setIsSubmitted(false);
@@ -263,24 +264,28 @@ export default function EditModal(props: ModalProps) {
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-                  <CurrentImg src="design_image/character/rectProfile/rectProfile1.png" alt="current profile" />
+                  <CurrentImg src={currentSrc} alt="current profile" />
                   <div>
                     <CandidateImgsWrapper>
                       <CandidateImg // 각 이미지들을 버튼으로 수정 필요, 이미지 업로드 기능 구현 필요
                         src="design_image/character/rectProfile/rectProfile1.png"
                         alt="candidate profile 1"
+                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile1.png")}
                       />
                       <CandidateImg
                         src="design_image/character/rectProfile/rectProfile2.png"
                         alt="candidate profile 2"
+                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile2.png")}
                       />
                       <CandidateImg
                         src="design_image/character/rectProfile/rectProfile3.png"
                         alt="candidate profile 3"
+                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile3.png")}
                       />
                       <CandidateImg
                         src="design_image/character/rectProfile/rectProfile4.png"
                         alt="candidate profile 4"
+                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile4.png")}
                       />
                     </CandidateImgsWrapper>
                     <div style={{ gap: '5px', marginTop: '52px' }}>
@@ -362,7 +367,10 @@ export default function EditModal(props: ModalProps) {
               }}
             >
               <SubContentsWrapper>
-                <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
+                <div style={{ display: "flex", alignItems: "baseline" }}>
+                  <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
+                  <ModalHelpMessage/>
+                </div>
                 <VerifiBoxWrapper>
                   <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
                   <div style={{ marginTop: 60 }}>
@@ -493,6 +501,7 @@ const CandidateImg = styled.img`
   width: 74px;
   height: 74px;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 const CandidateImgsWrapper = styled.div`
