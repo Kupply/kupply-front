@@ -309,8 +309,8 @@ export default function MyBoardPage() {
         // 모의지원 했는지.
         setIsApplied(userInfo.isApplied);
 
-        sessionStorage.setItem('userProfilePic', userInfo.userProfilePic);
-        sessionStorage.setItem('userProfileLink', userInfo.userProfileLink);
+        sessionStorage.setItem('userProfilePic', userInfo.profilePic);
+        sessionStorage.setItem('userProfileLink', userInfo.profileLink);
         sessionStorage.setItem('nickname', userInfo.nickname);
         sessionStorage.setItem('studentId', userInfo.studentId);
         sessionStorage.setItem('firstMajor', userInfo.firstMajor);

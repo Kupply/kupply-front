@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
 import PrevButton from '../../../assets/buttons/PrevButton';
 import SubmitButton from '../../../assets/buttons/SubmitButton';
@@ -11,7 +13,7 @@ import DropDown from '../../../assets/dropdown/dropDown';
 import VerificationBox from '../../../assets/VerificationBox';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
-import {ModalHelpMessage} from '../../../assets/myboardpage/HellpMessage';
+import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
 
 /*
 남은 개발
@@ -70,6 +72,87 @@ export default function EditModal(props: ModalProps) {
   const [hopeSemester1, setHopeSemester1] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
   const [hopeSemester2, setHopeSemester2] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
   const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
+  const [userProfilePic, setUserProfilePic] = useState<string>(
+    sessionStorage.getItem('userProfilePic') || 'rectProfile1',
+  );
+  const [userProfileLink, setUserProfileLink] = useState<string>(sessionStorage.getItem('userProfileLink') || '');
+
+  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
+
+  const originNickname = useRef<string>(sessionStorage.getItem('nickname'));
+  const originstdId = useRef<string>(sessionStorage.getItem('studentId'));
+  const originFirstMajor = useRef<string>(sessionStorage.getItem('firstMajor'));
+  const originHopeMajor1 = useRef<string>(sessionStorage.getItem('hopeMajor1'));
+  const originHopeMajor2 = useRef<string>(sessionStorage.getItem('hopeMajor2'));
+  const originGPA1 = useRef<string>(sessionStorage.getItem('curGPA')?.charAt(0) || '');
+  const originGPA2 = useRef<string>(sessionStorage.getItem('curGPA')?.charAt(2) || '');
+  const originGPA3 = useRef<string>(sessionStorage.getItem('curGPA')?.charAt(3) || '');
+  const originHopeSemester1 = useRef<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const originHopeSemester2 = useRef<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const originHopeSemester3 = useRef<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
+  const originUserProfilePic = useRef<string>(sessionStorage.getItem('userProfilePic'));
+
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
+  useEffect(() => {
+    if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
+      setIsGpaChanged(true);
+    }
+  }, [GPA1, GPA2, GPA3]);
+
+  const onClickSubmit = async () => {
+    let updateData = {};
+    console.log(hopeSemester1, hopeSemester2, hopeSemester3);
+
+    if (originNickname.current !== nickname) {
+      updateData = { ...updateData, newNickname: nickname };
+    }
+    if (originstdId.current !== stdID) {
+      updateData = { ...updateData, newStudentId: stdID };
+    }
+    if (originFirstMajor.current !== firstMajor) {
+      updateData = { ...updateData, newFirstMajor: firstMajor };
+    }
+    if (originHopeMajor1.current !== hopeMajor1) {
+      updateData = { ...updateData, newHopeMajor1: hopeMajor1 };
+    }
+    if (originHopeMajor2.current !== hopeMajor2) {
+      updateData = { ...updateData, newHopeMajor2: hopeMajor2 };
+    }
+    if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
+      const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
+      updateData = { ...updateData, newCurGPA: newGpa };
+    }
+    if (
+      originHopeSemester1.current !== hopeSemester1 ||
+      originHopeSemester2.current !== hopeSemester2 ||
+      originHopeSemester3.current !== hopeSemester3
+    ) {
+      const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
+      updateData = { ...updateData, newHopeSemester: newHopeSemester };
+    }
+    if (originUserProfilePic.current !== userProfilePic) {
+      updateData = { ...updateData, newProfilePic: userProfilePic };
+    }
+
+    if (Object.keys(updateData).length !== 0) {
+      console.log(updateData);
+      try {
+        await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        window.location.reload(); // 페이지 새로고침.
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   // 고려대학교 전체 학과 리스트
   const majorList = [
@@ -146,11 +229,11 @@ export default function EditModal(props: ModalProps) {
   3: 희망 진입학기
   */
   const [currentModal, setCurrentModal] = useState<number>(0);
-  const [currentSrc, setCurrentSrc] = useState("design_image/character/rectProfile/rectProfile1.png");
+  // const [currentSrc, setCurrentSrc] = useState('design_image/character/rectProfile/rectProfile1.png');
   return (
     <Main>
       setCurrentModal(0); setIsSubmitted(false);
-      {isOpenModal && isSubmitted && (
+      {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton
             onClick={() => {
@@ -191,6 +274,7 @@ export default function EditModal(props: ModalProps) {
                 onClick={() => {
                   setOpenModal(!isOpenModal);
                   setIsSubmitted(true);
+                  onClickSubmit();
                 }}
               >
                 확인
@@ -266,28 +350,35 @@ export default function EditModal(props: ModalProps) {
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-                  <CurrentImg src={currentSrc} alt="current profile" />
+                  <CurrentImg
+                    src={
+                      userProfilePic === 'customProfile'
+                        ? userProfileLink
+                        : `design_image/character/rectProfile/${userProfilePic}.png`
+                    }
+                    alt="current profile"
+                  />
                   <div>
                     <CandidateImgsWrapper>
                       <CandidateImg // 각 이미지들을 버튼으로 수정 필요, 이미지 업로드 기능 구현 필요
                         src="design_image/character/rectProfile/rectProfile1.png"
                         alt="candidate profile 1"
-                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile1.png")}
+                        onClick={() => setUserProfilePic('rectProfile1')}
                       />
                       <CandidateImg
                         src="design_image/character/rectProfile/rectProfile2.png"
                         alt="candidate profile 2"
-                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile2.png")}
+                        onClick={() => setUserProfilePic('rectProfile2')}
                       />
                       <CandidateImg
                         src="design_image/character/rectProfile/rectProfile3.png"
                         alt="candidate profile 3"
-                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile3.png")}
+                        onClick={() => setUserProfilePic('rectProfile3')}
                       />
                       <CandidateImg
                         src="design_image/character/rectProfile/rectProfile4.png"
                         alt="candidate profile 4"
-                        onClick={() => setCurrentSrc("design_image/character/rectProfile/rectProfile4.png")}
+                        onClick={() => setUserProfilePic('rectProfile4')}
                       />
                     </CandidateImgsWrapper>
                     <div style={{ gap: '5px', marginTop: '52px' }}>
@@ -369,9 +460,9 @@ export default function EditModal(props: ModalProps) {
               }}
             >
               <SubContentsWrapper>
-                <div style={{ display: "flex", alignItems: "baseline" }}>
+                <div style={{ display: 'flex', alignItems: 'baseline' }}>
                   <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
-                  <ModalHelpMessage/>
+                  <ModalHelpMessage />
                 </div>
                 <VerifiBoxWrapper>
                   <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
@@ -436,6 +527,7 @@ export default function EditModal(props: ModalProps) {
               onClick={() => {
                 // setOpenModal(!isOpenModal);
                 setIsSubmitted(true);
+                if (!isGpaChanged) onClickSubmit();
               }}
             >
               저장하기
