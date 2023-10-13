@@ -12,6 +12,7 @@ const FooterWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
+  max-width: 2560px;
   height: 262px; //(262/1248 = 20.1)
   background: #f9f9f9;
   padding: 41.84px 128px 42.78px 128px; // 상우하좌 순서
