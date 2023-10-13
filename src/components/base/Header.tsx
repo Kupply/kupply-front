@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   width: 100%;
-  max-width: 1664px;
+  // max-width: 1664px;
   padding: 0 128px;
   justify-content: space-between;
 `;

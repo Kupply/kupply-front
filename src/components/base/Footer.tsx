@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../assets/Logo';
 import Typography, { TypographyProps } from '../../assets/Typography';
@@ -71,7 +71,7 @@ const MenuWrapper = styled.div`
 `;
 
 const HorizontalLine = styled.div`
-  width: 1664px;
+  width: 100vw;
   height: 1px;
   background: rgba(20, 20, 20, 0.5);
 `;
@@ -83,6 +83,23 @@ const ContentsWrapper = styled.div`
 `;
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const handleMenu1Click = () => {
+    navigate('/archive');
+  };
+  const handleMenu2Click = () => {
+    navigate('/myboard');
+  };
+  const handleMenu3Click = () => {
+    navigate('/community');
+  };
+  const handleMessageClick = () => {
+    navigate('/message');
+  };
+  const handleSettingsClick = () => {
+    navigate('/settings');
+  };
+
   return (
     <FooterWrapper>
       <Logo />
@@ -94,11 +111,11 @@ export default function Footer() {
             </Typography>
             <div style={{ height: '8.05px' }}></div>
             <MenuWrapper>
-              <MenuButton>합격자료</MenuButton>
-              <MenuButton>마이보드</MenuButton>
-              <MenuButton>커뮤니티</MenuButton>
-              <MenuButton>쪽지함</MenuButton>
-              <MenuButton>환경설정</MenuButton>
+              <MenuButton onClick={handleMenu1Click}>합격자료</MenuButton>
+              <MenuButton onClick={handleMenu2Click}>마이보드</MenuButton>
+              <MenuButton onClick={handleMenu3Click}>커뮤니티</MenuButton>
+              <MenuButton onClick={handleMessageClick}>쪽지함</MenuButton>
+              <MenuButton onClick={handleSettingsClick}>환경설정</MenuButton>
             </MenuWrapper>
           </div>
           <div style={{ marginLeft: '50px' }}>

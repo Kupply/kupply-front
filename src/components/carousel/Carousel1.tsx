@@ -10,14 +10,15 @@ Carousel 2, 3 파일 또한 이상 동일
 */
 
 const Wrapper = styled.div`
-  width: 100%;
-  max-width: 1920px;
+  width: 100vw;
+  // max-width: 1920px;
   height: 100%; //630px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
   background-size: cover; // contain;
+  // background-image: url('/design_image/carousel/login_banner1_extend.png');
   background-image: url('/design_image/carousel/carousel1.png');
 `;
 

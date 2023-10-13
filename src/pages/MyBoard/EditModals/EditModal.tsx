@@ -232,7 +232,6 @@ export default function EditModal(props: ModalProps) {
   // const [currentSrc, setCurrentSrc] = useState('design_image/character/rectProfile/rectProfile1.png');
   return (
     <Main>
-      setCurrentModal(0); setIsSubmitted(false);
       {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton

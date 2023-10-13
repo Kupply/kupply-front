@@ -15,7 +15,6 @@ import MockApplicationButton from '../../../assets/myboardpage/MockApplication';
 import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
 import FirstReAppliedButton from '../../../assets/myboardpage/FirstReAppliedButton';
 
-
 export interface ModalProps {
   isOpenModal: boolean;
   setOpenModal: (isOpenModal: boolean) => void;
@@ -51,30 +50,34 @@ export default function ApplicationModal(props: ModalProps) {
   };
 
   const handleNext = () => {
-    if (currentModal < 4) { 
+    if (currentModal < 4) {
       setCurrentModal(currentModal + 1);
     }
-  }
+  };
 
   const handlePrev = () => {
     if (currentModal > 0) {
       setCurrentModal(currentModal - 1);
     }
-  }
+  };
 
   const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('GPA')?.charAt(0) || '');
   const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('GPA')?.charAt(2) || '');
   const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('GPA')?.charAt(3) || '');
   const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
 
-  const [currentSemester1, setCurrentSemester1] = useState<string>(sessionStorage.getItem('currentSemester')?.charAt(0) || '');
-  const [currentSemester2, setCurrentSemester2] = useState<string>(sessionStorage.getItem('currentSemester')?.charAt(2) || '');
-  
+  const [currentSemester1, setCurrentSemester1] = useState<string>(
+    sessionStorage.getItem('currentSemester')?.charAt(0) || '',
+  );
+  const [currentSemester2, setCurrentSemester2] = useState<string>(
+    sessionStorage.getItem('currentSemester')?.charAt(2) || '',
+  );
+
   const [stdIDState, setStdIDState] = useState<StateOptions>('default');
 
   useEffect(() => {
     const isValidGPA = GPA1 !== '' && GPA2 !== '' && GPA3 !== '';
-    const isValidStdID = stdID.length === 10;  
+    const isValidStdID = stdID.length === 10;
 
     if (isValidGPA && isValidStdID) {
       setNextButton(true);
@@ -84,16 +87,12 @@ export default function ApplicationModal(props: ModalProps) {
   }, [GPA1, GPA2, GPA3, stdID]);
 
   useEffect(() => {
-    if (
-      !!currentSemester1 &&
-      !!currentSemester2
-    ) {
+    if (!!currentSemester1 && !!currentSemester2) {
       setNextButton(true);
     } else {
       setNextButton(false);
     }
   }, [currentSemester1, currentSemester2]);
-
 
   return (
     <Main>
@@ -192,41 +191,65 @@ export default function ApplicationModal(props: ModalProps) {
                 <ProgressBarWrapper>
                   <MultiStepProgressBar numberOfSteps={3} currentStep={1} complete={true} />
                   <ProgressBarTtitle style={{ paddingLeft: '135px' }}>
-                    <Typography size="mediumText" style={{ color: "#E57C90", lineHeight: "136.111%", textAlign: "left" }}>
+                    <Typography
+                      size="mediumText"
+                      style={{ color: '#E57C90', lineHeight: '136.111%', textAlign: 'left' }}
+                    >
                       STEP1
                       <br />
                       기존 정보 확인하기
                     </Typography>
                   </ProgressBarTtitle>
                   <ProgressBarTtitle>
-                    <Typography size="mediumText" style={{ position: "absolute", color: "var(--DF_Grey-2, #DFDFDF)", lineHeight: "136.111%", top: "185px", left: "377px", textAlign: "center" }}>
+                    <Typography
+                      size="mediumText"
+                      style={{
+                        position: 'absolute',
+                        color: 'var(--DF_Grey-2, #DFDFDF)',
+                        lineHeight: '136.111%',
+                        top: '185px',
+                        left: '377px',
+                        textAlign: 'center',
+                      }}
+                    >
                       STEP2
                     </Typography>
                   </ProgressBarTtitle>
                   <ProgressBarTtitle>
-                    <Typography size="mediumText" style={{ position: "absolute", color: "var(--DF_Grey-2, #DFDFDF)", lineHeight: "136.111%", top: "185px", left: "705px", textAlign: "right" }}>
+                    <Typography
+                      size="mediumText"
+                      style={{
+                        position: 'absolute',
+                        color: 'var(--DF_Grey-2, #DFDFDF)',
+                        lineHeight: '136.111%',
+                        top: '185px',
+                        left: '705px',
+                        textAlign: 'right',
+                      }}
+                    >
                       STEP3
                     </Typography>
                   </ProgressBarTtitle>
                 </ProgressBarWrapper>
-                <div style={{ position: "absolute", top: 0, left: 0 }}>
+                <div style={{ position: 'absolute', top: 0, left: -1 }}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="814" height="232" viewBox="0 0 814 232" fill="none">
-                    <path d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z" stroke="#DFDFDF"/>
+                    <path
+                      d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z"
+                      stroke="#DFDFDF"
+                    />
                   </svg>
                 </div>
                 <div style={{ display: 'flex' }}>
                   <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                     학점
                   </Typography>
-                  <Typography size="mediumText">
-                    을 입력해주세요.
-                  </Typography>
+                  <Typography size="mediumText">을 입력해주세요.</Typography>
                 </div>
                 <VerifiBoxWrapper>
                   <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
                   <div style={{ marginTop: 60 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
-                      <circle cx="1" cy="1" r="1" fill="#141414"/>
+                      <circle cx="1" cy="1" r="1" fill="#141414" />
                     </svg>
                   </div>
                   <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
@@ -261,41 +284,65 @@ export default function ApplicationModal(props: ModalProps) {
                 <ProgressBarWrapper>
                   <MultiStepProgressBar numberOfSteps={3} currentStep={2} complete={true} />
                   <ProgressBarTtitle style={{ paddingLeft: '135px' }}>
-                    <Typography size="mediumText" style={{ color: "var(--DF_Grey-2, #DFDFDF)", lineHeight: "136.111%", textAlign: "left"}}>
+                    <Typography
+                      size="mediumText"
+                      style={{ color: 'var(--DF_Grey-2, #DFDFDF)', lineHeight: '136.111%', textAlign: 'left' }}
+                    >
                       STEP1
                     </Typography>
                   </ProgressBarTtitle>
                   <ProgressBarTtitle>
-                    <Typography size="mediumText" style={{ position: "absolute", color: "#E57C90", lineHeight: "136.111%", top: "185px", left: "338px", textAlign: "center"  }}>
+                    <Typography
+                      size="mediumText"
+                      style={{
+                        position: 'absolute',
+                        color: '#E57C90',
+                        lineHeight: '136.111%',
+                        top: '185px',
+                        left: '338px',
+                        textAlign: 'center',
+                      }}
+                    >
                       STEP2
                       <br />
                       지원학기 입력하기
                     </Typography>
                   </ProgressBarTtitle>
                   <ProgressBarTtitle>
-                    <Typography size="mediumText" style={{ position: "absolute", color: "var(--DF_Grey-2, #DFDFDF)", lineHeight: "136.111%", top: "185px", left: "705px", textAlign: "right" }}>
+                    <Typography
+                      size="mediumText"
+                      style={{
+                        position: 'absolute',
+                        color: 'var(--DF_Grey-2, #DFDFDF)',
+                        lineHeight: '136.111%',
+                        top: '185px',
+                        left: '705px',
+                        textAlign: 'right',
+                      }}
+                    >
                       STEP3
                     </Typography>
                   </ProgressBarTtitle>
                 </ProgressBarWrapper>
-                <div style={{ position: "absolute", top: 0, left: 0 }}>
+                <div style={{ position: 'absolute', top: 0, left: 0 }}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="814" height="232" viewBox="0 0 814 232" fill="none">
-                    <path d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z" stroke="#DFDFDF"/>
+                    <path
+                      d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z"
+                      stroke="#DFDFDF"
+                    />
                   </svg>
                 </div>
                 <div style={{ display: 'flex' }}>
                   <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                     재학 중인 학년/학기
                   </Typography>
-                  <Typography size="mediumText">
-                    를 입력해주세요.
-                  </Typography>
+                  <Typography size="mediumText">를 입력해주세요.</Typography>
                 </div>
                 <VerifiBoxWrapper>
                   <VerificationBox name="currentSemester-1" value={currentSemester2} setValue={setCurrentSemester1} />
                   <div style={{ marginTop: 60 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="2" viewBox="0 0 14 2" fill="none">
-                      <path d="M0 1H14" stroke="#B9B9B9"/>
+                      <path d="M0 1H14" stroke="#B9B9B9" />
                     </svg>
                   </div>
                   <VerificationBox name="currentSemester-2" value={currentSemester2} setValue={setCurrentSemester2} />
@@ -304,16 +351,18 @@ export default function ApplicationModal(props: ModalProps) {
                   <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                     과거 동일 학과를 지원
                   </Typography>
-                  <Typography size="mediumText">
-                    했던 경험이 있나요?
-                  </Typography>
+                  <Typography size="mediumText">했던 경험이 있나요?</Typography>
                 </div>
                 <FirstReAppliedButton
                   state={candidateState}
                   double={false}
                   onClick={() => handleButtonClick('candidate')}
                 ></FirstReAppliedButton>
-                <FirstReAppliedButton state={passerState} double={true} onClick={() => handleButtonClick('passer')}></FirstReAppliedButton>
+                <FirstReAppliedButton
+                  state={passerState}
+                  double={true}
+                  onClick={() => handleButtonClick('passer')}
+                ></FirstReAppliedButton>
                 <ButtonsWrapper>
                   <PrevButton active={true} onClick={handlePrev} />
                   <NextButton active={nextButton} onClick={handleNext} />
@@ -322,32 +371,58 @@ export default function ApplicationModal(props: ModalProps) {
             )}
             {currentModal === 2 && ( // 자기소개서 첨부하기 단계
               <div>
-              <ProgressBarWrapper>
-                <MultiStepProgressBar numberOfSteps={3} currentStep={3} complete={true} />
-                <ProgressBarTtitle style={{ paddingLeft: '135px' }}>
-                  <Typography size="mediumText" style={{ color: "var(--DF_Grey-2, #DFDFDF)", lineHeight: "136.111%", textAlign: "left" }}>
-                    STEP1
-                  </Typography>
-                </ProgressBarTtitle>
-                <ProgressBarTtitle>
-                <Typography size="mediumText" style={{ position: "absolute", color: "var(--DF_Grey-2, #DFDFDF)", lineHeight: "136.111%", top: "185px", left: "377px", textAlign: "center" }}>
-                    STEP2
-                  </Typography>
-                </ProgressBarTtitle>
-                <ProgressBarTtitle>
-                  <Typography size="mediumText" style={{ position: "absolute",  color: "#E57C90", lineHeight: "136.111%", top: "185px", left: "615px", textAlign: "right" }}>
-                    STEP3
-                    <br />
-                    자기소개서 첨부하기
-                  </Typography>
-                </ProgressBarTtitle>
-              </ProgressBarWrapper>
-              <div style={{ position: "absolute", top: 0, left: 0 }}>
+                <ProgressBarWrapper>
+                  <MultiStepProgressBar numberOfSteps={3} currentStep={3} complete={true} />
+                  <ProgressBarTtitle style={{ paddingLeft: '135px' }}>
+                    <Typography
+                      size="mediumText"
+                      style={{ color: 'var(--DF_Grey-2, #DFDFDF)', lineHeight: '136.111%', textAlign: 'left' }}
+                    >
+                      STEP1
+                    </Typography>
+                  </ProgressBarTtitle>
+                  <ProgressBarTtitle>
+                    <Typography
+                      size="mediumText"
+                      style={{
+                        position: 'absolute',
+                        color: 'var(--DF_Grey-2, #DFDFDF)',
+                        lineHeight: '136.111%',
+                        top: '185px',
+                        left: '377px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      STEP2
+                    </Typography>
+                  </ProgressBarTtitle>
+                  <ProgressBarTtitle>
+                    <Typography
+                      size="mediumText"
+                      style={{
+                        position: 'absolute',
+                        color: '#E57C90',
+                        lineHeight: '136.111%',
+                        top: '185px',
+                        left: '615px',
+                        textAlign: 'right',
+                      }}
+                    >
+                      STEP3
+                      <br />
+                      자기소개서 첨부하기
+                    </Typography>
+                  </ProgressBarTtitle>
+                </ProgressBarWrapper>
+                <div style={{ position: 'absolute', top: 0, left: 0 }}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="814" height="232" viewBox="0 0 814 232" fill="none">
-                    <path d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z" stroke="#DFDFDF"/>
+                    <path
+                      d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z"
+                      stroke="#DFDFDF"
+                    />
                   </svg>
                 </div>
-            </div>
+              </div>
             )}
           </ModalLarge>
         ))}
