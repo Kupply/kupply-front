@@ -7,18 +7,17 @@ import PageNumber from '../../assets/landing/PageNumber';
 
 const MainWrapper = styled.div`
   width: 100vw;
-  height: 1610px;
+  height: 1184px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #fff;
-  padding-top: 96px;
 `;
 
 const TitleWrapper = styled.div`
   width: 100%;
-  height: 321px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +31,7 @@ const SegmentedSlider = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
-  margin-top: 51px;
+  margin-top: 23px;
 `;
 
 const ContentWrapper = styled.div`
@@ -62,7 +61,7 @@ function FAQ() {
   return (
     <MainWrapper>
       <TitleWrapper>
-        <Typography size="mediumText" color="#D85888" bold="700" style={{ marginTop: '66px', marginBottom: '14px' }}>
+        <Typography size="mediumText" color="#D85888" bold="700" style={{ marginTop: '125px', marginBottom: '14px' }}>
           쿠플라이 FAQ
         </Typography>
         <Typography size="heading1" style={{ marginBottom: '26px' }}>

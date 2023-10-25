@@ -3,18 +3,17 @@ import Typography from '../../assets/Typography';
 
 const MainWrapper = styled.div`
   width: 100vw;
-  height: 2480px;
+  height: 2550px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #fff;
-  padding-top: 96px;
 `;
 
 const TitleWrapper = styled.div`
   width: 100%;
-  height: 250px;
+  height: 310px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +55,7 @@ function Preview() {
   return (
     <MainWrapper>
       <TitleWrapper>
-        <Typography size="mediumText" color="#D85888" bold="700" style={{ marginTop: '66px', marginBottom: '14px' }}>
+        <Typography size="mediumText" color="#D85888" bold="700" style={{ marginTop: '130px', marginBottom: '14px' }}>
           쿠플라이 미리보기
         </Typography>
         <Typography size="heading1" style={{ marginBottom: '26px' }}>

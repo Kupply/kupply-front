@@ -19,6 +19,7 @@ const Wrapper = styled.div<PageNumberProps>`
   border-radius: 5px;
   background: ${(props) => (props.active === true ? '#d85888' : '#f5f5f5')};
   box-shadow: ${(props) => (props.active === true ? '0px 4px 12px 0px rgba(216, 88, 136, 0.25)' : '0px 0px 0px 0px')};
+  cursor: pointer;
 `;
 
 export default function PageNumber(props: PageNumberProps) {
