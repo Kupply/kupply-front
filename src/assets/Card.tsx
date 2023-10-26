@@ -222,7 +222,7 @@ const SvgNotch = styled.div`
   height: 8px;
   flex-shrink: 0;
   fill: rgba(20, 20, 20, 0.6);
-  backdrop-filter: blur(27.182817459106445px);
+
   margin-top: 229px;
   margin-left: 314px;
 `;

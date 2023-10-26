@@ -18,6 +18,7 @@ import SignUp3Page from './pages/SignUp/SignUp3Page';
 // import AuthRequired from './AuthRequired';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/SignUp/SignUp4Page';
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
+import DeletePage from './pages/DeletePage';
 
 const Wrapper = styled.div`
   width: 100vw; // 1920px;
@@ -33,7 +34,7 @@ const Wrapper = styled.div`
 // marginTop 은 Header 에 페이지가 가리지 않게 하기 위해서.
 export default function App() {
   const [isLogined, setisLogined] = useState<boolean>(false);
-
+  const [selected, setSelected] = useState(0);
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
     else setisLogined(false);
@@ -42,19 +43,17 @@ export default function App() {
   // element={<AuthRequired />}
   return (
     <Wrapper>
-      <Header logined={isLogined} setLogin={setisLogined} />
+      <Header logined={true} setLogin={setisLogined} setSelected={setSelected} />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
-        <Route>
-          <Route path="/archive" element={<PreviousPage />} />
-          <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
-          <Route path="/myboard" element={<MyBoardPage />} />
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/message" element={<MessagePage />} />
-        </Route>
+        <Route path="/archive" element={<PreviousPage />} />
+        <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
+        <Route path="/myboard" element={<MyBoardPage />} />
+        <Route path="/community" element={<CommunityPage />} />
+        <Route path="/message" element={<MessagePage />} />
         <Route path="/join" element={<SignUp1Page />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/settings" element={<SettingsPage selected={selected} setSelected={setSelected} />} />
         <Route path="/signup1" element={<SignUp1Page />} />
         <Route path="/signup2" element={<SignUp2Page />} />
         <Route path="/signup3" element={<SignUp3Page />} />
@@ -64,6 +63,7 @@ export default function App() {
         <Route path="/signup5" element={<SignUp5Page />} />
         <Route path="/signupcomplete" element={<SignUp5Complete />} />
         <Route path="/landing" element={<LandingPage />} />
+        <Route path="/delete" element={<DeletePage />} />
       </Routes>
       <Footer />
     </Wrapper>
