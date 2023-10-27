@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
+import FAQ from '../components/landingpage/FAQ';
+import Ending from '../components/landingpage/Ending';
+import Preview from '../components/landingpage/Preview';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,6 +20,9 @@ const LandingPage = () => {
     <Wrapper>
       <RankingTable />
       <PassedDataCard />
+      <Preview />
+      <FAQ />
+      <Ending />
     </Wrapper>
   );
 };

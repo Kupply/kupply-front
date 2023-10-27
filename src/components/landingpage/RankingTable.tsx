@@ -5,7 +5,7 @@ import TableData from '../../assets/landingpage/TableData';
 
 type orderOptions = 'descending' | 'ascending';
 
-export default function RankingTable() {
+export default function Table() {
   //표의 데이터는 최초 한 번만 렌더링하도록 한다.
   const data = useMemo(
     () => [

@@ -284,62 +284,106 @@ export default function EditModal(props: ModalProps) {
       )}
       {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
-          <CloseButton
-            onClick={() => {
-              setOpenModal(!isOpenModal);
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M38.2071 23.2071C38.5976 22.8166 38.5976 22.1834 38.2071 21.7929C37.8166 21.4024 37.1834 21.4024 36.7929 21.7929L30 28.5858L23.2071 21.7929C22.8166 21.4024 22.1834 21.4024 21.7929 21.7929C21.4024 22.1834 21.4024 22.8166 21.7929 23.2071L28.5858 30L21.7929 36.7929C21.4024 37.1834 21.4024 37.8166 21.7929 38.2071C22.1834 38.5976 22.8166 38.5976 23.2071 38.2071L30 31.4142L36.7929 38.2071C37.1834 38.5976 37.8166 38.5976 38.2071 38.2071C38.5976 37.8166 38.5976 37.1834 38.2071 36.7929L31.4142 30L38.2071 23.2071Z"
-                fill="#141414"
-              />
-            </svg>
-          </CloseButton>
-          <Typography size="bodyText" style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '40px' }}>
-            프로필 정보 수정하기
-          </Typography>
-          <div style={{ height: '40px' }}></div>
-          <HeaderButtonWrapper>
-            <EditModalHeaderButton // 버튼 아이콘 삽입 필요
-              isClicked={headerButtonStates.basicMajor}
+          <HeaderWrapper>
+            <CloseButton
               onClick={() => {
-                handleHeaderButtonClick('basicMajor');
-                setCurrentModal(0);
+                setOpenModal(!isOpenModal);
               }}
             >
-              나의 기본정보
-            </EditModalHeaderButton>
-            <EditModalHeaderButton
-              isClicked={headerButtonStates.interestMajor}
-              onClick={() => {
-                handleHeaderButtonClick('interestMajor');
-                setCurrentModal(1);
-              }}
-            >
-              관심 전공
-            </EditModalHeaderButton>
-            <EditModalHeaderButton
-              isClicked={headerButtonStates.currentGPA}
-              onClick={() => {
-                handleHeaderButtonClick('currentGPA');
-                setCurrentModal(2);
-              }}
-            >
-              현재 내 학점
-            </EditModalHeaderButton>
-            <EditModalHeaderButton
-              isClicked={headerButtonStates.desiredSemester}
-              onClick={() => {
-                handleHeaderButtonClick('desiredSemester');
-                setCurrentModal(3);
-              }}
-            >
-              희망 지원학기
-            </EditModalHeaderButton>
-          </HeaderButtonWrapper>
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M38.2071 23.2071C38.5976 22.8166 38.5976 22.1834 38.2071 21.7929C37.8166 21.4024 37.1834 21.4024 36.7929 21.7929L30 28.5858L23.2071 21.7929C22.8166 21.4024 22.1834 21.4024 21.7929 21.7929C21.4024 22.1834 21.4024 22.8166 21.7929 23.2071L28.5858 30L21.7929 36.7929C21.4024 37.1834 21.4024 37.8166 21.7929 38.2071C22.1834 38.5976 22.8166 38.5976 23.2071 38.2071L30 31.4142L36.7929 38.2071C37.1834 38.5976 37.8166 38.5976 38.2071 38.2071C38.5976 37.8166 38.5976 37.1834 38.2071 36.7929L31.4142 30L38.2071 23.2071Z"
+                  fill="#141414"
+                />
+              </svg>
+            </CloseButton>
+            <Typography size="bodyText" style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '40px' }}>
+              프로필 정보 수정하기
+            </Typography>
+            <div style={{ height: '40px' }}></div>
+
+            <HeaderButtonWrapper>
+              <EditModalHeaderButton // 버튼 아이콘 삽입 필요
+                isClicked={headerButtonStates.basicMajor}
+                onClick={() => {
+                  handleHeaderButtonClick('basicMajor');
+                  setCurrentModal(0);
+                }}
+              >
+                <img
+                  src={
+                    currentModal == 0
+                      ? '../../design_image/my_board/fi_user_active.svg'
+                      : '../../design_image/my_board/fi_user.svg'
+                  }
+                  width="20px"
+                  height="20px"
+                  style={{ marginRight: '3px' }}
+                />
+                나의 기본정보
+              </EditModalHeaderButton>
+              <EditModalHeaderButton
+                isClicked={headerButtonStates.interestMajor}
+                onClick={() => {
+                  handleHeaderButtonClick('interestMajor');
+                  setCurrentModal(1);
+                }}
+              >
+                <img
+                  src={
+                    currentModal == 1
+                      ? '../../design_image/my_board/u_university_active.svg'
+                      : '../../design_image/my_board/u_university.svg'
+                  }
+                  width="20px"
+                  height="20px"
+                  style={{ marginRight: '3px' }}
+                />
+                관심 전공
+              </EditModalHeaderButton>
+              <EditModalHeaderButton
+                isClicked={headerButtonStates.currentGPA}
+                onClick={() => {
+                  handleHeaderButtonClick('currentGPA');
+                  setCurrentModal(2);
+                }}
+              >
+                <img
+                  src={
+                    currentModal == 2
+                      ? '../../design_image/my_board/fi_calendar_active.svg'
+                      : '../../design_image/my_board/fi_calendar.svg'
+                  }
+                  width="20px"
+                  height="20px"
+                  style={{ marginRight: '3px' }}
+                />
+                현재 내 학점
+              </EditModalHeaderButton>
+              <EditModalHeaderButton
+                isClicked={headerButtonStates.desiredSemester}
+                onClick={() => {
+                  handleHeaderButtonClick('desiredSemester');
+                  setCurrentModal(3);
+                }}
+              >
+                <img
+                  src={
+                    currentModal == 3
+                      ? '../../design_image/my_board/fi_trello_active.svg'
+                      : '../../design_image/my_board/fi_trello.svg'
+                  }
+                  width="20px"
+                  height="20px"
+                  style={{ marginRight: '3px' }}
+                />
+                희망 지원학기
+              </EditModalHeaderButton>
+            </HeaderButtonWrapper>
+          </HeaderWrapper>
+
           {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
             <ContentsWrapper
               style={{
@@ -459,16 +503,14 @@ export default function EditModal(props: ModalProps) {
               }}
             >
               <SubContentsWrapper>
-                <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                   <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
                   <ModalHelpMessage />
                 </div>
                 <VerifiBoxWrapper>
                   <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
                   <div style={{ marginTop: 60 }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
-                      <circle cx="1" cy="1" r="1" fill="##D85888" />
-                    </svg>
+                    <img src="design_image/my_board/Ellipse 981.svg" height="4px" width="4px" />
                   </div>
                   <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
                   <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} />
@@ -548,9 +590,21 @@ const Main = styled.main`
   z-index: 20; // Modal.tsx 와 상이한 stacking context
 `;
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 814px;
+  height: 134px;
+  flex-shrink: 0;
+  background-color: #fcfafb;
+  border-bottom: 1px solid var(--DF_Grey-2, #dfdfdf);
+`;
+
 const HeaderButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 40px;
 `;
 
 const MoveButtonWrapper = styled.div`

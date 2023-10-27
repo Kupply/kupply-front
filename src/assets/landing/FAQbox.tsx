@@ -4,7 +4,7 @@ import Typography from '../Typography';
 
 export interface FAQboxProps extends React.ComponentPropsWithRef<'div'> {
   question?: string;
-  answer?: string;
+  answer?: { text: string; bold: string }[][];
 }
 
 const MainWrapper = styled.div`
@@ -36,7 +36,14 @@ const ContentWrapper = styled.div`
 function FAQbox(props: FAQboxProps) {
   const {
     question = '이중전공 지원에 반영되는 학점은 대내용 학점인가요, 대외용 학점인가요?',
-    answer = '이중전공 지원에는 직전학기까지 수강신청한 모든 과목의 총 평점평균인 대내용 학점(F를 포함한 전체성적)이 반영됩니다.',
+    answer = [
+      [
+        {
+          text: '이중전공 지원에는 직전학기까지 수강신청한 모든 과목의 총 평점평균인 대내용 학점(F를 포함한 전체성적)이 반영됩니다.',
+          bold: '500',
+        },
+      ],
+    ],
     ...rest
   } = props;
 
@@ -57,7 +64,15 @@ function FAQbox(props: FAQboxProps) {
       </TitleWrapper>
       {showAnswer == true ? (
         <ContentWrapper>
-          <Typography size="mediumText">{answer}</Typography>
+          {answer.map((lineAnswers, lineIndex) => (
+            <div key={lineIndex}>
+              {lineAnswers.map((answer, segmentIndex) => (
+                <span key={segmentIndex} style={{ fontWeight: answer.bold }}>
+                  {answer.text}
+                </span>
+              ))}
+            </div>
+          ))}
         </ContentWrapper>
       ) : (
         <></>
