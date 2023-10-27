@@ -230,20 +230,35 @@ export function SignUp4PageCandidate() {
   const optionList = [
     { value1: '경영학과', value2: '경영대학' },
     { value1: '경제학과', value2: '정경대학' },
-    { value1: '통계학과', value2: '정경대학' },
-    { value1: '정치외교학과', value2: '정경대학' },
-    { value1: '국제학부', value2: '국제학부' },
-    { value1: '컴퓨터학과', value2: '정보대학' },
     { value1: '심리학부', value2: '심리학부' },
+    { value1: '통계학과', value2: '정경대학' },
+    { value1: '수학과', value2: '이과대학' },
+    { value1: '화학과', value2: '이과대학' },
+    { value1: '미디어학부', value2: '미디어학부' },
+    { value1: '식품자원경제학과', value2: '생명과학대학' },
+    { value1: '컴퓨터학과', value2: '정보대학' },
   ];
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    sessionStorage.setItem('hopeMajor1', hopeMajor1);
-    sessionStorage.setItem('hopeMajor2', hopeMajor2);
-    sessionStorage.setItem('GPA', GPA1 + '.' + GPA2 + GPA3);
-    sessionStorage.setItem('hopeSemester', '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3);
-    navigate('/signup5');
+    const GPA = +(GPA1 + '.' + GPA2 + GPA3);
+    const semesterYear = +(hopeSemester1 + hopeSemester2);
+
+    if (GPA > 4.5) {
+      alert('유효한 학점을 입력해주세요.');
+    } else if (
+      !(hopeSemester3 === '1' || hopeSemester3 === '2') ||
+      semesterYear < 23 ||
+      (semesterYear === 23 && hopeSemester3 === '1')
+    ) {
+      alert('유효한 희망 학기를 입력해주세요.');
+    } else {
+      sessionStorage.setItem('hopeMajor1', hopeMajor1);
+      sessionStorage.setItem('hopeMajor2', hopeMajor2);
+      sessionStorage.setItem('GPA', GPA1 + '.' + GPA2 + GPA3);
+      sessionStorage.setItem('hopeSemester', '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3);
+      navigate('/signup5');
+    }
   };
 
   const handlePrev = () => {
@@ -371,10 +386,23 @@ export function SignUp4PagePasser() {
   }, [doubleMajor, GPA1, GPA2, GPA3, passSemester1, passSemester2, passSemester3]);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
-    sessionStorage.setItem('secondMajor', doubleMajor);
-    sessionStorage.setItem('passedGPA', GPA1 + '.' + GPA2 + GPA3);
-    sessionStorage.setItem('passSemester', '20' + passSemester1 + passSemester2 + '-' + passSemester3);
-    navigate('/signup5');
+    const GPA = +(GPA1 + '.' + GPA2 + GPA3);
+    const semesterYear = +(passSemester1 + passSemester2);
+
+    if (GPA > 4.5) {
+      alert('유효한 학점을 입력해주세요.');
+    } else if (
+      !(passSemester3 === '1' || passSemester3 === '2') ||
+      semesterYear > 23 ||
+      (semesterYear === 23 && passSemester3 === '2')
+    ) {
+      alert('유효한 진입 학기를 입력해주세요.');
+    } else {
+      sessionStorage.setItem('secondMajor', doubleMajor);
+      sessionStorage.setItem('passedGPA', GPA1 + '.' + GPA2 + GPA3);
+      sessionStorage.setItem('passSemester', '20' + passSemester1 + passSemester2 + '-' + passSemester3);
+      navigate('/signup5');
+    }
   };
 
   const handlePrev = () => {
