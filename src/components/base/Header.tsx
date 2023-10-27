@@ -8,7 +8,7 @@ import HeaderButton from '../../assets/buttons/header/HeaderButton';
 import MailButton from '../../assets/buttons/header/MailButton';
 import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -157,10 +157,13 @@ export interface HeaderProps {
 export default function Header({ logined, setLogin, setSelected }: HeaderProps) {
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
+
+  const headerToggleRef = React.useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    //if (accessToken) {
-    setLogin(true);
-    //}
+    if (accessToken) {
+      setLogin(true);
+    }
   }, [accessToken]);
 
   const config = {
@@ -260,9 +263,27 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   };
 
   const [toggle, setToggle] = useState(false);
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (toggle && headerToggleRef && headerToggleRef.current && !headerToggleRef.current.contains(e.target as Node)) {
+        setToggle(false);
+      }
+    },
+    [toggle, headerToggleRef],
+  );
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [handleClickOutside]);
 
   const handleToggle = () => {
-    setToggle(!toggle);
+    setTimeout(() => {
+      setToggle(!toggle);
+    }, 100);
   };
 
   return (
@@ -311,7 +332,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
               <strong>{`${userData.userNickname} `}</strong>님
             </RightButtonsContainer>
             {toggle && (
-              <SettingToggleWrapper>
+              <SettingToggleWrapper ref={headerToggleRef}>
                 <Profile>
                   <img
                     src={
