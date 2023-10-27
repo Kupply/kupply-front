@@ -58,6 +58,7 @@ const CircleButton = styled.button<{ name: number; current: number }>`
 function Carousel() {
   const [current, setCurrent] = useState(0);
   const getCurrent = (current: number) => {
+    if (current === -1) return 2;
     if (current === 3) return 0;
     else return current;
   };
@@ -75,6 +76,7 @@ function Carousel() {
     <Wrapper>
       <LeftArrow onClick={() => setCurrent(getCurrent(current - 1))} />
       {current === 0 ? <Carousel1></Carousel1> : current === 1 ? <Carousel2></Carousel2> : <Carousel3></Carousel3>}
+    
       <RightArrow onClick={() => setCurrent(getCurrent(current + 1))} />
       <CircleButton onClick={() => setCurrent(0)} name={0} current={current} />
       <CircleButton onClick={() => setCurrent(1)} name={1} current={current} />

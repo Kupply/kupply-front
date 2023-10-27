@@ -55,7 +55,7 @@ const ConnectLink = styled(Typography)<TypographyProps>`
 
 const MenuButton = styled.button`
   display: flex;
-  width: auto;
+  width: 53px;
   color: rgba(20, 20, 20, 0.7);
   font-family: Pretendard;
   font-size: 14px;
@@ -83,7 +83,7 @@ const ContentsWrapper = styled.div`
   width: auto;
 `;
 
-export default function Footer() {
+export default function Footer({ setSelected }: { setSelected: React.Dispatch<React.SetStateAction<number>> }) {
   const navigate = useNavigate();
   const handleMenu1Click = () => {
     navigate('/archive');
@@ -104,7 +104,7 @@ export default function Footer() {
   return (
     <FooterWrapper>
       <Logo />
-      <ContentsWrapper style={{ marginTop: '26.1px', marginBottom: '46.35px', gap: '767px' }}>
+      <ContentsWrapper style={{ marginTop: '26.1px', marginBottom: '46.35px' }}>
         <ContentsWrapper>
           <div>
             <Typography size="smallText" bold="600">
@@ -163,8 +163,24 @@ export default function Footer() {
             Copyright ⓒ 2023 kupply. all rights reserved.
           </Typography>
           <MenuWrapper>
-            <MenuButton style={{ color: '#A8A8A8' }}>이용약관</MenuButton>
-            <MenuButton style={{ color: '#A8A8A8' }}>개인정보 처리방침</MenuButton>
+            <MenuButton
+              style={{ color: '#A8A8A8' }}
+              onClick={() => {
+                setSelected(4);
+                navigate('/settings');
+              }}
+            >
+              이용약관
+            </MenuButton>
+            <MenuButton
+              style={{ color: '#A8A8A8', width: 108 }}
+              onClick={() => {
+                setSelected(4);
+                navigate('/settings');
+              }}
+            >
+              개인정보 처리방침
+            </MenuButton>
           </MenuWrapper>
         </ContentsWrapper>
         <ContentsWrapper style={{ gap: '8px' }}>

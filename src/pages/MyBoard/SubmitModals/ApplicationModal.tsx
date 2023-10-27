@@ -94,9 +94,11 @@ export default function ApplicationModal(props: ModalProps) {
     }
   }, [currentSemester1, currentSemester2]);
 
+  // ---------------------------------------------------------------------------------------------------
+
   return (
     <Main>
-      {isOpenModal && // 모달 오픈
+      {isOpenModal &&
         (isSubmitted ? ( // 프로그래스바가 있는 창과 없는 창 구분 (모달번호 0, 1, 2,  vs. 3, 4)
           <ModalLarge onClickToggleModal={onClickModal}>
             <CloseButton
@@ -187,7 +189,7 @@ export default function ApplicationModal(props: ModalProps) {
               </Typography>
             </ModalTiteWrapper>
             {currentModal === 0 && ( // 기존 정보 확인하기 단계
-              <div>
+              <>
                 <ProgressBarWrapper>
                   <MultiStepProgressBar numberOfSteps={3} currentStep={1} complete={true} />
                   <ProgressBarTtitle style={{ paddingLeft: '135px' }}>
@@ -208,7 +210,7 @@ export default function ApplicationModal(props: ModalProps) {
                         color: 'var(--DF_Grey-2, #DFDFDF)',
                         lineHeight: '136.111%',
                         top: '185px',
-                        left: '377px',
+                        left: '405px',
                         textAlign: 'center',
                       }}
                     >
@@ -223,7 +225,7 @@ export default function ApplicationModal(props: ModalProps) {
                         color: 'var(--DF_Grey-2, #DFDFDF)',
                         lineHeight: '136.111%',
                         top: '185px',
-                        left: '705px',
+                        left: '730px',
                         textAlign: 'right',
                       }}
                     >
@@ -231,53 +233,52 @@ export default function ApplicationModal(props: ModalProps) {
                     </Typography>
                   </ProgressBarTtitle>
                 </ProgressBarWrapper>
-                <div style={{ position: 'absolute', top: 0, left: -1 }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="814" height="232" viewBox="0 0 814 232" fill="none">
-                    <path
-                      d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z"
-                      stroke="#DFDFDF"
-                    />
-                  </svg>
-                </div>
-                <div style={{ display: 'flex' }}>
-                  <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
-                    학점
-                  </Typography>
-                  <Typography size="mediumText">을 입력해주세요.</Typography>
-                </div>
-                <VerifiBoxWrapper>
-                  <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
-                  <div style={{ marginTop: 60 }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
-                      <circle cx="1" cy="1" r="1" fill="#141414" />
-                    </svg>
-                  </div>
-                  <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
-                  <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
-                </VerifiBoxWrapper>
-                <div style={{ display: 'flex' }}>
-                  <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
-                    고려대학교 학번
-                  </Typography>
-                  <Typography size="mediumText">을 입력해주세요.</Typography>
-                </div>
-                <TextFieldBox
-                  placeholder="학번 10자리"
-                  value={stdID}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setStdID(e.target.value);
-                  }}
-                  state={stdIDState}
-                  setState={setStdIDState}
-                  setValue={setStdID}
-                  helpMessage="학번 10자리"
-                  errorMessage="학번이 10자리 숫자가 아닙니다."
-                ></TextFieldBox>
-                <ButtonsWrapper>
-                  <PrevButton active={false} onClick={handlePrev} />
-                  <NextButton active={nextButton} onClick={handleNext} />
-                </ButtonsWrapper>
-              </div>
+                <DividingLine />
+                <ContentsWrapper>
+                  <SubContentsWrapper>
+                    <div style={{ display: 'flex' }}>
+                      <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
+                        학점
+                      </Typography>
+                      <Typography size="mediumText">을 입력해주세요.</Typography>
+                    </div>
+                    <VerifiBoxWrapper>
+                      <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
+                      <div style={{ marginTop: 60 }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
+                          <circle cx="1" cy="1" r="1" fill="#141414" />
+                        </svg>
+                      </div>
+                      <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
+                      <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
+                    </VerifiBoxWrapper>
+                  </SubContentsWrapper>
+                  <SubContentsWrapper>
+                    <div style={{ display: 'flex' }}>
+                      <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
+                        고려대학교 학번
+                      </Typography>
+                      <Typography size="mediumText">을 입력해주세요.</Typography>
+                    </div>
+                    <TextFieldBox
+                      placeholder="학번 10자리"
+                      value={stdID}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setStdID(e.target.value);
+                      }}
+                      state={stdIDState}
+                      setState={setStdIDState}
+                      setValue={setStdID}
+                      helpMessage="학번 10자리"
+                      errorMessage="학번이 10자리 숫자가 아닙니다."
+                    ></TextFieldBox>
+                  </SubContentsWrapper>
+                  <ButtonsWrapper>
+                    <PrevButton active={false} onClick={handlePrev} />
+                    <NextButton active={nextButton} onClick={handleNext} />
+                  </ButtonsWrapper>
+                </ContentsWrapper>
+              </>
             )}
             {currentModal === 1 && ( // 지원학기 입력하기 단계
               <div>
@@ -324,14 +325,6 @@ export default function ApplicationModal(props: ModalProps) {
                     </Typography>
                   </ProgressBarTtitle>
                 </ProgressBarWrapper>
-                <div style={{ position: 'absolute', top: 0, left: 0 }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="814" height="232" viewBox="0 0 814 232" fill="none">
-                    <path
-                      d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z"
-                      stroke="#DFDFDF"
-                    />
-                  </svg>
-                </div>
                 <div style={{ display: 'flex' }}>
                   <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
                     재학 중인 학년/학기
@@ -484,15 +477,42 @@ const ProgressBarTtitle = styled.text`
 const ProgressBarWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  // width: 814px;
 `;
 
 const VerifiBoxWrapper = styled.div`
   display: flex;
   gap: 13px;
+  //margin-bottom: 48px;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 18px;
-  margin-top: 34px;
+  margin-top: 130px;
+  //padding-left: 93px;
+  width: 630px;
+`;
+
+const ContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const SubContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: auto;
+  padding-top: 36.5px;
+`;
+
+const DividingLine = styled.div`
+  width: 860px;
+  height: 1px;
+  background: #dfdfdf;
+  position: absolute;
+  left: 0px;
+  top: 250px;
 `;
