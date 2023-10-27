@@ -104,7 +104,7 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
                 </clipPath>
               </defs>
             </svg>
-          </Svg>{' '}
+          </Svg>
           {svgHover && (
             <>
               <HoverInfo>
@@ -364,6 +364,7 @@ const HoverEng = styled.div`
   font-weight: 400;
   line-height: 18px;
   opacity: 0.8;
+  width: 250px;
   position: absolute;
   margin-top: 115px;
   margin-left: 120px;
@@ -399,8 +400,10 @@ const EngName = styled.div`
   margin-top: 487px;
 `;
 const Name = styled.div`
+  text-align: center;
+  width: 444px;
   position: absolute;
-  margin-left: 180px;
+
   margin-top: 451px;
   color: #141414;
   font-size: 24px;
