@@ -20,6 +20,7 @@ import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/Si
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 
 const Wrapper = styled.div`
+  position: absolute;
   width: 100vw; // 1920px;
   height: 100vh; //1248px; // Footer 요소가 포함이 되지 않는 관계로, 1510px 에서 Footer 높이를 제외한 높이
   max-width: 2560px;

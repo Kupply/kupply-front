@@ -7,7 +7,7 @@ type buttonOptions = 'default' | 'hover' | 'active';
 
 const Wrapper = styled.div`
   width: 86%;
-  height: 1152px;
+  height: 900px;
   display: flex;
   flex-direction: row;
   gap: 30px;

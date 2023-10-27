@@ -139,18 +139,17 @@ export default function SignUp2Page() {
     }
   }, [nameState, stdIDState, phoneState, dropdownValue, complete]);
 
-  /*
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('email')) navigate('/');
     else {
       sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
-      /* 나머지 세 데이터가 이미 존재하는 경우 textfield를 filled로 렌더링 시 바꿔 준다. 
+      //나머지 세 데이터가 이미 존재하는 경우 textfield를 filled로 렌더링 시 바꿔 준다.
       if (name !== '') setNameState('filled');
       if (stdID !== '') setStdIDState('filled');
       if (phone !== '') setPhoneState('filled');
     }
-  }, []);*/
+  }, []);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
     sessionStorage.setItem('name', name);
