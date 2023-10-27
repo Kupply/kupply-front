@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
+
 import Preview from '../components/landing/Preview';
 import FAQ from '../components/landing/FAQ';
 import Ending from '../components/landing/Ending';

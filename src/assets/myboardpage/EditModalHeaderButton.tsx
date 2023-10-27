@@ -17,7 +17,6 @@ const TextButton = styled.button<EditModalHeaderButtonProps>`
   font-size: 20px;
   font-style: normal;
   line-height: 100%;
-  margin-bottom: 14px;
 
   ${({ isClicked }) =>
     isClicked

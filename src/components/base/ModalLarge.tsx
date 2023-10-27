@@ -42,8 +42,10 @@ const ModalContainer = styled.div`
 
 // 모달 창 (흰 색 컨텐츠 창)
 const DialogBox = styled.dialog`
-  width: 42vw; // *전체화면에 대해 크기 조정 필요
-  height: 81vh; // *전체화면에 대해 크기 조정 필요
+  width: 814px; // *전체화면에 대해 크기 조정 필요
+  max-height: 81vh; // *전체화면에 대해 크기 조정 필요
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
