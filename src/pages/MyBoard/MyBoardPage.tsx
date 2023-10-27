@@ -9,8 +9,8 @@ import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 import MyStageChart from '../../assets/myboardpage/MyStage';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
-import EditModal from './EditModals/EditModal';
-import ApplicationModal from './SubmitModals/ApplicationModal';
+import EditModal from './EditModal';
+import ApplicationModal from './ApplicationModal';
 import { HelpMessage } from '../../assets/myboardpage/HellpMessage';
 
 /* 

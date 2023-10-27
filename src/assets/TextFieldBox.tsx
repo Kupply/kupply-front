@@ -190,15 +190,28 @@ export interface TextFieldBoxProps extends React.ComponentPropsWithoutRef<'input
   setValue: (value: string) => void;
   errorMessage?: string;
   helpMessage?: string;
+  width?: string; // Add width prop
+  height?: string; // Add height prop
 }
 
 const TextFieldWrapper = styled.div<TextFieldBoxProps>`
   ${baseWrapper}
   ${(props) => stateMapping[props.state || 'default']}
+  width: ${(props) => props.width || '592px'}; // Set width using the prop or a default value
+  height: ${(props) => props.height || '48px'}; // Set height using the prop or a default value
 `;
 
 function TextFieldBox(props: TextFieldBoxProps) {
-  const { state = 'default', setState, setValue, errorMessage = 'Invalid Message', helpMessage = '', ...rest } = props;
+  const {
+    state = 'default',
+    setState,
+    setValue,
+    errorMessage = 'Invalid Message',
+    helpMessage = '',
+    width,
+    height,
+    ...rest
+  } = props;
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -259,6 +272,8 @@ function TextFieldBox(props: TextFieldBoxProps) {
         onBlur={onBlur}
         ref={ref}
         tabIndex={rest.tabIndex || 0}
+        width={width} // Set width using the prop
+        height={height} // Set height using the prop
       >
         {state === 'default' || state === 'hover' ? (
           <PlaceHolder>{rest.placeholder}</PlaceHolder>
