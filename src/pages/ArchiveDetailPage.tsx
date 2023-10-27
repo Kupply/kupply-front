@@ -6,6 +6,7 @@ import axios from 'axios';
 import SegmentedPicker from '../assets/SegmentedPicker';
 import GpaLineChart, { Data, LineData } from '../assets/GpaLineChart';
 import { recruit } from '../common/recruiting';
+import { DBkeywords } from '../common/keyword';
 
 type MajorOptions =
   | 'business'
@@ -143,7 +144,7 @@ const ArchiveDetailPage = () => {
     '자기개발',
     '팀 내 소통',
   ];
-  const [keywords, setKeywords] = useState<string[]>(initKeywords);
+  const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || initKeywords);
 
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
