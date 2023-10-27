@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
 
-import Preview from '../components/landing/Preview';
-import FAQ from '../components/landing/FAQ';
-import Ending from '../components/landing/Ending';
+import Preview from '../components/landingpage/Preview';
+import FAQ from '../components/landingpage/FAQ';
+import Ending from '../components/landingpage/Ending';
 import TextFieldBox from '../assets/TextFieldBox';
 import Typography from '../assets/Typography';
 
