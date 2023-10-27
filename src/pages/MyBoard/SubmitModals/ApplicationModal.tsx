@@ -14,6 +14,9 @@ import LabelButton from '../../../assets/buttons/LabelButton';
 import MockApplicationButton from '../../../assets/myboardpage/MockApplication';
 import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
 import FirstReAppliedButton from '../../../assets/myboardpage/FirstReAppliedButton';
+import UploadButton from '../../../assets/myboardpage/UploadButton';
+import CompleteMockApplicationButton from '../../../assets/myboardpage/CompleteMockApplication';
+import { TypeFlags } from 'typescript';
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -32,7 +35,7 @@ export interface ModalProps {
 
 export default function ApplicationModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
-  const [currentModal, setCurrentModal] = useState(0);
+  const [currentModal, setCurrentModal] = useState(2);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [nextButton, setNextButton] = useState<boolean>(false);
 
@@ -406,15 +409,77 @@ export default function ApplicationModal(props: ModalProps) {
                       자기소개서 첨부하기
                     </Typography>
                   </ProgressBarTtitle>
+                  <div style={{ position: 'absolute', left: '93px', top: '268px' }}>
+                    <Typography
+                      size="mediumText"
+                      style={{ color: 'var(--Main-Black, #141414)', opacity: 0.8, fontWeight: '700' }}
+                    >
+                      자기소개개서 첨부하기
+                    </Typography>
+                    <Typography
+                      size="mediumText"
+                      style={{
+                        color: 'var(--A8_Grey-4, #A8A8A8)',
+                        opacity: 0.8,
+                        marginLeft: '170px',
+                        marginTop: '-18px',
+                      }}
+                    >
+                      (선택)
+                    </Typography>
+                  </div>
+                  <div style={{ position: 'absolute', left: '93px', top: '296px' }}>
+                    <UploadBox>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="92"
+                        height="70"
+                        viewBox="0 0 92 70"
+                        fill="none"
+                        style={{ position: 'absolute', left: '268px', top: '37px' }}
+                      >
+                        <path
+                          d="M61.3698 49L46.0365 35L30.7031 49"
+                          stroke="#E57C90"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M46.0391 35V66.5"
+                          stroke="#E57C90"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M78.2 57.3649C87.4767 52.7449 90.9267 42.1049 85.8667 33.6349C82.4934 27.9999 76.0534 24.4999 69.0384 24.4999H64.2084C59.9534 9.51995 43.24 0.524947 26.8334 4.40995C10.4267 8.29495 0.575035 23.5549 4.83004 38.4999C6.0567 42.7699 8.3567 46.7249 11.5384 50.0499"
+                          stroke="#E57C90"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M61.3698 49L46.0365 35L30.7031 49"
+                          stroke="#E57C90"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <Typography
+                        size="mediumText"
+                        style={{ position: 'absolute', color: '#E57C90', top: '124px', left: '213px' }}
+                      >
+                        Drag and Drop to Upload
+                      </Typography>
+                      <UploadButton isClicked={true} style={{ position: 'absolute', top: '165px', left: '231px' }} />
+                    </UploadBox>
+                  </div>
+                  <div style={{ position: 'absolute', top: '640px', left: 0 }}>
+                    <CompleteMockApplicationButton />
+                  </div>
                 </ProgressBarWrapper>
-                <div style={{ position: 'absolute', top: 0, left: 0 }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="814" height="232" viewBox="0 0 814 232" fill="none">
-                    <path
-                      d="M0.5 20C0.5 9.23045 9.23045 0.5 20 0.5H794C804.77 0.5 813.5 9.23045 813.5 20V231.5H0.5V20Z"
-                      stroke="#DFDFDF"
-                    />
-                  </svg>
-                </div>
               </div>
             )}
           </ModalLarge>
@@ -515,4 +580,13 @@ const DividingLine = styled.div`
   position: absolute;
   left: 0px;
   top: 250px;
+`;
+
+const UploadBox = styled.div`
+  width: 628px;
+  height: 238px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px dashed #e57c90;
+  background: var(--White, #fff);
 `;
