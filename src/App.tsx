@@ -65,7 +65,7 @@ export default function App() {
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/delete" element={<DeletePage />} />
       </Routes>
-      <Footer />
+      <Footer setSelected={setSelected} />
     </Wrapper>
   );
 }
