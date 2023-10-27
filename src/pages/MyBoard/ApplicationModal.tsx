@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
-import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
-import PrevButton from '../../../assets/buttons/PrevButton';
-import NextButton from '../../../assets/buttons/NextButton';
-import SubmitButton from '../../../assets/buttons/SubmitButton';
-import Typography from '../../../assets/Typography';
-import ModalLarge from '../../../components/base/ModalLarge';
-import DropDown from '../../../assets/dropdown/dropDown';
-import VerificationBox from '../../../assets/VerificationBox';
-import MultiStepProgressBar from '../../../assets/MultiStepProgressBar';
-import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-import LabelButton from '../../../assets/buttons/LabelButton';
-import MockApplicationButton from '../../../assets/myboardpage/MockApplication';
-import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
-import FirstReAppliedButton from '../../../assets/myboardpage/FirstReAppliedButton';
+import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
+import PrevButton from '../../assets/buttons/PrevButton';
+import NextButton from '../../assets/buttons/NextButton';
+import SubmitButton from '../../assets/buttons/SubmitButton';
+import Typography from '../../assets/Typography';
+import ModalLarge from '../../components/base/ModalLarge';
+import DropDown from '../../assets/dropdown/dropDown';
+import VerificationBox from '../../assets/VerificationBox';
+import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
+import LabelButton from '../../assets/buttons/LabelButton';
+import MockApplicationButton from '../../assets/myboardpage/MockApplication';
+import AlertIconCheck from '../../assets/icons/AlertIconCheck';
+import FirstReAppliedButton from '../../assets/myboardpage/FirstReAppliedButton';
 
 export interface ModalProps {
   isOpenModal: boolean;

@@ -385,8 +385,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; // 10.14 화면비율조정이슈로 추가
   width: 100vw;
-  max-width: 1920px;
+  max-width: 2560px; // 10.14 화면비율조정이슈로 수정
 
   &::before,
   &::after {

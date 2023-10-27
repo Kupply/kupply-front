@@ -9,8 +9,8 @@ import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 import MyStageChart from '../../assets/myboardpage/MyStage';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
-import EditModal from './EditModals/EditModal';
-import ApplicationModal from './SubmitModals/ApplicationModal';
+import EditModal from './EditModal';
+import ApplicationModal from './ApplicationModal';
 import { HelpMessage } from '../../assets/myboardpage/HellpMessage';
 
 /* 
@@ -1489,12 +1489,16 @@ height: 2378px;
 */
 
 const Wrapper = styled.div`
-  width: 100%; // 1920px;
+  width: 100vw; // 10.14 화면비율조정이슈로 수정
+  max-width: 2560px; // 10.14 화면비율조정이슈로 수정
   height: 2020px; // 100%; // (헤더, 풋터 제외 크기) 이 크기로 퍼센트 계산
   background: #fcfcfc;
   display: flex;
   flex-direction: column;
   position: relative;
+
+  align-items: center; // 10.14 화면비율조정이슈로 추가
+  justify-content: center; // 10.14 화면비율조정이슈로 추가
 
   &::before {
     content: '';
