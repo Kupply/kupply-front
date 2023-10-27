@@ -280,6 +280,7 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 86%;
   background: rgba(255, 255, 255, 0.6);
+  margin-bottom: 600px;
 `;
 
 const KupplyApplyButton = styled.button`

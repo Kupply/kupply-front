@@ -1,24 +1,98 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
+import Preview from '../components/landing/Preview';
+import FAQ from '../components/landing/FAQ';
+import Ending from '../components/landing/Ending';
+import TextFieldBox from '../assets/TextFieldBox';
+import Typography from '../assets/Typography';
+
+const LandingPage = () => {
+  const tableContent = useRef<HTMLDivElement>(null);
+
+  const onClickDownArrow = () => {
+    tableContent.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  return (
+    <Wrapper>
+      <HeadImageWrapper>
+        <img src="../../design_image/landingImage.png" style={{ width: '1248px', height: '880px' }}></img>
+        <HeadTextWrapper>
+          <Typography size="mediumText" color="#D85888">
+            실시간 지원률
+          </Typography>
+          <Typography size="heading1" style={{ marginTop: '14px' }}>
+            쿠플라이 실시간 이중전공 모의지원 현황
+          </Typography>
+          <Typography
+            color="rgba(20, 20, 20, 0.60)"
+            style={{ marginTop: '12px', fontSize: '30px', marginBottom: '25px' }}
+          >
+            실시간으로 업로드 되는 이중전공 지원 현황을 살펴보세요!
+          </Typography>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50"
+            height="51"
+            viewBox="0 0 50 51"
+            fill="none"
+            style={{ cursor: 'pointer' }}
+            onClick={onClickDownArrow}
+          >
+            <path
+              d="M14.584 27.5967L25.0007 38.0133L35.4173 27.5967"
+              stroke="#D85888"
+              stroke-opacity="0.6"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14.584 13.0137L25.0007 23.4303L35.4173 13.0137"
+              stroke="#D85888"
+              stroke-opacity="0.6"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </HeadTextWrapper>
+      </HeadImageWrapper>
+      <div ref={tableContent} style={{ marginBottom: '120px' }}></div>
+      <RankingTable />
+      <PassedDataCard />
+      <Preview />
+      <FAQ />
+      <Ending />
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 1920px;
-  padding-top: 100px;
 `;
 
-const LandingPage = () => {
-  return (
-    <Wrapper>
-      <RankingTable />
-      <PassedDataCard />
-    </Wrapper>
-  );
-};
+const HeadImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 400px;
+`;
+
+const HeadTextWrapper = styled.div`
+  position: relative;
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default LandingPage;
