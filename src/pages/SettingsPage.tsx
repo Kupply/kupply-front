@@ -662,7 +662,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={stdID}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setStdID(e.target.value);
             }}
             state={stdIDState}
             setState={setStdIDState}
@@ -683,7 +683,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={phoneNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setPhoneNumber(e.target.value);
             }}
             state={phoneNumberState}
             setState={setPhoneNumberState}
@@ -751,7 +751,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={nickname}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setNickname(e.target.value);
             }}
             state={nicknameState}
             setState={setNicknameState}
@@ -865,7 +865,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setEmail(e.target.value);
             }}
             state={emailState}
             setState={setEmailState}
@@ -877,7 +877,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={pwd}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setPwd(e.target.value);
             }}
             state={passwordState}
             setState={setPasswordState}
@@ -890,7 +890,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={pwdConfirm}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setPwdConfirm(e.target.value);
             }}
             state={password2State}
             setState={setPassword2State}
