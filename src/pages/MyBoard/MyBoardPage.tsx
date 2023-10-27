@@ -12,6 +12,7 @@ import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from './EditModals/EditModal';
 import ApplicationModal from './SubmitModals/ApplicationModal';
 import { HelpMessage } from '../../assets/myboardpage/HellpMessage';
+import { recruit } from '../../common/recruiting';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -28,7 +29,7 @@ import { HelpMessage } from '../../assets/myboardpage/HellpMessage';
 const major = {
   Business: {
     image: 'path/to/computerScience.jpg',
-    title: '경영대학',
+    title: '경영학과',
     text: 'Business School',
   },
   Psychology: {
@@ -74,7 +75,7 @@ const major = {
 };
 
 type MajorOptions =
-  | '경영대학'
+  | '경영학과'
   | '경제학과'
   | '심리학부'
   | '통계학과'
@@ -88,7 +89,7 @@ const collegeNameMapping = {
   식품자원경제학과: 'bio',
   미디어학부: 'media',
   컴퓨터학과: 'info',
-  경영대학: 'bussiness',
+  경영학과: 'bussiness',
   심리학부: 'psycho',
   화학과: 'science',
   수학과: 'science',
@@ -100,7 +101,7 @@ const collegeAPIMapping = {
   식품자원경제학과: 'foodecon',
   미디어학부: 'media',
   컴퓨터학과: 'computer',
-  경영대학: 'business',
+  경영학과: 'business',
   심리학부: 'psychology',
   화학과: 'chemistry',
   수학과: 'mathematics',
@@ -210,14 +211,13 @@ export default function MyBoardPage() {
     userRole: 'candidate',
     firstMajor: '디자인조형학부',
     studentId: '2020220037',
-    hopeMajor1: '경영대학',
+    hopeMajor1: '경영학과',
     hopeMajor2: '미디어학부',
     curGPA: 4.2,
     hopeSemester: '2023-2',
   });
 
   // 좀 아닌 것 같지만 생각의 여유가 없기에
-  // FIXME: numOfSelection(선발인원)들 하드코딩으로 바꿔야 함.
   const [pastData1, setPastData1] = useState([
     {
       numOfSelection: 10,
@@ -305,6 +305,19 @@ export default function MyBoardPage() {
           curGPA: userInfo.curGPA,
           hopeSemester: userInfo.hopeSemester,
         });
+
+        // 학기 별 모집인원 수
+        pastData1[0].numOfSelection = recruit[userInfo.hopeMajor1]['2023-1'];
+        pastData1[1].numOfSelection = recruit[userInfo.hopeMajor1]['2022-2'];
+        pastData1[2].numOfSelection = recruit[userInfo.hopeMajor1]['2022-1'];
+        setPastData1(pastData1);
+        pastData2[0].numOfSelection = recruit[userInfo.hopeMajor2]['2023-1'];
+        pastData2[1].numOfSelection = recruit[userInfo.hopeMajor2]['2022-2'];
+        pastData2[2].numOfSelection = recruit[userInfo.hopeMajor2]['2022-1'];
+        setPastData1(pastData2);
+        curData[0].curNumOfSelection = recruit[userInfo.hopeMajor1]['2023-2'];
+        curData[1].curNumOfSelection = recruit[userInfo.hopeMajor2]['2023-2'];
+        setCurData(curData);
 
         // 모의지원 했는지.
         setIsApplied(userInfo.isApplied);
@@ -405,7 +418,7 @@ export default function MyBoardPage() {
       for (let i = 0; i < 2; i++) {
         let curCompetitionRate = 0;
         if (data[i].curApplyNum > 0) {
-          curCompetitionRate = newCurData[i].curNumOfSelection / data[i].curApplyNum;
+          curCompetitionRate = +(data[i].curApplyNum / newCurData[i].curNumOfSelection).toFixed(2);
         }
 
         newCurData[i] = {
@@ -987,12 +1000,13 @@ export default function MyBoardPage() {
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '143px' }}
                       >
-                        {semesterBtnStates['2023-1R']
+                        {/* {semesterBtnStates['2023-1R']
                           ? pastData1[0].competitionRate
                           : semesterBtnStates['2022-2R']
                           ? pastData1[1].competitionRate
                           : pastData1[2].competitionRate}{' '}
-                        : 1
+                        : 1 */}
+                        N : 1
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
@@ -1114,10 +1128,10 @@ export default function MyBoardPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
                       <path d="M0 1L674 1" stroke="#DFDFDF" />
                     </svg>
-                    <PieChartComponent />
+                    <PieChartComponent MajorDatas={curData[0].scatterChartData} />
                   </Graph_1_1Box>
                   <Graph_2_1Box>
-                    <HalfPieChartComponent />
+                    <HalfPieChartComponent StudentYearDatas={curData[0].halfChartData} />
                   </Graph_2_1Box>
                 </div>
                 <Graph_2Box>
@@ -1135,7 +1149,7 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
                     <path d="M0 1L535 1" stroke="#DFDFDF" />
                   </svg>
-                  <PlotChartComponent />
+                  <PlotChartComponent MajorDatas={curData[0].scatterChartData} />
                 </Graph_2Box>
               </div>
             </>
@@ -1395,12 +1409,13 @@ export default function MyBoardPage() {
                         size="largeText"
                         style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '143px' }}
                       >
-                        {semesterBtnStates['2023-1R']
+                        {/* {semesterBtnStates['2023-1R']
                           ? pastData2[0].competitionRate
                           : semesterBtnStates['2022-2R']
                           ? pastData2[1].competitionRate
                           : pastData2[2].competitionRate}{' '}
-                        : 1
+                        : 1 */}
+                        N : 1
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
@@ -1480,10 +1495,10 @@ export default function MyBoardPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
                       <path d="M0 1L674 1" stroke="#DFDFDF" />
                     </svg>
-                    <PieChartComponent />
+                    <PieChartComponent MajorDatas={curData[1].scatterChartData} />
                   </Graph_1_1Box>
                   <Graph_2_1Box>
-                    <HalfPieChartComponent />
+                    <HalfPieChartComponent StudentYearDatas={curData[1].halfChartData} />
                   </Graph_2_1Box>
                 </div>
                 <Graph_2Box>
@@ -1501,7 +1516,7 @@ export default function MyBoardPage() {
                   <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
                     <path d="M0 1L535 1" stroke="#DFDFDF" />
                   </svg>
-                  <PlotChartComponent />
+                  <PlotChartComponent MajorDatas={curData[1].scatterChartData} />
                 </Graph_2Box>
               </div>
             </>

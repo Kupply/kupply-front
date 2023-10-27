@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import SegmentedPicker from '../assets/SegmentedPicker';
 import GpaLineChart, { Data, LineData } from '../assets/GpaLineChart';
-import axios from 'axios';
+import { recruit } from '../common/recruiting';
+import { DBkeywords } from '../common/keyword';
 
 type MajorOptions =
   | 'business'
@@ -18,7 +20,7 @@ type MajorOptions =
   | 'computer';
 
 const majorNameMapping = {
-  business: ['경영대학', 'Business School'],
+  business: ['경영학과', 'Business School'],
   economics: ['경제학과', 'Department of Economics'],
   psychology: ['심리학부', 'School of Psychology'],
   statistics: ['통계학과', 'Department of Statistics'],
@@ -122,9 +124,9 @@ const ArchiveDetailPage = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [enoughData, setEnoughData] = useState<boolean>(false);
 
-  const [numOfSelection, setNumOfSelection] = useState<number>(0); // FIXME: 모집요강에서?
+  const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
-  const [competitionRate, setCompetitionRate] = useState<number>(0); // FIXME: numOfSelection / numOfApplication
+  const [competitionRate, setCompetitionRate] = useState<number>(0);
 
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
   const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
@@ -142,7 +144,7 @@ const ArchiveDetailPage = () => {
     '자기개발',
     '팀 내 소통',
   ];
-  const [keywords, setKeywords] = useState<string[]>(initKeywords);
+  const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || initKeywords);
 
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
@@ -162,8 +164,16 @@ const ArchiveDetailPage = () => {
         const data = APIresponse.data.pastData;
 
         if (data.passedData.passedGPACountArray.length > 0) {
+          const selectionNum = recruit[majorKoreanName][semesterForAPI[activeIdx]] || 0;
+          let competitionRate = 0;
+          if (selectionNum > 0) {
+            competitionRate = data.overallData.numberOfData / selectionNum;
+          }
+
           setEnoughData(true);
           setNumOfApplication(data.overallData.numberOfData);
+          setNumOfSelection(selectionNum);
+          setCompetitionRate(competitionRate);
           setLineData(data.passedData.passedGPACountArray);
           setMeanGpa(data.passedData.passedMeanGPAData);
           setMedianGpa(data.passedData.passedMedianGPAData);
@@ -188,7 +198,16 @@ const ArchiveDetailPage = () => {
       const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
       const data = APIresponse.data.pastData;
 
+      const selectionNum = recruit[majorKoreanName][semesterForAPI[idx]] || 0;
+      let competitionRate = 0;
+      if (selectionNum > 0) {
+        competitionRate = data.overallData.numberOfData / selectionNum;
+      }
+
+      setEnoughData(true);
       setNumOfApplication(data.overallData.numberOfData);
+      setNumOfSelection(selectionNum);
+      setCompetitionRate(competitionRate);
       setLineData(data.passedData.passedGPACountArray);
       setMeanGpa(data.passedData.passedMeanGPAData);
       setMedianGpa(data.passedData.passedMedianGPAData);
@@ -267,21 +286,23 @@ const ArchiveDetailPage = () => {
         <SelectionInfoContentsWrapper>
           <SelectionInfoContent>
             <Text>선발인원</Text>
-            <SelectionInfoValue>{numOfSelection}명</SelectionInfoValue>
+            <SelectionInfoValue>{numOfSelection !== 0 ? `${numOfSelection} 명` : 'N 명'}</SelectionInfoValue>
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
             <Text>지원자 수</Text>
-            <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue>
+            {/* <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue> */}
+            <SelectionInfoValue>N 명</SelectionInfoValue>
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
             <Text>경쟁률</Text>
-            <SelectionInfoValue>{competitionRate}:1</SelectionInfoValue>
+            {/* <SelectionInfoValue>{competitionRate}:1</SelectionInfoValue> */}
+            <SelectionInfoValue>N : 1</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
       </SelectionInfoWrapper>
