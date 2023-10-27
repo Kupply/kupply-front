@@ -396,37 +396,48 @@ export default function MyBoardPage() {
 
     getPastData();
   }, []);
+  function formatTimeTo12HourFormat(date: Date) {
+    var hours = date.getHours();
+    var minutes: number | string = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 12-hour clock
+    minutes = minutes < 10 ? '0' + minutes : minutes.toString();
+    var timeString = hours + ':' + minutes + ' ' + ampm;
+    return timeString;
+  }
+  const [updateTime, setUpdateTime] = useState(formatTimeTo12HourFormat(new Date()));
 
-  useEffect(() => {
-    const getCurData = async () => {
-      try {
-        const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
-        const data = APIresponse.data.data;
+  const getCurData = async () => {
+    try {
+      const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
+      const data = APIresponse.data.data;
 
-        const newCurData = [...curData];
+      const newCurData = [...curData];
 
-        for (let i = 0; i < 2; i++) {
-          let curCompetitionRate = 0;
-          if (data[i].curApplyNum > 0) {
-            curCompetitionRate = +(data[i].curApplyNum / newCurData[i].curNumOfSelection).toFixed(2);
-          }
-
-          newCurData[i] = {
-            curNumOfSelection: newCurData[i].curNumOfSelection,
-            curApplyNum: data[i].curApplyNum,
-            curCompetitionRate: curCompetitionRate,
-            fullChartData: data[i].fullChartData,
-            halfChartData: data[i].halfChartData,
-            scatterChartData: data[i].scatterChartData,
-          };
+      for (let i = 0; i < 2; i++) {
+        let curCompetitionRate = 0;
+        if (data[i].curApplyNum > 0) {
+          curCompetitionRate = +(data[i].curApplyNum / newCurData[i].curNumOfSelection).toFixed(2);
         }
 
-        setCurData(newCurData);
-      } catch (err) {
-        console.log(err);
+        newCurData[i] = {
+          curNumOfSelection: newCurData[i].curNumOfSelection,
+          curApplyNum: data[i].curApplyNum,
+          curCompetitionRate: curCompetitionRate,
+          fullChartData: data[i].fullChartData,
+          halfChartData: data[i].halfChartData,
+          scatterChartData: data[i].scatterChartData,
+        };
       }
-    };
 
+      setCurData(newCurData);
+      setUpdateTime(formatTimeTo12HourFormat(new Date()));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
     getCurData();
   }, []);
 
@@ -801,7 +812,18 @@ export default function MyBoardPage() {
                         : 1
                       </Typography>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '37px', marginLeft: '36px' }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginTop: '37px',
+                        marginLeft: '36px',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => {
+                        getCurData();
+                      }}
+                    >
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path
                           d="M13.416 2.3335V5.8335H9.91602"
@@ -817,7 +839,7 @@ export default function MyBoardPage() {
                         />
                       </svg>
                       <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                        Last Update 5:58 PM
+                        Last Update {updateTime}
                       </Typography>
                     </div>
                   </CompetitionRateBox>
@@ -857,7 +879,12 @@ export default function MyBoardPage() {
                       <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
                         {curData[0].curApplyNum}명의 지원자가 {userData.hopeMajor1}를 지원했습니다.
                       </Typography>
-                      <div style={{ display: 'flex', marginTop: '18px' }}>
+                      <div
+                        style={{ display: 'flex', marginTop: '18px', cursor: 'pointer' }}
+                        onClick={() => {
+                          getCurData();
+                        }}
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                           <path
                             d="M13.416 2.3335V5.8335H9.91602"
@@ -873,7 +900,7 @@ export default function MyBoardPage() {
                           />
                         </svg>
                         <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                          Last Update 5:58 PM
+                          Last Update {updateTime}
                         </Typography>
                       </div>
                     </div>
@@ -1194,7 +1221,18 @@ export default function MyBoardPage() {
                         : 1
                       </Typography>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '37px', marginLeft: '36px' }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginTop: '37px',
+                        marginLeft: '36px',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => {
+                        getCurData();
+                      }}
+                    >
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path
                           d="M13.416 2.3335V5.8335H9.91602"
@@ -1210,7 +1248,7 @@ export default function MyBoardPage() {
                         />
                       </svg>
                       <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                        Last Update 5:58 PM
+                        Last Update {updateTime}
                       </Typography>
                     </div>
                   </CompetitionRateBox>
@@ -1250,7 +1288,12 @@ export default function MyBoardPage() {
                       <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
                         {curData[1].curApplyNum}명의 지원자가 {userData.hopeMajor2}를 지원했습니다.
                       </Typography>
-                      <div style={{ display: 'flex', marginTop: '18px' }}>
+                      <div
+                        style={{ display: 'flex', marginTop: '18px', cursor: 'pointer' }}
+                        onClick={() => {
+                          getCurData();
+                        }}
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                           <path
                             d="M13.416 2.3335V5.8335H9.91602"
@@ -1266,7 +1309,7 @@ export default function MyBoardPage() {
                           />
                         </svg>
                         <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                          Last Update 5:58 PM
+                          Last Update {updateTime}
                         </Typography>
                       </div>
                     </div>
