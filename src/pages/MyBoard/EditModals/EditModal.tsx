@@ -2,19 +2,25 @@ import styled from 'styled-components';
 import React, { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
-import PrevButton from '../../assets/buttons/PrevButton';
-import SubmitButton from '../../assets/buttons/SubmitButton';
-import Typography from '../../assets/Typography';
-import ModalLarge from '../../components/base/ModalLarge';
-import EditModalHeaderButton from '../../assets/myboardpage/EditModalHeaderButton';
-import ImgCtrlButton from '../../assets/myboardpage/ImgCtrlButton';
-import DropDown from '../../assets/dropdown/dropDown';
-import VerificationBox from '../../assets/VerificationBox';
-import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
-import LabelButton from '../../assets/buttons/LabelButton';
-import { ModalHelpMessage } from '../../assets/myboardpage/HellpMessage';
-import { MajorList } from '../../components/base/MajorList';
+import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
+import PrevButton from '../../../assets/buttons/PrevButton';
+import SubmitButton from '../../../assets/buttons/SubmitButton';
+import Typography from '../../../assets/Typography';
+import ModalLarge from '../../../components/base/ModalLarge';
+import EditModalHeaderButton from '../../../assets/myboardpage/EditModalHeaderButton';
+import ImgCtrlButton from '../../../assets/myboardpage/ImgCtrlButton';
+import DropDown from '../../../assets/dropdown/dropDown';
+import VerificationBox from '../../../assets/VerificationBox';
+import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
+import LabelButton from '../../../assets/buttons/LabelButton';
+import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
+
+/*
+남은 개발
+1. 프로필 사진 변경 - 버튼화
+2. 인포 메세지 (헬프 메세지) 버튼화
+3. 텍스트필드 입력값 유효성 조건 만족여부에 따른 아이콘 변화
+*/
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -22,23 +28,11 @@ export interface ModalProps {
   onClickModal: () => void; // 함수;
 }
 
-/* 
-  모달 헤더버튼 구분
-  0: 나의 기본정보
-  1: 관심 전공
-  2: 현재 내 학점
-  3: 희망 진입학기
-  */
-
 export default function EditModal(props: ModalProps) {
-  ///// 1. 모달창 구현
-
   const { isOpenModal, setOpenModal, onClickModal } = props;
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  ///// 2. 모달 내 입력/선택되는 정보 관리
-
-  // 각 버튼의 isClicked 값 관리 목적
+  // 각 버튼의 isClicked 값을 관리하기 위한 변수 선언
   const [headerButtonStates, setHeaderButtonStates] = useState<{
     basicMajor: boolean;
     interestMajor: boolean;
@@ -50,6 +44,19 @@ export default function EditModal(props: ModalProps) {
     currentGPA: false,
     desiredSemester: false,
   });
+
+  const handleHeaderButtonClick = (buttonName: string) => {
+    setHeaderButtonStates((prevState) => {
+      const newState = {
+        basicMajor: false,
+        interestMajor: false,
+        currentGPA: false,
+        desiredSemester: false,
+      };
+      newState[buttonName as keyof typeof prevState] = true;
+      return newState;
+    });
+  };
 
   // 각 input들의 값을 state를 사용하여 관리
   const [nickname, setNickname] = useState<string>(sessionStorage.getItem('nickname') || '');
@@ -148,27 +155,81 @@ export default function EditModal(props: ModalProps) {
   };
 
   // 고려대학교 전체 학과 리스트
-  let majorList: { value1: string; value2: string }[] = MajorList;
+  const majorList = [
+    { value1: '경영학과', value2: '경영대학' },
+    { value1: '국어국문학과', value2: '문과대학' },
+    { value1: '철학과', value2: '문과대학' },
+    { value1: '한국사학과', value2: '문과대학' },
+    { value1: '사학과', value2: '문과대학' },
+    { value1: '사회학과', value2: '문과대학' },
+    { value1: '한문학과', value2: '문과대학' },
+    { value1: '영어영문학과', value2: '문과대학' },
+    { value1: '독어독문학과', value2: '문과대학' },
+    { value1: '불어불문학과', value2: '문과대학' },
+    { value1: '중어중문학과', value2: '문과대학' },
+    { value1: '노어노문학과', value2: '문과대학' },
+    { value1: '일어일문학과', value2: '문과대학' },
+    { value1: '서어서문학과', value2: '문과대학' },
+    { value1: '언어학과', value2: '문과대학' },
+    { value1: '생명과학부', value2: '생명과학대학' },
+    { value1: '생명공학부', value2: '생명과학대학' },
+    { value1: '식품공학과', value2: '생명과학대학' },
+    { value1: '환경생태공학부', value2: '생명과학대학' },
+    { value1: '식품자원경제학과', value2: '생명과학대학' },
+    { value1: '정치외교학과', value2: '정경대학' },
+    { value1: '경제학과', value2: '정경대학' },
+    { value1: '통계학과', value2: '정경대학' },
+    { value1: '행정학과', value2: '정경대학' },
+    { value1: '수학과', value2: '이과대학' },
+    { value1: '물리학과', value2: '이과대학' },
+    { value1: '화학과', value2: '이과대학' },
+    { value1: '지구환경과학과', value2: '이과대학' },
+    { value1: '화공생명공학과', value2: '공과대학' },
+    { value1: '신소재공학부', value2: '공과대학' },
+    { value1: '건축사회환경공학부', value2: '공과대학' },
+    { value1: '건축학과', value2: '공과대학' },
+    { value1: '기계공학부', value2: '공과대학' },
+    { value1: '산업경영공학부', value2: '공과대학' },
+    { value1: '전기전자공학부', value2: '공과대학' },
+    { value1: '반도체공학과', value2: '공과대학' },
+    { value1: '융합에너지공학과', value2: '공과대학' },
+    { value1: '차세대통신학과', value2: '공과대학' },
+    { value1: '의과대학', value2: '의과대학' },
+    { value1: '교육학과', value2: '사범대학' },
+    { value1: '국어교육과', value2: '사범대학' },
+    { value1: '영어교육과', value2: '사범대학' },
+    { value1: '지리교육과', value2: '사범대학' },
+    { value1: '역사교육과', value2: '사범대학' },
+    { value1: '가정교육과', value2: '사범대학' },
+    { value1: '수학교육과', value2: '사범대학' },
+    { value1: '체육교육과', value2: '사범대학' },
+    { value1: '간호학과', value2: '간호대학' },
+    { value1: '컴퓨터학과', value2: '정보대학' },
+    { value1: '데이터과학과', value2: '정보대학' },
+    { value1: '디자인조형학부', value2: '디자인조형학부' },
+    { value1: '국제학부', value2: '국제대학' },
+    { value1: '글로벌한국융합학부', value2: '국제대학' },
+    { value1: '미디어학부', value2: '미디어학부' },
+    { value1: '바이오의공학부', value2: '보건과학대학' },
+    { value1: '바이오시스템의과학부', value2: '보건과학대학' },
+    { value1: '보건환경융합과학부', value2: '보건과학대학' },
+    { value1: '보건정책관리학부', value2: '보건과학대학' },
+    { value1: '자유전공학부', value2: '자유전공학부' },
+    { value1: '스마트보안학부', value2: '스마트보안학부' },
+    { value1: '사이버국방학과', value2: '스마트보안학부' },
+    { value1: '심리학부', value2: '심리학부' },
+    { value1: '스마트모빌리티학부', value2: '스마트모빌리티학부' },
+  ];
 
-  // 모달 페이지 초기화
+  /* 
+  모달 헤더 버튼 클릭에 따른 페이지 전환 위한 상태 관리
+  0: 나의 기본정보
+  1: 관심 전공
+  2: 현재 내 학점
+  3: 희망 진입학기
+  */
   const [currentModal, setCurrentModal] = useState<number>(0);
-
-  // 모달 헤더 버튼 클릭 이벤트
-  const handleHeaderButtonClick = (buttonName: string) => {
-    setHeaderButtonStates((prevState) => {
-      const newState = {
-        basicMajor: false,
-        interestMajor: false,
-        currentGPA: false,
-        desiredSemester: false,
-      };
-      newState[buttonName as keyof typeof prevState] = true;
-      return newState;
-    });
-  };
-
-  // -----------------------------------------------------------------
-
+  // const [currentSrc, setCurrentSrc] = useState('design_image/character/rectProfile/rectProfile1.png');
   return (
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
@@ -241,7 +302,7 @@ export default function EditModal(props: ModalProps) {
             프로필 정보 수정하기
           </Typography>
           <div style={{ height: '40px' }}></div>
-          <HeaderButtonWrapper width="calc(672px * 0.6)" height="calc(53.2px * 0.6)">
+          <HeaderButtonWrapper>
             <EditModalHeaderButton // 버튼 아이콘 삽입 필요
               isClicked={headerButtonStates.basicMajor}
               onClick={() => {
@@ -338,8 +399,6 @@ export default function EditModal(props: ModalProps) {
                     state={nicknameState}
                     setState={setNicknameState}
                     setValue={setNickname}
-                    width="calc(592px * 0.6)"
-                    height="calc(48px * 0.6)"
                   ></TextFieldBox>
                 </SubContentsWrapper>
                 <SubContentsWrapper>
@@ -352,8 +411,6 @@ export default function EditModal(props: ModalProps) {
                     state={stdIDState}
                     setState={setStdIDState}
                     setValue={setStdID}
-                    width="calc(592px * 0.6)"
-                    height="calc(48px * 0.6)"
                   ></TextFieldBox>
                 </SubContentsWrapper>
                 <SubContentsWrapper>
@@ -363,8 +420,6 @@ export default function EditModal(props: ModalProps) {
                     optionList={majorList}
                     value={firstMajor}
                     setValue={setFirstMajor}
-                    width="calc(628px * 0.6)"
-                    height="calc(68px * 0.6)"
                   ></DropDown>
                 </SubContentsWrapper>
               </div>
@@ -493,9 +548,7 @@ const Main = styled.main`
   z-index: 20; // Modal.tsx 와 상이한 stacking context
 `;
 
-const HeaderButtonWrapper = styled.div<{ width?: string; height?: string }>`
-  width: ${(props) => props.width || '672px'}; // Set width using the prop or a default value
-  height: ${(props) => props.height || '53.2px'}; // Set height using the prop or a default value
+const HeaderButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
@@ -503,14 +556,14 @@ const HeaderButtonWrapper = styled.div<{ width?: string; height?: string }>`
 const MoveButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: calc(628px * 0.6); // 628px;
+  width: 628px;
   gap: 18px;
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(628px * 0.6) px;
+  width: 628px;
   align-items: left;
   margin-left: auto;
   margin-right: auto;
