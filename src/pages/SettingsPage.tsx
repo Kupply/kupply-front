@@ -331,6 +331,15 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   const [pwdConfirm, setPwdConfirm] = useState<string>('');
   const [password2State, setPassword2State] =
     useState<StateOptions>('filled'); /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
+  const [lastBoxRef, setLastBoxRef] = useState<any>(null);
+  useEffect(() => {
+    if (parseFloat(`${GPA1}.${GPA2}${GPA3}`) > 4.5) {
+      setGPA1('4');
+      setGPA2('5');
+      setGPA3('0');
+      if (lastBoxRef && lastBoxRef.current) lastBoxRef.current.focus();
+    }
+  }, [GPA1, GPA2, GPA3]);
   useEffect(() => {
     const passwordCheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*?])[a-zA-Z\d~!@#$%^&*?ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{8,20}$/;
     if (passwordState === 'filled') {
@@ -662,7 +671,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={stdID}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setStdID(e.target.value);
             }}
             state={stdIDState}
             setState={setStdIDState}
@@ -683,7 +692,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={phoneNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setPhoneNumber(e.target.value);
             }}
             state={phoneNumberState}
             setState={setPhoneNumberState}
@@ -751,7 +760,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={nickname}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setNickname(e.target.value);
             }}
             state={nicknameState}
             setState={setNicknameState}
@@ -814,7 +823,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </svg>
             </div>
             <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
-            <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} />
+            <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
           </VerifiBoxWrapper>
           <TextFieldTitle>
             <strong>희망 지원학기</strong> 수정하기
@@ -865,7 +874,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setEmail(e.target.value);
             }}
             state={emailState}
             setState={setEmailState}
@@ -877,7 +886,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={pwd}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setPwd(e.target.value);
             }}
             state={passwordState}
             setState={setPasswordState}
@@ -890,7 +899,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <TextFieldBox
             value={pwdConfirm}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setName(e.target.value);
+              setPwdConfirm(e.target.value);
             }}
             state={password2State}
             setState={setPassword2State}

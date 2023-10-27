@@ -195,7 +195,7 @@ export default function SignUp1Page() {
     const url = 'http://localhost:8080/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     console.log(entireCode, email);
     try {
-      //await axios.post(url, { email: email, code: entireCode });
+      await axios.post(url, { email: email, code: entireCode });
 
       navigate('/signup2');
     } catch (err) {

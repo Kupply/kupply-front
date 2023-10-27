@@ -5,7 +5,7 @@ import TableData from '../../assets/landingpage/TableData';
 
 type orderOptions = 'descending' | 'ascending';
 
-export default function RankingTable() {
+export default function Table() {
   //표의 데이터는 최초 한 번만 렌더링하도록 한다.
   const data = useMemo(
     () => [
@@ -280,6 +280,7 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 86%;
   background: rgba(255, 255, 255, 0.6);
+  margin-bottom: 600px;
 `;
 
 const KupplyApplyButton = styled.button`

@@ -196,6 +196,8 @@ const optionList = [
 ];
 
 export function SignUp4PageCandidate() {
+  const [lastBoxRef, setLastBoxRef] = useState<any>(null);
+
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
 
@@ -213,6 +215,14 @@ export function SignUp4PageCandidate() {
   const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (parseFloat(`${GPA1}.${GPA2}${GPA3}`) > 4.5) {
+      setGPA1('4');
+      setGPA2('5');
+      setGPA3('0');
+      if (lastBoxRef && lastBoxRef.current) lastBoxRef.current.focus();
+    }
+  }, [GPA1, GPA2, GPA3, lastBoxRef]);
   /*
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
@@ -324,7 +334,7 @@ export function SignUp4PageCandidate() {
                 </svg>
               </div>
               <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
-              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
+              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} setRef={setLastBoxRef} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -356,6 +366,8 @@ export function SignUp4PageCandidate() {
 }
 
 export function SignUp4PagePasser() {
+  const [lastBoxRef, setLastBoxRef] = useState<any>(null);
+
   /* Prev/Next 버튼 동작에 따른 페이지(회원가입 단계) 이동 */
   const navigate = useNavigate();
 
@@ -384,6 +396,16 @@ export function SignUp4PagePasser() {
       setNextButton(false);
     }
   }, [doubleMajor, GPA1, GPA2, GPA3, passSemester1, passSemester2, passSemester3]);
+
+  useEffect(() => {
+    if (parseFloat(`${GPA1}.${GPA2}${GPA3}`) > 4.5) {
+      setGPA1('4');
+      setGPA2('5');
+      setGPA3('0');
+      if (lastBoxRef && lastBoxRef.current) lastBoxRef.current.focus();
+    }
+  }, [GPA1, GPA2, GPA3]);
+
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = () => {
     const GPA = +(GPA1 + '.' + GPA2 + GPA3);
@@ -461,7 +483,7 @@ export function SignUp4PagePasser() {
                 </svg>
               </div>
               <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
-              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
+              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} ref={lastBoxRef} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -479,7 +501,12 @@ export function SignUp4PagePasser() {
                   <path stroke="#000" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
                 </svg>
               </div>
-              <VerificationBox name="semester-3" value={passSemester3} setValue={setPassSemester3}></VerificationBox>
+              <VerificationBox
+                name="semester-3"
+                value={passSemester3}
+                setValue={setPassSemester3}
+                setRef={setLastBoxRef}
+              ></VerificationBox>
             </VerifiBoxWrapper>
           </ContentsWrapper>
         </ContentsList>

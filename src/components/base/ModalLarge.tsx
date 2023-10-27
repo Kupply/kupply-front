@@ -32,7 +32,7 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 
 // 모달창 위치 조정 목적의 컨테이너
 const ModalContainer = styled.div`
-  width: 100vw;
+  width: 814px;
   height: 90vh;
   position: fixed;
   display: flex;
@@ -42,8 +42,10 @@ const ModalContainer = styled.div`
 
 // 모달 창 (흰 색 컨텐츠 창)
 const DialogBox = styled.dialog`
-  width: 42vw; // *전체화면에 대해 크기 조정 필요
-  height: 81vh; // *전체화면에 대해 크기 조정 필요
+  width: 814px; // *전체화면에 대해 크기 조정 필요
+  max-height: 81vh; // *전체화면에 대해 크기 조정 필요
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,95 +67,3 @@ const Backdrop = styled.div`
   z-index: 9;
   background: rgba(20, 16, 19, 0.55);
 `;
-
-/*
-interface ModalProps {
-  setIsOpen: Dispatch<boolean>;
-  children: ReactNode;
-}
-
-export default function Modal({ setIsOpen, children }: ModalProps) {
-  const closeModal = (e: TouchEvent<HTMLDivElement>) => {
-    if ((e?.target as Element)?.contains(e?.currentTarget)) {
-      setIsOpen(false);
-    }
-  };
-
-  return (
-    <Wrapper onTouchEnd={(e) => closeModal(e)}>
-      <div>{children}</div>
-      <Close onTouchEnd={() => setIsOpen(false)}>X</Close>
-    </Wrapper>
-  );
-}
-
-const Close = styled.button`
-  position: fixed;
-  top: 50px;
-  right: 50px;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-`;
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  background: blue;
-`;
-*/
-
-/*
-const ModalWrapper = styled.div`
-  width: 100%; //100vw;
-  height: 100%; //100vh;
-  align-items: center;
-  justify-content: center;
-`;
-
-// 반영 완료
-const ModalBackground = styled.div`
-  background-color: rgba(20, 16, 19, 0.55);
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-`;
-
-const ModalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 70px 50px 70px 50px;
-  box-sizing: border-box;
-  width: 57.3%;
-  height: 50px;
-  background-color: white;
-  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
-`;
-
-const useOpenModal = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const clickModal = () => {
-    setIsOpenModal(true);
-  };
-  const closeModal = () => {
-    setIsOpenModal(false);
-  };
-  return { isOpenModal, clickModal, closeModal };
-};
-
-export default function Modal({ title, alert, coin }: ModalProps) {
-  const { isOpenModal, clickModal, closeModal } = useOpenModal();
-
-  return (
-    <ModalBackground onClick={closeModal}>
-      <ModalContainer>모달창입니다.</ModalContainer>
-    </ModalBackground>
-  );
-}
-*/
