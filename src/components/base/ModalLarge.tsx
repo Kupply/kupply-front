@@ -108,7 +108,8 @@ const DialogBox = styled.dialog`
 const Backdrop = styled.div`
   width: 100%; // 100vw;
   height: 100%; // 100vh;
-  // top: 0;
+  top: 0;
+  left: 0;
   position: fixed;
   z-index: 9;
   background: rgba(20, 16, 19, 0.55);
