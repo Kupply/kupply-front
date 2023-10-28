@@ -121,7 +121,7 @@ function MainPage() {
         </ContainerSubText>
         <JoinWrapper>
           <TextFieldBox
-            placeholder="Bright@korea.ac.kr"
+            placeholder="kupply@korea.ac.kr"
             value={ID}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);

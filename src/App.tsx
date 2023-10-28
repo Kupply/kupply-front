@@ -23,10 +23,9 @@ import DeletePage from './pages/DeletePage';
 const Wrapper = styled.div`
   position: absolute;
   width: 100vw; // 1920px;
-  height: 100vh; //1248px; // Footer 요소가 포함이 되지 않는 관계로, 1510px 에서 Footer 높이를 제외한 높이
+  //height: 100vh; // 푸터 겹침 문제 해결을 위해 삭제 (23.10.28)
   max-width: 2560px;
-  //max-height: 1510px;
-  margin-top: 96px; // header 높이와 동일 (구체적인 헤더 높이의 기준을 알 수 없어 우선 px 값으로 지정)
+  margin-top: 80px; // header 높이와 동일 (구체적인 헤더 높이의 기준을 알 수 없어 우선 px 값으로 지정)
   box-sizing: border-box;
 
   display: flex;
