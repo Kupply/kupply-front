@@ -3,6 +3,7 @@ import { mockHashes } from './Header';
 import Card from '../../assets/Card';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 export interface CardsProps {
   clicked: number;
@@ -121,9 +122,18 @@ const mockCards = [
 
 const Cards = ({ clicked }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
   const fetch = async () => {
     try {
-      const data = await axios.get('http://localhost:8080/dashboard/cards');
+      const data = await axios.get('http://localhost:8080/dashboard/cards', config);
 
       setCards(
         cards.map((c) => {
