@@ -153,7 +153,7 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
       <ContentsWrapper>
         <HorizontalLine></HorizontalLine>
       </ContentsWrapper>
-      <ContentsWrapper style={{ marginTop: '28.89px', gap: '498px' }}>
+      <ContentsWrapper style={{ marginTop: '28.89px', gap: 'auto' }}>
         <ContentsWrapper>
           <Typography size="smallText" color="#A8A8A8" style={{ marginRight: '38px' }}>
             Copyright ⓒ 2023 kupply. all rights reserved.
@@ -177,6 +177,7 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
             >
               개인정보 처리방침
             </MenuButton>
+            <MenuButton style={{ color: '#A8A8A8', width: 'auto' }}>개발팀</MenuButton>
           </MenuWrapper>
         </ContentsWrapper>
         <ContentsWrapper style={{ gap: '8px' }}>
