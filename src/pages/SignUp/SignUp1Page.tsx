@@ -211,13 +211,15 @@ export default function SignUp1Page() {
         switch (currentModal) {
           case 0:
             return (
-              <SignUpSmall
-                currentModal={currentModal}
-                isOpenModal={isOpenModal}
-                setCurrentModal={setCurrentModal}
-                setOpenModal={setOpenModal}
-                onClickModal={onClickToggleSmallModal}
-              />
+              <div style={{ background: 'red', width: '100%' }}>
+                <SignUpSmall
+                  currentModal={currentModal}
+                  isOpenModal={isOpenModal}
+                  setCurrentModal={setCurrentModal}
+                  setOpenModal={setOpenModal}
+                  onClickModal={onClickToggleSmallModal}
+                />
+              </div>
             );
 
           case 1:
