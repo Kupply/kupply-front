@@ -134,17 +134,7 @@ const ArchiveDetailPage = () => {
   const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
   const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
 
-  let initKeywords: string[] = [
-    '리더쉽',
-    '목표달성',
-    '소통',
-    '비즈니스의 이해',
-    '도전과 극복',
-    '비전',
-    '자기개발',
-    '팀 내 소통',
-  ];
-  const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || initKeywords);
+  const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || []);
 
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
@@ -286,7 +276,7 @@ const ArchiveDetailPage = () => {
         <SelectionInfoContentsWrapper>
           <SelectionInfoContent>
             <Text>선발인원</Text>
-            <SelectionInfoValue>{numOfSelection !== 0 ? `${numOfSelection} 명` : 'N 명'}</SelectionInfoValue>
+            <SelectionInfoValue>{numOfSelection !== 0 ? `${numOfSelection} 명` : '집계불가'}</SelectionInfoValue>
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
@@ -294,7 +284,7 @@ const ArchiveDetailPage = () => {
           <SelectionInfoContent>
             <Text>지원자 수</Text>
             {/* <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue> */}
-            <SelectionInfoValue>N 명</SelectionInfoValue>
+            <SelectionInfoValue>집계불가</SelectionInfoValue>
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
@@ -302,12 +292,12 @@ const ArchiveDetailPage = () => {
           <SelectionInfoContent>
             <Text>경쟁률</Text>
             {/* <SelectionInfoValue>{competitionRate}:1</SelectionInfoValue> */}
-            <SelectionInfoValue>N : 1</SelectionInfoValue>
+            <SelectionInfoValue>집계불가</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
       </SelectionInfoWrapper>
       <Container>
-        <PasserGPAInfoWrapper>
+        <PasserGPAInfoWrapper keywordsLength={keywords.length}>
           <PasserGPAInfoDescriptionWrapper>
             <PasserGpaChartDescriptionBox>
               <DescriptionIcon src="../../design_image/previous_detail/fi_bar-chart.png" />
@@ -373,21 +363,23 @@ const ArchiveDetailPage = () => {
             </PasserGPAInfoAnalyticsWrapper>
           </PasserGPAInfoDetailsWrapper>
         </PasserGPAInfoWrapper>
-        <KeywordWrapper>
-          <KeywordDescriptionBox>
-            <DescriptionIcon src="../../design_image/previous_detail/fi_edit-2.png" />
-            <Description>자기소개서 합격 키워드</Description>
-          </KeywordDescriptionBox>
-          <KeywordContainer>
-            {keywords.map((keyword, index) => (
-              <KeywordBox key={index}>
-                <Text>{keyword}</Text>
-              </KeywordBox>
-            ))}
-          </KeywordContainer>
-        </KeywordWrapper>
+        {keywords.length !== 0 && (
+          <KeywordWrapper>
+            <KeywordDescriptionBox>
+              <DescriptionIcon src="../../design_image/previous_detail/fi_edit-2.png" />
+              <Description>자기소개서 합격 키워드</Description>
+            </KeywordDescriptionBox>
+            <KeywordContainer>
+              {keywords.map((keyword, index) => (
+                <KeywordBox key={index}>
+                  <Text>{keyword}</Text>
+                </KeywordBox>
+              ))}
+            </KeywordContainer>
+          </KeywordWrapper>
+        )}
         {!enoughData && (
-          <CollectingWrapper>
+          <CollectingWrapper keywordsLength={keywords.length}>
             <CollectingTitleText>쿠플라이에서 아직 정보를 수집 중입니다!</CollectingTitleText>
             <CollectingDetailText>
               더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
@@ -645,7 +637,7 @@ const SelectionInfoValue = styled.text`
   text-align: center;
 `;
 
-const PasserGPAInfoWrapper = styled.div`
+const PasserGPAInfoWrapper = styled.div<{ keywordsLength: number }>`
   height: 555px;
   width: 100vw;
   max-width: 1665px;
@@ -655,6 +647,7 @@ const PasserGPAInfoWrapper = styled.div`
   border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
   margin-top: 18px;
+  margin-bottom: ${(props) => (props.keywordsLength === 0 ? '104px' : '18px')};
   position: relative;
   z-index: 1;
 `;
@@ -732,7 +725,6 @@ const KeywordWrapper = styled.div`
   border-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
-  margin-top: 18px;
   margin-bottom: 104px;
   position: relative;
   z-index: 1;
@@ -774,12 +766,12 @@ const Container = styled.div`
   justify-content: flex-start;
 `;
 
-const CollectingWrapper = styled.div`
+const CollectingWrapper = styled.div<{ keywordsLength: number }>`
   background-color: #f7f7f773;
   border-radius: 5px;
   box-shadow: 0px 0px 28px #1414140d;
   backdrop-filter: blur(10px);
-  height: 699px;
+  height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
   width: 100vw;
   max-width: 1665px;
   margin-top: 18px;
