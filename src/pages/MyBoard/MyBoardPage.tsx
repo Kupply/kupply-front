@@ -286,7 +286,8 @@ export default function MyBoardPage() {
   ]);
 
   useEffect(() => {
-    const getUserInfo = async () => {
+    // 로그인한 유저 정보 localStorage에
+    const getMe = async () => {
       try {
         const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         const userInfo = APIresponse.data.data.user;
@@ -322,21 +323,30 @@ export default function MyBoardPage() {
         // 모의지원 했는지.
         setIsApplied(userInfo.isApplied);
 
-        sessionStorage.setItem('userProfilePic', userInfo.profilePic);
-        sessionStorage.setItem('userProfileLink', userInfo.profileLink);
-        sessionStorage.setItem('nickname', userInfo.nickname);
-        sessionStorage.setItem('studentId', userInfo.studentId);
-        sessionStorage.setItem('firstMajor', userInfo.firstMajor);
-        sessionStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
-        sessionStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
-        sessionStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
-        sessionStorage.setItem('hopeSemester', userInfo.hopeSemester);
+        localStorage.setItem('userProfilePic', userInfo.profilePic);
+        localStorage.setItem('userProfileLink', userInfo.profileLink);
+        localStorage.setItem('name', userInfo.name);
+        localStorage.setItem('nickname', userInfo.nickname);
+        localStorage.setItem('phoneNumber', userInfo.phoneNumber);
+        localStorage.setItem('studentId', userInfo.studentId);
+        localStorage.setItem('firstMajor', userInfo.firstMajor);
+        localStorage.setItem('role', userInfo.role);
+        if (userInfo.role === 'candidate') {
+          localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+          localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+          localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+          localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+          localStorage.setItem('isApplied', userInfo.isApplied);
+        } else {
+          localStorage.setItem('secondMajor', userInfo.secondMajor);
+          localStorage.setItem('passSemester', userInfo.passSemester);
+          localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
+        }
       } catch (err) {
         console.log(err);
       }
     };
-
-    getUserInfo();
+    getMe();
   }, []);
 
   useEffect(() => {
@@ -396,6 +406,7 @@ export default function MyBoardPage() {
 
     getPastData();
   }, []);
+
   function formatTimeTo12HourFormat(date: Date) {
     var hours = date.getHours();
     var minutes: number | string = date.getMinutes();

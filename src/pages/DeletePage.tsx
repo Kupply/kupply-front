@@ -128,56 +128,35 @@ const DeletePage = () => {
     },
     withCredentials: true,
   };
+
   const [userData, setUserData] = useState({
-    userName: '고대빵',
-    userNickname: '잠만보',
-    userProfilePic: 'rectProfile1',
-    userProfileLink: '',
-    userRole: 'candidate',
-    firstMajor: '디자인조형학부',
-    studentId: '2020220037',
-    hopeMajor1: '경영대학',
-    hopeMajor2: '미디어학부',
-    curGPA: 4.2,
-    hopeSemester: '2023-2',
+    userName: localStorage.getItem('name') || '고대빵',
+    userNickname: localStorage.getItem('nickname') || '잠만보',
+    userProfilePic: localStorage.getItem('userProfilePic') || 'rectProfile1',
+    userProfileLink: localStorage.getItem('userProfileLink') || '',
+    userRole: localStorage.getItem('role') || 'candidate',
+    firstMajor: localStorage.getItem('firstMajor') || '디자인조형학부',
+    studentId: localStorage.getItem('studentId') || '2020220037',
+    hopeMajor1: localStorage.getItem('hopeMajor1') || '경영대학',
+    hopeMajor2: localStorage.getItem('hopeMajor2') || '미디어학부',
+    curGPA: localStorage.getItem('curGPA') || 4.2,
+    hopeSemester: localStorage.getItem('hopeSemester') || '2023-2',
   });
-  useEffect(() => {
-    const getUserInfo = async () => {
-      try {
-        const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
-        const userInfo = APIresponse.data.data.user;
 
-        setUserData({
-          ...userData,
-          userName: userInfo.name,
-          userNickname: userInfo.nickname,
-          userProfilePic: userInfo.profilePic,
-          userProfileLink: userInfo.profileLink,
-          userRole: userInfo.role,
-          firstMajor: userInfo.firstMajor,
-          studentId: userInfo.studentId,
-          hopeMajor1: userInfo.hopeMajor1,
-          hopeMajor2: userInfo.hopeMajor2,
-          curGPA: userInfo.curGPA,
-          hopeSemester: userInfo.hopeSemester,
-        });
+  const [, , removeCookie] = useCookies(['accessToken']);
 
-        sessionStorage.setItem('userProfilePic', userInfo.profilePic);
-        sessionStorage.setItem('userProfileLink', userInfo.profileLink);
-        sessionStorage.setItem('nickname', userInfo.nickname);
-        sessionStorage.setItem('studentId', userInfo.studentId);
-        sessionStorage.setItem('firstMajor', userInfo.firstMajor);
-        sessionStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
-        sessionStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
-        sessionStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
-        sessionStorage.setItem('hopeSemester', userInfo.hopeSemester);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const deleteMe = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/user/deleteMe`, config);
+      removeCookie('accessToken', { path: '/' });
+      window.localStorage.clear();
+      window.sessionStorage.clear();
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    getUserInfo();
-  });
   return (
     <Wrapper>
       <Container>
@@ -224,7 +203,9 @@ const DeletePage = () => {
             <ButtonWrapper buttonType="primary">취소하기</ButtonWrapper>
           </div>
           <div style={{ marginTop: 30 }}>
-            <ButtonWrapper buttonType="secondary">삭제하기</ButtonWrapper>
+            <ButtonWrapper buttonType="secondary" onClick={deleteMe}>
+              삭제하기
+            </ButtonWrapper>
           </div>
         </div>
       </Container>

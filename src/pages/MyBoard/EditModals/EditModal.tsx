@@ -59,38 +59,38 @@ export default function EditModal(props: ModalProps) {
   };
 
   // 각 input들의 값을 state를 사용하여 관리
-  const [nickname, setNickname] = useState<string>(sessionStorage.getItem('nickname') || '');
+  const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
-  const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
+  const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
-  const [firstMajor, setFirstMajor] = useState<string>(sessionStorage.getItem('firstMajor') || '');
-  const [hopeMajor1, setHopeMajor1] = useState<string>(sessionStorage.getItem('hopeMajor1') || '');
-  const [hopeMajor2, setHopeMajor2] = useState<string>(sessionStorage.getItem('hopeMajor2') || '');
-  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(0) || '');
-  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(2) || '');
-  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(3) || '');
-  const [hopeSemester1, setHopeSemester1] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
-  const [hopeSemester2, setHopeSemester2] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
+  const [firstMajor, setFirstMajor] = useState<string>(localStorage.getItem('firstMajor') || '');
+  const [hopeMajor1, setHopeMajor1] = useState<string>(localStorage.getItem('hopeMajor1') || '');
+  const [hopeMajor2, setHopeMajor2] = useState<string>(localStorage.getItem('hopeMajor2') || '');
+  const [GPA1, setGPA1] = useState<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
+  const [hopeSemester1, setHopeSemester1] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const [hopeSemester2, setHopeSemester2] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const [hopeSemester3, setHopeSemester3] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [userProfilePic, setUserProfilePic] = useState<string>(
-    sessionStorage.getItem('userProfilePic') || 'rectProfile1',
+    localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
-  const [userProfileLink, setUserProfileLink] = useState<string>(sessionStorage.getItem('userProfileLink') || '');
+  const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
 
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
 
-  const originNickname = useRef<string>(sessionStorage.getItem('nickname'));
-  const originstdId = useRef<string>(sessionStorage.getItem('studentId'));
-  const originFirstMajor = useRef<string>(sessionStorage.getItem('firstMajor'));
-  const originHopeMajor1 = useRef<string>(sessionStorage.getItem('hopeMajor1'));
-  const originHopeMajor2 = useRef<string>(sessionStorage.getItem('hopeMajor2'));
-  const originGPA1 = useRef<string>(sessionStorage.getItem('curGPA')?.charAt(0) || '');
-  const originGPA2 = useRef<string>(sessionStorage.getItem('curGPA')?.charAt(2) || '');
-  const originGPA3 = useRef<string>(sessionStorage.getItem('curGPA')?.charAt(3) || '');
-  const originHopeSemester1 = useRef<string>(sessionStorage.getItem('hopeSemester')?.charAt(2) || '');
-  const originHopeSemester2 = useRef<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const originHopeSemester3 = useRef<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
-  const originUserProfilePic = useRef<string>(sessionStorage.getItem('userProfilePic'));
+  const originNickname = useRef<string>(localStorage.getItem('nickname'));
+  const originstdId = useRef<string>(localStorage.getItem('studentId'));
+  const originFirstMajor = useRef<string>(localStorage.getItem('firstMajor'));
+  const originHopeMajor1 = useRef<string>(localStorage.getItem('hopeMajor1'));
+  const originHopeMajor2 = useRef<string>(localStorage.getItem('hopeMajor2'));
+  const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
+  const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
+  const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
+  const originHopeSemester1 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const originHopeSemester2 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const originHopeSemester3 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
+  const originUserProfilePic = useRef<string>(localStorage.getItem('userProfilePic'));
 
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
@@ -105,12 +105,13 @@ export default function EditModal(props: ModalProps) {
   useEffect(() => {
     if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
       setIsGpaChanged(true);
+    } else {
+      setIsGpaChanged(false);
     }
   }, [GPA1, GPA2, GPA3]);
 
   const onClickSubmit = async () => {
     let updateData = {};
-    console.log(hopeSemester1, hopeSemester2, hopeSemester3);
 
     if (originNickname.current !== nickname) {
       updateData = { ...updateData, newNickname: nickname };
@@ -144,9 +145,9 @@ export default function EditModal(props: ModalProps) {
     }
 
     if (Object.keys(updateData).length !== 0) {
-      console.log(updateData);
       try {
         await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+
         window.location.reload(); // 페이지 새로고침.
       } catch (err) {
         console.log(err);

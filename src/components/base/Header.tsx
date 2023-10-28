@@ -207,15 +207,25 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
             hopeSemester: userInfo.hopeSemester,
           });
 
-          sessionStorage.setItem('userProfilePic', userInfo.profilePic);
-          sessionStorage.setItem('userProfileLink', userInfo.profileLink);
-          sessionStorage.setItem('nickname', userInfo.nickname);
-          sessionStorage.setItem('studentId', userInfo.studentId);
-          sessionStorage.setItem('firstMajor', userInfo.firstMajor);
-          sessionStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
-          sessionStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
-          sessionStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
-          sessionStorage.setItem('hopeSemester', userInfo.hopeSemester);
+          localStorage.setItem('userProfilePic', userInfo.profilePic);
+          localStorage.setItem('userProfileLink', userInfo.profileLink);
+          localStorage.setItem('name', userInfo.name);
+          localStorage.setItem('nickname', userInfo.nickname);
+          localStorage.setItem('phoneNumber', userInfo.phoneNumber);
+          localStorage.setItem('studentId', userInfo.studentId);
+          localStorage.setItem('firstMajor', userInfo.firstMajor);
+          localStorage.setItem('role', userInfo.role);
+          if (userInfo.role === 'candidate') {
+            localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+            localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+            localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+            localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+            localStorage.setItem('isApplied', userInfo.isApplied);
+          } else {
+            localStorage.setItem('secondMajor', userInfo.secondMajor);
+            localStorage.setItem('passSemester', userInfo.passSemester);
+            localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
+          }
         }
       } catch (err) {
         console.log(err);
@@ -254,6 +264,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
       await axios.get(url);
       removeCookie('accessToken', { path: '/' });
       window.localStorage.clear();
+      window.sessionStorage.clear();
       setLogin(false);
       navigate('/');
     } catch (err) {

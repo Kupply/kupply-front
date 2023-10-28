@@ -302,36 +302,88 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   const [scrollActive, setActive] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [nickname, setNickname] = useState<string>(sessionStorage.getItem('nickname') || '');
+  const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
-  const [name, setName] = useState<string>(sessionStorage.getItem('name') || '');
+  const [name, setName] = useState<string>(localStorage.getItem('name') || '');
   const [nameState, setNameState] = useState<StateOptions>('filled');
-  const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
+  const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
-  const [firstMajor, setFirstMajor] = useState<string>(sessionStorage.getItem('firstMajor') || '');
-  const [hopeMajor1, setHopeMajor1] = useState<string>(sessionStorage.getItem('hopeMajor1') || '');
-  const [hopeMajor2, setHopeMajor2] = useState<string>(sessionStorage.getItem('hopeMajor2') || '');
-  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(0) || '');
-  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(2) || '');
-  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('curGPA')?.charAt(3) || '');
-  const [hopeSemester2, setHopeSemester2] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const [hopeSemester3, setHopeSemester3] = useState<string>(sessionStorage.getItem('hopeSemester')?.charAt(5) || '');
+  const [firstMajor, setFirstMajor] = useState<string>(localStorage.getItem('firstMajor') || '');
+  const [hopeMajor1, setHopeMajor1] = useState<string>(localStorage.getItem('hopeMajor1') || '');
+  const [hopeMajor2, setHopeMajor2] = useState<string>(localStorage.getItem('hopeMajor2') || '');
+  const [GPA1, setGPA1] = useState<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
+  const [hopeSemester1, setHopeSemester1] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const [hopeSemester2, setHopeSemester2] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const [hopeSemester3, setHopeSemester3] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [userProfilePic, setUserProfilePic] = useState<string>(
-    sessionStorage.getItem('userProfilePic') || 'rectProfile1',
+    localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
-  const [userProfileLink, setUserProfileLink] = useState<string>(sessionStorage.getItem('userProfileLink') || '');
+  const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
 
-  const [phoneNumber, setPhoneNumber] = useState<string>(sessionStorage.getItem('phoneNumber') || '');
-  const [phoneNumberState, setPhoneNumberState] = useState<StateOptions>('default');
+  const [phoneNumber, setPhoneNumber] = useState<string>(localStorage.getItem('phoneNumber') || '');
+  const [phoneNumberState, setPhoneNumberState] = useState<StateOptions>(
+    localStorage.getItem('phoneNumber') ? 'filled' : 'default',
+  );
 
-  const [email, setEmail] = useState<string>('');
-  const [emailState, setEmailState] = useState<StateOptions>('default');
+  const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
+  const [emailState, setEmailState] = useState<StateOptions>('filled');
   const [pwd, setPwd] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
   const [pwdConfirm, setPwdConfirm] = useState<string>('');
   const [password2State, setPassword2State] =
-    useState<StateOptions>('filled'); /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
+    useState<StateOptions>('default'); /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
+
+  useEffect(() => {
+    // 로그인한 유저 정보 localStorage에
+    const getMe = async () => {
+      try {
+        const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        const userInfo = APIresponse.data.data.user;
+
+        localStorage.setItem('  userProfilePic', userInfo.profilePic);
+        localStorage.setItem('userProfileLink', userInfo.profileLink);
+        localStorage.setItem('name', userInfo.name);
+        localStorage.setItem('nickname', userInfo.nickname);
+        localStorage.setItem('phoneNumber', userInfo.phoneNumber);
+        localStorage.setItem('studentId', userInfo.studentId);
+        localStorage.setItem('firstMajor', userInfo.firstMajor);
+        localStorage.setItem('role', userInfo.role);
+        if (userInfo.role === 'candidate') {
+          localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+          localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+          localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+          localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+          localStorage.setItem('isApplied', userInfo.isApplied);
+        } else {
+          localStorage.setItem('secondMajor', userInfo.secondMajor);
+          localStorage.setItem('passSemester', userInfo.passSemester);
+          localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
+        }
+
+        setNickname(userInfo.nickname);
+        setName(userInfo.name);
+        setStdID(userInfo.studentId);
+        setFirstMajor(userInfo.firstMajor);
+        setHopeMajor1(userInfo.hopeMajor1);
+        setHopeMajor2(userInfo.hopeMajor2);
+        setGPA1(userInfo.curGPA.toFixed(2).charAt(0));
+        setGPA2(userInfo.curGPA.toFixed(2).charAt(2));
+        setGPA3(userInfo.curGPA.toFixed(2).charAt(3));
+        setHopeSemester1(userInfo.hopeSemester.charAt(2));
+        setHopeSemester2(userInfo.hopeSemester.charAt(3));
+        setHopeSemester3(userInfo.hopeSemester.charAt(5));
+        setUserProfilePic(userInfo.profilePic);
+        setUserProfileLink(userInfo.profileLink);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMe();
+  }, []);
+
   useEffect(() => {
     if (parseFloat(`${GPA1}.${GPA2}${GPA3}`) > 4.5) {
       setGPA1('4');
@@ -340,6 +392,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       if (lastBoxRef && lastBoxRef.current) lastBoxRef.current.focus();
     }
   }, [GPA1, GPA2, GPA3]);
+
   useEffect(() => {
     const passwordCheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*?])[a-zA-Z\d~!@#$%^&*?ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{8,20}$/;
     if (passwordState === 'filled') {
@@ -433,7 +486,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   };
   const thirdSubmit = async () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
-    const newHopeSemester = hopeSemester2 + '-' + hopeSemester3;
+    const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
     const updateData = {
       newCurGPA: newGpa,
       newHopeMajor1: hopeMajor1,
@@ -832,6 +885,12 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             </span>
           </TextFieldTitle>
           <VerifiBoxWrapper>
+            <VerificationBox
+              name="semester-1"
+              value={hopeSemester1}
+              setValue={setHopeSemester1}
+              isEntered={true}
+            ></VerificationBox>
             <VerificationBox
               name="semester-2"
               value={hopeSemester2}

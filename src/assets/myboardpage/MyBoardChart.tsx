@@ -183,7 +183,6 @@ const PieChartComponent = (prop: MajorDataProps) => {
 const HalfPieChartComponent = (props: StudentYearDataProps) => {
   const { StudentYearDatas } = props;
   const { curGradeDatas, totalGrade } = getGradeData(StudentYearDatas);
-  console.log(curGradeDatas);
   return (
     <HalfPieChartContainer>
       <PieChart width={350} height={350}>
