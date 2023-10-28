@@ -55,7 +55,7 @@ const ConnectLink = styled(Typography)<TypographyProps>`
 
 const MenuButton = styled.button`
   display: flex;
-  width: 53px;
+  // width: 53px;
   color: rgba(20, 20, 20, 0.7);
   font-family: Pretendard;
   font-size: 14px;
@@ -92,10 +92,7 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
     navigate('/myboard');
   };
   const handleMenu3Click = () => {
-    navigate('/community');
-  };
-  const handleMessageClick = () => {
-    navigate('/message');
+    navigate('/landing');
   };
   const handleSettingsClick = () => {
     navigate('/settings');
@@ -112,10 +109,9 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
             </Typography>
             <div style={{ height: '8.05px' }}></div>
             <MenuWrapper>
+              <MenuButton onClick={handleMenu3Click}>실시간 지원현황</MenuButton>
               <MenuButton onClick={handleMenu1Click}>합격자료</MenuButton>
               <MenuButton onClick={handleMenu2Click}>마이보드</MenuButton>
-              <MenuButton onClick={handleMenu3Click}>커뮤니티</MenuButton>
-              <MenuButton onClick={handleMessageClick}>쪽지함</MenuButton>
               <MenuButton onClick={handleSettingsClick}>환경설정</MenuButton>
             </MenuWrapper>
           </div>
