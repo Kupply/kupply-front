@@ -13,6 +13,7 @@ const LogoWrapper = styled.button`
   flex-shrink: 0;
 `;
 
+/*
 const LogoTextWrapper = styled.text`
   display: flex;
   flex-direction: column;
@@ -25,11 +26,11 @@ const LogoTextWrapper = styled.text`
   font-weight: 300;
   letter-spacing: 1.177px;
 `;
+*/
 
 const LogoImage = styled.img`
-  width: 46.575px;
-  height: 46px;
-  flex-shrink: 0;
+  width: 188px; // 46.575px;
+  height: 46px; // 46px;
   border: none;
 `;
 
@@ -40,8 +41,7 @@ function Logo() {
   };
   return (
     <LogoWrapper onClick={LogoWrapperClick}>
-      <LogoImage src="../../design_image/logo.png" />
-      <LogoTextWrapper>쿠플라이</LogoTextWrapper>
+      <LogoImage src="../../design_image/Kupply_ver1.png" />
     </LogoWrapper>
   );
 }

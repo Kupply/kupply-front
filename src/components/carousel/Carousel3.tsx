@@ -40,10 +40,10 @@ const DirectButton = styled.button`
 const ButtonText = styled.text`
   color: #d85888;
   text-align: center;
-  font-family: GmarketSans;
+  font-family: Pretendard;
   font-size: 20px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 20px; /* 100% */
   letter-spacing: -0.6px;
 `;

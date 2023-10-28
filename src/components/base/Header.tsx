@@ -242,7 +242,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     navigate('/myboard');
   };
   const handleMenu3Click = () => {
-    navigate('/community');
+    navigate('/landing');
   };
   const handleSettingsClick = () => {
     setSelected(0);
@@ -303,14 +303,14 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
         <LeftButtonsContainer>
           <Logo />
           <HeaderButtonContainer>
-            <HeaderButton onClick={handleMenu1Click} activated={location.pathname === '/previous'}>
+            <HeaderButton onClick={handleMenu3Click} activated={location.pathname === '/landing'}>
+              실시간 지원현황
+            </HeaderButton>
+            <HeaderButton onClick={handleMenu1Click} activated={location.pathname === '/archive'}>
               합격자료
             </HeaderButton>
             <HeaderButton onClick={handleMenu2Click} activated={location.pathname === '/myboard'}>
               마이보드
-            </HeaderButton>
-            <HeaderButton onClick={handleMenu3Click} activated={location.pathname === '/community'}>
-              커뮤니티
             </HeaderButton>
           </HeaderButtonContainer>
         </LeftButtonsContainer>
