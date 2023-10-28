@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
@@ -205,6 +205,14 @@ export default function SignUp1Page() {
     }
   };
 
+  // 타이머 시간 초과시 처리 목적
+  const [timerExpired, setTimerExpired] = useState<boolean>(false);
+
+  const handleTimerExpired = () => {
+    setTimerExpired(true);
+    navigate('/');
+  };
+
   return (
     <Wrapper>
       {(() => {
@@ -294,7 +302,12 @@ export default function SignUp1Page() {
             </ContentsWrapper>
             <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
               <Typography size="largeText" color="#D85888">
-                <Timer setTime={3} sendNum={sendNum} currentModal={currentModal}></Timer>
+                <Timer
+                  setTime={3}
+                  sendNum={sendNum}
+                  currentModal={currentModal}
+                  onTimerExpired={handleTimerExpired}
+                ></Timer>
               </Typography>
             </div>
           </div>
