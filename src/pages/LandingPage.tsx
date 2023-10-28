@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useState, useEffect } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
 
@@ -9,15 +9,45 @@ import Ending from '../components/landingpage/Ending';
 import TextFieldBox from '../assets/TextFieldBox';
 import Typography from '../assets/Typography';
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    scroll-behavior: smooth;
+  }
+`;
+
+const ScrollToY = (to: number, duration: number) => {
+  if (duration <= 0) return;
+  const difference = to - window.scrollY;
+  const perTick = (difference / duration) * 10;
+
+  setTimeout(() => {
+    window.scrollTo(0, window.scrollY + perTick);
+    if (window.scrollY === to) return;
+    ScrollToY(to, duration - 10);
+  }, 10);
+};
+
 const LandingPage = () => {
   const tableContent = useRef<HTMLDivElement>(null);
 
   const onClickDownArrow = () => {
     tableContent.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const delay = 500;
+
+    setTimeout(() => {
+      const targetY = 230;
+      ScrollToY(targetY, 500); // 스크롤 애니메이션 지속 시간을 설정할 수 있습니다.
+    }, delay);
+  }, []);
+
   return (
     <Wrapper>
-      <HeadImageWrapper>
+      <HeadImageWrapper translateY={scrollY}>
         <img src="../../design_image/landingImage.png" style={{ width: '1248px', height: '880px' }}></img>
         <HeadTextWrapper>
           <Typography size="mediumText" color="#D85888">
@@ -79,12 +109,13 @@ const Wrapper = styled.div`
   max-width: 1920px;
 `;
 
-const HeadImageWrapper = styled.div`
+const HeadImageWrapper = styled.div<{ translateY: number }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 400px;
+  transform: ${(props) => `translateY(${props.translateY}px)`};
 `;
 
 const HeadTextWrapper = styled.div`
