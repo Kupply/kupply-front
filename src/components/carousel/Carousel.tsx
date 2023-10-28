@@ -23,7 +23,7 @@ const LeftArrow = styled.button`
   height: 32px;
   position: absolute;
   left: 6.66%; //100px;
-  top: 30.45%; // 380px; (380/1248 = 30.45)
+  top: 220px; // 30.45%; // 380px; (380/1248 = 30.45)
   background-image: url('design_image/carousel/carousel_left_button.png');
   background-size: cover;
   border: none;
@@ -35,7 +35,7 @@ const RightArrow = styled.button`
   height: 32px;
   position: absolute;
   right: 6.66%; // left: 1770px;
-  top: 30.45%; // 380px; (380/1248 = 30.45)
+  top: 220px; // 30.45%; // 380px; (380/1248 = 30.45)
   background-image: url('design_image/carousel/carousel_right_button.png');
   background-size: cover;
   border: none;
@@ -46,8 +46,8 @@ const CircleButton = styled.button<{ name: number; current: number }>`
   width: ${(props) => (props.name === props.current ? '10px' : '8px')};
   height: ${(props) => (props.name === props.current ? '10px' : '8px')};
   position: absolute;
-  top: 52.08%; // 650px; (650/1248 = 52.08)
-  left: ${(props) => (props.name === 0 ? '920px' : props.name === 1 ? '950px' : '980px')};
+  top: 460px; //(650/1248 = 52.08)
+  left: ${(props) => (props.name === 0 ? '995px' : props.name === 1 ? 'calc(100vw * 50%) px;' : '1045px')};
   border-radius: 50%;
   background-color: ${(props) =>
     props.name === props.current ? 'rgba(255, 255, 255, 1.00)' : 'rgba(255, 255, 255, 0.30)'};
