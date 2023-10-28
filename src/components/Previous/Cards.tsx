@@ -60,7 +60,7 @@ const mockCards = [
   },
   {
     name: '미디어학부',
-    eng: 'School of Media and Communication',
+    eng: 'School of Media & Communication',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 25,
     경쟁률: 3.59,
@@ -72,7 +72,7 @@ const mockCards = [
   },
   {
     name: '정보대학 컴퓨터학과',
-    eng: 'Department of Computer Science and Engineering',
+    eng: 'Department of Computer Science & Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 19,
     경쟁률: 3.59,
@@ -84,7 +84,7 @@ const mockCards = [
   },
   {
     name: '생명과학대학 식품자원경제학과',
-    eng: 'Department of Food and Resources',
+    eng: 'Department of Food & Resources',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 30,
     경쟁률: 3.59,
