@@ -56,6 +56,52 @@ const DialogBox = styled.dialog`
   background-color: white;
   // position: fixed; // 추가
   z-index: 10;
+
+  /* Webkit 기반의 브라우저 Chrome, Safari */
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; /* 스크롤바 높이를 10px로 수정 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent; /* 투명으로 설정 */
+    border-radius: 999px;
+    min-height: 30%;
+    box-shadow: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-button {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  .scrollbarWrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  /* Firefox에서 스크롤바 숨기기 */
+  scrollbar-width: thin;
+
+  /* Internet Explorer에서 스크롤바 숨기기 */
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요

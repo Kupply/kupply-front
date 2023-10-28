@@ -21,10 +21,6 @@ const Button = styled.button<CompleteMockApplicationProps>`
   &:hover:not(:disabled) {
     box-shadow: 0px 20px 50px 0px rgba(232, 88, 136, 0.41);
   }
-  // active
-  &:active:not(:disabled) {
-    background: linear-gradient(273deg, #d85888 -13.05%, #f5bdbd 93.4%, rgba(253, 242, 242, 0.3) 122.88%);
-  }
   // unactive
   &:disabled {
     opacity: 0.5;
