@@ -29,6 +29,8 @@ const Wrapper = styled.div`
   margin-top: 96px; // header 높이와 동일 (구체적인 헤더 높이의 기준을 알 수 없어 우선 px 값으로 지정)
   box-sizing: border-box;
 
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
