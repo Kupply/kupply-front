@@ -64,7 +64,7 @@ export default function SignUpLarge2(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: '20.15%' }}></div>
+          <div style={{ height: '130px' }}></div>
           <AlertIconExclamation width="113px" height="113px" />
           <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             인증번호를 받을 고려대 이메일 주소를 입력해주세요!
@@ -118,7 +118,7 @@ const CloseButton = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 70px;
+  top: 50px;
   right: 50px;
 
   cursor: pointer;
@@ -131,7 +131,7 @@ const PrevButton = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 70px;
+  top: 50px;
   left: 50px;
 
   cursor: pointer;
