@@ -29,7 +29,7 @@ const TitleWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 45px;
+  padding-top: 30px;
   padding-bottom: 25px;
 `;
 
@@ -94,8 +94,8 @@ const SubContentsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  margin-top: 159.24px;
-  margin-bottom: 171px;
+  margin-top: 109px; // 159.24px;
+  margin-bottom: 121px; //171px;
 `;
 
 // 푸터 버튼과 동일 에셋이라고 한다.

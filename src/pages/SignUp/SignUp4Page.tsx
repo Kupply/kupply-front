@@ -25,7 +25,7 @@ const TitleWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 45px;
+  padding-top: 30px;
   padding-bottom: 25px;
 `;
 
@@ -85,7 +85,7 @@ const ButtonsWrapper = styled.div`
 const AliasButtonsWrapper = styled.div`
   display: flex;
   gap: 18px;
-  margin-top: 140px;
+  margin-top: 70px;
 `;
 
 const VerifiBoxWrapper = styled.div`
