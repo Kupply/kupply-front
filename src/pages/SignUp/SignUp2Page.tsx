@@ -100,8 +100,8 @@ export default function SignUp2Page() {
   const [nameState, setNameState] = useState<StateOptions>('default');
   const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('default');
-  const [phone, setPhone] = useState<string>(sessionStorage.getItem('phoneNumber') || '');
-  const [phoneState, setPhoneState] = useState<StateOptions>('default');
+  // const [phone, setPhone] = useState<string>(sessionStorage.getItem('phoneNumber') || '');
+  // const [phoneState, setPhoneState] = useState<StateOptions>('default');
   const [dropdownValue, setdropDownValue] = useState<string>('');
 
   /* 학번의 유효성 검사 */
@@ -113,32 +113,14 @@ export default function SignUp2Page() {
     }
   }, [stdID, stdIDState]);
 
-  /* 전화번호 유효성 검사 + '-' 넣은 형식으로 바꾸기*/
-  useEffect(() => {
-    const phoneCheck = /^010\d{8}$/;
-    const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
-    if (phoneState === 'filled') {
-      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone)) setPhoneState('error');
-      else {
-        const newphoneNumber = phone;
-        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-
-        setPhone(newPhone);
-      }
-    }
-  }, [phone, phoneState]);
-
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {
-    if (nameState === 'filled' && stdIDState === 'filled' && phoneState === 'filled' && !!dropdownValue && !complete) {
+    if (nameState === 'filled' && stdIDState === 'filled' && !!dropdownValue && !complete) {
       setComplete(true);
-    } else if (
-      !(nameState === 'filled' && stdIDState === 'filled' && phoneState === 'filled' && !!dropdownValue) &&
-      complete
-    ) {
+    } else if (!(nameState === 'filled' && stdIDState === 'filled' && !!dropdownValue) && complete) {
       setComplete(false);
     }
-  }, [nameState, stdIDState, phoneState, dropdownValue, complete]);
+  }, [nameState, stdIDState, dropdownValue, complete]);
 
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
@@ -148,7 +130,7 @@ export default function SignUp2Page() {
       //나머지 세 데이터가 이미 존재하는 경우 textfield를 filled로 렌더링 시 바꿔 준다.
       if (name !== '') setNameState('filled');
       if (stdID !== '') setStdIDState('filled');
-      if (phone !== '') setPhoneState('filled');
+      // if (phone !== '') setPhoneState('filled');
     }
   }, []);
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
@@ -156,7 +138,7 @@ export default function SignUp2Page() {
     sessionStorage.setItem('name', name);
     sessionStorage.setItem('studentId', stdID);
     sessionStorage.setItem('firstMajor', dropdownValue);
-    sessionStorage.setItem('phoneNumber', phone);
+    // sessionStorage.setItem('phoneNumber', phone);
     navigate('/signup3');
   };
 
@@ -301,6 +283,19 @@ export default function SignUp2Page() {
               setValue={setdropDownValue}
             ></DropDown>
           </ContentsWrapper>
+        </ContentsList>
+        <ButtonsWrapper>
+          <PrevButton onClick={handlePrev} />
+          <NextButton active={complete} onClick={handleNext} />
+        </ButtonsWrapper>
+      </FormWrapper>
+    </Wrapper>
+  );
+}
+
+/*
+전화번호 관련 내용 삭제 23.10.29
+
           <ContentsWrapper>
             <div style={{ display: 'flex' }}>
               <Typography size="mediumText" bold="700" style={{ opacity: '0.8' }}>
@@ -321,12 +316,20 @@ export default function SignUp2Page() {
               errorMessage="휴대폰 번호는 010으로 시작하는 11자리 번호여야 합니다."
             ></TextFieldBox>
           </ContentsWrapper>
-        </ContentsList>
-        <ButtonsWrapper>
-          <PrevButton onClick={handlePrev} />
-          <NextButton active={complete} onClick={handleNext} />
-        </ButtonsWrapper>
-      </FormWrapper>
-    </Wrapper>
-  );
-}
+
+          
+  // 전화번호 유효성 검사 + '-' 넣은 형식으로 바꾸기
+  useEffect(() => {
+    const phoneCheck = /^010\d{8}$/;
+    const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
+    if (phoneState === 'filled') {
+      if (!phoneCheck.test(phone) && !phoneFormatCheck.test(phone)) setPhoneState('error');
+      else {
+        const newphoneNumber = phone;
+        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+
+        setPhone(newPhone);
+      }
+    }
+  }, [phone, phoneState]);
+*/
