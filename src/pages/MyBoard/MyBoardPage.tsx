@@ -743,7 +743,7 @@ export default function MyBoardPage() {
                 <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
               </svg>
               <div style={{ marginTop: '44px', marginLeft: '128.01px' }}>
-                <MockApplicationButton onClick={onClickApcModal} />
+                <MockApplicationButton onClick={onClickApcModal} active={!isApplied} />
               </div>
             </MyInformationBox>
           </div>
