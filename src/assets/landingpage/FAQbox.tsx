@@ -29,7 +29,6 @@ const ContentWrapper = styled.div`
   width: 1578px;
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
   gap: 6px;
 `;
 
@@ -67,7 +66,7 @@ function FAQbox(props: FAQboxProps) {
           {answer.map((lineAnswers, lineIndex) => (
             <div key={lineIndex}>
               {lineAnswers.map((answer, segmentIndex) => (
-                <span key={segmentIndex} style={{ fontWeight: answer.bold }}>
+                <span key={segmentIndex} style={{ fontWeight: answer.bold, fontSize: '18px' }}>
                   {answer.text}
                 </span>
               ))}

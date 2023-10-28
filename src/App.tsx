@@ -44,7 +44,7 @@ export default function App() {
   // element={<AuthRequired />}
   return (
     <Wrapper>
-      <Header logined={true} setLogin={setisLogined} setSelected={setSelected} />
+      <Header logined={false} setLogin={setisLogined} setSelected={setSelected} />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />

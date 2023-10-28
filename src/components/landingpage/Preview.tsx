@@ -19,7 +19,7 @@ const TitleWrapper = styled.div`
   align-items: center;
   position: sticky;
   top: 0;
-  background: #fff;
+  background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3));
   z-index: 10;
 `;
 
@@ -77,10 +77,10 @@ function Preview() {
             <Typography size="title2" style={{ marginBottom: '20px' }}>
               살펴보기
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               이번학기 나의 희망 학과(부)의 실시간 지
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               원자 수와 경쟁률을 제공해드릴게요.
             </Typography>
             <img
@@ -100,10 +100,10 @@ function Preview() {
             <Typography size="title2" style={{ marginBottom: '20px' }}>
               모집정보 한 눈에 보기
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               흩어져 있던 지난 이중 모집정원, 경쟁률
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               에 대한 정보를 모두 모아드릴게요.
             </Typography>
             <img
@@ -125,10 +125,10 @@ function Preview() {
             <Typography size="title2" style={{ marginBottom: '20px' }}>
               최신 합격컷 모아보기
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               학과 별 합격자의 최저학점, 평균, 중위
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               값, 최빈값을 정리해드릴게요.
             </Typography>
             <img
@@ -148,10 +148,10 @@ function Preview() {
             <Typography size="title2" style={{ marginBottom: '20px' }}>
               합격 예측하기
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               최신 3학기의 합격자료들을 바탕으로, 학
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               점에 맞는 적정지원인지 예측해드릴게요.
             </Typography>
             <img
@@ -171,10 +171,10 @@ function Preview() {
             <Typography size="title2" style={{ marginBottom: '20px' }}>
               나의 등수보기
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               실시간으로 변하는 지원자들 중 나의 등
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               수를 예측하여 제공 해드릴게요.
             </Typography>
             <img
@@ -196,10 +196,10 @@ function Preview() {
             <Typography size="title2" style={{ marginBottom: '20px' }}>
               키워드 둘러보기
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               합격자의 자소서 키워드를 추출하여, 더
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               나은 자기소개서 작성을 도와드릴게요.
             </Typography>
             <img
@@ -219,10 +219,10 @@ function Preview() {
             <Typography size="title2" style={{ marginBottom: '20px' }}>
               경쟁자 정보 살펴보기
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               지원자들의 출신 단과대 분포와 단과대
             </Typography>
-            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="500" style={{ marginBottom: '2px' }}>
+            <Typography size="bodyText" color="rgba(20, 20, 20, 0.8)" bold="400" style={{ marginBottom: '2px' }}>
               별 평균 학점 분포를 살펴보세요.
             </Typography>
             <img

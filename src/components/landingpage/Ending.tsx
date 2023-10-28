@@ -9,7 +9,7 @@ const MainWrapper = styled.div`
   gap: 17.56px;
   background-image: url('../../design_image/Mockup 1.png');
   background-repeat: no-repeat;
-  background-size: 1129px 900px;
+  background-size: 58.8vw 46.9vw;
   background-position: right center;
 `;
 
@@ -49,9 +49,6 @@ export default function Ending() {
         </TextWrapper>
         <TextWrapper>
           <img src="../../design_image/Kupply_ver1.png" width="490px" height="120px" />
-          <Typography size="heading1" bold="400" color="#141414" style={{ marginTop: '50px' }}>
-            &nbsp;와 함께
-          </Typography>
         </TextWrapper>
       </ContentWrapper>
     </MainWrapper>
