@@ -28,35 +28,10 @@ const LoginBox = styled.div`
   background: rgba(255, 255, 255, 0.7);
 `;
 
-const LogoBox = styled.div`
-  display: flex;
-  height: 59.457px;
-  justify-content: center;
-  align-items: center;
-  gap: 10.955px;
-  flex-shrink: 0;
-  margin-top: 118px;
-  margin-bottom: 8px;
-`;
-
 const LogoImage = styled.img`
-  width: 60.615px;
-  height: 59.457px;
+  width: 240px;
+  height: 60px;
   flex-shrink: 0;
-`;
-
-const LogoText = styled.text`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-family: 'GmarketSans';
-  font-size: 2.1em; // (참고) 폰트크기의 기본값은 16px
-  font-style: normal;
-  line-height: normal;
-  font-weight: 500;
-  letter-spacing: 1.177px;
 `;
 
 const TextFieldWrapper = styled.div`
@@ -208,10 +183,7 @@ function LoginPage(props: LoginPageProps) {
   return (
     <Wrapper>
       <LoginBox>
-        <LogoBox>
-          <LogoImage src="../../design_image/logo.png" />
-          <LogoText>쿠플라이</LogoText>
-        </LogoBox>
+        <LogoImage src="../../design_image/Kupply_ver1.png" style={{ marginTop: '119px' }} />
         <Typography size="mediumText">고려대학교 메일로 이용하는 쿠플라이의 모든 서비스</Typography>
         <TextFieldWrapper>
           <TextBox style={{ height: '105px' }}>

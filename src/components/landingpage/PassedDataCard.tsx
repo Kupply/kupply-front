@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import DepartmentCard from '../../assets/landingpage/DepartmentCard';
+import { Navigate } from 'react-router-dom';
 
 type buttonOptions = 'default' | 'hover' | 'active';
 
@@ -80,6 +82,8 @@ export default function PassedDataCard() {
   //합격 자료 바로가기 버튼의 click을 조정
   const [isActive, setisActive] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
   //자연계, 인문계 바로가기 버튼 click 조정
   const [upperButtonState, setUpperButtonState] = useState<buttonOptions>('default');
   const [underButtonState, setUnderButtonState] = useState<buttonOptions>('default');
@@ -94,7 +98,14 @@ export default function PassedDataCard() {
           인기학과 합격지표 한눈에 보기
         </Typography>
         <SubTextWrapper>지난 학기 가장 핫했던 학과의 정보를 나의 스펙과 비교 해보세요!</SubTextWrapper>
-        <LinkButton isClicked={isActive} onMouseDown={() => setisActive(true)} onMouseUp={() => setisActive(false)}>
+        <LinkButton
+          isClicked={isActive}
+          onMouseDown={() => setisActive(true)}
+          onMouseUp={() => setisActive(false)}
+          onClick={() => {
+            navigate('/archive');
+          }}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M5.83398 14.1663L14.1673 5.83301"

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
@@ -103,37 +104,49 @@ export default function Table() {
     else setOrder('descending');
   };
 
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
-      <Typography color="#D85888" size="mediumText" style={{ textAlign: 'center', marginBottom: '13.5px' }}>
-        실시간 지원률
-      </Typography>
-      <Typography size="heading2" style={{ textAlign: 'center', marginBottom: '15px' }}>
-        쿠플라이 실시간 이중전공 모의지원 현황
-      </Typography>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <KupplyApplyButton>
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-            <path
-              d="M18.8327 1.66699L9.66602 10.8337"
-              stroke="white"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M18.8327 1.66699L12.9993 18.3337L9.66602 10.8337L2.16602 7.50033L18.8327 1.66699Z"
-              stroke="white"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          <Typography color="white" size="bodyText">
-            쿠플라이 모의지원 하러가기
-          </Typography>
-        </KupplyApplyButton>
-      </div>
+      <TitleWrapper>
+        <Typography
+          color="#D85888"
+          size="mediumText"
+          style={{ textAlign: 'center', marginBottom: '13.5px', marginTop: '130px' }}
+        >
+          실시간 지원률
+        </Typography>
+        <Typography size="heading2" style={{ textAlign: 'center', marginBottom: '15px' }}>
+          쿠플라이 실시간 이중전공 모의지원 현황
+        </Typography>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <KupplyApplyButton
+            onClick={() => {
+              navigate('/myboard');
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+              <path
+                d="M18.8327 1.66699L9.66602 10.8337"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M18.8327 1.66699L12.9993 18.3337L9.66602 10.8337L2.16602 7.50033L18.8327 1.66699Z"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <Typography color="white" size="bodyText">
+              쿠플라이 모의지원 하러가기
+            </Typography>
+          </KupplyApplyButton>
+        </div>
+      </TitleWrapper>
       <TextWrapper>
         <ToggleOrder
           onClick={toggleOrder}
@@ -242,6 +255,7 @@ export default function Table() {
             viewBox="0 0 50 51"
             fill="none"
             onClick={() => setisShowAll(false)}
+            cursor="pointer"
           >
             <path
               d="M37.5 31.2637L25 18.7637L12.5 31.2637"
@@ -259,6 +273,7 @@ export default function Table() {
             viewBox="0 0 50 51"
             fill="none"
             onClick={() => setisShowAll(true)}
+            cursor="pointer"
           >
             <path
               d="M12.5 18.7637L25 31.2637L37.5 18.7637"
@@ -281,6 +296,15 @@ const Wrapper = styled.div`
   width: 86%;
   background: rgba(255, 255, 255, 0.6);
   margin-bottom: 600px;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3));
+  z-index: 10;
 `;
 
 const KupplyApplyButton = styled.button`

@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
-
 import Preview from '../components/landingpage/Preview';
 import FAQ from '../components/landingpage/FAQ';
 import Ending from '../components/landingpage/Ending';
