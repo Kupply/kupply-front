@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  max-width: 2560px;
   height: 1153px;
   background: white;
   gap: 80px;
