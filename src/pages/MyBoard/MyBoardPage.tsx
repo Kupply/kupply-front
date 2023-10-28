@@ -50,17 +50,17 @@ const major = {
   Media: {
     image: 'path/to/computerScience.jpg',
     title: '미디어학부',
-    text: 'School of Media and Communication',
+    text: 'School of Media & Communication',
   },
   Computer: {
     image: 'path/to/computerScience.jpg',
     title: '컴퓨터학과',
-    text: 'Department of Computer Science and Engineering',
+    text: 'Department of Computer Science & Engineering',
   },
   FoodandResources: {
     image: 'path/to/computerScience.jpg',
     title: '식품자원경제학과',
-    text: 'Department of Food and Resources',
+    text: 'Department of Food & Resources',
   },
   Math: {
     image: 'path/to/computerScience.jpg',
