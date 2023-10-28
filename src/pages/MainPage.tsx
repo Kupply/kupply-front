@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  max-width: 2560px;
   height: 1153px;
   background: white;
   gap: 80px;
@@ -95,7 +96,7 @@ function MainPage() {
       //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
       const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
       try {
-        await axios.post(url, { email: ID });
+        //await axios.post(url, { email: ID });
 
         //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
         window.sessionStorage.setItem('email', ID);

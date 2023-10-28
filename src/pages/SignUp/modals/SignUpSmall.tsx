@@ -103,6 +103,7 @@ const fadeOutAnimation = css`
 const ModalContainer = styled.div<{ isOpen: boolean }>`
   display: ${(props) => (props.isOpen ? 'flex' : 'none')};
   ${(props) => (props.isOpen ? fadeInAnimation : fadeOutAnimation)};
+  margin-left: 50px;
 `;
 
 export interface ModalProps {
