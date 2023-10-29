@@ -22,8 +22,8 @@ const LeftArrow = styled.button`
   width: 32px; // 추후 픽셀 값 수정 필요
   height: 32px;
   position: absolute;
-  left: 6.66%; //100px;
-  top: 220px; // 30.45%; // 380px; (380/1248 = 30.45)
+  left: 6.66vw; //100px;
+  top: 25vh; // 380px; (380/1248 = 30.45)
   background-image: url('design_image/carousel/carousel_left_button.png');
   background-size: cover;
   border: none;
@@ -34,8 +34,8 @@ const RightArrow = styled.button`
   width: 32px;
   height: 32px;
   position: absolute;
-  right: 6.66%; // left: 1770px;
-  top: 220px; // 30.45%; // 380px; (380/1248 = 30.45)
+  right: 6.66vw; // left: 1770px;
+  top: 25vh; // 380px; (380/1248 = 30.45)
   background-image: url('design_image/carousel/carousel_right_button.png');
   background-size: cover;
   border: none;
@@ -46,8 +46,8 @@ const CircleButton = styled.button<{ name: number; current: number }>`
   width: ${(props) => (props.name === props.current ? '10px' : '8px')};
   height: ${(props) => (props.name === props.current ? '10px' : '8px')};
   position: absolute;
-  top: 460px; //(650/1248 = 52.08)
-  left: ${(props) => (props.name === 0 ? '995px' : props.name === 1 ? 'calc(100vw * 50%) px;' : '1045px')};
+  top: 50vh; // 650px; (650/1248 = 52.08)
+  left: ${(props) => (props.name === 0 ? '48vw' : props.name === 1 ? '50vw' : '52vw')};
   border-radius: 50%;
   background-color: ${(props) =>
     props.name === props.current ? 'rgba(255, 255, 255, 1.00)' : 'rgba(255, 255, 255, 0.30)'};
