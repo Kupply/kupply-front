@@ -11,7 +11,6 @@ import MyStageChart from '../../assets/myboardpage/MyStage';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from './EditModals/EditModal';
 import ApplicationModal from './SubmitModals/ApplicationModal';
-import { HelpMessage } from '../../assets/myboardpage/HellpMessage';
 import { recruit } from '../../common/recruiting';
 
 /* 
@@ -455,6 +454,36 @@ export default function MyBoardPage() {
   return (
     <>
       <Wrapper>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          style={{ position: 'absolute', top: '92px', left: '1310px' }}
+        >
+          <g clip-path="url(#clip0_4660_23377)">
+            <path
+              d="M7.0013 12.8337C10.223 12.8337 12.8346 10.222 12.8346 7.00033C12.8346 3.77866 10.223 1.16699 7.0013 1.16699C3.77964 1.16699 1.16797 3.77866 1.16797 7.00033C1.16797 10.222 3.77964 12.8337 7.0013 12.8337Z"
+              stroke="#A8A8A8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path d="M7 9.33301H7.00583" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M7 4.66699V7.00033" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+          <defs>
+            <clipPath id="clip0_4660_23377">
+              <rect width="14" height="14" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+        <Typography
+          size="smallText"
+          style={{ position: 'absolute', color: 'var(--A8_Grey-4, #A8A8A8)', top: '92px', left: '1330px' }}
+        >
+          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+        </Typography>
         {isOpenEditModal ? (
           <EditModal isOpenModal={isOpenEditModal} setOpenModal={setOpenEditModal} onClickModal={onClickEditModal} />
         ) : null}
@@ -807,7 +836,6 @@ export default function MyBoardPage() {
                   <CompetitionRateBox>
                     <div style={{ display: 'flex', alignItems: 'baseline' }}>
                       <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
-                      <HelpMessage />
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -858,7 +886,6 @@ export default function MyBoardPage() {
                 <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
                   <div style={{ display: 'flex', alignItems: 'baseline' }}>
                     <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
-                    <HelpMessage />
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -1095,46 +1122,6 @@ export default function MyBoardPage() {
                       >
                         지원자 정보 살펴보기
                       </Typography>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        style={{ marginLeft: '8px', marginTop: '14px' }}
-                      >
-                        <g clip-path="url(#clip0_3942_9326)">
-                          <path
-                            d="M10.0013 18.3327C14.6037 18.3327 18.3346 14.6017 18.3346 9.99935C18.3346 5.39698 14.6037 1.66602 10.0013 1.66602C5.39893 1.66602 1.66797 5.39698 1.66797 9.99935C1.66797 14.6017 5.39893 18.3327 10.0013 18.3327Z"
-                            stroke="#141414"
-                            stroke-opacity="0.8"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M10.0078 6.66602L9.99948 6.66602"
-                            stroke="#141414"
-                            stroke-opacity="0.8"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M10.0078 13.334L10.0078 10.0007"
-                            stroke="#141414"
-                            stroke-opacity="0.8"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_3942_9326">
-                            <rect width="20" height="20" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
                       <path d="M0 1L674 1" stroke="#DFDFDF" />
@@ -1216,7 +1203,6 @@ export default function MyBoardPage() {
                   <CompetitionRateBox>
                     <div style={{ display: 'flex', alignItems: 'baseline' }}>
                       <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
-                      <HelpMessage />
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -1267,7 +1253,6 @@ export default function MyBoardPage() {
                 <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
                   <div style={{ display: 'flex', alignItems: 'baseline' }}>
                     <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
-                    <HelpMessage />
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
@@ -1567,7 +1552,6 @@ const Wrapper = styled.div`
   position: relative;
   align-items: center;
 
-  /*
   &::before {
     content: '';
     position: absolute;
@@ -1585,8 +1569,7 @@ const Wrapper = styled.div`
     top: -833px;
     left: -1px;
   }
-*/
-  /*
+
   &::after {
     content: '';
     position: absolute;
@@ -1600,7 +1583,6 @@ const Wrapper = styled.div`
     top: 199px;
     right: -518px;
   }
-  */
 `;
 
 const LeftSideWrapper = styled.div`

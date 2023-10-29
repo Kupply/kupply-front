@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 import TextFieldBox, { StateOptions } from '../assets/TextFieldBox';
 import { ImgCtrlButton, ImgDelButton } from '../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../assets/dropdown/dropDown';
-import { ModalHelpMessage } from '../assets/myboardpage/HellpMessage';
+import { HelpMessage } from '../assets/myboardpage/HellpMessage';
 import VerificationBox from '../assets/VerificationBox';
 import Typography from '../assets/Typography';
 import { ScrollBarSmall, ScrollBarLarge } from '../assets/ScrollButton';
@@ -866,7 +866,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             </span>
           </TextFieldTitle>
           <span style={{ position: 'absolute', top: 346, left: 720 }}>
-            <ModalHelpMessage />
+            <HelpMessage />
           </span>
           <VerifiBoxWrapper>
             <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
