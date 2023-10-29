@@ -302,7 +302,7 @@ export default function SignUp1Page() {
             <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
               <Typography size="largeText" color="#D85888">
                 <Timer
-                  setTime={0.5}
+                  setTime={3}
                   sendNum={sendNum}
                   currentModal={currentModal}
                   onTimerExpired={handleTimerExpired}
