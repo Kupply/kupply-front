@@ -128,11 +128,13 @@ function MainPage() {
             }}
           />
           <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
-            <img
-              src="../../design_image/kupply_icon.png"
-              style={{ width: '20px', height: '20px', marginRight: '8px' }}
-            />
-            Join!
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img
+                src="../../design_image/kupply_icon.png"
+                style={{ width: '20px', height: '20px', marginRight: '8px' }}
+              />
+              Join!
+            </div>
           </LabelButton>
         </JoinWrapper>
       </JoinMainContainer>
