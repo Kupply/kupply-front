@@ -198,7 +198,7 @@ const FlexContainer = styled.div`
   flex-wrap: wrap;
 `;
 const Container = styled.div`
-  height: 2500px;
+  height: 2745px;
   width: 100%;
   max-width: 1920px;
   background-color: #fff;
@@ -210,7 +210,7 @@ const Container = styled.div`
 const Sort = styled.div`
   width: 100%;
   max-width: 1382px;
-  margin-top: 130px;
+  margin-top: 184px;
   height: 24px;
   color: #a8a8a8;
   font-family: Pretendard;

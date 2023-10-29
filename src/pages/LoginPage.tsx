@@ -10,7 +10,7 @@ import AlertMessage from '../assets/AlertMessage';
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 933px;
+  height: 1153px;
   display: flex;
   justify-content: center;
   background-color: #fcfafb;
@@ -18,11 +18,11 @@ const Wrapper = styled.div`
 
 const LoginBox = styled.div`
   width: 816px;
-  height: 752px;
+  height: 952px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 36px;
+  margin-top: 76px;
   flex-shrink: 0;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
@@ -39,7 +39,7 @@ const TextFieldWrapper = styled.div`
   width: 628px;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 34px;
 `;
 
 const IDField = styled.input<{ isFilled: boolean }>`
@@ -114,8 +114,8 @@ const LinkBox = styled.div`
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin-top: 36px;
-  margin-bottom: 37px;
+  margin-top: 66px;
+  margin-bottom: 87px;
 `;
 
 const Link = styled.button`
@@ -183,7 +183,7 @@ function LoginPage(props: LoginPageProps) {
   return (
     <Wrapper>
       <LoginBox>
-        <LogoImage src="../../design_image/Kupply_ver1.png" style={{ marginTop: '49px' }} />
+        <LogoImage src="../../design_image/Kupply_ver1.png" style={{ marginTop: '119px' }} />
         <Typography size="mediumText">고려대학교 메일로 이용하는 쿠플라이의 모든 서비스</Typography>
         <TextFieldWrapper>
           <TextBox style={{ height: '105px' }}>

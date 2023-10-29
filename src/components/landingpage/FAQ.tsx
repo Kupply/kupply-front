@@ -40,7 +40,6 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 30px;
 `;
 
 const PageWrapper = styled.div`
@@ -99,7 +98,6 @@ function FAQ() {
         {college == 0 && page == 0 ? (
           <>
             <FAQbox
-              key="common0"
               question="이중전공 지원에 반영되는 학점은 대내용 학점인가요, 대외용 학점인가요?"
               answer={[
                 [
@@ -113,7 +111,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="common1"
               question="이중전공 지원 시 최대 몇 지망까지 선택 가능한가요?"
               answer={[
                 [{ text: '이중전공은 서울 캠퍼스 소속 학과 범위에서 최대 2지망까지 지원할 수 있습니다.', bold: '400' }],
@@ -132,7 +129,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="common2"
               question="1지망 학과(부) 외 다른 희망하는 학과(부)가 없는 경우에는 어떻게하나요?"
               answer={[
                 [
@@ -144,7 +140,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="common3"
               question="이중전공 선발 기준이 무엇인가요? "
               answer={[
                 [
@@ -166,7 +161,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="common4"
               question="이중전공 지원 요건이 어떻게 되나요?"
               answer={[
                 [{ text: '이중전공은 해당 학기에 아래 요건을 모두 만족하여야 지원 가능합니다.', bold: '400' }],
@@ -210,7 +204,6 @@ function FAQ() {
         ) : college == 0 && page == 1 ? (
           <>
             <FAQbox
-              key="common5"
               question="이중전공에 합격하고, 다음 학기에 바로 휴학 가능한가요?"
               answer={[
                 [
@@ -222,12 +215,10 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="common6"
               question="현재 휴학생인 경우에도 이중전공 지원이 가능한가요?"
               answer={[[{ text: '불가합니다. 금학기 휴학생 신분이신 경우 이중전공 지원이 불가합니다.', bold: '400' }]]}
             />
             <FAQbox
-              key="common7"
               question="전과처럼 이중전공에 지원할 수 있는 재학연한(이수학기) 제한이 있나요?"
               answer={[
                 [
@@ -239,7 +230,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="common8"
               question="학업계획서(자기소개서) 문항은 어디서 확인할 수 있나요? 그리고 문항 내용은 어떻게 구성되어 있나요?"
               answer={[
                 [
@@ -263,7 +253,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="common9"
               question="이중전공 재지원 횟수에 제한이 있나요?"
               answer={[
                 [
@@ -290,7 +279,6 @@ function FAQ() {
         ) : college == 1 ? (
           <>
             <FAQbox
-              key="business0"
               question="이번 학기에 면접 전형 진행하나요?"
               answer={[
                 [
@@ -301,7 +289,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="business1"
               question="경영학과 이중전공생도 경영대학 소속 해외교환학생 프로그램에 지원할 수 있나요?"
               answer={[[{ text: '지원 가능합니다.', bold: '400' }]]}
             />
@@ -309,7 +296,6 @@ function FAQ() {
         ) : (
           <>
             <FAQbox
-              key="computer0"
               question="컴퓨터학과 지원 요건이 무엇인가요?"
               answer={[
                 [
@@ -321,7 +307,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="computer1"
               question="이번 학기에 컴퓨터프로그래밍 과목(지원 요건) 수강하고 있는데, 지원 가능한가요?"
               answer={[
                 [
@@ -333,7 +318,6 @@ function FAQ() {
               ]}
             />
             <FAQbox
-              key="computer2"
               question="데이터과학과는 별도의 지원 요건이 없나요?"
               answer={[[{ text: '없습니다.', bold: '400' }]]}
             />

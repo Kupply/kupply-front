@@ -1,10 +1,16 @@
-import styled from 'styled-components';
-import Typography from '../../assets/Typography';
-import HashtagButton from '../../assets/buttons/HashtagButton';
-import { useState } from 'react';
-import SearchBar from '../../assets/SearchBar';
+import styled from "styled-components";
+import Typography from "../../assets/Typography";
+import HashtagButton from "../../assets/buttons/HashtagButton";
+import { useState } from "react";
+import SearchBar from "../../assets/SearchBar";
 
-export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부', '가나다 순 정렬'];
+export const mockHashes = [
+  "학부 전체보기",
+  "인문계 캠퍼스",
+  "자연계 캠퍼스",
+  "독립 학부",
+  "가나다 순 정렬",
+];
 
 export interface HeaderProps {
   clicked: number;
@@ -23,7 +29,7 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
       <TagButtonWrapper>
         {mockHashes.map((hash, index) => (
           <HashtagButton
-            status={index === clicked ? 'clicked' : 'default'}
+            status={index === clicked ? "clicked" : "default"}
             onClick={() => {
               setClicked(index);
             }}
@@ -32,7 +38,7 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
           </HashtagButton>
         ))}
       </TagButtonWrapper>
-      <div style={{ marginTop: 48, width: '100%', maxWidth: 1382 }}>
+      <div style={{ marginTop: 48, width: "100%", maxWidth: 1382 }}>
         <SearchBar value={searchWord} setValue={setSearchWord} />
       </div>
     </Container>
@@ -49,7 +55,7 @@ const TagButtonWrapper = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 1920px;
-  height: 450px;
+  height: 391px;
   background-color: #fcfafb;
 
   display: flex;
