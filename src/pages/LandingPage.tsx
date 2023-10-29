@@ -13,6 +13,7 @@ export interface ITableData {
   rank: number;
   secondMajor: string;
   engName: string;
+  pastRecruitNumber: number;
   recruitNumber: number;
   applyNumber: number;
   competition: number;
@@ -53,6 +54,17 @@ const LandingPage = () => {
     };
     loadData();
   }, []);
+
+  // const cardData = tableData.slice(0, 3).filter(data => {
+  //   name: data.secondMajor,
+  //   eng: data.engName,
+  //   경쟁률: data.pastCompetition,
+  //   선발인원: data.recruitNumber,
+  //   min: data.,
+  //   mean: 4.23,
+  //   semester: '23-2',
+  //   imagesrc: '/design_image/previous_detail/business.png',
+  // })
 
   const tableContent = useRef<HTMLDivElement>(null);
 
