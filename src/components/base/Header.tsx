@@ -23,6 +23,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
+`;
 
 const FlexContainer = styled.div`
   display: flex;
