@@ -194,14 +194,13 @@ export default function SignUp1Page() {
   const handleNext = async () => {
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
     const url = 'http://localhost:8080/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
-    console.log(entireCode, email);
     try {
       await axios.post(url, { email: email, code: entireCode });
 
       navigate('/signup2');
-    } catch (err) {
+    } catch (err: any) {
       //에러 메시지 등 다른 처리 필요
-      alert('올바른 인증번호가 아닙니다.');
+      alert(err.response.data.error.message);
     }
   };
 

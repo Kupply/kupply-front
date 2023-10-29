@@ -152,6 +152,7 @@ const DeletePage = () => {
       window.localStorage.clear();
       window.sessionStorage.clear();
       navigate('/');
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
