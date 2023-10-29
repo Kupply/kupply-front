@@ -268,6 +268,10 @@ export function SignUp4PageCandidate() {
     navigate('/signUp4');
   };
 
+  // 2지망 '희망없음' 구현 목적
+  const updatedMajorTargetList = [...majorTargetList];
+  updatedMajorTargetList.unshift({ value1: '희망 없음', value2: '희망 없음' });
+
   return (
     <Wrapper>
       <TitleWrapper>
@@ -308,7 +312,7 @@ export function SignUp4PageCandidate() {
             />
             <DropDown
               title="2지망 이중전공 선택"
-              optionList={optionList.filter(
+              optionList={updatedMajorTargetList.filter(
                 (el) => el.value1 !== hopeMajor1 && el.value1 !== sessionStorage.getItem('firstMajor'),
               )}
               value={hopeMajor2}
