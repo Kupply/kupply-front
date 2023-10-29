@@ -1088,7 +1088,7 @@ function SignUp5Page() {
           <ButtonsWrapper>
             <PrevButton onClick={handlePrev} />
             <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>
-              다음
+              완료
             </NextButtonFixedWidth>
           </ButtonsWrapper>
         </ScrollBarLarge>

@@ -1022,112 +1022,107 @@ export default function MyBoardPage() {
                         />
                       </svg>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '51px' }}>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '410px' }}
-                      >
-                        {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
-                        인원
-                      </Typography>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '410px' }}
-                      >
-                        경쟁률
-                      </Typography>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
-                      <Typography
-                        size="largeText"
+                    <div style={{ display: 'flex', marginTop: '50px' }}>
+                      <div
                         style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '81.7%',
-                          top: '440px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '20px',
+                          marginLeft: '40px',
                         }}
                       >
-                        {semesterBtnStates['2023-1R']
-                          ? pastData1[0].numOfSelection
-                          : semesterBtnStates['2022-2R']
-                          ? pastData1[1].numOfSelection
-                          : pastData1[2].numOfSelection}
-                        명
-                      </Typography>
-                      <Typography
-                        size="largeText"
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
+                          인원
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {semesterBtnStates['2023-1R']
+                            ? pastData1[0].numOfSelection
+                            : semesterBtnStates['2022-2R']
+                            ? pastData1[1].numOfSelection
+                            : pastData1[2].numOfSelection}
+                          명
+                        </Typography>
+                      </div>
+                      <div
                         style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '92.7%',
-                          top: '440px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '20px',
+                          marginLeft: '75px',
                         }}
                       >
-                        {/* {semesterBtnStates['2023-1R']
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          경쟁률
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {/* {semesterBtnStates['2023-1R']
                           ? pastData1[0].competitionRate
                           : semesterBtnStates['2022-2R']
                           ? pastData1[1].competitionRate
                           : pastData1[2].competitionRate}{' '}
                         : 1 */}
-                        N : 1
-                      </Typography>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '500px' }}
-                      >
-                        합격자 평균 학점
-                      </Typography>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '500px' }}
-                      >
-                        합격자 최저 학점
-                      </Typography>
-                      <div style={{ width: '295px', marginLeft: '48px', marginTop: '122px' }}>
-                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
-                          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
-                        </Typography>
-                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
-                          기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+                          N : 1
                         </Typography>
                       </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
-                      <Typography
-                        size="largeText"
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '81.7%',
-                          top: '530px',
-                        }}
-                      >
-                        {semesterBtnStates['2023-1R']
-                          ? pastData1[0].meanGpa
-                          : semesterBtnStates['2022-2R']
-                          ? pastData1[1].meanGpa
-                          : pastData1[2].meanGpa}
+                    <div style={{ display: 'flex', marginTop: '50px' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '40px', gap: '20px' }}>
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          합격자 평균 학점
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {semesterBtnStates['2023-1R']
+                            ? pastData1[0].meanGpa
+                            : semesterBtnStates['2022-2R']
+                            ? pastData1[1].meanGpa
+                            : pastData1[2].meanGpa}
+                        </Typography>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          합격자 최저 학점
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {semesterBtnStates['2023-1R']
+                            ? pastData1[0].minGpa
+                            : semesterBtnStates['2022-2R']
+                            ? pastData1[1].minGpa
+                            : pastData1[2].minGpa}
+                        </Typography>
+                      </div>
+                    </div>
+
+                    <div style={{ width: '295px', marginLeft: '48px', marginTop: '50px' }}>
+                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
+                        본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
                       </Typography>
-                      <Typography
-                        size="largeText"
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '92.7%',
-                          top: '530px',
-                        }}
-                      >
-                        {semesterBtnStates['2023-1R']
-                          ? pastData1[0].minGpa
-                          : semesterBtnStates['2022-2R']
-                          ? pastData1[1].minGpa
-                          : pastData1[2].minGpa}
+                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
+                        기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
                       </Typography>
                     </div>
                   </ThreeYearCumulativeDataBox>
@@ -1434,112 +1429,107 @@ export default function MyBoardPage() {
                         />
                       </svg>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '51px' }}>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '410px' }}
-                      >
-                        {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
-                        인원
-                      </Typography>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '410px' }}
-                      >
-                        경쟁률
-                      </Typography>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
-                      <Typography
-                        size="largeText"
+                    <div style={{ display: 'flex', marginTop: '50px' }}>
+                      <div
                         style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '81.7%',
-                          top: '440px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '20px',
+                          marginLeft: '40px',
                         }}
                       >
-                        {semesterBtnStates['2023-1R']
-                          ? pastData2[0].numOfSelection
-                          : semesterBtnStates['2022-2R']
-                          ? pastData2[1].numOfSelection
-                          : pastData2[2].numOfSelection}
-                        명
-                      </Typography>
-                      <Typography
-                        size="largeText"
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
+                          인원
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {semesterBtnStates['2023-1R']
+                            ? pastData2[0].numOfSelection
+                            : semesterBtnStates['2022-2R']
+                            ? pastData2[1].numOfSelection
+                            : pastData2[2].numOfSelection}
+                          명
+                        </Typography>
+                      </div>
+                      <div
                         style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '92.7%',
-                          top: '440px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '20px',
+                          marginLeft: '75px',
                         }}
                       >
-                        {/* {semesterBtnStates['2023-1R']
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          경쟁률
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {/* {semesterBtnStates['2023-1R']
                           ? pastData2[0].competitionRate
                           : semesterBtnStates['2022-2R']
                           ? pastData2[1].competitionRate
                           : pastData2[2].competitionRate}{' '}
                         : 1 */}
-                        N : 1
-                      </Typography>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '500px' }}
-                      >
-                        합격자 평균 학점
-                      </Typography>
-                      <Typography
-                        size="mediumText"
-                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '500px' }}
-                      >
-                        합격자 최저 학점
-                      </Typography>
-                      <div style={{ width: '295px', marginLeft: '48px', marginTop: '122px' }}>
-                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
-                          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
-                        </Typography>
-                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
-                          기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+                          N : 1
                         </Typography>
                       </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
-                      <Typography
-                        size="largeText"
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '81.7%',
-                          top: '530px',
-                        }}
-                      >
-                        {semesterBtnStates['2023-1R']
-                          ? pastData2[0].meanGpa
-                          : semesterBtnStates['2022-2R']
-                          ? pastData2[1].meanGpa
-                          : pastData2[2].meanGpa}
+                    <div style={{ display: 'flex', marginTop: '50px' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '40px', gap: '20px' }}>
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          합격자 평균 학점
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {semesterBtnStates['2023-1R']
+                            ? pastData2[0].meanGpa
+                            : semesterBtnStates['2022-2R']
+                            ? pastData2[1].meanGpa
+                            : pastData2[2].meanGpa}
+                        </Typography>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
+                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                          합격자 최저 학점
+                        </Typography>
+                        <Typography
+                          size="largeText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                          }}
+                        >
+                          {semesterBtnStates['2023-1R']
+                            ? pastData2[0].minGpa
+                            : semesterBtnStates['2022-2R']
+                            ? pastData2[1].minGpa
+                            : pastData2[2].minGpa}
+                        </Typography>
+                      </div>
+                    </div>
+
+                    <div style={{ width: '295px', marginLeft: '48px', marginTop: '50px' }}>
+                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
+                        본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
                       </Typography>
-                      <Typography
-                        size="largeText"
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          position: 'absolute',
-                          left: '92.7%',
-                          top: '530px',
-                        }}
-                      >
-                        {semesterBtnStates['2023-1R']
-                          ? pastData2[0].minGpa
-                          : semesterBtnStates['2022-2R']
-                          ? pastData2[1].minGpa
-                          : pastData2[2].minGpa}
+                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
+                        기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
                       </Typography>
                     </div>
                   </ThreeYearCumulativeDataBox>
@@ -1649,38 +1639,43 @@ const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-
+  /*
   &::before {
     content: '';
     position: absolute;
-    width: 1564px;
-    height: 1564px;
-    border-radius: 1564px;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 1000px;
     filter: blur(75px);
-    opacity: 0.7;
+    opacity: 0.4;
     background: radial-gradient(
-      60.96% 60.96% at 58.12% 41.5%,
-      rgba(216, 88, 136, 0.5) 0%,
-      rgba(255, 175, 189, 0.05) 100%
+      51.7% 51.7% at 58.12% 41.5%,
+      rgba(216, 88, 136, 0.3) 0%,
+      rgba(255, 175, 189, 0.18) 100%
     );
-    z-index: -1;
-    top: -833px;
-    left: -1px;
+    filter: blur(75px);
+    z-index: 0;
+    top: -100px;
+    left: 400px;
   }
 
   &::after {
     content: '';
     position: absolute;
-    width: 1494px;
-    height: 1494px;
-    border-radius: 1494px;
+    width: 1573px;
+    height: 1573px;
+    border-radius: 1573px;
     filter: blur(75px);
     opacity: 0.5;
-    background: radial-gradient(47.7% 47.7% at 50% 52.3%, rgba(232, 88, 136, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
-    z-index: -1;
-    top: 199px;
-    right: -518px;
-  }
+    background: radial-gradient(
+      67.64% 67.64% at 116.69% 26.92%,
+      rgba(216, 88, 136, 0.5) 0%,
+      rgba(255, 175, 189, 0.05) 100%
+    );
+    z-index: 0;
+    top: 273px;
+    right: -304px;
+  }*/
 `;
 
 const LeftSideWrapper = styled.div`
@@ -1728,7 +1723,8 @@ const BigMajorSymbolBox = styled.div`
   height: 571px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(231.86% 143.11% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(231.86% 143.11% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1737,7 +1733,8 @@ const CompetitionRateBox = styled.div`
   height: 274px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1746,8 +1743,9 @@ const ThreeYearCumulativeDataBox = styled.div`
   height: 571px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
-  //backdrop-filter: blur(12px);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
 `;
 
 const EachYearHeadBox = styled.div`
@@ -1768,7 +1766,8 @@ const RangeBox = styled.div`
   height: 252px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1777,7 +1776,8 @@ const Graph_1_1Box = styled.div`
   height: 520px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1786,7 +1786,8 @@ const Graph_2_1Box = styled.div`
   height: 288px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1799,7 +1800,8 @@ const Graph_2Box = styled.div`
   stroke: var(--DF_Grey-2, #dfdfdf);
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
