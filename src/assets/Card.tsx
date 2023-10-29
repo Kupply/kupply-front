@@ -42,7 +42,10 @@ const majorParamMapping = {
 const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, titleSrc }: CardsProps) => {
   const [hover, setHover] = useState(false);
   const onHover = () => {
-    setHover(!hover);
+    setHover(true);
+  };
+  const onHoverOut = () => {
+    setHover(false);
   };
   const [svgHover, setSvgHover] = useState(false);
   const onSvgHover = () => {
@@ -54,7 +57,7 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
     navigate('/archive/' + majorParamMapping[eng as MajorOptions]);
   };
   return (
-    <Container onMouseEnter={onHover} onMouseLeave={onHover}>
+    <Container onMouseEnter={onHover} onMouseLeave={onHoverOut}>
       <CardImage src={src} alt="card" hover={hover} />
       {hover ? (
         <>
@@ -174,6 +177,7 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
     </Container>
   );
 };
+
 const Button = styled.button`
   margin-top: 452px;
   margin-left: 66px;
