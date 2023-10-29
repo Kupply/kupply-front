@@ -18,9 +18,11 @@ export interface ITableData {
   applyNumber: number;
   competition: number;
   pastCompetition: number;
+  pastmin: number;
   pastmean: number;
   interest: number;
   interestedNum: number; //지망 아니면 0, n지망일경우 n이다.
+  imagesrc: string;
 }
 
 const GlobalStyle = createGlobalStyle`
@@ -55,16 +57,16 @@ const LandingPage = () => {
     loadData();
   }, []);
 
-  // const cardData = tableData.slice(0, 3).filter(data => {
-  //   name: data.secondMajor,
-  //   eng: data.engName,
-  //   경쟁률: data.pastCompetition,
-  //   선발인원: data.recruitNumber,
-  //   min: data.,
-  //   mean: 4.23,
-  //   semester: '23-2',
-  //   imagesrc: '/design_image/previous_detail/business.png',
-  // })
+  const cardData = tableData.slice(0, 3).map((data) => ({
+    name: data.secondMajor,
+    eng: data.engName,
+    경쟁률: data.pastCompetition,
+    선발인원: data.pastRecruitNumber,
+    min: data.pastmin,
+    mean: data.pastmean,
+    semester: '23-1',
+    imagesrc: data.imagesrc,
+  }));
 
   const tableContent = useRef<HTMLDivElement>(null);
 
@@ -130,7 +132,7 @@ const LandingPage = () => {
       </HeadImageWrapper>
       <div ref={tableContent} style={{ marginBottom: '120px' }}></div>
       <RankingTable tableData={tableData} />
-      <PassedDataCard />
+      <PassedDataCard cardData={cardData} />
       <Preview />
       <FAQ />
       <Ending />

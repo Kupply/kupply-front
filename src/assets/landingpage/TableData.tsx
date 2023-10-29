@@ -11,21 +11,12 @@ export interface TableDataProps {
   applyNumber: number;
   competition: number;
   pastCompetition: number;
+  pastmin: number;
   pastmean: number;
   interest: number;
   interestedNum: number; //지망 아니면 0, n지망일경우 n이다.
+  imagesrc: string;
 }
-
-type MajorOptions =
-  | '경영대학'
-  | '경제학과'
-  | '심리학부'
-  | '통계학과'
-  | '수학과'
-  | '화학과'
-  | '미디어학부'
-  | '식품자원경제학과'
-  | '컴퓨터학과';
 
 export default function TableData(props: TableDataProps) {
   const {
