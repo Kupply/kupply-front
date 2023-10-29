@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Typography from '../Typography';
 
@@ -20,54 +20,10 @@ interface SvgProps {
 
 interface MessageProps extends React.ComponentPropsWithoutRef<'button'> {}
 
-const MessageBox = styled.div<MessageBoxProps>`
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
-  padding: 10px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-  position: absolute;
-  top: -30px;
-  right: -280px;
-  width: 528px;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  //border-radius: 10px;
-  filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
-`;
-
-const ChartMessageBox = styled.div<MessageBoxProps>`
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
-  padding: 10px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-  position: absolute;
-  top: -30px;
-  right: -280px;
-  width: 528px;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  //border-radius: 10px;
-  filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
-`;
-
 const ModalMessageBox = styled.div<MessageBoxProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: visibility 0.3s ease-in-out;
   padding: 10px 8px;
   justify-content: center;
   align-items: center;
@@ -201,6 +157,25 @@ function HelpMessage(props: MessageProps) {
 /* 모달 전용 헬프메세지 */
 function ModalHelpMessage(props: MessageProps) {
   const [isHovered, setIsHovered] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (isHovered) {
+      setIsVisible(true);
+      const hideTimeout = setTimeout(() => {
+        setIsVisible(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(hideTimeout);
+      };
+    } else {
+      setIsVisible(true);
+      const hideTimeout = setTimeout(() => {
+        setIsVisible(false);
+      }, 300);
+    }
+  }, [isHovered]);
 
   return (
     <div style={{ position: 'absolute', top: '184px', left: '265px' }}>
@@ -231,7 +206,7 @@ function ModalHelpMessage(props: MessageProps) {
           </defs>
         </svg>
       </HelpBox>
-      <ModalMessageBox isVisible={isHovered}>
+      <ModalMessageBox isVisible={isVisible}>
         <Typography
           size="mediumText"
           style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '122.222%' }}
@@ -257,8 +232,8 @@ function ModalHelpMessage(props: MessageProps) {
         </Typography>
       </ModalMessageBox>
       <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
         style={{ position: 'absolute', left: '4px', top: '39px' }}
       >
         <StyledSvg
