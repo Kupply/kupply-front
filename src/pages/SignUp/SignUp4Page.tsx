@@ -9,6 +9,8 @@ import PrevButton from '../../assets/buttons/PrevButton';
 import Step4Button from '../../components/Step4Button';
 import VerificationBox from '../../assets/VerificationBox';
 import DropDown from '../../assets/dropdown/dropDown';
+import { majorAllList } from '../../common/majorAll';
+import { majorTargetList } from '../../common/majorTarget';
 
 const Wrapper = styled.div`
   display: flex;
@@ -184,17 +186,7 @@ export function SignUp4Page() {
   );
 }
 
-const optionList = [
-  { value1: '경영학과', value2: '경영대학' },
-  { value1: '경제학과', value2: '정경대학' },
-  { value1: '심리학부', value2: '심리학부' },
-  { value1: '통계학과', value2: '정경대학' },
-  { value1: '수학과', value2: '이과대학' },
-  { value1: '화학과', value2: '이과대학' },
-  { value1: '미디어학부', value2: '미디어학부' },
-  { value1: '식품자원경제학과', value2: '생명과학대학' },
-  { value1: '컴퓨터학과', value2: '정보대학' },
-];
+const optionList = majorTargetList;
 
 export function SignUp4PageCandidate() {
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
@@ -308,13 +300,17 @@ export function SignUp4PageCandidate() {
             </div>
             <DropDown
               title="1지망 이중전공 선택"
-              optionList={optionList.filter((el) => el.value1 !== hopeMajor2)}
+              optionList={optionList.filter(
+                (el) => el.value1 !== hopeMajor2 && el.value1 !== sessionStorage.getItem('firstMajor'),
+              )}
               value={hopeMajor1}
               setValue={setHopeMajor1}
             />
             <DropDown
               title="2지망 이중전공 선택"
-              optionList={optionList.filter((el) => el.value1 !== hopeMajor1)}
+              optionList={optionList.filter(
+                (el) => el.value1 !== hopeMajor1 && el.value1 !== sessionStorage.getItem('firstMajor'),
+              )}
               value={hopeMajor2}
               setValue={setHopeMajor2}
             />
