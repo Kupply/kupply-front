@@ -82,6 +82,7 @@ const BoldText = styled.div`
 `;
 
 function Carousel1() {
+  const navigate = useNavigate(); // 추후 버튼에 적용
   return (
     <Wrapper>
       <ContentWrapper>

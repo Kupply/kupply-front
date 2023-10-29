@@ -62,7 +62,7 @@ function Step4Button(props: Step4ButtonProps) {
     <ButtonWrapper state={state} {...rest}>
       <TextBox>
         <Title state={state} double={double}>
-          {!double ? '이중전공 도전생' : '이중전공 진입생'}
+          {!double ? '이중전공 도전생' : '이중전공 합격생'}
         </Title>
         <Passage state={state} double={double}>
           {!double

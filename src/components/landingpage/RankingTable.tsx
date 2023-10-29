@@ -3,93 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
+import { ITableData } from '../../pages/LandingPage';
 
 type orderOptions = 'descending' | 'ascending';
+type tableProps = {
+  tableData: ITableData[];
+};
 
-export default function Table() {
+export default function Table(props: tableProps) {
   //표의 데이터는 최초 한 번만 렌더링하도록 한다.
-  const data = useMemo(
-    () => [
-      {
-        rank: 1,
-        secondMajor: '경영대학',
-        recruitNumber: 12,
-        applyNumber: 32,
-        competition: 3.2,
-        pastCompetition: 3.59,
-        pastmean: 4.46,
-        interest: 56,
-        interestedNum: 1,
-      },
-      {
-        rank: 2,
-        secondMajor: '컴퓨터학과',
-        recruitNumber: 12,
-        applyNumber: 32,
-        competition: 3.2,
-        pastCompetition: 3.59,
-        pastmean: 4.46,
-        interest: 56,
-        interestedNum: 0,
-      },
-      {
-        rank: 3,
-        secondMajor: '심리학부',
-        recruitNumber: 12,
-        applyNumber: 32,
-        competition: 3.2,
-        pastCompetition: 3.59,
-        pastmean: 4.46,
-        interest: 56,
-        interestedNum: 2,
-      },
-      {
-        rank: 4,
-        secondMajor: '미디어학부',
-        recruitNumber: 12,
-        applyNumber: 32,
-        competition: 3.2,
-        pastCompetition: 3.59,
-        pastmean: 4.46,
-        interest: 56,
-        interestedNum: 3,
-      },
-      {
-        rank: 5,
-        secondMajor: '식품자원경제학과',
-        recruitNumber: 12,
-        applyNumber: 32,
-        competition: 3.2,
-        pastCompetition: 3.59,
-        pastmean: 4.46,
-        interest: 56,
-        interestedNum: 0,
-      },
-      {
-        rank: 6,
-        secondMajor: '경제학과',
-        recruitNumber: 12,
-        applyNumber: 32,
-        competition: 3.2,
-        pastCompetition: 3.59,
-        pastmean: 4.46,
-        interest: 56,
-        interestedNum: 0,
-      },
-      {
-        rank: 7,
-        secondMajor: '수학과',
-        recruitNumber: 12,
-        applyNumber: 32,
-        competition: 3.2,
-        pastCompetition: 3.59,
-        pastmean: 4.46,
-        interest: 56,
-        interestedNum: 0,
-      },
-    ],
-    [],
-  );
+  const data = props.tableData;
   const ascendingData = data.map((item) => ({ ...item, rank: data.length + 1 - item.rank })).reverse();
 
   //아래 toggle을 설정한다.
@@ -240,12 +163,12 @@ export default function Table() {
         </HeaderData>
       </TableHeader>
       {isShowAll && order === 'descending'
-        ? data.map((row) => <TableData {...row}></TableData>)
+        ? data && data.map((row) => <TableData {...row}></TableData>)
         : !isShowAll && order === 'descending'
-        ? data.slice(0, 5).map((row) => <TableData {...row}></TableData>)
+        ? data && data.slice(0, 5).map((row) => <TableData {...row}></TableData>)
         : isShowAll && order === 'ascending'
-        ? ascendingData.map((row) => <TableData {...row}></TableData>)
-        : ascendingData.slice(0, 5).map((row) => <TableData {...row}></TableData>)}
+        ? ascendingData && ascendingData.map((row) => <TableData {...row}></TableData>)
+        : ascendingData && ascendingData.slice(0, 5).map((row) => <TableData {...row}></TableData>)}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {isShowAll ? (
           <svg

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
@@ -29,7 +29,7 @@ const TitleWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 45px;
+  padding-top: 30px;
   padding-bottom: 25px;
 `;
 
@@ -94,8 +94,8 @@ const SubContentsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  margin-top: 159.24px;
-  margin-bottom: 171px;
+  margin-top: 109px; // 159.24px;
+  margin-bottom: 121px; //171px;
 `;
 
 // 푸터 버튼과 동일 에셋이라고 한다.
@@ -194,15 +194,22 @@ export default function SignUp1Page() {
   const handleNext = async () => {
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
     const url = 'http://localhost:8080/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
-    console.log(entireCode, email);
     try {
       await axios.post(url, { email: email, code: entireCode });
 
       navigate('/signup2');
-    } catch (err) {
+    } catch (err: any) {
       //에러 메시지 등 다른 처리 필요
-      alert('올바른 인증번호가 아닙니다.');
+      alert(err.response.data.error.message);
     }
+  };
+
+  // 타이머 시간 초과시 처리 목적
+  const [timerExpired, setTimerExpired] = useState<boolean>(false);
+
+  const handleTimerExpired = () => {
+    setTimerExpired(true);
+    navigate('/');
   };
 
   return (
@@ -211,13 +218,15 @@ export default function SignUp1Page() {
         switch (currentModal) {
           case 0:
             return (
-              <SignUpSmall
-                currentModal={currentModal}
-                isOpenModal={isOpenModal}
-                setCurrentModal={setCurrentModal}
-                setOpenModal={setOpenModal}
-                onClickModal={onClickToggleSmallModal}
-              />
+              <div style={{ background: 'red', width: '100%' }}>
+                <SignUpSmall
+                  currentModal={currentModal}
+                  isOpenModal={isOpenModal}
+                  setCurrentModal={setCurrentModal}
+                  setOpenModal={setOpenModal}
+                  onClickModal={onClickToggleSmallModal}
+                />
+              </div>
             );
 
           case 1:
@@ -292,7 +301,12 @@ export default function SignUp1Page() {
             </ContentsWrapper>
             <div style={{ display: 'flex', flexDirection: 'column-reverse' }}>
               <Typography size="largeText" color="#D85888">
-                <Timer setTime={3} sendNum={sendNum} currentModal={currentModal}></Timer>
+                <Timer
+                  setTime={0.5}
+                  sendNum={sendNum}
+                  currentModal={currentModal}
+                  onTimerExpired={handleTimerExpired}
+                ></Timer>
               </Typography>
             </div>
           </div>

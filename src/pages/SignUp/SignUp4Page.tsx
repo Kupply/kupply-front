@@ -9,6 +9,8 @@ import PrevButton from '../../assets/buttons/PrevButton';
 import Step4Button from '../../components/Step4Button';
 import VerificationBox from '../../assets/VerificationBox';
 import DropDown from '../../assets/dropdown/dropDown';
+import { majorAllList } from '../../common/majorAll';
+import { majorTargetList } from '../../common/majorTarget';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,7 +27,7 @@ const TitleWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 45px;
+  padding-top: 30px;
   padding-bottom: 25px;
 `;
 
@@ -85,7 +87,7 @@ const ButtonsWrapper = styled.div`
 const AliasButtonsWrapper = styled.div`
   display: flex;
   gap: 18px;
-  margin-top: 140px;
+  margin-top: 70px;
 `;
 
 const VerifiBoxWrapper = styled.div`
@@ -184,17 +186,7 @@ export function SignUp4Page() {
   );
 }
 
-const optionList = [
-  { value1: '경영학과', value2: '경영대학' },
-  { value1: '경제학과', value2: '정경대학' },
-  { value1: '심리학부', value2: '심리학부' },
-  { value1: '통계학과', value2: '정경대학' },
-  { value1: '수학과', value2: '이과대학' },
-  { value1: '화학과', value2: '이과대학' },
-  { value1: '미디어학부', value2: '미디어학부' },
-  { value1: '식품자원경제학과', value2: '생명과학대학' },
-  { value1: '컴퓨터학과', value2: '정보대학' },
-];
+const optionList = majorTargetList;
 
 export function SignUp4PageCandidate() {
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
@@ -276,6 +268,10 @@ export function SignUp4PageCandidate() {
     navigate('/signUp4');
   };
 
+  // 2지망 '희망없음' 구현 목적
+  const updatedMajorTargetList = [...majorTargetList];
+  updatedMajorTargetList.unshift({ value1: '희망 없음', value2: '희망 없음' });
+
   return (
     <Wrapper>
       <TitleWrapper>
@@ -308,13 +304,17 @@ export function SignUp4PageCandidate() {
             </div>
             <DropDown
               title="1지망 이중전공 선택"
-              optionList={optionList.filter((el) => el.value1 !== hopeMajor2)}
+              optionList={optionList.filter(
+                (el) => el.value1 !== hopeMajor2 && el.value1 !== sessionStorage.getItem('firstMajor'),
+              )}
               value={hopeMajor1}
               setValue={setHopeMajor1}
             />
             <DropDown
               title="2지망 이중전공 선택"
-              optionList={optionList.filter((el) => el.value1 !== hopeMajor1)}
+              optionList={updatedMajorTargetList.filter(
+                (el) => el.value1 !== hopeMajor1 && el.value1 !== sessionStorage.getItem('firstMajor'),
+              )}
               value={hopeMajor2}
               setValue={setHopeMajor2}
             />
@@ -348,12 +348,13 @@ export function SignUp4PageCandidate() {
             <VerifiBoxWrapper>
               <VerificationBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1}></VerificationBox>
               <VerificationBox name="semester-2" value={hopeSemester2} setValue={setHopeSemester2}></VerificationBox>
-              <div style={{ marginTop: 26 }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
-                  <path stroke="#000" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
-                </svg>
-              </div>
+              <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                년도
+              </Typography>
               <VerificationBox name="semester-3" value={hopeSemester3} setValue={setHopeSemester3}></VerificationBox>
+              <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                학기
+              </Typography>
             </VerifiBoxWrapper>
           </ContentsWrapper>
         </ContentsList>

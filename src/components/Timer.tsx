@@ -4,10 +4,11 @@ export interface TImerProps {
   setTime: number; // (분) 기준
   currentModal: number;
   sendNum: number;
+  onTimerExpired: () => void; // 콜백 함수
   // setTimeLeft: () => void; // 타이머 초기화 목적
 }
 
-export default function Timer({ setTime, currentModal, sendNum }: TImerProps) {
+export default function Timer({ setTime, currentModal, sendNum, onTimerExpired }: TImerProps) {
   const MINUTES_IN_MS = setTime * 60 * 1000;
   const INTERVAL = 1000; // 1초
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
@@ -20,7 +21,7 @@ export default function Timer({ setTime, currentModal, sendNum }: TImerProps) {
       setTimeLeft(MINUTES_IN_MS);
       console.log('타이머 초기화');
     }
-  }, [currentModal, MINUTES_IN_MS, sendNum]);
+  }, [currentModal, MINUTES_IN_MS, sendNum, onTimerExpired]);
 
   useEffect(() => {
     // setTimeLeft(MINUTES_IN_MS);
@@ -29,8 +30,9 @@ export default function Timer({ setTime, currentModal, sendNum }: TImerProps) {
       setTimeLeft((prevTime) => {
         if (prevTime <= 0) {
           clearInterval(timer);
-          console.log('타이머 종료');
-          return 0;
+          // console.log('타이머 종료');
+          onTimerExpired();
+          return -1;
         }
         return prevTime - INTERVAL;
       });
@@ -39,7 +41,7 @@ export default function Timer({ setTime, currentModal, sendNum }: TImerProps) {
     return () => {
       clearInterval(timer);
     };
-  }, [timeLeft, MINUTES_IN_MS]); // 남은 시간이 바뀔 때마다 useEffect 실행
+  }, [timeLeft, MINUTES_IN_MS, onTimerExpired]); // 남은 시간이 바뀔 때마다 useEffect 실행
 
   return (
     <div>

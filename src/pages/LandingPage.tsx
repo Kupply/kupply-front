@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import RankingTable from '../components/landingpage/RankingTable';
 import PassedDataCard from '../components/landingpage/PassedDataCard';
@@ -7,6 +7,23 @@ import FAQ from '../components/landingpage/FAQ';
 import Ending from '../components/landingpage/Ending';
 import TextFieldBox from '../assets/TextFieldBox';
 import Typography from '../assets/Typography';
+import axios from 'axios';
+
+export interface ITableData {
+  rank: number;
+  secondMajor: string;
+  engName: string;
+  pastRecruitNumber: number;
+  recruitNumber: number;
+  applyNumber: number;
+  competition: number;
+  pastCompetition: number;
+  pastmin: number;
+  pastmean: number;
+  interest: number;
+  interestedNum: number; //지망 아니면 0, n지망일경우 n이다.
+  imagesrc: string;
+}
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,6 +44,30 @@ const ScrollToY = (to: number, duration: number) => {
 };
 
 const LandingPage = () => {
+  const [tableData, setTableData] = useState<ITableData[]>([]);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/landing');
+        setTableData(response.data.data);
+      } catch (e) {
+        alert(e);
+      }
+    };
+    loadData();
+  }, []);
+
+  const cardData = tableData.slice(0, 3).map((data) => ({
+    name: data.secondMajor,
+    eng: data.engName,
+    경쟁률: data.pastCompetition,
+    선발인원: data.pastRecruitNumber,
+    min: data.pastmin,
+    mean: data.pastmean,
+    semester: '23-1',
+    imagesrc: data.imagesrc,
+  }));
+
   const tableContent = useRef<HTMLDivElement>(null);
 
   const onClickDownArrow = () => {
@@ -90,8 +131,8 @@ const LandingPage = () => {
         </HeadTextWrapper>
       </HeadImageWrapper>
       <div ref={tableContent} style={{ marginBottom: '120px' }}></div>
-      <RankingTable />
-      <PassedDataCard />
+      <RankingTable tableData={tableData} />
+      <PassedDataCard cardData={cardData} />
       <Preview />
       <FAQ />
       <Ending />

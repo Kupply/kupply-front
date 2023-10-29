@@ -101,9 +101,9 @@ function MainPage() {
         //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
         window.sessionStorage.setItem('email', ID);
         navigate('/join');
-      } catch (e) {
+      } catch (err: any) {
         //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
-        alert(e);
+        alert(err.response.data.error.message);
       }
     } else {
       alert('형식에 맞는 이메일이 아닙니다.');
