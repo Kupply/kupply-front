@@ -8,7 +8,7 @@ import SubmitButton from '../../../assets/buttons/SubmitButton';
 import Typography from '../../../assets/Typography';
 import ModalLarge from '../../../components/base/ModalLarge';
 import EditModalHeaderButton from '../../../assets/myboardpage/EditModalHeaderButton';
-import ImgCtrlButton from '../../../assets/myboardpage/ImgCtrlButton';
+import { ImgCtrlButton, ImgDelButton } from '../../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../../assets/dropdown/dropDown';
 import VerificationBox from '../../../assets/VerificationBox';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
@@ -426,8 +426,8 @@ export default function EditModal(props: ModalProps) {
                       />
                     </CandidateImgsWrapper>
                     <div style={{ gap: '5px', marginTop: '52px' }}>
-                      <ImgCtrlButton />
-                      <ImgCtrlButton>삭제</ImgCtrlButton>
+                      <ImgCtrlButton></ImgCtrlButton>
+                      <ImgDelButton>삭제</ImgDelButton>
                     </div>
                   </div>
                 </div>

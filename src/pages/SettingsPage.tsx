@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
 import TextFieldBox, { StateOptions } from '../assets/TextFieldBox';
-import ImgCtrlButton from '../assets/myboardpage/ImgCtrlButton';
+import { ImgCtrlButton, ImgDelButton } from '../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../assets/dropdown/dropDown';
 import { ModalHelpMessage } from '../assets/myboardpage/HellpMessage';
 import VerificationBox from '../assets/VerificationBox';
