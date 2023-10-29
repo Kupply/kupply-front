@@ -19,7 +19,6 @@ export default function Timer({ setTime, currentModal, sendNum, onTimerExpired }
   useEffect(() => {
     if (currentModal === 0 || currentModal === 3) {
       setTimeLeft(MINUTES_IN_MS);
-      onTimerExpired();
       console.log('타이머 초기화');
     }
   }, [currentModal, MINUTES_IN_MS, sendNum, onTimerExpired]);
