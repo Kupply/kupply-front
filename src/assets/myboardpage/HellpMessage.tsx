@@ -23,9 +23,7 @@ interface MessageProps extends React.ComponentPropsWithoutRef<'button'> {}
 const MessageBox = styled.div<MessageBoxProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   padding: 10px 8px;
   justify-content: center;
   align-items: center;
@@ -44,9 +42,7 @@ const MessageBox = styled.div<MessageBoxProps>`
 const ChartMessageBox = styled.div<MessageBoxProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   padding: 10px 8px;
   justify-content: center;
   align-items: center;
@@ -65,9 +61,7 @@ const ChartMessageBox = styled.div<MessageBoxProps>`
 const ModalMessageBox = styled.div<MessageBoxProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   padding: 10px 8px;
   justify-content: center;
   align-items: center;
@@ -87,9 +81,7 @@ const ModalMessageBox = styled.div<MessageBoxProps>`
 const StyledSvg = styled.svg<SvgProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   position: absolute;
   top: -32px;
   z-index: 1000;

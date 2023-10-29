@@ -17,22 +17,25 @@ import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
 import { majorAllList } from '../../../common/majorAll';
 import { majorTargetList } from '../../../common/majorTarget';
 
-/*
-남은 개발
-1. 프로필 사진 변경 - 버튼화
-2. 인포 메세지 (헬프 메세지) 버튼화
-3. 텍스트필드 입력값 유효성 조건 만족여부에 따른 아이콘 변화
-*/
+/* 
+  모달 헤더 버튼 클릭에 따른 페이지 전환 위한 상태 관리
+  0: 나의 기본정보
+  1: 관심 전공
+  2: 현재 내 학점
+  3: 희망 진입학기
+  */
 
 export interface ModalProps {
+  // 모달 조정용
   isOpenModal: boolean;
   setOpenModal: (isOpenModal: boolean) => void;
-  onClickModal: () => void; // 함수;
+  onClickModal: () => void;
 }
 
 export default function EditModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [isOpenMsg, setOpenMsg] = useState<boolean>(true); // 헬프 메세지
 
   // 각 버튼의 isClicked 값을 관리하기 위한 변수 선언
   const [headerButtonStates, setHeaderButtonStates] = useState<{
@@ -173,15 +176,18 @@ export default function EditModal(props: ModalProps) {
   const majorTarget = [...majorTargetList];
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
-  /* 
-  모달 헤더 버튼 클릭에 따른 페이지 전환 위한 상태 관리
-  0: 나의 기본정보
-  1: 관심 전공
-  2: 현재 내 학점
-  3: 희망 진입학기
-  */
   const [currentModal, setCurrentModal] = useState<number>(0);
-  // const [currentSrc, setCurrentSrc] = useState('design_image/character/rectProfile/rectProfile1.png');
+
+  // 헬프 메세지 일정 시간 이후 사라지는 효과 (메세지 2초간만 유지)
+  useEffect(() => {
+    if (isOpenMsg) {
+      const timer = setTimeout(() => {
+        setOpenMsg(false); // Close the modal after 2 seconds
+        clearTimeout(timer); // Clear the timer to prevent multiple executions
+      }, 2000);
+    }
+  }, [isOpenMsg, setOpenMsg]);
+
   return (
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
@@ -457,7 +463,7 @@ export default function EditModal(props: ModalProps) {
               <SubContentsWrapper>
                 <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                   <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
-                  <ModalHelpMessage />
+                  {isOpenMsg && <ModalHelpMessage />}
                 </div>
                 <VerifiBoxWrapper>
                   <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
@@ -545,7 +551,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20; // Modal.tsx 와 상이한 stacking context
+  z-index: 1005; // Modal.tsx 와 상이한 stacking context
 `;
 
 const HeaderWrapper = styled.div`
