@@ -25,7 +25,7 @@ const TitleWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 45px;
+  padding-top: 30px;
   padding-bottom: 25px;
 `;
 
@@ -85,7 +85,7 @@ const ButtonsWrapper = styled.div`
 const AliasButtonsWrapper = styled.div`
   display: flex;
   gap: 18px;
-  margin-top: 140px;
+  margin-top: 70px;
 `;
 
 const VerifiBoxWrapper = styled.div`
@@ -348,12 +348,13 @@ export function SignUp4PageCandidate() {
             <VerifiBoxWrapper>
               <VerificationBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1}></VerificationBox>
               <VerificationBox name="semester-2" value={hopeSemester2} setValue={setHopeSemester2}></VerificationBox>
-              <div style={{ marginTop: 26 }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
-                  <path stroke="#000" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
-                </svg>
-              </div>
+              <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                년도
+              </Typography>
               <VerificationBox name="semester-3" value={hopeSemester3} setValue={setHopeSemester3}></VerificationBox>
+              <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                학기
+              </Typography>
             </VerifiBoxWrapper>
           </ContentsWrapper>
         </ContentsList>

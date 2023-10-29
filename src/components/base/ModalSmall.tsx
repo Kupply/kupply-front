@@ -66,8 +66,7 @@ const Backdrop = styled.div`
   height: 202px;
   position: fixed;
   top: 707px; // 임의 조정
-  left: 663px;
-  right: 663px;
+  left: 725px; // 663px;
   z-index: 9;
   background: rgba(248, 248, 248, 0.4);
 `;

@@ -36,7 +36,7 @@ export default function SignUpLarge1(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: '20.15%' }}></div>
+          <div style={{ height: '130px' }}></div>
           <AlertIconExclamation width="113px" height="113px" />
           <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             아직 인증번호를 받지 못하셨나요?
@@ -84,21 +84,8 @@ const CloseButton = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 70px;
+  top: 50px;
   right: 50px;
-
-  cursor: pointer;
-`;
-
-const PrevButton = styled.button`
-  display: flex;
-  width: 60px;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 70px;
-  left: 50px;
 
   cursor: pointer;
 `;
