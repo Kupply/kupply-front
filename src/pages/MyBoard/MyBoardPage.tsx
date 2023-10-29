@@ -1555,33 +1555,38 @@ const Wrapper = styled.div`
   &::before {
     content: '';
     position: absolute;
-    width: 1564px;
-    height: 1564px;
-    border-radius: 1564px;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 1000px;
     filter: blur(75px);
-    opacity: 0.7;
+    opacity: 0.4;
     background: radial-gradient(
-      60.96% 60.96% at 58.12% 41.5%,
-      rgba(216, 88, 136, 0.5) 0%,
-      rgba(255, 175, 189, 0.05) 100%
+      51.7% 51.7% at 58.12% 41.5%,
+      rgba(216, 88, 136, 0.3) 0%,
+      rgba(255, 175, 189, 0.18) 100%
     );
-    z-index: -1;
-    top: -833px;
-    left: -1px;
+    filter: blur(75px);
+    z-index: 0;
+    top: -100px;
+    left: 400px;
   }
 
   &::after {
     content: '';
     position: absolute;
-    width: 1494px;
-    height: 1494px;
-    border-radius: 1494px;
+    width: 1573px;
+    height: 1573px;
+    border-radius: 1573px;
     filter: blur(75px);
     opacity: 0.5;
-    background: radial-gradient(47.7% 47.7% at 50% 52.3%, rgba(232, 88, 136, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
-    z-index: -1;
-    top: 199px;
-    right: -518px;
+    background: radial-gradient(
+      67.64% 67.64% at 116.69% 26.92%,
+      rgba(216, 88, 136, 0.5) 0%,
+      rgba(255, 175, 189, 0.05) 100%
+    );
+    z-index: 0;
+    top: 273px;
+    right: -304px;
   }
 `;
 
@@ -1630,7 +1635,8 @@ const BigMajorSymbolBox = styled.div`
   height: 571px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(231.86% 143.11% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(231.86% 143.11% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1639,7 +1645,8 @@ const CompetitionRateBox = styled.div`
   height: 274px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1648,8 +1655,9 @@ const ThreeYearCumulativeDataBox = styled.div`
   height: 571px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
-  //backdrop-filter: blur(12px);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
 `;
 
 const EachYearHeadBox = styled.div`
@@ -1670,7 +1678,8 @@ const RangeBox = styled.div`
   height: 252px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1679,7 +1688,8 @@ const Graph_1_1Box = styled.div`
   height: 520px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1688,7 +1698,8 @@ const Graph_2_1Box = styled.div`
   height: 288px;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
@@ -1701,7 +1712,8 @@ const Graph_2Box = styled.div`
   stroke: var(--DF_Grey-2, #dfdfdf);
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
 `;
 
