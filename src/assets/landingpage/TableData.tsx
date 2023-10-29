@@ -5,42 +5,24 @@ import Typography from '../../assets/Typography';
 export interface TableDataProps {
   rank: number;
   secondMajor: string;
+  engName: string;
+  pastRecruitNumber: number;
   recruitNumber: number;
   applyNumber: number;
   competition: number;
   pastCompetition: number;
+  pastmin: number;
   pastmean: number;
   interest: number;
   interestedNum: number; //지망 아니면 0, n지망일경우 n이다.
+  imagesrc: string;
 }
-
-type MajorOptions =
-  | '경영대학'
-  | '경제학과'
-  | '심리학부'
-  | '통계학과'
-  | '수학과'
-  | '화학과'
-  | '미디어학부'
-  | '식품자원경제학과'
-  | '컴퓨터학과';
-
-const majorParamMapping = {
-  경영대학: 'Business School',
-  경제학과: 'Department of Economics',
-  심리학부: 'School of Psychology',
-  통계학과: 'Department of Statistics',
-  수학과: 'Department of Mathematics',
-  화학과: 'Department of Chemistry',
-  미디어학부: 'School of Media & Communication',
-  식품자원경제학과: 'Department of Food & Resources',
-  컴퓨터학과: 'Department of Computer Science & Engineering',
-};
 
 export default function TableData(props: TableDataProps) {
   const {
     rank,
     secondMajor,
+    engName,
     recruitNumber,
     applyNumber,
     competition,
@@ -64,7 +46,7 @@ export default function TableData(props: TableDataProps) {
           {secondMajor}
         </Typography>
         <Typography size="mediumText" style={{ fontWeight: '300' }}>
-          {majorParamMapping[secondMajor as MajorOptions] || ''}
+          {engName}
         </Typography>
       </DoubleMajorCell>
       <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>

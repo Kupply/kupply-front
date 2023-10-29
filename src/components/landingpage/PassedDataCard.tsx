@@ -7,6 +7,20 @@ import { Navigate } from 'react-router-dom';
 
 type buttonOptions = 'default' | 'hover' | 'active';
 
+interface ICardData {
+  name: string;
+  eng: string;
+  경쟁률: number;
+  선발인원: number;
+  min: number;
+  mean: number;
+  semester: string;
+  imagesrc: string;
+}
+type cardProps = {
+  cardData: ICardData[];
+};
+
 const Wrapper = styled.div`
   width: 86%;
   height: 900px;
@@ -65,20 +79,8 @@ const SmallLinkButton = styled.button<{ state: buttonOptions }>`
   }
 `;
 
-const CardData = [
-  {
-    name: '경영대학',
-    eng: 'Business School',
-    경쟁률: 3.59,
-    선발인원: 25,
-    min: 4.12,
-    mean: 4.23,
-    semester: '24-1',
-    imagesrc: '/design_image/previous_detail/business.png',
-  },
-];
-
-export default function PassedDataCard() {
+export default function PassedDataCard(props: cardProps) {
+  const cardData = props.cardData;
   //합격 자료 바로가기 버튼의 click을 조정
   const [isActive, setisActive] = useState<boolean>(false);
 
@@ -149,9 +151,9 @@ export default function PassedDataCard() {
           </Typography>
         </SmallLinkButton>
       </SubjectWrapper>
-      <DepartmentCard {...CardData[0]}></DepartmentCard>
-      <DepartmentCard {...CardData[0]}></DepartmentCard>
-      <DepartmentCard {...CardData[0]}></DepartmentCard>
+      <DepartmentCard {...cardData[0]}></DepartmentCard>
+      <DepartmentCard {...cardData[1]}></DepartmentCard>
+      <DepartmentCard {...cardData[2]}></DepartmentCard>
     </Wrapper>
   );
 }
