@@ -1649,7 +1649,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-
+  /*
   &::before {
     content: '';
     position: absolute;
@@ -1685,7 +1685,7 @@ const Wrapper = styled.div`
     z-index: 0;
     top: 273px;
     right: -304px;
-  }
+  }*/
 `;
 
 const LeftSideWrapper = styled.div`

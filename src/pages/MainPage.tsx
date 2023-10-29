@@ -126,7 +126,13 @@ function MainPage() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);
             }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                handleButtonClick();
+              }
+            }}
           />
+
           <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
