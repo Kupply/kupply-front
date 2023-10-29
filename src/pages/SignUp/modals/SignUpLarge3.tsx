@@ -35,7 +35,7 @@ export default function SignUpLarge3(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: '274px' }}></div>
+          <div style={{ height: '170px' }}></div>
           <AlertIconCheck width="113px" height="113px" />
           <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
             새로운 인증번호를 발송했습니다.
@@ -79,7 +79,7 @@ const CloseButton = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 70px;
+  top: 50px;
   right: 50px;
 
   cursor: pointer;

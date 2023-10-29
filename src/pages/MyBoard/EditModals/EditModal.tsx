@@ -92,6 +92,8 @@ export default function EditModal(props: ModalProps) {
   const originHopeSemester3 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const originUserProfilePic = useRef<string>(localStorage.getItem('userProfilePic'));
 
+  const [lastBoxRef, setLastBoxRef] = useState<any>(null);
+
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
 
@@ -107,6 +109,15 @@ export default function EditModal(props: ModalProps) {
       setIsGpaChanged(true);
     } else {
       setIsGpaChanged(false);
+    }
+  }, [GPA1, GPA2, GPA3]);
+
+  useEffect(() => {
+    if (parseFloat(`${GPA1}.${GPA2}${GPA3}`) > 4.5) {
+      setGPA1('4');
+      setGPA2('5');
+      setGPA3('0');
+      if (lastBoxRef && lastBoxRef.current) lastBoxRef.current.focus();
     }
   }, [GPA1, GPA2, GPA3]);
 
@@ -509,12 +520,18 @@ export default function EditModal(props: ModalProps) {
                   <ModalHelpMessage />
                 </div>
                 <VerifiBoxWrapper>
-                  <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
+                  <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
                   <div style={{ marginTop: 60 }}>
                     <img src="design_image/my_board/Ellipse 981.svg" height="4px" width="4px" />
                   </div>
-                  <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
-                  <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} />
+                  <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
+                  <VerificationBox
+                    name="gpa-3"
+                    value={GPA3}
+                    setValue={setGPA3}
+                    isEntered={GPA3 !== ''}
+                    setRef={setLastBoxRef}
+                  />
                 </VerifiBoxWrapper>
               </SubContentsWrapper>
             </ContentsWrapper>
@@ -533,13 +550,13 @@ export default function EditModal(props: ModalProps) {
                       name="semester-1"
                       value={hopeSemester1}
                       setValue={setHopeSemester1}
-                      isEntered={true}
+                      isEntered={hopeSemester1 !== ''}
                     ></VerificationBox>
                     <VerificationBox
                       name="semester-2"
                       value={hopeSemester2}
                       setValue={setHopeSemester2}
-                      isEntered={true}
+                      isEntered={hopeSemester2 !== ''}
                     ></VerificationBox>
                     <div style={{ marginTop: 26 }}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
@@ -550,7 +567,7 @@ export default function EditModal(props: ModalProps) {
                       name="semester-3"
                       value={hopeSemester3}
                       setValue={setHopeSemester3}
-                      isEntered={true}
+                      isEntered={hopeSemester3 !== ''}
                     ></VerificationBox>
                   </VerifiBoxWrapper>
                 </SubContentsWrapper>

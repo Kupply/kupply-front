@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
 import PrevButton from '../../../assets/buttons/PrevButton';
 import NextButton from '../../../assets/buttons/NextButton';
@@ -37,7 +39,8 @@ export default function ApplicationModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
   const [currentModal, setCurrentModal] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [nextButton, setNextButton] = useState<boolean>(false);
+  const [nextButton1, setNextButton1] = useState<boolean>(false);
+  const [nextButton2, setNextButton2] = useState<boolean>(false);
 
   const [candidateState, setCandidateState] = useState<'default' | 'clicked' | 'unactive'>('default');
   const [passerState, setPasserState] = useState<'default' | 'clicked' | 'unactive'>('default');
@@ -64,38 +67,50 @@ export default function ApplicationModal(props: ModalProps) {
     }
   };
 
-  const [GPA1, setGPA1] = useState<string>(sessionStorage.getItem('GPA')?.charAt(0) || '');
-  const [GPA2, setGPA2] = useState<string>(sessionStorage.getItem('GPA')?.charAt(2) || '');
-  const [GPA3, setGPA3] = useState<string>(sessionStorage.getItem('GPA')?.charAt(3) || '');
-  const [stdID, setStdID] = useState<string>(sessionStorage.getItem('studentId') || '');
-
+  const [GPA1, setGPA1] = useState<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
+  const [GPA2, setGPA2] = useState<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
+  const [GPA3, setGPA3] = useState<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
+  const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
+  const [name, setName] = useState<string>(localStorage.getItem('name') || '');
+  const [hopeMajor1, setHopeMajor1] = useState<string>(localStorage.getItem('hopeMajor1') || '');
+  const [hopeMajor2, setHopeMajor2] = useState<string>(localStorage.getItem('hopeMajor2') || '');
   const [currentSemester1, setCurrentSemester1] = useState<string>(
-    sessionStorage.getItem('currentSemester')?.charAt(0) || '',
+    localStorage.getItem('currentSemester')?.charAt(0) || '',
   );
   const [currentSemester2, setCurrentSemester2] = useState<string>(
-    sessionStorage.getItem('currentSemester')?.charAt(2) || '',
+    localStorage.getItem('currentSemester')?.charAt(2) || '',
   );
 
-  const [stdIDState, setStdIDState] = useState<StateOptions>('default');
+  const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
+  const [lastBoxRef, setLastBoxRef] = useState<any>(null);
 
   useEffect(() => {
     const isValidGPA = GPA1 !== '' && GPA2 !== '' && GPA3 !== '';
     const isValidStdID = stdID.length === 10;
 
     if (isValidGPA && isValidStdID) {
-      setNextButton(true);
+      setNextButton1(true);
     } else {
-      setNextButton(false);
+      setNextButton1(false);
     }
   }, [GPA1, GPA2, GPA3, stdID]);
 
   useEffect(() => {
-    if (!!currentSemester1 && !!currentSemester2) {
-      setNextButton(true);
-    } else {
-      setNextButton(false);
+    if (parseFloat(`${GPA1}.${GPA2}${GPA3}`) > 4.5) {
+      setGPA1('4');
+      setGPA2('5');
+      setGPA3('0');
+      if (lastBoxRef && lastBoxRef.current) lastBoxRef.current.focus();
     }
-  }, [currentSemester1, currentSemester2]);
+  }, [GPA1, GPA2, GPA3]);
+
+  useEffect(() => {
+    if (!!currentSemester1 && !!currentSemester2 && (candidateState === 'clicked' || passerState === 'clicked')) {
+      setNextButton2(true);
+    } else {
+      setNextButton2(false);
+    }
+  }, [currentSemester1, currentSemester2, candidateState, passerState]);
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -104,6 +119,31 @@ export default function ApplicationModal(props: ModalProps) {
     if (file) {
       // 파일이 선택되었을 때 상태를 업데이트합니다.
       setSelectedFile(file);
+    }
+  };
+
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
+  const submitApplication = async () => {
+    try {
+      const applyData = {
+        applyMajor1: hopeMajor1,
+        applyMajor2: hopeMajor2,
+        applyGPA: parseFloat(GPA1 + '.' + GPA2 + GPA3),
+        applyTimes: candidateState === 'clicked' ? 'First' : 'Reapply',
+        applyGrade: currentSemester1 + '-' + currentSemester2,
+      };
+      await axios.post('http://localhost:8080/dashboard', applyData, config);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -158,6 +198,7 @@ export default function ApplicationModal(props: ModalProps) {
                   <MockApplicationButton
                     onClick={() => {
                       setCurrentModal(4); // 다음 창으로 이동
+                      submitApplication();
                     }}
                     style={{ width: '627.232px', height: '68px', fontSize: '20px' }}
                     // 글자 디자인 수정 필요
@@ -173,11 +214,12 @@ export default function ApplicationModal(props: ModalProps) {
                   모의지원이 완료되었습니다.
                 </Typography>
                 <Typography size="mediumText" bold="500" style={{ marginTop: '10px', lineHeight: '136.111%' }}>
-                  고대빵 님의 이중전공 합격을 기원합니다.
+                  {name} 님의 이중전공 합격을 기원합니다.
                 </Typography>
                 <SubmitButton
                   onClick={() => {
                     setOpenModal(!isOpenModal);
+                    window.location.reload();
                   }}
                   style={{ marginTop: '107px' }}
                 >
@@ -267,14 +309,20 @@ export default function ApplicationModal(props: ModalProps) {
                       <Typography size="mediumText">을 입력해주세요.</Typography>
                     </div>
                     <VerifiBoxWrapper>
-                      <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
+                      <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
                       <div style={{ marginTop: 60 }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
                           <circle cx="1" cy="1" r="1" fill="#141414" />
                         </svg>
                       </div>
-                      <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
-                      <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} />
+                      <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
+                      <VerificationBox
+                        name="gpa-3"
+                        value={GPA3}
+                        setValue={setGPA3}
+                        isEntered={GPA3 !== ''}
+                        setRef={setLastBoxRef}
+                      />
                     </VerifiBoxWrapper>
                   </div>
                   <div style={{ position: 'absolute', top: '412px', left: '93px' }}>
@@ -299,7 +347,7 @@ export default function ApplicationModal(props: ModalProps) {
                   </div>
                   <ButtonsWrapper style={{ position: 'absolute', left: '93px', top: '500px' }}>
                     <PrevButton active={false} onClick={handlePrev} />
-                    <NextButton active={nextButton} onClick={handleNext} />
+                    <NextButton active={nextButton1} onClick={handleNext} />
                   </ButtonsWrapper>
                 </ContentsWrapper>
               </>
@@ -354,7 +402,7 @@ export default function ApplicationModal(props: ModalProps) {
                     <VerifiBoxWrapper>
                       <VerificationBox
                         name="currentSemester-1"
-                        value={currentSemester2}
+                        value={currentSemester1}
                         setValue={setCurrentSemester1}
                       />
                       <div style={{ marginTop: '30px' }}>
@@ -391,8 +439,8 @@ export default function ApplicationModal(props: ModalProps) {
                     </div>
                   </div>
                   <ButtonsWrapper style={{ position: 'absolute', left: '93px', top: '500px' }}>
-                    <PrevButton active={false} onClick={handlePrev} />
-                    <NextButton active={nextButton} onClick={handleNext} />
+                    <PrevButton active={true} onClick={handlePrev} />
+                    <NextButton active={nextButton2} onClick={handleNext} />
                   </ButtonsWrapper>
                 </ContentsWrapper>
               </>

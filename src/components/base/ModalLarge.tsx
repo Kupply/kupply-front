@@ -33,7 +33,7 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 // 모달창 위치 조정 목적의 컨테이너
 const ModalContainer = styled.div`
   width: 814px;
-  height: 90vh;
+  height: 780px;
   position: fixed;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@ const ModalContainer = styled.div`
 // 모달 창 (흰 색 컨텐츠 창)
 const DialogBox = styled.dialog`
   width: 814px; // *전체화면에 대해 크기 조정 필요
-  max-height: 81vh; // *전체화면에 대해 크기 조정 필요
+  height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -54,8 +54,11 @@ const DialogBox = styled.dialog`
   box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   background-color: white;
-  // position: fixed; // 추가
+  // position: fixed;
+  // top: 75px;
   z-index: 10;
+
+  // --------------이하 스크롤바 관련 코드-------------
 
   /* Webkit 기반의 브라우저 Chrome, Safari */
   &::-webkit-scrollbar {
@@ -108,7 +111,8 @@ const DialogBox = styled.dialog`
 const Backdrop = styled.div`
   width: 100%; // 100vw;
   height: 100%; // 100vh;
-  // top: 0;
+  top: 0;
+  left: 0;
   position: fixed;
   z-index: 9;
   background: rgba(20, 16, 19, 0.55);
