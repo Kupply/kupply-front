@@ -39,8 +39,8 @@ const LandingPage = () => {
     const delay = 500;
 
     setTimeout(() => {
-      const targetY = 230;
-      ScrollToY(targetY, 500); // 스크롤 애니메이션 지속 시간을 설정할 수 있습니다.
+      const targetY = 330;
+      ScrollToY(targetY, 700); // 스크롤 애니메이션 지속 시간을 설정할 수 있습니다.
     }, delay);
   }, []);
 

@@ -24,11 +24,10 @@ const ContentWrapper = styled.div`
   margin-right: 200px;
 `;
 
-const DirectButton = styled.button`
+const DirectButton = styled.div`
   width: 147px;
   height: 44px;
   display: inline-flex;
-  padding: 12px 24px;
   justify-content: center;
   align-items: center;
   gap: 8px;

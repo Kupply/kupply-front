@@ -987,18 +987,30 @@ export default function MyBoardPage() {
                       </svg>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '51px' }}>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '410px' }}
+                      >
                         {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
                         인원
                       </Typography>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '85px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '410px' }}
+                      >
                         경쟁률
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '81.7%',
+                          top: '440px',
+                        }}
                       >
                         {semesterBtnStates['2023-1R']
                           ? pastData1[0].numOfSelection
@@ -1009,7 +1021,13 @@ export default function MyBoardPage() {
                       </Typography>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '143px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '92.7%',
+                          top: '440px',
+                        }}
                       >
                         {/* {semesterBtnStates['2023-1R']
                           ? pastData1[0].competitionRate
@@ -1021,17 +1039,37 @@ export default function MyBoardPage() {
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '500px' }}
+                      >
                         합격자 평균 학점
                       </Typography>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '76px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '500px' }}
+                      >
                         합격자 최저 학점
                       </Typography>
+                      <div style={{ width: '295px', marginLeft: '48px', marginTop: '122px' }}>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
+                          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
+                        </Typography>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
+                          기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+                        </Typography>
+                      </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '81.7%',
+                          top: '530px',
+                        }}
                       >
                         {semesterBtnStates['2023-1R']
                           ? pastData1[0].meanGpa
@@ -1041,7 +1079,13 @@ export default function MyBoardPage() {
                       </Typography>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '142px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '92.7%',
+                          top: '530px',
+                        }}
                       >
                         {semesterBtnStates['2023-1R']
                           ? pastData1[0].minGpa
@@ -1053,6 +1097,7 @@ export default function MyBoardPage() {
                   </ThreeYearCumulativeDataBox>
                 </div>
               </div>
+
               <div style={{ marginLeft: '551px', marginTop: '30px' }}>
                 <RangeBox>
                   <Typography
@@ -1396,18 +1441,30 @@ export default function MyBoardPage() {
                       </svg>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '51px' }}>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '410px' }}
+                      >
                         {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
                         인원
                       </Typography>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '85px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '410px' }}
+                      >
                         경쟁률
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '81.7%',
+                          top: '440px',
+                        }}
                       >
                         {semesterBtnStates['2023-1R']
                           ? pastData2[0].numOfSelection
@@ -1418,7 +1475,13 @@ export default function MyBoardPage() {
                       </Typography>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '143px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '92.7%',
+                          top: '440px',
+                        }}
                       >
                         {/* {semesterBtnStates['2023-1R']
                           ? pastData2[0].competitionRate
@@ -1430,17 +1493,37 @@ export default function MyBoardPage() {
                       </Typography>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '60.98px' }}>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '36px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '81.7%', top: '500px' }}
+                      >
                         합격자 평균 학점
                       </Typography>
-                      <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)', marginLeft: '76px' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{ color: 'rgba(20, 20, 20, 0.60)', position: 'absolute', left: '92.7%', top: '500px' }}
+                      >
                         합격자 최저 학점
                       </Typography>
+                      <div style={{ width: '295px', marginLeft: '48px', marginTop: '122px' }}>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
+                          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
+                        </Typography>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
+                          기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+                        </Typography>
+                      </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '9px' }}>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '36px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '81.7%',
+                          top: '530px',
+                        }}
                       >
                         {semesterBtnStates['2023-1R']
                           ? pastData2[0].meanGpa
@@ -1450,7 +1533,13 @@ export default function MyBoardPage() {
                       </Typography>
                       <Typography
                         size="largeText"
-                        style={{ color: 'var(--Main-Black, #141414)', fontWeight: '600', marginLeft: '142px' }}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '600',
+                          position: 'absolute',
+                          left: '92.7%',
+                          top: '530px',
+                        }}
                       >
                         {semesterBtnStates['2023-1R']
                           ? pastData2[0].minGpa
@@ -1558,7 +1647,7 @@ height: 2378px;
 */
 
 const Wrapper = styled.div`
-  width: 100%; // 1920px;
+  width: 100vw; // 1920px;
   max-width: 2560px;
   height: 2020px; // 100%; // (헤더, 풋터 제외 크기) 이 크기로 퍼센트 계산
   background: #fcfcfc;
