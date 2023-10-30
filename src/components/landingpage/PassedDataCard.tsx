@@ -88,7 +88,9 @@ export default function PassedDataCard(props: cardProps) {
 
   //자연계, 인문계 바로가기 버튼 click 조정
   const [upperButtonState, setUpperButtonState] = useState<buttonOptions>('default');
+  const [upperButtonClicked, setUpperButtonClicked] = useState(false);
   const [underButtonState, setUnderButtonState] = useState<buttonOptions>('default');
+  const [underButtonClicked, setUnderButtonClicked] = useState(false);
 
   return (
     <Wrapper>
@@ -129,10 +131,20 @@ export default function PassedDataCard(props: cardProps) {
           </Typography>
         </LinkButton>
         <SmallLinkButton
-          onMouseEnter={() => setUpperButtonState('hover')}
-          onMouseLeave={() => setUpperButtonState('default')}
-          onMouseDown={() => setUpperButtonState('active')}
-          onMouseUp={() => setUpperButtonState('default')}
+          onClick={() => {
+            setUpperButtonClicked(!upperButtonClicked);
+            if (underButtonClicked == true) {
+              setUnderButtonClicked(false);
+              setUnderButtonState('default');
+            }
+            upperButtonClicked ? setUpperButtonState('hover') : setUpperButtonState('active');
+          }}
+          onMouseOver={() => {
+            if (upperButtonClicked == false) setUpperButtonState('hover');
+          }}
+          onMouseOut={() => {
+            if (upperButtonClicked == false) setUpperButtonState('default');
+          }}
           state={upperButtonState}
         >
           <Typography size="mediumText" color={upperButtonState === 'default' ? '#B9B9B9' : '#D85888'}>
@@ -140,10 +152,20 @@ export default function PassedDataCard(props: cardProps) {
           </Typography>
         </SmallLinkButton>
         <SmallLinkButton
-          onMouseEnter={() => setUnderButtonState('hover')}
-          onMouseLeave={() => setUnderButtonState('default')}
-          onMouseDown={() => setUnderButtonState('active')}
-          onMouseUp={() => setUnderButtonState('default')}
+          onClick={() => {
+            setUnderButtonClicked(!underButtonClicked);
+            if (upperButtonClicked == true) {
+              setUpperButtonClicked(false);
+              setUpperButtonState('default');
+            }
+            underButtonClicked ? setUnderButtonState('hover') : setUnderButtonState('active');
+          }}
+          onMouseOver={() => {
+            if (underButtonClicked == false) setUnderButtonState('hover');
+          }}
+          onMouseOut={() => {
+            if (underButtonClicked == false) setUnderButtonState('default');
+          }}
           state={underButtonState}
         >
           <Typography size="mediumText" color={underButtonState === 'default' ? '#B9B9B9' : '#D85888'}>

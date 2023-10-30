@@ -24,7 +24,7 @@ const TitleWrapper = styled.div`
   position: sticky;
   top: 0;
   background: rgba(255, 255, 255, 1);
-  z-index: 10;
+  z-index: 990;
 `;
 
 const SegmentedSlider = styled.div`
