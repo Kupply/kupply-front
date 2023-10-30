@@ -1632,7 +1632,7 @@ height: 2378px;
 
 const Wrapper = styled.div`
   width: 100vw; // 1920px;
-  max-width: 2560px;
+  //max-width: 2560px;
   height: 2020px; // 100%; // (헤더, 풋터 제외 크기) 이 크기로 퍼센트 계산
   background: #fcfcfc;
   display: flex;

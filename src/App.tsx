@@ -20,6 +20,9 @@ import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/Si
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 import DeletePage from './pages/DeletePage';
 
+import { BrowserView, MobileView, isMobile } from 'react-device-detect';
+import MobilePage from './Mobile';
+
 const Wrapper = styled.div`
   position: absolute;
   width: 100vw; // 1920px;
@@ -43,30 +46,36 @@ export default function App() {
 
   // element={<AuthRequired />}
   return (
-    <Wrapper>
-      <Header logined={false} setLogin={setisLogined} setSelected={setSelected} />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
-        <Route path="/archive" element={<PreviousPage />} />
-        <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
-        <Route path="/myboard" element={<MyBoardPage />} />
-        <Route path="/community" element={<CommunityPage />} />
-        <Route path="/message" element={<MessagePage />} />
-        <Route path="/join" element={<SignUp1Page />} />
-        <Route path="/settings" element={<SettingsPage selected={selected} setSelected={setSelected} />} />
-        <Route path="/signup1" element={<SignUp1Page />} />
-        <Route path="/signup2" element={<SignUp2Page />} />
-        <Route path="/signup3" element={<SignUp3Page />} />
-        <Route path="/signup4" element={<SignUp4Page />} />
-        <Route path="/signup4-candidate" element={<SignUp4PageCandidate />} />
-        <Route path="/signup4-passer" element={<SignUp4PagePasser />} />
-        <Route path="/signup5" element={<SignUp5Page />} />
-        <Route path="/signupcomplete" element={<SignUp5Complete />} />
-        <Route path="/landing" element={<LandingPage />} />
-        <Route path="/delete" element={<DeletePage />} />
-      </Routes>
-      <Footer setSelected={setSelected} />
-    </Wrapper>
+    <>
+      {isMobile ? (
+        <MobilePage />
+      ) : (
+        <Wrapper>
+          <Header logined={true} setLogin={setisLogined} setSelected={setSelected} />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
+            <Route path="/archive" element={<PreviousPage />} />
+            <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
+            <Route path="/myboard" element={<MyBoardPage />} />
+            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/message" element={<MessagePage />} />
+            <Route path="/join" element={<SignUp1Page />} />
+            <Route path="/settings" element={<SettingsPage selected={selected} setSelected={setSelected} />} />
+            <Route path="/signup1" element={<SignUp1Page />} />
+            <Route path="/signup2" element={<SignUp2Page />} />
+            <Route path="/signup3" element={<SignUp3Page />} />
+            <Route path="/signup4" element={<SignUp4Page />} />
+            <Route path="/signup4-candidate" element={<SignUp4PageCandidate />} />
+            <Route path="/signup4-passer" element={<SignUp4PagePasser />} />
+            <Route path="/signup5" element={<SignUp5Page />} />
+            <Route path="/signupcomplete" element={<SignUp5Complete />} />
+            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/delete" element={<DeletePage />} />
+          </Routes>
+          <Footer setSelected={setSelected} />
+        </Wrapper>
+      )}
+    </>
   );
 }
