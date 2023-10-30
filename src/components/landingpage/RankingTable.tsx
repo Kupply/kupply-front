@@ -227,7 +227,7 @@ const TitleWrapper = styled.div`
   position: sticky;
   top: 0;
   background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3));
-  z-index: 10;
+  z-index: 990;
 `;
 
 const KupplyApplyButton = styled.button`

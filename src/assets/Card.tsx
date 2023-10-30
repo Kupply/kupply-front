@@ -49,7 +49,10 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
   };
   const [svgHover, setSvgHover] = useState(false);
   const onSvgHover = () => {
-    setSvgHover(!svgHover);
+    setSvgHover(true);
+  };
+  const onSvgHoverOut = () => {
+    setSvgHover(false);
   };
   const navigate = useNavigate();
 
@@ -73,7 +76,7 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
           <HoverMin>{min}</HoverMin>
           <HoverAvgTitle>합격자 평균 학점</HoverAvgTitle>
           <HoverAvg>{avg}</HoverAvg>
-          <Svg onMouseEnter={onSvgHover} onMouseLeave={onSvgHover}>
+          <Svg onMouseEnter={onSvgHover} onMouseLeave={onSvgHoverOut}>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
               <g clip-path="url(#clip0_3298_1700)">
                 <path
@@ -226,7 +229,7 @@ const SvgNotch = styled.div`
   height: 8px;
   flex-shrink: 0;
   fill: rgba(20, 20, 20, 0.6);
-
+  position: absolute;
   margin-top: 229px;
   margin-left: 314px;
 `;

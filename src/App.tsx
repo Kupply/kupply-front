@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   position: absolute;
   width: 100vw; // 1920px;
   //height: 100vh; // 푸터 겹침 문제 해결을 위해 삭제 (23.10.28)
-  max-width: 2560px;
+  max-width: 1920px;
   margin-top: 80px; // header 높이와 동일 (구체적인 헤더 높이의 기준을 알 수 없어 우선 px 값으로 지정)
   box-sizing: border-box;
   display: flex;
@@ -44,7 +44,7 @@ export default function App() {
   // element={<AuthRequired />}
   return (
     <Wrapper>
-      <Header logined={false} setLogin={setisLogined} setSelected={setSelected} />
+      <Header logined={true} setLogin={setisLogined} setSelected={setSelected} />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />

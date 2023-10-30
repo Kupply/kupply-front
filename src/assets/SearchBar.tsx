@@ -24,19 +24,23 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
         </svg>
       </SvgContainer>
       <Input ref={ref} value={value} onChange={onChange} placeholder="관심 학부 검색하기" />
-      <ButtonContainer>
-        <Button
-          onClick={() => {
-            setValue('');
-            if (ref.current) ref.current.focus();
-          }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 60 60" fill="none">
-            <path d="M36 24L24 36" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M24 24L36 36" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </Button>
-      </ButtonContainer>
+      {value != '' ? (
+        <ButtonContainer>
+          <Button
+            onClick={() => {
+              setValue('');
+              if (ref.current) ref.current.focus();
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 60 60" fill="none">
+              <path d="M36 24L24 36" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M24 24L36 36" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </Button>
+        </ButtonContainer>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

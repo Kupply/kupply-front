@@ -208,7 +208,7 @@ export default function MyBoardPage() {
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: '디자인조형학부',
+    firstMajor: '수학과',
     studentId: '2020220037',
     hopeMajor1: '경영학과',
     hopeMajor2: '미디어학부',
@@ -602,20 +602,51 @@ export default function MyBoardPage() {
                     >
                       1지망
                     </Typography>
-                    <Typography size="bodyText" style={{ color: 'var(--Main-Black, #141414)', marginTop: '16px' }}>
-                      {userData.hopeMajor1}
-                    </Typography>
                     <Typography
-                      size="normalText"
+                      size="bodyText"
                       style={{
                         color: 'var(--Main-Black, #141414)',
-                        fontWeight: '400',
-                        lineHeight: '128.571%',
-                        opacity: 0.8,
+                        marginTop:
+                          userData.hopeMajor1 == '심리학부' || userData.hopeMajor1 == '경영학과' ? '16px' : '8px',
                       }}
                     >
-                      {getTextByTitle(userData.hopeMajor1)}
+                      {userData.hopeMajor1}
                     </Typography>
+                    <div
+                      style={{
+                        width:
+                          userData.hopeMajor1 == '심리학부'
+                            ? '135px'
+                            : userData.hopeMajor1 == '경영학과'
+                            ? '103px'
+                            : userData.hopeMajor1 == '미디어학부'
+                            ? '111px'
+                            : userData.hopeMajor1 == '경제학과'
+                            ? '95px'
+                            : userData.hopeMajor1 == '통계학과'
+                            ? '95px'
+                            : userData.hopeMajor1 == '화학과'
+                            ? '90px'
+                            : userData.hopeMajor1 == '수학과'
+                            ? '95px'
+                            : userData.hopeMajor1 == '식품자원경제학과'
+                            ? '133px'
+                            : '138px',
+                      }}
+                    >
+                      <Typography
+                        size={userData.hopeMajor1 == '컴퓨터학과' ? 'details' : 'smallText'}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '400',
+                          lineHeight: '128.571%',
+                          opacity: 0.8,
+                          marginTop: '2px',
+                        }}
+                      >
+                        {getTextByTitle(userData.hopeMajor1)}
+                      </Typography>
+                    </div>
                   </div>
                 </InterestMajorBox>
               </div>
@@ -652,20 +683,51 @@ export default function MyBoardPage() {
                     >
                       2지망
                     </Typography>
-                    <Typography size="bodyText" style={{ color: 'var(--Main-Black, #141414)', marginTop: '8px' }}>
-                      {userData.hopeMajor2}
-                    </Typography>
                     <Typography
-                      size="normalText"
+                      size="bodyText"
                       style={{
                         color: 'var(--Main-Black, #141414)',
-                        fontWeight: '400',
-                        lineHeight: '114.286%',
-                        opacity: 0.8,
+                        marginTop:
+                          userData.hopeMajor2 == '심리학부' || userData.hopeMajor2 == '경영학과' ? '16px' : '8px',
                       }}
                     >
-                      {getTextByTitle(userData.hopeMajor2)}
+                      {userData.hopeMajor2}
                     </Typography>
+                    <div
+                      style={{
+                        width:
+                          userData.hopeMajor2 == '심리학부'
+                            ? '135px'
+                            : userData.hopeMajor2 == '경영학과'
+                            ? '103px'
+                            : userData.hopeMajor2 == '미디어학부'
+                            ? '111px'
+                            : userData.hopeMajor2 == '경제학과'
+                            ? '95px'
+                            : userData.hopeMajor2 == '통계학과'
+                            ? '95px'
+                            : userData.hopeMajor2 == '화학과'
+                            ? '90px'
+                            : userData.hopeMajor2 == '수학과'
+                            ? '95px'
+                            : userData.hopeMajor2 == '식품자원경제학과'
+                            ? '133px'
+                            : '138px',
+                      }}
+                    >
+                      <Typography
+                        size={userData.hopeMajor2 == '컴퓨터학과' ? 'details' : 'smallText'}
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          fontWeight: '400',
+                          lineHeight: '114.286%',
+                          opacity: 0.8,
+                          marginTop: '2px',
+                        }}
+                      >
+                        {getTextByTitle(userData.hopeMajor2)}
+                      </Typography>
+                    </div>
                   </div>
                 </InterestMajorBox>
               </div>
@@ -1632,7 +1694,7 @@ height: 2378px;
 
 const Wrapper = styled.div`
   width: 100vw; // 1920px;
-  max-width: 2560px;
+  max-width: 1920px;
   height: 2020px; // 100%; // (헤더, 풋터 제외 크기) 이 크기로 퍼센트 계산
   background: #fcfcfc;
   display: flex;
