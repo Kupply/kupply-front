@@ -56,7 +56,7 @@ const DialogBox = styled.dialog`
   background-color: white;
   // position: fixed;
   // top: 75px;
-  z-index: 1010;
+  z-index: 10;
 
   // --------------이하 스크롤바 관련 코드-------------
 
@@ -114,6 +114,6 @@ const Backdrop = styled.div`
   top: 0;
   left: 0;
   position: fixed;
-  z-index: 1005;
+  z-index: 9;
   background: rgba(20, 16, 19, 0.55);
 `;

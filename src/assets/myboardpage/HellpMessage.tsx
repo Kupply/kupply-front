@@ -20,48 +20,10 @@ interface SvgProps {
 
 interface MessageProps extends React.ComponentPropsWithoutRef<'button'> {}
 
-const MessageBox = styled.div<MessageBoxProps>`
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  padding: 10px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-  position: absolute;
-  top: -30px;
-  right: -280px;
-  width: 528px;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  //border-radius: 10px;
-  filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
-`;
-
-const ChartMessageBox = styled.div<MessageBoxProps>`
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  padding: 10px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-  position: absolute;
-  top: -30px;
-  right: -280px;
-  width: 528px;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  //border-radius: 10px;
-  filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
-`;
-
 const ModalMessageBox = styled.div<MessageBoxProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition: visibility 0.3s ease-in-out;
   padding: 10px 8px;
   justify-content: center;
   align-items: center;
