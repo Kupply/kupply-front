@@ -5,9 +5,7 @@ import Typography from '../Typography';
 const HelpBox = styled.button<{ isHovered: boolean }>`
   display: flex;
   width: 40px;
-  height: 20px;
-  position: absolute;
-  top: 20px;
+  height: 30px;
 `;
 
 interface MessageBoxProps {
@@ -23,17 +21,17 @@ interface MessageProps extends React.ComponentPropsWithoutRef<'button'> {}
 const ModalMessageBox = styled.div<MessageBoxProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition: visibility 0.3s ease-in-out;
+  //transition: visibility 0.3s ease-in-out;
   padding: 10px 8px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   align-self: stretch;
   position: absolute;
-  top: -100px;
-  right: -470px;
+  top: -95px;
+  right: -430px;
   width: 467px;
-  height: 87px;
+  height: 67px;
   z-index: 1000;
   background: #fff;
   //border-radius: 10px;
@@ -43,7 +41,7 @@ const ModalMessageBox = styled.div<MessageBoxProps>`
 const StyledSvg = styled.svg<SvgProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  //transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   position: absolute;
   top: -32px;
   z-index: 1000;
@@ -54,7 +52,7 @@ function HelpMessage(props: MessageProps) {
   const [isHovered, setIsHovered] = useState(true);
 
   return (
-    <div style={{ position: 'absolute', top: '67px', left: '440px' }}>
+    <div style={{ position: 'absolute' }}>
       <HelpBox onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +108,7 @@ function HelpMessage(props: MessageProps) {
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{ position: 'absolute', left: '4px', top: '39px' }}
+        style={{ position: 'absolute', left: '4px', top: '24px' }}
       >
         <StyledSvg
           xmlns="http://www.w3.org/2000/svg"
@@ -171,12 +169,12 @@ function ModalHelpMessage(props: MessageProps) {
       setIsVisible(true);
       const hideTimeout = setTimeout(() => {
         setIsVisible(false);
-      }, 300);
+      }, 0);
     }
   }, [isHovered]);
 
   return (
-    <div style={{ position: 'absolute', top: '184px', left: '265px' }}>
+    <div style={{ position: 'absolute', left: '260px', top: '205px' }}>
       <HelpBox onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -232,7 +230,7 @@ function ModalHelpMessage(props: MessageProps) {
       <div
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
-        style={{ position: 'absolute', left: '4px', top: '39px' }}
+        style={{ position: 'absolute', left: '4px', top: '24px' }}
       >
         <StyledSvg
           xmlns="http://www.w3.org/2000/svg"
