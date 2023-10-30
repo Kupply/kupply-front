@@ -43,9 +43,7 @@ const ModalMessageBox = styled.div<MessageBoxProps>`
 const StyledSvg = styled.svg<SvgProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   position: absolute;
   top: -32px;
   z-index: 1000;

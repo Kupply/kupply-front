@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect, createContext } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
@@ -19,6 +19,7 @@ import SignUp3Page from './pages/SignUp/SignUp3Page';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/SignUp/SignUp4Page';
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 import DeletePage from './pages/DeletePage';
+import RouteChangeTracker from './RouteChangeTracker'; // GA 추적 목적
 
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 import MobilePage from './Mobile';
@@ -37,6 +38,7 @@ const Wrapper = styled.div`
 
 // marginTop 은 Header 에 페이지가 가리지 않게 하기 위해서.
 export default function App() {
+  RouteChangeTracker();
   const [isLogined, setisLogined] = useState<boolean>(false);
   const [selected, setSelected] = useState(0);
   useEffect(() => {
@@ -45,6 +47,7 @@ export default function App() {
   }, []);
 
   // element={<AuthRequired />}
+  // 현재 MainPage 에만, pageView 이벤트 추적기 삽입
   return (
     <>
       {isMobile ? (
