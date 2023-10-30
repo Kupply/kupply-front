@@ -859,15 +859,16 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               setValue={setHopeMajor2}
             ></DropDown>
           </div>
+          <div style={{ marginTop: '53px', marginLeft: '110px' }}>
+            <HelpMessage />
+          </div>
           <TextFieldTitle>
             <strong>학점</strong> 수정하기
             <span style={{ marginLeft: 25 }}>
               <Optional>(선택)</Optional>
             </span>
           </TextFieldTitle>
-          <span style={{ position: 'absolute', top: 346, left: 720 }}>
-            <HelpMessage />
-          </span>
+
           <VerifiBoxWrapper>
             <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
             <div style={{ marginTop: 60 }}>
