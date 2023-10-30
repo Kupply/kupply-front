@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Typography from './assets/Typography';
+import { GlobalStyle } from './globalStyle';
 
 const MobilePageWrapper = styled.div`
   text-align: center;
@@ -11,8 +12,8 @@ const MobilePageWrapper = styled.div`
 `;
 
 const CharacterImage = styled.img`
-  width: 180px;
-  height: 180px;
+  width: 154px;
+  height: 184px;
   flex-shrink: 0;
   //background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 `;
@@ -26,7 +27,7 @@ const LogoImage = styled.img`
 
 const TitleStyle = styled.text`
   color: #000;
-  font-family: Gmarket Sans;
+  font-family: 'GmarketSans';
   font-size: 33.621px;
   font-style: normal;
   font-weight: 300;
