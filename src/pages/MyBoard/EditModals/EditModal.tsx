@@ -419,6 +419,24 @@ export default function EditModal(props: ModalProps) {
                   ></DropDown>
                 </SubContentsWrapper>
               </div>
+              <MoveButtonWrapper style={{ marginTop: '20px' }}>
+                <PrevButton
+                  onClick={() => {
+                    setOpenModal(!isOpenModal);
+                  }}
+                >
+                  취소
+                </PrevButton>
+                <SubmitButton
+                  onClick={() => {
+                    // setOpenModal(!isOpenModal);
+                    setIsSubmitted(true);
+                    if (!isGpaChanged) onClickSubmit();
+                  }}
+                >
+                  저장하기
+                </SubmitButton>
+              </MoveButtonWrapper>
             </ContentsWrapper>
           )}
           {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
@@ -446,6 +464,24 @@ export default function EditModal(props: ModalProps) {
                   </div>
                 </SubContentsWrapper>
               </div>
+              <MoveButtonWrapper style={{ marginTop: '187px' }}>
+                <PrevButton
+                  onClick={() => {
+                    setOpenModal(!isOpenModal);
+                  }}
+                >
+                  취소
+                </PrevButton>
+                <SubmitButton
+                  onClick={() => {
+                    // setOpenModal(!isOpenModal);
+                    setIsSubmitted(true);
+                    if (!isGpaChanged) onClickSubmit();
+                  }}
+                >
+                  저장하기
+                </SubmitButton>
+              </MoveButtonWrapper>
             </ContentsWrapper>
           )}
           {currentModal === 2 && ( // '현재 내 학점' 버튼 클릭 시
@@ -474,6 +510,24 @@ export default function EditModal(props: ModalProps) {
                   />
                 </VerifiBoxWrapper>
               </SubContentsWrapper>
+              <MoveButtonWrapper>
+                <PrevButton
+                  onClick={() => {
+                    setOpenModal(!isOpenModal);
+                  }}
+                >
+                  취소
+                </PrevButton>
+                <SubmitButton
+                  onClick={() => {
+                    // setOpenModal(!isOpenModal);
+                    setIsSubmitted(true);
+                    if (!isGpaChanged) onClickSubmit();
+                  }}
+                >
+                  저장하기
+                </SubmitButton>
+              </MoveButtonWrapper>
             </ContentsWrapper>
           )}
           {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
@@ -512,26 +566,26 @@ export default function EditModal(props: ModalProps) {
                   </VerifiBoxWrapper>
                 </SubContentsWrapper>
               </div>
+              <MoveButtonWrapper>
+                <PrevButton
+                  onClick={() => {
+                    setOpenModal(!isOpenModal);
+                  }}
+                >
+                  취소
+                </PrevButton>
+                <SubmitButton
+                  onClick={() => {
+                    // setOpenModal(!isOpenModal);
+                    setIsSubmitted(true);
+                    if (!isGpaChanged) onClickSubmit();
+                  }}
+                >
+                  저장하기
+                </SubmitButton>
+              </MoveButtonWrapper>
             </ContentsWrapper>
           )}
-          <MoveButtonWrapper>
-            <PrevButton
-              onClick={() => {
-                setOpenModal(!isOpenModal);
-              }}
-            >
-              취소
-            </PrevButton>
-            <SubmitButton
-              onClick={() => {
-                // setOpenModal(!isOpenModal);
-                setIsSubmitted(true);
-                if (!isGpaChanged) onClickSubmit();
-              }}
-            >
-              저장하기
-            </SubmitButton>
-          </MoveButtonWrapper>
         </ModalLarge>
       )}
     </Main>
@@ -570,6 +624,7 @@ const MoveButtonWrapper = styled.div`
   flex-direction: row;
   width: 628px;
   gap: 18px;
+  margin-top: 280px;
 `;
 
 const ContentsWrapper = styled.div`
