@@ -216,12 +216,13 @@ export default function SignUp3Page() {
   }, [password, passwordState, password2, password2State]);
 
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
+  // 닉네임 제한 10->7자 수정
   useEffect(() => {
-    if ((nickname.length === 1 || nickname.length > 10) && nicknameState !== 'focused') {
+    if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
       setnicknameState('error');
       setErrorMessages({
         ...errorMessages,
-        nicknameErrorMessage: '닉네임은 2자 이상 10자 이하여야 해요.',
+        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
       });
     } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
       setnicknameState('error');

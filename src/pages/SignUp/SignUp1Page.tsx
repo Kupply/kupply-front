@@ -218,7 +218,7 @@ export default function SignUp1Page() {
         switch (currentModal) {
           case 0:
             return (
-              <div style={{ background: 'red', width: '100%' }}>
+              <div style={{ background: 'red', width: '100%', zIndex: 20 }}>
                 <SignUpSmall
                   currentModal={currentModal}
                   isOpenModal={isOpenModal}

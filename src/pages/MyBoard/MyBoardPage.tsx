@@ -203,7 +203,7 @@ export default function MyBoardPage() {
 
   // 서버로부터 받는 정보들
   const [userData, setUserData] = useState({
-    userName: '고대빵',
+    userName: '가나다라마바사',
     userNickname: '잠만보',
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
@@ -1745,7 +1745,7 @@ const LeftSideWrapper = styled.div`
   position: absolute;
   flex-shrink: 0;
   background: linear-gradient(89deg, rgba(238, 238, 238, 0.44) 10.94%, rgba(217, 217, 217, 0) 99.54%);
-  left: 0;
+  left: 120px;
   top: 0;
   //border: 1px solid gray; // 외곽선 추가 (나중에 삭제)
 `;
