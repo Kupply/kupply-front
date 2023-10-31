@@ -174,7 +174,7 @@ function ModalHelpMessage(props: MessageProps) {
   }, [isHovered]);
 
   return (
-    <div style={{ position: 'absolute', left: '260px', top: '205px' }}>
+    <div style={{ position: 'absolute', left: '260px', top: '189px' }}>
       <HelpBox onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
