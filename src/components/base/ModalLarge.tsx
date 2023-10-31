@@ -62,7 +62,7 @@ const DialogBox = styled.dialog`
 
   /* Webkit 기반의 브라우저 Chrome, Safari */
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 1px;
     height: 10px; /* 스크롤바 높이를 10px로 수정 */
   }
 

@@ -378,6 +378,8 @@ export default function EditModal(props: ModalProps) {
                     </CandidateImgsWrapper>
                     <div style={{ gap: '5px', marginTop: '52px' }}>
                       <ImgCtrlButton></ImgCtrlButton>
+                    </div>
+                    <div style={{ marginLeft: '85px', marginTop: '-28px' }}>
                       <ImgDelButton>삭제</ImgDelButton>
                     </div>
                   </div>
@@ -611,6 +613,7 @@ const HeaderWrapper = styled.div`
   flex-shrink: 0;
   background-color: #fcfafb;
   border-bottom: 1px solid var(--DF_Grey-2, #dfdfdf);
+  margin-top: -16px;
 `;
 
 const HeaderButtonWrapper = styled.div`
