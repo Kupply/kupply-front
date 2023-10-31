@@ -850,8 +850,8 @@ export default function MyBoardPage() {
         </LeftSideWrapper>
         <div style={{ marginTop: '-82px' }}>
           <div style={{ display: 'flex', alignItems: 'center', marginTop: '154px', marginLeft: '551px', gap: '18px' }}>
-            <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} />
-            <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2}>
+            <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
+            <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
               2지망
             </InterestMajorButton>
           </div>
@@ -1700,7 +1700,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-  /*
+  overflow: hidden;
+
   &::before {
     content: '';
     position: absolute;
@@ -1736,7 +1737,7 @@ const Wrapper = styled.div`
     z-index: 0;
     top: 273px;
     right: -304px;
-  }*/
+  }
 `;
 
 const LeftSideWrapper = styled.div`
@@ -1747,7 +1748,7 @@ const LeftSideWrapper = styled.div`
   background: linear-gradient(89deg, rgba(238, 238, 238, 0.44) 10.94%, rgba(217, 217, 217, 0) 99.54%);
   left: 120px;
   top: 0;
-  //border: 1px solid gray; // 외곽선 추가 (나중에 삭제)
+  z-index: 1;
 `;
 
 // ----------------Box----------------
@@ -1758,6 +1759,7 @@ const MyInformationBox = styled.div<{ translateY: number }>`
   border: 0px solid var(--White, #fff);
   background: rgba(255, 255, 255, 0.3);
   transform: ${(props) => `translateY(${props.translateY}px)`};
+  z-index: 1;
 `;
 
 const InterestMajorBox = styled.div`
@@ -1768,6 +1770,7 @@ const InterestMajorBox = styled.div`
   border-radius: 5px;
   border: 1px solid #eee;
   backdrop-filter: blur(9px);
+  z-index: 1;
 `;
 
 const MajorSymbolShadow = styled.div`
@@ -1777,6 +1780,7 @@ const MajorSymbolShadow = styled.div`
   fill: radial-gradient(47.7% 47.7% at 50% 52.3%, rgba(146, 104, 83, 0.41) 0%, rgba(255, 255, 255, 0) 100%);
   margin-top: 16px;
   margin-left: 3px;
+  z-index: 1;
 `;
 
 const BigMajorSymbolBox = styled.div`
@@ -1787,6 +1791,7 @@ const BigMajorSymbolBox = styled.div`
   //background: radial-gradient(231.86% 143.11% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
+  z-index: 1;
 `;
 
 const CompetitionRateBox = styled.div`
@@ -1797,6 +1802,7 @@ const CompetitionRateBox = styled.div`
   //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
+  z-index: 1;
 `;
 
 const ThreeYearCumulativeDataBox = styled.div`
@@ -1807,6 +1813,7 @@ const ThreeYearCumulativeDataBox = styled.div`
   //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   backdrop-filter: blur(12px);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  z-index: 1;
 `;
 
 const EachYearHeadBox = styled.div`
@@ -1820,6 +1827,7 @@ const EachYearHeadBox = styled.div`
   box-shadow: 0px 2.91057px 145.52846px 0px rgba(20, 20, 20, 0.05);
   margin-top: 10px;
   margin-left: 16px;
+  z-index: 1;
 `;
 
 const RangeBox = styled.div`
@@ -1830,6 +1838,7 @@ const RangeBox = styled.div`
   //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
+  z-index: 1;
 `;
 
 const Graph_1_1Box = styled.div`
@@ -1840,6 +1849,7 @@ const Graph_1_1Box = styled.div`
   //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
+  z-index: 1;
 `;
 
 const Graph_2_1Box = styled.div`
@@ -1850,6 +1860,7 @@ const Graph_2_1Box = styled.div`
   //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
+  z-index: 1;
 `;
 
 const Graph_2Box = styled.div`
@@ -1864,6 +1875,7 @@ const Graph_2Box = styled.div`
   //background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
+  z-index: 1;
 `;
 
 // ----------------ImageBox----------------
