@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Typography from '../../assets/Typography';
 import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
@@ -12,6 +13,7 @@ import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from './EditModals/EditModal';
 import ApplicationModal from './SubmitModals/ApplicationModal';
 import { recruit } from '../../common/recruiting';
+import client from '../../utils/httpClient';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -115,12 +117,10 @@ function getTextByTitle(targetTitle: string) {
 }
 
 export default function MyBoardPage() {
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
+  const [cookies, setCookies, removeCookie] = useCookies(['accessToken', 'refreshToken', 'accessTokenExpire']);
   const config = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${cookies.accessToken}`,
     },
     withCredentials: true,
   };
@@ -284,11 +284,50 @@ export default function MyBoardPage() {
     },
   ]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        // const curTime = new Date();
+        // curTime.setHours(curTime.getHours() + 9);
+        // console.log(curTime.getTime(), +cookies.accessTokenExpire - 30 * 1000);
+        // if (curTime.getTime() > +cookies.accessTokenExpire - 30 * 1000) {
+        //   // 만료되기 30초 전이면 refresh
+        //   console.log('타임끝남');
+        //   const { newAccessToken, newAccessTokenExpire } = await refreshToken(
+        //     cookies.accessToken,
+        //     cookies.refreshToken,
+        //   );
+
+        //   if (newAccessToken) {
+        //     console.log('새로 설정');
+        //     const accessTokenExpire = new Date();
+        //     accessTokenExpire.setHours(accessTokenExpire.getHours() + 10);
+        //     setCookies('accessToken', newAccessToken, {
+        //       path: '/',
+        //       expires: accessTokenExpire,
+        //     });
+        //     setCookies('accessTokenExpire', newAccessTokenExpire, {
+        //       path: '/',
+        //       expires: accessTokenExpire,
+        //     });
+
+        //     config.headers.Authorization = `Bearer ${newAccessToken}`;
+        //   } else {
+        //     removeCookie('accessToken', { path: '/' });
+        //     removeCookie('accessTokenExpire', { path: '/' });
+        //     removeCookie('refreshToken', { path: '/' });
+        //     window.localStorage.clear();
+        //     window.sessionStorage.clear();
+        //     navigate('/login');
+        //     alert('세션이 만료되었습니다. 다시 로그인해 주세요.');
+        //   }
+        // }
+
+        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
         setUserData({
@@ -357,7 +396,8 @@ export default function MyBoardPage() {
       const newPastData1 = [...pastData1];
       for (let i = 0; i < semester.length; i++) {
         try {
-          const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor1}/${semester[i]}`, config);
+          // const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor1}/${semester[i]}`, config);
+          const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
           const data = APIresponse.data.pastData;
 
           let competitionRate = 0;
@@ -381,7 +421,8 @@ export default function MyBoardPage() {
       const newPastData2 = [...pastData2];
       for (let i = 0; i < semester.length; i++) {
         try {
-          const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor2}/${semester[i]}`, config);
+          // const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor2}/${semester[i]}`, config);
+          const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
           const data = APIresponse.data.pastData;
 
           let competitionRate = 0;
@@ -420,7 +461,8 @@ export default function MyBoardPage() {
 
   const getCurData = async () => {
     try {
-      const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
+      // const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
+      const APIresponse = await client.get('/dashboard/hopeMajorsCurrentInfo');
       const data = APIresponse.data.data;
 
       const newCurData = [...curData];

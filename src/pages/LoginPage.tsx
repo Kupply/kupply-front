@@ -7,6 +7,7 @@ import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
 import LoginModal from './LoginModal';
 import AlertMessage from '../assets/AlertMessage';
+import client from '../utils/httpClient';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -144,7 +145,7 @@ function LoginPage(props: LoginPageProps) {
   const [password, setPassword] = useState<string>('');
   const [isChecked, setIsChecked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [cookies, setCookies] = useCookies(['accessToken']);
+  const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken', 'accessTokenExpire']);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -152,22 +153,45 @@ function LoginPage(props: LoginPageProps) {
 
   // login API 접근
   const onLoginClick = async () => {
-    const url = 'http://localhost:8080/auth/login';
+    // const url = 'http://localhost:8080/auth/login';
     try {
-      await axios
-        .post(url, {
+      // await axios
+      //   .post(url, {
+      //     email: ID,
+      //     password: password,
+      //     isRememberOn: isChecked,
+      //   })
+      //   .then((res) => {
+      //     // const accessTokenExpire = new Date();
+      //     // accessTokenExpire.setHours(accessTokenExpire.getHours() + 10); // 한국시간 시차 9시간 + 만료 시간 1시간
+      //     // const refreshTokenExpire = new Date();
+      //     // refreshTokenExpire.setHours(refreshTokenExpire.getHours() + 9); // 한국시간 시차 9시간
+      //     // refreshTokenExpire.setDate(refreshTokenExpire.getDate() + 30); // 만료 시간 30일
+
+      //     // setCookies('accessToken', res.data.data.accessToken, {
+      //     //   path: '/',
+      //     //   expires: accessTokenExpire,
+      //     // });
+      //     // setCookies('accessTokenExpire', res.data.data.accessTokenExpire, {
+      //     //   path: '/',
+      //     //   expires: accessTokenExpire,
+      //     // });
+      //     // setCookies('refreshToken', res.data.data.refreshToken, {
+      //     //   path: '/',
+      //     //   expires: refreshTokenExpire,
+      //     // });
+      //     localStorage.setItem('accessToken', res.data.data.accessToken);
+      //     localStorage.setItem('refreshToken', res.data.data.refreshToken);
+      //   });
+      await client
+        .post('/auth/login', {
           email: ID,
           password: password,
           isRememberOn: isChecked,
         })
         .then((res) => {
-          const expireDate = new Date();
-          expireDate.setHours(expireDate.getHours() + 1);
-
-          setCookies('accessToken', res.data.data.accessToken, {
-            path: '/',
-            expires: expireDate,
-          });
+          localStorage.setItem('accessToken', res.data.data.accessToken);
+          localStorage.setItem('refreshToken', res.data.data.refreshToken);
         });
       //로그인 상태를 유지하기 위해 localStorage에 로그인 여부와 ID를 저장 후 login 상태를 true로 바꾸고 메인 페이지로 보낸다.
       window.localStorage.setItem('isLogin', 'true');
@@ -199,6 +223,13 @@ function LoginPage(props: LoginPageProps) {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);
             }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                if (ID !== '' && password !== '') {
+                  onLoginClick();
+                }
+              }
+            }}
             isFilled={ID !== ''}
           />
         </TextFieldWrapper>
@@ -215,6 +246,13 @@ function LoginPage(props: LoginPageProps) {
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);
+            }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                if (ID !== '' && password !== '') {
+                  onLoginClick();
+                }
+              }
             }}
             isFilled={password !== ''}
           />

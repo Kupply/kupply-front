@@ -8,6 +8,7 @@ import Ending from '../components/landingpage/Ending';
 import TextFieldBox from '../assets/TextFieldBox';
 import Typography from '../assets/Typography';
 import axios from 'axios';
+import client from '../utils/httpClient';
 
 export interface ITableData {
   rank: number;
@@ -48,7 +49,8 @@ const LandingPage = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/landing');
+        // const response = await axios.get('http://localhost:8080/landing');
+        const response = await client.get('/landing');
         setTableData(response.data.data);
       } catch (e) {
         alert(e);

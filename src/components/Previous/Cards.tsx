@@ -4,6 +4,7 @@ import Card from '../../assets/Card';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import client from '../../utils/httpClient';
 
 export interface CardsProps {
   clicked: number;
@@ -133,7 +134,8 @@ const Cards = ({ clicked }: CardsProps) => {
 
   const fetch = async () => {
     try {
-      const data = await axios.get('http://localhost:8080/dashboard/cards', config);
+      // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
+      const data = await client.get('/dashboard/cards');
 
       setCards(
         cards.map((c) => {

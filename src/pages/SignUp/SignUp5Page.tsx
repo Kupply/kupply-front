@@ -11,6 +11,7 @@ import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
 import axios from 'axios';
 import { useTable } from 'react-table';
 import { AnyCnameRecord } from 'dns';
+import client from '../../utils/httpClient';
 
 /*
 주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
@@ -202,14 +203,27 @@ const join = async (role: string) => {
     role: sessionStorage.getItem('role'),
   };
   if (role === 'passer') {
-    await axios.post(url, {
+    // await axios.post(url, {
+    //   ...commonData,
+    //   passSemester: sessionStorage.getItem('passSemester'),
+    //   passGPA: parseFloat(sessionStorage.getItem('passedGPA') || ''),
+    //   secondMajor: sessionStorage.getItem('secondMajor'),
+    // });
+    await client.post('/auth/join', {
       ...commonData,
       passSemester: sessionStorage.getItem('passSemester'),
       passGPA: parseFloat(sessionStorage.getItem('passedGPA') || ''),
       secondMajor: sessionStorage.getItem('secondMajor'),
     });
   } else {
-    await axios.post(url, {
+    // await axios.post(url, {
+    //   ...commonData,
+    //   curGPA: sessionStorage.getItem('GPA'),
+    //   hopeMajor1: sessionStorage.getItem('hopeMajor1'),
+    //   hopeMajor2: sessionStorage.getItem('hopeMajor2'),
+    //   hopeSemester: sessionStorage.getItem('hopeSemester'),
+    // });
+    await client.post('/auth/join', {
       ...commonData,
       curGPA: sessionStorage.getItem('GPA'),
       hopeMajor1: sessionStorage.getItem('hopeMajor1'),
