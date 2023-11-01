@@ -12,6 +12,7 @@ import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from './EditModals/EditModal';
 import ApplicationModal from './SubmitModals/ApplicationModal';
 import { recruit } from '../../common/recruiting';
+import MyboardPasserPageVer from './MyboardPasser';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -125,7 +126,7 @@ export default function MyBoardPage() {
     withCredentials: true,
   };
 
-  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState<boolean>(true);
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
   // Edit Modal 관련
@@ -207,7 +208,7 @@ export default function MyBoardPage() {
     userNickname: '잠만보',
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
-    userRole: 'candidate',
+    userRole: 'passer',
     firstMajor: '수학과',
     studentId: '2020220037',
     hopeMajor1: '컴퓨터학과',
@@ -464,551 +465,508 @@ export default function MyBoardPage() {
 
   return (
     <>
-      <Wrapper>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          style={{ position: 'absolute', top: '92px', left: '1310px' }}
-        >
-          <g clip-path="url(#clip0_4660_23377)">
-            <path
-              d="M7.0013 12.8337C10.223 12.8337 12.8346 10.222 12.8346 7.00033C12.8346 3.77866 10.223 1.16699 7.0013 1.16699C3.77964 1.16699 1.16797 3.77866 1.16797 7.00033C1.16797 10.222 3.77964 12.8337 7.0013 12.8337Z"
-              stroke="#A8A8A8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+      {userData.userRole === 'passer' ? (
+        <MyboardPasserPageVer />
+      ) : (
+        <Wrapper>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            style={{ position: 'absolute', top: '92px', left: '1310px' }}
+          >
+            <g clip-path="url(#clip0_4660_23377)">
+              <path
+                d="M7.0013 12.8337C10.223 12.8337 12.8346 10.222 12.8346 7.00033C12.8346 3.77866 10.223 1.16699 7.0013 1.16699C3.77964 1.16699 1.16797 3.77866 1.16797 7.00033C1.16797 10.222 3.77964 12.8337 7.0013 12.8337Z"
+                stroke="#A8A8A8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M7 9.33301H7.00583" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M7 4.66699V7.00033" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <defs>
+              <clipPath id="clip0_4660_23377">
+                <rect width="14" height="14" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+          <Typography
+            size="smallText"
+            style={{ position: 'absolute', color: 'var(--A8_Grey-4, #A8A8A8)', top: '92px', left: '1330px' }}
+          >
+            본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+          </Typography>
+          {isOpenEditModal ? (
+            <EditModal isOpenModal={isOpenEditModal} setOpenModal={setOpenEditModal} onClickModal={onClickEditModal} />
+          ) : null}
+          {isOpenApcModal ? (
+            <ApplicationModal
+              isOpenModal={isOpenApcModal}
+              setOpenModal={setOpenApcModal}
+              onClickModal={onClickApcModal}
             />
-            <path d="M7 9.33301H7.00583" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M7 4.66699V7.00033" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
-          </g>
-          <defs>
-            <clipPath id="clip0_4660_23377">
-              <rect width="14" height="14" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-        <Typography
-          size="smallText"
-          style={{ position: 'absolute', color: 'var(--A8_Grey-4, #A8A8A8)', top: '92px', left: '1330px' }}
-        >
-          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
-        </Typography>
-        {isOpenEditModal ? (
-          <EditModal isOpenModal={isOpenEditModal} setOpenModal={setOpenEditModal} onClickModal={onClickEditModal} />
-        ) : null}
-        {isOpenApcModal ? (
-          <ApplicationModal
-            isOpenModal={isOpenApcModal}
-            setOpenModal={setOpenApcModal}
-            onClickModal={onClickApcModal}
-          />
-        ) : null}
-        <LeftSideWrapper>
-          <div style={{ marginTop: '-82px' }}>
-            <MyInformationBox translateY={scrollY}>
-              <CharacterImageBox>
-                <CharacterImage
-                  src={
-                    userData.userProfilePic === 'customProfile'
-                      ? userData.userProfileLink
-                      : `design_image/character/rectProfile/${userData.userProfilePic}.png`
-                  }
-                  alt="profile"
-                />
-              </CharacterImageBox>
-              <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '128.01px', marginTop: '20px' }}>
-                <NicknameDynamicSize text={userData.userNickname} />
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          ) : null}
+          <LeftSideWrapper>
+            <div style={{ marginTop: '-82px' }}>
+              <MyInformationBox translateY={scrollY}>
+                <CharacterImageBox>
+                  <CharacterImage
+                    src={
+                      userData.userProfilePic === 'customProfile'
+                        ? userData.userProfileLink
+                        : `design_image/character/rectProfile/${userData.userProfilePic}.png`
+                    }
+                    alt="profile"
+                  />
+                </CharacterImageBox>
+                <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '128.01px', marginTop: '20px' }}>
+                  <NicknameDynamicSize text={userData.userNickname} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <Typography
+                      size="bodyText"
+                      style={{ color: 'rgba(20, 20, 20, 0.60)', fontWeight: '500', marginLeft: '6px' }}
+                    >
+                      {userData.userRole === 'candidate' ? '도전자' : '합격자'} 님
+                    </Typography>
+                    <EditButton onClick={onClickEditModal} />
+                  </div>
+                </div>
+                <div style={{ marginTop: '15px' }}>
                   <Typography
                     size="bodyText"
-                    style={{ color: 'rgba(20, 20, 20, 0.60)', fontWeight: '500', marginLeft: '6px' }}
+                    style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '500', marginLeft: '128.01px' }}
                   >
-                    {userData.userRole === 'candidate' ? '도전자' : '합격자'} 님
+                    {userData.firstMajor} {userData.studentId.substring(2, 4)}학번
                   </Typography>
-                  <EditButton onClick={onClickEditModal} />
                 </div>
-              </div>
-              <div style={{ marginTop: '15px' }}>
-                <Typography
-                  size="bodyText"
-                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '500', marginLeft: '128.01px' }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="284"
+                  height="2"
+                  viewBox="0 0 284 2"
+                  fill="none"
+                  style={{ marginTop: '30px', marginLeft: '128.01px' }}
                 >
-                  {userData.firstMajor} {userData.studentId.substring(2, 4)}학번
-                </Typography>
-              </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="284"
-                height="2"
-                viewBox="0 0 284 2"
-                fill="none"
-                style={{ marginTop: '30px', marginLeft: '128.01px' }}
-              >
-                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
-              </svg>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  // marginTop: '44px',
-                  marginLeft: '128px',
-                }}
-              >
-                <div style={{ marginTop: '44px' }}>
-                  <MockApplicationButton onClick={onClickApcModal} active={!isApplied} />
-                </div>
-                <div style={{ display: 'flex', marginTop: '44px' }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                      d="M17.4993 8.33325C17.6088 8.33328 17.7172 8.31174 17.8183 8.26987C17.9194 8.22801 18.0113 8.16662 18.0887 8.08924C18.1661 8.01185 18.2274 7.91997 18.2693 7.81885C18.3112 7.71774 18.3327 7.60936 18.3327 7.49992V4.99992C18.3328 4.82506 18.2778 4.65463 18.1755 4.51279C18.0733 4.37095 17.9289 4.26491 17.763 4.20972L10.263 1.70972C10.0919 1.65275 9.90684 1.65275 9.73567 1.70972L2.23567 4.20972C2.06976 4.26491 1.92544 4.37095 1.82319 4.51279C1.72093 4.65463 1.66594 4.82506 1.66602 4.99992V7.49992C1.66599 7.60936 1.68752 7.71774 1.72939 7.81885C1.77126 7.91997 1.83264 8.01185 1.91003 8.08924C1.98742 8.16662 2.0793 8.22801 2.18041 8.26987C2.28153 8.31174 2.38991 8.33328 2.49935 8.33325H3.33268V14.3201C2.84663 14.4914 2.42549 14.8088 2.12707 15.2289C1.82866 15.6491 1.6676 16.1513 1.66602 16.6666V18.3333C1.66599 18.4427 1.68752 18.5511 1.72939 18.6522C1.77126 18.7533 1.83264 18.8452 1.91003 18.9226C1.98742 19 2.0793 19.0613 2.18041 19.1032C2.28153 19.1451 2.38991 19.1666 2.49935 19.1666H17.4993C17.6088 19.1666 17.7172 19.1451 17.8183 19.1032C17.9194 19.0613 18.0113 19 18.0887 18.9226C18.1661 18.8452 18.2274 18.7533 18.2693 18.6522C18.3112 18.5511 18.3327 18.4427 18.3327 18.3333V16.6666C18.3311 16.1513 18.17 15.6491 17.8716 15.2289C17.5732 14.8088 17.1521 14.4914 16.666 14.3201V8.33325H17.4993ZM16.666 17.4999H3.33268V16.6666C3.3329 16.4456 3.42077 16.2338 3.577 16.0776C3.73324 15.9213 3.94507 15.8335 4.16602 15.8333H15.8327C16.0536 15.8335 16.2655 15.9213 16.4217 16.0776C16.5779 16.2338 16.6658 16.4456 16.666 16.6666V17.4999ZM4.99935 14.1666V8.33325H6.66602V14.1666H4.99935ZM8.33268 14.1666V8.33325H11.666V14.1666H8.33268ZM13.3327 14.1666V8.33325H14.9993V14.1666H13.3327ZM3.33268 6.66658V5.6005L9.99935 3.378L16.666 5.6005V6.66658H3.33268Z"
-                      fill="#434343"
-                      fill-opacity="0.6"
-                    />
-                  </svg>
-                  <Typography
-                    size="bodyText"
-                    style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '10px' }}
-                  >
-                    관심 전공
-                  </Typography>
-                </div>
-              </div>
-              <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
-                <InterestMajorBox>
-                  <MajorSymbolShadow>
-                    <MajorSymbol
-                      src={`design_image/major_symbol/trans/medium/${
-                        collegeNameMapping[userData.hopeMajor1 as MajorOptions]
-                      }_trans_medium.png`}
-                      alt={getTextByTitle(userData.hopeMajor1)}
-                    />
-                    <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
-                      <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_3779)" fill-opacity="0.7" />
-                      <defs>
-                        <radialGradient
-                          id="paint0_radial_3725_3779"
-                          cx="0"
-                          cy="0"
-                          r="1"
-                          gradientUnits="userSpaceOnUse"
-                          gradientTransform="translate(56 58.5751) rotate(90) scale(53.4249)"
-                        >
-                          <stop stop-color="#926853" stop-opacity="0.58" />
-                          <stop offset="1" stop-color="white" stop-opacity="0" />
-                        </radialGradient>
-                      </defs>
-                    </svg>
-                  </MajorSymbolShadow>
-                  <div style={{ marginTop: '16px', marginLeft: '130px' }}>
-                    <Typography
-                      size="bodyText"
-                      style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', lineHeight: '20px' }}
-                    >
-                      1지망
-                    </Typography>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        color: 'var(--Main-Black, #141414)',
-                        marginTop:
-                          userData.hopeMajor1 == '심리학부' || userData.hopeMajor1 == '경영학과' ? '16px' : '8px',
-                      }}
-                    >
-                      {userData.hopeMajor1}
-                    </Typography>
-                    <div
-                      style={{
-                        width:
-                          userData.hopeMajor1 == '심리학부'
-                            ? '135px'
-                            : userData.hopeMajor1 == '경영학과'
-                            ? '103px'
-                            : userData.hopeMajor1 == '미디어학부'
-                            ? '111px'
-                            : userData.hopeMajor1 == '경제학과'
-                            ? '95px'
-                            : userData.hopeMajor1 == '통계학과'
-                            ? '95px'
-                            : userData.hopeMajor1 == '화학과'
-                            ? '90px'
-                            : userData.hopeMajor1 == '수학과'
-                            ? '95px'
-                            : userData.hopeMajor1 == '식품자원경제학과'
-                            ? '133px'
-                            : '138px',
-                      }}
-                    >
-                      <Typography
-                        size={userData.hopeMajor1 == '컴퓨터학과' ? 'details' : 'smallText'}
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '400',
-                          lineHeight: '128.571%',
-                          opacity: 0.8,
-                          marginTop: '2px',
-                        }}
-                      >
-                        {getTextByTitle(userData.hopeMajor1)}
-                      </Typography>
-                    </div>
-                  </div>
-                </InterestMajorBox>
-              </div>
-              <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
-                <InterestMajorBox>
-                  <MajorSymbolShadow>
-                    <MajorSymbol
-                      src={`design_image/major_symbol/trans/medium/${
-                        collegeNameMapping[userData.hopeMajor2 as MajorOptions]
-                      }_trans_medium.png`}
-                      alt={getTextByTitle(userData.hopeMajor2)}
-                    />
-                    <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
-                      <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_1679)" fill-opacity="0.7" />
-                      <defs>
-                        <radialGradient
-                          id="paint0_radial_3725_1679"
-                          cx="0"
-                          cy="0"
-                          r="1"
-                          gradientUnits="userSpaceOnUse"
-                          gradientTransform="translate(56 58.5751) rotate(90) scale(53.4249)"
-                        >
-                          <stop stop-color="#7BBEEE" stop-opacity="0.6" />
-                          <stop offset="1" stop-color="white" stop-opacity="0" />
-                        </radialGradient>
-                      </defs>
-                    </svg>
-                  </MajorSymbolShadow>
-                  <div style={{ marginTop: '16px', marginLeft: '130px' }}>
-                    <Typography
-                      size="bodyText"
-                      style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', lineHeight: '20px' }}
-                    >
-                      2지망
-                    </Typography>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        color: 'var(--Main-Black, #141414)',
-                        marginTop:
-                          userData.hopeMajor2 == '심리학부' || userData.hopeMajor2 == '경영학과' ? '16px' : '8px',
-                      }}
-                    >
-                      {userData.hopeMajor2}
-                    </Typography>
-                    <div
-                      style={{
-                        width:
-                          userData.hopeMajor2 == '심리학부'
-                            ? '135px'
-                            : userData.hopeMajor2 == '경영학과'
-                            ? '103px'
-                            : userData.hopeMajor2 == '미디어학부'
-                            ? '111px'
-                            : userData.hopeMajor2 == '경제학과'
-                            ? '95px'
-                            : userData.hopeMajor2 == '통계학과'
-                            ? '95px'
-                            : userData.hopeMajor2 == '화학과'
-                            ? '90px'
-                            : userData.hopeMajor2 == '수학과'
-                            ? '95px'
-                            : userData.hopeMajor2 == '식품자원경제학과'
-                            ? '133px'
-                            : '138px',
-                      }}
-                    >
-                      <Typography
-                        size={userData.hopeMajor2 == '컴퓨터학과' ? 'details' : 'smallText'}
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '400',
-                          lineHeight: '114.286%',
-                          opacity: 0.8,
-                          marginTop: '2px',
-                        }}
-                      >
-                        {getTextByTitle(userData.hopeMajor2)}
-                      </Typography>
-                    </div>
-                  </div>
-                </InterestMajorBox>
-              </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="284"
-                height="2"
-                viewBox="0 0 284 2"
-                fill="none"
-                style={{ marginTop: '30px', marginLeft: '128.01px' }}
-              >
-                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
-              </svg>
-              <div style={{ display: 'flex', alignItems: 'center', marginTop: '44px', marginLeft: '128.01px' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path
-                    d="M4.15323 17.5L15.7787 17.5C16.6959 17.5 17.4395 16.7538 17.4395 15.8333L17.4395 4.16667C17.4395 3.24619 16.6959 2.5 15.7787 2.5L4.15323 2.5C3.23601 2.5 2.49246 3.24619 2.49246 4.16667L2.49245 15.8333C2.49245 16.7538 3.23601 17.5 4.15323 17.5Z"
-                    stroke="#434343"
-                    stroke-opacity="0.6"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M5.81352 14.1665L8.30469 14.1665L8.30469 9.99984L5.81352 9.99984L5.81352 14.1665Z"
-                    stroke="#434343"
-                    stroke-opacity="0.6"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M11.626 14.1665L14.1172 14.1665L14.1172 6.6665L11.626 6.6665L11.626 14.1665Z"
-                    stroke="#434343"
-                    stroke-opacity="0.6"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
+                  <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
                 </svg>
-                <Typography
-                  size="bodyText"
-                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    // marginTop: '44px',
+                    marginLeft: '128px',
+                  }}
                 >
-                  현재 내 학점
-                </Typography>
-                <Typography
-                  size="bodyText"
-                  style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '71.74px' }}
-                >
-                  {userData.curGPA}
-                </Typography>
-              </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="284"
-                height="2"
-                viewBox="0 0 284 2"
-                fill="none"
-                style={{ marginTop: '44px', marginLeft: '128.01px' }}
-              >
-                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
-              </svg>
-              <div style={{ display: 'flex', alignItems: 'center', marginTop: '44px', marginLeft: '128.01px' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path
-                    d="M15.7765 3.3335H4.15101C3.23379 3.3335 2.49023 4.07969 2.49023 5.00016V16.6668C2.49023 17.5873 3.23379 18.3335 4.15101 18.3335H15.7765C16.6937 18.3335 17.4372 17.5873 17.4372 16.6668V5.00016C17.4372 4.07969 16.6937 3.3335 15.7765 3.3335Z"
-                    stroke="#8B8B8B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M2.49023 8.3335H17.4372"
-                    stroke="#8B8B8B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M13.2871 1.6665V4.99984"
-                    stroke="#8B8B8B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M6.64258 1.6665V4.99984"
-                    stroke="#8B8B8B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <Typography
-                  size="bodyText"
-                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', marginLeft: '9.97px' }}
-                >
-                  희망 진입학기
-                </Typography>
-                <Typography
-                  size="bodyText"
-                  style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '59.4px' }}
-                >
-                  {userData.hopeSemester}R
-                </Typography>
-              </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="284"
-                height="2"
-                viewBox="0 0 284 2"
-                fill="none"
-                style={{ marginTop: '44px', marginLeft: '128.01px' }}
-              >
-                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
-              </svg>
-            </MyInformationBox>
-          </div>
-        </LeftSideWrapper>
-        <div style={{ marginTop: '-82px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', marginTop: '154px', marginLeft: '551px', gap: '18px' }}>
-            <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
-            <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
-              2지망
-            </InterestMajorButton>
-          </div>
-          {onViewMajor === 1 ? (
-            <>
-              <div style={{ marginLeft: '551px' }}>
-                <BigMajorSymbolBox style={{ marginTop: '32px' }}>
-                  <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
-                    1지망 관심전공
-                  </Typography>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="392"
-                    height="2"
-                    viewBox="0 0 392 2"
-                    fill="none"
-                    style={{ position: 'absolute', top: '72px' }}
-                  >
-                    <path d="M0 1L392 1" stroke="#DFDFDF" />
-                  </svg>
-                  <div style={{ position: 'absolute', top: '128px', left: '55px' }}>
-                    <div
-                      style={{
-                        width: '184px',
-                        height: '241px',
-                        display: 'block',
-                        marginLeft: 'auto',
-                        marginRight: 'auto',
-                      }}
+                  <div style={{ marginTop: '44px' }}>
+                    <MockApplicationButton onClick={onClickApcModal} active={!isApplied} />
+                  </div>
+                  <div style={{ display: 'flex', marginTop: '44px' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path
+                        d="M17.4993 8.33325C17.6088 8.33328 17.7172 8.31174 17.8183 8.26987C17.9194 8.22801 18.0113 8.16662 18.0887 8.08924C18.1661 8.01185 18.2274 7.91997 18.2693 7.81885C18.3112 7.71774 18.3327 7.60936 18.3327 7.49992V4.99992C18.3328 4.82506 18.2778 4.65463 18.1755 4.51279C18.0733 4.37095 17.9289 4.26491 17.763 4.20972L10.263 1.70972C10.0919 1.65275 9.90684 1.65275 9.73567 1.70972L2.23567 4.20972C2.06976 4.26491 1.92544 4.37095 1.82319 4.51279C1.72093 4.65463 1.66594 4.82506 1.66602 4.99992V7.49992C1.66599 7.60936 1.68752 7.71774 1.72939 7.81885C1.77126 7.91997 1.83264 8.01185 1.91003 8.08924C1.98742 8.16662 2.0793 8.22801 2.18041 8.26987C2.28153 8.31174 2.38991 8.33328 2.49935 8.33325H3.33268V14.3201C2.84663 14.4914 2.42549 14.8088 2.12707 15.2289C1.82866 15.6491 1.6676 16.1513 1.66602 16.6666V18.3333C1.66599 18.4427 1.68752 18.5511 1.72939 18.6522C1.77126 18.7533 1.83264 18.8452 1.91003 18.9226C1.98742 19 2.0793 19.0613 2.18041 19.1032C2.28153 19.1451 2.38991 19.1666 2.49935 19.1666H17.4993C17.6088 19.1666 17.7172 19.1451 17.8183 19.1032C17.9194 19.0613 18.0113 19 18.0887 18.9226C18.1661 18.8452 18.2274 18.7533 18.2693 18.6522C18.3112 18.5511 18.3327 18.4427 18.3327 18.3333V16.6666C18.3311 16.1513 18.17 15.6491 17.8716 15.2289C17.5732 14.8088 17.1521 14.4914 16.666 14.3201V8.33325H17.4993ZM16.666 17.4999H3.33268V16.6666C3.3329 16.4456 3.42077 16.2338 3.577 16.0776C3.73324 15.9213 3.94507 15.8335 4.16602 15.8333H15.8327C16.0536 15.8335 16.2655 15.9213 16.4217 16.0776C16.5779 16.2338 16.6658 16.4456 16.666 16.6666V17.4999ZM4.99935 14.1666V8.33325H6.66602V14.1666H4.99935ZM8.33268 14.1666V8.33325H11.666V14.1666H8.33268ZM13.3327 14.1666V8.33325H14.9993V14.1666H13.3327ZM3.33268 6.66658V5.6005L9.99935 3.378L16.666 5.6005V6.66658H3.33268Z"
+                        fill="#434343"
+                        fill-opacity="0.6"
+                      />
+                    </svg>
+                    <Typography
+                      size="bodyText"
+                      style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '10px' }}
                     >
-                      <BigMajorSymbol
-                        src={`design_image/major_symbol/trans/large/${
+                      관심 전공
+                    </Typography>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
+                  <InterestMajorBox>
+                    <MajorSymbolShadow>
+                      <MajorSymbol
+                        src={`design_image/major_symbol/trans/medium/${
                           collegeNameMapping[userData.hopeMajor1 as MajorOptions]
-                        }_trans_large.png`}
+                        }_trans_medium.png`}
                         alt={getTextByTitle(userData.hopeMajor1)}
                       />
-                    </div>
-                    <Typography
-                      size="title2"
-                      style={{
-                        lineHeight: '138.889%',
-                        marginTop: '34px',
-                        textAlign: 'center',
-                      }}
-                    >
-                      {userData.hopeMajor1}
-                    </Typography>
-                    <div style={{ display: 'flex' }}>
-                      <Typography
-                        size="mediumText"
-                        style={{
-                          opacity: '0.8',
-                          marginTop: '0px',
-                          textAlign: 'center',
-                          lineHeight: '133.333%',
-                          justifyContent: 'center',
-                          width: '287px',
-                        }}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="112"
+                        height="112"
+                        viewBox="0 0 112 112"
+                        fill="none"
                       >
-                        {getTextByTitle(userData.hopeMajor1)}
-                      </Typography>
-                    </div>
-                  </div>
-                </BigMajorSymbolBox>
-                <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
-                  <CompetitionRateBox>
-                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                      <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
-                      <path d="M0 1L392 1" stroke="#DFDFDF" />
-                    </svg>
-                    <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
-                      <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`${curData[0].curCompetitionRate}\u00A0`}
-                      </Typography>
-                      <Typography
-                        size="heading1"
-                        style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
-                      >
-                        : 1
-                      </Typography>
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginTop: '37px',
-                        marginLeft: '36px',
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => {
-                        getCurData();
-                      }}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path
-                          d="M13.416 2.3335V5.8335H9.91602"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
+                        <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_3779)" fill-opacity="0.7" />
+                        <defs>
+                          <radialGradient
+                            id="paint0_radial_3725_3779"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(56 58.5751) rotate(90) scale(53.4249)"
+                          >
+                            <stop stop-color="#926853" stop-opacity="0.58" />
+                            <stop offset="1" stop-color="white" stop-opacity="0" />
+                          </radialGradient>
+                        </defs>
                       </svg>
-                      <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                        Last Update {updateTime}
-                      </Typography>
-                    </div>
-                  </CompetitionRateBox>
-                </div>
-                <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
-                  </div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
-                    <path d="M0 1L392 1" stroke="#DFDFDF" />
-                  </svg>
-                  <div style={{ paddingTop: '35px' }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
-                      <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`${curData[0].curApplyNum}\u00A0`}
-                      </Typography>
+                    </MajorSymbolShadow>
+                    <div style={{ marginTop: '16px', marginLeft: '130px' }}>
                       <Typography
-                        size="heading1"
-                        style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
+                        size="bodyText"
+                        style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', lineHeight: '20px' }}
                       >
-                        / {curData[0].curNumOfSelection}
+                        1지망
                       </Typography>
                       <Typography
-                        size="normalText"
+                        size="bodyText"
                         style={{
-                          color: 'var(--Black2, #434343)',
-                          fontWeight: '400',
-                          lineHeight: '112.5%',
-                          marginLeft: '13px',
+                          color: 'var(--Main-Black, #141414)',
+                          marginTop:
+                            userData.hopeMajor1 == '심리학부' || userData.hopeMajor1 == '경영학과' ? '16px' : '8px',
                         }}
                       >
-                        {`\u00A0 명 정원`}
-                      </Typography>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
-                      <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
-                        {curData[0].curApplyNum}명의 지원자가 {userData.hopeMajor1}를 지원했습니다.
+                        {userData.hopeMajor1}
                       </Typography>
                       <div
-                        style={{ display: 'flex', marginTop: '18px', cursor: 'pointer' }}
+                        style={{
+                          width:
+                            userData.hopeMajor1 == '심리학부'
+                              ? '135px'
+                              : userData.hopeMajor1 == '경영학과'
+                              ? '103px'
+                              : userData.hopeMajor1 == '미디어학부'
+                              ? '111px'
+                              : userData.hopeMajor1 == '경제학과'
+                              ? '95px'
+                              : userData.hopeMajor1 == '통계학과'
+                              ? '95px'
+                              : userData.hopeMajor1 == '화학과'
+                              ? '90px'
+                              : userData.hopeMajor1 == '수학과'
+                              ? '95px'
+                              : userData.hopeMajor1 == '식품자원경제학과'
+                              ? '133px'
+                              : '138px',
+                        }}
+                      >
+                        <Typography
+                          size={userData.hopeMajor1 == '컴퓨터학과' ? 'details' : 'smallText'}
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '400',
+                            lineHeight: '128.571%',
+                            opacity: 0.8,
+                            marginTop: '2px',
+                          }}
+                        >
+                          {getTextByTitle(userData.hopeMajor1)}
+                        </Typography>
+                      </div>
+                    </div>
+                  </InterestMajorBox>
+                </div>
+                <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
+                  <InterestMajorBox>
+                    <MajorSymbolShadow>
+                      <MajorSymbol
+                        src={`design_image/major_symbol/trans/medium/${
+                          collegeNameMapping[userData.hopeMajor2 as MajorOptions]
+                        }_trans_medium.png`}
+                        alt={getTextByTitle(userData.hopeMajor2)}
+                      />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="112"
+                        height="112"
+                        viewBox="0 0 112 112"
+                        fill="none"
+                      >
+                        <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_1679)" fill-opacity="0.7" />
+                        <defs>
+                          <radialGradient
+                            id="paint0_radial_3725_1679"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(56 58.5751) rotate(90) scale(53.4249)"
+                          >
+                            <stop stop-color="#7BBEEE" stop-opacity="0.6" />
+                            <stop offset="1" stop-color="white" stop-opacity="0" />
+                          </radialGradient>
+                        </defs>
+                      </svg>
+                    </MajorSymbolShadow>
+                    <div style={{ marginTop: '16px', marginLeft: '130px' }}>
+                      <Typography
+                        size="bodyText"
+                        style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', lineHeight: '20px' }}
+                      >
+                        2지망
+                      </Typography>
+                      <Typography
+                        size="bodyText"
+                        style={{
+                          color: 'var(--Main-Black, #141414)',
+                          marginTop:
+                            userData.hopeMajor2 == '심리학부' || userData.hopeMajor2 == '경영학과' ? '16px' : '8px',
+                        }}
+                      >
+                        {userData.hopeMajor2}
+                      </Typography>
+                      <div
+                        style={{
+                          width:
+                            userData.hopeMajor2 == '심리학부'
+                              ? '135px'
+                              : userData.hopeMajor2 == '경영학과'
+                              ? '103px'
+                              : userData.hopeMajor2 == '미디어학부'
+                              ? '111px'
+                              : userData.hopeMajor2 == '경제학과'
+                              ? '95px'
+                              : userData.hopeMajor2 == '통계학과'
+                              ? '95px'
+                              : userData.hopeMajor2 == '화학과'
+                              ? '90px'
+                              : userData.hopeMajor2 == '수학과'
+                              ? '95px'
+                              : userData.hopeMajor2 == '식품자원경제학과'
+                              ? '133px'
+                              : '138px',
+                        }}
+                      >
+                        <Typography
+                          size={userData.hopeMajor2 == '컴퓨터학과' ? 'details' : 'smallText'}
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '400',
+                            lineHeight: '114.286%',
+                            opacity: 0.8,
+                            marginTop: '2px',
+                          }}
+                        >
+                          {getTextByTitle(userData.hopeMajor2)}
+                        </Typography>
+                      </div>
+                    </div>
+                  </InterestMajorBox>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="284"
+                  height="2"
+                  viewBox="0 0 284 2"
+                  fill="none"
+                  style={{ marginTop: '30px', marginLeft: '128.01px' }}
+                >
+                  <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
+                </svg>
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '44px', marginLeft: '128.01px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      d="M4.15323 17.5L15.7787 17.5C16.6959 17.5 17.4395 16.7538 17.4395 15.8333L17.4395 4.16667C17.4395 3.24619 16.6959 2.5 15.7787 2.5L4.15323 2.5C3.23601 2.5 2.49246 3.24619 2.49246 4.16667L2.49245 15.8333C2.49245 16.7538 3.23601 17.5 4.15323 17.5Z"
+                      stroke="#434343"
+                      stroke-opacity="0.6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M5.81352 14.1665L8.30469 14.1665L8.30469 9.99984L5.81352 9.99984L5.81352 14.1665Z"
+                      stroke="#434343"
+                      stroke-opacity="0.6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M11.626 14.1665L14.1172 14.1665L14.1172 6.6665L11.626 6.6665L11.626 14.1665Z"
+                      stroke="#434343"
+                      stroke-opacity="0.6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <Typography
+                    size="bodyText"
+                    style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
+                  >
+                    현재 내 학점
+                  </Typography>
+                  <Typography
+                    size="bodyText"
+                    style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '71.74px' }}
+                  >
+                    {userData.curGPA}
+                  </Typography>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="284"
+                  height="2"
+                  viewBox="0 0 284 2"
+                  fill="none"
+                  style={{ marginTop: '44px', marginLeft: '128.01px' }}
+                >
+                  <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
+                </svg>
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '44px', marginLeft: '128.01px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      d="M15.7765 3.3335H4.15101C3.23379 3.3335 2.49023 4.07969 2.49023 5.00016V16.6668C2.49023 17.5873 3.23379 18.3335 4.15101 18.3335H15.7765C16.6937 18.3335 17.4372 17.5873 17.4372 16.6668V5.00016C17.4372 4.07969 16.6937 3.3335 15.7765 3.3335Z"
+                      stroke="#8B8B8B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M2.49023 8.3335H17.4372"
+                      stroke="#8B8B8B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M13.2871 1.6665V4.99984"
+                      stroke="#8B8B8B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M6.64258 1.6665V4.99984"
+                      stroke="#8B8B8B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <Typography
+                    size="bodyText"
+                    style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', marginLeft: '9.97px' }}
+                  >
+                    희망 진입학기
+                  </Typography>
+                  <Typography
+                    size="bodyText"
+                    style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '59.4px' }}
+                  >
+                    {userData.hopeSemester}R
+                  </Typography>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="284"
+                  height="2"
+                  viewBox="0 0 284 2"
+                  fill="none"
+                  style={{ marginTop: '44px', marginLeft: '128.01px' }}
+                >
+                  <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
+                </svg>
+              </MyInformationBox>
+            </div>
+          </LeftSideWrapper>
+          <div style={{ marginTop: '-82px' }}>
+            <div
+              style={{ display: 'flex', alignItems: 'center', marginTop: '154px', marginLeft: '551px', gap: '18px' }}
+            >
+              <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
+              <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
+                2지망
+              </InterestMajorButton>
+            </div>
+            {onViewMajor === 1 ? (
+              <>
+                <div style={{ marginLeft: '551px' }}>
+                  <BigMajorSymbolBox style={{ marginTop: '32px' }}>
+                    <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
+                      1지망 관심전공
+                    </Typography>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="392"
+                      height="2"
+                      viewBox="0 0 392 2"
+                      fill="none"
+                      style={{ position: 'absolute', top: '72px' }}
+                    >
+                      <path d="M0 1L392 1" stroke="#DFDFDF" />
+                    </svg>
+                    <div style={{ position: 'absolute', top: '128px', left: '55px' }}>
+                      <div
+                        style={{
+                          width: '184px',
+                          height: '241px',
+                          display: 'block',
+                          marginLeft: 'auto',
+                          marginRight: 'auto',
+                        }}
+                      >
+                        <BigMajorSymbol
+                          src={`design_image/major_symbol/trans/large/${
+                            collegeNameMapping[userData.hopeMajor1 as MajorOptions]
+                          }_trans_large.png`}
+                          alt={getTextByTitle(userData.hopeMajor1)}
+                        />
+                      </div>
+                      <Typography
+                        size="title2"
+                        style={{
+                          lineHeight: '138.889%',
+                          marginTop: '34px',
+                          textAlign: 'center',
+                        }}
+                      >
+                        {userData.hopeMajor1}
+                      </Typography>
+                      <div style={{ display: 'flex' }}>
+                        <Typography
+                          size="mediumText"
+                          style={{
+                            opacity: '0.8',
+                            marginTop: '0px',
+                            textAlign: 'center',
+                            lineHeight: '133.333%',
+                            justifyContent: 'center',
+                            width: '287px',
+                          }}
+                        >
+                          {getTextByTitle(userData.hopeMajor1)}
+                        </Typography>
+                      </div>
+                    </div>
+                  </BigMajorSymbolBox>
+                  <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
+                    <CompetitionRateBox>
+                      <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                        <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                        <path d="M0 1L392 1" stroke="#DFDFDF" />
+                      </svg>
+                      <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
+                        <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
+                          {`${curData[0].curCompetitionRate}\u00A0`}
+                        </Typography>
+                        <Typography
+                          size="heading1"
+                          style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
+                        >
+                          : 1
+                        </Typography>
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginTop: '37px',
+                          marginLeft: '36px',
+                          cursor: 'pointer',
+                        }}
                         onClick={() => {
                           getCurData();
                         }}
@@ -1031,217 +989,707 @@ export default function MyBoardPage() {
                           Last Update {updateTime}
                         </Typography>
                       </div>
-                    </div>
+                    </CompetitionRateBox>
                   </div>
-                </CompetitionRateBox>
-
-                <div style={{ marginTop: '-575px', marginLeft: '847px' }}>
-                  <ThreeYearCumulativeDataBox>
-                    <Typography
-                      size="bodyText"
-                      style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
-                    >
-                      3학기 합격지표
-                    </Typography>
-                    <EachYearHeadBox>
-                      <SemesterButton
-                        isClicked={semesterBtnStates['2023-1R']}
-                        onClick={() => handleSemesterBtnClick('2023-1R')}
-                      >
-                        2023-1R
-                      </SemesterButton>
-                      <SemesterButton
-                        isClicked={semesterBtnStates['2022-2R']}
-                        onClick={() => handleSemesterBtnClick('2022-2R')}
-                      >
-                        2022-2R
-                      </SemesterButton>
-                      <SemesterButton
-                        isClicked={semesterBtnStates['2022-1R']}
-                        onClick={() => handleSemesterBtnClick('2022-1R')}
-                      >
-                        2022-1R
-                      </SemesterButton>
-                    </EachYearHeadBox>
+                  <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                      <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
+                    </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
-                    <TextBox>
-                      <Typography
-                        size="bodyText"
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          lineHeight: '90%',
-                          marginLeft: '36px',
-                          maxWidth: '350px',
-                        }}
-                      >
-                        {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
-                        {userData.hopeMajor1} 모집정보
-                      </Typography>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="60"
-                        height="60"
-                        viewBox="0 0 60 60"
-                        fill="none"
-                        style={{ marginLeft: '-1px' }}
-                      >
-                        <path
-                          d="M26 37L34 30"
-                          stroke="#141414"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M34 30L26 22"
-                          stroke="#141414"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </TextBox>
-                    <div style={{ display: 'flex', marginTop: '50px' }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '20px',
-                          marginLeft: '40px',
-                        }}
-                      >
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
-                          인원
+                    <div style={{ paddingTop: '35px' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
+                        <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
+                          {`${curData[0].curApplyNum}\u00A0`}
                         </Typography>
                         <Typography
-                          size="largeText"
+                          size="heading1"
+                          style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
+                        >
+                          / {curData[0].curNumOfSelection}
+                        </Typography>
+                        <Typography
+                          size="normalText"
                           style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '600',
+                            color: 'var(--Black2, #434343)',
+                            fontWeight: '400',
+                            lineHeight: '112.5%',
+                            marginLeft: '13px',
                           }}
                         >
-                          {semesterBtnStates['2023-1R']
-                            ? pastData1[0].numOfSelection
-                            : semesterBtnStates['2022-2R']
-                            ? pastData1[1].numOfSelection
-                            : pastData1[2].numOfSelection}
-                          명
+                          {`\u00A0 명 정원`}
                         </Typography>
                       </div>
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '20px',
-                          marginLeft: '75px',
-                        }}
-                      >
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          경쟁률
+                      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
+                        <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
+                          {curData[0].curApplyNum}명의 지원자가 {userData.hopeMajor1}를 지원했습니다.
                         </Typography>
+                        <div
+                          style={{ display: 'flex', marginTop: '18px', cursor: 'pointer' }}
+                          onClick={() => {
+                            getCurData();
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                          >
+                            <path
+                              d="M13.416 2.3335V5.8335H9.91602"
+                              stroke="#A8A8A8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
+                              stroke="#A8A8A8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
+                            Last Update {updateTime}
+                          </Typography>
+                        </div>
+                      </div>
+                    </div>
+                  </CompetitionRateBox>
+
+                  <div style={{ marginTop: '-575px', marginLeft: '847px' }}>
+                    <ThreeYearCumulativeDataBox>
+                      <Typography
+                        size="bodyText"
+                        style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
+                      >
+                        3학기 합격지표
+                      </Typography>
+                      <EachYearHeadBox>
+                        <SemesterButton
+                          isClicked={semesterBtnStates['2023-1R']}
+                          onClick={() => handleSemesterBtnClick('2023-1R')}
+                        >
+                          2023-1R
+                        </SemesterButton>
+                        <SemesterButton
+                          isClicked={semesterBtnStates['2022-2R']}
+                          onClick={() => handleSemesterBtnClick('2022-2R')}
+                        >
+                          2022-2R
+                        </SemesterButton>
+                        <SemesterButton
+                          isClicked={semesterBtnStates['2022-1R']}
+                          onClick={() => handleSemesterBtnClick('2022-1R')}
+                        >
+                          2022-1R
+                        </SemesterButton>
+                      </EachYearHeadBox>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                        <path d="M0 1L392 1" stroke="#DFDFDF" />
+                      </svg>
+                      <TextBox>
                         <Typography
-                          size="largeText"
+                          size="bodyText"
                           style={{
                             color: 'var(--Main-Black, #141414)',
                             fontWeight: '600',
+                            lineHeight: '90%',
+                            marginLeft: '36px',
+                            maxWidth: '350px',
                           }}
                         >
-                          {/* {semesterBtnStates['2023-1R']
+                          {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}
+                          R {userData.hopeMajor1} 모집정보
+                        </Typography>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="60"
+                          height="60"
+                          viewBox="0 0 60 60"
+                          fill="none"
+                          style={{ marginLeft: '-1px' }}
+                        >
+                          <path
+                            d="M26 37L34 30"
+                            stroke="#141414"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M34 30L26 22"
+                            stroke="#141414"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </TextBox>
+                      <div style={{ display: 'flex', marginTop: '50px' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '20px',
+                            marginLeft: '40px',
+                          }}
+                        >
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'}{' '}
+                            선발 인원
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {semesterBtnStates['2023-1R']
+                              ? pastData1[0].numOfSelection
+                              : semesterBtnStates['2022-2R']
+                              ? pastData1[1].numOfSelection
+                              : pastData1[2].numOfSelection}
+                            명
+                          </Typography>
+                        </div>
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '20px',
+                            marginLeft: '75px',
+                          }}
+                        >
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            경쟁률
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {/* {semesterBtnStates['2023-1R']
                           ? pastData1[0].competitionRate
                           : semesterBtnStates['2022-2R']
                           ? pastData1[1].competitionRate
                           : pastData1[2].competitionRate}{' '}
                         : 1 */}
-                          N : 1
-                        </Typography>
+                            N : 1
+                          </Typography>
+                        </div>
                       </div>
-                    </div>
-                    <div style={{ display: 'flex', marginTop: '50px' }}>
-                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '40px', gap: '20px' }}>
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          합격자 평균 학점
-                        </Typography>
-                        <Typography
-                          size="largeText"
-                          style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '600',
-                          }}
-                        >
-                          {semesterBtnStates['2023-1R']
-                            ? pastData1[0].meanGpa
-                            : semesterBtnStates['2022-2R']
-                            ? pastData1[1].meanGpa
-                            : pastData1[2].meanGpa}
-                        </Typography>
+                      <div style={{ display: 'flex', marginTop: '50px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '40px', gap: '20px' }}>
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            합격자 평균 학점
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {semesterBtnStates['2023-1R']
+                              ? pastData1[0].meanGpa
+                              : semesterBtnStates['2022-2R']
+                              ? pastData1[1].meanGpa
+                              : pastData1[2].meanGpa}
+                          </Typography>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            합격자 최저 학점
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {semesterBtnStates['2023-1R']
+                              ? pastData1[0].minGpa
+                              : semesterBtnStates['2022-2R']
+                              ? pastData1[1].minGpa
+                              : pastData1[2].minGpa}
+                          </Typography>
+                        </div>
                       </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          합격자 최저 학점
-                        </Typography>
-                        <Typography
-                          size="largeText"
-                          style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '600',
-                          }}
-                        >
-                          {semesterBtnStates['2023-1R']
-                            ? pastData1[0].minGpa
-                            : semesterBtnStates['2022-2R']
-                            ? pastData1[1].minGpa
-                            : pastData1[2].minGpa}
-                        </Typography>
-                      </div>
-                    </div>
 
-                    <div style={{ width: '295px', marginLeft: '48px', marginTop: '50px' }}>
-                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
-                        본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
-                      </Typography>
-                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
-                        기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
-                      </Typography>
-                    </div>
-                  </ThreeYearCumulativeDataBox>
+                      <div style={{ width: '295px', marginLeft: '48px', marginTop: '50px' }}>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
+                          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
+                        </Typography>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
+                          기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+                        </Typography>
+                      </div>
+                    </ThreeYearCumulativeDataBox>
+                  </div>
                 </div>
-              </div>
 
-              <div style={{ marginLeft: '551px', marginTop: '30px' }}>
-                <RangeBox>
-                  <Typography
-                    size="bodyText"
-                    style={{
-                      color: 'var(--Main-Black, #141414)',
-                      marginTop: '26px',
-                      marginLeft: '36px',
-                      marginBottom: '14px',
-                    }}
-                  >
-                    내 학점 위치 파악하기
-                  </Typography>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
-                    <path d="M0 1L1239 1" stroke="#DFDFDF" />
-                  </svg>
-                  <MyStageChart />
-                </RangeBox>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  marginLeft: '551px',
-                  marginTop: '30px',
-                  gap: '30px',
-                }}
-              >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  <Graph_1_1Box>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ marginLeft: '551px', marginTop: '30px' }}>
+                  <RangeBox>
+                    <Typography
+                      size="bodyText"
+                      style={{
+                        color: 'var(--Main-Black, #141414)',
+                        marginTop: '26px',
+                        marginLeft: '36px',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      내 학점 위치 파악하기
+                    </Typography>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
+                      <path d="M0 1L1239 1" stroke="#DFDFDF" />
+                    </svg>
+                    <MyStageChart />
+                  </RangeBox>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginLeft: '551px',
+                    marginTop: '30px',
+                    gap: '30px',
+                  }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <Graph_1_1Box>
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography
+                          size="bodyText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            marginLeft: '36px',
+                            marginTop: '26px',
+                            marginBottom: '14px',
+                          }}
+                        >
+                          지원자 정보 살펴보기
+                        </Typography>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
+                        <path d="M0 1L674 1" stroke="#DFDFDF" />
+                      </svg>
+                      <PieChartComponent MajorDatas={curData[0].scatterChartData} />
+                    </Graph_1_1Box>
+                    <Graph_2_1Box>
+                      <HalfPieChartComponent StudentYearDatas={curData[0].halfChartData} />
+                    </Graph_2_1Box>
+                  </div>
+                  <Graph_2Box>
+                    <Typography
+                      size="bodyText"
+                      style={{
+                        color: 'var(--Main-Black, #141414)',
+                        marginLeft: '36px',
+                        marginTop: '26px',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      이중전공 지원자 학과 분포
+                    </Typography>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
+                      <path d="M0 1L535 1" stroke="#DFDFDF" />
+                    </svg>
+                    <PlotChartComponent MajorDatas={curData[0].scatterChartData} />
+                  </Graph_2Box>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{ marginLeft: '551px' }}>
+                  <BigMajorSymbolBox style={{ marginTop: '32px' }}>
+                    <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
+                      2지망 관심전공
+                    </Typography>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="392"
+                      height="2"
+                      viewBox="0 0 392 2"
+                      fill="none"
+                      style={{ position: 'absolute', top: '72px' }}
+                    >
+                      <path d="M0 1L392 1" stroke="#DFDFDF" />
+                    </svg>
+                    <div style={{ position: 'absolute', top: '128px', left: '55px' }}>
+                      <div
+                        style={{
+                          width: '184px',
+                          height: '241px',
+                          display: 'block',
+                          marginLeft: 'auto',
+                          marginRight: 'auto',
+                        }}
+                      >
+                        <BigMajorSymbol
+                          src={`design_image/major_symbol/trans/large/${
+                            collegeNameMapping[userData.hopeMajor2 as MajorOptions]
+                          }_trans_large.png`}
+                          alt={getTextByTitle(userData.hopeMajor2)}
+                        />
+                      </div>
+                      <Typography
+                        size="title2"
+                        style={{
+                          lineHeight: '138.889%',
+                          marginTop: '34px',
+                          textAlign: 'center',
+                        }}
+                      >
+                        {userData.hopeMajor2}
+                      </Typography>
+                      <div style={{ display: 'flex' }}>
+                        <Typography
+                          size="mediumText"
+                          style={{
+                            opacity: '0.8',
+                            marginTop: '0px',
+                            textAlign: 'center',
+                            lineHeight: '133.333%',
+                            justifyContent: 'center',
+                            width: '287px',
+                          }}
+                        >
+                          {getTextByTitle(userData.hopeMajor2)}
+                        </Typography>
+                      </div>
+                    </div>
+                  </BigMajorSymbolBox>
+                  <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
+                    <CompetitionRateBox>
+                      <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                        <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                        <path d="M0 1L392 1" stroke="#DFDFDF" />
+                      </svg>
+                      <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
+                        <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
+                          {`${curData[1].curCompetitionRate}\u00A0`}
+                        </Typography>
+                        <Typography
+                          size="heading1"
+                          style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
+                        >
+                          : 1
+                        </Typography>
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginTop: '37px',
+                          marginLeft: '36px',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          getCurData();
+                        }}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path
+                            d="M13.416 2.3335V5.8335H9.91602"
+                            stroke="#A8A8A8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
+                            stroke="#A8A8A8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
+                          Last Update {updateTime}
+                        </Typography>
+                      </div>
+                    </CompetitionRateBox>
+                  </div>
+                  <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                      <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                      <path d="M0 1L392 1" stroke="#DFDFDF" />
+                    </svg>
+                    <div style={{ paddingTop: '35px' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
+                        <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
+                          {`${curData[1].curApplyNum}\u00A0`}
+                        </Typography>
+                        <Typography
+                          size="heading1"
+                          style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
+                        >
+                          / {curData[1].curNumOfSelection}
+                        </Typography>
+                        <Typography
+                          size="normalText"
+                          style={{
+                            color: 'var(--Black2, #434343)',
+                            fontWeight: '400',
+                            lineHeight: '112.5%',
+                            marginLeft: '13px',
+                          }}
+                        >
+                          {`\u00A0 명 정원`}
+                        </Typography>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
+                        <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
+                          {curData[1].curApplyNum}명의 지원자가 {userData.hopeMajor2}를 지원했습니다.
+                        </Typography>
+                        <div
+                          style={{ display: 'flex', marginTop: '18px', cursor: 'pointer' }}
+                          onClick={() => {
+                            getCurData();
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                          >
+                            <path
+                              d="M13.416 2.3335V5.8335H9.91602"
+                              stroke="#A8A8A8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
+                              stroke="#A8A8A8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
+                            Last Update {updateTime}
+                          </Typography>
+                        </div>
+                      </div>
+                    </div>
+                  </CompetitionRateBox>
+
+                  <div style={{ marginTop: '-575px', marginLeft: '847px' }}>
+                    <ThreeYearCumulativeDataBox>
+                      <Typography
+                        size="bodyText"
+                        style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
+                      >
+                        3학기 합격지표
+                      </Typography>
+                      <EachYearHeadBox>
+                        <SemesterButton
+                          isClicked={semesterBtnStates['2023-1R']}
+                          onClick={() => handleSemesterBtnClick('2023-1R')}
+                        >
+                          2023-1R
+                        </SemesterButton>
+                        <SemesterButton
+                          isClicked={semesterBtnStates['2022-2R']}
+                          onClick={() => handleSemesterBtnClick('2022-2R')}
+                        >
+                          2022-2R
+                        </SemesterButton>
+                        <SemesterButton
+                          isClicked={semesterBtnStates['2022-1R']}
+                          onClick={() => handleSemesterBtnClick('2022-1R')}
+                        >
+                          2022-1R
+                        </SemesterButton>
+                      </EachYearHeadBox>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                        <path d="M0 1L392 1" stroke="#DFDFDF" />
+                      </svg>
+                      <TextBox>
+                        <Typography
+                          size="bodyText"
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '600',
+                            lineHeight: '90%',
+                            marginLeft: '36px',
+                          }}
+                        >
+                          {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}
+                          R {userData.hopeMajor2} 모집정보
+                        </Typography>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="60"
+                          height="60"
+                          viewBox="0 0 60 60"
+                          fill="none"
+                          style={{ marginLeft: '-1px' }}
+                        >
+                          <path
+                            d="M26 37L34 30"
+                            stroke="#141414"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M34 30L26 22"
+                            stroke="#141414"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </TextBox>
+                      <div style={{ display: 'flex', marginTop: '50px' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '20px',
+                            marginLeft: '40px',
+                          }}
+                        >
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'}{' '}
+                            선발 인원
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {semesterBtnStates['2023-1R']
+                              ? pastData2[0].numOfSelection
+                              : semesterBtnStates['2022-2R']
+                              ? pastData2[1].numOfSelection
+                              : pastData2[2].numOfSelection}
+                            명
+                          </Typography>
+                        </div>
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '20px',
+                            marginLeft: '75px',
+                          }}
+                        >
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            경쟁률
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {/* {semesterBtnStates['2023-1R']
+                          ? pastData2[0].competitionRate
+                          : semesterBtnStates['2022-2R']
+                          ? pastData2[1].competitionRate
+                          : pastData2[2].competitionRate}{' '}
+                        : 1 */}
+                            N : 1
+                          </Typography>
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', marginTop: '50px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '40px', gap: '20px' }}>
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            합격자 평균 학점
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {semesterBtnStates['2023-1R']
+                              ? pastData2[0].meanGpa
+                              : semesterBtnStates['2022-2R']
+                              ? pastData2[1].meanGpa
+                              : pastData2[2].meanGpa}
+                          </Typography>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
+                          <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
+                            합격자 최저 학점
+                          </Typography>
+                          <Typography
+                            size="largeText"
+                            style={{
+                              color: 'var(--Main-Black, #141414)',
+                              fontWeight: '600',
+                            }}
+                          >
+                            {semesterBtnStates['2023-1R']
+                              ? pastData2[0].minGpa
+                              : semesterBtnStates['2022-2R']
+                              ? pastData2[1].minGpa
+                              : pastData2[2].minGpa}
+                          </Typography>
+                        </div>
+                      </div>
+
+                      <div style={{ width: '295px', marginLeft: '48px', marginTop: '50px' }}>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
+                          본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
+                        </Typography>
+                        <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
+                          기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+                        </Typography>
+                      </div>
+                    </ThreeYearCumulativeDataBox>
+                  </div>
+                </div>
+                <div style={{ marginLeft: '551px', marginTop: '30px' }}>
+                  <RangeBox>
+                    <Typography
+                      size="bodyText"
+                      style={{
+                        color: 'var(--Main-Black, #141414)',
+                        marginTop: '26px',
+                        marginLeft: '36px',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      내 학점 위치 파악하기
+                    </Typography>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
+                      <path d="M0 1L1239 1" stroke="#DFDFDF" />
+                    </svg>
+                    <MyStageChart />
+                  </RangeBox>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginLeft: '551px',
+                    marginTop: '30px',
+                    gap: '30px',
+                  }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <Graph_1_1Box>
                       <Typography
                         size="bodyText"
                         style={{
@@ -1253,413 +1701,16 @@ export default function MyBoardPage() {
                       >
                         지원자 정보 살펴보기
                       </Typography>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
-                      <path d="M0 1L674 1" stroke="#DFDFDF" />
-                    </svg>
-                    <PieChartComponent MajorDatas={curData[0].scatterChartData} />
-                  </Graph_1_1Box>
-                  <Graph_2_1Box>
-                    <HalfPieChartComponent StudentYearDatas={curData[0].halfChartData} />
-                  </Graph_2_1Box>
-                </div>
-                <Graph_2Box>
-                  <Typography
-                    size="bodyText"
-                    style={{
-                      color: 'var(--Main-Black, #141414)',
-                      marginLeft: '36px',
-                      marginTop: '26px',
-                      marginBottom: '14px',
-                    }}
-                  >
-                    이중전공 지원자 학과 분포
-                  </Typography>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
-                    <path d="M0 1L535 1" stroke="#DFDFDF" />
-                  </svg>
-                  <PlotChartComponent MajorDatas={curData[0].scatterChartData} />
-                </Graph_2Box>
-              </div>
-            </>
-          ) : (
-            <>
-              <div style={{ marginLeft: '551px' }}>
-                <BigMajorSymbolBox style={{ marginTop: '32px' }}>
-                  <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
-                    2지망 관심전공
-                  </Typography>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="392"
-                    height="2"
-                    viewBox="0 0 392 2"
-                    fill="none"
-                    style={{ position: 'absolute', top: '72px' }}
-                  >
-                    <path d="M0 1L392 1" stroke="#DFDFDF" />
-                  </svg>
-                  <div style={{ position: 'absolute', top: '128px', left: '55px' }}>
-                    <div
-                      style={{
-                        width: '184px',
-                        height: '241px',
-                        display: 'block',
-                        marginLeft: 'auto',
-                        marginRight: 'auto',
-                      }}
-                    >
-                      <BigMajorSymbol
-                        src={`design_image/major_symbol/trans/large/${
-                          collegeNameMapping[userData.hopeMajor2 as MajorOptions]
-                        }_trans_large.png`}
-                        alt={getTextByTitle(userData.hopeMajor2)}
-                      />
-                    </div>
-                    <Typography
-                      size="title2"
-                      style={{
-                        lineHeight: '138.889%',
-                        marginTop: '34px',
-                        textAlign: 'center',
-                      }}
-                    >
-                      {userData.hopeMajor2}
-                    </Typography>
-                    <div style={{ display: 'flex' }}>
-                      <Typography
-                        size="mediumText"
-                        style={{
-                          opacity: '0.8',
-                          marginTop: '0px',
-                          textAlign: 'center',
-                          lineHeight: '133.333%',
-                          justifyContent: 'center',
-                          width: '287px',
-                        }}
-                      >
-                        {getTextByTitle(userData.hopeMajor2)}
-                      </Typography>
-                    </div>
-                  </div>
-                </BigMajorSymbolBox>
-                <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
-                  <CompetitionRateBox>
-                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                      <BoxTitleText style={{ marginRight: '8px' }}>실시간 경쟁률</BoxTitleText>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
-                      <path d="M0 1L392 1" stroke="#DFDFDF" />
-                    </svg>
-                    <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '52px', marginLeft: '36px' }}>
-                      <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`${curData[1].curCompetitionRate}\u00A0`}
-                      </Typography>
-                      <Typography
-                        size="heading1"
-                        style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
-                      >
-                        : 1
-                      </Typography>
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginTop: '37px',
-                        marginLeft: '36px',
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => {
-                        getCurData();
-                      }}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path
-                          d="M13.416 2.3335V5.8335H9.91602"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
-                          stroke="#A8A8A8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
+                        <path d="M0 1L674 1" stroke="#DFDFDF" />
                       </svg>
-                      <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                        Last Update {updateTime}
-                      </Typography>
-                    </div>
-                  </CompetitionRateBox>
-                </div>
-                <CompetitionRateBox style={{ marginTop: '23px', marginLeft: '424px' }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <BoxTitleText style={{ marginRight: '8px' }}>실시간 지원자</BoxTitleText>
+                      <PieChartComponent MajorDatas={curData[1].scatterChartData} />
+                    </Graph_1_1Box>
+                    <Graph_2_1Box>
+                      <HalfPieChartComponent StudentYearDatas={curData[1].halfChartData} />
+                    </Graph_2_1Box>
                   </div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
-                    <path d="M0 1L392 1" stroke="#DFDFDF" />
-                  </svg>
-                  <div style={{ paddingTop: '35px' }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '36px' }}>
-                      <Typography size="heading1" style={{ color: '#D85888', lineHeight: '104.167%' }}>
-                        {`${curData[1].curApplyNum}\u00A0`}
-                      </Typography>
-                      <Typography
-                        size="heading1"
-                        style={{ color: 'rgba(67, 67, 67, 0.80)', fontWeight: '400', lineHeight: '50px' }}
-                      >
-                        / {curData[1].curNumOfSelection}
-                      </Typography>
-                      <Typography
-                        size="normalText"
-                        style={{
-                          color: 'var(--Black2, #434343)',
-                          fontWeight: '400',
-                          lineHeight: '112.5%',
-                          marginLeft: '13px',
-                        }}
-                      >
-                        {`\u00A0 명 정원`}
-                      </Typography>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px', marginLeft: '36px' }}>
-                      <Typography size={'smallText'} bold={'500px'} color="rgba(67, 67, 67, 0.80);">
-                        {curData[1].curApplyNum}명의 지원자가 {userData.hopeMajor2}를 지원했습니다.
-                      </Typography>
-                      <div
-                        style={{ display: 'flex', marginTop: '18px', cursor: 'pointer' }}
-                        onClick={() => {
-                          getCurData();
-                        }}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                          <path
-                            d="M13.416 2.3335V5.8335H9.91602"
-                            stroke="#A8A8A8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M11.9521 8.74985C11.5729 9.82313 10.8552 10.7441 9.90703 11.374C8.95888 12.0038 7.8317 12.3085 6.69535 12.242C5.55899 12.1755 4.47503 11.7415 3.60679 11.0054C2.73856 10.2693 2.1331 9.27089 1.88165 8.16071C1.6302 7.05053 1.74638 5.8887 2.21269 4.8503C2.679 3.8119 3.47017 2.95318 4.46698 2.40355C5.46379 1.85392 6.61223 1.64315 7.73925 1.80301C8.86626 1.96287 9.9108 2.48469 10.7154 3.28985L13.4163 5.83318"
-                            stroke="#A8A8A8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <Typography size="smallText" style={{ color: '#A8A8A8', marginLeft: '4px' }}>
-                          Last Update {updateTime}
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                </CompetitionRateBox>
-
-                <div style={{ marginTop: '-575px', marginLeft: '847px' }}>
-                  <ThreeYearCumulativeDataBox>
-                    <Typography
-                      size="bodyText"
-                      style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
-                    >
-                      3학기 합격지표
-                    </Typography>
-                    <EachYearHeadBox>
-                      <SemesterButton
-                        isClicked={semesterBtnStates['2023-1R']}
-                        onClick={() => handleSemesterBtnClick('2023-1R')}
-                      >
-                        2023-1R
-                      </SemesterButton>
-                      <SemesterButton
-                        isClicked={semesterBtnStates['2022-2R']}
-                        onClick={() => handleSemesterBtnClick('2022-2R')}
-                      >
-                        2022-2R
-                      </SemesterButton>
-                      <SemesterButton
-                        isClicked={semesterBtnStates['2022-1R']}
-                        onClick={() => handleSemesterBtnClick('2022-1R')}
-                      >
-                        2022-1R
-                      </SemesterButton>
-                    </EachYearHeadBox>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
-                      <path d="M0 1L392 1" stroke="#DFDFDF" />
-                    </svg>
-                    <TextBox>
-                      <Typography
-                        size="bodyText"
-                        style={{
-                          color: 'var(--Main-Black, #141414)',
-                          fontWeight: '600',
-                          lineHeight: '90%',
-                          marginLeft: '36px',
-                        }}
-                      >
-                        {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
-                        {userData.hopeMajor2} 모집정보
-                      </Typography>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="60"
-                        height="60"
-                        viewBox="0 0 60 60"
-                        fill="none"
-                        style={{ marginLeft: '-1px' }}
-                      >
-                        <path
-                          d="M26 37L34 30"
-                          stroke="#141414"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M34 30L26 22"
-                          stroke="#141414"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </TextBox>
-                    <div style={{ display: 'flex', marginTop: '50px' }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '20px',
-                          marginLeft: '40px',
-                        }}
-                      >
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발
-                          인원
-                        </Typography>
-                        <Typography
-                          size="largeText"
-                          style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '600',
-                          }}
-                        >
-                          {semesterBtnStates['2023-1R']
-                            ? pastData2[0].numOfSelection
-                            : semesterBtnStates['2022-2R']
-                            ? pastData2[1].numOfSelection
-                            : pastData2[2].numOfSelection}
-                          명
-                        </Typography>
-                      </div>
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '20px',
-                          marginLeft: '75px',
-                        }}
-                      >
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          경쟁률
-                        </Typography>
-                        <Typography
-                          size="largeText"
-                          style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '600',
-                          }}
-                        >
-                          {/* {semesterBtnStates['2023-1R']
-                          ? pastData2[0].competitionRate
-                          : semesterBtnStates['2022-2R']
-                          ? pastData2[1].competitionRate
-                          : pastData2[2].competitionRate}{' '}
-                        : 1 */}
-                          N : 1
-                        </Typography>
-                      </div>
-                    </div>
-                    <div style={{ display: 'flex', marginTop: '50px' }}>
-                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '40px', gap: '20px' }}>
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          합격자 평균 학점
-                        </Typography>
-                        <Typography
-                          size="largeText"
-                          style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '600',
-                          }}
-                        >
-                          {semesterBtnStates['2023-1R']
-                            ? pastData2[0].meanGpa
-                            : semesterBtnStates['2022-2R']
-                            ? pastData2[1].meanGpa
-                            : pastData2[2].meanGpa}
-                        </Typography>
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
-                        <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                          합격자 최저 학점
-                        </Typography>
-                        <Typography
-                          size="largeText"
-                          style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '600',
-                          }}
-                        >
-                          {semesterBtnStates['2023-1R']
-                            ? pastData2[0].minGpa
-                            : semesterBtnStates['2022-2R']
-                            ? pastData2[1].minGpa
-                            : pastData2[2].minGpa}
-                        </Typography>
-                      </div>
-                    </div>
-
-                    <div style={{ width: '295px', marginLeft: '48px', marginTop: '50px' }}>
-                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);">
-                        본 통계는 서비스 자체 설문조사를 통해 수집된 정보를
-                      </Typography>
-                      <Typography size="smallText" color="var(--A8_Grey-4, #A8A8A8);" style={{ marginTop: '8px' }}>
-                        기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
-                      </Typography>
-                    </div>
-                  </ThreeYearCumulativeDataBox>
-                </div>
-              </div>
-              <div style={{ marginLeft: '551px', marginTop: '30px' }}>
-                <RangeBox>
-                  <Typography
-                    size="bodyText"
-                    style={{
-                      color: 'var(--Main-Black, #141414)',
-                      marginTop: '26px',
-                      marginLeft: '36px',
-                      marginBottom: '14px',
-                    }}
-                  >
-                    내 학점 위치 파악하기
-                  </Typography>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
-                    <path d="M0 1L1239 1" stroke="#DFDFDF" />
-                  </svg>
-                  <MyStageChart />
-                </RangeBox>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  marginLeft: '551px',
-                  marginTop: '30px',
-                  gap: '30px',
-                }}
-              >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  <Graph_1_1Box>
+                  <Graph_2Box>
                     <Typography
                       size="bodyText"
                       style={{
@@ -1669,54 +1720,34 @@ export default function MyBoardPage() {
                         marginBottom: '14px',
                       }}
                     >
-                      지원자 정보 살펴보기
+                      이중전공 지원자 학과 분포
                     </Typography>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="674" height="2" viewBox="0 0 674 2" fill="none">
-                      <path d="M0 1L674 1" stroke="#DFDFDF" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
+                      <path d="M0 1L535 1" stroke="#DFDFDF" />
                     </svg>
-                    <PieChartComponent MajorDatas={curData[1].scatterChartData} />
-                  </Graph_1_1Box>
-                  <Graph_2_1Box>
-                    <HalfPieChartComponent StudentYearDatas={curData[1].halfChartData} />
-                  </Graph_2_1Box>
+                    <PlotChartComponent MajorDatas={curData[1].scatterChartData} />
+                  </Graph_2Box>
                 </div>
-                <Graph_2Box>
-                  <Typography
-                    size="bodyText"
-                    style={{
-                      color: 'var(--Main-Black, #141414)',
-                      marginLeft: '36px',
-                      marginTop: '26px',
-                      marginBottom: '14px',
-                    }}
-                  >
-                    이중전공 지원자 학과 분포
-                  </Typography>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="535" height="2" viewBox="0 0 535 2" fill="none">
-                    <path d="M0 1L535 1" stroke="#DFDFDF" />
-                  </svg>
-                  <PlotChartComponent MajorDatas={curData[1].scatterChartData} />
-                </Graph_2Box>
+              </>
+            )}
+            {isApplied ? null : (
+              <div style={{ display: 'flex', zIndex: 2, marginTop: '-830px', marginLeft: '550px' }}>
+                <BlurWrapper>
+                  <BlurMsg>
+                    <Typography size="largeText">쿠플라이에서 모의지원 후 열람 가능해요!</Typography>
+                    <Typography size="mediumText" style={{ lineHeight: '136.111%' }}>
+                      모의지원을 완료한 후, 나와 함께 {userData.hopeMajor1}를 지원한 지원자의 실시간 지원통계를
+                      열람해보세요.
+                      <br />
+                      모의지원하라는 홍보성 문구가 필요해요.
+                    </Typography>
+                  </BlurMsg>
+                </BlurWrapper>
               </div>
-            </>
-          )}
-          {isApplied ? null : (
-            <div style={{ display: 'flex', zIndex: 2, marginTop: '-830px', marginLeft: '550px' }}>
-              <BlurWrapper>
-                <BlurMsg>
-                  <Typography size="largeText">쿠플라이에서 모의지원 후 열람 가능해요!</Typography>
-                  <Typography size="mediumText" style={{ lineHeight: '136.111%' }}>
-                    모의지원을 완료한 후, 나와 함께 {userData.hopeMajor1}를 지원한 지원자의 실시간 지원통계를
-                    열람해보세요.
-                    <br />
-                    모의지원하라는 홍보성 문구가 필요해요.
-                  </Typography>
-                </BlurMsg>
-              </BlurWrapper>
-            </div>
-          )}
-        </div>
-      </Wrapper>
+            )}
+          </div>
+        </Wrapper>
+      )}
     </>
   );
 }
