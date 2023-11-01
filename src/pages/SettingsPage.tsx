@@ -867,9 +867,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </BodyContent>
           <TextFieldTitle>
             <strong>희망 이중전공</strong> 수정하기
-            <span style={{ marginLeft: -44 }}>
-              <Optional>(선택)</Optional>
-            </span>
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
             <DropDown
@@ -890,9 +887,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </div>
           <TextFieldTitle>
             <strong>학점</strong> 수정하기
-            <span style={{ marginLeft: 25 }}>
-              <Optional>(선택)</Optional>
-            </span>
           </TextFieldTitle>
 
           <VerifiBoxWrapper>
@@ -907,9 +901,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </VerifiBoxWrapper>
           <TextFieldTitle>
             <strong>희망 지원학기</strong> 수정하기
-            <span style={{ marginLeft: -34 }}>
-              <Optional>(선택)</Optional>
-            </span>
           </TextFieldTitle>
           <VerifiBoxWrapper>
             <VerificationBox
@@ -924,17 +915,18 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               setValue={setHopeSemester2}
               isEntered={true}
             ></VerificationBox>
-            <div style={{ marginTop: 26 }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
-                <path stroke="#D85888" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
-              </svg>
-            </div>
+            <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+              년도
+            </Typography>
             <VerificationBox
               name="semester-3"
               value={hopeSemester3}
               setValue={setHopeSemester3}
               isEntered={true}
             ></VerificationBox>
+            <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+              학기
+            </Typography>
           </VerifiBoxWrapper>
           <div>
             <ButtonWrapper
