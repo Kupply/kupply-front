@@ -232,6 +232,8 @@ const TextOutBox = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px;
+  margin-right: 18px;
+  line-height: 123.54%; /* 22.237px */
 `;
 
 const CandidateImgsWrapper = styled.div`
@@ -294,6 +296,31 @@ const Description = styled.div`
   font-weight: 500;
   line-height: 24.5px; /* 136.111% */
 `;
+
+const StyledTable = styled.table`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  th {
+    text-align: center;
+    background-color: #dfdfdf;
+    border: 1px solid black;
+    padding: 2px 2px;
+  }
+
+  td {
+    text-align: left;
+    border: 1px solid black;
+  }
+`;
+
 const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   const navigate = useNavigate();
 
@@ -988,13 +1015,13 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         <BodyContainer>
           <BodyTitle>약관보기</BodyTitle>
           <BodyContent>
-            다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관 입니다.
+            다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관입니다.
           </BodyContent>{' '}
           <ScrollBarLarge isChecked={scrollActive}>
             <div style={{ marginTop: 30 }}>
               <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
                 <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                  제 1장 총칙
+                  서비스 이용약관
                 </Typography>
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
                   <path
@@ -1017,6 +1044,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             <TextOutBox>
               <ScrollBarSmall isChecked={scrollActive}>
                 <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
+                  <Typography size="largeText" style={{ textAlign: 'left' }}>
+                    제 1장 총칙
+                  </Typography>
                   <Typography size="bodyText" style={{ textAlign: 'left' }}>
                     제 1조 (목적)
                   </Typography>
@@ -1088,35 +1118,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                     2. 이 약관에 명시되지 않은 사항에 대해서는 전기 통신 기본법, 전기 통신 사업법, 기타 관련법령 및
                     서비스별 안내의 규정에 의합니다.
                   </Typography>
-                </div>
-              </ScrollBarSmall>
-            </TextOutBox>{' '}
-            <div style={{ marginTop: 30 }}>
-              <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
-                <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                  제 2장 서비스 이용 계약
-                </Typography>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
-                  <path
-                    d="M12.1339 17.2676L15.8672 14.0009"
-                    stroke="#434343"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M15.8672 14L12.1339 10.2667"
-                    stroke="#434343"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
-            <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
-                <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
+                  <Typography size="largeText" style={{ textAlign: 'left' }}>
+                    제 2장 서비스 이용 계약
+                  </Typography>
                   <Typography size="bodyText" style={{ textAlign: 'left' }}>
                     제 5조 (이용 계약의 성립)
                   </Typography>
@@ -1200,35 +1204,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                     5. 쿠플라이는 제공하는 서비스 이용과 관련하여 이용자에게 발생한 어떠한 손해에 대해서도 책임을 지지
                     않습니다.
                   </Typography>
-                </div>
-              </ScrollBarSmall>
-            </TextOutBox>{' '}
-            <div style={{ marginTop: 30 }}>
-              <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
-                <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                  제 3장 서비스 제공 및 변경
-                </Typography>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
-                  <path
-                    d="M12.1339 17.2676L15.8672 14.0009"
-                    stroke="#434343"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M15.8672 14L12.1339 10.2667"
-                    stroke="#434343"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
-            <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
-                <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
+                  <Typography size="largeText" style={{ textAlign: 'left' }}>
+                    제 3장 서비스 제공 및 변경
+                  </Typography>
                   <Typography size="bodyText" style={{ textAlign: 'left' }}>
                     제 9조 (서비스 내용)
                   </Typography>
@@ -1480,6 +1458,216 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                   </Typography>
                   <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
                     1. 본 약관은 2023년 10월 20일부터 시행합니다.
+                  </Typography>
+                </div>
+              </ScrollBarSmall>
+            </TextOutBox>
+            <div style={{ marginTop: 30 }}>
+              <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
+                <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                  개인정보 처리방침
+                </Typography>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path
+                    d="M12.1339 17.2676L15.8672 14.0009"
+                    stroke="#434343"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15.8672 14L12.1339 10.2667"
+                    stroke="#434343"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div style={{ width: '628px', height: 'auto', marginBottom: '30' }}>
+              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left', color: '#a8a8a8' }}>
+                쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스를 이용함과 동시에
+                온라인 상에서 각 운영 서비스에 제공한 개인정보가 보호받을 수 있도록 최선을 다하고 있습니다.
+                <br />
+                <br />
+              </Typography>
+            </div>
+            <TextOutBox>
+              <ScrollBarSmall isChecked={scrollActive}>
+                <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
+                  <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                    쿠플라이는 ‘개인정보보호법’에 따라 정보주체의 개인정보를 보호하고 있으며 이와 관련한 고충을 신속하고
+                    원활하게 처리할 수 있도록 하기 위하여 ’개인정보보호법’ 제30조에 따라 다음과 같이 개인정보 처리방침을
+                    수립하고 공개합니다. 서비스 운영팀은 개인정보처리방침을 홈페이지의 첫 화면에 공개함으로써 이용자들이
+                    언제나 용이하게 확인할 수 있도록 조치하고 있습니다.
+                    <br />
+                    <br />
+                    쿠플라이의 개인정보처리방침은 관련 법령 및 지침 변경이나 서비스 운영팀 내부 방침 변경 등으로 인하여
+                    수시로 변경될 수 있으며, 개인정보처리방침의 지속적인 개선을 위하여 필요한 절차를 정하고 있습니다.
+                    개인정보처리방침을 개정하는 경우 서비스 운영팀은 그 변경 사항을 홈페이지에 게시하여 이용자들이
+                    개정된 사항을 쉽게 알아볼 수 있도록 하고 있습니다.
+                    <br />
+                    <br />
+                    쿠플라이의 개인정보처리방침은 다음과 같은 내용을 담고 있습니다.
+                    <br />
+                    <br />
+                  </Typography>
+                  <Typography size="mediumText" style={{ fontWeight: '600', textAlign: 'left' }}>
+                    1. 정보 수집에 대한 동의
+                    <br />
+                    2. 개인정보 수집•이용 목적, 수집하는 개인정보의 항목 및 수집방법
+                    <br />
+                    3. 개인정보의 제3자 제공
+                    <br />
+                    4. 개인정보의 보유 및 이용 기간, 개인정보의 파기절차 및 방법
+                    <br />
+                    5. 개인정보 보호책임자 및 개인정보에 관한 민원 서비스
+                    <br />
+                    6. 개인정보의 안전성 확보조치에 관한 사항
+                    <br />
+                    7. 고지의 의무
+                    <br />
+                    <br />
+                    <br />
+                  </Typography>
+                  <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                    1. 정보 수집에 대한 동의
+                  </Typography>
+                  <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                    (1) 쿠플라이는 개인정보를 개인의 동의 없이 수집하지 않습니다. 쿠플라이는 이용자들이 회사의
+                    개인정보처리방침, 이용약관, 기타 서비스 정책 내용에 대하여 '동의' 버튼 또는 '취소' 버튼을 클릭할 수
+                    있는 절차를 마련하여, '동의' 버튼을 클릭하면 개인정보 수집에 대해 동의한 것으로 봅니다. (2)
+                    쿠플라이는 스크래핑 등의 기술을 이용하여 이용자의 데이터를 수집하는 행위를 불허합니다. 쿠플라이는
+                    입력하신 정보를 이용자들에게 사전에 밝힌 목적 이외에 다른 목적으로는 사용하지 않으며, 외부로
+                    유출하지 않습니다. 단, 쿠플라이에 링크되어 있는 웹사이트들이 개인정보를 수집하는 행위에 대해서는 본
+                    ‘개인정보처리방침’이 적용되지 않음을 알려드립니다.
+                    <br />
+                    <br />
+                    개인정보란 살아 있는 개인에 관한 정보로서 다음 어느 하나에 해당하는 정보를 말합니다.
+                    <br />
+                    - 성명, 주민등록번호 및 영상 등을 통하여 개인을 식별할 수 있는 정보
+                    <br />
+                    - 해당 정보만으로는 특정 개인을 식별할 수 없더라도 다른 정보와 쉽게 결합하여 알아볼 수 있는 정보, 이
+                    경우 쉽게 결합할 수 있는지 여부는 다른 정보의 입수 가능성 등 개인을 알아보는 데 소요되는 시간, 비용,
+                    기술 등을 합리적으로 고려하여야 합니다.
+                    <br />- 가명정보
+                  </Typography>
+                  <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                    2. 개인정보 수집, 이용 목적, 수집하는 개인정보의 항목 및 수집방법
+                  </Typography>
+                  <StyledTable>
+                    <thead>
+                      <tr>
+                        <th>수집이용 및 목적</th>
+                        <th>수집항목</th>
+                        <th>수집방법</th>
+                        <th>보유 및 이용기간</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>회원관리</td>
+                        <td>
+                          - (필수항목): 고려대학교 이메일, 이름, 고려대학교 학번, 본전공(1전공), 아이디, 비밀번호,
+                          닉네임, 희망 이중전공 1, 2지망, 희망 이중 지원학기
+                        </td>
+                        <td>회원가입</td>
+                        <td>회원 탈퇴 시까지</td>
+                      </tr>
+                      <tr>
+                        <td>모의지원</td>
+                        <td>
+                          - (필수항목): 학점, 1,2지망 지원 학과(부), 재지원 여부, 현재 학년 <br />- (선택항목): 지원 시
+                          제출한 자기소개서
+                        </td>
+                        <td>모의지원 서비스 이용</td>
+                        <td>모의지원 서비스를 이용한 해당 학기 종강 후 1개월</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          합격자료 업데이트
+                          <br />
+                          (회원정보와 학교 포탈시스템에 공시되는 당학기 이중전공 합격자 발표 자료 대조)
+                        </td>
+                        <td>- (필수항목): 이름, 고려대학교 학번, 1, 2지망 지원학과</td>
+                        <td>회원가입 및 모의지원 서비스 이용</td>
+                        <td>모의지원 서비스를 이용한 해당 학기 종강 후 1개월</td>
+                      </tr>
+                    </tbody>
+                  </StyledTable>
+                  <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                    3. 개인정보의 제3자 제공
+                  </Typography>
+                  <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                    쿠플라이는 이용자의 사전 동의 없이 개인정보를 외부에 제공하지 않습니다. 단, 이용자가 외부 제휴사의
+                    서비스를 이용하기 위하여 개인정보 제공에 직접 동의를 한 경우, 그리고 관련 법령에 의거해 쿠플라이에
+                    개인정보 제출 의무가 발생한 경우, 이용자의 생명이나 안전에 급박한 위험이 확인되어 이를 해소하기 위한
+                    경우에 한하여 개인정보를 제공하고 있습니다.
+                  </Typography>
+                  <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                    4. 개인정보의 보유 및 이용 기간, 개인정보의 파기절차 및 방법
+                  </Typography>
+                  <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                    (1) 이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체 없이 파기합니다. 회원
+                    탈퇴를 요청하거나 개인정보의 수집 및 이용에 대한 동의를 철회하는 경우, 수집 및 이용목적이 달성되거나
+                    보유 및 이용기간이 종료한 경우 해당 개인정보를 지체 없이 파기합니다. 단, 관련 법령에 의하여 보존할
+                    필요가 있는 경우 아래와 같이 관련 법령에서 정한 일정한 기간 동안 회원정보를 보관합니다.
+                    <br />
+                    - 서비스 이용 관련 개인정보 (로그인 방문 기록)
+                    <br />
+                    - 보존 근거: 통신비밀보호법
+                    <br />
+                    - 보존 기간: 3개월 이상
+                    <br />
+                    (2) 쿠플라이는 개인정보의 수집 및 이용목적이 달성된 개인정보는 재생이 불가능한 방법으로 파기하고
+                    있습니다.
+                  </Typography>
+                  <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                    5. 개인정보 보호책임자 및 개인정보에 관한 민원 서비스
+                  </Typography>
+                  <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                    쿠플라이는 이용자의 개인정보 관련 문의사항 및 불만 처리 등을 위하여 아래와 같이 개인정보 보호
+                    책임자를 지정하고 있습니다.
+                    <br />
+                    [개인정보 보호책임자]
+                    <br />
+                    - 이름: 오윤진
+                    <br />
+                    - 이메일: dhdbsrlw@korea.ac.kr
+                    <br />
+                    쿠플라이는 고려대학교 재학생들이 운영하는 서비스로서, 즉각적인 문의 응답은 어렵습니다. 다만,
+                    개인정보 관련 민원 발생 시 아래 이메일로 문의주시면 최대한 빠르게 도와드리겠습니다.
+                    <br />- 이메일: kupply.devkor@gmail.com
+                    <br />
+                    기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.
+                    <br />
+                    - 개인정보 분쟁조정위원회 (www.kopico.go.kr/ 1833-6972) <br />
+                    - 개인정보침해신고센터 (privacy.kisa.or.kr / 국번없이 118) <br />
+                    - 대검찰청 사이버범죄수사과 (www.spo.go.kr / 국번없이 1301) <br />- 경찰청 사이버수사국
+                    (ecrm.police.go.kr / 국번없이 182)
+                  </Typography>
+                  <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                    6.개인정보의 안전성 확보조치에 관한 사항
+                  </Typography>
+                  <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                    쿠플라이는 이용자의 개인정보를 안전하게 관리하기 위하여 최선을 다하고 있으며, 개인정보보호법에 따라
+                    개인정보를 안전하게 보호하고 있습니다. 또한 개인정보를 처리하는 인원을 최소한으로 제한하고 정기적인
+                    교육과 비밀번호 변경을 통해 개인정보가 유출되지 않도록 안전하게 관리하고 있습니다. 다만, 이용자
+                    본인의 부주의나 인터넷 상의 문제로 아이디, 비밀번호 등의 개인정보가 유출되어 발생한 문제에 대해
+                    쿠플라이는 책임을 지지 않습니다.
+                  </Typography>
+                  <Typography size="bodyText" style={{ textAlign: 'left' }}>
+                    7. 고지의 의무
+                  </Typography>
+                  <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+                    개인정보처리방침의 내용의 추가, 삭제 및 수정이 있을 경우에는 시행하기 최소 7일 전에 홈페이지 등에
+                    공지하도록 하겠습니다.
+                    <br />
+                    - 개인정보처리방침 버전 번호: v1.0
+                    <br />
+                    - 공고일자: 2023년 10월 10일
+                    <br />- 시행일자:2023년 10울 20일
                   </Typography>
                 </div>
               </ScrollBarSmall>
