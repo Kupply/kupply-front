@@ -275,24 +275,28 @@ const ArchiveDetailPage = () => {
         </SelectionInfoDescriptionBox>
         <SelectionInfoContentsWrapper>
           <SelectionInfoContent>
-            <Text>선발인원</Text>
-            <SelectionInfoValue>{numOfSelection !== 0 ? `${numOfSelection} 명` : '집계불가'}</SelectionInfoValue>
+            <Text>{activeIdx === 0 ? '평균 선발인원' : '선발인원'}</Text>
+            <SelectionInfoValue>
+              {numOfSelection === 0
+                ? '집계불가'
+                : activeIdx === 0
+                ? `${Math.floor(numOfSelection / 6)} 명`
+                : `${numOfSelection} 명`}
+            </SelectionInfoValue>
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>지원자 수</Text>
+            <Text>모의 지원자 수</Text>
             <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue>
-            {/* <SelectionInfoValue>집계불가</SelectionInfoValue> */}
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>경쟁률</Text>
-            <SelectionInfoValue>{competitionRate.toFixed(2)}:1</SelectionInfoValue>
-            {/* <SelectionInfoValue>집계불가</SelectionInfoValue> */}
+            <Text>합격자 수</Text>
+            <SelectionInfoValue>{enoughData ? lineData.length : 0}명</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
       </SelectionInfoWrapper>
