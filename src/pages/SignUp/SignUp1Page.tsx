@@ -184,6 +184,7 @@ export default function SignUp1Page() {
     async function sendFirst(email: string) {
       await sendEmail(email);
     }
+
     sendFirst(email);
   }, []);
 
