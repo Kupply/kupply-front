@@ -22,7 +22,7 @@ const mockCards = [
     min: 4.12,
     semester: '2023-1R',
     src: '/design_image/previous/bussiness.png',
-    titleSrc: '/design_image/businessSample.png',
+    titleSrc: '/design_image/previous_detail/business.png',
   },
   {
     name: '심리학부',
@@ -34,7 +34,7 @@ const mockCards = [
     semester: '2023-1R',
     min: 4.12,
     src: '/design_image/previous/psycho.png',
-    titleSrc: '/design_image/psychoSample.png',
+    titleSrc: '/design_image/previous_detail/psycho.png',
   },
   {
     name: '정경대학 경제학과',
@@ -46,7 +46,7 @@ const mockCards = [
     semester: '2023-1R',
     min: 4.12,
     src: '/design_image/previous/political.png',
-    titleSrc: '/design_image/politicalSample.png',
+    titleSrc: '/design_image/previous_detail/political.png',
   },
   {
     name: '정경대학 통계학과',
@@ -58,7 +58,7 @@ const mockCards = [
     semester: '2023-1R',
     min: 4.12,
     src: '/design_image/previous/political.png',
-    titleSrc: '/design_image/politicalSample.png',
+    titleSrc: '/design_image/previous_detail/political.png',
   },
   {
     name: '미디어학부',
@@ -70,7 +70,7 @@ const mockCards = [
     avg: 4.23,
     min: 4.12,
     src: '/design_image/previous/media.png',
-    titleSrc: '/design_image/mediaSample.png',
+    titleSrc: '/design_image/previous_detail/media.png',
   },
   {
     name: '정보대학 컴퓨터학과',
@@ -82,7 +82,7 @@ const mockCards = [
     min: 4.12,
     semester: '2023-1R',
     src: '/design_image/previous/info.png',
-    titleSrc: '/design_image/infoSample.png',
+    titleSrc: '/design_image/previous_detail/info.png',
   },
   {
     name: '생명과학대학 식품자원경제학과',
@@ -94,7 +94,7 @@ const mockCards = [
     semester: '2023-1R',
     min: 4.12,
     src: '/design_image/previous/bio.png',
-    titleSrc: '/design_image/bioSample.png',
+    titleSrc: '/design_image/previous_detail/bio.png',
   },
   {
     name: '이과대학 수학과',
@@ -106,7 +106,7 @@ const mockCards = [
     avg: 4.23,
     min: 4.12,
     src: '/design_image/previous/science.png',
-    titleSrc: '/design_image/scienceSample.png',
+    titleSrc: '/design_image/previous_detail/science.png',
   },
   {
     name: '이과대학 화학과',
@@ -118,7 +118,7 @@ const mockCards = [
     avg: 4.23,
     min: 4.12,
     src: '/design_image/previous/science.png',
-    titleSrc: '/design_image/scienceSample.png',
+    titleSrc: '/design_image/previous_detail/science.png',
   },
 ];
 
