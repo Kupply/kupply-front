@@ -601,11 +601,10 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   const fourthSubmit = async () => {
     const updateData = {
       newPassword: pwd,
-      newEmail: email,
     };
     try {
       // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/updateMe', updateData, config);
+      await client.post('/user/resetPassword', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -837,19 +836,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             value={firstMajor}
             setValue={setFirstMajor}
           ></DropDown>
-          {/* <TextFieldTitle>
-            <strong>전화번호</strong> 수정하기 <Optional>(선택)</Optional>
-          </TextFieldTitle>
-          <TextFieldBox
-            value={phoneNumber}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setPhoneNumber(e.target.value);
-            }}
-            state={phoneNumberState}
-            setState={setPhoneNumberState}
-            setValue={setPhoneNumber}
-            placeholder="마케팅 및 새로운 수식 수신을 위한 휴대폰 11자리"
-          ></TextFieldBox> */}
           <ButtonWrapper
             buttonType="primary"
             onClick={() => {
@@ -1061,7 +1047,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEmail(e.target.value);
             }}
-            state={emailState}
+            state={'filled'}
             setState={setEmailState}
             setValue={setEmail}
           ></TextFieldBox>
@@ -1069,6 +1055,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             <strong>비밀번호</strong> 변경하기
           </TextFieldTitle>
           <TextFieldBox
+            placeholder="대소문자, 특수문자를 최소 하나씩 조합하여 8글자 이상"
             value={pwd}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPwd(e.target.value);
@@ -1076,12 +1063,14 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             state={passwordState}
             setState={setPasswordState}
             setValue={setPwd}
-            placeholder="대소문자, 숫자를 최소 하나씩 조합하여 8글자 이상"
+            helpMessage="비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다."
+            type="password"
           ></TextFieldBox>
           <TextFieldTitle>
             <strong>비밀번호 재확인</strong>하기
           </TextFieldTitle>
           <TextFieldBox
+            placeholder="비밀번호 확인"
             value={pwdConfirm}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPwdConfirm(e.target.value);
@@ -1089,7 +1078,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             state={password2State}
             setState={setPassword2State}
             setValue={setPwdConfirm}
-            placeholder="비밀번호 확인"
+            helpMessage="비밀번호 확인"
+            errorMessage="비밀번호가 일치하지 않아요!"
+            type="password"
           ></TextFieldBox>
           <div>
             <ButtonWrapper
