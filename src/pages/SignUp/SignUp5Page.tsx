@@ -13,11 +13,6 @@ import { useTable } from 'react-table';
 import { AnyCnameRecord } from 'dns';
 import client from '../../utils/httpClient';
 
-/*
-주의1) 1, 5 페이지는 (첫 단계, 마지막 단계 페이지는) 이벤트 함수에 신경써서 구현 
-주의2) 5페이지는 스크롤바 애니메이션 구현
-*/
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -98,6 +93,13 @@ const TextOutBox = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px;
+
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
 `;
 
 const ButtonsTextWrapper = styled.div`
@@ -161,6 +163,30 @@ const CheckButtonWrapper = styled.button<{ isChecked: boolean }>`
     `}
 `;
 
+const StyledTable = styled.table`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  th {
+    text-align: center;
+    background-color: #dfdfdf;
+    border: 1px solid black;
+    padding: 2px 2px;
+  }
+
+  td {
+    text-align: left;
+    border: 1px solid black;
+  }
+`;
+
 interface CustomCheckButtonProps {
   isChecked: boolean;
   onChange: (isChecked: boolean) => void; //  이 부분 수정했습니다
@@ -196,7 +222,6 @@ const join = async (role: string) => {
     name: sessionStorage.getItem('name'),
     studentId: Number(sessionStorage.getItem('studentId')),
     nickname: sessionStorage.getItem('nickname'),
-    phoneNumber: sessionStorage.getItem('phoneNumber'),
     email: sessionStorage.getItem('email'),
     password: sessionStorage.getItem('password'),
     firstMajor: sessionStorage.getItem('firstMajor'),
@@ -456,7 +481,7 @@ function SignUp5Page() {
 
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
-              <Typography size="largeText" style={{ textAlign: 'left' }}>
+              <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 1장 총칙
               </Typography>
               <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -528,7 +553,7 @@ function SignUp5Page() {
                 2. 이 약관에 명시되지 않은 사항에 대해서는 전기 통신 기본법, 전기 통신 사업법, 기타 관련법령 및 서비스별
                 안내의 규정에 의합니다.
               </Typography>
-              <Typography size="largeText" style={{ textAlign: 'left' }}>
+              <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 2장 서비스 이용 계약
               </Typography>
               <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -614,7 +639,7 @@ function SignUp5Page() {
                 5. 쿠플라이는 제공하는 서비스 이용과 관련하여 이용자에게 발생한 어떠한 손해에 대해서도 책임을 지지
                 않습니다.
               </Typography>
-              <Typography size="largeText" style={{ textAlign: 'left' }}>
+              <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 3장 서비스 제공 및 변경
               </Typography>
               <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -701,7 +726,7 @@ function SignUp5Page() {
                 5. 쿠플라이가 회원자격을 상실시키는 경우에는 회원등록을 말소합니다. 이 경우 회원에게 이를 통지하고,
                 회원등록 말소 전에 소명할 기회를 부여합니다.
               </Typography>
-              <Typography size="largeText" style={{ textAlign: 'left' }}>
+              <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 4장 서비스 관련 권한, 의무 관계
               </Typography>
               <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -818,7 +843,7 @@ function SignUp5Page() {
                 2. 쿠플라이는 쿠플라이 웹페이지 또는 이메일상에 게재되어 있거나 본 서비스를 통한 광고주의 판촉활동에
                 회원이 참여하거나 교신 또는 거래를 함으로써 발생하는 손실과 손해에 대해 책임을 지지 않습니다.
               </Typography>
-              <Typography size="largeText" style={{ textAlign: 'left' }}>
+              <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 5장 기타
               </Typography>
               <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -953,6 +978,46 @@ function SignUp5Page() {
               <Typography size="bodyText" style={{ textAlign: 'left' }}>
                 2. 개인정보 수집, 이용 목적, 수집하는 개인정보의 항목 및 수집방법
               </Typography>
+              <StyledTable>
+                <thead>
+                  <tr>
+                    <th>수집이용 및 목적</th>
+                    <th>수집항목</th>
+                    <th>수집방법</th>
+                    <th>보유 및 이용기간</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>회원관리</td>
+                    <td>
+                      - (필수항목): 고려대학교 이메일, 이름, 고려대학교 학번, 본전공(1전공), 아이디, 비밀번호, 닉네임,
+                      희망 이중전공 1, 2지망, 희망 이중 지원학기
+                    </td>
+                    <td>회원가입</td>
+                    <td>회원 탈퇴 시까지</td>
+                  </tr>
+                  <tr>
+                    <td>모의지원</td>
+                    <td>
+                      - (필수항목): 학점, 1,2지망 지원 학과(부), 재지원 여부, 현재 학년 <br />- (선택항목): 지원 시
+                      제출한 자기소개서
+                    </td>
+                    <td>모의지원 서비스 이용</td>
+                    <td>모의지원 서비스를 이용한 해당 학기 종강 후 1개월</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      합격자료 업데이트
+                      <br />
+                      (회원정보와 학교 포탈시스템에 공시되는 당학기 이중전공 합격자 발표 자료 대조)
+                    </td>
+                    <td>- (필수항목): 이름, 고려대학교 학번, 1, 2지망 지원학과</td>
+                    <td>회원가입 및 모의지원 서비스 이용</td>
+                    <td>모의지원 서비스를 이용한 해당 학기 종강 후 1개월</td>
+                  </tr>
+                </tbody>
+              </StyledTable>
               <Typography size="bodyText" style={{ textAlign: 'left' }}>
                 3. 개인정보의 제3자 제공
               </Typography>
@@ -1028,45 +1093,7 @@ function SignUp5Page() {
               </Typography>
             </ScrollBarSmall>
           </TextOutBox>
-          <ButtonsTextWrapper>
-            <CustomCheckButton
-              isChecked={individualChecks.fourth}
-              onChange={(newCheckedValue) =>
-                setIndividualChecks((prev) => ({
-                  ...prev,
-                  fourth: newCheckedValue,
-                }))
-              }
-            />
-            <Typography
-              size="mediumText"
-              style={{
-                fontWeight: '600',
-                marginBottom: '-5px',
-                justifyContent: 'center',
-              }}
-            >
-              광고성 정보 수신 동의 (선택)
-              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
-            </Typography>
-          </ButtonsTextWrapper>
 
-          <TextOutBox>
-            <ScrollBarSmall isChecked={scrollActive}>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
-                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의
-                개인정보 수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보
-                제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교
-                소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된 범위에서만 활용됩니다. 「개인정보보호법」 등 관련
-                법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른
-                목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를 통해
-                열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-                아래 항목에 명시된 범위에서만 활용됩니다.
-              </Typography>
-            </ScrollBarSmall>
-          </TextOutBox>
           <ButtonsWrapper>
             <PrevButton onClick={handlePrev} />
             <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>

@@ -13,7 +13,7 @@ import client from '../../utils/httpClient';
 
 const Wrapper = styled.div`
   align-items: center;
-  width: 100vw;
+  width: 1920px; // 100vw;
   // max-width: 1920px;
   //max-width: 1920px;
   height: 80px; // 7.7%; // 96px; (96/1248 = 7.7)
@@ -212,7 +212,6 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
             localStorage.setItem('userProfileLink', userInfo.profileLink);
             localStorage.setItem('name', userInfo.name);
             localStorage.setItem('nickname', userInfo.nickname);
-            localStorage.setItem('phoneNumber', userInfo.phoneNumber);
             localStorage.setItem('studentId', userInfo.studentId);
             localStorage.setItem('firstMajor', userInfo.firstMajor);
             localStorage.setItem('role', userInfo.role);
@@ -279,7 +278,16 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     navigate('/archive');
   };
   const handleMenu2Click = () => {
-    navigate('/myboard');
+    if (logined) {
+      navigate('/myboard');
+    } // 로그인 상태
+    else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
+      // 미로그인 상태
+    }
   };
   const handleMenu3Click = () => {
     navigate('/landing');
@@ -310,6 +318,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
       window.sessionStorage.clear();
       setLogin(false);
       navigate('/');
+      // window.location.reload();
     } catch (err) {
       // 이후 수정 필요함.
       alert(err);
@@ -344,7 +353,9 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     <Wrapper>
       <FlexContainer>
         <LeftButtonsContainer>
-          <Logo />
+          <div style={{ width: '100px', height: '46px' }}>
+            <Logo />
+          </div>
           <HeaderButtonContainer>
             <HeaderButton onClick={handleMenu3Click} activated={location.pathname === '/landing'}>
               실시간 지원현황

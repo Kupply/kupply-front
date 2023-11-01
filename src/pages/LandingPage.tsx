@@ -9,6 +9,7 @@ import TextFieldBox from '../assets/TextFieldBox';
 import Typography from '../assets/Typography';
 import axios from 'axios';
 import client from '../utils/httpClient';
+import { ICardData } from '../components/landingpage/PassedDataCard';
 
 export interface ITableData {
   rank: number;
@@ -46,6 +47,7 @@ const ScrollToY = (to: number, duration: number) => {
 
 const LandingPage = () => {
   const [tableData, setTableData] = useState<ITableData[]>([]);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -59,7 +61,7 @@ const LandingPage = () => {
     loadData();
   }, []);
 
-  const cardData = tableData.slice(0, 3).map((data) => ({
+  const cardData = tableData.map((data) => ({
     name: data.secondMajor,
     eng: data.engName,
     경쟁률: data.pastCompetition,
@@ -69,6 +71,7 @@ const LandingPage = () => {
     semester: '23-1',
     imagesrc: data.imagesrc,
   }));
+  console.log(cardData);
 
   const tableContent = useRef<HTMLDivElement>(null);
 
@@ -101,18 +104,20 @@ const LandingPage = () => {
         <img src="../../design_image/landingImage.png" style={{ width: '1248px', height: '880px' }}></img>
         <HeadTextWrapper>
           <Typography size="mediumText" color="#D85888">
-            {isWithinTimeRange() ? '실시간 지원률' : '실시간 지원률'}
+            {isWithinTimeRange() ? '실시간 지원현황' : '실시간 지원현황'}
           </Typography>
           <Typography size="heading1" style={{ marginTop: '14px' }}>
-            {isWithinTimeRange() ? '쿠플라이 실시간 이중전공 모의지원 현황' : '현재 지원 가능한 시기가 아닙니다'}
+            {isWithinTimeRange()
+              ? '쿠플라이 실시간 이중전공 모의지원 현황'
+              : '지금은 이중전공 지원 기간이 아닙니다.(11/8 오픈 예정)'}
           </Typography>
           <Typography
             color="rgba(20, 20, 20, 0.60)"
             style={{ marginTop: '12px', fontSize: '30px', marginBottom: '25px' }}
           >
             {isWithinTimeRange()
-              ? '실시간으로 업로드 되는 이중전공 지원 현황을 살펴보세요!'
-              : '쿠플라이가 제공하는 다른 서비스를 살펴보세요!'}
+              ? '실시간으로 업데이트 되는 이중전공 지원 현황을 살펴보세요!'
+              : '스크롤을 내려 쿠플라이가 제공하는 다른 서비스들을 살펴보세요.'}
           </Typography>
           <svg
             xmlns="http://www.w3.org/2000/svg"

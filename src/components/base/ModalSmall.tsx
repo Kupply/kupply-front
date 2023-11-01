@@ -65,7 +65,7 @@ const Backdrop = styled.div`
   width: 594px;
   height: 202px;
   position: fixed;
-  top: 707px; // 임의 조정
+  top: 70%; // 임의 조정
   left: 725px; // 663px;
   z-index: 9;
   background: rgba(248, 248, 248, 0.4);

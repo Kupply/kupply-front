@@ -620,29 +620,32 @@ export default function EditModal(props: ModalProps) {
                 <SubContentsWrapper>
                   <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
                   <VerifiBoxWrapper>
-                    <VerificationBox
-                      name="semester-1"
-                      value={hopeSemester1}
-                      setValue={setHopeSemester1}
-                      isEntered={hopeSemester1 !== ''}
-                    ></VerificationBox>
-                    <VerificationBox
-                      name="semester-2"
-                      value={hopeSemester2}
-                      setValue={setHopeSemester2}
-                      isEntered={hopeSemester2 !== ''}
-                    ></VerificationBox>
-                    <div style={{ marginTop: 26 }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
-                        <path stroke="#D85888" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
-                      </svg>
-                    </div>
-                    <VerificationBox
-                      name="semester-3"
-                      value={hopeSemester3}
-                      setValue={setHopeSemester3}
-                      isEntered={hopeSemester3 !== ''}
-                    ></VerificationBox>
+                    <VerifiBoxWrapper>
+                      <VerificationBox
+                        name="semester-1"
+                        value={hopeSemester1}
+                        setValue={setHopeSemester1}
+                        isEntered={true}
+                      ></VerificationBox>
+                      <VerificationBox
+                        name="semester-2"
+                        value={hopeSemester2}
+                        setValue={setHopeSemester2}
+                        isEntered={true}
+                      ></VerificationBox>
+                      <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                        년도
+                      </Typography>
+                      <VerificationBox
+                        name="semester-3"
+                        value={hopeSemester3}
+                        setValue={setHopeSemester3}
+                        isEntered={true}
+                      ></VerificationBox>
+                      <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                        학기
+                      </Typography>
+                    </VerifiBoxWrapper>
                   </VerifiBoxWrapper>
                 </SubContentsWrapper>
               </div>

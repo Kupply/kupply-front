@@ -182,7 +182,7 @@ export default function SignUp1Page() {
 
   // emailID를 받지 않은 상태라면 main으로 보내고, 아니라면 email을 받은 값으로 설정한다.
   useEffect(() => {
-    if (!sessionStorage.getItem('email')) navigate('/');
+    // /if (!sessionStorage.getItem('email')) navigate('/');
     async function sendFirst(email: string) {
       await sendEmail(email);
     }
@@ -202,6 +202,7 @@ export default function SignUp1Page() {
     }
     setBlank();
   }, [isOpenModal]);
+
   // large modal 관련
   const onClickToggleLargeModal = useCallback(() => {
     setOpenModal(!isOpenModal);

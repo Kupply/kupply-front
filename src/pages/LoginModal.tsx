@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ModalLarge from '../components/base/ModalLarge';
 import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
+import axios from 'axios';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -12,7 +13,7 @@ const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20;
+  z-index: 1005;
 `;
 
 const CloseButton = styled.button`
@@ -34,28 +35,13 @@ const LogoBox = styled.div`
   align-items: center;
   gap: 8.418px;
   flex-shrink: 0;
-  margin-top: 27%;
+  margin-top: 170px;
   margin-bottom: 39px;
 `;
 
 const LogoImage = styled.img`
-  width: 46px;
+  width: 188px;
   height: 46px;
-  flex-shrink: 0;
-`;
-
-const LogoText = styled.text`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-family: 'GmarketSans';
-  font-size: 2.1em; // (참고) 폰트크기의 기본값은 16px
-  font-style: normal;
-  line-height: normal;
-  font-weight: 500;
-  letter-spacing: 1.177px;
 `;
 
 const IDField = styled.input<{ isFilled: boolean }>`
@@ -94,6 +80,20 @@ export default function LoginModal() {
     setIsOpen(!isOpen);
   };
 
+  const forgotPassword = async () => {
+    try {
+      const url = 'http://localhost:8080/auth/forgotPassword';
+      await axios.post(url, { userEmail: ID });
+
+      setIsOpen(!isOpen);
+      alert('입력하신 이메일로 임시 비밀번호를 보냈습니다!');
+    } catch (err: any) {
+      if (err.response.data.error.message) {
+        alert(err.response.data.error.message);
+      }
+    }
+  };
+
   return isOpen ? (
     <Wrapper>
       <ModalLarge onClickToggleModal={handleToggle}>
@@ -112,19 +112,18 @@ export default function LoginModal() {
           </svg>
         </CloseButton>
         <LogoBox>
-          <LogoImage src="../../design_image/logo.png" />
-          <LogoText>쿠플라이</LogoText>
+          <LogoImage src="../../design_image/Kupply_ver1.png" />
         </LogoBox>
         <Typography size="largeText">임시 비밀번호를 발급받을 고려대 이메일 주소를 입력해주세요.</Typography>
         <IDField
-          placeholder="bright@korea.ac.kr"
+          placeholder="kupply@korea.ac.kr"
           value={ID}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setID(e.target.value);
           }}
           isFilled={ID !== ''}
         />
-        <NextButton active={ID !== ''} disabled={ID === ''} style={{ marginBottom: '80px' }}>
+        <NextButton active={ID !== ''} disabled={ID === ''} style={{ marginBottom: '80px' }} onClick={forgotPassword}>
           제출하기
         </NextButton>
         <Typography size="smallText" color="#B9b9b9">

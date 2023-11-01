@@ -45,7 +45,7 @@ const myRank: number = allGrade.findIndex((grade) => grade === myGrade) + 1;
 // console.log('My Rank:', myRank);
 
 // 백분율 계산
-const myPercentile: number = parseFloat(((1 - myRank / RankData.length) * 100).toFixed(1));
+const myPercentile: number = parseFloat((100 - (1 - myRank / RankData.length) * 100).toFixed(1));
 
 function calculateRank(): Rank {
   if (Num <= RankData.length) {
@@ -149,7 +149,7 @@ const MyStageChart: React.FC = () => {
               marginLeft: '26px',
             }}
           >
-            도전자님의 학점에 알맞는
+            도전자님의 학점에 매우 알맞는
             <br />
             적정지원이에요.
           </Typography>
@@ -249,9 +249,9 @@ const MyStageChart: React.FC = () => {
               marginLeft: '214px',
             }}
           >
-            도전자님의 학점보다 조금
+            도전자님의 학점에 알맞는
             <br />
-            상향지원이에요.
+            적정지원이에요.
           </Typography>
 
           <svg
@@ -474,7 +474,7 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                {MyName}님의 {HopeMajor}
+                {HopeMajor}
               </Typography>
               <Typography
                 size="mediumText"
@@ -484,7 +484,7 @@ const MyStageChart: React.FC = () => {
                   marginLeft: '5px',
                 }}
               >
-                이중 지원 시
+                이중 지원자들 중
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '763px', marginTop: '-3px' }}>
@@ -497,7 +497,18 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                지원안정도 점수
+                {MyName}님의&nbsp;
+              </Typography>
+              <Typography
+                size="mediumText"
+                style={{
+                  color: 'var(--Main-Black, #141414)',
+                  // marginLeft: '100px',
+                  fontWeight: '700',
+                  lineHeight: '133.333%',
+                }}
+              >
+                학점
               </Typography>
               <Typography
                 size="mediumText"
@@ -506,7 +517,7 @@ const MyStageChart: React.FC = () => {
                   fontWeight: '400',
                 }}
               >
-                는
+                은 상위
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '770px', marginTop: '2px' }}>

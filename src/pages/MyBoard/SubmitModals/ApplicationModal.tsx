@@ -248,24 +248,23 @@ export default function ApplicationModal(props: ModalProps) {
             </CloseButton>
             <ModalTiteWrapper>
               <Typography size="largeText" style={{ position: 'absolute', top: '55px', left: '308px' }}>
-                실지원 정보 확인하기
+                지원 정보 확인하기
               </Typography>
               <Typography
                 size="mediumText"
                 style={{
-                  position: 'absolute',
-                  top: '89px',
-                  left: '177px',
+                  textAlign: 'center',
+                  marginTop: '10px',
                   color: 'rgba(20, 20, 20, 0.80)',
                   lineHeight: ' 136.111% ',
                 }}
               >
-                실제 이중전공 지원 시 입력한 정보와 달라진 정보를 수정해주세요.
+                실제 이중전공 지원과 동일한 정보를 입력해주세요.
               </Typography>
             </ModalTiteWrapper>
             {currentModal === 0 && ( // 기존 정보 확인하기 단계
               <>
-                <ProgressBarWrapper style={{ position: 'absolute', top: '136px', left: '-82.5px' }}>
+                <ProgressBarWrapper style={{ position: 'absolute', top: '120px', left: '-82.5px' }}>
                   <MultiStepProgressBar numberOfSteps={3} currentStep={1} complete={true} />
                   <ProgressBarTtitle>
                     <Typography
