@@ -507,9 +507,7 @@ export default function MyBoardPage() {
 
   return (
     <>
-      {userData.userRole === 'passer' ? (
-        <MyboardPasserPageVer />
-      ) : (
+      
         <Wrapper>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -613,17 +611,20 @@ export default function MyBoardPage() {
                         fill-opacity="0.6"
                       />
                     </svg>
-                    <Typography
+                  </div>
+                  <Typography
                       size="bodyText"
                       style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '10px' }}
-                  현재 내 학점
-                </Typography>
+                      현재 내 학점
+                  </Typography>
+    
                 <Typography
                   size="bodyText"
                   style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '71.74px' }}
                 >
                   {userData.curGPA}
                 </Typography>
+                </div>
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1898,10 +1899,10 @@ export default function MyBoardPage() {
             )}
           </div>
         </Wrapper>
-      )
-    }
     </>
   );
+}
+
 /* 
 전체 페이지 크기 (헤더, 풋터 포함)
 width: 1921px;
