@@ -223,6 +223,13 @@ function LoginPage(props: LoginPageProps) {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);
             }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                if (ID !== '' && password !== '') {
+                  onLoginClick();
+                }
+              }
+            }}
             isFilled={ID !== ''}
           />
         </TextFieldWrapper>
@@ -239,6 +246,13 @@ function LoginPage(props: LoginPageProps) {
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);
+            }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                if (ID !== '' && password !== '') {
+                  onLoginClick();
+                }
+              }
             }}
             isFilled={password !== ''}
           />
