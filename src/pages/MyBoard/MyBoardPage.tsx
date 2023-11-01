@@ -14,6 +14,7 @@ import EditModal from './EditModals/EditModal';
 import ApplicationModal from './SubmitModals/ApplicationModal';
 import { recruit } from '../../common/recruiting';
 import client from '../../utils/httpClient';
+import MyboardPasserPageVer from './MyboardPasser';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -207,7 +208,7 @@ export default function MyBoardPage() {
     userNickname: '잠만보',
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
-    userRole: 'candidate',
+    userRole: 'passer',
     firstMajor: '수학과',
     studentId: '2020220037',
     hopeMajor1: '컴퓨터학과',
@@ -506,6 +507,9 @@ export default function MyBoardPage() {
 
   return (
     <>
+    {userData.userRole === 'passer' ? (
+        <MyboardPasserPageVer />
+      ) : (
       <Wrapper>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -1759,6 +1763,7 @@ export default function MyBoardPage() {
           )}
         </div>
       </Wrapper>
+      )}
     </>
   );
 }

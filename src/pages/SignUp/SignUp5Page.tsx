@@ -222,7 +222,6 @@ const join = async (role: string) => {
     name: sessionStorage.getItem('name'),
     studentId: Number(sessionStorage.getItem('studentId')),
     nickname: sessionStorage.getItem('nickname'),
-    phoneNumber: sessionStorage.getItem('phoneNumber'),
     email: sessionStorage.getItem('email'),
     password: sessionStorage.getItem('password'),
     firstMajor: sessionStorage.getItem('firstMajor'),
