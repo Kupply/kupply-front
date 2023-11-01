@@ -4,6 +4,7 @@ import LabelButton from '../assets/buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import MockApplicationButton from '../assets/myboardpage/MockApplication';
 
 const Wrapper = styled.div`
   display: flex;
@@ -81,8 +82,14 @@ const TextFieldBox = styled.input`
 
 function MainPage() {
   const [ID, setID] = useState<string>('');
-
   const navigate = useNavigate();
+
+  // 로그인 여부 확인
+  const [isLogined, setisLogined] = useState<boolean>(false);
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
 
   //회원가입 정보는 main에서는 지워져야 함.
   useEffect(() => {
@@ -110,42 +117,54 @@ function MainPage() {
     }
   };
 
+  // 준혁 선생님 마무리 부탁 - 로그인 상태 따라 다르게 렌더링
   return (
     <Wrapper>
       <Carousel />
-      <JoinMainContainer>
-        <ContainerMainText>당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
-        <ContainerSubText>
-          간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
-          이용해보세요.
-        </ContainerSubText>
-        <JoinWrapper>
-          <TextFieldBox
-            placeholder="kupply@korea.ac.kr"
-            value={ID}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setID(e.target.value);
-            }}
-            onKeyDown={(e: React.KeyboardEvent) => {
-              if (e.key === 'Enter') {
-                handleButtonClick();
-              }
-            }}
-          />
 
-          <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img
-                src="../../design_image/kupply_icon.png"
-                style={{ width: '20px', height: '20px', marginRight: '8px' }}
-              />
-              Join!
-            </div>
-          </LabelButton>
-        </JoinWrapper>
+      <JoinMainContainer>
+        <ContainerMainText>2023학년도 2학기 모의지원을 통해 당신의 합격 가능성을 확인하세요.</ContainerMainText>
+        <ContainerSubText>쿠플라이 모의지원으로 나의 순위 및 실시간 지원자 현황을 확인해보세요.</ContainerSubText>
+        <MockApplicationButton style={{ width: '700px', height: '200px', fontSize: '50px' }}></MockApplicationButton>
       </JoinMainContainer>
     </Wrapper>
   );
 }
 
 export default MainPage;
+
+/*
+
+<JoinMainContainer>
+          <ContainerMainText>당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
+          <ContainerSubText>
+            간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
+            이용해보세요.
+          </ContainerSubText>
+          <JoinWrapper>
+            <TextFieldBox
+              placeholder="kupply@korea.ac.kr"
+              value={ID}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setID(e.target.value);
+              }}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === 'Enter') {
+                  handleButtonClick();
+                }
+              }}
+            />
+
+            <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="../../design_image/kupply_icon.png"
+                  style={{ width: '20px', height: '20px', marginRight: '8px' }}
+                />
+                Join!
+              </div>
+            </LabelButton>
+          </JoinWrapper>
+        </JoinMainContainer>
+
+ */
