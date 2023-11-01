@@ -9,6 +9,7 @@ import TextFieldBox from '../assets/TextFieldBox';
 import Typography from '../assets/Typography';
 import axios from 'axios';
 import client from '../utils/httpClient';
+import { ICardData } from '../components/landingpage/PassedDataCard';
 
 export interface ITableData {
   rank: number;
@@ -46,6 +47,7 @@ const ScrollToY = (to: number, duration: number) => {
 
 const LandingPage = () => {
   const [tableData, setTableData] = useState<ITableData[]>([]);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -59,7 +61,7 @@ const LandingPage = () => {
     loadData();
   }, []);
 
-  const cardData = tableData.slice(0, 3).map((data) => ({
+  const cardData = tableData.map((data) => ({
     name: data.secondMajor,
     eng: data.engName,
     경쟁률: data.pastCompetition,
@@ -69,6 +71,7 @@ const LandingPage = () => {
     semester: '23-1',
     imagesrc: data.imagesrc,
   }));
+  console.log(cardData);
 
   const tableContent = useRef<HTMLDivElement>(null);
 
