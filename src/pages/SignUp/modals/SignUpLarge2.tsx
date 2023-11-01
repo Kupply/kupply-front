@@ -17,6 +17,7 @@ export interface ModalProps {
   emailState: StateOptions;
   setEmail: (email: string) => void;
   setEmailState: (emailState: StateOptions) => void;
+  setBlank: () => void;
 }
 
 export default function SignUpLarge2(props: ModalProps) {
@@ -34,6 +35,7 @@ export default function SignUpLarge2(props: ModalProps) {
     emailState,
     setEmail,
     setEmailState,
+    setBlank,
   } = props;
 
   return (
@@ -88,6 +90,7 @@ export default function SignUpLarge2(props: ModalProps) {
                 const IDPattern = /.+@korea\.ac\.kr$/;
                 if (IDPattern.test(email)) {
                   setCurrentModal(currentModal + 1);
+                  setBlank();
                   await sendEmail(email);
                 } else {
                   alert('형식에 맞지 않는 이메일 주소입니다.');
