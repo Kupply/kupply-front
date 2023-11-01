@@ -118,37 +118,39 @@ function MainPage() {
   return (
     <Wrapper>
       <Carousel />
-      <JoinMainContainer>
-        <ContainerMainText>당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
-        <ContainerSubText>
-          간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
-          이용해보세요.
-        </ContainerSubText>
-        <JoinWrapper>
-          <TextFieldBox
-            placeholder="kupply@korea.ac.kr"
-            value={ID}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setID(e.target.value);
-            }}
-            onKeyDown={(e: React.KeyboardEvent) => {
-              if (e.key === 'Enter') {
-                handleButtonClick();
-              }
-            }}
-          />
+      {
+        <JoinMainContainer>
+          <ContainerMainText>당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
+          <ContainerSubText>
+            간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
+            이용해보세요.
+          </ContainerSubText>
+          <JoinWrapper>
+            <TextFieldBox
+              placeholder="kupply@korea.ac.kr"
+              value={ID}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setID(e.target.value);
+              }}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === 'Enter') {
+                  handleButtonClick();
+                }
+              }}
+            />
 
-          <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img
-                src="../../design_image/kupply_icon.png"
-                style={{ width: '20px', height: '20px', marginRight: '8px' }}
-              />
-              Join!
-            </div>
-          </LabelButton>
-        </JoinWrapper>
-      </JoinMainContainer>
+            <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="../../design_image/kupply_icon.png"
+                  style={{ width: '20px', height: '20px', marginRight: '8px' }}
+                />
+                Join!
+              </div>
+            </LabelButton>
+          </JoinWrapper>
+        </JoinMainContainer>
+      }
     </Wrapper>
   );
 }

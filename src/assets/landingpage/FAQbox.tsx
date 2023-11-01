@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Typography from '../Typography';
 
 export interface FAQboxProps extends React.ComponentPropsWithRef<'div'> {
+  isOpen?: boolean;
+  onToggle?: () => void;
   question?: string;
   answer?: { text: string; bold: string }[][];
 }
@@ -34,6 +36,8 @@ const ContentWrapper = styled.div`
 
 function FAQbox(props: FAQboxProps) {
   const {
+    isOpen = false,
+    onToggle,
     question = '이중전공 지원에 반영되는 학점은 대내용 학점인가요, 대외용 학점인가요?',
     answer = [
       [
@@ -50,18 +54,18 @@ function FAQbox(props: FAQboxProps) {
   const handleButtonClick = () => (showAnswer == true ? setShowAnswer(false) : setShowAnswer(true));
 
   return (
-    <MainWrapper style={{ border: showAnswer == true ? '1px solid #d85888' : '1px solid #b9b9b9' }} {...rest}>
-      <TitleWrapper>
-        <Typography size="largeText" bold={showAnswer == true ? '700' : '500'}>
+    <MainWrapper style={{ border: isOpen ? '1px solid #d85888' : '1px solid #b9b9b9' }} {...rest}>
+      <TitleWrapper onClick={onToggle} style={{ cursor: 'pointer' }}>
+        <Typography size="largeText" bold={isOpen ? '700' : '500'}>
           {question}
         </Typography>
         <img
           src="../../design_image/u_angle-down.svg"
-          onClick={handleButtonClick}
-          style={{ cursor: 'pointer', transform: showAnswer == true ? 'rotate(180deg)' : 'none' }}
+          onClick={onToggle}
+          style={{ cursor: 'pointer', transform: isOpen == true ? 'rotate(180deg)' : 'none' }}
         />
       </TitleWrapper>
-      {showAnswer == true ? (
+      {isOpen == true ? (
         <ContentWrapper>
           {answer.map((lineAnswers, lineIndex) => (
             <div key={lineIndex}>
