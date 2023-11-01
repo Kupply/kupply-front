@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export interface VerificationBoxProps extends React.ComponentPropsWithRef<'input'> {
   isEntered?: boolean;
   value?: string;
-  setValue?: (value: string) => void;
+  setValue: (value: string) => void;
   name: string;
   setRef?: (ref: React.Ref<HTMLInputElement>) => void;
 }
@@ -38,33 +38,32 @@ export default function VerificationBox(props: VerificationBoxProps) {
   const [fieldName, fieldIndex] = name.split('-');
 
   const [isEntered, setIsEntered] = useState<boolean>(initIsEntered || false);
-  const [inputValue, setInputValue] = useState<string>(value || '');
 
   const inputRef = useRef<any>(null);
 
   useEffect(() => {
     if (setRef) setRef(inputRef);
-  });
+  }, []);
+
+  useEffect(() => {
+    if (value === '') setIsEntered(false);
+  }, [value]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.replace(/[^0-9]/g, '');
-    setInputValue(newValue);
-
+    setValue(newValue);
+    console.log(value);
     if (newValue === '') {
       setIsEntered(false);
     } else {
       setIsEntered(true);
     }
 
-    if (setValue) {
-      setValue(newValue);
-    }
-
     const nextSibling = document.querySelector(
       `input[name="${fieldName}-${parseInt(fieldIndex, 10) + 1}"]`,
     ) as HTMLInputElement;
 
-    if (newValue !== '' && nextSibling && inputValue === value && nextSibling.value === '') {
+    if (newValue !== '' && nextSibling && nextSibling.value === '') {
       nextSibling.focus();
     }
   };
@@ -88,6 +87,7 @@ export default function VerificationBox(props: VerificationBoxProps) {
       maxLength={1}
       isEntered={isEntered}
       value={value}
+      setValue={setValue}
       name={name}
       ref={inputRef}
     />

@@ -3,7 +3,7 @@ import Typography from '../../assets/Typography';
 
 const MainWrapper = styled.div`
   width: 100vw;
-  height: 2146px;
+  height: 1400px;
   display: flex;
   align-items: center;
   gap: 17.56px;

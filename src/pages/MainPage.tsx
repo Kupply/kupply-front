@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MockApplicationButton from '../assets/myboardpage/MockApplication';
+import client from '../utils/httpClient';
 
 const Wrapper = styled.div`
   display: flex;
@@ -104,6 +105,7 @@ function MainPage() {
       const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
       try {
         //await axios.post(url, { email: ID });
+        // await client.post('/auth/sendEmail', { email: ID });
 
         //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
         window.sessionStorage.setItem('email', ID);
@@ -111,6 +113,9 @@ function MainPage() {
       } catch (err: any) {
         //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
         alert(err.response.data.error.message);
+        if (err.response.data.error.message === '이미 회원가입이 완료된 이메일 입니다. 로그인해주세요.') {
+          navigate('/login');
+        }
       }
     } else {
       alert('형식에 맞는 이메일이 아닙니다.');

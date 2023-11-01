@@ -16,6 +16,7 @@ import LabelButton from '../../../assets/buttons/LabelButton';
 import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
 import { majorAllList } from '../../../common/majorAll';
 import { majorTargetList } from '../../../common/majorTarget';
+import client from '../../../utils/httpClient';
 import NicknameCheckButton from '../../../assets/NicknameCheckButton';
 
 /*
@@ -176,7 +177,8 @@ export default function EditModal(props: ModalProps) {
 
     if (Object.keys(updateData).length !== 0) {
       try {
-        await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        await client.post('/user/updateMe', updateData);
 
         window.location.reload(); // 페이지 새로고침.
       } catch (err) {
