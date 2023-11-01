@@ -37,7 +37,7 @@ const DepartmentCard = ({ name, eng, 경쟁률, 선발인원, min, mean, semeste
             경쟁률
           </Typography>
           <Typography size="largeText" style={{ fontWeight: '600' }}>
-            {경쟁률} : 1
+            집계불가
           </Typography>
         </ContentWrapper>
       </div>

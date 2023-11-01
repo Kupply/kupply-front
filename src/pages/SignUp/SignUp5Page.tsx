@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Typography from '../../assets/Typography';
@@ -362,6 +362,16 @@ function SignUp5Page() {
 
   const [scrollActive, setActive] = useState(false);
 
+  const button = useRef<HTMLDivElement>(null);
+
+  const onClickCheck = () => {
+    const body = document.getElementsByTagName('body')[0];
+    if (body) {
+      body.style.overflow = 'hidden';
+      button.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <Wrapper>
       <TitleWrapper>
@@ -391,6 +401,7 @@ function SignUp5Page() {
               isChecked={allCheckedUI}
               onChange={(isChecked) => {
                 handleAllCheckedClick(isChecked);
+                onClickCheck();
               }}
             />
             <Typography
@@ -1027,7 +1038,6 @@ function SignUp5Page() {
               <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
             </Typography>
           </ButtonsTextWrapper>
-
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
               <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
@@ -1084,7 +1094,7 @@ function SignUp5Page() {
               </Typography>
             </ScrollBarSmall>
           </TextOutBox>
-
+          <div ref={button}></div>
           <ButtonsWrapper>
             <PrevButton onClick={handlePrev} />
             <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>
