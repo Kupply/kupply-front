@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ModalLarge from '../components/base/ModalLarge';
 import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
+import axios from 'axios';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -79,6 +80,20 @@ export default function LoginModal() {
     setIsOpen(!isOpen);
   };
 
+  const forgotPassword = async () => {
+    try {
+      const url = 'http://localhost:8080/auth/forgotPassword';
+      await axios.post(url, { userEmail: ID });
+
+      setIsOpen(!isOpen);
+      alert('입력하신 이메일로 임시 비밀번호를 보냈습니다!');
+    } catch (err: any) {
+      if (err.response.data.error.message) {
+        alert(err.response.data.error.message);
+      }
+    }
+  };
+
   return isOpen ? (
     <Wrapper>
       <ModalLarge onClickToggleModal={handleToggle}>
@@ -108,7 +123,7 @@ export default function LoginModal() {
           }}
           isFilled={ID !== ''}
         />
-        <NextButton active={ID !== ''} disabled={ID === ''} style={{ marginBottom: '80px' }}>
+        <NextButton active={ID !== ''} disabled={ID === ''} style={{ marginBottom: '80px' }} onClick={forgotPassword}>
           제출하기
         </NextButton>
         <Typography size="smallText" color="#B9b9b9">

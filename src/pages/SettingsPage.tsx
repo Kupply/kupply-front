@@ -6,11 +6,12 @@ import { useCookies } from 'react-cookie';
 import TextFieldBox, { StateOptions } from '../assets/TextFieldBox';
 import { ImgCtrlButton, ImgDelButton } from '../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../assets/dropdown/dropDown';
-import { HelpMessage } from '../assets/myboardpage/HellpMessage';
+import { HelpMessage, ModalHelpMessage } from '../assets/myboardpage/HellpMessage';
 import VerificationBox from '../assets/VerificationBox';
 import Typography from '../assets/Typography';
 import { ScrollBarSmall, ScrollBarLarge } from '../assets/ScrollButton';
 import LabelButton from '../assets/buttons/LabelButton';
+import NicknameCheckButton from '../assets/NicknameCheckButton';
 import client from '../utils/httpClient';
 
 const Sidebar = styled.div`
@@ -321,6 +322,27 @@ const StyledTable = styled.table`
   }
 `;
 
+const NicknameCheckButtonWrapper = styled.div`
+  position: absolute;
+  top: 110px;
+  left: 490px;
+  z-index: 20;
+`;
+
+const ContentsWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+`;
+
+type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
+
+type errorMessageType = {
+  passwordErrorMessage: string;
+  nicknameErrorMessage: string;
+};
+
 const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   const navigate = useNavigate();
 
@@ -332,6 +354,13 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
+  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('default');
+
+  const [errorMessages, setErrorMessages] = useState<errorMessageType>({
+    passwordErrorMessage: '',
+    nicknameErrorMessage: '',
+  });
+
   const [name, setName] = useState<string>(localStorage.getItem('name') || '');
   const [nameState, setNameState] = useState<StateOptions>('filled');
   const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
@@ -457,6 +486,49 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     }
   }, [stdID, stdIDState]);
 
+  //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
+  // 닉네임 제한 10->7자 수정
+  useEffect(() => {
+    if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
+      setNicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
+      });
+    } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
+      setNicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '중복되는 닉네임이에요!',
+      });
+    } else if (nicknameCheck !== 'filled') {
+      if (!(nicknameState === 'default' || nicknameState === 'focused' || nicknameState === 'hover')) {
+        setNicknameState('error');
+        setErrorMessages({
+          ...errorMessages,
+          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
+        });
+      }
+    }
+  }, [nicknameState]);
+
+  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
+  useEffect(() => {
+    setNicknameCheckState('default');
+  }, [nickname]);
+
+  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
+  useEffect(() => {
+    if (nicknameCheck === 'filled') setNicknameState('filled');
+    else if (nicknameCheck === 'error') {
+      setNicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '중복되는 닉네임이에요!',
+      });
+    }
+  }, [nicknameCheck]);
+
   /* 전화번호 유효성 검사 + '-' 넣은 형식으로 바꾸기*/
   // useEffect(() => {
   //   const phoneCheck = /^010\d{8}$/;
@@ -529,11 +601,10 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   const fourthSubmit = async () => {
     const updateData = {
       newPassword: pwd,
-      newEmail: email,
     };
     try {
       // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/updateMe', updateData, config);
+      await client.post('/user/resetPassword', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -765,19 +836,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             value={firstMajor}
             setValue={setFirstMajor}
           ></DropDown>
-          {/* <TextFieldTitle>
-            <strong>전화번호</strong> 수정하기 <Optional>(선택)</Optional>
-          </TextFieldTitle>
-          <TextFieldBox
-            value={phoneNumber}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setPhoneNumber(e.target.value);
-            }}
-            state={phoneNumberState}
-            setState={setPhoneNumberState}
-            setValue={setPhoneNumber}
-            placeholder="마케팅 및 새로운 수식 수신을 위한 휴대폰 11자리"
-          ></TextFieldBox> */}
           <ButtonWrapper
             buttonType="primary"
             onClick={() => {
@@ -833,18 +891,44 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </div>
             </div>
           </div>
-          <TextFieldTitle>
-            <strong>닉네임</strong> 수정하기
-          </TextFieldTitle>
-          <TextFieldBox
-            value={nickname}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setNickname(e.target.value);
-            }}
-            state={nicknameState}
-            setState={setNicknameState}
-            setValue={setNickname}
-          ></TextFieldBox>
+          <ContentsWrapper>
+            <div style={{ display: 'flex', marginTop: '60px' }}>
+              <Typography
+                size="mediumText"
+                style={{ color: 'var(--Main-Black, #141414)', fontWeight: 700, opacity: 0.8 }}
+              >
+                닉네임&nbsp;
+              </Typography>
+              <Typography
+                size="mediumText"
+                style={{ color: 'var(--Main-Black, #141414)', fontWeight: 400, opacity: 0.8, lineHeight: '18px' }}
+              >
+                수정하기
+              </Typography>
+            </div>
+            <TextFieldBox
+              placeholder="닉네임"
+              value={nickname}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setNickname(e.target.value);
+              }}
+              state={nicknameState}
+              setState={setNicknameState}
+              setValue={setNickname}
+              errorMessage={errorMessages.nicknameErrorMessage}
+            ></TextFieldBox>
+            {nicknameState === 'filled' ? (
+              <></>
+            ) : (
+              <NicknameCheckButtonWrapper>
+                <NicknameCheckButton
+                  nickname={nickname}
+                  state={nicknameCheck}
+                  setState={setNicknameCheckState}
+                ></NicknameCheckButton>
+              </NicknameCheckButtonWrapper>
+            )}
+          </ContentsWrapper>
           <div>
             <ButtonWrapper
               buttonType="primary"
@@ -867,6 +951,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </BodyContent>
           <TextFieldTitle>
             <strong>희망 이중전공</strong> 수정하기
+            <span style={{ marginLeft: -44 }}>
+              <Optional>(선택)</Optional>
+            </span>
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
             <DropDown
@@ -882,11 +969,15 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               setValue={setHopeMajor2}
             ></DropDown>
           </div>
-          <div style={{ position: 'absolute', top: '245px', left: '835px' }}>
-            <HelpMessage />
-          </div>
+
           <TextFieldTitle>
             <strong>학점</strong> 수정하기
+            <span style={{ marginLeft: 25 }}>
+              <Optional>(선택)</Optional>
+            </span>
+            <div style={{ position: 'absolute', top: '325px', left: '900px' }}>
+              <ModalHelpMessage />
+            </div>
           </TextFieldTitle>
 
           <VerifiBoxWrapper>
@@ -901,6 +992,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </VerifiBoxWrapper>
           <TextFieldTitle>
             <strong>희망 지원학기</strong> 수정하기
+            <span style={{ marginLeft: -34 }}>
+              <Optional>(선택)</Optional>
+            </span>
           </TextFieldTitle>
           <VerifiBoxWrapper>
             <VerificationBox
@@ -915,18 +1009,17 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               setValue={setHopeSemester2}
               isEntered={true}
             ></VerificationBox>
-            <Typography size={'normalText'} style={{ marginTop: '58px' }}>
-              년도
-            </Typography>
+            <div style={{ marginTop: 26 }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
+                <path stroke="#D85888" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
+              </svg>
+            </div>
             <VerificationBox
               name="semester-3"
               value={hopeSemester3}
               setValue={setHopeSemester3}
               isEntered={true}
             ></VerificationBox>
-            <Typography size={'normalText'} style={{ marginTop: '58px' }}>
-              학기
-            </Typography>
           </VerifiBoxWrapper>
           <div>
             <ButtonWrapper
@@ -954,7 +1047,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEmail(e.target.value);
             }}
-            state={emailState}
+            state={'filled'}
             setState={setEmailState}
             setValue={setEmail}
           ></TextFieldBox>
@@ -962,6 +1055,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             <strong>비밀번호</strong> 변경하기
           </TextFieldTitle>
           <TextFieldBox
+            placeholder="대소문자, 특수문자를 최소 하나씩 조합하여 8글자 이상"
             value={pwd}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPwd(e.target.value);
@@ -969,12 +1063,14 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             state={passwordState}
             setState={setPasswordState}
             setValue={setPwd}
-            placeholder="대소문자, 숫자를 최소 하나씩 조합하여 8글자 이상"
+            helpMessage="비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다."
+            type="password"
           ></TextFieldBox>
           <TextFieldTitle>
             <strong>비밀번호 재확인</strong>하기
           </TextFieldTitle>
           <TextFieldBox
+            placeholder="비밀번호 확인"
             value={pwdConfirm}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPwdConfirm(e.target.value);
@@ -982,7 +1078,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             state={password2State}
             setState={setPassword2State}
             setValue={setPwdConfirm}
-            placeholder="비밀번호 확인"
+            helpMessage="비밀번호 확인"
+            errorMessage="비밀번호가 일치하지 않아요!"
+            type="password"
           ></TextFieldBox>
           <div>
             <ButtonWrapper
