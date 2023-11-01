@@ -283,16 +283,16 @@ const ArchiveDetailPage = () => {
           </svg>
           <SelectionInfoContent>
             <Text>지원자 수</Text>
-            {/* <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue> */}
-            <SelectionInfoValue>집계불가</SelectionInfoValue>
+            <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue>
+            {/* <SelectionInfoValue>집계불가</SelectionInfoValue> */}
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
             <Text>경쟁률</Text>
-            {/* <SelectionInfoValue>{competitionRate}:1</SelectionInfoValue> */}
-            <SelectionInfoValue>집계불가</SelectionInfoValue>
+            <SelectionInfoValue>{competitionRate.toFixed(2)}:1</SelectionInfoValue>
+            {/* <SelectionInfoValue>집계불가</SelectionInfoValue> */}
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
       </SelectionInfoWrapper>
@@ -401,27 +401,41 @@ const Wrapper = styled.div`
   width: 100vw;
   max-width: 1920px;
 
-  &::before,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 1000px;
+    filter: blur(75px);
+    opacity: 0.4;
+    background: radial-gradient(
+      51.7% 51.7% at 58.12% 41.5%,
+      rgba(216, 88, 136, 0.3) 0%,
+      rgba(255, 175, 189, 0.18) 100%
+    );
+    filter: blur(75px);
+    z-index: -2;
+    top: -100px;
+    left: -200px;
+  }
+
   &::after {
     content: '';
     position: absolute;
-    width: 90%;
-    height: 90%;
-    border-radius: 782px;
-    filter: blur(150px);
-    opacity: 0.7;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(232, 88, 136, 0.15) 0%, rgba(255, 175, 189, 0.05) 100%);
+    width: 1000px;
+    height: 1000px;
+    border-radius: 1000px;
+    filter: blur(75px);
+    opacity: 0.5;
+    background: radial-gradient(
+      67.64% 67.64% at 116.69% 26.92%,
+      rgba(216, 88, 136, 0.5) 0%,
+      rgba(255, 175, 189, 0.05) 100%
+    );
     z-index: -2;
-  }
-
-  &::before {
-    top: -5%;
-    left: -30%;
-  }
-
-  &::after {
-    bottom: -60%;
-    right: -40%;
+    top: 400px;
+    right: 150px;
   }
 `;
 
