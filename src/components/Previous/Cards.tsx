@@ -8,6 +8,7 @@ import client from '../../utils/httpClient';
 
 export interface CardsProps {
   clicked: number;
+  searchWord: string;
 }
 
 const mockCards = [
@@ -121,7 +122,7 @@ const mockCards = [
   },
 ];
 
-const Cards = ({ clicked }: CardsProps) => {
+const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
@@ -162,11 +163,18 @@ const Cards = ({ clicked }: CardsProps) => {
     fetch();
   });
 
-  const filteredCards =
-    clicked === 4
-      ? cards.sort((a, b) => a.name.localeCompare(b.name))
-      : cards.filter((card) => card.filter.includes(mockHashes[clicked]));
-  const opaCards = clicked === 4 ? [] : cards.filter((card) => !card.filter.includes(mockHashes[clicked]));
+  const filteredCards = cards
+    .filter((card) => {
+      if (clicked !== 4 && !card.filter.includes(mockHashes[clicked])) return false; // filter based on clicked hashtag
+      if (searchWord && !card.name.toLowerCase().includes(searchWord.toLowerCase())) return false; // filter based on search word
+      return true;
+    })
+    .sort((a, b) => a.name.localeCompare(b.name)); // always sort alphabetically
+
+  const filteredSet = new Set(filteredCards.map((card) => card.name));
+
+  const opaCards = cards.filter((card) => !filteredSet.has(card.name));
+
   return (
     <Container>
       <Sort>
