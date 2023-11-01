@@ -124,20 +124,19 @@ const mockCards = [
 
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  };
+  // const [cookies] = useCookies(['accessToken']);
+  // const accessToken = cookies.accessToken;
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${accessToken}`,
+  //   },
+  //   withCredentials: true,
+  // };
 
   const fetch = async () => {
     try {
       // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
       const data = await client.get('/dashboard/cards');
-
       setCards(
         cards.map((c) => {
           const res = data.data.find((ca: any) => ca.name === c.name);
