@@ -123,7 +123,7 @@ function MainPage() {
       <Carousel />
 
       <JoinMainContainer>
-        <ContainerMainText>2023학년도 2학기 모의지원을 통해 당신의 합격 가능성을 확인하세요.</ContainerMainText>
+        <ContainerMainText>2023학년도 2학기 모의지원을 통해 당신의 합격 가능성을 확인하세요!</ContainerMainText>
         <ContainerSubText>쿠플라이 모의지원으로 나의 순위 및 실시간 지원자 현황을 확인해보세요.</ContainerSubText>
         <MockApplicationButton style={{ width: '700px', height: '200px', fontSize: '50px' }}></MockApplicationButton>
       </JoinMainContainer>
