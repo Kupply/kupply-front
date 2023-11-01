@@ -153,38 +153,10 @@ function LoginPage(props: LoginPageProps) {
 
   // login API 접근
   const onLoginClick = async () => {
-    // const url = 'http://localhost:8080/auth/login';
+    const url = 'http://localhost:8080/auth/login';
     try {
-      // await axios
-      //   .post(url, {
-      //     email: ID,
-      //     password: password,
-      //     isRememberOn: isChecked,
-      //   })
-      //   .then((res) => {
-      //     // const accessTokenExpire = new Date();
-      //     // accessTokenExpire.setHours(accessTokenExpire.getHours() + 10); // 한국시간 시차 9시간 + 만료 시간 1시간
-      //     // const refreshTokenExpire = new Date();
-      //     // refreshTokenExpire.setHours(refreshTokenExpire.getHours() + 9); // 한국시간 시차 9시간
-      //     // refreshTokenExpire.setDate(refreshTokenExpire.getDate() + 30); // 만료 시간 30일
-
-      //     // setCookies('accessToken', res.data.data.accessToken, {
-      //     //   path: '/',
-      //     //   expires: accessTokenExpire,
-      //     // });
-      //     // setCookies('accessTokenExpire', res.data.data.accessTokenExpire, {
-      //     //   path: '/',
-      //     //   expires: accessTokenExpire,
-      //     // });
-      //     // setCookies('refreshToken', res.data.data.refreshToken, {
-      //     //   path: '/',
-      //     //   expires: refreshTokenExpire,
-      //     // });
-      //     localStorage.setItem('accessToken', res.data.data.accessToken);
-      //     localStorage.setItem('refreshToken', res.data.data.refreshToken);
-      //   });
-      await client
-        .post('/auth/login', {
+      await axios
+        .post(url, {
           email: ID,
           password: password,
           isRememberOn: isChecked,
@@ -200,7 +172,9 @@ function LoginPage(props: LoginPageProps) {
       navigate('/');
     } catch (err: any) {
       // 이후 수정 필요함.
-      alert(err.response.data.error.message);
+      if (err.response.data.error.message) {
+        alert(err.response.data.error.message);
+      }
     }
   };
 
