@@ -12,7 +12,7 @@ const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20;
+  z-index: 1005;
 `;
 
 const CloseButton = styled.button`
@@ -34,28 +34,13 @@ const LogoBox = styled.div`
   align-items: center;
   gap: 8.418px;
   flex-shrink: 0;
-  margin-top: 27%;
+  margin-top: 170px;
   margin-bottom: 39px;
 `;
 
 const LogoImage = styled.img`
-  width: 46px;
+  width: 188px;
   height: 46px;
-  flex-shrink: 0;
-`;
-
-const LogoText = styled.text`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-family: 'GmarketSans';
-  font-size: 2.1em; // (참고) 폰트크기의 기본값은 16px
-  font-style: normal;
-  line-height: normal;
-  font-weight: 500;
-  letter-spacing: 1.177px;
 `;
 
 const IDField = styled.input<{ isFilled: boolean }>`
@@ -112,12 +97,11 @@ export default function LoginModal() {
           </svg>
         </CloseButton>
         <LogoBox>
-          <LogoImage src="../../design_image/logo.png" />
-          <LogoText>쿠플라이</LogoText>
+          <LogoImage src="../../design_image/Kupply_ver1.png" />
         </LogoBox>
         <Typography size="largeText">임시 비밀번호를 발급받을 고려대 이메일 주소를 입력해주세요.</Typography>
         <IDField
-          placeholder="bright@korea.ac.kr"
+          placeholder="kupply@korea.ac.kr"
           value={ID}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setID(e.target.value);
