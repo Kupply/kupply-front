@@ -124,7 +124,7 @@ const TextButton = styled.button`
   }
 `;
 export const sendEmail = async (email: string) => {
-  const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+  const url = 'http://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
   try {
     // await axios.post(url, { email: email });
     await client.post('/auth/sendEmail', { email: email });
@@ -213,7 +213,7 @@ export default function SignUp1Page() {
   //버튼 클릭 시 API에 요청하여 번호가 맞는지 인증하고, 맞을 시에만 다음 페이지로 간다.
   const handleNext = async () => {
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
-    const url = 'http://localhost:8080/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
+    const url = 'http://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     try {
       await axios.post(url, { email: email, code: entireCode });
       // await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();

@@ -204,17 +204,17 @@ export default function MyBoardPage() {
 
   // 서버로부터 받는 정보들
   const [userData, setUserData] = useState({
-    userName: '가나다라마바사',
-    userNickname: '잠만보',
+    userName: '',
+    userNickname: '',
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
-    userRole: 'candidator',
-    firstMajor: '수학과',
-    studentId: '2020220037',
-    hopeMajor1: '컴퓨터학과',
-    hopeMajor2: '희망 없음',
-    curGPA: 4.2,
-    hopeSemester: '2023-2',
+    userRole: '',
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '',
+    hopeMajor2: '',
+    curGPA: 0,
+    hopeSemester: '',
   });
 
   // 좀 아닌 것 같지만 생각의 여유가 없기에
@@ -446,7 +446,7 @@ export default function MyBoardPage() {
     };
 
     getPastData();
-  }, []);
+  }, [userData]);
 
   function formatTimeTo12HourFormat(date: Date) {
     var hours = date.getHours();
@@ -1215,7 +1215,7 @@ export default function MyBoardPage() {
                           }}
                         >
                           <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                            경쟁률
+                            모의지원 수
                           </Typography>
                           <Typography
                             size="largeText"
@@ -1224,13 +1224,12 @@ export default function MyBoardPage() {
                               fontWeight: '600',
                             }}
                           >
-                            {/* {semesterBtnStates['2023-1R']
-                          ? pastData1[0].competitionRate
-                          : semesterBtnStates['2022-2R']
-                          ? pastData1[1].competitionRate
-                          : pastData1[2].competitionRate}{' '}
-                        : 1 */}
-                            N : 1
+                            {semesterBtnStates['2023-1R']
+                              ? pastData1[0].numOfApplication
+                              : semesterBtnStates['2022-2R']
+                              ? pastData1[1].numOfApplication
+                              : pastData1[2].numOfApplication}{' '}
+                            명
                           </Typography>
                         </div>
                       </div>
@@ -1247,10 +1246,16 @@ export default function MyBoardPage() {
                             }}
                           >
                             {semesterBtnStates['2023-1R']
-                              ? pastData1[0].meanGpa
+                              ? pastData1[0].meanGpa !== 0
+                                ? pastData1[0].meanGpa
+                                : '집계불가'
                               : semesterBtnStates['2022-2R']
-                              ? pastData1[1].meanGpa
-                              : pastData1[2].meanGpa}
+                              ? pastData1[1].meanGpa !== 0
+                                ? pastData1[1].meanGpa
+                                : '집계불가'
+                              : pastData1[2].meanGpa !== 0
+                              ? pastData1[2].meanGpa
+                              : '집계불가'}
                           </Typography>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
@@ -1265,10 +1270,16 @@ export default function MyBoardPage() {
                             }}
                           >
                             {semesterBtnStates['2023-1R']
-                              ? pastData1[0].minGpa
+                              ? pastData1[0].minGpa !== 0
+                                ? pastData1[0].minGpa
+                                : '집계불가'
                               : semesterBtnStates['2022-2R']
-                              ? pastData1[1].minGpa
-                              : pastData1[2].minGpa}
+                              ? pastData1[1].minGpa !== 0
+                                ? pastData1[1].minGpa
+                                : '집계불가'
+                              : pastData1[2].minGpa !== 0
+                              ? pastData1[2].minGpa
+                              : '집계불가'}
                           </Typography>
                         </div>
                       </div>
@@ -1641,7 +1652,7 @@ export default function MyBoardPage() {
                           }}
                         >
                           <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                            경쟁률
+                            모의지원 수
                           </Typography>
                           <Typography
                             size="largeText"
@@ -1650,13 +1661,12 @@ export default function MyBoardPage() {
                               fontWeight: '600',
                             }}
                           >
-                            {/* {semesterBtnStates['2023-1R']
-                          ? pastData2[0].competitionRate
-                          : semesterBtnStates['2022-2R']
-                          ? pastData2[1].competitionRate
-                          : pastData2[2].competitionRate}{' '}
-                        : 1 */}
-                            N : 1
+                            {semesterBtnStates['2023-1R']
+                              ? pastData2[0].numOfApplication
+                              : semesterBtnStates['2022-2R']
+                              ? pastData2[1].numOfApplication
+                              : pastData2[2].numOfApplication}{' '}
+                            명
                           </Typography>
                         </div>
                       </div>
@@ -1673,10 +1683,16 @@ export default function MyBoardPage() {
                             }}
                           >
                             {semesterBtnStates['2023-1R']
-                              ? pastData2[0].meanGpa
+                              ? pastData2[0].meanGpa !== 0
+                                ? pastData2[0].meanGpa
+                                : '집계불가'
                               : semesterBtnStates['2022-2R']
-                              ? pastData2[1].meanGpa
-                              : pastData2[2].meanGpa}
+                              ? pastData2[1].meanGpa !== 0
+                                ? pastData2[1].meanGpa
+                                : '집계불가'
+                              : pastData2[2].meanGpa !== 0
+                              ? pastData2[2].meanGpa
+                              : '집계불가'}
                           </Typography>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '65px', gap: '20px' }}>
@@ -1691,10 +1707,16 @@ export default function MyBoardPage() {
                             }}
                           >
                             {semesterBtnStates['2023-1R']
-                              ? pastData2[0].minGpa
+                              ? pastData2[0].minGpa !== 0
+                                ? pastData2[0].minGpa
+                                : '집계불가'
                               : semesterBtnStates['2022-2R']
-                              ? pastData2[1].minGpa
-                              : pastData2[2].minGpa}
+                              ? pastData2[1].minGpa !== 0
+                                ? pastData2[1].minGpa
+                                : '집계불가'
+                              : pastData2[2].minGpa !== 0
+                              ? pastData2[2].minGpa
+                              : '집계불가'}
                           </Typography>
                         </div>
                       </div>

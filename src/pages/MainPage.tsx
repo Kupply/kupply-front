@@ -102,7 +102,7 @@ function MainPage() {
     const IDPattern = /.+@korea\.ac\.kr$/;
     if (IDPattern.test(ID)) {
       //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
-      const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+      const url = 'http://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
       try {
         // await axios.post(url, { email: ID });
         // await client.post('/auth/sendEmail', { email: ID });
