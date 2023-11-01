@@ -13,6 +13,8 @@ import { ScrollBarSmall, ScrollBarLarge } from '../assets/ScrollButton';
 import LabelButton from '../assets/buttons/LabelButton';
 import NicknameCheckButton from '../assets/NicknameCheckButton';
 import client from '../utils/httpClient';
+import { majorTargetList } from '../common/majorTarget';
+import { majorAllList } from '../common/majorAll';
 
 const Sidebar = styled.div`
   width: 521px;
@@ -677,6 +679,10 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     { value1: '스마트모빌리티학부', value2: '스마트모빌리티학부' },
   ];
 
+  const majorAll = majorAllList;
+  const majorTarget = [...majorTargetList];
+  majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
+
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       {modalOpen && (
@@ -832,7 +838,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </TextFieldTitle>
           <DropDown
             title="전공선택" // 수정필요
-            optionList={majorList}
+            optionList={majorAll}
             value={firstMajor}
             setValue={setFirstMajor}
           ></DropDown>
@@ -951,20 +957,19 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </BodyContent>
           <TextFieldTitle>
             <strong>희망 이중전공</strong> 수정하기
-            <span style={{ marginLeft: -44 }}>
-              <Optional>(선택)</Optional>
-            </span>
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
             <DropDown
-              title="전공선택" // 수정필요
-              optionList={majorList}
+              title="1지망 전공 선택"
+              optionList={majorTarget.filter(
+                (el) => el.value1 !== '희망 없음' && el.value1 !== firstMajor && el.value1 !== hopeMajor2,
+              )}
               value={hopeMajor1}
               setValue={setHopeMajor1}
             ></DropDown>
             <DropDown
-              title="전공선택" // 수정필요
-              optionList={majorList}
+              title="2지망 전공 선택"
+              optionList={majorTarget.filter((el) => el.value1 !== firstMajor && el.value1 !== hopeMajor1)}
               value={hopeMajor2}
               setValue={setHopeMajor2}
             ></DropDown>
@@ -972,12 +977,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
 
           <TextFieldTitle>
             <strong>학점</strong> 수정하기
-            <span style={{ marginLeft: 25 }}>
-              <Optional>(선택)</Optional>
-            </span>
-            <div style={{ position: 'absolute', top: '325px', left: '900px' }}>
-              <ModalHelpMessage />
-            </div>
           </TextFieldTitle>
 
           <VerifiBoxWrapper>
@@ -992,9 +991,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </VerifiBoxWrapper>
           <TextFieldTitle>
             <strong>희망 지원학기</strong> 수정하기
-            <span style={{ marginLeft: -34 }}>
-              <Optional>(선택)</Optional>
-            </span>
           </TextFieldTitle>
           <VerifiBoxWrapper>
             <VerificationBox

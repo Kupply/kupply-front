@@ -408,6 +408,7 @@ export default function EditModal(props: ModalProps) {
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+                  tm
                   <CurrentImg
                     src={
                       userProfilePic === 'customProfile'
@@ -528,13 +529,15 @@ export default function EditModal(props: ModalProps) {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                     <DropDown
                       title="1지망 전공 선택"
-                      optionList={majorTarget.filter((el) => el.value1 !== '희망 없음')}
+                      optionList={majorTarget.filter(
+                        (el) => el.value1 !== '희망 없음' && el.value1 !== firstMajor && el.value1 !== hopeMajor2,
+                      )}
                       value={hopeMajor1}
                       setValue={setHopeMajor1}
                     ></DropDown>
                     <DropDown
                       title="2지망 전공 선택"
-                      optionList={majorTarget}
+                      optionList={majorTarget.filter((el) => el.value1 !== firstMajor && el.value1 !== hopeMajor1)}
                       value={hopeMajor2}
                       setValue={setHopeMajor2}
                     ></DropDown>

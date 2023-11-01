@@ -212,7 +212,7 @@ export default function MyBoardPage() {
     firstMajor: '수학과',
     studentId: '2020220037',
     hopeMajor1: '컴퓨터학과',
-    hopeMajor2: '식품자원경제학과',
+    hopeMajor2: '희망 없음',
     curGPA: 4.2,
     hopeSemester: '2023-2',
   });
@@ -670,44 +670,11 @@ export default function MyBoardPage() {
                       >
                         {userData.hopeMajor1}
                       </Typography>
-                      <div
-                        style={{
-                          width:
-                            userData.hopeMajor1 == '심리학부'
-                              ? '135px'
-                              : userData.hopeMajor1 == '경영학과'
-                              ? '103px'
-                              : userData.hopeMajor1 == '미디어학부'
-                              ? '111px'
-                              : userData.hopeMajor1 == '경제학과'
-                              ? '95px'
-                              : userData.hopeMajor1 == '통계학과'
-                              ? '95px'
-                              : userData.hopeMajor1 == '화학과'
-                              ? '90px'
-                              : userData.hopeMajor1 == '수학과'
-                              ? '95px'
-                              : userData.hopeMajor1 == '식품자원경제학과'
-                              ? '133px'
-                              : '138px',
-                        }}
-                      >
-                        <Typography
-                          size={userData.hopeMajor1 == '컴퓨터학과' ? 'details' : 'smallText'}
-                          style={{
-                            color: 'var(--Main-Black, #141414)',
-                            fontWeight: '400',
-                            lineHeight: '128.571%',
-                            opacity: 0.8,
-                            marginTop: '2px',
-                          }}
-                        >
-                          {getTextByTitle(userData.hopeMajor1)}
-                        </Typography>
-                      </div>
                     </div>
-                  </InterestMajorBox>
-                </div>
+                  </div>
+                </InterestMajorBox>
+              </div>
+              {userData.hopeMajor2 !== '희망 없음' ? (
                 <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
                   <InterestMajorBox>
                     <MajorSymbolShadow>
@@ -795,48 +762,101 @@ export default function MyBoardPage() {
                     </div>
                   </InterestMajorBox>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="284"
-                  height="2"
-                  viewBox="0 0 284 2"
-                  fill="none"
-                  style={{ marginTop: '30px', marginLeft: '128.01px' }}
+              ) : (
+                <></>
+              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="284"
+                height="2"
+                viewBox="0 0 284 2"
+                fill="none"
+                style={{ marginTop: '30px', marginLeft: '128.01px' }}
+              >
+                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
+              </svg>
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: '44px', marginLeft: '128.01px' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M4.15323 17.5L15.7787 17.5C16.6959 17.5 17.4395 16.7538 17.4395 15.8333L17.4395 4.16667C17.4395 3.24619 16.6959 2.5 15.7787 2.5L4.15323 2.5C3.23601 2.5 2.49246 3.24619 2.49246 4.16667L2.49245 15.8333C2.49245 16.7538 3.23601 17.5 4.15323 17.5Z"
+                    stroke="#434343"
+                    stroke-opacity="0.6"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M5.81352 14.1665L8.30469 14.1665L8.30469 9.99984L5.81352 9.99984L5.81352 14.1665Z"
+                    stroke="#434343"
+                    stroke-opacity="0.6"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.626 14.1665L14.1172 14.1665L14.1172 6.6665L11.626 6.6665L11.626 14.1665Z"
+                    stroke="#434343"
+                    stroke-opacity="0.6"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <Typography
+                  size="bodyText"
+                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
+                >
+                  현재 내 학점
+                </Typography>
+                <Typography
+                  size="bodyText"
+                  style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '71.74px' }}
                 >
                   <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
                 </svg>
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '44px', marginLeft: '128.01px' }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                      d="M4.15323 17.5L15.7787 17.5C16.6959 17.5 17.4395 16.7538 17.4395 15.8333L17.4395 4.16667C17.4395 3.24619 16.6959 2.5 15.7787 2.5L4.15323 2.5C3.23601 2.5 2.49246 3.24619 2.49246 4.16667L2.49245 15.8333C2.49245 16.7538 3.23601 17.5 4.15323 17.5Z"
-                      stroke="#434343"
-                      stroke-opacity="0.6"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M5.81352 14.1665L8.30469 14.1665L8.30469 9.99984L5.81352 9.99984L5.81352 14.1665Z"
-                      stroke="#434343"
-                      stroke-opacity="0.6"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M11.626 14.1665L14.1172 14.1665L14.1172 6.6665L11.626 6.6665L11.626 14.1665Z"
-                      stroke="#434343"
-                      stroke-opacity="0.6"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                  <Typography
-                    size="bodyText"
-                    style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
-                  >
-                    현재 내 학점
+                <Typography
+                  size="bodyText"
+                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
+                >
+                  희망 진입학기
+                </Typography>
+                <Typography
+                  size="bodyText"
+                  style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '59.4px' }}
+                >
+                  {userData.hopeSemester}R
+                </Typography>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="284"
+                height="2"
+                viewBox="0 0 284 2"
+                fill="none"
+                style={{ marginTop: '44px', marginLeft: '128.01px' }}
+              >
+                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
+              </svg>
+            </MyInformationBox>
+          </div>
+        </LeftSideWrapper>
+        <div style={{ marginTop: '-82px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: '154px', marginLeft: '551px', gap: '18px' }}>
+            <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
+            {userData.hopeMajor2 !== '희망 없음' ? (
+              <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
+                2지망
+              </InterestMajorButton>
+            ) : (
+              <></>
+            )}
+          </div>
+          {onViewMajor === 1 ? (
+            <>
+              <div style={{ marginLeft: '551px' }}>
+                <BigMajorSymbolBox style={{ marginTop: '32px' }}>
+                  <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
+                    1지망 관심전공
                   </Typography>
                   <Typography
                     size="bodyText"
