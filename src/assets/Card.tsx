@@ -8,7 +8,7 @@ export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   eng: string;
   filter: string[];
   TO: number;
-  경쟁률: number;
+  pass: number;
   avg: number;
   min: number;
   semester: string;
@@ -39,7 +39,7 @@ const majorParamMapping = {
   'Department of Computer Science & Engineering': 'computer',
 };
 
-const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, titleSrc }: CardsProps) => {
+const Card = ({ name, eng, filter, TO, pass, avg, min, src, semester, titleSrc }: CardsProps) => {
   const [hover, setHover] = useState(false);
   const onHover = () => {
     setHover(true);
@@ -70,8 +70,8 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
           <Hover모집정보>{semester} 모집정보</Hover모집정보>
           <HoverTOTitle>{semester.substring(2, 6)} 선발 인원</HoverTOTitle>
           <HoverTO>{TO}명</HoverTO>
-          <Hover경쟁률Title>경쟁률</Hover경쟁률Title>
-          <Hover경쟁률>{경쟁률} : 1</Hover경쟁률>
+          <Hover경쟁률Title>합격자</Hover경쟁률Title>
+          <Hover경쟁률>{pass}명</Hover경쟁률>
           <HoverMinTitle>합격자 최저 학점</HoverMinTitle>
           <HoverMin>{min}</HoverMin>
           <HoverAvgTitle>합격자 평균 학점</HoverAvgTitle>
@@ -116,7 +116,7 @@ const Card = ({ name, eng, filter, TO, 경쟁률, avg, min, src, semester, title
               <HoverInfo>
                 쿠플라이에서 수집된 데이터 값으로,
                 <br />
-                실제 경쟁률과 차이가 있을 수 있습니다.
+                실제 합격자 수와 차이가 있을 수 있습니다.
               </HoverInfo>
               <SvgNotch>
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
