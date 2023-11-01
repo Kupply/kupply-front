@@ -13,7 +13,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 const Wrapper = styled.div`
   align-items: center;
   width: 100vw;
-  max-width: 1920px;
+  // max-width: 1920px;
   //max-width: 1920px;
   height: 80px; // 7.7%; // 96px; (96/1248 = 7.7)
   position: fixed;

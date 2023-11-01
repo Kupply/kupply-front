@@ -12,6 +12,7 @@ import Carousel3 from './Carousel3';
 
 const Wrapper = styled.div`
   width: 100vw;
+  // max-width: 1920px;
   height: 500px;
   display: flex;
   flex-direction: column;

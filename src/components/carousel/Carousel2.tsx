@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100vw;
-  max-width: 2560px;
+  // max-width: 2560px;
   // max-width: 1920px;
   height: 100%; //630px;
   display: flex;
