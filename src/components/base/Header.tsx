@@ -309,7 +309,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
       window.sessionStorage.clear();
       setLogin(false);
       navigate('/');
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       // 이후 수정 필요함.
       alert(err);
