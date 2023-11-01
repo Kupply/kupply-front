@@ -343,7 +343,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         const userInfo = APIresponse.data.data.user;
 
-        localStorage.setItem('  userProfilePic', userInfo.profilePic);
+        localStorage.setItem('userProfilePic', userInfo.profilePic);
         localStorage.setItem('userProfileLink', userInfo.profileLink);
         localStorage.setItem('name', userInfo.name);
         localStorage.setItem('nickname', userInfo.nickname);
@@ -739,7 +739,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             value={firstMajor}
             setValue={setFirstMajor}
           ></DropDown>
-          <TextFieldTitle>
+          {/* <TextFieldTitle>
             <strong>전화번호</strong> 수정하기 <Optional>(선택)</Optional>
           </TextFieldTitle>
           <TextFieldBox
@@ -751,7 +751,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             setState={setPhoneNumberState}
             setValue={setPhoneNumber}
             placeholder="마케팅 및 새로운 수식 수신을 위한 휴대폰 11자리"
-          ></TextFieldBox>
+          ></TextFieldBox> */}
           <ButtonWrapper
             buttonType="primary"
             onClick={() => {
