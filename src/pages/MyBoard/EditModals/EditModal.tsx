@@ -16,6 +16,7 @@ import LabelButton from '../../../assets/buttons/LabelButton';
 import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
 import { majorAllList } from '../../../common/majorAll';
 import { majorTargetList } from '../../../common/majorTarget';
+import NicknameCheckButton from '../../../assets/NicknameCheckButton';
 
 /*
 남은 개발
@@ -60,9 +61,25 @@ export default function EditModal(props: ModalProps) {
     });
   };
 
-  // 각 input들의 값을 state를 사용하여 관리
-  const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
+  // 닉네임 중복 체크
+  type StateOptions = 'default' | 'hover' | 'focused' | 'typing' | 'filled' | 'error' | 'loading' | 'password';
+
+  type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
+
+  type errorMessageType = {
+    passwordErrorMessage: string;
+    nicknameErrorMessage: string;
+  };
+  const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '고대빵');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
+  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('filled');
+
+  const [errorMessages, setErrorMessages] = useState<errorMessageType>({
+    passwordErrorMessage: '',
+    nicknameErrorMessage: '',
+  });
+
+  // 각 input들의 값을 state를 사용하여 관리
   const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
   const [firstMajor, setFirstMajor] = useState<string>(localStorage.getItem('firstMajor') || '');
@@ -182,6 +199,50 @@ export default function EditModal(props: ModalProps) {
   */
   const [currentModal, setCurrentModal] = useState<number>(0);
   // const [currentSrc, setCurrentSrc] = useState('design_image/character/rectProfile/rectProfile1.png');
+
+  //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
+  // 닉네임 제한 10->7자 수정
+  useEffect(() => {
+    if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
+      setNicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
+      });
+    } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
+      setNicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '중복되는 닉네임이에요!',
+      });
+    } else if (nicknameCheck !== 'filled') {
+      if (!(nicknameState === 'default' || nicknameState === 'focused' || nicknameState === 'hover')) {
+        setNicknameState('error');
+        setErrorMessages({
+          ...errorMessages,
+          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
+        });
+      }
+    }
+  }, [nicknameState]);
+
+  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
+  useEffect(() => {
+    setNicknameCheckState('default');
+  }, [nickname]);
+
+  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
+  useEffect(() => {
+    if (nicknameCheck === 'filled') setNicknameState('filled');
+    else if (nicknameCheck === 'error') {
+      setNicknameState('error');
+      setErrorMessages({
+        ...errorMessages,
+        nicknameErrorMessage: '중복되는 닉네임이에요!',
+      });
+    }
+  }, [nicknameCheck]);
+
   return (
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
@@ -397,7 +458,19 @@ export default function EditModal(props: ModalProps) {
                     state={nicknameState}
                     setState={setNicknameState}
                     setValue={setNickname}
+                    errorMessage={errorMessages.nicknameErrorMessage}
                   ></TextFieldBox>
+                  {nickname === '' || nicknameState === 'filled' ? (
+                    <></>
+                  ) : (
+                    <NicknameCheckButtonWrapper>
+                      <NicknameCheckButton
+                        nickname={nickname}
+                        state={nicknameCheck}
+                        setState={setNicknameCheckState}
+                      ></NicknameCheckButton>
+                    </NicknameCheckButtonWrapper>
+                  )}
                 </SubContentsWrapper>
                 <SubContentsWrapper>
                   <ContentsTitle>학번 변경하기</ContentsTitle>
@@ -700,4 +773,11 @@ const CloseButton = styled.button`
   top: 32px;
   right: 40px;
   cursor: pointer;
+`;
+
+const NicknameCheckButtonWrapper = styled.div`
+  position: absolute;
+  top: 460px;
+  left: 580px;
+  z-index: 2;
 `;
