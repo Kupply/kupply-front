@@ -179,6 +179,7 @@ function LoginPage(props: LoginPageProps) {
       navigate('/');
     } catch (err: any) {
       // 이후 수정 필요함.
+      setPassword('');
       if (err.response.data.error.message) {
         alert(err.response.data.error.message);
       }
