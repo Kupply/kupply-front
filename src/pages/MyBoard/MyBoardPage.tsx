@@ -208,7 +208,7 @@ export default function MyBoardPage() {
     userNickname: '잠만보',
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
-    userRole: 'passer',
+    userRole: 'candidator',
     firstMajor: '수학과',
     studentId: '2020220037',
     hopeMajor1: '컴퓨터학과',
@@ -1784,12 +1784,10 @@ export default function MyBoardPage() {
               <div style={{ display: 'flex', zIndex: 2, marginTop: '-830px', marginLeft: '550px' }}>
                 <BlurWrapper>
                   <BlurMsg>
-                    <Typography size="largeText">쿠플라이에서 모의지원 후 열람 가능해요!</Typography>
+                    <Typography size="largeText">실시간 지원자 통계는 모의지원 후 열람 가능합니다.</Typography>
                     <Typography size="mediumText" style={{ lineHeight: '136.111%' }}>
-                      모의지원을 완료한 후, 나와 함께 {userData.hopeMajor1}를 지원한 지원자의 실시간 지원통계를
-                      열람해보세요.
-                      <br />
-                      모의지원하라는 홍보성 문구가 필요해요.
+                      좌측의 모의지원 버튼을 통해 모의지원을 완료해주세요. <br /> 모의지원을 완료하면{' '}
+                      {userData.hopeMajor1}를 지원한 다른 지원자들의 정보를 확인하실 수 있습니다.
                     </Typography>
                   </BlurMsg>
                 </BlurWrapper>
