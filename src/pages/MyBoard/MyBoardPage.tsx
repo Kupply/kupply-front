@@ -211,7 +211,7 @@ export default function MyBoardPage() {
     firstMajor: '수학과',
     studentId: '2020220037',
     hopeMajor1: '컴퓨터학과',
-    hopeMajor2: '식품자원경제학과',
+    hopeMajor2: '희망 없음',
     curGPA: 4.2,
     hopeSemester: '2023-2',
   });
@@ -698,87 +698,97 @@ export default function MyBoardPage() {
                   </div>
                 </InterestMajorBox>
               </div>
-              <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
-                <InterestMajorBox>
-                  <MajorSymbolShadow>
-                    <MajorSymbol
-                      src={`design_image/major_symbol/trans/medium/${
-                        collegeNameMapping[userData.hopeMajor2 as MajorOptions]
-                      }_trans_medium.png`}
-                      alt={getTextByTitle(userData.hopeMajor2)}
-                    />
-                    <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
-                      <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_1679)" fill-opacity="0.7" />
-                      <defs>
-                        <radialGradient
-                          id="paint0_radial_3725_1679"
-                          cx="0"
-                          cy="0"
-                          r="1"
-                          gradientUnits="userSpaceOnUse"
-                          gradientTransform="translate(56 58.5751) rotate(90) scale(53.4249)"
-                        >
-                          <stop stop-color="#7BBEEE" stop-opacity="0.6" />
-                          <stop offset="1" stop-color="white" stop-opacity="0" />
-                        </radialGradient>
-                      </defs>
-                    </svg>
-                  </MajorSymbolShadow>
-                  <div style={{ marginTop: '16px', marginLeft: '130px' }}>
-                    <Typography
-                      size="bodyText"
-                      style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', lineHeight: '20px' }}
-                    >
-                      2지망
-                    </Typography>
-                    <Typography
-                      size="bodyText"
-                      style={{
-                        color: 'var(--Main-Black, #141414)',
-                        marginTop:
-                          userData.hopeMajor2 == '심리학부' || userData.hopeMajor2 == '경영학과' ? '16px' : '8px',
-                      }}
-                    >
-                      {userData.hopeMajor2}
-                    </Typography>
-                    <div
-                      style={{
-                        width:
-                          userData.hopeMajor2 == '심리학부'
-                            ? '135px'
-                            : userData.hopeMajor2 == '경영학과'
-                            ? '103px'
-                            : userData.hopeMajor2 == '미디어학부'
-                            ? '111px'
-                            : userData.hopeMajor2 == '경제학과'
-                            ? '95px'
-                            : userData.hopeMajor2 == '통계학과'
-                            ? '95px'
-                            : userData.hopeMajor2 == '화학과'
-                            ? '90px'
-                            : userData.hopeMajor2 == '수학과'
-                            ? '95px'
-                            : userData.hopeMajor2 == '식품자원경제학과'
-                            ? '133px'
-                            : '138px',
-                      }}
-                    >
+              {userData.hopeMajor2 !== '희망 없음' ? (
+                <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
+                  <InterestMajorBox>
+                    <MajorSymbolShadow>
+                      <MajorSymbol
+                        src={`design_image/major_symbol/trans/medium/${
+                          collegeNameMapping[userData.hopeMajor2 as MajorOptions]
+                        }_trans_medium.png`}
+                        alt={getTextByTitle(userData.hopeMajor2)}
+                      />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="112"
+                        height="112"
+                        viewBox="0 0 112 112"
+                        fill="none"
+                      >
+                        <circle cx="56" cy="56" r="56" fill="url(#paint0_radial_3725_1679)" fill-opacity="0.7" />
+                        <defs>
+                          <radialGradient
+                            id="paint0_radial_3725_1679"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(56 58.5751) rotate(90) scale(53.4249)"
+                          >
+                            <stop stop-color="#7BBEEE" stop-opacity="0.6" />
+                            <stop offset="1" stop-color="white" stop-opacity="0" />
+                          </radialGradient>
+                        </defs>
+                      </svg>
+                    </MajorSymbolShadow>
+                    <div style={{ marginTop: '16px', marginLeft: '130px' }}>
                       <Typography
-                        size={userData.hopeMajor2 == '컴퓨터학과' ? 'details' : 'smallText'}
+                        size="bodyText"
+                        style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', lineHeight: '20px' }}
+                      >
+                        2지망
+                      </Typography>
+                      <Typography
+                        size="bodyText"
                         style={{
                           color: 'var(--Main-Black, #141414)',
-                          fontWeight: '400',
-                          lineHeight: '114.286%',
-                          opacity: 0.8,
-                          marginTop: '2px',
+                          marginTop:
+                            userData.hopeMajor2 == '심리학부' || userData.hopeMajor2 == '경영학과' ? '16px' : '8px',
                         }}
                       >
-                        {getTextByTitle(userData.hopeMajor2)}
+                        {userData.hopeMajor2}
                       </Typography>
+                      <div
+                        style={{
+                          width:
+                            userData.hopeMajor2 == '심리학부'
+                              ? '135px'
+                              : userData.hopeMajor2 == '경영학과'
+                              ? '103px'
+                              : userData.hopeMajor2 == '미디어학부'
+                              ? '111px'
+                              : userData.hopeMajor2 == '경제학과'
+                              ? '95px'
+                              : userData.hopeMajor2 == '통계학과'
+                              ? '95px'
+                              : userData.hopeMajor2 == '화학과'
+                              ? '90px'
+                              : userData.hopeMajor2 == '수학과'
+                              ? '95px'
+                              : userData.hopeMajor2 == '식품자원경제학과'
+                              ? '133px'
+                              : '138px',
+                        }}
+                      >
+                        <Typography
+                          size={userData.hopeMajor2 == '컴퓨터학과' ? 'details' : 'smallText'}
+                          style={{
+                            color: 'var(--Main-Black, #141414)',
+                            fontWeight: '400',
+                            lineHeight: '114.286%',
+                            opacity: 0.8,
+                            marginTop: '2px',
+                          }}
+                        >
+                          {getTextByTitle(userData.hopeMajor2)}
+                        </Typography>
+                      </div>
                     </div>
-                  </div>
-                </InterestMajorBox>
-              </div>
+                  </InterestMajorBox>
+                </div>
+              ) : (
+                <></>
+              )}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="284"
@@ -899,9 +909,13 @@ export default function MyBoardPage() {
         <div style={{ marginTop: '-82px' }}>
           <div style={{ display: 'flex', alignItems: 'center', marginTop: '154px', marginLeft: '551px', gap: '18px' }}>
             <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
-            <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
-              2지망
-            </InterestMajorButton>
+            {userData.hopeMajor2 !== '희망 없음' ? (
+              <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
+                2지망
+              </InterestMajorButton>
+            ) : (
+              <></>
+            )}
           </div>
           {onViewMajor === 1 ? (
             <>
