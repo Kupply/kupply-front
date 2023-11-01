@@ -129,6 +129,7 @@ export const sendEmail = async (email: string) => {
   } catch (e) {
     //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
     alert(e);
+    console.log(e);
   }
 };
 
@@ -147,7 +148,17 @@ export default function SignUp1Page() {
   const [num4, setNum4] = useState<string>('');
   const [num5, setNum5] = useState<string>('');
   const [num6, setNum6] = useState<string>('');
+  const [isEntered, setIsEntered] = useState<boolean>(false);
   const [nextButton, setNextButton] = useState<boolean>(false);
+
+  const setBlank = () => {
+    setNum1('');
+    setNum2('');
+    setNum3('');
+    setNum4('');
+    setNum5('');
+    setNum6('');
+  };
 
   // verificationBox 관련
   useEffect(() => {
@@ -170,6 +181,10 @@ export default function SignUp1Page() {
   // emailID를 받지 않은 상태라면 main으로 보내고, 아니라면 email을 받은 값으로 설정한다.
   useEffect(() => {
     if (!sessionStorage.getItem('email')) navigate('/');
+    async function sendFirst(email: string) {
+      await sendEmail(email);
+    }
+    sendFirst(email);
   }, []);
 
   // small modal 관련
@@ -182,6 +197,7 @@ export default function SignUp1Page() {
       setSendNum(sendNum + 1);
       await sendEmail(email);
     }
+    setBlank();
   }, [isOpenModal]);
   // large modal 관련
   const onClickToggleLargeModal = useCallback(() => {
@@ -233,6 +249,7 @@ export default function SignUp1Page() {
             return (
               <SignUpLarge1
                 email={email}
+                setBlank={setBlank}
                 currentModal={currentModal}
                 isOpenModal={isOpenModal}
                 setCurrentModal={setCurrentModal}
@@ -252,6 +269,7 @@ export default function SignUp1Page() {
                 emailState={emailState}
                 setEmail={setEmail}
                 setEmailState={setEmailState}
+                setBlank={setBlank}
               />
             );
 
