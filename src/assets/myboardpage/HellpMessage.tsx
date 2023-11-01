@@ -4,8 +4,10 @@ import Typography from '../Typography';
 
 const HelpBox = styled.button<{ isHovered: boolean }>`
   display: flex;
-  width: 40px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
+  //border: 2px solid black; /* 검정색 외곽선 추가 */
+  //border-radius: 5px; /* 원하는 값으로 변경 */
 `;
 
 interface MessageBoxProps {
@@ -32,7 +34,7 @@ const ModalMessageBox = styled.div<MessageBoxProps>`
   right: -430px;
   width: 467px;
   height: 67px;
-  z-index: 1000;
+  z-index: 1;
   background: #fff;
   //border-radius: 10px;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
@@ -44,15 +46,34 @@ const StyledSvg = styled.svg<SvgProps>`
   //transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   position: absolute;
   top: -32px;
-  z-index: 1000;
+  z-index: 1;
 `;
 
 /* 실시간 전용 헬프메세지 */
 function HelpMessage(props: MessageProps) {
   const [isHovered, setIsHovered] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (isHovered) {
+      setIsVisible(true);
+      const hideTimeout = setTimeout(() => {
+        setIsVisible(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(hideTimeout);
+      };
+    } else {
+      setIsVisible(true);
+      const hideTimeout = setTimeout(() => {
+        setIsVisible(false);
+      }, 0);
+    }
+  }, [isHovered]);
 
   return (
-    <div style={{ position: 'absolute' }}>
+    <div style={{ position: 'absolute', left: '260px', top: '189px' }}>
       <HelpBox onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} isHovered={isHovered}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +101,7 @@ function HelpMessage(props: MessageProps) {
           </defs>
         </svg>
       </HelpBox>
-      <ModalMessageBox isVisible={isHovered}>
+      <ModalMessageBox isVisible={isVisible}>
         <Typography
           size="mediumText"
           style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '122.222%' }}
@@ -89,7 +110,7 @@ function HelpMessage(props: MessageProps) {
         </Typography>
         <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '2px', marginBottom: '2px' }}>
           <Typography size="normalText" style={{ color: 'var(--Black2, #434343)', lineHeight: '22px' }}>
-            이중전공 지원 시즌에는 학점을
+            이중전공 지원 시즌에는 학점을 &nbsp;
           </Typography>
           <Typography
             size="normalText"
@@ -106,8 +127,8 @@ function HelpMessage(props: MessageProps) {
         </Typography>
       </ModalMessageBox>
       <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
         style={{ position: 'absolute', left: '4px', top: '24px' }}
       >
         <StyledSvg
@@ -147,6 +168,7 @@ function HelpMessage(props: MessageProps) {
     </div>
   );
 }
+
 ///////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////

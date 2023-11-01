@@ -859,7 +859,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               setValue={setHopeMajor2}
             ></DropDown>
           </div>
-          <div style={{ marginTop: '53px', marginLeft: '110px' }}>
+          <div style={{ position: 'absolute', top: '245px', left: '835px' }}>
             <HelpMessage />
           </div>
           <TextFieldTitle>
