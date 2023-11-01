@@ -11,6 +11,7 @@ import VerificationBox from '../assets/VerificationBox';
 import Typography from '../assets/Typography';
 import { ScrollBarSmall, ScrollBarLarge } from '../assets/ScrollButton';
 import LabelButton from '../assets/buttons/LabelButton';
+import client from '../utils/httpClient';
 
 const Sidebar = styled.div`
   width: 521px;
@@ -340,7 +341,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
         localStorage.setItem('userProfilePic', userInfo.profilePic);
@@ -466,7 +468,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newPhoneNumber: phoneNumber,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -478,7 +481,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newNickname: nickname,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -494,7 +498,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newHopeSemester: newHopeSemester,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -507,7 +512,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newEmail: email,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);

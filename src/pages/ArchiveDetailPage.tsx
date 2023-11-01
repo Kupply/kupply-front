@@ -7,6 +7,7 @@ import SegmentedPicker from '../assets/SegmentedPicker';
 import GpaLineChart, { Data, LineData } from '../assets/GpaLineChart';
 import { recruit } from '../common/recruiting';
 import { DBkeywords } from '../common/keyword';
+import client from '../utils/httpClient';
 
 type MajorOptions =
   | 'business'
@@ -126,7 +127,7 @@ const ArchiveDetailPage = () => {
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
-  const [competitionRate, setCompetitionRate] = useState<number>(0);
+  const [numOfPassed, setNumOfPassed] = useState<number>(0);
 
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
   const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
@@ -150,20 +151,21 @@ const ArchiveDetailPage = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
+        // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
+        const APIresponse = await client.get(`/pastData/${majorName}/all`);
         const data = APIresponse.data.pastData;
 
         if (data.passedData.passedGPACountArray.length > 0) {
           const selectionNum = recruit[majorKoreanName][semesterForAPI[activeIdx]] || 0;
-          let competitionRate = 0;
-          if (selectionNum > 0) {
-            competitionRate = data.overallData.numberOfData / selectionNum;
-          }
+          // let competitionRate = 0;
+          // if (selectionNum > 0) {
+          //   competitionRate = data.overallData.numberOfData / selectionNum;
+          // }
 
           setEnoughData(true);
           setNumOfApplication(data.overallData.numberOfData);
           setNumOfSelection(selectionNum);
-          setCompetitionRate(competitionRate);
+          setNumOfPassed(data.passedData.passedNumberOfData);
           setLineData(data.passedData.passedGPACountArray);
           setMeanGpa(data.passedData.passedMeanGPAData);
           setMedianGpa(data.passedData.passedMedianGPAData);
@@ -185,24 +187,27 @@ const ArchiveDetailPage = () => {
 
     try {
       const semester = semesterForAPI[idx];
-      const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
+      // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
+      const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
       const data = APIresponse.data.pastData;
 
       const selectionNum = recruit[majorKoreanName][semesterForAPI[idx]] || 0;
-      let competitionRate = 0;
-      if (selectionNum > 0) {
-        competitionRate = data.overallData.numberOfData / selectionNum;
-      }
+      // let competitionRate = 0;
+      // if (selectionNum > 0) {
+      //   competitionRate = data.overallData.numberOfData / selectionNum;
+      // }
 
       setEnoughData(true);
       setNumOfApplication(data.overallData.numberOfData);
       setNumOfSelection(selectionNum);
-      setCompetitionRate(competitionRate);
+      setNumOfPassed(data.passedData.passedNumberOfData);
       setLineData(data.passedData.passedGPACountArray);
       setMeanGpa(data.passedData.passedMeanGPAData);
       setMedianGpa(data.passedData.passedMedianGPAData);
       setModeGpa(data.passedData.passedModeGPAData);
       setMinGpa(data.passedData.passedMinimumGPAData);
+
+      console.log(data.passedData.passedMedianGPAData);
 
       if (data.passedData.passedGPACountArray.length > 0) {
         setEnoughData(true);

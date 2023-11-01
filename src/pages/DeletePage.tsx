@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
 import LabelButton from '../assets/buttons/LabelButton';
+import client from '../utils/httpClient';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -147,7 +148,8 @@ const DeletePage = () => {
 
   const deleteMe = async () => {
     try {
-      await axios.delete(`http://localhost:8080/user/deleteMe`, config);
+      // await axios.delete(`http://localhost:8080/user/deleteMe`, config);
+      await client.delete('/user/deleteMe');
       removeCookie('accessToken', { path: '/' });
       window.localStorage.clear();
       window.sessionStorage.clear();
