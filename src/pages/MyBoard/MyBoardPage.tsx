@@ -125,7 +125,7 @@ export default function MyBoardPage() {
     withCredentials: true,
   };
 
-  const [isApplied, setIsApplied] = useState<boolean>(true);
+  const [isApplied, setIsApplied] = useState<boolean>(false);
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
   // Edit Modal 관련
@@ -1701,17 +1701,19 @@ export default function MyBoardPage() {
             </>
           )}
           {isApplied ? null : (
-            <BlurWrapper>
-              <BlurMsg>
-                <Typography size="largeText">쿠플라이에서 모의지원 후 열람 가능해요!</Typography>
-                <Typography size="mediumText" style={{ lineHeight: '136.111%' }}>
-                  모의지원을 완료한 후, 나와 함께 {userData.hopeMajor1}를 지원한 지원자의 실시간 지원통계를
-                  열람해보세요.
-                  <br />
-                  모의지원하라는 홍보성 문구가 필요해요.
-                </Typography>
-              </BlurMsg>
-            </BlurWrapper>
+            <div style={{ display: 'flex', zIndex: 2, marginTop: '-830px', marginLeft: '550px' }}>
+              <BlurWrapper>
+                <BlurMsg>
+                  <Typography size="largeText">쿠플라이에서 모의지원 후 열람 가능해요!</Typography>
+                  <Typography size="mediumText" style={{ lineHeight: '136.111%' }}>
+                    모의지원을 완료한 후, 나와 함께 {userData.hopeMajor1}를 지원한 지원자의 실시간 지원통계를
+                    열람해보세요.
+                    <br />
+                    모의지원하라는 홍보성 문구가 필요해요.
+                  </Typography>
+                </BlurMsg>
+              </BlurWrapper>
+            </div>
           )}
         </div>
       </Wrapper>
@@ -1913,12 +1915,22 @@ const Graph_2Box = styled.div`
   z-index: 1;
 `;
 
+// ----------------Nickname----------------
 const TextBox = styled.div`
   max-width: 400px;
   display: flex;
   align-items: center;
   margin-left: 0px;
   margin-top: 41px;
+`;
+
+const NickNameText = styled.div<{ textSize: string }>`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: ${(props) => props.textSize};
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
 `;
 
 // ----------------ImageBox----------------
@@ -1968,9 +1980,9 @@ const BlurWrapper = styled.div`
   background: rgba(248, 248, 248, 0.45);
   backdrop-filter: blur(15px);
   box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
-  position: absolute;
-  top: 1045px; // 1115px;
-  left: 550px;
+  //position: absolute;
+  //top: 1045px; // 1115px;
+  //left: 680px;
   z-index: 2;
 `;
 
@@ -1996,13 +2008,4 @@ const BoxTitleText = styled.div`
   margin-top: 26px;
   margin-left: 36px;
   margin-bottom: 14px;
-`;
-
-const NickNameText = styled.div<{ textSize: string }>`
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: ${(props) => props.textSize};
-  font-style: normal;
-  font-weight: 700;
-  line-height: 40px;
 `;
