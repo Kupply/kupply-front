@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import DepartmentCard from '../../assets/landingpage/DepartmentCard';
 import { Navigate } from 'react-router-dom';
+import { major계열 } from '../../common/majorTarget';
 
 type buttonOptions = 'default' | 'hover' | 'active';
 
-interface ICardData {
+export interface ICardData {
   name: string;
   eng: string;
   경쟁률: number;
@@ -80,7 +81,9 @@ const SmallLinkButton = styled.button<{ state: buttonOptions }>`
 `;
 
 export default function PassedDataCard(props: cardProps) {
-  const cardData = props.cardData;
+  const [cardData, setCardData] = useState<ICardData[]>([]);
+  console.log(cardData);
+
   //합격 자료 바로가기 버튼의 click을 조정
   const [isActive, setisActive] = useState<boolean>(false);
 
@@ -91,6 +94,16 @@ export default function PassedDataCard(props: cardProps) {
   const [upperButtonClicked, setUpperButtonClicked] = useState(false);
   const [underButtonState, setUnderButtonState] = useState<buttonOptions>('default');
   const [underButtonClicked, setUnderButtonClicked] = useState(false);
+
+  useEffect(() => {
+    if (upperButtonClicked) {
+      const newCardData = props.cardData.filter((data) => major계열[data.name] === '인문계');
+      setCardData(newCardData);
+    } else if (underButtonClicked) {
+      const newCardData = props.cardData.filter((data) => major계열[data.name] === '자연계');
+      setCardData(newCardData);
+    } else setCardData(props.cardData);
+  }, [upperButtonClicked, underButtonClicked]);
 
   return (
     <Wrapper>
@@ -133,17 +146,17 @@ export default function PassedDataCard(props: cardProps) {
         <SmallLinkButton
           onClick={() => {
             setUpperButtonClicked(!upperButtonClicked);
-            if (underButtonClicked == true) {
+            if (underButtonClicked === true) {
               setUnderButtonClicked(false);
               setUnderButtonState('default');
             }
             upperButtonClicked ? setUpperButtonState('hover') : setUpperButtonState('active');
           }}
           onMouseOver={() => {
-            if (upperButtonClicked == false) setUpperButtonState('hover');
+            if (upperButtonClicked === false) setUpperButtonState('hover');
           }}
           onMouseOut={() => {
-            if (upperButtonClicked == false) setUpperButtonState('default');
+            if (upperButtonClicked === false) setUpperButtonState('default');
           }}
           state={upperButtonState}
         >
@@ -173,9 +186,21 @@ export default function PassedDataCard(props: cardProps) {
           </Typography>
         </SmallLinkButton>
       </SubjectWrapper>
-      <DepartmentCard {...cardData[0]}></DepartmentCard>
-      <DepartmentCard {...cardData[1]}></DepartmentCard>
-      <DepartmentCard {...cardData[2]}></DepartmentCard>
+      {cardData[0] ? (
+        <DepartmentCard {...cardData[0]}></DepartmentCard>
+      ) : (
+        <DepartmentCard {...props.cardData[0]}></DepartmentCard>
+      )}
+      {cardData[1] ? (
+        <DepartmentCard {...cardData[1]}></DepartmentCard>
+      ) : (
+        <DepartmentCard {...props.cardData[1]}></DepartmentCard>
+      )}
+      {cardData[2] ? (
+        <DepartmentCard {...cardData[2]}></DepartmentCard>
+      ) : (
+        <DepartmentCard {...props.cardData[2]}></DepartmentCard>
+      )}
     </Wrapper>
   );
 }
