@@ -13,7 +13,7 @@ import client from '../../utils/httpClient';
 
 const Wrapper = styled.div`
   align-items: center;
-  width: 100vw;
+  width: 1920px; // 100vw;
   // max-width: 1920px;
   //max-width: 1920px;
   height: 80px; // 7.7%; // 96px; (96/1248 = 7.7)

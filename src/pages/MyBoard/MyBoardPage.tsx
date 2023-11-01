@@ -1799,7 +1799,7 @@ height: 2378px;
 */
 
 const Wrapper = styled.div`
-  width: 1920px; //..1920px; // 1920px;
+  width: 1920px; //1920px; //..1920px; // 1920px;
   height: 2020px; // 100%; // (헤더, 풋터 제외 크기) 이 크기로 퍼센트 계산
   background: #fcfcfc;
   display: flex;
@@ -1852,7 +1852,7 @@ const LeftSideWrapper = styled.div`
   position: absolute;
   flex-shrink: 0;
   background: linear-gradient(89deg, rgba(238, 238, 238, 0.44) 10.94%, rgba(217, 217, 217, 0) 99.54%);
-  left: 120px;
+  left: 50px;
   top: 0;
   z-index: 1;
 `;
