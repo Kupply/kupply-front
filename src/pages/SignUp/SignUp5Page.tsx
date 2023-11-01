@@ -217,7 +217,7 @@ const CustomCheckButton: React.FC<CustomCheckButtonProps> = ({ isChecked, onChan
 };
 
 const join = async (role: string) => {
-  const url = 'http://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
+  const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
   const commonData = {
     name: sessionStorage.getItem('name'),
     studentId: Number(sessionStorage.getItem('studentId')),
