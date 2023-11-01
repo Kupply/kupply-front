@@ -50,6 +50,7 @@ const Container = styled.div`
   gap: 0px;
   width: 100%;
   max-width: 1382px;
+  z-index: 2;
 `;
 
 const SvgContainer = styled.div`

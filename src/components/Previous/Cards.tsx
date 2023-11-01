@@ -8,11 +8,12 @@ import client from '../../utils/httpClient';
 
 export interface CardsProps {
   clicked: number;
+  searchWord: string;
 }
 
 const mockCards = [
   {
-    name: '경영대학',
+    name: '경영대학 경영학과',
     eng: 'Business School',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 42,
@@ -121,7 +122,7 @@ const mockCards = [
   },
 ];
 
-const Cards = ({ clicked }: CardsProps) => {
+const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
@@ -162,11 +163,18 @@ const Cards = ({ clicked }: CardsProps) => {
     fetch();
   });
 
-  const filteredCards =
-    clicked === 4
-      ? cards.sort((a, b) => a.name.localeCompare(b.name))
-      : cards.filter((card) => card.filter.includes(mockHashes[clicked]));
-  const opaCards = clicked === 4 ? [] : cards.filter((card) => !card.filter.includes(mockHashes[clicked]));
+  const filteredCards = cards
+    .filter((card) => {
+      if (clicked !== 4 && !card.filter.includes(mockHashes[clicked])) return false; // filter based on clicked hashtag
+      if (searchWord && !card.name.toLowerCase().includes(searchWord.toLowerCase())) return false; // filter based on search word
+      return true;
+    })
+    .sort((a, b) => a.name.localeCompare(b.name)); // always sort alphabetically
+
+  const filteredSet = new Set(filteredCards.map((card) => card.name));
+
+  const opaCards = cards.filter((card) => !filteredSet.has(card.name));
+
   return (
     <Container>
       <Sort>
@@ -178,7 +186,7 @@ const Cards = ({ clicked }: CardsProps) => {
           <Card {...card} />
         ))}
       </FlexContainer>
-      <FlexContainer>
+      <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '50px' }}>
         {opaCards.map((card) => (
           <div style={{ opacity: 0.5 }}>
             <Card {...card} />
@@ -196,11 +204,13 @@ const FlexContainer = styled.div`
   width: 100%;
   max-width: 1382px;
   margin-top: 25px;
-
   flex-wrap: wrap;
 `;
 const Container = styled.div`
-  height: 2500px;
+  position: relative;
+  z-index: 0;
+  //height: 2500px;
+  padding-bottom: 230px;
   width: 100%;
   max-width: 1920px;
   background-color: #fff;
