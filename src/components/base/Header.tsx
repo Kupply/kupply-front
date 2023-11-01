@@ -212,7 +212,6 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
             localStorage.setItem('userProfileLink', userInfo.profileLink);
             localStorage.setItem('name', userInfo.name);
             localStorage.setItem('nickname', userInfo.nickname);
-            localStorage.setItem('phoneNumber', userInfo.phoneNumber);
             localStorage.setItem('studentId', userInfo.studentId);
             localStorage.setItem('firstMajor', userInfo.firstMajor);
             localStorage.setItem('role', userInfo.role);

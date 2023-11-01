@@ -301,7 +301,7 @@ const ArchiveDetailPage = () => {
           </svg>
           <SelectionInfoContent>
             <Text>합격자 수</Text>
-            <SelectionInfoValue>{enoughData ? lineData.length : 0}명</SelectionInfoValue>
+            <SelectionInfoValue>{enoughData ? numOfPassed : 0}명</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
       </SelectionInfoWrapper>
