@@ -278,7 +278,16 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     navigate('/archive');
   };
   const handleMenu2Click = () => {
-    navigate('/myboard');
+    if (logined) {
+      navigate('/myboard');
+    } // 로그인 상태
+    else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
+      // 미로그인 상태
+    }
   };
   const handleMenu3Click = () => {
     navigate('/landing');

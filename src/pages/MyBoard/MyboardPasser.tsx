@@ -33,7 +33,7 @@ const MyboardPasserPageVer = () => {
     hopeSemester: '2023-2',
   });
   return (
-    <MobilePageWrapper style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '276px' }}>
+    <MobilePageWrapper style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '150px' }}>
       <CharacterImage src={`design_image/character/Iam쏘리에요.png`} alt="Sorry icon" />
       <Typography
         size="title2"
@@ -44,7 +44,7 @@ const MyboardPasserPageVer = () => {
           marginTop: '48.09px',
         }}
       >
-        {userData.userNickname}님은 이중전공 합격자입니다!
+        {userData.userNickname}님은 이중전공 합격자입니다.
       </Typography>
       <Typography
         size="largeText"
@@ -57,9 +57,9 @@ const MyboardPasserPageVer = () => {
           marginTop: '14px',
         }}
       >
-        더 안정적인 서비스를 위해서 서비스를 개발 중에 있습니다.
+        이중전공 합격자를 위한 페이지는 현재 개발중에 있습니다.
         <br />
-        합격자를 위한 마이페이지로 빠른 시일 내 만나요!
+        빠른 시일 내 만나요 !
       </Typography>
     </MobilePageWrapper>
   );
