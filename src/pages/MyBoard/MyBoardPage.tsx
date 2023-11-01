@@ -210,8 +210,8 @@ export default function MyBoardPage() {
     userRole: 'candidate',
     firstMajor: '수학과',
     studentId: '2020220037',
-    hopeMajor1: '경영학과',
-    hopeMajor2: '미디어학부',
+    hopeMajor1: '컴퓨터학과',
+    hopeMajor2: '식품자원경제학과',
     curGPA: 4.2,
     hopeSemester: '2023-2',
   });
@@ -451,6 +451,17 @@ export default function MyBoardPage() {
     getCurData();
   }, []);
 
+  function NicknameDynamicSize({ text }: { text: string }) {
+    let textSize = '40px';
+
+    if (text.length <= 4) {
+      textSize = '40px';
+    } else if (text.length <= 7) {
+      textSize = '28px';
+    }
+    return <NickNameText textSize={textSize}>{text}</NickNameText>;
+  }
+
   return (
     <>
       <Wrapper>
@@ -507,13 +518,8 @@ export default function MyBoardPage() {
                   alt="profile"
                 />
               </CharacterImageBox>
-              <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '128.01px' }}>
-                <Typography
-                  size="heading2"
-                  style={{ color: 'var(--Main-Black, #141414)', marginTop: '20px', lineHeight: '125%' }}
-                >
-                  {userData.userName}
-                </Typography>
+              <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '128.01px', marginTop: '20px' }}>
+                <NicknameDynamicSize text={userData.userNickname} />
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Typography
                     size="bodyText"
@@ -859,11 +865,20 @@ export default function MyBoardPage() {
             <>
               <div style={{ marginLeft: '551px' }}>
                 <BigMajorSymbolBox style={{ marginTop: '32px' }}>
-                  <BoxTitleText style={{ marginLeft: '136px' }}>1지망 관심전공</BoxTitleText>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                  <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
+                    1지망 관심전공
+                  </Typography>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="392"
+                    height="2"
+                    viewBox="0 0 392 2"
+                    fill="none"
+                    style={{ position: 'absolute', top: '72px' }}
+                  >
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
-                  <div style={{ marginTop: '56px' }}>
+                  <div style={{ position: 'absolute', top: '128px', left: '55px' }}>
                     <div
                       style={{
                         width: '184px',
@@ -890,17 +905,21 @@ export default function MyBoardPage() {
                     >
                       {userData.hopeMajor1}
                     </Typography>
-                    <Typography
-                      size="largeText"
-                      style={{
-                        fontWeight: '500',
-                        opacity: '0.8',
-                        marginTop: '0px',
-                        textAlign: 'center',
-                      }}
-                    >
-                      {getTextByTitle(userData.hopeMajor1)}
-                    </Typography>
+                    <div style={{ display: 'flex' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{
+                          opacity: '0.8',
+                          marginTop: '0px',
+                          textAlign: 'center',
+                          lineHeight: '133.333%',
+                          justifyContent: 'center',
+                          width: '287px',
+                        }}
+                      >
+                        {getTextByTitle(userData.hopeMajor1)}
+                      </Typography>
+                    </div>
                   </div>
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
@@ -1047,7 +1066,7 @@ export default function MyBoardPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '41px' }}>
+                    <TextBox>
                       <Typography
                         size="bodyText"
                         style={{
@@ -1055,6 +1074,7 @@ export default function MyBoardPage() {
                           fontWeight: '600',
                           lineHeight: '90%',
                           marginLeft: '36px',
+                          maxWidth: '350px',
                         }}
                       >
                         {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
@@ -1066,7 +1086,7 @@ export default function MyBoardPage() {
                         height="60"
                         viewBox="0 0 60 60"
                         fill="none"
-                        style={{ marginLeft: '6px' }}
+                        style={{ marginLeft: '-1px' }}
                       >
                         <path
                           d="M26 37L34 30"
@@ -1083,7 +1103,7 @@ export default function MyBoardPage() {
                           stroke-linejoin="round"
                         />
                       </svg>
-                    </div>
+                    </TextBox>
                     <div style={{ display: 'flex', marginTop: '50px' }}>
                       <div
                         style={{
@@ -1266,11 +1286,20 @@ export default function MyBoardPage() {
             <>
               <div style={{ marginLeft: '551px' }}>
                 <BigMajorSymbolBox style={{ marginTop: '32px' }}>
-                  <BoxTitleText style={{ marginLeft: '136px' }}>2지망 관심전공</BoxTitleText>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
+                  <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
+                    2지망 관심전공
+                  </Typography>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="392"
+                    height="2"
+                    viewBox="0 0 392 2"
+                    fill="none"
+                    style={{ position: 'absolute', top: '72px' }}
+                  >
                     <path d="M0 1L392 1" stroke="#DFDFDF" />
                   </svg>
-                  <div style={{ marginTop: '56px' }}>
+                  <div style={{ position: 'absolute', top: '128px', left: '55px' }}>
                     <div
                       style={{
                         width: '184px',
@@ -1297,17 +1326,21 @@ export default function MyBoardPage() {
                     >
                       {userData.hopeMajor2}
                     </Typography>
-                    <Typography
-                      size="largeText"
-                      style={{
-                        fontWeight: '500',
-                        opacity: '0.8',
-                        marginTop: '0px',
-                        textAlign: 'center',
-                      }}
-                    >
-                      {getTextByTitle(userData.hopeMajor2)}
-                    </Typography>
+                    <div style={{ display: 'flex' }}>
+                      <Typography
+                        size="mediumText"
+                        style={{
+                          opacity: '0.8',
+                          marginTop: '0px',
+                          textAlign: 'center',
+                          lineHeight: '133.333%',
+                          justifyContent: 'center',
+                          width: '287px',
+                        }}
+                      >
+                        {getTextByTitle(userData.hopeMajor2)}
+                      </Typography>
+                    </div>
                   </div>
                 </BigMajorSymbolBox>
                 <div style={{ marginTop: '-571px', marginLeft: '424px' }}>
@@ -1454,7 +1487,7 @@ export default function MyBoardPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="392" height="2" viewBox="0 0 392 2" fill="none">
                       <path d="M0 1L392 1" stroke="#DFDFDF" />
                     </svg>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '41px' }}>
+                    <TextBox>
                       <Typography
                         size="bodyText"
                         style={{
@@ -1473,7 +1506,7 @@ export default function MyBoardPage() {
                         height="60"
                         viewBox="0 0 60 60"
                         fill="none"
-                        style={{ marginLeft: '6px' }}
+                        style={{ marginLeft: '-1px' }}
                       >
                         <path
                           d="M26 37L34 30"
@@ -1490,7 +1523,7 @@ export default function MyBoardPage() {
                           stroke-linejoin="round"
                         />
                       </svg>
-                    </div>
+                    </TextBox>
                     <div style={{ display: 'flex', marginTop: '50px' }}>
                       <div
                         style={{
@@ -1792,6 +1825,8 @@ const BigMajorSymbolBox = styled.div`
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   backdrop-filter: blur(12px);
   z-index: 1;
+  display: flex;
+  justify-content: center;
 `;
 
 const CompetitionRateBox = styled.div`
@@ -1878,6 +1913,14 @@ const Graph_2Box = styled.div`
   z-index: 1;
 `;
 
+const TextBox = styled.div`
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  margin-left: 0px;
+  margin-top: 41px;
+`;
+
 // ----------------ImageBox----------------
 const CharacterImageBox = styled.div`
   margin-left: 128.01px;
@@ -1953,4 +1996,13 @@ const BoxTitleText = styled.div`
   margin-top: 26px;
   margin-left: 36px;
   margin-bottom: 14px;
+`;
+
+const NickNameText = styled.div<{ textSize: string }>`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: ${(props) => props.textSize};
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
 `;
