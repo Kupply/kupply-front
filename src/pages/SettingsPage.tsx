@@ -323,11 +323,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   );
   const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
 
-  const [phoneNumber, setPhoneNumber] = useState<string>(localStorage.getItem('phoneNumber') || '');
-  const [phoneNumberState, setPhoneNumberState] = useState<StateOptions>(
-    localStorage.getItem('phoneNumber') ? 'filled' : 'default',
-  );
-
   const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
   const [emailState, setEmailState] = useState<StateOptions>('filled');
   const [pwd, setPwd] = useState<string>('');
@@ -349,7 +344,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         localStorage.setItem('userProfileLink', userInfo.profileLink);
         localStorage.setItem('name', userInfo.name);
         localStorage.setItem('nickname', userInfo.nickname);
-        localStorage.setItem('phoneNumber', userInfo.phoneNumber);
         localStorage.setItem('studentId', userInfo.studentId);
         localStorage.setItem('firstMajor', userInfo.firstMajor);
         localStorage.setItem('role', userInfo.role);
@@ -437,19 +431,19 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   }, [stdID, stdIDState]);
 
   /* 전화번호 유효성 검사 + '-' 넣은 형식으로 바꾸기*/
-  useEffect(() => {
-    const phoneCheck = /^010\d{8}$/;
-    const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
-    if (phoneNumberState === 'filled') {
-      if (!phoneCheck.test(phoneNumber) && !phoneFormatCheck.test(phoneNumber)) setPhoneNumberState('error');
-      else {
-        const newphoneNumber = phoneNumber;
-        const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+  // useEffect(() => {
+  //   const phoneCheck = /^010\d{8}$/;
+  //   const phoneFormatCheck = /^010-\d{4}-\d{4}$/;
+  //   if (phoneNumberState === 'filled') {
+  //     if (!phoneCheck.test(phoneNumber) && !phoneFormatCheck.test(phoneNumber)) setPhoneNumberState('error');
+  //     else {
+  //       const newphoneNumber = phoneNumber;
+  //       const newPhone = newphoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 
-        setPhoneNumber(newPhone);
-      }
-    }
-  }, [phoneNumber, phoneNumberState]);
+  //       setPhoneNumber(newPhone);
+  //     }
+  //   }
+  // }, [phoneNumber, phoneNumberState]);
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
 
@@ -465,7 +459,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newName: name,
       newStudentId: stdID,
       newFirstMajor: firstMajor,
-      newPhoneNumber: phoneNumber,
     };
     try {
       // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
