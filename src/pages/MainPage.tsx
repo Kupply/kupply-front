@@ -104,7 +104,7 @@ function MainPage() {
       //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
       const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
       try {
-        //await axios.post(url, { email: ID });
+        // await axios.post(url, { email: ID });
         // await client.post('/auth/sendEmail', { email: ID });
 
         //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
@@ -122,25 +122,16 @@ function MainPage() {
     }
   };
 
+  const goToMyBoard = () => {
+    navigate('/myboard');
+  };
+
   // 준혁 선생님 마무리 부탁 - 로그인 상태 따라 다르게 렌더링
   return (
     <Wrapper>
       <Carousel />
-
-      <JoinMainContainer>
-        <ContainerMainText>2023학년도 2학기 모의지원을 통해 당신의 합격 가능성을 확인하세요!</ContainerMainText>
-        <ContainerSubText>쿠플라이 모의지원으로 나의 순위 및 실시간 지원자 현황을 확인해보세요.</ContainerSubText>
-        <MockApplicationButton style={{ width: '700px', height: '200px', fontSize: '50px' }}></MockApplicationButton>
-      </JoinMainContainer>
-    </Wrapper>
-  );
-}
-
-export default MainPage;
-
-/*
-
-<JoinMainContainer>
+      {!isLogined ? (
+        <JoinMainContainer>
           <ContainerMainText>당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
           <ContainerSubText>
             간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
@@ -159,7 +150,6 @@ export default MainPage;
                 }
               }}
             />
-
             <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <img
@@ -171,5 +161,24 @@ export default MainPage;
             </LabelButton>
           </JoinWrapper>
         </JoinMainContainer>
+      ) : (
+        <JoinMainContainer>
+          <ContainerMainText>2023학년도 2학기 모의지원을 통해 당신의 합격 가능성을 확인하세요!</ContainerMainText>
+          <ContainerSubText>쿠플라이 모의지원으로 나의 순위 및 실시간 지원자 현황을 확인해보세요.</ContainerSubText>
+          <MockApplicationButton
+            style={{ width: '700px', height: '200px', fontSize: '50px' }}
+            onClick={goToMyBoard}
+          ></MockApplicationButton>
+        </JoinMainContainer>
+      )}
+    </Wrapper>
+  );
+}
+
+export default MainPage;
+
+/*
+
+
 
  */
