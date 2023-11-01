@@ -114,9 +114,9 @@ const Card = ({ name, eng, filter, TO, pass, avg, min, src, semester, titleSrc }
           {svgHover && (
             <>
               <HoverInfo>
-                쿠플라이에서 수집된 데이터 값으로,
+                쿠플라이에서 모의지원을 마친 지원자들 중 합격자 수로,
                 <br />
-                실제 합격자 수와 차이가 있을 수 있습니다.
+                실제 합격자 수와는 차이가 있을 수 있습니다.
               </HoverInfo>
               <SvgNotch>
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
