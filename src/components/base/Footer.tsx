@@ -185,7 +185,13 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
             >
               <MenuButton style={{ color: '#A8A8A8', width: 'auto' }}>버그리포트</MenuButton>
             </a>
-            <MenuButton style={{ color: '#A8A8A8', width: 'auto' }}>개발팀</MenuButton>
+            <a
+              href="https://www.instagram.com/kupply_ku/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA=="
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MenuButton style={{ color: '#A8A8A8', width: 'auto' }}>인스타그램</MenuButton>
+            </a>
           </MenuWrapper>
         </ContentsWrapper>
         <ContentsWrapper style={{ gap: '8px' }}>
