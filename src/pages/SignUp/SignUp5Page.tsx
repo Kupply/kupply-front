@@ -1004,47 +1004,6 @@ function SignUp5Page() {
               </Typography>
             </ScrollBarSmall>
           </TextOutBox>
-
-          <ButtonsTextWrapper>
-            <CustomCheckButton
-              isChecked={individualChecks.third}
-              onChange={(newCheckedValue) =>
-                setIndividualChecks((prev) => ({
-                  ...prev,
-                  third: newCheckedValue,
-                }))
-              }
-            />
-            <Typography
-              size="mediumText"
-              style={{
-                fontWeight: '600',
-                marginBottom: '-5px',
-                justifyContent: 'center',
-              }}
-            >
-              커뮤니티 이용수칙 확인 (필수)
-              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
-            </Typography>
-          </ButtonsTextWrapper>
-
-          <TextOutBox>
-            <ScrollBarSmall isChecked={scrollActive}>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
-                「개인정보보호법」 등 관련 법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의
-                개인정보 수집 및 활용에 대한 개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보
-                제공자가 동의한 내용 외의 다른 목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는
-                개인정보 관리 책임자를 통해 열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교
-                소프트웨어 개발/연구 학회 DevKor 의 아래 항목에 명시된 범위에서만 활용됩니다. 「개인정보보호법」 등 관련
-                법규에 의거하여 고려대학교 소프트웨어 개발/연구 학회 DevKor 는 응답자의 개인정보 수집 및 활용에 대한
-                개인정보 수집/이용 동의서를 받고 있습니다. 제공된 개인정보는 개인정보 제공자가 동의한 내용 외의 다른
-                목적으로는 활용되지 않으며, 해당 개인정보의 이용을 거부하고자 할 때에는 개인정보 관리 책임자를 통해
-                열람, 정정, 삭제를 요구할 수 있습니다. 제공된 개인 정보는 고려대학교 소프트웨어 개발/연구 학회 DevKor 의
-                아래 항목에 명시된 범위에서만 활용됩니다.
-              </Typography>
-            </ScrollBarSmall>
-          </TextOutBox>
-
           <ButtonsTextWrapper>
             <CustomCheckButton
               isChecked={individualChecks.fourth}
