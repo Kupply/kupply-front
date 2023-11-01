@@ -8,6 +8,7 @@ import NextButton from '../assets/buttons/NextButton';
 import LoginModal from './LoginModal';
 import AlertMessage from '../assets/AlertMessage';
 import client from '../utils/httpClient';
+import Login2JoinModal from './Login2JoinModal';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -136,9 +137,14 @@ export interface LoginPageProps {
 
 function LoginPage(props: LoginPageProps) {
   const { setLogin } = props;
+  const [isOpenAlert, setOpenAlert] = useState<boolean>(false);
+
   const navigate = useNavigate();
   const handleLink2Click = () => {
-    navigate('/join');
+    // 안내 모달 추가
+    setOpenAlert(true);
+    console.log(isOpenAlert); // 일단 보류
+    navigate('/');
   };
 
   const [ID, setID] = useState<string>('');
@@ -181,6 +187,9 @@ function LoginPage(props: LoginPageProps) {
 
   return (
     <Wrapper>
+      {isOpenAlert ? (
+        <Login2JoinModal isOpenAlert={isOpenAlert} setOpenAlert={setOpenAlert} onClickModal={handleLink2Click} />
+      ) : null}
       <LoginBox>
         <LogoImage src="../../design_image/Kupply_ver1.png" style={{ marginTop: '49px' }} />
         <Typography size="mediumText">고려대학교 메일로 이용하는 쿠플라이의 모든 서비스</Typography>
