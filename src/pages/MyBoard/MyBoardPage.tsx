@@ -824,7 +824,7 @@ export default function MyBoardPage() {
                 </svg>
                 <Typography
                   size="bodyText"
-                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400', marginLeft: '9.97px' }}
+                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
                 >
                   희망 진입학기
                 </Typography>

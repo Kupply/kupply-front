@@ -185,7 +185,7 @@ const colorMapping = {
 const ButtonWrapper = styled.button<{
   buttonType: 'primary' | 'secondary';
 }>`
-  margin-top: 103px;
+  margin-top: 60px;
   transition: 0.25s ease-in-out;
   justify-content: center;
   align-items: center;
@@ -819,7 +819,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             setState={setNicknameState}
             setValue={setNickname}
           ></TextFieldBox>
-          <div style={{ marginTop: 224 }}>
+          <div>
             <ButtonWrapper
               buttonType="primary"
               onClick={() => {
@@ -910,7 +910,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               isEntered={true}
             ></VerificationBox>
           </VerifiBoxWrapper>
-          <div style={{ marginTop: 77 }}>
+          <div>
             <ButtonWrapper
               buttonType="primary"
               onClick={() => {
@@ -966,7 +966,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             setValue={setPwdConfirm}
             placeholder="비밀번호 확인"
           ></TextFieldBox>
-          <div style={{ marginTop: 155 }}>
+          <div>
             <ButtonWrapper
               buttonType="primary"
               onClick={() => {
