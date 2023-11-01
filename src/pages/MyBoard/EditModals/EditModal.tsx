@@ -327,7 +327,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 0
+                    currentModal === 0
                       ? '../../design_image/my_board/fi_user_active.svg'
                       : '../../design_image/my_board/fi_user.svg'
                   }
@@ -346,7 +346,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 1
+                    currentModal === 1
                       ? '../../design_image/my_board/u_university_active.svg'
                       : '../../design_image/my_board/u_university.svg'
                   }
@@ -365,7 +365,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 2
+                    currentModal === 2
                       ? '../../design_image/my_board/fi_calendar_active.svg'
                       : '../../design_image/my_board/fi_calendar.svg'
                   }
@@ -384,7 +384,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 3
+                    currentModal === 3
                       ? '../../design_image/my_board/fi_trello_active.svg'
                       : '../../design_image/my_board/fi_trello.svg'
                   }
@@ -674,7 +674,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20; // Modal.tsx 와 상이한 stacking context
+  z-index: 1005;
 `;
 
 const HeaderWrapper = styled.div`

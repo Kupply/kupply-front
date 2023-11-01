@@ -536,7 +536,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20; // Modal.tsx 와 상이한 stacking context
+  z-index: 1005;
 `;
 
 const CloseButton = styled.button`
