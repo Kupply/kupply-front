@@ -87,22 +87,32 @@ const LandingPage = () => {
     }, delay);
   }, []);
 
+  const isWithinTimeRange = () => {
+    const now = new Date();
+    const startTime = new Date('2023-11-08T10:00:00');
+    const endTime = new Date('2023-11-10T17:00:00');
+
+    return now >= startTime && now <= endTime;
+  };
+
   return (
     <Wrapper>
       <HeadImageWrapper translateY={scrollY}>
         <img src="../../design_image/landingImage.png" style={{ width: '1248px', height: '880px' }}></img>
         <HeadTextWrapper>
           <Typography size="mediumText" color="#D85888">
-            실시간 지원률
+            {isWithinTimeRange() ? '실시간 지원률' : '실시간 지원률'}
           </Typography>
           <Typography size="heading1" style={{ marginTop: '14px' }}>
-            쿠플라이 실시간 이중전공 모의지원 현황
+            {isWithinTimeRange() ? '쿠플라이 실시간 이중전공 모의지원 현황' : '현재 지원 가능한 시기가 아닙니다'}
           </Typography>
           <Typography
             color="rgba(20, 20, 20, 0.60)"
             style={{ marginTop: '12px', fontSize: '30px', marginBottom: '25px' }}
           >
-            실시간으로 업로드 되는 이중전공 지원 현황을 살펴보세요!
+            {isWithinTimeRange()
+              ? '실시간으로 업로드 되는 이중전공 지원 현황을 살펴보세요!'
+              : '쿠플라이가 제공하는 다른 서비스를 살펴보세요!'}
           </Typography>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +143,7 @@ const LandingPage = () => {
         </HeadTextWrapper>
       </HeadImageWrapper>
       <div ref={tableContent} style={{ marginBottom: '120px' }}></div>
-      <RankingTable tableData={tableData} />
+      {isWithinTimeRange() && <RankingTable tableData={tableData} />}
       <PassedDataCard cardData={cardData} />
       <Preview />
       <FAQ />
