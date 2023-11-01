@@ -9,11 +9,12 @@ import MailButton from '../../assets/buttons/header/MailButton';
 import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
+import client from '../../utils/httpClient';
 
 const Wrapper = styled.div`
   align-items: center;
   width: 100vw;
-  max-width: 1920px;
+  // max-width: 1920px;
   //max-width: 1920px;
   height: 80px; // 7.7%; // 96px; (96/1248 = 7.7)
   position: fixed;
@@ -189,43 +190,82 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     const getUserInfo = async () => {
       try {
         if (logined) {
-          const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
-          const userInfo = APIresponse.data.data.user;
+          await client.get('/user/getMe').then((res) => {
+            const userInfo = res.data.data.user;
 
-          setUserData({
-            ...userData,
-            userName: userInfo.name,
-            userNickname: userInfo.nickname,
-            userProfilePic: userInfo.profilePic,
-            userProfileLink: userInfo.profileLink,
-            userRole: userInfo.role,
-            firstMajor: userInfo.firstMajor,
-            studentId: userInfo.studentId,
-            hopeMajor1: userInfo.hopeMajor1,
-            hopeMajor2: userInfo.hopeMajor2,
-            curGPA: userInfo.curGPA,
-            hopeSemester: userInfo.hopeSemester,
+            setUserData({
+              ...userData,
+              userName: userInfo.name,
+              userNickname: userInfo.nickname,
+              userProfilePic: userInfo.profilePic,
+              userProfileLink: userInfo.profileLink,
+              userRole: userInfo.role,
+              firstMajor: userInfo.firstMajor,
+              studentId: userInfo.studentId,
+              hopeMajor1: userInfo.hopeMajor1,
+              hopeMajor2: userInfo.hopeMajor2,
+              curGPA: userInfo.curGPA,
+              hopeSemester: userInfo.hopeSemester,
+            });
+
+            localStorage.setItem('userProfilePic', userInfo.profilePic);
+            localStorage.setItem('userProfileLink', userInfo.profileLink);
+            localStorage.setItem('name', userInfo.name);
+            localStorage.setItem('nickname', userInfo.nickname);
+            localStorage.setItem('phoneNumber', userInfo.phoneNumber);
+            localStorage.setItem('studentId', userInfo.studentId);
+            localStorage.setItem('firstMajor', userInfo.firstMajor);
+            localStorage.setItem('role', userInfo.role);
+            if (userInfo.role === 'candidate') {
+              localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+              localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+              localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+              localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+              localStorage.setItem('isApplied', userInfo.isApplied);
+            } else {
+              localStorage.setItem('secondMajor', userInfo.secondMajor);
+              localStorage.setItem('passSemester', userInfo.passSemester);
+              localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
+            }
           });
 
-          localStorage.setItem('userProfilePic', userInfo.profilePic);
-          localStorage.setItem('userProfileLink', userInfo.profileLink);
-          localStorage.setItem('name', userInfo.name);
-          localStorage.setItem('nickname', userInfo.nickname);
-          localStorage.setItem('phoneNumber', userInfo.phoneNumber);
-          localStorage.setItem('studentId', userInfo.studentId);
-          localStorage.setItem('firstMajor', userInfo.firstMajor);
-          localStorage.setItem('role', userInfo.role);
-          if (userInfo.role === 'candidate') {
-            localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
-            localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
-            localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
-            localStorage.setItem('hopeSemester', userInfo.hopeSemester);
-            localStorage.setItem('isApplied', userInfo.isApplied);
-          } else {
-            localStorage.setItem('secondMajor', userInfo.secondMajor);
-            localStorage.setItem('passSemester', userInfo.passSemester);
-            localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
-          }
+          // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+          // const userInfo = APIresponse.data.data.user;
+
+          // setUserData({
+          //   ...userData,
+          //   userName: userInfo.name,
+          //   userNickname: userInfo.nickname,
+          //   userProfilePic: userInfo.profilePic,
+          //   userProfileLink: userInfo.profileLink,
+          //   userRole: userInfo.role,
+          //   firstMajor: userInfo.firstMajor,
+          //   studentId: userInfo.studentId,
+          //   hopeMajor1: userInfo.hopeMajor1,
+          //   hopeMajor2: userInfo.hopeMajor2,
+          //   curGPA: userInfo.curGPA,
+          //   hopeSemester: userInfo.hopeSemester,
+          // });
+
+          // localStorage.setItem('userProfilePic', userInfo.profilePic);
+          // localStorage.setItem('userProfileLink', userInfo.profileLink);
+          // localStorage.setItem('name', userInfo.name);
+          // localStorage.setItem('nickname', userInfo.nickname);
+          // localStorage.setItem('phoneNumber', userInfo.phoneNumber);
+          // localStorage.setItem('studentId', userInfo.studentId);
+          // localStorage.setItem('firstMajor', userInfo.firstMajor);
+          // localStorage.setItem('role', userInfo.role);
+          // if (userInfo.role === 'candidate') {
+          //   localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+          //   localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+          //   localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+          //   localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+          //   localStorage.setItem('isApplied', userInfo.isApplied);
+          // } else {
+          //   localStorage.setItem('secondMajor', userInfo.secondMajor);
+          //   localStorage.setItem('passSemester', userInfo.passSemester);
+          //   localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
+          // }
         }
       } catch (err) {
         console.log(err);
@@ -256,13 +296,16 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     navigate('/login');
   };
 
-  const [, , removeCookie] = useCookies(['accessToken']);
+  const [, , removeCookie] = useCookies(['accessToken', 'accessTokenExpire', 'refreshToken']);
 
   const onLogoutClick = async () => {
-    const url = 'http://localhost:8080/auth/logout';
+    // const url = 'http://localhost:8080/auth/logout';
     try {
-      await axios.get(url);
+      // await axios.get(url);
+      await client.get('/auth/logout');
       removeCookie('accessToken', { path: '/' });
+      removeCookie('accessTokenExpire', { path: '/' });
+      removeCookie('refreshToken', { path: '/' });
       window.localStorage.clear();
       window.sessionStorage.clear();
       setLogin(false);

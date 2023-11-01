@@ -13,6 +13,7 @@ import SignUpSmall from './modals/SignUpSmall';
 import SignUpLarge1 from './modals/SignUpLarge1';
 import SignUpLarge2 from './modals/SignUpLarge2';
 import SignUpLarge3 from './modals/SignUpLarge3';
+import client from '../../utils/httpClient';
 
 const Wrapper = styled.div`
   display: flex;
@@ -125,10 +126,12 @@ const TextButton = styled.button`
 export const sendEmail = async (email: string) => {
   const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
   try {
-    await axios.post(url, { email: email });
+    // await axios.post(url, { email: email });
+    await client.post('/auth/sendEmail', { email: email });
   } catch (e) {
     //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
     alert(e);
+    console.log(e);
   }
 };
 
@@ -147,7 +150,17 @@ export default function SignUp1Page() {
   const [num4, setNum4] = useState<string>('');
   const [num5, setNum5] = useState<string>('');
   const [num6, setNum6] = useState<string>('');
+  const [isEntered, setIsEntered] = useState<boolean>(false);
   const [nextButton, setNextButton] = useState<boolean>(false);
+
+  const setBlank = () => {
+    setNum1('');
+    setNum2('');
+    setNum3('');
+    setNum4('');
+    setNum5('');
+    setNum6('');
+  };
 
   // verificationBox 관련
   useEffect(() => {
@@ -163,13 +176,18 @@ export default function SignUp1Page() {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   // modal 2 - 3 email value 전달 관련
   const [email, setEmail] = useState<string>(sessionStorage.getItem('email') || '');
-  const [emailState, setEmailState] = useState<StateOptions>('default');
+  const [emailState, setEmailState] = useState<StateOptions>(sessionStorage.getItem('email') ? 'filled' : 'default');
   //sendNum이 바뀌거나 isOpenModal이 0, 3이 되면 timer 초기화
   const [sendNum, setSendNum] = useState<number>(0);
 
   // emailID를 받지 않은 상태라면 main으로 보내고, 아니라면 email을 받은 값으로 설정한다.
   useEffect(() => {
     if (!sessionStorage.getItem('email')) navigate('/');
+    async function sendFirst(email: string) {
+      await sendEmail(email);
+    }
+
+    sendFirst(email);
   }, []);
 
   // small modal 관련
@@ -182,6 +200,7 @@ export default function SignUp1Page() {
       setSendNum(sendNum + 1);
       await sendEmail(email);
     }
+    setBlank();
   }, [isOpenModal]);
   // large modal 관련
   const onClickToggleLargeModal = useCallback(() => {
@@ -196,6 +215,7 @@ export default function SignUp1Page() {
     const url = 'http://localhost:8080/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     try {
       await axios.post(url, { email: email, code: entireCode });
+      // await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
 
       navigate('/signup2');
     } catch (err: any) {
@@ -233,6 +253,7 @@ export default function SignUp1Page() {
             return (
               <SignUpLarge1
                 email={email}
+                setBlank={setBlank}
                 currentModal={currentModal}
                 isOpenModal={isOpenModal}
                 setCurrentModal={setCurrentModal}
@@ -252,6 +273,7 @@ export default function SignUp1Page() {
                 emailState={emailState}
                 setEmail={setEmail}
                 setEmailState={setEmailState}
+                setBlank={setBlank}
               />
             );
 

@@ -11,6 +11,7 @@ import VerificationBox from '../assets/VerificationBox';
 import Typography from '../assets/Typography';
 import { ScrollBarSmall, ScrollBarLarge } from '../assets/ScrollButton';
 import LabelButton from '../assets/buttons/LabelButton';
+import client from '../utils/httpClient';
 
 const Sidebar = styled.div`
   width: 521px;
@@ -185,7 +186,7 @@ const colorMapping = {
 const ButtonWrapper = styled.button<{
   buttonType: 'primary' | 'secondary';
 }>`
-  margin-top: 103px;
+  margin-top: 60px;
   transition: 0.25s ease-in-out;
   justify-content: center;
   align-items: center;
@@ -340,10 +341,11 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
-        localStorage.setItem('  userProfilePic', userInfo.profilePic);
+        localStorage.setItem('userProfilePic', userInfo.profilePic);
         localStorage.setItem('userProfileLink', userInfo.profileLink);
         localStorage.setItem('name', userInfo.name);
         localStorage.setItem('nickname', userInfo.nickname);
@@ -466,7 +468,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newPhoneNumber: phoneNumber,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -478,7 +481,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newNickname: nickname,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -494,7 +498,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newHopeSemester: newHopeSemester,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -507,7 +512,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       newEmail: email,
     };
     try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -739,7 +745,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             value={firstMajor}
             setValue={setFirstMajor}
           ></DropDown>
-          <TextFieldTitle>
+          {/* <TextFieldTitle>
             <strong>전화번호</strong> 수정하기 <Optional>(선택)</Optional>
           </TextFieldTitle>
           <TextFieldBox
@@ -751,7 +757,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             setState={setPhoneNumberState}
             setValue={setPhoneNumber}
             placeholder="마케팅 및 새로운 수식 수신을 위한 휴대폰 11자리"
-          ></TextFieldBox>
+          ></TextFieldBox> */}
           <ButtonWrapper
             buttonType="primary"
             onClick={() => {
@@ -819,7 +825,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             setState={setNicknameState}
             setValue={setNickname}
           ></TextFieldBox>
-          <div style={{ marginTop: 224 }}>
+          <div>
             <ButtonWrapper
               buttonType="primary"
               onClick={() => {
@@ -910,7 +916,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               isEntered={true}
             ></VerificationBox>
           </VerifiBoxWrapper>
-          <div style={{ marginTop: 77 }}>
+          <div>
             <ButtonWrapper
               buttonType="primary"
               onClick={() => {
@@ -966,7 +972,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             setValue={setPwdConfirm}
             placeholder="비밀번호 확인"
           ></TextFieldBox>
-          <div style={{ marginTop: 155 }}>
+          <div>
             <ButtonWrapper
               buttonType="primary"
               onClick={() => {

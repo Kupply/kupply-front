@@ -346,7 +346,7 @@ export default function GpaLineChart(prop: GpaLineChartProps) {
       customTitle: {
         y: {
           display: true,
-          text: '지원자 수',
+          text: '합격자 수',
           offsetX: 13,
         },
         x: {
@@ -404,7 +404,7 @@ export default function GpaLineChart(prop: GpaLineChartProps) {
                   label = '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' + gpa;
                 }
               } else {
-                label = '지원자: ' + context.parsed.y + '명';
+                label = '합격자: ' + context.parsed.y + '명';
               }
             }
             return label;

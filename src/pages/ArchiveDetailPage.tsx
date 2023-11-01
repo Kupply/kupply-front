@@ -7,6 +7,7 @@ import SegmentedPicker from '../assets/SegmentedPicker';
 import GpaLineChart, { Data, LineData } from '../assets/GpaLineChart';
 import { recruit } from '../common/recruiting';
 import { DBkeywords } from '../common/keyword';
+import client from '../utils/httpClient';
 
 type MajorOptions =
   | 'business'
@@ -126,7 +127,7 @@ const ArchiveDetailPage = () => {
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
-  const [competitionRate, setCompetitionRate] = useState<number>(0);
+  const [numOfPassed, setNumOfPassed] = useState<number>(0);
 
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
   const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
@@ -150,20 +151,21 @@ const ArchiveDetailPage = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
+        // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
+        const APIresponse = await client.get(`/pastData/${majorName}/all`);
         const data = APIresponse.data.pastData;
 
         if (data.passedData.passedGPACountArray.length > 0) {
           const selectionNum = recruit[majorKoreanName][semesterForAPI[activeIdx]] || 0;
-          let competitionRate = 0;
-          if (selectionNum > 0) {
-            competitionRate = data.overallData.numberOfData / selectionNum;
-          }
+          // let competitionRate = 0;
+          // if (selectionNum > 0) {
+          //   competitionRate = data.overallData.numberOfData / selectionNum;
+          // }
 
           setEnoughData(true);
           setNumOfApplication(data.overallData.numberOfData);
           setNumOfSelection(selectionNum);
-          setCompetitionRate(competitionRate);
+          setNumOfPassed(data.passedData.passedNumberOfData);
           setLineData(data.passedData.passedGPACountArray);
           setMeanGpa(data.passedData.passedMeanGPAData);
           setMedianGpa(data.passedData.passedMedianGPAData);
@@ -185,24 +187,27 @@ const ArchiveDetailPage = () => {
 
     try {
       const semester = semesterForAPI[idx];
-      const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
+      // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
+      const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
       const data = APIresponse.data.pastData;
 
       const selectionNum = recruit[majorKoreanName][semesterForAPI[idx]] || 0;
-      let competitionRate = 0;
-      if (selectionNum > 0) {
-        competitionRate = data.overallData.numberOfData / selectionNum;
-      }
+      // let competitionRate = 0;
+      // if (selectionNum > 0) {
+      //   competitionRate = data.overallData.numberOfData / selectionNum;
+      // }
 
       setEnoughData(true);
       setNumOfApplication(data.overallData.numberOfData);
       setNumOfSelection(selectionNum);
-      setCompetitionRate(competitionRate);
+      setNumOfPassed(data.passedData.passedNumberOfData);
       setLineData(data.passedData.passedGPACountArray);
       setMeanGpa(data.passedData.passedMeanGPAData);
       setMedianGpa(data.passedData.passedMedianGPAData);
       setModeGpa(data.passedData.passedModeGPAData);
       setMinGpa(data.passedData.passedMinimumGPAData);
+
+      console.log(data.passedData.passedMedianGPAData);
 
       if (data.passedData.passedGPACountArray.length > 0) {
         setEnoughData(true);
@@ -275,24 +280,28 @@ const ArchiveDetailPage = () => {
         </SelectionInfoDescriptionBox>
         <SelectionInfoContentsWrapper>
           <SelectionInfoContent>
-            <Text>선발인원</Text>
-            <SelectionInfoValue>{numOfSelection !== 0 ? `${numOfSelection} 명` : '집계불가'}</SelectionInfoValue>
+            <Text>{activeIdx === 0 ? '평균 선발인원' : '선발인원'}</Text>
+            <SelectionInfoValue>
+              {numOfSelection === 0
+                ? '집계불가'
+                : activeIdx === 0
+                ? `${Math.floor(numOfSelection / 6)} 명`
+                : `${numOfSelection} 명`}
+            </SelectionInfoValue>
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>지원자 수</Text>
-            {/* <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue> */}
-            <SelectionInfoValue>집계불가</SelectionInfoValue>
+            <Text>모의 지원자 수</Text>
+            <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue>
           </SelectionInfoContent>
           <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>경쟁률</Text>
-            {/* <SelectionInfoValue>{competitionRate}:1</SelectionInfoValue> */}
-            <SelectionInfoValue>집계불가</SelectionInfoValue>
+            <Text>합격자 수</Text>
+            <SelectionInfoValue>{enoughData ? lineData.length : 0}명</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
       </SelectionInfoWrapper>
@@ -401,27 +410,41 @@ const Wrapper = styled.div`
   width: 100vw;
   max-width: 1920px;
 
-  &::before,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 1000px;
+    filter: blur(75px);
+    opacity: 0.4;
+    background: radial-gradient(
+      51.7% 51.7% at 58.12% 41.5%,
+      rgba(216, 88, 136, 0.3) 0%,
+      rgba(255, 175, 189, 0.18) 100%
+    );
+    filter: blur(75px);
+    z-index: -2;
+    top: -100px;
+    left: -200px;
+  }
+
   &::after {
     content: '';
     position: absolute;
-    width: 90%;
-    height: 90%;
-    border-radius: 782px;
-    filter: blur(150px);
-    opacity: 0.7;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(232, 88, 136, 0.15) 0%, rgba(255, 175, 189, 0.05) 100%);
+    width: 1000px;
+    height: 1000px;
+    border-radius: 1000px;
+    filter: blur(75px);
+    opacity: 0.5;
+    background: radial-gradient(
+      67.64% 67.64% at 116.69% 26.92%,
+      rgba(216, 88, 136, 0.5) 0%,
+      rgba(255, 175, 189, 0.05) 100%
+    );
     z-index: -2;
-  }
-
-  &::before {
-    top: -5%;
-    left: -30%;
-  }
-
-  &::after {
-    bottom: -60%;
-    right: -40%;
+    top: 400px;
+    right: 150px;
   }
 `;
 

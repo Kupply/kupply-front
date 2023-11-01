@@ -7,6 +7,7 @@ import Typography from '../assets/Typography';
 import NextButton from '../assets/buttons/NextButton';
 import LoginModal from './LoginModal';
 import AlertMessage from '../assets/AlertMessage';
+import client from '../utils/httpClient';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -144,7 +145,7 @@ function LoginPage(props: LoginPageProps) {
   const [password, setPassword] = useState<string>('');
   const [isChecked, setIsChecked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [cookies, setCookies] = useCookies(['accessToken']);
+  const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken', 'accessTokenExpire']);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -161,13 +162,8 @@ function LoginPage(props: LoginPageProps) {
           isRememberOn: isChecked,
         })
         .then((res) => {
-          const expireDate = new Date();
-          expireDate.setHours(expireDate.getHours() + 1);
-
-          setCookies('accessToken', res.data.data.accessToken, {
-            path: '/',
-            expires: expireDate,
-          });
+          localStorage.setItem('accessToken', res.data.data.accessToken);
+          localStorage.setItem('refreshToken', res.data.data.refreshToken);
         });
       //로그인 상태를 유지하기 위해 localStorage에 로그인 여부와 ID를 저장 후 login 상태를 true로 바꾸고 메인 페이지로 보낸다.
       window.localStorage.setItem('isLogin', 'true');
@@ -176,7 +172,9 @@ function LoginPage(props: LoginPageProps) {
       navigate('/');
     } catch (err: any) {
       // 이후 수정 필요함.
-      alert(err.response.data.error.message);
+      if (err.response.data.error.message) {
+        alert(err.response.data.error.message);
+      }
     }
   };
 
@@ -199,6 +197,13 @@ function LoginPage(props: LoginPageProps) {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);
             }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                if (ID !== '' && password !== '') {
+                  onLoginClick();
+                }
+              }
+            }}
             isFilled={ID !== ''}
           />
         </TextFieldWrapper>
@@ -215,6 +220,13 @@ function LoginPage(props: LoginPageProps) {
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);
+            }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                if (ID !== '' && password !== '') {
+                  onLoginClick();
+                }
+              }
             }}
             isFilled={password !== ''}
           />

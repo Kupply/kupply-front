@@ -16,6 +16,7 @@ import LabelButton from '../../../assets/buttons/LabelButton';
 import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
 import { majorAllList } from '../../../common/majorAll';
 import { majorTargetList } from '../../../common/majorTarget';
+import client from '../../../utils/httpClient';
 import NicknameCheckButton from '../../../assets/NicknameCheckButton';
 
 /*
@@ -176,7 +177,8 @@ export default function EditModal(props: ModalProps) {
 
     if (Object.keys(updateData).length !== 0) {
       try {
-        await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        await client.post('/user/updateMe', updateData);
 
         window.location.reload(); // 페이지 새로고침.
       } catch (err) {
@@ -327,7 +329,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 0
+                    currentModal === 0
                       ? '../../design_image/my_board/fi_user_active.svg'
                       : '../../design_image/my_board/fi_user.svg'
                   }
@@ -346,7 +348,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 1
+                    currentModal === 1
                       ? '../../design_image/my_board/u_university_active.svg'
                       : '../../design_image/my_board/u_university.svg'
                   }
@@ -365,7 +367,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 2
+                    currentModal === 2
                       ? '../../design_image/my_board/fi_calendar_active.svg'
                       : '../../design_image/my_board/fi_calendar.svg'
                   }
@@ -384,7 +386,7 @@ export default function EditModal(props: ModalProps) {
               >
                 <img
                   src={
-                    currentModal == 3
+                    currentModal === 3
                       ? '../../design_image/my_board/fi_trello_active.svg'
                       : '../../design_image/my_board/fi_trello.svg'
                   }
@@ -674,7 +676,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20; // Modal.tsx 와 상이한 stacking context
+  z-index: 1005;
 `;
 
 const HeaderWrapper = styled.div`

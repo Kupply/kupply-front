@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../assets/Logo';
@@ -12,12 +13,12 @@ const FooterWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
-  max-width: 2560px;
+  // max-width: 1920px; //2560px;
   height: 262px; //(262/1248 = 20.1)
   background: #f9f9f9;
   padding: 41.84px 128px 42.78px 128px; // 상우하좌 순서
   box-sizing: border-box;
-  margin-top: ;
+  //margin-top: ;
 `;
 
 const ShortcutWrapper = styled.div`
@@ -96,8 +97,14 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
     navigate('/landing');
   };
   const handleSettingsClick = () => {
-    navigate('/settings');
+    if (isLogined) navigate('/settings');
   };
+
+  const [isLogined, setisLogined] = useState<boolean>(false);
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
 
   return (
     <FooterWrapper>
@@ -163,21 +170,21 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
             <MenuButton
               style={{ color: '#A8A8A8' }}
               onClick={() => {
-                setSelected(4);
-                navigate('/settings');
+                if (isLogined) {
+                  setSelected(4);
+                  navigate('/settings');
+                }
               }}
             >
               이용약관
             </MenuButton>
-            <MenuButton
-              style={{ color: '#A8A8A8', width: 108 }}
-              onClick={() => {
-                setSelected(4);
-                navigate('/settings');
-              }}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdY6ponmxnPWcGUCwQUB-wZboIXh7igfzxIr5-qFSHAACJnNA/viewform?usp=send_form"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              개인정보 처리방침
-            </MenuButton>
+              <MenuButton style={{ color: '#A8A8A8', width: 'auto' }}>버그리포트</MenuButton>
+            </a>
             <MenuButton style={{ color: '#A8A8A8', width: 'auto' }}>개발팀</MenuButton>
           </MenuWrapper>
         </ContentsWrapper>

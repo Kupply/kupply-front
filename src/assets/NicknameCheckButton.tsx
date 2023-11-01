@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import axios from 'axios';
+import client from '../utils/httpClient';
 
 const baseButton = css`
   height: 24px;
@@ -133,9 +134,13 @@ const NicknameCheckButtonTextComponent = styled.div<NicknameCheckButtonTextProps
 
 // isSuccess가 success이면 성공, fail이면 실패이다.
 const nicknameCheckAPI = async (nickname: string) => {
-  const url = 'http://localhost:8080/auth/nicknameCheck'; // 만든 API 주소로 바뀌어야 함.
+  // const url = 'http://localhost:8080/auth/nicknameCheck'; // 만든 API 주소로 바뀌어야 함.
   try {
-    const response = await axios.post(url, {
+    // const response = await axios.post(url, {
+    //   nickname: nickname,
+    // });
+
+    const response = await client.post('/auth/nicknameCheck', {
       nickname: nickname,
     });
 

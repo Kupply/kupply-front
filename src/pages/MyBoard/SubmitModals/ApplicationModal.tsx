@@ -19,6 +19,7 @@ import FirstReAppliedButton from '../../../assets/myboardpage/FirstReAppliedButt
 import UploadButton from '../../../assets/myboardpage/UploadButton';
 import CompleteMockApplicationButton from '../../../assets/myboardpage/CompleteMockApplication';
 import { TypeFlags } from 'typescript';
+import client from '../../../utils/httpClient';
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -141,7 +142,8 @@ export default function ApplicationModal(props: ModalProps) {
         applyTimes: candidateState === 'clicked' ? 'First' : 'Reapply',
         applyGrade: currentSemester1 + '-' + currentSemester2,
       };
-      await axios.post('http://localhost:8080/dashboard', applyData, config);
+      // await axios.post('http://localhost:8080/dashboard', applyData, config);
+      await client.post('/dashboard', applyData);
     } catch (err) {
       console.log(err);
     }
@@ -536,7 +538,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20; // Modal.tsx 와 상이한 stacking context
+  z-index: 1005;
 `;
 
 const CloseButton = styled.button`

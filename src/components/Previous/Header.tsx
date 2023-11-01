@@ -47,9 +47,11 @@ const TagButtonWrapper = styled.div`
 `;
 
 const Container = styled.div`
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1920px;
-  height: 450px;
+  height: 380px;
   background-color: #fcfafb;
 
   display: flex;

@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Typography from '../../assets/Typography';
 import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
@@ -13,6 +14,7 @@ import EditModal from './EditModals/EditModal';
 import ApplicationModal from './SubmitModals/ApplicationModal';
 import { recruit } from '../../common/recruiting';
 import MyboardPasserPageVer from './MyboardPasser';
+import client from '../../utils/httpClient';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -116,12 +118,10 @@ function getTextByTitle(targetTitle: string) {
 }
 
 export default function MyBoardPage() {
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
+  const [cookies, setCookies, removeCookie] = useCookies(['accessToken', 'refreshToken', 'accessTokenExpire']);
   const config = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${cookies.accessToken}`,
     },
     withCredentials: true,
   };
@@ -285,11 +285,50 @@ export default function MyBoardPage() {
     },
   ]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        // const curTime = new Date();
+        // curTime.setHours(curTime.getHours() + 9);
+        // console.log(curTime.getTime(), +cookies.accessTokenExpire - 30 * 1000);
+        // if (curTime.getTime() > +cookies.accessTokenExpire - 30 * 1000) {
+        //   // 만료되기 30초 전이면 refresh
+        //   console.log('타임끝남');
+        //   const { newAccessToken, newAccessTokenExpire } = await refreshToken(
+        //     cookies.accessToken,
+        //     cookies.refreshToken,
+        //   );
+
+        //   if (newAccessToken) {
+        //     console.log('새로 설정');
+        //     const accessTokenExpire = new Date();
+        //     accessTokenExpire.setHours(accessTokenExpire.getHours() + 10);
+        //     setCookies('accessToken', newAccessToken, {
+        //       path: '/',
+        //       expires: accessTokenExpire,
+        //     });
+        //     setCookies('accessTokenExpire', newAccessTokenExpire, {
+        //       path: '/',
+        //       expires: accessTokenExpire,
+        //     });
+
+        //     config.headers.Authorization = `Bearer ${newAccessToken}`;
+        //   } else {
+        //     removeCookie('accessToken', { path: '/' });
+        //     removeCookie('accessTokenExpire', { path: '/' });
+        //     removeCookie('refreshToken', { path: '/' });
+        //     window.localStorage.clear();
+        //     window.sessionStorage.clear();
+        //     navigate('/login');
+        //     alert('세션이 만료되었습니다. 다시 로그인해 주세요.');
+        //   }
+        // }
+
+        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
         setUserData({
@@ -358,7 +397,8 @@ export default function MyBoardPage() {
       const newPastData1 = [...pastData1];
       for (let i = 0; i < semester.length; i++) {
         try {
-          const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor1}/${semester[i]}`, config);
+          // const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor1}/${semester[i]}`, config);
+          const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
           const data = APIresponse.data.pastData;
 
           let competitionRate = 0;
@@ -382,7 +422,8 @@ export default function MyBoardPage() {
       const newPastData2 = [...pastData2];
       for (let i = 0; i < semester.length; i++) {
         try {
-          const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor2}/${semester[i]}`, config);
+          // const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor2}/${semester[i]}`, config);
+          const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
           const data = APIresponse.data.pastData;
 
           let competitionRate = 0;
@@ -421,7 +462,8 @@ export default function MyBoardPage() {
 
   const getCurData = async () => {
     try {
-      const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
+      // const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
+      const APIresponse = await client.get('/dashboard/hopeMajorsCurrentInfo');
       const data = APIresponse.data.data;
 
       const newCurData = [...curData];
@@ -574,6 +616,115 @@ export default function MyBoardPage() {
                     <Typography
                       size="bodyText"
                       style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '10px' }}
+                  현재 내 학점
+                </Typography>
+                <Typography
+                  size="bodyText"
+                  style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '71.74px' }}
+                >
+                  {userData.curGPA}
+                </Typography>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="284"
+                height="2"
+                viewBox="0 0 284 2"
+                fill="none"
+                style={{ marginTop: '44px', marginLeft: '128.01px' }}
+              >
+                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
+              </svg>
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: '44px', marginLeft: '128.01px' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M15.7765 3.3335H4.15101C3.23379 3.3335 2.49023 4.07969 2.49023 5.00016V16.6668C2.49023 17.5873 3.23379 18.3335 4.15101 18.3335H15.7765C16.6937 18.3335 17.4372 17.5873 17.4372 16.6668V5.00016C17.4372 4.07969 16.6937 3.3335 15.7765 3.3335Z"
+                    stroke="#8B8B8B"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M2.49023 8.3335H17.4372"
+                    stroke="#8B8B8B"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M13.2871 1.6665V4.99984"
+                    stroke="#8B8B8B"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6.64258 1.6665V4.99984"
+                    stroke="#8B8B8B"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <Typography
+                  size="bodyText"
+                  style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
+                >
+                  희망 진입학기
+                </Typography>
+                <Typography
+                  size="bodyText"
+                  style={{ color: 'var(--Main-Black, #141414)', fontWeight: '500', marginLeft: '59.4px' }}
+                >
+                  {userData.hopeSemester}R
+                </Typography>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="284"
+                height="2"
+                viewBox="0 0 284 2"
+                fill="none"
+                style={{ marginTop: '44px', marginLeft: '128.01px' }}
+              >
+                <path d="M283 1L0.999992 1" stroke="#DFDFDF" stroke-linecap="round" />
+              </svg>
+            </MyInformationBox>
+          </div>
+        </LeftSideWrapper>
+        <div style={{ marginTop: '-82px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: '154px', marginLeft: '551px', gap: '18px' }}>
+            <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
+            <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
+              2지망
+            </InterestMajorButton>
+          </div>
+          {onViewMajor === 1 ? (
+            <>
+              <div style={{ marginLeft: '551px' }}>
+                <BigMajorSymbolBox style={{ marginTop: '32px' }}>
+                  <Typography size="bodyText" style={{ textAlign: 'center', marginTop: '26px' }}>
+                    1지망 관심전공
+                  </Typography>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="392"
+                    height="2"
+                    viewBox="0 0 392 2"
+                    fill="none"
+                    style={{ position: 'absolute', top: '72px' }}
+                  >
+                    <path d="M0 1L392 1" stroke="#DFDFDF" />
+                  </svg>
+                  <div style={{ position: 'absolute', top: '128px', left: '55px' }}>
+                    <div
+                      style={{
+                        width: '184px',
+                        height: '241px',
+                        display: 'block',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                      }}
                     >
                       관심 전공
                     </Typography>
@@ -1747,11 +1898,10 @@ export default function MyBoardPage() {
             )}
           </div>
         </Wrapper>
-      )}
+      )
+    }
     </>
   );
-}
-
 /* 
 전체 페이지 크기 (헤더, 풋터 포함)
 width: 1921px;
@@ -1759,7 +1909,7 @@ height: 2378px;
 */
 
 const Wrapper = styled.div`
-  width: 100vw; // 1920px;
+  width: 1920px; //..1920px; // 1920px;
   height: 2020px; // 100%; // (헤더, 풋터 제외 크기) 이 크기로 퍼센트 계산
   background: #fcfcfc;
   display: flex;

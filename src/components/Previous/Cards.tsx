@@ -4,6 +4,7 @@ import Card from '../../assets/Card';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import client from '../../utils/httpClient';
 
 export interface CardsProps {
   clicked: number;
@@ -11,9 +12,9 @@ export interface CardsProps {
 
 const mockCards = [
   {
-    name: '경영대학',
+    name: '경영대학 경영학과',
     eng: 'Business School',
-    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 42,
     경쟁률: 3.59,
     avg: 4.23,
@@ -133,7 +134,8 @@ const Cards = ({ clicked }: CardsProps) => {
 
   const fetch = async () => {
     try {
-      const data = await axios.get('http://localhost:8080/dashboard/cards', config);
+      // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
+      const data = await client.get('/dashboard/cards');
 
       setCards(
         cards.map((c) => {
@@ -176,7 +178,7 @@ const Cards = ({ clicked }: CardsProps) => {
           <Card {...card} />
         ))}
       </FlexContainer>
-      <FlexContainer>
+      <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '50px' }}>
         {opaCards.map((card) => (
           <div style={{ opacity: 0.5 }}>
             <Card {...card} />
@@ -194,11 +196,13 @@ const FlexContainer = styled.div`
   width: 100%;
   max-width: 1382px;
   margin-top: 25px;
-
   flex-wrap: wrap;
 `;
 const Container = styled.div`
-  height: 2500px;
+  position: relative;
+  z-index: 0;
+  //height: 2500px;
+  padding-bottom: 230px;
   width: 100%;
   max-width: 1920px;
   background-color: #fff;

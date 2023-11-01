@@ -13,10 +13,11 @@ export interface ModalProps {
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수
   email: string;
+  setBlank: () => void;
 }
 
 export default function SignUpLarge1(props: ModalProps) {
-  const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal, email } = props;
+  const { currentModal, isOpenModal, setCurrentModal, setOpenModal, onClickModal, email, setBlank } = props;
 
   return (
     <Main>
@@ -48,6 +49,7 @@ export default function SignUpLarge1(props: ModalProps) {
             <VerificationButton
               onClick={async () => {
                 setCurrentModal(currentModal + 2);
+                setBlank();
                 await sendEmail(email);
               }}
             >
@@ -74,7 +76,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 20; // Modal.tsx 와 상이한 stacking context
+  z-index: 1005; // Modal.tsx 와 상이한 stacking context
 `;
 
 const CloseButton = styled.button`
