@@ -8,7 +8,7 @@ const PreviousPage = () => {
   return (
     <>
       <Header clicked={clicked} setClicked={setClicked} searchWord={searchWord} setSearchWord={setSearchWord} />
-      <Cards clicked={clicked} />
+      <Cards clicked={clicked} searchWord={searchWord} />
     </>
   );
 };
