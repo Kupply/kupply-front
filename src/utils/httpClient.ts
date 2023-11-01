@@ -17,8 +17,8 @@ export const refresh = async () => {
   } catch (err) {
     console.log(err);
   }
-  localStorage.removeItem('refreshToken');
-  localStorage.removeItem('accessToken');
+  // localStorage.removeItem('refreshToken');
+  // localStorage.removeItem('accessToken');
 
   return false;
 };
@@ -47,7 +47,7 @@ client.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
         return client.request(originalRequest);
       }
-      localStorage.clear();
+      // localStorage.clear();
       alert('세션이 만료되었습니다. 다시 로그인해 주세요.');
       window.location.href = '/login';
     } else return error.response;
