@@ -367,8 +367,7 @@ function SignUp5Page() {
   const onClickCheck = () => {
     const body = document.getElementsByTagName('body')[0];
     if (body) {
-      body.style.overflow = 'hidden';
-      button.current?.scrollIntoView({ behavior: 'smooth' });
+      button.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   };
 
@@ -1094,13 +1093,13 @@ function SignUp5Page() {
               </Typography>
             </ScrollBarSmall>
           </TextOutBox>
-          <div ref={button}></div>
           <ButtonsWrapper>
             <PrevButton onClick={handlePrev} />
             <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>
               완료
             </NextButtonFixedWidth>
           </ButtonsWrapper>
+          <div ref={button}></div>
         </ScrollBarLarge>
       </FormWrapper>
     </Wrapper>
