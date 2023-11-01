@@ -204,17 +204,17 @@ export default function MyBoardPage() {
 
   // 서버로부터 받는 정보들
   const [userData, setUserData] = useState({
-    userName: '가나다라마바사',
-    userNickname: '잠만보',
+    userName: '',
+    userNickname: '',
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
-    userRole: 'candidator',
-    firstMajor: '수학과',
-    studentId: '2020220037',
-    hopeMajor1: '컴퓨터학과',
-    hopeMajor2: '희망 없음',
-    curGPA: 4.2,
-    hopeSemester: '2023-2',
+    userRole: '',
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '',
+    hopeMajor2: '',
+    curGPA: 0,
+    hopeSemester: '',
   });
 
   // 좀 아닌 것 같지만 생각의 여유가 없기에
