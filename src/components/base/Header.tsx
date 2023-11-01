@@ -13,7 +13,7 @@ import client from '../../utils/httpClient';
 
 const Wrapper = styled.div`
   align-items: center;
-  width: 1920px; // 100vw;
+  width: 100vw;
   // max-width: 1920px;
   //max-width: 1920px;
   height: 80px; // 7.7%; // 96px; (96/1248 = 7.7)
@@ -353,9 +353,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     <Wrapper>
       <FlexContainer>
         <LeftButtonsContainer>
-          <div style={{ width: '100px', height: '46px' }}>
-            <Logo />
-          </div>
+          <Logo />
           <HeaderButtonContainer>
             <HeaderButton onClick={handleMenu3Click} activated={location.pathname === '/landing'}>
               실시간 지원현황
