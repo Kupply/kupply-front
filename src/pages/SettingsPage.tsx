@@ -997,25 +997,26 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               name="semester-1"
               value={hopeSemester1}
               setValue={setHopeSemester1}
-              isEntered={true}
+              isEntered={hopeSemester1 ? true : false}
             ></VerificationBox>
             <VerificationBox
               name="semester-2"
               value={hopeSemester2}
               setValue={setHopeSemester2}
-              isEntered={true}
+              isEntered={hopeSemester2 ? true : false}
             ></VerificationBox>
-            <div style={{ marginTop: 26 }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
-                <path stroke="#D85888" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
-              </svg>
-            </div>
+            <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+              년도
+            </Typography>
             <VerificationBox
               name="semester-3"
               value={hopeSemester3}
               setValue={setHopeSemester3}
-              isEntered={true}
+              isEntered={hopeSemester3 ? true : false}
             ></VerificationBox>
+            <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+              학기
+            </Typography>
           </VerifiBoxWrapper>
           <div>
             <ButtonWrapper

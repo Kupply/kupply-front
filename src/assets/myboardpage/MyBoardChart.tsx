@@ -395,6 +395,8 @@ const PlotChartComponent = (props: MajorDataProps) => {
 
   const { curMajorDatas, totalMajor, TopFiveData } = getMajorData(MajorDatas);
 
+  const filteredMajorDatas = curMajorDatas.filter((d) => d.value !== 0);
+
   const maxValue = Math.max(...curMajorDatas.map((item) => item.value));
   const maxLength = maxValue <= 50 ? 5 : maxValue / 10 + 1;
   const [hoveredData, setHoveredData] = useState<(typeof curMajorDatas)[0] | null>(null);
@@ -420,7 +422,7 @@ const PlotChartComponent = (props: MajorDataProps) => {
           ticks={Array.from({ length: maxLength + 1 }, (_, i) => i * 10)}
         />
         <Tooltip content={<CustomTooltip activeData={hoveredData} />} />
-        {curMajorDatas.map((data, index) => (
+        {filteredMajorDatas.map((data, index) => (
           <Scatter
             data={[{ x: data.avgGpa, y: data.value }]}
             fill={data.fill}
@@ -669,10 +671,10 @@ const tmpDataMajor = [
 
 // 임시 데이터
 const tmpDataGrade = [
-  { name: '23학번', value: 50, fill: '#D85888' },
-  { name: '22학번', value: 24, fill: '#E57C90' },
-  { name: '21학번', value: 14, fill: '#FFAFBD' },
-  { name: '20학번 이상', value: 4, fill: 'var(--SECONDARY, #FDF2F2)' },
+  { name: '23학번', value: 0, fill: '#D85888' },
+  { name: '22학번', value: 0, fill: '#E57C90' },
+  { name: '21학번', value: 0, fill: '#FFAFBD' },
+  { name: '20학번 이상', value: 0, fill: 'var(--SECONDARY, #FDF2F2)' },
 ].sort((a, b) => b.value - a.value);
 
 const getMajorData = (MajorDatas: MajorData[]) => {
