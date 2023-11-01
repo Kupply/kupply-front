@@ -353,7 +353,9 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     <Wrapper>
       <FlexContainer>
         <LeftButtonsContainer>
-          <Logo />
+          <div style={{ width: '100px', height: '46px' }}>
+            <Logo />
+          </div>
           <HeaderButtonContainer>
             <HeaderButton onClick={handleMenu3Click} activated={location.pathname === '/landing'}>
               실시간 지원현황
