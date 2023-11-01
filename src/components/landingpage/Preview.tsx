@@ -19,7 +19,7 @@ const TitleWrapper = styled.div`
   align-items: center;
   position: sticky;
   top: 0;
-  background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3));
+  background: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0.4) 100%);
   z-index: 990;
 `;
 

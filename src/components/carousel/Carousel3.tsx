@@ -20,7 +20,7 @@ const ContentWrapper = styled.div`
   align-items: flex-end;
   justify-content: center;
   gap: 12px;
-  margin-right: 1000px;
+  margin-right: 52.083%;
 `;
 
 const DirectButton = styled.div`
