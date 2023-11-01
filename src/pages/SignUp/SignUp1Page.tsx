@@ -124,7 +124,7 @@ const TextButton = styled.button`
   }
 `;
 export const sendEmail = async (email: string) => {
-  const url = 'http://localhost:8080/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+  const url = 'http://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
   try {
     // await axios.post(url, { email: email });
     await client.post('/auth/sendEmail', { email: email });

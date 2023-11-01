@@ -159,7 +159,7 @@ function LoginPage(props: LoginPageProps) {
 
   // login API 접근
   const onLoginClick = async () => {
-    const url = 'http://localhost:8080/auth/login';
+    const url = 'http://api.kupply.devkor.club/auth/login';
     try {
       await axios
         .post(url, {
@@ -168,8 +168,10 @@ function LoginPage(props: LoginPageProps) {
           isRememberOn: isChecked,
         })
         .then((res) => {
-          localStorage.setItem('accessToken', res.data.data.accessToken);
-          localStorage.setItem('refreshToken', res.data.data.refreshToken);
+          if (res.data.data) {
+            localStorage.setItem('accessToken', res.data.data.accessToken);
+            localStorage.setItem('refreshToken', res.data.data.refreshToken);
+          }
         });
 
       //로그인 상태를 유지하기 위해 localStorage에 로그인 여부와 ID를 저장 후 login 상태를 true로 바꾸고 메인 페이지로 보낸다.
