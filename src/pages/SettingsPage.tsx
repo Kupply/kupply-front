@@ -142,7 +142,7 @@ const BodyContent = styled.div`
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 111.111% */
+  line-height: 22px; /* 111.111% */
   opacity: 0.6;
   margin-top: 12px;
 `;
