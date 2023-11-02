@@ -542,7 +542,12 @@ export default function MyBoardPage() {
             본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
           </Typography>
           {isOpenEditModal ? (
-            <EditModal isOpenModal={isOpenEditModal} setOpenModal={setOpenEditModal} onClickModal={onClickEditModal} />
+            <EditModal
+              isOpenModal={isOpenEditModal}
+              setOpenModal={setOpenEditModal}
+              onClickModal={onClickEditModal}
+              isApplied={isApplied}
+            />
           ) : null}
           {isOpenApcModal ? (
             <ApplicationModal
