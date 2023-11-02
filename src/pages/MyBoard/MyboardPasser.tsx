@@ -20,17 +20,16 @@ const CharacterImage = styled.img`
 
 const MyboardPasserPageVer = () => {
   const [userData, setUserData] = useState({
-    userName: '고대빵',
-    userNickname: '잠만보',
-    userProfilePic: 'rectProfile1',
-    userProfileLink: '',
-    userRole: 'passer',
-    firstMajor: '디자인조형학부',
-    studentId: '2020220037',
-    hopeMajor1: '경영대학',
-    hopeMajor2: '미디어학부',
-    curGPA: 4.2,
-    hopeSemester: '2023-2',
+    userName: localStorage.getItem('name') || '',
+    userNickname: localStorage.getItem('nickname') || '',
+    userProfilePic: localStorage.getItem('userProfilePic') || 'rectProfile1',
+    userProfileLink: localStorage.getItem('userProfileLink') || '',
+    userRole: localStorage.getItem('role') || 'passer',
+    firstMajor: localStorage.getItem('firstMajor') || '',
+    studentId: localStorage.getItem('studentId') || '',
+    secondMajor: localStorage.getItem('secondMajor') || '',
+    passGPA: localStorage.getItem('passGPA') || 0,
+    passSemester: localStorage.getItem('passSemester') || '',
   });
   return (
     <MobilePageWrapper style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '150px' }}>
