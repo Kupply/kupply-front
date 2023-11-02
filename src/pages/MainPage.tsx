@@ -4,7 +4,7 @@ import LabelButton from '../assets/buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import MockApplicationButton from '../assets/myboardpage/MockApplication';
+// import MockApplicationButton, { MockApplicationProps } from '../assets/myboardpage/MockApplication';
 import client from '../utils/httpClient';
 
 const Wrapper = styled.div`
@@ -81,6 +81,71 @@ const TextFieldBox = styled.input`
   }
 `;
 
+// 지원하기 버튼용
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  height: 200px;
+  padding: 16px 32px;
+  gap: 8px;
+  border-radius: 10px;
+  // default
+  background: linear-gradient(91deg, #d85888 -19.76%, #f5bdbd 87.65%, rgba(253, 242, 242, 0.3) 124.79%);
+  // hover
+  &:hover:not(:disabled) {
+    box-shadow: 0px 20px 50px 0px rgba(232, 88, 136, 0.41);
+  }
+  // unactive
+  &:disabled {
+    opacity: 0.5;
+    background: linear-gradient(91deg, #d85888 -19.76%, #f5bdbd 87.65%, rgba(253, 242, 242, 0.3) 124.79%);
+  }
+`;
+
+const Text = styled.text`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--White, #fff);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+`;
+
+// 아이콘 위치 수정 완료
+const Icon: React.FC = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <g clip-path="url(#clip0_3412_8527)">
+      <path
+        d="M18.3327 1.6665L9.16602 10.8332"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M18.3327 1.6665L12.4993 18.3332L9.16602 10.8332L1.66602 7.49984L18.3327 1.6665Z"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_3412_8527">
+        <rect width="20" height="20" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+//////////////////////
+
 function MainPage() {
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
@@ -126,7 +191,6 @@ function MainPage() {
     navigate('/myboard');
   };
 
-  // 준혁 선생님 마무리 부탁 - 로그인 상태 따라 다르게 렌더링
   return (
     <Wrapper>
       <Carousel />
@@ -163,12 +227,16 @@ function MainPage() {
         </JoinMainContainer>
       ) : (
         <JoinMainContainer>
-          <ContainerMainText>2023학년도 2학기 모의지원을 통해 당신의 합격 가능성을 확인하세요!</ContainerMainText>
-          <ContainerSubText>쿠플라이 모의지원으로 나의 순위 및 실시간 지원자 현황을 확인해보세요.</ContainerSubText>
-          <MockApplicationButton
-            style={{ width: '700px', height: '200px', fontSize: '50px' }}
-            onClick={goToMyBoard}
-          ></MockApplicationButton>
+          <ContainerMainText>쿠플라이 모의지원을 통해 당신의 합격 가능성을 확인하세요!</ContainerMainText>
+          <ContainerSubText>
+            간단한 모의지원으로 나의 학점 위치 및 다른 지원자 현황을 파악해볼 수 있어요.
+          </ContainerSubText>
+          <Button onClick={goToMyBoard}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Icon />
+              <Text style={{ marginLeft: '8px' }}>모의지원 하러가기</Text>
+            </div>
+          </Button>
         </JoinMainContainer>
       )}
     </Wrapper>
@@ -176,9 +244,3 @@ function MainPage() {
 }
 
 export default MainPage;
-
-/*
-
-
-
- */
