@@ -291,43 +291,6 @@ export default function MyBoardPage() {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        // const curTime = new Date();
-        // curTime.setHours(curTime.getHours() + 9);
-        // console.log(curTime.getTime(), +cookies.accessTokenExpire - 30 * 1000);
-        // if (curTime.getTime() > +cookies.accessTokenExpire - 30 * 1000) {
-        //   // 만료되기 30초 전이면 refresh
-        //   console.log('타임끝남');
-        //   const { newAccessToken, newAccessTokenExpire } = await refreshToken(
-        //     cookies.accessToken,
-        //     cookies.refreshToken,
-        //   );
-
-        //   if (newAccessToken) {
-        //     console.log('새로 설정');
-        //     const accessTokenExpire = new Date();
-        //     accessTokenExpire.setHours(accessTokenExpire.getHours() + 10);
-        //     setCookies('accessToken', newAccessToken, {
-        //       path: '/',
-        //       expires: accessTokenExpire,
-        //     });
-        //     setCookies('accessTokenExpire', newAccessTokenExpire, {
-        //       path: '/',
-        //       expires: accessTokenExpire,
-        //     });
-
-        //     config.headers.Authorization = `Bearer ${newAccessToken}`;
-        //   } else {
-        //     removeCookie('accessToken', { path: '/' });
-        //     removeCookie('accessTokenExpire', { path: '/' });
-        //     removeCookie('refreshToken', { path: '/' });
-        //     window.localStorage.clear();
-        //     window.sessionStorage.clear();
-        //     navigate('/login');
-        //     alert('세션이 만료되었습니다. 다시 로그인해 주세요.');
-        //   }
-        // }
-
-        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
@@ -505,6 +468,14 @@ export default function MyBoardPage() {
     return <NickNameText textSize={textSize}>{text}</NickNameText>;
   }
 
+  const isWithinTimeRange = () => {
+    const now = new Date();
+    const startTime = new Date('2023-11-08T10:00:00'); //2023-11-08로 고쳐야함
+    const endTime = new Date('2023-11-10T17:00:00');
+
+    return now >= startTime && now <= endTime;
+  };
+
   return (
     <>
       {userData.userRole === 'passer' ? (
@@ -608,7 +579,7 @@ export default function MyBoardPage() {
                   }}
                 >
                   <div style={{ marginTop: '44px' }}>
-                    <MockApplicationButton onClick={onClickApcModal} active={!isApplied} />
+                    <MockApplicationButton onClick={onClickApcModal} active={isWithinTimeRange() && !isApplied} />
                   </div>
                   <div style={{ display: 'flex', marginTop: '44px' }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
