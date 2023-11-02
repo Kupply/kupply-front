@@ -1779,7 +1779,7 @@ export default function MyBoardPage() {
               </>
             )}
             {isApplied ? null : (
-              <div style={{ display: 'flex', zIndex: 2, marginTop: '-830px', marginLeft: '553px' }}>
+              <div style={{ display: 'flex', zIndex: 2, marginTop: '-1120px', marginLeft: '553px' }}>
                 <BlurWrapper>
                   <BlurMsg>
                     <Typography size="largeText">실시간 지원자 통계는 모의지원 후 열람 가능합니다.</Typography>
@@ -1858,7 +1858,7 @@ const LeftSideWrapper = styled.div`
   position: absolute;
   flex-shrink: 0;
   background: linear-gradient(89deg, rgba(238, 238, 238, 0.44) 10.94%, rgba(217, 217, 217, 0) 99.54%);
-  left: 120px;
+  left: 55px;
   top: 0;
   z-index: 1;
 `;
@@ -2052,7 +2052,7 @@ const BigMajorSymbol = styled.img`
 const BlurWrapper = styled.div`
   display: flex;
   width: 1242px;
-  height: 829px;
+  height: 1119px;
   border-radius: 10px;
   background: rgba(248, 248, 248, 0.45);
   backdrop-filter: blur(15px);

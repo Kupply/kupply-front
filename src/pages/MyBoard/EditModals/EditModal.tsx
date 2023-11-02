@@ -517,11 +517,7 @@ export default function EditModal(props: ModalProps) {
             </ContentsWrapper>
           )}
           {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
-            <ContentsWrapper
-              style={{
-                marginBottom: '503px',
-              }}
-            >
+            <ContentsWrapper2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>희망 관심전공 변경하기</ContentsTitle>
@@ -562,14 +558,10 @@ export default function EditModal(props: ModalProps) {
                   저장하기
                 </SubmitButton>
               </MoveButtonWrapper>
-            </ContentsWrapper>
+            </ContentsWrapper2>
           )}
           {currentModal === 2 && ( // '현재 내 학점' 버튼 클릭 시
-            <ContentsWrapper
-              style={{
-                marginBottom: '603px',
-              }}
-            >
+            <ContentsWrapper2>
               <SubContentsWrapper>
                 <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                   <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
@@ -609,14 +601,10 @@ export default function EditModal(props: ModalProps) {
                   저장하기
                 </SubmitButton>
               </MoveButtonWrapper>
-            </ContentsWrapper>
+            </ContentsWrapper2>
           )}
           {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
-            <ContentsWrapper
-              style={{
-                marginBottom: '603px',
-              }}
-            >
+            <ContentsWrapper2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
@@ -669,7 +657,7 @@ export default function EditModal(props: ModalProps) {
                   저장하기
                 </SubmitButton>
               </MoveButtonWrapper>
-            </ContentsWrapper>
+            </ContentsWrapper2>
           )}
         </ModalLarge>
       )}
@@ -722,6 +710,20 @@ const ContentsWrapper = styled.div`
   margin-right: auto;
   margin-top: 58px;
   gap: 35px;
+`;
+
+const ContentsWrapper2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 628px;
+  //align-items: left;
+  //margin-left: auto;
+  //margin-right: auto;
+  margin-top: 58px;
+  //gap: 35px;
+  height: 796px;
+  overflow: auto;
+  overflow-x: hidden;
 `;
 
 const ContentsTitle = styled.text`
