@@ -20,7 +20,7 @@ export interface ITableData {
   applyNumber: number;
   competition: number;
   pastCompetition: number;
-  fakeAppliedNumber: number;
+  pastPassedNum: number;
   pastmin: number;
   pastmean: number;
   interest: number;
@@ -65,14 +65,13 @@ const LandingPage = () => {
   const cardData = tableData.map((data) => ({
     name: data.secondMajor,
     eng: data.engName,
-    모의지원자수: data.fakeAppliedNumber,
+    합격자수: data.pastPassedNum,
     선발인원: data.pastRecruitNumber,
     min: data.pastmin,
     mean: data.pastmean,
     semester: '23-1',
     imagesrc: data.imagesrc,
   }));
-  console.log(cardData);
 
   const tableContent = useRef<HTMLDivElement>(null);
 

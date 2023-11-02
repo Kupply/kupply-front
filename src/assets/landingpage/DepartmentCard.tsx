@@ -4,7 +4,7 @@ import Typography from '../Typography';
 export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   name: string;
   eng: string;
-  모의지원자수: number;
+  합격자수: number;
   선발인원: number;
   min: number;
   mean: number;
@@ -12,7 +12,7 @@ export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   imagesrc: string;
 }
 
-const DepartmentCard = ({ name, eng, 모의지원자수, 선발인원, min, mean, semester, imagesrc }: CardsProps) => {
+const DepartmentCard = ({ name, eng, 합격자수, 선발인원, min, mean, semester, imagesrc }: CardsProps) => {
   return (
     <CardContainer src={imagesrc}>
       <div style={{ display: 'flex' }}>
@@ -34,10 +34,10 @@ const DepartmentCard = ({ name, eng, 모의지원자수, 선발인원, min, mean
         </ContentWrapper>
         <ContentWrapper>
           <Typography size="mediumText" color="rgba(20, 20, 20, 0.60)">
-            모의 지원자 수
+            합격자 수
           </Typography>
           <Typography size="largeText" style={{ fontWeight: '600' }}>
-            {모의지원자수}명
+            {합격자수}명
           </Typography>
         </ContentWrapper>
       </div>
