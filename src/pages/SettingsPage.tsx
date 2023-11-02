@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
@@ -427,6 +427,20 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     useState<StateOptions>('default'); /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
 
+  const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
+  const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
+  const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
+
+  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
+      setIsGpaChanged(true);
+    } else {
+      setIsGpaChanged(false);
+    }
+  }, [GPA1, GPA2, GPA3]);
+
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
@@ -722,7 +736,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      {modalOpen && (
+      {modalOpen && isGpaChanged && (
         <Main>
           <ModalLarge
             onClickToggleModal={() => {
@@ -1064,7 +1078,11 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             <ButtonWrapper
               buttonType="primary"
               onClick={() => {
-                setModalOpen(true);
+                if (isGpaChanged) {
+                  setModalOpen(true);
+                } else {
+                  thirdSubmit();
+                }
               }}
             >
               저장하기
