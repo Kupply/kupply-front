@@ -220,8 +220,8 @@ const HoverInfo = styled.div`
   line-height: 16px;
   align-self: stretch;
   position: absolute;
-  margin-top: 184px;
-  margin-left: 204px;
+  margin-top: 185px;
+  margin-left: 140px;
 `;
 
 const SvgNotch = styled.div`

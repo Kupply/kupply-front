@@ -19,18 +19,8 @@ export interface TableDataProps {
 }
 
 export default function TableData(props: TableDataProps) {
-  const {
-    rank,
-    secondMajor,
-    engName,
-    recruitNumber,
-    applyNumber,
-    competition,
-    pastCompetition,
-    pastmean,
-    interest,
-    interestedNum,
-  } = props;
+  const { rank, secondMajor, engName, recruitNumber, applyNumber, competition, pastmean, interest, interestedNum } =
+    props;
   return (
     <Wrapper>
       <RankCell>{rank > 10 ? rank : '0' + rank}</RankCell>
@@ -59,7 +49,6 @@ export default function TableData(props: TableDataProps) {
           : 1
         </Typography>
       </CompetitionCell>
-      <PastCompetitionCell>집계불가</PastCompetitionCell>
       <PastMeanCell>{pastmean}</PastMeanCell>
       <InterestCell>
         <SvgCircle xmlns="http://www.w3.org/2000/svg" width="26" height="27" viewBox="0 0 26 27" fill="none">
@@ -126,7 +115,7 @@ const AppliedNumberCell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 132px;
+  width: 160px;
   text-align: center;
   font-family: Pretendard;
   font-size: 32px;
@@ -136,31 +125,18 @@ const AppliedNumberCell = styled.div`
 `;
 
 const CompetitionCell = styled.div`
-  width: 165px;
+  width: 175px;
   padding-right: 94px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const PastCompetitionCell = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 130px;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px; /* 100% */
-`;
-
 const PastMeanCell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 210px;
+  width: 175px;
   padding-right: 100px;
   text-align: center;
   font-family: Pretendard;
@@ -173,6 +149,7 @@ const PastMeanCell = styled.div`
 const InterestCell = styled.div`
   position: relative;
   display: flex;
+  width: 90px;
   gap: 8px;
   justify-content: center;
   align-items: center;
@@ -185,11 +162,14 @@ const InterestCell = styled.div`
 `;
 
 const SvgCircle = styled.svg`
+  position: absolute;
+  right: 73.5px;
+  top: 3.5px;
   fill: var(--SECONDARY, #fdf2f2);
 `;
 
 const SvgHeart = styled.svg`
   position: absolute;
-  right: 52px;
+  right: 78px;
   top: 8px;
 `;

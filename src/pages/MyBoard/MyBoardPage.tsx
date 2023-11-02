@@ -1215,7 +1215,7 @@ export default function MyBoardPage() {
                           }}
                         >
                           <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                            모의지원 수
+                            모의지원자 수
                           </Typography>
                           <Typography
                             size="largeText"
@@ -1652,7 +1652,7 @@ export default function MyBoardPage() {
                           }}
                         >
                           <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                            모의지원 수
+                            모의지원자 수
                           </Typography>
                           <Typography
                             size="largeText"
