@@ -59,7 +59,7 @@ function HelpMessage(props: MessageProps) {
       setIsVisible(true);
       const hideTimeout = setTimeout(() => {
         setIsVisible(false);
-      }, 3000);
+      }, 500);
 
       return () => {
         clearTimeout(hideTimeout);
