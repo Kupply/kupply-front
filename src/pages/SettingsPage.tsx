@@ -1317,11 +1317,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                     <br />
                     4. 모의지원을 바탕으로 각 학과(부)별 실시간 지원자 통계의 제공
                     <br />
-                    5. 각 학과(부)별 이중전공 커뮤니티 서비스의 제공
-                    <br />
-                    6. 회원 간 일대일 쪽지 서비스의 제공
-                    <br />
-                    7. 기타 회사가 추가 개발하거나 다른 회사와의 제휴계약 등을 통해 회원에게 제공하는 일체의 서비스 제공
+                    5. 기타 회사가 추가 개발하거나 다른 회사와의 제휴계약 등을 통해 회원에게 제공하는 일체의 서비스 제공
                   </ContentsText>
                   <br />
                   <TitleText>제 10조 (정보의 제공 및 광고의 게재)</TitleText>
@@ -1667,7 +1663,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                         <td>모의지원</td>
                         <td>
                           - (필수항목): 학점, 1,2지망 지원 학과(부), 재지원 여부, 현재 학년 <br />- (선택항목): 지원 시
-                          제출한 자기소개서
+                          제출한 자기소개서 원문
                         </td>
                         <td>모의지원 서비스 이용</td>
                         <td>모의지원 서비스를 이용한 해당 학기 종강 후 1개월</td>
