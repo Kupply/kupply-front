@@ -30,11 +30,17 @@ const Main = styled.main`
   z-index: 1005;
 `;
 
+const Wrapper = styled.div`
+  width: 1920px;
+  height: 100%;
+  background: var(--White, #fff);
+  display: flex;
+`;
+
 const Sidebar = styled.div`
   width: 521px;
   height: 1153px;
   flex-shrink: 0;
-
   border-right: 1px solid var(--DF_Grey-2, #dfdfdf);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.3) 100%);
 `;
@@ -691,7 +697,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <Wrapper>
       {modalOpen && isGpaChanged && (
         <Main>
           <ModalLarge
@@ -1755,7 +1761,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </ScrollBarLarge>
         </BodyContainer>
       )}
-    </div>
+    </Wrapper>
   );
 };
 
