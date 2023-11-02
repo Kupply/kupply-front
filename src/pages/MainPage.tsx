@@ -198,12 +198,12 @@ function MainPage() {
         <JoinMainContainer>
           <ContainerMainText>당신을 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
           <ContainerSubText>
-            간단한 이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
+            간단한 회원가입으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
             이용해보세요.
           </ContainerSubText>
           <JoinWrapper>
             <TextFieldBox
-              placeholder="kupply@korea.ac.kr"
+              placeholder="고려대학교 이메일 주소"
               value={ID}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setID(e.target.value);
