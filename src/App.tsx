@@ -15,7 +15,7 @@ import SettingsPage from './pages/SettingsPage';
 import SignUp1Page from './pages/SignUp/SignUp1Page';
 import SignUp2Page from './pages/SignUp/SignUp2Page';
 import SignUp3Page from './pages/SignUp/SignUp3Page';
-// import AuthRequired from './AuthRequired';
+import AuthRequired from './AuthRequired';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/SignUp/SignUp4Page';
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 import DeletePage from './pages/DeletePage';
@@ -45,7 +45,6 @@ export default function App() {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
     else setisLogined(false);
   }, []);
-
   // element={<AuthRequired />}
   // 현재 MainPage 에만, pageView 이벤트 추적기 삽입
   return (
@@ -56,15 +55,19 @@ export default function App() {
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
           <Routes>
+            <Route element={<AuthRequired />}>
+              <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
+              <Route path="/myboard" element={<MyBoardPage />} />
+              <Route path="/community" element={<CommunityPage />} />
+              <Route path="/message" element={<MessagePage />} />
+              <Route path="/settings" element={<SettingsPage selected={selected} setSelected={setSelected} />} />
+              <Route path="/landing" element={<LandingPage />} />
+              <Route path="/delete" element={<DeletePage />} />
+            </Route>
+            <Route path="/archive" element={<PreviousPage />} />
             <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
-            <Route path="/archive" element={<PreviousPage />} />
-            <Route path="/archive/:majorName" element={<ArchiveDetailPage />} />
-            <Route path="/myboard" element={<MyBoardPage />} />
-            <Route path="/community" element={<CommunityPage />} />
-            <Route path="/message" element={<MessagePage />} />
             <Route path="/join" element={<SignUp1Page />} />
-            <Route path="/settings" element={<SettingsPage selected={selected} setSelected={setSelected} />} />
             <Route path="/signup1" element={<SignUp1Page />} />
             <Route path="/signup2" element={<SignUp2Page />} />
             <Route path="/signup3" element={<SignUp3Page />} />
@@ -73,8 +76,6 @@ export default function App() {
             <Route path="/signup4-passer" element={<SignUp4PagePasser />} />
             <Route path="/signup5" element={<SignUp5Page />} />
             <Route path="/signupcomplete" element={<SignUp5Complete />} />
-            <Route path="/landing" element={<LandingPage />} />
-            <Route path="/delete" element={<DeletePage />} />
           </Routes>
           <Footer setSelected={setSelected} />
         </Wrapper>

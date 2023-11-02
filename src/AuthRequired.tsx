@@ -7,7 +7,7 @@ function AuthRequired() {
 
   useEffect(() => {
     if (isLogined !== 'true') {
-      alert('login required');
+      alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
       navigate('/login');
     }
   }, []);
