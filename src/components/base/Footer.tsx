@@ -10,9 +10,10 @@ import { sizeMapping } from '../../assets/Typography';
 
 const FooterWrapper = styled.div`
   display: flex;
+  top: 100;
   flex-direction: column;
   justify-content: space-between;
-  width: 100vw; //1920px; //100vw;
+  width: 1920px; //1920px; //100vw;
   // max-width: 1920px; //2560px;
   height: 262px; //(262/1248 = 20.1)
   background: #f9f9f9;

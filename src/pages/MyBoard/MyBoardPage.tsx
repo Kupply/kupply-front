@@ -470,8 +470,8 @@ export default function MyBoardPage() {
 
   const isWithinTimeRange = () => {
     const now = new Date();
-    const startTime = new Date('2023-11-08T10:00:00'); //2023-11-08로 고쳐야함
-    const endTime = new Date('2023-11-10T17:00:00');
+    const startTime = new Date('2023-11-02T10:00:00'); //2023-11-08로 고쳐야함
+    const endTime = new Date('2023-11-10T:00:00');
 
     return now >= startTime && now <= endTime;
   };
