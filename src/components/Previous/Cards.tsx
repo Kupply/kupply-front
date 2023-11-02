@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import client from '../../utils/httpClient';
+import { useNavigate } from 'react-router-dom';
 
 export interface CardsProps {
   clicked: number;
@@ -124,6 +125,7 @@ const mockCards = [
 
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
+  const navigate = useNavigate();
   // const [cookies] = useCookies(['accessToken']);
   // const accessToken = cookies.accessToken;
   // const config = {
@@ -135,7 +137,13 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
 
   const fetch = async () => {
     try {
-      // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
+      const isLogined = window.localStorage.getItem('isLogin');
+      if (isLogined !== 'true') {
+        alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+        navigate('/login');
+      }
+      else{
+        // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
       const data = await client.get('/dashboard/cards');
       setCards(
         cards.map((c) => {
@@ -154,6 +162,8 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
           };
         }),
       );
+      }
+      
     } catch (err) {
       console.log(err);
     }
