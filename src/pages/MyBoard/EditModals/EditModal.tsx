@@ -407,7 +407,6 @@ export default function EditModal(props: ModalProps) {
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-                  tm
                   <CurrentImg
                     src={
                       userProfilePic === 'customProfile'

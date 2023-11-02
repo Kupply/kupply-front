@@ -110,7 +110,7 @@ const LandingPage = () => {
           <Typography size="heading1" style={{ marginTop: '14px' }}>
             {isWithinTimeRange()
               ? '쿠플라이 실시간 이중전공 모의지원 현황'
-              : '지금은 이중전공 지원 기간이 아닙니다.(11/8 오픈 예정)'}
+              : '지금은 이중전공 지원 기간(11/8-11/10)이 아닙니다.'}
           </Typography>
           <Typography
             color="rgba(20, 20, 20, 0.60)"
