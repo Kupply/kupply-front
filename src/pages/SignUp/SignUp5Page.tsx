@@ -322,6 +322,29 @@ const Table = ({ columns, data }: any) => {
 };
 */
 
+const ContentsText = styled.div`
+  // mediumText
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 122.836%;
+  text-align: left;
+`;
+
+const TitleText = styled.div`
+  // bodyText
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 122.836%; /* 22.11px */
+  text-align: left;
+`;
+// ------------------------------------------------------------------------------------------------
+
 // 페이지
 function SignUp5Page() {
   /*각 체크박스의 상태를 state로 관리*/
@@ -479,25 +502,22 @@ function SignUp5Page() {
             </Typography>
           </ButtonsTextWrapper>
 
-          <TextOutBox>
+          <TextOutBox style={{ lineHeight: '122.836%' }}>
             <ScrollBarSmall isChecked={scrollActive}>
               <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 1장 총칙
               </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 1조 (목적)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              <TitleText>제 1조 (목적)</TitleText>
+              <ContentsText>
                 1. 본 약관은 이용자가 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이 (이하 “쿠플라이”라
                 합니다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 합니다)를 이용함에 있어 쿠플라이 및 쿠플라이의
                 서비스와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다. <br />
                 2. 본 약관이 규정한 내용 이외의 ‘쿠플라이’와 ‘이용자’ 간의 권리, 의무 및 책임사항에 관하여서는
                 전기통신사업법 기타 대한민국의 관련 법령과 상관습에 의합니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 2조 (정의)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 2조 (정의)</TitleText>
+              <ContentsText>
                 본 약관에서 사용하는 용어의 정의는 다음과 같습니다. <br />
                 1. 사이트: 회사가 정보 및 재화 또는 용역을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여
                 정보 및 재화 또는 용역을 거래할 수 있도록 설정한 가상의 영업장 또는 회사가 운영하는 웹사이트
@@ -517,11 +537,10 @@ function SignUp5Page() {
                 7. 회원 탈퇴: 회원이 이용계약을 종료시키는 행위
                 <br />
                 8. 컨텐츠(Contents): 회사에서 제공하는 학과(부)별 합격자료, 실시및 지원자 통계 및 기타정보
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 3조 (약관의 명시, 효력 및 개정)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 3조 (약관의 명시, 효력 및 개정)</TitleText>
+              <ContentsText>
                 1. 쿠플라이는 약관의 내용과 주소지, 관리자의 성명, 개인정보보호 담당자의 성명, 연락처(이메일 주소) 등을
                 이용자가 알 수 있도록 쿠플라이 사이트의 초기 서비스 화면에 게시합니다.
                 <br />
@@ -542,33 +561,31 @@ function SignUp5Page() {
                 것으로 간주됩니다. 회원은 변경된 약관에 동의하지 않을 경우 회원 탈퇴(해지)를 요청할 수 있으며, 변경된
                 약관의 효력 발생일로부터 7일 이내의 거부의사를 표시하지 아니하고 서비스를 계속 사용할 경우 약관의 변경
                 사항에 동의한 것으로 간주됩니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 4조 (약관 외 준칙)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 4조 (약관 외 준칙)</TitleText>
+              <ContentsText>
                 1. 이 약관은 쿠플라이가 제공하는 개별 서비스에 관한 이용안내(이하 “서비스별 안내”라 합니다)와 함께
                 적용합니다.
                 <br />
                 2. 이 약관에 명시되지 않은 사항에 대해서는 전기 통신 기본법, 전기 통신 사업법, 기타 관련법령 및 서비스별
                 안내의 규정에 의합니다.
-              </Typography>
+              </ContentsText>
+              <br />
+              <br />
               <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 2장 서비스 이용 계약
               </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 5조 (이용 계약의 성립)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              <TitleText>제 5조 (이용 계약의 성립)</TitleText>
+              <ContentsText>
                 1. 이용 계약은 서비스 이용 희망자의, 본 이용 약관에 대해 동의한다는 의사표시와 이용 신청에 대한
                 쿠플라이의 승낙으로 성립됩니다. <br />
                 2. 본 이용약관에 대한 동의는 회원 가입 또는 이용 신청 당시 사이트의 ‘동의함’ 버튼을 누름으로써 그
                 의사표시를 합니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 6조 (회원가입 및 승낙)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 6조 (회원가입 및 승낙)</TitleText>
+              <ContentsText>
                 1. 이용자가 회원에 가입하여 사이트의 서비스를 이용하고자 하는 경우, 이용자는 사이트에서 요청하는 개인
                 신상정보를 제공해야 합니다.
                 <br />
@@ -605,11 +622,10 @@ function SignUp5Page() {
                 (2) 쿠플라이의 기술상 지장이 있는 경우
                 <br />
                 (3) 기타 쿠플라이의 귀책사유로 이용승낙이 곤란한 경우
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 7조 (회원 정보의 변경 등)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 7조 (회원 정보의 변경 등)</TitleText>
+              <ContentsText>
                 1. 회원은 마이페이지를 통하여 언제든지 본인의 개인정보를 열람할 수 있고, 회사가 인정하는 경미한 내용을
                 변경 또는 수정할 수 있습니다. 단, 본래 영구적인 학교 이메일 및 안정적인 서비스 운영을 위해 필요한 기타
                 회사가 정한 사항은 변경 또는 수정할 수 없습니다.
@@ -620,11 +636,10 @@ function SignUp5Page() {
                 3. 2항의 변경사항을 회사에 알리지 아니함으로써, 회원이 입은 불이익에 대하여 회사는 회원 또는 제3자에
                 대하여 손해배상 기타 일체의 책임을 부담하지 아니하고, 회사 또는 회사와 제휴한 온라인서비스 제공자가 입은
                 불이익에 대하여 회원은 손해배상 기타 일체의 책임을 부담합니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 8조 (서비스 이용)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 8조 (서비스 이용)</TitleText>
+              <ContentsText>
                 1. 회원은 회원 가입 시 발급된 계정 하나로 사이트 내 모든 서비스를 이용할 수 있습니다. 단, 일부 서비스의
                 경우 해당 서비스 이용에 앞서 추가적인 개인 정보를 요청할 수 있습니다.
                 <br />
@@ -638,14 +653,15 @@ function SignUp5Page() {
                 <br />
                 5. 쿠플라이는 제공하는 서비스 이용과 관련하여 이용자에게 발생한 어떠한 손해에 대해서도 책임을 지지
                 않습니다.
-              </Typography>
+              </ContentsText>
+              <br />
+              <br />
               <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 3장 서비스 제공 및 변경
               </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 9조 (서비스 내용)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+
+              <TitleText>제 9조 (서비스 내용)</TitleText>
+              <ContentsText>
                 쿠플라이가 제공하는 서비스의 내용은 다음과 같습니다.
                 <br />
                 1. 고려대학교 이중전공 지원 관련 정보의 제공
@@ -662,22 +678,20 @@ function SignUp5Page() {
                 6. 회원 간 일대일 쪽지 서비스의 제공
                 <br />
                 7. 기타 회사가 추가 개발하거나 다른 회사와의 제휴계약 등을 통해 회원에게 제공하는 일체의 서비스 제공
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 10조 (정보의 제공 및 광고의 게재)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 10조 (정보의 제공 및 광고의 게재)</TitleText>
+              <ContentsText>
                 1. 쿠플라이는 회원에게 서비스 이용에 필요하다고 인정되는 각종 정보에 대해서 사이트 및 이메일, SMS 발송
                 등 각종 매체에 게재하는 방법 등으로 회원에게 제공할 수 있습니다.
                 <br />
                 2. 쿠플라이는 서비스 개선 및 소개 등을 목적으로 회원의 동의 하에 추가적인 개인정보를 요청할 수 있습니다.
                 <br />
                 3. 쿠플라이는 서비스의 운영과 관련하여 사이트, 이메일, SMS 등에 광고 등을 게재할 수 있습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 11조 (서비스 제공의 제한 및 중단)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 11조 (서비스 제공의 제한 및 중단)</TitleText>
+              <ContentsText>
                 1. 쿠플라이는 정기점검, 보수, 교체 등 쿠플라이가 필요한 경우 및 부득이한 사유로 인하여 서비스 이용에
                 지장이 있는 경우에는 서비스 이용의 전부 또는 일부를 제한하거나 일시 중단할 수 있습니다.
                 <br />
@@ -690,21 +704,19 @@ function SignUp5Page() {
                 <br />
                 4. 쿠플라이는 제1항의 사유로 서비스의 제공이 일시적으로 중단됨으로 인하여 이용자 또는 제3자가 입은
                 손해에 대하여 배상합니다. 단, 쿠플라이의 고의 또는 과실이 없음을 입증하는 경우에는 그러하지 아니합니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 12조 (회원에 대한 통지)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 12조 (회원에 대한 통지)</TitleText>
+              <ContentsText>
                 1. 쿠플라이는 회원에 대한 통지를 하는 경우에는 회원이 서비스 이용 신청 시 사이트 화면 또는 회원가입 시
                 제출한 이메일 주소로 할 수 있습니다.
                 <br />
                 2. 1. 2. 쿠플라이는 불특정다수 회원에 대한 통지의 경우 7일 이상 사이트 사이트 화면에 게시함으로써
                 개별통지에 갈음할 수 있습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 13조 (회원탈퇴 및 자격상실)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 13조 (회원탈퇴 및 자격상실)</TitleText>
+              <ContentsText>
                 1. 회원이 이용계약을 해지하고자 하는 때에는 회원 본인이 쿠플라이 웹페이지 내의 환경설정 메뉴를 통해
                 가입해지를 신청할 수 있으며, 쿠플라이는 즉시 회원 탈퇴 처리를 합니다.
                 <br />
@@ -725,14 +737,14 @@ function SignUp5Page() {
                 <br />
                 5. 쿠플라이가 회원자격을 상실시키는 경우에는 회원등록을 말소합니다. 이 경우 회원에게 이를 통지하고,
                 회원등록 말소 전에 소명할 기회를 부여합니다.
-              </Typography>
+              </ContentsText>
+              <br />
+              <br />
               <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 4장 서비스 관련 권한, 의무 관계
               </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 14조 (회사의 의무)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              <TitleText>제 14조 (회사의 의무)</TitleText>
+              <ContentsText>
                 1. 쿠플라이는 회원이 희망한 서비스 제공 개시일에 특별한 사정이 없는 한 서비스를 이용할 수 있도록 하여야
                 합니다.
                 <br />
@@ -744,11 +756,10 @@ function SignUp5Page() {
                 4. 쿠플라이는 회원으로부터 제기되는 의견이나 불만이 정당하다고 객관적으로 인정될 경우에는 적절한 절차를
                 거쳐 즉시 처리하여야 합니다. 다만, 즉시 처리가 곤란한 경우는 이용자에게 그 사유와 처리 일정을 통보하여야
                 합니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 15조 (회원의 의무)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 15조 (회원의 의무)</TitleText>
+              <ContentsText>
                 1. 회원은 다음 각 호의 행위를 하여서는 안됩니다.
                 <br />
                 (1) 회원가입 신청 또는 변경 시 허위내용을 등록하는 행위
@@ -787,11 +798,10 @@ function SignUp5Page() {
                 회원자격을 적절한 방법으로 제한 및 정지, 상실시킬 수 있습니다.
                 <br />
                 5. 회원은 그 귀책사유로 인하여 쿠플라이나 다른 회원이 입은 손해를 배상할 책임이 있습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 16조 (저작권의 귀속 및 권리 의무)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 16조 (저작권의 귀속 및 권리 의무)</TitleText>
+              <ContentsText>
                 1. 서비스에 대한 저작권 및 지적재산권은 회사에 있습니다.
                 <br />
                 2. 회원이 서비스상에 게시한 게시물(이하 “게시물’”)의 저작권은 해당 게시물의 저작자에게 있습니다.
@@ -807,11 +817,10 @@ function SignUp5Page() {
                 6. 회원이 서비스상에 게시한 게시물은 검색결과 내지 서비스 프로모션 등에 노출될 수 있으며, 해당 노출을
                 위하여 필요한 경우, 회사는 게시물을 일부 수정하거나 편집 기타 방법으로 이를 게시할 수 있습니다. 이 경우,
                 회원은 회사에 대하여 해당 게시물의 삭제, 검색결과 제외, 비공개 기타 필요한 조치를 요청할 수 있습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 17조 (게시물 관리)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 17조 (게시물 관리)</TitleText>
+              <ContentsText>
                 1. 쿠플라이는 회원에 대한 별도의 조치 없이 회원이 서비스상에 게시한 게시물을 편집하거나 이동할 수 있는
                 권리를 보유합니다.
                 <br />
@@ -832,31 +841,29 @@ function SignUp5Page() {
                 <br />
                 4. 회원의 게시물이 제3자의 저작권 기타 재산권을 침해함으로써 발생하는 일체의 민ㆍ형사상 책임에 대하여,
                 회사는 이를 일체 부담하지 아니합니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 18조 (광고주 및 연결 사이트와의 관계)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 18조 (광고주 및 연결 사이트와의 관계)</TitleText>
+              <ContentsText>
                 1. 쿠플라이의 공식 사이트 이외의 쿠플라이 웹페이지 및 이메일에서 링크된 사이트에서는 쿠플라이의
                 ‘개인정보처리방침’이 적용되지 않습니다.
                 <br />
                 2. 쿠플라이는 쿠플라이 웹페이지 또는 이메일상에 게재되어 있거나 본 서비스를 통한 광고주의 판촉활동에
                 회원이 참여하거나 교신 또는 거래를 함으로써 발생하는 손실과 손해에 대해 책임을 지지 않습니다.
-              </Typography>
+              </ContentsText>
+              <br />
+              <br />
               <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 5장 기타
               </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 19조 (양도의 금지)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              <TitleText>제 19조 (양도의 금지)</TitleText>
+              <ContentsText>
                 회원은 서비스 이용권리를 타인에게 대여, 양도 또는 증여 등을 할 수 없으며, 또한 질권의 목적으로도 사용할
                 수 없습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 20조 (면책 및 배상)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 20조 (면책 및 배상)</TitleText>
+              <ContentsText>
                 1. 쿠플라이는 천재지변 또는 이에 준하는 불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스
                 제공에 관한 책임이 면제됩니다.
                 <br />
@@ -870,21 +877,17 @@ function SignUp5Page() {
                 <br />
                 5. 쿠플라이는 서비스 이용과 관련하여 가입자에게 발생한 손해 가운데 가입자의 고의, 과실에 의한 손해에
                 대하여 책임을 지지 않습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                제 21조 (재판권 및 준거법)
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>제 21조 (재판권 및 준거법)</TitleText>
+              <ContentsText>
                 1. 쿠플라이와 이용자간에 발생한 분쟁에 관한 소송은 서울중앙지방법원을 관할법원으로 합니다.
                 <br />
                 2. 쿠플라이와 이용자간에 제기된 소송에는 대한민국법을 적용합니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                부칙
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
-                1. 본 약관은 2023년 10월 20일부터 시행합니다.
-              </Typography>
+              </ContentsText>
+              <br />
+              <TitleText>부칙</TitleText>
+              <ContentsText>1. 본 약관은 2023년 10월 20일부터 시행합니다.</ContentsText>
             </ScrollBarSmall>
           </TextOutBox>
 
@@ -913,7 +916,7 @@ function SignUp5Page() {
 
           <TextOutBox>
             <ScrollBarSmall isChecked={scrollActive}>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              <ContentsText>
                 쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스(이하 “서비스”라
                 함)를 이용함과 동시에 온라인 상에서 각 운영 서비스에 제공한 개인정보가 보호받을 수 있도록 최선을 다하고
                 있습니다.
@@ -934,8 +937,8 @@ function SignUp5Page() {
                 쿠플라이의 개인정보처리방침은 다음과 같은 내용을 담고 있습니다.
                 <br />
                 <br />
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '600', textAlign: 'left' }}>
+              </ContentsText>
+              <ContentsText style={{ fontWeight: '600' }}>
                 1. 정보 수집에 대한 동의
                 <br />
                 2. 개인정보 수집•이용 목적, 수집하는 개인정보의 항목 및 수집방법
@@ -951,12 +954,9 @@ function SignUp5Page() {
                 7. 고지의 의무
                 <br />
                 <br />
-                <br />
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                1. 정보 수집에 대한 동의
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <TitleText>1. 정보 수집에 대한 동의</TitleText>
+              <ContentsText>
                 (1) 쿠플라이는 개인정보를 개인의 동의 없이 수집하지 않습니다. 쿠플라이는 이용자들이 회사의
                 개인정보처리방침, 이용약관, 기타 서비스 정책 내용에 대하여 '동의' 버튼 또는 '취소' 버튼을 클릭할 수 있는
                 절차를 마련하여, '동의' 버튼을 클릭하면 개인정보 수집에 대해 동의한 것으로 봅니다. (2) 쿠플라이는
@@ -974,10 +974,12 @@ function SignUp5Page() {
                 경우 쉽게 결합할 수 있는지 여부는 다른 정보의 입수 가능성 등 개인을 알아보는 데 소요되는 시간, 비용,
                 기술 등을 합리적으로 고려하여야 합니다.
                 <br />- 가명정보
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                2. 개인정보 수집, 이용 목적, 수집하는 개인정보의 항목 및 수집방법
-              </Typography>
+              </ContentsText>
+              <br />
+              <br />
+              <TitleText>2. 개인정보 수집, 이용 목적, 수집하는 개인정보의 항목 및 수집방법</TitleText>
+              <br />
+
               <StyledTable>
                 <thead>
                   <tr>
@@ -1018,19 +1020,18 @@ function SignUp5Page() {
                   </tr>
                 </tbody>
               </StyledTable>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                3. 개인정보의 제3자 제공
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              <br />
+              <br />
+              <TitleText>3. 개인정보의 제3자 제공</TitleText>
+              <ContentsText>
                 쿠플라이는 이용자의 사전 동의 없이 개인정보를 외부에 제공하지 않습니다. 단, 이용자가 외부 제휴사의
                 서비스를 이용하기 위하여 개인정보 제공에 직접 동의를 한 경우, 그리고 관련 법령에 의거해 쿠플라이에
                 개인정보 제출 의무가 발생한 경우, 이용자의 생명이나 안전에 급박한 위험이 확인되어 이를 해소하기 위한
                 경우에 한하여 개인정보를 제공하고 있습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                4. 개인정보의 보유 및 이용 기간, 개인정보의 파기절차 및 방법
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>4. 개인정보의 보유 및 이용 기간, 개인정보의 파기절차 및 방법</TitleText>
+              <ContentsText>
                 (1) 이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체 없이 파기합니다. 회원
                 탈퇴를 요청하거나 개인정보의 수집 및 이용에 대한 동의를 철회하는 경우, 수집 및 이용목적이 달성되거나
                 보유 및 이용기간이 종료한 경우 해당 개인정보를 지체 없이 파기합니다. 단, 관련 법령에 의하여 보존할
@@ -1044,13 +1045,13 @@ function SignUp5Page() {
                 <br />
                 (2) 쿠플라이는 개인정보의 수집 및 이용목적이 달성된 개인정보는 재생이 불가능한 방법으로 파기하고
                 있습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                5. 개인정보 보호책임자 및 개인정보에 관한 민원 서비스
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>5. 개인정보 보호책임자 및 개인정보에 관한 민원 서비스</TitleText>
+              <ContentsText>
                 쿠플라이는 이용자의 개인정보 관련 문의사항 및 불만 처리 등을 위하여 아래와 같이 개인정보 보호 책임자를
                 지정하고 있습니다.
+                <br />
                 <br />
                 [개인정보 보호책임자]
                 <br />
@@ -1062,27 +1063,26 @@ function SignUp5Page() {
                 관련 민원 발생 시 아래 이메일로 문의주시면 최대한 빠르게 도와드리겠습니다.
                 <br />- 이메일: kupply.devkor@gmail.com
                 <br />
+                <br />
                 기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.
                 <br />
                 - 개인정보 분쟁조정위원회 (www.kopico.go.kr/ 1833-6972) <br />
                 - 개인정보침해신고센터 (privacy.kisa.or.kr / 국번없이 118) <br />
                 - 대검찰청 사이버범죄수사과 (www.spo.go.kr / 국번없이 1301) <br />- 경찰청 사이버수사국
                 (ecrm.police.go.kr / 국번없이 182)
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                6.개인정보의 안전성 확보조치에 관한 사항
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>6.개인정보의 안전성 확보조치에 관한 사항</TitleText>
+              <ContentsText>
                 쿠플라이는 이용자의 개인정보를 안전하게 관리하기 위하여 최선을 다하고 있으며, 개인정보보호법에 따라
                 개인정보를 안전하게 보호하고 있습니다. 또한 개인정보를 처리하는 인원을 최소한으로 제한하고 정기적인
                 교육과 비밀번호 변경을 통해 개인정보가 유출되지 않도록 안전하게 관리하고 있습니다. 다만, 이용자 본인의
                 부주의나 인터넷 상의 문제로 아이디, 비밀번호 등의 개인정보가 유출되어 발생한 문제에 대해 쿠플라이는
                 책임을 지지 않습니다.
-              </Typography>
-              <Typography size="bodyText" style={{ textAlign: 'left' }}>
-                7. 고지의 의무
-              </Typography>
-              <Typography size="mediumText" style={{ fontWeight: '400', textAlign: 'left' }}>
+              </ContentsText>
+              <br />
+              <TitleText>7. 고지의 의무</TitleText>
+              <ContentsText>
                 개인정보처리방침의 내용의 추가, 삭제 및 수정이 있을 경우에는 시행하기 최소 7일 전에 홈페이지 등에
                 공지하도록 하겠습니다.
                 <br />
@@ -1090,7 +1090,7 @@ function SignUp5Page() {
                 <br />
                 - 공고일자: 2023년 10월 10일
                 <br />- 시행일자:2023년 10울 20일
-              </Typography>
+              </ContentsText>
             </ScrollBarSmall>
           </TextOutBox>
 
