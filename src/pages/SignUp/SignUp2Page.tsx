@@ -103,7 +103,7 @@ export default function SignUp2Page() {
   const [stdIDState, setStdIDState] = useState<StateOptions>('default');
   // const [phone, setPhone] = useState<string>(sessionStorage.getItem('phoneNumber') || '');
   // const [phoneState, setPhoneState] = useState<StateOptions>('default');
-  const [dropdownValue, setdropDownValue] = useState<string>('');
+  const [dropdownValue, setdropDownValue] = useState<string>(sessionStorage.getItem('firstMajor') || '');
 
   /* 학번의 유효성 검사 */
   useEffect(() => {
