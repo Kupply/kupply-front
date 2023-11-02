@@ -30,10 +30,11 @@ export interface ModalProps {
   isOpenModal: boolean;
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수;
+  isApplied: boolean;
 }
 
 export default function EditModal(props: ModalProps) {
-  const { isOpenModal, setOpenModal, onClickModal } = props;
+  const { isOpenModal, setOpenModal, onClickModal, isApplied } = props;
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   // 각 버튼의 isClicked 값을 관리하기 위한 변수 선언
@@ -96,9 +97,7 @@ export default function EditModal(props: ModalProps) {
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
   const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
-
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
-
   const originNickname = useRef<string>(localStorage.getItem('nickname'));
   const originstdId = useRef<string>(localStorage.getItem('studentId'));
   const originFirstMajor = useRef<string>(localStorage.getItem('firstMajor'));
@@ -506,6 +505,7 @@ export default function EditModal(props: ModalProps) {
                   취소
                 </PrevButton>
                 <SubmitButton
+                  active={!isApplied}
                   onClick={() => {
                     // setOpenModal(!isOpenModal);
                     setIsSubmitted(true);
@@ -553,6 +553,7 @@ export default function EditModal(props: ModalProps) {
                   취소
                 </PrevButton>
                 <SubmitButton
+                  active={!isApplied}
                   onClick={() => {
                     // setOpenModal(!isOpenModal);
                     setIsSubmitted(true);
@@ -599,6 +600,7 @@ export default function EditModal(props: ModalProps) {
                   취소
                 </PrevButton>
                 <SubmitButton
+                  active={!isApplied}
                   onClick={() => {
                     // setOpenModal(!isOpenModal);
                     setIsSubmitted(true);
@@ -658,6 +660,7 @@ export default function EditModal(props: ModalProps) {
                   취소
                 </PrevButton>
                 <SubmitButton
+                  active={!isApplied}
                   onClick={() => {
                     // setOpenModal(!isOpenModal);
                     setIsSubmitted(true);

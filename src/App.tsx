@@ -63,6 +63,7 @@ export default function App() {
               <Route path="/settings" element={<SettingsPage selected={selected} setSelected={setSelected} />} />
               <Route path="/delete" element={<DeletePage />} />
             </Route>
+
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/archive" element={<PreviousPage />} />
             <Route path="/" element={<MainPage />} />
