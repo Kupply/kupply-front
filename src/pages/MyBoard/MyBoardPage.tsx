@@ -488,7 +488,7 @@ export default function MyBoardPage() {
             height="14"
             viewBox="0 0 14 14"
             fill="none"
-            style={{ position: 'absolute', top: '92px', left: '1310px' }}
+            style={{ position: 'absolute', top: '92px', left: '1248px' }}
           >
             <g clip-path="url(#clip0_4660_23377)">
               <path
@@ -508,7 +508,7 @@ export default function MyBoardPage() {
           </svg>
           <Typography
             size="smallText"
-            style={{ position: 'absolute', color: 'var(--A8_Grey-4, #A8A8A8)', top: '92px', left: '1330px' }}
+            style={{ position: 'absolute', color: 'var(--A8_Grey-4, #A8A8A8)', top: '92px', left: '1268px' }}
           >
             본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
           </Typography>
