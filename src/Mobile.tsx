@@ -53,7 +53,8 @@ const MobilePage = () => {
         size="largeText"
         style={{ color: 'rgba(20, 20, 20, 0.80)', lineHeight: '125%', textAlign: 'center', marginTop: '12px' }}
       >
-        쿠플라이 모바일 버전은 현재 개발중에 있습니다. 빠른 시일 내에 찾아올게요!
+        쿠플라이 모바일 버전은 현재 개발중에 있습니다. <br />
+        빠른 시일 내에 찾아올게요!
       </Typography>
     </MobilePageWrapper>
   );
