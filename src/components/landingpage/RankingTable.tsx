@@ -29,6 +29,8 @@ export default function Table(props: tableProps) {
 
   const navigate = useNavigate();
 
+  const [isInfoVisible, setInfoVisible] = useState(false);
+
   return (
     <Wrapper>
       <TitleWrapper>
@@ -121,45 +123,50 @@ export default function Table(props: tableProps) {
         <HeaderData>최종정원</HeaderData>
         <HeaderData>지원 현황</HeaderData>
         <HeaderData>실시간 경쟁률</HeaderData>
-        <HeaderData>지난 경쟁률</HeaderData>
         <HeaderData>지난 합격자 평균</HeaderData>
         <HeaderData>
           <div style={{ display: 'flex', gap: '4px' }}>
             관심
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-              <g clip-path="url(#clip0_4239_14474)">
-                <path
-                  d="M9.99935 19.2643C14.6017 19.2643 18.3327 15.5334 18.3327 10.931C18.3327 6.32862 14.6017 2.59766 9.99935 2.59766C5.39698 2.59766 1.66602 6.32862 1.66602 10.931C1.66602 15.5334 5.39698 19.2643 9.99935 19.2643Z"
-                  stroke="#A8A8A8"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M10.0078 7.59766L9.99948 7.59766"
-                  stroke="#A8A8A8"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M10.0078 14.2656L10.0078 10.9323"
-                  stroke="#A8A8A8"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_4239_14474">
-                  <rect width="20" height="20" fill="white" transform="translate(0 0.931641)" />
-                </clipPath>
-              </defs>
-            </svg>
+            <InfoIcon onMouseEnter={() => setInfoVisible(true)} onMouseLeave={() => setInfoVisible(false)}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                <g clip-path="url(#clip0_4239_14474)">
+                  <path
+                    d="M9.99935 19.2643C14.6017 19.2643 18.3327 15.5334 18.3327 10.931C18.3327 6.32862 14.6017 2.59766 9.99935 2.59766C5.39698 2.59766 1.66602 6.32862 1.66602 10.931C1.66602 15.5334 5.39698 19.2643 9.99935 19.2643Z"
+                    stroke="#A8A8A8"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.0078 7.59766L9.99948 7.59766"
+                    stroke="#A8A8A8"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.0078 14.2656L10.0078 10.9323"
+                    stroke="#A8A8A8"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_4239_14474">
+                    <rect width="20" height="20" fill="white" transform="translate(0 0.931641)" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </InfoIcon>
           </div>
-          <Info>
-            <InfoBody>사용자들의 희망 이중전공을 기준으로 집계된 것으로, 실제 지원과 차이가 있을 수 있습니다.</InfoBody>
-          </Info>
+          {isInfoVisible && (
+            <Info>
+              <InfoBody>
+                사용자들의 희망 이중전공을 기준으로 집계된 것으로, 실제 지원과 차이가 있을 수 있습니다.
+              </InfoBody>
+            </Info>
+          )}
         </HeaderData>
       </TableHeader>
       {isShowAll && order === 'descending'
@@ -226,7 +233,12 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   position: sticky;
   top: 0;
-  background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3));
+  background: linear-gradient(
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(255, 255, 255, 0) 95%,
+    rgba(255, 255, 255, 0) 100%
+  );
   z-index: 990;
 `;
 
@@ -275,6 +287,8 @@ const TableHeader = styled.div`
 `;
 
 const HeaderData = styled.div`
+  position: relative;
+  display: inline-block;
   color: #a8a8a8;
   font-family: Pretendard;
   font-size: 20px;
@@ -296,39 +310,47 @@ const HeaderData = styled.div`
 
   &:nth-child(3) {
     width: 125px;
+    padding-right: 15px;
   }
 
   &:nth-child(4) {
     width: 132px;
+    padding-right: 15px;
   }
 
   &:nth-child(5) {
     width: 165px;
-    padding-right: 94px;
+    padding-right: 105px;
   }
 
   &:nth-child(6) {
-    width: 130px;
+    width: 165px;
+    padding-right: 105px;
   }
 
   &:nth-child(7) {
-    width: 220px;
-    padding-right: 100px;
+    width: 100px;
   }
 
-  &:nth-child(8) {
-    position: relative;
-  }
+  //&:nth-child(8) {
+  // width: 400px;
+  //padding-right: 200px;
+  //position: relative;
+  //}
+  //
+`;
+
+const InfoIcon = styled.div`
+  height: auto;
+  width: auto;
+  position: relative;
+  display: inline-block;
 `;
 
 const Info = styled.div`
   position: absolute;
-  bottom: 50px;
-  right: -140px;
-  opacity: 0;
-  ${HeaderData}:hover & {
-    opacity: 1;
-  }
+  bottom: 54px;
+  right: -100px;
 `;
 
 const InfoBody = styled.div`
