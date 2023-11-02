@@ -13,13 +13,7 @@ type StudentData = {
 
 // 가상 데이터
 const RankData: StudentData[] = [
-  { name: 'aaa', gpa: '2.5', hopemajor: '경영학과' },
-  { name: 'bbb', gpa: '2.5', hopemajor: '경영학과' },
-  { name: 'ccc', gpa: '2.5', hopemajor: '경영학과' },
-  { name: 'ddd', gpa: '2.5', hopemajor: '경영학과' },
-  { name: 'eee', gpa: '3.0', hopemajor: '경영학과' },
-  { name: 'fff', gpa: '3.0', hopemajor: '경영학과' },
-  { name: 'ggg', gpa: '3.0', hopemajor: '경영학과' },
+  { name: 'ggg', gpa: '2.8', hopemajor: '경영학과' },
   { name: 'hhh', gpa: '3.0', hopemajor: '경영학과' },
   { name: 'iii', gpa: '3.5', hopemajor: '경영학과' },
   { name: 'jjj', gpa: '3.5', hopemajor: '경영학과' },
@@ -27,7 +21,7 @@ const RankData: StudentData[] = [
   { name: 'lll', gpa: '3.5', hopemajor: '경영학과' },
   { name: 'mmm', gpa: '4.0', hopemajor: '경영학과' },
   { name: 'nnn', gpa: '4.0', hopemajor: '경영학과' },
-  { name: 'hhh', gpa: '4.0', hopemajor: '경영학과' },
+  { name: 'hhh', gpa: '4.2', hopemajor: '경영학과' },
   { name: '고대빵', gpa: '4.0', hopemajor: '경영학과' },
 ];
 
@@ -36,30 +30,37 @@ const Num = 10;
 
 const MyData: StudentData = { name: '고대빵', gpa: '4.0', hopemajor: '경영학과' };
 
-const myGrade: number = parseFloat(MyData.gpa);
-const allGrade: number[] = RankData.map((student) => parseFloat(student.gpa));
-allGrade.sort((a, b) => b - a); // 학점을 내림차순으로 정렬
+// 전체 학점만 추출하여 내림차순으로 정렬
+const allGPAs = RankData.map((student) => parseFloat(student.gpa));
+allGPAs.sort((a, b) => b - a);
 
-// 내 등수 계산
-const myRank: number = allGrade.findIndex((grade) => grade === myGrade) + 1;
-// console.log('My Rank:', myRank);
+const myGPA = parseFloat(MyData.gpa);
 
-// 백분율 계산
-const myPercentile: number = parseFloat((100 - (1 - myRank / RankData.length) * 100).toFixed(1));
+// MyData의 GPA를 포함한 전체 GPA 배열 생성
+const allGPAsIncludingMyGPA = [...allGPAs, myGPA];
+
+// MyData의 GPA를 포함한 전체 GPA 배열을 내림차순으로 정렬
+allGPAsIncludingMyGPA.sort((a, b) => b - a);
+
+// MyData의 등수 계산
+const myRank = allGPAsIncludingMyGPA.indexOf(myGPA) + 1;
+
+// 등수를 퍼센트로 나타내기
+let myPercentile = (myRank / Num) * 100;
 
 function calculateRank(): Rank {
   if (Num <= RankData.length) {
-    if (myRank <= RankData.length * 0.25) {
+    if (myPercentile <= 25) {
       return 'Safe';
-    } else if (myRank <= RankData.length * 0.5) {
+    } else if (myPercentile <= 50) {
       return 'Normal';
-    } else if (myRank <= RankData.length * 0.75) {
+    } else if (myPercentile <= 75) {
       return 'Dangerous';
     } else {
       return 'VeryDangerous';
     }
   } else {
-    if (myRank <= RankData.length * 0.5) {
+    if (myPercentile <= 50) {
       return 'Normal';
     } else {
       return 'Dangerous';
@@ -941,7 +942,7 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                {MyName}님의 {HopeMajor}
+                {HopeMajor}
               </Typography>
               <Typography
                 size="mediumText"
@@ -951,7 +952,7 @@ const MyStageChart: React.FC = () => {
                   marginLeft: '5px',
                 }}
               >
-                이중 지원 시
+                이중 지원자들 중
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '763px', marginTop: '-3px' }}>
@@ -964,7 +965,18 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                지원안정도 점수
+                {MyName}님의&nbsp;
+              </Typography>
+              <Typography
+                size="mediumText"
+                style={{
+                  color: 'var(--Main-Black, #141414)',
+                  // marginLeft: '100px',
+                  fontWeight: '700',
+                  lineHeight: '133.333%',
+                }}
+              >
+                학점
               </Typography>
               <Typography
                 size="mediumText"
@@ -973,7 +985,7 @@ const MyStageChart: React.FC = () => {
                   fontWeight: '400',
                 }}
               >
-                는
+                은 상위
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '770px', marginTop: '2px' }}>
@@ -1397,7 +1409,7 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                {MyName}님의 {HopeMajor}
+                {HopeMajor}
               </Typography>
               <Typography
                 size="mediumText"
@@ -1407,7 +1419,7 @@ const MyStageChart: React.FC = () => {
                   marginLeft: '5px',
                 }}
               >
-                이중 지원 시
+                이중 지원자들 중
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '763px', marginTop: '-3px' }}>
@@ -1420,7 +1432,18 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                지원안정도 점수
+                {MyName}님의&nbsp;
+              </Typography>
+              <Typography
+                size="mediumText"
+                style={{
+                  color: 'var(--Main-Black, #141414)',
+                  // marginLeft: '100px',
+                  fontWeight: '700',
+                  lineHeight: '133.333%',
+                }}
+              >
+                학점
               </Typography>
               <Typography
                 size="mediumText"
@@ -1429,7 +1452,7 @@ const MyStageChart: React.FC = () => {
                   fontWeight: '400',
                 }}
               >
-                는
+                은 상위
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '770px', marginTop: '2px' }}>
@@ -1853,7 +1876,7 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                {MyName}님의 {HopeMajor}
+                {HopeMajor}
               </Typography>
               <Typography
                 size="mediumText"
@@ -1863,7 +1886,7 @@ const MyStageChart: React.FC = () => {
                   marginLeft: '5px',
                 }}
               >
-                이중 지원 시
+                이중 지원자들 중
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '763px', marginTop: '-3px' }}>
@@ -1876,7 +1899,18 @@ const MyStageChart: React.FC = () => {
                   lineHeight: '133.333%',
                 }}
               >
-                지원안정도 점수
+                {MyName}님의&nbsp;
+              </Typography>
+              <Typography
+                size="mediumText"
+                style={{
+                  color: 'var(--Main-Black, #141414)',
+                  // marginLeft: '100px',
+                  fontWeight: '700',
+                  lineHeight: '133.333%',
+                }}
+              >
+                학점
               </Typography>
               <Typography
                 size="mediumText"
@@ -1885,7 +1919,7 @@ const MyStageChart: React.FC = () => {
                   fontWeight: '400',
                 }}
               >
-                는
+                은 상위
               </Typography>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', marginLeft: '770px', marginTop: '2px' }}>
