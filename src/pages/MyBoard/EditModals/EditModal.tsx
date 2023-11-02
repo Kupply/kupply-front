@@ -18,6 +18,7 @@ import { majorAllList } from '../../../common/majorAll';
 import { majorTargetList } from '../../../common/majorTarget';
 import client from '../../../utils/httpClient';
 import NicknameCheckButton from '../../../assets/NicknameCheckButton';
+import { useNavigate } from 'react-router-dom';
 
 /*
 남은 개발
@@ -116,6 +117,8 @@ export default function EditModal(props: ModalProps) {
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
 
+  const navigate = useNavigate();
+
   const config = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -160,7 +163,14 @@ export default function EditModal(props: ModalProps) {
     }
     if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
       const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
-      updateData = { ...updateData, newCurGPA: newGpa };
+      const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
+
+      if (Math.abs(oldGpa - newGpa) >= 1.5) {
+        alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
+        navigate('/myboard');
+      } else {
+        updateData = { ...updateData, newCurGPA: newGpa };
+      }
     }
     if (
       originHopeSemester1.current !== hopeSemester1 ||
