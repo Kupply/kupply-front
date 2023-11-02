@@ -26,7 +26,7 @@ const activeWrapper = css`
   align-items: center;
   background: #d85888;
   box-shadow: 0px 4px 40px 6px #d8588840;
-  border: 1px solid #b9b9b9;
+  border: 1px solid #d85888;
   border-radius: 5px;
 `;
 
