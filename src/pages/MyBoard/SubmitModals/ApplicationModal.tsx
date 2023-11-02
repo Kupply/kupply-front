@@ -537,6 +537,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
+  overflow-y: scroll;
   z-index: 1005;
 `;
 
