@@ -20,6 +20,7 @@ export interface ITableData {
   applyNumber: number;
   competition: number;
   pastCompetition: number;
+  fakeAppliedNumber: number;
   pastmin: number;
   pastmean: number;
   interest: number;
@@ -64,7 +65,7 @@ const LandingPage = () => {
   const cardData = tableData.map((data) => ({
     name: data.secondMajor,
     eng: data.engName,
-    경쟁률: data.pastCompetition,
+    모의지원자수: data.fakeAppliedNumber,
     선발인원: data.pastRecruitNumber,
     min: data.pastmin,
     mean: data.pastmean,

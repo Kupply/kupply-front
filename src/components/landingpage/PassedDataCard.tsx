@@ -11,7 +11,7 @@ type buttonOptions = 'default' | 'hover' | 'active';
 export interface ICardData {
   name: string;
   eng: string;
-  경쟁률: number;
+  모의지원자수: number;
   선발인원: number;
   min: number;
   mean: number;

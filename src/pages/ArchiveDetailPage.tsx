@@ -300,7 +300,7 @@ const ArchiveDetailPage = () => {
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>합격자 수</Text>
+            <Text>모의 지원 합격자 수</Text>
             <SelectionInfoValue>{enoughData ? numOfPassed : 0}명</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
@@ -641,7 +641,7 @@ const SelectionInfoWrapper = styled.div`
 `;
 
 const SelectionInfoContentsWrapper = styled.div`
-  gap: 114px;
+  gap: 96px;
   display: flex;
 `;
 
