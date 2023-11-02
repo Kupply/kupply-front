@@ -45,10 +45,15 @@ export default function Ending() {
           <Typography size="heading1" bold="400" color="rgba(20, 20, 20, 0.80)">
             당신이 찾는&nbsp;
           </Typography>
-          <GradationText>이중전공에 대한 모든 정보,</GradationText>
+          <Typography size="heading1">이중전공에 대한 모든 정보,</Typography>
         </TextWrapper>
         <TextWrapper>
-          <img src="../../design_image/Kupply_ver1.png" width="490px" height="120px" />
+          <img
+            src="../../design_image/ending.png"
+            width="490px"
+            height="120px"
+            style={{ marginTop: '44px', marginLeft: '129px' }}
+          />
         </TextWrapper>
       </ContentWrapper>
     </MainWrapper>
