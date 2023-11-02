@@ -221,21 +221,21 @@ export default function MyBoardPage() {
   const [pastData1, setPastData1] = useState([
     {
       numOfSelection: 10,
-      numOfApplication: 5,
+      numOfPassed: 5,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
       numOfSelection: 20,
-      numOfApplication: 5,
+      numOfPassed: 5,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
       numOfSelection: 30,
-      numOfApplication: 5,
+      numOfPassed: 5,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -244,21 +244,21 @@ export default function MyBoardPage() {
   const [pastData2, setPastData2] = useState([
     {
       numOfSelection: 40,
-      numOfApplication: 5,
+      numOfPassed: 5,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
       numOfSelection: 50,
-      numOfApplication: 5,
+      numOfPassed: 5,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
     },
     {
       numOfSelection: 60,
-      numOfApplication: 5,
+      numOfPassed: 5,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -371,7 +371,7 @@ export default function MyBoardPage() {
 
           newPastData1[i] = {
             numOfSelection: newPastData1[i].numOfSelection,
-            numOfApplication: data.overallData.numberOfData,
+            numOfPassed: data.passedData.passedNumberOfData,
             competitionRate: competitionRate,
             meanGpa: data.passedData.passedMeanGPAData.gpa,
             minGpa: data.passedData.passedMinimumGPAData.gpa,
@@ -396,7 +396,7 @@ export default function MyBoardPage() {
 
           newPastData2[i] = {
             numOfSelection: newPastData2[i].numOfSelection,
-            numOfApplication: data.overallData.numberOfData,
+            numOfPassed: data.passedData.passedNumberOfData,
             competitionRate: competitionRate,
             meanGpa: data.passedData.passedMeanGPAData.gpa,
             minGpa: data.passedData.passedMinimumGPAData.gpa,
@@ -470,7 +470,7 @@ export default function MyBoardPage() {
 
   const isWithinTimeRange = () => {
     const now = new Date();
-    const startTime = new Date('2023-11-08T10:00:00'); //2023-11-08로 고쳐야함
+    const startTime = new Date('2023-11-01T10:00:00'); //2023-11-08로 고쳐야함
     const endTime = new Date('2023-11-10T17:00:00');
 
     return now >= startTime && now <= endTime;
@@ -1191,7 +1191,7 @@ export default function MyBoardPage() {
                           }}
                         >
                           <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                            모의지원자 수
+                            합격자 수
                           </Typography>
                           <Typography
                             size="largeText"
@@ -1201,10 +1201,10 @@ export default function MyBoardPage() {
                             }}
                           >
                             {semesterBtnStates['2023-1R']
-                              ? pastData1[0].numOfApplication
+                              ? pastData1[0].numOfPassed
                               : semesterBtnStates['2022-2R']
-                              ? pastData1[1].numOfApplication
-                              : pastData1[2].numOfApplication}{' '}
+                              ? pastData1[1].numOfPassed
+                              : pastData1[2].numOfPassed}{' '}
                             명
                           </Typography>
                         </div>
@@ -1628,7 +1628,7 @@ export default function MyBoardPage() {
                           }}
                         >
                           <Typography size="mediumText" style={{ color: 'rgba(20, 20, 20, 0.60)' }}>
-                            모의지원자 수
+                            합격자 수
                           </Typography>
                           <Typography
                             size="largeText"
@@ -1638,10 +1638,10 @@ export default function MyBoardPage() {
                             }}
                           >
                             {semesterBtnStates['2023-1R']
-                              ? pastData2[0].numOfApplication
+                              ? pastData2[0].numOfPassed
                               : semesterBtnStates['2022-2R']
-                              ? pastData2[1].numOfApplication
-                              : pastData2[2].numOfApplication}{' '}
+                              ? pastData2[1].numOfPassed
+                              : pastData2[2].numOfPassed}{' '}
                             명
                           </Typography>
                         </div>
@@ -1779,7 +1779,7 @@ export default function MyBoardPage() {
               </>
             )}
             {isApplied ? null : (
-              <div style={{ display: 'flex', zIndex: 2, marginTop: '-830px', marginLeft: '550px' }}>
+              <div style={{ display: 'flex', zIndex: 2, marginTop: '-830px', marginLeft: '553px' }}>
                 <BlurWrapper>
                   <BlurMsg>
                     <Typography size="largeText">실시간 지원자 통계는 모의지원 후 열람 가능합니다.</Typography>
