@@ -1091,7 +1091,7 @@ export default function MyBoardPage() {
                         size="bodyText"
                         style={{ color: 'var(--Main-Black, #141414)', marginTop: '26px', marginLeft: '36px' }}
                       >
-                        3학기 합격지표
+                        최근 3학기 합격지표
                       </Typography>
                       <EachYearHeadBox>
                         <SemesterButton
@@ -1130,29 +1130,35 @@ export default function MyBoardPage() {
                           {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}
                           R {userData.hopeMajor1} 모집정보
                         </Typography>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="60"
-                          height="60"
-                          viewBox="0 0 60 60"
-                          fill="none"
-                          style={{ marginLeft: '-1px' }}
+                        <button
+                          onClick={() => {
+                            navigate(`/archive/${userData.hopeMajor1}`);
+                          }}
                         >
-                          <path
-                            d="M26 37L34 30"
-                            stroke="#141414"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M34 30L26 22"
-                            stroke="#141414"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="60"
+                            height="60"
+                            viewBox="0 0 60 60"
+                            fill="none"
+                            style={{ marginLeft: '-1px' }}
+                          >
+                            <path
+                              d="M26 37L34 30"
+                              stroke="#141414"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M34 30L26 22"
+                              stroke="#141414"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
                       </TextBox>
                       <div style={{ display: 'flex', marginTop: '50px' }}>
                         <div
@@ -1567,29 +1573,35 @@ export default function MyBoardPage() {
                           {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}
                           R {userData.hopeMajor2} 모집정보
                         </Typography>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="60"
-                          height="60"
-                          viewBox="0 0 60 60"
-                          fill="none"
-                          style={{ marginLeft: '-1px' }}
+                        <button
+                          onClick={() => {
+                            navigate(`/archive/${userData.hopeMajor2}`);
+                          }}
                         >
-                          <path
-                            d="M26 37L34 30"
-                            stroke="#141414"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M34 30L26 22"
-                            stroke="#141414"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="60"
+                            height="60"
+                            viewBox="0 0 60 60"
+                            fill="none"
+                            style={{ marginLeft: '-1px' }}
+                          >
+                            <path
+                              d="M26 37L34 30"
+                              stroke="#141414"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M34 30L26 22"
+                              stroke="#141414"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
                       </TextBox>
                       <div style={{ display: 'flex', marginTop: '50px' }}>
                         <div
