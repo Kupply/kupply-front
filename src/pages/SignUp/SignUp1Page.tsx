@@ -128,10 +128,12 @@ export const sendEmail = async (email: string) => {
   try {
     await axios.post(url, { email: email });
     // await client.post('/auth/sendEmail', { email: email });
-  } catch (e) {
+    return true;
+  } catch (e: any) {
     //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
-    alert(e);
+    alert(e.response.data.error.message);
     console.log(e);
+    return false;
   }
 };
 
@@ -184,7 +186,11 @@ export default function SignUp1Page() {
   useEffect(() => {
     // /if (!sessionStorage.getItem('email')) navigate('/');
     async function sendFirst(email: string) {
-      await sendEmail(email);
+      const result = await sendEmail(email);
+
+      if (!result) {
+        navigate('/login');
+      }
     }
 
     sendFirst(email);
