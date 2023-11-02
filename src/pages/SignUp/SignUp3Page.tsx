@@ -149,7 +149,9 @@ export default function SignUp3Page() {
   const [password2, setPassword2] = useState<string>('');
   const [password2State, setPassword2State] = useState<StateOptions>('default');
   const [nickname, setNickname] = useState<string>(sessionStorage.getItem('nickname') || '');
-  const [nicknameState, setnicknameState] = useState<StateOptions>('default');
+  const [nicknameState, setnicknameState] = useState<StateOptions>(
+    sessionStorage.getItem('nickname') ? 'filled' : 'default',
+  );
   const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('default');
 
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
