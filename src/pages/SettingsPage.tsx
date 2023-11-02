@@ -15,6 +15,20 @@ import NicknameCheckButton from '../assets/NicknameCheckButton';
 import client from '../utils/httpClient';
 import { majorTargetList } from '../common/majorTarget';
 import { majorAllList } from '../common/majorAll';
+import AlertIconExclamation from '../assets/icons/AlertIconExclamation';
+import MockApplicationButton from '../assets/myboardpage/MockApplication';
+import ModalLarge from '../components/base/ModalLarge';
+
+const Main = styled.main`
+  width: 100%;
+  height: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  left: 70px;
+  z-index: 1005;
+`;
 
 const Sidebar = styled.div`
   width: 521px;
@@ -139,6 +153,18 @@ const TextFieldTitle = styled.div`
   line-height: 18px;
 `;
 
+const CloseButton = styled.button`
+  display: flex;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  cursor: pointer;
+`;
+
 const Optional = styled.span`
   color: var(--A8_Grey-4, #a8a8a8);
   text-align: right;
@@ -250,6 +276,7 @@ const VerifiBoxWrapper = styled.div`
 `;
 
 const ModalBg = styled.div`
+  // 모달 백그라운드
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -258,7 +285,7 @@ const ModalBg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 500;
+  z-index: 1005;
 `;
 
 const ModalWrapper = styled.div`
@@ -336,6 +363,16 @@ const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 9px;
+`;
+
+const AlertWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 628px;
+  height: 796px;
+  align-items: center;
+  text-align: center;
+  margin: auto auto;
 `;
 
 type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
@@ -686,29 +723,34 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       {modalOpen && (
-        <ModalBg>
-          <ModalWrapper>
-            <XWrapper
+        <Main>
+          <ModalLarge
+            onClickToggleModal={() => {
+              setModalOpen(!modalOpen);
+            }}
+          >
+            <CloseButton
               onClick={() => {
-                setModalOpen(false);
+                setModalOpen(!modalOpen);
               }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
-                  d="M38.9142 23.9142C39.6953 23.1332 39.6953 21.8668 38.9142 21.0858C38.1332 20.3047 36.8668 20.3047 36.0858 21.0858L30 27.1716L23.9142 21.0858C23.1332 20.3047 21.8668 20.3047 21.0858 21.0858C20.3047 21.8668 20.3047 23.1332 21.0858 23.9142L27.1716 30L21.0858 36.0858C20.3047 36.8668 20.3047 38.1332 21.0858 38.9142C21.8668 39.6953 23.1332 39.6953 23.9142 38.9142L30 32.8284L36.0858 38.9142C36.8668 39.6953 38.1332 39.6953 38.9142 38.9142C39.6953 38.1332 39.6953 36.8668 38.9142 36.0858L32.8284 30L38.9142 23.9142Z"
-                  fill="#434343"
+                  d="M38.2071 23.2071C38.5976 22.8166 38.5976 22.1834 38.2071 21.7929C37.8166 21.4024 37.1834 21.4024 36.7929 21.7929L30 28.5858L23.2071 21.7929C22.8166 21.4024 22.1834 21.4024 21.7929 21.7929C21.4024 22.1834 21.4024 22.8166 21.7929 23.2071L28.5858 30L21.7929 36.7929C21.4024 37.1834 21.4024 37.8166 21.7929 38.2071C22.1834 38.5976 22.8166 38.5976 23.2071 38.2071L30 31.4142L36.7929 38.2071C37.1834 38.5976 37.8166 38.5976 38.2071 38.2071C38.5976 37.8166 38.5976 37.1834 38.2071 36.7929L31.4142 30L38.2071 23.2071Z"
+                  fill="#141414"
                 />
               </svg>
-            </XWrapper>
-            <ModalFlex>
-              <img src="/design_image/AlertWarning.png" alt="delete" width={128} />
-              <TitleModal>변경한 학점을 저장하시겠습니까?</TitleModal>
-              <br />
-              <Description>
-                수정을 저장하면 이번 이중전공 지원 시즌 동안 <br /> 단 한 번의 학점 수정 기회가 남아요.
-              </Description>
+            </CloseButton>
+            <AlertWrapper style={{ marginTop: '180px' }}>
+              <AlertIconExclamation width="113px" height="113px" />
+              <Typography size="largeText" bold="700" style={{ marginTop: '25px' }}>
+                변경한 정보를 저장하시겠습니까?
+              </Typography>
+              <Typography size="mediumText" bold="500" style={{ marginTop: '24px', lineHeight: '136.111%' }}>
+                이중전공 지원 기간 동안에는 학점 수정이 최대 두 번까지만 가능해요.
+              </Typography>
               <div style={{ display: 'flex', gap: 22, marginTop: 60 }}>
                 <div
                   style={{ marginTop: 30 }}
@@ -737,9 +779,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                   </LabelButton>
                 </div>
               </div>
-            </ModalFlex>
-          </ModalWrapper>
-        </ModalBg>
+            </AlertWrapper>
+          </ModalLarge>
+        </Main>
       )}
       <Sidebar>
         <Content>
@@ -1760,3 +1802,65 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
 };
 
 export default SettingsPage;
+
+/*
+
+<ModalBg>
+          <ModalWrapper>
+            <XWrapper
+              onClick={() => {
+                setModalOpen(false);
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M38.9142 23.9142C39.6953 23.1332 39.6953 21.8668 38.9142 21.0858C38.1332 20.3047 36.8668 20.3047 36.0858 21.0858L30 27.1716L23.9142 21.0858C23.1332 20.3047 21.8668 20.3047 21.0858 21.0858C20.3047 21.8668 20.3047 23.1332 21.0858 23.9142L27.1716 30L21.0858 36.0858C20.3047 36.8668 20.3047 38.1332 21.0858 38.9142C21.8668 39.6953 23.1332 39.6953 23.9142 38.9142L30 32.8284L36.0858 38.9142C36.8668 39.6953 38.1332 39.6953 38.9142 38.9142C39.6953 38.1332 39.6953 36.8668 38.9142 36.0858L32.8284 30L38.9142 23.9142Z"
+                  fill="#434343"
+                />
+              </svg>
+            </XWrapper>
+            <ModalFlex>
+              <img src="/design_image/AlertWarning.png" alt="delete" width={128} />
+              <TitleModal>변경한 학점을 저장하시겠습니까?</TitleModal>
+              <br />
+              <Description>
+                수정을 저장하면 이번 이중전공 지원 시즌 동안 <br /> 단 한 번의 학점 수정 기회가 남아요.
+              </Description>
+              <div style={{ display: 'flex', gap: 22, marginTop: 60 }}>
+                <div
+                  style={{ marginTop: 30 }}
+                  onClick={() => {
+                    navigate('/settings');
+                  }}
+                >
+                  <LabelButton
+                    buttonType="secondary"
+                    size="medium"
+                    onClick={() => {
+                      setModalOpen(false);
+                    }}
+                  >
+                    취소
+                  </LabelButton>
+                </div>
+                <div
+                  style={{ marginTop: 30 }}
+                  onClick={() => {
+                    thirdSubmit();
+                  }}
+                >
+                  <LabelButton buttonType="primary" size="medium">
+                    확인
+                  </LabelButton>
+                </div>
+              </div>
+            </ModalFlex>
+          </ModalWrapper>
+        </ModalBg>
+
+
+
+
+*/

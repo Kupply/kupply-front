@@ -194,7 +194,7 @@ function LoginPage(props: LoginPageProps) {
         <Login2JoinModal isOpenAlert={isOpenAlert} setOpenAlert={setOpenAlert} onClickModal={handleLink2Click} />
       ) : null}
       <LoginBox>
-        <LogoImage src="../../design_image/Kupply_ver1.png" style={{ marginTop: '49px' }} />
+        <LogoImage src="../../design_image/Kupply_ver1.png" style={{ marginTop: '49px', marginBottom: '11.54px' }} />
         <Typography size="mediumText">고려대학교 메일로 이용하는 쿠플라이의 모든 서비스</Typography>
         <TextFieldWrapper>
           <TextBox style={{ height: '105px' }}>

@@ -294,10 +294,12 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   };
   const handleSettingsClick = () => {
     setSelected(0);
+    setToggle(false);
     navigate('/settings');
   };
   const handleMessageClick = () => {
     setSelected(4);
+    setToggle(false);
     navigate('/settings');
   };
   const handleLoginClick = () => {
