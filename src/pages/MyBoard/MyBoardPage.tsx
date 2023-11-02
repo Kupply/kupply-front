@@ -1858,7 +1858,7 @@ const LeftSideWrapper = styled.div`
   position: absolute;
   flex-shrink: 0;
   background: linear-gradient(89deg, rgba(238, 238, 238, 0.44) 10.94%, rgba(217, 217, 217, 0) 99.54%);
-  left: 120px;
+  left: 55px;
   top: 0;
   z-index: 1;
 `;
