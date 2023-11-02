@@ -976,9 +976,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         <BodyContainer>
           <BodyTitle>마이보드 프로필 수정하기</BodyTitle>
           <BodyContent>
-            마이보드는 도전자님이 작성하신 정보를 바탕으로, 도전자님의 희망 이중전공 진입을 도울 다양한 정보를
+            마이보드는 도전자님이 작성하신 정보를 바탕으로, 도전자님의 희망 이중전공 진입을 도울
             <br />
-            제공합니다. 신뢰할 수 있는 마이보드를 제공받기 위해 정보를 수정하세요.
+            다양한 정보를 제공합니다. 신뢰할 수 있는 마이보드를 제공받기 위해 정보를 수정하세요.
           </BodyContent>
           <TextFieldTitle>
             <strong>희망 이중전공</strong> 수정하기
@@ -1063,7 +1063,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         <BodyContainer>
           <BodyTitle>계정관리</BodyTitle>
           <BodyContent>
-            안전한 개인정보 보호를 위해 비밀번호를 변경하세요. 쿠플라이의 아이디는 고려대학교 이메일 입니다.
+            안전한 개인정보 보호를 위해 비밀번호를 변경하세요. 쿠플라이의 아이디는 고려대학교 <br />
+            이메일 입니다.
           </BodyContent>
           <TextFieldTitle>
             <strong>쿠플라이 아이디</strong>
