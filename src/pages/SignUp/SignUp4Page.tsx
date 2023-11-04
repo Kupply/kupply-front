@@ -498,17 +498,13 @@ export function SignUp4PagePasser() {
             <VerifiBoxWrapper>
               <VerificationBox name="semester-1" value={passSemester1} setValue={setPassSemester1}></VerificationBox>
               <VerificationBox name="semester-2" value={passSemester2} setValue={setPassSemester2}></VerificationBox>
-              <div style={{ marginTop: 26 }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" fill="none">
-                  <path stroke="#000" stroke-linecap="round" stroke-width="2" d="M1 1h10" />
-                </svg>
-              </div>
-              <VerificationBox
-                name="semester-3"
-                value={passSemester3}
-                setValue={setPassSemester3}
-                setRef={setLastBoxRef}
-              ></VerificationBox>
+              <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                년도
+              </Typography>
+              <VerificationBox name="semester-3" value={passSemester3} setValue={setPassSemester3}></VerificationBox>
+              <Typography size={'normalText'} style={{ marginTop: '58px' }}>
+                학기
+              </Typography>
             </VerifiBoxWrapper>
           </ContentsWrapper>
         </ContentsList>
