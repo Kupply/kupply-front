@@ -360,7 +360,6 @@ export default function MyBoardPage() {
       const newPastData1 = [...pastData1];
       for (let i = 0; i < semester.length; i++) {
         try {
-          // const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor1}/${semester[i]}`, config);
           const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
           const data = APIresponse.data.pastData;
 
@@ -385,7 +384,6 @@ export default function MyBoardPage() {
       const newPastData2 = [...pastData2];
       for (let i = 0; i < semester.length; i++) {
         try {
-          // const APIresponse = await axios.get(`http://localhost:8080/pastData/${hopeMajor2}/${semester[i]}`, config);
           const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
           const data = APIresponse.data.pastData;
 
@@ -408,7 +406,9 @@ export default function MyBoardPage() {
       setPastData2(newPastData2);
     };
 
-    getPastData();
+    if (userData.hopeMajor1 && userData.hopeMajor2) {
+      getPastData();
+    }
   }, [userData]);
 
   function formatTimeTo12HourFormat(date: Date) {
@@ -425,7 +425,6 @@ export default function MyBoardPage() {
 
   const getCurData = async () => {
     try {
-      // const APIresponse = await axios.get(`http://localhost:8080/dashboard/hopeMajorsCurrentInfo`, config);
       const APIresponse = await client.get('/dashboard/hopeMajorsCurrentInfo');
       const data = APIresponse.data.data;
 
@@ -494,20 +493,22 @@ export default function MyBoardPage() {
   const getMyStageData = async () => {
     const APIresponse = await client.get('/dashboard/myStage');
     const data = APIresponse.data.data;
-    setMyStageData([
-      {
-        majorName: userData.hopeMajor1,
-        recruitNum: recruit[userData.hopeMajor1]['2023-2'] || 0,
-        applyNum: data[0].applyNum,
-        rank: data[0].rank,
-      },
-      {
-        majorName: userData.hopeMajor2,
-        recruitNum: recruit[userData.hopeMajor2]['2023-2'] || 0,
-        applyNum: data[1].applyNum,
-        rank: data[1].rank,
-      },
-    ]);
+    if (userData.hopeMajor1 && userData.hopeMajor2) {
+      setMyStageData([
+        {
+          majorName: userData.hopeMajor1,
+          recruitNum: recruit[userData.hopeMajor1]['2023-2'] || 0,
+          applyNum: data[0].applyNum,
+          rank: data[0].rank,
+        },
+        {
+          majorName: userData.hopeMajor2,
+          recruitNum: recruit[userData.hopeMajor2]['2023-2'] || 0,
+          applyNum: data[1].applyNum,
+          rank: data[1].rank,
+        },
+      ]);
+    }
   };
 
   useEffect(() => {
