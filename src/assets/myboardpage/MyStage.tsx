@@ -12,44 +12,44 @@ type StudentData = {
 };
 
 // 가상 데이터
-const RankData: StudentData[] = [
-  { name: 'ggg', gpa: '2.8', hopemajor: '경영학과' },
-  { name: 'hhh', gpa: '3.0', hopemajor: '경영학과' },
-  { name: 'iii', gpa: '3.5', hopemajor: '경영학과' },
-  { name: 'jjj', gpa: '3.5', hopemajor: '경영학과' },
-  { name: 'kkk', gpa: '3.5', hopemajor: '경영학과' },
-  { name: 'lll', gpa: '3.5', hopemajor: '경영학과' },
-  { name: 'mmm', gpa: '4.0', hopemajor: '경영학과' },
-  { name: 'nnn', gpa: '4.0', hopemajor: '경영학과' },
-  { name: 'hhh', gpa: '4.2', hopemajor: '경영학과' },
-  { name: '고대빵', gpa: '4.0', hopemajor: '경영학과' },
-];
+// const RankData: StudentData[] = [
+//   { name: 'ggg', gpa: '2.8', hopemajor: '경영학과' },
+//   { name: 'hhh', gpa: '3.0', hopemajor: '경영학과' },
+//   { name: 'iii', gpa: '3.5', hopemajor: '경영학과' },
+//   { name: 'jjj', gpa: '3.5', hopemajor: '경영학과' },
+//   { name: 'kkk', gpa: '3.5', hopemajor: '경영학과' },
+//   { name: 'lll', gpa: '3.5', hopemajor: '경영학과' },
+//   { name: 'mmm', gpa: '4.0', hopemajor: '경영학과' },
+//   { name: 'nnn', gpa: '4.0', hopemajor: '경영학과' },
+//   { name: 'hhh', gpa: '4.2', hopemajor: '경영학과' },
+//   { name: '고대빵', gpa: '4.0', hopemajor: '경영학과' },
+// ];
 
 // 모집인원 수
-const Num = 10;
+// const Num = 10;
 
-const MyData: StudentData = { name: '고대빵', gpa: '4.0', hopemajor: '경영학과' };
+// const MyData: StudentData = { name: '고대빵', gpa: '4.0', hopemajor: '경영학과' };
 
 // 전체 학점만 추출하여 내림차순으로 정렬
-const allGPAs = RankData.map((student) => parseFloat(student.gpa));
-allGPAs.sort((a, b) => b - a);
+// const allGPAs = RankData.map((student) => parseFloat(student.gpa));
+// allGPAs.sort((a, b) => b - a);
 
-const myGPA = parseFloat(MyData.gpa);
+// const myGPA = parseFloat(MyData.gpa);
 
 // MyData의 GPA를 포함한 전체 GPA 배열 생성
-const allGPAsIncludingMyGPA = [...allGPAs, myGPA];
+// const allGPAsIncludingMyGPA = [...allGPAs, myGPA];
 
 // MyData의 GPA를 포함한 전체 GPA 배열을 내림차순으로 정렬
-allGPAsIncludingMyGPA.sort((a, b) => b - a);
+// allGPAsIncludingMyGPA.sort((a, b) => b - a);
 
 // MyData의 등수 계산
-const myRank = allGPAsIncludingMyGPA.indexOf(myGPA) + 1;
+// const myRank = allGPAsIncludingMyGPA.indexOf(myGPA) + 1;
 
 // 등수를 퍼센트로 나타내기
-let myPercentile = (myRank / Num) * 100;
+// let myPercentile = (myRank / Num) * 100;
 
-function calculateRank(): Rank {
-  if (Num <= RankData.length) {
+function calculateRank(applyNum: number, recruitNum: number, rankNum: number, myPercentile: number): Rank {
+  if (recruitNum <= applyNum) {
     if (myPercentile <= 25) {
       return 'Safe';
     } else if (myPercentile <= 50) {
@@ -68,11 +68,21 @@ function calculateRank(): Rank {
   }
 }
 
-const MyStageChart: React.FC = () => {
-  let rank: Rank = calculateRank(); // 4단계 중 현재 위치
+interface myStageData {
+  majorName: string;
+  recruitNum: number;
+  applyNum: number;
+  rank: number;
+}
 
-  let MyName: string = MyData.name; // 이름 가져오기
-  let HopeMajor: string = MyData.hopemajor;
+const MyStageChart: React.FC<myStageData> = (data) => {
+  const { majorName, recruitNum, applyNum, rank: rankNum } = data;
+  const myPercentile = (rankNum / applyNum) * 100;
+  // FIXME: applyNum 0일때?
+  let rank: Rank = calculateRank(applyNum, recruitNum, rankNum, myPercentile); // 4단계 중 현재 위치
+
+  let MyName: string = localStorage.getItem('name') || '';
+  let HopeMajor: string = majorName;
 
   switch (rank) {
     case 'Safe':

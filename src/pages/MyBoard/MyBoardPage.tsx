@@ -476,6 +476,48 @@ export default function MyBoardPage() {
     return now >= startTime && now <= endTime;
   };
 
+  const [myStageData, setMyStageData] = useState([
+    {
+      majorName: '',
+      recruitNum: 0,
+      applyNum: 0,
+      rank: 0,
+    },
+    {
+      majorName: '',
+      recruitNum: 0,
+      applyNum: 0,
+      rank: 0,
+    },
+  ]);
+
+  const getMyStageData = async () => {
+    const APIresponse = await client.get('/dashboard/myStage');
+    const data = APIresponse.data.data;
+    setMyStageData([
+      {
+        majorName: userData.hopeMajor1,
+        recruitNum: recruit[userData.hopeMajor1]['2023-2'] || 0,
+        applyNum: data[0].applyNum,
+        rank: data[0].rank,
+      },
+      {
+        majorName: userData.hopeMajor2,
+        recruitNum: recruit[userData.hopeMajor2]['2023-2'] || 0,
+        applyNum: data[1].applyNum,
+        rank: data[1].rank,
+      },
+    ]);
+  };
+
+  useEffect(() => {
+    try {
+      getMyStageData();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [userData]);
+
   return (
     <>
       {userData.userRole === 'passer' ? (
@@ -1294,7 +1336,7 @@ export default function MyBoardPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
                       <path d="M0 1L1239 1" stroke="#DFDFDF" />
                     </svg>
-                    <MyStageChart />
+                    <MyStageChart {...myStageData[0]} />
                   </RangeBox>
                 </div>
                 <div
@@ -1736,7 +1778,7 @@ export default function MyBoardPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="2" viewBox="0 0 1239 2" fill="none">
                       <path d="M0 1L1239 1" stroke="#DFDFDF" />
                     </svg>
-                    <MyStageChart />
+                    <MyStageChart {...myStageData[1]} />
                   </RangeBox>
                 </div>
                 <div
