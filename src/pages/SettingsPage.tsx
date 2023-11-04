@@ -421,8 +421,8 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
-  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('default');
-
+  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('filled');
+  const [currentNickname, setCurrentNickname] = useState('');
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: '',
     nicknameErrorMessage: '',
@@ -510,6 +510,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         setHopeSemester3(userInfo.hopeSemester.charAt(5));
         setUserProfilePic(userInfo.profilePic);
         setUserProfileLink(userInfo.profileLink);
+        setCurrentNickname(userInfo.nickname);
       } catch (err) {
         console.log(err);
       }
@@ -597,6 +598,13 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   useEffect(() => {
     setNicknameCheckState('default');
   }, [nickname]);
+
+  // nickname이 현재 닉네임과 같다면 중복 검사 스킵
+  useEffect(() => {
+    if (currentNickname === nickname) {
+      setNicknameCheckState('filled');
+    }
+  });
 
   //중복 체크의 결과에 따라 nicknameState가 바뀐다.
   useEffect(() => {
@@ -948,7 +956,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               setValue={setNickname}
               errorMessage={errorMessages.nicknameErrorMessage}
             ></TextFieldBox>
-            {nicknameState === 'filled' ? (
+            {nickname === '' || nicknameState === 'filled' ? (
               <></>
             ) : (
               <NicknameCheckButtonWrapper>

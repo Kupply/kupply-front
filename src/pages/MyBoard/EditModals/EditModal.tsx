@@ -76,7 +76,7 @@ export default function EditModal(props: ModalProps) {
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '고대빵');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
   const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('filled');
-
+  const [currentNickname, setCurrentNickname] = useState('');
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: '',
     nicknameErrorMessage: '',
@@ -241,6 +241,28 @@ export default function EditModal(props: ModalProps) {
   useEffect(() => {
     setNicknameCheckState('default');
   }, [nickname]);
+
+  useEffect(() => {
+    // 로그인한 유저 정보 localStorage에
+    const getMe = async () => {
+      try {
+        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        const APIresponse = await client.get('/user/getMe');
+        const userInfo = APIresponse.data.data.user;
+        setCurrentNickname(userInfo.nickname);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMe();
+  }, []);
+
+  // nickname이 현재 닉네임과 같다면 중복 검사 스킵
+  useEffect(() => {
+    if (currentNickname === nickname) {
+      setNicknameCheckState('filled');
+    }
+  });
 
   //중복 체크의 결과에 따라 nicknameState가 바뀐다.
   useEffect(() => {
