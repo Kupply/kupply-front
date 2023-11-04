@@ -107,12 +107,11 @@ export function SignUp4Page() {
   const [passerState, setPasserState] = useState<'default' | 'clicked' | 'unactive'>('default');
   const [nextPathState, setNextPathState] = useState<string>('');
 
-  /*
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('nickname')) navigate('/');
     else sessionStorage.removeItem('role');
-  }, []);*/
+  }, []);
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = (nextPath: string) => {
