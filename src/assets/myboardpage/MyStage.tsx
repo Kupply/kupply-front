@@ -61,9 +61,9 @@ function calculateRank(applyNum: number, recruitNum: number, rankNum: number, my
     }
   } else {
     if (myPercentile <= 50) {
-      return 'Normal';
+      return 'Safe';
     } else {
-      return 'Dangerous';
+      return 'Normal';
     }
   }
 }
@@ -77,11 +77,15 @@ interface myStageData {
 
 const MyStageChart: React.FC<myStageData> = (data) => {
   const { majorName, recruitNum, applyNum, rank: rankNum } = data;
-  const myPercentile = (rankNum / applyNum) * 100;
+  console.log('majorName', majorName, 'recruitNum', recruitNum, 'applyNum', applyNum, 'rankNum', rankNum);
+  let myPercentile = (rankNum / applyNum) * 100;
+  if (rankNum === applyNum) {
+    myPercentile = 1;
+  }
   // FIXME: applyNum 0일때?
   let rank: Rank = calculateRank(applyNum, recruitNum, rankNum, myPercentile); // 4단계 중 현재 위치
 
-  let MyName: string = localStorage.getItem('name') || '';
+  let MyName: string = localStorage.getItem('nickname') || '';
   let HopeMajor: string = majorName;
 
   switch (rank) {
