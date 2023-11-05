@@ -18,6 +18,7 @@ import { majorAllList } from '../common/majorAll';
 import AlertIconExclamation from '../assets/icons/AlertIconExclamation';
 import MockApplicationButton from '../assets/myboardpage/MockApplication';
 import ModalLarge from '../components/base/ModalLarge';
+import SubmitButton from '../assets/buttons/SubmitButton';
 
 const Main = styled.main`
   width: 100%;
@@ -454,6 +455,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   const [password2State, setPassword2State] =
     useState<StateOptions>('default'); /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
+  const [isApplied, setIsApplied] = useState<boolean>(localStorage.getItem('isApplied') === 'true' || false);
 
   const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
@@ -875,14 +877,15 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             value={firstMajor}
             setValue={setFirstMajor}
           ></DropDown>
-          <ButtonWrapper
-            buttonType="primary"
+          <SubmitButton
+            style={{ marginTop: '60px' }}
+            active={!isApplied}
             onClick={() => {
               firstSubmit();
             }}
           >
             저장하기
-          </ButtonWrapper>
+          </SubmitButton>
         </BodyContainer>
       )}
       {selected === 1 && (
@@ -966,14 +969,15 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             )}
           </ContentsWrapper>
           <div>
-            <ButtonWrapper
-              buttonType="primary"
+            <SubmitButton
+              style={{ marginTop: '60px' }}
+              active={!isApplied}
               onClick={() => {
                 secondSubmit();
               }}
             >
               저장하기
-            </ButtonWrapper>
+            </SubmitButton>
           </div>
         </BodyContainer>
       )}
@@ -1049,8 +1053,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             </Typography>
           </VerifiBoxWrapper>
           <div>
-            <ButtonWrapper
-              buttonType="primary"
+            <SubmitButton
+              style={{ marginTop: '60px' }}
+              active={!isApplied}
               onClick={() => {
                 if (isGpaChanged) {
                   setModalOpen(true);
@@ -1060,7 +1065,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               }}
             >
               저장하기
-            </ButtonWrapper>
+            </SubmitButton>
           </div>
         </BodyContainer>
       )}
@@ -1115,14 +1120,15 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             type="password"
           ></TextFieldBox>
           <div>
-            <ButtonWrapper
-              buttonType="primary"
+            <SubmitButton
+              style={{ marginTop: '60px' }}
+              active={!isApplied}
               onClick={() => {
                 fourthSubmit();
               }}
             >
               저장하기
-            </ButtonWrapper>
+            </SubmitButton>
           </div>
         </BodyContainer>
       )}
