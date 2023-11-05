@@ -49,23 +49,25 @@ type StudentData = {
 // let myPercentile = (myRank / Num) * 100;
 
 function calculateRank(applyNum: number, recruitNum: number, rankNum: number, myPercentile: number): Rank {
-  if (recruitNum <= applyNum) {
-    if (myPercentile <= 25) {
-      return 'Safe';
-    } else if (myPercentile <= 50) {
-      return 'Normal';
-    } else if (myPercentile <= 75) {
-      return 'Dangerous';
-    } else {
-      return 'VeryDangerous';
-    }
+  //if (recruitNum <= applyNum) {
+  if (myPercentile <= 25) {
+    return 'Safe';
+  } else if (myPercentile <= 50) {
+    return 'Normal';
+  } else if (myPercentile <= 75) {
+    return 'Dangerous';
   } else {
+    return 'VeryDangerous';
+  }
+  /*
+  } 
+  else {
     if (myPercentile <= 50) {
       return 'Safe';
     } else {
       return 'Normal';
     }
-  }
+  }*/
 }
 
 interface myStageData {
@@ -167,9 +169,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '26px',
             }}
           >
-            도전자님의 학점에 매우 알맞는
+            도전자님의 학점은 모의지원자 중
             <br />
-            적정지원이에요.
+            상위 25%이내예요.
           </Typography>
 
           <svg
@@ -267,9 +269,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '214px',
             }}
           >
-            도전자님의 학점에 알맞는
+            도전자님의 학점은 모의지원자 중
             <br />
-            적정지원이에요.
+            상위 50%이내예요.
           </Typography>
 
           <svg
@@ -367,9 +369,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '404px',
             }}
           >
-            도전자님의 학점보다 상향지원
+            도전자님의 학점은 모의지원자 중
             <br />
-            이에요.
+            상위 75%이내예요.
           </Typography>
 
           <svg
@@ -467,9 +469,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '594px',
             }}
           >
-            도전자님의 학점보다 매우 높은
+            도전자님의 학점은 모의지원자 중
             <br />
-            상향지원이에요.
+            상위 100%이내예요.
           </Typography>
           <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column' }}>
             <svg
@@ -658,9 +660,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '26px',
             }}
           >
-            도전자님의 학점에 알맞는
+            도전자님의 학점은 모의지원자 중
             <br />
-            적정지원이에요.
+            상위 25%이내예요.
           </Typography>
 
           <svg
@@ -734,9 +736,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '214px',
             }}
           >
-            도전자님의 학점보다 조금
+            도전자님의 학점은 모의지원자 중
             <br />
-            상향지원이에요.
+            상위 50%이내예요.
           </Typography>
 
           <svg
@@ -834,9 +836,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '404px',
             }}
           >
-            도전자님의 학점보다 상향지원
+            도전자님의 학점은 모의지원자 중
             <br />
-            이에요.
+            상위 75%이내예요.
           </Typography>
 
           <svg
@@ -934,9 +936,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '594px',
             }}
           >
-            도전자님의 학점보다 매우 높은
+            도전자님의 학점은 모의지원자 중
             <br />
-            상향지원이에요.
+            상위 100%이내예요.
           </Typography>
           <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column' }}>
             <svg
@@ -1125,9 +1127,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '26px',
             }}
           >
-            도전자님의 학점에 알맞는
+            도전자님의 학점은 모의지원자 중
             <br />
-            적정지원이에요.
+            상위 25%이내예요.
           </Typography>
 
           <svg
@@ -1225,9 +1227,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '214px',
             }}
           >
-            도전자님의 학점보다 조금
+            도전자님의 학점은 모의지원자 중
             <br />
-            상향지원이에요.
+            상위 50%이내예요.
           </Typography>
 
           <svg
@@ -1301,9 +1303,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '404px',
             }}
           >
-            도전자님의 학점보다 상향지원
+            도전자님의 학점은 모의지원자 중
             <br />
-            이에요.
+            상위 75%이내예요.
           </Typography>
 
           <svg
@@ -1401,9 +1403,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '594px',
             }}
           >
-            도전자님의 학점보다 매우 높은
+            도전자님의 학점은 모의지원자 중
             <br />
-            상향지원이에요.
+            상위 100%이내예요.
           </Typography>
           <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column' }}>
             <svg
@@ -1592,9 +1594,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '26px',
             }}
           >
-            도전자님의 학점에 알맞는
+            도전자님의 학점은 모의지원자 중
             <br />
-            적정지원이에요.
+            상위 25%이내예요.
           </Typography>
 
           <svg
@@ -1692,9 +1694,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '214px',
             }}
           >
-            도전자님의 학점보다 조금
+            도전자님의 학점은 모의지원자 중
             <br />
-            상향지원이에요.
+            상위 50%이내예요.
           </Typography>
 
           <svg
@@ -1792,9 +1794,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '404px',
             }}
           >
-            도전자님의 학점보다 상향지원
+            도전자님의 학점은 모의지원자 중
             <br />
-            이에요.
+            상위 75%이내예요.
           </Typography>
 
           <svg
@@ -1868,9 +1870,9 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               marginLeft: '594px',
             }}
           >
-            도전자님의 학점보다 매우 높은
+            도전자님의 학점은 모의지원자 중
             <br />
-            상향지원이에요.
+            상위 100%이내예요.
           </Typography>
           <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column' }}>
             <svg
