@@ -353,8 +353,6 @@ function SignUp5Page() {
   const [individualChecks, setIndividualChecks] = useState({
     first: false,
     second: false,
-    third: false,
-    fourth: false,
   });
 
   const [isButtonActive, setIsButtonActive] = useState(false);
@@ -369,15 +367,11 @@ function SignUp5Page() {
       setIndividualChecks({
         first: true,
         second: true,
-        third: true,
-        fourth: true,
       });
     } else {
       setIndividualChecks({
         first: false,
         second: false,
-        third: false,
-        fourth: false,
       });
     }
     setAllChecked(isChecked);
@@ -386,7 +380,7 @@ function SignUp5Page() {
 
   useEffect(() => {
     const isAllChecked = allStateAgreed();
-    setIsButtonActive(individualChecks.first && individualChecks.second && individualChecks.third);
+    setIsButtonActive(individualChecks.first && individualChecks.second);
     setAllCheckedUI(isAllChecked);
   }, [individualChecks]);
 
@@ -398,12 +392,12 @@ function SignUp5Page() {
   const [complete, setComplete] = useState<boolean>(true);
 
   const receivedData = useLocation().state;
-  /*
+
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   useEffect(() => {
     if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
   }, []);
-*/
+
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = async () => {
     if (isButtonActive) {
@@ -1121,6 +1115,11 @@ function SignUp5Complete() {
   const handleNext = () => {
     navigate('/login');
   };
+
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  useEffect(() => {
+    if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
+  }, []);
 
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {

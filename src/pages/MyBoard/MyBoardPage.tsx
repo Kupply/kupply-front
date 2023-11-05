@@ -203,10 +203,12 @@ export default function MyBoardPage() {
   }, []);
 
   // 서버로부터 받는 정보들
+
+  const [CurrentPic, setCurrentPic] = useState('');
   const [userData, setUserData] = useState({
     userName: '',
     userNickname: '',
-    userProfilePic: 'rectProfile1',
+    userProfilePic: CurrentPic,
     userProfileLink: '',
     userRole: '',
     firstMajor: '',
@@ -308,6 +310,7 @@ export default function MyBoardPage() {
           curGPA: userInfo.curGPA,
           hopeSemester: userInfo.hopeSemester,
         });
+        setCurrentPic(userInfo.profilePic);
 
         // 학기 별 모집인원 수
         pastData1[0].numOfSelection = recruit[userInfo.hopeMajor1]['2023-1'];
