@@ -7,7 +7,7 @@ const MainWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 17.56px;
-  background-image: url('../../design_image/landing_mockup_final.png');
+  background-image: url('../../design_image/Landing Mockup2.png');
   background-repeat: no-repeat;
   background-size: 58.8vw 46.9vw;
   background-position: right center;
