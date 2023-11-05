@@ -82,7 +82,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
     applyNum++;
   }
   let myPercentile = (rankNum / applyNum) * 100;
-  if (rankNum === applyNum) {
+  if (rankNum === applyNum && rankNum === 1) {
     myPercentile = 1;
   }
   // FIXME: applyNum 0일때?
