@@ -695,27 +695,27 @@ export default function MyBoardPage() {
                       <div
                         style={{
                           width:
-                            userData.hopeMajor1 == '심리학부'
+                            userData.hopeMajor1 === '심리학부'
                               ? '135px'
-                              : userData.hopeMajor1 == '경영학과'
+                              : userData.hopeMajor1 === '경영학과'
                               ? '103px'
-                              : userData.hopeMajor1 == '미디어학부'
+                              : userData.hopeMajor1 === '미디어학부'
                               ? '111px'
-                              : userData.hopeMajor1 == '경제학과'
+                              : userData.hopeMajor1 === '경제학과'
                               ? '95px'
-                              : userData.hopeMajor1 == '통계학과'
+                              : userData.hopeMajor1 === '통계학과'
                               ? '95px'
-                              : userData.hopeMajor1 == '화학과'
+                              : userData.hopeMajor1 === '화학과'
                               ? '90px'
-                              : userData.hopeMajor1 == '수학과'
+                              : userData.hopeMajor1 === '수학과'
                               ? '95px'
-                              : userData.hopeMajor1 == '식품자원경제학과'
+                              : userData.hopeMajor1 === '식품자원경제학과'
                               ? '133px'
                               : '138px',
                         }}
                       >
                         <Typography
-                          size={userData.hopeMajor1 == '컴퓨터학과' ? 'details' : 'smallText'}
+                          size={userData.hopeMajor1 === '컴퓨터학과' ? 'details' : 'smallText'}
                           style={{
                             color: 'var(--Main-Black, #141414)',
                             fontWeight: '400',
@@ -783,27 +783,27 @@ export default function MyBoardPage() {
                         <div
                           style={{
                             width:
-                              userData.hopeMajor2 == '심리학부'
+                              userData.hopeMajor2 === '심리학부'
                                 ? '135px'
-                                : userData.hopeMajor2 == '경영학과'
+                                : userData.hopeMajor2 === '경영학과'
                                 ? '103px'
-                                : userData.hopeMajor2 == '미디어학부'
+                                : userData.hopeMajor2 === '미디어학부'
                                 ? '111px'
-                                : userData.hopeMajor2 == '경제학과'
+                                : userData.hopeMajor2 === '경제학과'
                                 ? '95px'
-                                : userData.hopeMajor2 == '통계학과'
+                                : userData.hopeMajor2 === '통계학과'
                                 ? '95px'
-                                : userData.hopeMajor2 == '화학과'
+                                : userData.hopeMajor2 === '화학과'
                                 ? '90px'
-                                : userData.hopeMajor2 == '수학과'
+                                : userData.hopeMajor2 === '수학과'
                                 ? '95px'
-                                : userData.hopeMajor2 == '식품자원경제학과'
+                                : userData.hopeMajor2 === '식품자원경제학과'
                                 ? '133px'
                                 : '138px',
                           }}
                         >
                           <Typography
-                            size={userData.hopeMajor2 == '컴퓨터학과' ? 'details' : 'smallText'}
+                            size={userData.hopeMajor2 === '컴퓨터학과' ? 'details' : 'smallText'}
                             style={{
                               color: 'var(--Main-Black, #141414)',
                               fontWeight: '400',
