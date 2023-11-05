@@ -235,7 +235,7 @@ function MainPage() {
                   src="../../design_image/kupply_icon.png"
                   style={{ width: '20px', height: '20px', marginRight: '8px' }}
                 />
-                Join!
+                회원가입
               </div>
             </LabelButton>
           </JoinWrapper>
