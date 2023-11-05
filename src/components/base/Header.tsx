@@ -174,17 +174,17 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     withCredentials: true,
   };
   const [userData, setUserData] = useState({
-    userName: '고대빵',
-    userNickname: '잠만보',
+    userName: '',
+    userNickname: '',
     userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: '디자인조형학부',
-    studentId: '2020220037',
-    hopeMajor1: '경영대학',
-    hopeMajor2: '미디어학부',
-    curGPA: 4.2,
-    hopeSemester: '2023-2',
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '',
+    hopeMajor2: '',
+    curGPA: 0,
+    hopeSemester: '',
   });
   useEffect(() => {
     const getUserInfo = async () => {
