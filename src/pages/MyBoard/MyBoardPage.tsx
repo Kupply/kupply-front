@@ -362,7 +362,6 @@ export default function MyBoardPage() {
       if (userData.hopeMajor2 !== '희망 없음') {
         hopeMajor2 = collegeAPIMapping[userData.hopeMajor2 as MajorOptions];
       }
-      console.log('희망 학과: ', hopeMajor1, hopeMajor2);
 
       const newPastData1 = [...pastData1];
       for (let i = 0; i < semester.length; i++) {
