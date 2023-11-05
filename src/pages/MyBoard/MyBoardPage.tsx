@@ -358,7 +358,10 @@ export default function MyBoardPage() {
     const getPastData = async () => {
       const semester = ['2023-1', '2022-2', '2022-1'];
       const hopeMajor1 = collegeAPIMapping[userData.hopeMajor1 as MajorOptions];
-      const hopeMajor2 = collegeAPIMapping[userData.hopeMajor2 as MajorOptions];
+      let hopeMajor2 = '';
+      if (userData.hopeMajor2 !== '희망 없음') {
+        hopeMajor2 = collegeAPIMapping[userData.hopeMajor2 as MajorOptions];
+      }
 
       const newPastData1 = [...pastData1];
       for (let i = 0; i < semester.length; i++) {
@@ -384,29 +387,31 @@ export default function MyBoardPage() {
       }
       setPastData1(newPastData1);
 
-      const newPastData2 = [...pastData2];
-      for (let i = 0; i < semester.length; i++) {
-        try {
-          const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
-          const data = APIresponse.data.pastData;
+      if (hopeMajor2) {
+        const newPastData2 = [...pastData2];
+        for (let i = 0; i < semester.length; i++) {
+          try {
+            const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
+            const data = APIresponse.data.pastData;
 
-          let competitionRate = 0;
-          if (data.overallData.numberOfData > 0) {
-            competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
+            let competitionRate = 0;
+            if (data.overallData.numberOfData > 0) {
+              competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
+            }
+
+            newPastData2[i] = {
+              numOfSelection: newPastData2[i].numOfSelection,
+              numOfPassed: data.passedData.passedNumberOfData,
+              competitionRate: competitionRate,
+              meanGpa: data.passedData.passedMeanGPAData.gpa,
+              minGpa: data.passedData.passedMinimumGPAData.gpa,
+            };
+          } catch (err) {
+            console.log(err);
           }
-
-          newPastData2[i] = {
-            numOfSelection: newPastData2[i].numOfSelection,
-            numOfPassed: data.passedData.passedNumberOfData,
-            competitionRate: competitionRate,
-            meanGpa: data.passedData.passedMeanGPAData.gpa,
-            minGpa: data.passedData.passedMinimumGPAData.gpa,
-          };
-        } catch (err) {
-          console.log(err);
         }
+        setPastData2(newPastData2);
       }
-      setPastData2(newPastData2);
     };
 
     if (userData.hopeMajor1 && userData.hopeMajor2) {
