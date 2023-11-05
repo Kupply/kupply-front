@@ -36,9 +36,9 @@ export default function ModalSmall({ onClickToggleModal, children }: PropsWithCh
 const ModalContainer = styled.div`
   width: 100%;
   height: 100%;
-  // position: relative;
-  // top: 670px;
-  // left: 663px;
+  position: absolute;
+  //top: 670px;
+  //left: 300px;
   // right: 663px;
   display: flex;
   align-items: center;
@@ -56,17 +56,19 @@ const DialogBox = styled.dialog`
   border-radius: 10px;
   box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
   box-sizing: border-box;
-  background-color: white; //rgba(248, 248, 248, 0.45);
-  // position: fixed;
+  background-color: rgba(248, 248, 248, 1);
+  position: fixed;
   z-index: 10;
 `;
 
 const Backdrop = styled.div`
   width: 594px;
-  height: 202px;
+  height: 102px;
+  display: flex;
+  align-items: center;
   position: fixed;
-  top: 70%; // 임의 조정
-  left: 725px; // 663px;
+  top: 75%; // 임의 조정
+  left: 50%; // 663px;
   z-index: 9;
-  background: rgba(248, 248, 248, 0.4);
+  //background: rgba(248, 248, 248, 0.4);
 `;
