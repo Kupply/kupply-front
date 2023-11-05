@@ -924,10 +924,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                   onClick={() => setUserProfilePic('rectProfile4')}
                 />
               </CandidateImgsWrapper>
-              <div style={{ gap: '5px', marginTop: '52px', display: 'flex' }}>
-                <ImgCtrlButton />
-                <ImgCtrlButton>삭제</ImgCtrlButton>
-              </div>
+              <div style={{ gap: '5px', marginTop: '52px', display: 'flex' }}></div>
             </div>
           </div>
           <ContentsWrapper>
