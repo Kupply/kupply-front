@@ -47,6 +47,8 @@ export default function App() {
   }, []);
   // element={<AuthRequired />}
   // 현재 MainPage 에만, pageView 이벤트 추적기 삽입
+
+  // 제발 Landing Page AuthRequired 안에 집어넣지 마세요 ... - 윤진 (23/11/14)
   return (
     <>
       {isMobile ? (
@@ -62,9 +64,9 @@ export default function App() {
               <Route path="/message" element={<MessagePage />} />
               <Route path="/settings" element={<SettingsPage selected={selected} setSelected={setSelected} />} />
               <Route path="/delete" element={<DeletePage />} />
-              <Route path="/landing" element={<LandingPage />} />
             </Route>
 
+            <Route path="/landing" element={<LandingPage />} />
             <Route path="/archive" element={<PreviousPage />} />
             <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
