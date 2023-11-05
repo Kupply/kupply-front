@@ -76,8 +76,11 @@ interface myStageData {
 }
 
 const MyStageChart: React.FC<myStageData> = (data) => {
-  const { majorName, recruitNum, applyNum, rank: rankNum } = data;
-  console.log('majorName', majorName, 'recruitNum', recruitNum, 'applyNum', applyNum, 'rankNum', rankNum);
+  let { majorName, recruitNum, applyNum, rank: rankNum } = data;
+  const hopeMajor2 = localStorage.getItem('hopeMajor2') || '';
+  if (hopeMajor2 === majorName) {
+    applyNum++;
+  }
   let myPercentile = (rankNum / applyNum) * 100;
   if (rankNum === applyNum) {
     myPercentile = 1;
