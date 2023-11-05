@@ -547,7 +547,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                   lineHeight: '104.167%',
                 }}
               >
-                {myPercentile}
+                {myPercentile}.toFixed(2)
               </Typography>
               <Typography
                 size="heading1"
@@ -1014,7 +1014,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                   lineHeight: '104.167%',
                 }}
               >
-                {myPercentile}
+                {myPercentile}.toFixed(2)
               </Typography>
               <Typography
                 size="heading1"
@@ -1481,7 +1481,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                   lineHeight: '104.167%',
                 }}
               >
-                {myPercentile}
+                {myPercentile}.toFixed(2)
               </Typography>
               <Typography
                 size="heading1"
@@ -1948,7 +1948,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                   lineHeight: '104.167%',
                 }}
               >
-                {myPercentile}
+                {myPercentile}.toFixed(2)
               </Typography>
               <Typography
                 size="heading1"
