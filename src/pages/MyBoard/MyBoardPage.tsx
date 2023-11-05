@@ -1178,7 +1178,7 @@ export default function MyBoardPage() {
                         </Typography>
                         <button
                           onClick={() => {
-                            navigate(`/archive/${userData.hopeMajor1}`);
+                            navigate('/archive/' + collegeAPIMapping[userData.hopeMajor1 as MajorOptions]);
                           }}
                         >
                           <svg
@@ -1621,7 +1621,7 @@ export default function MyBoardPage() {
                         </Typography>
                         <button
                           onClick={() => {
-                            navigate(`/archive/${userData.hopeMajor2}`);
+                            navigate('/archive/' + collegeAPIMapping[userData.hopeMajor2 as MajorOptions]);
                           }}
                         >
                           <svg
