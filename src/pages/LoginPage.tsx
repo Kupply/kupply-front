@@ -141,10 +141,7 @@ function LoginPage(props: LoginPageProps) {
 
   const navigate = useNavigate();
   const handleLink2Click = () => {
-    // 안내 모달 추가
-    setOpenAlert(true);
-    console.log(isOpenAlert); // 일단 보류
-    navigate('/');
+    navigate('/', { state: { showModal: true } });
   };
 
   const [ID, setID] = useState<string>('');

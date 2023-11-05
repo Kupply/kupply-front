@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Typography from '../Typography';
 
+/* 버튼 커스텀은 나중에 .... 어려웡 ㅜㅜ  */
+
 export interface UploadButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   isClicked: boolean;
   children?: React.ReactNode;
@@ -41,7 +43,7 @@ const InputFile = styled.input`
 
 export default function UploadButton(props: UploadButtonProps) {
   const { children = '첨부 파일 업로드', ...rest } = props;
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileSelect = () => {
@@ -54,30 +56,77 @@ export default function UploadButton(props: UploadButtonProps) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = e.target.files;
     if (newFiles && newFiles.length > 0) {
-      setSelectedFiles([...selectedFiles, ...Array.from(newFiles)]);
+      const newFile = newFiles[0];
+      setSelectedFile(newFile);
       setIsLoading(true);
     }
   };
 
   useEffect(() => {
-    if (selectedFiles.length > 0) {
+    if (selectedFile) {
       setTimeout(() => {
         setIsLoading(false);
       }, 3000);
     }
-  }, [selectedFiles]);
+  }, [selectedFile]);
 
   return (
     <div style={{ position: 'relative' }}>
-      {selectedFiles.length === 0 ? (
+      {selectedFile! ? (
         <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="70"
+            height="70"
+            viewBox="0 0 70 70"
+            fill="none"
+            style={{ display: 'flex', justifyContent: 'center', marginTop: '63px', marginLeft: '279px' }}
+          >
+            <path
+              d="M40.8346 5.83398H17.5013C15.9542 5.83398 14.4705 6.44857 13.3765 7.54253C12.2826 8.63649 11.668 10.1202 11.668 11.6673V58.334C11.668 59.8811 12.2826 61.3648 13.3765 62.4588C14.4705 63.5527 15.9542 64.1673 17.5013 64.1673H52.5013C54.0484 64.1673 55.5321 63.5527 56.6261 62.4588C57.7201 61.3648 58.3346 59.8811 58.3346 58.334V23.334L40.8346 5.83398Z"
+              stroke="#E57C90"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path d="M35 52.5V35" stroke="#E57C90" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M26.25 43.75H43.75"
+              stroke="#E57C90"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M40.832 5.83398V23.334H58.332"
+              stroke="#E57C90"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <Typography
+            size="mediumText"
+            style={{
+              display: 'flex',
+              color: '#E57C90',
+              marginTop: '5px',
+              textAlign: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {selectedFile.name}
+          </Typography>
+        </div>
+      ) : (
+        <div style={{ position: 'relative' }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="92"
             height="70"
             viewBox="0 0 92 70"
             fill="none"
-            style={{ position: 'absolute', left: '268px', top: '37px' }}
+            style={{ display: 'flex', justifyContent: 'center', marginTop: '37px', marginLeft: '268px' }}
           >
             <path
               d="M61.3698 49L46.0365 35L30.7031 49"
@@ -108,44 +157,32 @@ export default function UploadButton(props: UploadButtonProps) {
               stroke-linejoin="round"
             />
           </svg>
-          <Typography size="mediumText" style={{ position: 'absolute', color: '#E57C90', top: '124px', left: '213px' }}>
-            Drag and Drop to Upload
-          </Typography>
-        </div>
-      ) : null}
-      {selectedFiles.length > 0
-        ? selectedFiles.map((file, index) => (
-            <div>
-              <Typography
-                size="largeText"
-                style={{
-                  color: 'rgba(20, 20, 20, 0)',
-                  opacity: 0.8,
-                  fontWeight: '700',
-                  textAlign: 'center',
-                }}
-              >
-                빈공간만들기~
-              </Typography>
-              <Typography
-                size="mediumText"
-                style={{
-                  color: 'var(--Main-Black, #141414)',
-                  opacity: 0.8,
-                  fontWeight: '700',
-                  textAlign: 'center',
-                }}
-              >
-                {file.name}
-              </Typography>
-            </div>
-          ))
-        : null}
 
-      <Button onClick={handleFileSelect} {...rest}>
-        {children}
-      </Button>
-      <InputFile type="file" id="fileInput" onChange={handleFileChange} />
+          <Typography
+            size="mediumText"
+            style={{
+              display: 'flex',
+              color: '#E57C90',
+              marginTop: '17px',
+              textAlign: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            학업계획서를 첨부해주세요 (선택)
+          </Typography>
+          <button></button>
+          <input
+            type="file"
+            id="fileInput"
+            onChange={handleFileChange}
+            style={{
+              position: 'absolute',
+              top: '130px',
+              left: '231px',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

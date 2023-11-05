@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Carousel from '../components/carousel/Carousel';
 import LabelButton from '../assets/buttons/LabelButton';
+import MainPageModal from './MainPageModal';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 // import MockApplicationButton, { MockApplicationProps } from '../assets/myboardpage/MockApplication';
 import client from '../utils/httpClient';
@@ -149,6 +151,19 @@ const Icon: React.FC = () => (
 function MainPage() {
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentModal, setCurrentModal] = useState(0);
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
+  useEffect(() => {
+    if (location.state?.showModal) {
+      setIsModalVisible(true);
+    }
+  }, [location]);
 
   // 로그인 여부 확인
   const [isLogined, setisLogined] = useState<boolean>(false);
@@ -220,7 +235,7 @@ function MainPage() {
                   src="../../design_image/kupply_icon.png"
                   style={{ width: '20px', height: '20px', marginRight: '8px' }}
                 />
-                Join!
+                회원가입
               </div>
             </LabelButton>
           </JoinWrapper>
@@ -238,6 +253,15 @@ function MainPage() {
             </div>
           </Button>
         </JoinMainContainer>
+      )}
+      {isModalVisible && (
+        <MainPageModal
+          currentModal={currentModal}
+          isOpenModal={isModalVisible}
+          setCurrentModal={setCurrentModal}
+          setOpenModal={setIsModalVisible}
+          onClickModal={closeModal}
+        />
       )}
     </Wrapper>
   );

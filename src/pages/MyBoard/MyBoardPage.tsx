@@ -203,10 +203,12 @@ export default function MyBoardPage() {
   }, []);
 
   // 서버로부터 받는 정보들
+
+  const [CurrentPic, setCurrentPic] = useState('');
   const [userData, setUserData] = useState({
     userName: '',
     userNickname: '',
-    userProfilePic: 'rectProfile1',
+    userProfilePic: CurrentPic,
     userProfileLink: '',
     userRole: '',
     firstMajor: '',
@@ -308,6 +310,7 @@ export default function MyBoardPage() {
           curGPA: userInfo.curGPA,
           hopeSemester: userInfo.hopeSemester,
         });
+        setCurrentPic(userInfo.profilePic);
 
         // 학기 별 모집인원 수
         pastData1[0].numOfSelection = recruit[userInfo.hopeMajor1]['2023-1'];
@@ -469,7 +472,7 @@ export default function MyBoardPage() {
 
   const isWithinTimeRange = () => {
     const now = new Date();
-    const startTime = new Date('2023-11-06T09:00:00'); //2023-11-08로 고쳐야함
+    const startTime = new Date('2023-11-05T09:00:00'); //2023-11-08로 고쳐야함
     const endTime = new Date('2023-11-10T23:59:59');
 
     return now >= startTime && now <= endTime;
@@ -692,27 +695,27 @@ export default function MyBoardPage() {
                       <div
                         style={{
                           width:
-                            userData.hopeMajor1 == '심리학부'
+                            userData.hopeMajor1 === '심리학부'
                               ? '135px'
-                              : userData.hopeMajor1 == '경영학과'
+                              : userData.hopeMajor1 === '경영학과'
                               ? '103px'
-                              : userData.hopeMajor1 == '미디어학부'
+                              : userData.hopeMajor1 === '미디어학부'
                               ? '111px'
-                              : userData.hopeMajor1 == '경제학과'
+                              : userData.hopeMajor1 === '경제학과'
                               ? '95px'
-                              : userData.hopeMajor1 == '통계학과'
+                              : userData.hopeMajor1 === '통계학과'
                               ? '95px'
-                              : userData.hopeMajor1 == '화학과'
+                              : userData.hopeMajor1 === '화학과'
                               ? '90px'
-                              : userData.hopeMajor1 == '수학과'
+                              : userData.hopeMajor1 === '수학과'
                               ? '95px'
-                              : userData.hopeMajor1 == '식품자원경제학과'
+                              : userData.hopeMajor1 === '식품자원경제학과'
                               ? '133px'
                               : '138px',
                         }}
                       >
                         <Typography
-                          size={userData.hopeMajor1 == '컴퓨터학과' ? 'details' : 'smallText'}
+                          size={userData.hopeMajor1 === '컴퓨터학과' ? 'details' : 'smallText'}
                           style={{
                             color: 'var(--Main-Black, #141414)',
                             fontWeight: '400',
@@ -780,27 +783,27 @@ export default function MyBoardPage() {
                         <div
                           style={{
                             width:
-                              userData.hopeMajor2 == '심리학부'
+                              userData.hopeMajor2 === '심리학부'
                                 ? '135px'
-                                : userData.hopeMajor2 == '경영학과'
+                                : userData.hopeMajor2 === '경영학과'
                                 ? '103px'
-                                : userData.hopeMajor2 == '미디어학부'
+                                : userData.hopeMajor2 === '미디어학부'
                                 ? '111px'
-                                : userData.hopeMajor2 == '경제학과'
+                                : userData.hopeMajor2 === '경제학과'
                                 ? '95px'
-                                : userData.hopeMajor2 == '통계학과'
+                                : userData.hopeMajor2 === '통계학과'
                                 ? '95px'
-                                : userData.hopeMajor2 == '화학과'
+                                : userData.hopeMajor2 === '화학과'
                                 ? '90px'
-                                : userData.hopeMajor2 == '수학과'
+                                : userData.hopeMajor2 === '수학과'
                                 ? '95px'
-                                : userData.hopeMajor2 == '식품자원경제학과'
+                                : userData.hopeMajor2 === '식품자원경제학과'
                                 ? '133px'
                                 : '138px',
                           }}
                         >
                           <Typography
-                            size={userData.hopeMajor2 == '컴퓨터학과' ? 'details' : 'smallText'}
+                            size={userData.hopeMajor2 === '컴퓨터학과' ? 'details' : 'smallText'}
                             style={{
                               color: 'var(--Main-Black, #141414)',
                               fontWeight: '400',
