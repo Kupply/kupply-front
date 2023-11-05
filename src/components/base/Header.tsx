@@ -309,9 +309,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   const [, , removeCookie] = useCookies(['accessToken', 'accessTokenExpire', 'refreshToken']);
 
   const onLogoutClick = async () => {
-    // const url = 'http://localhost:8080/auth/logout';
     try {
-      // await axios.get(url);
       await client.get('/auth/logout');
       removeCookie('accessToken', { path: '/' });
       removeCookie('accessTokenExpire', { path: '/' });
@@ -320,7 +318,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
       window.sessionStorage.clear();
       setLogin(false);
       navigate('/');
-      // window.location.reload();
+      window.location.reload();
     } catch (err) {
       // 이후 수정 필요함.
       alert(err);
