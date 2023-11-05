@@ -92,7 +92,7 @@ const LandingPage = () => {
 
   const isWithinTimeRange = () => {
     const now = new Date();
-    const startTime = new Date('2023-11-05T22:30:00'); //2023-11-08로 고쳐야함
+    const startTime = new Date('2023-11-06T09:00:00'); //2023-11-08로 고쳐야함
     const endTime = new Date('2023-11-30T23:59:59');
 
     return now >= startTime && now <= endTime;
