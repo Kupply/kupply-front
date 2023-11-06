@@ -302,7 +302,7 @@ export default function ApplicationModal(props: ModalProps) {
                   모의지원을 완료 하시겠습니까?
                 </Typography>
                 <Typography size="mediumText" bold="500" style={{ marginTop: '10px', lineHeight: '136.111%' }}>
-                  모의지원을 완료한 후에는 철회가 불가능합니다.
+                  모의지원을 완료한 후에는 철회 및 (남은 모의지원 기간 동안) 개인정보 수정이 불가능합니다.
                 </Typography>
                 <div
                   style={{
