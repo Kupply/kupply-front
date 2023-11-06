@@ -241,7 +241,12 @@ export default function ApplicationModal(props: ModalProps) {
   }, [GPA1, GPA2, GPA3]);
 
   useEffect(() => {
-    if (!!currentSemester1 && !!currentSemester2 && (candidateState === 'clicked' || passerState === 'clicked')) {
+    if (
+      !!currentSemester1 &&
+      +currentSemester1 > 1 &&
+      !!currentSemester2 &&
+      (candidateState === 'clicked' || passerState === 'clicked')
+    ) {
       setNextButton2(true);
     } else {
       setNextButton2(false);
