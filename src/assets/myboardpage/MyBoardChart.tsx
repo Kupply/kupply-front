@@ -398,7 +398,7 @@ const PlotChartComponent = (props: MajorDataProps) => {
   const filteredMajorDatas = curMajorDatas.filter((d) => d.value !== 0);
 
   const maxValue = Math.max(...curMajorDatas.map((item) => item.value));
-  const maxLength = maxValue <= 10 ? 5 : maxValue / 10 + 1;
+  const maxLength = maxValue <= 10 ? 10 : maxValue / 10 + 1;
   const [hoveredData, setHoveredData] = useState<(typeof curMajorDatas)[0] | null>(null);
 
   return (
