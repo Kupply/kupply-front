@@ -398,7 +398,7 @@ const PlotChartComponent = (props: MajorDataProps) => {
   const filteredMajorDatas = curMajorDatas.filter((d) => d.value !== 0);
 
   const maxValue = Math.max(...curMajorDatas.map((item) => item.value));
-  const maxLength = maxValue <= 50 ? 5 : maxValue / 10 + 1;
+  const maxLength = maxValue <= 10 ? 10 : maxValue / 10 + 1;
   const [hoveredData, setHoveredData] = useState<(typeof curMajorDatas)[0] | null>(null);
 
   return (
@@ -419,7 +419,7 @@ const PlotChartComponent = (props: MajorDataProps) => {
           name="지원자"
           unit=""
           domain={[0, maxLength]}
-          ticks={Array.from({ length: maxLength + 1 }, (_, i) => i * 10)}
+          ticks={Array.from({ length: maxLength + 1 }, (_, i) => i * 1)} // 임시로 바꿈 (일반화 적용 X)
         />
         <Tooltip content={<CustomTooltip activeData={hoveredData} />} />
         {filteredMajorDatas.map((data, index) => (
