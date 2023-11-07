@@ -120,7 +120,7 @@ export default function Table(props: tableProps) {
       <TableHeader>
         <HeaderData>순위</HeaderData>
         <HeaderData>이중전공</HeaderData>
-        <HeaderData>최종정원</HeaderData>
+        <HeaderData>선발 정원</HeaderData>
         <HeaderData>지원 현황</HeaderData>
         <HeaderData>실시간 경쟁률</HeaderData>
         <HeaderData>지난 합격자 평균</HeaderData>
