@@ -119,6 +119,43 @@ const Text = styled.text`
   line-height: 100%;
 `;
 
+const EventBox = styled.div`
+  position: fixed;
+  top: 100px;
+  right: 100px;
+  width: 550px;
+  height: 550px;
+  background-image: url('../design_image/eventImage.png');
+  background-size: cover;
+  z-index: 700;
+`;
+
+const CloseButton = styled.button`
+  display: flex;
+  width: 70px;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+`;
+
+const CloseForDayButton = styled.button`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 100% */
+  text-decoration-line: underline;
+  text-transform: uppercase;
+  position: absolute;
+  top: 520px;
+  right: 170px;
+`;
+
 // 아이콘 위치 수정 완료
 const Icon: React.FC = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -154,10 +191,39 @@ function MainPage() {
   const location = useLocation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentModal, setCurrentModal] = useState(0);
+  const [isEventVisible, setIsEventVisible] = useState(true);
 
   const closeModal = () => {
     setIsModalVisible(false);
   };
+
+  const closeEventBox = () => {
+    setIsEventVisible(false);
+  };
+
+  const closeEventBoxForDay = () => {
+    const now = new Date();
+    localStorage.setItem('eventBoxClosed', now.toISOString());
+    setIsEventVisible(false);
+  };
+
+  useEffect(() => {
+    sessionStorage.clear();
+
+    const eventBoxClosed = localStorage.getItem('eventBoxClosed');
+    if (eventBoxClosed) {
+      const now = new Date();
+      const closedDate = new Date(eventBoxClosed);
+      const isSameDay = now.toDateString() === closedDate.toDateString();
+
+      if (!isSameDay) {
+        localStorage.removeItem('eventBoxClosed');
+        setIsEventVisible(true);
+      } else {
+        setIsEventVisible(false);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (location.state?.showModal) {
@@ -208,6 +274,25 @@ function MainPage() {
 
   return (
     <Wrapper>
+      {isEventVisible && (
+        <EventBox>
+          <CloseButton
+            onClick={() => {
+              closeEventBox();
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 60 60" fill="none">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M38.9142 23.9142C39.6953 23.1332 39.6953 21.8668 38.9142 21.0858C38.1332 20.3047 36.8668 20.3047 36.0858 21.0858L30 27.1716L23.9142 21.0858C23.1332 20.3047 21.8668 20.3047 21.0858 21.0858C20.3047 21.8668 20.3047 23.1332 21.0858 23.9142L27.1716 30L21.0858 36.0858C20.3047 36.8668 20.3047 38.1332 21.0858 38.9142C21.8668 39.6953 23.1332 39.6953 23.9142 38.9142L30 32.8284L36.0858 38.9142C36.8668 39.6953 38.1332 39.6953 38.9142 38.9142C39.6953 38.1332 39.6953 36.8668 38.9142 36.0858L32.8284 30L38.9142 23.9142Z"
+                fill="#434343"
+              />
+            </svg>
+          </CloseButton>
+          <CloseForDayButton onClick={closeEventBoxForDay}>하루동안 보지 않기</CloseForDayButton>
+        </EventBox>
+      )}
       <Carousel />
       {!isLogined ? (
         <JoinMainContainer>
