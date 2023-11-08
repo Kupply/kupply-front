@@ -341,7 +341,7 @@ const CustomTooltip: React.FC<CustomDatatipProps> = ({ activeData }) => {
         </Typography>
         <div style={{ display: 'flex', alignItems: 'baseline' }}>
           <Typography size="smallText" style={{ color: 'var(--Main-Black, #A8A8A8)', lineHeight: '22px' }}>
-            학점
+            학점 평균
           </Typography>
           <Typography
             size="smallText"
