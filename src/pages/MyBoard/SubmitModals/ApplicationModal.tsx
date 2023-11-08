@@ -325,17 +325,21 @@ export default function ApplicationModal(props: ModalProps) {
                       setOpenModal(false);
                     }}
                   >
-                    취소하기
+                    <Typography size="bodyText" style={{ fontWeight: 500, lineHeight: '100%', color: '#D85888' }}>
+                      취소하기
+                    </Typography>
                   </LabelButton>
                   <MockApplicationButton
                     onClick={() => {
                       setCurrentModal(4); // 다음 창으로 이동
                       submitApplication();
                     }}
-                    style={{ width: '627.232px', height: '68px', fontSize: '20px' }}
+                    style={{ width: '627.232px', height: '68px',  }}
                     // 글자 디자인 수정 필요
                   >
-                    모의지원 완료하기
+                    <Typography size="bodyText" style={{ fontWeight: 600, lineHeight: '80%', color: '#FFF' }}>
+                      모의지원 완료하기
+                    </Typography>
                   </MockApplicationButton>
                 </div>
               </AlertWrapper>
@@ -610,7 +614,7 @@ export default function ApplicationModal(props: ModalProps) {
                     >
                       STEP3
                       <br />
-                      자기소개서 첨부하기
+                      학업계획서 첨부하기
                     </Typography>
                   </ProgressBarTtitle>
                 </ProgressBarWrapper>
@@ -622,7 +626,7 @@ export default function ApplicationModal(props: ModalProps) {
                         size="mediumText"
                         style={{ color: 'var(--Main-Black, #141414)', opacity: 0.8, fontWeight: '700' }}
                       >
-                        자기소개서 첨부하기
+                        학업계획서 첨부하기
                       </Typography>
                       <Typography
                         size="mediumText"
