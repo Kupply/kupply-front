@@ -191,7 +191,7 @@ function MainPage() {
   const location = useLocation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentModal, setCurrentModal] = useState(0);
-  const [isEventVisible, setIsEventVisible] = useState(true);
+  const [isEventVisible, setIsEventVisible] = useState(false); // 23.11.20 이벤트 종료되었으므로 디폴트값 false 로 수정
 
   const closeModal = () => {
     setIsModalVisible(false);
