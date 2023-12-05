@@ -6,7 +6,7 @@ export const refresh = async () => {
 
   try {
     const res = await axios.post(
-      'https://api.kupply.devkor.club/auth/refreshAccessToken',
+      'http://localhost:8080/auth/refreshAccessToken',
       { accessToken: accessToken },
       { headers: { Authorization: `Bearer ${refreshToken}` }, withCredentials: true },
     );
@@ -24,7 +24,7 @@ export const refresh = async () => {
 };
 
 const client = axios.create({
-  baseURL: 'https://api.kupply.devkor.club',
+  baseURL: 'http://localhost:8080',
 });
 
 client.interceptors.request.use((config) => {

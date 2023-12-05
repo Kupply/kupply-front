@@ -156,7 +156,7 @@ function LoginPage(props: LoginPageProps) {
 
   // login API 접근
   const onLoginClick = async () => {
-    const url = 'https://api.kupply.devkor.club/auth/login';
+    const url = 'http://localhost:8080/auth/login';
     try {
       await axios
         .post(url, {

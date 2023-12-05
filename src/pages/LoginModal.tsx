@@ -82,7 +82,7 @@ export default function LoginModal() {
 
   const forgotPassword = async () => {
     try {
-      const url = 'https://api.kupply.devkor.club/auth/forgotPassword';
+      const url = 'http://localhost:8080/auth/forgotPassword';
       await axios.post(url, { userEmail: ID });
 
       setIsOpen(!isOpen);

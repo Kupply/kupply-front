@@ -489,12 +489,14 @@ export default function MyBoardPage() {
       recruitNum: 0,
       applyNum: 0,
       rank: 0,
+      safe: 0,
     },
     {
       majorName: '',
       recruitNum: 0,
       applyNum: 0,
       rank: 0,
+      safe: 0,
     },
   ]);
 
@@ -508,12 +510,14 @@ export default function MyBoardPage() {
           recruitNum: recruit[userData.hopeMajor1]['2023-2'] || 0,
           applyNum: data[0].applyNum,
           rank: data[0].rank,
+          safe: data[0].safe,
         },
         {
           majorName: userData.hopeMajor2,
           recruitNum: recruit[userData.hopeMajor2]['2023-2'] || 0,
           applyNum: data[1].applyNum,
           rank: data[1].rank,
+          safe: data[1].safe,
         },
       ]);
     }

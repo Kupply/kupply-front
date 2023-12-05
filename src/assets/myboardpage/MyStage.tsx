@@ -48,37 +48,45 @@ type StudentData = {
 // 등수를 퍼센트로 나타내기
 // let myPercentile = (myRank / Num) * 100;
 
-function calculateRank(applyNum: number, recruitNum: number, rankNum: number, myPercentile: number): Rank {
-  //if (recruitNum <= applyNum) {
-  if (myPercentile <= 25) {
+function calculateRank(safe: number): Rank {
+  if (safe) {
     return 'Safe';
-  } else if (myPercentile <= 50) {
-    return 'Normal';
-  } else if (myPercentile <= 75) {
-    return 'Dangerous';
   } else {
     return 'VeryDangerous';
   }
-  /*
-  } 
-  else {
-    if (myPercentile <= 50) {
-      return 'Safe';
-    } else {
-      return 'Normal';
-    }
-  }*/
 }
+// function calculateRank(applyNum: number, recruitNum: number, rankNum: number, myPercentile: number): Rank {
+//   //if (recruitNum <= applyNum) {
+//   if (myPercentile <= 25) {
+//     return 'Safe';
+//   } else if (myPercentile <= 50) {
+//     return 'Normal';
+//   } else if (myPercentile <= 75) {
+//     return 'Dangerous';
+//   } else {
+//     return 'VeryDangerous';
+//   }
+//   /*
+//   }
+//   else {
+//     if (myPercentile <= 50) {
+//       return 'Safe';
+//     } else {
+//       return 'Normal';
+//     }
+//   }*/
+// }
 
 interface myStageData {
   majorName: string;
   recruitNum: number;
   applyNum: number;
   rank: number;
+  safe: number;
 }
 
 const MyStageChart: React.FC<myStageData> = (data) => {
-  let { majorName, recruitNum, applyNum, rank: rankNum } = data;
+  let { majorName, recruitNum, applyNum, rank: rankNum, safe } = data;
   const hopeMajor2 = localStorage.getItem('hopeMajor2') || '';
   if (hopeMajor2 === majorName) {
     applyNum++;
@@ -88,7 +96,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
     myPercentile = 1;
   }
   // FIXME: applyNum 0일때?
-  let rank: Rank = calculateRank(applyNum, recruitNum, rankNum, myPercentile); // 4단계 중 현재 위치
+  let rank: Rank = calculateRank(safe); // 4단계 중 현재 위치
 
   let MyName: string = localStorage.getItem('nickname') || '';
   let HopeMajor: string = majorName;
