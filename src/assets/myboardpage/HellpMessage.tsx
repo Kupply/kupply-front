@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Typography from '../Typography';
+import Typography from '../OldTypography';
 
 const HelpBox = styled.button<{ isHovered: boolean }>`
   display: flex;

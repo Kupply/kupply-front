@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
+import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
 import PrevButton from '../../../assets/buttons/PrevButton';
-import NextButton from '../../../assets/buttons/NextButton';
-import SubmitButton from '../../../assets/buttons/SubmitButton';
-import Typography from '../../../assets/Typography';
+import NextButton from '../../../assets/buttons/OldNextButton';
+import SubmitButton from '../../../assets/buttons/OldSubmitButton';
+import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../../components/base/ModalLarge';
 import DropDown from '../../../assets/dropdown/dropDown';
 import VerificationBox from '../../../assets/VerificationBox';
@@ -334,7 +334,7 @@ export default function ApplicationModal(props: ModalProps) {
                       setCurrentModal(4); // 다음 창으로 이동
                       submitApplication();
                     }}
-                    style={{ width: '627.232px', height: '68px',  }}
+                    style={{ width: '627.232px', height: '68px' }}
                     // 글자 디자인 수정 필요
                   >
                     <Typography size="bodyText" style={{ fontWeight: 600, lineHeight: '80%', color: '#FFF' }}>

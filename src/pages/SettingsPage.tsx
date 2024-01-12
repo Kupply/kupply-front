@@ -3,12 +3,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
-import TextFieldBox, { StateOptions } from '../assets/TextFieldBox';
+import TextFieldBox, { StateOptions } from '../assets/OldTextFieldBox';
 import { ImgCtrlButton, ImgDelButton } from '../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../assets/dropdown/dropDown';
 import { HelpMessage, ModalHelpMessage } from '../assets/myboardpage/HellpMessage';
 import VerificationBox from '../assets/VerificationBox';
-import Typography from '../assets/Typography';
+import Typography from '../assets/OldTypography';
 import { ScrollBarSmall, ScrollBarLarge } from '../assets/ScrollButton';
 import LabelButton from '../assets/buttons/LabelButton';
 import NicknameCheckButton from '../assets/NicknameCheckButton';
@@ -18,7 +18,7 @@ import { majorAllList } from '../common/majorAll';
 import AlertIconExclamation from '../assets/icons/AlertIconExclamation';
 import MockApplicationButton from '../assets/myboardpage/MockApplication';
 import ModalLarge from '../components/base/ModalLarge';
-import SubmitButton from '../assets/buttons/SubmitButton';
+import SubmitButton from '../assets/buttons/OldSubmitButton';
 
 const Main = styled.main`
   width: 100%;

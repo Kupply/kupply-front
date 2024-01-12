@@ -1,45 +1,60 @@
-import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
 
-/* 23.08.22 디자인 변경 수정 완료 - 버튼 background 색상 */
+import Typography from '../Typography';
 
-export interface NextButtonProps
-  extends React.ComponentPropsWithoutRef<"button"> {
-  active?: boolean;
+export interface NextButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+  size?: 'small' | 'large';
+  state?: 'active' | 'unactive';
 }
-
-const Button = styled.button<NextButtonProps>`
-  display: flex;
-  width: 628px;
-  padding: 24px 34px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 10px;
-  opacity: ${(props) => (props.active ? "null" : "0.75")}; // 수정
-  background: ${(props) =>
-    props.active
-      ? "rgba(216, 88, 136, 0.80)"
-      : "var(--df-grey-2, #DFDFDF)"}; // 수정
-`;
-
-const Text = styled.text`
-  color: var(--white, #fff);
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px;
-`;
 
 function NextButton(props: NextButtonProps) {
-  const { children = "다음", active = true, ...rest } = props;
+  const { children, size = 'small', state = 'active', ...rest } = props;
   return (
-    <Button active={active} disabled={!active} {...rest}>
-      <Text>{children}</Text>
-    </Button>
+    <ButtonWrapper size={size} state={state} {...rest}>
+      <Typography
+        bold="700"
+        color={
+          size === 'small' && state === 'active'
+            ? 'var(--PRIMARY, #D85888)'
+            : size === 'small' && state === 'unactive'
+            ? 'var(--DF_Grey-2, #DFDFDF)'
+            : 'var(--White, #FFF)'
+        }
+      >
+        {children}
+      </Typography>
+    </ButtonWrapper>
   );
 }
+
+const ButtonWrapper = styled.button<NextButtonProps>`
+  width: ${(props) => (props.size === 'small' ? '8.13vw' : '23.65vw')};
+  height: 68px;
+  box-sizing: border-box;
+  border: ${(props) =>
+    props.size === 'small' && props.state === 'active'
+      ? '1px solid #D85888'
+      : props.size === 'small' && props.state === 'unactive'
+      ? '1px solid var(--DF_Gray-2, #DFDFDF)'
+      : '0px'};
+  padding: 24px 1.77vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.42vw;
+  border-radius: 10px;
+  background: ${(props) =>
+    props.size === 'small'
+      ? 'var(--White, #FFF)'
+      : props.state === 'active'
+      ? 'rgba(216, 88, 136, 0.80)'
+      : 'var(--DF_Gray-2, #DFDFDF)'};
+  opacity: ${(props) =>
+    props.size === 'small' && props.state === 'unactive'
+      ? '0.45'
+      : props.size === 'large' && props.state === 'unactive'
+      ? '0.75'
+      : '1'};
+`;
 
 export default NextButton;

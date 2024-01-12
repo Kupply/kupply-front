@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState, MutableRefObject } from 'react';
 import styled, { css } from 'styled-components';
 import useDetectClose from './useDetectClose';
-import Typography, { TypographyProps } from '../Typography';
+import Typography, { TypographyProps } from '../OldTypography';
 
 // 3. 화살표 버튼 나타나게 처리
 

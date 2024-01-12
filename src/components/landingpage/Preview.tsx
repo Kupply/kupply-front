@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Typography from '../../assets/Typography';
+import Typography from '../../assets/OldTypography';
 
 const MainWrapper = styled.div`
   width: 100vw;

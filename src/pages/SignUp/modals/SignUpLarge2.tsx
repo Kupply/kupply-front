@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-import TextFieldBox, { StateOptions } from '../../../assets/TextFieldBox';
-import SubmitButton from '../../../assets/buttons/SubmitButton';
-import Typography from '../../../assets/Typography';
+import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
+import SubmitButton from '../../../assets/buttons/OldSubmitButton';
+import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../../components/base/ModalLarge';
 import { sendEmail } from '../SignUp1Page';
 

@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-import VerificationButton from '../../../assets/buttons/VerificationButton';
-import Typography from '../../../assets/Typography';
+import VerificationButton from '../../../assets/buttons/OldVerificationButton';
+import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../../components/base/ModalLarge';
 import { sendEmail } from '../SignUp1Page';
 

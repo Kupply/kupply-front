@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import NextButton from './buttons/NextButton';
+import NextButton from './buttons/OldNextButton';
 
 export interface StepProps {
   isActive: boolean;

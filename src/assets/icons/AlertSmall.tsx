@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styled, { keyframes, css } from "styled-components";
-import Typography from "../Typography";
-import AlertIconCheck from "./AlertIconExclamation";
+import React, { useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
+import Typography from '../OldTypography';
+import AlertIconCheck from './AlertIconExclamation';
 
 // 2023.09.04 수정중 by 윤진
 // ref: https://velog.io/@chlgdnd/%EB%AA%A8%EB%8B%AC-%EC%B0%BD-Fade-out-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0Feat.-React-Typescript
@@ -68,7 +68,7 @@ const ModalOut = keyframes`
   }
 `;
 
-interface AlertSmallProps extends React.ComponentPropsWithoutRef<"div"> {
+interface AlertSmallProps extends React.ComponentPropsWithoutRef<'div'> {
   mainText: string;
   subText: string;
   isOpen: boolean;
@@ -76,23 +76,15 @@ interface AlertSmallProps extends React.ComponentPropsWithoutRef<"div"> {
   // children: JSX.Element;
 }
 
-export default function AlertSmall({
-  mainText,
-  subText,
-  isOpen,
-}: AlertSmallProps) {
+export default function AlertSmall({ mainText, subText, isOpen }: AlertSmallProps) {
   return (
     <ModalContainer isOpen={isOpen}>
       <AlertIconCheck width="62px" height="62px" />
       <TextWrapper>
-        <Typography
-          size="mediumText"
-          color="#141414"
-          style={{ fontWeight: "700", lineHeight: "88.889%" }}
-        >
+        <Typography size="mediumText" color="#141414" style={{ fontWeight: '700', lineHeight: '88.889%' }}>
           {mainText}
         </Typography>
-        <div style={{ height: "8px" }}></div>
+        <div style={{ height: '8px' }}></div>
         <Typography size="normalText" color="#141414">
           {subText}
         </Typography>

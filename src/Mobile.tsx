@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typography from './assets/Typography';
+import Typography from './assets/OldTypography';
 import { GlobalStyle } from './globalStyle';
 
 const MobilePageWrapper = styled.div`

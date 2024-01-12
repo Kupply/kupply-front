@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
 import LabelButton from '../../../assets/buttons/LabelButton';
-import Typography from '../../../assets/Typography';
+import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../../components/base/ModalLarge';
 
 export interface ModalProps {

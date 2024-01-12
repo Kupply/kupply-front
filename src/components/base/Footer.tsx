@@ -2,9 +2,9 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../../assets/Logo';
-import Typography, { TypographyProps } from '../../assets/Typography';
-import { sizeMapping } from '../../assets/Typography';
+import Logo from '../../assets/OldLogo';
+import Typography, { TypographyProps } from '../../assets/OldTypography';
+import { sizeMapping } from '../../assets/OldTypography';
 
 // 추후 수정: 절대값 px 을 상대값 % 로 바꿔야 함.
 

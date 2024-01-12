@@ -69,7 +69,7 @@ export default function App() {
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/archive" element={<PreviousPage />} />
             <Route path="/" element={<MainPage />} />
-            <Route path="/login" element={<LoginPage setLogin={setisLogined} />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/join" element={<SignUp1Page />} />
             <Route path="/signup1" element={<SignUp1Page />} />
             <Route path="/signup2" element={<SignUp2Page />} />
