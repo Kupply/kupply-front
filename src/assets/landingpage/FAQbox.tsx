@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import Typography from '../Typography';
+import Typography from '../OldTypography';
 
 export interface FAQboxProps extends React.ComponentPropsWithRef<'div'> {
   isOpen?: boolean;

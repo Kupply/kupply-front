@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import Logo from '../../assets/Logo';
+import Logo from '../../assets/OldLogo';
 import HeaderButton from '../../assets/buttons/header/HeaderButton';
 import MailButton from '../../assets/buttons/header/MailButton';
 import SettingButton from '../../assets/buttons/header/SettingButton';

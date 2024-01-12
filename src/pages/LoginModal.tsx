@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import ModalLarge from '../components/base/ModalLarge';
-import Typography from '../assets/Typography';
-import NextButton from '../assets/buttons/NextButton';
+import Typography from '../assets/OldTypography';
+import NextButton from '../assets/buttons/OldNextButton';
 import axios from 'axios';
 
 const Wrapper = styled.main`

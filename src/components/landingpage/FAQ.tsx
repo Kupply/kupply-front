@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
-import Typography from '../../assets/Typography';
+import Typography from '../../assets/OldTypography';
 import FAQbox from '../../assets/landingpage/FAQbox';
 import SegmentedPicker from '../../assets/SegmentedPicker';
 import PageNumber from '../../assets/landingpage/PageNumber';

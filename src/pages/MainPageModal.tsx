@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import Typography from '../assets/Typography';
+import Typography from '../assets/OldTypography';
 import AlertIconCheck from '../assets/icons/AlertIconCheck';
 import ModalSmall from '../components/base/ModalSmall';
 

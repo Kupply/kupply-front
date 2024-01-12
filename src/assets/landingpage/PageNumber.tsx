@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Typography from '../Typography';
+import Typography from '../OldTypography';
 
 export interface PageNumberProps extends React.ComponentPropsWithRef<'div'> {
   active?: boolean;
