@@ -329,7 +329,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
               <></>
             )}
             <img
-              src="../../design_image/text_field/x_circle.png"
+              src="../../designImage/textField/XCircle.png"
               width="24px"
               height="24px"
               onMouseDown={() => {
@@ -343,12 +343,12 @@ function TextFieldBox(props: TextFieldBoxProps) {
               <HelpMessage>{helpMessage}</HelpMessage>
               <Input {...rest} />
             </MessageBox>
-            <img src="../../design_image/text_field/x_circle.png" width="28px" height="28px" />
+            <img src="../../designImage/textField/XCircle.png" width="28px" height="28px" />
           </>
         ) : state === 'filled' ? (
           <>
             <CorrectText type={rest.type} value={rest.value} disabled></CorrectText>
-            <img src="../../design_image/text_field/check_circle.png" width="24px" height="24px" />
+            <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
           </>
         ) : state === 'error' ? (
           <>
@@ -413,12 +413,12 @@ function TextFieldBox(props: TextFieldBoxProps) {
             ) : (
               <></>
             )}
-            <img src="../../design_image/text_field/alert_circle.png" width="28px" height="28px" />
+            <img src="../../designImage/textField/AlertCircle.png" width="28px" height="28px" />
           </>
         ) : state === 'loading' ? (
           <>
             <CorrectText>{rest.value}</CorrectText>
-            <img src="../../design_image/text_field/loading.png" width="28px" height="28px" />
+            <img src="../../designImage/textField/Loading.png" width="28px" height="28px" />
           </>
         ) : (
           <></>
@@ -426,7 +426,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
       </TextFieldWrapper>
       {state === 'error' ? (
         <ErrorMessageWrapper>
-          <img src="../../design_image/text_field/x.png" width="12px" height="12px" />
+          <img src="../../designImage/textField/X.png" width="12px" height="12px" />
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       ) : (

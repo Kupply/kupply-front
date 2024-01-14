@@ -33,7 +33,7 @@ const MyboardPasserPageVer = () => {
   });
   return (
     <MobilePageWrapper style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '150px' }}>
-      <CharacterImage src={`design_image/character/Iam쏘리에요.png`} alt="Sorry icon" />
+      <CharacterImage src={`designImage/character/IamSorry.png`} alt="Sorry icon" />
       <Typography
         size="title2"
         style={{

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const AlertImage = styled.img`
   display: flex;
@@ -12,7 +12,7 @@ const AlertImage = styled.img`
 `;
 
 function IDAlert() {
-  return <AlertImage src="../../design_image/fi_alert-circle.png" />;
+  return <AlertImage src="../../designImage/textField/FiAlertCircle.png" />;
 }
 
 export default IDAlert;

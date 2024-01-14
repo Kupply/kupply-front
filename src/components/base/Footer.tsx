@@ -44,14 +44,14 @@ const ShortcutWrapper = styled.div`
 const ShortcutImage1 = styled.div`
   width: 31px;
   height: 40.844px;
-  background-image: url('design_image/KUlogo1.png');
+  background-image: url('designImage/base/KuLogo1.png');
   background-size: cover;
 `;
 
 const ShortcutImage2 = styled.div`
   width: 29px;
   height: 38.813px;
-  background-image: url('design_image/KUlogo2.png');
+  background-image: url('designImage/base/KuLogo2.png');
   background-size: cover;
 `;
 

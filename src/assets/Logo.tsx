@@ -14,7 +14,7 @@ function Logo(props: LogoProps) {
 
   return (
     <LogoImage
-      src="../../design_image/Kupply_ver1.png"
+      src="../../designImage/kupply/KupplyVer1.png"
       alt="LogoImage"
       onClick={handleLogoClick}
       size={size}

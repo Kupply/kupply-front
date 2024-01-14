@@ -13,8 +13,8 @@ function AlertMessage(props: AlertMessageProps) {
           {children}
         </Typography>
       </MessageBox>
-      <NotchImage src="../../design_image/notch.svg" alt="NotchImage" />
-      <AlertImage src="../../design_image/fi_alert-circle1.svg" alt="AlertIcon" />
+      <NotchImage src="../../designImage/textField/notch.svg" alt="NotchImage" />
+      <AlertImage src="../../designImage/FiAlertCircle1.svg" alt="AlertIcon" />
     </MainWrapper>
   );
 }

@@ -11,7 +11,7 @@ import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
 import axios from 'axios';
 import { useTable } from 'react-table';
 import { AnyCnameRecord } from 'dns';
-import client from '../../utils/httpClient';
+import client from '../../utils/HttpClient';
 
 const Wrapper = styled.div`
   display: flex;
@@ -492,7 +492,7 @@ function SignUp5Page() {
               }}
             >
               서비스 이용약관 동의 (필수)
-              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
+              <ArrowImage src="designImage/carousel/CarouselRightButton.png" alt="right arrow" />
             </Typography>
           </ButtonsTextWrapper>
 
@@ -900,7 +900,7 @@ function SignUp5Page() {
               }}
             >
               개인정보 수집 및 이용 동의 (필수)
-              <ArrowImage src="design_image/carousel/carousel_right_button.png" alt="right arrow" />
+              <ArrowImage src="designImage/carousel/CarouselRightButton.png" alt="right arrow" />
             </Typography>
           </ButtonsTextWrapper>
 
@@ -1144,12 +1144,12 @@ function SignUp5Complete() {
         </Typography>
       </div>
       <img
-        src="design_image/check_ani.webp"
+        src="designImage/signUp/CheckAni.webp"
         alt="completeImage"
         style={{
           width: '781px',
           height: '836px',
-          background: 'url(design_image/check_ani.webp), lightgray 50% / cover no-repeat',
+          background: 'url(designImage/signUp/CheckAni.webp), lightgray 50% / cover no-repeat',
           transform: 'translateY(-84px)',
         }}
       />

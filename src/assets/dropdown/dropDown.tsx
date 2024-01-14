@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState, MutableRefObject } from 'react';
 import styled, { css } from 'styled-components';
-import useDetectClose from './useDetectClose';
+import useDetectClose from './UseDetectClose';
 import Typography, { TypographyProps } from '../OldTypography';
 
 // 3. 화살표 버튼 나타나게 처리
@@ -167,7 +167,7 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
-    background-image: url('../../design_image/u_angle-down.svg');
+    background-image: url('../../designImage/UAngleDown.svg');
     background-size: cover;
     z-index: 1; /* Add this line */
   }

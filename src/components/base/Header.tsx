@@ -9,7 +9,7 @@ import MailButton from '../../assets/buttons/header/MailButton';
 import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
-import client from '../../utils/httpClient';
+import client from '../../utils/HttpClient';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -401,7 +401,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                     src={
                       userData.userProfilePic === 'customProfile'
                         ? userData.userProfileLink
-                        : `design_image/character/rectProfile/${userData.userProfilePic}.png`
+                        : `designImage/character/rectProfile/${userData.userProfilePic}.png`
                     }
                     width={112}
                     alt="profile"

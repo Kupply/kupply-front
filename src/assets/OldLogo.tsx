@@ -41,7 +41,7 @@ function Logo() {
   };
   return (
     <LogoWrapper onClick={LogoWrapperClick}>
-      <LogoImage src="../../design_image/Kupply_ver1.png" />
+      <LogoImage src="../../designImage/kupply/KupplyVer1.png" />
     </LogoWrapper>
   );
 }

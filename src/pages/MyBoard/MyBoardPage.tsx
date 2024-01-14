@@ -10,11 +10,11 @@ import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 import MyStageChart from '../../assets/myboardpage/MyStage';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
-import EditModal from './EditModals/EditModal';
-import ApplicationModal from './SubmitModals/ApplicationModal';
-import { recruit } from '../../common/recruiting';
+import EditModal from '../../components/myBoard/EditModals/EditModal';
+import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
+import { recruit } from '../../common/Recruiting';
 import MyboardPasserPageVer from './MyboardPasser';
-import client from '../../utils/httpClient';
+import client from '../../utils/HttpClient';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -586,7 +586,7 @@ export default function MyBoardPage() {
                     src={
                       userData.userProfilePic === 'customProfile'
                         ? userData.userProfileLink
-                        : `design_image/character/rectProfile/${userData.userProfilePic}.png`
+                        : `designImage/character/rectProfile/${userData.userProfilePic}.png`
                     }
                     alt="profile"
                   />
@@ -652,7 +652,7 @@ export default function MyBoardPage() {
                   <InterestMajorBox>
                     <MajorSymbolShadow>
                       <MajorSymbol
-                        src={`design_image/major_symbol/trans/medium/${
+                        src={`designImage/major_symbol/trans/medium/${
                           collegeNameMapping[userData.hopeMajor1 as MajorOptions]
                         }_trans_medium.png`}
                         alt={getTextByTitle(userData.hopeMajor1)}
@@ -740,7 +740,7 @@ export default function MyBoardPage() {
                     <InterestMajorBox>
                       <MajorSymbolShadow>
                         <MajorSymbol
-                          src={`design_image/major_symbol/trans/medium/${
+                          src={`designImage/major_symbol/trans/medium/${
                             collegeNameMapping[userData.hopeMajor2 as MajorOptions]
                           }_trans_medium.png`}
                           alt={getTextByTitle(userData.hopeMajor2)}
@@ -984,7 +984,7 @@ export default function MyBoardPage() {
                         }}
                       >
                         <BigMajorSymbol
-                          src={`design_image/major_symbol/trans/large/${
+                          src={`designImage/major_symbol/trans/large/${
                             collegeNameMapping[userData.hopeMajor1 as MajorOptions]
                           }_trans_large.png`}
                           alt={getTextByTitle(userData.hopeMajor1)}
@@ -1428,7 +1428,7 @@ export default function MyBoardPage() {
                         }}
                       >
                         <BigMajorSymbol
-                          src={`design_image/major_symbol/trans/large/${
+                          src={`designImage/major_symbol/trans/large/${
                             collegeNameMapping[userData.hopeMajor2 as MajorOptions]
                           }_trans_large.png`}
                           alt={getTextByTitle(userData.hopeMajor2)}
