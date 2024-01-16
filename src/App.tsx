@@ -20,6 +20,7 @@ import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/Si
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 import DeletePage from './pages/DeletePage';
 import RouteChangeTracker from './RouteChangeTracker'; // GA 추적 목적
+import DashboardMainPage from './admin/AdminPage';
 
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 import MobilePage from './Mobile';
@@ -39,7 +40,7 @@ const Wrapper = styled.div`
 // marginTop 은 Header 에 페이지가 가리지 않게 하기 위해서.
 export default function App() {
   RouteChangeTracker();
-  const [isLogined, setisLogined] = useState<boolean>(false);
+  const [isLogined, setisLogined] = useState<boolean>(true); // 작업 위해 수정
   const [selected, setSelected] = useState(0);
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
@@ -48,7 +49,6 @@ export default function App() {
   // element={<AuthRequired />}
   // 현재 MainPage 에만, pageView 이벤트 추적기 삽입
 
-  // 제발 Landing Page AuthRequired 안에 집어넣지 마세요 ... - 윤진 (23/11/14)
   return (
     <>
       {isMobile ? (
@@ -66,6 +66,7 @@ export default function App() {
               <Route path="/delete" element={<DeletePage />} />
             </Route>
 
+            <Route path="/admin" element={<DashboardMainPage />} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/archive" element={<PreviousPage />} />
             <Route path="/" element={<MainPage />} />

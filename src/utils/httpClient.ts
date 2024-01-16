@@ -36,6 +36,7 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
+/*
 client.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -53,5 +54,6 @@ client.interceptors.response.use(
     } else return error.response;
   },
 );
+*/
 
 export default client;

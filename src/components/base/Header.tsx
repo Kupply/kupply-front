@@ -227,44 +227,6 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
               localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
             }
           });
-
-          // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
-          // const userInfo = APIresponse.data.data.user;
-
-          // setUserData({
-          //   ...userData,
-          //   userName: userInfo.name,
-          //   userNickname: userInfo.nickname,
-          //   userProfilePic: userInfo.profilePic,
-          //   userProfileLink: userInfo.profileLink,
-          //   userRole: userInfo.role,
-          //   firstMajor: userInfo.firstMajor,
-          //   studentId: userInfo.studentId,
-          //   hopeMajor1: userInfo.hopeMajor1,
-          //   hopeMajor2: userInfo.hopeMajor2,
-          //   curGPA: userInfo.curGPA,
-          //   hopeSemester: userInfo.hopeSemester,
-          // });
-
-          // localStorage.setItem('userProfilePic', userInfo.profilePic);
-          // localStorage.setItem('userProfileLink', userInfo.profileLink);
-          // localStorage.setItem('name', userInfo.name);
-          // localStorage.setItem('nickname', userInfo.nickname);
-          // localStorage.setItem('phoneNumber', userInfo.phoneNumber);
-          // localStorage.setItem('studentId', userInfo.studentId);
-          // localStorage.setItem('firstMajor', userInfo.firstMajor);
-          // localStorage.setItem('role', userInfo.role);
-          // if (userInfo.role === 'candidate') {
-          //   localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
-          //   localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
-          //   localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
-          //   localStorage.setItem('hopeSemester', userInfo.hopeSemester);
-          //   localStorage.setItem('isApplied', userInfo.isApplied);
-          // } else {
-          //   localStorage.setItem('secondMajor', userInfo.secondMajor);
-          //   localStorage.setItem('passSemester', userInfo.passSemester);
-          //   localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
-          // }
         }
       } catch (err) {
         console.log(err);
@@ -274,6 +236,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     getUserInfo();
   }, [logined]);
   const navigate = useNavigate();
+
   const handleMenu1Click = () => {
     navigate('/archive');
   };
@@ -304,6 +267,9 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   };
   const handleLoginClick = () => {
     navigate('/login');
+  };
+  const handleAdminClick = () => {
+    navigate('/admin');
   };
 
   const [, , removeCookie] = useCookies(['accessToken', 'accessTokenExpire', 'refreshToken']);
@@ -363,6 +329,9 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
             </HeaderButton>
             <HeaderButton onClick={handleMenu2Click} activated={location.pathname === '/myboard'}>
               마이보드
+            </HeaderButton>
+            <HeaderButton onClick={handleAdminClick} activated={location.pathname === '/admin'}>
+              관리자
             </HeaderButton>
           </HeaderButtonContainer>
         </LeftButtonsContainer>
