@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 
-import Chart, { useChart } from 'src/components/chart';
+import Chart, { useChart } from '../../components/chart';
 
 // ----------------------------------------------------------------------
 
@@ -45,14 +45,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
       <CardHeader title={title} subheader={subheader} />
 
       <Box sx={{ p: 3, pb: 1 }}>
-        <Chart
-          dir="ltr"
-          type="line"
-          series={series}
-          options={chartOptions}
-          width="100%"
-          height={364}
-        />
+        <Chart dir="ltr" type="line" series={series} options={chartOptions} width="100%" height={364} />
       </Box>
     </Card>
   );

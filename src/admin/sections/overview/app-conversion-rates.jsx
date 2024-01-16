@@ -4,9 +4,9 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from '../../utils/format-number';
 
-import Chart, { useChart } from 'src/components/chart';
+import Chart, { useChart } from '../../components/chart';
 
 // ----------------------------------------------------------------------
 
@@ -44,14 +44,7 @@ export default function AppConversionRates({ title, subheader, chart, ...other }
       <CardHeader title={title} subheader={subheader} />
 
       <Box sx={{ mx: 3 }}>
-        <Chart
-          dir="ltr"
-          type="bar"
-          series={[{ data: chartSeries }]}
-          options={chartOptions}
-          width="100%"
-          height={364}
-        />
+        <Chart dir="ltr" type="bar" series={[{ data: chartSeries }]} options={chartOptions} width="100%" height={364} />
       </Box>
     </Card>
   );

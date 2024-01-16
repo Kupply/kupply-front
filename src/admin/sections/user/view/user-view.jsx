@@ -10,10 +10,10 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
+import { users } from '../../../_mock/user';
 
-import Iconify from 'src/components/iconify';
-import Scrollbar from 'src/components/scrollbar';
+import Iconify from '../../../components/iconify';
+import Scrollbar from '../../../components/scrollbar';
 
 import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
@@ -64,10 +64,7 @@ export default function UserPage() {
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
     }
     setSelected(newSelected);
   };
@@ -105,11 +102,7 @@ export default function UserPage() {
       </Stack>
 
       <Card>
-        <UserTableToolbar
-          numSelected={selected.length}
-          filterName={filterName}
-          onFilterName={handleFilterByName}
-        />
+        <UserTableToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
@@ -131,26 +124,21 @@ export default function UserPage() {
                 ]}
               />
               <TableBody>
-                {dataFiltered
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
-                    <UserTableRow
-                      key={row.id}
-                      name={row.name}
-                      role={row.role}
-                      status={row.status}
-                      company={row.company}
-                      avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
-                      selected={selected.indexOf(row.name) !== -1}
-                      handleClick={(event) => handleClick(event, row.name)}
-                    />
-                  ))}
+                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                  <UserTableRow
+                    key={row.id}
+                    name={row.name}
+                    role={row.role}
+                    status={row.status}
+                    company={row.company}
+                    avatarUrl={row.avatarUrl}
+                    isVerified={row.isVerified}
+                    selected={selected.indexOf(row.name) !== -1}
+                    handleClick={(event) => handleClick(event, row.name)}
+                  />
+                ))}
 
-                <TableEmptyRows
-                  height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, users.length)}
-                />
+                <TableEmptyRows height={77} emptyRows={emptyRows(page, rowsPerPage, users.length)} />
 
                 {notFound && <TableNoData query={filterName} />}
               </TableBody>

@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from '../../utils/format-number';
 
 // ----------------------------------------------------------------------
 

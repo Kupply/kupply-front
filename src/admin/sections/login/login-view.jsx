@@ -13,12 +13,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { alpha, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { useRouter } from 'src/routes/hooks';
+import { useRouter } from '../../routes/hooks';
 
-import { bgGradient } from 'src/theme/css';
+import { bgGradient } from '../../theme/css';
 
-import Logo from 'src/components/logo';
-import Iconify from 'src/components/iconify';
+import Logo from '../../components/logo';
+import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -60,14 +60,7 @@ export default function LoginView() {
         </Link>
       </Stack>
 
-      <LoadingButton
-        fullWidth
-        size="large"
-        type="submit"
-        variant="contained"
-        color="inherit"
-        onClick={handleClick}
-      >
+      <LoadingButton fullWidth size="large" type="submit" variant="contained" color="inherit" onClick={handleClick}>
         Login
       </LoadingButton>
     </>

@@ -4,9 +4,9 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import { styled, useTheme } from '@mui/material/styles';
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from '../../utils/format-number';
 
-import Chart, { useChart } from 'src/components/chart';
+import Chart, { useChart } from '../../components/chart';
 
 // ----------------------------------------------------------------------
 
@@ -82,14 +82,7 @@ export default function AppCurrentVisits({ title, subheader, chart, ...other }) 
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} />
 
-      <StyledChart
-        dir="ltr"
-        type="pie"
-        series={chartSeries}
-        options={chartOptions}
-        width="100%"
-        height={280}
-      />
+      <StyledChart dir="ltr" type="pie" series={chartSeries} options={chartOptions} width="100%" height={280} />
     </Card>
   );
 }

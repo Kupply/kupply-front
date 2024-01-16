@@ -9,10 +9,10 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import CardHeader from '@mui/material/CardHeader';
 
-import { fToNow } from 'src/utils/format-time';
+import { fToNow } from '../../utils/format-time';
 
-import Iconify from 'src/components/iconify';
-import Scrollbar from 'src/components/scrollbar';
+import Iconify from '../../components/iconify';
+import Scrollbar from '../../components/scrollbar';
 
 // ----------------------------------------------------------------------
 
@@ -32,11 +32,7 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
       <Divider sx={{ borderStyle: 'dashed' }} />
 
       <Box sx={{ p: 2, textAlign: 'right' }}>
-        <Button
-          size="small"
-          color="inherit"
-          endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
-        >
+        <Button size="small" color="inherit" endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}>
           View all
         </Button>
       </Box>
@@ -57,12 +53,7 @@ function NewsItem({ news }) {
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
-      <Box
-        component="img"
-        alt={title}
-        src={image}
-        sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
-      />
+      <Box component="img" alt={title} src={image} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
 
       <Box sx={{ minWidth: 240, flexGrow: 1 }}>
         <Link color="inherit" variant="subtitle2" underline="hover" noWrap>

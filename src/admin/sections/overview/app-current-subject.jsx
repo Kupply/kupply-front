@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import { styled, useTheme } from '@mui/material/styles';
 
-import Chart, { useChart } from 'src/components/chart';
+import Chart, { useChart } from '../../components/chart';
 
 // ----------------------------------------------------------------------
 
@@ -59,14 +59,7 @@ export default function AppCurrentSubject({ title, subheader, chart, ...other })
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} />
 
-      <StyledChart
-        dir="ltr"
-        type="radar"
-        series={series}
-        options={chartOptions}
-        width="100%"
-        height={340}
-      />
+      <StyledChart dir="ltr" type="radar" series={series} options={chartOptions} width="100%" height={340} />
     </Card>
   );
 }

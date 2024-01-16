@@ -14,9 +14,9 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-import Iconify from 'src/components/iconify';
-import Scrollbar from 'src/components/scrollbar';
-import { ColorPicker } from 'src/components/color-utils';
+import Iconify from '../../components/iconify';
+import Scrollbar from '../../components/scrollbar';
+import { ColorPicker } from '../../components/color-utils';
 
 // ----------------------------------------------------------------------
 
@@ -34,16 +34,7 @@ export const PRICE_OPTIONS = [
   { value: 'between', label: 'Between $25 - $75' },
   { value: 'above', label: 'Above $75' },
 ];
-export const COLOR_OPTIONS = [
-  '#00AB55',
-  '#000000',
-  '#FFFFFF',
-  '#FFC0CB',
-  '#FF4842',
-  '#1890FF',
-  '#94D82D',
-  '#FFC107',
-];
+export const COLOR_OPTIONS = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107'];
 
 // ----------------------------------------------------------------------
 
@@ -88,12 +79,7 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
       <Typography variant="subtitle2">Price</Typography>
       <RadioGroup>
         {PRICE_OPTIONS.map((item) => (
-          <FormControlLabel
-            key={item.value}
-            value={item.value}
-            control={<Radio />}
-            label={item.label}
-          />
+          <FormControlLabel key={item.value} value={item.value} control={<Radio />} label={item.label} />
         ))}
       </RadioGroup>
     </Stack>
@@ -132,12 +118,7 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
 
   return (
     <>
-      <Button
-        disableRipple
-        color="inherit"
-        endIcon={<Iconify icon="ic:round-filter-list" />}
-        onClick={onOpenFilter}
-      >
+      <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
         Filters&nbsp;
       </Button>
 
@@ -149,12 +130,7 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
           sx: { width: 280, border: 'none', overflow: 'hidden' },
         }}
       >
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{ px: 1, py: 2 }}
-        >
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="h6" sx={{ ml: 1 }}>
             Filters
           </Typography>

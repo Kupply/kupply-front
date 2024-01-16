@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import CardHeader from '@mui/material/CardHeader';
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from '../../utils/format-number';
 
 // ----------------------------------------------------------------------
 
@@ -24,11 +24,7 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
         }}
       >
         {list.map((site) => (
-          <Paper
-            key={site.name}
-            variant="outlined"
-            sx={{ py: 2.5, textAlign: 'center', borderStyle: 'dashed' }}
-          >
+          <Paper key={site.name} variant="outlined" sx={{ py: 2.5, textAlign: 'center', borderStyle: 'dashed' }}>
             <Box sx={{ mb: 0.5 }}>{site.icon}</Box>
 
             <Typography variant="h6">{fShortenNumber(site.value)}</Typography>

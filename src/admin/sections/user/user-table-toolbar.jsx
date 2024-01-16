@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import Iconify from 'src/components/iconify';
+import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -36,10 +36,7 @@ export default function UserTableToolbar({ numSelected, filterName, onFilterName
           placeholder="Search user..."
           startAdornment={
             <InputAdornment position="start">
-              <Iconify
-                icon="eva:search-fill"
-                sx={{ color: 'text.disabled', width: 20, height: 20 }}
-              />
+              <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />
             </InputAdornment>
           }
         />
