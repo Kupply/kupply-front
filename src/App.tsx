@@ -20,7 +20,7 @@ import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/Si
 import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
 import DeletePage from './pages/DeletePage';
 import RouteChangeTracker from './RouteChangeTracker'; // GA 추적 목적
-import DashboardMainPage from './pages/Admin/DashboardMainPage';
+import DashboardMainPage from './admin/AdminPage';
 
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 import MobilePage from './Mobile';
