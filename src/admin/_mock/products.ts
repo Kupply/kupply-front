@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker';
 
 // ----------------------------------------------------------------------
 
+// 아래 부분은 하드코딩 예시 데이터 (추후 삭제)
 const PRODUCT_NAME = [
   'Nike Air Force 1 NDESTRUKT',
   'Nike Space Hippie 04',
@@ -29,16 +30,7 @@ const PRODUCT_NAME = [
   'Nike React Art3mis',
   'Nike React Infinity Run Flyknit A.I.R. Chaz Bear',
 ];
-const PRODUCT_COLOR = [
-  '#00AB55',
-  '#000000',
-  '#FFFFFF',
-  '#FFC0CB',
-  '#FF4842',
-  '#1890FF',
-  '#94D82D',
-  '#FFC107',
-];
+const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107'];
 
 // ----------------------------------------------------------------------
 
@@ -49,8 +41,8 @@ export const products = [...Array(24)].map((_, index) => {
     id: faker.string.uuid(),
     cover: `/assets/images/products/product_${setIndex}.jpg`,
     name: PRODUCT_NAME[index],
-    price: faker.number.int({ min: 4, max: 99, precision: 0.01 }),
-    priceSale: setIndex % 3 ? null : faker.number.int({ min: 19, max: 29, precision: 0.01 }),
+    price: faker.number.int({ min: 4, max: 99 }),
+    priceSale: setIndex % 3 ? null : faker.number.int({ min: 19, max: 29 }),
     colors:
       (setIndex === 1 && PRODUCT_COLOR.slice(0, 2)) ||
       (setIndex === 2 && PRODUCT_COLOR.slice(1, 3)) ||

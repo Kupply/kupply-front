@@ -3,7 +3,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 // ----------------------------------------------------------------------
 
-export function useResponsive(query, start, end) {
+export function useResponsive(query: string, start: any, end?: any) {
   const theme = useTheme();
 
   const mediaUp = useMediaQuery(theme.breakpoints.up(start));
@@ -42,6 +42,6 @@ export function useWidth() {
       const matches = useMediaQuery(theme.breakpoints.up(key));
 
       return !output && matches ? key : output;
-    }, null) || 'xs'
+    }, '') || 'xs'
   );
 }
