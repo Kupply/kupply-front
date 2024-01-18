@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { forwardRef, useCallback } from 'react';
 
 import Stack from '@mui/material/Stack';
@@ -9,12 +9,20 @@ import Iconify from '../iconify';
 
 // ----------------------------------------------------------------------
 
-const ColorPicker = forwardRef(
+interface ColorPickerProps {
+  colors: string[];
+  selected: string | string[];
+  onSelectColor: (color: string | string[]) => void;
+  limit?: number | 'auto';
+  sx?: object;
+}
+
+const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
   ({ colors, selected, onSelectColor, limit = 'auto', sx, ...other }, ref) => {
     const singleSelect = typeof selected === 'string';
 
     const handleSelect = useCallback(
-      (color) => {
+      (color: string) => {
         if (singleSelect) {
           if (color !== selected) {
             onSelectColor(color);
@@ -27,7 +35,7 @@ const ColorPicker = forwardRef(
           onSelectColor(newSelected);
         }
       },
-      [onSelectColor, selected, singleSelect]
+      [onSelectColor, selected, singleSelect],
     );
 
     return (
@@ -84,8 +92,8 @@ const ColorPicker = forwardRef(
                   width={hasSelected ? 12 : 0}
                   icon="eva:checkmark-fill"
                   sx={{
-                    color: (theme) => theme.palette.getContrastText(color),
-                    transition: (theme) =>
+                    color: (theme: any) => theme.palette.getContrastText(color),
+                    transition: (theme: any) =>
                       theme.transitions.create('all', {
                         duration: theme.transitions.duration.shortest,
                       }),
@@ -97,15 +105,7 @@ const ColorPicker = forwardRef(
         })}
       </Stack>
     );
-  }
+  },
 );
-
-ColorPicker.propTypes = {
-  colors: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  limit: PropTypes.number,
-  onSelectColor: PropTypes.func,
-  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  sx: PropTypes.object,
-};
 
 export default ColorPicker;

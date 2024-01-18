@@ -1,11 +1,33 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+// import { Icon } from '@iconify/react';
+
 import { forwardRef } from 'react';
-import { Icon } from '@iconify/react';
+import { Icon, IconifyIcon } from '@iconify/react';
 
 import Box from '@mui/material/Box';
 
 // ----------------------------------------------------------------------
 
+interface IconifyProps {
+  icon: IconifyIcon | string;
+  sx?: object;
+  width?: number;
+}
+
+const Iconify = forwardRef<HTMLDivElement, IconifyProps>(({ icon, width = 20, sx, ...other }, ref) => (
+  <Box
+    ref={ref}
+    component={Icon}
+    className="component-iconify"
+    icon={icon}
+    sx={{ width, height: width, ...sx }}
+    {...other}
+  />
+));
+
+export default Iconify;
+
+/*
 const Iconify = forwardRef(({ icon, width = 20, sx, ...other }, ref) => (
   <Box
     ref={ref}
@@ -24,3 +46,4 @@ Iconify.propTypes = {
 };
 
 export default Iconify;
+*/
