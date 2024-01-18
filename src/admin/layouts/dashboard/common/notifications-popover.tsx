@@ -80,7 +80,7 @@ export default function NotificationsPopover() {
 
   const [open, setOpen] = useState(null);
 
-  const handleOpen = (event) => {
+  const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
   };
 
@@ -93,7 +93,7 @@ export default function NotificationsPopover() {
       notifications.map((notification) => ({
         ...notification,
         isUnRead: false,
-      }))
+      })),
     );
   };
 
@@ -232,7 +232,7 @@ function NotificationItem({ notification }) {
 
 // ----------------------------------------------------------------------
 
-function renderContent(notification) {
+function renderContent(notification: any) {
   const title = (
     <Typography variant="subtitle2">
       {notification.title}
