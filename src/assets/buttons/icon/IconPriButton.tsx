@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled, { css, CSSProp } from "styled-components";
+import React, { useState } from 'react';
+import styled, { css, CSSProp } from 'styled-components';
 
 /*  
 Primary 버튼들 중, 아래 두 가지의 변수 (props)에 따라 버튼 컴포넌트 생성
@@ -131,38 +131,37 @@ const ButtonImage = styled.img<{ imageSize: CSSProp }>`
 
 const ActiveButtonImage = styled.img<{ imageSize: CSSProp }>`
   vertical-align: middle;
-  filter: invert(55%) sepia(60%) saturate(3485%) hue-rotate(337deg)
-    brightness(95%) contrast(81%);
+  filter: invert(55%) sepia(60%) saturate(3485%) hue-rotate(337deg) brightness(95%) contrast(81%);
   ${({ imageSize }) => imageSize};
 `;
 
 interface IconPrimaryButtonProps {
-  buttonSize?: "small" | "medium" | "large";
-  imageSize?: "small" | "medium" | "large";
+  buttonSize?: 'small' | 'medium' | 'large';
+  imageSize?: 'small' | 'medium' | 'large';
   controlActive?: boolean;
 }
 
 // 주목
 function IconPrimaryButton({
-  buttonSize = "medium", // default
-  imageSize = "medium", //default
+  buttonSize = 'medium', // default
+  imageSize = 'medium', //default
   controlActive = true, // default
 }: IconPrimaryButtonProps): JSX.Element {
-  const [buttonState, setButtonState] = useState<
-    "default" | "hover" | "active" | "disabled"
-  >(controlActive ? "default" : "disabled"); // 수정 필요
+  const [buttonState, setButtonState] = useState<'default' | 'hover' | 'active' | 'disabled'>(
+    controlActive ? 'default' : 'disabled',
+  ); // 수정 필요
 
   const handleClick = () => {
     /* 구체적인 함수 내부는 추후 수정*/
-    setButtonState("active");
+    setButtonState('active');
   };
 
   const handleMouseEnter = () => {
-    setButtonState("hover");
+    setButtonState('hover');
   };
 
   const handleMouseLeave = () => {
-    setButtonState(controlActive ? "default" : "disabled");
+    setButtonState(controlActive ? 'default' : 'disabled');
   };
 
   interface StyledButtonProps {
@@ -172,11 +171,11 @@ function IconPrimaryButton({
 
   const getButtonStyle = () => {
     switch (buttonState) {
-      case "hover":
+      case 'hover':
         return styled(HoverButton)<StyledButtonProps>``;
-      case "active":
+      case 'active':
         return styled(ActiveButton)<StyledButtonProps>``;
-      case "disabled":
+      case 'disabled':
         return styled(DisabledButton)<StyledButtonProps>``;
       default:
         return styled(DefaultButton)<StyledButtonProps>``;
@@ -194,46 +193,22 @@ function IconPrimaryButton({
         onMouseLeave={handleMouseLeave}
         buttonSize={buttonSizeStyles[buttonSize]}
       >
-        {buttonState === "active" ? (
+        {buttonState === 'active' ? (
           // Active
-          buttonSize === "small" ? (
-            <ActiveButtonImage
-              src={"../../design_image/user_D.svg"}
-              alt="오류"
-              imageSize={imageSizeStyles[imageSize]}
-            />
-          ) : buttonSize === "medium" ? (
-            <ActiveButtonImage
-              src={"../../design_image/user_D.svg"}
-              alt="오류"
-              imageSize={imageSizeStyles[imageSize]}
-            />
+          buttonSize === 'small' ? (
+            <ActiveButtonImage src={'../../designImage/UserD.svg'} alt="오류" imageSize={imageSizeStyles[imageSize]} />
+          ) : buttonSize === 'medium' ? (
+            <ActiveButtonImage src={'../../designImage/UserD.svg'} alt="오류" imageSize={imageSizeStyles[imageSize]} />
           ) : (
-            <ActiveButtonImage
-              src={"../../design_image/user_D.svg"}
-              alt="오류"
-              imageSize={imageSizeStyles[imageSize]}
-            />
+            <ActiveButtonImage src={'../../designImage/UserD.svg'} alt="오류" imageSize={imageSizeStyles[imageSize]} />
           )
         ) : // Default
-        buttonSize === "small" ? (
-          <ButtonImage
-            src={"../../design_image/user_D.svg"}
-            alt="오류"
-            imageSize={imageSizeStyles[imageSize]}
-          />
-        ) : buttonSize === "medium" ? (
-          <ButtonImage
-            src={"../../design_image/user_D.svg"}
-            alt="오류"
-            imageSize={imageSizeStyles[imageSize]}
-          />
+        buttonSize === 'small' ? (
+          <ButtonImage src={'../../designImage/UserD.svg'} alt="오류" imageSize={imageSizeStyles[imageSize]} />
+        ) : buttonSize === 'medium' ? (
+          <ButtonImage src={'../../designImage/UserD.svg'} alt="오류" imageSize={imageSizeStyles[imageSize]} />
         ) : (
-          <ButtonImage
-            src={"../../design_image/user_D.svg"}
-            alt="오류"
-            imageSize={imageSizeStyles[imageSize]}
-          />
+          <ButtonImage src={'../../designImage/UserD.svg'} alt="오류" imageSize={imageSizeStyles[imageSize]} />
         )}
       </StyledButton>
     </ButtonContainer>

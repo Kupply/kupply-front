@@ -60,7 +60,7 @@ function FAQbox(props: FAQboxProps) {
           {question}
         </Typography>
         <img
-          src="../../design_image/u_angle-down.svg"
+          src="../../designImage/UAngleDown.svg"
           onClick={onToggle}
           style={{ cursor: 'pointer', transform: isOpen == true ? 'rotate(180deg)' : 'none' }}
         />

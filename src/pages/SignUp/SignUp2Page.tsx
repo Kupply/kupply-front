@@ -6,8 +6,8 @@ import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
-import DropDown from '../../assets/dropdown/dropDown';
-import { majorAllList } from '../../common/majorAll';
+import DropDown from '../../assets/dropdown/DropDown';
+import { majorAllList } from '../../common/MajorAll';
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]

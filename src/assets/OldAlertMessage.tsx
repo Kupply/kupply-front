@@ -50,9 +50,9 @@ function AlertMessage({ message = '쿠플라이 아이디는 고려대학교 이
             {message}
           </Typography>
         </MessageBox>
-        <NotchImage src="../../design_image/notch.svg" style={{ marginLeft: '10px' }} />
+        <NotchImage src="../../designImage/textField/notch.svg" style={{ marginLeft: '10px' }} />
       </MessageWrapper>
-      <AlertImage src="../../design_image/fi_alert-circle1.svg" style={{ marginLeft: '8px' }} />
+      <AlertImage src="../../designImage/FiAlertCircle1.svg" style={{ marginLeft: '8px' }} />
     </Wrapper>
   );
 }

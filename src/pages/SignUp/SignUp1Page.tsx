@@ -6,14 +6,14 @@ import Typography from '../../assets/OldTypography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
-import Timer from '../../components/Timer';
+import Timer from '../../components/signUp/Timer';
 import VerificationBox from '../../assets/VerificationBox';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
-import SignUpSmall from './modals/SignUpSmall';
-import SignUpLarge1 from './modals/SignUpLarge1';
-import SignUpLarge2 from './modals/SignUpLarge2';
-import SignUpLarge3 from './modals/SignUpLarge3';
-import client from '../../utils/httpClient';
+import SignUpSmall from '../../components/signUp/modals/SignUpSmall';
+import SignUpLarge1 from '../../components/signUp/modals/SignUpLarge1';
+import SignUpLarge2 from '../../components/signUp/modals/SignUpLarge2';
+import SignUpLarge3 from '../../components/signUp/modals/SignUpLarge3';
+import client from '../../utils/HttpClient';
 
 const Wrapper = styled.div`
   display: flex;

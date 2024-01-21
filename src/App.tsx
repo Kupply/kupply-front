@@ -3,27 +3,27 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
-import MainPage from './pages/MainPage';
-import MyBoardPage from './pages/MyBoard/MyBoardPage';
-import LandingPage from './pages/LandingPage';
-import LoginPage from './pages/LoginPage';
-import PreviousPage from './pages/PreviousPage';
-import ArchiveDetailPage from './pages/ArchiveDetailPage';
-import CommunityPage from './pages/CommunityPage';
-import MessagePage from './pages/MessagePage';
-import SettingsPage from './pages/SettingsPage';
-import SignUp1Page from './pages/SignUp/SignUp1Page';
-import SignUp2Page from './pages/SignUp/SignUp2Page';
-import SignUp3Page from './pages/SignUp/SignUp3Page';
+import MainPage from './pages/main/MainPage';
+import MyBoardPage from './pages/myBoard/MyBoardPage';
+import LandingPage from './pages/landing/LandingPage';
+import LoginPage from './pages/login/LoginPage';
+import PreviousPage from './pages/archive/PreviousPage';
+import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
+import CommunityPage from './pages/community/CommunityPage';
+import MessagePage from './pages/message/MessagePage';
+import SettingsPage from './pages/setting/SettingsPage';
+import SignUp1Page from './pages/signUp/SignUp1Page';
+import SignUp2Page from './pages/signUp/SignUp2Page';
+import SignUp3Page from './pages/signUp/SignUp3Page';
 import AuthRequired from './AuthRequired';
-import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/SignUp/SignUp4Page';
-import { SignUp5Page, SignUp5Complete } from './pages/SignUp/SignUp5Page';
-import DeletePage from './pages/DeletePage';
+import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/SignUp4Page';
+import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
+import DeletePage from './pages/delete/DeletePage';
 import RouteChangeTracker from './RouteChangeTracker'; // GA 추적 목적
 import DashboardMainPage from './admin/AdminPage';
 
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
-import MobilePage from './Mobile';
+import MobilePage from './pages/mobile/Mobile';
 
 const Wrapper = styled.div`
   position: flex; //absolute;

@@ -33,7 +33,7 @@ export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
               isComplete={i + 1 < currentStep || complete}
               stepType={currentStep === i + 1 ? 'active' : currentStep < i + 1 ? 'inactive' : 'complete'}
             >
-              {currentStep > i + 1 ? <img src="../../design_image/fi_check.svg" alt="ERROR" /> : null}
+              {currentStep > i + 1 ? <img src="../../designImage/FiCheck.svg" alt="ERROR" /> : null}
             </Step>
           </StepItem>
         ))}
@@ -133,7 +133,7 @@ const ProgressBarContainer = styled.div`
               isComplete={i + 1 < props.currentStep || props.complete}
               stepType={props.currentStep === i + 1 ? 'active' : props.currentStep < i + 1 ? 'inactive' : 'complete'}
             >
-              {props.currentStep > i + 1 ? <img src="../../design_image/fi_check.svg" alt="ERROR" /> : null}
+              {props.currentStep > i + 1 ? <img src="../../designImage/FiCheck.svg" alt="ERROR" /> : null}
             </Step>
           </StepItem>
         ))}

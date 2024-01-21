@@ -11,8 +11,8 @@ const Wrapper = styled.div`
   align-items: flex-end;
   justify-content: center;
   background-size: cover;
-  // background-image: url('/design_image/carousel/login_banner2_extend.png');
-  background-image: url('/design_image/carousel/carousel2.png');
+  // background-image: url('/designImage/carousel/LoginBanner2Extend.png');
+  background-image: url('/designImage/carousel/Carousel2.png');
 `;
 
 const ContentWrapper = styled.div`
