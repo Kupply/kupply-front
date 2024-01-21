@@ -10,10 +10,10 @@ PostSort.propTypes = {
   onSort: PropTypes.func,
 };
 
-export default function PostSort({ options, onSort }) {
+export default function PostSort({ options, onSort }: any) {
   return (
     <TextField select size="small" value="latest" onChange={onSort}>
-      {options.map((option) => (
+      {options.map((option: any) => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}
         </MenuItem>
