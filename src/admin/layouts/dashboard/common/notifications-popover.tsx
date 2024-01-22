@@ -192,7 +192,7 @@ NotificationItem.propTypes = {
   }),
 };
 
-function NotificationItem({ notification }) {
+function NotificationItem({ notification }: any) {
   const { avatar, title } = renderContent(notification);
 
   return (
