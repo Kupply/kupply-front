@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -8,7 +8,32 @@ import Chart, { useChart } from '../../components/chart';
 
 // ----------------------------------------------------------------------
 
-export default function AppWebsiteVisits({ title, subheader, chart, ...other }) {
+interface ChartDataPoint {
+  x: any; // Adjust the type as necessary
+  y: any; // Adjust the type as necessary
+}
+
+interface ChartDataItem {
+  name?: string;
+  type?: string;
+  data: ChartDataPoint[]; // Array of data points
+  fill: any;
+}
+
+interface ChartProps {
+  labels: string[]; // or any other type depending on the actual structure
+  colors: string[]; // or any other type depending on the actual structure
+  series: ChartDataItem[]; // Adjust according to the actual series item structure
+  options?: any; // Replace 'any' with a more specific type if possible
+}
+
+interface AppWebsiteVisitsProps {
+  title?: string;
+  subheader?: string;
+  chart: ChartProps;
+}
+
+const AppWebsiteVisits: React.FC<AppWebsiteVisitsProps> = ({ title, subheader, chart, ...other }) => {
   const { labels, colors, series, options } = chart;
 
   const chartOptions = useChart({
@@ -29,7 +54,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
       shared: true,
       intersect: false,
       y: {
-        formatter: (value) => {
+        formatter: (value: any) => {
           if (typeof value !== 'undefined') {
             return `${value.toFixed(0)} visits`;
           }
@@ -49,10 +74,6 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
       </Box>
     </Card>
   );
-}
-
-AppWebsiteVisits.propTypes = {
-  chart: PropTypes.object,
-  subheader: PropTypes.string,
-  title: PropTypes.string,
 };
+
+export default AppWebsiteVisits;

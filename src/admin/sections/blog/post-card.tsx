@@ -17,7 +17,24 @@ import SvgColor from '../../components/svg-color';
 
 // ----------------------------------------------------------------------
 
-export default function PostCard({ post, index }) {
+// Define types for the props
+interface PostCardProps {
+  post: {
+    cover: string;
+    title: string;
+    view: number;
+    comment: number;
+    share: number;
+    author: {
+      name: string;
+      avatarUrl: string;
+    };
+    createdAt: Date;
+  };
+  index: number;
+}
+
+export default function PostCard({ post, index }: PostCardProps) {
   const { cover, title, view, comment, share, author, createdAt } = post;
 
   const latestPostLarge = index === 0;
@@ -134,7 +151,7 @@ export default function PostCard({ post, index }) {
 
   const renderShape = (
     <SvgColor
-      color="paper"
+      // color="paper"
       src="/assets/icons/shape-avatar.svg"
       sx={{
         width: 80,
@@ -142,7 +159,7 @@ export default function PostCard({ post, index }) {
         zIndex: 9,
         bottom: -15,
         position: 'absolute',
-        color: 'background.paper',
+        color: 'background.paper', // 여기서 color 설정
         ...((latestPostLarge || latestPost) && { display: 'none' }),
       }}
     />
@@ -201,8 +218,3 @@ export default function PostCard({ post, index }) {
     </Grid>
   );
 }
-
-PostCard.propTypes = {
-  post: PropTypes.object.isRequired,
-  index: PropTypes.number,
-};

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -11,7 +11,6 @@ import Chart, { useChart } from '../../components/chart';
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 400;
-
 const LEGEND_HEIGHT = 72;
 
 const StyledChart = styled(Chart)(({ theme }) => ({
@@ -28,7 +27,24 @@ const StyledChart = styled(Chart)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function AppCurrentVisits({ title, subheader, chart, ...other }) {
+interface SeriesItem {
+  value: number;
+  label: string;
+}
+
+interface ChartProps {
+  colors: string[];
+  series: SeriesItem[];
+  options?: any; // Replace 'any' with a more specific type if possible
+}
+
+interface AppCurrentVisitsProps {
+  chart: ChartProps;
+  subheader?: string;
+  title?: string;
+}
+
+const AppCurrentVisits: React.FC<AppCurrentVisitsProps> = ({ title, subheader, chart, ...other }) => {
   const theme = useTheme();
 
   const { colors, series, options } = chart;
@@ -60,9 +76,9 @@ export default function AppCurrentVisits({ title, subheader, chart, ...other }) 
     tooltip: {
       fillSeriesColor: false,
       y: {
-        formatter: (value) => fNumber(value),
+        formatter: (value: any) => fNumber(value),
         title: {
-          formatter: (seriesName) => `${seriesName}`,
+          formatter: (seriesName: any) => `${seriesName}`,
         },
       },
     },
@@ -85,10 +101,6 @@ export default function AppCurrentVisits({ title, subheader, chart, ...other }) 
       <StyledChart dir="ltr" type="pie" series={chartSeries} options={chartOptions} width="100%" height={280} />
     </Card>
   );
-}
-
-AppCurrentVisits.propTypes = {
-  chart: PropTypes.object,
-  subheader: PropTypes.string,
-  title: PropTypes.string,
 };
+
+export default AppCurrentVisits;

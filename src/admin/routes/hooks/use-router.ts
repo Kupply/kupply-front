@@ -1,8 +1,26 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, To } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
+export function useRouter() {
+  const navigate = useNavigate();
+
+  const router = useMemo(
+    () => ({
+      back: () => navigate(-1),
+      forward: () => navigate(1),
+      reload: () => window.location.reload(),
+      push: (href: To) => navigate(href),
+      replace: (href: To) => navigate(href, { replace: true }),
+    }),
+    [navigate],
+  );
+
+  return router;
+}
+
+/*
 export function useRouter() {
   const navigate = useNavigate();
 
@@ -19,3 +37,4 @@ export function useRouter() {
 
   return router;
 }
+*/

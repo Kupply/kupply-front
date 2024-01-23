@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -9,7 +9,6 @@ import Chart, { useChart } from '../../components/chart';
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 400;
-
 const LEGEND_HEIGHT = 72;
 
 const StyledChart = styled(Chart)(({ theme }) => ({
@@ -26,7 +25,20 @@ const StyledChart = styled(Chart)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function AppCurrentSubject({ title, subheader, chart, ...other }) {
+interface ChartData {
+  series?: any[]; // Replace 'any' with a more specific type if possible
+  colors?: string[];
+  categories?: string[];
+  options?: any; // Replace 'any' with a more specific type if possible
+}
+
+interface AppCurrentSubjectProps {
+  chart: ChartData;
+  subheader?: string;
+  title?: string;
+}
+
+const AppCurrentSubject: React.FC<AppCurrentSubjectProps> = ({ title, subheader, chart, ...other }) => {
   const theme = useTheme();
 
   const { series, colors, categories, options } = chart;
@@ -62,10 +74,6 @@ export default function AppCurrentSubject({ title, subheader, chart, ...other })
       <StyledChart dir="ltr" type="radar" series={series} options={chartOptions} width="100%" height={340} />
     </Card>
   );
-}
-
-AppCurrentSubject.propTypes = {
-  chart: PropTypes.object,
-  subheader: PropTypes.string,
-  title: PropTypes.string,
 };
+
+export default AppCurrentSubject;

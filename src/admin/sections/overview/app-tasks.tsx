@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -14,10 +13,28 @@ import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function AnalyticsTasks({ title, subheader, list, ...other }) {
+interface Task {
+  id: string;
+  name: string;
+  // Include other task properties if there are any
+}
+
+interface AnalyticsTasksProps {
+  title?: string;
+  subheader?: string;
+  list: Task[];
+}
+
+interface TaskItemProps {
+  task: Task;
+  checked: boolean;
+  onChange: () => void;
+}
+
+const AnalyticsTasks: React.FC<AnalyticsTasksProps> = ({ title, subheader, list, ...other }) => {
   const [selected, setSelected] = useState(['2']);
 
-  const handleClickComplete = (taskId) => {
+  const handleClickComplete = (taskId: string) => {
     const tasksCompleted = selected.includes(taskId)
       ? selected.filter((value) => value !== taskId)
       : [...selected, taskId];
@@ -39,20 +56,14 @@ export default function AnalyticsTasks({ title, subheader, list, ...other }) {
       ))}
     </Card>
   );
-}
-
-AnalyticsTasks.propTypes = {
-  list: PropTypes.array,
-  subheader: PropTypes.string,
-  title: PropTypes.string,
 };
 
 // ----------------------------------------------------------------------
 
-function TaskItem({ task, checked, onChange }) {
-  const [open, setOpen] = useState(null);
+const TaskItem: React.FC<TaskItemProps> = ({ task, checked, onChange }) => {
+  const [open, setOpen] = useState<HTMLElement | null>(null);
 
-  const handleOpenMenu = (event) => {
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setOpen(event.currentTarget);
   };
 
@@ -138,10 +149,6 @@ function TaskItem({ task, checked, onChange }) {
       </Popover>
     </>
   );
-}
-
-TaskItem.propTypes = {
-  checked: PropTypes.bool,
-  onChange: PropTypes.func,
-  task: PropTypes.object,
 };
+
+export default AnalyticsTasks;

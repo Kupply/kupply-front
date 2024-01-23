@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-
+// import PropTypes from 'prop-types';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
@@ -8,11 +8,22 @@ import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
+/*
 PostSearch.propTypes = {
   posts: PropTypes.array.isRequired,
 };
+*/
 
-export default function PostSearch({ posts }) {
+interface Post {
+  id: number; // or string, depending on your data structure
+  title: string;
+}
+
+interface PostSearchProps {
+  posts: Post[];
+}
+
+const PostSearch: React.FC<PostSearchProps> = ({ posts }) => {
   return (
     <Autocomplete
       sx={{ width: 280 }}
@@ -47,4 +58,6 @@ export default function PostSearch({ posts }) {
       )}
     />
   );
-}
+};
+
+export default PostSearch;

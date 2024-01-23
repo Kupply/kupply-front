@@ -1,3 +1,4 @@
+import React from 'react';
 import { faker } from '@faker-js/faker';
 
 import Container from '@mui/material/Container';
@@ -18,7 +19,7 @@ import AppConversionRates from '../app-conversion-rates';
 
 // ----------------------------------------------------------------------
 
-export default function AppView() {
+const AppView: React.FC = () => {
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
@@ -85,21 +86,31 @@ export default function AppView() {
                   name: 'Team A',
                   type: 'column',
                   fill: 'solid',
-                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30].map((value, index) => ({
+                    x: `01/0${index + 1}/2003`, // example x value, adjust as needed
+                    y: value,
+                  })),
                 },
                 {
                   name: 'Team B',
                   type: 'area',
                   fill: 'gradient',
-                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43].map((value, index) => ({
+                    x: `01/0${index + 1}/2003`, // example x value, adjust as needed
+                    y: value,
+                  })),
                 },
                 {
                   name: 'Team C',
                   type: 'line',
                   fill: 'solid',
-                  data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
+                  data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39].map((value, index) => ({
+                    x: `01/0${index + 1}/2003`, // example x value, adjust as needed
+                    y: value,
+                  })),
                 },
               ],
+              colors: ['#FF4560', '#00E396', '#008FFB'], // Example colors
             }}
           />
         </Grid>
@@ -114,6 +125,7 @@ export default function AppView() {
                 { label: 'Europe', value: 1443 },
                 { label: 'Africa', value: 4443 },
               ],
+              colors: ['#FF4560', '#00E396', '#008FFB'], // Example colors
             }}
           />
         </Grid>
@@ -135,6 +147,7 @@ export default function AppView() {
                 { label: 'United States', value: 1200 },
                 { label: 'United Kingdom', value: 1380 },
               ],
+              colors: ['#FF4560', '#00E396', '#008FFB'], // Example colors
             }}
           />
         </Grid>
@@ -191,22 +204,22 @@ export default function AppView() {
               {
                 name: 'FaceBook',
                 value: 323234,
-                icon: <Iconify icon="eva:facebook-fill" color="#1877F2" width={32} />,
+                icon: <Iconify icon="eva:facebook-fill" sx={{ color: '#1877F2' }} width={32} />,
               },
               {
                 name: 'Google',
                 value: 341212,
-                icon: <Iconify icon="eva:google-fill" color="#DF3E30" width={32} />,
+                icon: <Iconify icon="eva:google-fill" sx={{ color: '#DF3E30' }} width={32} />,
               },
               {
                 name: 'Linkedin',
                 value: 411213,
-                icon: <Iconify icon="eva:linkedin-fill" color="#006097" width={32} />,
+                icon: <Iconify icon="eva:linkedin-fill" sx={{ color: '#006097' }} width={32} />,
               },
               {
                 name: 'Twitter',
                 value: 443232,
-                icon: <Iconify icon="eva:twitter-fill" color="#1C9CEA" width={32} />,
+                icon: <Iconify icon="eva:twitter-fill" sx={{ color: '#1C9CEA' }} width={32} />,
               },
             ]}
           />
@@ -227,4 +240,6 @@ export default function AppView() {
       </Grid>
     </Container>
   );
-}
+};
+
+export default AppView;

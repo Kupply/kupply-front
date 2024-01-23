@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -10,7 +10,24 @@ import Chart, { useChart } from '../../components/chart';
 
 // ----------------------------------------------------------------------
 
-export default function AppConversionRates({ title, subheader, chart, ...other }) {
+interface SeriesItem {
+  value: number;
+  label: string;
+}
+
+interface ChartProps {
+  colors: string[];
+  series: SeriesItem[];
+  options?: any; // Replace 'any' with a more specific type if possible
+}
+
+interface AppConversionRatesProps {
+  chart: ChartProps;
+  subheader?: string;
+  title?: string;
+}
+
+const AppConversionRates: React.FC<AppConversionRatesProps> = ({ title, subheader, chart, ...other }) => {
   const { colors, series, options } = chart;
 
   const chartSeries = series.map((i) => i.value);
@@ -20,7 +37,7 @@ export default function AppConversionRates({ title, subheader, chart, ...other }
     tooltip: {
       marker: { show: false },
       y: {
-        formatter: (value) => fNumber(value),
+        formatter: (value: any) => fNumber(value),
         title: {
           formatter: () => '',
         },
@@ -48,10 +65,6 @@ export default function AppConversionRates({ title, subheader, chart, ...other }
       </Box>
     </Card>
   );
-}
-
-AppConversionRates.propTypes = {
-  chart: PropTypes.object,
-  subheader: PropTypes.string,
-  title: PropTypes.string,
 };
+
+export default AppConversionRates;

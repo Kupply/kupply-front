@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Card from '@mui/material/Card';
 import Timeline from '@mui/lab/Timeline';
@@ -13,8 +13,25 @@ import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import { fDateTime } from '../../utils/format-time';
 
 // ----------------------------------------------------------------------
+interface OrderItemProps {
+  type: string;
+  title: string;
+  time: Date; // Adjust the type as necessary
+  id: string; // Assuming there's an 'id' field for the key
+}
 
-export default function AnalyticsOrderTimeline({ title, subheader, list, ...other }) {
+interface AnalyticsOrderTimelineProps {
+  list: OrderItemProps[];
+  subheader?: string;
+  title?: string;
+}
+
+interface OrderItemComponentProps {
+  item: OrderItemProps;
+  lastTimeline: boolean;
+}
+
+const AnalyticsOrderTimeline: React.FC<AnalyticsOrderTimelineProps> = ({ title, subheader, list, ...other }) => {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -35,18 +52,13 @@ export default function AnalyticsOrderTimeline({ title, subheader, list, ...othe
       </Timeline>
     </Card>
   );
-}
-
-AnalyticsOrderTimeline.propTypes = {
-  list: PropTypes.array,
-  subheader: PropTypes.string,
-  title: PropTypes.string,
 };
 
 // ----------------------------------------------------------------------
 
-function OrderItem({ item, lastTimeline }) {
+const OrderItem: React.FC<OrderItemComponentProps> = ({ item, lastTimeline }) => {
   const { type, title, time } = item;
+
   return (
     <TimelineItem>
       <TimelineSeparator>
@@ -71,9 +83,6 @@ function OrderItem({ item, lastTimeline }) {
       </TimelineContent>
     </TimelineItem>
   );
-}
-
-OrderItem.propTypes = {
-  item: PropTypes.object,
-  lastTimeline: PropTypes.bool,
 };
+
+export default AnalyticsOrderTimeline;

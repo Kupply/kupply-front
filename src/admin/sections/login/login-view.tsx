@@ -109,7 +109,7 @@ export default function LoginView() {
               variant="outlined"
               sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
             >
-              <Iconify icon="eva:google-fill" color="#DF3E30" />
+              <Iconify icon="eva:google-fill" sx={{ color: '#DF3E30' }} />
             </Button>
 
             <Button
@@ -119,7 +119,7 @@ export default function LoginView() {
               variant="outlined"
               sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
             >
-              <Iconify icon="eva:facebook-fill" color="#1877F2" />
+              <Iconify icon="eva:facebook-fill" sx={{ color: '#1877F2' }} />
             </Button>
 
             <Button
@@ -129,7 +129,7 @@ export default function LoginView() {
               variant="outlined"
               sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
             >
-              <Iconify icon="eva:twitter-fill" color="#1C9CEA" />
+              <Iconify icon="eva:twitter-fill" sx={{ color: '#1C9CEA' }} />
             </Button>
           </Stack>
 

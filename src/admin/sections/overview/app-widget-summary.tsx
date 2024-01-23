@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -9,7 +9,15 @@ import { fShortenNumber } from '../../utils/format-number';
 
 // ----------------------------------------------------------------------
 
-export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx, ...other }) {
+interface AppWidgetSummaryProps {
+  title?: string;
+  total?: any;
+  icon?: React.ReactNode; // assuming icon can be a React component or a string
+  color?: string;
+  sx?: any;
+}
+
+const AppWidgetSummary: React.FC<AppWidgetSummaryProps> = ({ title, total, icon, color = 'primary', sx, ...other }) => {
   return (
     <Card
       component={Stack}
@@ -34,12 +42,6 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
       </Stack>
     </Card>
   );
-}
-
-AppWidgetSummary.propTypes = {
-  color: PropTypes.string,
-  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-  sx: PropTypes.object,
-  title: PropTypes.string,
-  total: PropTypes.number,
 };
+
+export default AppWidgetSummary;
