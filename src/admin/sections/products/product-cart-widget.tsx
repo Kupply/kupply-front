@@ -5,6 +5,16 @@ import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
+declare module '@mui/material/styles' {
+  // 이게 맞나??
+  interface Theme {
+    customShadows: {
+      dropdown: any;
+      z20: string;
+    };
+  }
+}
+
 const StyledRoot = styled('div')(({ theme }) => ({
   zIndex: 999,
   right: 0,

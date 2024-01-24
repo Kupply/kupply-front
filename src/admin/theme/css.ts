@@ -1,4 +1,4 @@
-import { alpha } from '@mui/material/styles';
+import { alpha, Theme } from '@mui/material/styles';
 import { dividerClasses } from '@mui/material/Divider';
 import { checkboxClasses } from '@mui/material/Checkbox';
 import { menuItemClasses } from '@mui/material/MenuItem';
@@ -6,7 +6,13 @@ import { autocompleteClasses } from '@mui/material/Autocomplete';
 
 // ----------------------------------------------------------------------
 
-export const paper = ({ theme, bgcolor, dropdown }) => ({
+interface paperProps {
+  theme: Theme;
+  bgcolor?: string;
+  dropdown?: string;
+}
+
+export const paper = ({ theme, bgcolor, dropdown }: paperProps) => ({
   ...bgBlur({
     blur: 20,
     opacity: 0.9,
@@ -31,7 +37,7 @@ export const paper = ({ theme, bgcolor, dropdown }) => ({
 
 // ----------------------------------------------------------------------
 
-export const menuItem = (theme) => ({
+export const menuItem = (theme: any) => ({
   ...theme.typography.body2,
   padding: theme.spacing(0.75, 1),
   borderRadius: theme.shape.borderRadius * 0.75,
@@ -63,7 +69,7 @@ export const menuItem = (theme) => ({
 
 // ----------------------------------------------------------------------
 
-export function bgBlur(props) {
+export function bgBlur(props: any) {
   const color = props?.color || '#000000';
   const blur = props?.blur || 6;
   const opacity = props?.opacity || 0.8;
@@ -97,7 +103,7 @@ export function bgBlur(props) {
 
 // ----------------------------------------------------------------------
 
-export function bgGradient(props) {
+export function bgGradient(props: any) {
   const direction = props?.direction || 'to bottom';
   const startColor = props?.startColor;
   const endColor = props?.endColor;
@@ -106,9 +112,7 @@ export function bgGradient(props) {
 
   if (imgUrl) {
     return {
-      background: `linear-gradient(${direction}, ${startColor || color}, ${
-        endColor || color
-      }), url(${imgUrl})`,
+      background: `linear-gradient(${direction}, ${startColor || color}, ${endColor || color}), url(${imgUrl})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center center',
@@ -122,7 +126,7 @@ export function bgGradient(props) {
 
 // ----------------------------------------------------------------------
 
-export function textGradient(value) {
+export function textGradient(value: any) {
   return {
     background: `-webkit-linear-gradient(${value})`,
     WebkitBackgroundClip: 'text',

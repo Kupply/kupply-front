@@ -10,10 +10,25 @@ import { fCurrency } from '../../utils/format-number';
 
 import Label from '../../components/label';
 import { ColorPreview } from '../../components/color-utils';
+import React from 'react';
 
 // ----------------------------------------------------------------------
 
-export default function ShopProductCard({ product }) {
+interface ShopProduct {
+  status: string;
+  name: string;
+  cover: string;
+  priceSale?: number | null;
+  price: number;
+  colors: string[];
+  id: string;
+}
+
+interface ShopProductCardProps {
+  product: ShopProduct;
+}
+
+const ShopProductCard: React.FC<ShopProductCardProps> = ({ product }) => {
   const renderStatus = (
     <Label
       variant="filled"
@@ -82,8 +97,10 @@ export default function ShopProductCard({ product }) {
       </Stack>
     </Card>
   );
-}
-
-ShopProductCard.propTypes = {
-  product: PropTypes.object,
 };
+
+// ShopProductCard.propTypes = {
+//   product: PropTypes.object,
+// };
+
+export default ShopProductCard;

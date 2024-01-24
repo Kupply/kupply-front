@@ -27,9 +27,9 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 export default function UserPage() {
   const [page, setPage] = useState(0);
 
-  const [order, setOrder] = useState('asc');
+  const [order, setOrder] = useState<'asc' | 'desc'>('asc');
 
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<string[]>([]);
 
   const [orderBy, setOrderBy] = useState('name');
 
@@ -37,7 +37,7 @@ export default function UserPage() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleSort = (event, id) => {
+  const handleSort = (event: React.MouseEvent, id: string) => {
     const isAsc = orderBy === id && order === 'asc';
     if (id !== '') {
       setOrder(isAsc ? 'desc' : 'asc');
@@ -45,18 +45,17 @@ export default function UserPage() {
     }
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
+  const handleSelectAllClick = () => {
+    if (selected.length === users.length) {
+      setSelected([]);
+    } else {
       const newSelecteds = users.map((n) => n.name);
       setSelected(newSelecteds);
-      return;
     }
-    setSelected([]);
   };
-
-  const handleClick = (event, name) => {
+  const handleClick = (name: string) => {
     const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
+    let newSelected: string[] = [];
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
     } else if (selectedIndex === 0) {
@@ -69,16 +68,16 @@ export default function UserPage() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event: React.MouseEvent<HTMLElement> | null, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<{ value: string }>) => {
     setPage(0);
     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
-  const handleFilterByName = (event) => {
+  const handleFilterByName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPage(0);
     setFilterName(event.target.value);
   };
@@ -102,7 +101,11 @@ export default function UserPage() {
       </Stack>
 
       <Card>
-        <UserTableToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+        <UserTableToolbar
+          numSelected={selected.length}
+          filterName={filterName}
+          onFilterName={() => handleFilterByName}
+        />
 
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
@@ -120,11 +123,11 @@ export default function UserPage() {
                   { id: 'role', label: 'Role' },
                   { id: 'isVerified', label: 'Verified', align: 'center' },
                   { id: 'status', label: 'Status' },
-                  { id: '' },
+                  { id: '', label: '' },
                 ]}
               />
               <TableBody>
-                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => (
                   <UserTableRow
                     key={row.id}
                     name={row.name}
@@ -134,7 +137,7 @@ export default function UserPage() {
                     avatarUrl={row.avatarUrl}
                     isVerified={row.isVerified}
                     selected={selected.indexOf(row.name) !== -1}
-                    handleClick={(event) => handleClick(event, row.name)}
+                    handleClick={() => handleClick(row.name)}
                   />
                 ))}
 

@@ -11,7 +11,13 @@ import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function UserTableToolbar({ numSelected, filterName, onFilterName }) {
+interface UserTableToolbarProp {
+  numSelected: number;
+  filterName: string;
+  onFilterName: () => void;
+}
+
+export default function UserTableToolbar({ numSelected, filterName, onFilterName }: UserTableToolbarProp) {
   return (
     <Toolbar
       sx={{
@@ -59,8 +65,10 @@ export default function UserTableToolbar({ numSelected, filterName, onFilterName
   );
 }
 
+/*
 UserTableToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,
   onFilterName: PropTypes.func,
 };
+*/

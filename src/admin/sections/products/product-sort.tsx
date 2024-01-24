@@ -20,7 +20,7 @@ const SORT_OPTIONS = [
 export default function ShopProductSort() {
   const [open, setOpen] = useState(null);
 
-  const handleOpen = (event) => {
+  const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
   };
 

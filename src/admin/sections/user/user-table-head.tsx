@@ -11,6 +11,24 @@ import { visuallyHidden } from './utils';
 
 // ----------------------------------------------------------------------
 
+interface HeadCell {
+  id: string;
+  label: string;
+  align?: 'left' | 'center' | 'right';
+  width?: number;
+  minWidth?: number;
+}
+
+interface UserTableHeadProps {
+  order: 'asc' | 'desc';
+  orderBy: string;
+  rowCount: number;
+  headLabel: HeadCell[];
+  numSelected: number;
+  onRequestSort: (event: React.MouseEvent, property: string) => void;
+  onSelectAllClick: () => void;
+}
+
 export default function UserTableHead({
   order,
   orderBy,
@@ -19,8 +37,8 @@ export default function UserTableHead({
   numSelected,
   onRequestSort,
   onSelectAllClick,
-}) {
-  const onSort = (property) => (event) => {
+}: UserTableHeadProps) {
+  const onSort = (property: string) => (event: React.MouseEvent) => {
     onRequestSort(event, property);
   };
 
@@ -50,9 +68,7 @@ export default function UserTableHead({
             >
               {headCell.label}
               {orderBy === headCell.id ? (
-                <Box sx={{ ...visuallyHidden }}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
+                <Box sx={{ ...visuallyHidden }}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'}</Box>
               ) : null}
             </TableSortLabel>
           </TableCell>
@@ -62,6 +78,7 @@ export default function UserTableHead({
   );
 }
 
+/*
 UserTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']),
   orderBy: PropTypes.string,
@@ -70,4 +87,4 @@ UserTableHead.propTypes = {
   numSelected: PropTypes.number,
   onRequestSort: PropTypes.func,
   onSelectAllClick: PropTypes.func,
-};
+};*/

@@ -10,6 +10,7 @@ import Iconify from '../iconify';
 // ----------------------------------------------------------------------
 
 interface ColorPickerProps {
+  name: string;
   colors: string[];
   selected: string | string[];
   onSelectColor: (color: string | string[]) => void;

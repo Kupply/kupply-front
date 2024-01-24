@@ -12,6 +12,7 @@ interface IconifyProps {
   icon: IconifyIcon | string;
   sx?: object;
   width?: number;
+  height?: number;
 }
 
 const Iconify = forwardRef<HTMLDivElement, IconifyProps>(({ icon, width = 20, sx, ...other }, ref) => (

@@ -38,7 +38,13 @@ export const COLOR_OPTIONS = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF48
 
 // ----------------------------------------------------------------------
 
-export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter }) {
+interface ProductFiltersProps {
+  openFilter: boolean;
+  onOpenFilter: () => void;
+  onCloseFilter: () => void;
+}
+
+const ProductFilters: React.FC<ProductFiltersProps> = ({ openFilter, onOpenFilter, onCloseFilter }) => {
   const renderGender = (
     <Stack spacing={1}>
       <Typography variant="subtitle2">Gender</Typography>
@@ -68,7 +74,7 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
         name="colors"
         selected={[]}
         colors={COLOR_OPTIONS}
-        onSelectColor={(color) => [].includes(color)}
+        onSelectColor={(color) => ([] as string[]).includes(color as string)}
         sx={{ maxWidth: 38 * 4 }}
       />
     </Stack>
@@ -170,10 +176,12 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
       </Drawer>
     </>
   );
-}
-
-ProductFilters.propTypes = {
-  openFilter: PropTypes.bool,
-  onOpenFilter: PropTypes.func,
-  onCloseFilter: PropTypes.func,
 };
+
+// ProductFilters.propTypes = {
+//  openFilter: PropTypes.bool,
+//  onOpenFilter: PropTypes.func,
+//  onCloseFilter: PropTypes.func,
+// };
+
+export default ProductFilters;

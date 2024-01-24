@@ -5,7 +5,12 @@ import TableCell from '@mui/material/TableCell';
 
 // ----------------------------------------------------------------------
 
-export default function TableEmptyRows({ emptyRows, height }) {
+interface TableEmptyRowsProps {
+  emptyRows?: number;
+  height: number;
+}
+
+export default function TableEmptyRows({ emptyRows, height }: TableEmptyRowsProps) {
   if (!emptyRows) {
     return null;
   }
@@ -23,7 +28,7 @@ export default function TableEmptyRows({ emptyRows, height }) {
   );
 }
 
-TableEmptyRows.propTypes = {
-  emptyRows: PropTypes.number,
-  height: PropTypes.number,
-};
+// TableEmptyRows.propTypes = {
+//  emptyRows: PropTypes.number,
+//  height: PropTypes.number,
+// };
