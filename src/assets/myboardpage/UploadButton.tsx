@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import Typography from '../Typography';
+import Typography from '../OldTypography';
 
 /* 버튼 커스텀은 나중에 .... 어려웡 ㅜㅜ  */
 

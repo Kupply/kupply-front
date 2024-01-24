@@ -2,9 +2,9 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../../assets/Logo';
-import Typography, { TypographyProps } from '../../assets/Typography';
-import { sizeMapping } from '../../assets/Typography';
+import Logo from '../../assets/OldLogo';
+import Typography, { TypographyProps } from '../../assets/OldTypography';
+import { sizeMapping } from '../../assets/OldTypography';
 
 // 추후 수정: 절대값 px 을 상대값 % 로 바꿔야 함.
 
@@ -44,14 +44,14 @@ const ShortcutWrapper = styled.div`
 const ShortcutImage1 = styled.div`
   width: 31px;
   height: 40.844px;
-  background-image: url('design_image/KUlogo1.png');
+  background-image: url('designImage/base/KuLogo1.png');
   background-size: cover;
 `;
 
 const ShortcutImage2 = styled.div`
   width: 29px;
   height: 38.813px;
-  background-image: url('design_image/KUlogo2.png');
+  background-image: url('designImage/base/KuLogo2.png');
   background-size: cover;
 `;
 

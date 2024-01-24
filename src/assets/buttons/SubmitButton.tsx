@@ -1,38 +1,33 @@
-import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export interface SubmitButtonProps
-  extends React.ComponentPropsWithoutRef<"button"> {
-  active?: boolean;
+import Typography from '../Typography';
+
+export interface SubmitButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+  state?: 'active' | 'unactive';
 }
 
-const Button = styled.button<SubmitButtonProps>`
-  display: flex;
-  width: 628px;
-  padding: 24px 34px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 10px;
-  background: ${(props) =>
-    props.active ? "#D85888" : "rgba(223, 223, 223, 0.75)"};
-`;
-
-const Text = styled.text`
-  color: var(--white, #fff);
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%;
-`;
-
-export default function SubmitButton(props: SubmitButtonProps) {
-  const { children = "제출하기", active = true, ...rest } = props;
+function SubmitButton(props: SubmitButtonProps) {
+  const { children, state = 'active', ...rest } = props;
   return (
-    <Button active={active} disabled={!active} {...rest}>
-      <Text>{children}</Text>
-    </Button>
+    <ButtonWrapper state={state} {...rest}>
+      <Typography bold="700" color="var(--White, #FFF)">
+        {children}
+      </Typography>
+    </ButtonWrapper>
   );
 }
+
+const ButtonWrapper = styled.button<SubmitButtonProps>`
+  width: 32.71vw;
+  height: 68px;
+  box-sizing: border-box;
+  padding: 24px 1.77vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.42vw;
+  border-radius: 10px;
+  background: ${(props) => (props.state === 'active' ? '#D85888' : 'rgba(223,223,223,0.75)')};
+`;
+
+export default SubmitButton;

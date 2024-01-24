@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Typography from '../../assets/Typography';
+import Typography from '../../assets/OldTypography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
-import TextFieldBox, { StateOptions } from '../../assets/TextFieldBox';
-import NextButton from '../../assets/buttons/NextButton';
+import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
+import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
-import DropDown from '../../assets/dropdown/dropDown';
-import { majorAllList } from '../../common/majorAll';
+import DropDown from '../../assets/dropdown/DropDown';
+import { majorAllList } from '../../common/MajorAll';
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]

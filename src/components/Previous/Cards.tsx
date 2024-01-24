@@ -4,7 +4,7 @@ import Card from '../../assets/Card';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import client from '../../utils/httpClient';
+import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 
 export interface CardsProps {
@@ -22,8 +22,8 @@ const mockCards = [
     avg: 4.23,
     min: 4.12,
     semester: '2023-1R',
-    src: '/design_image/previous/bussiness.png',
-    titleSrc: '/design_image/previous_detail/business.png',
+    src: '/designImage/majorSymbol/Business.png',
+    titleSrc: '/designImage/majorSymbol/BusinessLarge.png',
   },
   {
     name: '심리학부',
@@ -34,8 +34,8 @@ const mockCards = [
     avg: 4.23,
     semester: '2023-1R',
     min: 4.12,
-    src: '/design_image/previous/psycho.png',
-    titleSrc: '/design_image/previous_detail/psycho.png',
+    src: '/designImage/majorSymbol/Psycho.png',
+    titleSrc: '/designImage/majorSymbol/PsychoLarge.png',
   },
   {
     name: '정경대학 경제학과',
@@ -46,8 +46,8 @@ const mockCards = [
     avg: 4.23,
     semester: '2023-1R',
     min: 4.12,
-    src: '/design_image/previous/political.png',
-    titleSrc: '/design_image/previous_detail/political.png',
+    src: '/designImage/majorSymbol/Political.png',
+    titleSrc: '/designImage/majorSymbol/PoliticalLarge.png',
   },
   {
     name: '정경대학 통계학과',
@@ -58,8 +58,8 @@ const mockCards = [
     avg: 4.23,
     semester: '2023-1R',
     min: 4.12,
-    src: '/design_image/previous/political.png',
-    titleSrc: '/design_image/previous_detail/political.png',
+    src: '/designImage/majorSymbol/Political.png',
+    titleSrc: '/designImage/majorSymbol/PoliticalLarge.png',
   },
   {
     name: '미디어학부',
@@ -70,8 +70,8 @@ const mockCards = [
     semester: '2023-1R',
     avg: 4.23,
     min: 4.12,
-    src: '/design_image/previous/media.png',
-    titleSrc: '/design_image/previous_detail/media.png',
+    src: '/designImage/majorSymbol/Media.png',
+    titleSrc: '/designImage/majorSymbol/MediaLarge.png',
   },
   {
     name: '정보대학 컴퓨터학과',
@@ -82,8 +82,8 @@ const mockCards = [
     avg: 4.23,
     min: 4.12,
     semester: '2023-1R',
-    src: '/design_image/previous/info.png',
-    titleSrc: '/design_image/previous_detail/info.png',
+    src: '/designImage/majorSymbol/Info.png',
+    titleSrc: '/designImage/majorSymbol/InfoLarge.png',
   },
   {
     name: '생명과학대학 식품자원경제학과',
@@ -94,8 +94,8 @@ const mockCards = [
     avg: 4.23,
     semester: '2023-1R',
     min: 4.12,
-    src: '/design_image/previous/bio.png',
-    titleSrc: '/design_image/previous_detail/bio.png',
+    src: '/designImage/majorSymbol/Bio.png',
+    titleSrc: '/designImage/majorSymbol/BioLarge.png',
   },
   {
     name: '이과대학 수학과',
@@ -106,8 +106,8 @@ const mockCards = [
     semester: '2023-1R',
     avg: 4.23,
     min: 4.12,
-    src: '/design_image/previous/science.png',
-    titleSrc: '/design_image/previous_detail/science.png',
+    src: '/designImage/majorSymbol/Science.png',
+    titleSrc: '/designImage/majorSymbol/ScienceLarge.png',
   },
   {
     name: '이과대학 화학과',
@@ -118,8 +118,8 @@ const mockCards = [
     semester: '2023-1R',
     avg: 4.23,
     min: 4.12,
-    src: '/design_image/previous/science.png',
-    titleSrc: '/design_image/previous_detail/science.png',
+    src: '/designImage/majorSymbol/Science.png',
+    titleSrc: '/designImage/majorSymbol/ScienceLarge.png',
   },
 ];
 
@@ -141,29 +141,27 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
       if (isLogined !== 'true') {
         alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
         navigate('/login');
-      }
-      else{
+      } else {
         // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
-      const data = await client.get('/dashboard/cards');
-      setCards(
-        cards.map((c) => {
-          const res = data.data.find((ca: any) => ca.name === c.name);
-          return {
-            name: c.name,
-            eng: c.eng,
-            filter: c.filter,
-            TO: c.TO,
-            semester: c.semester,
-            src: c.src,
-            titleSrc: c.titleSrc,
-            avg: +(res.avg / res.passNum).toFixed(2),
-            min: res.min,
-            pass: res.passNum,
-          };
-        }),
-      );
+        const data = await client.get('/dashboard/cards');
+        setCards(
+          cards.map((c) => {
+            const res = data.data.find((ca: any) => ca.name === c.name);
+            return {
+              name: c.name,
+              eng: c.eng,
+              filter: c.filter,
+              TO: c.TO,
+              semester: c.semester,
+              src: c.src,
+              titleSrc: c.titleSrc,
+              avg: +(res.avg / res.passNum).toFixed(2),
+              min: res.min,
+              pass: res.passNum,
+            };
+          }),
+        );
       }
-      
     } catch (err) {
       console.log(err);
     }

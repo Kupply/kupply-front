@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Typography from '../../assets/Typography';
+import Typography from '../../assets/OldTypography';
 import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
-import TextFieldBox from '../../assets/TextFieldBox';
-import NextButton from '../../assets/buttons/NextButton';
+import TextFieldBox from '../../assets/OldTextFieldBox';
+import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
-import Step4Button from '../../components/Step4Button';
+import Step4Button from '../../components/signUp/Step4Button';
 import VerificationBox from '../../assets/VerificationBox';
-import DropDown from '../../assets/dropdown/dropDown';
-import { majorAllList } from '../../common/majorAll';
-import { majorTargetList } from '../../common/majorTarget';
+import DropDown from '../../assets/dropdown/DropDown';
+import { majorAllList } from '../../common/MajorAll';
+import { majorTargetList } from '../../common/MajorTarget';
 
 const Wrapper = styled.div`
   display: flex;
