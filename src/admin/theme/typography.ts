@@ -1,14 +1,22 @@
+import { SxProps, Theme } from '@mui/material';
+
 // ----------------------------------------------------------------------
 
-export function remToPx(value) {
+export function remToPx(value: string): number {
   return Math.round(parseFloat(value) * 16);
 }
 
-export function pxToRem(value) {
+export function pxToRem(value: number): string {
   return `${value / 16}rem`;
 }
 
-export function responsiveFontSizes({ sm, md, lg }) {
+interface ResponsiveFontSizesOptions {
+  sm: number;
+  md: number;
+  lg: number;
+}
+
+export function responsiveFontSizes({ sm, md, lg }: ResponsiveFontSizesOptions): SxProps<Theme> {
   return {
     '@media (min-width:600px)': {
       fontSize: pxToRem(sm),

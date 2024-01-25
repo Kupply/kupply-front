@@ -1,9 +1,109 @@
-import { alpha } from '@mui/material/styles';
+import { PaletteColor, SxProps, Theme, alpha } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
 // ----------------------------------------------------------------------
 
-export function overrides(theme) {
+interface ThemeOverrides {
+  MuiCssBaseline?: {
+    styleOverrides?: {
+      [key: string]: SxProps<Theme>;
+    };
+  };
+  MuiBackdrop?: {
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+      invisible?: SxProps<Theme>;
+    };
+  };
+  MuiButton?: {
+    styleOverrides?: {
+      containedInherit?: SxProps<Theme>;
+      sizeLarge?: SxProps<Theme>;
+    };
+  };
+  MuiCard?: {
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+  MuiCardHeader?: {
+    defaultProps?: {
+      titleTypographyProps?: {
+        variant?: string;
+      };
+      subheaderTypographyProps?: {
+        variant?: string;
+      };
+    };
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+  MuiOutlinedInput?: {
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+  MuiPaper?: {
+    defaultProps?: {
+      elevation?: number;
+    };
+  };
+  MuiTableCell?: {
+    styleOverrides?: {
+      head?: {
+        color?: string;
+        backgroundColor?: string;
+      };
+    };
+  };
+  MuiTooltip?: {
+    styleOverrides?: {
+      tooltip?: SxProps<Theme>;
+      arrow?: SxProps<Theme>;
+    };
+  };
+  MuiTypography?: {
+    styleOverrides?: {
+      paragraph?: SxProps<Theme>;
+      gutterBottom?: {
+        marginBottom?: string;
+      };
+    };
+  };
+  MuiMenuItem?: {
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+}
+
+interface ThemeProps {
+  typography: any;
+  palette: {
+    grey: {
+      [key: number]: string;
+    };
+    common: {
+      white: string;
+    };
+    text: {
+      secondary: string;
+    };
+    background: {
+      neutral: string;
+    };
+  } & PaletteColor;
+  customShadows: {
+    card: string;
+  };
+  shape: {
+    borderRadius: number;
+  };
+  spacing: (...args: number[]) => string;
+}
+
+export function overrides(theme: ThemeProps): ThemeOverrides {
   return {
     MuiCssBaseline: {
       styleOverrides: {

@@ -40,6 +40,6 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   );
 }
 
-ThemeProvider.propTypes = {
-  children: PropTypes.node,
-};
+// ThemeProvider.propTypes = {
+//   children: PropTypes.node,
+// };
