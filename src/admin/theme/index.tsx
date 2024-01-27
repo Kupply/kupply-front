@@ -1,8 +1,7 @@
 import { useMemo, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeOptions, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 
 import { palette } from './palette';
 import { shadows } from './shadows';
@@ -28,18 +27,16 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     [],
   );
 
-  const theme = createTheme(memoizedValue);
+  const theme = createTheme(memoizedValue as any);
 
-  theme.components = overrides(theme);
+  //  theme.components = overrides(theme);
 
   return (
-    <MUIThemeProvider theme={theme}>
+    <div>
       <CssBaseline />
       {children}
-    </MUIThemeProvider>
+    </div>
   );
 }
 
-// ThemeProvider.propTypes = {
-//   children: PropTypes.node,
-// };
+// 일단 div 로 단순화 (Theme 삭제)

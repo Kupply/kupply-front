@@ -1,8 +1,102 @@
+import { CSSProperties } from 'react';
 import { PaletteColor, SxProps, Theme, alpha } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
 // ----------------------------------------------------------------------
 
+interface ThemeOverrides {
+  MuiCssBaseline?: {
+    styleOverrides?: {
+      [key: string]: CSSProperties;
+    };
+  };
+  MuiBackdrop?: {
+    styleOverrides?: {
+      root?: CSSProperties;
+      invisible?: CSSProperties;
+    };
+  };
+  MuiButton?: {
+    styleOverrides?: {
+      containedInherit?: SxProps<Theme>;
+      sizeLarge?: SxProps<Theme>;
+    };
+  };
+  MuiCard?: {
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+  MuiCardHeader?: {
+    defaultProps?: {
+      titleTypographyProps?: {
+        variant?: string;
+      };
+      subheaderTypographyProps?: {
+        variant?: string;
+      };
+    };
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+  MuiOutlinedInput?: {
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+  MuiPaper?: {
+    defaultProps?: {
+      elevation?: number;
+    };
+  };
+  MuiTableCell?: {
+    styleOverrides?: {
+      head?: {
+        color?: string;
+        backgroundColor?: string;
+      };
+    };
+  };
+  MuiTooltip?: {
+    styleOverrides?: {
+      tooltip?: SxProps<Theme>;
+      arrow?: SxProps<Theme>;
+    };
+  };
+  MuiTypography?: {
+    styleOverrides?: {
+      paragraph?: SxProps<Theme>;
+      gutterBottom?: {
+        marginBottom?: string;
+      };
+    };
+  };
+  MuiMenuItem?: {
+    styleOverrides?: {
+      root?: SxProps<Theme>;
+    };
+  };
+}
+
+export function overrides(theme: Theme): ThemeOverrides {
+  return {
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          backgroundColor: alpha(theme.palette.grey[900], 0.8),
+        },
+        invisible: {
+          background: 'transparent',
+          // Other CSS properties as needed
+        },
+      },
+    },
+    // ... Other component overrides
+  };
+}
+
+/*
 interface ThemeOverrides {
   MuiCssBaseline?: {
     styleOverrides?: {
@@ -103,7 +197,7 @@ interface ThemeProps {
   spacing: (...args: number[]) => string;
 }
 
-export function overrides(theme: ThemeProps): ThemeOverrides {
+export function overrides(theme: Theme): ThemeOverrides {
   return {
     MuiCssBaseline: {
       styleOverrides: {
@@ -175,7 +269,6 @@ export function overrides(theme: ThemeProps): ThemeOverrides {
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: theme.customShadows.card,
           borderRadius: Number(theme.shape.borderRadius) * 2,
           position: 'relative',
           zIndex: 0, // Fix Safari overflow: hidden with border radius
@@ -211,7 +304,6 @@ export function overrides(theme: ThemeProps): ThemeOverrides {
       styleOverrides: {
         head: {
           color: theme.palette.text.secondary,
-          backgroundColor: theme.palette.background.neutral,
         },
       },
     },
@@ -244,3 +336,4 @@ export function overrides(theme: ThemeProps): ThemeOverrides {
     },
   };
 }
+*/
