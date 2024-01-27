@@ -1,4 +1,3 @@
-import { StringLiteralType } from 'typescript';
 import SvgColor from '../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -7,35 +6,37 @@ const icon = (name: string) => <SvgColor src={`/assets/icons/navbar/${name}.svg`
 
 const navConfig = [
   {
-    title: 'dashboard',
+    title: '대시보드',
     path: '/',
-    icon: icon('ic_analytics'),
+    icon: icon('ic_analytics'), // 수정 필요
   },
   {
-    title: 'user',
-    path: '/user',
-    icon: icon('ic_user'),
+    title: '회원 관리',
+    path: '/adminUser',
+    icon: icon('ic_user'), // 수정 필요
   },
+  {
+    title: '전공 관리',
+    path: '/adminMajor',
+    icon: icon('ic_blog'), // 수정 필요
+  },
+  {
+    title: '모의지원 관리',
+    path: '/adminApply',
+    icon: icon('ic_cart'), // 수정 필요
+  },
+  {
+    title: '업데이트 관리',
+    path: '/adminUpdate',
+    icon: icon('ic_blog'), // 수정 필요
+  },
+  /*
   {
     title: 'product',
     path: '/products',
     icon: icon('ic_cart'),
   },
-  {
-    title: 'blog',
-    path: '/blog',
-    icon: icon('ic_blog'),
-  },
-  {
-    title: 'login',
-    path: '/login',
-    icon: icon('ic_lock'),
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: icon('ic_disabled'),
-  },
+  */
 ];
 
 export default navConfig;
