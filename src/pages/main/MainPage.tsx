@@ -9,6 +9,173 @@ import axios from 'axios';
 // import MockApplicationButton, { MockApplicationProps } from '../assets/myboardpage/MockApplication';
 import client from '../../utils/HttpClient';
 
+function MainPage() {
+  const [ID, setID] = useState<string>('');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentModal, setCurrentModal] = useState(0);
+  const [isEventVisible, setIsEventVisible] = useState(false); // 23.11.20 이벤트 종료되었으므로 디폴트값 false 로 수정
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const closeEventBox = () => {
+    setIsEventVisible(false);
+  };
+
+  const closeEventBoxForDay = () => {
+    const now = new Date();
+    localStorage.setItem('eventBoxClosed', now.toISOString());
+    setIsEventVisible(false);
+  };
+
+  useEffect(() => {
+    sessionStorage.clear();
+
+    const eventBoxClosed = localStorage.getItem('eventBoxClosed');
+    if (eventBoxClosed) {
+      const now = new Date();
+      const closedDate = new Date(eventBoxClosed);
+      const isSameDay = now.toDateString() === closedDate.toDateString();
+
+      if (!isSameDay) {
+        localStorage.removeItem('eventBoxClosed');
+        setIsEventVisible(true);
+      } else {
+        setIsEventVisible(false);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (location.state?.showModal) {
+      setIsModalVisible(true);
+    }
+  }, [location]);
+
+  // 로그인 여부 확인
+  const [isLogined, setisLogined] = useState<boolean>(false);
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
+
+  //회원가입 정보는 main에서는 지워져야 함.
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
+
+  const handleButtonClick = async () => {
+    //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
+    const IDPattern = /.+@korea\.ac\.kr$/;
+    if (IDPattern.test(ID)) {
+      //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
+      const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+      try {
+        // await axios.post(url, { email: ID });
+        // await client.post('/auth/sendEmail', { email: ID });
+
+        //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
+        window.sessionStorage.setItem('email', ID);
+        navigate('/join');
+      } catch (err: any) {
+        //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
+        alert(err.response.data.error.message);
+        if (err.response.data.error.message === '이미 회원가입이 완료된 이메일 입니다. 로그인해주세요.') {
+          navigate('/login');
+        }
+      }
+    } else {
+      alert('형식에 맞는 이메일이 아닙니다.');
+    }
+  };
+
+  const goToMyBoard = () => {
+    navigate('/myboard');
+  };
+
+  return (
+    <Wrapper>
+      {isEventVisible && (
+        <EventBox>
+          <CloseButton
+            onClick={() => {
+              closeEventBox();
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 60 60" fill="none">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M38.9142 23.9142C39.6953 23.1332 39.6953 21.8668 38.9142 21.0858C38.1332 20.3047 36.8668 20.3047 36.0858 21.0858L30 27.1716L23.9142 21.0858C23.1332 20.3047 21.8668 20.3047 21.0858 21.0858C20.3047 21.8668 20.3047 23.1332 21.0858 23.9142L27.1716 30L21.0858 36.0858C20.3047 36.8668 20.3047 38.1332 21.0858 38.9142C21.8668 39.6953 23.1332 39.6953 23.9142 38.9142L30 32.8284L36.0858 38.9142C36.8668 39.6953 38.1332 39.6953 38.9142 38.9142C39.6953 38.1332 39.6953 36.8668 38.9142 36.0858L32.8284 30L38.9142 23.9142Z"
+                fill="#434343"
+              />
+            </svg>
+          </CloseButton>
+          <CloseForDayButton onClick={closeEventBoxForDay}>하루동안 보지 않기</CloseForDayButton>
+        </EventBox>
+      )}
+      <Carousel />
+      {!isLogined ? (
+        <JoinMainContainer>
+          <ContainerMainText>당신이 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
+          <ContainerSubText>
+            간단한 회원가입으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
+            이용해보세요.
+          </ContainerSubText>
+          <JoinWrapper>
+            <TextFieldBox
+              placeholder="고려대학교 이메일 주소"
+              value={ID}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setID(e.target.value);
+              }}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === 'Enter') {
+                  handleButtonClick();
+                }
+              }}
+            />
+            <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src="../../designImage/kupply/KupplyIcon.png"
+                  style={{ width: '20px', height: '20px', marginRight: '8px' }}
+                />
+                회원가입
+              </div>
+            </LabelButton>
+          </JoinWrapper>
+        </JoinMainContainer>
+      ) : (
+        <JoinMainContainer>
+          <ContainerMainText>쿠플라이 모의지원을 통해 당신의 합격 가능성을 확인하세요!</ContainerMainText>
+          <ContainerSubText>
+            간단한 모의지원으로 나의 학점 위치 및 다른 지원자 현황을 파악해볼 수 있어요.
+          </ContainerSubText>
+          <Button onClick={goToMyBoard}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Icon />
+              <Text style={{ marginLeft: '8px' }}>모의지원 하러가기</Text>
+            </div>
+          </Button>
+        </JoinMainContainer>
+      )}
+      {isModalVisible && (
+        <MainPageModal
+          currentModal={currentModal}
+          isOpenModal={isModalVisible}
+          setCurrentModal={setCurrentModal}
+          setOpenModal={setIsModalVisible}
+          onClickModal={closeModal}
+        />
+      )}
+    </Wrapper>
+  );
+}
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -182,174 +349,5 @@ const Icon: React.FC = () => (
     </defs>
   </svg>
 );
-
-//////////////////////
-
-function MainPage() {
-  const [ID, setID] = useState<string>('');
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [currentModal, setCurrentModal] = useState(0);
-  const [isEventVisible, setIsEventVisible] = useState(false); // 23.11.20 이벤트 종료되었으므로 디폴트값 false 로 수정
-
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
-
-  const closeEventBox = () => {
-    setIsEventVisible(false);
-  };
-
-  const closeEventBoxForDay = () => {
-    const now = new Date();
-    localStorage.setItem('eventBoxClosed', now.toISOString());
-    setIsEventVisible(false);
-  };
-
-  useEffect(() => {
-    sessionStorage.clear();
-
-    const eventBoxClosed = localStorage.getItem('eventBoxClosed');
-    if (eventBoxClosed) {
-      const now = new Date();
-      const closedDate = new Date(eventBoxClosed);
-      const isSameDay = now.toDateString() === closedDate.toDateString();
-
-      if (!isSameDay) {
-        localStorage.removeItem('eventBoxClosed');
-        setIsEventVisible(true);
-      } else {
-        setIsEventVisible(false);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    if (location.state?.showModal) {
-      setIsModalVisible(true);
-    }
-  }, [location]);
-
-  // 로그인 여부 확인
-  const [isLogined, setisLogined] = useState<boolean>(false);
-  useEffect(() => {
-    if (window.localStorage.isLogin === 'true') setisLogined(true);
-    else setisLogined(false);
-  }, []);
-
-  //회원가입 정보는 main에서는 지워져야 함.
-  useEffect(() => {
-    sessionStorage.clear();
-  }, []);
-
-  const handleButtonClick = async () => {
-    //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
-    const IDPattern = /.+@korea\.ac\.kr$/;
-    if (IDPattern.test(ID)) {
-      //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
-      const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
-      try {
-        // await axios.post(url, { email: ID });
-        // await client.post('/auth/sendEmail', { email: ID });
-
-        //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
-        window.sessionStorage.setItem('email', ID);
-        navigate('/join');
-      } catch (err: any) {
-        //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
-        alert(err.response.data.error.message);
-        if (err.response.data.error.message === '이미 회원가입이 완료된 이메일 입니다. 로그인해주세요.') {
-          navigate('/login');
-        }
-      }
-    } else {
-      alert('형식에 맞는 이메일이 아닙니다.');
-    }
-  };
-
-  const goToMyBoard = () => {
-    navigate('/myboard');
-  };
-
-  return (
-    <Wrapper>
-      {isEventVisible && (
-        <EventBox>
-          <CloseButton
-            onClick={() => {
-              closeEventBox();
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 60 60" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M38.9142 23.9142C39.6953 23.1332 39.6953 21.8668 38.9142 21.0858C38.1332 20.3047 36.8668 20.3047 36.0858 21.0858L30 27.1716L23.9142 21.0858C23.1332 20.3047 21.8668 20.3047 21.0858 21.0858C20.3047 21.8668 20.3047 23.1332 21.0858 23.9142L27.1716 30L21.0858 36.0858C20.3047 36.8668 20.3047 38.1332 21.0858 38.9142C21.8668 39.6953 23.1332 39.6953 23.9142 38.9142L30 32.8284L36.0858 38.9142C36.8668 39.6953 38.1332 39.6953 38.9142 38.9142C39.6953 38.1332 39.6953 36.8668 38.9142 36.0858L32.8284 30L38.9142 23.9142Z"
-                fill="#434343"
-              />
-            </svg>
-          </CloseButton>
-          <CloseForDayButton onClick={closeEventBoxForDay}>하루동안 보지 않기</CloseForDayButton>
-        </EventBox>
-      )}
-      <Carousel />
-      {!isLogined ? (
-        <JoinMainContainer>
-          <ContainerMainText>당신이 찾고있던 이중전공에 대한 모든 정보가 바로 이곳에!</ContainerMainText>
-          <ContainerSubText>
-            간단한 회원가입으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
-            이용해보세요.
-          </ContainerSubText>
-          <JoinWrapper>
-            <TextFieldBox
-              placeholder="고려대학교 이메일 주소"
-              value={ID}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setID(e.target.value);
-              }}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === 'Enter') {
-                  handleButtonClick();
-                }
-              }}
-            />
-            <LabelButton buttonType="primary" size="large" onClick={handleButtonClick}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src="../../designImage/kupply/KupplyIcon.png"
-                  style={{ width: '20px', height: '20px', marginRight: '8px' }}
-                />
-                회원가입
-              </div>
-            </LabelButton>
-          </JoinWrapper>
-        </JoinMainContainer>
-      ) : (
-        <JoinMainContainer>
-          <ContainerMainText>쿠플라이 모의지원을 통해 당신의 합격 가능성을 확인하세요!</ContainerMainText>
-          <ContainerSubText>
-            간단한 모의지원으로 나의 학점 위치 및 다른 지원자 현황을 파악해볼 수 있어요.
-          </ContainerSubText>
-          <Button onClick={goToMyBoard}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Icon />
-              <Text style={{ marginLeft: '8px' }}>모의지원 하러가기</Text>
-            </div>
-          </Button>
-        </JoinMainContainer>
-      )}
-      {isModalVisible && (
-        <MainPageModal
-          currentModal={currentModal}
-          isOpenModal={isModalVisible}
-          setCurrentModal={setCurrentModal}
-          setOpenModal={setIsModalVisible}
-          onClickModal={closeModal}
-        />
-      )}
-    </Wrapper>
-  );
-}
 
 export default MainPage;

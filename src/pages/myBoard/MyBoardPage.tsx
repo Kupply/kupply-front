@@ -15,6 +15,11 @@ import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationM
 import { recruit } from '../../common/Recruiting';
 import MyboardPasserPageVer from './MyboardPasser';
 import client from '../../utils/HttpClient';
+import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import {
+  collegeNameMappingByKR as collegeNameMapping,
+  collegeAPIMappingByKR as collegeAPIMapping,
+} from '../../utils/Mappings';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -74,41 +79,6 @@ const major = {
     title: '화학과',
     text: 'Department of Chemistry',
   },
-};
-
-type MajorOptions =
-  | '경영학과'
-  | '경제학과'
-  | '심리학부'
-  | '통계학과'
-  | '수학과'
-  | '화학과'
-  | '미디어학부'
-  | '식품자원경제학과'
-  | '컴퓨터학과';
-
-const collegeNameMapping = {
-  식품자원경제학과: 'bio',
-  미디어학부: 'media',
-  컴퓨터학과: 'info',
-  경영학과: 'bussiness',
-  심리학부: 'psycho',
-  화학과: 'science',
-  수학과: 'science',
-  경제학과: 'political',
-  통계학과: 'political',
-};
-
-const collegeAPIMapping = {
-  식품자원경제학과: 'foodecon',
-  미디어학부: 'media',
-  컴퓨터학과: 'computer',
-  경영학과: 'business',
-  심리학부: 'psychology',
-  화학과: 'chemistry',
-  수학과: 'mathematics',
-  경제학과: 'economics',
-  통계학과: 'statistics',
 };
 
 // 위의 major 객체에서 한글 title로 영어 text 찾는 함수

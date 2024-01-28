@@ -2,22 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Typography from '../../assets/OldTypography';
 
-const MobilePageWrapper = styled.div`
-  width: 1920px;
-  height: 1510px;
-  text-align: center;
-  padding: 20px;
-  background: var(--White, #fff);
-  display: flex;
-`;
-
-const CharacterImage = styled.img`
-  width: 284px;
-  height: 339.906px;
-  flex-shrink: 0;
-  //background: url(<path-to-image>), lightgray 50% / cover no-repeat;
-`;
-
 const MyboardPasserPageVer = () => {
   const [userData, setUserData] = useState({
     userName: localStorage.getItem('name') || '',
@@ -63,5 +47,21 @@ const MyboardPasserPageVer = () => {
     </MobilePageWrapper>
   );
 };
+
+const MobilePageWrapper = styled.div`
+  width: 1920px;
+  height: 1510px;
+  text-align: center;
+  padding: 20px;
+  background: var(--White, #fff);
+  display: flex;
+`;
+
+const CharacterImage = styled.img`
+  width: 284px;
+  height: 339.906px;
+  flex-shrink: 0;
+  //background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+`;
 
 export default MyboardPasserPageVer;
