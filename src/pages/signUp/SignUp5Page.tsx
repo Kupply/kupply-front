@@ -13,180 +13,6 @@ import { useTable } from 'react-table';
 import { AnyCnameRecord } from 'dns';
 import client from '../../utils/HttpClient';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  max-width: 2560px;
-  height: 1153px;
-  background-color: #fcfafb;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 30px;
-  padding-bottom: 25px;
-`;
-
-const FormWrapper = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  width: 816px;
-  height: 850px;
-  padding: 42px 94px 78px 94px;
-  padding-left: 94px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.7);
-  box-sizing: border-box;
-  margin-top: 25px;
-`;
-
-const StepIndicator = styled.div`
-  display: inline-flex;
-  padding: 8px 18px;
-  justify-content: center;
-  margin-bottom: 17px;
-  align-items: center;
-  border-radius: 999px;
-  border: 1px solid #d85888;
-  background: rgba(255, 255, 255, 0.3);
-  color: #d85888;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-`;
-
-const ContentsTitleWrapper = styled.div`
-  margin-bottom: 50px;
-`;
-
-const TextTitleWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  text-align: center;
-`;
-
-const TextTitle = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 11px;
-`;
-
-const TextOutBox = styled.div`
-  width: 628px;
-  height: 228px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background: var(--White, #fff);
-  border: 1px solid #eee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 123.54%;
-`;
-
-const ButtonsTextWrapper = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-top: 22px;
-  margin-bottom: 22px;
-`;
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-  gap: 18px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-  margin-right: 18px;
-`;
-
-const FixedWidth = css`
-  // 628px 너무 길어서 길이 조절했습니다
-  width: 475px;
-`;
-
-const NextButtonFixedWidth = styled(NextButton)`
-  ${FixedWidth}
-`;
-
-const ArrowImage = styled.img`
-  //display: flex;
-  width: 28px;
-  height: 28px;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-`;
-
-/* Asset에 있는 CheckButton 수정하기 애매해서 여기에 살짝 수정했습니다 */
-const CheckButtonWrapper = styled.button<{ isChecked: boolean }>`
-  width: 28px;
-  height: 28px;
-  transition: 0.25s ease-in-out;
-  justify-content: center;
-  align-items: center;
-
-  & > svg {
-    width: 28px;
-    height: 28px;
-    transition: 0.25s ease-in-out;
-    stroke: #a8a8a8;
-    fill: #ffffff;
-  }
-
-  ${(props) =>
-    props.isChecked &&
-    css`
-      & > svg > path {
-        stroke: #ffffff;
-        fill: rgba(216, 88, 136, 0.75);
-        border: none;
-      }
-    `}
-`;
-
-const StyledTable = styled.table`
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 123.54%;
-  border-collapse: collapse;
-  border: 1px solid black;
-  border-radius: 10px;
-
-  th {
-    text-align: center;
-    background-color: #dfdfdf;
-    border: 1px solid black;
-    padding: 2px 2px;
-  }
-
-  td {
-    text-align: left;
-    border: 1px solid black;
-  }
-`;
-
 interface CustomCheckButtonProps {
   isChecked: boolean;
   onChange: (isChecked: boolean) => void; //  이 부분 수정했습니다
@@ -1163,5 +989,179 @@ function SignUp5Complete() {
     </Wrapper2>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  max-width: 2560px;
+  height: 1153px;
+  background-color: #fcfafb;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 25px;
+`;
+
+const FormWrapper = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  width: 816px;
+  height: 850px;
+  padding: 42px 94px 78px 94px;
+  padding-left: 94px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
+  margin-top: 25px;
+`;
+
+const StepIndicator = styled.div`
+  display: inline-flex;
+  padding: 8px 18px;
+  justify-content: center;
+  margin-bottom: 17px;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #d85888;
+  background: rgba(255, 255, 255, 0.3);
+  color: #d85888;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+`;
+
+const ContentsTitleWrapper = styled.div`
+  margin-bottom: 50px;
+`;
+
+const TextTitleWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: center;
+`;
+
+const TextTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 11px;
+`;
+
+const TextOutBox = styled.div`
+  width: 628px;
+  height: 228px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White, #fff);
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
+`;
+
+const ButtonsTextWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 22px;
+  margin-bottom: 22px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 18px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  margin-right: 18px;
+`;
+
+const FixedWidth = css`
+  // 628px 너무 길어서 길이 조절했습니다
+  width: 475px;
+`;
+
+const NextButtonFixedWidth = styled(NextButton)`
+  ${FixedWidth}
+`;
+
+const ArrowImage = styled.img`
+  //display: flex;
+  width: 28px;
+  height: 28px;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+`;
+
+/* Asset에 있는 CheckButton 수정하기 애매해서 여기에 살짝 수정했습니다 */
+const CheckButtonWrapper = styled.button<{ isChecked: boolean }>`
+  width: 28px;
+  height: 28px;
+  transition: 0.25s ease-in-out;
+  justify-content: center;
+  align-items: center;
+
+  & > svg {
+    width: 28px;
+    height: 28px;
+    transition: 0.25s ease-in-out;
+    stroke: #a8a8a8;
+    fill: #ffffff;
+  }
+
+  ${(props) =>
+    props.isChecked &&
+    css`
+      & > svg > path {
+        stroke: #ffffff;
+        fill: rgba(216, 88, 136, 0.75);
+        border: none;
+      }
+    `}
+`;
+
+const StyledTable = styled.table`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  th {
+    text-align: center;
+    background-color: #dfdfdf;
+    border: 1px solid black;
+    padding: 2px 2px;
+  }
+
+  td {
+    text-align: left;
+    border: 1px solid black;
+  }
+`;
 
 export { SignUp5Page, SignUp5Complete };

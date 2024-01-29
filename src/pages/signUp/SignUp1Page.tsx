@@ -15,114 +15,6 @@ import SignUpLarge2 from '../../components/signUp/modals/SignUpLarge2';
 import SignUpLarge3 from '../../components/signUp/modals/SignUpLarge3';
 import client from '../../utils/HttpClient';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  max-width: 2560px;
-  height: 1153px;
-  background-color: #fcfafb;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 30px;
-  padding-bottom: 25px;
-`;
-
-const FormWrapper = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  width: 816px;
-  height: 850px;
-  padding: 42px 94px 78px 94px;
-  padding-left: 94px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.7);
-  box-sizing: border-box;
-  margin-top: 25px;
-`;
-const StepIndicator = styled.div`
-  display: inline-flex;
-  padding: 8px 18px;
-  justify-content: center;
-  margin-bottom: 17px;
-  align-items: center;
-  border-radius: 999px;
-  border: 1px solid #d85888;
-  background: rgba(255, 255, 255, 0.3);
-  color: #d85888;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-`;
-
-const ContentsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const ContentsTitleWrapper = styled.div`
-  margin-bottom: 50px;
-`;
-
-const ContentsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-`;
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-  gap: 18px;
-`;
-
-const VerifiBoxWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const SubContentsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  margin-top: 109px; // 159.24px;
-  margin-bottom: 121px; //171px;
-`;
-
-// 푸터 버튼과 동일 에셋이라고 한다.
-const TextButton = styled.button`
-  transition: 0.25s ease-in-out;
-  display: flex;
-  gap: 4.97px;
-  color: rgba(216, 88, 136, 0.8);
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  text-decoration-line: underline;
-
-  cursor: pointer;
-
-  &:hover {
-    color: black;
-  }
-
-  // 도형 아이콘 색깔 변경 고려
-  &:hover svg g path {
-    stroke: black;
-  }
-`;
 export const sendEmail = async (email: string) => {
   const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
   try {
@@ -137,7 +29,7 @@ export const sendEmail = async (email: string) => {
   }
 };
 
-export default function SignUp1Page() {
+function SignUp1Page() {
   //navigate 관련 코드. emailID가 안 왔으면 정상 경로가 아니므로 메인 페이지로 보낸다.
   const navigate = useNavigate();
 
@@ -385,3 +277,114 @@ export default function SignUp1Page() {
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  max-width: 2560px;
+  height: 1153px;
+  background-color: #fcfafb;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 25px;
+`;
+
+const FormWrapper = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  width: 816px;
+  height: 850px;
+  padding: 42px 94px 78px 94px;
+  padding-left: 94px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
+  margin-top: 25px;
+`;
+const StepIndicator = styled.div`
+  display: inline-flex;
+  padding: 8px 18px;
+  justify-content: center;
+  margin-bottom: 17px;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #d85888;
+  background: rgba(255, 255, 255, 0.3);
+  color: #d85888;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+`;
+
+const ContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const ContentsTitleWrapper = styled.div`
+  margin-bottom: 50px;
+`;
+
+const ContentsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 18px;
+`;
+
+const VerifiBoxWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const SubContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 109px; // 159.24px;
+  margin-bottom: 121px; //171px;
+`;
+
+// 푸터 버튼과 동일 에셋이라고 한다.
+const TextButton = styled.button`
+  transition: 0.25s ease-in-out;
+  display: flex;
+  gap: 4.97px;
+  color: rgba(216, 88, 136, 0.8);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  text-decoration-line: underline;
+
+  cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
+
+  // 도형 아이콘 색깔 변경 고려
+  &:hover svg g path {
+    stroke: black;
+  }
+`;
+
+export default SignUp1Page;

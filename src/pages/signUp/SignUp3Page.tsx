@@ -23,110 +23,6 @@ import NicknameCheckButton from '../../assets/NicknameCheckButton';
 4. ProgressBar 크기 수정
 */
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  max-width: 2560px;
-  height: 1153px;
-  background-color: #fcfafb;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 30px;
-  padding-bottom: 25px;
-`;
-
-const FormWrapper = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  width: 816px;
-  height: 850px;
-  padding: 42px 94px 78px 94px;
-  padding-left: 94px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.7);
-  box-sizing: border-box;
-  margin-top: 25px;
-`;
-
-const StepIndicator = styled.div`
-  display: inline-flex;
-  padding: 8px 18px;
-  justify-content: center;
-  margin-bottom: 17px;
-  align-items: center;
-  border-radius: 999px;
-  border: 1px solid #d85888;
-  background: rgba(255, 255, 255, 0.3);
-  color: #d85888;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-`;
-
-const ContentsWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-`;
-
-const ContentsTitleWrapper = styled.div`
-  margin-bottom: 50px;
-`;
-
-const ContentsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 34px;
-`;
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-  gap: 18px;
-  margin-top: 34px;
-`;
-
-const InfoMessageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  margin-left: 20px;
-`;
-
-const InfoImageWrapper = styled.div`
-  position: relative;
-  width: 12px;
-`;
-
-const CircleImage = styled.svg`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const CheckImage = styled.svg`
-  position: absolute;
-  top: 3px;
-  left: 3px;
-`;
-
-const NicknameCheckButtonWrapper = styled.div`
-  position: absolute;
-  top: 50.5px;
-  left: 490px;
-  z-index: 9999;
-`;
-
 // state를 부모 컴포넌트에서 넘겨 주기 위해 추가
 type StateOptions = 'default' | 'hover' | 'focused' | 'typing' | 'filled' | 'error' | 'loading' | 'password';
 
@@ -429,3 +325,107 @@ export default function SignUp3Page() {
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  max-width: 2560px;
+  height: 1153px;
+  background-color: #fcfafb;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 25px;
+`;
+
+const FormWrapper = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  width: 816px;
+  height: 850px;
+  padding: 42px 94px 78px 94px;
+  padding-left: 94px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
+  margin-top: 25px;
+`;
+
+const StepIndicator = styled.div`
+  display: inline-flex;
+  padding: 8px 18px;
+  justify-content: center;
+  margin-bottom: 17px;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #d85888;
+  background: rgba(255, 255, 255, 0.3);
+  color: #d85888;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+`;
+
+const ContentsWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+`;
+
+const ContentsTitleWrapper = styled.div`
+  margin-bottom: 50px;
+`;
+
+const ContentsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 18px;
+  margin-top: 34px;
+`;
+
+const InfoMessageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin-left: 20px;
+`;
+
+const InfoImageWrapper = styled.div`
+  position: relative;
+  width: 12px;
+`;
+
+const CircleImage = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const CheckImage = styled.svg`
+  position: absolute;
+  top: 3px;
+  left: 3px;
+`;
+
+const NicknameCheckButtonWrapper = styled.div`
+  position: absolute;
+  top: 50.5px;
+  left: 490px;
+  z-index: 9999;
+`;
