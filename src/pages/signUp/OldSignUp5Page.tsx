@@ -2,12 +2,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Typography from '../../assets/OldTypography';
-import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import MultiStepProgressBar from '../../assets/ProgressIndicator01';
 import NextButton from '../../assets/buttons/OldNextButton';
 import LoginButton from '../../assets/buttons/LoginButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import { check } from 'prettier';
-import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
+import { ScrollSmall, ScrollLarge } from '../../assets/Scroll';
 import axios from 'axios';
 import { useTable } from 'react-table';
 import { AnyCnameRecord } from 'dns';
@@ -298,7 +298,7 @@ function SignUp5Page() {
           </TextTitle>
         </TextTitleWrapper>
 
-        <ScrollBarLarge isChecked={scrollActive}>
+        <ScrollLarge isChecked={scrollActive}>
           <ButtonsTextWrapper>
             <CustomCheckButton
               isChecked={individualChecks.first}
@@ -323,7 +323,7 @@ function SignUp5Page() {
           </ButtonsTextWrapper>
 
           <TextOutBox style={{ lineHeight: '122.836%' }}>
-            <ScrollBarSmall isChecked={scrollActive}>
+            <ScrollSmall isChecked={scrollActive}>
               <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                 제 1장 총칙
               </Typography>
@@ -704,7 +704,7 @@ function SignUp5Page() {
               <br />
               <TitleText>부칙</TitleText>
               <ContentsText>1. 본 약관은 2023년 10월 20일부터 시행합니다.</ContentsText>
-            </ScrollBarSmall>
+            </ScrollSmall>
           </TextOutBox>
 
           <ButtonsTextWrapper>
@@ -731,7 +731,7 @@ function SignUp5Page() {
           </ButtonsTextWrapper>
 
           <TextOutBox>
-            <ScrollBarSmall isChecked={scrollActive}>
+            <ScrollSmall isChecked={scrollActive}>
               <ContentsText>
                 쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스(이하 “서비스”라
                 함)를 이용함과 동시에 온라인 상에서 각 운영 서비스에 제공한 개인정보가 보호받을 수 있도록 최선을 다하고
@@ -909,7 +909,7 @@ function SignUp5Page() {
                 - 공고일자: 2023년 10월 10일
                 <br />- 시행일자:2023년 10월 20일
               </ContentsText>
-            </ScrollBarSmall>
+            </ScrollSmall>
           </TextOutBox>
 
           <ButtonsWrapper>
@@ -919,7 +919,7 @@ function SignUp5Page() {
             </NextButtonFixedWidth>
           </ButtonsWrapper>
           <div ref={button}></div>
-        </ScrollBarLarge>
+        </ScrollLarge>
       </FormWrapper>
     </Wrapper>
   );

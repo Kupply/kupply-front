@@ -19,26 +19,24 @@ export default function MultiStepProgressBar(props: MultiStepProgressBarProps) {
   const { numberOfSteps = 5, currentStep, complete = false, ...rest } = props;
 
   return (
-    <div style={{ width: '976.8px', height: '30px' }}>
-      <ProgressBarContainer>
-        {Array.from({ length: numberOfSteps }).map((_, i) => (
-          <StepItem
-            key={i}
+    <ProgressBarContainer>
+      {Array.from({ length: numberOfSteps }).map((_, i) => (
+        <StepItem
+          key={i}
+          isActive={currentStep === i + 1}
+          isComplete={i + 1 < currentStep || complete}
+          stepType={currentStep === i + 1 ? 'active' : currentStep < i + 1 ? 'inactive' : 'complete'}
+        >
+          <Step
             isActive={currentStep === i + 1}
             isComplete={i + 1 < currentStep || complete}
             stepType={currentStep === i + 1 ? 'active' : currentStep < i + 1 ? 'inactive' : 'complete'}
           >
-            <Step
-              isActive={currentStep === i + 1}
-              isComplete={i + 1 < currentStep || complete}
-              stepType={currentStep === i + 1 ? 'active' : currentStep < i + 1 ? 'inactive' : 'complete'}
-            >
-              {currentStep > i + 1 ? <img src="../../designImage/FiCheck.svg" alt="ERROR" /> : null}
-            </Step>
-          </StepItem>
-        ))}
-      </ProgressBarContainer>
-    </div>
+            {currentStep > i + 1 ? <img src="../../designImage/FiCheck.svg" alt="ERROR" /> : null}
+          </Step>
+        </StepItem>
+      ))}
+    </ProgressBarContainer>
   );
 }
 
@@ -114,7 +112,8 @@ const Step = styled.div<StepProps>`
 `;
 
 const ProgressBarContainer = styled.div`
-  width: 100%;
+  width: 50.875vw; // 100%
+  height: 30px;
   display: flex;
   justify-content: space-between;
 `;
