@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export interface TypographyProps extends React.ComponentPropsWithoutRef<'span'> {
   size?: string;
-  maxSize?: string;
   bold?: string;
   color?: string;
 }
