@@ -19,6 +19,7 @@ import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import ModalLarge from '../../components/base/ModalLarge';
 import SubmitButton from '../../assets/buttons/OldSubmitButton';
+import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 
 interface SettingsPageProps {
   selected: number;
@@ -131,7 +132,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        //const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
@@ -436,48 +437,70 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         <Content>
           <Title>환경설정</Title>
           <Flex>
-            <ContentButton
+            {/* <ContentButton
               selected={selected === 0}
               onClick={() => {
                 onClick(0);
               }}
             >
               나의 기본정보 수정하기
-            </ContentButton>
-            <ContentButton
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 0}
+              onCustomFunction={() => {
+                onClick(0);
+              }}>나의 기본정보 수정하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 1}
               onClick={() => {
                 onClick(1);
-              }}
-            >
-              프로필 사진 / 닉네임 변경하기
-            </ContentButton>
-            <ContentButton
+              }}>프로필 사진 / 닉네임 변경하기</ContentButton> */}
+            <TextButton04 
+              selected={selected === 1}
+              onCustomFunction={() => {
+                onClick(1);
+              }}>프로필 사진 / 닉네임 변경하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 2}
               onClick={() => {
                 onClick(2);
               }}
             >
               마이보드 프로필 수정하기
-            </ContentButton>
-            <ContentButton
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 2}
+              onCustomFunction={() => {
+                onClick(2);
+              }}>마이보드 프로필 수정하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 3}
               onClick={() => {
                 onClick(3);
               }}
             >
               계정관리
-            </ContentButton>
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 3}
+              onCustomFunction={() => {
+                onClick(3);
+              }}>계정관리</TextButton04>
           </Flex>
           <div style={{ marginTop: 210 }}>
-            <ContentButton
+            {/* <ContentButton
               selected={selected === 4}
               onClick={() => {
                 onClick(4);
               }}
             >
               약관보기
-            </ContentButton>
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 4}
+              onCustomFunction={() => {
+                onClick(4);
+              }}>약관보기</TextButton04>
           </div>
           <div style={{ marginTop: 50 }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="284" height="2" viewBox="0 0 284 2" fill="none">
@@ -485,14 +508,18 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             </svg>
           </div>{' '}
           <div style={{ marginTop: 50 }}>
-            <DeleteButton
+            {/* <DeleteButton
               selected={selected === 5}
               onClick={() => {
                 navigate('/delete');
               }}
             >
               계정 삭제
-            </DeleteButton>
+            </DeleteButton> */}
+            <TextButton03Settings selected={selected === 5}
+              onCustomFunction={() => {
+                navigate('/delete');
+              }}>계정 삭제</TextButton03Settings>
           </div>
         </Content>
       </Sidebar>

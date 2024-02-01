@@ -10,6 +10,7 @@ import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
 import client from '../../utils/HttpClient';
+import { TextButton02, TextButton03LNB } from '../../assets/buttons/TextButton';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -382,12 +383,14 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                   </ProfileText>
                 </Profile>
                 <ProfileButtons>
-                  <ProfileButton onClick={handleSettingsClick}>환경설정</ProfileButton>
-                  <ProfileButton onClick={handleMessageClick}>약관 보기</ProfileButton>
+                  {/* <ProfileButton onClick={handleSettingsClick}>환경설정</ProfileButton>
+                  <ProfileButton onClick={handleMessageClick}>약관 보기</ProfileButton> */}
+                  <TextButton03LNB onClick={handleSettingsClick} style={{paddingLeft: '19px'}}>환경설정</TextButton03LNB>
+                  <TextButton03LNB onClick={handleMessageClick} style={{paddingLeft: '19px'}}>약관 보기</TextButton03LNB>
                   <svg xmlns="http://www.w3.org/2000/svg" width="328" height="2" viewBox="0 0 328 2" fill="none">
                     <path d="M327 1.20996L0.999993 1.20996" stroke="#DFDFDF" stroke-linecap="round" />
                   </svg>
-                  <ProfileButton onClick={onLogoutClick}>
+                  {/* <ProfileButton onClick={onLogoutClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                       <path
                         fill-rule="evenodd"
@@ -405,7 +408,8 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                       />
                     </svg>
                     로그아웃
-                  </ProfileButton>
+                  </ProfileButton> */}
+                  <TextButton02 onClick={onLogoutClick} style={{paddingLeft: '19px'}}>로그아웃</TextButton02>
                 </ProfileButtons>
               </SettingToggleWrapper>
             )}
