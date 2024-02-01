@@ -95,6 +95,13 @@ function SignUp5Page() {
 
   const receivedData = useLocation().state;
 
+  /************************************************/
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  //useEffect(() => {
+  //  if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
+  // }, []);
+  /************************************************/
+
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = async () => {
     if (isButtonActive) {
@@ -785,10 +792,12 @@ function SignUp5Complete() {
     navigate('/login');
   };
 
+  /************************************************/
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  useEffect(() => {
-    if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
-  }, []);
+  //useEffect(() => {
+  //  if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
+  //}, []);
+  /************************************************/
 
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {
@@ -943,7 +952,7 @@ const ButtonsTextWrapper = styled.div`
 `;
 
 const TextOutBox = styled.div`
-  width: 32.7083vw; // 30.1042vw; // 32.7083vw; // (628/1920)*100vw  width: 628px;
+  width: 32.7083vw; // 32.7083vw; // (628/1920)*100vw  width: 628px;
   max-width: 628px;
   height: 228px;
   flex-shrink: 0;
