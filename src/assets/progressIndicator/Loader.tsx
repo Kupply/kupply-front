@@ -1,9 +1,9 @@
-import { hover } from '@testing-library/user-event/dist/hover';
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import axios from 'axios';
-import client from '../utils/HttpClient';
+
+import client from '../../utils/HttpClient';
+
+type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
 const baseButton = css`
   height: 24px;
@@ -13,107 +13,6 @@ const baseButton = css`
   align-items: center;
   border-radius: 999px;
 `;
-const defaultButtonStyle = css`
-  display: flex;
-  border: 1px solid #d85888;
-  width: 67px;
-`;
-
-const hoverButtonStyle = css`
-  display: flex;
-  background: rgba(216, 88, 136, 0.1);
-  width: 65px;
-`;
-
-const filledButtonStyle = css`
-  display: flex;
-  width: 87px;
-  background: #d85888;
-  color: white;
-  transition: all 0.3s ease 0s;
-`;
-
-const errorButtonStyle = css`
-  display: flex;
-  width: 87px;
-  background: rgba(234, 9, 9, 0.7);
-  color: white;
-  transition: all 0.3s ease 0s;
-`;
-
-const loadingButtonStyle = css`
-  display: flex;
-  background: rgba(216, 88, 136, 0.1);
-  width: 87px;
-  transition: width 0.25s ease 0s;
-`;
-
-const loadingMove = keyframes`
-    0% {
-        transform: translateX(20px) rotate(0deg);
-    }
-    100% {
-        transform: translateX(0) rotate(90deg);
-    }
-`;
-
-const loadingRotate = keyframes`
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-`;
-
-const LoadingImage = styled.svg`
-  position: relative;
-  z-index: 1;
-  animation:
-    ${loadingMove} 0.25s ease,
-    ${loadingRotate} 1s linear infinite,
-    forwards;
-`;
-
-const ButtonText = css`
-  position: relative;
-  width: 48px;
-  z-index: 999;
-  color: #d85888;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  white-space: nowrap;
-`;
-
-const CompleteButtonText = css`
-  color: white;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-`;
-
-type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
-
-const stateMapping = {
-  default: defaultButtonStyle,
-  hover: hoverButtonStyle,
-  filled: filledButtonStyle,
-  error: errorButtonStyle,
-  loading: loadingButtonStyle,
-};
-
-const textStateMapping = {
-  default: ButtonText,
-  hover: ButtonText,
-  filled: CompleteButtonText,
-  error: CompleteButtonText,
-  loading: ButtonText,
-};
 
 export interface NicknameCheckButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   state: StateOptions;
@@ -253,5 +152,105 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
     </>
   );
 }
+
+const defaultButtonStyle = css`
+  display: flex;
+  border: 1px solid #d85888;
+  width: 67px; // 3.4896vw;
+`;
+
+const hoverButtonStyle = css`
+  display: flex;
+  background: rgba(216, 88, 136, 0.1);
+  width: 65px; // 3.3854vw;
+`;
+
+const filledButtonStyle = css`
+  display: flex;
+  width: 87px; // 4.5312vw;
+  background: #d85888;
+  color: white;
+  transition: all 0.3s ease 0s;
+`;
+
+const errorButtonStyle = css`
+  display: flex;
+  width: 87px; // 4.5312vw;
+  background: rgba(234, 9, 9, 0.7);
+  color: white;
+  transition: all 0.3s ease 0s;
+`;
+
+const loadingButtonStyle = css`
+  display: flex;
+  background: rgba(216, 88, 136, 0.1);
+  width: 87px; // 4.5312vw;
+  transition: width 0.25s ease 0s;
+`;
+
+const loadingMove = keyframes`
+    0% {
+        transform: translateX(20px) rotate(0deg);
+    }
+    100% {
+        transform: translateX(0) rotate(90deg);
+    }
+`;
+
+const loadingRotate = keyframes`
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+`;
+
+const LoadingImage = styled.svg`
+  position: relative;
+  z-index: 1;
+  animation:
+    ${loadingMove} 0.25s ease,
+    ${loadingRotate} 1s linear infinite,
+    forwards;
+`;
+
+const ButtonText = css`
+  position: relative;
+  width: 48px; // 2.5vw;
+  z-index: 999;
+  color: #d85888;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  white-space: nowrap;
+`;
+
+const CompleteButtonText = css`
+  color: white;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+`;
+
+const stateMapping = {
+  default: defaultButtonStyle,
+  hover: hoverButtonStyle,
+  filled: filledButtonStyle,
+  error: errorButtonStyle,
+  loading: loadingButtonStyle,
+};
+
+const textStateMapping = {
+  default: ButtonText,
+  hover: ButtonText,
+  filled: CompleteButtonText,
+  error: CompleteButtonText,
+  loading: ButtonText,
+};
 
 export default NicknameCheckButton;
