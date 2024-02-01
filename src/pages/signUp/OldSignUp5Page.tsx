@@ -7,7 +7,7 @@ import NextButton from '../../assets/buttons/OldNextButton';
 import LoginButton from '../../assets/buttons/LoginButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import { check } from 'prettier';
-import { ScrollSmall, ScrollLarge } from '../../assets/Scroll';
+import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import axios from 'axios';
 import { useTable } from 'react-table';
 import { AnyCnameRecord } from 'dns';

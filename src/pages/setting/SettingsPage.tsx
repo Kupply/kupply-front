@@ -9,7 +9,7 @@ import DropDown from '../../assets/dropdown/DropDown';
 import { HelpMessage, ModalHelpMessage } from '../../assets/myboardpage/HellpMessage';
 import VerificationBox from '../../assets/VerificationBox';
 import Typography from '../../assets/OldTypography';
-import { ScrollSmall, ScrollLarge } from '../../assets/Scroll';
+import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import LabelButton from '../../assets/buttons/LabelButton';
 import NicknameCheckButton from '../../assets/NicknameCheckButton';
 import client from '../../utils/HttpClient';

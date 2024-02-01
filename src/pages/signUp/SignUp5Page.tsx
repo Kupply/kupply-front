@@ -7,7 +7,7 @@ import MultiStepProgressBar from '../../assets/ProgressIndicator01';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import LoginButton from '../../assets/buttons/LoginButton';
-import { ScrollSmall, ScrollLarge } from '../../assets/Scroll';
+import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 
 import client from '../../utils/HttpClient';
 
