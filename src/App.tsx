@@ -17,6 +17,7 @@ import SignUp2Page from './pages/signUp/SignUp2Page';
 import SignUp3Page from './pages/signUp/SignUp3Page';
 import AuthRequired from './AuthRequired';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/SignUp4Page';
+// import { SignUp5Page, SignUp5Complete } from './pages/signUp/OldSignUp5Page';
 import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
 import DeletePage from './pages/delete/DeletePage';
 import RouteChangeTracker from './RouteChangeTracker'; // GA 추적 목적

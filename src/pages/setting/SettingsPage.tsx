@@ -9,7 +9,7 @@ import DropDown from '../../assets/dropdown/DropDown';
 import { HelpMessage, ModalHelpMessage } from '../../assets/myboardpage/HellpMessage';
 import VerificationBox from '../../assets/VerificationBox';
 import Typography from '../../assets/OldTypography';
-import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
+import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import LabelButton from '../../assets/buttons/LabelButton';
 import NicknameCheckButton from '../../assets/NicknameCheckButton';
 import client from '../../utils/HttpClient';
@@ -821,7 +821,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <BodyContent>
             다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관입니다.
           </BodyContent>{' '}
-          <ScrollBarLarge isChecked={scrollActive}>
+          <ScrollLarge isChecked={scrollActive}>
             <div style={{ marginTop: 30 }}>
               <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
                 <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -846,7 +846,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </div>
             </div>
             <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
+              <ScrollSmall isChecked={scrollActive}>
                 <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
                   <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                     제 1장 총칙
@@ -1240,7 +1240,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                   <TitleText>부칙</TitleText>
                   <ContentsText>1. 본 약관은 2023년 10월 20일부터 시행합니다.</ContentsText>
                 </div>
-              </ScrollBarSmall>
+              </ScrollSmall>
             </TextOutBox>
             <div style={{ marginTop: 30 }}>
               <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -1274,7 +1274,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </Typography>
             </div>
             <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
+              <ScrollSmall isChecked={scrollActive}>
                 <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
                   <ContentsText>
                     쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스(이하 “서비스”라
@@ -1454,9 +1454,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                     <br />- 시행일자:2023년 10월 20일
                   </ContentsText>
                 </div>
-              </ScrollBarSmall>
+              </ScrollSmall>
             </TextOutBox>
-          </ScrollBarLarge>
+          </ScrollLarge>
         </BodyContainer>
       )}
     </Wrapper>

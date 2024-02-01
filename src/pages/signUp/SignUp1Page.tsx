@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Typography from '../../assets/OldTypography';
-import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import MultiStepProgressBar from '../../assets/ProgressIndicator01';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import Timer from '../../components/signUp/Timer';
