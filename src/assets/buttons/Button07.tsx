@@ -2,16 +2,16 @@ import styled from 'styled-components';
 
 import Typography from '../Typography';
 
-export interface Button06Props extends React.ComponentPropsWithoutRef<'button'> {
+export interface Button07Props extends React.ComponentPropsWithoutRef<'button'> {
   title?: string;
   content?: string;
   state?: 'default' | 'pressed' | 'disabled';
 }
 
-function Button06(props: Button06Props) {
+function Button07(props: Button07Props) {
   const {
-    title = '이중전공 도전생',
-    content = '이중전공 지원 전, 이중전공에 대한 정보가 궁금해요!',
+    title = '이중전공 진입생',
+    content = '이중전공 진입에 성공했고, 다양한 정보를 공유하고 싶어요!',
     state = 'default',
     ...rest
   } = props;
@@ -28,15 +28,15 @@ function Button06(props: Button06Props) {
       <ImageWrapper
         src={
           state === 'disabled'
-            ? '../../designImage/character/Chick1StandSideOpacity.png'
-            : '../../designImage/character/Chick1StandSide.png'
+            ? '../../designImage/character/Chick2StandSideOpacity.png'
+            : '../../designImage/character/Chick2StandSide.png'
         }
       />
     </ButtonWrapper>
   );
 }
 
-const ButtonWrapper = styled.button<Button06Props>`
+const ButtonWrapper = styled.button<Button07Props>`
   width: 32.71vw;
   height: 110px;
   box-sizing: border-box;
@@ -67,8 +67,8 @@ const TextWrapper = styled.div`
 const ImageWrapper = styled.img`
   width: 4.69vw;
   height: 4.69vw;
-  margin-right: 2.71%;
+  margin-right: 3.03%;
   flex-shrink: 0;
 `;
 
-export default Button06;
+export default Button07;

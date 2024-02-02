@@ -27,7 +27,7 @@ function Button01(props: Button01Props) {
 }
 
 const ButtonWrapper = styled.button<Button01Props>`
-  width: ${(props) => (props.size === 'medium' ? '5.63vw' : '5.83vw')};
+  width: auto;
   height: auto;
   box-sizing: border-box;
   border: ${(props) =>
