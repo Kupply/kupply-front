@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export interface Icon15Props extends React.ComponentPropsWithoutRef<'div'> {
   size?: string;
-  fill?: boolean;
+  type?: 'outline' | 'fill';
 }
 
-function Icon15({ size = '1.04vw', fill = false }: Icon15Props) {
-  return fill ? (
-    <IconWrapper size={size} src="../../designImage/icon/icon_15_02.svg" />
-  ) : (
+function Icon15({ size = '1.04vw', type = 'outline' }: Icon15Props) {
+  return type === 'outline' ? (
     <IconWrapper size={size} src="../../designImage/icon/icon_15_01.svg" />
+  ) : (
+    <IconWrapper size={size} src="../../designImage/icon/icon_15_02.svg" />
   );
 }
 
