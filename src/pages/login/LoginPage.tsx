@@ -3,15 +3,6 @@ import styled from 'styled-components';
 import Logo from '../../assets/Logo';
 import Typography from '../../assets/Typography';
 import AlertMessage from '../../assets/AlertMessage';
-import NextButton from '../../assets/buttons/NextButton';
-import Button01 from '../../assets/buttons/Button01';
-import Button03 from '../../assets/buttons/Button03';
-import Button04 from '../../assets/buttons/Button04';
-import Button05 from '../../assets/buttons/Button05';
-import Icon05 from '../../assets/icons/Icon05';
-import Icon15 from '../../assets/icons/Icon15';
-import Icon16 from '../../assets/icons/Icon16';
-import Button06 from '../../assets/buttons/Button06';
 
 function LoginPage() {
   return (
@@ -31,9 +22,6 @@ function LoginPage() {
           </div>
         </TextFieldWrapper>
       </LoginBox>
-      <Button06 />
-      <Button06 state="pressed" />
-      <Button06 state="disabled" />
     </MainWrapper>
   );
 }
