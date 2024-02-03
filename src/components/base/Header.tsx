@@ -10,7 +10,7 @@ import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
 import client from '../../utils/HttpClient';
-import { TextButton02, TextButton03LNB } from '../../assets/buttons/TextButton';
+import { TextButton02, TextButton03LNB, TextButton06 } from '../../assets/buttons/TextButton';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -242,7 +242,8 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     navigate('/archive');
   };
   const handleMenu2Click = () => {
-    if (logined) {
+    // 원래는 if(logined)이지만 임시적으로 수정
+    if (true) {
       navigate('/myboard');
     } // 로그인 상태
     else {
@@ -338,7 +339,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
         </LeftButtonsContainer>
         {logined ? (
           <>
-            <RightButtonsContainer onClick={handleToggle}>
+            {/* <RightButtonsContainer onClick={handleToggle}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path
                   d="M9 8.25C10.6569 8.25 12 6.90685 12 5.25C12 3.59315 10.6569 2.25 9 2.25C7.34315 2.25 6 3.59315 6 5.25C6 6.90685 7.34315 8.25 9 8.25Z"
@@ -363,7 +364,9 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                 />
               </svg>
               <strong>{`${userData.userNickname} `}</strong>님
-            </RightButtonsContainer>
+            </RightButtonsContainer> */}
+            <TextButton06 nickName='고대빵' onCustomFunction={handleToggle}></TextButton06>
+            
             {toggle && (
               <SettingToggleWrapper ref={headerToggleRef}>
                 <Profile>
@@ -387,6 +390,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                   <ProfileButton onClick={handleMessageClick}>약관 보기</ProfileButton> */}
                   <TextButton03LNB onClick={handleSettingsClick} style={{paddingLeft: '19px'}}>환경설정</TextButton03LNB>
                   <TextButton03LNB onClick={handleMessageClick} style={{paddingLeft: '19px'}}>약관 보기</TextButton03LNB>
+
                   <svg xmlns="http://www.w3.org/2000/svg" width="328" height="2" viewBox="0 0 328 2" fill="none">
                     <path d="M327 1.20996L0.999993 1.20996" stroke="#DFDFDF" stroke-linecap="round" />
                   </svg>
@@ -409,7 +413,9 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                     </svg>
                     로그아웃
                   </ProfileButton> */}
+
                   <TextButton02 onClick={onLogoutClick} style={{paddingLeft: '19px'}}>로그아웃</TextButton02>
+
                 </ProfileButtons>
               </SettingToggleWrapper>
             )}

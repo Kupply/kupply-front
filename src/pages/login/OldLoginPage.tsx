@@ -9,7 +9,7 @@ import LoginModal from '../../components/login/LoginModal';
 import AlertMessage from '../../assets/OldAlertMessage';
 import client from '../../utils/HttpClient';
 import Login2JoinModal from '../../components/login/Login2JoinModal';
-
+import { CheckBoxButton02 } from '../../assets/buttons/CheckBoxButton';
 const Wrapper = styled.div`
   width: 100vw;
   height: 933px;
@@ -244,12 +244,14 @@ function LoginPage(props: LoginPageProps) {
             isFilled={password !== ''}
           />
         </TextFieldWrapper>
-        <TextBox>
+        {/* <TextBox>
           <CheckButton checked={isChecked} onClick={() => setIsChecked((prevState) => !prevState)}></CheckButton>
           <Typography size="mediumText" bold="600" color={isChecked ? '#D85888' : '#A8A8A8'}>
             로그인 상태 유지
           </Typography>
-        </TextBox>
+        </TextBox> */}
+        <CheckBoxButton02 isChecked={isChecked} onCustomFunction={() => setIsChecked((prevState) => !prevState)}>로그인 상태 유지</CheckBoxButton02>
+
         <LinkBox>
           <Link style={{ marginBottom: '8px' }} onClick={toggleModal}>
             비밀번호를 잊으셨나요?

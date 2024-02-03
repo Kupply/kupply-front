@@ -8,8 +8,8 @@ import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import LoginButton from '../../assets/buttons/LoginButton';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
-
 import client from '../../utils/HttpClient';
+import { CheckBoxButton01, CheckBoxButton02 } from '../../assets/buttons/CheckBoxButton';
 
 interface CustomCheckButtonProps {
   isChecked: boolean;
@@ -155,7 +155,7 @@ function SignUp5Page() {
         </ContentsTitleWrapper>
 
         <TextTitle>
-          <CustomCheckButton
+          {/* <CustomCheckButton
             isChecked={allCheckedUI}
             onChange={(isChecked) => {
               handleAllCheckedClick(isChecked);
@@ -169,11 +169,18 @@ function SignUp5Page() {
             src="designImage/carousel/CarouselRightButton.png"
             alt="right arrow"
             style={{ marginLeft: '-8px' }}
-          />
+          /> */}
+          <CheckBoxButton01 
+            isChecked={allCheckedUI}
+            onCustomFunction={(isChecked) => {
+              handleAllCheckedClick(isChecked);
+              onClickCheck();
+            }}>아래 약관에 모두 동의합니다</CheckBoxButton01>
+          
         </TextTitle>
 
         <ScrollLarge isChecked={scrollActive}>
-          <ButtonsTextWrapper>
+          {/* <ButtonsTextWrapper>
             <CustomCheckButton
               isChecked={individualChecks.first}
               onChange={(newCheckedValue) =>
@@ -187,7 +194,18 @@ function SignUp5Page() {
               서비스 이용약관 동의 (필수)
               <ArrowImage src="designImage/carousel/CarouselRightButton.png" alt="right arrow" />
             </Typography>
-          </ButtonsTextWrapper>
+          </ButtonsTextWrapper> */}
+
+          <CheckBoxButton01 
+          isChecked={individualChecks.first}
+          onCustomFunction={(newCheckedValue) =>
+                setIndividualChecks((prev) => ({
+                  ...prev,
+                  first: newCheckedValue,
+                }))
+              }>
+            서비스 이용약관 동의 (필수)
+          </CheckBoxButton01>
 
           <TextOutBox style={{ lineHeight: '122.836%' }}>
             <ScrollSmall isChecked={scrollActive}>
@@ -574,7 +592,7 @@ function SignUp5Page() {
             </ScrollSmall>
           </TextOutBox>
 
-          <ButtonsTextWrapper>
+          {/* <ButtonsTextWrapper>
             <CustomCheckButton
               isChecked={individualChecks.second}
               onChange={(newCheckedValue) =>
@@ -588,7 +606,18 @@ function SignUp5Page() {
               개인정보 수집 및 이용 동의 (필수)
               <ArrowImage src="designImage/carousel/CarouselRightButton.png" alt="right arrow" />
             </Typography>
-          </ButtonsTextWrapper>
+          </ButtonsTextWrapper> */}
+          <CheckBoxButton01 
+          isChecked={individualChecks.second}
+          onCustomFunction=
+          {(newCheckedValue) =>
+                setIndividualChecks((prev) => ({
+                  ...prev,
+                  second: newCheckedValue,
+                }))
+              }>
+          개인정보 수집 및 이용 동의 (필수)
+          </CheckBoxButton01>
 
           <TextOutBox>
             <ScrollSmall isChecked={scrollActive}>
