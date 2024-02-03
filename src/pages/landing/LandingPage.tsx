@@ -148,6 +148,7 @@ const LandingPage = () => {
         </HeadTextWrapper>
       </HeadImageWrapper>
       <div ref={tableContent} style={{ marginBottom: '120px' }}></div>
+      
       {isWithinTimeRange() && <RankingTable tableData={tableData} />}
       <PassedDataCard cardData={cardData} />
       <Preview />

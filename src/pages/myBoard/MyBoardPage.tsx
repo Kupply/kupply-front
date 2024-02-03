@@ -20,6 +20,7 @@ import {
   collegeNameMappingByKR as collegeNameMapping,
   collegeAPIMappingByKR as collegeAPIMapping,
 } from '../../utils/Mappings';
+import Card02 from '../../assets/cards/Card02';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -497,6 +498,7 @@ export default function MyBoardPage() {
     }
   }, [userData]);
 
+  
   return (
     <>
       {userData.userRole === 'passer' ? (
@@ -619,7 +621,9 @@ export default function MyBoardPage() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
-                  <InterestMajorBox>
+                  {/* 현재 로그인 상태가 아니라서 사진과 학과명을 볼 수가 없음 */}
+                  <Card02 korName={userData.hopeMajor1} hopeMajor='1지망'/>
+                  {/* <InterestMajorBox>
                     <MajorSymbolShadow>
                       <MajorSymbol
                         src={`designImage/major_symbol/trans/medium/${
@@ -703,11 +707,11 @@ export default function MyBoardPage() {
                         </Typography>
                       </div>
                     </div>
-                  </InterestMajorBox>
+                  </InterestMajorBox> */}
                 </div>
                 {userData.hopeMajor2 !== '희망 없음' ? (
                   <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
-                    <InterestMajorBox>
+                    {/* <InterestMajorBox>
                       <MajorSymbolShadow>
                         <MajorSymbol
                           src={`designImage/major_symbol/trans/medium/${
@@ -791,7 +795,8 @@ export default function MyBoardPage() {
                           </Typography>
                         </div>
                       </div>
-                    </InterestMajorBox>
+                    </InterestMajorBox> */}
+                    <Card02 korName={userData.hopeMajor2} hopeMajor='2지망'/>
                   </div>
                 ) : (
                   <></>
