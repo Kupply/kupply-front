@@ -38,8 +38,6 @@ const majorParamMappingPath = {
   'Department of Computer Science & Engineering': 'computer',
 };
 
-// Card는 width와 height모두 vw vh로 바꾸는게 맞지 않을까라는 생각이 듬...
-// 아직 responsive하게 바꾸지 않음
 
 export default function Card01 ({
   korName, engName, TO, avgPass, minPass, compRate, semester
@@ -79,25 +77,29 @@ export default function Card01 ({
   
   
   return (<>
-    {hover ? (
+    {hover ? ( 
     <Container hover={hover} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
-      <CardImageBlurred image={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_blurred.png`}/>
-      <CardImageSmall image={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_trans.png`}/>
+      <CardImageBlurred>
+        <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_blurred.png`} alt="blurred major image" />
+      </CardImageBlurred>
+      <CardImageSmall>
+        <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}Large.png`} alt="major image small" />
+      </CardImageSmall>
       <NameWrapper hover={true}>
         <MajorNameKor hover={true}>{majorKorName}</MajorNameKor>
         <DepNameEng hover={true}>{engName}</DepNameEng>
       </NameWrapper> 
       <ContentInner 
-      style={{top: '133px', left: '38px'}}>
+      style={{top: '6.93vw', left: '1.98vw'}}>
         20{semester}R 모집정보
       </ContentInner>
 
-      <ContentTitle style={{top: '178px', left: '38px'}}>{semester} 선발 인원</ContentTitle>
-      <ContentInner style={{top: '202px', left: '38px'}}>{TO}명</ContentInner>
+      <ContentTitle style={{top: '9.28vw', left: '1.98vw'}}>{semester} 선발 인원</ContentTitle>
+      <ContentInner style={{top: '10.52vw', left: '1.98vw'}}>{TO}명</ContentInner>
 
-      <ContentTitle style={{top: '178px', left: '169px'}}>경쟁률</ContentTitle>
+      <ContentTitle style={{top: '9.28vw', left: '8.80vw'}}>경쟁률</ContentTitle>
       <Svg onMouseEnter={onSvgHover} onMouseLeave={onSvgHoverOut}>
-      <svg style={{top: '178px', left: '213px', position: 'absolute'}} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <svg style={{top: '9.28vw', left: '11.10vw', position: 'absolute', width: '0.94vw', height: '0.94vw'}} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
         <g clip-path="url(#clip0_94_861)">
           <path d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" stroke="#141414" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M9.00751 6L9.00001 6" stroke="#141414" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -112,16 +114,19 @@ export default function Card01 ({
       {/* {svgHover && <HoverInfo>'....'</HoverInfo>} */}
       </Svg>
       
-      <ContentInner style={{top: '202px', left: '169px'}}>{compRate}</ContentInner>
+      <ContentInner style={{top: '10.52vw', left: '8.80vw'}}>{compRate}</ContentInner>
 
-      <ContentTitle style={{top: '244px', left: '38px'}}>합격자 평균 학점</ContentTitle>
-      <ContentInner style={{top: '268px', left: '38px'}}>{avgPass}</ContentInner>
+      <ContentTitle style={{top: '12.71vw', left: '1.98vw'}}>합격자 평균 학점</ContentTitle>
+      <ContentInner style={{top: '13.96vw', left: '1.98vw'}}>{avgPass}</ContentInner>
 
-      <ContentTitle style={{top: '244px', left: '169px'}}>합격자 최저 학점</ContentTitle>
-      <ContentInner style={{top: '268px', left: '169px'}}>{minPass}</ContentInner>
+      <ContentTitle style={{top: '12.71vw', left: '8.80vw'}}>합격자 최저 학점</ContentTitle>
+      <ContentInner style={{top: '13.96vw', left: '8.80vw'}}>{minPass}</ContentInner>
 
       <Button onClick={handleClickDetail}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <svg style={{
+          width: '1.04vw',
+          height: '1.04vw'
+        }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
           <path d="M6.33301 14.1663L14.6663 5.83301" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M6.33301 5.83301H14.6663V14.1663" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -131,7 +136,9 @@ export default function Card01 ({
     ) : (
       
     <Container hover={hover} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
-      <CardImageDefault image={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}.png`}/>
+      <CardImageDefault>
+        <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}.png`} alt="major image default" />
+      </CardImageDefault>
         <NameWrapper hover={false}>
           <MajorNameKor hover={false}>{majorKorName}</MajorNameKor>
           <DepNameEng hover={false}>{engName}</DepNameEng>
@@ -147,52 +154,85 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-  width: 312px;
-  height: 420px;
+  width: 16.25vw;
+  height: 21.88vw;
   flex-shrink: 0;
   border-radius: ${(props) => 
-    props.hover ? '5px' : '0px'};
+    props.hover ? '0.26vw' : '0px'};
   box-shadow: ${(props) => 
-    props.hover  ? '0px 0px 20px 0px rgba(20, 20, 20, 0.25)' :
+    props.hover  ? '0px 0px 1.04vw 0px rgba(20, 20, 20, 0.25)' :
     undefined};
   position: relative;
 `;
 
-const CardImageDefault = styled.div<{image: string;}>`
+const CardImageDefault = styled.div`
 position: absolute;
-width: 312px;
-height: 420px;
-border-radius: 10px;
-background: url(${(props) => props.image}), lightgray 50% / cover no-repeat;
+width: 16.25vw;
+height: 21.88vw;
+border-radius: 0.52vw;
+overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
 
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Maintain aspect ratio while fitting the container */
+  }
 `;
 
-const CardImageBlurred = styled.div<{image: string}>`
-position: absolute;
-margin-top: 1px;
-width: 312px;
-height: 420px;
-background: url(${(props) => props.image}), lightgray 50% / cover no-repeat;
+// const CardImageBlurred = styled.div<{image: string}>`
+// position: absolute;
+// margin-top: 0.052vw;
+// width: 16.25vw;
+// height: 21.88vw;
+// background: url(${(props) => props.image}), lightgray 50% / cover no-repeat;
+// `;
 
+const CardImageBlurred = styled.div`
+  position: absolute;
+  margin-top: 0.052vw;
+  width: 16.25vw;
+  height: 21.88vw;
+  overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio while covering the container */
+    //filter: blur(5px); /* Apply a blur effect to the image */
+  }
 `;
 
-const CardImageSmall = styled.div<{image: string}>`
-position: absolute;
-margin: 45px 233px 322px 38px;
-width: 41px; 
-height: 54px; 
-background: url(${(props) => props.image}) no-repeat;
+// const CardImageSmall = styled.div<{image: string}>`
+// position: absolute;
+// margin: 2.34vw 12.14vw 16.771vw 1.98vw;
+// width: 2.14vw; 
+// height: 2.812vw; 
+// background: url(${(props) => props.image}) no-repeat;
+// `;
+
+const CardImageSmall = styled.div`
+  position: absolute;
+  margin: 2.34vw 12.14vw 16.771vw 1.98vw;
+  width: 2.14vw;
+  height: 2.812vw;
+  overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio while covering the container */
+  }
 `;
 
 const MajorNameKor = styled.div<ContainerProps>`
   color: #141414;
   text-align: ${(props) => props.hover ? undefined : 'center'};
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; 
-  margin-bottom: ${(props) => props.hover ? '10px' : '12px'};
+  line-height: 1.25vw; 
+  margin-bottom: ${(props) => props.hover ? '0.52vw' : '0.625vw'};
   white-space: nowrap;
 `;
 
@@ -204,25 +244,25 @@ const DepNameEng = styled.div<ContainerProps>`
     color: #141414;
     text-align: center;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 0.833vw;
     font-style: normal;
     font-weight: 400;
-    line-height: 18px; 
+    line-height: 0.94vw; 
     opacity: 0.8;
     text-wrap: balance;
-    width: 254px;
+    width: 13.23vw;
     `
     :
     `
     color: #141414;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 0.833vw;
     font-style: normal;
     font-weight: 400;
-    line-height: 18px; /* 112.5% */
+    line-height: 0.94vw; /* 112.5% */
     opacity: 0.8;
     text-wrap: balance;
-    width: 203px;
+    width: 10.57vw;
     `
   )}
 `;
@@ -233,14 +273,14 @@ const NameWrapper = styled.span<ContainerProps>`
     `
     position: absolute;
     //margin: 317px 29px 50px 29px;
-    top: 317px;
+    top: 16.51vw;
     flex-shrink: 0;
     left: 50%;
     transform: translateX(-50%);
     `:
     `
     position: absolute;
-    margin: 46px 96px 323px 99px;
+    margin: 2.395vw 5vw 16.823vw 5.16vw;
     flex-shrink: 0;
     `
   )}
@@ -250,7 +290,7 @@ const ContentTitle = styled.div`
   position: absolute;
   color: rgba(20, 20, 20, 0.60);
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 0.833vw;
   font-style: normal;
   font-weight: 500;
   line-height: 120%; /* 19.2px */
@@ -259,49 +299,49 @@ const ContentTitle = styled.div`
 const ContentInner = styled.div`
 color: #141414;
 font-family: Pretendard;
-font-size: 20px;
+font-size: 1.04vw;
 font-style: normal;
 font-weight: 700;
-line-height: 120%; /* 24px */
+line-height: 120%; /* 1.25vw */
 position: absolute;
 `;
 
 const Button = styled.button`
-  top: 339px;
-  left: 38px;
+  top: 17.66vw;
+  left: 1.98vw;
   display: flex;
-  width: 236px;
-  height: 46px;
-  padding: 24px 34px;
+  width: 12.29vw;
+  height: 2.40vw;
+  padding: 1.25vw 1.77vw;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0.42vw;
   flex-shrink: 0;
   position: absolute;
-  border-radius: 999px;
+  border-radius: 52.03vw;
   background: var(--Primary-color, #D85888);
   color: var(--White, #FFF);
   text-align: center;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 0.833vw;
   font-style: normal;
   font-weight: 700;
   line-height: 120%; /* 19.2px */
 `;
 
 const Svg = styled.div`
-width: 18px;
-height: 18px;
+width: 0.94vw;
+height: 0.94vw;
 flex-shrink: 0;
 position: absolute;
-top: '178px';
-left: '213px';
+top: '9.28vw';
+left: '11.10vw';
 `;
 
 // 아직 정확한 포지셔닝과 문구가 나오지 않아서 놨둠
 const HoverInfo = styled.div`
   display: flex;
-  padding: 10px 8px;
+  padding: 0.52vw 0.42vw;
   justify-content: center;
   align-items: center;
 
@@ -309,10 +349,12 @@ const HoverInfo = styled.div`
   color: var(--White, #fff);
   text-align: center;
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 0.73vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 0.833vw;
   align-self: stretch;
   position: absolute;
 `;
+
+
