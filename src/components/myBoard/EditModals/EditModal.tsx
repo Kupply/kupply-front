@@ -13,7 +13,7 @@ import DropDown from '../../../assets/dropdown/DropDown';
 import VerificationBox from '../../../assets/VerificationBox';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
-import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
+import ToolTip04 from '../../../assets/toolTips/ToolTip04';
 import { majorAllList } from '../../../common/MajorAll';
 import { majorTargetList } from '../../../common/MajorTarget';
 import client from '../../../utils/HttpClient';
@@ -593,7 +593,7 @@ export default function EditModal(props: ModalProps) {
               <SubContentsWrapper>
                 <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                   <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
-                  <ModalHelpMessage />
+                  <ToolTip04 />
                 </div>
                 <VerifiBoxWrapper>
                   <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
