@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import Logo from '../../assets/Logo';
 import Typography from '../../assets/Typography';
 import AlertMessage from '../../assets/AlertMessage';
+import Button14 from '../../assets/buttons/Button14';
+import Button06 from '../../assets/buttons/Button06';
+import Button07 from '../../assets/buttons/Button07';
+import Button02 from '../../assets/buttons/Button02';
 
 function LoginPage() {
   return (
@@ -22,6 +26,14 @@ function LoginPage() {
           </div>
         </TextFieldWrapper>
       </LoginBox>
+      <Button02 />
+      <Button02 state="hover" />
+      <Button02 state="pressed" />
+      <Button02 state="disabled" />
+      <Button02 variant="outline" />
+      <Button02 variant="outline" state="hover" />
+      <Button02 variant="outline" state="pressed" />
+      <Button02 variant="outline" state="disabled" />
     </MainWrapper>
   );
 }
