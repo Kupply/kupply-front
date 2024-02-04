@@ -42,7 +42,7 @@ const ButtonWrapper = styled.button<Button02Props>`
       : 'none'};
   padding: 24px 1.77vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 0.42vw;
   border-radius: 10px;
