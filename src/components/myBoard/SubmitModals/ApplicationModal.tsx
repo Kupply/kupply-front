@@ -9,7 +9,7 @@ import SubmitButton from '../../../assets/buttons/OldSubmitButton';
 import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../base/ModalLarge';
 import DropDown from '../../../assets/dropdown/DropDown';
-import VerificationBox from '../../../assets/VerificationBox';
+import TextArea from '../../../assets/TextArea';
 import MultiStepProgressBar from '../../../assets/ProgressIndicator01';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
@@ -444,14 +444,14 @@ export default function ApplicationModal(props: ModalProps) {
                       <Typography size="mediumText">을 입력해주세요.</Typography>
                     </div>
                     <VerifiBoxWrapper>
-                      <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
+                      <TextArea name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
                       <div style={{ marginTop: 60 }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2" fill="none">
                           <circle cx="1" cy="1" r="1" fill="#141414" />
                         </svg>
                       </div>
-                      <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
-                      <VerificationBox
+                      <TextArea name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
+                      <TextArea
                         name="gpa-3"
                         value={GPA3}
                         setValue={setGPA3}
@@ -535,7 +535,7 @@ export default function ApplicationModal(props: ModalProps) {
                       <Typography size="mediumText">를 입력해주세요.</Typography>
                     </div>
                     <VerifiBoxWrapper>
-                      <VerificationBox
+                      <TextArea
                         name="currentSemester-1"
                         value={currentSemester1}
                         setValue={setCurrentSemester1}
@@ -545,7 +545,7 @@ export default function ApplicationModal(props: ModalProps) {
                           <path d="M0 1H14" stroke="#B9B9B9" />
                         </svg>
                       </div>
-                      <VerificationBox
+                      <TextArea
                         name="currentSemester-2"
                         value={currentSemester2}
                         setValue={setCurrentSemester2}

@@ -10,7 +10,7 @@ import ModalLarge from '../../base/ModalLarge';
 import EditModalHeaderButton from '../../../assets/myboardpage/EditModalHeaderButton';
 import { ImgCtrlButton, ImgDelButton } from '../../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../../assets/dropdown/DropDown';
-import VerificationBox from '../../../assets/VerificationBox';
+import TextArea from '../../../assets/TextArea';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
 import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
@@ -596,12 +596,12 @@ export default function EditModal(props: ModalProps) {
                   <ModalHelpMessage />
                 </div>
                 <VerifiBoxWrapper>
-                  <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
+                  <TextArea name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
                   <div style={{ marginTop: 60 }}>
                     <img src="designImage/myBoard/Ellipse 981.svg" height="4px" width="4px" />
                   </div>
-                  <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
-                  <VerificationBox
+                  <TextArea name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
+                  <TextArea
                     name="gpa-3"
                     value={GPA3}
                     setValue={setGPA3}
@@ -638,27 +638,27 @@ export default function EditModal(props: ModalProps) {
                   <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
                   <VerifiBoxWrapper>
                     <VerifiBoxWrapper>
-                      <VerificationBox
+                      <TextArea
                         name="semester-1"
                         value={hopeSemester1}
                         setValue={setHopeSemester1}
                         isEntered={true}
-                      ></VerificationBox>
-                      <VerificationBox
+                      ></TextArea>
+                      <TextArea
                         name="semester-2"
                         value={hopeSemester2}
                         setValue={setHopeSemester2}
                         isEntered={true}
-                      ></VerificationBox>
+                      ></TextArea>
                       <Typography size={'normalText'} style={{ marginTop: '58px' }}>
                         년도
                       </Typography>
-                      <VerificationBox
+                      <TextArea
                         name="semester-3"
                         value={hopeSemester3}
                         setValue={setHopeSemester3}
                         isEntered={true}
-                      ></VerificationBox>
+                      ></TextArea>
                       <Typography size={'normalText'} style={{ marginTop: '58px' }}>
                         학기
                       </Typography>
