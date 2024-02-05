@@ -1,14 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Typography from '../../assets/OldTypography';
 import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
-import MyStageChart from '../../assets/myboardpage/MyStage';
+//import MyStageChart from '../../assets/myboardpage/MyStage';
+import MyStageChart from '../../assets/tabMenu/TabMenu05';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from '../../components/myBoard/EditModals/EditModal';
 import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
@@ -96,7 +97,7 @@ export default function MyBoardPage() {
     withCredentials: true,
   };
 
-  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
   // Edit Modal 관련

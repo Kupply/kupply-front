@@ -41,7 +41,7 @@ const Wrapper = styled.div`
 // marginTop 은 Header 에 페이지가 가리지 않게 하기 위해서.
 export default function App() {
   RouteChangeTracker();
-  const [isLogined, setisLogined] = useState<boolean>(true); // 작업 위해 수정
+  const [isLogined, setisLogined] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [selected, setSelected] = useState(0);
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
