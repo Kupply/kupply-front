@@ -10,6 +10,7 @@ import Typography from '../../assets/OldTypography';
 import axios from 'axios';
 import client from '../../utils/HttpClient';
 import { ICardData } from '../../components/landing/PassedDataCard';
+import { Card } from '@mui/material';
 
 export interface ITableData {
   rank: number;

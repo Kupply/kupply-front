@@ -83,7 +83,7 @@ export default function Card01 ({
         <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_blurred.png`} alt="blurred major image" />
       </CardImageBlurred>
       <CardImageSmall>
-        <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}Large.png`} alt="major image small" />
+        <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_trans_small.png`} alt="major image small" />
       </CardImageSmall>
       <NameWrapper hover={true}>
         <MajorNameKor hover={true}>{majorKorName}</MajorNameKor>
