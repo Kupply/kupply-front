@@ -1,20 +1,46 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-
 import Typography from '../../assets/OldTypography';
 import MultiStepProgressBar from '../../assets/ProgressIndicator01';
 import NextButton from '../../assets/buttons/OldNextButton';
-import PrevButton from '../../assets/buttons/PrevButton';
 import LoginButton from '../../assets/buttons/LoginButton';
+import PrevButton from '../../assets/buttons/PrevButton';
+import { check } from 'prettier';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
-
+import axios from 'axios';
+import { useTable } from 'react-table';
+import { AnyCnameRecord } from 'dns';
 import client from '../../utils/HttpClient';
 
 interface CustomCheckButtonProps {
   isChecked: boolean;
-  onChange: (isChecked: boolean) => void;
+  onChange: (isChecked: boolean) => void; //  이 부분 수정했습니다
 }
+
+const CustomCheckButton: React.FC<CustomCheckButtonProps> = ({ isChecked, onChange }) => {
+  return (
+    <CheckButtonWrapper
+      isChecked={isChecked}
+      onClick={() => onChange(!isChecked)} //  이 부분 수정했습니다
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path
+          d="M14.0002 25.6666C20.4435 25.6666 25.6668 20.4432 25.6668 13.9999C25.6668 7.5566 20.4435 2.33325 14.0002 2.33325C7.55684 2.33325 2.3335 7.5566 2.3335 13.9999C2.3335 20.4432 7.55684 25.6666 14.0002 25.6666Z"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M17.8891 11.0833L12.5419 16.4305L10.1113 13.9999"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </CheckButtonWrapper>
+  );
+};
 
 const join = async (role: string) => {
   const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
@@ -28,6 +54,12 @@ const join = async (role: string) => {
     role: sessionStorage.getItem('role'),
   };
   if (role === 'passer') {
+    // await axios.post(url, {
+    //   ...commonData,
+    //   passSemester: sessionStorage.getItem('passSemester'),
+    //   passGPA: parseFloat(sessionStorage.getItem('passedGPA') || ''),
+    //   secondMajor: sessionStorage.getItem('secondMajor'),
+    // });
     await client.post('/auth/join', {
       ...commonData,
       passSemester: sessionStorage.getItem('passSemester'),
@@ -35,6 +67,13 @@ const join = async (role: string) => {
       secondMajor: sessionStorage.getItem('secondMajor'),
     });
   } else {
+    // await axios.post(url, {
+    //   ...commonData,
+    //   curGPA: sessionStorage.getItem('GPA'),
+    //   hopeMajor1: sessionStorage.getItem('hopeMajor1'),
+    //   hopeMajor2: sessionStorage.getItem('hopeMajor2'),
+    //   hopeSemester: sessionStorage.getItem('hopeSemester'),
+    // });
     await client.post('/auth/join', {
       ...commonData,
       curGPA: sessionStorage.getItem('GPA'),
@@ -45,6 +84,91 @@ const join = async (role: string) => {
   }
 };
 
+/* 개인정보처리방침에 삽입되는 표
+const columnData = [
+  { accessor: 'objective', Header: '수집 이용목적' },
+  { accessor: 'contents', Header: '수집 내용' },
+  { accessor: 'method', Header: '수집 방법' },
+  { accessor: 'period', Header: '보유 및 이용기간' },
+];
+
+const columns = useMemo(() => columnData, []);
+const data = useMemo(
+  () => [
+    {
+      objective: '회원관리',
+      contents:
+        '- (필수항목): 고려대학교 이메일, 이름, 고려대학교 학번, 본전공(1전공), 아이디, 비밀번호, 닉네임, 희망 이중전공 1, 2지망 <br/> - (선택항목): 전화번호, 학점, 희망 이중 지원학기',
+      method: '회원가입',
+      period: '회원 탈퇴 시까지',
+    },
+  ],
+  [],
+);
+
+const [info, setInfo] = useState();
+const getTable = () => {
+  data.getTable().then(item => setInfo(item));
+};
+const data = useMemo(() => info, [info])
+
+
+const Table = ({ columns, data }: any) => {
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
+
+  return (
+    <TableSheet {...getTableProps()}>
+      <TableHead>
+        {headerGroups.map((header) => (
+          // header 배열 호출
+          <Header {...headerGroups.getHeaderGroupProps()}>
+            {header.headers.map((col) => (
+              // getHeaderProps 가 각 셀 순서에 맞게 header 호출
+              <Th {...col.getHeaderProps()}>{col.render('Header')}</Th>
+            ))}
+          </Header>
+        ))}
+      </TableHead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row);
+          return (
+            // 각 row data 호출
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => (
+                // 각 cell data 호출
+                <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+              ))}
+            </tr>
+          );
+        })}
+      </tbody>
+    </TableSheet>
+  );
+};
+*/
+
+const ContentsText = styled.div`
+  // mediumText
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 122.836%;
+  text-align: left;
+`;
+
+const TitleText = styled.div`
+  // bodyText
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 122.836%; /* 22.11px */
+  text-align: left;
+`;
 // ------------------------------------------------------------------------------------------------
 
 // 페이지
@@ -95,12 +219,10 @@ function SignUp5Page() {
 
   const receivedData = useLocation().state;
 
-  /************************************************/
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  //useEffect(() => {
-  //  if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
-  // }, []);
-  /************************************************/
+  useEffect(() => {
+    if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
+  }, []);
 
   /* 각 페이지마다 버튼 이벤트가 상이하기 때문에 개별 정의 */
   const handleNext = async () => {
@@ -141,36 +263,40 @@ function SignUp5Page() {
           쿠플라이의 몇 가지 약관을 확인하면 서비스를 이용하실 수 있어요.
         </Typography>
       </TitleWrapper>
-      <MultiStepProgressBar numberOfSteps={5} currentStep={currentStep} complete={complete} />
+
+      <div style={{ width: '976.8px', height: '30px' }}>
+        <MultiStepProgressBar numberOfSteps={5} currentStep={currentStep} complete={complete} />
+      </div>
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step 5</StepIndicator>
           <Typography size="largeText">약관 읽고 서비스 이용하기</Typography>
-
-          <HeaderBar>
-            <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
-              <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
-            </svg>
-          </HeaderBar>
+          <svg xmlns="http://www.w3.org/2000/svg" width="630" height="2" viewBox="0 0 630 2" fill="none">
+            <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
+          </svg>
         </ContentsTitleWrapper>
 
-        <TextTitle>
-          <CustomCheckButton
-            isChecked={allCheckedUI}
-            onChange={(isChecked) => {
-              handleAllCheckedClick(isChecked);
-              onClickCheck();
-            }}
-          />
-          <Typography size="largeText" style={{ fontWeight: '600' }}>
-            아래 약관에 모두 동의합니다
-          </Typography>
-          <ArrowImage
-            src="designImage/carousel/CarouselRightButton.png"
-            alt="right arrow"
-            style={{ marginLeft: '-8px' }}
-          />
-        </TextTitle>
+        <TextTitleWrapper>
+          <TextTitle>
+            <CustomCheckButton
+              isChecked={allCheckedUI}
+              onChange={(isChecked) => {
+                handleAllCheckedClick(isChecked);
+                onClickCheck();
+              }}
+            />
+            <Typography
+              size="largeText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
+              아래 약관에 모두 동의합니다.
+            </Typography>
+          </TextTitle>
+        </TextTitleWrapper>
 
         <ScrollLarge isChecked={scrollActive}>
           <ButtonsTextWrapper>
@@ -183,7 +309,14 @@ function SignUp5Page() {
                 }))
               }
             />
-            <Typography size="mediumText" style={{ fontWeight: '600' }}>
+            <Typography
+              size="mediumText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
               서비스 이용약관 동의 (필수)
               <ArrowImage src="designImage/carousel/CarouselRightButton.png" alt="right arrow" />
             </Typography>
@@ -584,7 +717,14 @@ function SignUp5Page() {
                 }))
               }
             />
-            <Typography size="mediumText" style={{ fontWeight: '600' }}>
+            <Typography
+              size="mediumText"
+              style={{
+                fontWeight: '600',
+                marginBottom: '-5px',
+                justifyContent: 'center',
+              }}
+            >
               개인정보 수집 및 이용 동의 (필수)
               <ArrowImage src="designImage/carousel/CarouselRightButton.png" alt="right arrow" />
             </Typography>
@@ -771,19 +911,29 @@ function SignUp5Page() {
               </ContentsText>
             </ScrollSmall>
           </TextOutBox>
+
           <ButtonsWrapper>
             <PrevButton onClick={handlePrev} />
             <NextButtonFixedWidth active={isButtonActive} onClick={handleNext}>
               완료
             </NextButtonFixedWidth>
           </ButtonsWrapper>
-
-          <div ref={button} />
+          <div ref={button}></div>
         </ScrollLarge>
       </FormWrapper>
     </Wrapper>
   );
 }
+
+const Wrapper2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  //background: #FCFAFB;
+  background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);
+`;
 
 function SignUp5Complete() {
   const [isButtonActive, setIsButtionActive] = useState(true);
@@ -792,12 +942,10 @@ function SignUp5Complete() {
     navigate('/login');
   };
 
-  /************************************************/
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  //useEffect(() => {
-  //  if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
-  //}, []);
-  /************************************************/
+  useEffect(() => {
+    if (!sessionStorage.getItem('GPA') && !sessionStorage.getItem('passedGPA')) navigate('/');
+  }, []);
 
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {
@@ -842,31 +990,19 @@ function SignUp5Complete() {
   );
 }
 
-// ------------------------------------------------------------------------------------------------
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  max-width: 1920px;
+  max-width: 2560px;
   height: 1153px;
   background-color: #fcfafb;
 `;
 
-const Wrapper2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw; // 100%
-  height: 100%;
-  //background: #FCFAFB;
-  background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);
-`;
-
 const TitleWrapper = styled.div`
   display: flex;
-  width: 100vw; // 100%
+  width: 100%;
   flex-direction: column;
   align-items: center;
   padding-top: 30px;
@@ -874,11 +1010,12 @@ const TitleWrapper = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 42.5vw; // (816/1920*100)vw  width: 816px;
+  // display: flex;
+  // flex-direction: column;
+  width: 816px;
   height: 850px;
-  padding: 42px 4.8958vw 78px 4.8958vw; // 42px 94px 78px 94px;
+  padding: 42px 94px 78px 94px;
+  padding-left: 94px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
@@ -889,7 +1026,7 @@ const StepIndicator = styled.div`
   display: inline-flex;
   padding: 8px 18px;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 17px;
   align-items: center;
   border-radius: 999px;
   border: 1px solid #d85888;
@@ -903,44 +1040,43 @@ const StepIndicator = styled.div`
   line-height: 100%;
 `;
 
-const HeaderBar = styled.svg`
-  width: 32.8125vw;
-  max-width: 628px;
-  margin-top: 12px;
-  margin-bottom: 0px;
+const ContentsTitleWrapper = styled.div`
+  margin-bottom: 50px;
+`;
+
+const TextTitleWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: center;
 `;
 
 const TextTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: -125px; // 왜 생겼지? 원인 못찾음... ??
   margin-bottom: 11px;
 `;
 
-const CustomCheckButton: React.FC<CustomCheckButtonProps> = ({ isChecked, onChange }) => {
-  return (
-    <CheckButtonWrapper isChecked={isChecked} onClick={() => onChange(!isChecked)}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path
-          d="M14.0002 25.6666C20.4435 25.6666 25.6668 20.4432 25.6668 13.9999C25.6668 7.5566 20.4435 2.33325 14.0002 2.33325C7.55684 2.33325 2.3335 7.5566 2.3335 13.9999C2.3335 20.4432 7.55684 25.6666 14.0002 25.6666Z"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M17.8891 11.0833L12.5419 16.4305L10.1113 13.9999"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </CheckButtonWrapper>
-  );
-};
+const TextOutBox = styled.div`
+  width: 628px;
+  height: 228px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White, #fff);
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
 
-const ContentsTitleWrapper = styled.div`
-  // margin-bottom: 42px;
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
 `;
 
 const ButtonsTextWrapper = styled.div`
@@ -951,64 +1087,21 @@ const ButtonsTextWrapper = styled.div`
   margin-bottom: 22px;
 `;
 
-const TextOutBox = styled.div`
-  width: 32.7083vw; // 32.7083vw; // (628/1920)*100vw  width: 628px;
-  max-width: 628px;
-  height: 228px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background: var(--White, #fff);
-  border: 1px solid #eee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.4167vw; // 8px;
-
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 123.54%;
-`;
-
-const ContentsText = styled.div`
-  // mediumText
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 122.836%;
-  text-align: left;
-`;
-
-const TitleText = styled.div`
-  // bodyText
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 122.836%; /* 22.11px */
-  text-align: left;
-`;
-
 const ButtonsWrapper = styled.div`
   display: flex;
-  gap: 0.9375vw; // 18px;
+  gap: 18px;
   margin-top: 20px;
   margin-bottom: 50px;
-  margin-right: 0.9375vw; // 18px;
+  margin-right: 18px;
 `;
 
-const NextFixedWidth = css`
+const FixedWidth = css`
   // 628px 너무 길어서 길이 조절했습니다
   width: 475px;
 `;
 
 const NextButtonFixedWidth = styled(NextButton)`
-  ${NextFixedWidth}
+  ${FixedWidth}
 `;
 
 const ArrowImage = styled.img`

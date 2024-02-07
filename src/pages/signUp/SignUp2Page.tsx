@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/OldTypography';
-import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import MultiStepProgressBar from '../../assets/ProgressIndicator01';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
