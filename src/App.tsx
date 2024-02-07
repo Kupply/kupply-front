@@ -22,7 +22,7 @@ import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
 import DeletePage from './pages/delete/DeletePage';
 import RouteChangeTracker from './RouteChangeTracker'; // GA 추적 목적
 import DashboardMainPage from './admin/AdminPage';
-
+import React from 'react';
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 import MobilePage from './pages/mobile/Mobile';
 
@@ -43,10 +43,13 @@ export default function App() {
   RouteChangeTracker();
   const [isLogined, setisLogined] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [selected, setSelected] = useState(0);
+
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
     else setisLogined(false);
   }, []);
+
+
   // element={<AuthRequired />}
   // 현재 MainPage 에만, pageView 이벤트 추적기 삽입
 
@@ -88,3 +91,4 @@ export default function App() {
     </>
   );
 }
+
