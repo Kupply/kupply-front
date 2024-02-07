@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import Typography from '../../assets/OldTypography';
-import MultiStepProgressBar from '../../assets/ProgressIndicator01';
+import MultiStepProgressBar from '../../assets/progressIndicator/ProgressBar';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import LoginButton from '../../assets/buttons/LoginButton';

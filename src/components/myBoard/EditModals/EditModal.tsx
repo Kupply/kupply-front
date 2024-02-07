@@ -17,7 +17,7 @@ import { ModalHelpMessage } from '../../../assets/myboardpage/HellpMessage';
 import { majorAllList } from '../../../common/MajorAll';
 import { majorTargetList } from '../../../common/MajorTarget';
 import client from '../../../utils/HttpClient';
-import NicknameCheckButton from '../../../assets/NicknameCheckButton';
+import NicknameCheckButton from '../../../assets/progressIndicator/Loader';
 import { useNavigate } from 'react-router-dom';
 
 /*

@@ -11,7 +11,7 @@ import VerificationBox from '../../assets/VerificationBox';
 import Typography from '../../assets/OldTypography';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import LabelButton from '../../assets/buttons/LabelButton';
-import NicknameCheckButton from '../../assets/NicknameCheckButton';
+import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 import client from '../../utils/HttpClient';
 import { majorTargetList } from '../../common/MajorTarget';
 import { majorAllList } from '../../common/MajorAll';
