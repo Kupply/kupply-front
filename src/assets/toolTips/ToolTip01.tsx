@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Typography from './Typography';
+import Typography from '../Typography';
 
 export interface AlertMessageProps extends React.ComponentPropsWithoutRef<'div'> {}
 
@@ -13,8 +13,8 @@ function AlertMessage(props: AlertMessageProps) {
           {children}
         </Typography>
       </MessageBox>
-      <NotchImage src="../../designImage/textField/notch.svg" alt="NotchImage" />
-      <AlertImage src="../../designImage/FiAlertCircle1.svg" alt="AlertIcon" />
+      <NotchImage src="../../designImage/toolTips/ToolTip01Notch.svg" alt="NotchImage" />
+      <AlertImage src="../../designImage/toolTips/ToolTip01Default.svg" alt="AlertIcon" />
     </MainWrapper>
   );
 }

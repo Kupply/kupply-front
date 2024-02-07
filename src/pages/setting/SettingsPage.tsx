@@ -6,7 +6,6 @@ import { useCookies } from 'react-cookie';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import { ImgCtrlButton, ImgDelButton } from '../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../assets/dropdown/DropDown';
-import { HelpMessage, ModalHelpMessage } from '../../assets/myboardpage/HellpMessage';
 import VerificationBox from '../../assets/VerificationBox';
 import Typography from '../../assets/OldTypography';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
