@@ -6,120 +6,121 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
+import Card01 from '../../assets/cards/Card01';
 
 export interface CardsProps {
   clicked: number;
   searchWord: string;
 }
 
+// korName: c.korName,
+// engName: c.engName,
+// filter: c.filter,
+// TO: c.TO,
+// semester: c.semester,
+// avgPass: res.avg,
+// minPass: res.min,
+// pass: res.passNum,
+
+// Card01의 prop과 맞도록 수정
+// 지원자 수에 대한 데이터가 없어서 경쟁률은 계산하지 못함
 const mockCards = [
   {
-    name: '경영대학 경영학과',
-    eng: 'Business School',
+    korName: '경영대학 경영학과',
+    engName: 'Business School',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 42,
-    pass: 7,
-    avg: 4.23,
-    min: 4.12,
-    semester: '2023-1R',
-    src: '/designImage/majorSymbol/Business.png',
-    titleSrc: '/designImage/majorSymbol/BusinessLarge.png',
+    compRate: 4.23,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+    
   },
   {
-    name: '심리학부',
-    eng: 'School of Psychology',
+    korName: '심리학부',
+    engName: 'School of Psychology',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 44,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/designImage/majorSymbol/Psycho.png',
-    titleSrc: '/designImage/majorSymbol/PsychoLarge.png',
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+    
   },
   {
-    name: '정경대학 경제학과',
-    eng: 'Department of Economics',
+    korName: '정경대학 경제학과',
+    engName: 'Department of Economics',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 13,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/designImage/majorSymbol/Political.png',
-    titleSrc: '/designImage/majorSymbol/PoliticalLarge.png',
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+    
   },
   {
-    name: '정경대학 통계학과',
-    eng: 'Department of Statistics',
+    korName: '정경대학 통계학과',
+    engName: 'Department of Statistics',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 28,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/designImage/majorSymbol/Political.png',
-    titleSrc: '/designImage/majorSymbol/PoliticalLarge.png',
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+    
   },
   {
-    name: '미디어학부',
-    eng: 'School of Media & Communication',
+    korName: '미디어학부',
+    engName: 'School of Media & Communication',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 25,
-    pass: 7,
-    semester: '2023-1R',
-    avg: 4.23,
-    min: 4.12,
-    src: '/designImage/majorSymbol/Media.png',
-    titleSrc: '/designImage/majorSymbol/MediaLarge.png',
+    compRate: 7,
+    semester: '23-2',
+    avgPass: 4.23,
+    minPass: 4.12,
+    
   },
   {
-    name: '정보대학 컴퓨터학과',
-    eng: 'Department of Computer Science & Engineering',
+    korName: '정보대학 컴퓨터학과',
+    engName: 'Department of Computer Science & Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 19,
-    pass: 7,
-    avg: 4.23,
-    min: 4.12,
-    semester: '2023-1R',
-    src: '/designImage/majorSymbol/Info.png',
-    titleSrc: '/designImage/majorSymbol/InfoLarge.png',
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+    
   },
   {
-    name: '생명과학대학 식품자원경제학과',
-    eng: 'Department of Food & Resources',
+    korName: '생명과학대학 식품자원경제학과',
+    engName: 'Department of Food & Resources',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 30,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/designImage/majorSymbol/Bio.png',
-    titleSrc: '/designImage/majorSymbol/BioLarge.png',
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+    
   },
   {
-    name: '이과대학 수학과',
-    eng: 'Department of Mathematics',
+    korName: '이과대학 수학과',
+    engName: 'Department of Mathematics',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 17,
-    pass: 7,
-    semester: '2023-1R',
-    avg: 4.23,
-    min: 4.12,
-    src: '/designImage/majorSymbol/Science.png',
-    titleSrc: '/designImage/majorSymbol/ScienceLarge.png',
+    compRate: 7,
+    semester: '23-2',
+    avgPass: 4.23,
+    minPass: 4.12,
   },
   {
-    name: '이과대학 화학과',
-    eng: 'Department of Chemistry',
+    korName: '이과대학 화학과',
+    engName: 'Department of Chemistry',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 11,
-    pass: 7,
-    semester: '2023-1R',
-    avg: 4.23,
-    min: 4.12,
-    src: '/designImage/majorSymbol/Science.png',
-    titleSrc: '/designImage/majorSymbol/ScienceLarge.png',
+    compRate: 7,
+    semester: '23-2',
+    avgPass: 4.23,
+    minPass: 4.12,
   },
 ];
 
@@ -135,37 +136,57 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   //   withCredentials: true,
   // };
 
+  // 이게 원래 fetch function 이지만 /archive access를 위해 임시로 fetch function 만듦
+  // const fetch = async () => {
+  //   try {
+  //     const isLogined = window.localStorage.getItem('isLogin');
+      
+  //     if (isLogined !== 'true') {
+  //       alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+  //       navigate('/login');
+  //     } else {
+  //       // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
+  //       const data = await client.get('/dashboard/cards');
+  //       setCards(
+  //         cards.map((c) => {
+  //           const res = data.data.find((ca: any) => ca.name === c.korName);
+  //           return {
+  //             korName: c.korName,
+  //             engName: c.engName,
+  //             filter: c.filter,
+  //             TO: c.TO,
+  //             semester: c.semester,
+  //             avgPass: res.avg,
+  //             minPass: res.min,
+  //             compRate: res.passNum,
+  //           };
+  //         }),
+  //       );
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  
+  // 임시적으로 만든 fetch function 
   const fetch = async () => {
-    try {
-      const isLogined = window.localStorage.getItem('isLogin');
-      if (isLogined !== 'true') {
-        alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
-        navigate('/login');
-      } else {
-        // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
-        const data = await client.get('/dashboard/cards');
+    const data = await client.get('/dashboard/cards');
         setCards(
           cards.map((c) => {
-            const res = data.data.find((ca: any) => ca.name === c.name);
+            const res = data.data.find((ca: any) => ca.name === c.korName);
             return {
-              name: c.name,
-              eng: c.eng,
+              korName: c.korName,
+              engName: c.engName,
               filter: c.filter,
               TO: c.TO,
               semester: c.semester,
-              src: c.src,
-              titleSrc: c.titleSrc,
-              avg: +(res.avg / res.passNum).toFixed(2),
-              min: res.min,
-              pass: res.passNum,
+              avgPass: res.avg,
+              minPass: res.min,
+              compRate: res.passNum,
             };
           }),
         );
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  }
   useEffect(() => {
     fetch();
   });
@@ -173,14 +194,14 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   const filteredCards = cards
     .filter((card) => {
       if (clicked !== 4 && !card.filter.includes(mockHashes[clicked])) return false; // filter based on clicked hashtag
-      if (searchWord && !card.name.toLowerCase().includes(searchWord.toLowerCase())) return false; // filter based on search word
+      if (searchWord && !card.korName.toLowerCase().includes(searchWord.toLowerCase())) return false; // filter based on search word
       return true;
     })
-    .sort((a, b) => a.name.localeCompare(b.name)); // always sort alphabetically
+    .sort((a, b) => a.korName.localeCompare(b.korName)); // always sort alphabetically
 
-  const filteredSet = new Set(filteredCards.map((card) => card.name));
+  const filteredSet = new Set(filteredCards.map((card) => card.korName));
 
-  const opaCards = cards.filter((card) => !filteredSet.has(card.name));
+  const opaCards = cards.filter((card) => !filteredSet.has(card.korName));
 
   return (
     <Container>
@@ -190,13 +211,13 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
       </Sort>
       <FlexContainer>
         {filteredCards.map((card) => (
-          <Card {...card} />
+          <Card01 {...card} />
         ))}
       </FlexContainer>
       <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '50px' }}>
         {opaCards.map((card) => (
           <div style={{ opacity: 0.5 }}>
-            <Card {...card} />
+            <Card01 {...card} />
           </div>
         ))}
       </FlexContainer>

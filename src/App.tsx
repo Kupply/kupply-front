@@ -44,6 +44,7 @@ export default function App() {
   const [isLogined, setisLogined] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [selected, setSelected] = useState(0);
 
+
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
     else setisLogined(false);
