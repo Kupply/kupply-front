@@ -5,8 +5,9 @@ import Header from './components/base/Header';
 import Footer from './components/base/Footer';
 import { isMobile } from 'react-device-detect';
 import MobilePage from './pages/mobile/Mobile';
-import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './routes';
+import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
+import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 
 interface RouteConfig {
@@ -36,9 +37,9 @@ export default function App() {
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
           <Routes>
             <Route element={<AuthRequired />}>{renderRoutes(authRoutes)}</Route>
+            <Route element={<AdminRequired />}>{renderRoutes(adminRoutes)}</Route>
             {renderRoutes(mainRoutes)}
             {renderRoutes(signupRoutes)}
-            {renderRoutes(adminRoutes)}
           </Routes>
           <Footer setSelected={setSelected} />
         </Wrapper>
