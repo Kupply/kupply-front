@@ -10,7 +10,7 @@ import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
 //import MyStageChart from '../../assets/myboardpage/MyStage';
 import MyStageChart from '../../assets/tabMenu/TabMenu05';
-import SemesterButton from '../../assets/myboardpage/SemesterButton';
+import SemesterButton from '../../assets/tabMenu/TabMenu02';
 import EditModal from '../../components/myBoard/EditModals/EditModal';
 import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
 import { recruit } from '../../common/Recruiting';
