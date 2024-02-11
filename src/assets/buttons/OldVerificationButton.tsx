@@ -5,7 +5,8 @@ import styled from 'styled-components';
 
 const ButtonWrapper = styled.button`
   display: flex;
-  width: 627.232px;
+  width: 90%;
+  max-width: 627.232px;
   height: 68px;
   padding: 25px 18px;
   justify-content: center;

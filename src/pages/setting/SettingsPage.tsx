@@ -6,12 +6,11 @@ import { useCookies } from 'react-cookie';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import { ImgCtrlButton, ImgDelButton } from '../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../assets/dropdown/DropDown';
-import { HelpMessage, ModalHelpMessage } from '../../assets/myboardpage/HellpMessage';
 import VerificationBox from '../../assets/VerificationBox';
 import Typography from '../../assets/OldTypography';
-import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
+import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import LabelButton from '../../assets/buttons/LabelButton';
-import NicknameCheckButton from '../../assets/NicknameCheckButton';
+import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 import client from '../../utils/HttpClient';
 import { majorTargetList } from '../../common/MajorTarget';
 import { majorAllList } from '../../common/MajorAll';
@@ -19,6 +18,7 @@ import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import ModalLarge from '../../components/base/ModalLarge';
 import SubmitButton from '../../assets/buttons/OldSubmitButton';
+import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 
 interface SettingsPageProps {
   selected: number;
@@ -131,7 +131,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        //const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
@@ -436,48 +436,70 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         <Content>
           <Title>환경설정</Title>
           <Flex>
-            <ContentButton
+            {/* <ContentButton
               selected={selected === 0}
               onClick={() => {
                 onClick(0);
               }}
             >
               나의 기본정보 수정하기
-            </ContentButton>
-            <ContentButton
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 0}
+              onCustomFunction={() => {
+                onClick(0);
+              }}>나의 기본정보 수정하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 1}
               onClick={() => {
                 onClick(1);
-              }}
-            >
-              프로필 사진 / 닉네임 변경하기
-            </ContentButton>
-            <ContentButton
+              }}>프로필 사진 / 닉네임 변경하기</ContentButton> */}
+            <TextButton04 
+              selected={selected === 1}
+              onCustomFunction={() => {
+                onClick(1);
+              }}>프로필 사진 / 닉네임 변경하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 2}
               onClick={() => {
                 onClick(2);
               }}
             >
               마이보드 프로필 수정하기
-            </ContentButton>
-            <ContentButton
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 2}
+              onCustomFunction={() => {
+                onClick(2);
+              }}>마이보드 프로필 수정하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 3}
               onClick={() => {
                 onClick(3);
               }}
             >
               계정관리
-            </ContentButton>
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 3}
+              onCustomFunction={() => {
+                onClick(3);
+              }}>계정관리</TextButton04>
           </Flex>
           <div style={{ marginTop: 210 }}>
-            <ContentButton
+            {/* <ContentButton
               selected={selected === 4}
               onClick={() => {
                 onClick(4);
               }}
             >
               약관보기
-            </ContentButton>
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 4}
+              onCustomFunction={() => {
+                onClick(4);
+              }}>약관보기</TextButton04>
           </div>
           <div style={{ marginTop: 50 }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="284" height="2" viewBox="0 0 284 2" fill="none">
@@ -485,14 +507,18 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             </svg>
           </div>{' '}
           <div style={{ marginTop: 50 }}>
-            <DeleteButton
+            {/* <DeleteButton
               selected={selected === 5}
               onClick={() => {
                 navigate('/delete');
               }}
             >
               계정 삭제
-            </DeleteButton>
+            </DeleteButton> */}
+            <TextButton03Settings selected={selected === 5}
+              onCustomFunction={() => {
+                navigate('/delete');
+              }}>계정 삭제</TextButton03Settings>
           </div>
         </Content>
       </Sidebar>
@@ -670,40 +696,40 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           </TextFieldTitle>
 
           <VerifiBoxWrapper>
-            <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
+            <TextArea name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
             <div style={{ marginTop: 60 }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
                 <circle cx="2" cy="2" r="2" fill="#D85888" />
               </svg>
             </div>
-            <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
-            <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
+            <TextArea name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
+            <TextArea name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
           </VerifiBoxWrapper>
           <TextFieldTitle>
             <strong>희망 지원학기</strong> 수정하기
           </TextFieldTitle>
           <VerifiBoxWrapper>
-            <VerificationBox
+            <TextArea
               name="semester-1"
               value={hopeSemester1}
               setValue={setHopeSemester1}
               isEntered={hopeSemester1 ? true : false}
-            ></VerificationBox>
-            <VerificationBox
+            ></TextArea>
+            <TextArea
               name="semester-2"
               value={hopeSemester2}
               setValue={setHopeSemester2}
               isEntered={hopeSemester2 ? true : false}
-            ></VerificationBox>
+            ></TextArea>
             <Typography size={'normalText'} style={{ marginTop: '58px' }}>
               년도
             </Typography>
-            <VerificationBox
+            <TextArea
               name="semester-3"
               value={hopeSemester3}
               setValue={setHopeSemester3}
               isEntered={hopeSemester3 ? true : false}
-            ></VerificationBox>
+            ></TextArea>
             <Typography size={'normalText'} style={{ marginTop: '58px' }}>
               학기
             </Typography>
@@ -794,7 +820,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <BodyContent>
             다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관입니다.
           </BodyContent>{' '}
-          <ScrollBarLarge isChecked={scrollActive}>
+          <ScrollLarge isChecked={scrollActive}>
             <div style={{ marginTop: 30 }}>
               <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
                 <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -819,7 +845,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </div>
             </div>
             <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
+              <ScrollSmall isChecked={scrollActive}>
                 <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
                   <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                     제 1장 총칙
@@ -1213,7 +1239,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                   <TitleText>부칙</TitleText>
                   <ContentsText>1. 본 약관은 2023년 10월 20일부터 시행합니다.</ContentsText>
                 </div>
-              </ScrollBarSmall>
+              </ScrollSmall>
             </TextOutBox>
             <div style={{ marginTop: 30 }}>
               <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -1247,7 +1273,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </Typography>
             </div>
             <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
+              <ScrollSmall isChecked={scrollActive}>
                 <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
                   <ContentsText>
                     쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스(이하 “서비스”라
@@ -1427,9 +1453,9 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                     <br />- 시행일자:2023년 10월 20일
                   </ContentsText>
                 </div>
-              </ScrollBarSmall>
+              </ScrollSmall>
             </TextOutBox>
-          </ScrollBarLarge>
+          </ScrollLarge>
         </BodyContainer>
       )}
     </Wrapper>

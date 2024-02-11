@@ -14,13 +14,3 @@ const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(({ to, ...othe
 ));
 
 export default RouterLink;
-
-/*
-const RouterLink = forwardRef(({ href, ...other }, ref) => <Link ref={ref} to={href} {...other} />);
-
-RouterLink.propTypes = {
-  href: PropTypes.string,
-};
-
-export default RouterLink;
-*/

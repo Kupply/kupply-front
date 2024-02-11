@@ -68,7 +68,7 @@ const TextField = styled.input<TextFieldBoxProps>`
   outline: none;
   background: none;
   font-family: Pretendard;
-  font-size: 0.94vw;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   color: ${(props) => (props.state === 'typing' || props.state === 'error' ? '#141414' : '#D85888')};
@@ -76,7 +76,7 @@ const TextField = styled.input<TextFieldBoxProps>`
 
   &::placeholder {
     font-family: Pretendard;
-    font-size: 0.94vw;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 500;
     color: #b9b9b9;

@@ -1,8 +1,9 @@
-import { css, styled } from "styled-components";
+import { useState } from 'react';
+import { css, styled } from 'styled-components';
 
-export type HashtagButtonStatus = "clicked" | "default" | "inactive";
+export type HashtagButtonStatus = 'clicked' | 'default' | 'inactive';
 
-export interface HashtagButtonProps extends React.ComponentPropsWithRef<"button"> {
+export interface HashtagButtonProps extends React.ComponentPropsWithRef<'button'> {
   status: HashtagButtonStatus;
 }
 
@@ -27,20 +28,20 @@ const Container = styled.button<{ status: HashtagButtonStatus }>`
   transition: 0.3s ease-in-out;
   ${(props) => {
     switch (props.status) {
-      case "clicked":
+      case 'clicked':
         return css`
           background-color: #e57c90;
           box-shadow: 0px 0px 20px 0px rgba(229, 124, 144, 0.5);
           border: none;
           color: white;
         `;
-      case "default":
+      case 'default':
         return css`
           border: 1px solid #d85888;
           background: rgba(255, 255, 255, 0.3);
           color: #d85888;
         `;
-      case "inactive":
+      case 'inactive':
         return css`
           border-radius: 999px;
           border: 1px solid #d85888;
