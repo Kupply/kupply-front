@@ -7,7 +7,7 @@ import MultiStepProgressBar from '../../assets/progressIndicator/ProgressBar';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import Timer from '../../components/signUp/Timer';
-import VerificationBox from '../../assets/VerificationBox';
+import TextArea from '../../assets/TextArea';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import SignUpSmall from '../../components/signUp/modals/SignUpSmall';
 import SignUpLarge1 from '../../components/signUp/modals/SignUpLarge1';
@@ -37,7 +37,7 @@ function SignUp1Page() {
   const [currentStep, setCurrentStep] = useState<number>(1); // 회원가입 1 단계 페이지
   const [complete, setComplete] = useState<boolean>(false);
 
-  // verificationBox 관련
+  // TextArea 관련
   const [num1, setNum1] = useState<string>('');
   const [num2, setNum2] = useState<string>('');
   const [num3, setNum3] = useState<string>('');
@@ -56,7 +56,7 @@ function SignUp1Page() {
     setNum6('');
   };
 
-  // verificationBox 관련
+  // TextArea 관련
   useEffect(() => {
     if (!!num1 && !!num2 && !!num3 && !!num4 && !!num6 && !!num6) {
       setNextButton(true);
@@ -74,19 +74,19 @@ function SignUp1Page() {
   //sendNum이 바뀌거나 isOpenModal이 0, 3이 되면 timer 초기화
   const [sendNum, setSendNum] = useState<number>(0);
 
-  // emailID를 받지 않은 상태라면 main으로 보내고, 아니라면 email을 받은 값으로 설정한다.
-  useEffect(() => {
-    // /if (!sessionStorage.getItem('email')) navigate('/');
-    async function sendFirst(email: string) {
-      const result = await sendEmail(email);
+  // // emailID를 받지 않은 상태라면 main으로 보내고, 아니라면 email을 받은 값으로 설정한다.
+  // useEffect(() => {
+  //   // /if (!sessionStorage.getItem('email')) navigate('/');
+  //   async function sendFirst(email: string) {
+  //     const result = await sendEmail(email);
 
-      if (!result) {
-        navigate('/login');
-      }
-    }
+  //     if (!result) {
+  //       navigate('/login');
+  //     }
+  //   }
 
-    sendFirst(email);
-  }, []);
+  //   sendFirst(email);
+  // }, []);
 
   // small modal 관련
   const onClickToggleSmallModal = useCallback(async () => {
@@ -232,12 +232,12 @@ function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <VerificationBox name="pin-1" value={num1} setValue={setNum1}></VerificationBox>
-            <VerificationBox name="pin-2" value={num2} setValue={setNum2}></VerificationBox>
-            <VerificationBox name="pin-3" value={num3} setValue={setNum3}></VerificationBox>
-            <VerificationBox name="pin-4" value={num4} setValue={setNum4}></VerificationBox>
-            <VerificationBox name="pin-5" value={num5} setValue={setNum5}></VerificationBox>
-            <VerificationBox name="pin-6" value={num6} setValue={setNum6}></VerificationBox>
+            <TextArea name="pin-1" value={num1} setValue={setNum1}></TextArea>
+            <TextArea name="pin-2" value={num2} setValue={setNum2}></TextArea>
+            <TextArea name="pin-3" value={num3} setValue={setNum3}></TextArea>
+            <TextArea name="pin-4" value={num4} setValue={setNum4}></TextArea>
+            <TextArea name="pin-5" value={num5} setValue={setNum5}></TextArea>
+            <TextArea name="pin-6" value={num6} setValue={setNum6}></TextArea>
           </VerifiBoxWrapper>
         </ContentsList>
         <SubContentsWrapper>
