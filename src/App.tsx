@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
 import MainPage from './pages/main/MainPage';
+//import MyBoardPage from './pages/myBoard/OldMyBoardPage';
 import MyBoardPage from './pages/myBoard/MyBoardPage';
+
 import LandingPage from './pages/landing/LandingPage';
 import LoginPage from './pages/login/LoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
