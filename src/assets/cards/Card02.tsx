@@ -36,7 +36,7 @@ export default function Card02({korName, hopeMajor}: CardProps){
       src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_ellipse.svg`} alt="major ellipse svg" />
 
     <MajorImage>
-      <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}Large.png`} alt="major image" />
+      <img src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_trans_small.png`} alt="major image" />
     </MajorImage>
   
     <Typography 

@@ -13,6 +13,7 @@ import { ICardData } from '../../components/landing/PassedDataCard';
 import { Card } from '@mui/material';
 import Card02 from '../../assets/cards/Card02';
 
+
 export interface ITableData {
   rank: number;
   secondMajor: string;
