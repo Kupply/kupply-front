@@ -8,54 +8,13 @@ import GpaLineChart, { Data, LineData } from '../../assets/GpaLineChart';
 import { recruit } from '../../common/Recruiting';
 import { DBkeywords } from '../../common/Keyword';
 import client from '../../utils/HttpClient';
-
-type MajorOptions =
-  | 'business'
-  | 'economics'
-  | 'psychology'
-  | 'statistics'
-  | 'mathematics'
-  | 'chemistry'
-  | 'media'
-  | 'foodecon'
-  | 'computer';
-
-const majorNameMapping = {
-  business: ['경영학과', 'Business School'],
-  economics: ['경제학과', 'Department of Economics'],
-  psychology: ['심리학부', 'School of Psychology'],
-  statistics: ['통계학과', 'Department of Statistics'],
-  mathematics: ['수학과', 'Department of Mathematics'],
-  chemistry: ['화학과', 'Department of Chemistry'],
-  media: ['미디어학부', 'School of Media & Communication'],
-  foodecon: ['식품자원경제학과', 'Department of Food & Resources'],
-  computer: ['컴퓨터학과', 'Department of Computer Science & Engineering'],
-};
-
-const collegeNameMapping = {
-  foodecon: 'bio',
-  media: 'media',
-  computer: 'info',
-  business: 'business',
-  psychology: 'psycho',
-  chemistry: 'science',
-  mathematics: 'science',
-  economics: 'political',
-  statistics: 'political',
-};
-
-const semesterMapping: string[] = [
-  '전학기 누적',
-  '2023-1R',
-  '2022-2R',
-  '2022-1R',
-  '2021-2R',
-  '2021-1R',
-  '2020-2R',
-  '2020-1R',
-];
-
-const semesterForAPI: string[] = ['all', '2023-1', '2022-2', '2022-1', '2021-2', '2021-1', '2020-2', '2020-1'];
+import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import {
+  collegeNameMappingByEng as collegeNameMapping,
+  semesterAPIMapping as semesterForAPI,
+  semesterMapping,
+  majorNameMapping,
+} from '../../utils/Mappings';
 
 const tmpRandomData = [
   {

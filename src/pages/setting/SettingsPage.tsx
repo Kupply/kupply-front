@@ -6,12 +6,11 @@ import { useCookies } from 'react-cookie';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import { ImgCtrlButton, ImgDelButton } from '../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../assets/dropdown/DropDown';
-import { HelpMessage, ModalHelpMessage } from '../../assets/myboardpage/HellpMessage';
 import VerificationBox from '../../assets/VerificationBox';
 import Typography from '../../assets/OldTypography';
-import { ScrollBarSmall, ScrollBarLarge } from '../../assets/ScrollButton';
+import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import LabelButton from '../../assets/buttons/LabelButton';
-import NicknameCheckButton from '../../assets/NicknameCheckButton';
+import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 import client from '../../utils/HttpClient';
 import { majorTargetList } from '../../common/MajorTarget';
 import { majorAllList } from '../../common/MajorAll';
@@ -19,172 +18,20 @@ import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import ModalLarge from '../../components/base/ModalLarge';
 import SubmitButton from '../../assets/buttons/OldSubmitButton';
-
-const Main = styled.main`
-  width: 100%;
-  height: 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  left: 70px;
-  z-index: 1005;
-`;
-
-const Wrapper = styled.div`
-  width: 1920px;
-  height: 100%;
-  background: var(--White, #fff);
-  display: flex;
-`;
-
-const Sidebar = styled.div`
-  width: 521px;
-  height: 1153px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--DF_Grey-2, #dfdfdf);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.3) 100%);
-`;
-
-const Title = styled.div`
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 100% */
-  padding-top: 70px;
-  padding-bottom: 70px;
-`;
-
-const Content = styled.div`
-  padding-left: 128px;
-`;
-
-const ContentButton = styled.div<{ selected: boolean }>`
-  color: var(--Main-Black, #141414);
-  text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 100% */
-  opacity: 0.6;
-  &:hover {
-    cursor: pointer;
-  }
-  ${(props) =>
-    props.selected &&
-    css`
-      color: var(--Main-Black, #141414);
-      text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
-      font-family: Pretendard;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 20px; /* 100% */
-      opacity: 1;
-    `}
-`;
-const DeleteButton = styled.div<{ selected: boolean }>`
-  color: var(--Main-Black, #ee6767);
-  text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 100% */
-  opacity: 0.6;
-  &:hover {
-    cursor: pointer;
-  }
-  ${(props) =>
-    props.selected &&
-    css`
-      color: var(--Main-Black, #ee6767);
-      text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
-      font-family: Pretendard;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 20px; /* 100% */
-      opacity: 1;
-    `}
-`;
-const Flex = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-`;
+import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 
 interface SettingsPageProps {
   selected: number;
   setSelected: (selected: number) => void;
 }
 
-const BodyContainer = styled.div`
-  padding-left: 262px;
-  padding-top: 70px;
-`;
+type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
-const BodyTitle = styled.div`
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 100% */
-`;
+type errorMessageType = {
+  passwordErrorMessage: string;
+  nicknameErrorMessage: string;
+};
 
-const BodyContent = styled.div`
-  color: var(--Main-Black, #141414);
-  text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px; /* 111.111% */
-  opacity: 0.6;
-  margin-top: 12px;
-`;
-
-const TextFieldTitle = styled.div`
-  margin-top: 58px;
-  margin-bottom: 9px;
-  opacity: 0.8;
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
-`;
-
-const CloseButton = styled.button`
-  display: flex;
-  width: 60px;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 32px;
-  right: 40px;
-  cursor: pointer;
-`;
-
-const Optional = styled.span`
-  color: var(--A8_Grey-4, #a8a8a8);
-  text-align: right;
-
-  /* Medium Text */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 18px; /* 100% */
-  opacity: 0.8;
-  margin-left: 455px;
-`;
 const colorMapping = {
   primary: css`
     color: white;
@@ -218,197 +65,6 @@ const colorMapping = {
       background: #d85888;
     }
   `,
-};
-const ButtonWrapper = styled.button<{
-  buttonType: 'primary' | 'secondary';
-}>`
-  margin-top: 60px;
-  transition: 0.25s ease-in-out;
-  justify-content: center;
-  align-items: center;
-  padding: 24px 34px;
-  border-radius: 10px;
-  width: 630px;
-  height: 68px;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 100% */
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.445;
-  }
-
-  ${(props) => colorMapping[props.buttonType]};
-`;
-
-const CurrentImg = styled.img`
-  width: 153px;
-  height: 153px;
-  object-fit: cover;
-`;
-
-const CandidateImg = styled.img`
-  width: 74px;
-  height: 74px;
-  object-fit: cover;
-  cursor: pointer;
-`;
-const TextOutBox = styled.div`
-  width: 628px;
-  height: 228px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background: var(--White, #fff);
-  border: 1px solid #eee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-  margin-right: 18px;
-  line-height: 123.54%; /* 22.237px */
-`;
-
-const CandidateImgsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 14px;
-`;
-const VerifiBoxWrapper = styled.div`
-  display: flex;
-  gap: 13px;
-`;
-
-const ModalBg = styled.div`
-  // 모달 백그라운드
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  background: rgba(20, 16, 19, 0.55);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1005;
-`;
-
-const ModalWrapper = styled.div`
-  width: 814px;
-  height: 500px;
-  margin-bottom: 100px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  background: var(--White, #fff);
-  padding: 70px;
-`;
-const XWrapper = styled.div`
-  padding-left: 704px;
-`;
-const ModalFlex = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const TitleModal = styled.div`
-  color: var(--Main-Black, #141414);
-  margin-top: 10px;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 100% */
-`;
-const Description = styled.div`
-  margin-top: 10px;
-  color: rgba(20, 20, 20, 0.8);
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24.5px; /* 136.111% */
-`;
-
-const StyledTable = styled.table`
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 123.54%;
-  border-collapse: collapse;
-  border: 1px solid black;
-  border-radius: 10px;
-
-  th {
-    text-align: center;
-    background-color: #dfdfdf;
-    border: 1px solid black;
-    padding: 2px 2px;
-  }
-
-  td {
-    text-align: left;
-    border: 1px solid black;
-  }
-`;
-
-const NicknameCheckButtonWrapper = styled.div`
-  position: absolute;
-  top: 110px;
-  left: 490px;
-  z-index: 20;
-`;
-
-const ContentsWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-`;
-
-const AlertWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 628px;
-  height: 796px;
-  align-items: center;
-  text-align: center;
-  margin: auto auto;
-`;
-
-const ContentsText = styled.div`
-  // mediumText
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 122.836%;
-  text-align: left;
-`;
-
-const TitleText = styled.div`
-  // bodyText
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 122.836%; /* 22.11px */
-  text-align: left;
-`;
-
-type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
-
-type errorMessageType = {
-  passwordErrorMessage: string;
-  nicknameErrorMessage: string;
 };
 
 const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
@@ -475,7 +131,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        // const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
+        //const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
@@ -780,48 +436,70 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         <Content>
           <Title>환경설정</Title>
           <Flex>
-            <ContentButton
+            {/* <ContentButton
               selected={selected === 0}
               onClick={() => {
                 onClick(0);
               }}
             >
               나의 기본정보 수정하기
-            </ContentButton>
-            <ContentButton
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 0}
+              onCustomFunction={() => {
+                onClick(0);
+              }}>나의 기본정보 수정하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 1}
               onClick={() => {
                 onClick(1);
-              }}
-            >
-              프로필 사진 / 닉네임 변경하기
-            </ContentButton>
-            <ContentButton
+              }}>프로필 사진 / 닉네임 변경하기</ContentButton> */}
+            <TextButton04 
+              selected={selected === 1}
+              onCustomFunction={() => {
+                onClick(1);
+              }}>프로필 사진 / 닉네임 변경하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 2}
               onClick={() => {
                 onClick(2);
               }}
             >
               마이보드 프로필 수정하기
-            </ContentButton>
-            <ContentButton
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 2}
+              onCustomFunction={() => {
+                onClick(2);
+              }}>마이보드 프로필 수정하기</TextButton04>
+            {/* <ContentButton
               selected={selected === 3}
               onClick={() => {
                 onClick(3);
               }}
             >
               계정관리
-            </ContentButton>
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 3}
+              onCustomFunction={() => {
+                onClick(3);
+              }}>계정관리</TextButton04>
           </Flex>
           <div style={{ marginTop: 210 }}>
-            <ContentButton
+            {/* <ContentButton
               selected={selected === 4}
               onClick={() => {
                 onClick(4);
               }}
             >
               약관보기
-            </ContentButton>
+            </ContentButton> */}
+            <TextButton04 
+              selected={selected === 4}
+              onCustomFunction={() => {
+                onClick(4);
+              }}>약관보기</TextButton04>
           </div>
           <div style={{ marginTop: 50 }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="284" height="2" viewBox="0 0 284 2" fill="none">
@@ -829,14 +507,18 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             </svg>
           </div>{' '}
           <div style={{ marginTop: 50 }}>
-            <DeleteButton
+            {/* <DeleteButton
               selected={selected === 5}
               onClick={() => {
                 navigate('/delete');
               }}
             >
               계정 삭제
-            </DeleteButton>
+            </DeleteButton> */}
+            <TextButton03Settings selected={selected === 5}
+              onCustomFunction={() => {
+                navigate('/delete');
+              }}>계정 삭제</TextButton03Settings>
           </div>
         </Content>
       </Sidebar>
@@ -1138,7 +820,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <BodyContent>
             다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관입니다.
           </BodyContent>{' '}
-          <ScrollBarLarge isChecked={scrollActive}>
+          <ScrollLarge isChecked={scrollActive}>
             <div style={{ marginTop: 30 }}>
               <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
                 <Typography size="bodyText" style={{ textAlign: 'left' }}>
@@ -1163,7 +845,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </div>
             </div>
             <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
+              <ScrollSmall isChecked={scrollActive}>
                 <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
                   <Typography size="largeText" style={{ textAlign: 'left', marginBottom: '10px' }}>
                     제 1장 총칙
@@ -1557,7 +1239,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                   <TitleText>부칙</TitleText>
                   <ContentsText>1. 본 약관은 2023년 10월 20일부터 시행합니다.</ContentsText>
                 </div>
-              </ScrollBarSmall>
+              </ScrollSmall>
             </TextOutBox>
             <div style={{ marginTop: 30 }}>
               <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -1591,7 +1273,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
               </Typography>
             </div>
             <TextOutBox>
-              <ScrollBarSmall isChecked={scrollActive}>
+              <ScrollSmall isChecked={scrollActive}>
                 <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
                   <ContentsText>
                     쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스(이하 “서비스”라
@@ -1771,14 +1453,360 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                     <br />- 시행일자:2023년 10월 20일
                   </ContentsText>
                 </div>
-              </ScrollBarSmall>
+              </ScrollSmall>
             </TextOutBox>
-          </ScrollBarLarge>
+          </ScrollLarge>
         </BodyContainer>
       )}
     </Wrapper>
   );
 };
+
+const Main = styled.main`
+  width: 100%;
+  height: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  left: 70px;
+  z-index: 1005;
+`;
+
+const Wrapper = styled.div`
+  width: 1920px;
+  height: 100%;
+  background: var(--White, #fff);
+  display: flex;
+`;
+
+const Sidebar = styled.div`
+  width: 521px;
+  height: 1153px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--DF_Grey-2, #dfdfdf);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.3) 100%);
+`;
+
+const Title = styled.div`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 100% */
+  padding-top: 70px;
+  padding-bottom: 70px;
+`;
+
+const Content = styled.div`
+  padding-left: 128px;
+`;
+
+const ContentButton = styled.div<{ selected: boolean }>`
+  color: var(--Main-Black, #141414);
+  text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 100% */
+  opacity: 0.6;
+  &:hover {
+    cursor: pointer;
+  }
+  ${(props) =>
+    props.selected &&
+    css`
+      color: var(--Main-Black, #141414);
+      text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
+      font-family: Pretendard;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 100% */
+      opacity: 1;
+    `}
+`;
+const DeleteButton = styled.div<{ selected: boolean }>`
+  color: var(--Main-Black, #ee6767);
+  text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 100% */
+  opacity: 0.6;
+  &:hover {
+    cursor: pointer;
+  }
+  ${(props) =>
+    props.selected &&
+    css`
+      color: var(--Main-Black, #ee6767);
+      text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
+      font-family: Pretendard;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px; /* 100% */
+      opacity: 1;
+    `}
+`;
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+`;
+
+const BodyContainer = styled.div`
+  padding-left: 262px;
+  padding-top: 70px;
+`;
+
+const BodyTitle = styled.div`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 100% */
+`;
+
+const BodyContent = styled.div`
+  color: var(--Main-Black, #141414);
+  text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 111.111% */
+  opacity: 0.6;
+  margin-top: 12px;
+`;
+
+const TextFieldTitle = styled.div`
+  margin-top: 58px;
+  margin-bottom: 9px;
+  opacity: 0.8;
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+`;
+
+const CloseButton = styled.button`
+  display: flex;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  cursor: pointer;
+`;
+
+const Optional = styled.span`
+  color: var(--A8_Grey-4, #a8a8a8);
+  text-align: right;
+
+  /* Medium Text */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 100% */
+  opacity: 0.8;
+  margin-left: 455px;
+`;
+
+const ButtonWrapper = styled.button<{
+  buttonType: 'primary' | 'secondary';
+}>`
+  margin-top: 60px;
+  transition: 0.25s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 34px;
+  border-radius: 10px;
+  width: 630px;
+  height: 68px;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 100% */
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.445;
+  }
+
+  ${(props) => colorMapping[props.buttonType]};
+`;
+
+const CurrentImg = styled.img`
+  width: 153px;
+  height: 153px;
+  object-fit: cover;
+`;
+
+const CandidateImg = styled.img`
+  width: 74px;
+  height: 74px;
+  object-fit: cover;
+  cursor: pointer;
+`;
+const TextOutBox = styled.div`
+  width: 628px;
+  height: 228px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White, #fff);
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin-right: 18px;
+  line-height: 123.54%; /* 22.237px */
+`;
+
+const CandidateImgsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+`;
+const VerifiBoxWrapper = styled.div`
+  display: flex;
+  gap: 13px;
+`;
+
+const ModalBg = styled.div`
+  // 모달 백그라운드
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: rgba(20, 16, 19, 0.55);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1005;
+`;
+
+const ModalWrapper = styled.div`
+  width: 814px;
+  height: 500px;
+  margin-bottom: 100px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: var(--White, #fff);
+  padding: 70px;
+`;
+const XWrapper = styled.div`
+  padding-left: 704px;
+`;
+const ModalFlex = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TitleModal = styled.div`
+  color: var(--Main-Black, #141414);
+  margin-top: 10px;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 100% */
+`;
+const Description = styled.div`
+  margin-top: 10px;
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24.5px; /* 136.111% */
+`;
+
+const StyledTable = styled.table`
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  th {
+    text-align: center;
+    background-color: #dfdfdf;
+    border: 1px solid black;
+    padding: 2px 2px;
+  }
+
+  td {
+    text-align: left;
+    border: 1px solid black;
+  }
+`;
+
+const NicknameCheckButtonWrapper = styled.div`
+  position: absolute;
+  top: 110px;
+  left: 490px;
+  z-index: 20;
+`;
+
+const ContentsWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+`;
+
+const AlertWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 628px;
+  height: 796px;
+  align-items: center;
+  text-align: center;
+  margin: auto auto;
+`;
+
+const ContentsText = styled.div`
+  // mediumText
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 122.836%;
+  text-align: left;
+`;
+
+const TitleText = styled.div`
+  // bodyText
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 122.836%; /* 22.11px */
+  text-align: left;
+`;
 
 export default SettingsPage;
 

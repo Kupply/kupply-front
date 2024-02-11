@@ -3,6 +3,27 @@ import styled from 'styled-components';
 import Typography from '../../assets/OldTypography';
 import { GlobalStyle } from '../../GlobalStyle';
 
+const MobilePage = () => {
+  return (
+    <MobilePageWrapper>
+      <CharacterImage src={`designImage/character/IamSorry.png`} alt="Sorry icon" />
+      <Typography
+        size="heading2"
+        style={{ color: 'var(--Main-Black, #141414)', lineHeight: '120%', textAlign: 'center', marginTop: '19px' }}
+      >
+        PC로 접속해주세요!
+      </Typography>
+      <Typography
+        size="largeText"
+        style={{ color: 'rgba(20, 20, 20, 0.80)', lineHeight: '125%', textAlign: 'center', marginTop: '12px' }}
+      >
+        쿠플라이 모바일 버전은 현재 개발중에 있습니다. <br />
+        빠른 시일 내에 찾아올게요!
+      </Typography>
+    </MobilePageWrapper>
+  );
+};
+
 const MobilePageWrapper = styled.div`
   text-align: center;
   padding: 20px;
@@ -38,27 +59,6 @@ const TitleStyle = styled.text`
   letter-spacing: 1.177px;
   margin-bottom: 29.42px;
 `;
-
-const MobilePage = () => {
-  return (
-    <MobilePageWrapper>
-      <CharacterImage src={`designImage/character/IamSorry.png`} alt="Sorry icon" />
-      <Typography
-        size="heading2"
-        style={{ color: 'var(--Main-Black, #141414)', lineHeight: '120%', textAlign: 'center', marginTop: '19px' }}
-      >
-        PC로 접속해주세요!
-      </Typography>
-      <Typography
-        size="largeText"
-        style={{ color: 'rgba(20, 20, 20, 0.80)', lineHeight: '125%', textAlign: 'center', marginTop: '12px' }}
-      >
-        쿠플라이 모바일 버전은 현재 개발중에 있습니다. <br />
-        빠른 시일 내에 찾아올게요!
-      </Typography>
-    </MobilePageWrapper>
-  );
-};
 
 export default MobilePage;
 

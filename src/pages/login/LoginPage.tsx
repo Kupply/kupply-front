@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Logo from '../../assets/Logo';
 import Typography from '../../assets/Typography';
-import AlertMessage from '../../assets/AlertMessage';
+import AlertMessage from '../../assets/toolTips/ToolTip01';
 
 function LoginPage() {
   return (
@@ -30,6 +30,7 @@ const MainWrapper = styled.div`
   width: 100vw;
   height: 1153px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   background: #fcfafb;
