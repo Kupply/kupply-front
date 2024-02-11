@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Logo from '../../assets/OldLogo';
 import Typography, { TypographyProps } from '../../assets/OldTypography';
 import { sizeMapping } from '../../assets/OldTypography';
-
+import { TextButton05 } from '../../assets/buttons/TextButton';
 // 추후 수정: 절대값 px 을 상대값 % 로 바꿔야 함.
 
 const Background = styled.div`
@@ -61,12 +61,12 @@ const ShortcutContents = styled.div`
   gap: 8.97px;
 `;
 
-const ConnectLink = styled(Typography)<TypographyProps>`
-  font-size: ${(props) => sizeMapping['smallText'][0]};
-  font-weight: ${(props) => sizeMapping['smallText'][1]};
-  color: rgba(20, 20, 20, 0.7);
-  text-decoration-line: underline;
-`;
+// const ConnectLink = styled(Typography)<TypographyProps>`
+//   font-size: ${(props) => sizeMapping['smallText'][0]};
+//   font-weight: ${(props) => sizeMapping['smallText'][1]};
+//   color: rgba(20, 20, 20, 0.7);
+//   text-decoration-line: underline;
+// `;
 
 const MenuButton = styled.button`
   display: flex;
@@ -154,9 +154,10 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 <Typography size="smallText" bold="600">
                   고려대학교 포탈
                 </Typography>
-                <Link to="https://portal.korea.ac.kr/front/Intro.kpd" target="_blank">
+                {/* <Link to="https://portal.korea.ac.kr/front/Intro.kpd" target="_blank">
                   <ConnectLink>바로가기</ConnectLink>
-                </Link>
+                </Link> */}
+                <TextButton05 externalUrl='https://portal.korea.ac.kr/front/Intro.kpd'>바로가기</TextButton05>
               </ShortcutContents>
             </ShortcutWrapper>
             <ShortcutWrapper style={{ marginLeft: '58px' }}>
@@ -165,9 +166,10 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 <Typography size="smallText" bold="600">
                   고려대학교 교육정보
                 </Typography>
-                <Link to="https://registrar.korea.ac.kr/eduinfo/info/major_double.do" target="_blank">
+                {/* <Link to="https://registrar.korea.ac.kr/eduinfo/info/major_double.do" target="_blank">
                   <ConnectLink>바로가기</ConnectLink>
-                </Link>
+                </Link> */}
+                <TextButton05 externalUrl='https://registrar.korea.ac.kr/eduinfo/info/major_double.do'>바로가기</TextButton05>
               </ShortcutContents>
             </ShortcutWrapper>
           </ContentsWrapper>

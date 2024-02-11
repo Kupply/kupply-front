@@ -1,14 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Typography from '../../assets/OldTypography';
 import EditButton from '../../assets/myboardpage/InterestMajorEditButton';
 import MockApplicationButton from '../../assets/myboardpage/MockApplication';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton';
 import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '../../assets/myboardpage/MyBoardChart';
-import MyStageChart from '../../assets/myboardpage/MyStage';
+//import MyStageChart from '../../assets/myboardpage/MyStage';
+import MyStageChart from '../../assets/tabMenu/TabMenu05';
 import SemesterButton from '../../assets/myboardpage/SemesterButton';
 import EditModal from '../../components/myBoard/EditModals/EditModal';
 import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
@@ -20,6 +21,7 @@ import {
   collegeNameMappingByKR as collegeNameMapping,
   collegeAPIMappingByKR as collegeAPIMapping,
 } from '../../utils/Mappings';
+import Card02 from '../../assets/cards/Card02';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -96,7 +98,7 @@ export default function MyBoardPage() {
     withCredentials: true,
   };
 
-  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
   // Edit Modal 관련
@@ -497,6 +499,7 @@ export default function MyBoardPage() {
     }
   }, [userData]);
 
+  
   return (
     <>
       {userData.userRole === 'passer' ? (
@@ -619,7 +622,9 @@ export default function MyBoardPage() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
-                  <InterestMajorBox>
+                  {/* 현재 로그인 상태가 아니라서 사진과 학과명을 볼 수가 없음 */}
+                  <Card02 korName={userData.hopeMajor1} hopeMajor='1지망'/>
+                  {/* <InterestMajorBox>
                     <MajorSymbolShadow>
                       <MajorSymbol
                         src={`designImage/major_symbol/trans/medium/${
@@ -703,11 +708,11 @@ export default function MyBoardPage() {
                         </Typography>
                       </div>
                     </div>
-                  </InterestMajorBox>
+                  </InterestMajorBox> */}
                 </div>
                 {userData.hopeMajor2 !== '희망 없음' ? (
                   <div style={{ display: 'flex', marginTop: '14px', marginLeft: '128px' }}>
-                    <InterestMajorBox>
+                    {/* <InterestMajorBox>
                       <MajorSymbolShadow>
                         <MajorSymbol
                           src={`designImage/major_symbol/trans/medium/${
@@ -791,7 +796,8 @@ export default function MyBoardPage() {
                           </Typography>
                         </div>
                       </div>
-                    </InterestMajorBox>
+                    </InterestMajorBox> */}
+                    <Card02 korName={userData.hopeMajor2} hopeMajor='2지망'/>
                   </div>
                 ) : (
                   <></>

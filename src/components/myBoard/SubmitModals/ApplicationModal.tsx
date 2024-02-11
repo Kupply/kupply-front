@@ -10,7 +10,7 @@ import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../base/ModalLarge';
 import DropDown from '../../../assets/dropdown/DropDown';
 import VerificationBox from '../../../assets/VerificationBox';
-import MultiStepProgressBar from '../../../assets/MultiStepProgressBar';
+import MultiStepProgressBar from '../../../assets/progressIndicator/ProgressBar';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
 import MockApplicationButton from '../../../assets/myboardpage/MockApplication';

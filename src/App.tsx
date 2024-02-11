@@ -17,11 +17,12 @@ import SignUp2Page from './pages/signUp/SignUp2Page';
 import SignUp3Page from './pages/signUp/SignUp3Page';
 import AuthRequired from './AuthRequired';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/SignUp4Page';
+// import { SignUp5Page, SignUp5Complete } from './pages/signUp/OldSignUp5Page';
 import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
 import DeletePage from './pages/delete/DeletePage';
 import RouteChangeTracker from './RouteChangeTracker'; // GA 추적 목적
 import DashboardMainPage from './admin/AdminPage';
-
+import React from 'react';
 import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 import MobilePage from './pages/mobile/Mobile';
 
@@ -40,12 +41,16 @@ const Wrapper = styled.div`
 // marginTop 은 Header 에 페이지가 가리지 않게 하기 위해서.
 export default function App() {
   RouteChangeTracker();
-  const [isLogined, setisLogined] = useState<boolean>(true); // 작업 위해 수정
+  const [isLogined, setisLogined] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [selected, setSelected] = useState(0);
+
+
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
     else setisLogined(false);
   }, []);
+
+
   // element={<AuthRequired />}
   // 현재 MainPage 에만, pageView 이벤트 추적기 삽입
 
@@ -87,3 +92,4 @@ export default function App() {
     </>
   );
 }
+

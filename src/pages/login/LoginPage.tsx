@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Logo from '../../assets/Logo';
 import Typography from '../../assets/Typography';
-import AlertMessage from '../../assets/AlertMessage';
+import AlertMessage from '../../assets/toolTips/ToolTip01';
 
 function LoginPage() {
   return (
