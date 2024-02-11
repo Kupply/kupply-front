@@ -6,7 +6,8 @@ import styled, { css } from 'styled-components';
 const baseWrapper = css`
   display: flex;
   width: 592px;
-  height: 48px;
+  box-sizing: border-box;
+  height: 68px;
   padding: 10px 18px;
   gap: 10px;
   border-radius: 10px;

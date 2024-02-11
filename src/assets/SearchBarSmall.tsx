@@ -7,7 +7,7 @@ export interface SearchBarProps {
   setValue: (value: string) => void;
 }
 
-const SearchBar = ({ value, setValue }: SearchBarProps) => {
+const SearchBarSmall = ({ value, setValue }: SearchBarProps) => {
   const ref: React.MutableRefObject<HTMLInputElement | null> = useRef(null);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -16,7 +16,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
     <Container>
       <InputBox>
         <SvgContainer>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -26,15 +26,6 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
           </svg>
         </SvgContainer>
         <Input ref={ref} value={value} onChange={onChange} placeholder="관심 학부 검색하기" />
-
-        <Button
-          onClick={() => {
-            setValue('');
-            if (ref.current) ref.current.focus();
-          }}
-        >
-          <Icon02 />
-        </Button>
       </InputBox>
     </Container>
   );
@@ -44,7 +35,8 @@ const Container = styled.div`
   flex-direction: row;
   gap: 0px;
   width: 95%;
-  max-width: 1382px;
+  border-radius: 999px;
+  max-width: 402px;
   z-index: 2;
 
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
@@ -52,77 +44,53 @@ const Container = styled.div`
 
 const InputBox = styled.div`
   width: 100%;
-  max-width: 1382px;
-  height: 80px;
+  height: 46px;
   position: relative;
-
-  & > button {
-    position: absolute;
-    top: 51%;
-    left: 95%; // 우측 여백 조절
-    transform: translateY(-49%);
-    cursor: pointer;
-  }
 `;
 
 const SvgContainer = styled.div`
-  width: 70px;
-  height: 80px;
-  margin-top: 28px;
-  margin-left: 30px;
   position: absolute;
-`;
-
-const Button = styled.button`
-  opacity: 0.7;
-  transition: 0.3s ease-in-out;
-  &:hover > svg > path {
-    stroke: #d85888;
-  }
-  overflow: auto;
-  border-radius: 32px;
-  background: rgba(255, 255, 255, 0.32);
-  &:hover {
-    box-shadow: 0px 0px 12px rgba(237, 162, 162, 0.35);
-  }
+  top: 53%;
+  left: 5%;
+  transform: translateY(-47%);
 `;
 
 const Input = styled.input`
   width: 100%;
-  max-width: 1382px;
   box-sizing: border-box;
-  height: 80px;
-  padding-left: 70px;
-  border-radius: 10px;
+  height: 100%;
+  padding-left: 45px;
+  border-radius: 999px;
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
 
   transition: 0.3s ease-in-out;
   &::placeholder {
     color: #a8a8a8;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px; /* 100% */
     opacity: 0.8;
   }
   &:hover {
     border: 1px solid rgba(216, 88, 136, 0.2);
-    box-shadow: 0px 10px 30px 0px rgba(216, 88, 136, 0.1);
+    box-shadow: 10px rgba(216, 88, 136, 0.15);
   }
 
   &:focus {
     border: 1px solid var(--Primary-V, #e85888);
-    box-shadow: 0px 10px 30px 0px rgba(216, 88, 136, 0.1);
+    box-shadow: 10px 10px 30px 10px rgba(216, 88, 136, 0.1);
     outline: none;
   }
 
   color: #141414;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
 `;
 
-export default SearchBar;
+export default SearchBarSmall;

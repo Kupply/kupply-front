@@ -142,7 +142,23 @@ const PrevButton = styled.button`
 
 const ActionWrapper = styled.div`
   display: flex;
+  width: 100%;
+  max-width: 628px;
+
   flex-direction: column;
+  align-items: center;
   gap: 30px;
   margin-top: 72px;
+
+  & > div {
+    width: 90%;
+    box-sizing: border-box;
+    height: 68px;
+    max-width: 628px;
+  }
+
+  & > button {
+    width: 90%;
+    max-width: 628px;
+  }
 `;

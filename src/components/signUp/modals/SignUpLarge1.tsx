@@ -23,6 +23,16 @@ export default function SignUpLarge1(props: ModalProps) {
     <Main>
       {isOpenModal && (
         <ModalLarge onClickToggleModal={onClickModal}>
+          <PrevButton
+            onClick={() => {
+              setOpenModal(!isOpenModal);
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <path d="M34 23L26 30" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M26 30L34 38" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </PrevButton>
           <CloseButton
             onClick={() => {
               setOpenModal(!isOpenModal);
@@ -87,14 +97,27 @@ const CloseButton = styled.button`
   align-items: center;
   position: absolute;
   top: 50px;
-  right: 50px;
+
+  cursor: pointer;
+`;
+
+const PrevButton = styled.button`
+  display: flex;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50px;
 
   cursor: pointer;
 `;
 
 const ActionWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 30px;
   margin-top: 72px;
 `;
