@@ -30,6 +30,7 @@ const MainWrapper = styled.div`
   width: 100vw;
   height: 1153px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   background: #fcfafb;
