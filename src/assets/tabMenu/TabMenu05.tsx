@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Typography from '../OldTypography';
 import { TableUnique } from 'typeorm';
 
-// 기존 코드 간소화 vw 변환 X
+// 기존 코드 간소화 vw 변환
+// px -> vw 대충 변환해서 아직까지는 잘 작동 X
 
 type Rank = '01' | '02' | '03' | '04';
 type StudentData = {
@@ -439,21 +440,21 @@ const MyStageChart: React.FC<myStageData> = (data) => {
 const MainWrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  gap: 56px;
+  gap: 2.92vw; // 56px;
   margin-top: 34px;
 
   // border: 1px solid black;
 `;
 
 const Wrapper = styled.div`
-  width: 729px;
+  width: 37.97vw; //  729px;
   height: 94px;
   position: relative;
   display: flex; /* 요소들을 행으로 정렬 */
   align-items: flex-start;
   justify-content: center;
 
-  margin-left: 42px;
+  // margin-left: 42px;
 
   //border: 1px solid black;
 `;
@@ -464,7 +465,7 @@ const NotchSquareColor = styled.img`
   position: absolute;
   display: flex;
   flex-shrink: 0;
-  margin: -15px;
+  margin: -0.78vw; // -15px;
 `;
 
 const NotchSquareNormal = styled.img`
@@ -476,7 +477,7 @@ const NotchSquareNormal = styled.img`
   stroke: var(--kitsch, #a8a8a8);
   filter: drop-shadow(0px 20px 50px rgba(223, 223, 223, 0.4));
   flex-shrink: 0;
-  margin: -15px;
+  margin: -0.78vw; // -15px;
 `;
 
 const Square = styled.img`
@@ -493,19 +494,19 @@ const Square = styled.img`
 `;
 
 const InnerBox = styled.div`
-  width: 100px;
+  width: 5.22vw; //100px;
   height: 20px;
   position: absolute;
   display: flex;
-  gap: 10px;
-  padding: 15px 48px 15px 48px;
+  gap: 0.52vw; //10px;
+  padding: 15px 2.5vw 15px 2.5vw; //  15px 48px 15px 48px;
   z-index: 1;
 
   //border: 1px solid black;
 `;
 
 const InnerIcon = styled.img`
-  width: 20px;
+  width: 1.04vw; // 20px;
   height: 20px;
   flex-shrink: 0;
 `;
@@ -513,7 +514,7 @@ const InnerIcon = styled.img`
 const WhiteText = styled.div`
   color: var(--White, #fff);
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 1.04vw; // 20px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px; /* 100% */
@@ -522,14 +523,14 @@ const WhiteText = styled.div`
 const BlackText = styled.div`
   color: rgba(20, 20, 20, 0.8);
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 1.04vw; // 20px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px; /* 100% */
 `;
 
 const TextBox = styled.div`
-  width: 176px;
+  width: 9.17vw; // 176px;
   height: 36px;
   flex-shrink: 0;
   position: absolute;
@@ -543,7 +544,7 @@ const TextBox = styled.div`
 const TextBoxNormal = styled.div`
   color: rgba(20, 20, 20, 0.6);
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 0.73vw; // 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 18px; /* 128.571% */
@@ -551,7 +552,7 @@ const TextBoxNormal = styled.div`
 
 const TextBoxColor = styled.div`
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 0.73vw; // 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px; /* 128.571% */
@@ -560,7 +561,7 @@ const TextBoxColor = styled.div`
 //////////////// Default ////////////////
 
 const DefaultWrapper = styled.div`
-  width: 413px;
+  width: 21.51vw; // 413px;
   height: 100px;
   position: relative;
 
@@ -570,7 +571,7 @@ const DefaultWrapper = styled.div`
 const DefaultText = styled.div`
   color: #141414;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.94vw; // 18px;
   font-style: normal;
   line-height: 24px;
   margin: 0;
@@ -581,7 +582,7 @@ const NumText = styled.div`
 
   /* Heading 1 */
   font-family: Pretendard;
-  font-size: 48px;
+  font-size: 2.5vw; // 48px;
   font-style: normal;
   font-weight: 700;
   line-height: 104.167%;
@@ -591,7 +592,7 @@ const NumText = styled.div`
 const PercentText = styled.div`
   color: rgba(67, 67, 67, 0.8);
   font-family: Pretendard;
-  font-size: 48px;
+  font-size: 2.5vw; // 48px;
   font-style: normal;
   font-weight: 400;
   line-height: 104.167%;
