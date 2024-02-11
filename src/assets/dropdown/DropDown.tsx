@@ -46,15 +46,9 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
   */
 
   return (
-    <div ref={ref}>
-      <button onClick={toggleIsOpen}>
-        <InputWrapper
-          isOpen={isOpen}
-          isSelected={isSelected}
-          //onClick={toggleIsOpen}
-          type="button"
-          value={value || title}
-        />
+    <div style={{ width: '100%' }} ref={ref}>
+      <DropDownBtn isOpen={isOpen} isSelected={isSelected} onClick={toggleIsOpen} type="button" value={value || title}>
+        {value || title}
         <AngleDown isOpen={isOpen} isSelected={isSelected}>
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -63,7 +57,7 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
             />
           </svg>
         </AngleDown>
-      </button>
+      </DropDownBtn>
 
       {isOpen && (
         <div
@@ -74,10 +68,10 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
             position: 'relative',
           }}
         >
-          <OptionContainer>
+          <SelectBoxContainer>
             {optionList.map((data) => {
               return (
-                <OptionWrapper
+                <SelectBoxWrapper
                   isSelectedValue={value === data.value1 ? true : false}
                   key={data.value1}
                   // type="button"
@@ -88,16 +82,13 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
                   }}
                 >
                   {data.value1}
-                  <CollegeWrapper
-                    size={'normalText'}
-                    color={value === data.value1 ? 'var(--primary, #d85888)' : '#141414'}
-                  >
+                  <SelectBox size={'normalText'} color={value === data.value1 ? 'var(--primary, #d85888)' : '#141414'}>
                     {data.value2}
-                  </CollegeWrapper>
-                </OptionWrapper>
+                  </SelectBox>
+                </SelectBoxWrapper>
               );
             })}
-          </OptionContainer>
+          </SelectBoxContainer>
         </div>
       )}
     </div>
@@ -109,10 +100,14 @@ export default DropDown;
 /* 이하는 스타일 적용 */
 
 const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
-  position: relative;
-  bottom: 47px;
-  left: 285px;
-  height: 2px;
+  /* position: relative; */
+  /* bottom: 47px; */
+  /* left: 285px; */
+  /* height: 2px; */
+  position: absolute;
+
+  right: 2.5%;
+  margin-top: 2px;
 
   cursor: pointer;
 
@@ -127,8 +122,8 @@ const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
   }
 `;
 
-const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
-  width: 628px;
+const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
+  width: 100%;
   max-width: 628px;
   height: 68px;
   border-radius: 10px;
@@ -166,19 +161,6 @@ const InputWrapper = styled.input<{ isOpen: boolean; isSelected: boolean }>`
 
 
   position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 18px;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    background-image: url('../../designImage/UAngleDown.svg');
-    background-size: cover;
-    z-index: 1; /* Add this line */
-  }
 `;
 
 /*
@@ -223,13 +205,13 @@ const InputButtonWrapper = styled.button<{
         </InputButtonWrapper>
 */
 
-const OptionContainer = styled.div`
+const SelectBoxContainer = styled.div`
   position: absolute;
   z-index: 999;
   top: 30px;
   display: flex;
   flex-direction: column;
-  width: 629px;
+  width: 100%;
   max-width: 629px;
   height: 213px;
   /* height 의 경우 옵션의 개수에 따라 동적으로 변화하게 설정 */
@@ -257,7 +239,7 @@ const OptionContainer = styled.div`
   scrollbar-width: none; /* 파이어폭스 */
 `;
 
-const OptionWrapper = styled.button<{
+const SelectBoxWrapper = styled.button<{
   isSelectedValue: boolean;
 }>`
   display: flex;
@@ -295,7 +277,7 @@ const OptionWrapper = styled.button<{
     `}
 `;
 
-const CollegeWrapper = styled(Typography)<TypographyProps>`
+const SelectBox = styled(Typography)<TypographyProps>`
   font-weight: 400;
   opacity: 0.8;
 `;
