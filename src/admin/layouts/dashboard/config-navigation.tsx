@@ -7,7 +7,7 @@ const icon = (name: string) => <SvgColor src={`/assets/icons/navbar/${name}.svg`
 const navConfig = [
   {
     title: '대시보드',
-    path: '/',
+    path: '/admin',
     icon: icon('ic_analytics'), // 수정 필요
   },
   {
@@ -30,13 +30,6 @@ const navConfig = [
     path: '/adminUpdate',
     icon: icon('ic_blog'), // 수정 필요
   },
-  /*
-  {
-    title: 'product',
-    path: '/products',
-    icon: icon('ic_cart'),
-  },
-  */
 ];
 
 export default navConfig;
