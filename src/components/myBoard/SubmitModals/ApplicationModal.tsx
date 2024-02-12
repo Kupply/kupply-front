@@ -10,6 +10,7 @@ import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../base/ModalLarge';
 import DropDown from '../../../assets/dropdown/DropDown';
 import VerificationBox from '../../../assets/VerificationBox';
+import TextArea from '../../../assets/TextArea';
 import MultiStepProgressBar from '../../../assets/progressIndicator/ProgressBar';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import LabelButton from '../../../assets/buttons/LabelButton';
@@ -535,21 +536,13 @@ export default function ApplicationModal(props: ModalProps) {
                       <Typography size="mediumText">를 입력해주세요.</Typography>
                     </div>
                     <VerifiBoxWrapper>
-                      <TextArea
-                        name="currentSemester-1"
-                        value={currentSemester1}
-                        setValue={setCurrentSemester1}
-                      />
+                      <TextArea name="currentSemester-1" value={currentSemester1} setValue={setCurrentSemester1} />
                       <div style={{ marginTop: '30px' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="2" viewBox="0 0 14 2" fill="none">
                           <path d="M0 1H14" stroke="#B9B9B9" />
                         </svg>
                       </div>
-                      <TextArea
-                        name="currentSemester-2"
-                        value={currentSemester2}
-                        setValue={setCurrentSemester2}
-                      />
+                      <TextArea name="currentSemester-2" value={currentSemester2} setValue={setCurrentSemester2} />
                     </VerifiBoxWrapper>
                   </div>
                   <div style={{ position: 'absolute', top: '412px', left: '93px' }}>

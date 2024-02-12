@@ -12,7 +12,7 @@ const MajorBox = () => {
       <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" />
 
       <MajorWrapper>
-        <Major src="designImage/majorSymbol/BusinessLarge.png" alt="business" />
+        <Major src="designImage/majorSymbol/newMajorImage/BusinessLarge.png" alt="business" />
         <Shadow src="designImage/majorSymbol/BusinessShadow.svg" alt="shadow" />
       </MajorWrapper>
       <MajorTextBox>
