@@ -19,6 +19,7 @@ function SubmitButton(props: SubmitButtonProps) {
 
 const ButtonWrapper = styled.button<SubmitButtonProps>`
   width: 32.71vw;
+  max-width: 628px;
   height: 68px;
   box-sizing: border-box;
   padding: 24px 1.77vw;
