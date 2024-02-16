@@ -14,6 +14,7 @@ function Button11(props: Button11Props) {
         size="0.94vw"
         bold={state === 'pressed' ? '700' : '500'}
         color={state === 'default' ? '#B9B9B9' : '#D85888'}
+        {...rest}
       >
         {children}
       </Typography>
@@ -26,7 +27,7 @@ const ButtonWrapper = styled.button<Button11Props>`
   height: auto;
   box-sizing: border-box;
   border: ${(props) => (props.state === 'default' ? '1px solid #EEE' : 'none')};
-  padding: 16px 2.08vw;
+  padding: 0.83vw 2.08vw;
   display: flex;
   justify-content: center;
   align-items: center;
