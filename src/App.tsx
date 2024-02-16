@@ -9,6 +9,7 @@ import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
+import { RecoilRoot } from 'recoil';
 
 interface RouteConfig {
   path: string;
@@ -29,7 +30,7 @@ export default function App() {
     routes.map((route: RouteConfig, index: number) => <Route key={index} path={route.path} element={route.element} />);
 
   return (
-    <>
+    <RecoilRoot>
       {isMobile ? (
         <MobilePage />
       ) : (
@@ -44,7 +45,7 @@ export default function App() {
           <Footer setSelected={setSelected} />
         </Wrapper>
       )}
-    </>
+    </RecoilRoot>
   );
 }
 

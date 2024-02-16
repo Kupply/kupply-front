@@ -5,7 +5,7 @@ import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
 import SubmitButton from '../../../assets/buttons/OldSubmitButton';
 import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../base/ModalLarge';
-import { sendEmail } from '../../../pages/signUp/SignUp1Page';
+import { sendEmail } from '../../../utils/SignUpFunctions';
 
 export interface ModalProps {
   currentModal: number;

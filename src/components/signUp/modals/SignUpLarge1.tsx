@@ -4,7 +4,7 @@ import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import VerificationButton from '../../../assets/buttons/OldVerificationButton';
 import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../base/ModalLarge';
-import { sendEmail } from '../../../pages/signUp/SignUp1Page';
+import { sendEmail } from '../../../pages/signUp/old/OldSignUp1Page';
 
 export interface ModalProps {
   currentModal: number;

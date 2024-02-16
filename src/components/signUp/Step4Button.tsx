@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-type StateOptions = 'default' | 'clicked' | 'unactive';
+// 'unactive' 이랑 'inactive'가 같아서 'unactive'을 빼고 싶지만 기존의 페이지가 돌아가기 위해 일단 이렇게 해놓음
+type StateOptions = 'default' | 'clicked' | 'inactive' | 'unactive';
 
 export interface Step4ButtonProps extends React.ComponentPropsWithRef<'div'> {
   state?: StateOptions;
@@ -12,10 +13,10 @@ const ButtonWrapper = styled.button<Step4ButtonProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 628px;
+  width: 32.708vw;
   height: 110px;
-  padding-left: 44px;
-  padding-right: 17px;
+  padding-left: 2.29vw;
+  padding-right: 0.885vw;
   flex-shrink: 0;
   border-radius: 10px;
   background: #fff;
@@ -39,21 +40,21 @@ const TextBox = styled.div`
 const Title = styled.text<Step4ButtonProps>`
   color: var(--main-black, #141414);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 700;
   line-height: 18px;
-  opacity: ${(props) => (props.state === 'unactive' ? '0.5' : '0.8')};
+  opacity: ${(props) => (props.state === 'inactive' ? '0.5' : '0.8')};
 `;
 
 const Passage = styled.text<Step4ButtonProps>`
   color: var(--main-black, #141414);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-  opacity: ${(props) => (props.state === 'unactive' ? '0.5' : '0.8')};
+  opacity: ${(props) => (props.state === 'inactive' ? '0.5' : '0.8')};
 `;
 
 function Step4Button(props: Step4ButtonProps) {
@@ -74,7 +75,7 @@ function Step4Button(props: Step4ButtonProps) {
         <img src="../../designImage/character/Chick1StandSide.png" width="90px" height="90px" />
       ) : (state === 'default' || state === 'clicked') && double ? (
         <img src="../../designImage/character/Chick2StandSide.png" width="90px" height="90px" />
-      ) : state === 'unactive' && !double ? (
+      ) : state === 'inactive' && !double ? (
         <img src="../../designImage/character/Chick1StandSideOpacity.png" width="90px" height="90px" />
       ) : (
         <img src="../../designImage/character/Chick2StandSideOpacity.png" width="90px" height="90px" />

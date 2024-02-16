@@ -1,9 +1,8 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-
 import client from '../../utils/HttpClient';
 
-type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
+type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 
 const baseButton = css`
   height: 24px;
