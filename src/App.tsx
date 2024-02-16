@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
-import MainPage from './pages/main/MainPage';
+import OnboardingPage from './pages/main/OnboardingPage';
 import MyBoardPage from './pages/myBoard/MyBoardPage';
 import LandingPage from './pages/landing/LandingPage';
 import LoginPage from './pages/login/LoginPage';
@@ -69,7 +69,7 @@ export default function App() {
             <Route path="/admin" element={<DashboardMainPage />} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/archive" element={<PreviousPage />} />
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<OnboardingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/join" element={<SignUp1Page />} />
             <Route path="/signup1" element={<SignUp1Page />} />
