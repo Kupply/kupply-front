@@ -1,21 +1,19 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-export interface SubmitButtonProps
-  extends React.ComponentPropsWithoutRef<"button"> {
+export interface SubmitButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   active?: boolean;
 }
 
 const Button = styled.button<SubmitButtonProps>`
   display: flex;
   width: 628px;
-  padding: 24px 34px;
+  padding: 24px 18px;
   justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 10px;
-  background: ${(props) =>
-    props.active ? "#D85888" : "rgba(223, 223, 223, 0.75)"};
+  background: ${(props) => (props.active ? '#D85888' : 'rgba(223, 223, 223, 0.75)')};
 `;
 
 const Text = styled.text`
@@ -29,7 +27,7 @@ const Text = styled.text`
 `;
 
 export default function SubmitButton(props: SubmitButtonProps) {
-  const { children = "제출하기", active = true, ...rest } = props;
+  const { children = '제출하기', active = true, ...rest } = props;
   return (
     <Button active={active} disabled={!active} {...rest}>
       <Text>{children}</Text>

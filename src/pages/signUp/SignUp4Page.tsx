@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/OldTypography';
-import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import MultiStepProgressBar from '../../assets/progressIndicator/ProgressBar';
 import TextFieldBox from '../../assets/OldTextFieldBox';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import Step4Button from '../../components/signUp/Step4Button';
-import VerificationBox from '../../assets/VerificationBox';
+import TextArea from '../../assets/TextArea';
 import DropDown from '../../assets/dropdown/DropDown';
 import { majorAllList } from '../../common/MajorAll';
 import { majorTargetList } from '../../common/MajorTarget';
@@ -244,14 +244,14 @@ export function SignUp4PageCandidate() {
               <Typography size="mediumText">을 소수점 두 자리까지 기입해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
+              <TextArea name="gpa-1" value={GPA1} setValue={setGPA1} />
               <div style={{ marginTop: 60 }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
                   <circle cx="1" cy="1" r="1" fill="#141414" />
                 </svg>
               </div>
-              <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
-              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} setRef={setLastBoxRef} />
+              <TextArea name="gpa-2" value={GPA2} setValue={setGPA2} />
+              <TextArea name="gpa-3" value={GPA3} setValue={setGPA3} setRef={setLastBoxRef} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -262,12 +262,12 @@ export function SignUp4PageCandidate() {
               <Typography size="mediumText">를 입력해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1}></VerificationBox>
-              <VerificationBox name="semester-2" value={hopeSemester2} setValue={setHopeSemester2}></VerificationBox>
+              <TextArea name="semester-1" value={hopeSemester1} setValue={setHopeSemester1}></TextArea>
+              <TextArea name="semester-2" value={hopeSemester2} setValue={setHopeSemester2}></TextArea>
               <Typography size={'normalText'} style={{ marginTop: '58px' }}>
                 년도
               </Typography>
-              <VerificationBox name="semester-3" value={hopeSemester3} setValue={setHopeSemester3}></VerificationBox>
+              <TextArea name="semester-3" value={hopeSemester3} setValue={setHopeSemester3}></TextArea>
               <Typography size={'normalText'} style={{ marginTop: '58px' }}>
                 학기
               </Typography>
@@ -394,14 +394,14 @@ export function SignUp4PagePasser() {
               <Typography size="mediumText">을 소수점 두 자리까지 기입해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox name="gpa-1" value={GPA1} setValue={setGPA1} />
+              <TextArea name="gpa-1" value={GPA1} setValue={setGPA1} />
               <div style={{ marginTop: 60 }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
                   <circle cx="1" cy="1" r="1" fill="#141414" />
                 </svg>
               </div>
-              <VerificationBox name="gpa-2" value={GPA2} setValue={setGPA2} />
-              <VerificationBox name="gpa-3" value={GPA3} setValue={setGPA3} ref={lastBoxRef} />
+              <TextArea name="gpa-2" value={GPA2} setValue={setGPA2} />
+              <TextArea name="gpa-3" value={GPA3} setValue={setGPA3} ref={lastBoxRef} />
             </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
@@ -412,12 +412,12 @@ export function SignUp4PagePasser() {
               <Typography size="mediumText">를 입력해주세요.</Typography>
             </div>
             <VerifiBoxWrapper>
-              <VerificationBox name="semester-1" value={passSemester1} setValue={setPassSemester1}></VerificationBox>
-              <VerificationBox name="semester-2" value={passSemester2} setValue={setPassSemester2}></VerificationBox>
+              <TextArea name="semester-1" value={passSemester1} setValue={setPassSemester1}></TextArea>
+              <TextArea name="semester-2" value={passSemester2} setValue={setPassSemester2}></TextArea>
               <Typography size={'normalText'} style={{ marginTop: '58px' }}>
                 년도
               </Typography>
-              <VerificationBox name="semester-3" value={passSemester3} setValue={setPassSemester3}></VerificationBox>
+              <TextArea name="semester-3" value={passSemester3} setValue={setPassSemester3}></TextArea>
               <Typography size={'normalText'} style={{ marginTop: '58px' }}>
                 학기
               </Typography>

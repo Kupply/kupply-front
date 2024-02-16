@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Typography from '../../assets/OldTypography';
-import MultiStepProgressBar from '../../assets/MultiStepProgressBar';
+import MultiStepProgressBar from '../../assets/progressIndicator/ProgressBar';
 import TextFieldBox from '../../assets/OldTextFieldBox';
 import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
-import NicknameCheckButton from '../../assets/NicknameCheckButton';
+import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]
@@ -59,13 +59,15 @@ export default function SignUp3Page() {
   const navigate = useNavigate();
 
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  useEffect(() => {
-    if (!sessionStorage.getItem('name')) navigate('/');
-    else {
-      sessionStorage.removeItem('password'); //비밀번호는 삭제
-      if (nickname !== '') setnicknameState('filled');
-    }
-  }, []);
+  /**********************************************/
+  //useEffect(() => {
+  //  if (!sessionStorage.getItem('name')) navigate('/');
+  //  else {
+  //    sessionStorage.removeItem('password'); //비밀번호는 삭제
+  //    if (nickname !== '') setnicknameState('filled');
+  //  }
+  // }, []);
+  /**********************************************/
 
   /* 모든 state가 빈 문자열이 아니면 선택이 완료된 것이므로 complete를 true로 전환한다. 반대도 마찬가지. */
   useEffect(() => {

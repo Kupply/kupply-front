@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+
 import Typography from '../../assets/OldTypography';
-import HashtagButton from '../../assets/buttons/HashtagButton';
-import { useState } from 'react';
+// import HashtagButton from '../../assets/buttons/HashtagButton';
+import HashtagButton from '../../assets/tabMenu/TabMenu04';
 import SearchBar from '../../assets/SearchBar';
 
 export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부', '가나다 순 정렬'];
@@ -23,7 +24,7 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
       <TagButtonWrapper>
         {mockHashes.map((hash, index) => (
           <HashtagButton
-            status={index === clicked ? 'clicked' : 'default'}
+            status={index === clicked ? 'pressed' : 'default'}
             onClick={() => {
               setClicked(index);
             }}
