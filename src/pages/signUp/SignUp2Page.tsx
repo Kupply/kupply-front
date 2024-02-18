@@ -14,9 +14,12 @@ export default function SignUp2Page(){
   const [next, setNext] = useState(false);
   const {complete} = useSignUp2Validation();
   
+  // setNext에 대한 re-render가 이루어지고 navigate가 일어나도록 이렇게 짬 
   const handleNext = () => {
     setNext(true);
-    navigate('/signup3');
+    Promise.resolve().then(() => {
+      navigate('/signup3');
+    });
   };
 
   const handlePrev = () => {

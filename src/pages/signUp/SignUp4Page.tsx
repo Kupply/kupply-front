@@ -2,7 +2,6 @@ import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
 import styled from "styled-components";
 import Typography from "../../assets/Typography";
 import Step4Button from "../../components/signUp/Step4Button";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userTypeState } from "../../store/atom";
 import { useRecoilState } from "recoil";
@@ -10,6 +9,9 @@ import Button04 from "../../assets/buttons/Button04";
 import Button03 from "../../assets/buttons/Button03";
 import { UserInput } from "../../components/signUp/UserInput";
 import { UserInputText } from "../../components/signUp/UserInputText";
+import { GPAVerification, SemesterVerification } from "../../components/signUp/VerificationForm";
+import { useInputState } from "../../utils/SignUpFunctions";
+
 
 export function SignUp4Page(){
 
@@ -86,49 +88,94 @@ export function SignUp4Page(){
 }
 
 /* ----------------------------------------- */
+export type inputState = 'incomplete' | 'error' | 
+'complete';
 
 export function SignUp4PageCandidate(){
+
+  const {
+    setGpaState,
+    setSemesterState,
+    setMajorState,
+    complete,
+    next,
+    handleNext,
+    handlePrev} = useInputState();
+
   return (
     <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
       <ContentsList>
         <ContentsWrapper>
           <UserInputText userInfoType="hopeMajor1"/>
-          <UserInput userInfoType="hopeMajor1"/>
+          <UserInput userInfoType="hopeMajor1" toNext={next} setStateValid={setMajorState}/>
           <UserInputText userInfoType="hopeMajor2"/>
-          <UserInput userInfoType="hopeMajor2"/>
+          <UserInput userInfoType="hopeMajor2" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="GPAcandidate"/>
-          {/* GPA 관련 입력  */}
+          <GPAVerification 
+            userType="candidate" 
+            setState={setGpaState}
+            toNext={next}/>
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="hopeSemester"/>
-          {/* 희망 학기 관련 입력 */}
+          <SemesterVerification
+            userType="candidate"
+            setState={setSemesterState}
+            toNext={next}
+          />
         </ContentsWrapper>
       </ContentsList>
+      <ButtonsWrapper>
+        <Button04 onClick={handlePrev}/>
+        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext}/>
+      </ButtonsWrapper>
     </SignUpPageWrapper>
   )
 }
 
 /* ---------------------------------------- */
 
+
+
 export function SignUp4PagePasser(){
+  const {
+    setGpaState,
+    setSemesterState,
+    setMajorState,
+    complete,
+    next,
+    handleNext,
+    handlePrev} = useInputState();
+
   return (
     <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
       <ContentsList>
         <ContentsWrapper>
           <UserInputText userInfoType="doubleMajor"/>
-          <UserInput userInfoType="doubleMajor"/>
+          <UserInput userInfoType="doubleMajor" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="GPApasser"/>
-          {/* GPA 관련 입력  */}
+          <GPAVerification 
+            userType="candidate" 
+            setState={setGpaState}
+            toNext={next}/>
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="enterSemester"/>
-          {/* 진입학기 관련 입력 */}
+          <SemesterVerification
+            userType="candidate"
+            setState={setSemesterState}
+            toNext={next}
+          />
         </ContentsWrapper>
       </ContentsList>
+      <ButtonsWrapper>
+        <Button04 onClick={handlePrev}/>
+        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext}/>
+      </ButtonsWrapper>
     </SignUpPageWrapper>
   )
 }
@@ -151,3 +198,10 @@ const AliasButtonsWrapper = styled.div`
   gap: 18px;
   margin-top: 70px;
 `;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 18px;
+  margin-top: 34px;
+`;
+

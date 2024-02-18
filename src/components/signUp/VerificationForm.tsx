@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import TextAreaBox from "../../assets/TextArea";
 import { useEffect, useState } from "react";
-import { nextButtonState, verificationCodeState } from "../../store/atom";
+import { nextButtonState, verificationCodeState, gpaState, semesterState } from "../../store/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { inputState } from "../../pages/signUp/SignUp4Page";
+import Typography from "../../assets/Typography";
 
-// onVerificationSuccess가 함수인데 이거 type정해줘야 함 
 export const CodeVerification = () => {
 
   const [codeState, setCodeState] = useRecoilState(verificationCodeState);
@@ -45,24 +46,128 @@ export const CodeVerification = () => {
     }
   }, [num1, num2, num3, num4, num5, num6]);
 
-
   return (
-    <VerifiBoxWrapper>
-      <TextAreaBox name="pin-1" value={num1} setValue={(num1) => handleCodeState('num1', num1)}/>
-      <TextAreaBox name="pin-2" value={num2} setValue={(num2) => handleCodeState('num2', num2)}/>
-      <TextAreaBox name="pin-3" value={num3} setValue={(num3) => handleCodeState('num3', num3)}/>
-      <TextAreaBox name="pin-4" value={num4} setValue={(num4) => handleCodeState('num4', num4)}/>
-      <TextAreaBox name="pin-5" value={num5} setValue={(num5) => handleCodeState('num5', num5)}/>
-      <TextAreaBox name="pin-6" value={num6} setValue={(num6) => handleCodeState('num6', num6)}/>
-    </VerifiBoxWrapper>
+    <CodeVerifiBoxWrapper>
+      {Array.from({ length: 6 }, (_, index) => (
+          <TextAreaBox
+            key={index}
+            name={`pin-${index + 1}`}
+            value={eval(`num${index + 1}`)}
+            setValue={(value) => handleCodeState(`num${index + 1}`, value)}
+          />
+        ))}
+    </CodeVerifiBoxWrapper>
   )
 }
 
+interface GpaSemesterVerificationProps{
+  userType: 'passer' | 'candidate';
+  state?: inputState;
+  setState: (args:inputState) => void;
+  toNext: boolean;
+};
 
+// 이 userType으로 입력이 들어가는게 passerGpa랑 그냥 GPa
+export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext}) => {
+  const [userGpa, setUserGpa] = useRecoilState(gpaState(userType));
+  const {num1, num2, num3} = userGpa;
+  const [lastBoxRef, setLastBoxRef] = useState<any>(null);
+
+
+  useEffect(() => {
+    if(parseFloat(`${num1}.${num2}${num3}`) > 4.5){
+      setUserGpa({
+        num1: '4',
+        num2: '5',
+        num3: '0'
+      })
+
+      if(lastBoxRef && lastBoxRef.current) lastBoxRef.current.focus();
+    }
+  }, [userGpa, lastBoxRef]);
+
+  useEffect(() => {
+    if(!!num1 && !!num2 && !!num3) {
+      setState('complete')
+      if(+(num1 + '.' + num2 + num3) > 4.5) 
+        setState('error');
+    };
+    
+  }, [userGpa]);
+
+  const handleGPAState = (num:string, value:string) => {
+    setUserGpa((prev) => ({
+      ...prev,
+      [num]: value
+    }))
+  };
+
+  if(toNext){
+    sessionStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
+  }
+
+  return (
+    <VerifiBoxWrapper>
+      <TextAreaBox name="gpa-1" value={num1} setValue={(value) => handleGPAState(`num1`, value)}/>
+      <div style={{ marginTop: 60 }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
+          <circle cx="1" cy="1" r="1" fill="#141414" />
+        </svg>
+      </div>
+      <TextAreaBox name="gpa-2" value={num2} setValue={(value) => handleGPAState(`num2`, value)}/>
+      <TextAreaBox name="gpa-3" value={num3} setValue={(value) => handleGPAState(`num3`, value)} setRef={setLastBoxRef}/>
+    </VerifiBoxWrapper>
+  )
+  
+}
+
+// 지금 문제가 한칸에 대해서만 입력을 하는데에도 전체가 바뀌는 마법이 일어남 
+export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({userType, setState, toNext}) => {
+  const [userSemester, setUserSemester] = useRecoilState(semesterState(userType));
+  const {num1, num2, num3} = userSemester;
+
+
+  useEffect(() => {
+    const semesterYear = +(num1 + num2);
+    if(!!num1 && !!num2 && !!num3) {
+      setState('complete')
+      if(!(num3 === '1' || num3 === '2') || semesterYear < 23 || (semesterYear === 23 && num1 === '1')) 
+        setState('error');
+    };
+    
+  }, [userSemester]);
+
+  const handleSemesterState = (num:string, value:string) => {
+    setUserSemester((prev) => ({
+      ...prev,
+      [num]: value
+    }))
+  };
+
+  if(toNext){
+    sessionStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
+  }
+
+  return (
+  <VerifiBoxWrapper>
+    <TextAreaBox name="semester-1" value={num1} setValue={(value) => handleSemesterState('num1', value)}/>
+    <TextAreaBox name="semester-2" value={num2} setValue={(value) => handleSemesterState('num2', value)}/>
+    <Typography size="16px" bold="500" style={{ marginTop: '58px' }}>년도</Typography>
+    <TextAreaBox name="semester-3" value={num3} setValue={(value) => handleSemesterState('num3', value)}/>
+    <Typography size="16px" bold="500" style={{ marginTop: '58px' }}>학기</Typography>
+  </VerifiBoxWrapper>
+  )
+
+}
+
+const CodeVerifiBoxWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const VerifiBoxWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap: 13px;
 `;
 
 

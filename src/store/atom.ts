@@ -91,3 +91,30 @@ export const userTypeState = atom<
   }
 });
 
+// GPA에 관한거랑 semester에 관한거가 필요함 - 근데 여기서 각각 두 종류가 있고 서로 섞이지 않기 때문에 이럴 떄에는 atom family
+
+type GpaSemesterType = {
+  num1: string;
+  num2: string;
+  num3: string;
+}
+
+export const gpaState = atomFamily<GpaSemesterType, string>({
+  key: "GpaState",
+  default: (kind: string) => ({
+    num1: sessionStorage.getItem(kind)?.charAt(0) || '',
+    num2: sessionStorage.getItem(kind)?.charAt(2) || '',
+    num3: sessionStorage.getItem(kind)?.charAt(3) || '',
+  })
+})
+
+
+export const semesterState = atomFamily<GpaSemesterType, string>({
+  key: "SemesterState",
+  default: (kind: string) => ({
+    num1: sessionStorage.getItem(kind)?.charAt(2) || '',
+    num2: sessionStorage.getItem(kind)?.charAt(3) || '',
+    num3: sessionStorage.getItem(kind)?.charAt(5) || '',
+  })
+})
+

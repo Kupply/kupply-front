@@ -19,9 +19,13 @@ export default function SignUp3Page(){
   const [next, setNext] = useState(false); 
   const [nickname, setNickname] = useRecoilState(userState('nickname'));
 
-  const complete = useSignUp3Validation();
+  const {complete} = useSignUp3Validation();
+
   const handleNext = () => {
-    navigate('/signup4');
+    setNext(true);
+    Promise.resolve().then(() => {
+      navigate('/signup4');
+    });
   };
 
   const handlePrev = () => {
@@ -72,7 +76,7 @@ export default function SignUp3Page(){
       </ContentsList>
       <ButtonsWrapper>
         <Button04 onClick={handlePrev} />
-        <Button03 state={complete? 'pressed' : 'disabled'} onClick={handleNext}/>
+        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext}/>
       </ButtonsWrapper>
     </SignUpPageWrapper>
   )

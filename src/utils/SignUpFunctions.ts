@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { errorMessageState, userState } from "../store/atom";
 import { useEffect, useState } from "react";
+import { inputState } from "../pages/signUp/SignUp4Page";
 
 export const sendEmail = async (email: string) => {
   const url = 'https://api.kupply.devkor.club/auth/sendEmail';
@@ -55,7 +56,6 @@ export function useSignUp2Validation(){
   }
 }
 
-// 이것자체가 지금 문제임 Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
 export function useSignUp3Validation(){
   const [password, setPassword] = useRecoilState(userState('password'));
   const [password2, setPassword2] = useRecoilState(userState('password2'));
@@ -63,6 +63,7 @@ export function useSignUp3Validation(){
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageState);
   const [complete, setComplete] = useState(false);
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (password.infoState === 'filled' && password2.infoState === 'filled' && nickname.infoState === 'filled' && !complete) {
       setComplete(true);
@@ -151,6 +152,67 @@ export function useSignUp3Validation(){
     }
   }, [nickname.infoCheck]);
 
+  // 잠시 수정 
+  // useEffect(() => {
+  // if (!sessionStorage.getItem('name')) navigate('/');
+  // else {
+  //   sessionStorage.removeItem('password'); //비밀번호는 삭제
+  //   if (nickname.info !== '') setNickname((prev) => ({...prev, infoState: 'filled'}));
+  // }
+  // }, []);
+
   return {complete};
 }
 
+
+export function useInputState(){
+   // 이제 여기서 hopeMajor와 GPA와 hopeSemester에 대한 입력이 모두 이루어졌는지에 대한 확인과 
+  const [gpaState, setGpaState] = useState<inputState>('incomplete');
+  const [semesterState, setSemesterState] = useState<inputState>('incomplete');
+  const [majorState, setMajorState] = useState<inputState>('incomplete');
+  const [complete, setComplete] = useState(false);
+  const [next, setNext] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  // 먼저 모두 찼는지 확인 - error은 complete된걸 imply한다 VerificationForm에서 확인가능 
+  useEffect(() => {
+    if((gpaState === 'complete' || gpaState === 'error') && (semesterState === 'complete' || semesterState === 'error') && majorState === 'complete') 
+      setComplete(true);
+  }, [gpaState, semesterState, majorState]);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem('role')) navigate('/');
+    sessionStorage.removeItem('secondMajor');
+    sessionStorage.removeItem('passedGPA');
+    sessionStorage.removeItem('passSemester');
+  }, []);
+  
+  // buttonActive에서만 작동 
+  const handleNext = () => {
+    if(gpaState === 'error') alert('유효한 학점을 입력해주세요.');
+    if (semesterState === 'error') alert('유효한 학기를 입력해주세요.');
+    if(gpaState === 'complete' && semesterState === 'complete') {
+      setNext(true);
+      Promise.resolve().then(() => {
+        navigate('/signup5');
+      });
+    }
+  }
+
+  const handlePrev = () => {
+    navigate('/signup4');
+  };
+
+  return {
+    gpaState,
+    setGpaState,
+    semesterState,
+    setSemesterState,
+    majorState,
+    setMajorState,
+    complete,
+    next,
+    handleNext,
+    handlePrev,
+  };
+}

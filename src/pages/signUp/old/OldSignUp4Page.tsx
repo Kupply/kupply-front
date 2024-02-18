@@ -139,7 +139,9 @@ export function SignUp4PageCandidate() {
     sessionStorage.removeItem('secondMajor');
     sessionStorage.removeItem('passedGPA');
     sessionStorage.removeItem('passSemester');
-  }, []);*/
+  }, []);
+  
+  */
 
   useEffect(() => {
     if (
