@@ -66,8 +66,8 @@ function SignUp1Page() {
   }, [num1, num2, num3, num4, num5, num6]);
 
   // modal 관련
-  const [currentModal, setCurrentModal] = useState<number>(100); // 임의 값으로 초기화
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [currentModal, setCurrentModal] = useState<number>(1); // 임의 값으로 초기화
+  const [isOpenModal, setOpenModal] = useState<boolean>(true);
   // modal 2 - 3 email value 전달 관련
   const [email, setEmail] = useState<string>(sessionStorage.getItem('email') || '');
   const [emailState, setEmailState] = useState<StateOptions>(sessionStorage.getItem('email') ? 'filled' : 'default');

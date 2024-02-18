@@ -55,16 +55,16 @@ export default function SignUp3Page(){
         <ContentsWrapper>
           <UserInputText userInfoType="nickname"/>
           <UserInput userInfoType="nickname" toNext={next}>
-          {nickname.info === '' || nickname.infoState === 'filled' ? (
-                <></>
-              ) : (
-                <NicknameCheckButtonWrapper>
-                  <NicknameCheckButton
-                    nickname={nickname.info}
-                    state={nickname.infoCheck as StateOptions}
-                    setState={(so) => setNickname((prev) => ({...prev, infoCheck: so}))}
-                  ></NicknameCheckButton>
-                </NicknameCheckButtonWrapper>
+          {nickname.info === '' || 
+            nickname.infoState === 'filled' ? (<></>) : 
+            (
+              <NicknameCheckButtonWrapper>
+                <NicknameCheckButton
+                  nickname={nickname.info}
+                  state={nickname.infoCheck as StateOptions}
+                  setState={(so) => setNickname((prev) => ({...prev, infoCheck: so}))}
+                ></NicknameCheckButton>
+              </NicknameCheckButtonWrapper>
                 
               )}
           </UserInput>
@@ -114,11 +114,10 @@ const CheckImage = styled.img`
   left: 0.156vw;
 `;
 
-// UserInput의 Children으로 가니까 ContentsWrapper 안에 들어가는 셈 
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
-  top: 50.5px;
-  left: 25.521vw;
+  top: 2.480vw;
+  left: 22.521vw;
   z-index: 9999;
 `;
 const ContentsWrapper = styled.div`

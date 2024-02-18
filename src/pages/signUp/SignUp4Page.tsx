@@ -23,7 +23,6 @@ export function SignUp4Page(){
   //   else sessionStorage.removeItem('role');
   // }, []);
 
-
   const handleButtonClick = (inputType: string) => {
     if(inputType === 'candidate' && user.userState[0] !== 'clicked'){
       setUser((prev) => ({

@@ -7,13 +7,16 @@ import { sendEmail } from "../../utils/SignUpFunctions";
 import { currentModalState, emailAtom, emailStateAtom, sendNumState } from "../../store/atom";
 import { useRecoilState } from "recoil";
 
-export function ModalHandle(setBlank: any){
+interface ModalHandleProps {
+  setBlank: () => void;
+}
+
+export function ModalHandle ({setBlank}: ModalHandleProps) {
   const [currentModal, setCurrentModal] = useRecoilState(currentModalState);
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [isOpenModal, setOpenModal] = useState<boolean>(true);
   const [sendNum, setSendNum] = useRecoilState(sendNumState);
   const [email, setEmail] = useRecoilState(emailAtom);
   const [emailState, setEmailState] = useRecoilState(emailStateAtom);
-
 
   const onClickToggleSmallModal = useCallback(async () => {
     setOpenModal(!isOpenModal);
@@ -37,7 +40,7 @@ export function ModalHandle(setBlank: any){
   return (
     <>
       {
-        () => {
+        (() => {
           switch (currentModal) {
             case 0:
               return (
@@ -96,7 +99,7 @@ export function ModalHandle(setBlank: any){
             default:
               return null;
           }
-        }
+        })()
       }
     </>
   )

@@ -45,8 +45,10 @@ export function SignUp1Page(){
   }
   
   return (
+    <>
+    <ModalHandle setBlank={setBlank}/>
     <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
-      <ModalHandle setBlank={setBlank}/>
+      
       <ContentsList>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ContentsWrapper>
@@ -75,6 +77,7 @@ export function SignUp1Page(){
         {/* VerificationForm에서 자동으로 넘어갈 수 있게 설정해서 onClick일단 빼둠 UI 어떻게 바꿀지 몰라서 일단 보류*/}
       </ButtonsWrapper>
     </SignUpPageWrapper>
+    </>
   )
 }
 
