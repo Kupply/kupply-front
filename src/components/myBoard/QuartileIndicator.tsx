@@ -63,7 +63,7 @@ const TitleBox = styled.div`
 const ChartBox = styled.div`
   position: absolute;
   display: flex;
-  top: 72px;
+  top: 111px;
   left: 2.08vw;
 `;
 

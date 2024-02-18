@@ -1,15 +1,22 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import EditModal from './EditModals/EditModal';
+import Card02 from '../../assets/cards/Card02';
+import CTA02 from '../../assets/CTAs/CTA02';
 
-// 에셋 머지를 안해서 Card02 머지되면 나머지 완성 가능
 // 데이터 연결 X
 //  isApplied={isApplied}
+// editmodal 위치 수정... 해야 됨
+
+export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
+  korName: string;
+  hopeMajor: string;
+}
 
 const ProfileBox = () => {
   const [isOpenEditModal, setOpenEditModal] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [scrollY, setScrollY] = useState(window.scrollY + 92);
 
   const onClickEditModal = () => {
     setOpenEditModal(true);
@@ -21,12 +28,12 @@ const ProfileBox = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      let newPositionY = window.scrollY + 50;
+      let newPositionY = window.scrollY + 92;
       if (newPositionY < 0) {
         newPositionY = 0;
       }
-      if (newPositionY > 1350) {
-        newPositionY = 1350;
+      if (newPositionY > 900) {
+        newPositionY = 900;
       }
       setScrollY(newPositionY);
     };
@@ -39,17 +46,15 @@ const ProfileBox = () => {
 
   return (
     <Wrapper translateY={scrollY}>
-      <ProfileImageBox>
-        <CharacterImage src="designImage/character/rectProfile/RectProfile1.png" alt="profile" />
+      <CharacterImage src="designImage/character/rectProfile/RectProfile1.png" alt="profile" />
+      <NickNameBox>
+        <NickNameText>고대빵없어...</NickNameText>
+        <RoleText>도전자 님</RoleText>
         <EditImage src="designImage/myBoard/Edit.svg" alt="edit" onClick={onClickEditModal} />
-        <NickNameBox>
-          <NickNameText>고대빵없어</NickNameText>
-          <RoleText>도전자 님</RoleText>
-        </NickNameBox>
-        <MajorBox>
-          <MajorText>디자인조형학부</MajorText>
-        </MajorBox>
-      </ProfileImageBox>
+      </NickNameBox>
+      <MajorTextBox>
+        <MajorText>디자인조형학부 20학번</MajorText>
+      </MajorTextBox>
 
       {isOpenEditModal && (
         <EditModal
@@ -60,88 +65,63 @@ const ProfileBox = () => {
         />
       )}
 
-      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '229px' }} />
-      <SubTitleBox style={{ top: '249px' }}>
+      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '215.98px' }} />
+      <SubTitleBox style={{ top: '245.98px' }}>
         <IconImage src="designImage/myBoard/ProfileBoxMajorIcon.svg" alt="major" />
         <SubTitleText>관심 전공</SubTitleText>
       </SubTitleBox>
 
-      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '467px' }} />
-      <SubTitleBox style={{ top: '490px' }}>
+      <InterestMajorBox>
+        <Card02 korName="경영학과" hopeMajor="business" />
+        <Card02 korName="경영학과" hopeMajor="business" />
+      </InterestMajorBox>
+
+      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '535.98px' }} />
+      <SubTitleBox style={{ top: '565.98px' }}>
         <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
         <SubTitleText>현재 내 학점</SubTitleText>
-      </SubTitleBox>
-      <TextBox2 style={{ top: '519px' }}>
         <HopeSemesterText>4.2</HopeSemesterText>
-      </TextBox2>
+      </SubTitleBox>
 
-      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '561px' }} />
-      <SubTitleBox style={{ top: '584px' }}>
+      <SubTitleBox style={{ top: '605.98px' }}>
         <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
         <SubTitleText>희망 진입학기</SubTitleText>
-      </SubTitleBox>
-      <TextBox2 style={{ top: '613px' }}>
         <GPAText>2023-2R</GPAText>
-      </TextBox2>
+      </SubTitleBox>
+
+      <ApplyBox>
+        <CTA02 size="small" />
+      </ApplyBox>
     </Wrapper>
   );
 };
-
-//
 
 const Wrapper = styled.div<{ translateY: number }>`
   display: flex;
   position: relative;
 
-  justify-content: center; /* 수평 중앙 정렬 */
-  //align-items: center; /* 수직 중앙 정렬 */
-  width: 13.54vw;
-  // min-width: 260px;
-  max-width: 260px;
-  height: 660px;
+  justify-content: left;
+  width: 14.68vw;
+  height: 860px;
   flex-shrink: 0;
-  border-radius: 10px;
-  border: 0px solid var(--White, #fff);
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0px 14.857px 37.143px 0px rgba(213, 213, 213, 0.4);
-  backdrop-filter: blur(6.685710906982422px);
 
   transform: ${(props) => `translateY(${props.translateY}px)`};
-  //border: 1px solid black;
-`;
-
-const ProfileImageBox = styled.div`
-  position: relative;
-  display: column;
-  justify-content: center;
-
-  width: 9.27vw;
-  max-width: 178px;
-  height: 178px;
-  flex-shrink: 0;
-  border-radius: 10px;
-
-  margin-top: 31px;
-  //border: 1px solid black;
 `;
 
 const NickNameBox = styled.div`
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
 
-  gap: 0.26vw;
-  margin-top: 18px;
-  // border: 1px solid black;
+  gap: 0.47vw;
+  top: 128.98px;
 `;
 
-const MajorBox = styled.div`
-  position: relative;
+const MajorTextBox = styled.div`
+  position: absolute;
   display: flex;
-  justify-content: center;
 
-  margin-top: 10px;
-  //border: 1px solid black;
+  top: 163.98px;
 `;
 
 const SubTitleBox = styled.div`
@@ -153,23 +133,25 @@ const SubTitleBox = styled.div`
   flex-shrink: 0;
 
   gap: 0.52vw;
-  left: 1.46vw;
 `;
 
-const TextBox1 = styled.div`
+const InterestMajorBox = styled.div`
   position: absolute;
-  display: flex;
+  display: column;
   justify-content: left;
+  justify-content: flex-start;
 
-  left: 6.35vw;
+  margin-top: 20px;
+
+  top: 265.98px;
+  & > div {
+    margin-bottom: 20px;
+  }
 `;
 
-const TextBox2 = styled.div`
+const ApplyBox = styled.div`
   position: absolute;
-  display: flex;
-  justify-content: center;
-
-  left: 3.02vw;
+  top: 655.98px;
 `;
 
 ///////////////// image /////////////////
@@ -180,19 +162,12 @@ const CharacterImage = styled.img`
   max-width: 111px;
   height: 111px;
   object-fit: cover;
-
-  margin-left: 1.77vw;
 `;
 
 const EditImage = styled.img`
-  position: absolute;
-
   width: 1.04vw;
   height: 20px;
   flex-shrink: 0;
-
-  top: 100px;
-  margin-left: 0.68vw;
 
   &:hover {
     cursor: pointer;
@@ -202,8 +177,7 @@ const EditImage = styled.img`
 const VectorImage = styled.img`
   position: absolute;
 
-  width: 13.54vw;
-  max-width: 260px;
+  width: 14.68vw;
   flex-shrink: 0;
 `;
 
@@ -240,7 +214,6 @@ const MajorText = styled.div`
   font-size: 0.94vw;
   font-style: normal;
   font-weight: 500;
-  // line-height: 277.778%; /*50px*/
 `;
 
 const SubTitleText = styled.div`
@@ -253,45 +226,31 @@ const SubTitleText = styled.div`
   line-height: 19.2px; /* 120% */
 `;
 
-const HopeText = styled.div`
-  color: rgba(67, 67, 67, 0.6);
-
-  /* normal_Regular */
-  font-family: Pretendard;
-  font-size: 0.83vw;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 120%; /* 19.2px */
-`;
-
-const HopeMajorText = styled.div`
-  color: #141414;
-  text-align: center;
-
-  /* BODY TEXT_Bold */
-  font-family: Pretendard;
-  font-size: 1.04vw;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 120%; /* 24px */
-`;
-
 const GPAText = styled.div`
+  position: absolute;
+
   color: #141414;
   font-family: Pretendard;
   font-size: 1.04vw;
   font-style: normal;
   font-weight: 500;
   line-height: 120%; /* 24px */
+  white-space: nowrap;
+
+  left: 9.27vw;
 `;
 
 const HopeSemesterText = styled.div`
+  position: absolute;
+
   color: #141414;
   font-family: Pretendard;
   font-size: 1.04vw;
   font-style: normal;
   font-weight: 500;
   line-height: 120%; /* 24px */
+
+  left: 9.27vw;
 `;
 
 export default ProfileBox;

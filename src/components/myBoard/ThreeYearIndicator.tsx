@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import SemesterButton from '../../assets/tabMenu/SemesterButton'; // 아직 vw 변환 X
+import SemesterButton from '../../assets/tabMenu/TabMenu02';
 
 const ThreeYear = () => {
   interface SemesterBtnStates {
