@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import Tooltip from '@mui/material/Tooltip';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -64,11 +62,3 @@ export default function UserTableToolbar({ numSelected, filterName, onFilterName
     </Toolbar>
   );
 }
-
-/*
-UserTableToolbar.propTypes = {
-  numSelected: PropTypes.number,
-  filterName: PropTypes.string,
-  onFilterName: PropTypes.func,
-};
-*/

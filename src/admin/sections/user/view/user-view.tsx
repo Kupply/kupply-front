@@ -6,9 +6,10 @@ import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import TableBody from '@mui/material/TableBody';
-import Typography from '@mui/material/Typography';
+//import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
+import Typography from '../../../../assets/Typography';
 
 import { users } from '../../../_mock/user';
 
@@ -93,10 +94,10 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">Users</Typography>
+        <Typography>사용자 목록</Typography>
 
         <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New User
+          사용자 추가
         </Button>
       </Stack>
 
@@ -118,24 +119,26 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'role', label: '구분' },
+                  { id: 'name', label: '이름' },
+                  { id: 'nickname', label: '닉네임' },
+                  { id: 'studentID', label: '학번' },
+                  { id: 'firstMajor', label: '1전공', align: 'center' },
+                  { id: 'secondMajor', label: '2전공', align: 'center' },
+                  { id: 'email', label: '이메일 주소' },
                   { id: '', label: '' },
                 ]}
               />
               <TableBody>
                 {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => (
                   <UserTableRow
-                    key={row.id}
-                    name={row.name}
                     role={row.role}
-                    status={row.status}
-                    company={row.company}
-                    avatarUrl={row.avatarUrl}
-                    isVerified={row.isVerified}
+                    name={row.name}
+                    nickname={row.nickname}
+                    studentID={row.studentID}
+                    firstMajor={row.firstMajor}
+                    secondMajor={row.secondMajor}
+                    email={row.email}
                     selected={selected.indexOf(row.name) !== -1}
                     handleClick={() => handleClick(row.name)}
                   />
