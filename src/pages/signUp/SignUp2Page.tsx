@@ -8,6 +8,7 @@ import NextButton from '../../assets/buttons/OldNextButton';
 import PrevButton from '../../assets/buttons/PrevButton';
 import DropDown from '../../assets/dropdown/DropDown';
 import { majorAllList } from '../../common/MajorAll';
+import { majorNameMappingBySID } from '../../utils/Mappings';
 
 /*
 [ 참고 사항 - TextFieldBox State Option ]
@@ -38,7 +39,9 @@ function SignUp2Page() {
     const passwordCheck = /^\d{10}$/;
     if (stdIDState === 'filled') {
       if (!passwordCheck.test(stdID)) setStdIDState('error');
-      else setStdIDState('filled');
+      else {
+        setStdIDState('filled');
+      }
     }
   }, [stdID, stdIDState]);
 
@@ -125,7 +128,15 @@ function SignUp2Page() {
               placeholder="학번 10자리"
               value={stdID}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setStdID(e.target.value);
+                const newStdID = e.target.value;
+                setStdID(newStdID);
+
+                if (newStdID.length === 10) {
+                  // 학번 중간 4자리에 해당하는 학과 데이터가 있으면 자동으로 채워줌, 없으면 무시
+                  const key = parseInt(stdID.substring(4, 8));
+                  setdropDownValue(majorNameMappingBySID[key] || sessionStorage.getItem('firstMajor') || '');
+                  setStdIDState('filled');
+                }
               }}
               state={stdIDState}
               setState={setStdIDState}
