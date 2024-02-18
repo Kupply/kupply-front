@@ -9,7 +9,7 @@ export interface TextAreaBoxProps extends React.ComponentPropsWithRef<'input'> {
   setRef?: (ref: React.Ref<HTMLInputElement>) => void;
 }
 
-// 그냥 inputWrapper안에 
+// 그냥 inputWrapper안에
 const InputWrapper = styled.input<TextAreaBoxProps>`
   width: 3.91vw;
   height: 3.91vw;
@@ -34,9 +34,8 @@ const InputWrapper = styled.input<TextAreaBoxProps>`
   }
 `;
 
-
 export default function TextAreaBox(props: TextAreaBoxProps) {
-  const { value, setValue, name, isEntered: initIsEntered, setRef } = props;
+  const { value, setValue, name, isEntered: initIsEntered, setRef, onPaste = undefined } = props;
   const [fieldName, fieldIndex] = name.split('-');
 
   const [isEntered, setIsEntered] = useState<boolean>(initIsEntered || false);
@@ -86,6 +85,7 @@ export default function TextAreaBox(props: TextAreaBoxProps) {
     <InputWrapper
       onChange={handleChange}
       onKeyDown={handleKeyDown}
+      onPaste={onPaste}
       maxLength={1}
       isEntered={isEntered}
       value={value}

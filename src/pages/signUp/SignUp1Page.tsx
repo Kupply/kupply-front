@@ -47,6 +47,23 @@ function SignUp1Page() {
   const [isEntered, setIsEntered] = useState<boolean>(false);
   const [nextButton, setNextButton] = useState<boolean>(false);
 
+  // input 요소에 붙여넣기 이벤트 처리
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const clipboardData = e.clipboardData.getData('text/plain').slice(0, 6); // 붙여넣기된 텍스트를 가져와 최대 6자리까지만 사용
+
+    if (/^\d{6}$/.test(clipboardData)) {
+      setNum1(clipboardData[0]);
+      setNum2(clipboardData[1]);
+      setNum3(clipboardData[2]);
+      setNum4(clipboardData[3]);
+      setNum5(clipboardData[4]);
+      setNum6(clipboardData[5]);
+
+      handleNext();
+    }
+  };
+
   const setBlank = () => {
     setNum1('');
     setNum2('');
@@ -232,7 +249,7 @@ function SignUp1Page() {
             </div>
           </div>
           <VerifiBoxWrapper>
-            <TextArea name="pin-1" value={num1} setValue={setNum1}></TextArea>
+            <TextArea name="pin-1" value={num1} setValue={setNum1} onPaste={handlePaste}></TextArea>
             <TextArea name="pin-2" value={num2} setValue={setNum2}></TextArea>
             <TextArea name="pin-3" value={num3} setValue={setNum3}></TextArea>
             <TextArea name="pin-4" value={num4} setValue={setNum4}></TextArea>
