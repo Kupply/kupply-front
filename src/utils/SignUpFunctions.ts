@@ -4,6 +4,8 @@ import { useRecoilState } from "recoil";
 import { errorMessageState, userState } from "../store/atom";
 import { useEffect, useState } from "react";
 import { inputState } from "../pages/signUp/SignUp4Page";
+import { userType } from "../store/atom";
+import client from "./HttpClient";
 
 export const sendEmail = async (email: string) => {
   const url = 'https://api.kupply.devkor.club/auth/sendEmail';
@@ -16,6 +18,35 @@ export const sendEmail = async (email: string) => {
     return false;
   }
 }
+
+export const join = async (role: string) => {
+  const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
+  const commonData = {
+    name: sessionStorage.getItem('name'),
+    studentId: Number(sessionStorage.getItem('studentId')),
+    nickname: sessionStorage.getItem('nickname'),
+    email: sessionStorage.getItem('email'),
+    password: sessionStorage.getItem('password'),
+    firstMajor: sessionStorage.getItem('firstMajor'),
+    role: sessionStorage.getItem('role'),
+  };
+  if (role === 'passer') {
+    await client.post('/auth/join', {
+      ...commonData,
+      passSemester: sessionStorage.getItem('passerSemester'),
+      passGPA: parseFloat(sessionStorage.getItem('passerGPA') || ''),
+      secondMajor: sessionStorage.getItem('secondMajor'),
+    });
+  } else {
+    await client.post('/auth/join', {
+      ...commonData,
+      curGPA: sessionStorage.getItem('candidateGPA'),
+      hopeMajor1: sessionStorage.getItem('hopeMajor1'),
+      hopeMajor2: sessionStorage.getItem('hopeMajor2'),
+      hopeSemester: sessionStorage.getItem('candidateSemester'),
+    });
+  }
+};
 
 export function useSignUp2Validation(){
   const [name, setName] = useRecoilState(userState('name'));

@@ -21,21 +21,43 @@ export const SignUpPageWrapper:
   return (
     <Wrapper>
       <TitleWrapper>
-        <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>환영합니다!</Typography>
-        <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '5px' }}>
+        {currentStep !== 5 ? 
+        <>
+          <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>환영합니다!</Typography>
+          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '5px' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
+        </> : 
+        <>
+          <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
+            거의 다왔습니다!
+          </Typography>
+          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '5px' }}>
+            쿠플라이의 몇 가지 약관을 확인하면 서비스를 이용하실 수 있어요.
+          </Typography>
+        </>
+        }
       </TitleWrapper>
       <MultiStepProgressBar numberOfSteps={5} currentStep={currentStep} complete={complete}/>
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step {currentStep}</StepIndicator>
           <div>
-          <Typography size="1.25vw" bold="700">{stepInfo}</Typography>
+          <Typography size="24px" bold="700">{stepInfo}</Typography>
           </div>
+          {currentStep === 5 ? 
+          <>
+          <HeaderBar>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32.81vw" height="2" viewBox="0 0 630 2" fill="none">
+              <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
+            </svg>
+          </HeaderBar>
+          </> : 
+          <>
           <svg xmlns="http://www.w3.org/2000/svg" width="32.81vw" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
+          </>}
         </ContentsTitleWrapper>
         {children}
       </FormWrapper>
@@ -97,3 +119,9 @@ const ContentsTitleWrapper = styled.div`
   margin-bottom: 50px;
 `;
 
+const HeaderBar = styled.svg`
+  width: 32.8125vw;
+  max-width: 628px;
+  margin-top: 12px;
+  margin-bottom: 0px;
+`;

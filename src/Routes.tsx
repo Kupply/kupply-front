@@ -15,6 +15,7 @@ import SignUp3Page from './pages/signUp/SignUp3Page';
 //import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/old/OldSignUp4Page';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/SignUp4Page';
 
+//import { SignUp5Page, SignUp5Complete } from './pages/signUp/old/OldSignUp5Page';
 import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
 import DeletePage from './pages/delete/DeletePage';
 //import DashboardMainPage from './admin/AdminPage';

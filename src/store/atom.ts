@@ -99,22 +99,24 @@ type GpaSemesterType = {
   num3: string;
 }
 
-export const gpaState = atomFamily<GpaSemesterType, string>({
+export type userType = 'candidate' | 'passer';
+
+export const gpaState = atomFamily<GpaSemesterType, userType>({
   key: "GpaState",
-  default: (kind: string) => ({
-    num1: sessionStorage.getItem(kind)?.charAt(0) || '',
-    num2: sessionStorage.getItem(kind)?.charAt(2) || '',
-    num3: sessionStorage.getItem(kind)?.charAt(3) || '',
+  default: (kind: userType) => ({
+    num1: sessionStorage.getItem(`${kind}GPA`)?.charAt(0) || '',
+    num2: sessionStorage.getItem(`${kind}GPA`)?.charAt(2) || '',
+    num3: sessionStorage.getItem(`${kind}GPA`)?.charAt(3) || '',
   })
 })
 
 
-export const semesterState = atomFamily<GpaSemesterType, string>({
+export const semesterState = atomFamily<GpaSemesterType, userType>({
   key: "SemesterState",
-  default: (kind: string) => ({
-    num1: sessionStorage.getItem(kind)?.charAt(2) || '',
-    num2: sessionStorage.getItem(kind)?.charAt(3) || '',
-    num3: sessionStorage.getItem(kind)?.charAt(5) || '',
+  default: (kind: userType) => ({
+    num1: sessionStorage.getItem(`${kind}Semester`)?.charAt(2) || '',
+    num2: sessionStorage.getItem(`${kind}Semester`)?.charAt(3) || '',
+    num3: sessionStorage.getItem(`${kind}Semester`)?.charAt(5) || '',
   })
 })
 
