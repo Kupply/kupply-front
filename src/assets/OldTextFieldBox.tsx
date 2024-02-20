@@ -184,7 +184,7 @@ const ErrorMessageWrapper = styled.div`
   min-width: 216px;
   height: 12px;
   padding-top: 5px;
-  padding-left: 18px;
+  padding-left: 0.9375vw;
   gap: 4px;
   border: none;
   background: none;
@@ -206,14 +206,14 @@ const EyeIconWrapper = styled.div`
   position: relative;
   z-index: 1;
   top: 2px;
-  right: 10px;
+  right: 0.5208vw; //10px
 
   & > img {
-    margin-left: 10px;
+    margin-left: 0.5208vw; //10px
   }
 
   & > button {
-    margin-right: 10px;
+    margin-right: 0.5208vw; //10px
   }
 `;
 
@@ -221,9 +221,9 @@ const CheckDuplicated = styled.button`
   display: flex;
   box-sizing: border-box;
   min-width: 65px;
-  width: 65px;
+  width: 3.385vw //65px;
   height: 24px;
-  padding: 4px 5px;
+  padding: 4px 0.2604vw; //5px
   justify-content: center;
   align-items: center;
   gap: 8px;

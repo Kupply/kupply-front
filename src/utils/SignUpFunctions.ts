@@ -1,11 +1,35 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { errorMessageState, userState } from "../store/atom";
+import { emailAtom, errorMessageState, userState } from "../store/atom";
 import { useEffect, useState } from "react";
 import { inputState } from "../pages/signUp/SignUp4Page";
 import { userType } from "../store/atom";
 import client from "./HttpClient";
+
+export function useEmailVerification(){
+  const [complete, setComplete] = useState(false);
+  const [ID, setID] = useRecoilState(userState('kuEmail'));
+
+  console.log(ID);
+  const IDPattern = /.+@korea\.ac\.kr$/;
+  useEffect(() => {
+    if (ID.infoState === 'filled') {
+      if (!IDPattern.test(ID.info)) {
+        setID((prev) => ({...prev, infoState: 'error'}));
+        setComplete(false);
+      }
+      else {
+        console.log('test passed');
+        setID((prev) => ({...prev, infoState: 'filled'}));
+        setComplete(true);
+      }
+    }
+  }, [ID.info, ID.infoState]);
+
+  return {complete, ID};
+}
+
 
 export const sendEmail = async (email: string) => {
   const url = 'https://api.kupply.devkor.club/auth/sendEmail';
@@ -138,6 +162,7 @@ export function useSignUp3Validation(){
         setPassword2((prev) => ({...prev, infoState: 'error'}));
       }
     }
+
   }, [password.info, password.infoState, password2.info, password2.infoState]);
 
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.

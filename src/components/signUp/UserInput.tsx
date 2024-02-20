@@ -8,11 +8,12 @@ import { errorMessageState } from "../../store/atom";
 import { majorTargetList } from "../../common/MajorTarget";
 import { inputState } from "../../pages/signUp/SignUp4Page";
 
-export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'email' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor';
+export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'email' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
 
 interface UserInputProps {
   userInfoType: UserTypeOptions;
   toNext?: boolean;
+  setValue?: (args: string) => void;
   setStateValid?: (args: inputState) => void;
   children?: ReactNode;
 }
@@ -27,7 +28,8 @@ const placeholderMapping: Record<UserTypeOptions, string> = {
   email: '쿠플라이 아이디',
   hopeMajor1: '1지망 이중전공 선택',
   hopeMajor2: '2지망 이중전공 선택',
-  doubleMajor: '진입 이중전공 선택'
+  doubleMajor: '진입 이중전공 선택',
+  kuEmail: '고려대학교 이메일'
 }
 
 const helpMessageMapping: Record<UserTypeOptions, string> = {
@@ -40,7 +42,8 @@ const helpMessageMapping: Record<UserTypeOptions, string> = {
   nickname: '닉네임',
   hopeMajor1: '',
   hopeMajor2: '',
-  doubleMajor: ''
+  doubleMajor: '',
+  kuEmail: ''
 }
 
 const errorMessageMapping: Record<UserTypeOptions, string> = {
@@ -53,14 +56,17 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
   email: '',
   hopeMajor1: '',
   hopeMajor2: '',
-  doubleMajor: ''
+  doubleMajor: '',
+  kuEmail: '유효하지 않은 이메일 주소입니다'
 }
 
 const optionList = majorTargetList;
 
-export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid }) => {
-
-  const [info, setInfo] = useRecoilState(userState(userInfoType));
+export function UserInput (props:UserInputProps) {
+  const { userInfoType, toNext, children, setStateValid, setValue } = props;
+  
+  // 이렇게 해서 정보를 미리 가져오는데 email = kuEmail이고 sessionStorage에 저장된건 kuEmail이라 email일 때에는 kuEmail을 갖고 온다 
+  const [info, setInfo] = useRecoilState(userState(userInfoType === 'email' ? 'kuEmail' : userInfoType));
   const errorMessage = useRecoilValue(errorMessageState);
   const firstMajor = useRecoilValue(userState('firstMajor')).info;
   const hopeMajor1 = useRecoilValue(userState('hopeMajor1')).info;
@@ -85,8 +91,10 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
 
   if(info.info !== ''){
     setStateValid?.('complete');
+    setValue?.(info.info);
   }else{
     setStateValid?.('incomplete');
+    setValue?.('');
   }
   
   return (
@@ -122,6 +130,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
         setValue={(v) => setInfo((prev) => ({...prev, info: v}))}
         helpMessage={helpMessageMapping[userInfoType]}
         errorMessage={errorMessageMapping[userInfoType]}
+        type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}
       />
       }
       {children}

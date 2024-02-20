@@ -11,7 +11,8 @@ const userTypeMapping: Record<UserTypeOptions, string> = {
   email: '쿠플라이 아이디를',
   hopeMajor1: '이중전공',
   hopeMajor2: '이중전공',
-  doubleMajor: '이중전공'
+  doubleMajor: '이중전공',
+  kuEmail: '고려대학교 이메일을'
 }
 
 interface UserInputTextProps{

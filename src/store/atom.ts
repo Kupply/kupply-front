@@ -91,8 +91,6 @@ export const userTypeState = atom<
   }
 });
 
-// GPA에 관한거랑 semester에 관한거가 필요함 - 근데 여기서 각각 두 종류가 있고 서로 섞이지 않기 때문에 이럴 떄에는 atom family
-
 type GpaSemesterType = {
   num1: string;
   num2: string;

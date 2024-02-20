@@ -6,6 +6,7 @@ import LoginPage from './pages/login/LoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
 // import SettingsPage from './pages/setting/SettingsPage';
+import { SignUp0Page } from './pages/signUp/SignUp0Page';
 import { SignUp1Page } from './pages/signUp/SignUp1Page';
 //import SignUp1Page from './pages/signUp/old/OldSignUp1Page';
 import SignUp2Page from './pages/signUp/SignUp2Page';
@@ -39,6 +40,7 @@ export const authRoutes = [
 
 export const signupRoutes = [
   { path: '/join', element: <SignUp1Page /> },
+  { path: '/signup0', element: <SignUp0Page/>},
   { path: '/signup1', element: <SignUp1Page /> },
   { path: '/signup2', element: <SignUp2Page /> },
   { path: '/signup3', element: <SignUp3Page /> },

@@ -70,7 +70,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   max-width: 2560px;
   height: 1153px;
   background-color: #fcfafb;
