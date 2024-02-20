@@ -1,10 +1,11 @@
-import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-import VerificationButton from '../../../assets/buttons/OldVerificationButton';
-import Typography from '../../../assets/OldTypography';
+//import VerificationButton from '../../../assets/buttons/OldVerificationButton';
+import Button05 from '../../../assets/buttons/Button05';
+//import Typography from '../../../assets/OldTypography';
+import Typography from '../../../assets/Typography';
 import ModalLarge from '../../base/ModalLarge';
-import { sendEmail } from '../../../pages/signUp/old/OldSignUp1Page';
+import { sendEmail } from '../../../utils/SignUpFunctions';
 
 export interface ModalProps {
   currentModal: number;
@@ -23,16 +24,6 @@ export default function SignUpLarge1(props: ModalProps) {
     <Main>
       {isOpenModal && (
         <ModalLarge onClickToggleModal={onClickModal}>
-          <PrevButton
-            onClick={() => {
-              setOpenModal(!isOpenModal);
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <path d="M34 23L26 30" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M26 30L34 38" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </PrevButton>
           <CloseButton
             onClick={() => {
               setOpenModal(!isOpenModal);
@@ -48,15 +39,15 @@ export default function SignUpLarge1(props: ModalProps) {
             </svg>
           </CloseButton>
           <div style={{ height: '130px' }}></div>
-          <AlertIconExclamation width="113px" height="113px" />
-          <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
+          <AlertIconExclamation width="5.885vw" height="5.885vw" />
+          <Typography size="1.25vw" bold='700' color="#141414" style={{ marginTop: '25px' }}>
             아직 인증번호를 받지 못하셨나요?
           </Typography>
-          <Typography size="mediumText" color="#141414" style={{ marginTop: '24px' }}>
+          <Typography size="0.9375vw" bold='500' color="#141414" style={{ marginTop: '24px' }}>
             새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
           </Typography>
           <ActionWrapper>
-            <VerificationButton
+            <Button05
               onClick={async () => {
                 setCurrentModal(currentModal + 2);
                 setBlank();
@@ -64,14 +55,14 @@ export default function SignUpLarge1(props: ModalProps) {
               }}
             >
               인증번호 다시 받기
-            </VerificationButton>
-            <VerificationButton
+            </Button05>
+            <Button05
               onClick={() => {
                 setCurrentModal(currentModal + 1);
               }}
             >
               이메일 주소 변경하기
-            </VerificationButton>
+            </Button05>
           </ActionWrapper>
         </ModalLarge>
       )}
@@ -91,19 +82,7 @@ const Main = styled.main`
 
 const CloseButton = styled.button`
   display: flex;
-  width: 60px;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50px;
-
-  cursor: pointer;
-`;
-
-const PrevButton = styled.button`
-  display: flex;
-  width: 60px;
+  width: 3.125vw; //60px
   height: 60px;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
-import { currentModalState, sendNumState } from "../../store/atom";
+import { currentModalState, isOpenModalState, sendNumState } from "../../store/atom";
 import { sendEmail } from "../../utils/SignUpFunctions";
 
 type VerificationButtonProps = {
@@ -10,7 +10,7 @@ type VerificationButtonProps = {
 
 export default function VerificationButton({onSetBlank}:VerificationButtonProps){
   const [currentModal, setCurrentModal] = useRecoilState(currentModalState);
-  const [isOpenModal, setOpenModal] = useState(false);
+  const [isOpenModal, setOpenModal] = useRecoilState(isOpenModalState);
   const [sendNum, setSendNum] = useRecoilState(sendNumState);
 
   const onClickToggleSmallModal = useCallback(async () => {
@@ -20,7 +20,7 @@ export default function VerificationButton({onSetBlank}:VerificationButtonProps)
     //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
     if (!isOpenModal) {
       setSendNum(sendNum + 1);
-      await sendEmail(sessionStorage.getItem('email') || '');
+      await sendEmail(sessionStorage.getItem('kuEmail') || '');
     }
     onSetBlank();
   }, [isOpenModal]);

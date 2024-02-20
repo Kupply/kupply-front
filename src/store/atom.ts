@@ -42,6 +42,11 @@ export const currentModalState = atom<number>({
   default: 100
 });
 
+export const isOpenModalState = atom<boolean>({
+  key: 'isOpenModalState',
+  default: false
+});
+
 export const nextButtonState = atom<boolean>({
   key: 'nextButtonState',
   default: false
