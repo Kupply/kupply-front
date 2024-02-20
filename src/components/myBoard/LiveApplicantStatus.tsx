@@ -23,19 +23,19 @@ const Application = () => {
 
   return (
     <AppliWrapper>
-      <TitleWrapper style={{ top: '21px' }}>
+      <TitleWrapper style={{ top: '1.03vw' }}>
         <TitleText>실시간 지원자</TitleText>
         <Information src="designImage/myBoard/InformationCircle.svg" alt="information" />
       </TitleWrapper>
-      <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" style={{ top: '62px' }} />
-      <NumberBox style={{ top: '73px' }}>
+      <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" style={{ top: '3.05vw' }} />
+      <NumberBox style={{ top: '3.59vw' }}>
         <NumberText style={{ color: '#D85888' }}>32</NumberText>
         <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;/ 12</NumberText>
         <NumberText2>명 정원</NumberText2>
       </NumberBox>
       <Content>32명의 지원자가 경영학과를 지원했습니다.</Content>
-      <UpdateBox style={{ top: '146.5px' }}>
-        <StyledSVG xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <UpdateBox style={{ top: '7.21vw' }}>
+        <StyledSVG xmlns="http://www.w3.org/2000/svg" width="0.625vw" height="0.59vw" viewBox="0 0 12 12" fill="none">
           <path d="M11.5 2V5H8.5" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
           <path
             d="M10.2449 7.50001C9.91993 8.41997 9.30472 9.20937 8.49202 9.74926C7.67932 10.2892 6.71317 10.5503 5.73915 10.4933C4.76513 10.4363 3.83602 10.0643 3.09182 9.43334C2.34762 8.80237 1.82865 7.94662 1.61312 6.99503C1.39759 6.04345 1.49718 5.0476 1.89687 4.15754C2.29656 3.26748 2.97471 2.53144 3.82912 2.06033C4.68352 1.58921 5.6679 1.40856 6.63392 1.54558C7.59993 1.6826 8.49525 2.12988 9.18494 2.82001L11.4999 5.00001"
@@ -58,17 +58,17 @@ const MockApply = () => {
 
   return (
     <MockWrapper>
-      <TitleWrapper style={{ top: '18px' }}>
+      <TitleWrapper style={{ top: '0.89vw' }}>
         <TitleText>내 학점 위치 파악하기</TitleText>
         <Information src="designImage/myBoard/InformationCircle.svg" alt="information" />
       </TitleWrapper>
-      <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" style={{ top: '57px' }} />
-      <NumberBox style={{ top: '67px' }}>
+      <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" style={{ top: '2.81vw' }} />
+      <NumberBox style={{ top: '3.3vw' }}>
         <NumberText style={{ color: '#D85888' }}>3.14</NumberText>
         <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;: 1</NumberText>
       </NumberBox>
-      <UpdateBox style={{ top: '116px' }}>
-        <StyledSVG xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <UpdateBox style={{ top: '5.71vw' }}>
+        <StyledSVG xmlns="http://www.w3.org/2000/svg" width="0.625vw" height="0.59vw" viewBox="0 0 12 12" fill="none">
           <path d="M11.5 2V5H8.5" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />
           <path
             d="M10.2449 7.50001C9.91993 8.41997 9.30472 9.20937 8.49202 9.74926C7.67932 10.2892 6.71317 10.5503 5.73915 10.4933C4.76513 10.4363 3.83602 10.0643 3.09182 9.43334C2.34762 8.80237 1.82865 7.94662 1.61312 6.99503C1.39759 6.04345 1.49718 5.0476 1.89687 4.15754C2.29656 3.26748 2.97471 2.53144 3.82912 2.06033C4.68352 1.58921 5.6679 1.40856 6.63392 1.54558C7.59993 1.6826 8.49525 2.12988 9.18494 2.82001L11.4999 5.00001"
@@ -85,7 +85,7 @@ const MockApply = () => {
 
 const AppliWrapper = styled.div`
   width: 16.25vw;
-  height: 181px;
+  height: 8.91vw;
 
   flex-shrink: 0;
   border-radius: 10px;
@@ -112,7 +112,7 @@ const AppliWrapper = styled.div`
 
 const MockWrapper = styled.div`
   width: 16.25vw;
-  height: 148px;
+  height: 8.12vw;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
@@ -192,13 +192,13 @@ const NumberText2 = styled.div`
   //line-height: 100%;
   opacity: 0.8;
 
-  margin-left: 10px;
+  margin-left: 0.52vw;
 `;
 
 const Content = styled.div`
   position: absolute;
   display: flex;
-  top: 125.5px;
+  top: 6.18vw;
   left: 2.083vw;
 
   color: rgba(67, 67, 67, 0.8);
@@ -231,7 +231,7 @@ const StyledSVG = styled.svg`
 const Information = styled.img`
   display: flex;
   width: 1.042vw;
-  height: 20px;
+  height: 0.98vw;
 
   flex-shrink: 0;
 `;
