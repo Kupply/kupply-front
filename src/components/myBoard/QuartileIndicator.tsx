@@ -26,12 +26,10 @@ const QuartileIndicator = () => {
         <TitleText>내 학점 위치 파악하기</TitleText>
         <Information src="designImage/myBoard/InformationCircle.svg" alt="information" />
       </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="57vw" height="2" viewBox="0 0 1096 2" fill="none">
+      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="57vw" height="0.1vw" viewBox="0 0 1096 2" fill="none">
         <path d="M0.883301 1L1095.12 1" stroke="#DFDFDF" />
       </StyleSvg>
-      <ChartBox>
-        <MyStageChart {...myStageData[0]} />
-      </ChartBox>
+      <ChartBox>{/* <MyStageChart {...myStageData[0]} /> */}</ChartBox>
     </Wrapper>
   );
 };
@@ -41,7 +39,7 @@ const Wrapper = styled.div`
   display: flex;
 
   width: 57.08vw;
-  height: 252px;
+  height: 12.4vw;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid #dfdfdf;
@@ -56,14 +54,14 @@ const TitleBox = styled.div`
   align-items: center;
 
   left: 2.08vw;
-  top: 26px;
+  top: 1.28vw;
   gap: 0.47vw;
 `;
 
 const ChartBox = styled.div`
   position: absolute;
   display: flex;
-  top: 111px;
+  top: 5.46vw;
   left: 2.08vw;
 `;
 
@@ -83,14 +81,14 @@ const TitleText = styled.div`
 const Information = styled.img`
   display: flex;
   width: 1.042vw;
-  height: 20px;
+  height: 0.98vw;
 
   flex-shrink: 0;
 `;
 
 const StyleSvg = styled.svg`
   position: absolute;
-  top: 72px;
+  top: 3.54vw;
 `;
 
 export default QuartileIndicator;

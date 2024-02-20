@@ -11,13 +11,13 @@ const PieChart = () => {
         <TitleText>지원자 정보 살펴보기</TitleText>
         <Information src="designImage/myBoard/InformationCircle.svg" alt="information" />
       </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="2" viewBox="0 0 534 2" fill="none">
+      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="0.1vw" viewBox="0 0 534 2" fill="none">
         <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
       </StyleSvg>
       <PieBox>
         <Pie />
       </PieBox>
-      <StyleSvg2 xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="2" viewBox="0 0 534 2" fill="none">
+      <StyleSvg2 xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="0.1vw" viewBox="0 0 534 2" fill="none">
         <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
       </StyleSvg2>
       <HalfPieBox>
@@ -29,7 +29,7 @@ const PieChart = () => {
 
 const Wrapper = styled.div`
   width: 27.92vw;
-  height: 828px;
+  height: 40.75vw;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid #dfdfdf;
@@ -46,7 +46,7 @@ const TitleBox = styled.div`
   align-items: center;
 
   left: 2.08vw;
-  top: 26px;
+  top: 1.28vw;
   gap: 0.47vw;
 `;
 
@@ -57,7 +57,7 @@ const PieBox = styled.div`
   align-items: center;
 
   left: 2.13vw;
-  top: 135.5px;
+  top: 6.67vw;
 `;
 
 const HalfPieBox = styled.div`
@@ -67,7 +67,7 @@ const HalfPieBox = styled.div`
   align-items: center;
 
   left: 2.13vw;
-  top: 537.91px;
+  top: 26.47vw;
 `;
 
 ///////////////// text /////////////////
@@ -86,19 +86,19 @@ const TitleText = styled.div`
 const Information = styled.img`
   display: flex;
   width: 1.042vw;
-  height: 20px;
+  height: 0.98vw;
 
   flex-shrink: 0;
 `;
 
 const StyleSvg = styled.svg`
   position: absolute;
-  top: 72px;
+  top: 3.54vw;
 `;
 
 const StyleSvg2 = styled.svg`
   position: absolute;
-  top: 479px;
+  top: 23.57vw;
 `;
 
 export default PieChart;

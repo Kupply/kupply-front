@@ -1,46 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { VictoryTheme, VictoryScatter, VictoryChart, VictoryTooltip, VictoryAxis } from 'victory';
+import { VictoryTheme, VictoryScatter, VictoryChart, VictoryTooltip, VictoryAxis, VictoryLabel } from 'victory';
 import { majorColorMapping } from '../../../utils/Mappings';
 
 // 하드코딩
 // translate(0, -150) 적용 x
 // 호버 tooltip 커스텀해야 됨 + 폰트 스타일 적용 X
 // plot 아래 학과 나타내기 X
-
-const tmpData = [
-  {
-    name: '경영대학',
-    value: 5,
-    avgGpa: 4.4,
-  },
-  {
-    name: '정경대학',
-    value: 10,
-    avgGpa: 3.5,
-  },
-  {
-    name: '의과대학',
-    value: 30,
-    avgGpa: 3.0,
-  },
-  {
-    name: '정보대학',
-    value: 14,
-    avgGpa: 4.2,
-  },
-  {
-    name: '미디어학부',
-    value: 24,
-    avgGpa: 4.0,
-  },
-  {
-    name: '스마트보안학부',
-    value: 45,
-    avgGpa: 3.8,
-  },
-];
 
 const Scatter = () => {
   const maxValue = Math.max(...tmpData.map((item) => item.value));
@@ -54,7 +21,7 @@ const Scatter = () => {
         <TitleText>이중전공 지원자 학과 분포</TitleText>
         <Information src="designImage/myBoard/InformationCircle.svg" alt="information" />
       </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="2" viewBox="0 0 534 2" fill="none">
+      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="0.1vw" viewBox="0 0 534 2" fill="none">
         <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
       </StyleSvg>
 
@@ -75,9 +42,10 @@ const Scatter = () => {
             axisComponent={<CustomAxis />}
             style={{
               grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
-              axisLabel: { padding: -12, transform: 'rotate(-90deg)' }, // translate(0, -150) 적용이 안되는데 일단 나중에...
+              axisLabel: { padding: -12, transform: 'rotate(-90deg) ' }, // padding: -12, transform: 'rotate(-90deg) translate(0, -150)'
             }}
           />
+
           <VictoryScatter
             data={tmpData}
             x="avgGpa"
@@ -89,7 +57,7 @@ const Scatter = () => {
                 flyoutStyle={{
                   fontFamily: 'Pretendard',
                   background: 'background: rgba(255, 255, 255, 0.80)',
-                  padding: '10px 8px',
+                  padding: '0.49vw 0.42vw',
                   display: 'flex',
                   justifyContent: 'flex-start',
                   alignItems: 'center',
@@ -97,7 +65,7 @@ const Scatter = () => {
                   alignSelf: 'stretch',
                   lineHeight: '22px',
                   maxWidth: '200px',
-                  height: '100px',
+                  height: '4.92vw',
                   border: 'none',
                 }}
                 flyoutPadding={10}
@@ -137,12 +105,45 @@ const CustomAxis = (props: any) => {
   );
 };
 
+const tmpData = [
+  {
+    name: '경영대학',
+    value: 5,
+    avgGpa: 4.4,
+  },
+  {
+    name: '정경대학',
+    value: 10,
+    avgGpa: 3.5,
+  },
+  {
+    name: '의과대학',
+    value: 30,
+    avgGpa: 3.0,
+  },
+  {
+    name: '정보대학',
+    value: 14,
+    avgGpa: 4.2,
+  },
+  {
+    name: '미디어학부',
+    value: 24,
+    avgGpa: 4.0,
+  },
+  {
+    name: '스마트보안학부',
+    value: 45,
+    avgGpa: 3.8,
+  },
+];
+
 const Wrapper = styled.div`
   position: relative;
   display: flex;
 
   width: 27.92vw;
-  height: 828px;
+  height: 40.75vw;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid #dfdfdf;
@@ -159,7 +160,7 @@ const TitleBox = styled.div`
   align-items: center;
 
   left: 2.08vw;
-  top: 26px;
+  top: 1.28vw;
   gap: 0.47vw;
 `;
 
@@ -195,14 +196,14 @@ const PlotText = styled.div`
 const Information = styled.img`
   display: flex;
   width: 1.042vw;
-  height: 20px;
+  height: 0.98vw;
 
   flex-shrink: 0;
 `;
 
 const StyleSvg = styled.svg`
   position: absolute;
-  top: 72px;
+  top: 3.54vw;
 `;
 
 export default Scatter;

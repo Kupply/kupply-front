@@ -6,8 +6,9 @@ import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
 
 // 데이터 연결 X
-//  isApplied={isApplied}
-// editmodal 위치 수정... 해야 됨
+// isApplied={isApplied}
+// editmodal 위치 수정 해야 됨
+// CTA02 부모 컨포넌트에 따라 크기 변경되게? 수정해야 될듯
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: string;
@@ -65,8 +66,8 @@ const ProfileBox = () => {
         />
       )}
 
-      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '215.98px' }} />
-      <SubTitleBox style={{ top: '245.98px' }}>
+      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '10.63vw' }} />
+      <SubTitleBox style={{ top: '12.11vw' }}>
         <IconImage src="designImage/myBoard/ProfileBoxMajorIcon.svg" alt="major" />
         <SubTitleText>관심 전공</SubTitleText>
       </SubTitleBox>
@@ -76,14 +77,14 @@ const ProfileBox = () => {
         <Card02 korName="경영학과" hopeMajor="business" />
       </InterestMajorBox>
 
-      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '535.98px' }} />
-      <SubTitleBox style={{ top: '565.98px' }}>
+      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '26.38vw' }} />
+      <SubTitleBox style={{ top: '27.85vw' }}>
         <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
         <SubTitleText>현재 내 학점</SubTitleText>
         <HopeSemesterText>4.2</HopeSemesterText>
       </SubTitleBox>
 
-      <SubTitleBox style={{ top: '605.98px' }}>
+      <SubTitleBox style={{ top: '29.82vw' }}>
         <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
         <SubTitleText>희망 진입학기</SubTitleText>
         <GPAText>2023-2R</GPAText>
@@ -102,7 +103,7 @@ const Wrapper = styled.div<{ translateY: number }>`
 
   justify-content: left;
   width: 14.68vw;
-  height: 860px;
+  height: 42.32vw;
   flex-shrink: 0;
 
   transform: ${(props) => `translateY(${props.translateY}px)`};
@@ -114,14 +115,14 @@ const NickNameBox = styled.div`
   justify-content: center;
 
   gap: 0.47vw;
-  top: 128.98px;
+  top: 6.35vw;
 `;
 
 const MajorTextBox = styled.div`
   position: absolute;
   display: flex;
 
-  top: 163.98px;
+  top: 8.07vw;
 `;
 
 const SubTitleBox = styled.div`
@@ -129,7 +130,7 @@ const SubTitleBox = styled.div`
   display: flex;
   justify-content: center;
 
-  height: 20px;
+  height: 0.98vw;
   flex-shrink: 0;
 
   gap: 0.52vw;
@@ -141,17 +142,17 @@ const InterestMajorBox = styled.div`
   justify-content: left;
   justify-content: flex-start;
 
-  margin-top: 20px;
+  margin-top: 0.98vw;
 
-  top: 265.98px;
+  top: 13.09vw;
   & > div {
-    margin-bottom: 20px;
+    margin-bottom: 0.98vw;
   }
 `;
 
 const ApplyBox = styled.div`
   position: absolute;
-  top: 655.98px;
+  top: 32.28vw;
 `;
 
 ///////////////// image /////////////////
@@ -159,14 +160,14 @@ const ApplyBox = styled.div`
 const CharacterImage = styled.img`
   justify-content: center;
   width: 5.78vw;
-  max-width: 111px;
-  height: 111px;
+  max-width: 5.78125vw;
+  height: 5.46vw;
   object-fit: cover;
 `;
 
 const EditImage = styled.img`
   width: 1.04vw;
-  height: 20px;
+  height: 0.98vw;
   flex-shrink: 0;
 
   &:hover {
@@ -183,7 +184,7 @@ const VectorImage = styled.img`
 
 const IconImage = styled.img`
   width: 1.04vw;
-  height: 20px;
+  height: 0.98vw;
   flex-shrink: 0;
 `;
 
@@ -204,7 +205,7 @@ const RoleText = styled.div`
   font-size: 1.04vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 120%; /* 24px */
+  line-height: 120%;
 `;
 
 const MajorText = styled.div`
@@ -223,7 +224,7 @@ const SubTitleText = styled.div`
   font-size: 0.83vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 19.2px; /* 120% */
+  line-height: 120%;
 `;
 
 const GPAText = styled.div`
@@ -234,7 +235,7 @@ const GPAText = styled.div`
   font-size: 1.04vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 120%; /* 24px */
+  line-height: 120%;
   white-space: nowrap;
 
   left: 9.27vw;
@@ -248,7 +249,7 @@ const HopeSemesterText = styled.div`
   font-size: 1.04vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 120%; /* 24px */
+  line-height: 120%;
 
   left: 9.27vw;
 `;

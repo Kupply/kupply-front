@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import ProfileBox from '../../components/myBoard/ProfileBox';
 import MajorBox from '../../components/myBoard/MajorBox';
@@ -39,6 +39,7 @@ const MyBoardPage = () => {
 
   return (
     <Wrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
+      <GlobalStyles />
       <InterestMajorBox>
         <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
         <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
@@ -46,35 +47,41 @@ const MyBoardPage = () => {
         </InterestMajorButton>
       </InterestMajorBox>
 
-      <div style={{ position: 'absolute', top: '62.02px', left: '4.98vw' }}>
-        <ProfileBox />
-      </div>
-
       <MainWrapper>
-        <div style={{ position: 'absolute', top: '224px', left: '27.3vw' }}>
+        <div style={{ position: 'absolute', top: '3.05vw', left: '4.98vw' }}>
+          <ProfileBox />
+        </div>
+        <div style={{ position: 'absolute', top: '11.02vw', left: '27.3vw' }}>
           <MajorBox />
         </div>
         <LiveWrapper>
           <Application />
-          <div style={{ marginTop: '24px' }} />
+          <div style={{ marginTop: '0.34vw' }} />
           <MockApply />
         </LiveWrapper>
-        <div style={{ position: 'absolute', top: '224px', left: '62.29vw' }}>
+        <div style={{ position: 'absolute', top: '11.02vw', left: '62.29vw' }}>
           <ThreeYear />
         </div>
-        <div style={{ position: 'absolute', top: '601px', left: '27.3vw' }}>
+        <div style={{ position: 'absolute', top: '29.58vw', left: '27.3vw' }}>
           <QuartileIndicator />
         </div>
-        <div style={{ position: 'absolute', top: '877px', left: '27.3vw' }}>
+        <div style={{ position: 'absolute', top: '43.16vw', left: '27.3vw' }}>
           <PieChart />
         </div>
-        <div style={{ position: 'absolute', top: '877px', left: '56.46vw' }}>
+        <div style={{ position: 'absolute', top: '43.16vw', left: '56.46vw' }}>
           <Scatter />
         </div>
       </MainWrapper>
     </Wrapper>
   );
 };
+
+const GlobalStyles = createGlobalStyle` // 가로 스크롤 숨기기
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+`;
 
 const Wrapper = styled.div`
   // position: relative;
@@ -98,22 +105,22 @@ const Wrapper = styled.div`
 
 const MainWrapper = styled.div`
   width: 100%;
-  height: 1481px;
+  height: 100%;
   flex-shrink: 0;
 
-  margin-top: 128px;
+  //margin-top: 62.02px;
 `;
 
 const LiveWrapper = styled.div`
   position: absolute;
-  top: 224px;
+  top: 11.02vw;
   left: 44.8vw;
 `;
 
 const InterestMajorBox = styled.div`
   position: absolute;
   display: flex;
-  top: 154px;
+  top: 7.58vw;
   left: 27.3vw;
 
   gap: 0.9375vw;

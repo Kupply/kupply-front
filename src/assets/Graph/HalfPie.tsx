@@ -120,7 +120,7 @@ const HalfPie = () => {
                 height="2"
                 viewBox="0 0 223 2"
                 fill="none"
-                style={{ marginTop: '20px', marginBottom: '20px' }}
+                style={{ marginTop: '0.98vw', marginBottom: '0.98vw' }}
               >
                 <path d="M0.887207 1H222.474" stroke="#DFDFDF" strokeLinecap="round" />
               </svg>
@@ -171,7 +171,7 @@ const SecondLineBox = styled.div`
   justify-content: flex-end;
   padding-right: 0.16vw;
 
-  margin-top: 6px;
+  margin-top: 0.3vw;
 `;
 
 const CircleCenterBox = styled.div`
