@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import Typography from './Typography';
 
 export interface TextFieldBoxProps extends React.ComponentPropsWithoutRef<'div'> {
@@ -26,7 +25,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
             {helpMessage}
           </Typography>
         )}
-        <TextField state={state} placeholder={placeHolder}></TextField>
+        <TextField state={state} placeholder={placeHolder} {...rest}></TextField>
       </TextFieldWrapper>
     </MainWrapper>
   );

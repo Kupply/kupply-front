@@ -67,7 +67,7 @@ function SignUp1Page() {
 
   // modal 관련
   const [currentModal, setCurrentModal] = useState<number>(1); // 임의 값으로 초기화
-  const [isOpenModal, setOpenModal] = useState<boolean>(true);
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
   // modal 2 - 3 email value 전달 관련
   const [email, setEmail] = useState<string>(sessionStorage.getItem('email') || '');
   const [emailState, setEmailState] = useState<StateOptions>(sessionStorage.getItem('email') ? 'filled' : 'default');

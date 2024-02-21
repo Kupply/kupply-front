@@ -84,7 +84,7 @@ interface GpaSemesterVerificationProps{
   toNext: boolean;
 };
 
-// 이 userType으로 입력이 들어가는게 passerGpa랑 그냥 GPa
+// 
 export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext}) => {
   const [userGpa, setUserGpa] = useRecoilState(gpaState(userType));
   const {num1, num2, num3} = userGpa;
