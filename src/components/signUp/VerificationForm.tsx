@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TextAreaBox from "../../assets/TextArea";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { nextButtonState, verificationCodeState, gpaState, semesterState } from "../../store/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailAtom } from "../../store/atom";
@@ -24,6 +24,22 @@ export const CodeVerification = () => {
     }))
     console.log(boxNum, value, codeState);
   };
+
+  const handlePaste = (e:React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const clipboardData = e.clipboardData.getData('text/plain').slice(0, 6);
+
+    if (/^\d{6}$/.test(clipboardData)){
+      setCodeState({
+        num1: clipboardData[0],
+        num2: clipboardData[1],
+        num3: clipboardData[2],
+        num4: clipboardData[3],
+        num5: clipboardData[4],
+        num6: clipboardData[5]
+      })
+    }
+  }
   
   useEffect(() => {
     async function handleVerification(){
@@ -54,6 +70,7 @@ export const CodeVerification = () => {
             name={`pin-${index + 1}`}
             value={eval(`num${index + 1}`)}
             setValue={(value) => handleCodeState(`num${index + 1}`, value)}
+            onPaste={index === 0 ? handlePaste: undefined}
           />
         ))}
     </CodeVerifiBoxWrapper>

@@ -11,7 +11,7 @@ export interface TextAreaBoxProps extends React.ComponentPropsWithRef<'input'> {
 
 
 export default function TextAreaBox(props: TextAreaBoxProps) {
-  const { value, setValue, name, isEntered: initIsEntered, setRef } = props;
+  const { value, setValue, name, isEntered: initIsEntered, setRef, onPaste = undefined } = props;
   const [fieldName, fieldIndex] = name.split('-');
 
   const [isEntered, setIsEntered] = useState<boolean>(initIsEntered || false);
@@ -61,6 +61,7 @@ export default function TextAreaBox(props: TextAreaBoxProps) {
     <InputWrapper
       onChange={handleChange}
       onKeyDown={handleKeyDown}
+      onPaste={onPaste}
       maxLength={1}
       isEntered={isEntered}
       value={value}

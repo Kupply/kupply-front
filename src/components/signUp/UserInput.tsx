@@ -1,5 +1,5 @@
 import TextFieldBox from "../../assets/OldTextFieldBox";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../store/atom";
 import DropDown from "../../assets/dropdown/DropDown";
 import { majorAllList } from "../../common/MajorAll";
@@ -7,6 +7,7 @@ import { ReactNode, useEffect } from "react";
 import { errorMessageState } from "../../store/atom";
 import { majorTargetList } from "../../common/MajorTarget";
 import { inputState } from "../../pages/signUp/SignUp4Page";
+import { majorNameMappingBySID } from '../../utils/Mappings';
 
 export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'email' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor';
 
@@ -60,9 +61,10 @@ const optionList = majorTargetList;
 
 export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid }) => {
 
-  const [info, setInfo] = useRecoilState(userState(userInfoType));
+  // info = {info: , infoState:, infoCheck: }
+  const [userInfo, setUserInfo] = useRecoilState(userState(userInfoType));
+  const [firstMajor, setFirstMajor] = useRecoilState(userState('firstMajor'));
   const errorMessage = useRecoilValue(errorMessageState);
-  const firstMajor = useRecoilValue(userState('firstMajor')).info;
   const hopeMajor1 = useRecoilValue(userState('hopeMajor1')).info;
   const hopeMajor2 = useRecoilValue(userState('hopeMajor2')).info;
 
@@ -73,17 +75,31 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
   updatedMajorTargetList.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInfo((prev) => ({
+    const newData = e.target.value;
+    setUserInfo((prev) => ({
       ...prev,
-      info: e.target.value
+      info: newData
     }))
+
+    if(userInfoType === 'studentId'){
+      if(newData.length === 10){
+        // 학번 중간 4자리에 해당하는 학과 데이터가 있으면 자동으로 채워줌, 없으면 무시
+        const key = parseInt(userInfo.info.substring(4, 8));
+        // firstMajor에 해당하는 dropdown value를 바꿔준다
+        setFirstMajor((prev) => ({
+          ...prev,
+          info: majorNameMappingBySID[key] || firstMajor.info
+        }))
+
+      }
+    }
   };
 
   if (toNext){
-    sessionStorage.setItem(userInfoType, info.info);
+    sessionStorage.setItem(userInfoType, userInfo.info);
   }
 
-  if(info.info !== ''){
+  if(userInfo.info !== ''){
     setStateValid?.('complete');
   }else{
     setStateValid?.('incomplete');
@@ -103,23 +119,23 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
           userInfoType === 'doubleMajor' ? optionList:
           userInfoType === 'hopeMajor1' ?  optionList.filter(
             (el) => el.value1 !== hopeMajor2 &&
-            el.value1 !== firstMajor
+            el.value1 !== firstMajor.info
           ):
           updatedMajorTargetList.filter(
             (el) => el.value1 !== hopeMajor1 &&
-            el.value1 !== firstMajor
+            el.value1 !== firstMajor.info
           )
         }
-        value={info.info}
-        setValue={(v) => setInfo((prev) => ({...prev, info:v}))}
+        value={userInfo.info}
+        setValue={(v) => setUserInfo((prev) => ({...prev, info:v}))}
       /> :
       <TextFieldBox
         placeholder={placeholderMapping[userInfoType]}
-        value={info.info}
+        value={userInfo.info}
         onChange={handleInputChange}
-        state={info.infoState}
-        setState={(s) => setInfo((prev) => ({...prev, infoState: s}))}
-        setValue={(v) => setInfo((prev) => ({...prev, info: v}))}
+        state={userInfo.infoState}
+        setState={(s) => setUserInfo((prev) => ({...prev, infoState: s}))}
+        setValue={(v) => setUserInfo((prev) => ({...prev, info: v}))}
         helpMessage={helpMessageMapping[userInfoType]}
         errorMessage={errorMessageMapping[userInfoType]}
       />
