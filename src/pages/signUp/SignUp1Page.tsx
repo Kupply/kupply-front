@@ -52,7 +52,7 @@ export function SignUp1Page(){
       <ContentsList>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ContentsWrapper>
-              <Typography size="0.9375vw" bold="500">
+              <Typography size="0.9375vw" bold="700">
                 인증번호가 전송되었습니다.
               </Typography>
               <Typography size="0.833vw" bold="500">

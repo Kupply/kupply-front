@@ -4,7 +4,7 @@ import SignUpLarge1 from "./modals/SignUpLarge1";
 import SignUpLarge2 from "./modals/SignUpLarge2";
 import SignUpLarge3 from "./modals/SignUpLarge3";
 import { sendEmail } from "../../utils/SignUpFunctions";
-import { currentModalState, emailAtom, emailStateAtom, sendNumState } from "../../store/atom";
+import { currentModalState, isOpenModalState, sendNumState, userState } from "../../store/atom";
 import { useRecoilState } from "recoil";
 
 interface ModalHandleProps {
@@ -13,10 +13,9 @@ interface ModalHandleProps {
 
 export function ModalHandle ({setBlank}: ModalHandleProps) {
   const [currentModal, setCurrentModal] = useRecoilState(currentModalState);
-  const [isOpenModal, setOpenModal] = useState<boolean>(true);
+  const [isOpenModal, setOpenModal] = useRecoilState(isOpenModalState);
   const [sendNum, setSendNum] = useRecoilState(sendNumState);
-  const [email, setEmail] = useRecoilState(emailAtom);
-  const [emailState, setEmailState] = useRecoilState(emailStateAtom);
+  const [email, setEmail] = useRecoilState(userState('kuEmail'));
 
   const onClickToggleSmallModal = useCallback(async () => {
     setOpenModal(!isOpenModal);
@@ -25,10 +24,12 @@ export function ModalHandle ({setBlank}: ModalHandleProps) {
     //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
     if (!isOpenModal) {
       setSendNum(sendNum + 1);
-      await sendEmail(sessionStorage.getItem('email') || '');
+      await sendEmail(sessionStorage.getItem('kuEmail') || '');
     }
     setBlank();
   }, [isOpenModal]);
+
+  console.log(isOpenModal);
 
   // large modal 관련
   const onClickToggleLargeModal = useCallback(() => {
@@ -58,7 +59,7 @@ export function ModalHandle ({setBlank}: ModalHandleProps) {
             case 1:
               return (
                 <SignUpLarge1
-                  email={email}
+                  email={email.info}
                   setBlank={setBlank}
                   currentModal={currentModal}
                   isOpenModal={isOpenModal}
@@ -75,10 +76,10 @@ export function ModalHandle ({setBlank}: ModalHandleProps) {
                   setCurrentModal={setCurrentModal}
                   setOpenModal={setOpenModal}
                   onClickModal={onClickToggleLargeModal}
-                  email={email}
-                  emailState={emailState}
-                  setEmail={setEmail}
-                  setEmailState={setEmailState}
+                  email={email.info}
+                  emailState={email.infoState}
+                  setEmail={(v) => setEmail((prev) => ({...prev, info: v}))}
+                  setEmailState={(s) => setEmail((prev) => ({...prev, infoState: s}))}
                   setBlank={setBlank}
                 />
               );
@@ -92,7 +93,7 @@ export function ModalHandle ({setBlank}: ModalHandleProps) {
                   setCurrentModal={setCurrentModal}
                   setOpenModal={setOpenModal}
                   onClickModal={onClickToggleLargeModal}
-                  email={email}
+                  email={email.info}
                 />
               );
   

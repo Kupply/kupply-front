@@ -1,9 +1,11 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
-import LabelButton from '../../../assets/buttons/LabelButton';
-import Typography from '../../../assets/OldTypography';
+//import LabelButton from '../../../assets/buttons/LabelButton';
+//import Typography from '../../../assets/OldTypography';
+import Typography from '../../../assets/Typography';
 import ModalLarge from '../../base/ModalLarge';
+import Button01 from '../../../assets/buttons/Button01';
 
 export interface ModalProps {
   currentModal: number;
@@ -26,7 +28,7 @@ export default function SignUpLarge3(props: ModalProps) {
               setOpenModal(!isOpenModal);
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.125vw" height="3.125vw" viewBox="0 0 60 60" fill="none">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -35,13 +37,13 @@ export default function SignUpLarge3(props: ModalProps) {
               />
             </svg>
           </CloseButton>
-          <div style={{ height: '170px' }}></div>
-          <AlertIconCheck width="113px" height="113px" />
-          <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
+          <div style={{ height: '15.74vh' }}></div>
+          <AlertIconCheck width="5.885vw" height="5.885vw" />
+          <Typography size="1.25vw" bold='700' color="#141414" style={{ marginTop: '25px' }}>
             새로운 인증번호를 발송했습니다.
           </Typography>
           <Typography
-            size="mediumText"
+            size="0.9375vw" bold='500'
             color="#141414"
             style={{
               marginTop: '24px',
@@ -52,9 +54,9 @@ export default function SignUpLarge3(props: ModalProps) {
             <br /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요!
           </Typography>
           <ActionWrapper>
-            <LabelButton buttonType="primary" size="medium" onClick={onClickModal}>
+            <Button01 size="medium" onClick={onClickModal}>
               확인
-            </LabelButton>
+            </Button01>
           </ActionWrapper>
         </ModalLarge>
       )}
@@ -74,13 +76,13 @@ const Main = styled.main`
 
 const CloseButton = styled.button`
   display: flex;
-  width: 60px;
+  width: 3.125vw;
   height: 60px;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 50px;
-  right: 50px;
+  top: 4.629vh; //50px
+  right: 2.604vw; //50px
 
   cursor: pointer;
 `;
@@ -88,5 +90,5 @@ const CloseButton = styled.button`
 const ActionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 83px;
+  margin-top: 7.685vh //83px;
 `;

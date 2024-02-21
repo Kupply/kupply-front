@@ -9,7 +9,7 @@ import { majorTargetList } from "../../common/MajorTarget";
 import { inputState } from "../../pages/signUp/SignUp4Page";
 import { majorNameMappingBySID } from '../../utils/Mappings';
 
-export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'email' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor';
+export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'email' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
 
 // localStorage이나 sessionStorage에서 가져올 때 각 페이지별로 설정해 둔 이름들이 모두 다른 관계로 
 // 강제적으로 원하는 정보를 가져올 수 있도록 userInfoTypeManual을 만들어둠 
@@ -17,6 +17,7 @@ export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | '
 interface UserInputProps {
   userInfoType: UserTypeOptions;
   toNext?: boolean;
+  setValue?: (args: string) => void;
   setStateValid?: (args: inputState) => void;
   children?: ReactNode;
   userInfoTypeManual?: string | undefined;
@@ -32,7 +33,8 @@ const placeholderMapping: Record<UserTypeOptions, string> = {
   email: '쿠플라이 아이디',
   hopeMajor1: '1지망 이중전공 선택',
   hopeMajor2: '2지망 이중전공 선택',
-  doubleMajor: '진입 이중전공 선택'
+  doubleMajor: '진입 이중전공 선택',
+  kuEmail: '고려대학교 이메일'
 }
 
 const helpMessageMapping: Record<UserTypeOptions, string> = {
@@ -45,7 +47,8 @@ const helpMessageMapping: Record<UserTypeOptions, string> = {
   nickname: '닉네임',
   hopeMajor1: '',
   hopeMajor2: '',
-  doubleMajor: ''
+  doubleMajor: '',
+  kuEmail: ''
 }
 
 const errorMessageMapping: Record<UserTypeOptions, string> = {
@@ -58,7 +61,8 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
   email: '',
   hopeMajor1: '',
   hopeMajor2: '',
-  doubleMajor: ''
+  doubleMajor: '',
+  kuEmail: '유효하지 않은 이메일 주소입니다'
 }
 
 const optionList = majorTargetList;
@@ -105,8 +109,10 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
 
   if(userInfo.info !== ''){
     setStateValid?.('complete');
+    setValue?.(userInfo.info);
   }else{
     setStateValid?.('incomplete');
+    setValue?.('');
   }
   
   return (
@@ -142,6 +148,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
         setValue={(v) => setUserInfo((prev) => ({...prev, info: v}))}
         helpMessage={helpMessageMapping[userInfoType]}
         errorMessage={errorMessageMapping[userInfoType]}
+        type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}
       />
       }
       {children}

@@ -137,8 +137,6 @@ export function SignUp4PageCandidate(){
 
 /* ---------------------------------------- */
 
-
-
 export function SignUp4PagePasser(){
   const {
     setGpaState,

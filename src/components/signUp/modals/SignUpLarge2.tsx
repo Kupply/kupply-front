@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react';
+import Typography from '../../../assets/Typography';
 import styled from 'styled-components';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
-import SubmitButton from '../../../assets/buttons/OldSubmitButton';
-import Typography from '../../../assets/OldTypography';
+//import SubmitButton from '../../../assets/buttons/OldSubmitButton';
+import Button03 from '../../../assets/buttons/Button03';
+//import Typography from '../../../assets/OldTypography';
 import ModalLarge from '../../base/ModalLarge';
 import { sendEmail } from '../../../utils/SignUpFunctions';
 
@@ -47,7 +48,7 @@ export default function SignUpLarge2(props: ModalProps) {
               setCurrentModal(currentModal - 1);
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.125vw" height="3.125vw" viewBox="0 0 60 60" fill="none">
               <path d="M34 23L26 30" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
               <path d="M26 30L34 38" stroke="#434343" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -57,7 +58,7 @@ export default function SignUpLarge2(props: ModalProps) {
               setOpenModal(!isOpenModal);
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.125vw" height="3.125vw" viewBox="0 0 60 60" fill="none">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -67,11 +68,11 @@ export default function SignUpLarge2(props: ModalProps) {
             </svg>
           </CloseButton>
           <div style={{ height: '130px' }}></div>
-          <AlertIconExclamation width="113px" height="113px" />
-          <Typography size="largeText" color="#141414" style={{ marginTop: '25px' }}>
+          <AlertIconExclamation width="5.8854vw" height="5.8854vw" />
+          <Typography size="1.25vw" bold='700' color="#141414" style={{ marginTop: '25px' }}>
             인증번호를 받을 고려대 이메일 주소를 입력해주세요!
           </Typography>
-          <Typography size="mediumText" color="#141414" style={{ marginTop: '24px' }}>
+          <Typography size="0.9375vw" bold='500' color="#141414" style={{ marginTop: '24px' }}>
             고려대학교 이메일 주소를 정확히 기입해주세요.
           </Typography>
           <ActionWrapper>
@@ -85,7 +86,7 @@ export default function SignUpLarge2(props: ModalProps) {
               setState={setEmailState}
               setValue={setEmail}
             />
-            <SubmitButton
+            <Button03
               onClick={async () => {
                 const IDPattern = /.+@korea\.ac\.kr$/;
                 if (IDPattern.test(email)) {
@@ -116,26 +117,26 @@ const Main = styled.main`
 
 const CloseButton = styled.button`
   display: flex;
-  width: 60px;
+  width: 3.125vw //60px;
   height: 60px;
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 50px;
-  right: 50px;
+  right: 2.604vw;
 
   cursor: pointer;
 `;
 
 const PrevButton = styled.button`
   display: flex;
-  width: 60px;
+  width: 3.125vw //60px;
   height: 60px;
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 50px;
-  left: 50px;
+  left: 2.604vw;
 
   cursor: pointer;
 `;

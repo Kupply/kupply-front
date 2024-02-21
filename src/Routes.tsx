@@ -5,6 +5,8 @@ import LandingPage from './pages/landing/LandingPage';
 import LoginPage from './pages/login/LoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
+// import SettingsPage from './pages/setting/SettingsPage';
+import { SignUp0Page } from './pages/signUp/SignUp0Page';
 import { SettingsPage } from './pages/setting/SettingsPage';
 //import SettingsPage from './pages/setting/OldSettingsPage';
 import { SignUp1Page } from './pages/signUp/SignUp1Page';
@@ -16,6 +18,7 @@ import SignUp3Page from './pages/signUp/SignUp3Page';
 //import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/old/OldSignUp4Page';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/SignUp4Page';
 
+//import { SignUp5Page, SignUp5Complete } from './pages/signUp/old/OldSignUp5Page';
 import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
 import DeletePage from './pages/delete/DeletePage';
 //import DashboardMainPage from './admin/AdminPage';
@@ -39,6 +42,7 @@ export const authRoutes = [
 
 export const signupRoutes = [
   { path: '/join', element: <SignUp1Page /> },
+  { path: '/signup0', element: <SignUp0Page/>},
   { path: '/signup1', element: <SignUp1Page /> },
   { path: '/signup2', element: <SignUp2Page /> },
   { path: '/signup3', element: <SignUp3Page /> },
