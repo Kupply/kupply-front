@@ -63,9 +63,10 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
 
 const optionList = majorTargetList;
 
-export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid }) => {
+export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, setValue }) => {
 
-  const [info, setInfo] = useRecoilState(userState(userInfoType));
+  const [userInfo, setUserInfo] = useRecoilState(userState(userInfoType));
+  const [firstMajor, setFirstMajor] = useRecoilState(userState('firstMajor'));
   const errorMessage = useRecoilValue(errorMessageState);
   const hopeMajor1 = useRecoilValue(userState('hopeMajor1')).info;
   const hopeMajor2 = useRecoilValue(userState('hopeMajor2')).info;
@@ -103,7 +104,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
 
   if(userInfo.info !== ''){
     setStateValid?.('complete');
-    setValue?.(info.info);
+    setValue?.(userInfo.info);
   }else{
     setStateValid?.('incomplete');
     setValue?.('');
