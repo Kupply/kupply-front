@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { TextButton04, TextButton03Settings } from "../../assets/buttons/TextButton";
+import { TextButton04, TextButton03Settings, TextButton01, TextButton02, TextButton03LNB, TextButton05, TextButton06 } from "../../assets/buttons/TextButton";
 import { SBContentState } from "../../store/atom";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
+import Button02 from "../../assets/buttons/Button02";
 
 export function SideBar(){
   const [selected, setSelected] = useRecoilState(SBContentState);
@@ -16,6 +17,7 @@ export function SideBar(){
       <Content>
           <Title>환경설정</Title>
           <Flex>
+
           <TextButton04
               selected={selected === 0}
               onCustomFunction={() => {

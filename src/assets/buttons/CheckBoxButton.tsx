@@ -25,12 +25,12 @@ const CheckBoxButton01 = (props: CheckBoxButtonProps) => {
 
 const CheckBoxButton02 = (props: CheckBoxButtonProps) => {
   
-  const {children, isChecked, onCustomFunction, ...rest} = props;
+  const {children, isChecked, onCustomFunction, textSize, textBold, ...rest} = props;
   return <ButtonWrapper02 {...rest}>
     <button onClick={() => onCustomFunction(!isChecked)}>
       <ButtonImage02 isChecked={isChecked}/>
     </button>
-    <ButtonText02 isChecked={isChecked}>{children}</ButtonText02>
+    <ButtonText02 style={{fontSize: `${textSize}`, fontWeight: `${textBold}`}} isChecked={isChecked}>{children}</ButtonText02>
   </ButtonWrapper02>
 }
 
@@ -50,7 +50,7 @@ align-items: center;
 //margin-bottom: 22px;
 `;
 
-const ButtonText01 = styled.div`
+const ButtonText01 = styled.text`
 color: #141414;
 /* Medium Text */
 font-family: Pretendard;
@@ -81,7 +81,7 @@ const ButtonImage01 = ( {isChecked}: {isChecked: boolean}):JSX.Element => {
   }
 }
 
-const ArrowImage = () => {
+export const ArrowImage = () => {
   return <div style={{
     display: 'flex',
     //width: '28px',
@@ -108,7 +108,7 @@ gap: 5px;
 flex-shrink: 0;
 `;
 
-const ButtonText02 = styled.div<{isChecked: boolean}>`
+const ButtonText02 = styled.text<{isChecked: boolean}>`
 color: ${(props) => props.isChecked === false  ? 'var(--A8_Grey-4, #A8A8A8)' : '#D85888'};
 font-family: Pretendard;
 //font-size: 18px;

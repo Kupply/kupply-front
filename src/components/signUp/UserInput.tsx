@@ -109,10 +109,8 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
 
   if(userInfo.info !== ''){
     setStateValid?.('complete');
-    setValue?.(userInfo.info);
   }else{
     setStateValid?.('incomplete');
-    setValue?.('');
   }
   
   return (

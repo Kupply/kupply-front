@@ -4,6 +4,7 @@ import client from "./HttpClient";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import axios from "axios";
 
 export function useSubmit(){
 
@@ -38,8 +39,9 @@ export function useSubmit(){
       newStudentId: stdID.info,
       newFirstMajor: firstMajor.info,
     };
+    //console.log('firstSubmit');
     try {
-      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
       await client.post('/user/updateMe', updateData, config);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {

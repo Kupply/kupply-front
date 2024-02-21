@@ -10,7 +10,7 @@ import { useSubmit } from "../../../utils/SettingSubmitFunctions";
 
 export function SidebarContent2(){
   // 지금 문제가 setGpaState이랑 setSemesterState에서 SignUpFunctions를 쓰고 있는데 이게 다르다 보니까 문제가 생긴다. role을 갖고 오는게 거기에는 있는데 여기는 role이 'candidate'으로 고정된 상황 
-  const {setGpaState, setSemesterState} = useInputState();
+
   const isGpaChanged = useRecoilValue(isGpaChangedState);
   const [modalOpen, setModalOpen] = useRecoilState(settingsModalState);
   const [isApplied, setIsApplied] = useRecoilState(isAppliedState);
@@ -39,7 +39,7 @@ export function SidebarContent2(){
 
           <GPAVerification 
             userType="candidate"
-            setState={setGpaState}
+            locationUsed="Settings"
           />
 
           <TextFieldTitle>
@@ -47,11 +47,8 @@ export function SidebarContent2(){
           </TextFieldTitle>
           <SemesterVerification
             userType="candidate"
-            setState={setSemesterState}
+            locationUsed="Settings"
           />
-            <Typography size={'normalText'} style={{ marginTop: '58px' }}>
-              학기
-            </Typography>
           
           <div>
             <SubmitButton

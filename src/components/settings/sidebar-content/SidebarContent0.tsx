@@ -11,6 +11,7 @@ export function SidebarContent0(){
   const [isApplied, setIsApplied] = useRecoilState(isAppliedState);
   const {firstSubmit} = useSubmit();
   
+  // axios - error의 문제가 발생하긴 하는데 submitButton 자체는 제대로 작동 
   return (
     <BodyContainer>
           <BodyTitle>나의 기본정보 수정하기</BodyTitle>
@@ -36,6 +37,7 @@ export function SidebarContent0(){
             active={!isApplied}
             onClick={() => {
               firstSubmit();
+              console.log('submitted');
             }}
           >
             저장하기

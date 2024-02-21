@@ -36,7 +36,7 @@ export default function SignUp3Page(){
       <ContentsList>
         <ContentsWrapper>
           <UserInputText userInfoType="email"/>
-          <UserInput userInfoType="email">
+          <UserInput userInfoType="email" userInfoTypeManual="kuEmail">
             <InfoMessageWrapper>
               <InfoImageWrapper>
                 <CircleImage src={process.env.PUBLIC_URL + `/designImage/CircleImage.svg`}/>

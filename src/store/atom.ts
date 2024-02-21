@@ -61,10 +61,11 @@ type InfoState = {
 }
 
 // 이름, 비밀번호, 닉네임...
+// 이렇게 하니까 발생하는 문제점이 회원가입한 사람이 로그인 하지 않았는데 정보가 이미 채워지는 결과가 나타남 
 export const userState = atomFamily<InfoState, string>({
   key: "userState", 
   default: (kind: string) => ({
-    info: sessionStorage.getItem(kind) || localStorage.getItem(kind) || '',
+    info: sessionStorage.getItem(kind) || '',
     infoState: 'default',
     infoCheck: 'default'
   })
@@ -113,6 +114,16 @@ export const gpaState = atomFamily<GpaSemesterType, userType>({
   })
 })
 
+// SettingsPage에서 사용할 gpa
+export const gpaSettingsState = atomFamily<GpaSemesterType, userType>({
+  key: "GpaSettingsState",
+  default: (kind: userType) => ({
+    num1: localStorage.getItem(`${kind}GPA`)?.charAt(0) || '',
+    num2: localStorage.getItem(`${kind}GPA`)?.charAt(2) || '',
+    num3: localStorage.getItem(`${kind}GPA`)?.charAt(3) || '',
+  })
+})
+
 
 export const semesterState = atomFamily<GpaSemesterType, userType>({
   key: "SemesterState",
@@ -120,6 +131,16 @@ export const semesterState = atomFamily<GpaSemesterType, userType>({
     num1: sessionStorage.getItem(`${kind}Semester`)?.charAt(2) || '',
     num2: sessionStorage.getItem(`${kind}Semester`)?.charAt(3) || '',
     num3: sessionStorage.getItem(`${kind}Semester`)?.charAt(5) || '',
+  })
+})
+
+// SettingsPage에서 사용하는 gpa
+export const semesterSettingsState = atomFamily<GpaSemesterType, userType>({
+  key: "SemesterSettingsState",
+  default: (kind: userType) => ({
+    num1: localStorage.getItem(`${kind}Semester`)?.charAt(2) || '',
+    num2: localStorage.getItem(`${kind}Semester`)?.charAt(3) || '',
+    num3: localStorage.getItem(`${kind}Semester`)?.charAt(5) || '',
   })
 })
 

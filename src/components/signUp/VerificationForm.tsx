@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TextAreaBox from "../../assets/TextArea";
 import React, { useEffect, useState, useRef } from "react";
-import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState } from "../../store/atom";
+import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState } from "../../store/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
@@ -84,14 +84,16 @@ type LocationUsed = 'Settings' | 'SignUp';
 interface GpaSemesterVerificationProps{
   userType: 'passer' | 'candidate';
   state?: inputState;
-  setState: (args:inputState) => void;
+  setState?: (args:inputState) => void;
   toNext?: boolean;
   locationUsed? : LocationUsed;
 };
 
 
 export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext, locationUsed = 'SignUp'}) => {
-  const [userGpa, setUserGpa] = useRecoilState(gpaState(userType));
+
+  // 
+  const [userGpa, setUserGpa] = useRecoilState(locationUsed === 'SignUp' ? gpaState(userType) : gpaSettingsState(userType));
   const [isGpaChanged, setIsGpaChanged] = useRecoilState(isGpaChangedState);
   const {num1, num2, num3} = userGpa;
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
@@ -113,9 +115,9 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
 
   useEffect(() => {
     if(!!num1 && !!num2 && !!num3) {
-      setState('complete')
+      setState?.('complete')
       if(+(num1 + '.' + num2 + num3) > 4.5) 
-        setState('error');
+        setState?.('error');
     };
     
   }, [userGpa]);
@@ -168,17 +170,17 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
 
 
 /* ---------------------------------------------------------------- */
-export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({userType, setState, toNext}) => {
-  const [userSemester, setUserSemester] = useRecoilState(semesterState(userType));
-  const {num1, num2, num3} = userSemester;
+export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({userType, setState, toNext, locationUsed = 'SignUp'}) => {
 
+  const [userSemester, setUserSemester] = useRecoilState(locationUsed === 'SignUp' ? semesterState(userType) : semesterSettingsState(userType));
+  const {num1, num2, num3} = userSemester;
 
   useEffect(() => {
     const semesterYear = +(num1 + num2);
     if(!!num1 && !!num2 && !!num3) {
-      setState('complete')
+      setState?.('complete')
       if(!(num3 === '1' || num3 === '2') || semesterYear < 23 || (semesterYear === 23 && num1 === '1')) 
-        setState('error');
+        setState?.('error');
     };
     
   }, [userSemester]);
@@ -191,7 +193,10 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
   };
 
   if(toNext){
-    sessionStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
+    if(locationUsed === 'SignUp')
+      sessionStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
+    else
+      localStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
   }
 
   return (
