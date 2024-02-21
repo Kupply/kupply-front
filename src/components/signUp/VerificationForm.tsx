@@ -77,6 +77,7 @@ export const CodeVerification = () => {
   )
 }
 
+/* ---------------------------------------------------------------- */
 interface GpaSemesterVerificationProps{
   userType: 'passer' | 'candidate';
   state?: inputState;
@@ -138,7 +139,8 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   
 }
 
-// 지금 문제가 한칸에 대해서만 입력을 하는데에도 전체가 바뀌는 마법이 일어남 
+
+/* ---------------------------------------------------------------- */
 export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({userType, setState, toNext}) => {
   const [userSemester, setUserSemester] = useRecoilState(semesterState(userType));
   const {num1, num2, num3} = userSemester;
