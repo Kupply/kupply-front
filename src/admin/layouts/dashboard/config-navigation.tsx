@@ -11,7 +11,7 @@ const navConfig = [
     icon: icon('ic_analytics'), // 수정 필요
   },
   {
-    title: '회원 관리',
+    title: '사용자 관리',
     path: '/adminUser',
     icon: icon('ic_user'), // 수정 필요
   },

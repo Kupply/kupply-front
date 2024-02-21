@@ -3,7 +3,6 @@ import { Outlet, Navigate, useRoutes, useNavigate } from 'react-router-dom';
 
 export const IndexPage = lazy(() => import('../pages/app'));
 export const UserPage = lazy(() => import('../pages/user'));
-export const LoginPage = lazy(() => import('../pages/login'));
 export const ProductsPage = lazy(() => import('../pages/products'));
 
 // ----------------------------------------------------------------------

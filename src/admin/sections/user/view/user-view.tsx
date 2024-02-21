@@ -92,7 +92,7 @@ export default function UserPage() {
   const notFound = !dataFiltered.length && !!filterName;
 
   return (
-    <Container>
+    <Container maxWidth="xl" sx={{ width: '100vw' }}>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography>사용자 목록</Typography>
 

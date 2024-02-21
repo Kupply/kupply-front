@@ -26,7 +26,7 @@ export default function ProductsView() {
   };
 
   return (
-    <Container>
+    <Container maxWidth="xl" sx={{ width: '100vw' }}>
       <Typography variant="h4" sx={{ mb: 5 }}>
         Products
       </Typography>

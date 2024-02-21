@@ -12,7 +12,7 @@ import AppWidgetSummary from '../app-widget-summary';
 
 const AppView: React.FC = () => {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ width: '100vw' }}>
       <Typography variant="h4" sx={{ mb: 5 }}>
         쿠플라이 어드민 대시보드
       </Typography>

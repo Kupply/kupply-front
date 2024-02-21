@@ -12,9 +12,9 @@ import SignUp3Page from './pages/signUp/SignUp3Page';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/SignUp4Page';
 import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
 import DeletePage from './pages/delete/DeletePage';
-//import DashboardMainPage from './admin/AdminPage';
 import UserPage from './admin/pages/user';
 import { IndexPage } from './admin/routes/sections';
+import AppPage from './admin/pages/app';
 
 export const mainRoutes = [
   { path: '/', element: <OnboardingPage /> },
@@ -44,7 +44,7 @@ export const signupRoutes = [
 ];
 
 export const adminRoutes = [
-  { path: '/admin', element: <IndexPage /> },
+  { path: '/admin', element: <AppPage /> },
   { path: '/adminUser', element: <UserPage /> },
   { path: '/adminMajor', element: <UserPage /> },
   { path: '/adminApply', element: <UserPage /> },
