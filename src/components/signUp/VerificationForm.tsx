@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TextAreaBox from "../../assets/TextArea";
-import React, { useEffect, useState } from "react";
-import { nextButtonState, verificationCodeState, gpaState, semesterState } from "../../store/atom";
+import React, { useEffect, useState, useRef } from "react";
+import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState } from "../../store/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
@@ -77,20 +77,27 @@ export const CodeVerification = () => {
   )
 }
 
+// Settings에서는 localStorage에 저장, SignUp에서는 sessionStorage에 저장 
+type LocationUsed = 'Settings' | 'SignUp';
+
 /* ---------------------------------------------------------------- */
 interface GpaSemesterVerificationProps{
   userType: 'passer' | 'candidate';
   state?: inputState;
   setState: (args:inputState) => void;
-  toNext: boolean;
+  toNext?: boolean;
+  locationUsed? : LocationUsed;
 };
 
-// 이 userType으로 입력이 들어가는게 passerGpa랑 그냥 GPa
-export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext}) => {
+
+export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext, locationUsed = 'SignUp'}) => {
   const [userGpa, setUserGpa] = useRecoilState(gpaState(userType));
+  const [isGpaChanged, setIsGpaChanged] = useRecoilState(isGpaChangedState);
   const {num1, num2, num3} = userGpa;
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
-
+  const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
+  const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
+  const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
 
   useEffect(() => {
     if(parseFloat(`${num1}.${num2}${num3}`) > 4.5){
@@ -120,8 +127,28 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
     }))
   };
 
+  // Settings에서는 비정상적인 학점 변화를 감지해야 한다 
+  useEffect(() => {
+    if(locationUsed === 'Settings'){
+      const newGpa = parseFloat(num1 + '.' + num2 + num3);
+      const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
+      
+      if(Math.abs(oldGpa - newGpa) >= 1.5){
+        setIsGpaChanged({changed: true, strange: true});
+      }else if(oldGpa !== newGpa){
+        setIsGpaChanged({changed: true, strange: false});
+      }else{
+        setIsGpaChanged({changed: false, strange: false});
+      }
+    }
+  }, [userGpa]);
+
   if(toNext){
-    sessionStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
+    if(locationUsed === 'SignUp')
+      sessionStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
+
+    else 
+      localStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
   }
 
   return (

@@ -11,11 +11,15 @@ import { majorNameMappingBySID } from '../../utils/Mappings';
 
 export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'email' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor';
 
+// localStorage이나 sessionStorage에서 가져올 때 각 페이지별로 설정해 둔 이름들이 모두 다른 관계로 
+// 강제적으로 원하는 정보를 가져올 수 있도록 userInfoTypeManual을 만들어둠 
+
 interface UserInputProps {
   userInfoType: UserTypeOptions;
   toNext?: boolean;
   setStateValid?: (args: inputState) => void;
   children?: ReactNode;
+  userInfoTypeManual?: string | undefined;
 }
 
 const placeholderMapping: Record<UserTypeOptions, string> = {
@@ -59,10 +63,10 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
 
 const optionList = majorTargetList;
 
-export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid }) => {
+export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, userInfoTypeManual=undefined }) => {
 
   // info = {info: , infoState:, infoCheck: }
-  const [userInfo, setUserInfo] = useRecoilState(userState(userInfoType));
+  const [userInfo, setUserInfo] = useRecoilState(userState(userInfoTypeManual || userInfoType));
   const [firstMajor, setFirstMajor] = useRecoilState(userState('firstMajor'));
   const errorMessage = useRecoilValue(errorMessageState);
   const hopeMajor1 = useRecoilValue(userState('hopeMajor1')).info;

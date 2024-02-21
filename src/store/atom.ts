@@ -59,7 +59,7 @@ type InfoState = {
 export const userState = atomFamily<InfoState, string>({
   key: "userState", 
   default: (kind: string) => ({
-    info: sessionStorage.getItem(kind) || '',
+    info: sessionStorage.getItem(kind) || localStorage.getItem(kind) || '',
     infoState: 'default',
     infoCheck: 'default'
   })
@@ -118,3 +118,40 @@ export const semesterState = atomFamily<GpaSemesterType, string>({
   })
 })
 
+// settings의 sidebar에서 어떤 번호가 selected인지
+export const SBContentState = atom<number>({
+  key: 'SideBarContentSelectedNumberState',
+  default: 0
+});
+
+
+export const isAppliedState = atom<boolean>({
+  key: 'isAppliedState',
+  default: localStorage.getItem('isApplied') === 'true' || false
+});
+
+export const userProfileState = atom({
+  key: 'userProfileState',
+  default: {
+    pic: localStorage.getItem('userProfilePic') || 'rectProfile1',
+    link: localStorage.getItem('userProfileLink') || ''
+  }
+})
+
+// gpa가 바뀐 여부와 바뀐것이 이상행동으로 감지되었는지 여부 
+type gpaChangeType = {
+  changed: boolean;
+  strange: boolean;
+};
+export const isGpaChangedState = atom<gpaChangeType>({
+  key: 'hasGPAChanged',
+  default: {
+    changed: false,
+    strange: false
+  }
+})
+
+export const settingsModalState = atom<boolean>({
+  key: 'settingsModalState',
+  default: false
+})
