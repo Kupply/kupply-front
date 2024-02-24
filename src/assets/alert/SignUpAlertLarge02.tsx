@@ -55,12 +55,14 @@ function SignUpAlertLarge02({
       </ButtonWrapper>
       <div style={{ height: '130px' }}></div>
       <AlertIconExclamation width="113px" height="113px" />
-      <Typography size={'24px'} bold={'700'} color="#141414" style={{ marginTop: '25px' }}>
-        인증번호를 받을 고려대 이메일 주소를 입력해주세요!
-      </Typography>
-      <Typography size={'18px'} color="#141414" style={{ marginTop: '24px' }}>
-        고려대학교 이메일 주소를 정확히 기입해주세요.
-      </Typography>
+      <TextWrapper>
+        <Typography size={'24px'} bold={'700'} color="#141414" style={{ marginTop: '25px' }}>
+          인증번호를 받을 <span className="mobile"> 고려대 이메일 주소를 입력해주세요!</span>
+        </Typography>
+        <Typography size={'18px'} color="#141414" style={{ marginTop: '24px' }}>
+          고려대학교 이메일 주소를 정확히 기입해주세요.
+        </Typography>
+      </TextWrapper>
       <ActionWrapper>
         <TextFieldBox
           placeholder="bright@korea.ac.kr"
@@ -120,6 +122,25 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const TextWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & > span {
+    text-align: center;
+  }
+  @media screen and (max-width: 768px) {
+    .mobile {
+      display: block;
+      margin-top: 8px;
+    }
+  }
 `;
 
 export default SignUpAlertLarge02;

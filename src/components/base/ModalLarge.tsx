@@ -42,13 +42,14 @@ const ModalContainer = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 768px) {
-    width: 100vw;
-    height: 100vh;
-    margin-top: 0px;
+    width: 90vw;
+    height: 90vh;
+    margin-top: 5vh;
     top: 0px;
 
     & > dialog {
-      border-radius: 0px;
+      position: relative;
+      height: 100%;
     }
   }
 `;

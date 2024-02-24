@@ -52,7 +52,7 @@ function SignUpAlertLarge03({
       </Typography>
       <Typography size={'18px'} color="#141414" style={{ marginTop: '24px' }}>
         {email} 메일함을 다시 확인해주세요.
-        <br /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요!{' '}
+        <span style={{ display: 'block', marginTop: '8px' }} /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요!{' '}
       </Typography>
       <ActionWrapper>
         <SubmitButton size={'18px'} onClick={onClickModal}>
