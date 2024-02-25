@@ -1,10 +1,10 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const paddingMapping = {
-  small: "8px 26px",
-  medium: "16px 32px",
-  large: "24px 34px",
+  small: '8px 26px',
+  medium: '16px 1.66vw',
+  large: '24px 34px',
 };
 
 const colorMapping = {
@@ -43,14 +43,14 @@ const colorMapping = {
 };
 
 const ButtonWrapper = styled.button<{
-  size: "small" | "medium" | "large";
-  buttonType: "primary" | "secondary";
+  size: 'small' | 'medium' | 'large';
+  buttonType: 'primary' | 'secondary';
 }>`
   transition: 0.25s ease-in-out;
   justify-content: center;
   align-items: center;
   padding: ${(props) => paddingMapping[props.size]};
-  border-radius: ${(props) => (props.size === "small" ? "6px" : "10px")};
+  border-radius: ${(props) => (props.size === 'small' ? '6px' : '10px')};
 
   text-align: center;
   font-family: Pretendard;
@@ -66,10 +66,9 @@ const ButtonWrapper = styled.button<{
 
   ${(props) => colorMapping[props.buttonType]};
 `;
-export interface LabelButtonProps
-  extends React.ComponentPropsWithoutRef<"button"> {
-  buttonType: "primary" | "secondary";
-  size: "small" | "medium" | "large";
+export interface LabelButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+  buttonType: 'primary' | 'secondary';
+  size: 'small' | 'medium' | 'large';
 }
 export default function LabelButton(props: LabelButtonProps) {
   return <ButtonWrapper {...props}>{props.children}</ButtonWrapper>;
