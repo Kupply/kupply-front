@@ -98,6 +98,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
 
     getUserInfo();
   }, [logined]);
+
   const navigate = useNavigate();
 
   const handleMenu1Click = () => {
@@ -204,7 +205,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
         <LoginContainer>
           {logined ? (
             <>
-              <TextButton06 nickName="고대빵" onCustomFunction={handleToggle}></TextButton06>
+              <TextButton06 fontSize="14px" nickName="고대빵" onCustomFunction={handleToggle}></TextButton06>
 
               {toggle && (
                 <SettingToggleWrapper ref={headerToggleRef}>
@@ -356,7 +357,7 @@ const LoginContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     height: 45px; /* 아이템의 높이를 부모 요소에 맞춤 */
-
+    width: 20%;
     .login {
       padding: 8px 16px;
       max-height: 36px;
@@ -393,6 +394,13 @@ const SettingToggleWrapper = styled.div`
   /* 5020 */
   box-shadow: 0px 20px 50px 0px rgba(223, 223, 223, 0.4);
   backdrop-filter: blur(9px);
+
+  @media screen and (max-width: 768px) {
+    top: 84px;
+    right: 10px;
+    width: 80vw;
+    height: 490px;
+  }
 `;
 
 const Profile = styled.div`
