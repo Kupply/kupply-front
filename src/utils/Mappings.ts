@@ -107,3 +107,10 @@ export const idColorMapping: { [key: number]: string } = {
   21: '#FFAFBD',
   20: 'var(--SECONDARY, #FDF2F2)',
 };
+
+export const idColorMappingShadow: { [key: number]: string } = {
+  23: 'rgba(216, 88, 136, 0.5)',
+  22: 'rgba(229, 124, 144, 0.5)',
+  21: 'rgba(255, 175, 189, 0.5)',
+  20: 'rgba(253, 242, 242, 0.5)',
+};
