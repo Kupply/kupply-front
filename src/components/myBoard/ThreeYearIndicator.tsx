@@ -53,8 +53,8 @@ const ThreeYear = () => {
       <TitleBox>
         <TitleText>3개년 합격지표</TitleText>
       </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="21.93vw" height="0.1vw" viewBox="0 0 421 2" fill="none">
-        <path d="M0 1L421 0.999963" stroke="#DFDFDF" />
+      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="21.98vw" height="2" viewBox="0 0 422 2" fill="none">
+        <path d="M0 1L422 0.999963" stroke="#DFDFDF" />
       </StyleSvg>
       <EachYearHeadBox>
         <SemesterButton isClicked={semesterBtnStates['2023-1R']} onClick={() => handleSemesterBtnClick('2023-1R')}>

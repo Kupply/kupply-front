@@ -26,10 +26,12 @@ const QuartileIndicator = () => {
         <TitleText>내 학점 위치 파악하기</TitleText>
         <Information src="designImage/myBoard/InformationCircle.svg" alt="information" />
       </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="57vw" height="0.1vw" viewBox="0 0 1096 2" fill="none">
-        <path d="M0.883301 1L1095.12 1" stroke="#DFDFDF" />
+      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="57.08vw" height="2" viewBox="0 0 1096 2" fill="none">
+        <path d="M0 1L1096 1" stroke="#DFDFDF" />
       </StyleSvg>
-      <ChartBox>{/* <MyStageChart {...myStageData[0]} /> */}</ChartBox>
+      <ChartBox>
+        <MyStageChart {...myStageData[0]} />
+      </ChartBox>
     </Wrapper>
   );
 };

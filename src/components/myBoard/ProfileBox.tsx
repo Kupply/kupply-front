@@ -17,7 +17,7 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
 
 const ProfileBox = () => {
   const [isOpenEditModal, setOpenEditModal] = useState(false);
-  const [scrollY, setScrollY] = useState(window.scrollY + 92);
+  const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
 
   const onClickEditModal = () => {
     setOpenEditModal(true);
@@ -29,12 +29,12 @@ const ProfileBox = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      let newPositionY = window.scrollY + 92;
+      let newPositionY = window.scrollY + 62.02;
       if (newPositionY < 0) {
         newPositionY = 0;
       }
-      if (newPositionY > 900) {
-        newPositionY = 900;
+      if (newPositionY > 850) {
+        newPositionY = 800;
       }
       setScrollY(newPositionY);
     };
