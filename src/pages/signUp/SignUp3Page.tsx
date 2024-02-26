@@ -7,7 +7,7 @@ import Typography from "../../assets/Typography";
 import NicknameCheckButton from "../../assets/progressIndicator/Loader";
 import { useRecoilState } from "recoil";
 import { userState } from "../../store/atom";
-import { useSignUp3Validation } from "../../utils/SignUpFunctions";
+import { useSignUp3Verification } from "../../utils/SignUpFunctions";
 import Button04 from "../../assets/buttons/Button04";
 import Button03 from "../../assets/buttons/Button03";
 import { UserInputText } from "../../components/signUp/UserInputText";
@@ -19,7 +19,7 @@ export default function SignUp3Page(){
   const [next, setNext] = useState(false); 
   const [nickname, setNickname] = useRecoilState(userState('nickname'));
 
-  const {complete} = useSignUp3Validation();
+  const {complete} = useSignUp3Verification();
 
   const handleNext = () => {
     setNext(true);
@@ -35,16 +35,21 @@ export default function SignUp3Page(){
     <SignUpPageWrapper step={3} stepInfo={"쿠플라이 비밀번호와 닉네임 설정하기"}>
       <ContentsList>
         <ContentsWrapper>
-          <UserInputText userInfoType="email"/>
-          <UserInput userInfoType="email" userInfoTypeManual="kuEmail">
+          <UserInputText userInfoType="id"/>
+          <UserInput userInfoType="id" userInfoTypeManual="kuEmail">
             <InfoMessageWrapper>
+              
               <InfoImageWrapper>
                 <CircleImage src={process.env.PUBLIC_URL + `/designImage/CircleImage.svg`}/>
                 <CheckImage src={process.env.PUBLIC_URL + `/designImage/CheckImage.svg`}/>  
               </InfoImageWrapper>
-              <Typography size="12px" bold="400" color="#A8A8A8">
+          
+              <div>
+                <Typography size="12px" bold="400" color="#A8A8A8">
                   쿠플라이 아이디는 고려대학교 이메일입니다.
-              </Typography>
+                </Typography>
+              </div>
+              
             </InfoMessageWrapper>
           </UserInput>
         </ContentsWrapper>
@@ -58,6 +63,7 @@ export default function SignUp3Page(){
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="nickname"/>
+          <div style={{position: 'relative', width: '628px'}}>
           <UserInput userInfoType="nickname" toNext={next}>
           {nickname.info === '' || 
             nickname.infoState === 'filled' ? (<></>) : 
@@ -72,11 +78,12 @@ export default function SignUp3Page(){
                 
               )}
           </UserInput>
+          </div>
         </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
-        <Button04 onClick={handlePrev} />
-        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext}/>
+        <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
+        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext} style={{width: '74.418%'}}/>
       </ButtonsWrapper>
     </SignUpPageWrapper>
   )
@@ -108,25 +115,27 @@ const InfoImageWrapper = styled.div`
 
 const CircleImage = styled.img`
   position: absolute;
-  top: 0;
+  top: 4px;
   left: 0;
 `;
 
 const CheckImage = styled.img`
   position: absolute;
-  top: 3px;
+  top: 7px;
   left: 0.156vw;
 `;
 
+// 얘도 픽셀로 안 박으면 괴이한 현상이 일어남
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
-  top: 2.480vw;
-  left: 22.521vw;
+  top: 23px;
+  left: 490px;
   z-index: 9999;
 `;
+
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
+  //position: relative;
   gap: 9px;
 `;

@@ -13,7 +13,7 @@ const ButtonWrapper = styled.button<Step4ButtonProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 32.708vw;
+  width: 100%;
   height: 110px;
   padding-left: 2.29vw;
   padding-right: 0.885vw;

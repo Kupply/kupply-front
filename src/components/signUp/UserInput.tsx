@@ -1,6 +1,6 @@
 import TextFieldBox from "../../assets/OldTextFieldBox";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { userState } from "../../store/atom";
+import { userSettingsState, userState } from "../../store/atom";
 import DropDown from "../../assets/dropdown/DropDown";
 import { majorAllList } from "../../common/MajorAll";
 import { ReactNode, useEffect } from "react";
@@ -9,7 +9,7 @@ import { majorTargetList } from "../../common/MajorTarget";
 import { inputState } from "../../pages/signUp/SignUp4Page";
 import { majorNameMappingBySID } from '../../utils/Mappings';
 
-export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'email' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
+export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'id' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
 
 // localStorage이나 sessionStorage에서 가져올 때 각 페이지별로 설정해 둔 이름들이 모두 다른 관계로 
 // 강제적으로 원하는 정보를 가져올 수 있도록 userInfoTypeManual을 만들어둠 
@@ -21,6 +21,7 @@ interface UserInputProps {
   setStateValid?: (args: inputState) => void;
   children?: ReactNode;
   userInfoTypeManual?: string | undefined;
+  locationUsed?: 'signUp' | 'settings';
 }
 
 const placeholderMapping: Record<UserTypeOptions, string> = {
@@ -30,7 +31,7 @@ const placeholderMapping: Record<UserTypeOptions, string> = {
   nickname: '닉네임',
   studentId: '학번 10자리',
   firstMajor: '전공선택',
-  email: '쿠플라이 아이디',
+  id: '쿠플라이 아이디',
   hopeMajor1: '1지망 이중전공 선택',
   hopeMajor2: '2지망 이중전공 선택',
   doubleMajor: '진입 이중전공 선택',
@@ -41,7 +42,7 @@ const helpMessageMapping: Record<UserTypeOptions, string> = {
   name: "이름 입력",
   studentId: "학번 10자리",
   firstMajor: '',
-  email: '',
+  id: '',
   password: '비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다.',
   password2: '비밀번호 확인',
   nickname: '닉네임',
@@ -58,7 +59,7 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
   password: '',
   password2: '비밀번호가 일치하지 않아요!',
   nickname: '',
-  email: '',
+  id: '',
   hopeMajor1: '',
   hopeMajor2: '',
   doubleMajor: '',
@@ -67,14 +68,19 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
 
 const optionList = majorTargetList;
 
-export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, userInfoTypeManual=undefined }) => {
+export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, userInfoTypeManual=undefined, locationUsed='signUp',}) => {
 
   // info = {info: , infoState:, infoCheck: }
-  const [userInfo, setUserInfo] = useRecoilState(userState(userInfoTypeManual || userInfoType));
-  const [firstMajor, setFirstMajor] = useRecoilState(userState('firstMajor'));
+  const [userInfo, setUserInfo] = useRecoilState(locationUsed === 'signUp' ? userState(userInfoTypeManual || userInfoType) : 
+  userSettingsState(userInfoTypeManual || userInfoType));
+
+  const [firstMajor, setFirstMajor] = useRecoilState(locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'));
+
   const errorMessage = useRecoilValue(errorMessageState);
-  const hopeMajor1 = useRecoilValue(userState('hopeMajor1')).info;
-  const hopeMajor2 = useRecoilValue(userState('hopeMajor2')).info;
+
+  const hopeMajor1 = useRecoilValue(locationUsed === 'signUp' ?userState('hopeMajor1') : userSettingsState('hopeMajor1')).info;
+
+  const hopeMajor2 = useRecoilValue(locationUsed === 'signUp' ?userState('hopeMajor2') : userSettingsState('hopeMajor2')).info;
 
   errorMessageMapping.password = errorMessage.passwordErrorMessage;
   errorMessageMapping.nickname = errorMessage.nicknameErrorMessage;
@@ -103,7 +109,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
     }
   };
 
-  if (toNext){
+  if (toNext && locationUsed === 'signUp'){
     sessionStorage.setItem(userInfoType, userInfo.info);
   }
 
@@ -113,6 +119,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
     setStateValid?.('incomplete');
   }
   
+  //console.log(userInfo);
   return (
     <>
       {

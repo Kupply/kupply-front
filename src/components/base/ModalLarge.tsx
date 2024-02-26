@@ -32,7 +32,7 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 
 // 모달창 위치 조정 목적의 컨테이너
 const ModalContainer = styled.div`
-  width: 90vw; 
+  width: 60vw; 
   max-width: 814px;
   //height: 780px;
   height: 72.22vh;

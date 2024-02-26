@@ -24,12 +24,12 @@ export const verificationCodeState = atom<NumStateType>({
 
 export const emailStateAtom = atom<StateOptions>({
   key: 'emailState',
-  default: sessionStorage.getItem('email') ? 'filled' : 'default'
+  default: sessionStorage.getItem('kuEmail') ? 'filled' : 'default'
 });
 
 export const emailAtom = atom({
   key: 'email',
-  default: sessionStorage.getItem('email') || ''
+  default: sessionStorage.getItem('kuEmail') || ''
 });
 
 export const sendNumState = atom<number>({
@@ -66,6 +66,15 @@ export const userState = atomFamily<InfoState, string>({
   key: "userState", 
   default: (kind: string) => ({
     info: sessionStorage.getItem(kind) || '',
+    infoState: 'default',
+    infoCheck: 'default'
+  })
+});
+
+export const userSettingsState = atomFamily<InfoState, string>({
+  key: "userSettingsState",
+  default: (kind: string) => ({
+    info: localStorage.getItem(kind) || '',
     infoState: 'default',
     infoCheck: 'default'
   })
@@ -181,3 +190,4 @@ export const settingsModalState = atom<boolean>({
   key: 'settingsModalState',
   default: false
 })
+

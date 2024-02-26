@@ -4,16 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { UserInput } from "../../components/signUp/UserInput";
 import { UserInputText } from "../../components/signUp/UserInputText";
 import Button03 from "../../assets/buttons/Button03";
-import { useState } from "react";
-import { useEmailVerification } from "../../utils/SignUpFunctions";
+import { useCallback, useEffect, useState } from "react";
+import { useSignUp0Verification } from "../../utils/SignUpFunctions";
 import axios from "axios";
 import client from "../../utils/HttpClient";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../store/atom";
 
 
 export function SignUp0Page(){
 
   // 형식에 맞는 이메일이 입력되면 인증메일 받기 버튼이 켜지도록 
-  const {complete, ID} = useEmailVerification();
+  const {complete, idVerified} = useSignUp0Verification();
+  const ID = useRecoilValue(userState('kuEmail'));
   const [next, setNext] = useState(false);
   const navigate = useNavigate();
 
@@ -50,7 +53,7 @@ export function SignUp0Page(){
           </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
-        <Button03 state={complete? 'pressed' : 'disabled'} onClick={handleNext} style={{width: '32.71vw'}}>
+        <Button03 state={complete? 'pressed' : 'disabled'} onClick={handleNext} style={{width: '100%'}}>
           인증메일 받기 
         </Button03>
       </ButtonsWrapper>
@@ -75,4 +78,5 @@ const ButtonsWrapper = styled.div`
   display: flex;
   gap: 0.9375vw;
   margin-top: 347px;
+  width: 100%;
 `;

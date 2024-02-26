@@ -43,18 +43,18 @@ export const SignUpPageWrapper:
         <ContentsTitleWrapper>
           <StepIndicator>Step {currentStep}</StepIndicator>
           <div>
-          <Typography size="24px" bold="700">{stepInfo}</Typography>
+          <Typography size="1.25vw" bold="700">{stepInfo}</Typography>
           </div>
           {currentStep === 5 ? 
           <>
           <HeaderBar>
-            <svg xmlns="http://www.w3.org/2000/svg" width="32.81vw" height="2" viewBox="0 0 630 2" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 630 2" fill="none">
               <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
             </svg>
           </HeaderBar>
           </> : 
           <>
-          <svg xmlns="http://www.w3.org/2000/svg" width="32.81vw" height="2" viewBox="0 0 630 2" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 630 2" fill="none">
             <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
           </svg>
           </>}
@@ -70,7 +70,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   max-width: 2560px;
   height: 1153px;
   background-color: #fcfafb;
@@ -84,19 +84,19 @@ const TitleWrapper = styled.div`
   padding-top: 30px;
   padding-bottom: 25px;
 `;
+
 const FormWrapper = styled.div`
   // display: flex;
   // flex-direction: column;
-  width:  42.5vw; //816px
+  width: 816px; // 816px 이걸 픽셀로 박지 않은 이상 TextField와 DropDown 그리고 그 위의 선 모든게 뒤틀린다
   height: 850px;
-  padding: 42px 4.895vw 78px 4.895vw;
-  padding-left: 4.895vw;
+  padding: 42px 94px 78px 94px;
+  padding-left: 94px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
   margin-top: 25px;
 `;
-
 const StepIndicator = styled.div`
   display: inline-flex;
   padding: 8px 0.9375vw;
@@ -120,8 +120,8 @@ const ContentsTitleWrapper = styled.div`
 `;
 
 const HeaderBar = styled.svg`
-  width: 32.8125vw;
-  max-width: 628px;
+  width: 100%;
+  //max-width: 628px;
   margin-top: 12px;
   margin-bottom: 0px;
 `;

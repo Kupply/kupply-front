@@ -5,14 +5,14 @@ import Button04 from "../../assets/buttons/Button04";
 import Button03 from "../../assets/buttons/Button03";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useSignUp2Validation } from "../../utils/SignUpFunctions";
+import { useSignUp2Verification } from "../../utils/SignUpFunctions";
 import { UserInputText } from "../../components/signUp/UserInputText";
 
 export default function SignUp2Page(){
 
   const navigate = useNavigate();
   const [next, setNext] = useState(false);
-  const {complete} = useSignUp2Validation();
+  const {complete} = useSignUp2Verification();
   
   // setNext에 대한 re-render가 이루어지고 navigate가 일어나도록 이렇게 짬 
   const handleNext = () => {
@@ -43,17 +43,17 @@ export default function SignUp2Page(){
         </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
-        <Button04 onClick={handlePrev} />
-        <Button03 state={complete? 'pressed' : 'disabled'} onClick={handleNext}/>
+        <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
+        <Button03 state={complete? 'pressed' : 'disabled'} onClick={handleNext} style={{width: '74.418%'}}/>
       </ButtonsWrapper>
     </SignUpPageWrapper>
   )
 }
 
 const ContentsList = styled.div`
-display: flex;
-flex-direction: column;
-gap: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
 `;
 
 const ButtonsWrapper = styled.div`
@@ -65,6 +65,5 @@ const ButtonsWrapper = styled.div`
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   gap: 9px;
 `;

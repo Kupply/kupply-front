@@ -8,7 +8,7 @@ const userTypeMapping: Record<UserTypeOptions, string> = {
   nickname: '닉네임을',
   studentId: '고려대학교 학번을',
   firstMajor: '본전공(1전공)을',
-  email: '쿠플라이 아이디를',
+  id: '쿠플라이 아이디를',
   hopeMajor1: '이중전공',
   hopeMajor2: '이중전공',
   doubleMajor: '이중전공',
@@ -16,7 +16,7 @@ const userTypeMapping: Record<UserTypeOptions, string> = {
 }
 
 interface UserInputTextProps{
-  userInfoType: UserTypeOptions | 'GPAcandidate' | 'GPApasser' | 'hopeSemester' | 'enterSemester';
+  userInfoType: UserTypeOptions | 'candidateGPA' | 'passerGPA' | 'candidateSemester' | 'passerSemester';
 }
 
 export const UserInputText: React.FC<UserInputTextProps> = ({userInfoType}) =>{
@@ -25,7 +25,7 @@ export const UserInputText: React.FC<UserInputTextProps> = ({userInfoType}) =>{
       {
         (() => {
           switch (userInfoType) {
-            case 'email':
+            case 'id':
               return (
                 <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
                   {userTypeMapping[userInfoType].replace(/[을를]$/, '')}
@@ -58,23 +58,23 @@ export const UserInputText: React.FC<UserInputTextProps> = ({userInfoType}) =>{
                 <>
                 </>
               );
-            case 'GPAcandidate':
-            case 'GPApasser':
+            case 'candidateGPA':
+            case 'passerGPA':
               return (
                 <>
-                  <Typography size="0.9375vw">{userInfoType === 'GPAcandidate' ? '현재' : '지원 당시의'}&nbsp;</Typography>
+                  <Typography size="0.9375vw">{userInfoType === 'candidateGPA' ? '현재' : '지원 당시의'}&nbsp;</Typography>
                   <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
                     학점
                   </Typography>
                   <Typography size="0.9375vw">을 소수점 두 자리까지 기입해주세요.</Typography>
                 </>
               );
-            case 'hopeSemester':
-            case 'enterSemester':
+            case 'candidateSemester':
+            case 'passerSemester':
               return(
                 <>
                   <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
-                    {userInfoType === 'hopeSemester' ? '희망 이중 지원학기' : '이중전공 진입학기'}
+                    {userInfoType === 'candidateSemester' ? '희망 이중 지원학기' : '이중전공 진입학기'}
                   </Typography>
                   <Typography size="0.9375vw">를 입력해주세요.</Typography>
                 </>

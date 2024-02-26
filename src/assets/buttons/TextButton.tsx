@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { StringLiteral } from "typescript";
 
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
@@ -110,7 +109,7 @@ const TextButton04 = (props:TextButtonProps) => {
     onCustomFunction();
   }
   return <Container04 onClick={handleClick} {...rest}>
-    <Typography04 state={selected === false ? 'pressed' : 'default'} 
+    <Typography04 state={selected === true ? 'pressed' : 'default'} 
     style={{fontSize: `${fontSize}`}}>
       {children}
     </Typography04>

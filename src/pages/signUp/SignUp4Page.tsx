@@ -10,7 +10,7 @@ import Button03 from "../../assets/buttons/Button03";
 import { UserInput } from "../../components/signUp/UserInput";
 import { UserInputText } from "../../components/signUp/UserInputText";
 import { GPAVerification, SemesterVerification } from "../../components/signUp/VerificationForm";
-import { useInputState } from "../../utils/SignUpFunctions";
+import { useSignUp4Handler } from "../../utils/SignUpFunctions";
 
 
 export function SignUp4Page(){
@@ -77,10 +77,11 @@ export function SignUp4Page(){
       </ContentsWrapper>
       </ContentsList>
       <AliasButtonsWrapper>
-        <Button04 onClick={handlePrev} />
+        <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
         <Button03
           state={user.userState[0] === 'clicked' || user.userState[1] === 'clicked' ? 'pressed' : 'disabled'}
           onClick={handleNext}
+          style={{width:'74.418%'}}
         />
       </AliasButtonsWrapper>
     </SignUpPageWrapper>
@@ -100,7 +101,7 @@ export function SignUp4PageCandidate(){
     complete,
     next,
     handleNext,
-    handlePrev} = useInputState();
+    handlePrev} = useSignUp4Handler();
 
   return (
     <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
@@ -112,14 +113,14 @@ export function SignUp4PageCandidate(){
           <UserInput userInfoType="hopeMajor2" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="GPAcandidate"/>
+          <UserInputText userInfoType="candidateGPA"/>
           <GPAVerification 
             userType="candidate" 
             setState={setGpaState}
             toNext={next}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="hopeSemester"/>
+          <UserInputText userInfoType="candidateSemester"/>
           <SemesterVerification
             userType="candidate"
             setState={setSemesterState}
@@ -128,8 +129,8 @@ export function SignUp4PageCandidate(){
         </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
-        <Button04 onClick={handlePrev}/>
-        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext}/>
+        <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
+        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext} style={{width:'74.418%'}}/>
       </ButtonsWrapper>
     </SignUpPageWrapper>
   )
@@ -145,7 +146,7 @@ export function SignUp4PagePasser(){
     complete,
     next,
     handleNext,
-    handlePrev} = useInputState();
+    handlePrev} = useSignUp4Handler();
 
   return (
     <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
@@ -155,24 +156,25 @@ export function SignUp4PagePasser(){
           <UserInput userInfoType="doubleMajor" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="GPApasser"/>
+          <UserInputText userInfoType="passerGPA"/>
           <GPAVerification 
-            userType="candidate" 
+            userType="passer" 
             setState={setGpaState}
             toNext={next}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="enterSemester"/>
+          <UserInputText userInfoType="passerSemester"/>
           <SemesterVerification
-            userType="candidate"
+            userType="passer"
             setState={setSemesterState}
             toNext={next}
           />
         </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
-        <Button04 onClick={handlePrev}/>
-        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext}/>
+        <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
+        <Button03 state={complete ? 'pressed' : 'disabled'} onClick={handleNext} 
+        style={{width:'74.418%'}}/>
       </ButtonsWrapper>
     </SignUpPageWrapper>
   )

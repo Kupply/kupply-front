@@ -17,7 +17,7 @@ export function SidebarContent4(){
       <ScrollLarge isChecked={false}>
         <div style={{ marginTop: 30 }}>
           <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
-            <Typography size="20px" bold="700" style={{ textAlign: 'left' }}>
+            <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
               서비스 이용약관
             </Typography>
             <ArrowImage/>
@@ -32,7 +32,7 @@ export function SidebarContent4(){
 
         <div style={{ marginTop: 30 }}>
           <div style={{ marginBottom: 22, display: 'flex', gap: 8, alignItems: 'center' }}>
-            <Typography size="20px" bold="700" style={{ textAlign: 'left' }}>
+            <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
               개인정보 처리방침
             </Typography>
             <ArrowImage/>
@@ -40,7 +40,7 @@ export function SidebarContent4(){
         </div>
 
         <div style={{ width: '628px', height: 'auto', marginBottom: '30', textAlign: 'left' }}>
-          <Typography size="18px" bold="500" style={{ fontWeight: '400', textAlign: 'left', color: '#a8a8a8' }}>
+          <Typography size="0.9375vw" bold="500" style={{ fontWeight: '400', textAlign: 'left', color: '#a8a8a8' }}>
             쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스를 이용함과 동시에
             온라인 상에서 각 운영 서비스에 제공한 개인정보가 보호받을 수 있도록 최선을 다하고 있습니다.
             <br />
@@ -59,14 +59,16 @@ export function SidebarContent4(){
 }
 
 const BodyContainer = styled.div`
-  padding-left: 262px;
+  //padding-left: 262px;
+  padding-left: 13.645vw;
   padding-top: 70px;
+  width: 628px;
 `;
 const BodyContent = styled.div`
   color: var(--Main-Black, #141414);
   text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 111.111% */
@@ -76,7 +78,7 @@ const BodyContent = styled.div`
 const BodyTitle = styled.div`
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
   line-height: 24px; /* 100% */

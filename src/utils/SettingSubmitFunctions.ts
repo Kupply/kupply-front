@@ -1,13 +1,53 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { gpaState, isGpaChangedState, semesterState, userProfileState, userState } from "../store/atom";
+import { gpaSettingsState, isGpaChangedState, semesterSettingsState, userProfileState, userState, userSettingsState } from "../store/atom";
 import client from "./HttpClient";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
-import axios from "axios";
 
-export function useSubmit(){
 
+export function useSubmit0() {
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+  const navigate = useNavigate();
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
+  const name = useRecoilValue(userSettingsState('name'));
+  const stdID = useRecoilValue(userSettingsState('studentId'));
+  const firstMajor = useRecoilValue(userSettingsState('firstMajor'));
+
+  const firstSubmit = async () => {
+    // UserInput에서 update한 value들이 send되는게 맞은지를 확인 - 맞게 들어옴
+    console.log(name.info, stdID.info, firstMajor.info);
+
+    const updateData = {
+      newName: name.info,
+      newStudentId: stdID.info,
+      newFirstMajor: firstMajor.info,
+    };
+    //console.log('firstSubmit');
+    try {
+      //await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
+      window.location.reload(); // 페이지 새로고침.
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return {firstSubmit};
+}
+
+
+
+
+
+export function useSubmit1(){
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
   const navigate = useNavigate();
@@ -20,36 +60,11 @@ export function useSubmit(){
     withCredentials: true,
   };
 
-  // 너무 마음에 안 든다ㅠㅠ
-  const name = useRecoilValue(userState('name'));
-  const stdID = useRecoilValue(userState('studentId'));
-  const firstMajor = useRecoilValue(userState('firstMajor'));
   const userProfile = useRecoilValue(userProfileState);
-  const nickname = useRecoilValue(userState('nickname'));
-  const semester = useRecoilValue(semesterState('candidate'));
-  const hopeMajor1 = useRecoilValue(userState('hopeMajor1'));
-  const hopeMajor2 = useRecoilValue(userState('hopeMajor2'));
-  const pwd = useRecoilValue(userState('password'));
-  const {num1, num2, num3} = useRecoilValue(gpaState('candidate'));
-  const isGpaChange = useRecoilValue(isGpaChangedState);
-
-  const firstSubmit = async () => {
-    const updateData = {
-      newName: name.info,
-      newStudentId: stdID.info,
-      newFirstMajor: firstMajor.info,
-    };
-    //console.log('firstSubmit');
-    try {
-      await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/updateMe', updateData, config);
-      window.location.reload(); // 페이지 새로고침.
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const nickname = useRecoilValue(userSettingsState('nickname'));
 
   const secondSubmit = async () => {
+
     const updateData = {
       newProfilePic: userProfile.pic,
       newNickname: nickname.info,
@@ -62,6 +77,31 @@ export function useSubmit(){
       console.log(err);
     }
   };
+
+  return {secondSubmit};
+}
+
+
+
+
+export function useSubmit2(){
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+  const navigate = useNavigate();
+
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
+  const semester = useRecoilValue(semesterSettingsState('candidate'));
+  const hopeMajor1 = useRecoilValue(userSettingsState('hopeMajor1'));
+  const hopeMajor2 = useRecoilValue(userSettingsState('hopeMajor2'));
+  const {num1, num2, num3} = useRecoilValue(gpaSettingsState('candidate'));
+  const isGpaChange = useRecoilValue(isGpaChangedState);
 
   const thirdSubmit = async () => {
     
@@ -87,7 +127,26 @@ export function useSubmit(){
       }
     }
   };
+  return {thirdSubmit};
+}
 
+
+
+
+export function useSubmit3(){
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+  const navigate = useNavigate();
+
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
+  const pwd = useRecoilValue(userSettingsState('password'));
   const fourthSubmit = async () => {
     const updateData = {
       newPassword: pwd.info,
@@ -101,5 +160,7 @@ export function useSubmit(){
     }
   };
 
-  return {firstSubmit, secondSubmit, thirdSubmit, fourthSubmit};
+  return {fourthSubmit};
 }
+
+

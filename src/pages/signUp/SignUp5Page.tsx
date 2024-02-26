@@ -7,9 +7,10 @@ import { ScrollLarge, ScrollSmall } from "../../assets/scroll/Scroll";
 import { TermsText1, TermsText2 } from "../../components/signUp/TermsText";
 import Button04 from "../../assets/buttons/Button04";
 import Button03 from "../../assets/buttons/Button03";
-import LoginButton from "../../assets/buttons/LoginButton";
+import CTA01 from "../../assets/CTAs/CTA01";
 import Typography from "../../assets/Typography";
 import { join } from "../../utils/SignUpFunctions";
+
 
 export function SignUp5Page(){
   const [allChecked, setAllChecked] = useState(false);
@@ -99,7 +100,7 @@ export function SignUp5Page(){
         </CheckBoxButton01>
         <TextOutBox>
           <ScrollSmall isChecked={scrollActive}>
-            <TermsText1/>
+            <TermsText1 />
           </ScrollSmall>
         </TextOutBox>
         <CheckBoxButton01 
@@ -115,18 +116,20 @@ export function SignUp5Page(){
           </CheckBoxButton01>
           <TextOutBox>
             <ScrollSmall isChecked={scrollActive}>
-              <TermsText2/>
+              <TermsText2 />
             </ScrollSmall>
           </TextOutBox>
           <ButtonsWrapper>
-            <Button04 onClick={handlePrev} />
+            <Button04 onClick={handlePrev} style={{width: '25.582%'}}/>
             <NextButtonFixedWidth 
               state={isButtonActive ? 'pressed' : 'disabled'} 
-              onClick={handleNext}>
+              onClick={handleNext}
+              style={{width: '74.418%'}}
+            >
               완료
             </NextButtonFixedWidth>
           </ButtonsWrapper>
-          <div ref={button} />
+        <div ref={button} />
       </ScrollLarge>
     </SignUpPageWrapper>
   )
@@ -140,9 +143,10 @@ export function SignUp5Complete(){
   };
 
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  useEffect(() => {
-    if (!sessionStorage.getItem('candidateGPA') && !sessionStorage.getItem('passerGPA')) navigate('/');
-  }, []);
+  // 잠시 수정
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem('candidateGPA') && !sessionStorage.getItem('passerGPA')) navigate('/');
+  // }, []);
 
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {
@@ -150,18 +154,18 @@ export function SignUp5Complete(){
   }, []);
 
   return (
-    <>
+    
     <Wrapper2>
-      <div style={{ textAlign: 'center' }}>
-        <Typography size="2.5vw" bold="700" style={{ marginTop: '140px', lineHeight: '104.167%' }}>
+      <div style={{ textAlign: 'center', marginTop: '12.9629vh', marginBottom: '2.222vh', zIndex: 2}}>
+        <Typography size="2.5vw" bold="700" style={{ lineHeight: '50px' }}>
           축하합니다!
         </Typography>
       </div>
-      <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+      <div style={{ textAlign: 'center',  zIndex: 1 }}>
         <Typography
           size="1.25vw"
           bold="700"
-          style={{ marginTop: '24px', opacity: '0.8', lineHeight: '125%', fontWeight: '500' }}
+          style={{ opacity: '0.8', lineHeight: '125%', fontWeight: '500' }}
         >
           이제 쿠플라이의 회원이 되셨습니다.
           <br />
@@ -173,20 +177,19 @@ export function SignUp5Complete(){
         alt="completeImage"
         style={{
           width: '40.677vw',
-          height: '836px',
+          height: '77.407vh',
           background: 'url(designImage/signUp/CheckAni.webp), lightgray 50% / cover no-repeat',
           transform: 'translateY(-84px)',
         }}
       />
       <div style={{ transform: 'translateY(-221px)' }}>
-        <LoginButton active={isButtonActive} onClick={handleNext}>
+        <CTA01 state={isButtonActive ? 'default' : 'disabled'} onClick={handleNext}>
           <Typography size="1.042vw" bold="700" color="var(--White, #FFF)">
             로그인하고 쿠플라이로 이동하기
           </Typography>
-        </LoginButton>
+        </CTA01>
       </div>
     </Wrapper2>
-    </>
   )
 }
 
@@ -199,8 +202,8 @@ const TextTitle = styled.div`
 `;
 
 const TextOutBox = styled.div`
-  width: 32.7083vw; // 32.7083vw; // (628/1920)*100vw  width: 628px;
-  max-width: 628px;
+  width: 100%; // 32.7083vw; // (628/1920)*100vw  width: 628px;
+  //max-width: 628px;
   height: 228px;
   flex-shrink: 0;
   border-radius: 10px;
@@ -224,16 +227,16 @@ display: flex;
 gap: 0.9375vw; // 18px;
 margin-top: 20px;
 margin-bottom: 50px;
-margin-right: 0.9375vw; // 18px;
+//margin-right: 0.9375vw; // 18px;
 `;
 
 const NextFixedWidth = css`
   // 628px 너무 길어서 길이 조절했습니다
-  width: 24.739vw; // 475px
+  width: 23.65vw; 
 `;
 
 const NextButtonFixedWidth = styled(Button03)`
-  ${NextFixedWidth}
+  //${NextFixedWidth}
 `;
 
 const Wrapper2 = styled.div`
@@ -242,6 +245,7 @@ const Wrapper2 = styled.div`
   align-items: center;
   width: 100vw; // 100%
   height: 100%;
+  box-sizing: 'border-box';
   //background: #FCFAFB;
   background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);
 `;

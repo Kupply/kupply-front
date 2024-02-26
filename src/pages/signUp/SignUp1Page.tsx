@@ -12,12 +12,14 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import Button03 from "../../assets/buttons/Button03";
 import Button04 from "../../assets/buttons/Button04";
 import VerificationButton from "../../components/signUp/VerificationButton";
+import axios from "axios";
 
 export function SignUp1Page(){
   const navigate = useNavigate();
 
   const email = useRecoilValue(emailAtom);
   const [codeNum, setCodeNum] = useRecoilState(verificationCodeState);
+  const {num1, num2, num3, num4, num5, num6} = codeNum;
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
 
   // 잠시 설정 - backend와 연결하면 확인할 수 있을까? 
@@ -44,6 +46,20 @@ export function SignUp1Page(){
     })
   }
   
+  const handleNext = async () => {
+    const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
+    const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
+    try {
+      await axios.post(url, { email: email, code: entireCode });
+      // await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
+
+      navigate('/signup2');
+    } catch (err: any) {
+      //에러 메시지 등 다른 처리 필요
+      alert(err.response.data.error.message);
+    }
+  };
+
   return (
     <>
     <ModalHandle setBlank={setBlank}/>
@@ -72,9 +88,9 @@ export function SignUp1Page(){
       </ContentsList>
       <VerificationButton onSetBlank={setBlank}/>
       <ButtonsWrapper>
-        <Button04 state="disabled"/>
-        <Button03 state={nextButton ? 'pressed' : 'disabled'} />
-        {/* VerificationForm에서 자동으로 넘어갈 수 있게 설정해서 onClick일단 빼둠 UI 어떻게 바꿀지 몰라서 일단 보류*/}
+        <Button04 state="disabled" style={{width:'25.582%'}}/>
+        <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} style={{width:'74.418%'}}/>
+        {/* VerificationForm에서 자동으로 넘어갈 수 있게 설정해서 onClick일단 빼둠*/}
       </ButtonsWrapper>
     </SignUpPageWrapper>
     </>

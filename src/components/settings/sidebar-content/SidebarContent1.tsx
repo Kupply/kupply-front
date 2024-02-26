@@ -1,22 +1,25 @@
 import styled from "styled-components";
 import { UserInput } from "../../signUp/UserInput";
-import SubmitButton from "../../../assets/buttons/OldSubmitButton";
+//import SubmitButton from "../../../assets/buttons/OldSubmitButton";
+import Button03 from "../../../assets/buttons/Button03";
 import Typography from "../../../assets/Typography";
 import { useRecoilState } from "recoil";
-import { isAppliedState, userProfileState, userState } from "../../../store/atom";
+import { isAppliedState, userProfileState, userSettingsState, userState } from "../../../store/atom";
 import client from "../../../utils/HttpClient";
-import { useSubmit } from "../../../utils/SettingSubmitFunctions";
+import { useSubmit1 } from "../../../utils/SettingSubmitFunctions";
 import NicknameCheckButton from "../../../assets/progressIndicator/Loader";
+import { useNicknameVerification } from "../../../utils/UserInputVerification";
 
 
 type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 
 export function SidebarContent1(){
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
-  const [nickname, setNickname] = useRecoilState(userState('nickname'));
+  const [nickname, setNickname] = useRecoilState(userSettingsState('nickname'));
   const [isApplied, setIsApplied] = useRecoilState(isAppliedState);
 
-  const {secondSubmit} = useSubmit();
+  useNicknameVerification('settings');
+  const {secondSubmit} = useSubmit1();
 
   return (
     <BodyContainer>
@@ -75,7 +78,8 @@ export function SidebarContent1(){
                 수정하기
               </Typography>
             </div>
-            <UserInput userInfoType="nickname"/>
+            <div style={{position: 'relative', width: '628px'}}>
+            <UserInput userInfoType="nickname" locationUsed="settings">
             {nickname.info === '' || nickname.infoState === 'filled' ? (
               <></>
             ) : (
@@ -84,44 +88,50 @@ export function SidebarContent1(){
                   nickname={nickname.info}
                   state={nickname.infoCheck as StateOptions}
                   setState={(so) => setNickname((prev) => ({...prev, infoCheck: so}))}
+                  style={{whiteSpace: 'nowrap', width: '50px'}}
                 ></NicknameCheckButton>
               </NicknameCheckButtonWrapper>
             )}
+            </UserInput>
+            </div>
+            
+            
           </ContentsWrapper>
-          <div>
-            <SubmitButton
-              style={{ marginTop: '60px' }}
-              active={!isApplied}
-              onClick={() => {
-                secondSubmit();
-              }}
-            >
-              저장하기
-            </SubmitButton>
-          </div>
+          
+          <Button03
+            style={{ marginTop: '245px', width: '100%' }}
+            state={!isApplied ? 'pressed' : 'disabled'}
+            onClick={() => {
+              secondSubmit();
+            }}
+          >
+            저장하기
+          </Button03>  
         </BodyContainer>
   )
 }
 
 const BodyContainer = styled.div`
-  padding-left: 262px;
+  //padding-left: 262px;
+  padding-left: 13.645vw;
   padding-top: 70px;
+  width: 628px;
 `;
 
 const BodyTitle = styled.div`
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 100% */
+  line-height: 1.25vw; /* 100% */
 `;
 
 const BodyContent = styled.div`
   color: var(--Main-Black, #141414);
   text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 111.111% */
@@ -135,22 +145,22 @@ const TextFieldTitle = styled.div`
   opacity: 0.8;
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 0.9375vw;
 `;
 
 
 const CurrentImg = styled.img`
-  width: 153px;
-  height: 153px;
+  width: 7.96875vw; //153px;
+  height: 7.96875vw; //153px;
   object-fit: cover;
 `;
 
 const CandidateImg = styled.img`
-  width: 74px;
-  height: 74px;
+  width: 3.8541vw; //74px;
+  height: 3.8541vw; //74px;
   object-fit: cover;
   cursor: pointer;
 `;
@@ -162,15 +172,16 @@ const CandidateImgsWrapper = styled.div`
 `;
 
 const ContentsWrapper = styled.div`
-  position: relative;
+  //position: relative;
   display: flex;
   flex-direction: column;
+  width: 32.7083vw; //628px;
   gap: 9px;
 `;
 
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
-  top: 110px;
+  top: 23px;
   left: 490px;
   z-index: 20;
 `;

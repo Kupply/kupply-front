@@ -31,6 +31,7 @@ const NicknameCheckButtonComponent = styled.button<NicknameCheckButtonProps>`
 
 const NicknameCheckButtonTextComponent = styled.div<NicknameCheckButtonTextProps>`
   ${(props) => textStateMapping[props.state || 'default']}
+  white-space: nowrap;
 `;
 
 // isSuccess가 success이면 성공, fail이면 실패이다.

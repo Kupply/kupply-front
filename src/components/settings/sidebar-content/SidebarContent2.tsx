@@ -2,19 +2,18 @@ import styled from "styled-components";
 import { UserInput } from "../../signUp/UserInput";
 import { GPAVerification, SemesterVerification } from "../../signUp/VerificationForm";
 import Typography from "../../../assets/Typography";
-import { useInputState } from "../../../utils/SignUpFunctions";
-import SubmitButton from "../../../assets/buttons/OldSubmitButton";
+//import SubmitButton from "../../../assets/buttons/OldSubmitButton";
+import Button03 from "../../../assets/buttons/Button03";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isAppliedState, isGpaChangedState, settingsModalState } from "../../../store/atom";
-import { useSubmit } from "../../../utils/SettingSubmitFunctions";
+import { useSubmit2 } from "../../../utils/SettingSubmitFunctions";
 
 export function SidebarContent2(){
-  // 지금 문제가 setGpaState이랑 setSemesterState에서 SignUpFunctions를 쓰고 있는데 이게 다르다 보니까 문제가 생긴다. role을 갖고 오는게 거기에는 있는데 여기는 role이 'candidate'으로 고정된 상황 
 
   const isGpaChanged = useRecoilValue(isGpaChangedState);
   const [modalOpen, setModalOpen] = useRecoilState(settingsModalState);
   const [isApplied, setIsApplied] = useRecoilState(isAppliedState);
-  const {thirdSubmit} = useSubmit();
+  const {thirdSubmit} = useSubmit2();
 
   return (
     <BodyContainer>
@@ -29,8 +28,8 @@ export function SidebarContent2(){
             <strong>희망 이중전공</strong> 수정하기
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-            <UserInput userInfoType="hopeMajor1"/>
-            <UserInput userInfoType="hopeMajor2"/>
+            <UserInput userInfoType="hopeMajor1" locationUsed="settings"/>
+            <UserInput userInfoType="hopeMajor2" locationUsed="settings"/>
           </div>
 
           <TextFieldTitle>
@@ -51,9 +50,9 @@ export function SidebarContent2(){
           />
           
           <div>
-            <SubmitButton
-              style={{ marginTop: '60px' }}
-              active={!isApplied}
+            <Button03
+              style={{ marginTop: '60px', width: '100%' }}
+              state={!isApplied ? 'pressed' : 'disabled'}
               onClick={() => {
                 if (isGpaChanged.changed) {
                   setModalOpen(true);
@@ -63,31 +62,33 @@ export function SidebarContent2(){
               }}
             >
               저장하기
-            </SubmitButton>
+            </Button03>
           </div>
         </BodyContainer>
   )
 }
 
 const BodyContainer = styled.div`
-  padding-left: 262px;
+  //padding-left: 262px;
+  padding-left: 13.645vw;
   padding-top: 70px;
+  width: 628px;
 `;
 
 const BodyTitle = styled.div`
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 100% */
+  line-height: 1.25vw; /* 100% */
 `;
 
 const BodyContent = styled.div`
   color: var(--Main-Black, #141414);
   text-shadow: 0px 4px 16px rgba(255, 255, 255, 0.33);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 111.111% */
@@ -101,8 +102,8 @@ const TextFieldTitle = styled.div`
   opacity: 0.8;
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 0.9375vw;
 `;

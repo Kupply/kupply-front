@@ -48,7 +48,7 @@ export function SideBar(){
             >
               계정관리
             </TextButton04>
-            <div style={{ marginTop: 210 }}>
+            <div style={{ marginTop: 160 }}>
             <TextButton04
               selected={selected === 4}
               onCustomFunction={() => {
@@ -58,12 +58,12 @@ export function SideBar(){
               약관보기
             </TextButton04>
             </div>
-            <div style={{ marginTop: 50 }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="284" height="2" viewBox="0 0 284 2" fill="none">
+            <div style={{ marginTop: 0 }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14.7916vw" height="2" viewBox="0 0 284 2" fill="none">
               <path d="M283 1L0.999988 1" stroke="#DFDFDF" stroke-linecap="round" />
             </svg>
           </div>{' '}
-          <div style={{ marginTop: 50 }}>
+          <div style={{ marginTop: 0 }}>
           <TextButton03Settings
               selected={selected === 5}
               onCustomFunction={() => {
@@ -80,7 +80,7 @@ export function SideBar(){
 }
 
 const Sidebar = styled.div`
-  width: 521px;
+  width: 27.135vw;
   height: 1153px;
   flex-shrink: 0;
   border-right: 1px solid var(--DF_Grey-2, #dfdfdf);
@@ -90,7 +90,7 @@ const Sidebar = styled.div`
 const Title = styled.div`
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
   line-height: 24px; /* 100% */

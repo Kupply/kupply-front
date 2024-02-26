@@ -1,4 +1,108 @@
-export function GpaChangeModal(){
+import ModalLarge from "../base/ModalLarge";
+import LabelButton from "../../assets/buttons/LabelButton";
+import Typography from "../../assets/Typography";
+import styled from "styled-components";
+import { settingsModalState } from "../../store/atom";
+import { useRecoilState } from "recoil";
+import AlertIconExclamation from "../../assets/icons/AlertIconExclamation";
+import { useNavigate } from "react-router-dom";
+import { useSubmit2 } from "../../utils/SettingSubmitFunctions";
+import Button01 from "../../assets/buttons/Button01";
 
-  return <></>
+
+export function GpaChangeModal(){
+  const [modalOpen, setModalOpen] = useRecoilState(settingsModalState);
+  const navigate = useNavigate();
+  const {thirdSubmit} = useSubmit2();
+
+  return (
+    <Main>
+      <ModalLarge
+            onClickToggleModal={() => {
+              setModalOpen(!modalOpen);
+            }}
+          >
+            <CloseButton
+              onClick={() => {
+                setModalOpen(!modalOpen);
+              }}
+            >
+              <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
+            </CloseButton>
+
+            <AlertWrapper style={{ marginTop: '180px' }}>
+              <AlertIconExclamation width="113px" height="113px" />
+              <Typography size="1.25vw" bold="700" style={{ marginTop: '25px' }}>
+                변경한 정보를 저장하시겠습니까?
+              </Typography>
+              <Typography size="0.9375vw" bold="500" style={{ marginTop: '24px', lineHeight: '136.111%' }}>
+                이중전공 지원 기간 동안에는 학점 수정이 최대 두 번까지만 가능해요.
+              </Typography>
+              <div style={{ display: 'flex', gap: 22, marginTop: 60 }}>
+                <div
+                  style={{ marginTop: 30 }}
+                  onClick={() => {
+                    navigate('/settings');
+                  }}
+                >
+                  <Button01
+                    variant="outline"
+                    size="medium"
+                    onClick={() => {
+                      setModalOpen(false);
+                    }}
+                  >
+                    취소
+                  </Button01>
+                </div>
+                <div
+                  style={{ marginTop: 30 }}
+                  onClick={() => {
+                    thirdSubmit();
+                  }}
+                >
+                  <Button01 
+                    variant="solid" 
+                    size="medium">
+                    확인
+                  </Button01>
+                </div>
+              </div>
+            </AlertWrapper>
+          </ModalLarge>
+    </Main>
+  )
 }
+
+const CloseButton = styled.button`
+  display: flex;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  cursor: pointer;
+`;
+
+const AlertWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 628px;
+  height: 796px;
+  align-items: center;
+  text-align: center;
+  margin: auto auto;
+`;
+
+const Main = styled.main`
+  width: 42.3958vw;
+  top: 5.729vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  left: 28.803vw;
+  z-index: 1005;
+`;

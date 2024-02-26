@@ -97,9 +97,11 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   const [isGpaChanged, setIsGpaChanged] = useRecoilState(isGpaChangedState);
   const {num1, num2, num3} = userGpa;
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
-  const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
-  const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
-  const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
+
+  // candidate인지 passer인지에 따라 달라져야 할듯
+  const originGPA1 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(0) || '');
+  const originGPA2 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(2) || '');
+  const originGPA3 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(3) || '');
 
   useEffect(() => {
     if(parseFloat(`${num1}.${num2}${num3}`) > 4.5){
@@ -130,11 +132,15 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   };
 
   // Settings에서는 비정상적인 학점 변화를 감지해야 한다 
+  // 이를 바탕으로 isGPAChanged를 변경 이를 thirdSubmit에서 활용
   useEffect(() => {
     if(locationUsed === 'Settings'){
       const newGpa = parseFloat(num1 + '.' + num2 + num3);
       const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
       
+      // 제대로 작동
+      console.log(newGpa, oldGpa);
+
       if(Math.abs(oldGpa - newGpa) >= 1.5){
         setIsGpaChanged({changed: true, strange: true});
       }else if(oldGpa !== newGpa){
@@ -143,14 +149,12 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
         setIsGpaChanged({changed: false, strange: false});
       }
     }
+    console.log(isGpaChanged);
   }, [userGpa]);
 
+  // toNext는 signUp에서만 사용
   if(toNext){
-    if(locationUsed === 'SignUp')
-      sessionStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
-
-    else 
-      localStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
+    sessionStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
   }
 
   return (
@@ -179,8 +183,15 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
     const semesterYear = +(num1 + num2);
     if(!!num1 && !!num2 && !!num3) {
       setState?.('complete')
-      if(!(num3 === '1' || num3 === '2') || semesterYear < 23 || (semesterYear === 23 && num1 === '1')) 
+
+      console.log(userType, num1, num2, num3);
+      if((!(num3 === '1' || num3 === '2') || semesterYear < 23 || (semesterYear === 23 && num1 === '1')) && userType === 'candidate') 
         setState?.('error');
+
+      else if((!(num3 === '1' || num3 === '2') || semesterYear > 23 || (semesterYear === 23 && num3 === '2')) && userType === 'passer'){
+        setState?.('error');
+      }
+        
     };
     
   }, [userSemester]);
@@ -192,11 +203,9 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
     }))
   };
 
+  // toNext는 signUp에서만 활용
   if(toNext){
-    if(locationUsed === 'SignUp')
-      sessionStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
-    else
-      localStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
+    sessionStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
   }
 
   return (
