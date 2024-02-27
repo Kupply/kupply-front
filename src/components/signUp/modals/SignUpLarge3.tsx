@@ -1,11 +1,6 @@
-import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
-//import LabelButton from '../../../assets/buttons/LabelButton';
-//import Typography from '../../../assets/OldTypography';
-import Typography from '../../../assets/Typography';
-import ModalLarge from '../../base/ModalLarge';
-import Button01 from '../../../assets/buttons/Button01';
+import SignUpAlertLarge03 from '../../../assets/alert/SignUpAlertLarge03';
+
 
 export interface ModalProps {
   currentModal: number;
@@ -22,43 +17,14 @@ export default function SignUpLarge3(props: ModalProps) {
   return (
     <Main>
       {isOpenModal && (
-        <ModalLarge onClickToggleModal={onClickModal}>
-          <CloseButton
-            onClick={() => {
-              setOpenModal(!isOpenModal);
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="3.125vw" height="3.125vw" viewBox="0 0 60 60" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M38.9142 23.9142C39.6953 23.1332 39.6953 21.8668 38.9142 21.0858C38.1332 20.3047 36.8668 20.3047 36.0858 21.0858L30 27.1716L23.9142 21.0858C23.1332 20.3047 21.8668 20.3047 21.0858 21.0858C20.3047 21.8668 20.3047 23.1332 21.0858 23.9142L27.1716 30L21.0858 36.0858C20.3047 36.8668 20.3047 38.1332 21.0858 38.9142C21.8668 39.6953 23.1332 39.6953 23.9142 38.9142L30 32.8284L36.0858 38.9142C36.8668 39.6953 38.1332 39.6953 38.9142 38.9142C39.6953 38.1332 39.6953 36.8668 38.9142 36.0858L32.8284 30L38.9142 23.9142Z"
-                fill="#434343"
-              />
-            </svg>
-          </CloseButton>
-          <div style={{ height: '15.74vh' }}></div>
-          <AlertIconCheck width="5.885vw" height="5.885vw" />
-          <Typography size="1.25vw" bold='700' color="#141414" style={{ marginTop: '25px' }}>
-            새로운 인증번호를 발송했습니다.
-          </Typography>
-          <Typography
-            size="0.9375vw" bold='500'
-            color="#141414"
-            style={{
-              marginTop: '24px',
-              textAlign: 'center',
-            }}
-          >
-            {email} 메일함을 다시 확인해주세요.
-            <br /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요!
-          </Typography>
-          <ActionWrapper>
-            <Button01 size="medium" onClick={onClickModal}>
-              확인
-            </Button01>
-          </ActionWrapper>
-        </ModalLarge>
+        <SignUpAlertLarge03
+          currentModal={currentModal}
+          isOpenModal={isOpenModal}
+          setCurrentModal={setCurrentModal}
+          setOpenModal={setOpenModal}
+          onClickModal={onClickModal}
+          email={email}
+        />
       )}
     </Main>
   );
@@ -72,23 +38,4 @@ const Main = styled.main`
   align-items: center;
   position: fixed;
   z-index: 1005; // Modal.tsx 와 상이한 stacking context
-`;
-
-const CloseButton = styled.button`
-  display: flex;
-  width: 3.125vw;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 4.629vh; //50px
-  right: 2.604vw; //50px
-
-  cursor: pointer;
-`;
-
-const ActionWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 7.685vh //83px;
 `;

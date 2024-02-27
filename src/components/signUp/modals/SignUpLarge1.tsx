@@ -1,11 +1,6 @@
 import styled from 'styled-components';
-import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-//import VerificationButton from '../../../assets/buttons/OldVerificationButton';
-import Button05 from '../../../assets/buttons/Button05';
-//import Typography from '../../../assets/OldTypography';
-import Typography from '../../../assets/Typography';
-import ModalLarge from '../../base/ModalLarge';
 import { sendEmail } from '../../../utils/SignUpFunctions';
+import SignUpAlertLarge from '../../../assets/alert/SignUpAlertLarge01';
 
 export interface ModalProps {
   currentModal: number;
@@ -23,48 +18,16 @@ export default function SignUpLarge1(props: ModalProps) {
   return (
     <Main>
       {isOpenModal && (
-        <ModalLarge onClickToggleModal={onClickModal}>
-          <CloseButton
-            onClick={() => {
-              setOpenModal(!isOpenModal);
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M38.9142 23.9142C39.6953 23.1332 39.6953 21.8668 38.9142 21.0858C38.1332 20.3047 36.8668 20.3047 36.0858 21.0858L30 27.1716L23.9142 21.0858C23.1332 20.3047 21.8668 20.3047 21.0858 21.0858C20.3047 21.8668 20.3047 23.1332 21.0858 23.9142L27.1716 30L21.0858 36.0858C20.3047 36.8668 20.3047 38.1332 21.0858 38.9142C21.8668 39.6953 23.1332 39.6953 23.9142 38.9142L30 32.8284L36.0858 38.9142C36.8668 39.6953 38.1332 39.6953 38.9142 38.9142C39.6953 38.1332 39.6953 36.8668 38.9142 36.0858L32.8284 30L38.9142 23.9142Z"
-                fill="#434343"
-              />
-            </svg>
-          </CloseButton>
-          <div style={{ height: '130px' }}></div>
-          <AlertIconExclamation width="5.885vw" height="5.885vw" />
-          <Typography size="1.25vw" bold='700' color="#141414" style={{ marginTop: '25px' }}>
-            아직 인증번호를 받지 못하셨나요?
-          </Typography>
-          <Typography size="0.9375vw" bold='500' color="#141414" style={{ marginTop: '24px' }}>
-            새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
-          </Typography>
-          <ActionWrapper>
-            <Button05
-              onClick={async () => {
-                setCurrentModal(currentModal + 2);
-                setBlank();
-                await sendEmail(email);
-              }}
-            >
-              인증번호 다시 받기
-            </Button05>
-            <Button05
-              onClick={() => {
-                setCurrentModal(currentModal + 1);
-              }}
-            >
-              이메일 주소 변경하기
-            </Button05>
-          </ActionWrapper>
-        </ModalLarge>
+        <SignUpAlertLarge
+          onClickModal={onClickModal}
+          setOpenModal={setOpenModal}
+          isOpenModal={isOpenModal}
+          setBlank={setBlank}
+          setCurrentModal={setCurrentModal}
+          currentModal={currentModal}
+          email={email}
+          sendEmail={sendEmail}
+        />
       )}
     </Main>
   );
@@ -80,23 +43,3 @@ const Main = styled.main`
   z-index: 1005; // Modal.tsx 와 상이한 stacking context
 `;
 
-const CloseButton = styled.button`
-  display: flex;
-  width: 3.125vw; //60px
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50px;
-
-  cursor: pointer;
-`;
-
-const ActionWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  margin-top: 72px;
-`;
