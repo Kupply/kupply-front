@@ -1,11 +1,12 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const MailButtonWrapper = styled.button<{ activated: boolean }>`
   transition: 0.25s ease-in-out;
   justify-content: center;
   align-items: center;
-  padding: 8px 26px;
+  padding: 8px 1.35vw;
+  white-space: nowrap;
   border-radius: 6px;
 
   ${(props) =>
@@ -73,8 +74,7 @@ const MailButtonWrapper = styled.button<{ activated: boolean }>`
         `}
 `;
 
-export interface HeaderButtonProps
-  extends React.ComponentPropsWithoutRef<"button"> {
+export interface HeaderButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   activated: boolean;
 }
 
