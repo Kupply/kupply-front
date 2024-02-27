@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { StringLiteral } from 'typescript';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fontSize?: string;
