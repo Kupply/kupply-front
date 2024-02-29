@@ -9,7 +9,6 @@ const LogoWrapper = styled.button`
   background: none;
   width: 188px;
   height: 46px;
-  gap: 8.418px;
   flex-shrink: 0;
 `;
 

@@ -63,7 +63,7 @@ export default function App() {
 const Wrapper = styled.div`
   position: flex;
   width: 100vw;
-  margin-top: 80px;
+  margin-top: 96px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
