@@ -25,7 +25,7 @@ const MajorBox = () => {
 
 const Wrapper = styled.div`
   width: 16.2vw;
-  height: 353px;
+  height: 17.37vw;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid #dfdfdf;
@@ -58,7 +58,7 @@ const TextBox = styled.div`
   justify-content: center;
   flex-shrink: 0;
 
-  margin-top: 21px;
+  margin-top: 1.03vw;
 `;
 
 const MajorWrapper = styled.div`
@@ -72,7 +72,7 @@ const MajorTextBox = styled.div`
   display: center;
   justify-content: center;
 
-  margin-top: 207.67px;
+  margin-top: 10.22vw;
 `;
 
 ///////////////// text /////////////////
@@ -117,28 +117,28 @@ const MajorText = styled.div`
 
 const Vector = styled.img`
   position: absolute;
-  top: 60px;
+  top: 2.95vw;
   flex-shrink: 0;
   width: 16.12vw;
 `;
 
 const Major = styled.img`
   position: absolute;
-  top: 62.67px;
+  top: 3.08vw;
   left: 5.76vw;
 
   width: 4.61vw;
-  height: 120.289px;
+  height: 5.92vw;
   flex-shrink: 0;
 `;
 
 const Shadow = styled.img`
   position: absolute;
-  top: 71.67px;
+  top: 3.53vw;
   left: 3.22vw;
 
   width: 8.365vw;
-  height: 166.708px;
+  height: 8.2vw;
   flex-shrink: 0;
   fill: radial-gradient(47.7% 47.7% at 50% 52.3%, rgba(146, 104, 83, 0.41) 0%, rgba(255, 255, 255, 0) 100%);
 `;
