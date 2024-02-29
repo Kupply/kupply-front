@@ -11,11 +11,12 @@ const baseWrapper = css`
   display: flex;
   width: 100%;
   min-width: 278px;
-  max-width: 592px;
-  height: 48px;
+
+  height: 68px;
   padding: 10px 18px;
   gap: 10px;
   border-radius: 10px;
+  box-sizing: border-box;
 
   & > img {
     position: relative;

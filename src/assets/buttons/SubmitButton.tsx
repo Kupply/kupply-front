@@ -4,13 +4,14 @@ import Typography from '../Typography';
 
 export interface SubmitButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   state?: 'active' | 'unactive';
+  size?: string;
 }
 
 function SubmitButton(props: SubmitButtonProps) {
-  const { children, state = 'active', ...rest } = props;
+  const { children, state = 'active', size, ...rest } = props;
   return (
     <ButtonWrapper state={state} {...rest}>
-      <Typography bold="700" color="var(--White, #FFF)">
+      <Typography size={size} bold="700" color="var(--White, #FFF)">
         {children}
       </Typography>
     </ButtonWrapper>
@@ -18,14 +19,15 @@ function SubmitButton(props: SubmitButtonProps) {
 }
 
 const ButtonWrapper = styled.button<SubmitButtonProps>`
-  width: 32.71vw;
+  width: 100%;
   height: 68px;
+
   box-sizing: border-box;
-  padding: 24px 1.77vw;
+  padding: 10px 18px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.42vw;
+
   border-radius: 10px;
   background: ${(props) => (props.state === 'active' ? '#D85888' : 'rgba(223,223,223,0.75)')};
 `;
