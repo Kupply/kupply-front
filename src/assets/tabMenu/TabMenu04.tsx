@@ -55,10 +55,10 @@ const Container = styled.button<{ status: HashtagButtonStatus }>`
 
 const InnerText = styled.div`
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
+  // line-height: 24px;
   text-align: center;
 `;
 
