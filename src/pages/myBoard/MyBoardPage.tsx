@@ -40,35 +40,29 @@ const MyBoardPage = () => {
   return (
     <Wrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
       <GlobalStyles />
-      <InterestMajorBox>
-        <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
-        <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
-          2지망
-        </InterestMajorButton>
-      </InterestMajorBox>
+      <ProfileWrapper>
+        <ProfileBox />
+      </ProfileWrapper>
 
       <MainWrapper>
-        <div style={{ position: 'absolute', top: '3.05vw', left: '4.98vw' }}>
-          <ProfileBox />
-        </div>
-        <div style={{ position: 'absolute', top: '11.02vw', left: '27.3vw' }}>
+        <InterestMajorBox>
+          <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
+          <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
+            2지망
+          </InterestMajorButton>
+        </InterestMajorBox>
+        <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
           <MajorBox />
-        </div>
-        <LiveWrapper>
-          <Application />
-          <div style={{ marginTop: '0.34vw' }} />
-          <MockApply />
-        </LiveWrapper>
-        <div style={{ position: 'absolute', top: '11.02vw', left: '62.29vw' }}>
+          <LiveWrapper>
+            <Application />
+            <div style={{ marginTop: '0.35vw' }}></div>
+            <MockApply />
+          </LiveWrapper>
           <ThreeYear />
         </div>
-        <div style={{ position: 'absolute', top: '29.58vw', left: '27.3vw' }}>
-          <QuartileIndicator />
-        </div>
-        <div style={{ position: 'absolute', top: '43.16vw', left: '27.3vw' }}>
+        <QuartileIndicator />
+        <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
           <PieChart />
-        </div>
-        <div style={{ position: 'absolute', top: '43.16vw', left: '56.46vw' }}>
           <Scatter />
         </div>
       </MainWrapper>
@@ -84,14 +78,13 @@ const GlobalStyles = createGlobalStyle` // 가로 스크롤 숨기기
 `;
 
 const Wrapper = styled.div`
-  // position: relative;
-  // justify-content: center;
-  width: 100vw;
-  height: 1678px;
+  position: relative;
+  display: flex;
 
-  // display: grid;
-  // grid-template-columns: auto auto;
-  // gap: 112px;
+  width: 100vw;
+  max-width: 1920px;
+  //min-height: 200vh;
+  max-height: 200vh;
 
   flex-shrink: 0;
   background: #fefafb;
@@ -101,28 +94,38 @@ const Wrapper = styled.div`
   background-size: 100vw 1027px;
   background-repeat: no-repeat;
   background-position: 0px;
+
+  padding-bottom: 165px;
+`;
+
+const ProfileWrapper = styled.div`
+  position: relative;
+  display: flex;
+  margin-left: 6.77vw;
 `;
 
 const MainWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
   flex-shrink: 0;
 
   //margin-top: 62.02px;
+  margin-left: 5.83vw;
+  gap: 1.25vw;
 `;
 
 const LiveWrapper = styled.div`
-  position: absolute;
-  top: 11.02vw;
-  left: 44.8vw;
+  position: relative;
+  row-gap: 0.34vw;
 `;
 
 const InterestMajorBox = styled.div`
-  position: absolute;
   display: flex;
-  top: 7.58vw;
-  left: 27.3vw;
-
+  margin-top: 58px;
   gap: 0.9375vw;
 `;
 
