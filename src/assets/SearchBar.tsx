@@ -33,7 +33,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
             if (ref.current) ref.current.focus();
           }}
         >
-          <Icon02 />
+          <Icon02 size={'24px'} />
         </Button>
       </InputBox>
     </Container>
@@ -48,6 +48,14 @@ const Container = styled.div`
   z-index: 2;
 
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
+
+  &,
+  & div,
+  & input {
+    @media screen and (max-width: 768px) {
+      height: 40px;
+    }
+  }
 `;
 
 const InputBox = styled.div`
@@ -62,24 +70,43 @@ const InputBox = styled.div`
     left: 95%; // 우측 여백 조절
     transform: translateY(-49%);
     cursor: pointer;
+
+    @media screen and (max-width: 576px) {
+      left: 90%;
+    }
   }
 `;
 
 const SvgContainer = styled.div`
+  display: flex;
+  align-items: center;
   width: 70px;
   height: 80px;
-  margin-top: 28px;
+
   margin-left: 30px;
   position: absolute;
+
+  @media screen and (max-width: 768px) {
+    margin-left: 15px;
+  }
+
+  & > svg {
+    @media screen and (max-width: 768px) {
+      width: 50%;
+      height: 50%;
+    }
+  }
 `;
 
 const Button = styled.button`
+  z-index: 2;
+  position: absolute;
   opacity: 0.7;
   transition: 0.3s ease-in-out;
   &:hover > svg > path {
     stroke: #d85888;
   }
-  overflow: auto;
+  overflow: hidden;
   border-radius: 32px;
   background: rgba(255, 255, 255, 0.32);
   &:hover {
@@ -123,6 +150,11 @@ const Input = styled.input`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+
+  @media screen and (max-width: 768px) {
+    padding-left: 55px;
+    font-size: 16px;
+  }
 `;
 
 export default SearchBar;
