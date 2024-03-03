@@ -1,8 +1,6 @@
 import React from 'react';
-import { useEffect, useState, MutableRefObject } from 'react';
 import styled, { css } from 'styled-components';
 import useDetectClose from './UseDetectClose';
-import Typography, { TypographyProps } from '../OldTypography';
 
 export interface DropDownProps {
   optionList: string[];
@@ -29,15 +27,6 @@ function DropDown02({ optionList, value, setValue }: DropDownProps) {
   const isSelected: boolean = !!value;
 
   if (!value && optionList) value = optionList[0];
-
-  /*
-  const handleOptionChange = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("start");
-    console.log((e.currentTarget as HTMLButtonElement).value);
-    setSeletedValue((e.currentTarget as HTMLButtonElement).value);
-    toggleIsOpen();
-  };
-  */
 
   return (
     <div style={{ maxWidth: '113px' }} ref={ref}>
@@ -68,11 +57,9 @@ function DropDown02({ optionList, value, setValue }: DropDownProps) {
                 <SelectBoxWrapper
                   isSelectedValue={value === data}
                   key={data}
-                  // type="button"
-                  // onClick={handleOptionChange}
                   onClick={() => {
                     setValue(data);
-                    toggleIsOpen(); // 해결 필요 1 - 옵션 선태 시 옵션 창 닫기 구현이 안됨.
+                    toggleIsOpen();
                   }}
                 >
                   {data}
@@ -87,8 +74,6 @@ function DropDown02({ optionList, value, setValue }: DropDownProps) {
 }
 
 export default DropDown02;
-
-/* 이하는 스타일 적용 */
 
 const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
   margin-left: 0.5rem;
