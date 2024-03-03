@@ -7,6 +7,7 @@ import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import { ImgCtrlButton, ImgDelButton } from '../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../assets/dropdown/DropDown';
 import VerificationBox from '../../assets/VerificationBox';
+import TextArea from '../../assets/TextArea';
 import Typography from '../../assets/OldTypography';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import LabelButton from '../../assets/buttons/LabelButton';
@@ -444,21 +445,27 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             >
               나의 기본정보 수정하기
             </ContentButton> */}
-            <TextButton04 
+            <TextButton04
               selected={selected === 0}
               onCustomFunction={() => {
                 onClick(0);
-              }}>나의 기본정보 수정하기</TextButton04>
+              }}
+            >
+              나의 기본정보 수정하기
+            </TextButton04>
             {/* <ContentButton
               selected={selected === 1}
               onClick={() => {
                 onClick(1);
               }}>프로필 사진 / 닉네임 변경하기</ContentButton> */}
-            <TextButton04 
+            <TextButton04
               selected={selected === 1}
               onCustomFunction={() => {
                 onClick(1);
-              }}>프로필 사진 / 닉네임 변경하기</TextButton04>
+              }}
+            >
+              프로필 사진 / 닉네임 변경하기
+            </TextButton04>
             {/* <ContentButton
               selected={selected === 2}
               onClick={() => {
@@ -467,11 +474,14 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             >
               마이보드 프로필 수정하기
             </ContentButton> */}
-            <TextButton04 
+            <TextButton04
               selected={selected === 2}
               onCustomFunction={() => {
                 onClick(2);
-              }}>마이보드 프로필 수정하기</TextButton04>
+              }}
+            >
+              마이보드 프로필 수정하기
+            </TextButton04>
             {/* <ContentButton
               selected={selected === 3}
               onClick={() => {
@@ -480,11 +490,14 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             >
               계정관리
             </ContentButton> */}
-            <TextButton04 
+            <TextButton04
               selected={selected === 3}
               onCustomFunction={() => {
                 onClick(3);
-              }}>계정관리</TextButton04>
+              }}
+            >
+              계정관리
+            </TextButton04>
           </Flex>
           <div style={{ marginTop: 210 }}>
             {/* <ContentButton
@@ -495,11 +508,14 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             >
               약관보기
             </ContentButton> */}
-            <TextButton04 
+            <TextButton04
               selected={selected === 4}
               onCustomFunction={() => {
                 onClick(4);
-              }}>약관보기</TextButton04>
+              }}
+            >
+              약관보기
+            </TextButton04>
           </div>
           <div style={{ marginTop: 50 }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="284" height="2" viewBox="0 0 284 2" fill="none">
@@ -515,10 +531,14 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             >
               계정 삭제
             </DeleteButton> */}
-            <TextButton03Settings selected={selected === 5}
+            <TextButton03Settings
+              selected={selected === 5}
               onCustomFunction={() => {
                 navigate('/delete');
-              }}>계정 삭제</TextButton03Settings>
+              }}
+            >
+              계정 삭제
+            </TextButton03Settings>
           </div>
         </Content>
       </Sidebar>

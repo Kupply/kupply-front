@@ -1,9 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import SemesterButton from '../../assets/tabMenu/SemesterButton'; // 아직 vw 변환 X
+import { useNavigate } from 'react-router-dom';
+import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import SemesterButton from '../../assets/tabMenu/TabMenu02';
+
+import { collegeAPIMappingByKR as collegeAPIMapping } from '../../utils/Mappings';
+
+// 하드코딩
+// tapmenu02 부모 컨포넌트에 따라 크기 조정되게 변경해야 됨
 
 const ThreeYear = () => {
+  const navigate = useNavigate();
+  const [CurrentPic, setCurrentPic] = useState('');
+  const [userData, setUserData] = useState({
+    userName: '',
+    userNickname: '',
+    userProfilePic: CurrentPic,
+    userProfileLink: '',
+    userRole: '',
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '',
+    hopeMajor2: '',
+    curGPA: 0,
+    hopeSemester: '',
+  });
+
   interface SemesterBtnStates {
     '2023-1R': boolean;
     '2022-2R': boolean;
@@ -30,8 +53,8 @@ const ThreeYear = () => {
       <TitleBox>
         <TitleText>3개년 합격지표</TitleText>
       </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="21.93vw" height="2" viewBox="0 0 421 2" fill="none">
-        <path d="M0 1L421 0.999963" stroke="#DFDFDF" />
+      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="21.98vw" height="2" viewBox="0 0 422 2" fill="none">
+        <path d="M0 1L422 0.999963" stroke="#DFDFDF" />
       </StyleSvg>
       <EachYearHeadBox>
         <SemesterButton isClicked={semesterBtnStates['2023-1R']} onClick={() => handleSemesterBtnClick('2023-1R')}>
@@ -46,18 +69,29 @@ const ThreeYear = () => {
       </EachYearHeadBox>
 
       <Text1Box>
-        <Text1>2024-1R 경영대학 모집정보</Text1>
-        <Arrow src="designImage/myBoard/RightArrow.svg" alt="arrow" />
+        <Text1>
+          {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
+          {userData.hopeMajor1} 모집정보{' '}
+        </Text1>
+        <button
+          onClick={() => {
+            navigate('/archive/' + collegeAPIMapping[userData.hopeMajor1 as MajorOptions]);
+          }}
+        >
+          <Arrow src="designImage/myBoard/RightArrow.svg" alt="arrow" />
+        </button>
       </Text1Box>
 
-      <Text2 style={{ position: 'absolute', top: '174px', left: '2.5vw' }}>24-1 선발 인원</Text2>
-      <Text3 style={{ position: 'absolute', top: '198px', left: '2.5vw' }}>25명</Text3>
-      <Text2 style={{ position: 'absolute', top: '174px', left: '12.14vw' }}>경쟁률</Text2>
-      <Text3 style={{ position: 'absolute', top: '198px', left: '12.14vw' }}>3.59 : 1</Text3>
-      <Text2 style={{ position: 'absolute', top: '240px', left: '2.5vw' }}>합격자 평균 학점</Text2>
-      <Text3 style={{ position: 'absolute', top: '264px', left: '2.5vw' }}>4.23</Text3>
-      <Text2 style={{ position: 'absolute', top: '240px', left: '12.14vw' }}>합격자 최저 학점</Text2>
-      <Text3 style={{ position: 'absolute', top: '264px', left: '12.14vw' }}>4.12</Text3>
+      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
+        {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발 인원
+      </Text2>
+      <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>25명</Text3>
+      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>경쟁률</Text2>
+      <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>3.59 : 1</Text3>
+      <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 평균 학점</Text2>
+      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>4.23</Text3>
+      <Text2 style={{ position: 'absolute', top: '11.81vw', left: '12.14vw' }}>합격자 최저 학점</Text2>
+      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '12.14vw' }}>4.12</Text3>
       <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
     </Wrapper>
   );
@@ -66,7 +100,7 @@ const ThreeYear = () => {
 const Wrapper = styled.div`
   position: relative;
   width: 22.08vw;
-  height: 353px;
+  height: 17.37vw;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
@@ -93,8 +127,8 @@ const TitleBox = styled.div`
   display: flex;
   justify-content: center;
 
-  top: 21.42px;
-  left: 40px;
+  top: 1.05vw;
+  left: 2.08vw;
 `;
 
 const EachYearHeadBox = styled.div`
@@ -103,14 +137,14 @@ const EachYearHeadBox = styled.div`
   justify-content: center;
   align-items: center;
   width: 18.85vw;
-  height: 44px;
+  height: 2.17vw;
   flex-shrink: 0;
 
   border-radius: 5px;
   border: 1px solid #eee;
   box-shadow: 0px 2.911px 145.528px 0px rgba(20, 20, 20, 0.05);
 
-  top: 72px;
+  top: 3.54vw;
   left: 1.61vw;
 `;
 
@@ -120,7 +154,7 @@ const Text1Box = styled.div`
   justify-content: center;
   align-items: center;
 
-  top: 134px;
+  top: 6.59vw;
   left: 2.5vw;
 `;
 
@@ -176,7 +210,7 @@ const Text3 = styled.div`
 
 const Text4 = styled.div`
   position: absolute;
-  top: 310px;
+  top: 15.26vw;
   left: 2.5vw;
 
   color: var(--A8_Grey-4, #a8a8a8);
@@ -193,13 +227,13 @@ const Text4 = styled.div`
 
 const StyleSvg = styled.svg`
   position: absolute;
-  top: 62px;
+  top: 3.05vw;
 `;
 
 const Arrow = styled.img`
   display: flex;
   width: 2.6vw;
-  height: 50px;
+  height: 2.46vw;
 
   flex-shrink: 0;
 `;

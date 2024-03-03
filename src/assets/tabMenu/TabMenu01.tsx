@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-export type StateOptions = 'default' | 'hover' | 'active';
+export type StateOptions = 'default' | 'hover' | 'active' | 'disabled';
 
 export interface SegmentedPickerProps extends React.ComponentPropsWithRef<'div'> {
   state?: StateOptions;
@@ -10,8 +10,8 @@ export interface SegmentedPickerProps extends React.ComponentPropsWithRef<'div'>
 
 const baseWrapper = css`
   display: flex;
-  width: 174px;
-  height: 48px;
+  width: 9.0625vw; // 174px;
+  height: 2.5vw;
   justify-content: center;
   align-items: center;
 `;
@@ -30,12 +30,26 @@ const activeWrapper = css`
   border-radius: 5px;
 `;
 
+const disabledWrapper = css`
+  align-items: center;
+  background: none;
+  border: none;
+  pointer-events: none;
+`;
+
 const Semester = styled.text<SegmentedPickerProps>`
-  color: ${(props) => (props.state === 'default' ? '#141414cc' : props.state === 'hover' ? '#d85888' : '#ffffff')};
+  color: ${(props) =>
+    props.state === 'default'
+      ? 'rgba(20, 20, 20, 0.80)'
+      : props.state === 'disabled'
+      ? 'rgba(20, 20, 20, 0.40)'
+      : props.state === 'hover'
+      ? '#d85888'
+      : '#ffffff'};
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 1.04vw;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   text-align: center;
 `;
 
@@ -43,6 +57,7 @@ const stateMapping = {
   default: defaultWrapper,
   hover: defaultWrapper,
   active: activeWrapper,
+  disabled: disabledWrapper,
 };
 
 const SegmentedPickerWrapper = styled.button<SegmentedPickerProps>`

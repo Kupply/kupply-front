@@ -40,6 +40,18 @@ const ModalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    width: 90vw;
+    height: 90vh;
+    margin-top: 5vh;
+    top: 0px;
+
+    & > dialog {
+      position: relative;
+      height: 100%;
+    }
+  }
 `;
 
 // 모달 창 (흰 색 컨텐츠 창)
@@ -107,6 +119,11 @@ const DialogBox = styled.dialog`
 
   /* Internet Explorer에서 스크롤바 숨기기 */
   -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요

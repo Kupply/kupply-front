@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
-
+import EyeIcon from '../assets/icons/EyeIcon';
 /* 
     Width는 부모 요소(Wrapper)의 width를 따라갑니다.
 */
@@ -11,11 +11,12 @@ const baseWrapper = css`
   display: flex;
   width: 100%;
   min-width: 278px;
-  max-width: 592px;
-  height: 48px;
+
+  height: 68px;
   padding: 10px 18px;
   gap: 10px;
   border-radius: 10px;
+  box-sizing: border-box;
 
   & > img {
     position: relative;
@@ -201,7 +202,7 @@ const ErrorMessage = styled.text`
   opacity: 0.8;
 `;
 
-const EyeIcon = styled.div`
+const EyeIconWrapper = styled.div`
   display: flex;
   position: relative;
   z-index: 1;
@@ -349,6 +350,29 @@ function TextFieldBox(props: TextFieldBoxProps) {
     alert('중복 체크');
   };
 
+  const changeTextTypeToText = (e: React.MouseEvent<SVGElement, MouseEvent> | React.TouchEvent<SVGElement>) => {
+    e.preventDefault();
+    setTextType('text');
+  };
+
+  const changeTextTypeToPW = (e: React.MouseEvent<SVGElement, MouseEvent> | React.TouchEvent<SVGElement>) => {
+    e.preventDefault();
+    setTextType('password');
+  };
+
+  const XCircle = () => {
+    return (
+      <img
+        src="../../designImage/textField/XCircle.png"
+        width="24px"
+        height="24px"
+        onMouseDown={() => {
+          setValue('');
+        }}
+      />
+    );
+  };
+
   useEffect(() => {
     if (type === 'password') setTextType('password');
   }, []);
@@ -393,97 +417,21 @@ function TextFieldBox(props: TextFieldBoxProps) {
               <Input value={value} onChange={rest.onChange} type={textType} autoFocus />
             </MessageBox>
             {textType === 'password' ? (
-              <EyeIcon
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  setTextType('text');
-                }}
-                onTouchStart={(e) => {
-                  e.preventDefault();
-                  setTextType('text');
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"
-                    stroke="#A8A8A8"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
-                    stroke="#A8A8A8"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <img
-                  src="../../designImage/textField/XCircle.png"
-                  width="24px"
-                  height="24px"
-                  onMouseDown={() => {
-                    setValue('');
-                  }}
-                />
-              </EyeIcon>
+              <EyeIconWrapper>
+                <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
+                <XCircle />
+              </EyeIconWrapper>
             ) : textType === 'text' ? (
-              <EyeIcon
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  setTextType('password');
-                }}
-                onTouchStart={(e) => {
-                  e.preventDefault();
-                  setTextType('password');
-                }}
-              >
+              <EyeIconWrapper>
                 {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 24" fill="none">
-                  <g clip-path="url(#clip0_2389_1254)">
-                    <path
-                      d="M9.9 4.24002C10.5883 4.0789 11.2931 3.99836 12 4.00003C19 4.00003 23 12 23 12C22.393 13.1356 21.6691 14.2048 20.84 15.19M14.12 14.12C13.8454 14.4148 13.5141 14.6512 13.1462 14.8151C12.7782 14.9791 12.3809 15.0673 11.9781 15.0744C11.5753 15.0815 11.1752 15.0074 10.8016 14.8565C10.4281 14.7056 10.0887 14.4811 9.80385 14.1962C9.51897 13.9113 9.29439 13.572 9.14351 13.1984C8.99262 12.8249 8.91853 12.4247 8.92563 12.0219C8.93274 11.6191 9.02091 11.2219 9.18488 10.8539C9.34884 10.4859 9.58525 10.1547 9.88 9.88003M17.94 17.94C16.2306 19.243 14.1491 19.9649 12 20C5 20 1 12 1 12C2.24389 9.68192 3.96914 7.65663 6.06 6.06003L17.94 17.94Z"
-                      stroke="#A8A8A8"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M1 1L23 23"
-                      stroke="#A8A8A8"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_2389_1254">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <img
-                  src="../../designImage/textField/XCircle.png"
-                  width="24px"
-                  height="24px"
-                  onMouseDown={() => {
-                    setValue('');
-                  }}
-                />
-              </EyeIcon>
+                <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
+                <XCircle />
+              </EyeIconWrapper>
             ) : (
-              <EyeIcon>
+              <EyeIconWrapper>
                 {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
-                <img
-                  src="../../designImage/textField/XCircle.png"
-                  width="24px"
-                  height="24px"
-                  onMouseDown={() => {
-                    setValue('');
-                  }}
-                />
-              </EyeIcon>
+                <XCircle />
+              </EyeIconWrapper>
             )}
           </>
         ) : state === 'typing' ? (
@@ -492,87 +440,32 @@ function TextFieldBox(props: TextFieldBoxProps) {
               {helpMessage && <HelpMessage>{helpMessage}</HelpMessage>}
               <Input {...rest} />
             </MessageBox>
-            <img src="../../designImage/textField/XCircle.png" width="28px" height="28px" />
+            <XCircle />
           </>
         ) : state === 'filled' ? (
           <>
             <IconWrapper>
               <CorrectText type={textType} value={value} disabled></CorrectText>
               {textType === 'password' ? (
-                <EyeIcon
-                  onMouseDown={(e) => {
-                    e.preventDefault();
-                    setTextType('text');
-                  }}
-                  onTouchStart={(e) => {
-                    e.preventDefault();
-                    setTextType('text');
-                  }}
-                >
+                <EyeIconWrapper>
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"
-                      stroke="#A8A8A8"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
-                      stroke="#A8A8A8"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
+                  <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
                   {valid ? (
                     <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
                   ) : (
                     <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
                   )}
-                </EyeIcon>
+                </EyeIconWrapper>
               ) : textType === 'text' ? (
-                <EyeIcon
-                  onMouseDown={(e) => {
-                    e.preventDefault();
-                    setTextType('password');
-                  }}
-                  onTouchStart={(e) => {
-                    e.preventDefault();
-                    setTextType('password');
-                  }}
-                >
+                <EyeIconWrapper>
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 24" fill="none">
-                    <g clip-path="url(#clip0_2389_1254)">
-                      <path
-                        d="M9.9 4.24002C10.5883 4.0789 11.2931 3.99836 12 4.00003C19 4.00003 23 12 23 12C22.393 13.1356 21.6691 14.2048 20.84 15.19M14.12 14.12C13.8454 14.4148 13.5141 14.6512 13.1462 14.8151C12.7782 14.9791 12.3809 15.0673 11.9781 15.0744C11.5753 15.0815 11.1752 15.0074 10.8016 14.8565C10.4281 14.7056 10.0887 14.4811 9.80385 14.1962C9.51897 13.9113 9.29439 13.572 9.14351 13.1984C8.99262 12.8249 8.91853 12.4247 8.92563 12.0219C8.93274 11.6191 9.02091 11.2219 9.18488 10.8539C9.34884 10.4859 9.58525 10.1547 9.88 9.88003M17.94 17.94C16.2306 19.243 14.1491 19.9649 12 20C5 20 1 12 1 12C2.24389 9.68192 3.96914 7.65663 6.06 6.06003L17.94 17.94Z"
-                        stroke="#A8A8A8"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M1 1L23 23"
-                        stroke="#A8A8A8"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_2389_1254">
-                        <rect width="24" height="24" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
+                  <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
                   {valid ? (
                     <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
                   ) : (
                     <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
                   )}
-                </EyeIcon>
+                </EyeIconWrapper>
               ) : (
                 <>
                   {valid ? (
@@ -588,70 +481,15 @@ function TextFieldBox(props: TextFieldBoxProps) {
           <>
             <ErrorText type={textType} value={value} disabled></ErrorText>
             {textType === 'password' ? (
-              <EyeIcon
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  setTextType('text');
-                }}
-                onTouchStart={(e) => {
-                  e.preventDefault();
-                  setTextType('text');
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"
-                    stroke="#A8A8A8"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
-                    stroke="#A8A8A8"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+              <EyeIconWrapper>
+                <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
                 <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
-              </EyeIcon>
+              </EyeIconWrapper>
             ) : textType === 'text' ? (
-              <EyeIcon
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  setTextType('password');
-                }}
-                onTouchStart={(e) => {
-                  e.preventDefault();
-                  setTextType('password');
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 24" fill="none">
-                  <g clip-path="url(#clip0_2389_1254)">
-                    <path
-                      d="M9.9 4.24002C10.5883 4.0789 11.2931 3.99836 12 4.00003C19 4.00003 23 12 23 12C22.393 13.1356 21.6691 14.2048 20.84 15.19M14.12 14.12C13.8454 14.4148 13.5141 14.6512 13.1462 14.8151C12.7782 14.9791 12.3809 15.0673 11.9781 15.0744C11.5753 15.0815 11.1752 15.0074 10.8016 14.8565C10.4281 14.7056 10.0887 14.4811 9.80385 14.1962C9.51897 13.9113 9.29439 13.572 9.14351 13.1984C8.99262 12.8249 8.91853 12.4247 8.92563 12.0219C8.93274 11.6191 9.02091 11.2219 9.18488 10.8539C9.34884 10.4859 9.58525 10.1547 9.88 9.88003M17.94 17.94C16.2306 19.243 14.1491 19.9649 12 20C5 20 1 12 1 12C2.24389 9.68192 3.96914 7.65663 6.06 6.06003L17.94 17.94Z"
-                      stroke="#A8A8A8"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M1 1L23 23"
-                      stroke="#A8A8A8"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_2389_1254">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
+              <EyeIconWrapper>
+                <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
                 <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
-              </EyeIcon>
+              </EyeIconWrapper>
             ) : (
               <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
             )}
