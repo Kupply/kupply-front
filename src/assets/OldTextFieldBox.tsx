@@ -96,6 +96,10 @@ const PlaceHolder = styled.text`
   line-height: 18px;
   opacity: 0.8;
   white-space: nowrap;
+
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const MessageBox = styled.div<{ isCheckDuplicated?: boolean }>`
@@ -158,6 +162,10 @@ const Input = styled.input`
   outline: none;
   background: none;
   caret-color: #d85888;
+
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const CorrectText = styled.input`
@@ -172,6 +180,9 @@ const CorrectText = styled.input`
   line-height: 18px;
   background: #fff;
   ${(props) => props.type === 'password' && 'color: black;'}
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const ErrorText = styled.input`
@@ -186,6 +197,9 @@ const ErrorText = styled.input`
   line-height: 18px;
   opacity: 0.8;
   background: #fff;
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const ErrorMessageWrapper = styled.div`
@@ -277,13 +291,6 @@ const CheckDuplicated = styled.div`
   border: 1px solid #d85888;
   color: #d85888;
 
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-
   @media screen and (max-width: 768px) {
     height: 18px;
   }
@@ -292,6 +299,7 @@ const CheckDuplicated = styled.div`
 const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
   display: flex;
   max-width: 67px;
+  min-width: 62px;
   height: 22px;
   width: 25%;
   padding: 8px 10px;
@@ -314,9 +322,11 @@ const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 10px;
+    width: 30%;
+    font-size: 12px;
     padding: 2px 5px;
-    margin-left: -8px;
+    margin-left: -16px;
+    margin-bottom: 1px;
     & > svg {
       margin-right: 0px;
     }
