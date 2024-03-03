@@ -38,18 +38,13 @@ export default function SignUp3Page(){
           <UserInputText userInfoType="id"/>
           <UserInput userInfoType="id" userInfoTypeManual="kuEmail">
             <InfoMessageWrapper>
-              
-              <InfoImageWrapper>
                 <CircleImage src={process.env.PUBLIC_URL + `/designImage/CircleImage.svg`}/>
                 <CheckImage src={process.env.PUBLIC_URL + `/designImage/CheckImage.svg`}/>  
-              </InfoImageWrapper>
-          
-              <div>
-                <Typography size="12px" bold="400" color="#A8A8A8">
+              <div style={{position: 'absolute', left: '0.8vw', display: 'flex', justifyContent: 'center', top: '0.265vw'}}>
+                <Typography size="0.625vw" bold="400" color="#A8A8A8">
                   쿠플라이 아이디는 고려대학교 이메일입니다.
                 </Typography>
               </div>
-              
             </InfoMessageWrapper>
           </UserInput>
         </ContentsWrapper>
@@ -63,7 +58,7 @@ export default function SignUp3Page(){
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="nickname"/>
-          <div style={{position: 'relative', width: '628px'}}>
+          <div style={{position: 'relative'}}>
           <UserInput userInfoType="nickname" toNext={next}>
           {nickname.info === '' || 
             nickname.infoState === 'filled' ? (<></>) : 
@@ -92,44 +87,43 @@ export default function SignUp3Page(){
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 1.823vw; //34px;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  gap: 18px;
-  margin-top: 34px;
+  gap: 0.9375vw; //18px;
+  margin-top: 1.823vw; //34px;
 `;
 
 const InfoMessageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 4px;
   margin-left: 1.0416vw;
-`;
-
-const InfoImageWrapper = styled.div`
   position: relative;
-  width: 0.625vw;
 `;
 
 const CircleImage = styled.img`
   position: absolute;
-  top: 4px;
+  top: 0.208vw; //4px;
+  width: 0.625vw;
+  height: 0.625vw;
   left: 0;
 `;
 
 const CheckImage = styled.img`
   position: absolute;
-  top: 7px;
-  left: 0.156vw;
+  top: 0.39vw; //7px;
+  width: 0.3125vw;
+  height: 0.3125vw;
+  left: 0.180vw;
 `;
 
 // 얘도 픽셀로 안 박으면 괴이한 현상이 일어남
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
-  top: 23px;
-  left: 490px;
+  top: 1.15vw; //20.2px;
+  left: 25.3vw; //490px;
   z-index: 9999;
 `;
 
@@ -137,5 +131,5 @@ const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   //position: relative;
-  gap: 9px;
+  gap: 0.469vw; //9px;
 `;

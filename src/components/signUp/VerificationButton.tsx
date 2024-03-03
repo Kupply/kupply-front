@@ -34,8 +34,8 @@ export default function VerificationButton({onSetBlank}:VerificationButtonProps)
   return (
     <SubContentsWrapper>
         <TextButton onClick={onClickToggleSmallModal}>
-          <div style={{ gap: '4.97px', display: 'flex' }}>
-            <img src={process.env.PUBLIC_URL + `/designImage/VerificationAgain.svg`} alt="인증번호 다시받기 이미지" />
+          <div style={{ gap: '0.2588vw', display: 'flex'}}>
+            <img src={process.env.PUBLIC_URL + `/designImage/VerificationAgain.svg`} alt="인증번호 다시받기 이미지" style={{width: '0.729vw', height: '0.729vw'}}/>
             인증번호 다시받기
           </div>
         </TextButton>
@@ -48,9 +48,9 @@ const SubContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-  margin-top: 109px; // 159.24px;
-  margin-bottom: 121px; //171px;
+  gap: 0.78125vw; //15px;
+  margin-top: 5.677vw; //109px; // 159.24px;
+  margin-bottom: 6.302vw; //121px; //171px;
 `;
 
 const TextButton = styled.button`

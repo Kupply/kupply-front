@@ -64,19 +64,19 @@ export function SignUp0Page(){
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 1.823vw; //35px;
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 100px;
+  gap: 0.417vw; //8px;
+  margin-top: 5.21vw; //100px;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 0.9375vw;
-  margin-top: 347px;
+  margin-top: 18.073vw; //347px;
   width: 100%;
 `;

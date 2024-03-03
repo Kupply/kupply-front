@@ -24,7 +24,7 @@ export const SignUpPageWrapper:
         {currentStep !== 5 ? 
         <>
           <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>환영합니다!</Typography>
-          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '5px' }}>
+          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
           회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
         </Typography>
         </> : 
@@ -32,7 +32,7 @@ export const SignUpPageWrapper:
           <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
             거의 다왔습니다!
           </Typography>
-          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '5px' }}>
+          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
             쿠플라이의 몇 가지 약관을 확인하면 서비스를 이용하실 수 있어요.
           </Typography>
         </>
@@ -71,8 +71,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  max-width: 2560px;
   height: 1153px;
+  max-width: 2560px;
   background-color: #fcfafb;
 `;
 
@@ -81,28 +81,27 @@ const TitleWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
-  padding-bottom: 25px;
+  padding-top: 1.5625vw; //30px;
+  padding-bottom: 1.302vw; //25px;
 `;
 
 const FormWrapper = styled.div`
   // display: flex;
   // flex-direction: column;
-  width: 816px; // 816px 이걸 픽셀로 박지 않은 이상 TextField와 DropDown 그리고 그 위의 선 모든게 뒤틀린다
-  //width: 42.5vw;
+  //width: 816px; // 816px 이걸 픽셀로 박지 않은 이상 TextField와 DropDown 그리고 그 위의 선 모든게 뒤틀린다
+  width: 42.5vw;
   height: 850px;
-  padding: 42px 94px 78px 94px;
-  padding-left: 94px;
-  border-radius: 10px;
+  padding: 2.188vw 4.896vw 4.063vw 4.896vw; // 42px 94px 78px 94px
+  border-radius: 0.521vw; //10px;
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
-  margin-top: 25px;
+  margin-top: 1.302vw; //25px;
 `;
 const StepIndicator = styled.div`
   display: inline-flex;
-  padding: 8px 0.9375vw;
+  padding: 0.417vw 0.9375vw; //8px 18px
   justify-content: center;
-  margin-bottom: 17px;
+  margin-bottom: 0.885vw; //17px;
   align-items: center;
   border-radius: 999px;
   border: 1px solid #d85888;
@@ -117,12 +116,12 @@ const StepIndicator = styled.div`
 `;
 
 const ContentsTitleWrapper = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 2.604vw; //50px;
 `;
 
 const HeaderBar = styled.svg`
   width: 100%;
   //max-width: 628px;
-  margin-top: 12px;
+  margin-top: 0.625vw; //12px;
   margin-bottom: 0px;
 `;

@@ -34,9 +34,9 @@ export const UserInputText: React.FC<UserInputTextProps> = ({userInfoType}) =>{
             case 'password2':
               return (
                 <>
-                  <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
+                  <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8', marginRight: '0.2344vw' }}>
                     {userTypeMapping[userInfoType].replace(/[을를]$/, '')}
-                  </Typography>
+                  </Typography>{" "}
                   <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
                     확인
                   </Typography>

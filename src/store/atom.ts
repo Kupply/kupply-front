@@ -83,13 +83,15 @@ export const userSettingsState = atomFamily<InfoState, string>({
 type errorMessageType = {
   passwordErrorMessage: string;
   nicknameErrorMessage: string;
+  password2ErrorMessage: string;
 };
 
 export const errorMessageState = atom<errorMessageType>({
   key: "errorMessageState",
   default: {
     passwordErrorMessage: '',
-    nicknameErrorMessage: ''
+    nicknameErrorMessage: '',
+    password2ErrorMessage: ''
   }
 });
 

@@ -57,7 +57,7 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
   studentId: '학번이 10자리 숫자가 아닙니다.',
   firstMajor: '',
   password: '',
-  password2: '비밀번호가 일치하지 않아요!',
+  password2: '',
   nickname: '',
   id: '',
   hopeMajor1: '',
@@ -84,6 +84,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
 
   errorMessageMapping.password = errorMessage.passwordErrorMessage;
   errorMessageMapping.nickname = errorMessage.nicknameErrorMessage;
+  errorMessageMapping.password2 = errorMessage.password2ErrorMessage;
 
   const updatedMajorTargetList = [...majorTargetList];
   updatedMajorTargetList.unshift({ value1: '희망 없음', value2: '희망 없음' });

@@ -12,15 +12,19 @@ const baseWrapper = css`
   width: 100%;
   min-width: 278px;
 
-  height: 68px;
-  padding: 10px 18px;
-  gap: 10px;
-  border-radius: 10px;
+  //height: 68px;
+  height: 3.542vw; 
+  //padding: 10px 18px;
+  padding: 0.521vw 0.9375vw; 
+  // gap: 10px;
+  // border-radius: 10px;
+  gap: 0.521vw; //10px;
+  border-radius: 0.521vw; //10px;
   box-sizing: border-box;
 
   & > img {
     position: relative;
-    right: 10px;
+    right: 0.521vw; //10px;
   }
 `;
 
@@ -81,7 +85,7 @@ const PlaceHolder = styled.text`
   width: 100%;
   color: #b9b9b9;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw; //18px;
   font-weight: 500;
   font-style: normal;
   line-height: 18px;
@@ -110,18 +114,18 @@ const IconWrapper = styled.div`
   flex-direction: row;
   & > img {
     position: relative;
-    right: 10px;
+    right: 0.521vw; //10px;
   }
 `;
 
 const IconBundler = styled.div`
   position: relative;
-  right: 10px;
+  right: 0.521vw; //10px;
   display: flex;
   flex-direction: row;
 
   & > button {
-    margin-right: 8px;
+    margin-right: 0.417vw; //8px;
   }
 `;
 
@@ -130,7 +134,7 @@ const HelpMessage = styled.text`
   height: 12px;
   color: #d85888;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 400;
   line-height: 12px;
@@ -139,7 +143,7 @@ const HelpMessage = styled.text`
 const Input = styled.input`
   color: #141414;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw; //18px;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
@@ -153,7 +157,7 @@ const Input = styled.input`
 const CorrectText = styled.input`
   width: 80%;
   height: 18px;
-  font-size: 18px;
+  font-size: 0.9375vw; //18px;
   flex-shrink: 0;
   color: #d85888;
   font-family: Pretendard;
@@ -167,7 +171,7 @@ const CorrectText = styled.input`
 const ErrorText = styled.input`
   width: 80%;
   height: 18px;
-  font-size: 18px;
+  font-size: 0.9375vw; //18px;
   flex-shrink: 0;
   color: #141414;
   font-family: Pretendard;
@@ -185,7 +189,7 @@ const ErrorMessageWrapper = styled.div`
   min-width: 216px;
   height: 12px;
   padding-top: 5px;
-  padding-left: 0.9375vw;
+  padding-left: 0.9375vw; //18px;
   gap: 4px;
   border: none;
   background: none;
@@ -195,7 +199,7 @@ const ErrorMessage = styled.text`
   width: 100%;
   color: #ea0909;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 400;
   line-height: 12px;
@@ -207,14 +211,14 @@ const EyeIconWrapper = styled.div`
   position: relative;
   z-index: 1;
   top: 2px;
-  right: 0.5208vw; //10px
+  right: 0.521vw; //10px;
 
   & > img {
-    margin-left: 0.5208vw; //10px
+    margin-left: 0.521vw; //10px;
   }
 
   & > button {
-    margin-right: 0.5208vw; //10px
+    margin-right: 0.521vw; //10px;
   }
 `;
 
@@ -222,9 +226,9 @@ const CheckDuplicated = styled.button`
   display: flex;
   box-sizing: border-box;
   min-width: 65px;
-  width: 3.385vw //65px;
+  width: 65px;
   height: 24px;
-  padding: 4px 0.2604vw; //5px
+  padding: 4px 5px;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -232,7 +236,7 @@ const CheckDuplicated = styled.button`
 
   text-align: center;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
@@ -242,7 +246,7 @@ const CheckDuplicated = styled.button`
 
   text-align: center;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;

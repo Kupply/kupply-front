@@ -88,7 +88,7 @@ export function SignUp1Page(){
       </ContentsList>
       <VerificationButton onSetBlank={setBlank}/>
       <ButtonsWrapper>
-        <Button04 state="disabled" style={{width:'25.582%'}}/>
+        <Button04 style={{width:'25.582%'}} state="disabled"/>
         <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} style={{width:'74.418%'}}/>
         {/* VerificationForm에서 자동으로 넘어갈 수 있게 설정해서 onClick일단 빼둠*/}
       </ButtonsWrapper>
@@ -100,12 +100,12 @@ export function SignUp1Page(){
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 1.823vw; //35px;
 `;
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.417vw; //8px;
 `;
 
 const ButtonsWrapper = styled.div`

@@ -5,7 +5,7 @@ function TermsText1(){
 
   return (
     <>
-      <div style={{textAlign: 'left', marginBottom: '10px'}}>
+      <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
       <Typography size="1.25vw" bold="700">
         제 1장 총칙
       </Typography>
@@ -76,7 +76,7 @@ function TermsText1(){
       </ContentsText>
       <br />
       <br />
-      <div style={{textAlign: 'left', marginBottom: '10px'}}>
+      <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
       <Typography size="1.25vw" bold="700" >
         제 2장 서비스 이용 계약
       </Typography>
@@ -161,7 +161,7 @@ function TermsText1(){
       </ContentsText>
       <br />
       <br />
-      <div style={{textAlign: 'left', marginBottom: '10px'}}>
+      <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
       <Typography size="1.25vw" bold="700" >
         제 3장 서비스 제공 및 변경
       </Typography>
@@ -244,7 +244,7 @@ function TermsText1(){
       </ContentsText>
       <br />
       <br />
-      <div style={{textAlign: 'left', marginBottom: '10px'}}>
+      <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
         <Typography size="1.25vw" bold="700" >
           제 4장 서비스 관련 권한, 의무 관계
       </Typography>
@@ -359,7 +359,7 @@ function TermsText1(){
       </ContentsText>
       <br />
       <br />
-      <div style={{textAlign: 'left', marginBottom: '10px'}}>
+      <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
       <Typography size="1.25vw" bold="700">
         제 5장 기타
       </Typography>
@@ -625,7 +625,7 @@ const StyledTable = styled.table`
     text-align: center;
     background-color: #dfdfdf;
     border: 1px solid black;
-    padding: 2px 2px;
+    padding: 0.104vw 0.104vw; //2px 2px;
   }
 
   td {

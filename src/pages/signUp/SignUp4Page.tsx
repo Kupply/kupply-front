@@ -184,24 +184,24 @@ export function SignUp4PagePasser(){
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 1.823vw; //34px;
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 0.46875vw; //9px;
 `;
 
 const AliasButtonsWrapper = styled.div`
   display: flex;
-  gap: 18px;
-  margin-top: 70px;
+  gap: 0.9375vw; //18px;
+  margin-top: 3.646vw; //70px;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  gap: 18px;
-  margin-top: 34px;
+  gap: 0.9375vw; //18px;
+  margin-top: 1.823vw; //34px;
 `;
 

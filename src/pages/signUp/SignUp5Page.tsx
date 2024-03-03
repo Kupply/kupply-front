@@ -136,7 +136,6 @@ export function SignUp5Page(){
 }
 
 export function SignUp5Complete(){
-  const [isButtonActive, setIsButtionActive] = useState(true);
   const navigate = useNavigate();
   const handleNext = () => {
     navigate('/login');
@@ -177,13 +176,13 @@ export function SignUp5Complete(){
         alt="completeImage"
         style={{
           width: '40.677vw',
-          height: '77.407vh',
+          height: '43.542vw',
           background: 'url(designImage/signUp/CheckAni.webp), lightgray 50% / cover no-repeat',
           transform: 'translateY(-84px)',
         }}
       />
       <div style={{ transform: 'translateY(-221px)' }}>
-        <CTA01 state={isButtonActive ? 'default' : 'disabled'} onClick={handleNext}>
+        <CTA01 state="default" onClick={handleNext}>
           <Typography size="1.042vw" bold="700" color="var(--White, #FFF)">
             로그인하고 쿠플라이로 이동하기
           </Typography>

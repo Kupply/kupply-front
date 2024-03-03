@@ -28,7 +28,7 @@ export function SidebarContent1(){
           <TextFieldTitle>
             <strong>프로필 사진</strong> 변경하기
           </TextFieldTitle>
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '1.0416vw' }}>
             <CurrentImg
               src={
                 userProfile.pic === 'customProfile'
@@ -60,11 +60,11 @@ export function SidebarContent1(){
                   onClick={() => setUserProfile((prev) => ({...prev, pic: 'rectProfile4'}))}
                 />
               </CandidateImgsWrapper>
-              <div style={{ gap: '5px', marginTop: '52px', display: 'flex' }}></div>
+              <div style={{ gap: '0.2604vw', marginTop: '2.708vw', display: 'flex' }}></div>
             </div>
           </div>
           <ContentsWrapper>
-            <div style={{ display: 'flex', marginTop: '60px' }}>
+            <div style={{ display: 'flex', marginTop: '3.125vw' }}>
               <Typography
                 size="mediumText"
                 style={{ color: 'var(--Main-Black, #141414)', fontWeight: 700, opacity: 0.8 }}
@@ -78,7 +78,7 @@ export function SidebarContent1(){
                 수정하기
               </Typography>
             </div>
-            <div style={{position: 'relative', width: '628px'}}>
+            <div style={{position: 'relative'}}>
             <UserInput userInfoType="nickname" locationUsed="settings">
             {nickname.info === '' || nickname.infoState === 'filled' ? (
               <></>
@@ -88,7 +88,7 @@ export function SidebarContent1(){
                   nickname={nickname.info}
                   state={nickname.infoCheck as StateOptions}
                   setState={(so) => setNickname((prev) => ({...prev, infoCheck: so}))}
-                  style={{whiteSpace: 'nowrap', width: '50px'}}
+                  style={{whiteSpace: 'nowrap'}}
                 ></NicknameCheckButton>
               </NicknameCheckButtonWrapper>
             )}
@@ -114,8 +114,10 @@ export function SidebarContent1(){
 const BodyContainer = styled.div`
   //padding-left: 262px;
   padding-left: 13.645vw;
-  padding-top: 70px;
-  width: 628px;
+  padding-top: 3.646vw;
+  //padding-top: 70px;
+  //width: 628px;
+  width: 32.7083vw;
 `;
 
 const BodyTitle = styled.div`
@@ -134,14 +136,14 @@ const BodyContent = styled.div`
   font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 22px; /* 111.111% */
+  line-height: 111.111%; //22px; /* 111.111% */
   opacity: 0.6;
-  margin-top: 12px;
+  margin-top: 0.625vw; //12px;
 `;
 
 const TextFieldTitle = styled.div`
-  margin-top: 58px;
-  margin-bottom: 9px;
+  margin-top: 3.021vw; //58px;
+  margin-bottom: 0.4688vw; //9px;
   opacity: 0.8;
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
@@ -181,7 +183,7 @@ const ContentsWrapper = styled.div`
 
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
-  top: 23px;
-  left: 490px;
+  top: 1.05vw; //23px;
+  left: 25vw; //490px;
   z-index: 20;
 `;

@@ -53,17 +53,17 @@ export default function SignUp2Page(){
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 1.823vw; //34px;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  gap: 18px;
-  margin-top: 34px;
+  gap: 0.9375vw; //18px;
+  margin-top: 1.823vw; //34px;
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 0.4686vw; //9px;
 `;

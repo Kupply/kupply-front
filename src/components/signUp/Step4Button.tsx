@@ -18,7 +18,7 @@ const ButtonWrapper = styled.button<Step4ButtonProps>`
   padding-left: 2.29vw;
   padding-right: 0.885vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.521vw; //10px;
   background: #fff;
   box-shadow: ${(props) => (props.state === 'default' ? '0px 0px 12px 0px  rgba(216, 88, 136, 0.10)' : 'none')};
   border: ${(props) =>
@@ -34,7 +34,7 @@ const TextBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.4166vw; //8px;
 `;
 
 const Title = styled.text<Step4ButtonProps>`
@@ -43,7 +43,7 @@ const Title = styled.text<Step4ButtonProps>`
   font-size: 0.9375vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 18px;
+  line-height: 100% //18px;
   opacity: ${(props) => (props.state === 'inactive' ? '0.5' : '0.8')};
 `;
 
@@ -53,7 +53,7 @@ const Passage = styled.text<Step4ButtonProps>`
   font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 100% //18px;
   opacity: ${(props) => (props.state === 'inactive' ? '0.5' : '0.8')};
 `;
 

@@ -1,5 +1,4 @@
 import ModalLarge from "../base/ModalLarge";
-import LabelButton from "../../assets/buttons/LabelButton";
 import Typography from "../../assets/Typography";
 import styled from "styled-components";
 import { settingsModalState } from "../../store/atom";
@@ -98,7 +97,7 @@ const AlertWrapper = styled.div`
 
 const Main = styled.main`
   width: 42.3958vw;
-  top: 5.729vw;
+  margin-top: 5.729vw;
   display: flex;
   flex-direction: column;
   align-items: center;

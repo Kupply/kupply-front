@@ -7,7 +7,7 @@ type verificationProps = 'signUp' | 'settings';
 
 export function useEmailVerification(locationUsed: verificationProps){
   
-  const [ID, setID] = useRecoilState(locationUsed === 'signUp' ? userState('kuEmail') : userSettingsState('kuEmail'));
+  const [ID, setID] = useRecoilState(locationUsed === 'signUp' ? userState('kuEmail') : userSettingsState('loginedUser'));
   const [idVerified, setIdVerified] = useState(false);
 
   const IDPattern = /.+@korea\.ac\.kr$/;
@@ -94,9 +94,11 @@ export function usePasswordVerification(locationUsed: verificationProps){
 export function usePassword2Verification(locationUsed: verificationProps){
   const [password, setPassword] = useRecoilState(locationUsed === 'signUp' ?userState('password') : userSettingsState('password'));
   const [password2, setPassword2] = useRecoilState(locationUsed === 'signUp' ?userState('password2') : userSettingsState('password2'));
+  const [errorMessages, setErrorMessages] = useRecoilState(errorMessageState);
   const [password2Verified, setPassword2Verified] = useState(false);
 
   useEffect(() => {
+    // password와 password2에 모두 기입이 되었을 때
     if (!!password.info && !!password2.info && password.infoState === 'filled' && password2.infoState === 'filled') {
       if (password.info === password2.info) {
         setPassword2((prev) => ({...prev, infoState: 'filled'}));
@@ -104,9 +106,21 @@ export function usePassword2Verification(locationUsed: verificationProps){
       } else {
         setPassword2((prev) => ({...prev, infoState: 'error'}));
         setPassword2Verified(false);
+        setErrorMessages({
+          ...errorMessages,
+          password2ErrorMessage: '비밀번호가 일치하지 않아요!',
+        });
       }
+    } 
+    // password2에는 입력이 됨 but password1의 verification이 valid하지 않음
+    else if(!!password2.info && password2.infoState === 'filled' && password.infoState !== 'filled'){
+      setPassword2((prev) => ({...prev, infoState: 'error'}))
+      setPassword2Verified(false);
+      setErrorMessages({
+        ...errorMessages,
+        password2ErrorMessage: '비밀번호를 먼저 올바르게 기입해주세요!',
+      });
     }
-
   }, [password.info, password.infoState, password2.info, password2.infoState]);
 
   return {password2Verified};

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TextButton04, TextButton03Settings, TextButton01, TextButton02, TextButton03LNB, TextButton05, TextButton06 } from "../../assets/buttons/TextButton";
+import { TextButton04, TextButton03Settings, } from "../../assets/buttons/TextButton";
 import { SBContentState } from "../../store/atom";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
@@ -93,17 +93,17 @@ const Title = styled.div`
   font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 100% */
-  padding-top: 70px;
-  padding-bottom: 70px;
+  line-height: 1.25vw; //24px; /* 100% */
+  padding-top: 3.646vw; //70px;
+  padding-bottom: 3.646vw; //70px;
 `;
 
 const Content = styled.div`
-  padding-left: 128px;
+  padding-left: 6.667vw; //128px;
 `;
 
 const Flex = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 2.604vw; //50px;
 `;

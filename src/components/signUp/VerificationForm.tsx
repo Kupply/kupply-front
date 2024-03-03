@@ -160,7 +160,7 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   return (
     <VerifiBoxWrapper>
       <TextAreaBox name="gpa-1" value={num1} setValue={(value) => handleGPAState(`num1`, value)}/>
-      <div style={{ marginTop: 60 }}>
+      <div style={{ marginTop: '3.125vw' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
           <circle cx="1" cy="1" r="1" fill="#141414" />
         </svg>
@@ -212,9 +212,9 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
   <VerifiBoxWrapper>
     <TextAreaBox name="semester-1" value={num1} setValue={(value) => handleSemesterState('num1', value)}/>
     <TextAreaBox name="semester-2" value={num2} setValue={(value) => handleSemesterState('num2', value)}/>
-    <Typography size="16px" bold="500" style={{ marginTop: '58px' }}>년도</Typography>
+    <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>년도</Typography>
     <TextAreaBox name="semester-3" value={num3} setValue={(value) => handleSemesterState('num3', value)}/>
-    <Typography size="16px" bold="500" style={{ marginTop: '58px' }}>학기</Typography>
+    <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>학기</Typography>
   </VerifiBoxWrapper>
   )
 
@@ -227,7 +227,7 @@ const CodeVerifiBoxWrapper = styled.div`
 
 const VerifiBoxWrapper = styled.div`
   display: flex;
-  gap: 13px;
+  gap: 0.6771vw;
 `;
 
 
