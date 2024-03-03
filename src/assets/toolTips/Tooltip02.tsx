@@ -8,6 +8,7 @@ export interface AlertMessageProps extends React.ComponentPropsWithoutRef<'div'>
 
 function ToolTip02(props: AlertMessageProps) {
   const { children, hoverState, ...rest } = props;
+  
   return (
     <MainWrapper {...rest}>
       <AlertImage src="../../designImage/toolTips/ToolTip02Default.svg" alt="AlertIcon" />
