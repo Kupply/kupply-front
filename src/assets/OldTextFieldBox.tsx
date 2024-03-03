@@ -11,12 +11,11 @@ const baseWrapper = css`
   display: flex;
   width: 100%;
   min-width: 278px;
-
-  height: 68px;
+  max-width: 592px;
+  height: 48px;
   padding: 10px 18px;
   gap: 10px;
   border-radius: 10px;
-  box-sizing: border-box;
 
   & > img {
     position: relative;
@@ -405,16 +404,29 @@ function TextFieldBox(props: TextFieldBoxProps) {
         ref={ref}
         tabIndex={rest.tabIndex || 0}
       >
-        {state === 'default' || state === 'hover' ? (
-          <>
-            <PlaceHolder>{placeholder}</PlaceHolder>
-            {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
-          </>
-        ) : state === 'focused' ? (
+        {state === 'default' ||
+          (state === 'hover' && (
+            <>
+              <PlaceHolder>{placeholder}</PlaceHolder>
+              {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
+            </>
+          ))}
+        {state === 'focused' && (
           <>
             <MessageBox isCheckDuplicated={isCheckDuplicated}>
               {helpMessage && <HelpMessage>{helpMessage}</HelpMessage>}
-              <Input value={value} onChange={rest.onChange} type={textType} autoFocus />
+              <Input
+                value={value}
+                onChange={
+                  rest.onChange
+                    ? rest.onChange
+                    : (e: React.ChangeEvent<HTMLInputElement>) => {
+                        setValue(e.target.value);
+                      }
+                }
+                type={textType}
+                autoFocus
+              />
             </MessageBox>
             {textType === 'password' ? (
               <EyeIconWrapper>
@@ -434,7 +446,8 @@ function TextFieldBox(props: TextFieldBoxProps) {
               </EyeIconWrapper>
             )}
           </>
-        ) : state === 'typing' ? (
+        )}
+        {state === 'typing' && (
           <>
             <MessageBox isCheckDuplicated={isCheckDuplicated}>
               {helpMessage && <HelpMessage>{helpMessage}</HelpMessage>}
@@ -442,7 +455,8 @@ function TextFieldBox(props: TextFieldBoxProps) {
             </MessageBox>
             <XCircle />
           </>
-        ) : state === 'filled' ? (
+        )}
+        {state === 'filled' && (
           <>
             <IconWrapper>
               <CorrectText type={textType} value={value} disabled></CorrectText>
@@ -477,7 +491,8 @@ function TextFieldBox(props: TextFieldBoxProps) {
               )}
             </IconWrapper>
           </>
-        ) : state === 'error' ? (
+        )}
+        {state === 'error' && (
           <>
             <ErrorText type={textType} value={value} disabled></ErrorText>
             {textType === 'password' ? (
@@ -493,17 +508,16 @@ function TextFieldBox(props: TextFieldBoxProps) {
             ) : (
               <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
             )}
-            {/* <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" /> */}
           </>
-        ) : state === 'loading' ? (
+        )}
+        {state === 'loading' && (
           <>
             <CorrectText>{value}</CorrectText>
             <img src="../../designImage/textField/Loading.png" width="28px" height="28px" />
           </>
-        ) : (
-          <></>
         )}
       </TextFieldWrapper>
+
       {state === 'error' && (
         <ErrorMessageWrapper>
           <img src="../../designImage/textField/X.png" width="12px" height="12px" />
