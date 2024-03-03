@@ -92,8 +92,8 @@ const SvgContainer = styled.div`
 
   & > svg {
     @media screen and (max-width: 768px) {
-      width: 50%;
-      height: 50%;
+      width: 12px;
+      height: 12px;
     }
   }
 `;
@@ -140,8 +140,18 @@ const Input = styled.input`
 
   &:focus {
     border: 1px solid var(--Primary-V, #e85888);
-    box-shadow: 0px 10px 30px 0px rgba(216, 88, 136, 0.1);
+    border-radius: 2px;
+
+    box-shadow: 0px 10px 30px 0px rgba(232, 88, 136, 0.15);
     outline: none;
+
+    background: #ffffff;
+
+    @media screen and (max-width: 768px) {
+      outline-style: solid;
+      outline-color: rgba(232, 88, 136, 0.15);
+      outline-width: 4px;
+    }
   }
 
   color: #141414;
@@ -153,7 +163,13 @@ const Input = styled.input`
 
   @media screen and (max-width: 768px) {
     padding-left: 55px;
-    font-size: 16px;
+    font-size: 14px;
+    padding-left: 40px;
+    background: #f3f3f3;
+
+    &::placeholder {
+      font-size: 14px;
+    }
   }
 `;
 
