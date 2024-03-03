@@ -41,6 +41,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
 };
 const Container = styled.div`
   display: flex;
+  margin-top: 4px;
   flex-direction: row;
   gap: 0px;
   width: 95%;
