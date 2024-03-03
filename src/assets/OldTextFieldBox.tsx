@@ -694,7 +694,10 @@ function TextFieldBox(props: TextFieldBoxProps) {
                 <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
               </EyeIconWrapper>
             )}
-            {textType !== 'password' && textType !== 'text' && isCheckDuplicated ? (
+            {textType === 'default' && !isCheckDuplicated && (
+              <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+            )}
+            {textType === 'default' && isCheckDuplicated && (
               <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path
@@ -718,11 +721,10 @@ function TextFieldBox(props: TextFieldBoxProps) {
                 </svg>
                 중복 확인
               </CheckDuplicatedValidation>
-            ) : (
-              <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
             )}
           </>
         )}
+
         {state === 'loading' && (
           <>
             <CorrectText>{value}</CorrectText>
