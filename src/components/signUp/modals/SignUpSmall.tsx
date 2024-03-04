@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import Typography from '../../../assets/OldTypography';
+//import Typography from '../../../assets/OldTypography';
+import Typography from '../../../assets/Typography';
 import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
 import ModalSmall from '../../base/ModalSmall';
 
@@ -9,7 +10,7 @@ import ModalSmall from '../../base/ModalSmall';
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 26px;
+  margin-left: 1.354vw; //26px;
 `;
 
 const fadeInAnimation = css`
@@ -132,13 +133,13 @@ export default function SignUpSmall(props: ModalProps) {
   return (
     <ModalContainer isOpen={isOpenModal}>
       <ModalSmall onClickToggleModal={onClickModal}>
-        <AlertIconCheck width="62px" height="62px" />
+        <AlertIconCheck width="3.23vw" height="3.23vw" />
         <TextWrapper>
-          <Typography size="mediumText" color="#141414" style={{ fontWeight: '700', lineHeight: '88.889%' }}>
+          <Typography size="0.9375vw" bold='700' color="#141414" style={{ lineHeight: '88.889%' }}>
             새로운 인증번호를 발송했습니다.
           </Typography>
           <div style={{ height: '8px' }}></div>
-          <Typography size="normalText" color="#141414">
+          <Typography size="0.8333vw" bold='500' color="#141414">
             메일함을 확인해주세요!
           </Typography>
         </TextWrapper>

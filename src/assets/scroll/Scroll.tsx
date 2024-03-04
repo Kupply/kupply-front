@@ -70,7 +70,8 @@ function ScrollLarge(props: ScrollButtonProps) {
 
 const ScrollbarSmall = styled.button<{ isChecked: boolean; isHovered: boolean }>`
   display: inline-block;
-  width: 30.9375vw; // (594/1920*100)vw  width: 594px;
+  //width: 30.9375vw; // (594/1920*100)vw  width: 594px;
+  width: 100%;
   height: 204px;
   padding: 0.4167vw; // (8/1920*100)vw  padding: 8px;
   gap: 0.4167vw; // (8/1920*100)vw  gap: 8px;
@@ -133,10 +134,12 @@ const ScrollbarSmall = styled.button<{ isChecked: boolean; isHovered: boolean }>
 
 const ScrollbarLarge = styled.button<{ isChecked: boolean; isHovered: boolean }>`
   display: inline-block;
-  width: 35.3125vw; //678px; // 740px
+  //width: 35.3125vw; //678px; // 740px
+  width: 100%;
   height: 80%;
   flex-direction: column;
   align-items: flex-start;
+  //align-items:center;
   flex-shrink: 0;
   overflow-y: auto;
   overflow-x: hidden;

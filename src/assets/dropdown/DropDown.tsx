@@ -50,7 +50,7 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
       <DropDownBtn isOpen={isOpen} isSelected={isSelected} onClick={toggleIsOpen} type="button" value={value || title}>
         {value || title}
         <AngleDown isOpen={isOpen} isSelected={isSelected}>
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="1.458vw" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M19.8333 10.6984C19.6147 10.4811 19.319 10.3591 19.0108 10.3591C18.7026 10.3591 18.4069 10.4811 18.1883 10.6984L14 14.8284L9.86998 10.6984C9.65139 10.4811 9.3557 10.3591 9.04748 10.3591C8.73926 10.3591 8.44357 10.4811 8.22498 10.6984C8.11563 10.8068 8.02884 10.9359 7.96961 11.078C7.91038 11.2202 7.87988 11.3727 7.87988 11.5267C7.87988 11.6807 7.91038 11.8332 7.96961 11.9754C8.02884 12.1176 8.11563 12.2466 8.22498 12.3551L13.1716 17.3017C13.2801 17.4111 13.4091 17.4979 13.5513 17.5571C13.6935 17.6163 13.846 17.6468 14 17.6468C14.154 17.6468 14.3065 17.6163 14.4487 17.5571C14.5908 17.4979 14.7199 17.4111 14.8283 17.3017L19.8333 12.3551C19.9427 12.2466 20.0295 12.1176 20.0887 11.9754C20.1479 11.8332 20.1784 11.6807 20.1784 11.5267C20.1784 11.3727 20.1479 11.2202 20.0887 11.078C20.0295 10.9359 19.9427 10.8068 19.8333 10.6984Z"
               fill={isOpen ? '#D85888' : '#B9B9B9'}
@@ -82,7 +82,7 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
                   }}
                 >
                   {data.value1}
-                  <SelectBox size={'normalText'} color={value === data.value1 ? 'var(--primary, #d85888)' : '#141414'}>
+                  <SelectBox color={value === data.value1 ? 'var(--primary, #d85888)' : '#141414'}>
                     {data.value2}
                   </SelectBox>
                 </SelectBoxWrapper>
@@ -125,19 +125,19 @@ const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
 const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   width: 100%;
   max-width: 628px;
-  height: 68px;
-  border-radius: 10px;
+  height: 3.542vw; //68px;
+  border-radius: 0.521vw; //10px;
   border: 1px solid #b9b9b9;
   background: #fff;
 
   display: flex;
   align-items: center;
   text-align: left;
-  padding-left: 18px;
+  padding-left: 0.9375vw; //18px;
 
   color: #757575;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw; //18px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px; /* 100% */
@@ -220,10 +220,10 @@ const SelectBoxContainer = styled.div`
   max-height: 350px; /* 한 옵션 당 34 px * 9 = 306 px + ... 패딩값 등 고려하여 임의 설정 */
   justify-content: flex-start;
   align-items: center;
-  padding-top: 17px;
+  padding-top: 0.885vw; //17px;
   padding-bottom: 7px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 0.521vw; //10px;
   border: 1px solid rgba(216, 88, 136, 0.2);
   background: #fff;
   box-shadow: 0px 0px 15px 0px rgba(79, 13, 37, 0.15);
@@ -250,12 +250,12 @@ const SelectBoxWrapper = styled.button<{
   align-items: center;
   border-radius: 5px;
 
-  padding: 13px 18px;
+  padding: 0.677vw 0.9375vw; //13px 18px;
   margin-top: 4px;
 
   color: var(--main-black, #141414);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw; //18px;
   font-style: normal;
   font-weight: 500;
   line-height: 100%;
@@ -279,5 +279,6 @@ const SelectBoxWrapper = styled.button<{
 
 const SelectBox = styled(Typography)<TypographyProps>`
   font-weight: 400;
+  font-size: 0.833vw; 
   opacity: 0.8;
 `;

@@ -2,19 +2,24 @@ import styled from 'styled-components';
 
 import Typography from '../Typography';
 
-export interface AlertMessageProps extends React.ComponentPropsWithoutRef<'div'> {}
+export interface AlertMessageProps extends React.ComponentPropsWithoutRef<'div'> {
+  hoverState?: boolean;
+}
 
 function ToolTip02(props: AlertMessageProps) {
-  const { children, ...rest } = props;
+  const { children, hoverState, ...rest } = props;
+  
   return (
     <MainWrapper {...rest}>
-      <MessageBox>
+      <AlertImage src="../../designImage/toolTips/ToolTip02Default.svg" alt="AlertIcon" />
+      {hoverState && 
+      <div style={{position: 'absolute', top: '-3.18vw', zIndex: 999}}>
+        <MessageBox>
         <Typography size="0.73vw" bold="500" color="var(--White, #FFF)" style={{ lineHeight: '114.286%' }}>
           {children}
         </Typography>
       </MessageBox>
-      <NotchImage src="../../designImage/toolTips/ToolTip02Notch.svg" alt="NochIcon" />
-      <AlertImage src="../../designImage/toolTips/ToolTip02Default.svg" alt="AlertIcon" />
+      <NotchImage src="../../designImage/toolTips/ToolTip02Notch.svg" alt="NochIcon" /></div>}
     </MainWrapper>
   );
 }
@@ -23,6 +28,7 @@ const MainWrapper = styled.div<AlertMessageProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
 `;
 
 const AlertImage = styled.img`
@@ -47,7 +53,7 @@ const MessageBox = styled.div`
   width: 12.03vw;
   height: auto;
   box-sizing: border-box;
-  padding: 10px 0.42vw;
+  padding: 0.521vw 0.42vw;
   margin-left: -5vw;
   display: none;
   justify-content: center;
