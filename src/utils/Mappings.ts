@@ -174,3 +174,11 @@ export const majorNameMappingBySID: Record<number, string> = {
   3501: '스마트보안학부',
   4200: '스마트모빌리티학부',
 };
+
+export const idColorMappingShadow: { [key: number]: string } = {
+  23: 'rgba(216, 88, 136, 0.5)',
+  22: 'rgba(229, 124, 144, 0.5)',
+  21: 'rgba(255, 175, 189, 0.5)',
+  20: 'rgba(253, 242, 242, 0.5)',
+};
+

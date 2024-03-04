@@ -9,7 +9,7 @@ export interface SemesterButtonProps extends React.ComponentPropsWithoutRef<'but
 const Button = styled.button<SemesterButtonProps>`
   display: flex;
   width: 4.58vw;
-  height: 28px;
+  height: 1.46vw;
   border-radius: 3.638px;
   vertical-align: middle;
   align-items: center;

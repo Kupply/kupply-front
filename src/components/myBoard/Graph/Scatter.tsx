@@ -21,7 +21,7 @@ const Scatter = () => {
         <TitleText>이중전공 지원자 학과 분포</TitleText>
         <Information src="designImage/myBoard/InformationCircle.svg" alt="information" />
       </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="0.1vw" viewBox="0 0 534 2" fill="none">
+      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.8125vw" height="2" viewBox="0 0 534 2" fill="none">
         <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
       </StyleSvg>
 
