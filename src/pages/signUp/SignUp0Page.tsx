@@ -21,7 +21,10 @@ export function SignUp0Page(){
   const navigate = useNavigate();
 
   const handleNext = async () => {
-    if(complete){
+    const IDPattern = /.+@korea\.ac\.kr$/;
+
+    // onKeyDown에서 complete가 아직 update가 안된 상태라 || 뒤에 추가 
+    if(complete || IDPattern.test(ID.info)){
       const url = 'https://api.kupply.devkor.club/auth/sendEmail';
       try {
         //await axios.post(url, { email: ID.info });
@@ -49,7 +52,7 @@ export function SignUp0Page(){
       <ContentsList>
           <ContentsWrapper>
             <UserInputText userInfoType="kuEmail"/>
-            <UserInput userInfoType="kuEmail" toNext={next}/>
+            <UserInput userInfoType="kuEmail" toNext={next} onCustomFunction={handleNext}/>
           </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>

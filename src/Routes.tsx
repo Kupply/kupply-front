@@ -1,5 +1,6 @@
 import React from 'react';
-import OnboardingPage from './pages/main/OnboardingPage';
+//import OnboardingPage from './pages/main/OnboardingPage';
+import OnboardingPage from './pages/main/OldOnboardingPage';
 import MyBoardPage from './pages/myBoard/MyBoardPage';
 import LandingPage from './pages/landing/LandingPage';
 import LoginPage from './pages/login/LoginPage';

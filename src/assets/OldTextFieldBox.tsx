@@ -418,7 +418,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           <>
             <MessageBox isCheckDuplicated={isCheckDuplicated}>
               {helpMessage && <HelpMessage>{helpMessage}</HelpMessage>}
-              <Input value={value} onChange={rest.onChange} type={textType} autoFocus />
+              <Input value={value} onChange={rest.onChange} type={textType} autoFocus onKeyDown={rest.onKeyDown}/>
             </MessageBox>
             {textType === 'password' ? (
               <EyeIconWrapper>

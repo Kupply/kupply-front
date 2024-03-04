@@ -22,6 +22,7 @@ interface UserInputProps {
   children?: ReactNode;
   userInfoTypeManual?: string | undefined;
   locationUsed?: 'signUp' | 'settings';
+  onCustomFunction?: () => void;
 }
 
 const placeholderMapping: Record<UserTypeOptions, string> = {
@@ -68,7 +69,7 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
 
 const optionList = majorTargetList;
 
-export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, userInfoTypeManual=undefined, locationUsed='signUp',}) => {
+export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, userInfoTypeManual=undefined, locationUsed='signUp', onCustomFunction}) => {
 
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(locationUsed === 'signUp' ? userState(userInfoTypeManual || userInfoType) : 
@@ -155,6 +156,12 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
         helpMessage={helpMessageMapping[userInfoType]}
         errorMessage={errorMessageMapping[userInfoType]}
         type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key === 'Enter') {
+            console.log('This is the onKeyDown');
+            onCustomFunction?.();
+          }
+        }}
       />
       }
       {children}
