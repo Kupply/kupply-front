@@ -4,18 +4,31 @@ import styled from 'styled-components';
 import EditModal from './EditModals/EditModal';
 import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
+import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
 
-// 데이터 연결 X
 // isApplied={isApplied}
 // editmodal 위치 수정 해야 됨
-// CTA02 부모 컨포넌트에 따라 크기 변경되게? 수정해야 될듯
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: string;
   hopeMajor: string;
 }
 
-const ProfileBox = () => {
+const ProfileBox = ({ userData }: { userData: any }) => {
+  const id = userData.studentId.slice(2, 4);
+  const major: MajorOptions = userData.firstMajor;
+  const major1: MajorOptions = userData.hopeMajor1;
+  const major2: MajorOptions = userData.hopeMajor2;
+
+  const majorKoreanName = majorNameMapping[major][0];
+
+  const majorKoreanName1 = majorNameMapping[major1][0];
+  const majorEngishName1 = majorNameMapping[major1][1];
+
+  const majorKoreanName2 = majorNameMapping[major2][0];
+  const majorEngishName2 = majorNameMapping[major2][1];
+
   const [isOpenEditModal, setOpenEditModal] = useState(false);
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
 
@@ -49,12 +62,14 @@ const ProfileBox = () => {
     <Wrapper translateY={scrollY}>
       <CharacterImage src="designImage/character/rectProfile/RectProfile1.png" alt="profile" />
       <NickNameBox>
-        <NickNameText>고대빵없어...</NickNameText>
-        <RoleText>도전자 님</RoleText>
+        <NickNameText>{userData.userNickname}</NickNameText>
+        <RoleText>{userData.userRole === 'candidate' ? '도전자' : '합격자'} 님</RoleText>
         <EditImage src="designImage/myBoard/Edit.svg" alt="edit" onClick={onClickEditModal} />
       </NickNameBox>
       <MajorTextBox>
-        <MajorText>디자인조형학부 20학번</MajorText>
+        <MajorText>
+          {majorKoreanName} {id}학번
+        </MajorText>
       </MajorTextBox>
 
       {isOpenEditModal && (
@@ -73,21 +88,21 @@ const ProfileBox = () => {
       </SubTitleBox>
 
       <InterestMajorBox>
-        <Card02 korName="경영학과" hopeMajor="business" />
-        <Card02 korName="경영학과" hopeMajor="business" />
+        <Card02 korName={majorKoreanName1} hopeMajor="1지망" />
+        <Card02 korName={majorKoreanName2} hopeMajor="2지망" />
       </InterestMajorBox>
 
       <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '26.38vw' }} />
       <SubTitleBox style={{ top: '27.85vw' }}>
         <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
         <SubTitleText>현재 내 학점</SubTitleText>
-        <HopeSemesterText>4.2</HopeSemesterText>
+        <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
       </SubTitleBox>
 
       <SubTitleBox style={{ top: '29.82vw' }}>
         <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
         <SubTitleText>희망 진입학기</SubTitleText>
-        <GPAText>2023-2R</GPAText>
+        <GPAText>{userData.hopeSemester}R</GPAText>
       </SubTitleBox>
 
       <ApplyBox>
