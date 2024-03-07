@@ -10,7 +10,7 @@ const PreviousPage = () => {
 
   return (
     <>
-      <GlobalStyles />
+      {/* <GlobalStyles /> */}
       <Header clicked={clicked} setClicked={setClicked} searchWord={searchWord} setSearchWord={setSearchWord} />
       <Cards clicked={clicked} searchWord={searchWord} />
     </>
@@ -19,9 +19,9 @@ const PreviousPage = () => {
 
 export default PreviousPage;
 
-const GlobalStyles = createGlobalStyle` // 가로 스크롤 숨기기
+const GlobalStyles = createGlobalStyle` // 가로 스크롤 숨기기 -> 세로 스크롤 두개 생기는 현상으로 지움
   html, body {
-    max-width: 100%;
+    overflow-y: auto;
     overflow-x: hidden;
   }
 `;

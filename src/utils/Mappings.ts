@@ -52,19 +52,11 @@ export const majorNameMapping = {
 /*
   학기
 */
-export const semesterMapping: string[] = [
-  '전학기 누적',
-  '2023-1R',
-  '2022-2R',
-  '2022-1R',
-  '2021-2R',
-  '2021-1R',
-  '2020-2R',
-  '2020-1R',
-];
+export const semesterMapping: string[] = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R'];
 
 export const semesterAPIMapping: string[] = [
   'all',
+  '2023-2',
   '2023-1',
   '2022-2',
   '2022-1',
