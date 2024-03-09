@@ -3,30 +3,21 @@ import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import { collegeAPIMappingByKR as collegeAPIMapping } from '../../utils/Mappings';
+import { majorNameMapping } from '../../utils/Mappings';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
 
-import { collegeAPIMappingByKR as collegeAPIMapping } from '../../utils/Mappings';
-
-// 하드코딩
-// tapmenu02 부모 컨포넌트에 따라 크기 조정되게 변경해야 됨
-
-const ThreeYear = () => {
-  const navigate = useNavigate();
-  const [CurrentPic, setCurrentPic] = useState('');
-  const [userData, setUserData] = useState({
-    userName: '',
-    userNickname: '',
-    userProfilePic: CurrentPic,
-    userProfileLink: '',
-    userRole: '',
-    firstMajor: '',
-    studentId: '',
-    hopeMajor1: '',
-    hopeMajor2: '',
-    curGPA: 0,
-    hopeSemester: '',
-  });
-
+const ThreeYear = ({
+  onViewMajor,
+  userData,
+  pastData1,
+  pastData2,
+}: {
+  onViewMajor: number;
+  userData: any;
+  pastData1: any[];
+  pastData2: any[];
+}) => {
   interface SemesterBtnStates {
     '2023-1R': boolean;
     '2022-2R': boolean;
@@ -39,6 +30,12 @@ const ThreeYear = () => {
     '2022-1R': false,
   });
 
+  const [selectedSemesterIndex, setSelectedSemesterIndex] = useState(0);
+
+  const navigate = useNavigate();
+  const major: keyof typeof majorNameMapping = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
+  const majorKoreanName = majorNameMapping[major][0];
+
   const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
     // Create a new object with updated isClicked values
     const updatedBtnStates: SemesterBtnStates = { ...semesterBtnStates };
@@ -46,7 +43,16 @@ const ThreeYear = () => {
       updatedBtnStates[key as keyof SemesterBtnStates] = key === buttonName;
     }
     setSemesterBtnStates(updatedBtnStates);
+
+    const indexMap: { [key: string]: number } = {
+      '2023-1R': 0,
+      '2022-2R': 1,
+      '2022-1R': 2,
+    };
+    setSelectedSemesterIndex(indexMap[buttonName]);
   };
+
+  const selectedPastData = onViewMajor === 1 ? pastData1[selectedSemesterIndex] : pastData2[selectedSemesterIndex];
 
   return (
     <Wrapper>
@@ -71,11 +77,11 @@ const ThreeYear = () => {
       <Text1Box>
         <Text1>
           {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
-          {userData.hopeMajor1} 모집정보{' '}
+          {majorKoreanName} 모집정보{' '}
         </Text1>
         <button
           onClick={() => {
-            navigate('/archive/' + collegeAPIMapping[userData.hopeMajor1 as MajorOptions]);
+            navigate('/archive/' + collegeAPIMapping[majorKoreanName as MajorOptions]);
           }}
         >
           <Arrow src="designImage/myBoard/RightArrow.svg" alt="arrow" />
@@ -85,13 +91,15 @@ const ThreeYear = () => {
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
         {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발 인원
       </Text2>
-      <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>25명</Text3>
+      <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>경쟁률</Text2>
-      <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>3.59 : 1</Text3>
+      <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>
+        {selectedPastData.competitionRate} : 1
+      </Text3>
       <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 평균 학점</Text2>
-      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>4.23</Text3>
+      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>{selectedPastData.meanGpa}</Text3>
       <Text2 style={{ position: 'absolute', top: '11.81vw', left: '12.14vw' }}>합격자 최저 학점</Text2>
-      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '12.14vw' }}>4.12</Text3>
+      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '12.14vw' }}>{selectedPastData.minGpa}</Text3>
       <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
     </Wrapper>
   );
@@ -114,7 +122,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="424" height="353" viewBox="0 0 424 353" fill="none"%3E%3Cg filter="url(%23filter0_b_318_1187)"%3E%3Cpath d="M10 2.65413e-05C4.47715 2.69041e-05 -1.60625e-07 4.47718 0 10L9.68486e-06 343C9.84549e-06 348.523 4.47716 353 10 353L414 353C419.523 353 424 348.523 424 343V10C424 4.47715 419.523 -3.6283e-07 414 0L10 2.65413e-05Z" fill="url(%23paint0_radial_318_1187)" fill-opacity="0.9"/%3E%3Cpath d="M0.5 10C0.5 4.75332 4.75329 0.500027 10 0.500027L414 0.5C419.247 0.5 423.5 4.75329 423.5 10V343C423.5 348.247 419.247 352.5 414 352.5L10 352.5C4.75331 352.5 0.50001 348.247 0.50001 343L0.5 10Z" stroke="%23DFDFDF"/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id="filter0_b_318_1187" x="-24" y="-24" width="472" height="401" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"%3E%3CfeFlood flood-opacity="0" result="BackgroundImageFix"/%3E%3CfeGaussianBlur in="BackgroundImageFix" stdDeviation="12"/%3E%3CfeComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_318_1187"/%3E%3CfeBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_318_1187" result="shape"/%3E%3C/filter%3E%3CradialGradient id="paint0_radial_318_1187" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(424 4.32745) rotate(140.568) scale(548.952 831.341)"%3E%3Cstop stop-color="white"/%3E%3Cstop offset="1" stop-color="white" stop-opacity="0"/%3E%3C/radialGradient%3E%3C/defs%3E%3C/svg%3E');
+    background-image: url('data:image/svg+xml,%0A%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22424%22%20height%3D%22353%22%20viewBox%3D%220%200%20424%20353%22%20fill%3D%22none%22%3E%0A%20%20%3Cg%20filter%3D%22url%28%23filter0_b_318_1187%29%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M10%202.65413e-05C4.47715%202.69041e-05%20-1.60625e-07%204.47718%200%2010L9.68486e-06%20343C9.84549e-06%20348.523%204.47716%20353%2010%20353L414%20353C419.523%20353%20424%20348.523%20424%20343V10C424%204.47715%20419.523%20-3.6283e-07%20414%200L10%202.65413e-05Z%22%20fill%3D%22url%28%23paint0_radial_318_1187%29%22%20fill-opacity%3D%220.9%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0.5%2010C0.5%204.75332%204.75329%200.500027%2010%200.500027L414%200.5C419.247%200.5%20423.5%204.75329%20423.5%2010V343C423.5%20348.247%20419.247%20352.5%20414%20352.5L10%20352.5C4.75331%20352.5%200.50001%20348.247%200.50001%20343L0.5%2010Z%22%20stroke%3D%22%23DFDFDF%22/%3E%0A%20%20%3C/g%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3Cfilter%20id%3D%22filter0_b_318_1187%22%20x%3D%22-24%22%20y%3D%22-24%22%20width%3D%22472%22%20height%3D%22401%22%20filterUnits%3D%22userSpaceOnUse%22%20color-interpolation-filters%3D%22sRGB%22%3E%0A%20%20%20%20%20%20%3CfeFlood%20flood-opacity%3D%220%22%20result%3D%22BackgroundImageFix%22/%3E%0A%20%20%20%20%20%20%3CfeGaussianBlur%20in%3D%22BackgroundImageFix%22%20stdDeviation%3D%2212%22/%3E%0A%20%20%20%20%20%20%3CfeComposite%20in2%3D%22SourceAlpha%22%20operator%3D%22in%22%20result%3D%22effect1_backgroundBlur_318_1187%22/%3E%0A%20%20%20%20%20%20%3CfeBlend%20mode%3D%22normal%22%20in%3D%22SourceGraphic%22%20in2%3D%22effect1_backgroundBlur_318_1187%22%20result%3D%22shape%22/%3E%0A%20%20%20%20%3C/filter%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22paint0_radial_318_1187%22%20cx%3D%220%22%20cy%3D%220%22%20r%3D%221%22%20gradientUnits%3D%22userSpaceOnUse%22%20gradientTransform%3D%22translate%28-3.33771e-05%204.32746%29%20rotate%2839.4319%29%20scale%28548.952%20831.342%29%22%3E%0A%20%20%20%20%20%20%3Cstop%20stop-color%3D%22white%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22white%22%20stop-opacity%3D%220%22/%3E%0A%20%20%20%20%3C/radialGradient%3E%0A%20%20%3C/defs%3E%0A%3C/svg%3E%0A');
     background-repeat: no-repeat;
     background-size: cover;
     z-index: -1;

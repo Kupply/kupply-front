@@ -134,6 +134,7 @@ function OnboardingPage() {
               }}
               onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.key === 'Enter') {
+                  console.log('This is the onKeyDown');
                   handleButtonClick();
                 }
               }}

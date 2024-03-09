@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { MajorOptionsLongEng as MajorOptions } from "../../types/MajorTypes";
+import ToolTip02 from "../toolTips/Tooltip02";
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: string;
@@ -68,7 +69,7 @@ export default function Card01 ({
   const majorName = majorParamMappingPath[engName as MajorOptions];
   const depName = majorParamMappingImage[engName as MajorOptions];
 
-  console.log([majorKorName, majorName, depName]);
+  //console.log([majorKorName, majorName, depName]);
 
   const handleClickDetail = () => {
     navigate('/archive/' + majorName);
@@ -98,21 +99,8 @@ export default function Card01 ({
       <ContentInner style={{top: '10.52vw', left: '1.98vw'}}>{TO}명</ContentInner>
 
       <ContentTitle style={{top: '9.28vw', left: '8.80vw'}}>경쟁률</ContentTitle>
-      <Svg onMouseEnter={onSvgHover} onMouseLeave={onSvgHoverOut}>
-      <svg style={{top: '9.28vw', left: '11.10vw', position: 'absolute', width: '0.94vw', height: '0.94vw'}} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <g clip-path="url(#clip0_94_861)">
-          <path d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" stroke="#141414" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9.00751 6L9.00001 6" stroke="#141414" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9.00751 12L9.00751 9" stroke="#141414" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </g>
-        <defs>
-          <clipPath id="clip0_94_861">
-            <rect width="18" height="18" fill="white"/>
-          </clipPath>
-        </defs>
-      </svg>
-      {/* {svgHover && <HoverInfo>'....'</HoverInfo>} */}
-      </Svg>
+      <ToolTip02 onMouseEnter={onSvgHover} onMouseLeave={onSvgHoverOut} hoverState={svgHover}
+      style={{position: 'absolute', top: '9.05vw', left: '10.80vw'}}>쿠플라이에서 수집된 데이터 값으로, 실제 경쟁률과 차이가 있을 수 있습니다.</ToolTip02>
       
       <ContentInner style={{top: '10.52vw', left: '8.80vw'}}>{compRate}</ContentInner>
 
@@ -338,23 +326,5 @@ top: '9.28vw';
 left: '11.10vw';
 `;
 
-// 아직 정확한 포지셔닝과 문구가 나오지 않아서 놨둠
-const HoverInfo = styled.div`
-  display: flex;
-  padding: 0.52vw 0.42vw;
-  justify-content: center;
-  align-items: center;
-
-  background: rgba(20, 20, 20, 0.6);
-  color: var(--White, #fff);
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 0.73vw;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 0.833vw;
-  align-self: stretch;
-  position: absolute;
-`;
 
 

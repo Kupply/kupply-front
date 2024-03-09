@@ -22,11 +22,11 @@ const ButtonWrapper = styled.button<Button04Props>`
   height: auto;
   box-sizing: border-box;
   border: ${(props) => (props.state === 'pressed' ? '1px solid #D85888' : '1px solid #DFDFDF')};
-  padding: 24px 1.77vw;
+  padding: 1.25vw 1.77vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0.521vw; //10px;
   background: #fff;
   opacity: ${(props) => (props.state === 'disabled' ? '0.45' : '1')};
 `;

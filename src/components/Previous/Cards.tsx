@@ -129,24 +129,26 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   row-gap: 1.66vw;
   column-gap: 1.31vw;
   width: 100%;
   max-width: 1382px;
   margin-top: 0.83vw;
-  flex-wrap: wrap;
 `;
+
 const Container = styled.div`
   position: relative;
-  z-index: 0;
-  //height: 2500px;
-  padding-bottom: 7.64vw;
-  width: 100%;
-  max-width: 1920px;
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: auto;
+  width: 100%;
+  max-width: 1920px;
+  background-color: #fff;
+  padding-bottom: 7.64vw;
+
+  z-index: 0;
 `;
 
 const Sort = styled.div`
@@ -154,6 +156,7 @@ const Sort = styled.div`
   max-width: 1382px;
   margin-top: 4.32vw;
   height: 0.8vw;
+
   color: #a8a8a8;
   font-family: Pretendard;
   font-size: 0.8vw;

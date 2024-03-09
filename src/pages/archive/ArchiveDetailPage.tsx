@@ -33,7 +33,7 @@ const ArchiveDetailPage = () => {
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [enoughData, setEnoughData] = useState<boolean>(false); // false 일시적 수정
+  const [enoughData, setEnoughData] = useState<boolean>(true); // false 일시적 수정
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
@@ -144,7 +144,7 @@ const ArchiveDetailPage = () => {
 
   return (
     <Wrapper>
-      <GlobalStyles />
+      {/* <GlobalStyles /> */}
       <MajorWrapper>
         <LeftBox>
           <PreviousIconWrapper>
@@ -207,7 +207,7 @@ const ArchiveDetailPage = () => {
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>경쟁률</Text> {/* 경쟁률 수정?? 디자인 나오면 수정할 예정 */}
+            <Text>경쟁률</Text>
             <SelectionInfoValue>{enoughData ? numOfPassed : 0}</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
@@ -302,7 +302,7 @@ const ArchiveDetailPage = () => {
 
 export default ArchiveDetailPage;
 
-const GlobalStyles = createGlobalStyle` // 가로 스크롤 숨기기
+const GlobalStyles = createGlobalStyle` // 가로 스크롤 숨기기 -> 세로 스크롤 두개 생기는 현상으로 지움
   html, body {
     max-width: 100%;
     overflow-x: hidden;
@@ -466,8 +466,8 @@ const WarningIcon = styled.img`
 const SegmentedWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100vw;
+  justify-content: flex-start;
+  width: 100%;
   max-width: 1665px;
   border-radius: 5px;
   border: 1px solid var(--White, #fff);
@@ -476,8 +476,13 @@ const SegmentedWrapper = styled.div`
   box-shadow: 0px 4px 200px 0px rgba(20, 20, 20, 0.05);
 
   gap: 0.9375vw;
-  padding: 6px 10.26vw;
+  padding: 6px 0px; // 10.26vw;
   margin-top: 19.82px;
+  left: 0;
+
+  & > :first-child {
+    margin-left: 5.42vw;
+  }
 `;
 
 const SelectionInfoDescriptionBox = styled.div`
@@ -594,7 +599,7 @@ const PasserGPAInfoDetailsWrapper = styled.div`
 
 const PasserGPAInfoGraphWrapper = styled.div`
   display: inline-flex;
-  width: 70vw; // 62.5vw; 길이가 부족해 보여서 임의로 조정
+  width: 62.5vw;
   height: auto;
 `;
 

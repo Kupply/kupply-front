@@ -11,8 +11,8 @@ import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
 import CommunityPage from './pages/community/CommunityPage';
 import MessagePage from './pages/message/MessagePage';
-import SettingsPage from './pages/setting/SettingsPage';
-import SignUp1Page from './pages/signUp/SignUp1Page';
+import {SettingsPage} from './pages/setting/SettingsPage';
+import {SignUp1Page} from './pages/signUp/SignUp1Page';
 import SignUp2Page from './pages/signUp/SignUp2Page';
 import SignUp3Page from './pages/signUp/SignUp3Page';
 import { isMobile } from 'react-device-detect';
@@ -21,6 +21,7 @@ import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
+import { RecoilRoot } from 'recoil';
 
 interface RouteConfig {
   path: string;
@@ -41,7 +42,7 @@ export default function App() {
     routes.map((route: RouteConfig, index: number) => <Route key={index} path={route.path} element={route.element} />);
 
   return (
-    <>
+    <RecoilRoot>
       {isMobile ? (
         <MobilePage />
       ) : (
@@ -56,7 +57,7 @@ export default function App() {
           <Footer setSelected={setSelected} />
         </Wrapper>
       )}
-    </>
+    </RecoilRoot>
   );
 }
 

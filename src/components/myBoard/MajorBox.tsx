@@ -1,23 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
-/* 일단 하드코딩부터 */
+import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
 
-const MajorBox = () => {
+const MajorBox = ({ onViewMajor, userData }: { onViewMajor: any; userData: any }) => {
+  const titleText = onViewMajor === 1 ? '1지망 관심전공' : '2지망 관심전공';
+  const major: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
+
+  const majorKoreanName = majorNameMapping[major][0];
+  const majorEngishName = majorNameMapping[major][1];
+  const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}Large.png`;
+  const majorShadowPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}_ellipse.svg`;
   return (
     <Wrapper>
       <TextBox>
-        <TitleText>1지망 관심전공</TitleText>
+        <TitleText>{titleText}</TitleText>
       </TextBox>
       <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" />
 
       <MajorWrapper>
-        <Major src="designImage/majorSymbol/newMajorImage/BusinessLarge.png" alt="business" />
-        <Shadow src="designImage/majorSymbol/BusinessShadow.svg" alt="shadow" />
+        <Major src={majorSymbolPath} alt="hopemajor" />
+        <Shadow src={majorShadowPath} alt="shadow" />
       </MajorWrapper>
       <MajorTextBox>
-        <전공Text>경영대학</전공Text>
-        <MajorText>Business School</MajorText>
+        <전공Text>{majorKoreanName}</전공Text>
+        <MajorText>{majorEngishName}</MajorText>
       </MajorTextBox>
     </Wrapper>
   );
