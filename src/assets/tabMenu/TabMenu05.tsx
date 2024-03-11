@@ -55,69 +55,23 @@ const MyStageChart: React.FC<myStageData> = (data) => {
       return (
         <MainWrapper>
           <Wrapper>
-            <NotchSquareColor
-              src="../../designImage/tabMenu/TabMenu05NotchSquare01.svg"
-              alt="first line first"
-              style={{
-                fill: '#3ad54e',
-                filter: 'drop-shadow(0px 20px 50px rgba(58, 213, 78, 0.4))',
-                marginLeft: '-514px',
-              }}
-            />
-            <InnerBox style={{ marginLeft: '-535px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05SunWhite.svg" alt="Sun" />
-              <WhiteText>안정지원</WhiteText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-535px' }}>
+            <StageBox1 src="../../designImage/tabMenu/tabmenu_type_05_1.webp" />
+            <TextBox>
               <TextBoxColor style={{ color: 'rgba(58, 213, 78, 0.80)' }}>
-                도전자님의 학점에 알맞는
-                <br />
+                도전자님의 학점에 맞는 <br />
                 적정지원이에요.
               </TextBoxColor>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line second"
-              style={{ marginLeft: '-196px' }}
-            />
-            <InnerBox style={{ marginLeft: '-185px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05PartlyCloudyBlack.svg" alt="Partly Cloudy" />
-              <BlackText>무난지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-175px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
                 도전자님의 학점보다 조금
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line third"
-              style={{ marginLeft: '150px' }}
-            />
-            <InnerBox style={{ marginLeft: '170px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05CloudyBlack.svg" alt="Cloudy" />
-              <BlackText>소신지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '170px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
                 도전자님의 학점보다 상향지원
                 <br />
                 이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line third"
-              style={{ marginLeft: '500px' }}
-            />
-            <InnerBox style={{ marginLeft: '510px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05RainyBlack.svg" alt="Rainy" />
-              <BlackText>위험지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '520px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
                 도전자님의 학점보다 매우 높은
                 <br />
                 상향지원이에요.
@@ -127,7 +81,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
 
           <DefaultWrapper>
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
-            <div style={{ marginLeft: '28px', marginTop: '-105px' }}>
+            <DefaultTextBox>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>
                   {MyName}님의 {HopeMajor}&nbsp;
@@ -142,7 +96,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
                 <PercentText>%</PercentText>
               </span>
-            </div>
+            </DefaultTextBox>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -151,79 +105,33 @@ const MyStageChart: React.FC<myStageData> = (data) => {
       return (
         <MainWrapper>
           <Wrapper>
-            <Square
-              src="../../designImage/tabMenu/TabMenu05Square.svg"
-              alt="first line first"
-              style={{ marginLeft: '-505px', marginTop: '-29px' }}
-            />
-            <InnerBox style={{ marginLeft: '-535px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05SunBlack.svg" alt="Sun" />
-              <BlackText>안정지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-535px' }}>
+            <StageBox2 src="../../designImage/tabMenu/tabmenu_type_05_2.webp" />
+            <TextBox>
               <TextBoxNormal>
-                도전자님의 학점에 알맞는
-                <br />
+                도전자님의 학점에 맞는 <br />
                 적정지원이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareColor
-              src="../../designImage/tabMenu/TabMenu05NotchSquare02.svg"
-              alt="first line second"
-              style={{
-                fill: '#4894E3',
-                filter: 'drop-shadow(0px 20px 50px rgba(72, 148, 227, 0.40))',
-                marginLeft: '-196px',
-                marginTop: '-29px',
-              }}
-            />
-            <InnerBox style={{ marginLeft: '-185px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05PartlyCloudyWhite.svg" alt="Partly Cloudy" />
-              <WhiteText>무난지원</WhiteText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-175px' }}>
-              <TextBoxColor style={{ color: 'rgba(72, 148, 227, 0.80)' }}>
+              <TextBoxColor style={{ color: 'rgba(72, 148, 227, 0.80)', marginLeft: '2.20vw' }}>
                 도전자님의 학점보다 조금
                 <br />
                 상향지원이에요.
               </TextBoxColor>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line third"
-              style={{ marginLeft: '150px' }}
-            />
-            <InnerBox style={{ marginLeft: '170px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05CloudyBlack.svg" alt="Cloudy" />
-              <BlackText>소신지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '170px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
                 도전자님의 학점보다 상향지원
                 <br />
                 이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line third"
-              style={{ marginLeft: '500px' }}
-            />
-            <InnerBox style={{ marginLeft: '510px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05RainyBlack.svg" alt="Rainy" />
-              <BlackText>위험지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '520px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
                 도전자님의 학점보다 매우 높은
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
             </TextBox>
           </Wrapper>
+
           <DefaultWrapper>
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
-            <div style={{ marginLeft: '28px', marginTop: '-105px' }}>
+            <DefaultTextBox>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>
                   {MyName}님의 {HopeMajor}&nbsp;
@@ -238,7 +146,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
                 <PercentText>%</PercentText>
               </span>
-            </div>
+            </DefaultTextBox>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -247,79 +155,33 @@ const MyStageChart: React.FC<myStageData> = (data) => {
       return (
         <MainWrapper>
           <Wrapper>
-            <Square
-              src="../../designImage/tabMenu/TabMenu05Square.svg"
-              alt="first line first"
-              style={{ marginLeft: '-505px', marginTop: '-29px' }}
-            />
-            <InnerBox style={{ marginLeft: '-535px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05SunBlack.svg" alt="Sun" />
-              <BlackText>안정지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-535px' }}>
+            <StageBox2 src="../../designImage/tabMenu/tabmenu_type_05_3.webp" />
+            <TextBox>
               <TextBoxNormal>
-                도전자님의 학점에 알맞는
-                <br />
+                도전자님의 학점에 맞는 <br />
                 적정지원이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line second"
-              style={{ marginLeft: '-196px' }}
-            />
-            <InnerBox style={{ marginLeft: '-185px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05PartlyCloudyBlack.svg" alt="Partly Cloudy" />
-              <BlackText>무난지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-175px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
                 도전자님의 학점보다 조금
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareColor
-              src="../../designImage/tabMenu/TabMenu05NotchSquare03.svg"
-              alt="first line third"
-              style={{
-                fill: '#D85888',
-                filter: 'drop-shadow(0px 20px 50px rgba(216, 88, 136, 0.40))',
-                marginLeft: '150px',
-                marginTop: '-29px',
-              }}
-            />
-            <InnerBox style={{ marginLeft: '170px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05CloudyWhite.svg" alt="Cloudy" />
-              <WhiteText>소신지원</WhiteText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '170px' }}>
-              <TextBoxColor style={{ color: 'rgba(216, 88, 136, 0.80)' }}>
+              <TextBoxColor style={{ color: 'rgba(216, 88, 136, 0.80)', marginLeft: '1.05vw' }}>
                 도전자님의 학점보다 상향지원
                 <br />
                 이에요.
               </TextBoxColor>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line third"
-              style={{ marginLeft: '500px' }}
-            />
-            <InnerBox style={{ marginLeft: '510px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05RainyBlack.svg" alt="Rainy" />
-              <BlackText>위험지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '520px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
                 도전자님의 학점보다 매우 높은
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
             </TextBox>
           </Wrapper>
+
           <DefaultWrapper>
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
-            <div style={{ marginLeft: '28px', marginTop: '-105px' }}>
+            <DefaultTextBox>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>
                   {MyName}님의 {HopeMajor}&nbsp;
@@ -334,7 +196,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
                 <PercentText>%</PercentText>
               </span>
-            </div>
+            </DefaultTextBox>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -343,70 +205,23 @@ const MyStageChart: React.FC<myStageData> = (data) => {
       return (
         <MainWrapper>
           <Wrapper>
-            <Square
-              src="../../designImage/tabMenu/TabMenu05Square.svg"
-              alt="first line first"
-              style={{ marginLeft: '-505px', marginTop: '-29px' }}
-            />
-            <InnerBox style={{ marginLeft: '-535px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05SunBlack.svg" alt="Sun" />
-              <BlackText>안정지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-535px' }}>
+            <StageBox2 src="../../designImage/tabMenu/tabmenu_type_05_4.webp" />
+            <TextBox>
               <TextBoxNormal>
-                도전자님의 학점에 알맞는
-                <br />
+                도전자님의 학점에 맞는 <br />
                 적정지원이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line second"
-              style={{ marginLeft: '-196px' }}
-            />
-            <InnerBox style={{ marginLeft: '-185px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05PartlyCloudyBlack.svg" alt="Partly Cloudy" />
-              <BlackText>무난지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '-175px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
                 도전자님의 학점보다 조금
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareNormal
-              src="../../designImage/tabMenu/TabMenu05NotchSquare.svg"
-              alt="first line third"
-              style={{ marginLeft: '150px' }}
-            />
-            <InnerBox style={{ marginLeft: '170px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05CloudyBlack.svg" alt="Cloudy" />
-              <BlackText>소신지원</BlackText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '170px' }}>
-              <TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
                 도전자님의 학점보다 상향지원
                 <br />
                 이에요.
               </TextBoxNormal>
-            </TextBox>
-            <NotchSquareColor
-              src="../../designImage/tabMenu/TabMenu05NotchSquare04.svg"
-              alt="first line third"
-              style={{
-                fill: '#E84549',
-                filter: 'drop-shadow(0px 20px 50px rgba(232, 69, 73, 0.40))',
-                marginLeft: '460px',
-                marginTop: '-29px',
-              }}
-            />
-            <InnerBox style={{ marginLeft: '510px' }}>
-              <InnerIcon src="../../designImage/tabMenu/TabMenu05RainyWhite.svg" alt="Rainy" />
-              <WhiteText>위험지원</WhiteText>
-            </InnerBox>
-            <TextBox style={{ marginLeft: '520px' }}>
-              <TextBoxColor style={{ color: '#E84549' }}>
+              <TextBoxColor style={{ color: '#E84549', marginLeft: '0.53vw' }}>
                 도전자님의 학점보다 매우 높은
                 <br />
                 상향지원이에요.
@@ -415,7 +230,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
           </Wrapper>
           <DefaultWrapper>
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
-            <div style={{ marginLeft: '28px', marginTop: '-105px' }}>
+            <DefaultTextBox>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>
                   {MyName}님의 {HopeMajor}&nbsp;
@@ -430,7 +245,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
                 <PercentText>%</PercentText>
               </span>
-            </div>
+            </DefaultTextBox>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -441,113 +256,49 @@ const MainWrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   gap: 2.92vw; // 56px;
-  margin-top: 34px;
-
-  // border: 1px solid black;
 `;
 
 const Wrapper = styled.div`
   width: 37.97vw; //  729px;
   height: 94px;
   position: relative;
-  display: flex; /* 요소들을 행으로 정렬 */
+  display: flex;
   align-items: flex-start;
   justify-content: center;
-
-  // margin-left: 42px;
-
-  //border: 1px solid black;
 `;
 
-const NotchSquareColor = styled.img`
-  //width: 196px;
-  //height: 49px;
+const StageBox1 = styled.img`
   position: absolute;
-  display: flex;
-  flex-shrink: 0;
-  margin: -0.78vw; // -15px;
-`;
+  width: 100%;
 
-const NotchSquareNormal = styled.img`
-  position: absolute;
-  display: flex;
-
-  fill: var(--White, #fff);
-  stroke-width: 1px;
-  stroke: var(--kitsch, #a8a8a8);
-  filter: drop-shadow(0px 20px 50px rgba(223, 223, 223, 0.4));
-  flex-shrink: 0;
-  margin: -0.78vw; // -15px;
-`;
-
-const Square = styled.img`
-  //width: 187px;
-  //height: 49px;
-  position: absolute;
-  display: flex;
-  flex-shrink: 0;
-
-  fill: var(--White, #fff);
-  stroke-width: 1px;
-  stroke: var(--kitsch, #a8a8a8);
-  filter: drop-shadow(0px 20px 50px rgba(223, 223, 223, 0.4));
-`;
-
-const InnerBox = styled.div`
-  width: 5.22vw; //100px;
-  height: 20px;
-  position: absolute;
-  display: flex;
-  gap: 0.52vw; //10px;
-  padding: 15px 2.5vw 15px 2.5vw; //  15px 48px 15px 48px;
-  z-index: 1;
-
-  //border: 1px solid black;
-`;
-
-const InnerIcon = styled.img`
-  width: 1.04vw; // 20px;
-  height: 20px;
+  top: 0;
   flex-shrink: 0;
 `;
 
-const WhiteText = styled.div`
-  color: var(--White, #fff);
-  font-family: Pretendard;
-  font-size: 1.04vw; // 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px; /* 100% */
-`;
+const StageBox2 = styled.img`
+  position: absolute;
+  width: 100%;
 
-const BlackText = styled.div`
-  color: rgba(20, 20, 20, 0.8);
-  font-family: Pretendard;
-  font-size: 1.04vw; // 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px; /* 100% */
+  top: -0.64vw;
+  flex-shrink: 0;
 `;
 
 const TextBox = styled.div`
-  width: 9.17vw; // 176px;
-  height: 36px;
-  flex-shrink: 0;
   position: absolute;
   display: flex;
-  z-index: 1;
+  justify-content: flex-start;
+  width: 40vw;
 
-  margin-top: 59px;
-  //border: 1px solid black;
+  top: 3.59375vw;
+  left: 1.54vw;
 `;
-
 const TextBoxNormal = styled.div`
   color: rgba(20, 20, 20, 0.6);
   font-family: Pretendard;
   font-size: 0.73vw; // 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px; /* 128.571% */
+  line-height: 128.571%;
 `;
 
 const TextBoxColor = styled.div`
@@ -555,25 +306,32 @@ const TextBoxColor = styled.div`
   font-size: 0.73vw; // 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px; /* 128.571% */
+  line-height: 128.571%;
 `;
 
 //////////////// Default ////////////////
 
 const DefaultWrapper = styled.div`
+  position: absolute;
   width: 21.51vw; // 413px;
-  height: 100px;
-  position: relative;
+  height: 4.91vw;
 
+  left: 39.08vw;
   //border: 1px solid black;
+`;
+
+const DefaultTextBox = styled.div`
+  position: absolute;
+  top: 0.25vw;
+  left: 1.25vw;
 `;
 
 const DefaultText = styled.div`
   color: #141414;
   font-family: Pretendard;
-  font-size: 0.94vw; // 18px;
+  font-size: 0.94vw;
   font-style: normal;
-  line-height: 24px;
+  line-height: 118%;
   margin: 0;
 `;
 
@@ -582,7 +340,7 @@ const NumText = styled.div`
 
   /* Heading 1 */
   font-family: Pretendard;
-  font-size: 2.5vw; // 48px;
+  font-size: 2.5vw;
   font-style: normal;
   font-weight: 700;
   line-height: 104.167%;
@@ -592,7 +350,7 @@ const NumText = styled.div`
 const PercentText = styled.div`
   color: rgba(67, 67, 67, 0.8);
   font-family: Pretendard;
-  font-size: 2.5vw; // 48px;
+  font-size: 2.5vw;
   font-style: normal;
   font-weight: 400;
   line-height: 104.167%;
@@ -600,8 +358,8 @@ const PercentText = styled.div`
 `;
 
 const Bar = styled.img`
+  height: 5.3125vw;
   flex-shrink: 0;
-
   align-items: flex-start;
 `;
 

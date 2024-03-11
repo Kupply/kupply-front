@@ -9,7 +9,7 @@ export interface InterestMajorProps extends React.ComponentPropsWithoutRef<'butt
 const Button = styled.button<InterestMajorProps>`
   display: flex;
   width: 6.46vw;
-  height: 46px;
+  height: 2.4vw;
   justify-content: center;
   align-items: center;
   border-radius: 5px;

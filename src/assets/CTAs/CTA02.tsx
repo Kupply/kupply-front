@@ -27,9 +27,9 @@ function CTA02(props: CTA02Props) {
 
 const ButtonWrapper = styled.button<CTA02Props>`
   width: ${(props) => (props.size === 'large' ? '23.33vw' : '14.69vw')};
-  height: ${(props) => (props.size === 'large' ? '68px' : '52px')};
+  height: ${(props) => (props.size === 'large' ? '3.54vw' : '2.71vw')};
   box-sizing: border-box;
-  padding: 16px 1.67vw;
+  padding: 0.83vw 1.67vw;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { currentModalState, sendNumState } from '../../store/atom';
+import { useRecoilValue } from 'recoil';
 
 export interface TImerProps {
   setTime: number; // (분) 기준
-  currentModal: number;
-  sendNum: number;
   onTimerExpired: () => void; // 콜백 함수
   // setTimeLeft: () => void; // 타이머 초기화 목적
 }
 
-export default function Timer({ setTime, currentModal, sendNum, onTimerExpired }: TImerProps) {
+export default function Timer({ setTime, onTimerExpired }: TImerProps) {
+  const currentModal = useRecoilValue(currentModalState);
+  const sendNum = useRecoilValue(sendNumState);
+
   const MINUTES_IN_MS = setTime * 60 * 1000;
   const INTERVAL = 1000; // 1초
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);

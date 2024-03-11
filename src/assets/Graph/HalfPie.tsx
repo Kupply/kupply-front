@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { CallbackArgs, VictoryPie } from 'victory';
-import { idColorMapping } from '../../utils/Mappings';
+import { idColorMapping, idColorMappingShadow } from '../../utils/Mappings';
 
 // 하드코딩
 // 커스텀하기 너무 귀차나... 일단 파이차트랑 비슷한 형태로
@@ -91,7 +91,7 @@ const HalfPie = () => {
           data: {
             filter: (args: CallbackArgs) => {
               const datum = args.datum as Datum;
-              return `drop-shadow(0px 16px 18px ${idColorMapping[datum.id]})`;
+              return `drop-shadow(0px 16px 18px ${idColorMappingShadow[datum.id]})`;
             },
           },
           labels: { display: 'none' }, // 파이 안에 라벨 invisible

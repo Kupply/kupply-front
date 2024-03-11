@@ -1,6 +1,7 @@
 //3d이미지 없어서 미완
-import styled from 'styled-components';
 import { useState } from 'react';
+
+import styled from 'styled-components';
 
 import Typography from '../../assets/Typography';
 

@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import Typography from '../../assets/OldTypography';
-import MultiStepProgressBar from '../../assets/progressIndicator/ProgressBar';
-import NextButton from '../../assets/buttons/OldNextButton';
-import LoginButton from '../../assets/buttons/LoginButton';
-import PrevButton from '../../assets/buttons/PrevButton';
+import Typography from '../../../assets/OldTypography';
+import MultiStepProgressBar from '../../../assets/progressIndicator/ProgressBar';
+import NextButton from '../../../assets/buttons/OldNextButton';
+import LoginButton from '../../../assets/buttons/LoginButton';
+import PrevButton from '../../../assets/buttons/PrevButton';
 import { check } from 'prettier';
-import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
+import { ScrollSmall, ScrollLarge } from '../../../assets/scroll/Scroll';
 import axios from 'axios';
 import { useTable } from 'react-table';
 import { AnyCnameRecord } from 'dns';
-import client from '../../utils/HttpClient';
+import client from '../../../utils/HttpClient';
 
 interface CustomCheckButtonProps {
   isChecked: boolean;

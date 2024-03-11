@@ -22,7 +22,7 @@ export const sizeMapping: Record<SizeOptions, string[]> = {
   mediumText: ['18px', '500'],
   normalText: ['16px', '500'],
   smallText: ['14px', '400'],
-  details: ['12px', '400'],
+  details: ['12px', '400'], 
 };
 
 export interface TypographyProps extends React.ComponentPropsWithoutRef<'div'> {

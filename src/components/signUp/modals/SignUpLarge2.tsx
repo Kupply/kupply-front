@@ -1,11 +1,6 @@
-import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
-import SubmitButton from '../../../assets/buttons/OldSubmitButton';
-import Typography from '../../../assets/OldTypography';
-import ModalLarge from '../../base/ModalLarge';
-import { sendEmail } from '../../../pages/signUp/SignUp1Page';
+import { StateOptions } from '../../../assets/OldTextFieldBox';
+import { sendEmail } from '../../../utils/SignUpFunctions';
 import SignUpAlertLarge02 from '../../../assets/alert/SignUpAlertLarge02';
 
 export interface ModalProps {
@@ -68,53 +63,4 @@ const Main = styled.main`
   align-items: center;
   position: fixed;
   z-index: 1005; // Modal.tsx 와 상이한 stacking context
-`;
-
-const CloseButton = styled.button`
-  display: flex;
-  width: 60px;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50px;
-  right: 50px;
-
-  cursor: pointer;
-`;
-
-const PrevButton = styled.button`
-  display: flex;
-  width: 60px;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50px;
-  left: 50px;
-
-  cursor: pointer;
-`;
-
-const ActionWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 628px;
-
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  margin-top: 72px;
-
-  & > div {
-    width: 90%;
-    box-sizing: border-box;
-    height: 68px;
-    max-width: 628px;
-  }
-
-  & > button {
-    width: 90%;
-    max-width: 628px;
-  }
 `;

@@ -9,7 +9,7 @@ function AlertMessage(props: AlertMessageProps) {
   return (
     <MainWrapper {...rest}>
       <MessageBox>
-        <Typography size="0.73vw" bold="500" color="var(--White, #FFF)">
+        <Typography size="0.72vw" bold="500" color="var(--White, #FFF)">
           {children}
         </Typography>
       </MessageBox>
@@ -46,7 +46,7 @@ const MessageBox = styled.div`
   width: auto;
   height: auto;
   box-sizing: border-box;
-  padding: 10px 0.42vw;
+  padding: 0.52vw 0.42vw;
   display: none;
   justify-content: center;
   align-items: center;

@@ -23,7 +23,7 @@ function Button11(props: Button11Props) {
 }
 
 const ButtonWrapper = styled.button<Button11Props>`
-  width: auto;
+  width: fit-content;
   height: auto;
   box-sizing: border-box;
   border: ${(props) => (props.state === 'default' ? '1px solid #EEE' : 'none')};

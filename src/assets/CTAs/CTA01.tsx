@@ -21,11 +21,11 @@ const ButtonWrapper = styled.button<CTA01Props>`
   width: 32.71vw;
   height: auto;
   box-sizing: border-box;
-  padding: 24px 1.77vw;
+  padding: 1.25vw 1.77vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0.521vw; //10px;
   background: ${(props) => (props.state === 'default' ? '#D85888' : 'rgba(223,223,223,0.75)')};
 `;
 
