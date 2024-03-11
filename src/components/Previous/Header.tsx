@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import HashtagButton from '../../assets/tabMenu/TabMenu04';
 import SearchBar from '../../assets/SearchBar';
 
-export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부', '가나다 순 정렬'];
+export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
 
-// searchbar 크기 조절해야 됨
+// searchbar 크기 조절해야 됨 폰트 적용 X
 
 export interface HeaderProps {
   clicked: number;
@@ -25,10 +25,12 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
       <TagButtonWrapper>
         {mockHashes.map((hash, index) => (
           <HashtagButton
+            key={index}
             status={index === clicked ? 'pressed' : 'default'}
             onClick={() => {
               setClicked(index);
             }}
+            index={index}
           >
             {hash}
           </HashtagButton>
@@ -44,7 +46,8 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
 const TagButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 54.6875vw;
+  justify-content: center;
+
   gap: 1.04vw;
   margin-top: 2.76vw;
 `;
@@ -69,7 +72,7 @@ const Title = styled.div`
 
 const SearchBarWrapper = styled.div`
   margin-top: 2.5vw;
-  width: 100%;
+  width: 68.75vw;
   max-width: 1382px;
 `;
 

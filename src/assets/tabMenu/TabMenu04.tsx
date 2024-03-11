@@ -5,12 +5,15 @@ export type HashtagButtonStatus = 'default' | 'pressed';
 
 export interface HashtagButtonProps extends React.ComponentPropsWithRef<'button'> {
   status: HashtagButtonStatus;
+  index: number;
 }
 
 const HashtagButton = (props: HashtagButtonProps) => {
+  const imageNumber = String(props.index + 1).padStart(2, '0');
+  const imagePath = `../../designImage/tabMenu/Tabmenu04_${imageNumber}.svg`;
   return (
     <Container {...props}>
-      <InnerText>#</InnerText>
+      <InnerImage src={imagePath} alt="symbol" />
       <InnerText>{props.children}</InnerText>
     </Container>
   );
@@ -22,7 +25,7 @@ const Container = styled.button<{ status: HashtagButtonStatus }>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.41vw;
+  gap: 0.42vw;
   flex-shrink: 0;
   border-radius: 999px;
   transition: 0.3s ease-in-out;
@@ -60,6 +63,13 @@ const InnerText = styled.div`
   font-weight: 500;
   // line-height: 24px;
   text-align: center;
+`;
+
+const InnerImage = styled.img`
+  width: 1vw;
+  height: 1.25vw;
+  flex-shrink: 0;
+  justify-content: center;
 `;
 
 export default HashtagButton;
