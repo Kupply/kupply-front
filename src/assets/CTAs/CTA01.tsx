@@ -25,7 +25,7 @@ const ButtonWrapper = styled.button<CTA01Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0.521vw; //10px;
   background: ${(props) => (props.state === 'default' ? '#D85888' : 'rgba(223,223,223,0.75)')};
 `;
 

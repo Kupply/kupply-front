@@ -9,6 +9,8 @@ import SearchBar from '../../assets/SearchBar';
 
 export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부', '가나다 순 정렬'];
 
+// searchbar 크기 조절해야 됨
+
 export interface HeaderProps {
   clicked: number;
   setClicked: (index: number) => void;

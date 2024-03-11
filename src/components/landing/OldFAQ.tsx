@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
 import Typography from '../../assets/OldTypography';
-import SegmentedPicker from '../../assets/SegmentedPicker';
+import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import PageNumber from '../../assets/landingpage/PageNumber';
 import React from 'react';
 import Button08 from '../../assets/buttons/Button08';
@@ -205,39 +205,44 @@ function FAQ() {
               isOpen={openedFAQKey === 'common4'}
               onToggle={() => handleFAQToggle('common4')}
               question="이중전공 지원 요건이 어떻게 되나요?"
-              answer={
+              answer={[
+                [{ text: '이중전공은 해당 학기에 아래 요건을 모두 만족하여야 지원 가능합니다.', bold: '500' }],
+                [{ text: '', bold: '' }],
+                [{ text: '가. 제 1전공이 배정된 자', bold: '700' }],
+                [{ text: '', bold: '' }],
+                [{ text: '나. 3학기 이상 등록자 (편입생은 본교 2학기 이상 등록자)', bold: '700' }],
+                [{ text: '', bold: '' }],
                 [
-                  [{ text: '이중전공은 해당 학기에 아래 요건을 모두 만족하여야 지원 가능합니다.', bold: '500' }],
-                  [{text:'', bold:''}],
-                  [{ text: '가. 제 1전공이 배정된 자', bold: '700' }],
-                  [{text:'', bold:''}],
-                  [{ text: '나. 3학기 이상 등록자 (편입생은 본교 2학기 이상 등록자)', bold: '700' }],
-                  [{text:'', bold:''}],
-                  [
-                    { text: '다. 지원 당해 학기 재학생 (중도 휴학생을 포함한 휴학생은 지원 불가).', bold: '700' },
-                    { text: '단, 당해학기 외국대학 교환학생 지원 불가.', bold: '500' },
-                  ],
-                  [{ text: '*당해 학기 재학생의 재학보유기간: 1학기(3.1~7.31), 2학기(9.1~익년.1.31)', bold: '500' }],
-                  [{text:'', bold:''}],
-                  [{ text: '라. 이중(융합, 학생설계)전공자 및 공학인증자(공과대)는 지원할 수 없음.', bold: '700' }],
-                  [
-                    { text: '1) 단, 이중(융합, 학생설계)전공자(공학인증자 포함)가 재지원하고자 하는 경우, 반드시 ', bold: '500' },
-                    { text: '2023. 5. 3.(수)', bold: '700'},
-                    { text: '까지 기 합격부분이 ', bold: '500'},
-                    { text: '포기처리 ', bold: '700'},
-                    { text: '되어야 함.', bold: '500'}
-                  ],
-                  [
-                    { text: '(신청방법 : 포탈시스템-학적/졸업-학적사항-다중전공포기신청, 공학인증-해당학과)', bold: '500'}
-                  ],
-                  [
-                    { text: '2) 이중(융합)전공 기합격자 및 공학인증 신청자의 재지원은 1회에 한함.',
-                      bold: '500'}
-                  ],
-                  [
-                    { text: "3) 재지원하여 불합격한 경우, '04학번 이후 학생은 제1전공의 심화전공을 이수하여야 함.", bold: '500'}
-                  ]]
-              }
+                  { text: '다. 지원 당해 학기 재학생 (중도 휴학생을 포함한 휴학생은 지원 불가).', bold: '700' },
+                  { text: '단, 당해학기 외국대학 교환학생 지원 불가.', bold: '500' },
+                ],
+                [{ text: '*당해 학기 재학생의 재학보유기간: 1학기(3.1~7.31), 2학기(9.1~익년.1.31)', bold: '500' }],
+                [{ text: '', bold: '' }],
+                [{ text: '라. 이중(융합, 학생설계)전공자 및 공학인증자(공과대)는 지원할 수 없음.', bold: '700' }],
+                [
+                  {
+                    text: '1) 단, 이중(융합, 학생설계)전공자(공학인증자 포함)가 재지원하고자 하는 경우, 반드시 ',
+                    bold: '500',
+                  },
+                  { text: '2023. 5. 3.(수)', bold: '700' },
+                  { text: '까지 기 합격부분이 ', bold: '500' },
+                  { text: '포기처리 ', bold: '700' },
+                  { text: '되어야 함.', bold: '500' },
+                ],
+                [
+                  {
+                    text: '(신청방법 : 포탈시스템-학적/졸업-학적사항-다중전공포기신청, 공학인증-해당학과)',
+                    bold: '500',
+                  },
+                ],
+                [{ text: '2) 이중(융합)전공 기합격자 및 공학인증 신청자의 재지원은 1회에 한함.', bold: '500' }],
+                [
+                  {
+                    text: "3) 재지원하여 불합격한 경우, '04학번 이후 학생은 제1전공의 심화전공을 이수하여야 함.",
+                    bold: '500',
+                  },
+                ],
+              ]}
             />
           </>
         ) : college == 0 && page == 1 ? (

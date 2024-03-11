@@ -58,7 +58,11 @@ const InnerText = styled.div`
   font-size: 1.25vw;
   font-style: normal;
   font-weight: 500;
+<<<<<<< HEAD
   line-height: 1.25vw;
+=======
+  // line-height: 24px;
+>>>>>>> origin/develop
   text-align: center;
 `;
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import SegmentedPicker from '../../assets/SegmentedPicker';
+import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import GpaLineChart, { Data, LineData } from '../../assets/GpaLineChart';
 import { recruit } from '../../common/Recruiting';
 import { DBkeywords } from '../../common/Keyword';
@@ -16,57 +16,8 @@ import {
   majorNameMapping,
 } from '../../utils/Mappings';
 
-const tmpRandomData = [
-  {
-    gpa: 4.5,
-    num: 7,
-  },
-  {
-    gpa: 4.3,
-    num: 10,
-  },
-  {
-    gpa: 4.25,
-    num: 11,
-  },
-  {
-    gpa: 4.1,
-    num: 9,
-  },
-  {
-    gpa: 4.0,
-    num: 7,
-  },
-  {
-    gpa: 3.9,
-    num: 7,
-  },
-  {
-    gpa: 3.75,
-    num: 7,
-  },
-  {
-    gpa: 3.6,
-    num: 6,
-  },
-  {
-    gpa: 3.5,
-    num: 5,
-  },
-  {
-    gpa: 3.35,
-    num: 4,
-  },
-  {
-    gpa: 3.0,
-    num: 2,
-  },
-];
-
-const tmpMeanGpa = { gpa: 3.75, num: 7 };
-const tmpMedianGpa = { gpa: 4.0, num: 7 };
-const tmpModeGpa = { gpa: 4.25, num: 11 };
-const tmpMinGpa = { gpa: 3.0, num: 2 };
+// SegmentedWrapper 디자인 반영 X
+// 경쟁률 적용 X (디자인 나와서 고치면서 수정할 예정)
 
 const ArchiveDetailPage = () => {
   const navigate = useNavigate();
@@ -78,11 +29,11 @@ const ArchiveDetailPage = () => {
   const { majorName } = useParams() as { majorName: MajorOptions };
   const majorKoreanName = majorNameMapping[majorName][0];
   const majorEngishName = majorNameMapping[majorName][1];
-  const majorSymbolPath = `../../designImage/previous/${collegeNameMapping[majorName]}.png`;
+  const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorName]}_trans_small.png`;
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [enoughData, setEnoughData] = useState<boolean>(false);
+  const [enoughData, setEnoughData] = useState<boolean>(true); // false 일시적 수정
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
@@ -193,24 +144,21 @@ const ArchiveDetailPage = () => {
 
   return (
     <Wrapper>
+      {/* <GlobalStyles /> */}
       <MajorWrapper>
-        <PreviousIconWrapper>
-          <PreviousIconBox onClick={handlePrev} src="../../designImage/previous/D_Previous icon.png" />
-        </PreviousIconWrapper>
-        <MajorIconContainer>
-          <MajorIconBlur />
-          <MajorIconBox src={majorSymbolPath} />
-        </MajorIconContainer>
-        <MajorTextBox>
-          <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
-          {majorName === 'foodecon' || majorName === 'computer' ? (
-            <MajorTextEnglishSmall>{majorEngishName}</MajorTextEnglishSmall>
-          ) : majorName === 'media' ? (
-            <MajorTextEnglishMiddle>{majorEngishName}</MajorTextEnglishMiddle>
-          ) : (
-            <MajorTextEnglishLarge>{majorEngishName}</MajorTextEnglishLarge>
-          )}
-        </MajorTextBox>
+        <LeftBox>
+          <PreviousIconWrapper>
+            <PreviousIconBox onClick={handlePrev} src="../../designImage/previous/D_Previous icon.png" />
+          </PreviousIconWrapper>
+          <MajorIconContainer>
+            <MajorIconBlur />
+            <MajorIconBox src={majorSymbolPath} />
+          </MajorIconContainer>
+          <MajorTextBox>
+            <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
+            <MajorTextEnglish>{majorEngishName}</MajorTextEnglish>
+          </MajorTextBox>
+        </LeftBox>
         <WarningTextBox>
           <WarningIcon src="../../designImage/previous/D_alert-circle.png" />
           <WarningText>
@@ -248,19 +196,19 @@ const ArchiveDetailPage = () => {
                 : `${numOfSelection} 명`}
             </SelectionInfoValue>
           </SelectionInfoContent>
-          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>모의 지원자 수</Text>
+            <Text>지원자 수</Text>
             <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue>
           </SelectionInfoContent>
-          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="72" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
             <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
           </svg>
           <SelectionInfoContent>
-            <Text>모의 지원 합격자 수</Text>
-            <SelectionInfoValue>{enoughData ? numOfPassed : 0}명</SelectionInfoValue>
+            <Text>경쟁률</Text>
+            <SelectionInfoValue>{enoughData ? numOfPassed : 0}</SelectionInfoValue>
           </SelectionInfoContent>
         </SelectionInfoContentsWrapper>
       </SelectionInfoWrapper>
@@ -292,40 +240,32 @@ const ArchiveDetailPage = () => {
               <PasserGPAInfoBox>
                 <PasserMeanGPAIcon />
                 <PasserGPAInfoTextBox>
-                  <Text>합격자 학점 평균값</Text>
-                  <Text>{meanGpa.gpa}</Text>
+                  <Text>합격자 평균 학점</Text>
+                  <TextNumber>{meanGpa.gpa.toFixed(2)}</TextNumber>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
-              <svg xmlns="http://www.w3.org/2000/svg" width="300" height="1" viewBox="0 0 300 1" fill="none">
-                <path d="M1 1H299" stroke="#141414" stroke-linecap="round" stroke-opacity="0.25" />
-              </svg>
+
               <PasserGPAInfoBox>
                 <PasserMedianGPAIcon />
                 <PasserGPAInfoTextBox>
                   <Text>합격자 학점 중위값</Text>
-                  <Text>{medianGpa.gpa}</Text>
+                  <TextNumber>{medianGpa.gpa.toFixed(2)}</TextNumber>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
-              <svg xmlns="http://www.w3.org/2000/svg" width="300" height="1" viewBox="0 0 300 1" fill="none">
-                <path d="M1 1H299" stroke="#141414" stroke-linecap="round" stroke-opacity="0.25" />
-              </svg>
+
               <PasserGPAInfoBox>
                 <PasserModeGPAIcon />
                 <PasserGPAInfoTextBox>
                   <Text>합격자 학점 최빈값</Text>
-                  <Text>
-                    {modeGpa.gpa} ({modeGpa.num}명)
-                  </Text>
+                  <TextNumber>{modeGpa.gpa.toFixed(2)}</TextNumber>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
-              <svg xmlns="http://www.w3.org/2000/svg" width="300" height="1" viewBox="0 0 300 1" fill="none">
-                <path d="M1 1H299" stroke="#141414" stroke-linecap="round" stroke-opacity="0.25" />
-              </svg>
+
               <PasserGPAInfoBox>
                 <PasserMinGPAIcon />
                 <PasserGPAInfoTextBox>
                   <Text>합격자 학점 최저값</Text>
-                  <Text>{minGpa.gpa}</Text>
+                  <TextNumber>{minGpa.gpa.toFixed(2)}</TextNumber>
                 </PasserGPAInfoTextBox>
               </PasserGPAInfoBox>
             </PasserGPAInfoAnalyticsWrapper>
@@ -362,7 +302,16 @@ const ArchiveDetailPage = () => {
 
 export default ArchiveDetailPage;
 
+const GlobalStyles = createGlobalStyle` // 가로 스크롤 숨기기 -> 세로 스크롤 두개 생기는 현상으로 지움
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+`;
+
 const Wrapper = styled.div`
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -408,10 +357,17 @@ const Wrapper = styled.div`
 `;
 
 const MajorWrapper = styled.div`
-  height: 145px;
+  display: flex;
+  justify-content: space-between;
   width: 100vw;
   max-width: 1690px;
+  margin-top: 46.4px;
+`;
+
+const LeftBox = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const PreviousIconWrapper = styled.button`
@@ -420,16 +376,16 @@ const PreviousIconWrapper = styled.button`
   align-items: center;
   border: none;
   background: none;
-  height: 60px;
-  width: 60px;
-  margin: 54px 9px 31px 0px;
+  height: 3.125vw;
+  width: 3.125vw;
+  margin-right: 0.46875vw;
 `;
 
 const PreviousIconBox = styled.img`
-  height: 60px;
-  width: 60px;
   align-items: center;
   justify-content: center;
+  height: 3.125vw;
+  width: 3.125vw;
 `;
 
 const MajorIconContainer = styled.div`
@@ -438,15 +394,15 @@ const MajorIconContainer = styled.div`
 `;
 
 const MajorIconBox = styled.img`
-  width: 60px;
-  height: 78.77px;
-  margin: 46.4px 30px 19.82px 0px;
+  width: 3.125vw;
+  height: 4.1vw;
+  flex-shrink: 0;
 `;
 
 const MajorIconBlur = styled.div`
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 3.65vw;
+  height: 3.65vw;
   opacity: 0.7;
   z-index: -1;
   background: radial-gradient(50% 50% at 50% 50%, rgba(146, 104, 83, 0.41) 0%, rgba(255, 255, 255, 0) 100%);
@@ -458,62 +414,44 @@ const MajorIconBlur = styled.div`
 
 const MajorTextBox = styled.div`
   display: inline-flex;
-  width: 900px;
-  height: 100%;
-  gap: 18px;
+  align-items: flex-end;
+  gap: 0.98vw;
+  margin-left: 1.5625vw;
 `;
 
 const MajorTextKorean = styled.text`
   color: #141414;
+
+  /* Heading 1 */
   font-family: Pretendard;
-  font-size: 48px;
+  font-size: 1.875vw;
+  font-style: normal;
   font-weight: 700;
-  font-style: normal;
-  text-align: center;
-  margin-top: 59px;
+  line-height: 104.167%;
 `;
 
-const MajorTextEnglishLarge = styled.text`
+const MajorTextEnglish = styled.text`
   color: #141414;
   font-family: Pretendard;
-  font-size: 36px;
-  font-weight: 500;
+  font-size: 1.5625vw;
   font-style: normal;
-  text-align: center;
-  margin-top: 77px;
-`;
+  font-weight: 500;
+  line-height: 66.667%;
 
-const MajorTextEnglishMiddle = styled.text`
-  color: #141414;
-  font-family: Pretendard;
-  font-size: 30px;
-  font-weight: 500;
-  font-style: normal;
-  text-align: center;
-  margin-top: 77px;
-`;
-
-const MajorTextEnglishSmall = styled.text`
-  color: #141414;
-  font-family: Pretendard;
-  font-size: 24px;
-  font-weight: 500;
-  font-style: normal;
-  text-align: center;
-  margin-top: 77px;
+  margin-bottom: 0.42vw;
 `;
 
 const WarningTextBox = styled.div`
   display: flex;
   gap: 4px;
-  padding: 94px 0px 37px 0px;
+  // padding: 94px 0px 37px 0px;
   align-items: center;
 `;
 
 const WarningText = styled.text`
   color: #a7a7a7;
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 0.73vw;
   font-weight: 400;
   font-style: normal;
   text-align: center;
@@ -527,129 +465,149 @@ const WarningIcon = styled.img`
 
 const SegmentedWrapper = styled.div`
   display: flex;
-  width: 100vw;
-  max-width: 1665px;
-  gap: 18px;
-  padding: 6px 197px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1665px;
+  border-radius: 5px;
+  border: 1px solid var(--White, #fff);
+
+  /* 임시 */
+  box-shadow: 0px 4px 200px 0px rgba(20, 20, 20, 0.05);
+
+  gap: 0.9375vw;
+  padding: 6px 0px; // 10.26vw;
+  margin-top: 19.82px;
+  left: 0;
+
+  & > :first-child {
+    margin-left: 5.42vw;
+  }
 `;
 
 const SelectionInfoDescriptionBox = styled.div`
   display: flex;
-  width: 580px;
-  gap: 8px;
   align-items: center;
   background: none;
-  margin-left: 36px;
+  width: 30.21vw;
+  gap: 0.42vw;
+
+  margin-left: 1.875vw;
 `;
 
 const PasserGPAInfoDescriptionWrapper = styled.div`
   display: flex;
-  margin-left: 36px;
+  margin-left: 1.875vw;
   margin-top: 33px;
 `;
 
 const PasserGpaChartDescriptionBox = styled.div`
   display: inline-flex;
-  gap: 8px;
-  margin-right: 997px;
   align-items: center;
+  gap: 0.42vw;
+  margin-right: 51.93vw;
 `;
 
 const PasserGpaAnalyticDescriptionBox = styled.div`
   display: inline-flex;
-  gap: 8px;
   align-items: center;
+  gap: 0.42vw;
 `;
 
 const KeywordDescriptionBox = styled.div`
   display: inline-flex;
-  gap: 8px;
-  margin-left: 36px;
-  margin-top: 23px;
   align-items: center;
+  gap: 0.42vw;
+  margin-left: 1.875vw;
+  margin-top: 23px;
 `;
 
 const Description = styled.text`
+  text-align: center;
+
   color: #141414;
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 1.04vw;
   font-style: normal;
   font-weight: 700;
-  text-align: center;
 `;
 
 const DescriptionIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 1.04vw;
+  height: 1.04vw;
 `;
 
 const SelectionInfoWrapper = styled.div`
-  background-color: #ffffff99;
-  border: 1px solid;
-  border-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0px 4px 200px #1414140d;
-  height: 90px;
+  display: flex;
+  align-items: center;
   width: 100vw;
   max-width: 1665px;
+  height: 4.6875vw;
+
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  box-shadow: 0px 4px 200px #1414140d;
+  background-color: #ffffff99;
+
   margin-top: 36px;
-  align-items: center;
-  display: flex;
 `;
 
 const SelectionInfoContentsWrapper = styled.div`
-  gap: 96px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5vw;
 `;
 
 const SelectionInfoContent = styled.div`
-  gap: 22px;
   display: flex;
   align-items: center;
+  gap: 1.15vw;
 `;
 
 const SelectionInfoValue = styled.text`
+  text-align: center;
+
   color: #141414;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
-  text-align: center;
 `;
 
 const PasserGPAInfoWrapper = styled.div<{ keywordsLength: number }>`
-  height: 555px;
+  position: relative;
   width: 100vw;
   max-width: 1665px;
-  background-color: #ffffff99;
-  border: 1px solid;
-  border-color: #ffffff;
+  height: 555px;
+  border: 1px solid #ffffff;
   border-radius: 5px;
+  background-color: #ffffff99;
   box-shadow: 0px 4px 200px #1414140d;
+  z-index: 1;
+
   margin-top: 18px;
   margin-bottom: ${(props) => (props.keywordsLength === 0 ? '104px' : '18px')};
-  position: relative;
-  z-index: 1;
 `;
 
 const PasserGPAInfoDetailsWrapper = styled.div`
   display: flex;
-  gap: 40px;
-  margin-left: 25px;
+  gap: 2.08vw;
+  margin-left: 1.3vw;
   margin-top: 32px;
 `;
 
 const PasserGPAInfoGraphWrapper = styled.div`
   display: inline-flex;
+  width: 62.5vw;
+  height: auto;
 `;
 
 const PasserGPAInfoAnalyticsWrapper = styled.div`
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 45px;
+  row-gap: 29px;
+  margin-top: 18px;
 `;
 
 const PasserGPAInfoBox = styled.div`
@@ -659,63 +617,67 @@ const PasserGPAInfoBox = styled.div`
 `;
 
 const PasserMeanGPAIcon = styled.div`
-  height: 12px;
-  width: 12px;
-  background-color: #f5bdbd;
-  border-radius: 6px;
-  box-shadow: 0px 0px 20px #f5bdbd99;
+  width: 8px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 28px;
+  background: var(--Secondary-V, #f5bdbd);
 `;
 
 const PasserMedianGPAIcon = styled.div`
-  height: 12px;
-  width: 12px;
-  background-color: #e96d6d;
-  border-radius: 6px;
-  box-shadow: 0px 0px 20px #d8588880;
+  width: 8px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 28px;
+  background: #e96d6d;
 `;
 
 const PasserModeGPAIcon = styled.div`
-  height: 12px;
-  width: 12px;
-  background-color: #d85888;
-  border-radius: 6px;
-  box-shadow: 0px 0px 20px #d8588880;
+  width: 8px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 28px;
+  background: #d85888;
 `;
 
 const PasserMinGPAIcon = styled.div`
-  height: 12px;
-  width: 12px;
-  background-color: #7900a3;
-  border-radius: 6px;
-  box-shadow: 0px 0px 20px #7900a380;
+  width: 8px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 28px;
+  background: var(--Blue, #313b80);
 `;
 
 const PasserGPAInfoTextBox = styled.div`
   display: flex;
-  gap: 47px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  row-gap: 15px;
 `;
 
 const KeywordWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  height: 126px;
-  width: 100vw;
   max-width: 1665px;
+  width: 100vw;
+  height: 126px;
+  gap: 0.83vw;
   background-color: #ffffff99;
-  border: 1px solid;
-  border-color: #ffffff;
-  border-radius: 5px;
   box-shadow: 0px 4px 200px #1414140d;
-  margin-bottom: 104px;
-  position: relative;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
   z-index: 1;
+
+  margin-bottom: 104px;
 `;
 
 const KeywordContainer = styled.div`
   display: flex;
-  gap: 22px;
-  margin-left: 36px;
+  gap: 1.15vw;
+  margin-left: 1.875vw;
 `;
 
 const KeywordBox = styled.div`
@@ -732,12 +694,22 @@ const KeywordBox = styled.div`
 `;
 
 const Text = styled.text`
+  text-align: center;
+
   color: #141414;
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 1.04vw;
   font-style: normal;
   font-weight: 500;
-  text-align: center;
+`;
+
+const TextNumber = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 1.875vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 55.556%;
 `;
 
 const Container = styled.div`
@@ -749,40 +721,94 @@ const Container = styled.div`
 `;
 
 const CollectingWrapper = styled.div<{ keywordsLength: number }>`
-  background-color: #f7f7f773;
-  border-radius: 5px;
-  box-shadow: 0px 0px 28px #1414140d;
-  backdrop-filter: blur(10px);
-  height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
-  width: 100vw;
-  max-width: 1665px;
-  margin-top: 18px;
+  position: absolute;
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
+  width: 100vw;
+  max-width: 1665px;
+  height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
+  background-color: #f7f7f773;
+  box-shadow: 0px 0px 28px #1414140d;
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
   gap: 24px;
-  position: absolute;
+
+  margin-top: 18px;
   top: 0;
   left: 0;
   z-index: 2;
 `;
 
 const CollectingTitleText = styled.text`
+  text-align: center;
   color: #141414;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 700;
-  text-align: center;
 `;
 
 const CollectingDetailText = styled.text`
+  text-align: center;
+
   color: #141414;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 500;
-  text-align: center;
   white-space: pre-wrap;
 `;
+
+const tmpMeanGpa = { gpa: 3.75, num: 7 };
+const tmpMedianGpa = { gpa: 4.0, num: 7 };
+const tmpModeGpa = { gpa: 4.25, num: 11 };
+const tmpMinGpa = { gpa: 3.0, num: 2 };
+
+const tmpRandomData = [
+  {
+    gpa: 4.5,
+    num: 7,
+  },
+  {
+    gpa: 4.3,
+    num: 10,
+  },
+  {
+    gpa: 4.25,
+    num: 11,
+  },
+  {
+    gpa: 4.1,
+    num: 9,
+  },
+  {
+    gpa: 4.0,
+    num: 7,
+  },
+  {
+    gpa: 3.9,
+    num: 7,
+  },
+  {
+    gpa: 3.75,
+    num: 7,
+  },
+  {
+    gpa: 3.6,
+    num: 6,
+  },
+  {
+    gpa: 3.5,
+    num: 5,
+  },
+  {
+    gpa: 3.35,
+    num: 4,
+  },
+  {
+    gpa: 3.0,
+    num: 2,
+  },
+];

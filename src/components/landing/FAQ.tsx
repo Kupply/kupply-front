@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 import Typography from '../../assets/Typography';
-import SegmentedPicker from '../../assets/SegmentedPicker';
+import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import Button08 from '../../assets/buttons/Button08';
 import PageNumber from '../../assets/landingpage/PageNumber';
 

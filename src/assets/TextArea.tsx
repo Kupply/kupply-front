@@ -9,34 +9,9 @@ export interface TextAreaBoxProps extends React.ComponentPropsWithRef<'input'> {
   setRef?: (ref: React.Ref<HTMLInputElement>) => void;
 }
 
-// 그냥 inputWrapper안에 
-const InputWrapper = styled.input<TextAreaBoxProps>`
-  width: 3.91vw;
-  height: 3.91vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.26vw;
-  border: ${(props) => (props.isEntered ? '0.052vw solid #D85888' : '0.052vw solid #b9b9b9')};
-  box-shadow: ${(props) => (props.isEntered ? '0px 0.208vw 0.625vw 0px rgba(216, 88, 136, 0.2)' : 'null')};
-  background: var(--white, #fff);
-  color: var(--main-black, #141414);
-  font-family: Pretendard;
-  font-size: 1.25vw;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 100%;
-  text-align: center;
-  &:focus {
-    border-color: #d85888;
-    outline: none;
-    box-shadow: 0px 0.208vw 0.625vw 0px rgba(216, 88, 136, 0.2);
-  }
-`;
-
 
 export default function TextAreaBox(props: TextAreaBoxProps) {
-  const { value, setValue, name, isEntered: initIsEntered, setRef } = props;
+  const { value, setValue, name, isEntered: initIsEntered, setRef, onPaste = undefined } = props;
   const [fieldName, fieldIndex] = name.split('-');
 
   const [isEntered, setIsEntered] = useState<boolean>(initIsEntered || false);
@@ -86,6 +61,7 @@ export default function TextAreaBox(props: TextAreaBoxProps) {
     <InputWrapper
       onChange={handleChange}
       onKeyDown={handleKeyDown}
+      onPaste={onPaste}
       maxLength={1}
       isEntered={isEntered}
       value={value}
@@ -95,3 +71,29 @@ export default function TextAreaBox(props: TextAreaBoxProps) {
     />
   );
 }
+
+// 그냥 inputWrapper안에 
+const InputWrapper = styled.input<TextAreaBoxProps>`
+  width: 3.91vw;
+  height: 3.91vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.26vw;
+  border: ${(props) => (props.isEntered ? '0.052vw solid #D85888' : '0.052vw solid #b9b9b9')};
+  box-shadow: ${(props) => (props.isEntered ? '0px 0.208vw 0.625vw 0px rgba(216, 88, 136, 0.2)' : 'null')};
+  background: var(--white, #fff);
+  color: var(--main-black, #141414);
+  font-family: Pretendard;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-align: center;
+  &:focus {
+    border-color: #d85888;
+    outline: none;
+    box-shadow: 0px 0.208vw 0.625vw 0px rgba(216, 88, 136, 0.2);
+  }
+`;
+
