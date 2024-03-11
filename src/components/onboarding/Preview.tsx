@@ -1,4 +1,4 @@
-// 사진 일부 수정 필요(2번 병아리, 4번 말풍선), 9번 버튼 기능 추가
+// 2번 병아리 사진 수정 필요, 9번 버튼 기능 추가
 
 import styled from 'styled-components';
 
@@ -111,6 +111,17 @@ function Preview() {
                 height="38.15%"
                 src="../../designImage/preview/preview_04_01.png"
                 style={{ position: 'absolute', bottom: '50%', right: '9.67%' }}
+              />
+              <img
+                width="7.28%"
+                height="11.43%"
+                src="../../designImage/preview/preview_04_02.svg"
+                style={{
+                  position: 'absolute',
+                  bottom: '73.13%',
+                  right: '32.11%',
+                  filter: 'drop-shadow(0px 6px 10px rgba(229, 124, 144, 0.43))',
+                }}
               />
               <img
                 width="13.44%"
