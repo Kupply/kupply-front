@@ -1,10 +1,56 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-
-import Typography from '../../assets/Typography';
+import { useState, useRef } from 'react';
+import Typography from '../../assets/OldTypography';
 import SegmentedPicker from '../../assets/SegmentedPicker';
-import Button08 from '../../assets/buttons/Button08';
 import PageNumber from '../../assets/landingpage/PageNumber';
+import React from 'react';
+import Button08 from '../../assets/buttons/Button08';
+//import FAQbox from '../../assets/landingpage/FAQbox';
+
+const MainWrapper = styled.div`
+  width: 100vw;
+  height: 1500px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+`;
+
+const TitleWrapper = styled.div`
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 1);
+  z-index: 990;
+`;
+
+const SegmentedSlider = styled.div`
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin-top: 23px;
+`;
+
+const ContentWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+`;
+
+const PageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: ceter;
+  gap: 18px;
+`;
 
 function FAQ() {
   const [college, setCollege] = useState(0);
@@ -33,45 +79,50 @@ function FAQ() {
 
   return (
     <MainWrapper>
-      <Typography size="0.94vw" bold="700" color="#D85888">
-        쿠플라이 FAQ
-      </Typography>
-      <Typography size="2.08vw" bold="700" style={{ marginTop: '1.23vw', lineHeight: '120%' }}>
-        이중전공 지원 전, 이런게 궁금해요!
-      </Typography>
-      <Typography size="1.04vw" bold="500" color="rgba(20,20,20,0.6)" style={{ marginTop: '0.73vw', opacity: 0.8 }}>
-        이중전공을 준비하는 당신이 가장 궁금해할 질문들에 쿠플라이가 답해줄게요.
-      </Typography>
-      <SegmentedSlider>
-        <SegmentedPicker
-          state={college == 0 ? 'active' : hover0 == true ? 'hover' : 'default'}
-          semester="공통"
-          onMouseEnter={() => setHover0(true)}
-          onMouseLeave={() => setHover0(false)}
-          onClick={() => {
-            setCollege(0);
-          }}
-        />
-        <SegmentedPicker
-          state={college == 1 ? 'active' : hover1 == true ? 'hover' : 'default'}
-          semester="경영대학"
-          onMouseEnter={() => setHover1(true)}
-          onMouseLeave={() => setHover1(false)}
-          onClick={() => {
-            setCollege(1);
-          }}
-        />
-        <SegmentedPicker
-          state={college == 4 ? 'active' : hover4 == true ? 'hover' : 'default'}
-          semester="정보대학"
-          onClick={() => {
-            setCollege(4);
-          }}
-          onMouseEnter={() => setHover4(true)}
-          onMouseLeave={() => setHover4(false)}
-        />
-      </SegmentedSlider>
-      <ButtonWrapper>
+      <TitleWrapper>
+        <Typography size="mediumText" color="#D85888" bold="700" style={{ marginTop: '125px', marginBottom: '14px' }}>
+          쿠플라이 FAQ
+        </Typography>
+        <Typography size="heading1" style={{ marginBottom: '26px' }}>
+          이중전공 지원 전, 이런게 궁금해요!
+        </Typography>
+        <Typography size="bodyText" bold="500" color="rgba(20, 20, 20, 0.6)">
+          이중전공을 준비하는 당신이 가장 궁금해할 질문들에 쿠플라이가 답해줄게요.
+        </Typography>
+        <SegmentedSlider>
+          <SegmentedPicker
+            state={college == 0 ? 'active' : hover0 == true ? 'hover' : 'default'}
+            semester="공통"
+            onMouseEnter={() => setHover0(true)}
+            onMouseLeave={() => setHover0(false)}
+            onClick={() => {
+              setCollege(0);
+              scrollToTop();
+            }}
+          />
+          <SegmentedPicker
+            state={college == 1 ? 'active' : hover1 == true ? 'hover' : 'default'}
+            semester="경영대학"
+            onMouseEnter={() => setHover1(true)}
+            onMouseLeave={() => setHover1(false)}
+            onClick={() => {
+              setCollege(1);
+              scrollToTop();
+            }}
+          />
+          <SegmentedPicker
+            state={college == 4 ? 'active' : hover4 == true ? 'hover' : 'default'}
+            semester="정보대학"
+            onClick={() => {
+              setCollege(4);
+              scrollToTop();
+            }}
+            onMouseEnter={() => setHover4(true)}
+            onMouseLeave={() => setHover4(false)}
+          />
+        </SegmentedSlider>
+      </TitleWrapper>
+      <ContentWrapper>
         {college == 0 && page == 0 ? (
           <>
             <Button08
@@ -154,44 +205,39 @@ function FAQ() {
               isOpen={openedFAQKey === 'common4'}
               onToggle={() => handleFAQToggle('common4')}
               question="이중전공 지원 요건이 어떻게 되나요?"
-              answer={[
-                [{ text: '이중전공은 해당 학기에 아래 요건을 모두 만족하여야 지원 가능합니다.', bold: '500' }],
-                [{ text: '', bold: '' }],
-                [{ text: '가. 제 1전공이 배정된 자', bold: '700' }],
-                [{ text: '', bold: '' }],
-                [{ text: '나. 3학기 이상 등록자 (편입생은 본교 2학기 이상 등록자)', bold: '700' }],
-                [{ text: '', bold: '' }],
+              answer={
                 [
-                  { text: '다. 지원 당해 학기 재학생 (중도 휴학생을 포함한 휴학생은 지원 불가).', bold: '700' },
-                  { text: '단, 당해학기 외국대학 교환학생 지원 불가.', bold: '500' },
-                ],
-                [{ text: '*당해 학기 재학생의 재학보유기간: 1학기(3.1~7.31), 2학기(9.1~익년.1.31)', bold: '500' }],
-                [{ text: '', bold: '' }],
-                [{ text: '라. 이중(융합, 학생설계)전공자 및 공학인증자(공과대)는 지원할 수 없음.', bold: '700' }],
-                [
-                  {
-                    text: '1) 단, 이중(융합, 학생설계)전공자(공학인증자 포함)가 재지원하고자 하는 경우, 반드시 ',
-                    bold: '500',
-                  },
-                  { text: '2023. 5. 3.(수)', bold: '700' },
-                  { text: '까지 기 합격부분이 ', bold: '500' },
-                  { text: '포기처리 ', bold: '700' },
-                  { text: '되어야 함.', bold: '500' },
-                ],
-                [
-                  {
-                    text: '(신청방법 : 포탈시스템-학적/졸업-학적사항-다중전공포기신청, 공학인증-해당학과)',
-                    bold: '500',
-                  },
-                ],
-                [{ text: '2) 이중(융합)전공 기합격자 및 공학인증 신청자의 재지원은 1회에 한함.', bold: '500' }],
-                [
-                  {
-                    text: "3) 재지원하여 불합격한 경우, '04학번 이후 학생은 제1전공의 심화전공을 이수하여야 함.",
-                    bold: '500',
-                  },
-                ],
-              ]}
+                  [{ text: '이중전공은 해당 학기에 아래 요건을 모두 만족하여야 지원 가능합니다.', bold: '500' }],
+                  [{text:'', bold:''}],
+                  [{ text: '가. 제 1전공이 배정된 자', bold: '700' }],
+                  [{text:'', bold:''}],
+                  [{ text: '나. 3학기 이상 등록자 (편입생은 본교 2학기 이상 등록자)', bold: '700' }],
+                  [{text:'', bold:''}],
+                  [
+                    { text: '다. 지원 당해 학기 재학생 (중도 휴학생을 포함한 휴학생은 지원 불가).', bold: '700' },
+                    { text: '단, 당해학기 외국대학 교환학생 지원 불가.', bold: '500' },
+                  ],
+                  [{ text: '*당해 학기 재학생의 재학보유기간: 1학기(3.1~7.31), 2학기(9.1~익년.1.31)', bold: '500' }],
+                  [{text:'', bold:''}],
+                  [{ text: '라. 이중(융합, 학생설계)전공자 및 공학인증자(공과대)는 지원할 수 없음.', bold: '700' }],
+                  [
+                    { text: '1) 단, 이중(융합, 학생설계)전공자(공학인증자 포함)가 재지원하고자 하는 경우, 반드시 ', bold: '500' },
+                    { text: '2023. 5. 3.(수)', bold: '700'},
+                    { text: '까지 기 합격부분이 ', bold: '500'},
+                    { text: '포기처리 ', bold: '700'},
+                    { text: '되어야 함.', bold: '500'}
+                  ],
+                  [
+                    { text: '(신청방법 : 포탈시스템-학적/졸업-학적사항-다중전공포기신청, 공학인증-해당학과)', bold: '500'}
+                  ],
+                  [
+                    { text: '2) 이중(융합)전공 기합격자 및 공학인증 신청자의 재지원은 1회에 한함.',
+                      bold: '500'}
+                  ],
+                  [
+                    { text: "3) 재지원하여 불합격한 경우, '04학번 이후 학생은 제1전공의 심화전공을 이수하여야 함.", bold: '500'}
+                  ]]
+              }
             />
           </>
         ) : college == 0 && page == 1 ? (
@@ -346,66 +392,33 @@ function FAQ() {
             />
           </>
         )}
-      </ButtonWrapper>
-      <PageWrapper>
-        {' '}
-        {college == 0 ? (
-          <>
-            <PageNumber
-              active={page === 0 ? true : false}
-              page="1"
-              onClick={() => {
-                setPage(0);
-              }}
-            />
-            <PageNumber
-              active={page === 1 ? true : false}
-              page="2"
-              onClick={() => {
-                setPage(1);
-              }}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-      </PageWrapper>
+        <PageWrapper>
+          {college == 0 ? (
+            <>
+              <PageNumber
+                active={page === 0 ? true : false}
+                page="1"
+                onClick={() => {
+                  setPage(0);
+                  scrollToTop();
+                }}
+              />
+              <PageNumber
+                active={page === 1 ? true : false}
+                page="2"
+                onClick={() => {
+                  setPage(1);
+                  scrollToTop();
+                }}
+              />
+            </>
+          ) : (
+            <></>
+          )}
+        </PageWrapper>
+      </ContentWrapper>
     </MainWrapper>
   );
 }
-
-const MainWrapper = styled.div`
-  width: fit-content;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const SegmentedSlider = styled.div`
-  width: fit-content;
-  height: auto;
-  display: flex;
-  align-items: center;
-  margin: 1.92vw 0 2.63vw 0;
-`;
-
-const ButtonWrapper = styled.div`
-  width: fit-content;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.42vw;
-`;
-
-const PageWrapper = styled.div`
-  width: fit-content;
-  height: auto;
-  margin: 1.67vw 0 10.42vw 0;
-  display: flex;
-  align-items: center;
-  justify-content: ceter;
-  gap: 0.94vw;
-`;
 
 export default FAQ;

@@ -1,17 +1,19 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Typography from '../../assets/OldTypography';
+import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 import { ITableData } from '../../pages/landing/LandingPage';
 import { TextButton01 } from '../../assets/buttons/TextButton';
+import CTA01 from '../../assets/CTAs/CTA01';
+import CTA02 from '../../assets/CTAs/CTA02';
 
 type orderOptions = 'descending' | 'ascending';
 type tableProps = {
   tableData: ITableData[];
 };
 
-export default function Table(props: tableProps) {
+export default function RankingTable(props: tableProps) {
   //표의 데이터는 최초 한 번만 렌더링하도록 한다.
   const data = props.tableData;
   const ascendingData = data.map((item) => ({ ...item, rank: data.length + 1 - item.rank })).reverse();
@@ -21,7 +23,6 @@ export default function Table(props: tableProps) {
 
   //정렬 여부와 정렬 버튼의 색상을 설정한다.
   const [order, setOrder] = useState<orderOptions>('descending');
-  const [orderColor, setOrderColor] = useState<string>('#A8A8A8');
 
   const toggleOrder = () => {
     if (order === 'descending') setOrder('ascending');
@@ -32,60 +33,50 @@ export default function Table(props: tableProps) {
 
   const [isInfoVisible, setInfoVisible] = useState(false);
 
+  const [mouseOn, setMouseOn] = useState(false);
+
   return (
     <Wrapper>
-      <TitleWrapper>
-        <Typography
-          color="#D85888"
-          size="mediumText"
-          style={{ textAlign: 'center', marginBottom: '13.5px', marginTop: '130px' }}
-        >
-          실시간 지원률
-        </Typography>
-        <Typography size="heading2" style={{ textAlign: 'center', marginBottom: '15px' }}>
-          쿠플라이 실시간 이중전공 모의지원 현황
-        </Typography>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <KupplyApplyButton
-            onClick={() => {
-              navigate('/myboard');
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-              <path
-                d="M18.8327 1.66699L9.66602 10.8337"
-                stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M18.8327 1.66699L12.9993 18.3337L9.66602 10.8337L2.16602 7.50033L18.8327 1.66699Z"
-                stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <Typography color="white" size="bodyText">
-              쿠플라이 모의지원 하러가기
-            </Typography>
-          </KupplyApplyButton>
-        </div>
-      </TitleWrapper>
+      <Typography
+        size="2.08vw"
+        bold="700"
+        style={{ lineHeight: '120%', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
+      >
+        쿠플라이 실시간 이중전공 모의지원 현황
+      </Typography>
+      <Typography
+        size="1.04vw"
+        bold="500"
+        color="rgba(20,20,20,0.6)"
+        style={{ opacity: 0.8, lineHeight: '120%', margin: '0.63vw 0 1.72vw 0' }}
+      >
+        이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.
+      </Typography>
+      <CTA02 onClick={() => navigate('/myboard')} style={{ marginBottom: '3.8vw' }} />
       <TextWrapper>
-        <ToggleOrder
-          onClick={toggleOrder}
-          onMouseEnter={() => setOrderColor('#D85888')}
-          onMouseLeave={() => setOrderColor('#A8A8A8')}
-        >
+        <ToggleOrder onClick={toggleOrder} onMouseEnter={() => setMouseOn(true)} onMouseLeave={() => setMouseOn(false)}>
+          <img width="0.83vw" height="0.83vw" src="../../designImage/landing/rankTable1.svg" />
           {order === 'descending' ? (
-            <TextButton01>높은 경쟁률 순</TextButton01>
+            <Typography
+              size="0.83vw"
+              bold="500"
+              color={mouseOn === false ? '#a8a8a8' : '#d85888'}
+              style={{ cursor: 'pointer' }}
+            >
+              높은 경쟁률 순
+            </Typography>
           ) : (
-            <TextButton01>낮은 경쟁률 순</TextButton01>
+            <Typography
+              size="0.83vw"
+              bold="500"
+              color={mouseOn === false ? '#a8a8a8' : '#d85888'}
+              style={{ cursor: 'pointer' }}
+            >
+              낮은 경쟁률 순
+            </Typography>
           )}
         </ToggleOrder>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '0.31vw' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
             <g clip-path="url(#clip0_4010_12381)">
               <path
@@ -103,7 +94,7 @@ export default function Table(props: tableProps) {
               </clipPath>
             </defs>
           </svg>
-          <Typography size="normalText" color="#A8A8A8">
+          <Typography size="0.83vw" color="#A8a8a8" style={{ lineHeight: '120%' }}>
             본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
           </Typography>
         </div>
@@ -111,15 +102,16 @@ export default function Table(props: tableProps) {
       <TableHeader>
         <HeaderData>순위</HeaderData>
         <HeaderData>이중전공</HeaderData>
-        <HeaderData>선발 정원</HeaderData>
+        <HeaderData>최종정원</HeaderData>
         <HeaderData>지원 현황</HeaderData>
         <HeaderData>실시간 경쟁률</HeaderData>
+        <HeaderData>지난 경쟁률</HeaderData>
         <HeaderData>지난 합격자 평균</HeaderData>
         <HeaderData>
-          <div style={{ display: 'flex', gap: '4px' }}>
+          <div style={{ display: 'flex', gap: '0.21vw' }}>
             관심
             <InfoIcon onMouseEnter={() => setInfoVisible(true)} onMouseLeave={() => setInfoVisible(false)}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.04vw" height="1.04vw" viewBox="0 0 20 21" fill="none">
                 <g clip-path="url(#clip0_4239_14474)">
                   <path
                     d="M9.99935 19.2643C14.6017 19.2643 18.3327 15.5334 18.3327 10.931C18.3327 6.32862 14.6017 2.59766 9.99935 2.59766C5.39698 2.59766 1.66602 6.32862 1.66602 10.931C1.66602 15.5334 5.39698 19.2643 9.99935 19.2643Z"
@@ -214,48 +206,24 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 86%;
-  background: rgba(255, 255, 255, 0.6);
-  margin-bottom: 600px;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: 0;
-  background: linear-gradient(
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 15%,
-    rgba(255, 255, 255, 0) 95%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  z-index: 990;
-`;
-
-const KupplyApplyButton = styled.button`
-  display: flex;
-  width: 628px;
-  padding: 24px 34px;
-  border-radius: 10px;
-  background: linear-gradient(91deg, #d85888 -19.78%, #f5bdbd 89.21%, rgba(253, 242, 242, 0.3) 126.89%);
-  justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 78px;
+  width: 57.09vw;
+  background: #fefafb;
+  margin-bottom: 12.29vw;
 `;
 
 const TextWrapper = styled.div`
-  margin-bottom: 18px;
+  width: 57.09vw;
+  height: auto;
+  margin-bottom: 0.63vw;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `;
 
 const ToggleOrder = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 6px;
+  gap: 0.31vw;
   cursor: pointer;
 
   &:hover {
@@ -268,66 +236,66 @@ const ToggleOrder = styled.div`
 const TableHeader = styled.div`
   border-bottom: 1px solid #dfdfdf;
   border-top: 1px solid #dfdfdf;
-  height: 58px;
+  height: 3.02vw;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 1.56vw;
 `;
 
 const HeaderData = styled.div`
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   color: #a8a8a8;
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 0.83vw;
   font-weight: 500;
-  line-height: 20px; /* 100% */
+  line-height: 120px; /* 100% */
   opacity: 0.8;
   padding: 18px 0px;
   text-align: center;
 
   &:nth-child(1) {
-    width: 110px;
+    width: 5.73vw;
   }
 
   &:nth-child(2) {
     text-align: start;
-    padding-left: 60px;
-    width: 340px;
+    padding-left: 3.13vw;
+    width: 17.71vw;
   }
 
   &:nth-child(3) {
-    width: 125px;
-    padding-right: 15px;
+    width: 6.51vw;
+    padding-right: 0.78vw;
   }
 
   &:nth-child(4) {
-    width: 132px;
-    padding-right: 15px;
+    width: 6.88vw;
+    padding-right: 0.78vw;
   }
 
   &:nth-child(5) {
-    width: 165px;
-    padding-right: 105px;
+    width: 8.59vw;
+    padding-right: 5.47vw;
   }
 
   &:nth-child(6) {
-    width: 165px;
-    padding-right: 105px;
+    width: 8.59vw;
+    padding-right: 5.47vw;
   }
 
   &:nth-child(7) {
-    width: 100px;
+    width: 5.21vw;
   }
 
-  //&:nth-child(8) {
-  // width: 400px;
-  //padding-right: 200px;
-  //position: relative;
-  //}
+  &:nth-child(8) {
+    width: 400px;
+    padding-right: 200px;
+    position: relative;
+  }
   //
 `;
 

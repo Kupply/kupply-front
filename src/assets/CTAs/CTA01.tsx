@@ -21,7 +21,7 @@ const ButtonWrapper = styled.button<CTA01Props>`
   width: 32.71vw;
   height: auto;
   box-sizing: border-box;
-  padding: 24px 1.77vw;
+  padding: 1.25vw 1.77vw;
   display: flex;
   justify-content: center;
   align-items: center;

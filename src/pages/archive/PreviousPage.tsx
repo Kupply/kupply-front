@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useState } from 'react';
 
 import Header from '../../components/Previous/Header';
 import Cards from '../../components/Previous/Cards';

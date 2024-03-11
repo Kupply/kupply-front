@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../assets/Typography';
 import Button02 from '../../assets/buttons/Button02';
 
-function Join1() {
+function Join2() {
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
 
@@ -36,11 +36,21 @@ function Join1() {
 
   return (
     <MainWrapper>
-      <Typography size="1.98vw" bold="700" color="#2C323A" style={{ marginTop: '4.95vw', lineHeight: '2.6vw' }}>
-        당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서.
+      <Typography
+        size="1.98vw"
+        bold="700"
+        color="#FFF"
+        style={{
+          textShadow:
+            '5px 3px 13px rgba(202, 63, 130, 0.25), 42px 30px 31px rgba(202, 63, 130, 0.13), 74px 53px 37px rgba(202, 63, 130, 0.04), 116px 83px 40px rgba(202, 63, 130, 0.00);',
+          lineHeight: '131.579%',
+          marginBottom: '0.73vw',
+        }}
+      >
+        간편 이메일 등록 후 이중전공에 대한 모든 정보 확인하기!
       </Typography>
-      <Typography size="1.25vw" bold="500" color="#2C323A">
-        이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.
+      <Typography size="1.25vw" bold="500" color="#FFF">
+        몇가지 회원가입 단계를 거친 후, 쿠플라이만의 다양한 서비스를 이용해보세요.
       </Typography>
       <JoinBox>
         <TextFieldBox
@@ -54,14 +64,8 @@ function Join1() {
               handleButtonClick();
             }
           }}
-        />
-        <Button02
-          onClick={handleButtonClick}
-          style={{
-            boxShadow:
-              '7px 3px 16px 0px rgba(216, 88, 136, 0.20), 26px 11px 28px 0px rgba(216, 88, 136, 0.17), 59px 25px 38px 0px rgba(216, 88, 136, 0.10), 105px 45px 46px 0px rgba(216, 88, 136, 0.03), 164px 70px 50px 0px rgba(216, 88, 136, 0.00)',
-          }}
-        />
+        ></TextFieldBox>
+        <Button02 onClick={handleButtonClick}></Button02>
       </JoinBox>
     </MainWrapper>
   );
@@ -69,18 +73,21 @@ function Join1() {
 
 const MainWrapper = styled.div`
   width: 100vw;
-  height: auto;
+  height: 13.33vw;
+  padding-top: 3.39vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url('../../designImage/onboarding/Join2.png');
+  background-size: cover;
 `;
 
 const JoinBox = styled.div`
   width: auto;
   height: auto;
+  margin-top: 1.82vw;
   display: flex;
   gap: 1.15vw;
-  margin: 2.29vw 0 5.63vw 0;
 `;
 
 const TextFieldBox = styled.input`
@@ -93,7 +100,7 @@ const TextFieldBox = styled.input`
   border: 0.1vw solid #d85888;
   padding: 1.3vw 0.94vw;
   border-radius: 0.52vw;
-  background: rgba(255, 255, 255);
+  background: rgba(255, 255, 255, 0.7);
   color: #141414;
   font-family: Pretendard;
   font-size: 0.94vw;
@@ -110,4 +117,4 @@ const TextFieldBox = styled.input`
   }
 `;
 
-export default Join1;
+export default Join2;

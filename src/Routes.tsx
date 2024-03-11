@@ -1,8 +1,7 @@
-import React from 'react';
-import MainPage from './pages/main/MainPage';
+import React, { useState } from 'react';
 import MyBoardPage from './pages/myBoard/MyBoardPage';
-import LandingPage from './pages/landing/LandingPage';
-import LoginPage from './pages/login/LoginPage';
+import LandingPage from './pages/main/LandingPage';
+import LoginPage from './pages/login/OldLoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
 // import SettingsPage from './pages/setting/SettingsPage';
@@ -15,10 +14,13 @@ import DeletePage from './pages/delete/DeletePage';
 //import DashboardMainPage from './admin/AdminPage';
 import UserPage from './admin/pages/user';
 import { IndexPage } from './admin/routes/sections';
+import OnboardingPage from './pages/main/OnboardingPage';
+
+const isLogined = true;
 
 export const mainRoutes = [
-  { path: '/', element: <MainPage /> },
-  { path: '/login', element: <LoginPage /> },
+  { path: '/', element: <OnboardingPage /> },
+  { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
   { path: '/landing', element: <LandingPage /> },
   { path: '/archive', element: <PreviousPage /> },
 ];

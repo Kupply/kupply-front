@@ -40,7 +40,7 @@ const ButtonWrapper = styled.button<Button02Props>`
     props.variant === 'outline' && (props.state === 'default' || props.state === 'disabled')
       ? '1px solid #D85888'
       : 'none'};
-  padding: 24px 1.77vw;
+  padding: 1.25vw 1.77vw;
   display: flex;
   justify-content: space-between;
   align-items: center;

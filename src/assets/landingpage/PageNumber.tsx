@@ -8,15 +8,15 @@ export interface PageNumberProps extends React.ComponentPropsWithRef<'div'> {
 
 const Wrapper = styled.div<PageNumberProps>`
   display: flex;
-  width: 14px;
-  height: 14px;
-  padding: 18px;
+  width: 0.73vw;
+  height: 0.73vw;
+  padding: 0.94vw;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
-  border-radius: 5px;
+  border-radius: 0.26vw;
   background: ${(props) => (props.active === true ? '#d85888' : '#f5f5f5')};
   box-shadow: ${(props) => (props.active === true ? '0px 4px 12px 0px rgba(216, 88, 136, 0.25)' : '0px 0px 0px 0px')};
   cursor: pointer;
