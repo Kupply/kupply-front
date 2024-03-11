@@ -30,7 +30,6 @@ export const paper = ({ theme, bgcolor, dropdown }: paperProps) => ({
   }),
   ...(dropdown && {
     padding: theme.spacing(0.5),
-    boxShadow: theme.customShadows.dropdown,
     borderRadius: theme.shape.borderRadius * 1.25,
   }),
 });

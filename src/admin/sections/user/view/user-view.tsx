@@ -11,7 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import Typography from '../../../../assets/Typography';
 
-import { users } from '../../../_mock/user';
+import { users } from '../../../_mock/user'; // 데이터 원천
 
 import Iconify from '../../../components/iconify';
 import Scrollbar from '../../../components/scrollbar';
