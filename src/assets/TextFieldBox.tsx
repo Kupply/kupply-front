@@ -25,7 +25,7 @@ const baseWrapper = css`
     right: 10px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     height: 42px;
     box-sizing: border-box;
 
@@ -97,7 +97,7 @@ const PlaceHolder = styled.text`
   opacity: 0.8;
   white-space: nowrap;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
 `;
@@ -163,7 +163,7 @@ const Input = styled.input`
   background: none;
   caret-color: #d85888;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
 `;
@@ -180,7 +180,7 @@ const CorrectText = styled.input<{ type?: string }>`
   line-height: 18px;
   background: #fff;
   ${(props) => props.type === 'password' && 'color: black;'}
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
 `;
@@ -197,7 +197,7 @@ const ErrorText = styled.input`
   line-height: 18px;
   opacity: 0.8;
   background: #fff;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     font-size: 14px;
   }
 `;
@@ -214,7 +214,7 @@ const ErrorMessageWrapper = styled.div`
   border: none;
   background: none;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     width: 100%;
 
     min-width: 278px;
@@ -256,7 +256,7 @@ const EyeIconWrapper = styled.div`
     margin-right: 10px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     right: 0px;
     top: 0px;
     & > img {
@@ -299,7 +299,7 @@ const CheckDuplicated = styled.div`
   border: 1px solid #d85888;
   color: #d85888;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     height: 18px;
   }
 `;
@@ -329,7 +329,7 @@ const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
     margin-right: 4px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     width: 30%;
     font-size: 12px;
     padding: 2px 5px;
