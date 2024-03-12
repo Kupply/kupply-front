@@ -1,23 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
-/* 일단 하드코딩부터 */
+import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
 
-const MajorBox = () => {
+const MajorBox = ({ onViewMajor, userData }: { onViewMajor: any; userData: any }) => {
+  const titleText = onViewMajor === 1 ? '1지망 관심전공' : '2지망 관심전공';
+  const major: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
+
+  const majorKoreanName = majorNameMapping[major][0];
+  const majorEngishName = majorNameMapping[major][1];
+  const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}Large.png`;
+  const majorShadowPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}_ellipse.svg`;
   return (
     <Wrapper>
       <TextBox>
-        <TitleText>1지망 관심전공</TitleText>
+        <TitleText>{titleText}</TitleText>
       </TextBox>
       <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" />
 
       <MajorWrapper>
-        <Major src="designImage/majorSymbol/BusinessLarge.png" alt="business" />
-        <Shadow src="designImage/majorSymbol/BusinessShadow.svg" alt="shadow" />
+        <Major src={majorSymbolPath} alt="hopemajor" />
+        <Shadow src={majorShadowPath} alt="shadow" />
       </MajorWrapper>
       <MajorTextBox>
-        <전공Text>경영대학</전공Text>
-        <MajorText>Business School</MajorText>
+        <전공Text>{majorKoreanName}</전공Text>
+        <MajorText>{majorEngishName}</MajorText>
       </MajorTextBox>
     </Wrapper>
   );
@@ -25,7 +33,7 @@ const MajorBox = () => {
 
 const Wrapper = styled.div`
   width: 16.2vw;
-  height: 353px;
+  height: 17.37vw;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid #dfdfdf;
@@ -58,7 +66,7 @@ const TextBox = styled.div`
   justify-content: center;
   flex-shrink: 0;
 
-  margin-top: 21px;
+  margin-top: 1.03vw;
 `;
 
 const MajorWrapper = styled.div`
@@ -72,7 +80,7 @@ const MajorTextBox = styled.div`
   display: center;
   justify-content: center;
 
-  margin-top: 207.67px;
+  margin-top: 10.22vw;
 `;
 
 ///////////////// text /////////////////
@@ -117,28 +125,28 @@ const MajorText = styled.div`
 
 const Vector = styled.img`
   position: absolute;
-  top: 60px;
+  top: 2.95vw;
   flex-shrink: 0;
   width: 16.12vw;
 `;
 
 const Major = styled.img`
   position: absolute;
-  top: 62.67px;
+  top: 3.08vw;
   left: 5.76vw;
 
   width: 4.61vw;
-  height: 120.289px;
+  height: 5.92vw;
   flex-shrink: 0;
 `;
 
 const Shadow = styled.img`
   position: absolute;
-  top: 71.67px;
+  top: 3.53vw;
   left: 3.22vw;
 
   width: 8.365vw;
-  height: 166.708px;
+  height: 8.2vw;
   flex-shrink: 0;
   fill: radial-gradient(47.7% 47.7% at 50% 52.3%, rgba(146, 104, 83, 0.41) 0%, rgba(255, 255, 255, 0) 100%);
 `;

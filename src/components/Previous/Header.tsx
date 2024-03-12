@@ -1,11 +1,15 @@
+// 서치바 크기 조정 필요?
+// 버튼 state 이게 맞나? 좀 이상한데,,, 디자인 확인 필요
+
 import styled from 'styled-components';
 
-import Typography from '../../assets/OldTypography';
-// import HashtagButton from '../../assets/buttons/HashtagButton';
-import HashtagButton from '../../assets/tabMenu/TabMenu04';
+import Typography from '../../assets/Typography';
+import TabMenu04 from '../../assets/tabMenu/TabMenu04';
 import SearchBar from '../../assets/SearchBar';
 
 export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부', '가나다 순 정렬'];
+
+// searchbar 크기 조절해야 됨
 
 export interface HeaderProps {
   clicked: number;
@@ -16,63 +20,54 @@ export interface HeaderProps {
 
 function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps) {
   return (
-    <Container>
-      <Title>
-        <Typography size="heading1">지난 학기 합격 지표 바로 보기</Typography>
-      </Title>
-      <SubTitle>쿠플라이에서 지원하는 학과 별 합격지표를 한 눈에 비교 해보세요!</SubTitle>
-      <TagButtonWrapper>
+    <MainWrapper>
+      <Typography size="2.5vw" bold="700" style={{ lineHeight: '2.6vw', marginTop: '5.31vw' }}>
+        지난 학기 합격 지표 바로 보기
+      </Typography>
+      <Typography size="1.25vw" bold="500" style={{ opacity: 0.8, marginTop: '0.52vw' }}>
+        쿠플라이에서 지원하는 학과 별 합격지표를 한 눈에 비교해보세요!
+      </Typography>
+      <MenuWrapper>
         {mockHashes.map((hash, index) => (
-          <HashtagButton
+          <TabMenu04
             status={index === clicked ? 'pressed' : 'default'}
             onClick={() => {
               setClicked(index);
             }}
           >
             {hash}
-          </HashtagButton>
+          </TabMenu04>
         ))}
-      </TagButtonWrapper>
-      <div style={{ marginTop: 48, width: '100%', maxWidth: 1382 }}>
+      </MenuWrapper>
+      <SearchBarWrapper>
         <SearchBar value={searchWord} setValue={setSearchWord} />
-      </div>
-    </Container>
+      </SearchBarWrapper>
+    </MainWrapper>
   );
 }
 
-const TagButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  margin-top: 53px;
-`;
-
-const Container = styled.div`
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1920px;
-  height: 380px;
-  background-color: #fcfafb;
-
+const MainWrapper = styled.div`
+  width: 100vw;
+  height: 19.42vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fcfafb;
 `;
 
-const Title = styled.div`
-  margin-top: 102px;
+const MenuWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1.04vw;
+  margin: 2.76vw 0 2.5vw 0;
 `;
 
-const SubTitle = styled.div`
-  opacity: 0.8;
-  margin-top: 18px;
-  color: var(--Main-Black, #141414);
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
+const SearchBarWrapper = styled.div`
+  width: 68.75vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Header;
