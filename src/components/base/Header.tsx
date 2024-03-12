@@ -306,7 +306,7 @@ const FlexContainer = styled.div`
   padding: 0 6.67vw;
   justify-content: space-between;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     padding: 0 16px;
   }
 `;
@@ -318,7 +318,7 @@ const HeaderButtonContainer = styled.div`
   align-items: center;
   justify-content: start;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: row;
     height: 45px; /* 아이템의 높이를 부모 요소에 맞춤 */
@@ -331,7 +331,7 @@ const LogoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     height: 36px; /* 아이템의 높이를 부모 요소에 맞춤 */
 
     & button {
@@ -355,7 +355,7 @@ const LoginContainer = styled.div`
     white-space: nowrap;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     height: 45px; /* 아이템의 높이를 부모 요소에 맞춤 */
     width: 20%;
     .login {
@@ -373,7 +373,7 @@ const LeftButtonsContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     flex-wrap: wrap; /* 요소들을 여러 줄에 걸쳐 배치할 수 있도록 설정 */
   }
 `;
@@ -395,7 +395,7 @@ const SettingToggleWrapper = styled.div`
   box-shadow: 0px 20px 50px 0px rgba(223, 223, 223, 0.4);
   backdrop-filter: blur(9px);
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     top: 84px;
     right: 10px;
     width: 80vw;

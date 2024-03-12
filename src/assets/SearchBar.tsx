@@ -53,7 +53,7 @@ const Container = styled.div`
   &,
   & div,
   & input {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 600px) {
       height: 40px;
     }
   }
@@ -87,12 +87,12 @@ const SvgContainer = styled.div`
   margin-left: 30px;
   position: absolute;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     margin-left: 15px;
   }
 
   & > svg {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 600px) {
       width: 12px;
       height: 12px;
     }
@@ -148,7 +148,7 @@ const Input = styled.input`
 
     background: #ffffff;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 600px) {
       outline-style: solid;
       outline-color: rgba(232, 88, 136, 0.15);
       outline-width: 4px;
@@ -162,7 +162,7 @@ const Input = styled.input`
   font-weight: 500;
   line-height: 24px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     padding-left: 55px;
     font-size: 14px;
     padding-left: 40px;
