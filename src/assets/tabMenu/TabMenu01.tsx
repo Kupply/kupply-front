@@ -10,11 +10,7 @@ export interface SegmentedPickerProps extends React.ComponentPropsWithRef<'div'>
 
 const baseWrapper = css`
   display: flex;
-<<<<<<< HEAD:src/assets/SegmentedPicker.tsx
   width: 9.06vw;
-=======
-  width: 9.0625vw; // 174px;
->>>>>>> origin/develop:src/assets/tabMenu/TabMenu01.tsx
   height: 2.5vw;
   justify-content: center;
   align-items: center;

@@ -34,7 +34,7 @@ const ButtonWrapper = styled.button<CTA02Props>`
   justify-content: center;
   align-items: center;
   gap: 0.42vw;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   background: ${(props) =>
     props.state === 'disabled'
       ? '#D3D3D3'

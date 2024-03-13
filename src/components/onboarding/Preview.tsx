@@ -27,7 +27,7 @@ function Preview() {
             style={{
               width: '20.2vw',
               height: '29.27vw',
-              background: 'linear-gradient(105deg, #f2709c -31.62%, #ff9472 99.37%)',
+              background: 'linear-gradient(159deg, #FFA9C5 13.78%, #FFD1C0 73.99%)',
             }}
           >
             <Menu style={{ color: '#141414', background: '#FFF' }}>마이페이지</Menu>
@@ -154,7 +154,7 @@ function Preview() {
                 style={{
                   width: '20.2vw',
                   height: '13.65vw',
-                  background: '#fff374',
+                  background: '#fef2c0',
                   boxShadow: ' 0px 14.857px 37.143px 0px rgba(223, 223, 223, 0.4)',
                   backdropFilter: 'blur(6.685710906982422px)',
                 }}
