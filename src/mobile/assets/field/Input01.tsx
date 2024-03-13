@@ -14,10 +14,8 @@ import Icon08 from '../../../assets/icons/Icon08';
 const baseWrapper = css`
   display: flex;
   width: 100%;
-  box-sizing: border-box;
   max-width: 328px;
-  height: 42px;
-  padding: 12px 16px;
+  min-width: 250px;
   gap: 10px;
   border-radius: 10px;
 
@@ -26,12 +24,10 @@ const baseWrapper = css`
     right: 0.521vw; //10px;
   }
 
-  @media screen and (max-width: 600px) {
-    height: 42px;
-    box-sizing: border-box;
+  height: 42px;
+  box-sizing: border-box;
 
-    padding: 12px 16px;
-  }
+  padding: 12px 16px;
 `;
 
 const defaultWrapper = css`
@@ -97,18 +93,16 @@ const PlaceHolder = styled.text`
   line-height: 18px;
   opacity: 0.8;
   white-space: nowrap;
-
-  @media screen and (max-width: 600px) {
-    font-size: 14px;
-  }
 `;
 
 const MessageBox = styled.div<{ isCheckDuplicated?: boolean }>`
   display: flex;
   flex-direction: column;
+  align-content: space-between;
   justify-content: center;
   gap: 5px;
-  width: 80%;
+  width: 70%;
+  padding: 1px 2px;
   height: 100%;
   ${(props) =>
     props.isCheckDuplicated &&
@@ -145,7 +139,7 @@ const HelpMessage = styled.text`
   height: 12px;
   color: #d85888;
   font-family: Pretendard;
-  font-size: 0.625vw; //12px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 12px;
@@ -163,10 +157,6 @@ const Input = styled.input`
   outline: none;
   background: none;
   caret-color: #d85888;
-
-  @media screen and (max-width: 600px) {
-    font-size: 14px;
-  }
 `;
 
 const CorrectText = styled.input<{ type?: string }>`
@@ -181,9 +171,6 @@ const CorrectText = styled.input<{ type?: string }>`
   line-height: 18px;
   background: #fff;
   ${(props) => props.type === 'password' && 'color: black;'}
-  @media screen and (max-width: 600px) {
-    font-size: 14px;
-  }
 `;
 
 const ErrorText = styled.input`
@@ -198,16 +185,11 @@ const ErrorText = styled.input`
   line-height: 18px;
   opacity: 0.8;
   background: #fff;
-  @media screen and (max-width: 600px) {
-    font-size: 14px;
-  }
 `;
 
 const ErrorMessageWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  min-width: 216px;
   height: 12px;
   padding-top: 5px;
   padding-left: 13px;
@@ -215,23 +197,21 @@ const ErrorMessageWrapper = styled.div`
   border: none;
   background: none;
 
-  @media screen and (max-width: 600px) {
-    width: 100%;
-
-    min-width: 278px;
-    display: flex;
-    justify-content: end;
-    position: relative;
-    bottom: 62px;
-    right: 0px;
-    padding: 0;
-  }
+  width: 100%;
+  max-width: 328px;
+  min-width: 250px;
+  display: flex;
+  justify-content: end;
+  position: relative;
+  bottom: 62px;
+  right: 0px;
+  padding: 0;
 `;
 
 const ErrorMessage = styled.text`
   color: #ea0909;
   font-family: Pretendard;
-  font-size: 0.625vw; //12px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 12px;
@@ -271,37 +251,34 @@ const EyeIconWrapper = styled.div`
 const CheckDuplicated = styled.div`
   display: flex;
 
-  min-width: 65px;
-  width: 65px;
-  height: 24px;
-  padding: 4px 5px;
+  width: 55px;
+  height: 22px;
+
+  padding: 8px 10px;
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
   gap: 8px;
   color: #d85888;
 
   text-align: center;
   font-family: Pretendard;
-  font-size: 0.625vw; //12px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
   border-radius: 999px;
   border: 1px solid #d85888;
   color: #d85888;
-
-  @media screen and (max-width: 600px) {
-    height: 18px;
-  }
 `;
 
 const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
   display: flex;
-  max-width: 67px;
-  min-width: 62px;
+  width: 67px;
   height: 22px;
-  width: 25%;
-  padding: 8px 10px;
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
   gap: 1px;
@@ -312,23 +289,16 @@ const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
 
   text-align: center;
   font-family: Pretendard;
-  font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 500;
 
+  font-size: 10px;
+  padding: 2px 5px;
+  margin-left: -16px;
+  margin-bottom: 1px;
+  z-index: 2;
   & > svg {
-    margin-right: 4px;
-  }
-
-  @media screen and (max-width: 600px) {
-    width: 30%;
-    font-size: 12px;
-    padding: 2px 5px;
-    margin-left: -16px;
-    margin-bottom: 1px;
-    & > svg {
-      margin-right: 0px;
-    }
+    margin-right: 2px;
   }
 `;
 
@@ -572,7 +542,7 @@ function Input01(props: TextFieldBoxProps) {
                   )}
                   {isCheckDuplicated && valid && (
                     <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                         <path
                           d="M8 15C12.1421 15 15.5 11.6421 15.5 7.5C15.5 3.35786 12.1421 0 8 0C3.85786 0 0.5 3.35786 0.5 7.5C0.5 11.6421 3.85786 15 8 15Z"
                           fill="white"
@@ -589,7 +559,7 @@ function Input01(props: TextFieldBoxProps) {
                   )}
                   {isCheckDuplicated && !valid && (
                     <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                         <path
                           d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z"
                           fill="white"
@@ -625,7 +595,7 @@ function Input01(props: TextFieldBoxProps) {
                   )}
                   {isCheckDuplicated && valid && (
                     <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                         <path
                           d="M8 15C12.1421 15 15.5 11.6421 15.5 7.5C15.5 3.35786 12.1421 0 8 0C3.85786 0 0.5 3.35786 0.5 7.5C0.5 11.6421 3.85786 15 8 15Z"
                           fill="white"
@@ -642,7 +612,7 @@ function Input01(props: TextFieldBoxProps) {
                   )}
                   {isCheckDuplicated && !valid && (
                     <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                         <path
                           d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z"
                           fill="white"
@@ -690,7 +660,7 @@ function Input01(props: TextFieldBoxProps) {
             )}
             {textType === 'default' && isCheckDuplicated && (
               <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                   <path
                     d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z"
                     fill="white"
