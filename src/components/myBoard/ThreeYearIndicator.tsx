@@ -33,8 +33,7 @@ const ThreeYear = ({
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState(0);
 
   const navigate = useNavigate();
-  const major: keyof typeof majorNameMapping = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-  const majorKoreanName = majorNameMapping[major][0];
+  const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
 
   const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
     // Create a new object with updated isClicked values
