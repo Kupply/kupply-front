@@ -9,11 +9,13 @@ export interface HashtagButtonProps extends React.ComponentPropsWithRef<'button'
 }
 
 const HashtagButton = (props: HashtagButtonProps) => {
+  const [isHovered, setIsHovered] = useState(false);
   const imageNumber = String(props.index + 1).padStart(2, '0');
-  const imagePath = `../../designImage/tabMenu/Tabmenu04_${imageNumber}.svg`;
+  const imagePath1 = `../../designImage/tabMenu/Tabmenu04_${imageNumber}_1.svg`; // DEFAULT
+  const imagePath2 = `../../designImage/tabMenu/Tabmenu04_${imageNumber}_2.svg`; // HOVER
   return (
-    <Container {...props}>
-      <InnerImage src={imagePath} alt="symbol" />
+    <Container {...props} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <InnerImage src={isHovered ? imagePath2 : imagePath1} alt="symbol" />
       <InnerText>{props.children}</InnerText>
     </Container>
   );
