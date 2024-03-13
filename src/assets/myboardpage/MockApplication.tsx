@@ -10,10 +10,14 @@ const Button = styled.button<MockApplicationProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 282px;
-  padding: 16px 32px;
-  gap: 8px;
-  border-radius: 10px;
+  //width: 282px;
+  width: 14.6875vw;
+  //padding: 16px 32px;
+  padding: 0.833vw 1.667vw;
+  //gap: 8px;
+  gap: 0.4167vw;
+  //border-radius: 10px;
+  border-radius: 0.521vw;
   // default
   background: linear-gradient(93deg, #d85888 -24.37%, #f5bdbd 120.85%, rgba(253, 242, 242, 0.3) 161.07%);
   // hover
@@ -38,7 +42,8 @@ const Text = styled.text`
   color: var(--White, #fff);
   text-align: center;
   font-family: Pretendard;
-  font-size: 16px;
+  //font-size: 16px;
+  font-size: 0.833vw;
   font-style: normal;
   font-weight: 600;
   line-height: 100%;
@@ -46,7 +51,7 @@ const Text = styled.text`
 
 // 아이콘 위치 수정 완료
 const Icon: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="1.042vw" height="1.042vw" viewBox="0 0 20 20" fill="none">
     <g clip-path="url(#clip0_3412_8527)">
       <path
         d="M18.3327 1.6665L9.16602 10.8332"
@@ -65,7 +70,7 @@ const Icon: React.FC = () => (
     </g>
     <defs>
       <clipPath id="clip0_3412_8527">
-        <rect width="20" height="20" fill="white" />
+        <rect width="1.042vw" height="1.042vw" fill="white" />
       </clipPath>
     </defs>
   </svg>
@@ -76,7 +81,7 @@ function MockApplicationButton(props: MockApplicationProps) {
     children = (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Icon />
-        <Text style={{ marginLeft: '8px' }}>쿠플라이 모의지원 하러가기</Text>
+        <Text style={{ marginLeft: '0.417vw' }}>쿠플라이 모의지원 하러가기</Text>
       </div>
     ),
     active = true,

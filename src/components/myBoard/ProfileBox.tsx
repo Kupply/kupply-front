@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import EditModal from './EditModals/EditModal';
+import EditModal from './EditModals/OldEditModal';
 import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';

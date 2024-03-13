@@ -183,7 +183,7 @@ const ContentsWrapper = styled.div`
 
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
-  top: 1.05vw; //23px;
+  top: 1.15vw; //23px;
   left: 25vw; //490px;
   z-index: 20;
 `;
