@@ -6,7 +6,6 @@ import Router from './routes/sections';
 
 export default function App() {
   useScrollToTop();
-
   return (
     <>
       <Router />

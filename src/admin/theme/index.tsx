@@ -7,7 +7,6 @@ import { palette } from './palette';
 import { shadows } from './shadows';
 import { overrides } from './overrides';
 import { typography } from './typography';
-import { customShadows } from './custom-shadows';
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +20,6 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
       palette: palette(),
       typography,
       shadows: shadows(),
-      customShadows: customShadows(),
       shape: { borderRadius: 8 },
     }),
     [],
