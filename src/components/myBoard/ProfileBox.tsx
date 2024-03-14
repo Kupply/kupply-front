@@ -20,6 +20,7 @@ const ProfileBox = ({ userData }: { userData: any }) => {
   const major: MajorOptions = userData.firstMajor;
   const major1: MajorOptions = userData.hopeMajor1;
   const major2: MajorOptions = userData.hopeMajor2;
+  const profilePic = userData.userProfilePic;
 
   // const majorKoreanName = majorNameMapping[major][0];
 
@@ -60,7 +61,7 @@ const ProfileBox = ({ userData }: { userData: any }) => {
 
   return (
     <Wrapper translateY={scrollY}>
-      <CharacterImage src="designImage/character/rectProfile/RectProfile1.png" alt="profile" />
+      <CharacterImage src={`designImage/character/rectProfile/${profilePic}.png`} alt="profile" />
       <NickNameBox>
         <NickNameText>{userData.userNickname}</NickNameText>
         <RoleText>{userData.userRole === 'candidate' ? '도전자' : '합격자'} 님</RoleText>
