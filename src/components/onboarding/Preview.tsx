@@ -1,4 +1,4 @@
-// 사진 일부 수정 필요(2번 병아리, 4번 말풍선), 9번 버튼 기능 추가
+// 2번 병아리 사진 수정 필요, 9번 버튼 기능 추가
 
 import styled from 'styled-components';
 
@@ -27,7 +27,7 @@ function Preview() {
             style={{
               width: '20.2vw',
               height: '29.27vw',
-              background: 'linear-gradient(105deg, #f2709c -31.62%, #ff9472 99.37%)',
+              background: 'linear-gradient(159deg, #FFA9C5 13.78%, #FFD1C0 73.99%)',
             }}
           >
             <Menu style={{ color: '#141414', background: '#FFF' }}>마이페이지</Menu>
@@ -113,6 +113,17 @@ function Preview() {
                 style={{ position: 'absolute', bottom: '50%', right: '9.67%' }}
               />
               <img
+                width="7.28%"
+                height="11.43%"
+                src="../../designImage/preview/preview_04_02.svg"
+                style={{
+                  position: 'absolute',
+                  bottom: '73.13%',
+                  right: '32.11%',
+                  filter: 'drop-shadow(0px 6px 10px rgba(229, 124, 144, 0.43))',
+                }}
+              />
+              <img
                 width="13.44%"
                 height="2.4%"
                 src="../../designImage/preview/preview_04_03.png"
@@ -143,7 +154,7 @@ function Preview() {
                 style={{
                   width: '20.2vw',
                   height: '13.65vw',
-                  background: '#fff374',
+                  background: '#fef2c0',
                   boxShadow: ' 0px 14.857px 37.143px 0px rgba(223, 223, 223, 0.4)',
                   backdropFilter: 'blur(6.685710906982422px)',
                 }}

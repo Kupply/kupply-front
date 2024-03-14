@@ -3,9 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
 import EyeIcon from '../assets/icons/EyeIcon';
-import Icon07 from './icons/Icon07';
-import Icon08 from './icons/Icon07';
-
 /* 
     Width는 부모 요소(Wrapper)의 width를 따라갑니다.
 */
@@ -14,23 +11,20 @@ const baseWrapper = css`
   display: flex;
   width: 100%;
   min-width: 278px;
-  max-width: 592px;
-  height: 48px;
-  padding: 10px 18px;
-  gap: 10px;
-  border-radius: 10px;
 
+  //height: 68px;
+  height: 3.542vw; 
+  //padding: 10px 18px;
+  padding: 0.521vw 0.9375vw; 
+  // gap: 10px;
+  // border-radius: 10px;
+  gap: 0.521vw; //10px;
+  border-radius: 0.521vw; //10px;
+  box-sizing: border-box;
 
   & > img {
     position: relative;
     right: 0.521vw; //10px;
-  }
-
-  @media screen and (max-width: 768px) {
-    height: 42px;
-    box-sizing: border-box;
-
-    padding: 12px 16px;
   }
 `;
 
@@ -94,13 +88,9 @@ const PlaceHolder = styled.text`
   font-size: 0.9375vw; //18px;
   font-weight: 500;
   font-style: normal;
-  line-height: 18px;
+  line-height: 100%;
   opacity: 0.8;
   white-space: nowrap;
-
-  @media screen and (max-width: 768px) {
-    font-size: 14px;
-  }
 `;
 
 const MessageBox = styled.div<{ isCheckDuplicated?: boolean }>`
@@ -113,7 +103,7 @@ const MessageBox = styled.div<{ isCheckDuplicated?: boolean }>`
   ${(props) =>
     props.isCheckDuplicated &&
     `
-    width: 55%;
+    width: 60%;
   `}
 `;
 
@@ -121,7 +111,6 @@ const IconWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
   flex-direction: row;
   & > img {
     position: relative;
@@ -142,13 +131,13 @@ const IconBundler = styled.div`
 
 const HelpMessage = styled.text`
   width: 100%;
-  height: 12px;
+  height: 0.625vw;
   color: #d85888;
   font-family: Pretendard;
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 12px;
+  line-height: 100%;
 `;
 
 const Input = styled.input`
@@ -157,50 +146,40 @@ const Input = styled.input`
   font-size: 0.9375vw; //18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 100%;
   opacity: 0.8;
   border: none;
   outline: none;
   background: none;
   caret-color: #d85888;
-
-  @media screen and (max-width: 768px) {
-    font-size: 14px;
-  }
 `;
 
-const CorrectText = styled.input<{ type?: string }>`
-  width: 70%;
-  height: 18px;
+const CorrectText = styled.input`
+  width: 80%;
+  height: 0.9375vw;
   font-size: 0.9375vw; //18px;
   flex-shrink: 0;
   color: #d85888;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 100%;
   background: #fff;
   ${(props) => props.type === 'password' && 'color: black;'}
-  @media screen and (max-width: 768px) {
-    font-size: 14px;
-  }
 `;
 
 const ErrorText = styled.input`
-  width: 70%;
-  height: 18px;
+  width: 80%;
+  height: 0.9375vw;
   font-size: 0.9375vw; //18px;
   flex-shrink: 0;
   color: #141414;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 100%;
   opacity: 0.8;
   background: #fff;
-  @media screen and (max-width: 768px) {
-    font-size: 14px;
-  }
 `;
 
 const ErrorMessageWrapper = styled.div`
@@ -208,42 +187,28 @@ const ErrorMessageWrapper = styled.div`
   align-items: center;
   width: 100%;
   min-width: 216px;
-  height: 12px;
-  padding-top: 5px;
+  height: 0.625vw;
+  //padding-top: 5px;
+  padding-top: 0.260vw;
   padding-left: 0.9375vw; //18px;
   gap: 4px;
   border: none;
   background: none;
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-
-    min-width: 278px;
-    display: flex;
-    justify-content: end;
-    position: relative;
-    bottom: 62px;
-    right: 0px;
-    padding: 0;
-  }
 `;
 
 const ErrorMessage = styled.text`
+  width: 100%;
   color: #ea0909;
   font-family: Pretendard;
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 12px;
+  line-height: 100%;
   opacity: 0.8;
 `;
 
 const EyeIconWrapper = styled.div`
   display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
   position: relative;
   z-index: 1;
   top: 2px;
@@ -256,35 +221,18 @@ const EyeIconWrapper = styled.div`
   & > button {
     margin-right: 0.521vw; //10px;
   }
-
-  @media screen and (max-width: 768px) {
-    right: 0px;
-    top: 0px;
-    & > img {
-      margin-left: 5px;
-      width: 15px;
-      height: 15px;
-    }
-
-    & > svg {
-      margin-left: 5px;
-      width: 15px;
-      height: 15px;
-    }
-
-    & > button {
-      margin-right: 10px;
-    }
-  }
 `;
 
-const CheckDuplicated = styled.div`
+const CheckDuplicated = styled.button`
   display: flex;
-
+  box-sizing: border-box;
   min-width: 65px;
-  width: 65px;
-  height: 24px;
-  padding: 4px 5px;
+  //width: 65px;
+  width: 3.385vw;
+  //height: 24px;
+  height: 1.25vw;
+  //padding: 4px 5px;
+  padding: 0.208vw 0.260vw;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -295,51 +243,19 @@ const CheckDuplicated = styled.div`
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  //line-height: 20px;
+  line-height: 1.042vw;
   border-radius: 999px;
   border: 1px solid #d85888;
   color: #d85888;
-
-  @media screen and (max-width: 768px) {
-    height: 18px;
-  }
-`;
-
-const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
-  display: flex;
-  max-width: 67px;
-  min-width: 62px;
-  height: 22px;
-  width: 25%;
-  padding: 8px 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 1px;
-  flex-shrink: 0;
-  color: white;
-  border-radius: 999px;
-  background: ${(props) => (props.valid ? '#d85888' : '#F05353')};
 
   text-align: center;
   font-family: Pretendard;
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 500;
-
-  & > svg {
-    margin-right: 4px;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 30%;
-    font-size: 12px;
-    padding: 2px 5px;
-    margin-left: -16px;
-    margin-bottom: 1px;
-    & > svg {
-      margin-right: 0px;
-    }
-  }
+  //line-height: 20px;
+  line-height: 1.042vw;
 `;
 
 export type StateOptions = 'default' | 'hover' | 'focused' | 'typing' | 'filled' | 'error' | 'loading' | 'password';
@@ -430,7 +346,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
     }
   };
 
-  const onCheckDuplicated = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onCheckDuplicated = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
     if (Math.random() > 0.5) {
@@ -456,7 +372,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
 
   const XCircle = () => {
     return (
-      <img
+        <img
         src="../../designImage/textField/XCircle.png"
         width="24px"
         height="24px"
@@ -499,34 +415,16 @@ function TextFieldBox(props: TextFieldBoxProps) {
         ref={ref}
         tabIndex={rest.tabIndex || 0}
       >
-        {state === 'default' && (
+        {state === 'default' || state === 'hover' ? (
           <>
             <PlaceHolder>{placeholder}</PlaceHolder>
             {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
           </>
-        )}
-        {state === 'hover' && (
-          <>
-            <PlaceHolder>{placeholder}</PlaceHolder>
-            {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
-          </>
-        )}
-        {state === 'focused' && (
+        ) : state === 'focused' ? (
           <>
             <MessageBox isCheckDuplicated={isCheckDuplicated}>
               {helpMessage && <HelpMessage>{helpMessage}</HelpMessage>}
-              <Input
-                value={value}
-                onChange={
-                  rest.onChange
-                    ? rest.onChange
-                    : (e: React.ChangeEvent<HTMLInputElement>) => {
-                        setValue(e.target.value);
-                      }
-                }
-                type={textType}
-                autoFocus
-              />
+              <Input value={value} onChange={rest.onChange} type={textType} autoFocus onKeyDown={rest.onKeyDown}/>
             </MessageBox>
             {textType === 'password' ? (
               <EyeIconWrapper>
@@ -546,8 +444,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
               </EyeIconWrapper>
             )}
           </>
-        )}
-        {state === 'typing' && (
+        ) : state === 'typing' ? (
           <>
             <MessageBox isCheckDuplicated={isCheckDuplicated}>
               {helpMessage && <HelpMessage>{helpMessage}</HelpMessage>}
@@ -555,185 +452,68 @@ function TextFieldBox(props: TextFieldBoxProps) {
             </MessageBox>
             <XCircle />
           </>
-        )}
-        {state === 'filled' && (
+        ) : state === 'filled' ? (
           <>
             <IconWrapper>
               <CorrectText type={textType} value={value} disabled></CorrectText>
-              {textType === 'password' && (
+              {textType === 'password' ? (
                 <EyeIconWrapper>
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
-                  {!isCheckDuplicated && valid ? (
+                  {valid ? (
                     <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
                   ) : (
                     <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
                   )}
                 </EyeIconWrapper>
-              )}
-              {textType === 'text' && (
+              ) : textType === 'text' ? (
                 <EyeIconWrapper>
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
-                  {!isCheckDuplicated && valid ? (
+                  {valid ? (
                     <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
                   ) : (
                     <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
                   )}
-                  {isCheckDuplicated && valid && (
-                    <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
-                        <path
-                          d="M8 15C12.1421 15 15.5 11.6421 15.5 7.5C15.5 3.35786 12.1421 0 8 0C3.85786 0 0.5 3.35786 0.5 7.5C0.5 11.6421 3.85786 15 8 15Z"
-                          fill="white"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M10.8536 5.77145C11.0488 5.96671 11.0488 6.28329 10.8536 6.47855L7.41605 9.91605C7.22079 10.1113 6.90421 10.1113 6.70895 9.91605L5.14645 8.35355C4.95118 8.15829 4.95118 7.84171 5.14645 7.64645C5.34171 7.45118 5.65829 7.45118 5.85355 7.64645L7.0625 8.85539L10.1464 5.77145C10.3417 5.57618 10.6583 5.57618 10.8536 5.77145Z"
-                          fill="#D85888"
-                        />
-                      </svg>
-                      중복 확인
-                    </CheckDuplicatedValidation>
-                  )}
-                  {isCheckDuplicated && !valid && (
-                    <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path
-                          d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z"
-                          fill="white"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M7.5 11C7.5 10.7239 7.72219 10.5 7.99628 10.5H8.00372C8.27781 10.5 8.5 10.7239 8.5 11C8.5 11.2761 8.27781 11.5 8.00372 11.5H7.99628C7.72219 11.5 7.5 11.2761 7.5 11Z"
-                          fill="#EA0909"
-                          fill-opacity="0.7"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M8 4.5C8.27614 4.5 8.5 4.72386 8.5 5V8C8.5 8.27614 8.27614 8.5 8 8.5C7.72386 8.5 7.5 8.27614 7.5 8V5C7.5 4.72386 7.72386 4.5 8 4.5Z"
-                          fill="#EA0909"
-                          fill-opacity="0.7"
-                        />
-                      </svg>
-                      중복 확인
-                    </CheckDuplicatedValidation>
-                  )}
                 </EyeIconWrapper>
-              )}
-
-              {textType === 'default' && (
+              ) : (
                 <>
-                  {!isCheckDuplicated && valid && (
+                  {valid ? (
                     <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
-                  )}
-                  {!isCheckDuplicated && !valid && (
+                  ) : (
                     <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
-                  )}
-                  {isCheckDuplicated && valid && (
-                    <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
-                        <path
-                          d="M8 15C12.1421 15 15.5 11.6421 15.5 7.5C15.5 3.35786 12.1421 0 8 0C3.85786 0 0.5 3.35786 0.5 7.5C0.5 11.6421 3.85786 15 8 15Z"
-                          fill="white"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M10.8536 5.77145C11.0488 5.96671 11.0488 6.28329 10.8536 6.47855L7.41605 9.91605C7.22079 10.1113 6.90421 10.1113 6.70895 9.91605L5.14645 8.35355C4.95118 8.15829 4.95118 7.84171 5.14645 7.64645C5.34171 7.45118 5.65829 7.45118 5.85355 7.64645L7.0625 8.85539L10.1464 5.77145C10.3417 5.57618 10.6583 5.57618 10.8536 5.77145Z"
-                          fill="#D85888"
-                        />
-                      </svg>
-                      중복 확인
-                    </CheckDuplicatedValidation>
-                  )}
-                  {isCheckDuplicated && !valid && (
-                    <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path
-                          d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z"
-                          fill="white"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M7.5 11C7.5 10.7239 7.72219 10.5 7.99628 10.5H8.00372C8.27781 10.5 8.5 10.7239 8.5 11C8.5 11.2761 8.27781 11.5 8.00372 11.5H7.99628C7.72219 11.5 7.5 11.2761 7.5 11Z"
-                          fill="#EA0909"
-                          fill-opacity="0.7"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M8 4.5C8.27614 4.5 8.5 4.72386 8.5 5V8C8.5 8.27614 8.27614 8.5 8 8.5C7.72386 8.5 7.5 8.27614 7.5 8V5C7.5 4.72386 7.72386 4.5 8 4.5Z"
-                          fill="#EA0909"
-                          fill-opacity="0.7"
-                        />
-                      </svg>
-                      중복 확인
-                    </CheckDuplicatedValidation>
                   )}
                 </>
               )}
             </IconWrapper>
           </>
-        )}
-        {state === 'error' && (
+        ) : state === 'error' ? (
           <>
             <ErrorText type={textType} value={value} disabled></ErrorText>
-            {textType === 'password' && (
+            {textType === 'password' ? (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
                 <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
               </EyeIconWrapper>
-            )}
-            {textType === 'text' && (
+            ) : textType === 'text' ? (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
                 <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
               </EyeIconWrapper>
-            )}
-            {textType === 'default' && !isCheckDuplicated && (
+            ) : (
               <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
             )}
-            {textType === 'default' && isCheckDuplicated && (
-              <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z"
-                    fill="white"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M7.5 11C7.5 10.7239 7.72219 10.5 7.99628 10.5H8.00372C8.27781 10.5 8.5 10.7239 8.5 11C8.5 11.2761 8.27781 11.5 8.00372 11.5H7.99628C7.72219 11.5 7.5 11.2761 7.5 11Z"
-                    fill="#EA0909"
-                    fill-opacity="0.7"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M8 4.5C8.27614 4.5 8.5 4.72386 8.5 5V8C8.5 8.27614 8.27614 8.5 8 8.5C7.72386 8.5 7.5 8.27614 7.5 8V5C7.5 4.72386 7.72386 4.5 8 4.5Z"
-                    fill="#EA0909"
-                    fill-opacity="0.7"
-                  />
-                </svg>
-                중복 확인
-              </CheckDuplicatedValidation>
-            )}
+            {/* <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" /> */}
           </>
-        )}
-
-        {state === 'loading' && (
+        ) : state === 'loading' ? (
           <>
             <CorrectText>{value}</CorrectText>
             <img src="../../designImage/textField/Loading.png" width="28px" height="28px" />
           </>
+        ) : (
+          <></>
         )}
       </TextFieldWrapper>
-
       {state === 'error' && (
         <ErrorMessageWrapper>
           <img src="../../designImage/textField/X.png" width="12px" height="12px" />

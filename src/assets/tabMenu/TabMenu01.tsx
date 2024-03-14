@@ -10,7 +10,7 @@ export interface SegmentedPickerProps extends React.ComponentPropsWithRef<'div'>
 
 const baseWrapper = css`
   display: flex;
-  width: 9.0625vw; // 174px;
+  width: 9.06vw;
   height: 2.5vw;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@ const activeWrapper = css`
   background: #d85888;
   box-shadow: 0px 4px 40px 6px #d8588840;
   border: 1px solid #d85888;
-  border-radius: 5px;
+  border-radius: 0.26vw;
 `;
 
 const disabledWrapper = css`

@@ -59,7 +59,7 @@ export default function SignUp3Page(){
         <ContentsWrapper>
           <UserInputText userInfoType="nickname"/>
           <div style={{position: 'relative'}}>
-          <UserInput userInfoType="nickname" toNext={next}>
+          <UserInput userInfoType="nickname" toNext={next}/>
           {nickname.info === '' || 
             nickname.infoState === 'filled' ? (<></>) : 
             (
@@ -72,7 +72,6 @@ export default function SignUp3Page(){
               </NicknameCheckButtonWrapper>
                 
               )}
-          </UserInput>
           </div>
         </ContentsWrapper>
       </ContentsList>
@@ -123,7 +122,7 @@ const CheckImage = styled.img`
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
   top: 1.15vw; //20.2px;
-  left: 25.3vw; //490px;
+  left: 25vw; //490px;
   z-index: 9999;
 `;
 

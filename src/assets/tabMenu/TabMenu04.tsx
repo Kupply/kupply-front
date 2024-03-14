@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { css, styled } from 'styled-components';
 
-export type HashtagButtonStatus = 'default' | 'pressed';
+export type TabMunu04Status = 'default' | 'pressed';
+
 
 export interface HashtagButtonProps extends React.ComponentPropsWithRef<'button'> {
   status: HashtagButtonStatus;
@@ -13,6 +14,7 @@ const HashtagButton = (props: HashtagButtonProps) => {
   const imageNumber = String(props.index + 1).padStart(2, '0');
   const imagePath1 = `../../designImage/tabMenu/Tabmenu04_${imageNumber}_1.svg`; // DEFAULT
   const imagePath2 = `../../designImage/tabMenu/Tabmenu04_${imageNumber}_2.svg`; // HOVER
+
   return (
     <Container {...props} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <InnerImage src={isHovered ? imagePath2 : imagePath1} alt="symbol" />
@@ -21,7 +23,7 @@ const HashtagButton = (props: HashtagButtonProps) => {
   );
 };
 
-const Container = styled.button<{ status: HashtagButtonStatus }>`
+const Container = styled.button<{ status: TabMunu04Status }>`
   padding: 0.6vw 1.25vw; // 15px 24px;
   display: flex;
   flex-direction: row;
@@ -63,9 +65,12 @@ const InnerText = styled.div`
   font-size: 1.25vw;
   font-style: normal;
   font-weight: 500;
-  // line-height: 24px;
+
+  line-height: 1.25vw;
+
   text-align: center;
 `;
+
 
 const InnerImage = styled.img`
   width: 1vw;
@@ -75,3 +80,4 @@ const InnerImage = styled.img`
 `;
 
 export default HashtagButton;
+

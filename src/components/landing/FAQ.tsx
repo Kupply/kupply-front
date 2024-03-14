@@ -1,56 +1,10 @@
 import styled from 'styled-components';
-import { useState, useRef } from 'react';
-import Typography from '../../assets/OldTypography';
+import { useState } from 'react';
+
+import Typography from '../../assets/Typography';
 import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
-import PageNumber from '../../assets/landingpage/PageNumber';
-import React from 'react';
 import Button08 from '../../assets/buttons/Button08';
-//import FAQbox from '../../assets/landingpage/FAQbox';
-
-const MainWrapper = styled.div`
-  width: 100vw;
-  height: 1500px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-`;
-
-const TitleWrapper = styled.div`
-  width: 100%;
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 1);
-  z-index: 990;
-`;
-
-const SegmentedSlider = styled.div`
-  height: 60px;
-  display: flex;
-  align-items: center;
-  margin-top: 23px;
-`;
-
-const ContentWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  margin-top: 30px;
-`;
-
-const PageWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: ceter;
-  gap: 18px;
-`;
+import PageNumber from '../../assets/landingpage/PageNumber';
 
 function FAQ() {
   const [college, setCollege] = useState(0);
@@ -79,50 +33,45 @@ function FAQ() {
 
   return (
     <MainWrapper>
-      <TitleWrapper>
-        <Typography size="mediumText" color="#D85888" bold="700" style={{ marginTop: '125px', marginBottom: '14px' }}>
-          쿠플라이 FAQ
-        </Typography>
-        <Typography size="heading1" style={{ marginBottom: '26px' }}>
-          이중전공 지원 전, 이런게 궁금해요!
-        </Typography>
-        <Typography size="bodyText" bold="500" color="rgba(20, 20, 20, 0.6)">
-          이중전공을 준비하는 당신이 가장 궁금해할 질문들에 쿠플라이가 답해줄게요.
-        </Typography>
-        <SegmentedSlider>
-          <SegmentedPicker
-            state={college == 0 ? 'active' : hover0 == true ? 'hover' : 'default'}
-            semester="공통"
-            onMouseEnter={() => setHover0(true)}
-            onMouseLeave={() => setHover0(false)}
-            onClick={() => {
-              setCollege(0);
-              scrollToTop();
-            }}
-          />
-          <SegmentedPicker
-            state={college == 1 ? 'active' : hover1 == true ? 'hover' : 'default'}
-            semester="경영대학"
-            onMouseEnter={() => setHover1(true)}
-            onMouseLeave={() => setHover1(false)}
-            onClick={() => {
-              setCollege(1);
-              scrollToTop();
-            }}
-          />
-          <SegmentedPicker
-            state={college == 4 ? 'active' : hover4 == true ? 'hover' : 'default'}
-            semester="정보대학"
-            onClick={() => {
-              setCollege(4);
-              scrollToTop();
-            }}
-            onMouseEnter={() => setHover4(true)}
-            onMouseLeave={() => setHover4(false)}
-          />
-        </SegmentedSlider>
-      </TitleWrapper>
-      <ContentWrapper>
+      <Typography size="0.94vw" bold="700" color="#D85888">
+        쿠플라이 FAQ
+      </Typography>
+      <Typography size="2.08vw" bold="700" style={{ marginTop: '1.23vw', lineHeight: '120%' }}>
+        이중전공 지원 전, 이런게 궁금해요!
+      </Typography>
+      <Typography size="1.04vw" bold="500" color="rgba(20,20,20,0.6)" style={{ marginTop: '0.73vw', opacity: 0.8 }}>
+        이중전공을 준비하는 당신이 가장 궁금해할 질문들에 쿠플라이가 답해줄게요.
+      </Typography>
+      <SegmentedSlider>
+        <SegmentedPicker
+          state={college == 0 ? 'active' : hover0 == true ? 'hover' : 'default'}
+          semester="공통"
+          onMouseEnter={() => setHover0(true)}
+          onMouseLeave={() => setHover0(false)}
+          onClick={() => {
+            setCollege(0);
+          }}
+        />
+        <SegmentedPicker
+          state={college == 1 ? 'active' : hover1 == true ? 'hover' : 'default'}
+          semester="경영대학"
+          onMouseEnter={() => setHover1(true)}
+          onMouseLeave={() => setHover1(false)}
+          onClick={() => {
+            setCollege(1);
+          }}
+        />
+        <SegmentedPicker
+          state={college == 4 ? 'active' : hover4 == true ? 'hover' : 'default'}
+          semester="정보대학"
+          onClick={() => {
+            setCollege(4);
+          }}
+          onMouseEnter={() => setHover4(true)}
+          onMouseLeave={() => setHover4(false)}
+        />
+      </SegmentedSlider>
+      <ButtonWrapper>
         {college == 0 && page == 0 ? (
           <>
             <Button08
@@ -397,33 +346,66 @@ function FAQ() {
             />
           </>
         )}
-        <PageWrapper>
-          {college == 0 ? (
-            <>
-              <PageNumber
-                active={page === 0 ? true : false}
-                page="1"
-                onClick={() => {
-                  setPage(0);
-                  scrollToTop();
-                }}
-              />
-              <PageNumber
-                active={page === 1 ? true : false}
-                page="2"
-                onClick={() => {
-                  setPage(1);
-                  scrollToTop();
-                }}
-              />
-            </>
-          ) : (
-            <></>
-          )}
-        </PageWrapper>
-      </ContentWrapper>
+      </ButtonWrapper>
+      <PageWrapper>
+        {' '}
+        {college == 0 ? (
+          <>
+            <PageNumber
+              active={page === 0 ? true : false}
+              page="1"
+              onClick={() => {
+                setPage(0);
+              }}
+            />
+            <PageNumber
+              active={page === 1 ? true : false}
+              page="2"
+              onClick={() => {
+                setPage(1);
+              }}
+            />
+          </>
+        ) : (
+          <></>
+        )}
+      </PageWrapper>
     </MainWrapper>
   );
 }
+
+const MainWrapper = styled.div`
+  width: fit-content;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SegmentedSlider = styled.div`
+  width: fit-content;
+  height: auto;
+  display: flex;
+  align-items: center;
+  margin: 1.92vw 0 2.63vw 0;
+`;
+
+const ButtonWrapper = styled.div`
+  width: fit-content;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.42vw;
+`;
+
+const PageWrapper = styled.div`
+  width: fit-content;
+  height: auto;
+  margin: 1.67vw 0 10.42vw 0;
+  display: flex;
+  align-items: center;
+  justify-content: ceter;
+  gap: 0.94vw;
+`;
 
 export default FAQ;

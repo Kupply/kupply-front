@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import EditModal from './EditModals/EditModal';
+import EditModal from './EditModals/OldEditModal';
 import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
 
 // isApplied={isApplied}
@@ -20,14 +20,15 @@ const ProfileBox = ({ userData }: { userData: any }) => {
   const major: MajorOptions = userData.firstMajor;
   const major1: MajorOptions = userData.hopeMajor1;
   const major2: MajorOptions = userData.hopeMajor2;
+  const profilePic = userData.userProfilePic;
 
-  const majorKoreanName = majorNameMapping[major][0];
+  // const majorKoreanName = majorNameMapping[major][0];
 
-  const majorKoreanName1 = majorNameMapping[major1][0];
-  const majorEngishName1 = majorNameMapping[major1][1];
+  // const majorKoreanName1 = majorNameMapping[major1][0];
+  // const majorEngishName1 = majorNameMapping[major1][1];
 
-  const majorKoreanName2 = majorNameMapping[major2][0];
-  const majorEngishName2 = majorNameMapping[major2][1];
+  // const majorKoreanName2 = majorNameMapping[major2][0];
+  // const majorEngishName2 = majorNameMapping[major2][1];
 
   const [isOpenEditModal, setOpenEditModal] = useState(false);
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
@@ -60,7 +61,7 @@ const ProfileBox = ({ userData }: { userData: any }) => {
 
   return (
     <Wrapper translateY={scrollY}>
-      <CharacterImage src="designImage/character/rectProfile/RectProfile1.png" alt="profile" />
+      <CharacterImage src={`designImage/character/rectProfile/${profilePic}.png`} alt="profile" />
       <NickNameBox>
         <NickNameText>{userData.userNickname}</NickNameText>
         <RoleText>{userData.userRole === 'candidate' ? '도전자' : '합격자'} 님</RoleText>
@@ -68,7 +69,7 @@ const ProfileBox = ({ userData }: { userData: any }) => {
       </NickNameBox>
       <MajorTextBox>
         <MajorText>
-          {majorKoreanName} {id}학번
+          {major} {id}학번
         </MajorText>
       </MajorTextBox>
 
@@ -88,8 +89,8 @@ const ProfileBox = ({ userData }: { userData: any }) => {
       </SubTitleBox>
 
       <InterestMajorBox>
-        <Card02 korName={majorKoreanName1} hopeMajor="1지망" />
-        <Card02 korName={majorKoreanName2} hopeMajor="2지망" />
+        <Card02 korName={major1} hopeMajor="1지망" />
+        <Card02 korName={major2} hopeMajor="2지망" />
       </InterestMajorBox>
 
       <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '26.38vw' }} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import Typography from '../Typography';
+
 
 interface MessageBoxProps {
   isVisible: boolean;
@@ -18,7 +18,7 @@ function ToolTip04(props: MessageProps) {
       setIsVisible(true);
       const hideTimeout = setTimeout(() => {
         setIsVisible(false);
-      }, 3000);
+      }, 30000);
 
       return () => {
         clearTimeout(hideTimeout);
@@ -43,26 +43,26 @@ function ToolTip04(props: MessageProps) {
 
       <MessageBox isVisible={isVisible}>
         <Typography
-          size="mediumText"
+          size="0.9375vw"
           style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '122.222%' }}
         >
           주의하세요!
         </Typography>
-        <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '2px', marginBottom: '2px' }}>
-          <Typography size="normalText" style={{ color: 'var(--Black2, #434343)', lineHeight: '22px' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '0.104vw', marginBottom: '0.104vw' }}>
+          <Typography size="0.833vw" bold='500' style={{ color: 'var(--Black2, #434343)', lineHeight: '1.146vw' }}>
             이중전공 지원 시즌에는 학점을
           </Typography>
           <Typography
-            size="normalText"
-            style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '22px' }}
+            size="0.833vw"
+            style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '1.146vw' }}
           >
             최대 2번까지 변경
           </Typography>
-          <Typography size="normalText" style={{ color: 'var(--Main-Black, #141414)', lineHeight: '22px' }}>
+          <Typography size="0.833vw" bold='500' style={{ color: 'var(--Main-Black, #141414)', lineHeight: '1.146vw' }}>
             할 수 있어요.
           </Typography>
         </div>
-        <Typography size="normalText" style={{ color: 'var(--Main-Black, #141414)', lineHeight: '22px' }}>
+        <Typography size="0.833vw" bold='500' style={{ color: 'var(--Main-Black, #141414)', lineHeight: '1.146vw' }}>
           정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.
         </Typography>
       </MessageBox>
@@ -80,20 +80,25 @@ function ToolTip04(props: MessageProps) {
 const MainWrapper = styled.div`
   display: flex;
   position: absolute;
-  left: 260px;
-  top: 192px;
+  //left: 260px;
+  left: 13.542vw;
+  //top: 192px;
+  top: 10vw;
 `;
 
 const AlertImage = styled.img<{ isHovered: boolean }>`
-  width: 18px;
-  height: 18px;
+  //width: 18px;
+  //height: 18px;
+  width: 0.9375vw;
+  height: 0.9375vw;
   cursor: pointer;
 `;
 
 const NotchImage = styled.img<{ isHovered: boolean }>`
   display: ${(props) => (props.isHovered ? 'flex' : 'none')};
   position: absolute;
-  top: -10px;
+  //top: -10px;
+  top: -0.521vw;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -106,16 +111,22 @@ const NotchImage = styled.img<{ isHovered: boolean }>`
 const MessageBox = styled.div<MessageBoxProps>`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  padding: 10px 8px;
+  //padding: 10px 8px;
+  padding: 0.521vw 0.417vw;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  //gap: 10px;
+  gap: 0.521vw;
   align-self: stretch;
   position: absolute;
-  top: -95px;
-  right: -430px;
-  width: 467px;
-  height: 67px;
+  //top: -95px;
+  top: -4.948vw;
+  //right: -430px;
+  right: -22.396vw;
+  //width: 467px;
+  width: 24.323vw;
+  //height: 67px;
+  height: 3.490vw;
   z-index: 1;
   background: #fff;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));

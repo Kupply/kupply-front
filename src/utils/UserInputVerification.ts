@@ -34,7 +34,6 @@ export function useStudentIdVerification(locationUsed: verificationProps){
   const [stdId, setStdId] = useRecoilState(locationUsed === 'signUp' ? userState('studentId') : userSettingsState('studentId'));
   const [stdIdVerified, setStdIdVerified] = useState(false);
 
-  console.log(stdId, 'stdId');
   useEffect(() => {
     const passwordCheck = /^\d{10}$/;
     if (stdId.infoState === 'filled') {

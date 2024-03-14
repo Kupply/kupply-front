@@ -90,7 +90,7 @@ const FormWrapper = styled.div`
   // flex-direction: column;
   //width: 816px; // 816px 이걸 픽셀로 박지 않은 이상 TextField와 DropDown 그리고 그 위의 선 모든게 뒤틀린다
   width: 42.5vw;
-  height: 850px;
+  height: 1000px;
   padding: 2.188vw 4.896vw 4.063vw 4.896vw; // 42px 94px 78px 94px
   border-radius: 0.521vw; //10px;
   background: rgba(255, 255, 255, 0.7);

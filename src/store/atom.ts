@@ -61,7 +61,6 @@ type InfoState = {
 }
 
 // 이름, 비밀번호, 닉네임...
-// 이렇게 하니까 발생하는 문제점이 회원가입한 사람이 로그인 하지 않았는데 정보가 이미 채워지는 결과가 나타남 
 export const userState = atomFamily<InfoState, string>({
   key: "userState", 
   default: (kind: string) => ({
@@ -100,6 +99,15 @@ type userTypetype = 'candidate' | 'passer' | '';
 type userStatetype = 'clicked' | 'default' | 'inactive';
 
 export const userTypeState = atom<
+{userType: userTypetype, userState: userStatetype[]}>({
+  key: 'userTypeState',
+  default: {
+    userType: '',
+    userState: ['default', 'default']
+  }
+});
+
+export const appModalUserTypeState = atom<
 {userType: userTypetype, userState: userStatetype[]}>({
   key: 'userTypeState',
   default: {
@@ -192,4 +200,38 @@ export const settingsModalState = atom<boolean>({
   key: 'settingsModalState',
   default: false
 })
+
+export const selectedFileState = atom<File|null>({
+  key: 'selectedFileState',
+  default: null
+});
+
+export const applicationModalState = atom<number>({
+  key: 'applicationModalState',
+  default: 0
+});
+
+export const applicationSubmittedState = atom<boolean>({
+  key: 'applicationSubmittedState',
+  default: false
+});
+
+export const editSubmittedState = atom<boolean>({
+  key: 'editSubmittedState',
+  default: false
+});
+
+export const editModalState = atom<number>({
+  key: 'editModalState',
+  default: 0
+});
+
+
+export type headerButtonStateType = 'basicMajor' | 'interestMajor' | 'currentGPA' | 'hopeSemester';
+
+export const headerButtonState = atom<headerButtonStateType>({
+  key: 'headerButtonState',
+  default: 'basicMajor'
+});
+
 

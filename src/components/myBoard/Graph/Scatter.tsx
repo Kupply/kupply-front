@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { VictoryTheme, VictoryScatter, VictoryChart, VictoryTooltip, VictoryAxis, VictoryLabel } from 'victory';
+import {
+  VictoryTheme,
+  VictoryScatter,
+  VictoryChart,
+  VictoryTooltip,
+  VictoryAxis,
+  VictoryLabel,
+  VictoryVoronoiContainer,
+} from 'victory';
 import { majorColorMapping } from '../../../utils/Mappings';
 import ToolTip05 from '../../../assets/toolTips/ToolTip05';
 import Typography from '../../../assets/Typography';
@@ -30,7 +38,23 @@ const Scatter = () => {
       </StyleSvg>
 
       <ScatterBox>
-        <VictoryChart theme={VictoryTheme.material} domain={{ x: [0, 4.5], y: [0, maxYValue] }} origin={{ x: 0, y: 0 }}>
+        <VictoryChart
+          theme={VictoryTheme.material}
+          domain={{ x: [0, 4.8], y: [0, maxYValue] }}
+          origin={{ x: 0, y: 0 }}
+          containerComponent={
+            <VictoryVoronoiContainer
+              labels={({ datum }) => `${datum.name}`}
+              labelComponent={
+                <VictoryTooltip
+                  flyoutComponent={<CustomTooltipLabel />}
+                  flyoutStyle={{ stroke: 'none', fill: 'white' }}
+                  style={{ fontSize: 0 }}
+                />
+              }
+            />
+          }
+        >
           <VictoryAxis
             label="지원자 평균 학점"
             axisComponent={<CustomAxis />}
@@ -67,18 +91,16 @@ const Scatter = () => {
             x="avgGpa"
             y="value"
             size={6}
-            labels={({ datum }) => `${datum.name}\n학점 ${datum.avgGpa}\n지원자 ${datum.value}명`} // 각 데이터 포인트에 대한 라벨 설정
+            labels={({ datum }) => `${datum.name}`} // 각 점에 대한 학과 라벨
             labelComponent={
-              <VictoryTooltip
-                style={{ fontFamily: 'Pretendard', fontSize: 10, textAnchor: 'start' }} // 텍스트 스타일 설정
-                flyoutStyle={{
-                  fill: 'rgba(255, 255, 255, 0.80)',
-                  stroke: 'none',
-                  strokeWidth: 0,
-                  lineHeight: 22,
+              <VictoryLabel
+                dy={20}
+                style={{
+                  fontFamily: 'Pretendard',
+                  fontSize: 10,
+                  fill: 'rgba(67, 67, 67, 0.80)',
+                  //  fill: (args: any) => color[tmpData.findIndex((item) => item.name === args.datum.name)], 호버 이벤트 넣기 실패.. ㅠㅠ
                 }}
-                flyoutPadding={({ text }) => (text.length > 1 ? { top: 10, bottom: 10, left: 8, right: 8 } : 1)}
-                dy={-10}
               />
             }
             style={{
@@ -116,6 +138,24 @@ const CustomAxis = (props: any) => {
         markerEnd="url(#arrowhead)"
       />
     </svg>
+  );
+};
+
+const CustomTooltipLabel = (props: any) => {
+  return (
+    <foreignObject x={props.x - 40} y={props.y - 70} width="80" height="75">
+      <TooltipContainer>
+        <p>
+          <ToolTipBordText>{props.datum.name}</ToolTipBordText>
+          <br />
+          <ToolTipNormalText>학점 </ToolTipNormalText>
+          <ToolTipBordText>{props.datum.avgGpa}</ToolTipBordText>
+          <br />
+          <ToolTipNormalText>지원자 </ToolTipNormalText>
+          <ToolTipBordText>{props.datum.value}명</ToolTipBordText>
+        </p>
+      </TooltipContainer>
+    </foreignObject>
   );
 };
 
@@ -208,6 +248,36 @@ const LabelBox = styled.div`
   left: 2.5vw;
 `;
 
+const TooltipContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.8);
+
+  & > p {
+    margin-top: -1px;
+    margin-bottom: 1px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(255, 255, 255, 0.8);
+    transform: translateX(-50%);
+  }
+`;
+
 ///////////////// text /////////////////
 
 const TitleText = styled.div`
@@ -219,7 +289,7 @@ const TitleText = styled.div`
   line-height: 100%;
 `;
 
-const PlotText = styled.div`
+const PlotTitleText = styled.text`
   color: rgba(67, 67, 67, 0.8);
   text-align: center;
 
@@ -231,6 +301,23 @@ const PlotText = styled.div`
   line-height: 100%;
 `;
 
+const ToolTipNormalText = styled.text`
+  color: #a8a8a8;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 157.143%;
+`;
+
+const ToolTipBordText = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 157.143%;
+`;
 ///////////////// image /////////////////
 
 const Information = styled.img`

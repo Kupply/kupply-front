@@ -1,17 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import { collegeNameMappingByKR as collegeNameMapping, majorNmaeMappingByKr } from '../../utils/Mappings';
 
 const MajorBox = ({ onViewMajor, userData }: { onViewMajor: any; userData: any }) => {
   const titleText = onViewMajor === 1 ? '1지망 관심전공' : '2지망 관심전공';
-  const major: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
+  const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
 
-  const majorKoreanName = majorNameMapping[major][0];
-  const majorEngishName = majorNameMapping[major][1];
-  const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}Large.png`;
-  const majorShadowPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}_ellipse.svg`;
+  const majorEngishName = majorNmaeMappingByKr[majorKoreanName];
+  const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorKoreanName]}Large.png`;
+  const majorShadowPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorKoreanName]}_ellipse.svg`;
   return (
     <Wrapper>
       <TextBox>

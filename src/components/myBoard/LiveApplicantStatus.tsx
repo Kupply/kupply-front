@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import { majorNameMapping } from '../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import { recruit } from '../../common/Recruiting';
 
 const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any; userData: any; curApplyNum: any }) => {
@@ -23,8 +22,7 @@ const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any;
     setUpdateTime(formatTimeTo12HourFormat(new Date()));
   };
 
-  const major: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-  const majorKoreanName = majorNameMapping[major][0];
+  const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
   const recruitNum = recruit[majorKoreanName]['2024-1'];
 
   return (
