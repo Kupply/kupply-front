@@ -241,7 +241,7 @@ const SiteMap = styled.div`
   width: '60%';
   max-width: '350px';
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     div {
       font-size: 11px;
     }
@@ -251,7 +251,7 @@ const SiteMap = styled.div`
 const QNAWrapper = styled.div`
   width: 40%;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     div {
       font-size: 11px;
     }
@@ -381,11 +381,7 @@ const ContentsTypoWrapper = styled.div<{ order?: string }>`
   & > svg {
     margin: 0 4px;
   }
-  @media screen and (max-width: 768px) {
-    div {
-      font-size: 11px;
-    }
-  }
+
   @media screen and (max-width: 900px) {
     & > div {
       font-size: 11px;
