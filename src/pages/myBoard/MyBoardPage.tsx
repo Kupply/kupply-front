@@ -47,10 +47,10 @@ const MyBoardPage = () => {
     userProfilePic: CurrentPic,
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: 'media',
+    firstMajor: '미디어학부',
     studentId: '2021160009',
-    hopeMajor1: 'business',
-    hopeMajor2: 'computer',
+    hopeMajor1: '경영학과',
+    hopeMajor2: '컴퓨터학과',
     curGPA: 4.5,
     hopeSemester: '2023-2',
   }));

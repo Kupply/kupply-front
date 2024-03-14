@@ -17,7 +17,7 @@ export const collegeNameMappingByKR = {
   식품자원경제학과: 'bio',
   미디어학부: 'media',
   컴퓨터학과: 'info',
-  경영학과: 'bussiness',
+  경영학과: 'business',
   심리학부: 'psycho',
   화학과: 'science',
   수학과: 'science',
@@ -49,6 +49,18 @@ export const majorNameMapping = {
   computer: ['컴퓨터학과', 'Department of Computer Science & Engineering'],
 };
 
+export const majorNmaeMappingByKr = {
+  경영학과: 'Business School',
+  경제학과: 'Department of Economics',
+  심리학부: 'School of Psychology',
+  통계학과: 'Department of Statistics',
+  수학과: 'Department of Mathematics',
+  화학과: 'Department of Chemistry',
+  미디어학부: 'School of Media & Communication',
+  식품자원경제학과: 'Department of Food & Resources',
+  컴퓨터학과: 'Department of Computer Science & Engineering',
+};
+
 /*
   학기
 */
@@ -65,7 +77,6 @@ export const semesterAPIMapping: string[] = [
   '2020-2',
   '2020-1',
 ];
-
 
 /*
   학과 색상
@@ -173,4 +184,3 @@ export const idColorMappingShadow: { [key: number]: string } = {
   21: 'rgba(255, 175, 189, 0.5)',
   20: 'rgba(253, 242, 242, 0.5)',
 };
-
