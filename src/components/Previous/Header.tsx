@@ -7,9 +7,9 @@ import Typography from '../../assets/Typography';
 import TabMenu04 from '../../assets/tabMenu/TabMenu04';
 import SearchBar from '../../assets/SearchBar';
 
-export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부', '가나다 순 정렬'];
+export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
 
-// searchbar 크기 조절해야 됨
+// searchbar 크기 조절해야 됨 폰트 적용 X
 
 export interface HeaderProps {
   clicked: number;
@@ -29,11 +29,15 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
       </Typography>
       <MenuWrapper>
         {mockHashes.map((hash, index) => (
-          <TabMenu04
+
+          <HashtagButton
+            key={index}
+
             status={index === clicked ? 'pressed' : 'default'}
             onClick={() => {
               setClicked(index);
             }}
+            index={index}
           >
             {hash}
           </TabMenu04>
@@ -46,9 +50,26 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
   );
 }
 
-const MainWrapper = styled.div`
-  width: 100vw;
-  height: 19.42vw;
+
+const TagButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  gap: 1.04vw;
+  margin-top: 2.76vw;
+`;
+
+const Container = styled.div`
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1920px;
+  height: 19.8vw;
+
+  background-color: #fcfafb;
+
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,11 +84,35 @@ const MenuWrapper = styled.div`
 `;
 
 const SearchBarWrapper = styled.div`
+  margin-top: 2.5vw;
   width: 68.75vw;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 1382px;
+`;
+
+const TitleText = styled.div`
+  color: #141414;
+
+  /* Heading 1 */
+  font-family: Pretendard;
+  font-size: 2.5vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 104.167%;
+`;
+
+const SubTitleText = styled.div`
+  color: #141414;
+
+  /* Large Text (Subtitle) */
+  font-family: Pretendard;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  opacity: 0.8;
+
+  margin-top: 0.9375vw;
+
 `;
 
 export default Header;
