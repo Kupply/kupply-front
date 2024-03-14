@@ -124,99 +124,122 @@ const MyBoardPage = () => {
     },
   ]);
 
-  useEffect(() => {
-    // 로그인한 유저 정보 localStorage에
-    const getMe = async () => {
-      try {
-        const APIresponse = await client.get('/user/getMe');
-        const userInfo = APIresponse.data.data.user;
+  // 로그인한 유저 정보 localStorage에
+  const getMe = async () => {
+    try {
+      const APIresponse = await client.get('/user/getMe');
+      const userInfo = APIresponse.data.data.user;
 
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          userName: userInfo.name,
-          userNickname: userInfo.nickname,
-          userProfilePic: userInfo.profilePic,
-          userProfileLink: userInfo.profileLink,
-          userRole: userInfo.role,
-          firstMajor: userInfo.firstMajor,
-          studentId: userInfo.studentId,
-          hopeMajor1: userInfo.hopeMajor1,
-          hopeMajor2: userInfo.hopeMajor2,
-          curGPA: userInfo.curGPA,
-          hopeSemester: userInfo.hopeSemester,
-        }));
-        setCurrentPic(userInfo.profilePic);
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        userName: userInfo.name,
+        userNickname: userInfo.nickname,
+        userProfilePic: userInfo.profilePic,
+        userProfileLink: userInfo.profileLink,
+        userRole: userInfo.role,
+        firstMajor: userInfo.firstMajor,
+        studentId: userInfo.studentId,
+        hopeMajor1: userInfo.hopeMajor1,
+        hopeMajor2: userInfo.hopeMajor2,
+        curGPA: userInfo.curGPA,
+        hopeSemester: userInfo.hopeSemester,
+      }));
+      setCurrentPic(userInfo.profilePic);
 
-        // 학기 별 모집인원 수
-        const pastData1Copy = [...pastData1];
-        pastData1Copy[0].numOfSelection = recruit[userInfo.hopeMajor1]['2023-2'];
-        pastData1Copy[1].numOfSelection = recruit[userInfo.hopeMajor1]['2023-1'];
-        pastData1Copy[2].numOfSelection = recruit[userInfo.hopeMajor1]['2022-2'];
-        setPastData1(pastData1Copy);
+      // 학기 별 모집인원 수
+      const pastData1Copy = [...pastData1];
+      pastData1Copy[0].numOfSelection = recruit[userInfo.hopeMajor1]['2023-2'];
+      pastData1Copy[1].numOfSelection = recruit[userInfo.hopeMajor1]['2023-1'];
+      pastData1Copy[2].numOfSelection = recruit[userInfo.hopeMajor1]['2022-2'];
+      setPastData1(pastData1Copy);
 
-        const pastData2Copy = [...pastData2];
-        pastData2Copy[0].numOfSelection = recruit[userInfo.hopeMajor2]['2023-2'];
-        pastData2Copy[1].numOfSelection = recruit[userInfo.hopeMajor2]['2023-1'];
-        pastData2Copy[2].numOfSelection = recruit[userInfo.hopeMajor2]['2022-2'];
-        setPastData2(pastData2Copy);
+      const pastData2Copy = [...pastData2];
+      pastData2Copy[0].numOfSelection = recruit[userInfo.hopeMajor2]['2023-2'];
+      pastData2Copy[1].numOfSelection = recruit[userInfo.hopeMajor2]['2023-1'];
+      pastData2Copy[2].numOfSelection = recruit[userInfo.hopeMajor2]['2022-2'];
+      setPastData2(pastData2Copy);
 
-        const curDataCopy = [...curData];
-        curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1]['2024-1'];
-        curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2]['2024-1'];
-        setCurData(curDataCopy);
+      const curDataCopy = [...curData];
+      curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1]['2024-1'];
+      curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2]['2024-1'];
+      setCurData(curDataCopy);
 
-        // 모의지원 했는지.
-        setIsApplied(userInfo.isApplied);
+      // 모의지원 했는지.
+      setIsApplied(userInfo.isApplied);
 
-        localStorage.setItem('userProfilePic', userInfo.profilePic);
-        localStorage.setItem('userProfileLink', userInfo.profileLink);
-        localStorage.setItem('name', userInfo.name);
-        localStorage.setItem('nickname', userInfo.nickname);
-        localStorage.setItem('phoneNumber', userInfo.phoneNumber);
-        localStorage.setItem('studentId', userInfo.studentId);
-        localStorage.setItem('firstMajor', userInfo.firstMajor);
-        localStorage.setItem('role', userInfo.role);
-        if (userInfo.role === 'candidate') {
-          localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
-          localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
-          localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
-          localStorage.setItem('hopeSemester', userInfo.hopeSemester);
-          localStorage.setItem('isApplied', userInfo.isApplied);
-        } else {
-          localStorage.setItem('secondMajor', userInfo.secondMajor);
-          localStorage.setItem('passSemester', userInfo.passSemester);
-          localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
-        }
-      } catch (err) {
-        console.log(err);
+      localStorage.setItem('userProfilePic', userInfo.profilePic);
+      localStorage.setItem('userProfileLink', userInfo.profileLink);
+      localStorage.setItem('name', userInfo.name);
+      localStorage.setItem('nickname', userInfo.nickname);
+      localStorage.setItem('phoneNumber', userInfo.phoneNumber);
+      localStorage.setItem('studentId', userInfo.studentId);
+      localStorage.setItem('firstMajor', userInfo.firstMajor);
+      localStorage.setItem('role', userInfo.role);
+      if (userInfo.role === 'candidate') {
+        localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+        localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+        localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+        localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+        localStorage.setItem('isApplied', userInfo.isApplied);
+      } else {
+        localStorage.setItem('secondMajor', userInfo.secondMajor);
+        localStorage.setItem('passSemester', userInfo.passSemester);
+        localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
       }
-    };
-
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
     getMe();
   }, []);
 
-  useEffect(() => {
-    const getPastData = async () => {
-      const semester = ['2023-1', '2022-2', '2022-1'];
-      const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
-      let hopeMajor2 = '';
-      if (userData.hopeMajor2 !== '희망 없음') {
-        hopeMajor2 = collegeAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
-      }
+  const getPastData = async () => {
+    const semester = ['2023-1', '2022-2', '2022-1'];
+    const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
+    let hopeMajor2 = '';
+    if (userData.hopeMajor2 !== '희망 없음') {
+      hopeMajor2 = collegeAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
+    }
 
-      const newPastData1 = [...pastData1];
+    const newPastData1 = [...pastData1];
+    for (let i = 0; i < semester.length; i++) {
+      try {
+        const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
+        const data = APIresponse.data.pastData;
+
+        let competitionRate = 0;
+        if (data.overallData.numberOfData > 0) {
+          competitionRate = +(data.overallData.numberOfData / newPastData1[i].numOfSelection).toFixed(2);
+        }
+
+        newPastData1[i] = {
+          numOfSelection: newPastData1[i].numOfSelection,
+          numOfPassed: data.passedData.passedNumberOfData,
+          competitionRate: competitionRate,
+          meanGpa: data.passedData.passedMeanGPAData.gpa,
+          minGpa: data.passedData.passedMinimumGPAData.gpa,
+        };
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    setPastData1(newPastData1);
+
+    if (hopeMajor2) {
+      const newPastData2 = [...pastData2];
       for (let i = 0; i < semester.length; i++) {
         try {
-          const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
+          const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
           const data = APIresponse.data.pastData;
 
           let competitionRate = 0;
           if (data.overallData.numberOfData > 0) {
-            competitionRate = +(data.overallData.numberOfData / newPastData1[i].numOfSelection).toFixed(2);
+            competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
           }
 
-          newPastData1[i] = {
-            numOfSelection: newPastData1[i].numOfSelection,
+          newPastData2[i] = {
+            numOfSelection: newPastData2[i].numOfSelection,
             numOfPassed: data.passedData.passedNumberOfData,
             competitionRate: competitionRate,
             meanGpa: data.passedData.passedMeanGPAData.gpa,
@@ -226,35 +249,10 @@ const MyBoardPage = () => {
           console.log(err);
         }
       }
-      setPastData1(newPastData1);
-
-      if (hopeMajor2) {
-        const newPastData2 = [...pastData2];
-        for (let i = 0; i < semester.length; i++) {
-          try {
-            const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
-            const data = APIresponse.data.pastData;
-
-            let competitionRate = 0;
-            if (data.overallData.numberOfData > 0) {
-              competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
-            }
-
-            newPastData2[i] = {
-              numOfSelection: newPastData2[i].numOfSelection,
-              numOfPassed: data.passedData.passedNumberOfData,
-              competitionRate: competitionRate,
-              meanGpa: data.passedData.passedMeanGPAData.gpa,
-              minGpa: data.passedData.passedMinimumGPAData.gpa,
-            };
-          } catch (err) {
-            console.log(err);
-          }
-        }
-        setPastData2(newPastData2);
-      }
-    };
-
+      setPastData2(newPastData2);
+    }
+  };
+  useEffect(() => {
     if (userData.hopeMajor1 && userData.hopeMajor2) {
       getPastData();
     }
