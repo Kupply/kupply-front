@@ -11,6 +11,8 @@ import Scatter from '../../components/myBoard/Graph/Scatter';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton'; // 1지망 2지망 선택 버튼
 import client from '../../utils/HttpClient';
 import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
+import { MajorOptionsKR } from '../../types/MajorTypes';
+import { collegeAPIMappingByKR } from '../../utils/Mappings';
 
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
@@ -192,6 +194,71 @@ const MyBoardPage = () => {
 
     getMe();
   }, []);
+
+  useEffect(() => {
+    const getPastData = async () => {
+      const semester = ['2023-1', '2022-2', '2022-1'];
+      const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
+      let hopeMajor2 = '';
+      if (userData.hopeMajor2 !== '희망 없음') {
+        hopeMajor2 = collegeAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
+      }
+
+      const newPastData1 = [...pastData1];
+      for (let i = 0; i < semester.length; i++) {
+        try {
+          const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
+          const data = APIresponse.data.pastData;
+
+          let competitionRate = 0;
+          if (data.overallData.numberOfData > 0) {
+            competitionRate = +(data.overallData.numberOfData / newPastData1[i].numOfSelection).toFixed(2);
+          }
+
+          newPastData1[i] = {
+            numOfSelection: newPastData1[i].numOfSelection,
+            numOfPassed: data.passedData.passedNumberOfData,
+            competitionRate: competitionRate,
+            meanGpa: data.passedData.passedMeanGPAData.gpa,
+            minGpa: data.passedData.passedMinimumGPAData.gpa,
+          };
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      setPastData1(newPastData1);
+
+      if (hopeMajor2) {
+        const newPastData2 = [...pastData2];
+        for (let i = 0; i < semester.length; i++) {
+          try {
+            const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
+            const data = APIresponse.data.pastData;
+
+            let competitionRate = 0;
+            if (data.overallData.numberOfData > 0) {
+              competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
+            }
+
+            newPastData2[i] = {
+              numOfSelection: newPastData2[i].numOfSelection,
+              numOfPassed: data.passedData.passedNumberOfData,
+              competitionRate: competitionRate,
+              meanGpa: data.passedData.passedMeanGPAData.gpa,
+              minGpa: data.passedData.passedMinimumGPAData.gpa,
+            };
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        setPastData2(newPastData2);
+      }
+    };
+
+    if (userData.hopeMajor1 && userData.hopeMajor2) {
+      getPastData();
+    }
+  }, [userData]);
 
   const getCurData = async () => {
     try {
