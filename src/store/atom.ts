@@ -72,11 +72,17 @@ export const userState = atomFamily<InfoState, string>({
 
 export const userSettingsState = atomFamily<InfoState, string>({
   key: "userSettingsState",
-  default: (kind: string) => ({
-    info: localStorage.getItem(kind) || '',
-    infoState: 'default',
-    infoCheck: 'default'
-  })
+  default: (kind: string) => {
+    let infoState:StateOptions = 'default';
+    if(kind === 'name' || kind === 'studentId' || kind === 'nickname' || kind === 'kuEmail' || kind === 'loginedUser'){
+      infoState = 'filled';
+    }
+    return {
+      info: localStorage.getItem(kind) || '',
+      infoState: infoState,
+      infoCheck: 'default'
+    };
+  }
 });
 
 type errorMessageType = {

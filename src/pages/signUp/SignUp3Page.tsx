@@ -11,6 +11,8 @@ import { useSignUp3Verification } from "../../utils/SignUpFunctions";
 import Button04 from "../../assets/buttons/Button04";
 import Button03 from "../../assets/buttons/Button03";
 import { UserInputText } from "../../components/signUp/UserInputText";
+import TextFieldBox from "../../assets/OldTextFieldBox";
+
 
 type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 
@@ -18,9 +20,16 @@ export default function SignUp3Page(){
   const navigate = useNavigate();
   const [next, setNext] = useState(false); 
   const [nickname, setNickname] = useRecoilState(userState('nickname'));
-
+  //const [id, setId] = useRecoilState(userState('kuEmail'));
   const {complete} = useSignUp3Verification();
 
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const newData = e.target.value;
+  //   setUserInfo((prev) => ({
+  //     ...prev,
+  //     info: newData
+  //   }))
+  // }
   const handleNext = () => {
     setNext(true);
     Promise.resolve().then(() => {
@@ -36,8 +45,18 @@ export default function SignUp3Page(){
       <ContentsList>
         <ContentsWrapper>
           <UserInputText userInfoType="id"/>
-          <UserInput userInfoType="id" userInfoTypeManual="kuEmail">
-            <InfoMessageWrapper>
+          {/* <TextFieldBox
+            placeholder={'고려대학교 이메일'}
+            value={id.info}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setId((prev) => ({...prev, info: e.target.value}));
+            }}
+            state={'filled'}
+            setState={()=>{}}
+            setValue={()=>{}}
+          /> */}
+          <UserInput userInfoType="id" userInfoTypeManual="kuEmail"/>
+          <InfoMessageWrapper>
                 <CircleImage src={process.env.PUBLIC_URL + `/designImage/CircleImage.svg`}/>
                 <CheckImage src={process.env.PUBLIC_URL + `/designImage/CheckImage.svg`}/>  
               <div style={{position: 'absolute', left: '0.8vw', display: 'flex', justifyContent: 'center', top: '0.265vw'}}>
@@ -45,8 +64,7 @@ export default function SignUp3Page(){
                   쿠플라이 아이디는 고려대학교 이메일입니다.
                 </Typography>
               </div>
-            </InfoMessageWrapper>
-          </UserInput>
+          </InfoMessageWrapper>
         </ContentsWrapper>
         <ContentsWrapper>   
           <UserInputText userInfoType="password"/>    

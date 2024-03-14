@@ -10,7 +10,7 @@ import EyeIcon from '../assets/icons/EyeIcon';
 const baseWrapper = css`
   display: flex;
   width: 100%;
-  min-width: 278px;
+  //min-width: 278px;
 
   //height: 68px;
   height: 3.542vw; 
