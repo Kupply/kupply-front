@@ -28,9 +28,8 @@ const FooterWrapper = styled.div`
   max-width: 1920px; //2560px;
   height: 262px; //(262/1248 = 20.1)
   background: #f9f9f9;
-  padding: 41.84px 128px 42.78px 128px; // 상우하좌 순서
+  padding: 2.18vw 6.67vw 42.78px 2.22vw; // 상우하좌 순서
   box-sizing: border-box;
-  position: bottom: fixed;
   //margin-top: ;
 `;
 
@@ -157,7 +156,7 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 {/* <Link to="https://portal.korea.ac.kr/front/Intro.kpd" target="_blank">
                   <ConnectLink>바로가기</ConnectLink>
                 </Link> */}
-                <TextButton05 externalUrl='https://portal.korea.ac.kr/front/Intro.kpd'>바로가기</TextButton05>
+                <TextButton05 externalUrl="https://portal.korea.ac.kr/front/Intro.kpd">바로가기</TextButton05>
               </ShortcutContents>
             </ShortcutWrapper>
             <ShortcutWrapper style={{ marginLeft: '58px' }}>
@@ -169,7 +168,9 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 {/* <Link to="https://registrar.korea.ac.kr/eduinfo/info/major_double.do" target="_blank">
                   <ConnectLink>바로가기</ConnectLink>
                 </Link> */}
-                <TextButton05 externalUrl='https://registrar.korea.ac.kr/eduinfo/info/major_double.do'>바로가기</TextButton05>
+                <TextButton05 externalUrl="https://registrar.korea.ac.kr/eduinfo/info/major_double.do">
+                  바로가기
+                </TextButton05>
               </ShortcutContents>
             </ShortcutWrapper>
           </ContentsWrapper>
