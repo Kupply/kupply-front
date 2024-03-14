@@ -88,7 +88,7 @@ const PlaceHolder = styled.text`
   font-size: 0.9375vw; //18px;
   font-weight: 500;
   font-style: normal;
-  line-height: 18px;
+  line-height: 100%;
   opacity: 0.8;
   white-space: nowrap;
 `;
@@ -131,13 +131,13 @@ const IconBundler = styled.div`
 
 const HelpMessage = styled.text`
   width: 100%;
-  height: 12px;
+  height: 0.625vw;
   color: #d85888;
   font-family: Pretendard;
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 12px;
+  line-height: 100%;
 `;
 
 const Input = styled.input`
@@ -146,7 +146,7 @@ const Input = styled.input`
   font-size: 0.9375vw; //18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 100%;
   opacity: 0.8;
   border: none;
   outline: none;
@@ -156,28 +156,28 @@ const Input = styled.input`
 
 const CorrectText = styled.input`
   width: 80%;
-  height: 18px;
+  height: 0.9375vw;
   font-size: 0.9375vw; //18px;
   flex-shrink: 0;
   color: #d85888;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 100%;
   background: #fff;
   ${(props) => props.type === 'password' && 'color: black;'}
 `;
 
 const ErrorText = styled.input`
   width: 80%;
-  height: 18px;
+  height: 0.9375vw;
   font-size: 0.9375vw; //18px;
   flex-shrink: 0;
   color: #141414;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 100%;
   opacity: 0.8;
   background: #fff;
 `;
@@ -187,8 +187,9 @@ const ErrorMessageWrapper = styled.div`
   align-items: center;
   width: 100%;
   min-width: 216px;
-  height: 12px;
-  padding-top: 5px;
+  height: 0.625vw;
+  //padding-top: 5px;
+  padding-top: 0.260vw;
   padding-left: 0.9375vw; //18px;
   gap: 4px;
   border: none;
@@ -202,7 +203,7 @@ const ErrorMessage = styled.text`
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 12px;
+  line-height: 100%;
   opacity: 0.8;
 `;
 
@@ -226,9 +227,12 @@ const CheckDuplicated = styled.button`
   display: flex;
   box-sizing: border-box;
   min-width: 65px;
-  width: 65px;
-  height: 24px;
-  padding: 4px 5px;
+  //width: 65px;
+  width: 3.385vw;
+  //height: 24px;
+  height: 1.25vw;
+  //padding: 4px 5px;
+  padding: 0.208vw 0.260vw;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -239,7 +243,8 @@ const CheckDuplicated = styled.button`
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  //line-height: 20px;
+  line-height: 1.042vw;
   border-radius: 999px;
   border: 1px solid #d85888;
   color: #d85888;
@@ -249,7 +254,8 @@ const CheckDuplicated = styled.button`
   font-size: 0.625vw; //12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  //line-height: 20px;
+  line-height: 1.042vw;
 `;
 
 export type StateOptions = 'default' | 'hover' | 'focused' | 'typing' | 'filled' | 'error' | 'loading' | 'password';
@@ -366,7 +372,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
 
   const XCircle = () => {
     return (
-      <img
+        <img
         src="../../designImage/textField/XCircle.png"
         width="24px"
         height="24px"

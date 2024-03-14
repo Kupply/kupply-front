@@ -11,7 +11,7 @@ export default function CurrentModal2(props: EditCurrentModalProps){
       <SubContentsWrapper>
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
           <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
-          <ToolTip04 />
+          <ToolTip04/>
         </div>
         <GPAVerification userType="candidate" locationUsed="Settings"/>
       </SubContentsWrapper>

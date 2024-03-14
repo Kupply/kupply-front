@@ -172,7 +172,7 @@ const FooterWrapper = styled.div`
   position: bottom;
   //margin-top: ;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     padding: 19px 3.34vw;
   }
 `;
@@ -182,7 +182,7 @@ const ShortcutWrapper = styled.div`
   height: 40.844px;
   gap: 8px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     width: 50%;
     min-width: 150px;
   }
@@ -213,7 +213,7 @@ const ShortcutContents = styled.div`
     width: 40%;
     text-decoration: underline;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     width: 75%;
   }
 `;
@@ -256,7 +256,7 @@ const MenuWrapper = styled.div`
     margin-right: 16px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     justify-content: flex-start;
 
     & > button {
@@ -285,7 +285,7 @@ const ContentsWrapper = styled.div<{
   min-width: ${(props) => (props.minSize ? props.minSize : '')};
   max-width: ${(props) => (props.maxSize ? props.maxSize : '')};
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     order: ${(props) => (props.order ? props.order : '')};
     width: 100%;
   }
@@ -297,7 +297,7 @@ const BottomContentsWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 28px;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     flex-direction: column;
     & > div:nth-child(2) {
       margin-bottom: 13px;
@@ -330,7 +330,7 @@ const ContentsTypoWrapper = styled.div<{ order?: string }>`
     margin: 0 4px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     order: ${(props) => (props.order ? props.order : '')};
     width: 100%;
     justify-content: flex-start;
@@ -348,7 +348,7 @@ const Contents = styled.div`
   margin-top: 26.1px;
   margin-bottom: 46.35px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     flex-direction: column;
     margin-top: 16px;
     margin-bottom: 18px;

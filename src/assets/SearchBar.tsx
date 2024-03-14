@@ -33,7 +33,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
             if (ref.current) ref.current.focus();
           }}
         >
-          <Icon02 />
+          <Icon02 size={'24px'} />
         </Button>
       </InputBox>
     </Container>
@@ -41,6 +41,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
 };
 const Container = styled.div`
   display: flex;
+  margin-top: 4px;
   flex-direction: row;
   gap: 0px;
   width: 95%;
@@ -48,6 +49,14 @@ const Container = styled.div`
   z-index: 2;
 
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
+
+  &,
+  & div,
+  & input {
+    @media screen and (max-width: 600px) {
+      height: 40px;
+    }
+  }
 `;
 
 const InputBox = styled.div`
@@ -62,24 +71,43 @@ const InputBox = styled.div`
     left: 95%; // 우측 여백 조절
     transform: translateY(-49%);
     cursor: pointer;
+
+    @media screen and (max-width: 576px) {
+      left: 90%;
+    }
   }
 `;
 
 const SvgContainer = styled.div`
+  display: flex;
+  align-items: center;
   width: 70px;
   height: 80px;
-  margin-top: 28px;
+
   margin-left: 30px;
   position: absolute;
+
+  @media screen and (max-width: 600px) {
+    margin-left: 15px;
+  }
+
+  & > svg {
+    @media screen and (max-width: 600px) {
+      width: 12px;
+      height: 12px;
+    }
+  }
 `;
 
 const Button = styled.button`
+  z-index: 2;
+  position: absolute;
   opacity: 0.7;
   transition: 0.3s ease-in-out;
   &:hover > svg > path {
     stroke: #d85888;
   }
-  overflow: auto;
+  overflow: hidden;
   border-radius: 32px;
   background: rgba(255, 255, 255, 0.32);
   &:hover {
@@ -113,8 +141,18 @@ const Input = styled.input`
 
   &:focus {
     border: 1px solid var(--Primary-V, #e85888);
-    box-shadow: 0px 10px 30px 0px rgba(216, 88, 136, 0.1);
+    border-radius: 2px;
+
+    box-shadow: 0px 10px 30px 0px rgba(232, 88, 136, 0.15);
     outline: none;
+
+    background: #ffffff;
+
+    @media screen and (max-width: 600px) {
+      outline-style: solid;
+      outline-color: rgba(232, 88, 136, 0.15);
+      outline-width: 4px;
+    }
   }
 
   color: #141414;
@@ -123,6 +161,17 @@ const Input = styled.input`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+
+  @media screen and (max-width: 600px) {
+    padding-left: 55px;
+    font-size: 14px;
+    padding-left: 40px;
+    background: #f3f3f3;
+
+    &::placeholder {
+      font-size: 14px;
+    }
+  }
 `;
 
 export default SearchBar;

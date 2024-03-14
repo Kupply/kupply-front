@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { css, styled } from 'styled-components';
 
-export type HashtagButtonStatus = 'default' | 'pressed';
+export type TabMunu04Status = 'default' | 'pressed';
 
-export interface HashtagButtonProps extends React.ComponentPropsWithRef<'button'> {
-  status: HashtagButtonStatus;
+export interface TabMenu04Props extends React.ComponentPropsWithRef<'button'> {
+  status: TabMunu04Status;
 }
 
-const HashtagButton = (props: HashtagButtonProps) => {
+const TabMenu04 = (props: TabMenu04Props) => {
   return (
     <Container {...props}>
       <InnerText>#</InnerText>
@@ -16,7 +16,7 @@ const HashtagButton = (props: HashtagButtonProps) => {
   );
 };
 
-const Container = styled.button<{ status: HashtagButtonStatus }>`
+const Container = styled.button<{ status: TabMunu04Status }>`
   padding: 0.6vw 1.25vw; // 15px 24px;
   display: flex;
   flex-direction: row;
@@ -58,8 +58,12 @@ const InnerText = styled.div`
   font-size: 1.25vw;
   font-style: normal;
   font-weight: 500;
+<<<<<<< HEAD
+  line-height: 1.25vw;
+=======
   // line-height: 24px;
+>>>>>>> origin/develop
   text-align: center;
 `;
 
-export default HashtagButton;
+export default TabMenu04;

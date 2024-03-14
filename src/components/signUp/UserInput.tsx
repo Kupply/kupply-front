@@ -146,7 +146,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
         value={userInfo.info}
         setValue={(v) => setUserInfo((prev) => ({...prev, info:v}))}
       /> :
-      <TextFieldBox
+        <TextFieldBox
         placeholder={placeholderMapping[userInfoType]}
         value={userInfo.info}
         onChange={handleInputChange}
@@ -164,7 +164,6 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
         }}
       />
       }
-      {children}
     </>
   )
 }

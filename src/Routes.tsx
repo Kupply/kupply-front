@@ -1,10 +1,7 @@
-import React from 'react';
-//import OnboardingPage from './pages/main/OnboardingPage';
-import OnboardingPage from './pages/main/OldOnboardingPage';
 //import MyBoardPage from './pages/myBoard/MyBoardPage';
 import MyBoardPage from './pages/myBoard/OldMyBoardPage';
-import LandingPage from './pages/landing/LandingPage';
-import LoginPage from './pages/login/LoginPage';
+import LandingPage from './pages/main/LandingPage';
+import LoginPage from './pages/login/OldLoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
 // import SettingsPage from './pages/setting/SettingsPage';
@@ -26,10 +23,13 @@ import DeletePage from './pages/delete/DeletePage';
 //import DashboardMainPage from './admin/AdminPage';
 import UserPage from './admin/pages/user';
 import { IndexPage } from './admin/routes/sections';
+import OnboardingPage from './pages/main/OnboardingPage';
+
+const isLogined = true;
 
 export const mainRoutes = [
   { path: '/', element: <OnboardingPage /> },
-  { path: '/login', element: <LoginPage /> },
+  { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
   { path: '/landing', element: <LandingPage /> },
   { path: '/archive', element: <PreviousPage /> },
 ];
@@ -38,13 +38,13 @@ export const authRoutes = [
   { path: '/myboard', element: <MyBoardPage /> },
   { path: '/archive/:majorName', element: <ArchiveDetailPage /> },
   // 상태관리 도입 예정으로, 잠시 삭제
-  { path: '/settings', element: <SettingsPage/> },
+  { path: '/settings', element: <SettingsPage /> },
   { path: '/delete', element: <DeletePage /> },
 ];
 
 export const signupRoutes = [
   { path: '/join', element: <SignUp1Page /> },
-  { path: '/signup0', element: <SignUp0Page/>},
+  { path: '/signup0', element: <SignUp0Page /> },
   { path: '/signup1', element: <SignUp1Page /> },
   { path: '/signup2', element: <SignUp2Page /> },
   { path: '/signup3', element: <SignUp3Page /> },
