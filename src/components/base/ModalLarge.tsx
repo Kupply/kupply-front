@@ -32,20 +32,35 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 
 // 모달창 위치 조정 목적의 컨테이너
 const ModalContainer = styled.div`
-  width: 90vw;
+  width: 60vw;
   max-width: 814px;
-  height: 780px;
+  //height: 780px;
+  height: 72.22vh;
   position: fixed;
-  margin-top: -50px;
+  //margin-top: -50px;
+  margin-top: -4.63vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 600px) {
+    width: 90vw;
+    height: 90vh;
+    margin-top: 5vh;
+    top: 0px;
+
+    & > dialog {
+      position: relative;
+      height: 100%;
+    }
+  }
 `;
 
 // 모달 창 (흰 색 컨텐츠 창)
 const DialogBox = styled.dialog`
   width: 100%; // *전체화면에 대해 크기 조정 필요 43vw 814px
-  height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
+  //height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
+  height: 39.0625vw;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -107,6 +122,11 @@ const DialogBox = styled.dialog`
 
   /* Internet Explorer에서 스크롤바 숨기기 */
   -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  @media screen and (max-width: 600px) {
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요

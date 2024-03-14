@@ -3,12 +3,24 @@ import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
+import OnboardingPage from './pages/main/OnboardingPage';
+import MyBoardPage from './pages/myBoard/MyBoardPage';
+import LandingPage from './pages/landing/LandingPage';
+import PreviousPage from './pages/archive/PreviousPage';
+import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
+import CommunityPage from './pages/community/CommunityPage';
+import MessagePage from './pages/message/MessagePage';
+import { SettingsPage } from './pages/setting/SettingsPage';
+import { SignUp1Page } from './pages/signUp/SignUp1Page';
+import SignUp2Page from './pages/signUp/SignUp2Page';
+import SignUp3Page from './pages/signUp/SignUp3Page';
 import { isMobile } from 'react-device-detect';
 import MobilePage from './pages/mobile/Mobile';
 import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
+import { RecoilRoot } from 'recoil';
 
 interface RouteConfig {
   path: string;
@@ -29,7 +41,7 @@ export default function App() {
     routes.map((route: RouteConfig, index: number) => <Route key={index} path={route.path} element={route.element} />);
 
   return (
-    <>
+    <RecoilRoot>
       {isMobile ? (
         <MobilePage />
       ) : (
@@ -44,14 +56,14 @@ export default function App() {
           <Footer setSelected={setSelected} />
         </Wrapper>
       )}
-    </>
+    </RecoilRoot>
   );
 }
 
 const Wrapper = styled.div`
   position: flex;
   width: 100vw;
-  margin-top: 80px;
+  margin-top: 96px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -96,7 +108,7 @@ export default function App() {
 
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/archive" element={<PreviousPage />} />
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<OnboardingPage />} />
             <Route path="/login" element={<LoginPage />} />
 
             <Route path="/join" element={<SignUp1Page />} />

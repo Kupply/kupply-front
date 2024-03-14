@@ -1,12 +1,13 @@
 import { styled } from 'styled-components';
-import { mockHashes } from './Header';
-import Card from '../../assets/Card';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
-import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
+
+import Typography from '../../assets/Typography';
+import { mockHashes } from './Header';
 import Card01 from '../../assets/cards/Card01';
+import client from '../../utils/HttpClient';
+
+// 정렬 임의로 넣어 둠 (에셋 완성되면 적용할 예정)
 
 export interface CardsProps {
   clicked: number;
@@ -34,7 +35,6 @@ const mockCards = [
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
-    
   },
   {
     korName: '심리학부',
@@ -45,7 +45,6 @@ const mockCards = [
     avgPass: 4.23,
     semester: '23-2',
     minPass: 4.12,
-    
   },
   {
     korName: '정경대학 경제학과',
@@ -56,7 +55,6 @@ const mockCards = [
     avgPass: 4.23,
     semester: '23-2',
     minPass: 4.12,
-    
   },
   {
     korName: '정경대학 통계학과',
@@ -67,7 +65,6 @@ const mockCards = [
     avgPass: 4.23,
     semester: '23-2',
     minPass: 4.12,
-    
   },
   {
     korName: '미디어학부',
@@ -78,7 +75,6 @@ const mockCards = [
     semester: '23-2',
     avgPass: 4.23,
     minPass: 4.12,
-    
   },
   {
     korName: '정보대학 컴퓨터학과',
@@ -89,7 +85,6 @@ const mockCards = [
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
-    
   },
   {
     korName: '생명과학대학 식품자원경제학과',
@@ -100,7 +95,6 @@ const mockCards = [
     avgPass: 4.23,
     semester: '23-2',
     minPass: 4.12,
-    
   },
   {
     korName: '이과대학 수학과',
@@ -124,8 +118,11 @@ const mockCards = [
   },
 ];
 
+const sortOptions = ['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순'];
+
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
+  const [sortCriterion, setSortCriterion] = useState('가나다순');
   const navigate = useNavigate();
   // const [cookies] = useCookies(['accessToken']);
   // const accessToken = cookies.accessToken;
@@ -140,7 +137,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   // const fetch = async () => {
   //   try {
   //     const isLogined = window.localStorage.getItem('isLogin');
-      
+
   //     if (isLogined !== 'true') {
   //       alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
   //       navigate('/login');
@@ -167,29 +164,33 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   //     console.log(err);
   //   }
   // };
-  
-  // 임시적으로 만든 fetch function 
+
+  // 임시적으로 만든 fetch function
   const fetch = async () => {
     const data = await client.get('/dashboard/cards');
-        setCards(
-          cards.map((c) => {
-            const res = data.data.find((ca: any) => ca.name === c.korName);
-            return {
-              korName: c.korName,
-              engName: c.engName,
-              filter: c.filter,
-              TO: c.TO,
-              semester: c.semester,
-              avgPass: res.avg,
-              minPass: res.min,
-              compRate: res.passNum,
-            };
-          }),
-        );
-  }
+    setCards(
+      cards.map((c) => {
+        const res = data.data.find((ca: any) => ca.name === c.korName);
+        return {
+          korName: c.korName,
+          engName: c.engName,
+          filter: c.filter,
+          TO: c.TO,
+          semester: c.semester,
+          avgPass: res.avg,
+          minPass: res.min,
+          compRate: res.passNum,
+        };
+      }),
+    );
+  };
   useEffect(() => {
     fetch();
   });
+
+  const handleSortChange = (criterion: string) => {
+    setSortCriterion(criterion);
+  };
 
   const filteredCards = cards
     .filter((card) => {
@@ -197,67 +198,95 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
       if (searchWord && !card.korName.toLowerCase().includes(searchWord.toLowerCase())) return false; // filter based on search word
       return true;
     })
-    .sort((a, b) => a.korName.localeCompare(b.korName)); // always sort alphabetically
+    .sort((a, b) => {
+      switch (sortCriterion) {
+        case '가나다순':
+          return a.korName.localeCompare(b.korName);
+        case '선발인원순':
+          return a.TO - b.TO;
+        case '경쟁률순':
+          return a.compRate - b.compRate;
+        case '평균학점순':
+          return a.avgPass - b.avgPass;
+        case '최저학점순':
+          return a.minPass - b.minPass;
+        default:
+          return a.korName.localeCompare(b.korName);
+      }
+    });
 
   const filteredSet = new Set(filteredCards.map((card) => card.korName));
 
   const opaCards = cards.filter((card) => !filteredSet.has(card.korName));
 
   return (
+
     <Container>
-      <Sort>
-        {mockHashes[clicked]}
-        {clicked > 0 && clicked < 4 && ' 정렬'}
-      </Sort>
       <FlexContainer>
+        <Sort>
+          {/*{mockHashes[clicked]}*/}
+          {/*{clicked > 0 && clicked < 4 && ' 정렬'}*/}
+          <select onChange={(e) => handleSortChange(e.target.value)}>
+            {sortOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </Sort>
+
         {filteredCards.map((card) => (
           <Card01 {...card} />
         ))}
-      </FlexContainer>
-      <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '50px' }}>
+      </CardWrapper>
+      <CardWrapper style={{ marginTop: opaCards.length == 0 ? '0px' : '50px' }}>
         {opaCards.map((card) => (
           <div style={{ opacity: 0.5 }}>
             <Card01 {...card} />
           </div>
         ))}
-      </FlexContainer>
-    </Container>
+      </CardWrapper>
+    </MainWrapper>
   );
 };
+
 const FlexContainer = styled.div`
   display: flex;
+  justify-content: flex-start;
   flex-direction: row;
-  row-gap: 50px;
-  column-gap: 25px;
-  width: 100%;
-  max-width: 1382px;
-  margin-top: 25px;
   flex-wrap: wrap;
+  row-gap: 1.66vw;
+  column-gap: 1.31vw;
+  width: 100%;
+  max-width: 69vw; // 68.75vw;
+  margin-top: 0.83vw;
 `;
+
 const Container = styled.div`
   position: relative;
-  z-index: 0;
-  //height: 2500px;
-  padding-bottom: 230px;
-  width: 100%;
-  max-width: 1920px;
-  background-color: #fff;
+
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  margin: 128px 0 15.16vw 0;
+  background-color: #fff;
+  position: relative;
+  z-index: 0;
 `;
 
 const Sort = styled.div`
   width: 100%;
-  max-width: 1382px;
-  margin-top: 130px;
-  height: 24px;
+  //margin-top: 4.32vw;
+  height: 0.8vw;
+
   color: #a8a8a8;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 0.8vw;
   font-style: normal;
   font-weight: 600;
-  line-height: 24px; /* 100% */
+  line-height: 100%;
+
 `;
 
 export default Cards;

@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import RankingTable from '../../components/landing/RankingTable';
 import PassedDataCard from '../../components/landing/PassedDataCard';
 import Preview from '../../components/landing/Preview';
-import FAQ from '../../components/landing/FAQ';
+import FAQ from '../../components/landing/OldFAQ';
 import Ending from '../../components/landing/Ending';
 import TextFieldBox from '../../assets/OldTextFieldBox';
 import Typography from '../../assets/OldTypography';
@@ -12,7 +12,6 @@ import client from '../../utils/HttpClient';
 import { ICardData } from '../../components/landing/PassedDataCard';
 import { Card } from '@mui/material';
 import Card02 from '../../assets/cards/Card02';
-
 
 export interface ITableData {
   rank: number;
@@ -151,7 +150,7 @@ const LandingPage = () => {
         </HeadTextWrapper>
       </HeadImageWrapper>
       <div ref={tableContent} style={{ marginBottom: '120px' }}></div>
-      
+
       {isWithinTimeRange() && <RankingTable tableData={tableData} />}
       <PassedDataCard cardData={cardData} />
       <Preview />

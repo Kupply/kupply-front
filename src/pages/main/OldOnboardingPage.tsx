@@ -9,7 +9,7 @@ import axios from 'axios';
 // import MockApplicationButton, { MockApplicationProps } from '../assets/myboardpage/MockApplication';
 import client from '../../utils/HttpClient';
 
-function MainPage() {
+function OnboardingPage() {
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -134,6 +134,7 @@ function MainPage() {
               }}
               onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.key === 'Enter') {
+                  console.log('This is the onKeyDown');
                   handleButtonClick();
                 }
               }}
@@ -350,4 +351,4 @@ const Icon: React.FC = () => (
   </svg>
 );
 
-export default MainPage;
+export default OnboardingPage;

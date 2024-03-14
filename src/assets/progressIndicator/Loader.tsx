@@ -1,14 +1,15 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-
 import client from '../../utils/HttpClient';
 
-type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
+type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 
 const baseButton = css`
   height: 24px;
+  //height: 1.25vw;
   gap: 2px;
-  padding: 8px 10px;
+  //padding: 8px 10px;
+  padding: 0.417vw 0.521vw;
   justify-content: center;
   align-items: center;
   border-radius: 999px;
@@ -32,6 +33,7 @@ const NicknameCheckButtonComponent = styled.button<NicknameCheckButtonProps>`
 
 const NicknameCheckButtonTextComponent = styled.div<NicknameCheckButtonTextProps>`
   ${(props) => textStateMapping[props.state || 'default']}
+  white-space: nowrap;
 `;
 
 // isSuccess가 success이면 성공, fail이면 실패이다.
@@ -92,7 +94,7 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
         onMouseDown={onMouseDown}
       >
         {state === 'loading' ? (
-          <LoadingImage xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <LoadingImage xmlns="http://www.w3.org/2000/svg" width="1.0416vw" height="20" viewBox="0 0 20 20" fill="none">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -108,7 +110,7 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
             />
           </LoadingImage>
         ) : state === 'filled' ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.0416vw" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M9.99984 18.3334C14.6022 18.3334 18.3332 14.6024 18.3332 10C18.3332 5.39765 14.6022 1.66669 9.99984 1.66669C5.39746 1.66669 1.6665 5.39765 1.6665 10C1.6665 14.6024 5.39746 18.3334 9.99984 18.3334Z"
               fill="white"
@@ -122,7 +124,7 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
             />
           </svg>
         ) : state === 'error' ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.0416vw" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M9.99984 18.3334C14.6022 18.3334 18.3332 14.6024 18.3332 10C18.3332 5.39765 14.6022 1.66669 9.99984 1.66669C5.39746 1.66669 1.6665 5.39765 1.6665 10C1.6665 14.6024 5.39746 18.3334 9.99984 18.3334Z"
               fill="white"
@@ -156,18 +158,18 @@ function NicknameCheckButton(props: NicknameCheckButtonProps) {
 const defaultButtonStyle = css`
   display: flex;
   border: 1px solid #d85888;
-  width: 67px; // 3.4896vw;
+  width: 3.4896vw; // 3.4896vw;
 `;
 
 const hoverButtonStyle = css`
   display: flex;
   background: rgba(216, 88, 136, 0.1);
-  width: 65px; // 3.3854vw;
+  width: 3.3854vw; // 65px;
 `;
 
 const filledButtonStyle = css`
   display: flex;
-  width: 87px; // 4.5312vw;
+  width: 4.5312vw; //87px;
   background: #d85888;
   color: white;
   transition: all 0.3s ease 0s;
@@ -175,7 +177,7 @@ const filledButtonStyle = css`
 
 const errorButtonStyle = css`
   display: flex;
-  width: 87px; // 4.5312vw;
+  width: 4.5312vw; // 87px; 
   background: rgba(234, 9, 9, 0.7);
   color: white;
   transition: all 0.3s ease 0s;
@@ -184,7 +186,7 @@ const errorButtonStyle = css`
 const loadingButtonStyle = css`
   display: flex;
   background: rgba(216, 88, 136, 0.1);
-  width: 87px; // 4.5312vw;
+  width: 4.5312vw; // 87px; 
   transition: width 0.25s ease 0s;
 `;
 
@@ -217,12 +219,12 @@ const LoadingImage = styled.svg`
 
 const ButtonText = css`
   position: relative;
-  width: 48px; // 2.5vw;
+  width: 2.5vw; // 48px;
   z-index: 999;
   color: #d85888;
   text-align: center;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 0.625vw;
   font-style: normal;
   font-weight: 500;
   white-space: nowrap;
@@ -232,7 +234,7 @@ const CompleteButtonText = css`
   color: white;
   text-align: center;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 0.625vw;
   font-style: normal;
   font-weight: 500;
 `;
