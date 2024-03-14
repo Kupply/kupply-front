@@ -4,21 +4,7 @@ import styled from 'styled-components';
 import MyStageChart from '../../assets/tabMenu/TabMenu05';
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
 
-const QuartileIndicator = () => {
-  const [myStageData, setMyStageData] = useState([
-    {
-      majorName: '',
-      recruitNum: 0,
-      applyNum: 0,
-      rank: 0,
-    },
-    {
-      majorName: '',
-      recruitNum: 0,
-      applyNum: 0,
-      rank: 0,
-    },
-  ]);
+const QuartileIndicator = ({ onViewMajor, myStageData }: { onViewMajor: any; myStageData: any }) => {
   return (
     <Wrapper>
       <TitleBox>
@@ -32,7 +18,7 @@ const QuartileIndicator = () => {
         <path d="M0 1L1096 1" stroke="#DFDFDF" />
       </StyleSvg>
       <ChartBox>
-        <MyStageChart {...myStageData[0]} />
+        <MyStageChart {...myStageData[onViewMajor - 1]} />
       </ChartBox>
     </Wrapper>
   );

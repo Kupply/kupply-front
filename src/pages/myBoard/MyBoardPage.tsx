@@ -124,6 +124,21 @@ const MyBoardPage = () => {
     },
   ]);
 
+  const [myStageData, setMyStageData] = useState([
+    {
+      majorName: '',
+      recruitNum: 0,
+      applyNum: 0,
+      rank: 0,
+    },
+    {
+      majorName: '',
+      recruitNum: 0,
+      applyNum: 0,
+      rank: 0,
+    },
+  ]);
+
   // 로그인한 유저 정보 localStorage에
   const getMe = async () => {
     try {
@@ -258,6 +273,35 @@ const MyBoardPage = () => {
     }
   }, [userData]);
 
+  const getMyStageData = async () => {
+    const APIresponse = await client.get('/dashboard/myStage');
+    const data = APIresponse.data.data;
+    if (userData.hopeMajor1 && userData.hopeMajor2) {
+      setMyStageData([
+        {
+          majorName: userData.hopeMajor1,
+          recruitNum: recruit[userData.hopeMajor1]['2023-2'] || 0,
+          applyNum: data[0].applyNum,
+          rank: data[0].rank,
+        },
+        {
+          majorName: userData.hopeMajor2,
+          recruitNum: recruit[userData.hopeMajor2]['2023-2'] || 0,
+          applyNum: data[1].applyNum,
+          rank: data[1].rank,
+        },
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    try {
+      getMyStageData();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [userData]);
+
   const getCurData = async () => {
     try {
       const APIresponse = await client.get('/dashboard/hopeMajorsCurrentInfo');
@@ -323,7 +367,7 @@ const MyBoardPage = () => {
           </LiveWrapper>
           <ThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
         </div>
-        <QuartileIndicator />
+        <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} />
         <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
           <PieChart />
           <Scatter />
