@@ -20,7 +20,6 @@ export function SidebarContent4(){
             <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
               서비스 이용약관
             </Typography>
-            <ArrowImage/>
           </div>
         </div>
 
@@ -35,7 +34,6 @@ export function SidebarContent4(){
             <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
               개인정보 처리방침
             </Typography>
-            <ArrowImage/>
           </div>
         </div>
 

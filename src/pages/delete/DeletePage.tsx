@@ -57,7 +57,7 @@ const DeletePage = () => {
           </Button>
         </ButtonContainer>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-          <img src="/designImage/textField/AlertWarning.png" alt="delete" style={{ marginTop: 60 }} width={128} />
+          <img src="/designImage/textField/AlertWarning.png" alt="delete" style={{ marginTop: '3.125vw', width: '6.667vw' }} />
           <Title>계정을 삭제하시겠습니까?</Title>
           <Description>
             {userNickname} 님, 계정을 삭제하시면 철회가 불가능합니다.
@@ -65,14 +65,14 @@ const DeletePage = () => {
             정말 계정을 삭제하시겠어요?
           </Description>
           <div
-            style={{ marginTop: 53 }}
+            style={{ marginTop: '2.76vw' }}
             onClick={() => {
               navigate('/settings');
             }}
           >
             <Button05 state="pressed">취소하기</Button05>
           </div>
-          <div style={{ marginTop: 30 }}>
+          <div style={{ marginTop: '1.5625vw' }}>
             <Button05 state="default" onClick={deleteMe}>
               삭제하기
             </Button05>
@@ -85,7 +85,9 @@ const DeletePage = () => {
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 1153px;
+  //height: 1153px;
+  //height: auto;
+  height: 60.052vw;
   background: #fcfafb;
   display: flex;
   justify-content: center;
@@ -96,10 +98,13 @@ const Container = styled.div`
   border-radius: 20px;
   background: var(--White, #fff);
   width: 42.604vw;
-  height: 918px;
+  //height: 918px;
+  //height: auto;
+  height: 45.813vw;
   padding-left: 2.604vw;
   padding-right: 2.604vw;
-  padding-top: 70px;
+  //padding-top: 70px;
+  padding-top: 3.646vw;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
 `;
 
@@ -118,7 +123,8 @@ const ButtonContainer = styled.div`
 
 const Title = styled.div`
   color: var(--Main-Black, #141414);
-  margin-top: 10px;
+  //margin-top: 10px;
+  margin-top: 0.521vw;
   text-align: center;
   font-family: Pretendard;
   font-size: 1.25vw;
@@ -128,14 +134,16 @@ const Title = styled.div`
 `;
 
 const Description = styled.div`
-  margin-top: 10px;
+  //margin-top: 10px;
+  margin-top: 0.521vw;
   color: rgba(20, 20, 20, 0.8);
   text-align: center;
   font-family: Pretendard;
   font-size: 0.9375vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 24.5px; /* 136.111% */
+  //line-height: 24.5px; /* 136.111% */
+  line-height: 136.111%;
 `;
 
 const colorMapping = {

@@ -44,7 +44,7 @@ const helpMessageMapping: Record<UserTypeOptions, string> = {
   studentId: "학번 10자리",
   firstMajor: '',
   id: '',
-  password: '비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다.',
+  password: '<8~20자/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다.',
   password2: '비밀번호 확인',
   nickname: '닉네임',
   hopeMajor1: '',
@@ -97,18 +97,18 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
       info: newData
     }))
 
-    if(userInfoType === 'studentId'){
-      if(newData.length === 10){
-        // 학번 중간 4자리에 해당하는 학과 데이터가 있으면 자동으로 채워줌, 없으면 무시
-        const key = parseInt(userInfo.info.substring(4, 8));
-        // firstMajor에 해당하는 dropdown value를 바꿔준다
-        setFirstMajor((prev) => ({
-          ...prev,
-          info: majorNameMappingBySID[key] || firstMajor.info
-        }))
+    // if(userInfoType === 'studentId'){
+    //   if(newData.length === 10){
+    //     // 학번 중간 4자리에 해당하는 학과 데이터가 있으면 자동으로 채워줌, 없으면 무시
+    //     const key = parseInt(userInfo.info.substring(4, 8));
+    //     // firstMajor에 해당하는 dropdown value를 바꿔준다
+    //     setFirstMajor((prev) => ({
+    //       ...prev,
+    //       info: majorNameMappingBySID[key] || firstMajor.info
+    //     }))
 
-      }
-    }
+    //   }
+    // }
   };
 
   if (toNext && locationUsed === 'signUp'){

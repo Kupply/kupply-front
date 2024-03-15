@@ -66,14 +66,14 @@ export function SidebarContent1(){
           <ContentsWrapper>
             <div style={{ display: 'flex', marginTop: '3.125vw' }}>
               <Typography
-                size="mediumText"
+                size="0.9375vw"
                 style={{ color: 'var(--Main-Black, #141414)', fontWeight: 700, opacity: 0.8 }}
               >
                 닉네임&nbsp;
               </Typography>
               <Typography
-                size="mediumText"
-                style={{ color: 'var(--Main-Black, #141414)', fontWeight: 400, opacity: 0.8, lineHeight: '18px' }}
+                size="0.9375vw"
+                style={{ color: 'var(--Main-Black, #141414)', fontWeight: 400, opacity: 0.8, lineHeight: '100%' }}
               >
                 수정하기
               </Typography>

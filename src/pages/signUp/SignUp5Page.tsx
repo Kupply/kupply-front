@@ -103,6 +103,7 @@ export function SignUp5Page(){
             <TermsText1 />
           </ScrollSmall>
         </TextOutBox>
+        <div style={{height: '2vw'}}></div>
         <CheckBoxButton01 
           isChecked={individualChecks.second}
           onCustomFunction=
