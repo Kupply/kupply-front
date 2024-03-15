@@ -34,7 +34,7 @@ const ButtonWrapper = styled.button<Button01Props>`
     props.variant === 'outline' && (props.state === 'default' || props.state === 'disabled')
       ? '1px solid #D85888'
       : 'none'};
-  padding: ${(props) => (props.size === 'medium' ? '16px 1.67vw' : '24px 1.77vw')};
+  padding: ${(props) => (props.size === 'medium' ? '0.833vw 1.67vw' : '1.25vw 1.77vw')};
   display: flex;
   justify-content: center;
   align-items: center;

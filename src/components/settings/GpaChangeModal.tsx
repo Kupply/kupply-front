@@ -29,17 +29,17 @@ export function GpaChangeModal(){
               <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
             </CloseButton>
 
-            <AlertWrapper style={{ marginTop: '180px' }}>
-              <AlertIconExclamation width="113px" height="113px" />
-              <Typography size="1.25vw" bold="700" style={{ marginTop: '25px' }}>
+            <AlertWrapper style={{ marginTop: '9.375vw' }}>
+              <AlertIconExclamation width="5.885vw" height="5.885vw" />
+              <Typography size="1.25vw" bold="700" style={{ marginTop: '1.302vw' }}>
                 변경한 정보를 저장하시겠습니까?
               </Typography>
-              <Typography size="0.9375vw" bold="500" style={{ marginTop: '24px', lineHeight: '136.111%' }}>
+              <Typography size="0.9375vw" bold="500" style={{ marginTop: '1.25vw', lineHeight: '136.111%' }}>
                 이중전공 지원 기간 동안에는 학점 수정이 최대 두 번까지만 가능해요.
               </Typography>
-              <div style={{ display: 'flex', gap: 22, marginTop: 60 }}>
+              <div style={{ display: 'flex', gap: '1.146vw', marginTop: '3.125vw' }}>
                 <div
-                  style={{ marginTop: 30 }}
+                  style={{ marginTop: '1.5625vw' }}
                   onClick={() => {
                     navigate('/settings');
                   }}
@@ -55,7 +55,7 @@ export function GpaChangeModal(){
                   </Button01>
                 </div>
                 <div
-                  style={{ marginTop: 30 }}
+                  style={{ marginTop: '1.5625vw'}}
                   onClick={() => {
                     thirdSubmit();
                   }}
@@ -73,23 +73,38 @@ export function GpaChangeModal(){
   )
 }
 
+// const CloseButton = styled.button`
+//   display: flex;
+//   width: 60px;
+//   height: 60px;
+//   justify-content: center;
+//   align-items: center;
+//   position: absolute;
+//   top: 32px;
+//   right: 40px;
+//   cursor: pointer;
+// `;
 const CloseButton = styled.button`
   display: flex;
-  width: 60px;
-  height: 60px;
+  //width: 60px; 
+  width: 3.125vw;
+  //height: 60px;
+  height: 3.125vw;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 32px;
-  right: 40px;
+  //top: 32px;
+  top: 1.667vw;
+  //right: 40px;
+  right: 2.083vw;
   cursor: pointer;
 `;
 
 const AlertWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 628px;
-  height: 796px;
+  width: 32.708vw;
+  height: 41.458vw;
   align-items: center;
   text-align: center;
   margin: auto auto;
