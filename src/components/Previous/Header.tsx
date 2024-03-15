@@ -1,10 +1,7 @@
-// 서치바 크기 조정 필요?
-// 버튼 state 이게 맞나? 좀 이상한데,,, 디자인 확인 필요
-
 import styled from 'styled-components';
 
-import Typography from '../../assets/Typography';
-import TabMenu04 from '../../assets/tabMenu/TabMenu04';
+// import HashtagButton from '../../assets/buttons/HashtagButton';
+import HashtagButton from '../../assets/tabMenu/TabMenu04';
 import SearchBar from '../../assets/SearchBar';
 
 export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
@@ -20,19 +17,15 @@ export interface HeaderProps {
 
 function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps) {
   return (
-    <MainWrapper>
-      <Typography size="2.5vw" bold="700" style={{ lineHeight: '2.6vw', marginTop: '5.31vw' }}>
-        지난 학기 합격 지표 바로 보기
-      </Typography>
-      <Typography size="1.25vw" bold="500" style={{ opacity: 0.8, marginTop: '0.52vw' }}>
-        쿠플라이에서 지원하는 학과 별 합격지표를 한 눈에 비교해보세요!
-      </Typography>
-      <MenuWrapper>
+    <Container>
+      <Title>
+        <TitleText>지난 학기 합격 지표 바로 보기</TitleText>
+      </Title>
+      <SubTitleText>쿠플라이에서 지원하는 학과 별 합격지표를 한 눈에 비교 해보세요!</SubTitleText>
+      <TagButtonWrapper>
         {mockHashes.map((hash, index) => (
-
           <HashtagButton
             key={index}
-
             status={index === clicked ? 'pressed' : 'default'}
             onClick={() => {
               setClicked(index);
@@ -40,16 +33,15 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
             index={index}
           >
             {hash}
-          </TabMenu04>
+          </HashtagButton>
         ))}
-      </MenuWrapper>
+      </TagButtonWrapper>
       <SearchBarWrapper>
         <SearchBar value={searchWord} setValue={setSearchWord} />
       </SearchBarWrapper>
-    </MainWrapper>
+    </Container>
   );
 }
-
 
 const TagButtonWrapper = styled.div`
   display: flex;
@@ -69,18 +61,13 @@ const Container = styled.div`
 
   background-color: #fcfafb;
 
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fcfafb;
 `;
 
-const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 1.04vw;
-  margin: 2.76vw 0 2.5vw 0;
+const Title = styled.div`
+  margin-top: 5.3125vw;
 `;
 
 const SearchBarWrapper = styled.div`
@@ -112,7 +99,6 @@ const SubTitleText = styled.div`
   opacity: 0.8;
 
   margin-top: 0.9375vw;
-
 `;
 
 export default Header;
