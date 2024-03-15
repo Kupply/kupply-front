@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import TextAreaBox from "../../assets/TextArea";
 import React, { useEffect, useState, useRef } from "react";
-import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState } from "../../store/atom";
+import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState, userState, userSettingsState } from "../../store/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailAtom } from "../../store/atom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
 import axios from "axios";
 import { inputState } from "../../pages/signUp/SignUp4Page";
 import Typography from "../../assets/Typography";
+
 
 export const CodeVerification = () => {
 
@@ -93,6 +94,8 @@ interface GpaSemesterVerificationProps{
 export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext, locationUsed = 'SignUp'}) => {
 
   const [userGpa, setUserGpa] = useRecoilState(locationUsed === 'SignUp' ? gpaState(userType) : gpaSettingsState(userType));
+  const [userStdId, setUserStdId] = useRecoilState(locationUsed === 'SignUp' ? userState('studentId') : userSettingsState('studentId'));
+  const [fixedGpa, setFixedGpa] = useState(false);
   const [isGpaChanged, setIsGpaChanged] = useRecoilState(isGpaChangedState);
   const {num1, num2, num3} = userGpa;
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
@@ -101,6 +104,17 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   const originGPA1 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(0) || '');
   const originGPA2 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(3) || '');
+
+  useEffect(()=>{
+    if(+userStdId.info.slice(2, 4) === 24){
+      setUserGpa({
+        num1: '0',
+        num2: '0',
+        num3: '0'
+      });
+      setFixedGpa(true);
+    }
+  },[]);
 
   useEffect(() => {
     if(parseFloat(`${num1}.${num2}${num3}`) > 4.5){
@@ -158,14 +172,14 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
 
   return (
     <VerifiBoxWrapper>
-      <TextAreaBox name="gpa-1" value={num1} setValue={(value) => handleGPAState(`num1`, value)}/>
+      <TextAreaBox name="gpa-1" value={num1} setValue={fixedGpa ? ()=>{} : (value) => handleGPAState(`num1`, value)}/>
       <div style={{ marginTop: '3.125vw' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
           <circle cx="1" cy="1" r="1" fill="#141414" />
         </svg>
       </div>
-      <TextAreaBox name="gpa-2" value={num2} setValue={(value) => handleGPAState(`num2`, value)}/>
-      <TextAreaBox name="gpa-3" value={num3} setValue={(value) => handleGPAState(`num3`, value)} setRef={setLastBoxRef}/>
+      <TextAreaBox name="gpa-2" value={num2} setValue={fixedGpa ? ()=>{} :(value) => handleGPAState(`num2`, value)}/>
+      <TextAreaBox name="gpa-3" value={num3} setValue={fixedGpa ? ()=>{} :(value) => handleGPAState(`num3`, value)} setRef={setLastBoxRef}/>
     </VerifiBoxWrapper>
   )
   
@@ -183,11 +197,12 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
     if(!!num1 && !!num2 && !!num3) {
       setState?.('complete')
 
-      console.log(userType, num1, num2, num3);
-      if((!(num3 === '1' || num3 === '2') || semesterYear < 23 || (semesterYear === 23 && num1 === '1')) && userType === 'candidate') 
+      // 학기가 1, 2가 아니면 안되고 바라는 학기가 24보다 작으면 안된다 
+      if((!(num3 === '1' || num3 === '2') || semesterYear < 24 && userType === 'candidate'))
         setState?.('error');
 
-      else if((!(num3 === '1' || num3 === '2') || semesterYear > 23 || (semesterYear === 23 && num3 === '2')) && userType === 'passer'){
+      // 통과한 사람은 학기가 1, 2가 아니면 안되고 24이후에 통과한 사람이면 안되지 
+      else if((!(num3 === '1' || num3 === '2') || semesterYear >= 24) && userType === 'passer'){
         setState?.('error');
       }
         
