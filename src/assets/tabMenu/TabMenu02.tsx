@@ -10,7 +10,7 @@ const Button = styled.button<SemesterButtonProps>`
   display: flex;
   width: 4.58vw;
   height: 1.46vw;
-  border-radius: 3.638px;
+  border-radius: 0.19vw;
   vertical-align: middle;
   align-items: center;
   justify-content: center;

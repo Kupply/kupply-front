@@ -153,11 +153,12 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
       opacity: 1;
     `}
 
-  /* ${(props) =>
+  ${(props) =>
     props.isSelected &&
     css`
       color: #d85888;
-    `} */
+      border: 1px solid #d85888;
+    `}
 
 
   position: relative;
@@ -279,6 +280,6 @@ const SelectBoxWrapper = styled.button<{
 
 const SelectBox = styled(Typography)<TypographyProps>`
   font-weight: 400;
-  font-size: 0.833vw; 
+  font-size: 0.833vw;
   opacity: 0.8;
 `;

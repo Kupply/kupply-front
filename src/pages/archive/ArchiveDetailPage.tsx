@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+
 import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import GpaLineChart, { Data, LineData } from '../../assets/GpaLineChart';
 import { recruit } from '../../common/Recruiting';
@@ -16,7 +16,6 @@ import {
   majorNameMapping,
 } from '../../utils/Mappings';
 
-// SegmentedWrapper 디자인 반영 X
 // 경쟁률 적용 X (디자인 나와서 고치면서 수정할 예정)
 
 const ArchiveDetailPage = () => {
@@ -145,157 +144,165 @@ const ArchiveDetailPage = () => {
   return (
     <Wrapper>
       {/* <GlobalStyles /> */}
-      <MajorWrapper>
-        <LeftBox>
-          <PreviousIconWrapper>
-            <PreviousIconBox onClick={handlePrev} src="../../designImage/previous/D_Previous icon.png" />
-          </PreviousIconWrapper>
-          <MajorIconContainer>
-            <MajorIconBlur />
-            <MajorIconBox src={majorSymbolPath} />
-          </MajorIconContainer>
-          <MajorTextBox>
-            <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
-            <MajorTextEnglish>{majorEngishName}</MajorTextEnglish>
-          </MajorTextBox>
-        </LeftBox>
-        <WarningTextBox>
-          <WarningIcon src="../../designImage/previous/D_alert-circle.png" />
-          <WarningText>
-            본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
-          </WarningText>
-        </WarningTextBox>
-      </MajorWrapper>
-      <SegmentedWrapper>
-        {semesterMapping.map((semester, index) => (
-          <SegmentedPicker
-            key={index}
-            state={activeIdx === index ? 'active' : hoveredIdx === index ? 'hover' : 'default'}
-            semester={semester}
-            onClick={() => handleButtonClick(index)}
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
-          />
-        ))}
-      </SegmentedWrapper>
-      <SelectionInfoWrapper>
-        <SelectionInfoDescriptionBox>
-          <DescriptionIcon src="../../designImage/previous/UserDOutline.png" />
-          <Description>
-            {semesterMapping[activeIdx]} {majorKoreanName} 이중전공 선발 정보
-          </Description>
-        </SelectionInfoDescriptionBox>
-        <SelectionInfoContentsWrapper>
-          <SelectionInfoContent>
-            <Text>{activeIdx === 0 ? '평균 선발인원' : '선발인원'}</Text>
-            <SelectionInfoValue>
-              {numOfSelection === 0
-                ? '집계불가'
-                : activeIdx === 0
-                ? `${Math.floor(numOfSelection / 6)} 명`
-                : `${numOfSelection} 명`}
-            </SelectionInfoValue>
-          </SelectionInfoContent>
-          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
-            <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
-          </svg>
-          <SelectionInfoContent>
-            <Text>지원자 수</Text>
-            <SelectionInfoValue>{numOfApplication}명</SelectionInfoValue>
-          </SelectionInfoContent>
-          <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
-            <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
-          </svg>
-          <SelectionInfoContent>
-            <Text>경쟁률</Text>
-            <SelectionInfoValue>{enoughData ? numOfPassed : 0}</SelectionInfoValue>
-          </SelectionInfoContent>
-        </SelectionInfoContentsWrapper>
-      </SelectionInfoWrapper>
-      <Container>
-        <PasserGPAInfoWrapper keywordsLength={keywords.length}>
-          <PasserGPAInfoDescriptionWrapper>
-            <PasserGpaChartDescriptionBox>
-              <DescriptionIcon src="../../designImage/previous/FiBarChart.png" />
-              <Description>{majorKoreanName} 합격자 학점 분포</Description>
-            </PasserGpaChartDescriptionBox>
-            <PasserGpaAnalyticDescriptionBox>
-              <DescriptionIcon src="../../designImage/previous/UChartGrowth.png" />
-              <Description>합격자 학점 분석</Description>
-            </PasserGpaAnalyticDescriptionBox>
-          </PasserGPAInfoDescriptionWrapper>
-          <PasserGPAInfoDetailsWrapper>
-            <PasserGPAInfoGraphWrapper>
-              <GpaLineChart
-                lineData={lineData}
-                meanGpa={meanGpa}
-                medianGpa={medianGpa}
-                modeGpa={modeGpa}
-                minGpa={minGpa}
-                width={1200}
-                height={470}
-              />
-            </PasserGPAInfoGraphWrapper>
-            <PasserGPAInfoAnalyticsWrapper>
-              <PasserGPAInfoBox>
-                <PasserMeanGPAIcon />
-                <PasserGPAInfoTextBox>
-                  <Text>합격자 평균 학점</Text>
-                  <TextNumber>{meanGpa.gpa.toFixed(2)}</TextNumber>
-                </PasserGPAInfoTextBox>
-              </PasserGPAInfoBox>
+      <InnerWrapper>
+        <MajorWrapper>
+          <LeftBox>
+            <PreviousIconWrapper>
+              <PreviousIconBox onClick={handlePrev} src="../../designImage/previous/D_Previous icon.png" />
+            </PreviousIconWrapper>
+            <MajorIconContainer>
+              <MajorIconBlur />
+              <MajorIconBox src={majorSymbolPath} />
+            </MajorIconContainer>
+            <MajorTextBox>
+              <MajorTextKorean>{majorKoreanName}</MajorTextKorean>
+              <MajorTextEnglish>{majorEngishName}</MajorTextEnglish>
+            </MajorTextBox>
+          </LeftBox>
+          <WarningTextBox>
+            <WarningIcon src="../../designImage/previous/D_alert-circle.png" />
+            <WarningText>
+              본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+            </WarningText>
+          </WarningTextBox>
+        </MajorWrapper>
+        <SegmentedWrapper>
+          {semesterMapping.map((semester, index) => (
+            <SegmentedPicker
+              key={index}
+              state={activeIdx === index ? 'active' : hoveredIdx === index ? 'hover' : 'default'}
+              semester={semester}
+              onClick={() => handleButtonClick(index)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            />
+          ))}
+        </SegmentedWrapper>
+        <SelectionInfoWrapper>
+          <SelectionInfoDescriptionBox>
+            <DescriptionIcon src="../../designImage/previous/UserDOutline.png" />
+            <Description>
+              {semesterMapping[activeIdx]} {majorKoreanName} 이중전공 선발 정보
+            </Description>
+          </SelectionInfoDescriptionBox>
+          <SelectionInfoContentsWrapper>
+            <SelectionInfoContent>
+              <Text>{activeIdx === 0 ? '평균 선발인원' : '선발인원'}</Text>
+              <SelectionInfoValue>
+                {numOfSelection === 0
+                  ? '집계불가'
+                  : activeIdx === 0
+                  ? `${Math.floor(numOfSelection / 6)} 명`
+                  : `${numOfSelection} 명`}
+              </SelectionInfoValue>
+            </SelectionInfoContent>
+            <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
+              <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
+            </svg>
+            <SelectionInfoContent>
+              <Text>지원자 수</Text>
+              <SelectionInfoValue>{numOfApplication === 0 ? '집계불가' : `${numOfApplication}명`}</SelectionInfoValue>
+            </SelectionInfoContent>
+            <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
+              <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
+            </svg>
+            <SelectionInfoContent>
+              <Text>경쟁률</Text>
+              <SelectionInfoValue>
+                {numOfSelection === 0
+                  ? '집계불가'
+                  : activeIdx === 0
+                  ? `${(numOfSelection / numOfApplication).toFixed(2)} : 1`
+                  : `1`}
+              </SelectionInfoValue>
+            </SelectionInfoContent>
+          </SelectionInfoContentsWrapper>
+        </SelectionInfoWrapper>
+        <Container>
+          <PasserGPAInfoWrapper keywordsLength={keywords.length}>
+            <PasserGPAInfoDescriptionWrapper>
+              <PasserGpaChartDescriptionBox>
+                <DescriptionIcon src="../../designImage/previous/FiBarChart.png" />
+                <Description>{majorKoreanName} 합격자 학점 분포</Description>
+              </PasserGpaChartDescriptionBox>
+              <PasserGpaAnalyticDescriptionBox>
+                <DescriptionIcon src="../../designImage/previous/UChartGrowth.png" />
+                <Description>합격자 학점 분석</Description>
+              </PasserGpaAnalyticDescriptionBox>
+            </PasserGPAInfoDescriptionWrapper>
+            <PasserGPAInfoDetailsWrapper>
+              <PasserGPAInfoGraphWrapper>
+                <GpaLineChart
+                  lineData={lineData}
+                  meanGpa={meanGpa}
+                  medianGpa={medianGpa}
+                  modeGpa={modeGpa}
+                  minGpa={minGpa}
+                  width={1200}
+                  height={470}
+                />
+              </PasserGPAInfoGraphWrapper>
+              <PasserGPAInfoAnalyticsWrapper>
+                <PasserGPAInfoBox>
+                  <PasserMeanGPAIcon />
+                  <PasserGPAInfoTextBox>
+                    <Text>합격자 평균 학점</Text>
+                    <TextNumber>{meanGpa.gpa.toFixed(2)}</TextNumber>
+                  </PasserGPAInfoTextBox>
+                </PasserGPAInfoBox>
 
-              <PasserGPAInfoBox>
-                <PasserMedianGPAIcon />
-                <PasserGPAInfoTextBox>
-                  <Text>합격자 학점 중위값</Text>
-                  <TextNumber>{medianGpa.gpa.toFixed(2)}</TextNumber>
-                </PasserGPAInfoTextBox>
-              </PasserGPAInfoBox>
+                <PasserGPAInfoBox>
+                  <PasserMedianGPAIcon />
+                  <PasserGPAInfoTextBox>
+                    <Text>합격자 학점 중위값</Text>
+                    <TextNumber>{medianGpa.gpa.toFixed(2)}</TextNumber>
+                  </PasserGPAInfoTextBox>
+                </PasserGPAInfoBox>
 
-              <PasserGPAInfoBox>
-                <PasserModeGPAIcon />
-                <PasserGPAInfoTextBox>
-                  <Text>합격자 학점 최빈값</Text>
-                  <TextNumber>{modeGpa.gpa.toFixed(2)}</TextNumber>
-                </PasserGPAInfoTextBox>
-              </PasserGPAInfoBox>
+                <PasserGPAInfoBox>
+                  <PasserModeGPAIcon />
+                  <PasserGPAInfoTextBox>
+                    <Text>합격자 학점 최빈값</Text>
+                    <TextNumber>{modeGpa.gpa.toFixed(2)}</TextNumber>
+                  </PasserGPAInfoTextBox>
+                </PasserGPAInfoBox>
 
-              <PasserGPAInfoBox>
-                <PasserMinGPAIcon />
-                <PasserGPAInfoTextBox>
-                  <Text>합격자 학점 최저값</Text>
-                  <TextNumber>{minGpa.gpa.toFixed(2)}</TextNumber>
-                </PasserGPAInfoTextBox>
-              </PasserGPAInfoBox>
-            </PasserGPAInfoAnalyticsWrapper>
-          </PasserGPAInfoDetailsWrapper>
-        </PasserGPAInfoWrapper>
-        {keywords.length !== 0 && (
-          <KeywordWrapper>
-            <KeywordDescriptionBox>
-              <DescriptionIcon src="../../designImage/previous/FiEdit2.png" />
-              <Description>자기소개서 합격 키워드</Description>
-            </KeywordDescriptionBox>
-            <KeywordContainer>
-              {keywords.map((keyword, index) => (
-                <KeywordBox key={index}>
-                  <Text>{keyword}</Text>
-                </KeywordBox>
-              ))}
-            </KeywordContainer>
-          </KeywordWrapper>
-        )}
-        {!enoughData && (
-          <CollectingWrapper keywordsLength={keywords.length}>
-            <CollectingTitleText>쿠플라이에서 아직 정보를 수집 중입니다!</CollectingTitleText>
-            <CollectingDetailText>
-              더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
-              {'\n'}더 나은 서비스를 위해서 조금만 더 기다려주세요!
-            </CollectingDetailText>
-          </CollectingWrapper>
-        )}
-      </Container>
+                <PasserGPAInfoBox>
+                  <PasserMinGPAIcon />
+                  <PasserGPAInfoTextBox>
+                    <Text>합격자 학점 최저값</Text>
+                    <TextNumber>{minGpa.gpa.toFixed(2)}</TextNumber>
+                  </PasserGPAInfoTextBox>
+                </PasserGPAInfoBox>
+              </PasserGPAInfoAnalyticsWrapper>
+            </PasserGPAInfoDetailsWrapper>
+          </PasserGPAInfoWrapper>
+          {keywords.length !== 0 && (
+            <KeywordWrapper>
+              <KeywordDescriptionBox>
+                <DescriptionIcon src="../../designImage/previous/FiEdit2.png" />
+                <Description>자기소개서 합격 키워드</Description>
+              </KeywordDescriptionBox>
+              <KeywordContainer>
+                {keywords.map((keyword, index) => (
+                  <KeywordBox key={index}>
+                    <Text>{keyword}</Text>
+                  </KeywordBox>
+                ))}
+              </KeywordContainer>
+            </KeywordWrapper>
+          )}
+          {!enoughData && (
+            <CollectingWrapper keywordsLength={keywords.length}>
+              <CollectingTitleText>쿠플라이에서 아직 정보를 수집 중입니다!</CollectingTitleText>
+              <CollectingDetailText>
+                더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
+                {'\n'}더 나은 서비스를 위해서 조금만 더 기다려주세요!
+              </CollectingDetailText>
+            </CollectingWrapper>
+          )}
+        </Container>
+      </InnerWrapper>
     </Wrapper>
   );
 };
@@ -356,11 +363,16 @@ const Wrapper = styled.div`
   }
 `;
 
+const InnerWrapper = styled.div`
+  width: 86.71875vw;
+  max-width: 1665px;
+`;
+
 const MajorWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100vw;
-  max-width: 1690px;
+  width: 86.71875vw;
+  max-width: 1665px;
   margin-top: 46.4px;
 `;
 
@@ -466,7 +478,7 @@ const WarningIcon = styled.img`
 const SegmentedWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around;
   width: 100%;
   max-width: 1665px;
   border-radius: 5px;
@@ -475,14 +487,9 @@ const SegmentedWrapper = styled.div`
   /* 임시 */
   box-shadow: 0px 4px 200px 0px rgba(20, 20, 20, 0.05);
 
-  gap: 0.9375vw;
   padding: 6px 0px; // 10.26vw;
   margin-top: 19.82px;
   left: 0;
-
-  & > :first-child {
-    margin-left: 5.42vw;
-  }
 `;
 
 const SelectionInfoDescriptionBox = styled.div`
@@ -540,7 +547,7 @@ const DescriptionIcon = styled.img`
 const SelectionInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   max-width: 1665px;
   height: 4.6875vw;
 
@@ -577,7 +584,7 @@ const SelectionInfoValue = styled.text`
 
 const PasserGPAInfoWrapper = styled.div<{ keywordsLength: number }>`
   position: relative;
-  width: 100vw;
+  width: 100%;
   max-width: 1665px;
   height: 555px;
   border: 1px solid #ffffff;
@@ -662,7 +669,7 @@ const KeywordWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1665px;
-  width: 100vw;
+  width: 100%;
   height: 126px;
   gap: 0.83vw;
   background-color: #ffffff99;
@@ -717,7 +724,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 const CollectingWrapper = styled.div<{ keywordsLength: number }>`
