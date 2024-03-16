@@ -33,7 +33,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
             if (ref.current) ref.current.focus();
           }}
         >
-          <Icon02 size={'24px'} />
+          <Icon02 />
         </Button>
       </InputBox>
     </Container>
@@ -44,64 +44,44 @@ const Container = styled.div`
   margin-top: 4px;
   flex-direction: row;
   gap: 0px;
-  width: 95%;
-  max-width: 1382px;
+  width: 68.75vw;
+  height: 4.17vw;
   z-index: 2;
 
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
-
-  &,
-  & div,
-  & input {
-    @media screen and (max-width: 600px) {
-      height: 40px;
-    }
-  }
 `;
 
 const InputBox = styled.div`
-  width: 100%;
-  max-width: 1382px;
-  height: 80px;
   position: relative;
+  width: 68.75vw;
+  height: 4.17vw;
 
-  & > button {
-    position: absolute;
-    top: 51%;
-    left: 95%; // 우측 여백 조절
-    transform: translateY(-49%);
-    cursor: pointer;
-
-    @media screen and (max-width: 576px) {
-      left: 90%;
-    }
-  }
+  display: flex;
+  align-items: center;
 `;
 
 const SvgContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 70px;
-  height: 80px;
-
-  margin-left: 30px;
+  margin-left: 1.5625vw;
   position: absolute;
 
-  @media screen and (max-width: 600px) {
-    margin-left: 15px;
-  }
-
   & > svg {
-    @media screen and (max-width: 600px) {
-      width: 12px;
-      height: 12px;
-    }
+    width: 1.25vw;
+    height: 1.25vw;
   }
 `;
 
 const Button = styled.button`
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
+  width: 1.667vw;
+  height: 1.667vw;
+  right: 1%; /* 우측에 배치합니다. */
+  cursor: pointer;
+
   opacity: 0.7;
   transition: 0.3s ease-in-out;
   &:hover > svg > path {
@@ -113,22 +93,26 @@ const Button = styled.button`
   &:hover {
     box-shadow: 0px 0px 12px rgba(237, 162, 162, 0.35);
   }
+
+  & > img {
+    width: 1.25vw;
+    height: 1.25vw;
+  }
 `;
 
 const Input = styled.input`
   width: 100%;
-  max-width: 1382px;
+  height: 100%;
   box-sizing: border-box;
-  height: 80px;
-  padding-left: 70px;
+  padding-left: 3.48vw;
   border-radius: 10px;
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
 
   transition: 0.3s ease-in-out;
   &::placeholder {
     color: #a8a8a8;
-    font-family: Pretendard;
-    font-size: 24px;
+    font-family: 'Pretendard';
+    font-size: 1.25vw;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 100% */
@@ -147,31 +131,14 @@ const Input = styled.input`
     outline: none;
 
     background: #ffffff;
-
-    @media screen and (max-width: 600px) {
-      outline-style: solid;
-      outline-color: rgba(232, 88, 136, 0.15);
-      outline-width: 4px;
-    }
   }
 
   color: #141414;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-
-  @media screen and (max-width: 600px) {
-    padding-left: 55px;
-    font-size: 14px;
-    padding-left: 40px;
-    background: #f3f3f3;
-
-    &::placeholder {
-      font-size: 14px;
-    }
-  }
 `;
 
 export default SearchBar;
