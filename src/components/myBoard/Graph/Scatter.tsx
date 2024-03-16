@@ -18,11 +18,35 @@ import Typography from '../../../assets/Typography';
 // 호버 tooltip 커스텀해야 됨 + 폰트 스타일 적용 X
 // plot 아래 학과 나타내기 X
 
-const Scatter = () => {
-  const maxValue = Math.max(...tmpData.map((item) => item.value));
-  const maxYValue = Math.ceil(maxValue / 10) * 10 + 10;
+interface Datum {
+  college: string;
+  curApplyNum: number;
+  curAccumGPA: number;
+}
 
-  const color = tmpData.map((item) => majorColorMapping[item.name as keyof typeof majorColorMapping].fill);
+interface Datum2 {
+  college: string;
+  curApplyNum: number;
+  avgGpa: number;
+}
+
+const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) => {
+  const sccatterData: Datum[] = curData[onViewMajor - 1].scatterChartData;
+  const filteredData: Datum2[] = sccatterData
+    .filter((item) => item.curApplyNum !== 0)
+    .map(({ college, curAccumGPA, curApplyNum }) => ({
+      college,
+      avgGpa: Number((curAccumGPA / curApplyNum).toFixed(2)),
+      curApplyNum,
+    }));
+
+  console.log(filteredData);
+
+  const maxValue = Math.max(...filteredData.map((item) => item.avgGpa));
+  const maxYValue = Math.ceil(maxValue / 10) * 10 + 10;
+  const minXValue = Math.min(...filteredData.map((item) => item.avgGpa));
+
+  const color = filteredData.map((item) => majorColorMapping[item.college as keyof typeof majorColorMapping].fill);
 
   return (
     <Wrapper>
@@ -40,11 +64,11 @@ const Scatter = () => {
       <ScatterBox>
         <VictoryChart
           theme={VictoryTheme.material}
-          domain={{ x: [0, 4.8], y: [0, maxYValue] }}
+          domain={{ x: [minXValue - 0.5, 4.8], y: [0, maxYValue] }}
           origin={{ x: 0, y: 0 }}
           containerComponent={
             <VictoryVoronoiContainer
-              labels={({ datum }) => `${datum.name}`}
+              labels={({ datum }) => `${datum.college}`}
               labelComponent={
                 <VictoryTooltip
                   flyoutComponent={<CustomTooltipLabel />}
@@ -87,11 +111,11 @@ const Scatter = () => {
           />
 
           <VictoryScatter
-            data={tmpData}
+            data={filteredData}
             x="avgGpa"
-            y="value"
+            y="curApplyNum"
             size={6}
-            labels={({ datum }) => `${datum.name}`} // 각 점에 대한 학과 라벨
+            // labels={({ datum }) => `${datum.college}`} // 각 점에 대한 학과 라벨
             labelComponent={
               <VictoryLabel
                 dy={20}
@@ -104,7 +128,7 @@ const Scatter = () => {
               />
             }
             style={{
-              data: { fill: (args) => color[tmpData.findIndex((item) => item.name === args.datum.name)] }, // 각 데이터 포인트에 대한 fill 색상을 설정
+              data: { fill: (args) => color[filteredData.findIndex((item) => item.college === args.datum.college)] }, // 각 데이터 포인트에 대한 fill 색상을 설정
             }}
           />
         </VictoryChart>
@@ -146,51 +170,51 @@ const CustomTooltipLabel = (props: any) => {
     <foreignObject x={props.x - 40} y={props.y - 70} width="80" height="75">
       <TooltipContainer>
         <p>
-          <ToolTipBordText>{props.datum.name}</ToolTipBordText>
+          <ToolTipBordText>{props.datum.college}</ToolTipBordText>
           <br />
           <ToolTipNormalText>학점 </ToolTipNormalText>
           <ToolTipBordText>{props.datum.avgGpa}</ToolTipBordText>
           <br />
           <ToolTipNormalText>지원자 </ToolTipNormalText>
-          <ToolTipBordText>{props.datum.value}명</ToolTipBordText>
+          <ToolTipBordText>{props.datum.curApplyNum}명</ToolTipBordText>
         </p>
       </TooltipContainer>
     </foreignObject>
   );
 };
 
-const tmpData = [
-  {
-    name: '경영대학',
-    value: 5,
-    avgGpa: 4.4,
-  },
-  {
-    name: '정경대학',
-    value: 10,
-    avgGpa: 3.5,
-  },
-  {
-    name: '의과대학',
-    value: 30,
-    avgGpa: 3.0,
-  },
-  {
-    name: '정보대학',
-    value: 14,
-    avgGpa: 4.2,
-  },
-  {
-    name: '미디어학부',
-    value: 24,
-    avgGpa: 4.0,
-  },
-  {
-    name: '스마트보안학부',
-    value: 45,
-    avgGpa: 3.8,
-  },
-];
+// const tmpData = [
+//   {
+//     name: '경영대학',
+//     value: 5,
+//     avgGpa: 4.4,
+//   },
+//   {
+//     name: '정경대학',
+//     value: 10,
+//     avgGpa: 3.5,
+//   },
+//   {
+//     name: '의과대학',
+//     value: 30,
+//     avgGpa: 3.0,
+//   },
+//   {
+//     name: '정보대학',
+//     value: 14,
+//     avgGpa: 4.2,
+//   },
+//   {
+//     name: '미디어학부',
+//     value: 24,
+//     avgGpa: 4.0,
+//   },
+//   {
+//     name: '스마트보안학부',
+//     value: 45,
+//     avgGpa: 3.8,
+//   },
+// ];
 
 const Wrapper = styled.div`
   position: relative;
