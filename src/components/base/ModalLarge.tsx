@@ -38,7 +38,7 @@ const ModalContainer = styled.div`
   height: 72.22vh;
   position: fixed;
   //margin-top: -50px;
-  margin-top: -4.63vh;
+  //margin-top: -4.63vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +60,7 @@ const ModalContainer = styled.div`
 const DialogBox = styled.dialog`
   width: 100%; // *전체화면에 대해 크기 조정 필요 43vw 814px
   //height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
-  height: 39.0625vw;
+  height: 80vh;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;

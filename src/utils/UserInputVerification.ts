@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState, errorMessageState,  userSettingsState } from "../store/atom";
 import { useEffect, useState } from "react";
 import { users } from "../admin/_mock/user";
@@ -130,9 +130,16 @@ export function useNicknameVerification(locationUsed: verificationProps){
   const [nickname, setNickname] = useRecoilState(locationUsed === 'signUp' ? userState('nickname') : userSettingsState('nickname'));
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageState);
   const [nicknameVerified, setNicknameVerified] = useState(false);
-
+  //currentNickname을 갖고 와야 하는데 이건 한번 가져오고 바뀌면 안됨 
+  const [currentNickname, setCurrentNickname] = useState('');
+  console.log(nickname);
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
   // 닉네임 제한 10->7자 수정
+  useEffect(()=>{
+    if(locationUsed === 'settings')
+      setCurrentNickname(localStorage.getItem('nickname')!);
+  }, []);
+
   useEffect(() => {
     if ((nickname.info.length === 1 || nickname.info.length > 7) && nickname.infoState !== 'focused') {
       setNickname((prev) => ({...prev, infoState: 'error'}));
@@ -166,6 +173,12 @@ export function useNicknameVerification(locationUsed: verificationProps){
   useEffect(() => {
     setNickname((prev) => ({...prev, infoCheck: 'default'}));
   }, [nickname.info]);
+
+  useEffect(() => {
+    if (currentNickname === nickname.info) {
+      setNickname((prev) => ({...prev, infoCheck: 'filled'}));
+    }
+  }, []);
 
   //중복 체크의 결과에 따라 nicknameState가 바뀐다.
   useEffect(() => {

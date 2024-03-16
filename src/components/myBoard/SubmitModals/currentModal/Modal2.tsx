@@ -43,15 +43,14 @@ export default function CurrentModal2(){
       </SubContentsWrapper>
     </NotSubmittedWrapper>
     </ContentsWrapper>
-    <div style={{ position: 'absolute', top: '33.333vw', left: 0, height: '5.208vw' }}>
-      <CompleteMockApplicationButton
+    <CompleteMockApplicationButton
         active={true}
         onClick={() => {
           setCurrentModal(3);
           setIsSubmitted(true);
         }}
+        style={{marginBottom: '-0.87vw'}}
       />
-    </div>
     </>
     
   )
