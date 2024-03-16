@@ -10,12 +10,11 @@ import EyeIcon from '../assets/icons/EyeIcon';
 const baseWrapper = css`
   display: flex;
   width: 100%;
-  min-width: 278px;
 
   //height: 68px;
-  height: 3.542vw; 
+  height: 3.542vw;
   //padding: 10px 18px;
-  padding: 0.521vw 0.9375vw; 
+  padding: 0.521vw 0.9375vw;
   // gap: 10px;
   // border-radius: 10px;
   gap: 0.521vw; //10px;
@@ -189,11 +188,16 @@ const ErrorMessageWrapper = styled.div`
   min-width: 216px;
   height: 0.625vw;
   //padding-top: 5px;
-  padding-top: 0.260vw;
+  padding-top: 0.26vw;
   padding-left: 0.9375vw; //18px;
   gap: 4px;
   border: none;
   background: none;
+
+  & > img {
+    width: 0.625vw;
+    height: 0.625vw;
+  }
 `;
 
 const ErrorMessage = styled.text`
@@ -209,13 +213,15 @@ const ErrorMessage = styled.text`
 
 const EyeIconWrapper = styled.div`
   display: flex;
-  position: relative;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
-  top: 2px;
   right: 0.521vw; //10px;
 
   & > img {
     margin-left: 0.521vw; //10px;
+    width: 1.3vw;
+    height: 1.3vw;
   }
 
   & > button {
@@ -232,7 +238,7 @@ const CheckDuplicated = styled.button`
   //height: 24px;
   height: 1.25vw;
   //padding: 4px 5px;
-  padding: 0.208vw 0.260vw;
+  padding: 0.208vw 0.26vw;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -372,7 +378,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
 
   const XCircle = () => {
     return (
-        <img
+      <img
         src="../../designImage/textField/XCircle.png"
         width="24px"
         height="24px"
@@ -385,6 +391,9 @@ function TextFieldBox(props: TextFieldBoxProps) {
 
   useEffect(() => {
     if (type === 'password') setTextType('password');
+
+    if (value === '') setState('default');
+    else setState('filled');
   }, []);
 
   useEffect(() => {
@@ -424,7 +433,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
           <>
             <MessageBox isCheckDuplicated={isCheckDuplicated}>
               {helpMessage && <HelpMessage>{helpMessage}</HelpMessage>}
-              <Input value={value} onChange={rest.onChange} type={textType} autoFocus onKeyDown={rest.onKeyDown}/>
+              <Input value={value} onChange={rest.onChange} type={textType} autoFocus onKeyDown={rest.onKeyDown} />
             </MessageBox>
             {textType === 'password' ? (
               <EyeIconWrapper>
@@ -461,9 +470,9 @@ function TextFieldBox(props: TextFieldBoxProps) {
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
                   {valid ? (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
+                    <img src="../../designImage/textField/CheckCircle96.png" />
                   ) : (
-                    <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                    <img src="../../designImage/textField/AlertCircle.png" />
                   )}
                 </EyeIconWrapper>
               ) : textType === 'text' ? (
@@ -471,19 +480,19 @@ function TextFieldBox(props: TextFieldBoxProps) {
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
                   {valid ? (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
+                    <img src="../../designImage/textField/CheckCircle96.png" />
                   ) : (
-                    <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                    <img src="../../designImage/textField/AlertCircle.png" />
                   )}
                 </EyeIconWrapper>
               ) : (
-                <>
+                <EyeIconWrapper>
                   {valid ? (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="24px" height="24px" />
+                    <img src="../../designImage/textField/CheckCircle96.png" />
                   ) : (
-                    <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                    <img src="../../designImage/textField/AlertCircle.png" />
                   )}
-                </>
+                </EyeIconWrapper>
               )}
             </IconWrapper>
           </>
@@ -493,15 +502,17 @@ function TextFieldBox(props: TextFieldBoxProps) {
             {textType === 'password' ? (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
-                <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                <img src="../../designImage/textField/AlertCircle.png" />
               </EyeIconWrapper>
             ) : textType === 'text' ? (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
-                <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                <img src="../../designImage/textField/AlertCircle.png" />
               </EyeIconWrapper>
             ) : (
-              <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+              <EyeIconWrapper>
+                <img src="../../designImage/textField/AlertCircle.png" />
+              </EyeIconWrapper>
             )}
             {/* <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" /> */}
           </>
