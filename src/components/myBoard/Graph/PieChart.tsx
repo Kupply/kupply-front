@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   width: 27.92vw;
   height: 40.75vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid #dfdfdf;
   fill: var(--, radial-gradient(230.3% 140.56% at 0% 1.23%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%));
   stroke-width: 1px;
