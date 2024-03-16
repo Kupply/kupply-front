@@ -111,7 +111,7 @@ const AppliWrapper = styled.div`
   height: 8.91vw;
 
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
   backdrop-filter: blur(12px);
 
@@ -137,7 +137,7 @@ const MockWrapper = styled.div`
   width: 16.25vw;
   height: 8.12vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
   backdrop-filter: blur(12px);
   position: relative;

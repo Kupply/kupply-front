@@ -26,15 +26,21 @@ const MyBoardPage = () => {
     console.log('2지망 선택');
   }, [onViewMajor]);
 
-  const [scrollY, setScrollY] = useState(0); // 배경 이미지 + 프로필 박스 화면 따라오기
+  const [scrollY, setScrollY] = useState(window.scrollY + 20); // 배경 이미지 + 프로필 박스 화면 따라오기
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      let newPositionY = window.scrollY + 20;
+      if (newPositionY < 0) {
+        newPositionY = 0;
+      }
+      if (newPositionY > 850) {
+        newPositionY = 800;
+      }
+      setScrollY(newPositionY);
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -399,7 +405,7 @@ const Wrapper = styled.div`
   //background: black;
 
   background-image: url('designImage/myBoard/MyBoardBackground.png');
-  background-size: 100vw 1027px;
+  background-size: 100vw 100vh;
   background-repeat: no-repeat;
   background-position: 0px;
 
@@ -410,6 +416,7 @@ const ProfileWrapper = styled.div`
   position: relative;
   display: flex;
   margin-left: 6.77vw;
+  z-index: 100;
 `;
 
 const MainWrapper = styled.div`
