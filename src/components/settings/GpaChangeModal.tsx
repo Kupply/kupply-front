@@ -1,4 +1,4 @@
-import ModalLarge from "../base/ModalLarge";
+import ModalMedium from "../base/ModalLarge";
 import Typography from "../../assets/Typography";
 import styled from "styled-components";
 import { settingsModalState } from "../../store/atom";
@@ -16,7 +16,7 @@ export function GpaChangeModal(){
 
   return (
     <Main>
-      <ModalLarge
+      <ModalMedium
             onClickToggleModal={() => {
               setModalOpen(!modalOpen);
             }}
@@ -57,7 +57,8 @@ export function GpaChangeModal(){
                 <div
                   style={{ marginTop: '1.5625vw'}}
                   onClick={() => {
-                    thirdSubmit();
+                    thirdSubmit(); 
+                    setModalOpen(false);
                   }}
                 >
                   <Button01 
@@ -68,7 +69,7 @@ export function GpaChangeModal(){
                 </div>
               </div>
             </AlertWrapper>
-          </ModalLarge>
+          </ModalMedium>
     </Main>
   )
 }
@@ -104,7 +105,7 @@ const AlertWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 32.708vw;
-  height: 41.458vw;
+  height: auto;
   align-items: center;
   text-align: center;
   margin: auto auto;
@@ -112,7 +113,6 @@ const AlertWrapper = styled.div`
 
 const Main = styled.main`
   width: 42.3958vw;
-  margin-top: 5.729vw;
   display: flex;
   flex-direction: column;
   align-items: center;

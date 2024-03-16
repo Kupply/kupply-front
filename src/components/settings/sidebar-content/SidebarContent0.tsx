@@ -13,7 +13,6 @@ export function SidebarContent0(){
   const [isApplied, setIsApplied] = useRecoilState(isAppliedState);
   const {firstSubmit} = useSubmit0();
 
-  // 각 input이 validated되었는지의 여부가 없음 firstSubmit이 validated되었을 때 가능하도록?
   useStudentIdVerification('settings');
   
   return (

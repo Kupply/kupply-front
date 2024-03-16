@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState, errorMessageState,  userSettingsState } from "../store/atom";
 import { useEffect, useState } from "react";
 import { users } from "../admin/_mock/user";
@@ -8,6 +8,7 @@ type verificationProps = 'signUp' | 'settings';
 export function useEmailVerification(locationUsed: verificationProps){
   
   const [ID, setID] = useRecoilState(locationUsed === 'signUp' ? userState('kuEmail') : userSettingsState('loginedUser'));
+  console.log(ID);
   const [idVerified, setIdVerified] = useState(false);
 
   const IDPattern = /.+@korea\.ac\.kr$/;
@@ -33,9 +34,13 @@ export function useEmailVerification(locationUsed: verificationProps){
 export function useStudentIdVerification(locationUsed: verificationProps){
   const [stdId, setStdId] = useRecoilState(locationUsed === 'signUp' ? userState('studentId') : userSettingsState('studentId'));
   const [stdIdVerified, setStdIdVerified] = useState(false);
+  
 
   useEffect(() => {
     const passwordCheck = /^\d{10}$/;
+    console.log('stdId', stdId);
+    console.log(localStorage.getItem('studentId'));
+    console.log('stdId again', stdId);
     if (stdId.infoState === 'filled') {
       if (!passwordCheck.test(stdId.info)){
         setStdId((prev) => ({...prev, infoState: 'error'}));
@@ -130,9 +135,9 @@ export function useNicknameVerification(locationUsed: verificationProps){
   const [nickname, setNickname] = useRecoilState(locationUsed === 'signUp' ? userState('nickname') : userSettingsState('nickname'));
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageState);
   const [nicknameVerified, setNicknameVerified] = useState(false);
-
+  
+  // 문제는 처음에 
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
-  // 닉네임 제한 10->7자 수정
   useEffect(() => {
     if ((nickname.info.length === 1 || nickname.info.length > 7) && nickname.infoState !== 'focused') {
       setNickname((prev) => ({...prev, infoState: 'error'}));
@@ -166,6 +171,7 @@ export function useNicknameVerification(locationUsed: verificationProps){
   useEffect(() => {
     setNickname((prev) => ({...prev, infoCheck: 'default'}));
   }, [nickname.info]);
+
 
   //중복 체크의 결과에 따라 nicknameState가 바뀐다.
   useEffect(() => {

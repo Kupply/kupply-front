@@ -35,8 +35,8 @@ export const join = async (role: string) => {
   if (role === 'passer') {
     await client.post('/auth/join', {
       ...commonData,
-      passSemester: sessionStorage.getItem('passerSemester'),
-      passGPA: parseFloat(sessionStorage.getItem('passerGPA') || ''),
+      passSemester: sessionStorage.getItem('passSemester'),
+      passGPA: parseFloat(sessionStorage.getItem('passGPA') || ''),
       secondMajor: sessionStorage.getItem('secondMajor'),
     });
   } else {
@@ -147,8 +147,8 @@ export function useSignUp4Handler(){
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
     sessionStorage.removeItem('secondMajor');
-    sessionStorage.removeItem('passerGPA');
-    sessionStorage.removeItem('passerSemester');
+    sessionStorage.removeItem('passGPA');
+    sessionStorage.removeItem('passSemester');
   }, []);
   
   // buttonActive에서만 작동 

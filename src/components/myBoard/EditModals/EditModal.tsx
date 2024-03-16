@@ -1,6 +1,6 @@
-import { editModalState, errorMessageState, isGpaChangedState, userSettingsState } from "../../../store/atom";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { useState } from "react";
+import { editModalState, errorMessageState, gpaSettingsState, isGpaChangedState, semesterSettingsState, userProfileState, userSettingsState } from "../../../store/atom";
+import { useRecoilState, useResetRecoilState, useRecoilValue } from "recoil";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import HeaderBar from "./HeaderBar";
 import Typography from "../../../assets/Typography";
@@ -12,6 +12,8 @@ import CurrentModal2 from "./currentModal/Modal2";
 import CurrentModal3 from "./currentModal/Modal3";
 import Button01 from "../../../assets/buttons/Button01";
 import AlertIconExclamation from "../../../assets/icons/AlertIconExclamation";
+import { useNavigate } from 'react-router-dom';
+import client from "../../../utils/HttpClient";
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -22,16 +24,86 @@ export interface ModalProps {
 
 export default function EditModal(props: ModalProps){
   const { isOpenModal, setOpenModal, onClickModal, isApplied } = props;
+  const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   useResetRecoilState(isGpaChangedState);
   const [isGpaChanged, setIsGpaChanged] = useRecoilState(isGpaChangedState);
   const [currentModal, setCurrentModal] = useRecoilState(editModalState);
+  const originNickname = useRef<string>(localStorage.getItem('nickname'));
+  const originstdId = useRef<string>(localStorage.getItem('studentId'));
+  const originFirstMajor = useRef<string>(localStorage.getItem('firstMajor'));
+  const originHopeMajor1 = useRef<string>(localStorage.getItem('hopeMajor1'));
+  const originHopeMajor2 = useRef<string>(localStorage.getItem('hopeMajor2'));
+  const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
+  const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
+  const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
+  const originHopeSemester1 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
+  const originHopeSemester2 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
+  const originHopeSemester3 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
+  const originUserProfilePic = useRef<string>(localStorage.getItem('userProfilePic'));
 
-  const onClickSubmit = () => {};
-  // 아직제대로 구간을 나누지는 못했지만...
-  // isOpenModal && isSubmitted && isGpaChanged &&
-  // isOpenModal && !isSubmitted
-  // isGpaChanged 인식하는데 지금 MoveButton제대로 안만들어서 isSubmitted가 인식이 안되어서
+  const nickname = useRecoilValue(userSettingsState('nickname'));
+  const stdId = useRecoilValue(userSettingsState('studentId'));
+  const firstMajor = useRecoilValue(userSettingsState('firstMajor'));
+  const hopeMajor1 = useRecoilValue(userSettingsState('hopeMajor1'));
+  const hopeMajor2 = useRecoilValue(userSettingsState('hopeMajor2'));
+  const GPA = useRecoilValue(gpaSettingsState('candidate'));
+  const hopeSemester = useRecoilValue(semesterSettingsState('candidate'));
+  const userProfile = useRecoilValue(userProfileState);
+
+  const onClickSubmit = async () => {
+    let updateData = {};
+
+    if (originNickname.current !== nickname.info) {
+      updateData = { ...updateData, newNickname: nickname.info };
+    }
+    if (originstdId.current !== stdId.info) {
+      updateData = { ...updateData, newStudentId: stdId.info };
+    }
+    if (originFirstMajor.current !== firstMajor.info) {
+      updateData = { ...updateData, newFirstMajor: firstMajor.info };
+    }
+    if (originHopeMajor1.current !== hopeMajor1.info) {
+      updateData = { ...updateData, newHopeMajor1: hopeMajor1.info };
+    }
+    if (originHopeMajor2.current !== hopeMajor2.info) {
+      updateData = { ...updateData, newHopeMajor2: hopeMajor2.info };
+    }
+    if (originGPA1.current !== GPA.num1 || originGPA2.current !== GPA.num2 || originGPA3.current !== GPA.num3) {
+      const newGpa = parseFloat(GPA.num1 + '.' + GPA.num2 + GPA.num3);
+      const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
+
+      if (Math.abs(oldGpa - newGpa) >= 1.5) {
+        alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
+        navigate('/myboard');
+      } else {
+        updateData = { ...updateData, newCurGPA: newGpa };
+      }
+    }
+    if (
+      originHopeSemester1.current !== hopeSemester.num1 ||
+      originHopeSemester2.current !== hopeSemester.num2 ||
+      originHopeSemester3.current !== hopeSemester.num3
+    ) {
+      const newHopeSemester = '20' + hopeSemester.num1 + hopeSemester.num2 + '-' + hopeSemester.num3;
+      updateData = { ...updateData, newHopeSemester: newHopeSemester };
+    }
+    if (originUserProfilePic.current !== userProfile.pic) {
+      updateData = { ...updateData, newProfilePic: userProfile.pic };
+    }
+
+    if (Object.keys(updateData).length !== 0) {
+      try {
+        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        await client.post('/user/updateMe', updateData);
+
+        window.location.reload(); // 페이지 새로고침.
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (

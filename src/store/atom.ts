@@ -72,11 +72,12 @@ export const userState = atomFamily<InfoState, string>({
 
 export const userSettingsState = atomFamily<InfoState, string>({
   key: "userSettingsState",
-  default: (kind: string) => ({
-    info: localStorage.getItem(kind) || '',
+  default: (kind: string) => {
+    return {
+    info: localStorage.getItem(kind) || 'whatisthis',
     infoState: 'default',
     infoCheck: 'default'
-  })
+  }}
 });
 
 type errorMessageType = {
@@ -127,9 +128,9 @@ export type userType = 'candidate' | 'passer';
 export const gpaState = atomFamily<GpaSemesterType, userType>({
   key: "GpaState",
   default: (kind: userType) => ({
-    num1: sessionStorage.getItem(`${kind}GPA`)?.charAt(0) || '',
-    num2: sessionStorage.getItem(`${kind}GPA`)?.charAt(2) || '',
-    num3: sessionStorage.getItem(`${kind}GPA`)?.charAt(3) || '',
+    num1: sessionStorage.getItem(kind === 'candidate' ? 'curGPA' : `passGPA`)?.charAt(0) || '',
+    num2: sessionStorage.getItem(kind === 'candidate' ? 'curGPA' : `passGPA`)?.charAt(2) || '',
+    num3: sessionStorage.getItem(kind === 'candidate' ? 'curGPA' : `passGPA`)?.charAt(3) || '',
   })
 })
 
@@ -137,9 +138,9 @@ export const gpaState = atomFamily<GpaSemesterType, userType>({
 export const gpaSettingsState = atomFamily<GpaSemesterType, userType>({
   key: "GpaSettingsState",
   default: (kind: userType) => ({
-    num1: localStorage.getItem(`${kind}GPA`)?.charAt(0) || '',
-    num2: localStorage.getItem(`${kind}GPA`)?.charAt(2) || '',
-    num3: localStorage.getItem(`${kind}GPA`)?.charAt(3) || '',
+    num1: localStorage.getItem(kind === 'candidate' ? 'curGPA' : `passGPA`)?.charAt(0) || '',
+    num2: localStorage.getItem(kind === 'candidate' ? 'curGPA' : `passGPA`)?.charAt(2) || '',
+    num3: localStorage.getItem(kind === 'candidate' ? 'curGPA' : `passGPA`)?.charAt(3) || '',
   })
 })
 
@@ -147,9 +148,9 @@ export const gpaSettingsState = atomFamily<GpaSemesterType, userType>({
 export const semesterState = atomFamily<GpaSemesterType, userType>({
   key: "SemesterState",
   default: (kind: userType) => ({
-    num1: sessionStorage.getItem(`${kind}Semester`)?.charAt(2) || '',
-    num2: sessionStorage.getItem(`${kind}Semester`)?.charAt(3) || '',
-    num3: sessionStorage.getItem(`${kind}Semester`)?.charAt(5) || '',
+    num1: sessionStorage.getItem(kind === 'candidate' ? 'hopeSemester' : 'passSemester')?.charAt(2) || '',
+    num2: sessionStorage.getItem(kind === 'candidate' ? 'hopeSemester' : 'passSemester')?.charAt(3) || '',
+    num3: sessionStorage.getItem(kind === 'candidate' ? 'hopeSemester' : 'passSemester')?.charAt(5) || '',
   })
 })
 
@@ -157,9 +158,9 @@ export const semesterState = atomFamily<GpaSemesterType, userType>({
 export const semesterSettingsState = atomFamily<GpaSemesterType, userType>({
   key: "SemesterSettingsState",
   default: (kind: userType) => ({
-    num1: localStorage.getItem(`${kind}Semester`)?.charAt(2) || '',
-    num2: localStorage.getItem(`${kind}Semester`)?.charAt(3) || '',
-    num3: localStorage.getItem(`${kind}Semester`)?.charAt(5) || '',
+    num1: localStorage.getItem(kind === 'candidate' ? 'hopeSemester' : 'passSemester')?.charAt(2) || '',
+    num2: localStorage.getItem(kind === 'candidate' ? 'hopeSemester' : 'passSemester')?.charAt(3) || '',
+    num3: localStorage.getItem(kind === 'candidate' ? 'hopeSemester' : 'passSemester')?.charAt(5) || '',
   })
 })
 

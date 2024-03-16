@@ -101,9 +101,9 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
 
   // candidate인지 passer인지에 따라 달라져야 할듯
-  const originGPA1 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(0) || '');
-  const originGPA2 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(2) || '');
-  const originGPA3 = useRef<string>(localStorage.getItem(`${userType}GPA`)?.charAt(3) || '');
+  const originGPA1 = useRef<string>(localStorage.getItem(userType === 'candidate' ? 'curGPA' : 'passGPA')?.charAt(0) || '');
+  const originGPA2 = useRef<string>(localStorage.getItem(userType === 'candidate' ? 'curGPA' : 'passGPA')?.charAt(2) || '');
+  const originGPA3 = useRef<string>(localStorage.getItem(userType === 'candidate' ? 'curGPA' : 'passGPA')?.charAt(3) || '');
 
   useEffect(()=>{
     if(+userStdId.info.slice(2, 4) === 24){
@@ -167,7 +167,7 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
 
   // toNext는 signUp에서만 사용
   if(toNext){
-    sessionStorage.setItem(`${userType}GPA`, num1 + '.' + num2 + num3);
+    sessionStorage.setItem(userType === 'candidate' ? 'curGPA' : 'passGPA', num1 + '.' + num2 + num3);
   }
 
   return (
@@ -219,7 +219,7 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
 
   // toNext는 signUp에서만 활용
   if(toNext){
-    sessionStorage.setItem(`${userType}Semester`, '20' + num1 + num2 + '-' + num3);
+    sessionStorage.setItem(userType === 'candidate' ? 'hopeSemester' : 'passSemester', '20' + num1 + num2 + '-' + num3);
   }
 
   return (

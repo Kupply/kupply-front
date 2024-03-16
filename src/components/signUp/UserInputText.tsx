@@ -16,7 +16,7 @@ const userTypeMapping: Record<UserTypeOptions, string> = {
 }
 
 interface UserInputTextProps{
-  userInfoType: UserTypeOptions | 'candidateGPA' | 'passerGPA' | 'candidateSemester' | 'passerSemester';
+  userInfoType: UserTypeOptions | 'candidateGPA' | 'passGPA' | 'candidateSemester' | 'passSemester';
 }
 
 export const UserInputText: React.FC<UserInputTextProps> = ({userInfoType}) =>{
@@ -59,7 +59,7 @@ export const UserInputText: React.FC<UserInputTextProps> = ({userInfoType}) =>{
                 </>
               );
             case 'candidateGPA':
-            case 'passerGPA':
+            case 'passGPA':
               return (
                 <>
                   <Typography size="0.9375vw">{userInfoType === 'candidateGPA' ? '현재' : '지원 당시의'}&nbsp;</Typography>
@@ -70,7 +70,7 @@ export const UserInputText: React.FC<UserInputTextProps> = ({userInfoType}) =>{
                 </>
               );
             case 'candidateSemester':
-            case 'passerSemester':
+            case 'passSemester':
               return(
                 <>
                   <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>

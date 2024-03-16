@@ -167,14 +167,14 @@ export function SignUp4PagePasser(){
           <UserInput userInfoType="doubleMajor" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="passerGPA"/>
+          <UserInputText userInfoType="passGPA"/>
           <GPAVerification 
             userType="passer" 
             setState={setGpaState}
             toNext={next}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="passerSemester"/>
+          <UserInputText userInfoType="passSemester"/>
           <SemesterVerification
             userType="passer"
             setState={setSemesterState}
