@@ -9,6 +9,8 @@ import { majorTargetList } from "../../common/MajorTarget";
 import { inputState } from "../../pages/signUp/SignUp4Page";
 import { majorNameMappingBySID } from '../../utils/Mappings';
 
+type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
+
 export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'id' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
 
 // localStorage이나 sessionStorage에서 가져올 때 각 페이지별로 설정해 둔 이름들이 모두 다른 관계로 
@@ -23,6 +25,8 @@ interface UserInputProps {
   userInfoTypeManual?: string | undefined;
   locationUsed?: 'signUp' | 'settings';
   onCustomFunction?: () => void;
+  isCheckDuplicated?: boolean;
+  onCheckDuplicated?: (value: StateOptions) => void;
 }
 
 const placeholderMapping: Record<UserTypeOptions, string> = {
@@ -69,7 +73,7 @@ const errorMessageMapping: Record<UserTypeOptions, string> = {
 
 const optionList = majorTargetList;
 
-export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, userInfoTypeManual=undefined, locationUsed='signUp', onCustomFunction}) => {
+export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, children, setStateValid, userInfoTypeManual=undefined, locationUsed='signUp', onCustomFunction, isCheckDuplicated, onCheckDuplicated}) => {
 
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(locationUsed === 'signUp' ? userState(userInfoTypeManual || userInfoType) : 
@@ -162,6 +166,7 @@ export const UserInput:  React.FC<UserInputProps> = ({ userInfoType, toNext, chi
             onCustomFunction?.();
           }
         }}
+        isCheckDuplicated={userInfoType === 'nickname' ? true : false}
       />
       }
     </>

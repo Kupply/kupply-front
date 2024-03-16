@@ -55,7 +55,7 @@ const StepItem = styled.div<StepProps>`
     background: ${(props) => (props.stepType === 'inactive' ? '#fcecee' : '#e57c90')};
     position: absolute;
     width: 100%;
-    height: 4px;
+    height: 0.208vw;
     right: 50%;
     top: 33.3333%;
     transform: translateY(100%);
@@ -64,8 +64,8 @@ const StepItem = styled.div<StepProps>`
 
 // 원(step) 디자인
 const Step = styled.div<StepProps>`
-  width: 1.875rem; // 16xp = 1rem 기준
-  height: 1.875rem;
+  width: 1.563vw; // 16xp = 1rem 기준 1.875rem;
+  height: 1.563vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,7 +113,7 @@ const Step = styled.div<StepProps>`
 
 const ProgressBarContainer = styled.div`
   width: 50.875vw; // 100%
-  height: 30px;
+  height: auto;
   display: flex;
   justify-content: space-between;
 `;

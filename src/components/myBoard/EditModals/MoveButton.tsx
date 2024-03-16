@@ -35,6 +35,7 @@ export default function MoveButton(props: MoveButtonProps){
           setIsSubmitted(true);
           if (!isGpaChanged) onClickSubmit();
         }}
+        style={{background: '#D85888'}}
       >
         저장하기
       </Button03>

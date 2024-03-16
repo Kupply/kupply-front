@@ -244,9 +244,8 @@ export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({
   );
   useEffect(() => {
     if (
-      !!currentSemester1 &&
-      +currentSemester1 > 1 &&
-      !!currentSemester2 
+      !!currentSemester1 && !!currentSemester2 && 
+      (+currentSemester1 >= 1 && +currentSemester1 <=4) && (+currentSemester2 === 1 || +currentSemester2 === 2)
     ) {
       setState?.('complete');
     } else{
@@ -257,8 +256,8 @@ export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({
   return (
     <VerifiBoxWrapper>
       <TextAreaBox name="currentSemester-1" value={currentSemester1} setValue={setCurrentSemester1} />
-      <div style={{ marginTop: '30px' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="2" viewBox="0 0 14 2" fill="none">
+      <div style={{ marginTop: '1.263vw', width: '0.729vw', height: '0.1042vw' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 2" fill="none">
           <path d="M0 1H14" stroke="#B9B9B9" />
         </svg>
       </div>

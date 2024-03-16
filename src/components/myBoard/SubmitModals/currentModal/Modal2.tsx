@@ -13,23 +13,22 @@ export default function CurrentModal2(){
   const [isSubmitted, setIsSubmitted] = useRecoilState(applicationSubmittedState);
   return (
     <>
-    <ContentsWrapper>
       <NotSubmittedWrapper currentStep={3}>
       <SubContentsWrapper>
-        <div style={{ position: 'absolute', left: '4.844vw', top: '13.958vw' }}>
+        <div style={{ position: 'absolute', left: '4.844vw', top: '13.958vw', display: 'flex', whiteSpace: 'nowrap', flexDirection: 'row' }}>
           <Typography
             size="0.9375vw"
-            style={{ color: 'var(--Main-Black, #141414)', opacity: 0.8, fontWeight: '700' }}
+            style={{ color: 'var(--Main-Black, #141414)', opacity: 0.8, fontWeight: '700', marginRight: '10px' }}
           >
             학업계획서 첨부하기
-          </Typography>{"  "}
+          </Typography>
           <Typography
             size="0.9375vw"
             bold="500"
             style={{
               color: 'var(--A8_Grey-4, #A8A8A8)',
               opacity: 0.8,
-              marginTop: '-0.9375vw',
+              marginTop: '-0.1vw',
             }}
           >
             (선택)
@@ -42,7 +41,6 @@ export default function CurrentModal2(){
         </div>
       </SubContentsWrapper>
     </NotSubmittedWrapper>
-    </ContentsWrapper>
     <div style={{ position: 'absolute', top: '33.333vw', left: 0, height: '5.208vw' }}>
       <CompleteMockApplicationButton
         active={true}
@@ -64,7 +62,6 @@ const SubContentsWrapper = styled.div`
   gap: 0.521vw;
   padding: auto;
   //padding-top: 36.5px;
-  padding-top: 1.901vw;
 `;
 
 const UploadBox = styled.div`
@@ -77,12 +74,4 @@ const UploadBox = styled.div`
   border-radius: 0.521vw;
   border: 1px dashed #e57c90;
   background: var(--White, #fff);
-`;
-
-const ContentsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  //height: 796px;
-  height: 41.458vw;
 `;
