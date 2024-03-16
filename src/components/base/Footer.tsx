@@ -35,7 +35,7 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
           <Logo />
         </LogoWrapper>
         <Contents>
-          <ContentsWrapper justify="space-between" size="60%" maxSize="580px">
+          <ContentsWrapper justify="space-between" size="58%" maxSize="580px">
             <SiteMap>
               <Typography size="smallText" bold="600">
                 사이트맵
@@ -48,7 +48,7 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 <MenuButton onClick={handleSettingsClick}>환경설정</MenuButton>
               </MenuWrapper>
             </SiteMap>
-            <div style={{ width: '40%' }}>
+            <QNAWrapper>
               <Typography size="smallText" bold="600">
                 문의
               </Typography>
@@ -56,9 +56,9 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
               <Typography size="smallText" color="rgba(20, 20, 20, 0.70)">
                 kupply.devkor@gmail.com
               </Typography>
-            </div>
+            </QNAWrapper>
           </ContentsWrapper>
-          <ContentsWrapper size="40%" maxSize="480px">
+          <ContentsWrapper justify="flex-end" size="42%" maxSize="480px">
             <ShortcutWrapper>
               <ShortcutImage1 />
               <ShortcutContents>
@@ -68,7 +68,9 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 {/* <Link to="https://portal.korea.ac.kr/front/Intro.kpd" target="_blank">
                   <ConnectLink>바로가기</ConnectLink>
                 </Link> */}
-                <TextButton05 externalUrl="https://portal.korea.ac.kr/front/Intro.kpd">바로가기</TextButton05>
+                <TextButton05 fontSize="10px" externalUrl="https://portal.korea.ac.kr/front/Intro.kpd">
+                  바로가기
+                </TextButton05>
               </ShortcutContents>
             </ShortcutWrapper>
             <ShortcutWrapper>
@@ -80,7 +82,7 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 {/* <Link to="https://registrar.korea.ac.kr/eduinfo/info/major_double.do" target="_blank">
                   <ConnectLink>바로가기</ConnectLink>
                 </Link> */}
-                <TextButton05 externalUrl="https://registrar.korea.ac.kr/eduinfo/info/major_double.do">
+                <TextButton05 fontSize="10px" externalUrl="https://registrar.korea.ac.kr/eduinfo/info/major_double.do">
                   바로가기
                 </TextButton05>
               </ShortcutContents>
@@ -91,12 +93,12 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
           <HorizontalLine></HorizontalLine>
         </HorizentalWrapper>
         <BottomContentsWrapper>
-          <ContentsWrapper minSize="290px" maxSize="290px" size="25%" justify="flex-start" order="3">
+          <ContentsWrapper minSize="223px" maxSize="290px" size="25%" justify="flex-start" order="3">
             <Typography size="smallText" color="#A8A8A8">
               Copyright ⓒ 2023 kupply. all rights reserved.
             </Typography>
           </ContentsWrapper>
-          <ContentsWrapper size="20%" justify="flex-start" order="1">
+          <ContentsWrapper size="20%" minSize="127px" justify="flex-start" order="1">
             <MenuWrapper>
               <MenuButton
                 style={{ color: '#A8A8A8' }}
@@ -165,40 +167,49 @@ const FooterWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
-  max-width: 1920px; //2560px;
 
   background: #f9f9f9;
-  padding: 41px 6.67vw;
+  padding: 19px 3.34vw;
   box-sizing: border-box;
   position: bottom;
-  //margin-top: ;
-
-  @media screen and (max-width: 600px) {
-    padding: 19px 3.34vw;
-  }
 `;
 
 const ShortcutWrapper = styled.div`
   display: flex;
+  justify-content: center;
   height: 40.844px;
   gap: 8px;
+  margin-right: 8px;
 
   @media screen and (max-width: 600px) {
     width: 50%;
+    justify-content: flex-start;
     min-width: 150px;
   }
 `;
 
 const ShortcutImage1 = styled.div`
   width: 31px;
+  height: 40.844px;
   background-image: url('designImage/base/KuLogo1.png');
   background-size: cover;
+
+  @media screen and (max-width: 900px) {
+    width: 21px;
+    height: 27px;
+  }
 `;
 
 const ShortcutImage2 = styled.div`
   width: 31px;
+  height: 40.844px;
   background-image: url('designImage/base/KuLogo2.png');
   background-size: cover;
+
+  @media screen and (max-width: 900px) {
+    width: 21px;
+    height: 28px;
+  }
 `;
 
 const ShortcutContents = styled.div`
@@ -214,16 +225,38 @@ const ShortcutContents = styled.div`
     width: 40%;
     text-decoration: underline;
   }
+  @media screen and (max-width: 900px) {
+    div {
+      font-size: 11px;
+    }
+    gap: 6px;
+  }
   @media screen and (max-width: 600px) {
     width: 75%;
+    gap: 4px;
   }
 `;
 
 const SiteMap = styled.div`
   width: '60%';
   max-width: '350px';
+
+  @media screen and (max-width: 900px) {
+    div {
+      font-size: 11px;
+    }
+  }
 `;
 
+const QNAWrapper = styled.div`
+  width: 40%;
+
+  @media screen and (max-width: 900px) {
+    div {
+      font-size: 11px;
+    }
+  }
+`;
 // const ConnectLink = styled(Typography)<TypographyProps>`
 //   font-size: ${(props) => sizeMapping['smallText'][0]};
 //   font-weight: ${(props) => sizeMapping['smallText'][1]};
@@ -247,6 +280,12 @@ const MenuButton = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: 14px;
+
+  white-space: nowrap;
+
+  @media screen and (max-width: 900px) {
+    font-size: 11px;
+  }
 `;
 
 const MenuWrapper = styled.div`
@@ -254,9 +293,15 @@ const MenuWrapper = styled.div`
   justify-content: space-between;
 
   & > button {
-    margin-right: 16px;
+    margin-right: 0.83vw;
   }
 
+  @media screen and (max-width: 900px) {
+    button {
+      font-size: 11px;
+      white-space: nowrap;
+    }
+  }
   @media screen and (max-width: 600px) {
     justify-content: flex-start;
 
@@ -285,6 +330,12 @@ const ContentsWrapper = styled.div<{
   width: ${(props) => (props.size ? props.size : '50%')};
   min-width: ${(props) => (props.minSize ? props.minSize : '')};
   max-width: ${(props) => (props.maxSize ? props.maxSize : '')};
+
+  @media screen and (max-width: 900px) {
+    & > div {
+      font-size: 11px;
+    }
+  }
 
   @media screen and (max-width: 600px) {
     order: ${(props) => (props.order ? props.order : '')};
@@ -331,6 +382,11 @@ const ContentsTypoWrapper = styled.div<{ order?: string }>`
     margin: 0 4px;
   }
 
+  @media screen and (max-width: 900px) {
+    & > div {
+      font-size: 11px;
+    }
+  }
   @media screen and (max-width: 600px) {
     order: ${(props) => (props.order ? props.order : '')};
     width: 100%;

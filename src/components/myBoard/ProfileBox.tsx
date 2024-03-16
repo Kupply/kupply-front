@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import EditModal from './EditModals/OldEditModal';
+// import EditModal from './EditModals/OldEditModal';
+import EditModal from './EditModals/EditModal';
 import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
@@ -40,76 +41,133 @@ const ProfileBox = ({ userData }: { userData: any }) => {
   const closeModal = () => {
     setOpenEditModal(false);
   };
+  const adjustScrollPositionByWidth = (width: number, scrollPosition: number) => {
+    let maxScrollValue;
+
+    if (width < 600) {
+      maxScrollValue = 300;
+    } else if (width < 800) {
+      maxScrollValue = 400;
+    } else if (width < 1000) {
+      maxScrollValue = 500;
+    } else if (width < 1200) {
+      maxScrollValue = 600;
+    } else {
+      maxScrollValue = 800;
+    }
+
+    // 스크롤 위치 조정
+    return Math.min(Math.max(scrollPosition + 62.02, 0), maxScrollValue);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      let newPositionY = window.scrollY + 62.02;
-      if (newPositionY < 0) {
-        newPositionY = 0;
-      }
-      if (newPositionY > 850) {
-        newPositionY = 800;
-      }
+      const newPositionY = adjustScrollPositionByWidth(window.innerWidth, window.scrollY);
+      setScrollY(newPositionY);
+    };
+
+    const handleResize = () => {
+      const newPositionY = adjustScrollPositionByWidth(window.innerWidth, window.scrollY);
       setScrollY(newPositionY);
     };
 
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+
+    // 초기 로딩 시에도 스크롤 위치 조정
+    handleResize();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   return (
-    <Wrapper translateY={scrollY}>
-      <CharacterImage src={`designImage/character/rectProfile/${profilePic}.png`} alt="profile" />
-      <NickNameBox>
-        <NickNameText>{userData.userNickname}</NickNameText>
-        <RoleText>{userData.userRole === 'candidate' ? '도전자' : '합격자'} 님</RoleText>
-        <EditImage src="designImage/myBoard/Edit.svg" alt="edit" onClick={onClickEditModal} />
-      </NickNameBox>
-      <MajorTextBox>
-        <MajorText>
-          {major} {id}학번
-        </MajorText>
-      </MajorTextBox>
+    <>
+      <ModalBox>
+        {isOpenEditModal && (
+          <EditModal
+            isOpenModal={isOpenEditModal}
+            setOpenModal={setOpenEditModal}
+            onClickModal={closeModal}
+            isApplied={false} /* 임시로 false */
+          />
+        )}
+      </ModalBox>
 
-      {isOpenEditModal && (
-        <EditModal
-          isOpenModal={isOpenEditModal}
-          setOpenModal={setOpenEditModal}
-          onClickModal={closeModal}
-          isApplied={false} /* 임시로 false */
-        />
-      )}
+      <Wrapper translateY={scrollY}>
+        <CharacterImage src={`designImage/character/rectProfile/${profilePic}.png`} alt="profile" />
+        <NickNameBox>
+          <NickNameText>{userData.userNickname}</NickNameText>
+          <RoleText>{userData.userRole === 'candidate' ? '도전자' : '합격자'} 님</RoleText>
+          <EditImage src="designImage/myBoard/Edit.svg" alt="edit" onClick={onClickEditModal} />
+        </NickNameBox>
+        <MajorTextBox>
+          <MajorText>
+            {major} {id}학번
+          </MajorText>
+        </MajorTextBox>
 
-      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '10.63vw' }} />
-      <SubTitleBox style={{ top: '12.11vw' }}>
-        <IconImage src="designImage/myBoard/ProfileBoxMajorIcon.svg" alt="major" />
-        <SubTitleText>관심 전공</SubTitleText>
-      </SubTitleBox>
+        <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '10.63vw' }} />
+        <SubTitleBox style={{ top: '12.11vw' }}>
+          <IconImage src="designImage/myBoard/ProfileBoxMajorIcon.svg" alt="major" />
+          <SubTitleText>관심 전공</SubTitleText>
+        </SubTitleBox>
 
-      <InterestMajorBox>
-        <Card02 korName={major1} hopeMajor="1지망" />
-        <Card02 korName={major2} hopeMajor="2지망" />
-      </InterestMajorBox>
+        <InterestMajorBox>
+          {userData.hopeMajor2 !== '희망 없음' ? (
+            <>
+              <Card02 korName={major1} hopeMajor="1지망" />
+              <Card02 korName={major2} hopeMajor="2지망" />
+            </>
+          ) : (
+            <>
+              <Card02 korName={major1} hopeMajor="1지망" />
+            </>
+          )}
+        </InterestMajorBox>
+        {userData.hopeMajor2 !== '희망 없음' ? (
+          <>
+            <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '26.38vw' }} />
+            <SubTitleBox style={{ top: '27.85vw' }}>
+              <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
+              <SubTitleText>현재 내 학점</SubTitleText>
+              <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
+            </SubTitleBox>
 
-      <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '26.38vw' }} />
-      <SubTitleBox style={{ top: '27.85vw' }}>
-        <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
-        <SubTitleText>현재 내 학점</SubTitleText>
-        <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
-      </SubTitleBox>
+            <SubTitleBox style={{ top: '29.82vw' }}>
+              <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
+              <SubTitleText>희망 진입학기</SubTitleText>
+              <GPAText>{userData.hopeSemester}R</GPAText>
+            </SubTitleBox>
 
-      <SubTitleBox style={{ top: '29.82vw' }}>
-        <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
-        <SubTitleText>희망 진입학기</SubTitleText>
-        <GPAText>{userData.hopeSemester}R</GPAText>
-      </SubTitleBox>
+            <ApplyBox>
+              <CTA02 size="small" />
+            </ApplyBox>
+          </>
+        ) : (
+          <>
+            <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '21.38vw' }} />
+            <SubTitleBox style={{ top: '22.85vw' }}>
+              <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
+              <SubTitleText>현재 내 학점</SubTitleText>
+              <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
+            </SubTitleBox>
 
-      <ApplyBox>
-        <CTA02 size="small" />
-      </ApplyBox>
-    </Wrapper>
+            <SubTitleBox style={{ top: '24.82vw' }}>
+              <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
+              <SubTitleText>희망 진입학기</SubTitleText>
+              <GPAText>{userData.hopeSemester}R</GPAText>
+            </SubTitleBox>
+
+            <ApplyBox style={{ top: '27.28vw' }}>
+              <CTA02 size="small" />
+            </ApplyBox>
+          </>
+        )}
+      </Wrapper>
+    </>
   );
 };
 
@@ -169,6 +227,19 @@ const InterestMajorBox = styled.div`
 const ApplyBox = styled.div`
   position: absolute;
   top: 32.28vw;
+`;
+
+const ModalBox = styled.div`
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translate(-20%, -50%);
+  -moz-transform: translate(-20%, -50%);
+  -ms-transform: translate(-20%, -50%);
+  -o-transform: translate(-20%, -50%);
+  transform: translate(-20%, -50%);
+
+  z-index: 1;
 `;
 
 ///////////////// image /////////////////
