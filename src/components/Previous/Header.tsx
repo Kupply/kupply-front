@@ -64,6 +64,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin-bottom: 5.21vw;
 `;
 
 const Title = styled.div`
@@ -71,9 +73,12 @@ const Title = styled.div`
 `;
 
 const SearchBarWrapper = styled.div`
+  position: relative;
+  justify-content: center;
+
   margin-top: 2.5vw;
   width: 68.75vw;
-  max-width: 1382px;
+  max-width: 1320px;
 `;
 
 const TitleText = styled.div`
