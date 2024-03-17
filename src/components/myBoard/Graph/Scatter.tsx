@@ -40,8 +40,6 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
       curApplyNum,
     }));
 
-  console.log(filteredData);
-
   const maxValue = Math.max(...filteredData.map((item) => item.avgGpa));
   const maxYValue = Math.ceil(maxValue / 10) * 10 + 10;
   const minXValue = Math.min(...filteredData.map((item) => item.avgGpa));
