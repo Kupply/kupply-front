@@ -526,7 +526,7 @@ const KeywordDescriptionBox = styled.div`
   align-items: center;
   gap: 0.42vw;
   margin-left: 1.875vw;
-  margin-top: 23px;
+  margin-top: 1.2vw;
 `;
 
 const Description = styled.text`
@@ -586,7 +586,7 @@ const PasserGPAInfoWrapper = styled.div<{ keywordsLength: number }>`
   position: relative;
   width: 100%;
   max-width: 1665px;
-  height: 555px;
+  height: 40vw; // 555px;
   border: 1px solid #ffffff;
   border-radius: 5px;
   background-color: #ffffff99;
@@ -602,6 +602,8 @@ const PasserGPAInfoDetailsWrapper = styled.div`
   gap: 2.08vw;
   margin-left: 1.3vw;
   margin-top: 32px;
+
+  height: 30vw;
 `;
 
 const PasserGPAInfoGraphWrapper = styled.div`
@@ -613,8 +615,11 @@ const PasserGPAInfoGraphWrapper = styled.div`
 const PasserGPAInfoAnalyticsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 29px;
+  // row-gap: 29px;
+  row-gap: 1.51vw;
   margin-top: 18px;
+
+  height: 29vw;
 `;
 
 const PasserGPAInfoBox = styled.div`
@@ -625,33 +630,34 @@ const PasserGPAInfoBox = styled.div`
 
 const PasserMeanGPAIcon = styled.div`
   width: 8px;
-  height: 80px;
+  //height: 80px;
+  height: 5.2vw;
   flex-shrink: 0;
-  border-radius: 28px;
+  border-radius: 1.46vw;
   background: var(--Secondary-V, #f5bdbd);
 `;
 
 const PasserMedianGPAIcon = styled.div`
   width: 8px;
-  height: 80px;
+  height: 5.2vw;
   flex-shrink: 0;
-  border-radius: 28px;
+  border-radius: 1.46vw;
   background: #e96d6d;
 `;
 
 const PasserModeGPAIcon = styled.div`
   width: 8px;
-  height: 80px;
+  height: 5.2vw;
   flex-shrink: 0;
-  border-radius: 28px;
+  border-radius: 1.46vw;
   background: #d85888;
 `;
 
 const PasserMinGPAIcon = styled.div`
   width: 8px;
-  height: 80px;
+  height: 5.2vw;
   flex-shrink: 0;
-  border-radius: 28px;
+  border-radius: 1.46vw;
   background: var(--Blue, #313b80);
 `;
 
@@ -661,7 +667,7 @@ const PasserGPAInfoTextBox = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
 
-  row-gap: 15px;
+  row-gap: 0.78125vw;
 `;
 
 const KeywordWrapper = styled.div`
@@ -670,7 +676,7 @@ const KeywordWrapper = styled.div`
   flex-direction: column;
   max-width: 1665px;
   width: 100%;
-  height: 126px;
+  height: 6.5625vw;
   gap: 0.83vw;
   background-color: #ffffff99;
   box-shadow: 0px 4px 200px #1414140d;
@@ -696,7 +702,7 @@ const KeywordBox = styled.div`
   display: inline-flex;
   gap: 8px;
   justify-content: center;
-  padding: 12px 26px;
+  padding: 0.625vw 1.35vw;
   position: relative;
 `;
 

@@ -99,7 +99,7 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: left;
 
   font-family: Pretendard;
