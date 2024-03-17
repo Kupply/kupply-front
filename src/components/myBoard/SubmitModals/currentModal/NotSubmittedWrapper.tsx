@@ -12,9 +12,8 @@ export default function NotSubmittedWrapper(props: NotSubmittedWrapperProps){
   const {currentStep, children} = props;
 
   return (
-    <>
+    <ContentsWrapper>
     <ProgressBarWrapper style={{ position: 'absolute', top: '6.25vw', left: '-4.297vw' }}>
-      Hello
       <MultiStepProgressBar numberOfSteps={3} currentStep={currentStep} complete={true} />
       <ProgressBarTitle>
         <div style={{ textAlign: 'left', paddingLeft: '7.031vw', lineHeight: '136.111%' }}>
@@ -63,7 +62,7 @@ export default function NotSubmittedWrapper(props: NotSubmittedWrapperProps){
       </ProgressBarWrapper>
       <DividingLine/>
         {children}
-    </>
+    </ContentsWrapper>
   )
 }
 
@@ -88,10 +87,22 @@ const ProgressBarTitle = styled.text`
 const DividingLine = styled.div`
   //width: 860px;
   widht: 44.792vw;
-  height: 1px;
+  height: 30px;
   background: #dfdfdf;
   position: absolute;
   left: 0px;
   //top: 232px;
   top: 12.083vw;
+`;
+
+const ContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 41.458vw;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5vw;
+  position: absolute;
+  left: 0vw;
 `;

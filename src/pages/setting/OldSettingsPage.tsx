@@ -87,6 +87,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
   });
 
   const [name, setName] = useState<string>(localStorage.getItem('name') || '');
+  console.log('firstPrintName', name);
   const [nameState, setNameState] = useState<StateOptions>('filled');
   const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('filled');

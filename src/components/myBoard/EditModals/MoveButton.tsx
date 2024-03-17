@@ -12,7 +12,7 @@ interface MoveButtonProps{
   style?: React.CSSProperties
 };
 
-// 문제가 MoveButton이 이들을 props로 받는다고 했는데 그러면 EditModal에서 받은걸 Modal0으로 옮기고 다시 옮기는 상황이 발생함...진짜 싫다.
+
 export default function MoveButton(props: MoveButtonProps){
   const {isOpenModal, setOpenModal, isApplied, onClickSubmit, style } = props;
   const [isSubmitted, setIsSubmitted] = useRecoilState(editSubmittedState);
@@ -33,8 +33,12 @@ export default function MoveButton(props: MoveButtonProps){
         onClick={() => {
           // setOpenModal(!isOpenModal);
           setIsSubmitted(true);
-          if (!isGpaChanged) onClickSubmit();
+          console.log('Hello There');
+          console.log(isGpaChanged); // 학점이 변경되어서 submit을 못한다??
+          // if (!isGpaChanged.changed) onClickSubmit();
+          onClickSubmit();
         }}
+        style={{background: '#D85888'}}
       >
         저장하기
       </Button03>

@@ -37,22 +37,22 @@ function SignUpAlertLarge01({
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon03 size={'60px'} />
+          <Icon03 size={'3.125vw'} />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size={'60px'} />
+          <Icon02 size={'3.125vw'} />
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '130px' }}></div>
-      <AlertIconExclamation width="113px" height="113px" />
-      <Typography size={'24px'} bold={'700'} color="#141414" style={{ marginTop: '25px' }}>
+      <div style={{ height: '6.771vw' }}></div>
+      <AlertIconExclamation width="5.885vw" height="5.885vw" />
+      <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
         아직 인증번호를 받지 못하셨나요?
       </Typography>
-      <Typography size={'18px'} color="#141414" style={{ marginTop: '24px' }}>
+      <Typography size={'0.9375vw'} color="#141414" style={{ marginTop: '1.25vw' }}>
         새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
       </Typography>
       <ActionWrapper>
@@ -79,8 +79,8 @@ function SignUpAlertLarge01({
 
 const TopButton = styled.button`
   display: flex;
-  width: 60px;
-  height: 60px;
+  width: 3.125vw;
+  height: 3.125vw;
   justify-content: center;
   align-items: center;
 
@@ -92,8 +92,8 @@ const ActionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  margin-top: 72px;
+  gap: 1.5625vw;
+  margin-top: 3.75vw;
 `;
 
 const ButtonWrapper = styled.div`

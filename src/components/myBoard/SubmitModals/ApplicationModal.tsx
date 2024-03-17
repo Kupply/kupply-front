@@ -153,7 +153,7 @@ export default function ApplicationModal(props: ModalProps){
         {!isSubmitted ? 
         <>
         <ModalTitleWrapper>
-          <Typography size="1.25vw" bold="700" style={{ position: 'absolute', top: '2.865vw' }}>
+          <Typography size="1.25vw" bold="700">
             지원 정보 확인하기
           </Typography>
           <Typography
@@ -199,10 +199,10 @@ export default function ApplicationModal(props: ModalProps){
   )
 }
 
-
+// ModalLarge안에 들어가는게 부모는 position이 없고 조상은 fixed
 const Main = styled.main`
   width: 100%;
-  height: 1px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -214,7 +214,7 @@ const Main = styled.main`
 
 const CloseButton = styled.button`
   display: flex;
-  //width: 60px;
+  //width: 60px; 
   width: 3.125vw;
   //height: 60px;
   height: 3.125vw;
@@ -231,11 +231,8 @@ const CloseButton = styled.button`
 const ModalTitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  //gap: 10px;
-  gap: 0.521vw;
+  gap: 0.221vw;
   align-items: center;
-  //margin-top: 55px;
-  margin-top: 2.865vw;
-  //margin-bottom: 18px;
-  margin-bottom: 0.9375vw;
+  position: absolute;
+  top: 2.667vw;
 `;

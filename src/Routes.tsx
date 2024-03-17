@@ -38,7 +38,8 @@ export const authRoutes = [
   { path: '/myboard', element: <MyBoardPage /> },
   { path: '/archive/:majorName', element: <ArchiveDetailPage /> },
   // 상태관리 도입 예정으로, 잠시 삭제
-  { path: '/settings', element: <SettingsPage/> },
+  // { path: '/settings', element: <SettingsPage selected={0} setSelected={()=>{}}/> },
+  { path: '/settings', element: <SettingsPage /> },
   { path: '/delete', element: <DeletePage /> },
 ];
 

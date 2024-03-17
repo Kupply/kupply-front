@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import EyeIcon from './icons/EyeIcon';
+import EyeIcon from './icons/NewEyeIcon';
 
 interface TextFieldBoxProps {
   placeholder?: string;
@@ -15,7 +15,7 @@ interface TextFieldBoxProps {
   checkDuplicateInput?: ((value: string) => boolean) | null; // input value를 받아서 값 중복 여부를 반환하는 함수
 }
 
-function TextFieldBox({
+function NewTextFieldBox({
   placeholder = '',
   helpMessage = '',
   errorMessage = '',
@@ -303,4 +303,4 @@ const CheckDuplicated = styled.button`
   font-style: normal;
   font-weight: 500;
 `;
-export default TextFieldBox;
+export default NewTextFieldBox;

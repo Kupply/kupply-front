@@ -32,6 +32,7 @@ export function SettingsPage(){
         const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         //const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
+        console.log('userInfo',userInfo); // 얘가 아예 등장도 하지 않음 
         localStorage.setItem('userProfilePic', userInfo.profilePic);
         localStorage.setItem('userProfileLink', userInfo.profileLink);
         localStorage.setItem('name', userInfo.name);
