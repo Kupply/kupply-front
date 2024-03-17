@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { UserInput } from "../../signUp/UserInput";
+import { NewUserInput } from "../UserInputSettings";
 import Button03 from "../../../assets/buttons/Button03";
 import SubmitButton from "../../../assets/buttons/OldSubmitButton";
 import { useRecoilValue } from "recoil";
@@ -26,16 +27,16 @@ export function SidebarContent3(){
           <TextFieldTitle>
             <strong>쿠플라이 아이디</strong>
           </TextFieldTitle>
-          <UserInput userInfoType="id" userInfoTypeManual="loginedUser" locationUsed="settings"/>
+          <NewUserInput userInfoType="id" userInfoTypeManual="loginedUser"/>
           <TextFieldTitle>
             <strong>비밀번호</strong> 변경하기
           </TextFieldTitle>
-          <UserInput userInfoType="password" locationUsed="settings"/>
+          <NewUserInput userInfoType="password" />
 
           <TextFieldTitle>
             <strong>비밀번호 재확인</strong>하기
           </TextFieldTitle>
-          <UserInput userInfoType="password2" locationUsed="settings"/>
+          <NewUserInput userInfoType="password2" />
           <div>
             <Button03
               style={{ marginTop: '60px', width: '100%' }}

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { UserInput } from "../../signUp/UserInput";
+import { NewUserInput } from "../UserInputSettings";
 //import SubmitButton from "../../../assets/buttons/OldSubmitButton";
 import Button03 from "../../../assets/buttons/Button03";
 import Typography from "../../../assets/Typography";
@@ -9,13 +10,20 @@ import client from "../../../utils/HttpClient";
 import { useSubmit1 } from "../../../utils/SettingSubmitFunctions";
 import NicknameCheckButton from "../../../assets/progressIndicator/Loader";
 import { useNicknameVerification } from "../../../utils/UserInputVerification";
+import { useState } from "react";
 
 
 type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
+type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
 export function SidebarContent1(){
-  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
-  const [nickname, setNickname] = useRecoilState(userSettingsState('nickname'));
+  const [userProfile, setUserProfile] = useState({
+    pic: localStorage.getItem('userProfilePic') || 'rectProfile1',
+    link: localStorage.getItem('userProfileLink') || ''
+  });
+  const [nickname, setNickname] = useState(localStorage.getItem('nickname') || '');
+  const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
+  const [nicknameCheck, setNicknameCheck] = useState<NicknameCheckStateOptions>('filled');
   const [isApplied, setIsApplied] = useRecoilState(isAppliedState);
 
   useNicknameVerification('settings');
@@ -79,20 +87,20 @@ export function SidebarContent1(){
               </Typography>
             </div>
             <div style={{position: 'relative'}}>
-            <UserInput userInfoType="nickname" locationUsed="settings">
-            {nickname.info === '' || nickname.infoState === 'filled' ? (
+            <NewUserInput userInfoType="nickname">
+            {nickname === '' || nicknameState === 'filled' ? (
               <></>
             ) : (
               <NicknameCheckButtonWrapper>
                 <NicknameCheckButton
-                  nickname={nickname.info}
-                  state={nickname.infoCheck as StateOptions}
-                  setState={(so) => setNickname((prev) => ({...prev, infoCheck: so}))}
+                  nickname={nickname}
+                  state={nicknameCheck as StateOptions}
+                  setState={setNicknameCheck}
                   style={{whiteSpace: 'nowrap'}}
                 ></NicknameCheckButton>
               </NicknameCheckButtonWrapper>
             )}
-            </UserInput>
+            </NewUserInput>
             </div>
             
             

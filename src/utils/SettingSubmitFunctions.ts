@@ -18,16 +18,14 @@ export function useSubmit0() {
     withCredentials: true,
   };
 
-  const name = useRecoilValue(userSettingsState('name'));
-  const stdID = useRecoilValue(userSettingsState('studentId'));
-  const firstMajor = useRecoilValue(userSettingsState('firstMajor'));
+  
 
+  // 그래서 UserInputSettings에서 정의된 state들을 여기로 불러내야 함...
   const firstSubmit = async () => {
-
     const updateData = {
-      newName:name.info,
-      newStudentId: stdID.info,
-      newFirstMajor: firstMajor.info,
+      // newName:name,
+      // newStudentId: stdID,
+      // newFirstMajor: firstMajor,
     };
     console.log('firstSubmit', updateData);
     try {

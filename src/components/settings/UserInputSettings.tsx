@@ -8,6 +8,8 @@ import { errorMessageState } from '../../store/atom';
 import { majorTargetList } from '../../common/MajorTarget';
 import { inputState } from '../../pages/signUp/SignUp4Page';
 import NewTextFieldBox from '../../assets/NewTextFieldBox';
+import { useState } from 'react';
+import { StateOptions } from '../../assets/OldTextFieldBox';
 
 export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'id' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
 
@@ -16,14 +18,8 @@ export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | '
 
 interface UserInputProps {
   userInfoType: UserTypeOptions;
-  toNext?: boolean;
-  setValue?: (args: string) => void;
-  setStateValid?: (args: inputState) => void;
   children?: ReactNode;
   userInfoTypeManual?: string | undefined;
-  locationUsed?: 'signUp' | 'settings';
-  onCustomFunction?: () => void;
-  
 }
 
 export const placeholderMapping: Record<UserTypeOptions, string> = {
@@ -70,67 +66,38 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
 
 const optionList = majorTargetList;
 
-export const UserInput: React.FC<UserInputProps> = ({
+export const NewUserInput: React.FC<UserInputProps> = ({
   userInfoType,
-  toNext,
   children,
-  setStateValid,
   userInfoTypeManual = undefined,
-  locationUsed = 'signUp',
-  onCustomFunction,
 }) => {
   // info = {info: , infoState:, infoCheck: }
-  const [userInfo, setUserInfo] = useRecoilState(
-    locationUsed === 'signUp'
-      ? userState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
-      : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
+  
+  const [userInfo, setUserInfo] = useState(
+    localStorage.getItem(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType) || ''
   );
-  // const [userInfo, setUserInfo] = useState(
-  //   locationUsed === 'signUp'
-  //   ? sessionStorage.getItem(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType) :
-  //   localStorage.getItem(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
-  // )
+  const [userInfoState, setUserInfoState] = useState<StateOptions>(
+    userInfoType === 'name' || userInfoType === 'studentId' || userInfoType === 'nickname' || userInfoType === 'kuEmail' || userInfoTypeManual === 'loginedUser' ? 'filled' : 'default'
+  );
+  const [userInfoCheck, setUserInfoCheck] = useState(userInfoType === 'nickname' ? 'filled' : 'default');
+
   console.log('UserInput에서 뽑는 userInfo', userInfo);
 
-  const [firstMajor, setFirstMajor] = useRecoilState(
-    locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'),
-  );
 
-  const errorMessage = useRecoilValue(errorMessageState);
+  const firstMajor = localStorage.getItem('firstMajor') || '';
 
-  const hopeMajor1 = useRecoilValue(
-    locationUsed === 'signUp' ? userState('hopeMajor1') : userSettingsState('hopeMajor1'),
-  ).info;
+  const errorMessage = useState({
+    passwordErrorMessage: '',
+    nicknameErrorMessage: '',
+    password2ErrorMessage: ''
+  });
 
-  const hopeMajor2 = useRecoilValue(
-    locationUsed === 'signUp' ? userState('hopeMajor2') : userSettingsState('hopeMajor2'),
-  ).info;
-
-  errorMessageMapping.password = errorMessage.passwordErrorMessage;
-  errorMessageMapping.nickname = errorMessage.nicknameErrorMessage;
-  errorMessageMapping.password2 = errorMessage.password2ErrorMessage;
+  const hopeMajor1 = localStorage.getItem('hopeMajor1') || '';
+  const hopeMajor2 = localStorage.getItem('hopeMajor2') || '';
 
   const updatedMajorTargetList = [...majorTargetList];
   updatedMajorTargetList.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newData = e.target.value;
-    setUserInfo((prev) => ({
-      ...prev,
-      info: newData,
-    }));
-    console.log('바뀐 value', newData); //이게 인식은 잘 되는데 
-  };
-
-  if (toNext && locationUsed === 'signUp') {
-    sessionStorage.setItem(userInfoType, userInfo.info);
-  }
-
-  if (userInfo.info !== '') {
-    setStateValid?.('complete');
-  } else {
-    setStateValid?.('incomplete');
-  }
 
   //console.log(userInfo);
   return (
@@ -147,28 +114,24 @@ export const UserInput: React.FC<UserInputProps> = ({
               : userInfoType === 'doubleMajor'
               ? optionList
               : userInfoType === 'hopeMajor1'
-              ? optionList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor.info)
-              : updatedMajorTargetList.filter((el) => el.value1 !== hopeMajor1 && el.value1 !== firstMajor.info)
+              ? optionList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor)
+              : updatedMajorTargetList.filter((el) => el.value1 !== hopeMajor1 && el.value1 !== firstMajor)
           }
-          value={userInfo.info}
-          setValue={(v) => setUserInfo((prev) => ({ ...prev, info: v }))}
+          value={userInfo}
+          setValue={setUserInfo}
         />
       ) : (
         <TextFieldBox
           placeholder={placeholderMapping[userInfoType]}
-          value={userInfo.info}
-          onChange={handleInputChange}
-          state={userInfo.infoState}
-          setState={(s) => setUserInfo((prev) => ({ ...prev, infoState: s }))}
-          setValue={(v) => setUserInfo((prev) => ({ ...prev, info: v }))}
+          value={userInfo}
+          state={userInfoState}
+          setState={setUserInfoState}
+          setValue={setUserInfo}
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
           type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}
-          onKeyDown={(e: React.KeyboardEvent) => {
-            if (e.key === 'Enter') {
-              console.log('This is the onKeyDown');
-              onCustomFunction?.();
-            }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setUserInfo(e.target.value);
           }}
         />)}
     </>

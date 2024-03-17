@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import TextFieldBox from "../../../assets/OldTextFieldBox";
 import { UserInput } from "../../signUp/UserInput";
+import { NewUserInput } from "../UserInputSettings";
 //import SubmitButton from "../../../assets/buttons/OldSubmitButton";
 import Button03 from "../../../assets/buttons/Button03";
 import { useRecoilState } from "recoil";
@@ -8,14 +9,55 @@ import { isAppliedState } from "../../../store/atom";
 import client from "../../../utils/HttpClient";
 import { useSubmit0 } from "../../../utils/SettingSubmitFunctions";
 import { useStudentIdVerification } from "../../../utils/UserInputVerification";
+import { useState, useEffect } from "react";
+import { StateOptions } from "../../../assets/OldTextFieldBox";
+import { useCookies } from "react-cookie";
+import DropDown from "../../../assets/dropdown/DropDown";
+import { majorAllList } from "../../../common/MajorAll";
 
 export function SidebarContent0(){
   const [isApplied, setIsApplied] = useRecoilState(isAppliedState);
-  const {firstSubmit} = useSubmit0();
-
-  // 각 input이 validated되었는지의 여부가 없음 firstSubmit이 validated되었을 때 가능하도록?
-  useStudentIdVerification('settings');
+  const [name, setName] = useState<string>(localStorage.getItem('name') || '');
+  const [nameState, setNameState] = useState<StateOptions>('filled');
+  const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
+  const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
+  const [firstMajor, setFirstMajor] = useState<string>(localStorage.getItem('firstMajor') || '');
+  const majorAll = majorAllList;
   
+  useEffect(() => {
+    const passwordCheck = /^\d{10}$/;
+    if (stdIDState === 'filled') {
+      if (!passwordCheck.test(stdID)) setStdIDState('error');
+      else setStdIDState('filled');
+    }
+  }, [stdID, stdIDState]);
+  const [cookies] = useCookies(['accessToken']);
+  const accessToken = cookies.accessToken;
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    withCredentials: true,
+  };
+
+  const firstSubmit = async () => {
+    const updateData = {
+      newName: name,
+      newStudentId: stdID,
+      newFirstMajor: firstMajor,
+    };
+    console.log(updateData); // 요거는 맞음 
+    try {
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
+      window.location.reload(); // 페이지 새로고침. 그러고서 새로고침을 하고 다시 reload가 될때 반영이 안됨 
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  console.log(name, stdID, firstMajor);
   return (
     <BodyContainer>
           <BodyTitle>나의 기본정보 수정하기</BodyTitle>
@@ -24,20 +66,41 @@ export function SidebarContent0(){
           <TextFieldTitle>
             <strong>이름</strong> 수정하기
           </TextFieldTitle>
-          <UserInput userInfoType="name" locationUsed="settings"/>
+          <TextFieldBox
+            value={name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setName(e.target.value);
+            }}
+            state={nameState}
+            setState={setNameState}
+            setValue={setName}
+          />
           
           
           <TextFieldTitle>
             <strong>고려대학교 학번</strong> 수정하기
           </TextFieldTitle>
-          <UserInput userInfoType="studentId" locationUsed="settings"/>
+          <TextFieldBox
+            value={stdID}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setStdID(e.target.value);
+            }}
+            state={stdIDState}
+            setState={setStdIDState}
+            setValue={setStdID}
+          />
           
 
           <TextFieldTitle>
             <strong>본전공(1전공)</strong> 수정하기
           </TextFieldTitle>
           
-          <UserInput userInfoType="firstMajor" locationUsed="settings"/>
+          <DropDown
+          title="전공선택" // 수정필요
+          optionList={majorAll}
+          value={firstMajor}
+          setValue={setFirstMajor}
+          />
           
           <Button03
             style={{ marginTop: '60px', width: '100%'}}

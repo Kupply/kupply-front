@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { UserInput } from "../../signUp/UserInput";
+import { NewUserInput } from "../UserInputSettings";
 import { GPAVerification, SemesterVerification } from "../../signUp/VerificationForm";
 import Typography from "../../../assets/Typography";
 //import SubmitButton from "../../../assets/buttons/OldSubmitButton";
@@ -28,8 +29,8 @@ export function SidebarContent2(){
             <strong>희망 이중전공</strong> 수정하기
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-            <UserInput userInfoType="hopeMajor1" locationUsed="settings"/>
-            <UserInput userInfoType="hopeMajor2" locationUsed="settings"/>
+            <NewUserInput userInfoType="hopeMajor1" />
+            <NewUserInput userInfoType="hopeMajor2" />
           </div>
 
           <TextFieldTitle>
