@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
-import EyeIcon from '../assets/icons/EyeIcon';
+import EyeIcon from './icons/OldEyeIcon';
 import Icon07 from './icons/Icon07';
 import Icon08 from './icons/Icon07';
 

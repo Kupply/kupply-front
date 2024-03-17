@@ -13,6 +13,7 @@ import Button03 from "../../assets/buttons/Button03";
 import Button04 from "../../assets/buttons/Button04";
 import VerificationButton from "../../components/signUp/VerificationButton";
 import axios from "axios";
+import client from "../../utils/HttpClient";
 
 export function SignUp1Page(){
   const navigate = useNavigate();
@@ -23,16 +24,16 @@ export function SignUp1Page(){
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
 
   // 잠시 설정 - backend와 연결하면 확인할 수 있을까? 
-  // useEffect(() => {
-  //   async function sendFirst(email: string) {
-  //     const result = await sendEmail(email);
+  useEffect(() => {
+    async function sendFirst(email: string) {
+      const result = await sendEmail(email);
 
-  //     if (!result) {
-  //       navigate('/login');
-  //     }
-  //   }
-  //   sendFirst(email);
-  // }, []);
+      if (!result) {
+        navigate('/login');
+      }
+    }
+    sendFirst(email);
+  }, []);
 
 
   const setBlank = () => {
@@ -50,8 +51,8 @@ export function SignUp1Page(){
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
     const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     try {
-      await axios.post(url, { email: email, code: entireCode });
-      // await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
+      //await axios.post(url, { email: email, code: entireCode });
+      await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
 
       navigate('/signup2');
     } catch (err: any) {

@@ -173,8 +173,8 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   return (
     <VerifiBoxWrapper>
       <TextAreaBox name="gpa-1" value={num1} setValue={fixedGpa ? ()=>{} : (value) => handleGPAState(`num1`, value)}/>
-      <div style={{ marginTop: '3.125vw' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill="none">
+      <div style={{ marginTop: '3.021vw', width: '2px', height: '2px' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none">
           <circle cx="1" cy="1" r="1" fill="#141414" />
         </svg>
       </div>

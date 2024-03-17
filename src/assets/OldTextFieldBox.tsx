@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
-import EyeIcon from '../assets/icons/EyeIcon';
+import EyeIcon from './icons/OldEyeIcon';
 /* 
     Width는 부모 요소(Wrapper)의 width를 따라갑니다.
 */
@@ -354,6 +354,7 @@ function TextFieldBox(props: TextFieldBoxProps) {
 
   const onCheckDuplicated = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+
     if (Math.random() > 0.5) {
       // 중복 아닐 경우
       if (valid) setState('filled');

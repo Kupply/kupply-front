@@ -89,7 +89,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>지원안정도 점수</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
                 <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
@@ -139,7 +139,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>지원안정도 점수</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
                 <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
@@ -189,7 +189,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>지원안정도 점수</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
                 <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
@@ -238,7 +238,7 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>지원안정도 점수</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
                 <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>

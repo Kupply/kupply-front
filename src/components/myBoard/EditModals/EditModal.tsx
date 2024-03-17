@@ -52,6 +52,7 @@ export default function EditModal(props: ModalProps){
   const userProfile = useRecoilValue(userProfileState);
 
   const onClickSubmit = async () => {
+    console.log('Hello There!!');
     let updateData = {};
 
     if (originNickname.current !== nickname.info) {

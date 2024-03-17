@@ -67,20 +67,21 @@ export function useSignUp0Verification(){
 
 export function useSignUp2Verification(){
   const [name, setName] = useRecoilState(userState('name'));
+  const [stdId, setStdId] = useRecoilState(userState('studentId'));
   const [firstM, setFirstM] = useRecoilState(userState('firstMajor'));
   const [complete, setComplete] = useState(false);
   const {stdIdVerified} = useStudentIdVerification('signUp');
   const navigate = useNavigate();
 
   // 잠시 수정 
-  // useEffect(() => {
-  //   if (!sessionStorage.getItem('email')) navigate('/');
-  //   else {
-  //     sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
-  //     if (name.info !== '') setName((prev) => ({...prev, infoState: 'filled'}));
-  //     if (stdId.info !== '') setStdId((prev) => ({...prev, infoState: 'filled'}));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!sessionStorage.getItem('email')) navigate('/');
+    else {
+      sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
+      if (name.info !== '') setName((prev) => ({...prev, infoState: 'filled'}));
+      if (stdId.info !== '') setStdId((prev) => ({...prev, infoState: 'filled'}));
+    }
+  }, []);
   // name, stdId, firstMajor의 completed 여부
 
   useEffect(() => {
@@ -116,13 +117,13 @@ export function useSignUp3Verification(){
   }, [passwordVerified, password2Verified, nicknameVerified, complete, idVerified]);
 
 
-  // useEffect(() => {
-  // if (!sessionStorage.getItem('name')) navigate('/');
-  // else {
-  //   sessionStorage.removeItem('password'); //비밀번호는 삭제
-  //   if (nickname.info !== '') setNickname((prev) => ({...prev, infoState: 'filled'}));
-  // }
-  // }, []);
+  useEffect(() => {
+  if (!sessionStorage.getItem('name')) navigate('/');
+  else {
+    sessionStorage.removeItem('password'); //비밀번호는 삭제
+    if (nickname.info !== '') setNickname((prev) => ({...prev, infoState: 'filled'}));
+  }
+  }, []);
 
   return {complete};
 

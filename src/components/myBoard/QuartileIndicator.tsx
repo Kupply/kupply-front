@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   width: 57.08vw;
   height: 12.4vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid #dfdfdf;
   // background: radial-gradient(230.3% 140.56% at 1.23% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
   backdrop-filter: blur(12px);

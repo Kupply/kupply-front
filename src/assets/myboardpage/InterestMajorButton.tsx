@@ -12,7 +12,7 @@ const Button = styled.button<InterestMajorProps>`
   height: 2.4vw;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 0.26vw;
   text-align: center;
   font-family: Pretendard;
   font-size: 1.04vw;

@@ -31,6 +31,7 @@ export function useEmailVerification(locationUsed: verificationProps){
   return {idVerified};
 }
 
+
 export function useStudentIdVerification(locationUsed: verificationProps){
   const [stdId, setStdId] = useRecoilState(locationUsed === 'signUp' ? userState('studentId') : userSettingsState('studentId'));
   const [stdIdVerified, setStdIdVerified] = useState(false);

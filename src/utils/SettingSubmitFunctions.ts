@@ -23,15 +23,13 @@ export function useSubmit0() {
   const firstMajor = useRecoilValue(userSettingsState('firstMajor'));
 
   const firstSubmit = async () => {
-    // UserInput에서 update한 value들이 send되는게 맞은지를 확인 - 맞게 들어옴
-    console.log(name.info, stdID.info, firstMajor.info);
 
     const updateData = {
-      newName: name.info,
+      newName:name.info,
       newStudentId: stdID.info,
       newFirstMajor: firstMajor.info,
     };
-    //console.log('firstSubmit');
+    console.log('firstSubmit', updateData);
     try {
       //await axios.post('http://localhost:8080/user/updateMe', updateData, config);
       await client.post('/user/updateMe', updateData, config);
@@ -53,7 +51,6 @@ export function useSubmit1(){
   const accessToken = cookies.accessToken;
   const navigate = useNavigate();
 
-
   const config = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -70,6 +67,7 @@ export function useSubmit1(){
       newProfilePic: userProfile.pic,
       newNickname: nickname.info,
     };
+    console.log('secondSubmit', updateData);
     try {
       // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
       await client.post('/user/updateMe', updateData, config);
