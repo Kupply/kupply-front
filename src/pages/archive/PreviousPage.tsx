@@ -39,5 +39,6 @@ const Wrapper = styled.div`
 `;
 
 const CardWrapper = styled.div`
-  margin-top: 6.66vw;
+  // margin-top: 6.66vw;
+  margin-left: 0px;
 `;

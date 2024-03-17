@@ -15,6 +15,12 @@ function KupplyImage() {
         </Typography>
       </div>
       <img
+        src="../../designImage/landing/LandingMockup1.png"
+        width="29.33%"
+        height="5.37%"
+        style={{ marginTop: '3.13vw' }}
+      />
+      <img
         width="100%"
         height="100%"
         src="../../designImage/onboarding/KupplyImage.png"

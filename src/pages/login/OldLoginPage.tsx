@@ -179,6 +179,7 @@ function LoginPage(props: LoginPageProps) {
       window.localStorage.setItem('loginedUser', ID);
       setLogin(true);
       navigate('/');
+      window.location.reload();
     } catch (err: any) {
       // 이후 수정 필요함.
       setPassword('');

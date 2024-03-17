@@ -7,68 +7,67 @@ import { majorColorMapping } from '../../utils/Mappings';
 // 하드코딩
 
 interface Datum {
-  name: string;
-  value: number;
-  avgGpa: number;
+  college: string;
+  curApplyNum: number;
 }
 
-const tmpData = [
-  {
-    name: '경영대학',
-    value: 5,
-    avgGpa: 4.4,
-  },
-  {
-    name: '정경대학',
-    value: 10,
-    avgGpa: 3.5,
-  },
-  {
-    name: '의과대학',
-    value: 30,
-    avgGpa: 3.0,
-  },
-  {
-    name: '정보대학',
-    value: 14,
-    avgGpa: 4.2,
-  },
-  {
-    name: '미디어학부',
-    value: 24,
-    avgGpa: 4.0,
-  },
-  {
-    name: '스마트보안학부',
-    value: 15,
-    avgGpa: 3.8,
-  },
-];
+// const tmpData = [
+//   {
+//     name: '경영대학',
+//     value: 5,
+//     avgGpa: 4.4,
+//   },
+//   {
+//     name: '정경대학',
+//     value: 10,
+//     avgGpa: 3.5,
+//   },
+//   {
+//     name: '의과대학',
+//     value: 30,
+//     avgGpa: 3.0,
+//   },
+//   {
+//     name: '정보대학',
+//     value: 14,
+//     avgGpa: 4.2,
+//   },
+//   {
+//     name: '미디어학부',
+//     value: 24,
+//     avgGpa: 4.0,
+//   },
+//   {
+//     name: '스마트보안학부',
+//     value: 15,
+//     avgGpa: 3.8,
+//   },
+// ];
 
-const Pie = () => {
-  const totalValue = tmpData.reduce((acc, cur) => acc + cur.value, 0);
+const Pie = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) => {
+  const pieData: Datum[] = curData[onViewMajor - 1].fullChartData;
+  const totalValue = pieData.reduce((acc: number, cur: Datum) => acc + cur.curApplyNum, 0);
 
-  const sortedData = [...tmpData].sort((a, b) => b.value - a.value);
+  const sortedData = [...pieData].sort((a, b) => b.curApplyNum - a.curApplyNum);
   const topFourData = sortedData.slice(0, 4); // top 4 추출
-  const LastValue = sortedData.slice(4).reduce((acc, data) => acc + data.value, 0);
+  const LastValue = sortedData.slice(4).reduce((acc, data) => acc + data.curApplyNum, 0);
 
   const OtherData = {
-    name: '기타',
-    value: LastValue,
-    avgGpa: 0,
+    college: '기타',
+    curApplyNum: LastValue,
   };
 
   const TopFiveData = topFourData.concat(OtherData);
 
   // topFourData 기반으로 color 설정
-  const color = TopFiveData.map((item) => majorColorMapping[item.name as keyof typeof majorColorMapping].fill);
+  const color = TopFiveData.map((item) => majorColorMapping[item.college as keyof typeof majorColorMapping].fill);
 
   return (
     <PieWrapper>
       <VictoryPie
         data={TopFiveData}
-        x="name"
-        y="value"
+        x="college"
+        y="curApplyNum"
         cornerRadius={999} // 모서리 둥굴게
         radius={190}
         innerRadius={170} // 내부 반지름
@@ -81,7 +80,7 @@ const Pie = () => {
           data: {
             filter: (args: CallbackArgs) => {
               const datum = args.datum as Datum;
-              const name = datum.name as keyof typeof majorColorMapping;
+              const name = datum.college as keyof typeof majorColorMapping;
               return `drop-shadow(0px 16px 18px ${majorColorMapping[name].boxShadow})`;
             },
           },
@@ -92,16 +91,16 @@ const Pie = () => {
       <LabelsWrapper>
         {TopFiveData.map((item, index) =>
           index < 5 ? (
-            <Fragment key={item.name}>
+            <Fragment key={item.college}>
               <FirstLineBox>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <LabelColor color={majorColorMapping[item.name as keyof typeof majorColorMapping].fill} />
-                  <MaJorText>{item.name}</MaJorText>
+                  <LabelColor color={majorColorMapping[item.college as keyof typeof majorColorMapping].fill} />
+                  <MaJorText>{item.college}</MaJorText>
                 </div>
-                <PercentText>{((item.value / totalValue) * 100).toFixed(0)}%</PercentText>
+                <PercentText>{((item.curApplyNum / totalValue) * 100).toFixed(0)}%</PercentText>
               </FirstLineBox>
               <SecondLineBox>
-                <NumText>{item.value}명</NumText>
+                <NumText>{item.curApplyNum}명</NumText>
               </SecondLineBox>
               {index < 5 - 1 && (
                 <svg

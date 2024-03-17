@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Typography from '../Typography';
 
-
 interface MessageBoxProps {
   isVisible: boolean;
 }
@@ -42,29 +41,13 @@ function ToolTip04(props: MessageProps) {
       />
 
       <MessageBox isVisible={isVisible}>
-        <Typography
-          size="0.9375vw"
-          style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '122.222%' }}
-        >
-          주의하세요!
-        </Typography>
+        <BordLargeText>주의하세요!</BordLargeText>
         <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '0.104vw', marginBottom: '0.104vw' }}>
-          <Typography size="0.833vw" bold='500' style={{ color: 'var(--Black2, #434343)', lineHeight: '1.146vw' }}>
-            이중전공 지원 시즌에는 학점을
-          </Typography>
-          <Typography
-            size="0.833vw"
-            style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '1.146vw' }}
-          >
-            최대 2번까지 변경
-          </Typography>
-          <Typography size="0.833vw" bold='500' style={{ color: 'var(--Main-Black, #141414)', lineHeight: '1.146vw' }}>
-            할 수 있어요.
-          </Typography>
+          <NormalText> 이중전공 지원 시즌에는 학점을</NormalText>
+          <BordSmallText>최대 2번까지 변경</BordSmallText>
+          <NormalText>할 수 있어요.</NormalText>
         </div>
-        <Typography size="0.833vw" bold='500' style={{ color: 'var(--Main-Black, #141414)', lineHeight: '1.146vw' }}>
-          정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.
-        </Typography>
+        <NormalText> 정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.</NormalText>
       </MessageBox>
       <NotchImage
         onMouseEnter={() => setIsHovered(true)}
@@ -126,10 +109,37 @@ const MessageBox = styled.div<MessageBoxProps>`
   //width: 467px;
   width: 24.323vw;
   //height: 67px;
-  height: 3.490vw;
+  height: 3.49vw;
   z-index: 1;
   background: #fff;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
+`;
+
+const NormalText = styled.text`
+  color: var(--Black2, #434343);
+  font-family: Pretendard;
+  font-size: 0.83vw;
+  font-style: normal;
+  font-weight: 500;
+  //line-height: 22px;
+`;
+
+const BordSmallText = styled.text`
+  color: var(--Black2, #d85888);
+  font-family: Pretendard;
+  font-size: 0.83vw;
+  font-style: normal;
+  font-weight: 700;
+  //line-height: 22px;
+`;
+
+const BordLargeText = styled.text`
+  color: var(--Black2, #d85888);
+  font-family: Pretendard;
+  font-size: 0.9375vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 122.222%;
 `;
 
 export default ToolTip04;

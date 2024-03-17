@@ -8,56 +8,57 @@ import { idColorMapping, idColorMappingShadow } from '../../utils/Mappings';
 // 커스텀하기 너무 귀차나... 일단 파이차트랑 비슷한 형태로
 
 interface Datum {
-  id: number;
-  value: number;
+  stdIdYear: string;
+  curApplyNum: number;
 }
 // 그래프 확인용 임시 데이터
-const tmpData = [
-  {
-    id: 23,
-    value: 60,
-  },
-  {
-    id: 22,
-    value: 30,
-  },
-  {
-    id: 21,
-    value: 10,
-  },
-  {
-    id: 20,
-    value: 14,
-  },
-  {
-    id: 19,
-    value: 24,
-  },
-  {
-    id: 18,
-    value: 2,
-  },
-];
+// const tmpData = [
+//   {
+//     id: 23,
+//     value: 60,
+//   },
+//   {
+//     id: 22,
+//     value: 30,
+//   },
+//   {
+//     id: 21,
+//     value: 10,
+//   },
+//   {
+//     id: 20,
+//     value: 14,
+//   },
+//   {
+//     id: 19,
+//     value: 24,
+//   },
+//   {
+//     id: 18,
+//     value: 2,
+//   },
+// ];
 
-const HalfPie = () => {
-  const totalValue = tmpData.reduce((acc, cur) => acc + cur.value, 0);
+const HalfPie = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) => {
+  const halfpieData = curData[onViewMajor - 1].halfChartData;
+  const totalValue = halfpieData.reduce((acc: number, cur: Datum) => acc + cur.curApplyNum, 0);
   const currentYear = new Date().getFullYear(); // 현재 년도
   const studentId = currentYear - 2000; // 기준 학번 : 24
 
-  const filteredData = tmpData.filter((item) => {
-    return item.id >= studentId - 10 && item.id <= studentId - 1; // 23 ~ 14학번까지
+  const filteredData = halfpieData.filter((item: Datum) => {
+    return +item.stdIdYear >= studentId - 10 && +item.stdIdYear <= studentId - 1; // 23 ~ 14학번까지
   });
 
   let newStudentIdValue = 0;
   let newData = [];
-  filteredData.forEach((item) => {
-    if (item.id > studentId - 4) {
+  filteredData.forEach((item: Datum) => {
+    if (+item.stdIdYear > studentId - 4) {
       newData.push({
-        id: item.id,
-        value: item.value,
+        id: item.stdIdYear,
+        value: item.curApplyNum,
       });
     } else {
-      newStudentIdValue += item.value;
+      newStudentIdValue += item.curApplyNum;
     }
   });
 
@@ -91,7 +92,7 @@ const HalfPie = () => {
           data: {
             filter: (args: CallbackArgs) => {
               const datum = args.datum as Datum;
-              return `drop-shadow(0px 16px 18px ${idColorMappingShadow[datum.id]})`;
+              return `drop-shadow(0px 16px 18px ${idColorMappingShadow[+datum.stdIdYear]})`;
             },
           },
           labels: { display: 'none' }, // 파이 안에 라벨 invisible
