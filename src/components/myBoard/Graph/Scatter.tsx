@@ -40,9 +40,10 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
       curApplyNum,
     }));
 
-  const maxValue = Math.max(...filteredData.map((item) => item.avgGpa));
-  const maxYValue = Math.ceil(maxValue / 10) * 10 + 10;
-  const minXValue = Math.min(...filteredData.map((item) => item.avgGpa));
+  const maxApplyValue = Math.max(...filteredData.map((item) => item.curApplyNum));
+  const maxYValue = Math.ceil(maxApplyValue / 10) * 10;
+  const minGpaValue = Math.min(...filteredData.map((item) => item.avgGpa));
+  const minXValue = Math.floor(minGpaValue * 2) / 2;
 
   const color = filteredData.map((item) => majorColorMapping[item.college as keyof typeof majorColorMapping].fill);
 
@@ -62,7 +63,7 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
       <ScatterBox>
         <VictoryChart
           theme={VictoryTheme.material}
-          domain={{ x: [minXValue - 0.5, 4.8], y: [0, maxYValue] }}
+          domain={{ x: [minXValue, 4.8], y: [0, maxYValue] }}
           origin={{ x: 0, y: 0 }}
           containerComponent={
             <VictoryVoronoiContainer
