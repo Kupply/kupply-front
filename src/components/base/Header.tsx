@@ -205,7 +205,11 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
         <LoginContainer>
           {logined ? (
             <>
-              <TextButton06 fontSize="14px" nickName="고대빵" onCustomFunction={handleToggle}></TextButton06>
+              <TextButton06
+                fontSize="14px"
+                nickName={userData.userNickname}
+                onCustomFunction={handleToggle}
+              ></TextButton06>
 
               {toggle && (
                 <SettingToggleWrapper ref={headerToggleRef}>

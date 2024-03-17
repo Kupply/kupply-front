@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import Banner from '../../components/landing/Banner';
 import RankingTable from '../../components/landing/RankingTable';
 import FAQ from '../../components/landing/FAQ';
+import ProfileBox from '../../components/myBoard/ProfileBox';
 
 export interface ITableData {
   rank: number;
@@ -23,6 +24,21 @@ export interface ITableData {
 }
 
 function LandingPage() {
+  const [CurrentPic, setCurrentPic] = useState('');
+  const [userData, setUserData] = useState(() => ({
+    userName: '고대빵',
+    userNickname: '빵대고대빵',
+    userProfilePic: CurrentPic,
+    userProfileLink: '',
+    userRole: 'candidate',
+    firstMajor: 'media',
+    studentId: '2021160009',
+    hopeMajor1: 'business',
+    hopeMajor2: 'computer',
+    curGPA: 4.5,
+    hopeSemester: '2023-2',
+  }));
+
   const [tableData, setTableData] = useState<ITableData[]>([
     {
       rank: 1,
@@ -124,7 +140,9 @@ function LandingPage() {
 
   return (
     <MainWrapper>
-      <Side></Side>
+      <Side>
+        <ProfileBox userData={userData} />
+      </Side>
       <Content>
         <Banner />
         <RankingTable tableData={tableData} />
@@ -144,6 +162,8 @@ const MainWrapper = styled.div`
 const Side = styled.div`
   width: 27.29vw;
   height: auto;
+  display: flex;
+  justify-content: center;
 `;
 
 const Content = styled.div`

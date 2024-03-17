@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 import Card01 from '../../assets/cards/Card01';
+import DropDown02 from '../../assets/dropdown/DropDown02';
 
 // 정렬 임의로 넣어 둠 (에셋 완성되면 적용할 예정)
 
@@ -27,7 +28,7 @@ export interface CardsProps {
 // Card01의 prop과 맞도록 수정
 // 지원자 수에 대한 데이터가 없어서 경쟁률은 계산하지 못함
 
-const sortOptions = ['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순'];
+// const sortOptions = ['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순'];
 
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
@@ -134,13 +135,11 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
         <Sort>
           {/*{mockHashes[clicked]}*/}
           {/*{clicked > 0 && clicked < 4 && ' 정렬'}*/}
-          <select onChange={(e) => handleSortChange(e.target.value)}>
-            {sortOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          <DropDown02
+            optionList={['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순']}
+            value={sortCriterion}
+            setValue={setSortCriterion}
+          />
         </Sort>
         {filteredCards.map((card) => (
           <Card01 {...card} />
@@ -166,7 +165,7 @@ const FlexContainer = styled.div`
   column-gap: 1.31vw;
   width: 100%;
   max-width: 69vw; // 68.75vw;
-  margin-top: 0.83vw;
+  //margin-top: 0.83vw;
 `;
 
 const Container = styled.div`
@@ -186,15 +185,9 @@ const Container = styled.div`
 
 const Sort = styled.div`
   width: 100%;
-  //margin-top: 4.32vw;
-  height: 0.8vw;
-
-  color: #a8a8a8;
-  font-family: Pretendard;
-  font-size: 0.8vw;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 100%;
+  // margin-top: 4.32vw;
+  // margin-bottom: 4.6875vw;
+  height: auto;
 `;
 
 const mockCards = [

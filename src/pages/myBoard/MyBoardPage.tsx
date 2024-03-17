@@ -338,8 +338,7 @@ const MyBoardPage = () => {
   };
   useEffect(() => {
     getCurData();
-  }, []);
-
+  }, [userData]);
   ////////////////////////////
 
   return (
@@ -375,8 +374,8 @@ const MyBoardPage = () => {
         </div>
         <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} />
         <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
-          <PieChart />
-          <Scatter />
+          <PieChart onViewMajor={onViewMajor} curData={curData} />
+          <Scatter onViewMajor={onViewMajor} curData={curData} />
         </div>
       </MainWrapper>
     </Wrapper>
