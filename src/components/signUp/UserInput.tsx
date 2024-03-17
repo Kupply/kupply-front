@@ -7,20 +7,9 @@ import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../store/atom';
 import { majorTargetList } from '../../common/MajorTarget';
 import { inputState } from '../../pages/signUp/SignUp4Page';
-import { majorNameMappingBySID } from '../../utils/Mappings';
+import NewTextFieldBox from '../../assets/NewTextFieldBox';
 
-export type UserTypeOptions =
-  | 'name'
-  | 'password'
-  | 'password2'
-  | 'nickname'
-  | 'studentId'
-  | 'firstMajor'
-  | 'id'
-  | 'hopeMajor1'
-  | 'hopeMajor2'
-  | 'doubleMajor'
-  | 'kuEmail';
+export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'id' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
 
 // localStorage이나 sessionStorage에서 가져올 때 각 페이지별로 설정해 둔 이름들이 모두 다른 관계로
 // 강제적으로 원하는 정보를 가져올 수 있도록 userInfoTypeManual을 만들어둠
@@ -34,9 +23,10 @@ interface UserInputProps {
   userInfoTypeManual?: string | undefined;
   locationUsed?: 'signUp' | 'settings';
   onCustomFunction?: () => void;
+  
 }
 
-const placeholderMapping: Record<UserTypeOptions, string> = {
+export const placeholderMapping: Record<UserTypeOptions, string> = {
   name: '홍길동',
   password: '대소문자, 특수문자를 최소 하나씩 조합하여 8글자 이상',
   password2: '비밀번호 확인',
@@ -50,13 +40,12 @@ const placeholderMapping: Record<UserTypeOptions, string> = {
   kuEmail: '고려대학교 이메일',
 };
 
-const helpMessageMapping: Record<UserTypeOptions, string> = {
+export const helpMessageMapping: Record<UserTypeOptions, string> = {
   name: '이름 입력',
   studentId: '학번 10자리',
   firstMajor: '',
   id: '',
-  password:
-    '비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다.',
+  password: '<8~20자/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다.',
   password2: '비밀번호 확인',
   nickname: '닉네임',
   hopeMajor1: '',
@@ -65,7 +54,7 @@ const helpMessageMapping: Record<UserTypeOptions, string> = {
   kuEmail: '',
 };
 
-const errorMessageMapping: Record<UserTypeOptions, string> = {
+export const errorMessageMapping: Record<UserTypeOptions, string> = {
   name: '',
   studentId: '학번이 10자리 숫자가 아닙니다.',
   firstMajor: '',
@@ -93,10 +82,10 @@ export const UserInput: React.FC<UserInputProps> = ({
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(
     locationUsed === 'signUp'
-      ? userState(userInfoTypeManual || userInfoType)
-      : userSettingsState(userInfoTypeManual || userInfoType),
+      ? userState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
+      : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
   );
-
+  console.log('UserInput에서 뽑는 userInfo', userInfo);
   const [firstMajor, setFirstMajor] = useRecoilState(
     locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'),
   );
@@ -124,6 +113,7 @@ export const UserInput: React.FC<UserInputProps> = ({
       ...prev,
       info: newData,
     }));
+    console.log('바뀐 value', newData); //이게 인식은 잘 되는데 
   };
 
   if (toNext && locationUsed === 'signUp') {
@@ -174,8 +164,7 @@ export const UserInput: React.FC<UserInputProps> = ({
               onCustomFunction?.();
             }
           }}
-        />
-      )}
+        />)}
     </>
   );
 };

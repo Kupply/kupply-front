@@ -103,6 +103,7 @@ export function SignUp5Page(){
             <TermsText1 />
           </ScrollSmall>
         </TextOutBox>
+        <div style={{height: '2vw'}}></div>
         <CheckBoxButton01 
           isChecked={individualChecks.second}
           onCustomFunction=
@@ -181,7 +182,7 @@ export function SignUp5Complete(){
           transform: 'translateY(-84px)',
         }}
       />
-      <div style={{ transform: 'translateY(-221px)' }}>
+      <div style={{ transform: 'translateY(-221px)'}}>
         <CTA01 state="default" onClick={handleNext}>
           <Typography size="1.042vw" bold="700" color="var(--White, #FFF)">
             로그인하고 쿠플라이로 이동하기
@@ -243,7 +244,8 @@ const Wrapper2 = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw; // 100%
-  height: 100%;
+  height: auto;
+  padding-bottom: 5vw;
   box-sizing: 'border-box';
   //background: #FCFAFB;
   background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);

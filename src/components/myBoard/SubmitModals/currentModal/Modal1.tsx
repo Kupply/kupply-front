@@ -39,10 +39,10 @@ export default function CurrentModal1(props: CurrentModalProps){
   }, [semesterState, userType]);
 
   return (
-    <ContentsWrapper>
+    <>
       <NotSubmittedWrapper currentStep={2}>
       <div style={{ position: 'absolute', top: '13.958vw', left: '4.844vw' }}>
-        <div style={{ display: 'flex', marginBottom: '0.521vw' }}>
+        <div style={{ display: 'flex', marginBottom: '0.521vw', whiteSpace: 'nowrap' }}>
           <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
             재학 중인 학년/학기
           </Typography>
@@ -76,7 +76,7 @@ export default function CurrentModal1(props: CurrentModalProps){
         <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} />
       </ButtonsWrapper>
     </NotSubmittedWrapper>
-    </ContentsWrapper>
+    </>
     
   )
 }
@@ -92,10 +92,3 @@ const ButtonsWrapper = styled.div`
   width: 32.813vw;
 `;
 
-const ContentsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  //height: 796px;
-  height: 41.458vw;
-`;

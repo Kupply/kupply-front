@@ -30,7 +30,7 @@ export default function CurrentModal0(props: CurrentModalProps){
   }, [gpaState, stdIdVerified]);
 
   return (
-    <ContentsWrapper>
+    <>
       <NotSubmittedWrapper currentStep={1}>
       <div style={{ position: 'absolute', top: '13.958vw', left: '4.844vw' }}>
         <div style={{ display: 'flex', marginBottom: '0.521vw' }}>
@@ -55,7 +55,7 @@ export default function CurrentModal0(props: CurrentModalProps){
         <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} />
       </ButtonsWrapper>
     </NotSubmittedWrapper>
-    </ContentsWrapper>
+    </>
     
   )
 }
@@ -71,10 +71,3 @@ const ButtonsWrapper = styled.div`
   width: 32.813vw;
 `;
 
-const ContentsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  //height: 796px;
-  height: 41.458vw;
-`;

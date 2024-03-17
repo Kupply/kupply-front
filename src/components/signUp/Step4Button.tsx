@@ -14,7 +14,8 @@ const ButtonWrapper = styled.button<Step4ButtonProps>`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 110px;
+  //height: 110px;
+  height: 5.729vw;
   padding-left: 2.29vw;
   padding-right: 0.885vw;
   flex-shrink: 0;
@@ -72,13 +73,21 @@ function Step4Button(props: Step4ButtonProps) {
         </Passage>
       </TextBox>
       {(state === 'default' || state === 'clicked') && !double ? (
-        <img src="../../designImage/character/Chick1StandSide.png" width="90px" height="90px" />
+        <div style={{width: '4.688vw', height: '4.668vw'}}>
+          <img src="../../designImage/character/Chick1StandSide.png" width="100%" height="100%" />
+        </div>
       ) : (state === 'default' || state === 'clicked') && double ? (
-        <img src="../../designImage/character/Chick2StandSide.png" width="90px" height="90px" />
+        <div style={{width: '4.688vw', height: '4.668vw'}}>
+          <img src="../../designImage/character/Chick2StandSide.png" width="100%" height="100%" />
+        </div>
       ) : state === 'inactive' && !double ? (
-        <img src="../../designImage/character/Chick1StandSideOpacity.png" width="90px" height="90px" />
+        <div style={{width: '4.688vw', height: '4.668vw'}}>
+        <img src="../../designImage/character/Chick1StandSideOpacity.png" width="100%" height="100%" />
+        </div>
       ) : (
-        <img src="../../designImage/character/Chick2StandSideOpacity.png" width="90px" height="90px" />
+        <div style={{width: '4.668vw', height: '4.668vw'}}>
+          <img src="../../designImage/character/Chick2StandSideOpacity.png" width="100%" height="100%" />
+        </div>
       )}
     </ButtonWrapper>
   );

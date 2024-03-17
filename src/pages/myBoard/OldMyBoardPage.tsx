@@ -14,6 +14,7 @@ import SemesterButton from '../../assets/tabMenu/TabMenu02';
 //import EditModal from '../../components/myBoard/EditModals/OldEditModal';
 import EditModal from '../../components/myBoard/EditModals/EditModal';
 import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
+//import ApplicationModal from '../../components/myBoard/SubmitModals/OldApplicationModal';
 import { recruit } from '../../common/Recruiting';
 import MyboardPasserPageVer from './MyboardPasser';
 import client from '../../utils/HttpClient';
@@ -102,9 +103,9 @@ export default function MyBoardPage() {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // 1지망 학과를 보고 있다는 의미
   const [scrollY, setScrollY] = useState(0);
   // Edit Modal 관련
-  const [isOpenEditModal, setOpenEditModal] = useState<boolean>(false);
+  const [isOpenEditModal, setOpenEditModal] = useState<boolean>(true);
   // Application Modal 관련
-  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(true);
+  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(false);
 
   // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.
   const onClickApplication = useCallback(() => {

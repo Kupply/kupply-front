@@ -32,7 +32,7 @@ export function SettingsPage(){
         const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         //const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
-
+        console.log('userInfo',userInfo); // 얘가 아예 등장도 하지 않음 
         localStorage.setItem('userProfilePic', userInfo.profilePic);
         localStorage.setItem('userProfileLink', userInfo.profileLink);
         localStorage.setItem('name', userInfo.name);
@@ -48,8 +48,8 @@ export function SettingsPage(){
           localStorage.setItem('isApplied', userInfo.isApplied);
         } else {
           localStorage.setItem('secondMajor', userInfo.secondMajor);
-          localStorage.setItem('passerSemester', userInfo.passSemester);
-          localStorage.setItem('passerGPA', userInfo.passGPA.toFixed(2));
+          localStorage.setItem('passSemester', userInfo.passSemester);
+          localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
         }
       } catch(err){
         console.log(err);

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Typography from "../../assets/Typography";
 import Step4Button from "../../components/signUp/Step4Button";
 import { useNavigate } from "react-router-dom";
-import { userTypeState } from "../../store/atom";
+import { userTypeState, userState } from "../../store/atom";
 import { useRecoilState } from "recoil";
 import Button04 from "../../assets/buttons/Button04";
 import Button03 from "../../assets/buttons/Button03";
@@ -11,19 +11,30 @@ import { UserInput } from "../../components/signUp/UserInput";
 import { UserInputText } from "../../components/signUp/UserInputText";
 import { GPAVerification, SemesterVerification } from "../../components/signUp/VerificationForm";
 import { useSignUp4Handler } from "../../utils/SignUpFunctions";
+import { useEffect, useState } from "react";
 
 
 export function SignUp4Page(){
 
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userTypeState);
-
+  const [userStdId, setUserStdId] = useRecoilState(userState('studentId'));
+  const [fixedUserType, setFixedUserType] = useState(false);
   // 넘겨받는 데이터가 없는 경우 돌려보내기 위해 
   // 잠시 수정 
-  // useEffect(() => {
-  //   if (!sessionStorage.getItem('nickname')) navigate('/');
-  //   else sessionStorage.removeItem('role');
-  // }, []);
+  useEffect(() => {
+    if (!sessionStorage.getItem('nickname')) navigate('/');
+    else sessionStorage.removeItem('role');
+  }, []);
+  useEffect(()=>{
+    if(+userStdId.info.slice(2,4) === 24){
+      setUser({
+        userType: 'candidate',
+        userState: ['clicked', 'inactive']
+      })
+      setFixedUserType(true);
+    }
+  }, []);
 
   const handleButtonClick = (inputType: string) => {
     if(inputType === 'candidate' && user.userState[0] !== 'clicked'){
@@ -67,12 +78,12 @@ export function SignUp4Page(){
         <Step4Button
           state={user.userType === 'candidate' ? user.userState[0] : 'inactive'}
           double={false}
-          onClick={() => handleButtonClick('candidate')}
+          onClick={fixedUserType ? () => {} : () => handleButtonClick('candidate')}
         />
         <Step4Button 
           state={user.userType === 'passer' ? user.userState[1] : 'inactive'} 
           double={true} 
-          onClick={() => handleButtonClick('passer')}
+          onClick={fixedUserType ? () => {} : () => handleButtonClick('passer')}
         />
       </ContentsWrapper>
       </ContentsList>
@@ -156,14 +167,14 @@ export function SignUp4PagePasser(){
           <UserInput userInfoType="doubleMajor" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="passerGPA"/>
+          <UserInputText userInfoType="passGPA"/>
           <GPAVerification 
             userType="passer" 
             setState={setGpaState}
             toNext={next}/>
         </ContentsWrapper>
         <ContentsWrapper>
-          <UserInputText userInfoType="passerSemester"/>
+          <UserInputText userInfoType="passSemester"/>
           <SemesterVerification
             userType="passer"
             setState={setSemesterState}
