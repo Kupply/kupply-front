@@ -44,7 +44,7 @@ const Container = styled.div`
   margin-top: 4px;
   flex-direction: row;
   gap: 0px;
-  width: 95%;
+  width: 100%;
   max-width: 1382px;
   z-index: 2;
 
