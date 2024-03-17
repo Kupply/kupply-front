@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { SideBar } from "../../components/settings/Sidebar";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { SBContentState, isAppliedState, isGpaChangedState, settingsModalState } from "../../store/atom";
+import { SBContentState, isAppliedState, isGpaChangedState, settingsModalState, userSettingsState } from "../../store/atom";
 import { SidebarContent0 } from "../../components/settings/sidebar-content/SidebarContent0";
 import { SidebarContent1 } from "../../components/settings/sidebar-content/SidebarContent1";
 import { SidebarContent2 } from "../../components/settings/sidebar-content/SidebarContent2";
@@ -13,6 +13,8 @@ import client from "../../utils/HttpClient";
 import { GpaChangeModal } from "../../components/settings/GpaChangeModal";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useRouteError } from "react-router-dom";
+import { StateOptions } from "../../assets/OldTextFieldBox";
 
 export function SettingsPage(){
   const [selected, setSelected] = useRecoilState(SBContentState);
@@ -24,6 +26,13 @@ export function SettingsPage(){
     },
     withCredentials: true,
   };
+
+  const [name, setName] = useState<string>(localStorage.getItem('name') || '');
+  console.log('firstPrintName', name);
+  const [nameState, setNameState] = useState<StateOptions>('filled');
+  const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
+  const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
+  const [firstMajor, setFirstMajor] = useState<string>(localStorage.getItem('firstMajor') || '');
 
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
@@ -51,6 +60,10 @@ export function SettingsPage(){
           localStorage.setItem('passSemester', userInfo.passSemester);
           localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
         }
+
+        setName(userInfo.name);
+        setStdID(userInfo.studentId);
+        setFirstMajor(userInfo.firstMajor);
       } catch(err){
         console.log(err);
       }}
