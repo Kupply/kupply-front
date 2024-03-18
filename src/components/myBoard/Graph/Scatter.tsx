@@ -63,7 +63,7 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
       <ScatterBox>
         <VictoryChart
           theme={VictoryTheme.material}
-          domain={{ x: [minXValue, 4.8], y: [0, maxYValue] }}
+          domain={{ x: [minXValue, 4.5], y: [0, maxYValue] }}
           origin={{ x: 0, y: 0 }}
           containerComponent={
             <VictoryVoronoiContainer
@@ -81,7 +81,7 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
           <VictoryAxis
             label="지원자 평균 학점"
             axisComponent={<CustomAxis />}
-            tickValues={[0.5, 1.5, 2.5, 3.5, 4.5]}
+            tickValues={[3.5, 3.7, 3.9, 4.1, 4.3, 4.5]}
             style={{
               grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
               axisLabel: {
