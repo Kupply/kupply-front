@@ -49,7 +49,7 @@ export default function CurrentModal2(){
           setCurrentModal(3);
           setIsSubmitted(true);
         }}
-        style={{width: '200%'}}
+        style={{position: 'absolute', top: '36.9vw'}}
       />
     </>
     
@@ -81,6 +81,6 @@ const LeftAlignedContainer = styled.div`
   align-items: center; /* Align children to the left */
   height: 15vw;
   margin-top: 7vw;
-  margin-bottom: 9.5vw;
+  margin-bottom: 10vw;
   width: 36.3vw;
 `;
