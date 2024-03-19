@@ -10,6 +10,8 @@ import CurrentModal2 from "./currentModal/Modal2";
 import CurrentModal3 from "./currentModal/Modal3";
 import CurrentModal4 from "./currentModal/Modal4";
 import client from "../../../utils/HttpClient";
+import NotSubmittedHeader from "./currentModal/NotSubmittedHeader";
+import { useRef } from "react";
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -33,7 +35,6 @@ export function UploadButton(props: UploadButtonProps){
       const newFile = newFiles[0];
       setSelectedFile(newFile);
     }
-    console.log(selectedFile, 'this is the selected file but i have no idea whether this is now working or not');
   };
 
     return (
@@ -56,7 +57,7 @@ export function UploadButton(props: UploadButtonProps){
             </Typography>
           </div>
         ) : (
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', alignItems: 'center' }}>
             <img src={process.env.PUBLIC_URL + `/designImage/myBoard/EmptySelectedFile.svg`} alt="Empty Selected File Image" />
             <Typography
               size="0.975vw"
@@ -71,15 +72,11 @@ export function UploadButton(props: UploadButtonProps){
             >
               학업계획서를 첨부해주세요 (선택)
             </Typography>
+          
             <input
               type="file"
               id="fileInput"
               onChange={handleFileChange}
-              style={{
-                position: 'absolute',
-                top: '6.771vw',
-                left: '12.031vw',
-              }}
             />
           </div>
         )}
@@ -143,6 +140,7 @@ export default function ApplicationModal(props: ModalProps){
     <Main>
       {isOpenModal && 
       <ModalLarge onClickToggleModal={onClickModal}>
+
       <CloseButton
         onClick={() => {
           setOpenModal(!isOpenModal);
@@ -169,18 +167,29 @@ export default function ApplicationModal(props: ModalProps){
             실제 이중전공 지원과 동일한 정보를 입력해주세요.
           </Typography>
         </ModalTitleWrapper>
+        
         {(()=>{
             switch(currentModal){
               case 0: 
-                return <CurrentModal0 handleNext={handleNext} handlePrev={handlePrev}/>
+                return <>
+                <NotSubmittedHeader currentStep={1}/>
+                <CurrentModal0 handleNext={handleNext} handlePrev={handlePrev}/>
+                </>
               case 1:
-                return <CurrentModal1 handleNext={handleNext} handlePrev={handlePrev}/>
+                return <>
+                <NotSubmittedHeader currentStep={2}/>
+                <CurrentModal1 handleNext={handleNext} handlePrev={handlePrev}/>
+                </>
               case 2: 
-                return <CurrentModal2/>
+                return <>
+                <NotSubmittedHeader currentStep={2}/>
+                <CurrentModal2/>
+                </>
               default:
                 return <></>
             }
           })()}
+
         </>
           : 
         (()=>{
@@ -205,8 +214,8 @@ const Main = styled.main`
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: fixed;
+  align-items: center;
   overflow-y: scroll;
   z-index: 1005;
 `;
@@ -233,6 +242,13 @@ const ModalTitleWrapper = styled.div`
   flex-direction: column;
   gap: 0.221vw;
   align-items: center;
-  position: absolute;
-  top: 2.667vw;
+  margin-top: 1.667vw;
 `;
+
+const StyledInput = styled.input`
+  position: absolute;
+  top: 6.771vw;
+  left: 12.031vw;
+  width: 100px; /* Default width */
+`;
+
