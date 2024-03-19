@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import React, { forwardRef } from 'react';
 
 import Typography from '../../assets/Typography';
 import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import Button08 from '../../assets/buttons/Button08';
 import PageNumber from '../../assets/landingpage/PageNumber';
 
-function FAQ() {
+const FAQ = forwardRef<HTMLDivElement, {}>((props, ref) => {
   const [college, setCollege] = useState(0);
   const [hover0, setHover0] = useState(false);
   const [hover1, setHover1] = useState(false);
@@ -32,7 +33,7 @@ function FAQ() {
   }
 
   return (
-    <MainWrapper>
+    <MainWrapper ref={ref}>
       <Typography size="0.94vw" bold="700" color="#D85888">
         쿠플라이 FAQ
       </Typography>
@@ -372,7 +373,7 @@ function FAQ() {
       </PageWrapper>
     </MainWrapper>
   );
-}
+});
 
 const MainWrapper = styled.div`
   width: fit-content;
