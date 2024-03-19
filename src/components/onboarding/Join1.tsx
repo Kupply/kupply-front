@@ -4,8 +4,10 @@ import { useState } from 'react';
 
 import Typography from '../../assets/Typography';
 import Button02 from '../../assets/buttons/Button02';
+import CTA02 from '../../assets/CTAs/CTA02';
 
 function Join1() {
+  const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
 
@@ -36,33 +38,60 @@ function Join1() {
 
   return (
     <MainWrapper>
-      <Typography size="1.98vw" bold="700" color="#2C323A" style={{ marginTop: '4.95vw', lineHeight: '2.6vw' }}>
-        당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서.
-      </Typography>
-      <Typography size="1.25vw" bold="500" color="#2C323A">
-        이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.
-      </Typography>
-      <JoinBox>
-        <TextFieldBox
-          placeholder="Bright@Korea.ac.kr"
-          value={ID}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setID(e.target.value);
-          }}
-          onKeyDown={(e: React.KeyboardEvent) => {
-            if (e.key === 'Enter') {
-              handleButtonClick();
-            }
-          }}
-        />
-        <Button02
-          onClick={handleButtonClick}
-          style={{
-            boxShadow:
-              '7px 3px 16px 0px rgba(216, 88, 136, 0.20), 26px 11px 28px 0px rgba(216, 88, 136, 0.17), 59px 25px 38px 0px rgba(216, 88, 136, 0.10), 105px 45px 46px 0px rgba(216, 88, 136, 0.03), 164px 70px 50px 0px rgba(216, 88, 136, 0.00)',
-          }}
-        />
-      </JoinBox>
+      {isLogined ? (
+        <>
+          <Typography
+            size="1.98vw"
+            bold="700"
+            color="#2C323A"
+            style={{ margin: '4.95vw 0 0.42vw 0', lineHeight: '131.58%' }}
+          >
+            쿠플라이 모의지원을 통해 당신의 합격 가능성을 확인하세요!
+          </Typography>
+          <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8 }}>
+            간단한 모의지원으로 나의 학점 위치와 자소서까지, 오직 쿠플라이에서 제공해드릴게요.
+          </Typography>
+          <CTA02 onClick={() => navigate('/myboard')} style={{ margin: '2.29vw 0 5.63vw 0' }} />
+        </>
+      ) : (
+        <>
+          <Typography
+            size="1.98vw"
+            bold="700"
+            color="#2C323A"
+            style={{ margin: '4.95vw 0 0.42vw 0', lineHeight: '131.58%' }}
+          >
+            당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서.
+          </Typography>
+          <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8 }}>
+            이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
+            이용해보세요.
+          </Typography>
+          <JoinBox>
+            <TextFieldWrapper>
+              <TextFieldBox
+                placeholder="Bright@Korea.ac.kr"
+                value={ID}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setID(e.target.value);
+                }}
+                onKeyDown={(e: React.KeyboardEvent) => {
+                  if (e.key === 'Enter') {
+                    handleButtonClick();
+                  }
+                }}
+              />
+            </TextFieldWrapper>
+            <Button02
+              onClick={handleButtonClick}
+              style={{
+                boxShadow:
+                  '7px 3px 16px 0px rgba(216, 88, 136, 0.20), 26px 11px 28px 0px rgba(216, 88, 136, 0.17), 59px 25px 38px 0px rgba(216, 88, 136, 0.10), 105px 45px 46px 0px rgba(216, 88, 136, 0.03), 164px 70px 50px 0px rgba(216, 88, 136, 0.00)',
+              }}
+            />
+          </JoinBox>
+        </>
+      )}
     </MainWrapper>
   );
 }
@@ -80,7 +109,20 @@ const JoinBox = styled.div`
   height: auto;
   display: flex;
   gap: 1.15vw;
-  margin: 2.29vw 0 5.63vw 0;
+  margin: 0 0 3.34vw 0;
+  align-items: center;
+`;
+
+const TextFieldWrapper = styled.div`
+  width: 32.99vw; //33.33vw;
+  height: 10.15vw; //4.48vw;
+  border-radius: 0.52vw;
+  background-image: url('../../designImage/onboarding/Blur.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TextFieldBox = styled.input`
@@ -90,8 +132,8 @@ const TextFieldBox = styled.input`
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  border: 0.1vw solid #d85888;
-  padding: 1.3vw 0.94vw;
+  border: 1px solid #d85888;
+  padding: 1.2vw 0.94vw;
   border-radius: 0.52vw;
   background: rgba(255, 255, 255);
   color: #141414;
@@ -100,6 +142,7 @@ const TextFieldBox = styled.input`
   font-style: normal;
   font-weight: 500;
   line-height: 100%;
+
   &::placeholder {
     color: #b9b9b9;
     font-family: Pretendard;
@@ -107,6 +150,7 @@ const TextFieldBox = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: 100%;
+    opacity: 0.8;
   }
 `;
 

@@ -1,17 +1,21 @@
-// 버튼 기능 추가
-
 import styled from 'styled-components';
 
 import Typography from '../../assets/Typography';
 import Button11 from '../../assets/buttons/Button11';
 
-function Banner() {
+interface BannerProps {
+  scrollToFAQ: () => void;
+}
+
+function Banner({ scrollToFAQ }: BannerProps) {
   return (
     <MainWrapper>
       <Typography size="1.67vw" bold="700" color="#FFF" style={{ lineHeight: '120%' }}>
         다른 지원자들은 어떤 정보를 궁금해하고 있을까?
       </Typography>
-      <Button11 style={{ color: '#FFF', zIndex: '10' }}>이중전공 A to Z 바로가기</Button11>
+      <Button11 onClick={scrollToFAQ} style={{ color: '#FFF', zIndex: '10' }}>
+        이중전공 A to Z 바로가기
+      </Button11>
       <img
         width="11.5%"
         height="63%"

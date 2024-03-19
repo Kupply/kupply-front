@@ -33,8 +33,8 @@ function Button02(props: Button02Props) {
 }
 
 const ButtonWrapper = styled.button<Button02Props>`
-  width: auto;
-  height: auto;
+  width: fit-content;
+  height: fit-content;
   box-sizing: border-box;
   border: ${(props) =>
     props.variant === 'outline' && (props.state === 'default' || props.state === 'disabled')
@@ -45,7 +45,7 @@ const ButtonWrapper = styled.button<Button02Props>`
   justify-content: space-between;
   align-items: center;
   gap: 0.42vw;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   background: ${(props) =>
     props.variant === 'solid' && props.state === 'hover'
       ? 'rgba(216, 88, 136, 0.75)'
