@@ -7,7 +7,17 @@ export type MajorOptionsShortEng =
   | 'chemistry'
   | 'media'
   | 'foodecon'
-  | 'computer';
+  | 'computer'
+  | 'bioeng'
+  | 'lifesci'
+  | 'political'
+  | 'pubadmin'
+  | 'materials'
+  | 'industrial'
+  | 'electrical'
+  | 'chembio'
+  | 'datasci'
+  | 'smartsec';
 
 export type MajorOptionsLongEng =
   | 'Business School'
@@ -18,7 +28,19 @@ export type MajorOptionsLongEng =
   | 'Department of Chemistry'
   | 'School of Media & Communication'
   | 'Department of Food & Resources'
-  | 'Department of Computer Science & Engineering';
+  | 'Department of Computer Science & Engineering'
+  | 'Biological Engineering'
+  | 'School of Life Sciences'
+  | 'Department of Political Science & International Relations'
+  | 'Department of Public Administration'
+  | 'School of Materials Science & Engineering'
+  | 'School of Mechanical Engineering'
+  | 'School of Industrial Management Engineering'
+  | 'School of Electrical Engineering'
+  | 'Department of Chemical & Biological Engineering'
+  | 'Department of Data Science'
+  | 'Division of Smart Security';
+  
 
 export type MajorOptionsKR =
   | '경영학과'
@@ -29,4 +51,15 @@ export type MajorOptionsKR =
   | '화학과'
   | '미디어학부'
   | '식품자원경제학과'
-  | '컴퓨터학과';
+  | '컴퓨터학과'
+  | '생명공학부'
+  | '생명과학부'
+  | '정치외교학과'
+  | '행정학과'
+  | '신소재공학부'
+  | '기계공학부'
+  | '산업경영공학부'
+  | '전기전자공학부'
+  | '화공생명공학부'
+  | '데이터과학과'
+  | '스마트보안학부';
