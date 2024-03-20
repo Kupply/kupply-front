@@ -44,56 +44,57 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   // };
 
   // 이게 원래 fetch function 이지만 /archive access를 위해 임시로 fetch function 만듦
-  // const fetch = async () => {
-  //   try {
-  //     const isLogined = window.localStorage.getItem('isLogin');
-
-  //     if (isLogined !== 'true') {
-  //       alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
-  //       navigate('/login');
-  //     } else {
-  //       // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
-  //       const data = await client.get('/dashboard/cards');
-  //       setCards(
-  //         cards.map((c) => {
-  //           const res = data.data.find((ca: any) => ca.name === c.korName);
-  //           return {
-  //             korName: c.korName,
-  //             engName: c.engName,
-  //             filter: c.filter,
-  //             TO: c.TO,
-  //             semester: c.semester,
-  //             avgPass: res.avg,
-  //             minPass: res.min,
-  //             compRate: res.passNum,
-  //           };
-  //         }),
-  //       );
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // 임시적으로 만든 fetch function
   const fetch = async () => {
-    const data = await client.get('/dashboard/cards');
-    setCards(
-      cards.map((c) => {
-        const res = data.data.find((ca: any) => ca.name === c.korName);
-        return {
-          korName: c.korName,
-          engName: c.engName,
-          filter: c.filter,
-          TO: c.TO,
-          semester: c.semester,
-          avgPass: res.avg,
-          minPass: res.min,
-          compRate: res.passNum,
-        };
-      }),
-    );
+    try {
+      const isLogined = window.localStorage.getItem('isLogin');
+
+      if (isLogined !== 'true') {
+        alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+        // navigate('/login'); FIXME => 배포 시 수정 필요
+      } else {
+        // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
+        const data = await client.get('/dashboard/cards');
+        console.log(data.data);
+        setCards(
+          cards.map((c) => {
+            const res = data.data.find((ca: any) => ca.name === c.korName);
+            return {
+              korName: c.korName,
+              engName: c.engName,
+              filter: c.filter,
+              TO: c.TO,
+              semester: c.semester,
+              avgPass: +(res.avg / res.passNum).toFixed(2),
+              minPass: res.min,
+              compRate: +(res.passNum / c.TO).toFixed(2),
+            };
+          }),
+        );
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // // 임시적으로 만든 fetch function
+  // const fetch = async () => {
+  //   const data = await client.get('/dashboard/cards');
+  //   setCards(
+  //     cards.map((c) => {
+  //       const res = data.data.find((ca: any) => ca.name === c.korName);
+  //       return {
+  //         korName: c.korName,
+  //         engName: c.engName,
+  //         filter: c.filter,
+  //         TO: c.TO,
+  //         semester: c.semester,
+  //         avgPass: res.avg,
+  //         minPass: res.min,
+  //         compRate: res.passNum,
+  //       };
+  //     }),
+  //   );
+  // };
   useEffect(() => {
     fetch();
   });
