@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
-import { GlobalStyle } from './globalStyle';
+import { GlobalStyle } from './GlobalStyle';
 import App from './App';
 import ScrollToTop from './components/ScrollToTop';
 import ReactGA from 'react-ga4';

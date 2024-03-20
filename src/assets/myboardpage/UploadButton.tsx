@@ -11,16 +11,21 @@ export interface UploadButtonProps extends React.ComponentPropsWithoutRef<'butto
 
 const Button = styled.button<UploadButtonProps>`
   display: flex;
-  width: 170px;
-  height: 36px;
-  border-radius: 3.638px;
-  padding: 8px 26px;
+  //width: 170px;
+  width: 8.854vw;
+  //height: 36px;
+  height: 1.875vw;
+  //border-radius: 3.638px;
+  border-radius: 0.189vw;
+  //padding: 8px 26px;
+  padding: 0.4167vw 1.354vw;
   vertical-align: middle;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-family: Pretendard;
-  font-size: 18px;
+  //font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 500;
   line-height: 111.111%;
@@ -76,11 +81,11 @@ export default function UploadButton(props: UploadButtonProps) {
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="70"
-            height="70"
+            width="3.646vw"
+            height="3.646vw"
             viewBox="0 0 70 70"
             fill="none"
-            style={{ display: 'flex', justifyContent: 'center', marginTop: '63px', marginLeft: '279px' }}
+            style={{ display: 'flex', justifyContent: 'center', marginTop: '3.281vw', marginLeft: '14.531vw' }}
           >
             <path
               d="M40.8346 5.83398H17.5013C15.9542 5.83398 14.4705 6.44857 13.3765 7.54253C12.2826 8.63649 11.668 10.1202 11.668 11.6673V58.334C11.668 59.8811 12.2826 61.3648 13.3765 62.4588C14.4705 63.5527 15.9542 64.1673 17.5013 64.1673H52.5013C54.0484 64.1673 55.5321 63.5527 56.6261 62.4588C57.7201 61.3648 58.3346 59.8811 58.3346 58.334V23.334L40.8346 5.83398Z"
@@ -110,7 +115,7 @@ export default function UploadButton(props: UploadButtonProps) {
             style={{
               display: 'flex',
               color: '#E57C90',
-              marginTop: '5px',
+              marginTop: '0.260vw',
               textAlign: 'center',
               justifyContent: 'center',
             }}
@@ -122,11 +127,11 @@ export default function UploadButton(props: UploadButtonProps) {
         <div style={{ position: 'relative' }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="92"
-            height="70"
+            width="4.792vw"
+            height="3.646vw"
             viewBox="0 0 92 70"
             fill="none"
-            style={{ display: 'flex', justifyContent: 'center', marginTop: '37px', marginLeft: '268px' }}
+            style={{ display: 'flex', justifyContent: 'center', marginTop: '1.927vw', marginLeft: '13.958vw' }}
           >
             <path
               d="M61.3698 49L46.0365 35L30.7031 49"
@@ -159,11 +164,12 @@ export default function UploadButton(props: UploadButtonProps) {
           </svg>
 
           <Typography
-            size="mediumText"
+            size="0.9375vw"
+            bold='500'
             style={{
               display: 'flex',
               color: '#E57C90',
-              marginTop: '17px',
+              marginTop: '0.885vw',
               textAlign: 'center',
               justifyContent: 'center',
             }}
@@ -177,8 +183,8 @@ export default function UploadButton(props: UploadButtonProps) {
             onChange={handleFileChange}
             style={{
               position: 'absolute',
-              top: '130px',
-              left: '231px',
+              top: '6.771vw',
+              left: '12.031vw',
             }}
           />
         </div>

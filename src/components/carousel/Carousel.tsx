@@ -25,7 +25,7 @@ const LeftArrow = styled.button`
   position: absolute;
   left: 6.66vw; //100px;
   top: 300px; // 380px; (380/1248 = 30.45)
-  background-image: url('design_image/carousel/carousel_left_button.png');
+  background-image: url('designImage/carousel/CarouselLeftButton.png');
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -37,7 +37,7 @@ const RightArrow = styled.button`
   position: absolute;
   right: 6.66vw; // left: 1770px;
   top: 300px; // 380px; (380/1248 = 30.45)
-  background-image: url('design_image/carousel/carousel_right_button.png');
+  background-image: url('designImage/carousel/CarouselRightButton.png');
   background-size: cover;
   border: none;
   cursor: pointer;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Cell, PieChart, Pie, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, DotProps } from 'recharts';
 import styled from 'styled-components';
-import Typography from '../Typography';
+import Typography from '../OldTypography';
 import { TableUnique } from 'typeorm';
 
 type Rank = 'Safe' | 'Normal' | 'Dangerous' | 'VeryDangerous';

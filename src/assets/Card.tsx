@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 import LabelButton from './buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
+import { MajorOptionsLongEng as MajorOptions } from '../types/MajorTypes';
 
 export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   name: string;
@@ -16,17 +17,6 @@ export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   titleSrc: string;
 }
 
-type MajorOptions =
-  | 'Business School'
-  | 'Department of Economics'
-  | 'School of Psychology'
-  | 'Department of Statistics'
-  | 'Department of Mathematics'
-  | 'Department of Chemistry'
-  | 'School of Media & Communication'
-  | 'Department of Food & Resources'
-  | 'Department of Computer Science & Engineering';
-
 const majorParamMapping = {
   'Business School': 'business',
   'Department of Economics': 'economics',
@@ -37,6 +27,17 @@ const majorParamMapping = {
   'School of Media & Communication': 'media',
   'Department of Food & Resources': 'foodecon',
   'Department of Computer Science & Engineering': 'computer',
+  'Biological Engineering': 'bioeng',
+  'School of Life Sciences': 'lifesci',
+  'Department of Political Science & International Relations': 'political',
+  'Department of Public Administration': 'pubadmin',
+  'School of Materials Science & Engineering': 'materials',
+  'School of Mechanical Engineering': 'mechanical',
+  'School of Industrial & Management Engineering': 'industrial',
+  'School of Electrical Engineering': 'electrical',
+  'Department of Chemical & Biological Engineering': 'chembio',
+  'Department of Data Science': 'datasci',
+  'Division of Smart Security': 'smartsec',
 };
 
 const Card = ({ name, eng, filter, TO, pass, avg, min, src, semester, titleSrc }: CardsProps) => {

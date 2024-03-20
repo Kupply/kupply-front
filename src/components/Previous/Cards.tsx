@@ -4,128 +4,37 @@ import Card from '../../assets/Card';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import client from '../../utils/httpClient';
+import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
+import Card01 from '../../assets/cards/Card01';
+import DropDown02 from '../../assets/dropdown/DropDown02';
+
+// 정렬 임의로 넣어 둠 (에셋 완성되면 적용할 예정)
 
 export interface CardsProps {
   clicked: number;
   searchWord: string;
 }
 
-const mockCards = [
-  {
-    name: '경영대학 경영학과',
-    eng: 'Business School',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 42,
-    pass: 7,
-    avg: 4.23,
-    min: 4.12,
-    semester: '2023-1R',
-    src: '/design_image/previous/bussiness.png',
-    titleSrc: '/design_image/previous_detail/business.png',
-  },
-  {
-    name: '심리학부',
-    eng: 'School of Psychology',
-    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
-    TO: 44,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/design_image/previous/psycho.png',
-    titleSrc: '/design_image/previous_detail/psycho.png',
-  },
-  {
-    name: '정경대학 경제학과',
-    eng: 'Department of Economics',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 13,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/design_image/previous/political.png',
-    titleSrc: '/design_image/previous_detail/political.png',
-  },
-  {
-    name: '정경대학 통계학과',
-    eng: 'Department of Statistics',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 28,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/design_image/previous/political.png',
-    titleSrc: '/design_image/previous_detail/political.png',
-  },
-  {
-    name: '미디어학부',
-    eng: 'School of Media & Communication',
-    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
-    TO: 25,
-    pass: 7,
-    semester: '2023-1R',
-    avg: 4.23,
-    min: 4.12,
-    src: '/design_image/previous/media.png',
-    titleSrc: '/design_image/previous_detail/media.png',
-  },
-  {
-    name: '정보대학 컴퓨터학과',
-    eng: 'Department of Computer Science & Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 19,
-    pass: 7,
-    avg: 4.23,
-    min: 4.12,
-    semester: '2023-1R',
-    src: '/design_image/previous/info.png',
-    titleSrc: '/design_image/previous_detail/info.png',
-  },
-  {
-    name: '생명과학대학 식품자원경제학과',
-    eng: 'Department of Food & Resources',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 30,
-    pass: 7,
-    avg: 4.23,
-    semester: '2023-1R',
-    min: 4.12,
-    src: '/design_image/previous/bio.png',
-    titleSrc: '/design_image/previous_detail/bio.png',
-  },
-  {
-    name: '이과대학 수학과',
-    eng: 'Department of Mathematics',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 17,
-    pass: 7,
-    semester: '2023-1R',
-    avg: 4.23,
-    min: 4.12,
-    src: '/design_image/previous/science.png',
-    titleSrc: '/design_image/previous_detail/science.png',
-  },
-  {
-    name: '이과대학 화학과',
-    eng: 'Department of Chemistry',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 11,
-    pass: 7,
-    semester: '2023-1R',
-    avg: 4.23,
-    min: 4.12,
-    src: '/design_image/previous/science.png',
-    titleSrc: '/design_image/previous_detail/science.png',
-  },
-];
+// korName: c.korName,
+// engName: c.engName,
+// filter: c.filter,
+// TO: c.TO,
+// semester: c.semester,
+// avgPass: res.avg,
+// minPass: res.min,
+// pass: res.passNum,
+
+// Card01의 prop과 맞도록 수정
+// 지원자 수에 대한 데이터가 없어서 경쟁률은 계산하지 못함
+
+// const sortOptions = ['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순'];
 
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
+  const [sortCriterion, setSortCriterion] = useState('가나다순');
   const navigate = useNavigate();
+  const prevSemester = '23-2';
   // const [cookies] = useCookies(['accessToken']);
   // const accessToken = cookies.accessToken;
   // const config = {
@@ -135,110 +44,359 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   //   withCredentials: true,
   // };
 
+  // 이게 원래 fetch function 이지만 /archive access를 위해 임시로 fetch function 만듦
   const fetch = async () => {
     try {
       const isLogined = window.localStorage.getItem('isLogin');
+
       if (isLogined !== 'true') {
         alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
-        navigate('/login');
-      }
-      else{
+        // navigate('/login'); FIXME => 배포 시 수정 필요
+      } else {
         // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
-      const data = await client.get('/dashboard/cards');
-      setCards(
-        cards.map((c) => {
-          const res = data.data.find((ca: any) => ca.name === c.name);
-          return {
-            name: c.name,
-            eng: c.eng,
-            filter: c.filter,
-            TO: c.TO,
-            semester: c.semester,
-            src: c.src,
-            titleSrc: c.titleSrc,
-            avg: +(res.avg / res.passNum).toFixed(2),
-            min: res.min,
-            pass: res.passNum,
-          };
-        }),
-      );
+        const data = await client.get('/dashboard/cards');
+
+        setCards(
+          cards.map((c) => {
+            const res = data.data.find((ca: any) => ca.name === c.korName);
+            return {
+              korName: c.korName,
+              engName: c.engName,
+              filter: c.filter,
+              TO: c.TO,
+              semester: prevSemester,
+              avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
+              minPass: res.passNum === 0 ? 0 : res.min,
+              compRate: +(res.passNum / c.TO).toFixed(2),
+            };
+          }),
+        );
       }
-      
     } catch (err) {
       console.log(err);
     }
   };
+
+  // // 임시적으로 만든 fetch function
+  // const fetch = async () => {
+  //   const data = await client.get('/dashboard/cards');
+  //   setCards(
+  //     cards.map((c) => {
+  //       const res = data.data.find((ca: any) => ca.name === c.korName);
+  //       return {
+  //         korName: c.korName,
+  //         engName: c.engName,
+  //         filter: c.filter,
+  //         TO: c.TO,
+  //         semester: c.semester,
+  //         avgPass: res.avg,
+  //         minPass: res.min,
+  //         compRate: res.passNum,
+  //       };
+  //     }),
+  //   );
+  // };
   useEffect(() => {
     fetch();
   });
 
+  const handleSortChange = (criterion: string) => {
+    setSortCriterion(criterion);
+  };
+
   const filteredCards = cards
     .filter((card) => {
       if (clicked !== 4 && !card.filter.includes(mockHashes[clicked])) return false; // filter based on clicked hashtag
-      if (searchWord && !card.name.toLowerCase().includes(searchWord.toLowerCase())) return false; // filter based on search word
+      if (searchWord && !card.korName.toLowerCase().includes(searchWord.toLowerCase())) return false; // filter based on search word
       return true;
     })
-    .sort((a, b) => a.name.localeCompare(b.name)); // always sort alphabetically
+    .sort((a, b) => {
+      switch (sortCriterion) {
+        case '가나다순':
+          return a.korName.localeCompare(b.korName);
+        case '선발인원순':
+          return a.TO - b.TO;
+        case '경쟁률순':
+          return a.compRate - b.compRate;
+        case '평균학점순':
+          return a.avgPass - b.avgPass;
+        case '최저학점순':
+          return a.minPass - b.minPass;
+        default:
+          return a.korName.localeCompare(b.korName);
+      }
+    });
 
-  const filteredSet = new Set(filteredCards.map((card) => card.name));
+  const filteredSet = new Set(filteredCards.map((card) => card.korName));
 
-  const opaCards = cards.filter((card) => !filteredSet.has(card.name));
+  const opaCards = cards.filter((card) => !filteredSet.has(card.korName));
 
   return (
     <Container>
-      <Sort>
-        {mockHashes[clicked]}
-        {clicked > 0 && clicked < 4 && ' 정렬'}
-      </Sort>
       <FlexContainer>
+        <Sort>
+          {/*{mockHashes[clicked]}*/}
+          {/*{clicked > 0 && clicked < 4 && ' 정렬'}*/}
+          <DropDown02
+            optionList={['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순']}
+            value={sortCriterion}
+            setValue={setSortCriterion}
+          />
+        </Sort>
         {filteredCards.map((card) => (
-          <Card {...card} />
+          <Card01 {...card} />
         ))}
       </FlexContainer>
-      <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '50px' }}>
+      <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '1.66vw' }}>
         {opaCards.map((card) => (
           <div style={{ opacity: 0.5 }}>
-            <Card {...card} />
+            <Card01 {...card} />
           </div>
         ))}
       </FlexContainer>
     </Container>
   );
 };
+
 const FlexContainer = styled.div`
   display: flex;
+  justify-content: flex-start;
   flex-direction: row;
-  row-gap: 50px;
-  column-gap: 25px;
-  width: 100%;
-  max-width: 1382px;
-  margin-top: 25px;
   flex-wrap: wrap;
+  row-gap: 1.66vw;
+  column-gap: 1.31vw;
+  width: 100%;
+  max-width: 69vw; // 68.75vw;
+  //margin-top: 0.83vw;
 `;
+
 const Container = styled.div`
   position: relative;
-  z-index: 0;
-  //height: 2500px;
-  padding-bottom: 230px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
   width: 100%;
   max-width: 1920px;
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding-bottom: 7.64vw;
+
+  z-index: 0;
 `;
 
 const Sort = styled.div`
   width: 100%;
-  max-width: 1382px;
-  margin-top: 130px;
-  height: 24px;
-  color: #a8a8a8;
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 100% */
+  // margin-top: 4.32vw;
+  // margin-bottom: 4.6875vw;
+  height: auto;
 `;
+
+const mockCards = [
+  {
+    korName: '경영대학 경영학과',
+    engName: 'Business School',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 37,
+    compRate: 4.23,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '심리학부',
+    engName: 'School of Psychology',
+    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
+    TO: 27,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '정경대학 경제학과',
+    engName: 'Department of Economics',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 29,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '정경대학 통계학과',
+    engName: 'Department of Statistics',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 29,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '미디어학부',
+    engName: 'School of Media & Communication',
+    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
+    TO: 21,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '정보대학 컴퓨터학과',
+    engName: 'Department of Computer Science & Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 20,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '생명과학대학 식품자원경제학과',
+    engName: 'Department of Food & Resources',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 21,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '이과대학 수학과',
+    engName: 'Department of Mathematics',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 7,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '이과대학 화학과',
+    engName: 'Department of Chemistry',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 10,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+
+  ////// 학과 추가 (3/20) //////
+  ///////////////////////////
+
+  {
+    korName: '생명과학대학 생명공학부',
+    engName: 'Biological Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 11,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '생명과학대학 생명과학부',
+    engName: 'School of Life Sciences',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 3,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '정경대학 정치외교학과',
+    engName: 'Department of Political Science & International Relations',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 27,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '정경대학 행정학과',
+    engName: 'Department of Public Administration',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 7,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '공과대학 신소재공학부',
+    engName: 'School of Materials Science & Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 5,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '공과대학 기계공학부',
+    engName: 'School of Mechanical Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 6,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '공과대학 산업경영공학부',
+    engName: 'School of Industrial & Management Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 7,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '공과대학 전기전자공학부',
+    engName: 'School of Electrical Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 14,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '공과대학 화공생명공학부',
+    engName: 'Department of Chemical & Biological Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 7,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '정보대학 데이터과학과',
+    engName: 'Department of Data Science',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 9,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '스마트보안학부 스마트보안학부',
+    engName: 'Division of Smart Security',
+    filter: ['학부 전체보기', '독립학부'],
+    TO: 3,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+];
 
 export default Cards;

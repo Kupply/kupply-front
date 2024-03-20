@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import Typography from '../Typography';
+import Typography from '../OldTypography';
 
 export interface FAQboxProps extends React.ComponentPropsWithRef<'div'> {
   isOpen?: boolean;
@@ -60,7 +60,7 @@ function FAQbox(props: FAQboxProps) {
           {question}
         </Typography>
         <img
-          src="../../design_image/u_angle-down.svg"
+          src="../../designImage/UAngleDown.svg"
           onClick={onToggle}
           style={{ cursor: 'pointer', transform: isOpen == true ? 'rotate(180deg)' : 'none' }}
         />

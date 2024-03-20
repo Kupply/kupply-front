@@ -10,8 +10,8 @@ const Wrapper = styled.div`
   align-items: flex-end;
   justify-content: center;
   background-size: cover;
-  // background-image: url('/design_image/carousel/login_banner3_extend.png');
-  background-image: url('/design_image/carousel/carousel3.png');
+  // background-image: url('/designImage/carousel/LoginBanner3Extend.png');
+  background-image: url('/designImage/carousel/Carousel3.png');
 `;
 
 const ContentWrapper = styled.div`
