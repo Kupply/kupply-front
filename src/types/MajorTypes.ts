@@ -35,12 +35,11 @@ export type MajorOptionsLongEng =
   | 'Department of Public Administration'
   | 'School of Materials Science & Engineering'
   | 'School of Mechanical Engineering'
-  | 'School of Industrial Management Engineering'
+  | 'School of Industrial & Management Engineering'
   | 'School of Electrical Engineering'
   | 'Department of Chemical & Biological Engineering'
   | 'Department of Data Science'
   | 'Division of Smart Security';
-  
 
 export type MajorOptionsKR =
   | '경영학과'

@@ -31,14 +31,14 @@ const majorParamMappingImage = {
   'Department of Public Administration': 'political',
   'School of Materials Science & Engineering': 'engineering',
   'School of Mechanical Engineering': 'engineering',
-  'School of Industrial Management Engineering': 'engineering',
+  'School of Industrial & Management Engineering': 'engineering',
   'School of Electrical Engineering': 'engineering',
   'Department of Chemical & Biological Engineering': 'engineering',
   'Department of Data Science': 'info',
-  'Division of Smart Security': 'smartsecurity'
+  'Division of Smart Security': 'smartsecurity',
 };
 
-// 각각의 path 받아서 수정 
+// 각각의 path 받아서 수정
 const majorParamMappingPath = {
   'Business School': 'business',
   'Department of Economics': 'economics',
@@ -55,11 +55,11 @@ const majorParamMappingPath = {
   'Department of Public Administration': 'pubadmin',
   'School of Materials Science & Engineering': 'materials',
   'School of Mechanical Engineering': 'mechanical',
-  'School of Industrial Management Engineering': 'industrial',
+  'School of Industrial & Management Engineering': 'industrial',
   'School of Electrical Engineering': 'electrical',
   'Department of Chemical & Biological Engineering': 'chembio',
   'Department of Data Science': 'datasci',
-  'Division of Smart Security': 'smartsec'
+  'Division of Smart Security': 'smartsec',
 };
 
 export default function Card01({ korName, engName, TO, avgPass, minPass, compRate, semester }: CardProps) {
