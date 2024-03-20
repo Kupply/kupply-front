@@ -28,8 +28,8 @@ const LogoTextWrapper = styled.text`
 */
 
 const LogoImage = styled.img`
-  width: 188px; // 46.575px;
-  height: 46px; // 46px;
+  width: 145.6px; // 46.575px;
+  height: 32px; // 46px;
   border: none;
 `;
 
@@ -40,7 +40,7 @@ function Logo() {
   };
   return (
     <LogoWrapper onClick={LogoWrapperClick}>
-      <LogoImage src="../../designImage/kupply/KupplyVer1.png" />
+      <LogoImage src="../../designImage/kupply/KupplyVer1.svg" />
     </LogoWrapper>
   );
 }

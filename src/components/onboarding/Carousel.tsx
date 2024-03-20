@@ -96,12 +96,12 @@ function Carousel() {
       <ArrowButton
         onClick={handleLeftClick}
         src="../designImage/carousel/CarouselLeftButton.png"
-        style={{ left: '6.67%', top: '42.78%' }}
+        style={{ left: '6.67%', top: '46.37%' }}
       />
       <ArrowButton
         onClick={handleRightClick}
         src="../designImage/carousel/CarouselRightButton.png"
-        style={{ right: '6.67%', top: '42.78%' }}
+        style={{ right: '6.67%', top: '46.37%' }}
       />
       <CircleButton
         onClick={() => {
@@ -133,16 +133,16 @@ function Carousel() {
 
 const MainWrapper = styled.div<MainWrapperProps>`
   width: 100vw;
-  height: 18.7vw;
+  height: 23.7vw;
   position: relative;
   background-size: cover;
   background-position: center;
   background-image: ${(props) =>
     props.page === 0
-      ? `url('../designImage/carousel/LoginBanner1Extend.png')`
+      ? `url('../designImage/carousel/Carousel1.png')`
       : props.page === 1
-      ? `url('../designImage/carousel/LoginBanner3Extend.png')`
-      : `url('../designImage/carousel/LoginBanner2Extend.png')`};
+      ? `url('../designImage/carousel/Carousel2.png')`
+      : `url('../designImage/carousel/Carousel3.png')`};
 `;
 
 const ArrowButton = styled.img`
@@ -160,7 +160,7 @@ const CircleButton = styled.div<{ active: boolean }>`
   border-radius: 999px;
   position: absolute;
   transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  top: ${({ active }) => (active ? '82.88%' : '83.28%')};
+  top: ${({ active }) => (active ? '85.31%' : '85.81%')};
   cursor: pointer;
 `;
 
@@ -174,7 +174,7 @@ const BannerButton = styled.div`
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0px 0px 40px 0px rgba(216, 88, 136, 0.2);
-  margin: 5.47vw 0 1.67vw 0;
+  margin: 7.24vw 0 1.77vw 0;
 `;
 
 export default Carousel;

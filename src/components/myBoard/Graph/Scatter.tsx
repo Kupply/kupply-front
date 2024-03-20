@@ -44,6 +44,7 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
   const maxYValue = Math.ceil(maxApplyValue / 10) * 10;
   const minGpaValue = Math.min(...filteredData.map((item) => item.avgGpa));
   const minXValue = Math.floor(minGpaValue * 2) / 2;
+  const TicGap = (4.5 - minXValue) / 4;
 
   const color = filteredData.map((item) => majorColorMapping[item.college as keyof typeof majorColorMapping].fill);
 
@@ -81,7 +82,13 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
           <VictoryAxis
             label="지원자 평균 학점"
             axisComponent={<CustomAxis />}
-            tickValues={[3.5, 3.7, 3.9, 4.1, 4.3, 4.5]}
+            tickValues={[
+              minXValue,
+              minXValue + TicGap,
+              minXValue + TicGap + TicGap,
+              minXValue + TicGap + TicGap + TicGap,
+              4.5,
+            ]}
             style={{
               grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
               axisLabel: {
