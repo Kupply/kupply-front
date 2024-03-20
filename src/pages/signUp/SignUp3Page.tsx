@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
 import styled from "styled-components";
 import { UserInput } from "../../components/signUp/UserInput";
@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import Typography from "../../assets/Typography";
 import NicknameCheckButton from "../../assets/progressIndicator/Loader";
 import { useRecoilState } from "recoil";
-import { userState } from "../../store/atom";
+import { userState, errorMessageState } from "../../store/atom";
 import { useSignUp3Verification } from "../../utils/SignUpFunctions";
 import Button04 from "../../assets/buttons/Button04";
 import Button03 from "../../assets/buttons/Button03";
 import { UserInputText } from "../../components/signUp/UserInputText";
+import NewTextFieldBox from "../../assets/NewTextFieldBox";
+import { useNicknameVerification } from "../../utils/UserInputVerification";
 
 type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 
@@ -18,8 +20,8 @@ export default function SignUp3Page(){
   const navigate = useNavigate();
   const [next, setNext] = useState(false); 
   const [nickname, setNickname] = useRecoilState(userState('nickname'));
-
   const {complete} = useSignUp3Verification();
+
 
   const handleNext = () => {
     setNext(true);
@@ -122,7 +124,7 @@ const CheckImage = styled.img`
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
   top: 1.15vw; //20.2px;
-  left: 25vw; //490px;
+  left: 25.7vw; //490px;
   z-index: 9999;
 `;
 

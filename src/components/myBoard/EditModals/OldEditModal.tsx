@@ -328,7 +328,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      {isOpenModal && !isSubmitted && (
+      { isOpenModal && !isSubmitted &&(
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton

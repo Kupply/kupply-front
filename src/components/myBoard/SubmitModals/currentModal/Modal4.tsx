@@ -23,7 +23,7 @@ export default function CurrentModal4(props: CurrentModalSubmittedProps){
           setOpenModal(!isOpenModal);
           window.location.reload();
         }}
-        style={{ marginTop: '5.573vw' }}
+        style={{ marginTop: '10.573vw', width: '100%' }}
       >
         확인
       </Button03>

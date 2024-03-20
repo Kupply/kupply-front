@@ -23,7 +23,6 @@ interface UserInputProps {
   userInfoTypeManual?: string | undefined;
   locationUsed?: 'signUp' | 'settings';
   onCustomFunction?: () => void;
-  
 }
 
 export const placeholderMapping: Record<UserTypeOptions, string> = {

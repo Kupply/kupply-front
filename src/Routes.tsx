@@ -1,5 +1,5 @@
-import MyBoardPage from './pages/myBoard/MyBoardPage';
-//import MyBoardPage from './pages/myBoard/OldMyBoardPage';
+//import MyBoardPage from './pages/myBoard/MyBoardPage';
+import MyBoardPage from './pages/myBoard/OldMyBoardPage';
 import LandingPage from './pages/main/LandingPage';
 import LoginPage from './pages/login/OldLoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
@@ -39,8 +39,7 @@ export const authRoutes = [
   { path: '/myboard', element: <MyBoardPage /> },
   { path: '/archive/:majorName', element: <ArchiveDetailPage /> },
   // 상태관리 도입 예정으로, 잠시 삭제
-  // { path: '/settings', element: <SettingsPage selected={0} setSelected={()=>{}}/> },
-  { path: '/settings', element: <SettingsPage selected={4} setSelected={()=>{}}/> },
+  { path: '/settings', element: <SettingsPage /> },
   { path: '/delete', element: <DeletePage /> },
 ];
 

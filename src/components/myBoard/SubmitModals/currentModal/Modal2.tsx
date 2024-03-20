@@ -1,4 +1,4 @@
-import NotSubmittedWrapper from "./NotSubmittedWrapper";
+import NotSubmittedWrapper from "./NotSubmittedHeader";
 import styled from "styled-components";
 import UploadButton from "../../../../assets/myboardpage/UploadButton";
 import Typography from "../../../../assets/Typography";
@@ -13,9 +13,9 @@ export default function CurrentModal2(){
   const [isSubmitted, setIsSubmitted] = useRecoilState(applicationSubmittedState);
   return (
     <>
-      <NotSubmittedWrapper currentStep={3}>
-      <SubContentsWrapper>
-        <div style={{ position: 'absolute', left: '4.844vw', top: '13.958vw', display: 'flex', whiteSpace: 'nowrap', flexDirection: 'row' }}>
+    <LeftAlignedContainer>
+    <SubContentsWrapper>
+        <div style={{ display: 'flex', whiteSpace: 'nowrap', flexDirection: 'row' }}>
           <Typography
             size="0.9375vw"
             style={{ color: 'var(--Main-Black, #141414)', opacity: 0.8, fontWeight: '700', marginRight: '10px' }}
@@ -34,13 +34,14 @@ export default function CurrentModal2(){
             (선택)
           </Typography>
         </div>
-        <div style={{ position: 'absolute', left: '4.844vw', top: '15.417vw' }}>
+        <div>
           <UploadBox>
-            <UploadButton isClicked={true} style={{ position: 'absolute', top: '8.594vw', left: '12.031vw' }} />
+            <UploadButton isClicked={true}/>
           </UploadBox>
         </div>
       </SubContentsWrapper>
-    </NotSubmittedWrapper>
+    </LeftAlignedContainer>
+      
 
       <CompleteMockApplicationButton
         active={true}
@@ -48,7 +49,7 @@ export default function CurrentModal2(){
           setCurrentModal(3);
           setIsSubmitted(true);
         }}
-        style={{marginBottom: '-0.87vw'}}
+        style={{position: 'absolute', top: '36.9vw'}}
       />
     </>
     
@@ -58,10 +59,8 @@ export default function CurrentModal2(){
 const SubContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  //gap: 10px;
   gap: 0.521vw;
   padding: auto;
-  //padding-top: 36.5px;
 `;
 
 const UploadBox = styled.div`
@@ -74,4 +73,14 @@ const UploadBox = styled.div`
   border-radius: 0.521vw;
   border: 1px dashed #e57c90;
   background: var(--White, #fff);
+`;
+
+const LeftAlignedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align children to the left */
+  height: 15vw;
+  margin-top: 7vw;
+  margin-bottom: 10vw;
+  width: 36.3vw;
 `;

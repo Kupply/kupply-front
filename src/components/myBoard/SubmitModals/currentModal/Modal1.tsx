@@ -1,4 +1,4 @@
-import NotSubmittedWrapper from "./NotSubmittedWrapper";
+import NotSubmittedWrapper from "./NotSubmittedHeader";
 import { CurrentModalProps } from "./Modal0";
 import Typography from "../../../../assets/Typography";
 import { CurSemesterVerification, SemesterVerification } from "../../../signUp/VerificationForm";
@@ -40,8 +40,9 @@ export default function CurrentModal1(props: CurrentModalProps){
 
   return (
     <>
-      <NotSubmittedWrapper currentStep={2}>
-      <div style={{ position: 'absolute', top: '13.958vw', left: '4.844vw' }}>
+      <LeftAlignedContainer>
+
+      <div style={{marginBottom: '2vw'}}>
         <div style={{ display: 'flex', marginBottom: '0.521vw', whiteSpace: 'nowrap' }}>
           <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
             재학 중인 학년/학기
@@ -50,13 +51,14 @@ export default function CurrentModal1(props: CurrentModalProps){
         </div>
         <CurSemesterVerification userType="candidate" setState={setSemesterState}/>
       </div>
-      <div style={{ position: 'absolute', top: '21.458vw', left: '4.844vw' }}>
+
         <div style={{ display: 'flex', marginBottom: '0.521vw' }}>
           <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
             과거 동일 학과를 지원
           </Typography>
           <Typography size="0.9375vw" bold="500">했던 경험이 있나요?</Typography>
         </div>
+
         <div style={{ display: 'flex' }}>
           <FirstReAppliedButton
             state={userType.userState[0]}
@@ -70,12 +72,13 @@ export default function CurrentModal1(props: CurrentModalProps){
             onClick={() => handleButtonClick('passer')}
           />
         </div>
-      </div>
-      <ButtonsWrapper style={{ position: 'absolute', left: '4.844vw', top: '26.042vw' }}>
+
+      </LeftAlignedContainer>
+
+      <ButtonsWrapper>
         <Button04 state='pressed' onClick={handlePrev} />
         <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} />
       </ButtonsWrapper>
-    </NotSubmittedWrapper>
     </>
     
   )
@@ -83,12 +86,18 @@ export default function CurrentModal1(props: CurrentModalProps){
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  //gap: 18px;
   gap: 0.9375vw;
-  //margin-top: 130px;
-  margin-top: 6.771vw;
-  //padding-left: 93px;
-  //width: 630px;
-  width: 32.813vw;
+  align-items: center;
+`;
+
+const LeftAlignedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align children to the left */
+  height: 15vw;
+  margin-top: 7vw;
+  margin-bottom: 3.5vw;
+  margin-left: 3.5vw;
+  width: 36.3vw;
 `;
 

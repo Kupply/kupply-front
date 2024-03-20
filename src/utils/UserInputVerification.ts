@@ -137,8 +137,8 @@ export function useNicknameVerification(locationUsed: verificationProps){
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageState);
   const [nicknameVerified, setNicknameVerified] = useState(false);
   
-  // 문제는 처음에 
   //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
+  // infoCheck해주는 내용은 이미 따로 중복확인 버튼에서 구현이 되어 있다 
   useEffect(() => {
     if ((nickname.info.length === 1 || nickname.info.length > 7) && nickname.infoState !== 'focused') {
       setNickname((prev) => ({...prev, infoState: 'error'}));
@@ -190,5 +190,5 @@ export function useNicknameVerification(locationUsed: verificationProps){
     }
   }, [nickname.infoCheck]);
 
-  return {nicknameVerified};
+  return {nicknameVerified, errorMessages, nickname, setNickname};
 }

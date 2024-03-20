@@ -124,7 +124,7 @@ function NewTextFieldBox({
               중복 확인
             </CheckDuplicated>
           )}
-          {inputType !== '' && <EyeIcon inputType={inputType} toggleClick={toggleClick} />}
+          {inputType !== '' && type === 'password' && <EyeIcon inputType={inputType} toggleClick={toggleClick} />}
 
           {inputState === 'valid' && <img src="../../designImage/textField/CheckCircle96.png" />}
           {inputState === 'invalid' && <img src="../../designImage/textField/AlertCircle.png" />}

@@ -75,7 +75,7 @@ function Button08(props: FAQboxProps) {
   return (
     <MainWrapper
       style={{
-        border: isOpen ? '1px solid #d85888' : '1px solid #b9b9b9',
+        border: isOpen ? '1px solid #d85888' : '1px solid rgba(223, 223, 223, 0.4)',
         boxShadow: isOpen ? '0px 0px 0.625vw 0px rgba(216, 88, 136, 0.10)' : '',
       }}
       {...rest}

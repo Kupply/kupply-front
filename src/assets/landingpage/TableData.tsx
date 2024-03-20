@@ -32,20 +32,35 @@ export default function TableData(props: TableDataProps) {
     interest,
     interestedNum,
   } = props;
+
+  const longNameThreshold = 5;
+
   return (
     <Wrapper>
       <RankCell>{rank > 10 ? rank : '0' + rank}</RankCell>
-      <DoubleMajorCell>
-        <div style={{ display: 'flex', gap: '0.73vw', alignItems: 'center', flexWrap: 'wrap' }}>
+      {secondMajor.length > longNameThreshold ? (
+        <DoubleMajorCell>
+          {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
           <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
             {secondMajor}
           </Typography>
-          {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
-        </div>
-        <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
-          {engName}
-        </Typography>
-      </DoubleMajorCell>
+          <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+            {engName}
+          </Typography>
+        </DoubleMajorCell>
+      ) : (
+        <DoubleMajorCell>
+          <div style={{ display: 'flex', gap: '0.73vw', flexWrap: 'wrap' }}>
+            <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
+              {secondMajor}
+            </Typography>
+            {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+          </div>
+          <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+            {engName}
+          </Typography>
+        </DoubleMajorCell>
+      )}
       <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
       <AppliedNumberCell>{applyNumber}</AppliedNumberCell>
       <CompetitionCell>{competition} : 1</CompetitionCell>
@@ -81,7 +96,7 @@ const RankCell = styled.div`
 `;
 
 const InterestNumCell = styled.div`
-  width: auto;
+  width: fit-content;
   height: auto;
   padding: 0.42vw 0.63vw;
   display: flex;

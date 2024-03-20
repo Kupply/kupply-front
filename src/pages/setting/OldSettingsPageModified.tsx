@@ -21,8 +21,12 @@ import ModalLarge from '../../components/base/ModalLarge';
 import SubmitButton from '../../assets/buttons/OldSubmitButton';
 import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 import Button03 from '../../assets/buttons/Button03';
+import Button01 from '../../assets/buttons/Button01';
 import Typography from '../../assets/Typography';
 import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
+import Icon02 from '../../assets/icons/Icon02';
+import { useRecoilState } from 'recoil';
+import { SBContentState } from '../../store/atom';
 
 interface SettingsPageProps {
   selected: number;
@@ -71,7 +75,8 @@ const colorMapping = {
   `,
 };
 
-const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
+const SettingsPage = () => {
+  const [selected, setSelected] = useRecoilState(SBContentState);
   const navigate = useNavigate();
 
   const onClick = (index: number) => {
@@ -231,8 +236,6 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     }
   }, [stdID, stdIDState]);
 
-  //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
-  // 닉네임 제한 10->7자 수정
   useEffect(() => {
     if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
       setNicknameState('error');
@@ -281,7 +284,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
     }
   }, [nicknameCheck]);
 
-  
+  console.log('settings에서 뽑는', nickname, nicknameCheck, nicknameState);
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
 
@@ -328,6 +331,11 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
       navigate('/settings');
     } else {
       const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
+      const year = +(hopeSemester1 + hopeSemester2);
+      const semester = +hopeSemester3;
+      if(year <= 23 || (semester !== 1 && semester !==2)){
+        alert('유효한 학기를 입력해주세요!');
+      }else{
       const updateData = {
         newCurGPA: newGpa,
         newHopeMajor1: hopeMajor1,
@@ -342,6 +350,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
         console.log(err);
       }
     }
+  }
   };
 
   const fourthSubmit = async () => {
@@ -375,49 +384,45 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                 setModalOpen(!modalOpen);
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M38.2071 23.2071C38.5976 22.8166 38.5976 22.1834 38.2071 21.7929C37.8166 21.4024 37.1834 21.4024 36.7929 21.7929L30 28.5858L23.2071 21.7929C22.8166 21.4024 22.1834 21.4024 21.7929 21.7929C21.4024 22.1834 21.4024 22.8166 21.7929 23.2071L28.5858 30L21.7929 36.7929C21.4024 37.1834 21.4024 37.8166 21.7929 38.2071C22.1834 38.5976 22.8166 38.5976 23.2071 38.2071L30 31.4142L36.7929 38.2071C37.1834 38.5976 37.8166 38.5976 38.2071 38.2071C38.5976 37.8166 38.5976 37.1834 38.2071 36.7929L31.4142 30L38.2071 23.2071Z"
-                  fill="#141414"
-                />
-              </svg>
+              <Icon02/>
             </CloseButton>
-            <AlertWrapper style={{ marginTop: '180px' }}>
-              <AlertIconExclamation width="113px" height="113px" />
-              <Typography size="largeText" bold="700" style={{ marginTop: '25px' }}>
+            <AlertWrapper style={{ marginTop: '9.375vw' }}>
+              <AlertIconExclamation width="5.885vw" height="5.885vw" />
+              <Typography size="1.25vw" bold="700" style={{ marginTop: '1.302vw' }}>
                 변경한 정보를 저장하시겠습니까?
               </Typography>
-              <Typography size="mediumText" bold="500" style={{ marginTop: '24px', lineHeight: '136.111%' }}>
+              <Typography size="0.9375vw" bold="500" style={{ marginTop: '1.25vw', lineHeight: '136.111%' }}>
                 이중전공 지원 기간 동안에는 학점 수정이 최대 두 번까지만 가능해요.
               </Typography>
-              <div style={{ display: 'flex', gap: 22, marginTop: 60 }}>
+              <div style={{ display: 'flex', gap: '1.146vw', marginTop: '3.125vw' }}>
                 <div
-                  style={{ marginTop: 30 }}
+                  style={{ marginTop: '1.5625vw' }}
                   onClick={() => {
                     navigate('/settings');
                   }}
                 >
-                  <LabelButton
-                    buttonType="secondary"
+                  <Button01
+                    variant="outline"
                     size="medium"
                     onClick={() => {
                       setModalOpen(false);
                     }}
                   >
                     취소
-                  </LabelButton>
+                  </Button01>
                 </div>
                 <div
-                  style={{ marginTop: 30 }}
+                  style={{ marginTop: '1.5625vw'}}
                   onClick={() => {
-                    thirdSubmit();
+                    thirdSubmit(); 
+                    setModalOpen(false);
                   }}
                 >
-                  <LabelButton buttonType="primary" size="medium">
+                  <Button01 
+                    variant="solid" 
+                    size="medium">
                     확인
-                  </LabelButton>
+                  </Button01>
                 </div>
               </div>
             </AlertWrapper>
@@ -460,7 +465,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             >
               계정관리
             </TextButton04>
-            <div style={{ marginTop: 160 }}>
+            <div style={{ marginTop: '8.333vw' }}>
             <TextButton04
               selected={selected === 4}
               onCustomFunction={() => {
@@ -527,7 +532,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           ></DropDown>
           <Button03
             style={{ marginTop: '60px', width: '100%' }}
-            state={!isApplied ? 'pressed' : 'disabled'}
+            state={isApplied ? 'pressed' : 'disabled'}
             onClick={() => {
               firstSubmit();
             }}
@@ -554,47 +559,34 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
             />
             <div>
               <CandidateImgsWrapper>
-                <CandidateImg // 각 이미지들을 버튼으로 수정 필요, 이미지 업로드 기능 구현 필요
-                  src="designImage/character/rectProfile/RectProfile1.png"
-                  alt="candidate profile 1"
-                  onClick={() => setUserProfilePic('rectProfile1')}
-                />
-                <CandidateImg
-                  src="designImage/character/rectProfile/RectProfile2.png"
-                  alt="candidate profile 2"
-                  onClick={() => setUserProfilePic('rectProfile2')}
-                />
-                <CandidateImg
-                  src="designImage/character/rectProfile/RectProfile3.png"
-                  alt="candidate profile 3"
-                  onClick={() => setUserProfilePic('rectProfile3')}
-                />
-                <CandidateImg
-                  src="designImage/character/rectProfile/RectProfile4.png"
-                  alt="candidate profile 4"
-                  onClick={() => setUserProfilePic('rectProfile4')}
-                />
+                {Array.from({ length: 4 }, (_, index) => (
+                  <CandidateImg
+                    src={`designImage/character/rectProfile/RectProfile${index+1}.png`}
+                    alt={`candidate profile ${index+1}`}
+                    onClick={() => setUserProfilePic(`rectProfile${index+1}`)}
+                  />
+                ))}
               </CandidateImgsWrapper>
               <div style={{ gap: '5px', marginTop: '52px', display: 'flex' }}></div>
             </div>
           </div>
           <ContentsWrapper>
-            <div style={{ display: 'flex', marginTop: '60px' }}>
+          <div style={{ display: 'flex', marginTop: '3.125vw' }}>
               <Typography
-                size="mediumText"
+                size="0.9375vw"
                 style={{ color: 'var(--Main-Black, #141414)', fontWeight: 700, opacity: 0.8 }}
               >
                 닉네임&nbsp;
               </Typography>
               <Typography
-                size="mediumText"
-                style={{ color: 'var(--Main-Black, #141414)', fontWeight: 400, opacity: 0.8, lineHeight: '18px' }}
+                size="0.9375vw"
+                style={{ color: 'var(--Main-Black, #141414)', fontWeight: 400, opacity: 0.8, lineHeight: '100%' }}
               >
                 수정하기
               </Typography>
             </div>
+            <div style={{position: 'relative'}}>
             <TextFieldBox
-              placeholder="닉네임"
               value={nickname}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setNickname(e.target.value);
@@ -615,11 +607,12 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
                 ></NicknameCheckButton>
               </NicknameCheckButtonWrapper>
             )}
+            </div>
           </ContentsWrapper>
           <div>
             <Button03
-              style={{ marginTop: '60px', width: '100%' }}
-              state={!isApplied ? 'pressed' : 'disabled'}
+              style={{ marginTop: '12.760vw', width: '100%' }}
+              state={isApplied ? 'pressed' : 'disabled'}
               onClick={() => {
                 secondSubmit();
               }}
@@ -699,7 +692,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <div>
             <Button03
               style={{ marginTop: '60px', width: '100%' }}
-              state={!isApplied ? 'pressed' : 'disabled'}
+              state={isApplied ? 'pressed' : 'disabled'}
               onClick={() => {
                 if (isGpaChanged) {
                   setModalOpen(true);
@@ -766,7 +759,7 @@ const SettingsPage = ({ selected, setSelected }: SettingsPageProps) => {
           <div>
             <Button03
               style={{ marginTop: '60px', width: '100%' }}
-              state={!isApplied ? 'pressed' : 'disabled'}
+              state={isApplied ? 'pressed' : 'disabled'}
               onClick={() => {
                 fourthSubmit();
               }}
@@ -998,4 +991,3 @@ const TextOutBox = styled.div`
 
 
 export default SettingsPage;
-

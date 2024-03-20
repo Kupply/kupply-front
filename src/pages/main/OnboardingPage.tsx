@@ -2,19 +2,19 @@ import styled from 'styled-components';
 
 import Carousel from '../../components/onboarding/Carousel';
 import Join1 from '../../components/onboarding/Join1';
-import Preview from '../../components/onboarding/Preview';
+import Cards from '../../components/onboarding/Cards';
 import Join2 from '../../components/onboarding/Join2';
 import KupplyImage from '../../components/onboarding/KupplyImage';
 import Banner from '../../components/onboarding/Banner';
-import Feature from '../../components/onboarding/Feature';
+import Preview from '../../components/onboarding/Preview';
 
 function OnboardingPage() {
   return (
     <MainWrapper>
       <Carousel />
       <Join1 />
+      <Cards />
       <Preview />
-      <Feature />
       <Banner />
       <KupplyImage />
       <Join2 />

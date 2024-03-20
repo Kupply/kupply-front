@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 interface EyeIconProps {
   type: string;
   onMouseDown: (e: React.MouseEvent<SVGElement, MouseEvent>) => void;
@@ -7,6 +9,7 @@ interface EyeIconProps {
 function EyeIcon({ type, onMouseDown, onTouchStart }: EyeIconProps) {
   if (type === 'on') {
     return (
+      <EyeIconWrapper>
       <svg
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
@@ -31,10 +34,13 @@ function EyeIcon({ type, onMouseDown, onTouchStart }: EyeIconProps) {
           stroke-linejoin="round"
         />
       </svg>
+      </EyeIconWrapper>
+      
     );
   } else if (type === 'off') {
     return (
-      <svg
+      <EyeIconWrapper>
+        <svg
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
         xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +65,7 @@ function EyeIcon({ type, onMouseDown, onTouchStart }: EyeIconProps) {
           </clipPath>
         </defs>
       </svg>
+      </EyeIconWrapper>
     );
   } else {
     return <></>;
@@ -66,3 +73,14 @@ function EyeIcon({ type, onMouseDown, onTouchStart }: EyeIconProps) {
 }
 
 export default EyeIcon;
+
+const EyeIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 0.104vw;
+  margin-right: 0.104vw;
+  & > svg {
+    width: 1.25vw;
+    height: 1.25vw;
+  }
+`;
