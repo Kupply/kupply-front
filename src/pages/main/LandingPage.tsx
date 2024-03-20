@@ -271,18 +271,18 @@ function LandingPage() {
     },
   ]);
 
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     try {
-  //       // const response = await axios.get('http://localhost:8080/landing');
-  //       const response = await client.get('/landing');
-  //       setTableData(response.data.data);
-  //     } catch (e) {
-  //       alert(e);
-  //     }
-  //   };
-  //   loadData();
-  // }, []);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // const response = await axios.get('http://localhost:8080/landing');
+        const response = await client.get('/landing');
+        setTableData(response.data.data);
+      } catch (e) {
+        alert(e);
+      }
+    };
+    loadData();
+  }, []);
 
   // const cardData = tableData.map((data) => ({
   //   name: data.secondMajor,
