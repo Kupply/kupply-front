@@ -72,10 +72,13 @@ export function UploadButton(props: UploadButtonProps){
             >
               학업계획서를 첨부해주세요 (선택)
             </Typography>
-          
+            <label htmlFor="fileInput">
+              Custom Upload Button
+            </label>
             <input
               type="file"
               id="fileInput"
+              style={{display: 'none'}}
               onChange={handleFileChange}
             />
           </div>

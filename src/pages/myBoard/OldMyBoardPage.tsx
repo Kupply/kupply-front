@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-
+import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import Typography from '../../assets/OldTypography';
@@ -11,9 +11,9 @@ import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '..
 //import MyStageChart from '../../assets/myboardpage/MyStage';
 import MyStageChart from '../../assets/tabMenu/TabMenu05';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
-//import EditModal from '../../components/myBoard/EditModals/OldEditModal';
+import EditModal from '../../components/myBoard/EditModals/OldEditModal';
 //import EditModal from '../../components/myBoard/EditModals/EditModal';
-import EditModal from '../../components/myBoard/EditModals/OldEditModalModified';import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
+//import EditModal from '../../components/myBoard/EditModals/OldEditModalModified';import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
 //import ApplicationModal from '../../components/myBoard/SubmitModals/OldApplicationModal';
 import { recruit } from '../../common/Recruiting';
 import MyboardPasserPageVer from './MyboardPasser';

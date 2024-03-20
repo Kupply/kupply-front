@@ -149,6 +149,14 @@ export default function EditModal(props: ModalProps) {
     }
   }, [GPA1, GPA2, GPA3]);
 
+  useEffect(() => {
+    const passwordCheck = /^\d{10}$/;
+    if (stdIDState === 'filled') {
+      if (!passwordCheck.test(stdID)) setStdIDState('error');
+      else setStdIDState('filled');
+    }
+  }, [stdID, stdIDState]);
+
   const onClickSubmit = async () => {
     let updateData = {};
 
@@ -184,7 +192,12 @@ export default function EditModal(props: ModalProps) {
       originHopeSemester3.current !== hopeSemester3
     ) {
       const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
-      updateData = { ...updateData, newHopeSemester: newHopeSemester };
+      const year = +(hopeSemester1 + hopeSemester2);
+      const semester = +hopeSemester3;
+      if(year <= 23 || (semester !== 1 && semester !==2)){
+        alert('유효한 학기를 입력해주세요!');
+      }
+      else updateData = { ...updateData, newHopeSemester: newHopeSemester };
     }
     if (originUserProfilePic.current !== userProfilePic) {
       updateData = { ...updateData, newProfilePic: userProfilePic };
@@ -370,6 +383,7 @@ export default function EditModal(props: ModalProps) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>닉네임 변경하기</ContentsTitle>
+                  <div style={{position: 'relative'}}>
                   <TextFieldBox
                     value={nickname}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -391,6 +405,7 @@ export default function EditModal(props: ModalProps) {
                       ></NicknameCheckButton>
                     </NicknameCheckButtonWrapper>
                   )}
+                  </div>
                 </SubContentsWrapper>
                 <SubContentsWrapper>
                   <ContentsTitle>학번 변경하기</ContentsTitle>
@@ -460,7 +475,7 @@ export default function EditModal(props: ModalProps) {
           {currentModal === 2 && ( // '현재 내 학점' 버튼 클릭 시
             <ContentsWrapper2>
               <SubContentsWrapper>
-                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '0.3vw' }}>
                   <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
                   <ToolTip04 />
                 </div>
