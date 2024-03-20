@@ -194,10 +194,9 @@ export default function EditModal(props: ModalProps) {
       const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
       const year = +(hopeSemester1 + hopeSemester2);
       const semester = +hopeSemester3;
-      if(year <= 23 || (semester !== 1 && semester !==2)){
+      if (year <= 23 || (semester !== 1 && semester !== 2)) {
         alert('유효한 학기를 입력해주세요!');
-      }
-      else updateData = { ...updateData, newHopeSemester: newHopeSemester };
+      } else updateData = { ...updateData, newHopeSemester: newHopeSemester };
     }
     if (originUserProfilePic.current !== userProfilePic) {
       updateData = { ...updateData, newProfilePic: userProfilePic };
@@ -221,7 +220,7 @@ export default function EditModal(props: ModalProps) {
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   const [currentModal, setCurrentModal] = useRecoilState(editModalState);
-  
+
   useEffect(() => {
     if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
       setNicknameState('error');
@@ -287,17 +286,17 @@ export default function EditModal(props: ModalProps) {
 
   return (
     <Main>
-      {(isOpenModal && isSubmitted && isGpaChanged &&
+      {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton
             onClick={() => {
               setOpenModal(!isOpenModal);
             }}
           >
-            <Icon02/>
+            <Icon02 />
           </CloseButton>
           <AlertWrapper>
-          <AlertIconExclamation width="5.885vw" height="5.885vw" />
+            <AlertIconExclamation width="5.885vw" height="5.885vw" />
             <Typography size="1.25vw" bold="700" style={{ marginTop: '1.302vw' }}>
               변경한 학점을 저장하시겠습니까?
             </Typography>
@@ -330,7 +329,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      {(
+      {
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton
@@ -338,73 +337,77 @@ export default function EditModal(props: ModalProps) {
                 setOpenModal(!isOpenModal);
               }}
             >
-              <Icon02/>
+              <Icon02 />
             </CloseButton>
-            <Typography size="1.042vw" bold="700" style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '2.083vw' }}>
-            프로필 정보 수정하기
-          </Typography>
-          <div style={{ height: '2.083vw' }}></div>
-          <HeaderBar/>
-      </HeaderWrapper>
+            <Typography
+              size="1.042vw"
+              bold="700"
+              style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '2.083vw' }}
+            >
+              프로필 정보 수정하기
+            </Typography>
+            <div style={{ height: '2.083vw' }}></div>
+            <HeaderBar />
+          </HeaderWrapper>
 
-      {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
+          {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
             <ContentsWrapper
-            style={{
-              marginBottom: '5.260vw',
-            }}
-          >
-            <SubContentsWrapper>
-              <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
-              <div style={{ display: 'flex', flexDirection: 'row', gap: '1.042vw' }}>
-                <CurrentImg
-                  src={
-                    userProfilePic === 'customProfile'
-                      ? userProfileLink
-                      : `designImage/character/rectProfile/${userProfilePic}.png`
-                  }
-                  alt="current profile"
-                />
-                <div>
-                  <CandidateImgsWrapper>
-                    {Array.from({ length: 4 }, (_, index) => (
-                      <CandidateImg
-                        src={`designImage/character/rectProfile/RectProfile${index+1}.png`}
-                        alt={`candidate profile ${index+1}`}
-                        onClick={() => setUserProfilePic(`rectProfile${index+1}`)}
-                      />
-                    ))}
-                  </CandidateImgsWrapper>
-                  <div style={{ gap: '0.260vw', marginTop: '2.708vw' }}></div>
-                  <div style={{ marginLeft: '4.427vw', marginTop: '-1.458vw' }}></div>
+              style={{
+                marginBottom: '5.260vw',
+              }}
+            >
+              <SubContentsWrapper>
+                <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '1.042vw' }}>
+                  <CurrentImg
+                    src={
+                      userProfilePic === 'customProfile'
+                        ? userProfileLink
+                        : `designImage/character/rectProfile/${userProfilePic}.png`
+                    }
+                    alt="current profile"
+                  />
+                  <div>
+                    <CandidateImgsWrapper>
+                      {Array.from({ length: 4 }, (_, index) => (
+                        <CandidateImg
+                          src={`designImage/character/rectProfile/RectProfile${index + 1}.png`}
+                          alt={`candidate profile ${index + 1}`}
+                          onClick={() => setUserProfilePic(`rectProfile${index + 1}`)}
+                        />
+                      ))}
+                    </CandidateImgsWrapper>
+                    <div style={{ gap: '0.260vw', marginTop: '2.708vw' }}></div>
+                    <div style={{ marginLeft: '4.427vw', marginTop: '-1.458vw' }}></div>
+                  </div>
                 </div>
-              </div>
-            </SubContentsWrapper>
+              </SubContentsWrapper>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>닉네임 변경하기</ContentsTitle>
-                  <div style={{position: 'relative'}}>
-                  <TextFieldBox
-                    value={nickname}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setNickname(e.target.value);
-                    }}
-                    state={nicknameState}
-                    setState={setNicknameState}
-                    setValue={setNickname}
-                    errorMessage={errorMessages.nicknameErrorMessage}
-                  ></TextFieldBox>
-                  {nickname === '' || nicknameState === 'filled' ? (
-                    <></>
-                  ) : (
-                    <NicknameCheckButtonWrapper>
-                      <NicknameCheckButton
-                        nickname={nickname}
-                        state={nicknameCheck}
-                        setState={setNicknameCheckState}
-                      ></NicknameCheckButton>
-                    </NicknameCheckButtonWrapper>
-                  )}
+                  <div style={{ position: 'relative' }}>
+                    <TextFieldBox
+                      value={nickname}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setNickname(e.target.value);
+                      }}
+                      state={nicknameState}
+                      setState={setNicknameState}
+                      setValue={setNickname}
+                      errorMessage={errorMessages.nicknameErrorMessage}
+                    ></TextFieldBox>
+                    {nickname === '' || nicknameState === 'filled' ? (
+                      <></>
+                    ) : (
+                      <NicknameCheckButtonWrapper>
+                        <NicknameCheckButton
+                          nickname={nickname}
+                          state={nicknameCheck}
+                          setState={setNicknameCheckState}
+                        ></NicknameCheckButton>
+                      </NicknameCheckButtonWrapper>
+                    )}
                   </div>
                 </SubContentsWrapper>
                 <SubContentsWrapper>
@@ -435,7 +438,7 @@ export default function EditModal(props: ModalProps) {
                 onClickSubmit={onClickSubmit}
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
-                style={{marginTop: '1.042vw'}}
+                style={{ marginTop: '1.042vw' }}
               />
             </ContentsWrapper>
           )}
@@ -468,7 +471,7 @@ export default function EditModal(props: ModalProps) {
                 onClickSubmit={onClickSubmit}
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
-                style={{marginTop: '9.740vw'}}
+                style={{ marginTop: '9.740vw' }}
               />
             </ContentsWrapper2>
           )}
@@ -477,7 +480,9 @@ export default function EditModal(props: ModalProps) {
               <SubContentsWrapper>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '0.3vw' }}>
                   <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
-                  <ToolTip04 />
+                  <div style={{ marginLeft: '0.26vw' }}>
+                    <ToolTip04 />
+                  </div>
                 </div>
                 <VerifiBoxWrapper>
                   <TextArea name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
@@ -522,14 +527,18 @@ export default function EditModal(props: ModalProps) {
                         setValue={setHopeSemester2}
                         isEntered={true}
                       ></TextArea>
-                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>년도</Typography>
+                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
+                        년도
+                      </Typography>
                       <TextArea
                         name="semester-3"
                         value={hopeSemester3}
                         setValue={setHopeSemester3}
                         isEntered={true}
                       ></TextArea>
-                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>학기</Typography>
+                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
+                        학기
+                      </Typography>
                     </VerifiBoxWrapper>
                   </VerifiBoxWrapper>
                 </SubContentsWrapper>
@@ -544,7 +553,7 @@ export default function EditModal(props: ModalProps) {
             </ContentsWrapper2>
           )}
         </ModalLarge>
-      )}
+      }
     </Main>
   );
 }
@@ -570,13 +579,13 @@ const HeaderWrapper = styled.div`
   flex-shrink: 0;
   background-color: #fcfafb;
   border-bottom: 1px solid var(--DF_Grey-2, #dfdfdf);
-  //margin-top: -16px;
-  margin-top: -0.833vw;
+  margin-top: -20px;
+  //margin-top: -0.833vw;
 `;
 
 const CloseButton = styled.button`
   display: flex;
-  //width: 60px; 
+  //width: 60px;
   width: 3.125vw;
   //height: 60px;
   height: 3.125vw;
@@ -606,7 +615,6 @@ const HeaderButtonWrapper = styled.div`
   //margin-top: 40px;
   margin-top: 2.083vw;
 `;
-
 
 const MoveButtonWrapper = styled.div`
   display: flex;
@@ -703,5 +711,3 @@ const VerifiBoxWrapper = styled.div`
   display: flex;
   gap: 0.6771vw;
 `;
-
-
