@@ -291,7 +291,7 @@ const Wrapper = styled.div`
   width: 100vw;
   // max-width: 1920px;
   //max-width: 1920px;
-  height: 96px; // 7.7%; // 96px; (96/1248 = 7.7)
+  height: 70px; // 7.7%; // 96px; (96/1248 = 7.7)
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -367,6 +367,8 @@ const LoginContainer = styled.div`
       max-height: 36px;
     }
   }
+
+  //border: 1px solid black;
 `;
 
 const LeftButtonsContainer = styled.div`
@@ -415,6 +417,8 @@ const Profile = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  border: 1px solid black;
 `;
 
 const ProfileText = styled.div`
