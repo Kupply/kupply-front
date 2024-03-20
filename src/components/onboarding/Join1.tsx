@@ -7,7 +7,7 @@ import Button02 from '../../assets/buttons/Button02';
 import CTA02 from '../../assets/CTAs/CTA02';
 
 function Join1() {
-  const [isLogined, setIsLogined] = useState<boolean>(true);
+  const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
 

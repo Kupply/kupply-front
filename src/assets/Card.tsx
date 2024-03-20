@@ -27,6 +27,17 @@ const majorParamMapping = {
   'School of Media & Communication': 'media',
   'Department of Food & Resources': 'foodecon',
   'Department of Computer Science & Engineering': 'computer',
+  'Biological Engineering': 'bioeng',
+  'School of Life Sciences': 'lifesci',
+  'Department of Political Science & International Relations': 'political',
+  'Department of Public Administration': 'pubadmin',
+  'School of Materials Science & Engineering': 'materials',
+  'School of Mechanical Engineering': 'mechanical',
+  'School of Industrial Management Engineering': 'industrial',
+  'School of Electrical Engineering': 'electrical',
+  'Department of Chemical & Biological Engineering': 'chembio',
+  'Department of Data Science': 'datasci',
+  'Division of Smart Security': 'smartsec'
 };
 
 const Card = ({ name, eng, filter, TO, pass, avg, min, src, semester, titleSrc }: CardsProps) => {
