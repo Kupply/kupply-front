@@ -39,7 +39,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
   return (
     <Wrapper ref={ref}>
       <TextWrapper>
-        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '0.42vw' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.42vw' }}>
           <img width="auto" height="auto" src="../../designImage/landing/rankTable1.png" />
           <Typography size="0.83vw" bold="500" color="#a8a8a8">
             높은 경쟁률 순

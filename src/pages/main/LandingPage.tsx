@@ -27,9 +27,17 @@ export interface ITableData {
 function LandingPage() {
   const location = useLocation();
 
+  const scrollToQ = () => {
+    if (faqRef.current) {
+      const yOffset = -100;
+      const y = faqRef.current.getBoundingClientRect().top + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   const smoothScrollTo = (target: number, duration: number): void => {
-    const startPosition: number = window.pageYOffset; // Current scroll position
-    const distance: number = target - startPosition; // The distance to travel
+    const startPosition: number = window.pageYOffset;
+    const distance: number = target - startPosition;
     const startTime: number = performance.now();
 
     const ease = (time: number, start: number, distance: number, duration: number): number => {
@@ -51,13 +59,19 @@ function LandingPage() {
 
   // useEffect(() => {
   //   if (location.state?.fromButton) {
-  //     smoothScrollTo(1200, 1500);
+  //     smoothScrollTo(1100, 1500);
+  //   }
+  // }, [location.state]);
+
+  // useEffect(() => {
+  //   if (location.state?.fromButton) {
+  //     window.scrollTo(0, 1100);
   //   }
   // }, [location.state]);
 
   useEffect(() => {
     if (location.state?.fromButton) {
-      window.scrollTo(0, 1200);
+      scrollToQ();
     }
   }, [location.state]);
 
@@ -252,7 +266,7 @@ function LandingPage() {
           scrollToFAQ={() => {
             if (faqRef.current) {
               const yOffset = -100;
-              const y = faqRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+              const y = faqRef.current.getBoundingClientRect().top + yOffset;
               window.scrollTo({ top: y, behavior: 'smooth' });
             }
           }}
