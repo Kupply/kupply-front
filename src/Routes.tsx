@@ -1,13 +1,14 @@
-import MyBoardPage from './pages/myBoard/MyBoardPage';
-//import MyBoardPage from './pages/myBoard/OldMyBoardPage';
+//import MyBoardPage from './pages/myBoard/MyBoardPage';
+import MyBoardPage from './pages/myBoard/OldMyBoardPage';
 import LandingPage from './pages/main/LandingPage';
 import LoginPage from './pages/login/OldLoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
 //import SettingsPage from './pages/setting/SettingsPage';
 import { SignUp0Page } from './pages/signUp/SignUp0Page';
-import { SettingsPage } from './pages/setting/SettingsPage';
+//import { SettingsPage } from './pages/setting/SettingsPage';
 //import SettingsPage from './pages/setting/OldSettingsPage';
+import SettingsPage from './pages/setting/OldSettingsPageModified';
 import { SignUp1Page } from './pages/signUp/SignUp1Page';
 //import SignUp1Page from './pages/signUp/old/OldSignUp1Page';
 import SignUp2Page from './pages/signUp/SignUp2Page';
@@ -38,8 +39,8 @@ export const authRoutes = [
   { path: '/myboard', element: <MyBoardPage /> },
   { path: '/archive/:majorName', element: <ArchiveDetailPage /> },
   // 상태관리 도입 예정으로, 잠시 삭제
-  // { path: '/settings', element: <SettingsPage selected={0} setSelected={()=>{}}/> },
   { path: '/settings', element: <SettingsPage /> },
+  // { path: '/settings', element: <SettingsPage /> },
   { path: '/delete', element: <DeletePage /> },
 ];
 

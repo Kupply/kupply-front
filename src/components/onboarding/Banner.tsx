@@ -1,8 +1,129 @@
 import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
 
 import Typography from '../../assets/Typography';
+import Card01 from '../../assets/cards/Card01';
+import MainCard from './MainCard';
+import SubCard from './SubCards';
+
+const mockCards = [
+  {
+    korName: '경영대학 경영학과',
+    engName: 'Business School',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 42,
+    compRate: 4.23,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '심리학부',
+    engName: 'School of Psychology',
+    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
+    TO: 44,
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+  },
+  {
+    korName: '정경대학 경제학과',
+    engName: 'Department of Economics',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 13,
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+  },
+  {
+    korName: '정경대학 통계학과',
+    engName: 'Department of Statistics',
+    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    TO: 28,
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+  },
+  {
+    korName: '미디어학부',
+    engName: 'School of Media & Communication',
+    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
+    TO: 25,
+    compRate: 7,
+    semester: '23-2',
+    avgPass: 4.23,
+    minPass: 4.12,
+  },
+  {
+    korName: '정보대학 컴퓨터학과',
+    engName: 'Department of Computer Science & Engineering',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 19,
+    compRate: 7,
+    avgPass: 4.23,
+    minPass: 4.12,
+    semester: '23-2',
+  },
+  {
+    korName: '생명과학대학 식품자원경제학과',
+    engName: 'Department of Food & Resources',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 30,
+    compRate: 7,
+    avgPass: 4.23,
+    semester: '23-2',
+    minPass: 4.12,
+  },
+  {
+    korName: '이과대학 수학과',
+    engName: 'Department of Mathematics',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 17,
+    compRate: 7,
+    semester: '23-2',
+    avgPass: 4.23,
+    minPass: 4.12,
+  },
+  {
+    korName: '이과대학 화학과',
+    engName: 'Department of Chemistry',
+    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    TO: 11,
+    compRate: 7,
+    semester: '23-2',
+    avgPass: 4.23,
+    minPass: 4.12,
+  },
+];
 
 function Banner() {
+  const [cards, setCards] = useState(mockCards);
+  const [isDetailed, setIsDetailed] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [cards.length]);
+
+  useEffect(() => {
+    setIsDetailed(false);
+    const timeoutId = setTimeout(() => {
+      setIsDetailed(true);
+    }, 1500);
+    return () => clearTimeout(timeoutId);
+  }, [currentIndex]);
+
+  const calculateIndex = (index: number) => {
+    const length = cards.length;
+    return (index + length) % length;
+  };
+
   return (
     <MainWrapper>
       <Typography size="0.94vw" bold="700" color="rgba(255,255,255,0.5)" style={{ margin: '5.21vw 0 0.42vw 0' }}>
@@ -24,19 +145,25 @@ function Banner() {
       </Typography>
       <ImageWrapper>
         <div style={{ display: 'flex', gap: '2.11vw' }}>
-          <SubImage />
-          <SubImage />
-          <SubImage />
+          {[-3, -2, -1].map((offset) => (
+            <SubImage key={offset}>
+              <SubCard {...cards[calculateIndex(currentIndex + offset)]} />
+            </SubImage>
+          ))}
         </div>
         <div style={{ display: 'flex', gap: '2.11vw' }}>
-          <SubImage />
-          <SubImage />
-          <SubImage />
+          {[1, 2, 3].map((offset) => (
+            <SubImage key={offset}>
+              <SubCard {...cards[calculateIndex(currentIndex + offset)]} />
+            </SubImage>
+          ))}
         </div>
       </ImageWrapper>
       <CellPhone></CellPhone>
       <Notch src="../../designImage/onboarding/Notch.png" />
-      <MainImage />
+      <MainImage>
+        <MainCard isDetailed={isDetailed} {...cards[currentIndex]} />
+      </MainImage>
     </MainWrapper>
   );
 }
@@ -84,19 +211,17 @@ const ImageWrapper = styled.div`
 `;
 
 const MainImage = styled.div`
-  width: 15.08vw;
-  height: 19.42vw;
-  border-radius: 0.42vw;
-  background-color: aliceblue;
+  width: 14.63vw;
+  height: 19.69vw;
   position: absolute;
   top: 25.82vw;
-  left: 43.17vw;
+  left: 43.41vw;
   z-index: 10;
 `;
 
 const SubImage = styled.div`
-  width: 13.13vw;
-  height: 16.88vw;
+  width: 13vw;
+  height: 17.5vw;
   border-radius: 0.36vw;
   background-color: aliceblue;
 `;

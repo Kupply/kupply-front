@@ -1,4 +1,4 @@
-import NotSubmittedWrapper from "./NotSubmittedWrapper";
+import NotSubmittedHeader from "./NotSubmittedHeader";
 import Button04 from "../../../../assets/buttons/Button04";
 import Button03 from "../../../../assets/buttons/Button03";
 import { UserInputText } from "../../../signUp/UserInputText";
@@ -29,10 +29,12 @@ export default function CurrentModal0(props: CurrentModalProps){
     else setNextButton(false);
   }, [gpaState, stdIdVerified]);
 
+  // 그러면 이제 
   return (
     <>
-      <NotSubmittedWrapper currentStep={1}>
-      <div style={{ position: 'absolute', top: '13.958vw', left: '4.844vw' }}>
+    <LeftAlignedContainer>
+
+      <div style={{marginBottom: '2vw'}}>
         <div style={{ display: 'flex', marginBottom: '0.521vw' }}>
           <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
             학점
@@ -41,20 +43,24 @@ export default function CurrentModal0(props: CurrentModalProps){
         </div>
         <GPAVerification userType="candidate" setState={setGpaState}/>
       </div>
-      <div style={{ position: 'absolute', top: '21.458vw', left: '4.844vw', width: '32.708vw' }}>
+      
+      <div>
         <div style={{ display: 'flex', marginBottom: '0.521vw' }}>
           <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
             고려대학교 학번
           </Typography>
           <Typography size="0.9375vw">을 입력해주세요.</Typography>
         </div>
+        <div style={{width: '100%'}}>
         <UserInput userInfoType="studentId" locationUsed="settings"/>
+        </div>
       </div>
-      <ButtonsWrapper style={{ position: 'absolute', left: '4.844vw', top: '26.042vw' }}>
+    </LeftAlignedContainer>
+      
+      <ButtonsWrapper>
         <Button04 state='disabled' onClick={handlePrev} />
         <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} />
       </ButtonsWrapper>
-    </NotSubmittedWrapper>
     </>
     
   )
@@ -62,12 +68,17 @@ export default function CurrentModal0(props: CurrentModalProps){
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  //gap: 18px;
   gap: 0.9375vw;
-  //margin-top: 130px;
-  margin-top: 6.771vw;
-  //padding-left: 93px;
-  //width: 630px;
-  width: 32.813vw;
+  align-items: center;
 `;
 
+const LeftAlignedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align children to the left */
+  height: 15vw;
+  margin-top: 7vw;
+  margin-bottom: 3.5vw;
+  margin-left: 4.5vw;
+  width: 36vw;
+`;

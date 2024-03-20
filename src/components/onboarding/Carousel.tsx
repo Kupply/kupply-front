@@ -139,10 +139,10 @@ const MainWrapper = styled.div<MainWrapperProps>`
   background-position: center;
   background-image: ${(props) =>
     props.page === 0
-      ? `url('../designImage/carousel/Carousel1.png')`
+      ? `url('../designImage/carousel/LoginBanner1Extend.png')`
       : props.page === 1
-      ? `url('../designImage/carousel/Carousel2.png')`
-      : `url('../designImage/carousel/Carousel3.png')`};
+      ? `url('../designImage/carousel/LoginBanner3Extend.png')`
+      : `url('../designImage/carousel/LoginBanner2Extend.png')`};
 `;
 
 const ArrowButton = styled.img`
