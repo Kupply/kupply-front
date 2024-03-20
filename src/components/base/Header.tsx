@@ -417,8 +417,6 @@ const Profile = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  border: 1px solid black;
 `;
 
 const ProfileText = styled.div`
