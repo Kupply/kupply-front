@@ -84,7 +84,7 @@ export const UserInput: React.FC<UserInputProps> = ({
       ? userState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
       : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
   );
-  console.log('UserInput에서 뽑는 userInfo', userInfo);
+  
   const [firstMajor, setFirstMajor] = useRecoilState(
     locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'),
   );
@@ -112,7 +112,6 @@ export const UserInput: React.FC<UserInputProps> = ({
       ...prev,
       info: newData,
     }));
-    console.log('바뀐 value', newData); //이게 인식은 잘 되는데 
   };
 
   if (toNext && locationUsed === 'signUp') {

@@ -140,7 +140,7 @@ export interface LoginPageProps {
 
 function LoginPage(props: LoginPageProps) {
   const { setLogin } = props;
-  const [isOpenAlert, setOpenAlert] = useState<boolean>(false);
+  const [isOpenAlert, setOpenAlert] = useState<boolean>(true);
 
   const navigate = useNavigate();
   const handleLink2Click = () => {
@@ -192,11 +192,13 @@ function LoginPage(props: LoginPageProps) {
   return (
     <Wrapper>
       {isOpenAlert ? (
-        <Login2JoinModal isOpenAlert={isOpenAlert} setOpenAlert={setOpenAlert} onClickModal={handleLink2Click} />
+        <div style={{transform: 'translateY(-10.375vw) translateX(+5vw)'}}>
+          <Login2JoinModal isOpenAlert={isOpenAlert} setOpenAlert={setOpenAlert} onClickModal={handleLink2Click} />
+        </div>
       ) : null}
       <LoginBox>
         <LogoImage
-          src="../../designImage/kupply/KupplyVer1.png"
+          src="../../designImage/kupply/KupplyVer1.svg"
           style={{ marginTop: '6.2vw', marginBottom: '0.6vw' }}
         />
         <Typography size="0.94vw" bold="500">

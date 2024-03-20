@@ -22,10 +22,12 @@ export function SignUp4Page(){
   const [fixedUserType, setFixedUserType] = useState(false);
   // 넘겨받는 데이터가 없는 경우 돌려보내기 위해 
   // 잠시 수정 
-  useEffect(() => {
-    if (!sessionStorage.getItem('nickname')) navigate('/');
-    else sessionStorage.removeItem('role');
-  }, []);
+
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem('nickname')) navigate('/');
+  //   else sessionStorage.removeItem('role');
+  // }, []);
+  
   useEffect(()=>{
     if(+userStdId.info.slice(2,4) === 24){
       setUser({

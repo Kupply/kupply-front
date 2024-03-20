@@ -45,7 +45,7 @@ export function ModalHandle ({setBlank}: ModalHandleProps) {
           switch (currentModal) {
             case 0:
               return (
-                <div style={{ background: 'red', width: '100%', zIndex: 20 }}>
+                <div style={{ background: 'red', width: '100%', zIndex: 20, transform: 'translateY(+35.375vw)', }}>
                   <SignUpSmall
                     currentModal={currentModal}
                     isOpenModal={isOpenModal}

@@ -262,7 +262,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                     로그아웃
                   </ProfileButton> */}
 
-                    <TextButton02 onClick={onLogoutClick} style={{ paddingLeft: '19px' }}>
+                    <TextButton02 onClick={onLogoutClick} style={{ paddingLeft: '0.989vw' }}>
                       로그아웃
                     </TextButton02>
                   </ProfileButtons>

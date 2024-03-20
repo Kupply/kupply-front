@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
 import { sendEmail } from "../../utils/SignUpFunctions";
 import { useNavigate } from "react-router-dom";
@@ -17,24 +17,24 @@ import client from "../../utils/HttpClient";
 
 export function SignUp1Page(){
   const navigate = useNavigate();
-
-  const email = useRecoilValue(emailAtom);
+  // signup에서 가져오는 
+  const email = sessionStorage.getItem('kuEmail') || '';
+  console.log('email', email);
   const [codeNum, setCodeNum] = useRecoilState(verificationCodeState);
   const {num1, num2, num3, num4, num5, num6} = codeNum;
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
 
   // 잠시 설정 - backend와 연결하면 확인할 수 있을까? 
-  useEffect(() => {
-    async function sendFirst(email: string) {
-      const result = await sendEmail(email);
+  // useEffect(() => {
+  //   async function sendFirst(email: string) {
+  //     const result = await sendEmail(email);
 
-      if (!result) {
-        navigate('/login');
-      }
-    }
-    sendFirst(email);
-  }, []);
-
+  //     if (!result) {
+  //       navigate('/login');
+  //     }
+  //   }
+  //   sendFirst(email);
+  // }, []);
 
   const setBlank = () => {
     setCodeNum({

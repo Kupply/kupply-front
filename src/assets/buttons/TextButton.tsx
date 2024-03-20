@@ -312,8 +312,9 @@ const Typography01 = styled.div<{ state: string }>`
   white-space: nowrap;
 `;
 const Container02 = styled.button`
-  display: inline-flex;
-  align-items: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   gap: 4px;
   box-sizing: border-box;
 `;

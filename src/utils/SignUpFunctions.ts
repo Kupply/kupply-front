@@ -12,7 +12,7 @@ import { useEmailVerification, useNicknameVerification, usePassword2Verification
 export const sendEmail = async (email: string) => {
   const url = 'https://api.kupply.devkor.club/auth/sendEmail';
   try {
-    await axios.post(url, { email: email });
+    await client.post('/auth/sendEmail', { email: email });
     return true;
   } catch (e: any){
     alert(e.response.data.error.message);

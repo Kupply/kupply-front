@@ -34,36 +34,41 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 const ModalContainer = styled.div`
   width: 60vw;
   max-width: 814px;
-  //height: 780px;
-  height: 72vh;
+  height: 780px;
+  //height: 60vh;
   position: fixed;
   //margin-top: -50px;
-  ////margin-top: -4.63vh;
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  @media screen and (max-width: 600px) {
-    width: 60vw;
-    height: 80%;
-    margin-top: 5vh;
-    top: 0px;
 
-    & > dialog {
-      position: relative;
-      height: 100%;
-    }
-  }
-  @media screen and (max-width: 800px) {
+  @media screen and (min-width: 1201px) and (max-width: 1500px) {
     width: 50vw;
-    height: 80%;
-    margin-top: 5vh;
+    height: 700px;
+    margin-top: 30px;
     top: 0px;
+  }
+  
+  @media screen and (min-width: '1001px') and (max-width: 1200px) {
+    width: 50vw;
+    height: 600px;
+    margin-top: 6vh;
+    top: 0px;
+  }
 
-    & > dialog {
-      position: relative;
-      height: 100%;
-    }
+  @media screen and (min-width: '801px') and (max-width: 1000px) {
+    width: 50vw;
+    height: 500px;
+    margin-top: 2vh;
+    top: 0px;
+  }
+  @media screen and (min-width: '601px') and (max-width: 800px) {
+    width: 50vw;
+    height: 400px;
+    margin-top: 3vh;
+    top: 0px;
   }
 `;
 
@@ -139,6 +144,19 @@ const DialogBox = styled.dialog`
     width: 100vw;
     height: 100vh;
   }
+
+  @media screen and (min-width: 601px) and (max-width: 800px) {
+    height: 50vh;
+  }
+
+  @media screen and (min-width: 801px) and (max-width: 1200px) {
+    height: 60vh;
+  }
+
+  @media screen and (min-width: 1201px) and (max-width: 1500px) {
+    height: 70vh;
+  }
+
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요

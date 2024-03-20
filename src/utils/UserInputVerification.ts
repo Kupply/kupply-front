@@ -8,7 +8,7 @@ type verificationProps = 'signUp' | 'settings';
 export function useEmailVerification(locationUsed: verificationProps){
   
   const [ID, setID] = useRecoilState(locationUsed === 'signUp' ? userState('kuEmail') : userSettingsState('loginedUser'));
-  console.log(ID);
+  //console.log(ID);
   const [idVerified, setIdVerified] = useState(false);
 
   const IDPattern = /.+@korea\.ac\.kr$/;
