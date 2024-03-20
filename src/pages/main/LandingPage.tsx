@@ -6,6 +6,7 @@ import Banner from '../../components/landing/Banner';
 import RankingTable from '../../components/landing/RankingTable';
 import FAQ from '../../components/landing/FAQ';
 import ProfileBox from '../../components/myBoard/ProfileBox';
+import client from '../../utils/HttpClient';
 
 export interface ITableData {
   rank: number;
@@ -89,6 +90,55 @@ function LandingPage() {
     curGPA: 4.5,
     hopeSemester: '2023-2',
   }));
+
+  // 로그인한 유저 정보 localStorage에
+  const getMe = async () => {
+    try {
+      const APIresponse = await client.get('/user/getMe');
+      const userInfo = APIresponse.data.data.user;
+
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        userName: userInfo.name,
+        userNickname: userInfo.nickname,
+        userProfilePic: userInfo.profilePic,
+        userProfileLink: userInfo.profileLink,
+        userRole: userInfo.role,
+        firstMajor: userInfo.firstMajor,
+        studentId: userInfo.studentId,
+        hopeMajor1: userInfo.hopeMajor1,
+        hopeMajor2: userInfo.hopeMajor2,
+        curGPA: userInfo.curGPA,
+        hopeSemester: userInfo.hopeSemester,
+      }));
+      setCurrentPic(userInfo.profilePic);
+
+      localStorage.setItem('userProfilePic', userInfo.profilePic);
+      localStorage.setItem('userProfileLink', userInfo.profileLink);
+      localStorage.setItem('name', userInfo.name);
+      localStorage.setItem('nickname', userInfo.nickname);
+      localStorage.setItem('phoneNumber', userInfo.phoneNumber);
+      localStorage.setItem('studentId', userInfo.studentId);
+      localStorage.setItem('firstMajor', userInfo.firstMajor);
+      localStorage.setItem('role', userInfo.role);
+      if (userInfo.role === 'candidate') {
+        localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+        localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+        localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+        localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+        localStorage.setItem('isApplied', userInfo.isApplied);
+      } else {
+        localStorage.setItem('secondMajor', userInfo.secondMajor);
+        localStorage.setItem('passSemester', userInfo.passSemester);
+        localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getMe();
+  }, []);
 
   const [tableData, setTableData] = useState<ITableData[]>([
     {
