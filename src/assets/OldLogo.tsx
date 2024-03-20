@@ -28,8 +28,8 @@ const LogoTextWrapper = styled.text`
 */
 
 const LogoImage = styled.img`
-  width: 145.6px; // 46.575px;
-  height: 32px; // 46px;
+  width: 130px; // 46.575px;
+  height: 29px; // 46px;
   border: none;
 `;
 
