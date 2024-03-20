@@ -3,15 +3,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
-import PrevButton from '../../../assets/buttons/PrevButton';
-import SubmitButton from '../../../assets/buttons/OldSubmitButton';
 import ModalLarge from '../../base/ModalLarge';
-import EditModalHeaderButton from '../../../assets/myboardpage/EditModalHeaderButton';
-import { ImgCtrlButton, ImgDelButton } from '../../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../../assets/dropdown/DropDown';
 import TextArea from '../../../assets/TextArea';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-import LabelButton from '../../../assets/buttons/LabelButton';
 import ToolTip04 from '../../../assets/toolTips/ToolTip04';
 import { majorAllList } from '../../../common/MajorAll';
 import { majorTargetList } from '../../../common/MajorTarget';
@@ -42,33 +37,7 @@ export interface ModalProps {
 
 export default function EditModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal, isApplied } = props;
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(true);
-
-  // 각 버튼의 isClicked 값을 관리하기 위한 변수 선언
-  const [headerButtonStates, setHeaderButtonStates] = useState<{
-    basicMajor: boolean;
-    interestMajor: boolean;
-    currentGPA: boolean;
-    desiredSemester: boolean;
-  }>({
-    basicMajor: true,
-    interestMajor: false,
-    currentGPA: false,
-    desiredSemester: false,
-  });
-
-  const handleHeaderButtonClick = (buttonName: string) => {
-    setHeaderButtonStates((prevState) => {
-      const newState = {
-        basicMajor: false,
-        interestMajor: false,
-        currentGPA: false,
-        desiredSemester: false,
-      };
-      newState[buttonName as keyof typeof prevState] = true;
-      return newState;
-    });
-  };
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   // 닉네임 중복 체크
   type StateOptions = 'default' | 'hover' | 'focused' | 'typing' | 'filled' | 'error' | 'loading' | 'password';
@@ -329,7 +298,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      {
+      {isOpenModal && !isSubmitted &&
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton
@@ -439,6 +408,7 @@ export default function EditModal(props: ModalProps) {
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
                 style={{ marginTop: '1.042vw' }}
+                isGpaChanged={isGpaChanged}
               />
             </ContentsWrapper>
           )}
@@ -472,6 +442,7 @@ export default function EditModal(props: ModalProps) {
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
                 style={{ marginTop: '9.740vw' }}
+                isGpaChanged={isGpaChanged}
               />
             </ContentsWrapper2>
           )}
@@ -505,6 +476,7 @@ export default function EditModal(props: ModalProps) {
                 onClickSubmit={onClickSubmit}
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
+                isGpaChanged={isGpaChanged}
               />
             </ContentsWrapper2>
           )}
@@ -549,6 +521,7 @@ export default function EditModal(props: ModalProps) {
                 onClickSubmit={onClickSubmit}
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
+                isGpaChanged={isGpaChanged}
               />
             </ContentsWrapper2>
           )}

@@ -10,11 +10,12 @@ interface MoveButtonProps{
   onClickSubmit: () => void; // 함수;
   isApplied: boolean; 
   setIsSubmitted: (isSubmitted: boolean) => void;
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
+  isGpaChanged: boolean;
 };
 
 export default function MoveButton(props: MoveButtonProps){
-  const {isOpenModal, setOpenModal, isApplied, onClickSubmit, style,setIsSubmitted } = props;
+  const {isOpenModal, setOpenModal, isApplied, onClickSubmit, style,setIsSubmitted, isGpaChanged } = props;
   console.log(isApplied);
   return (
     <MoveButtonWrapper style={style}>
@@ -27,11 +28,10 @@ export default function MoveButton(props: MoveButtonProps){
         취소
       </Button04>
       <Button03
-        state={!isApplied ? 'disabled':'pressed'}
+        state={!isApplied ? 'pressed':'disabled'}
         onClick={() => {
-          console.log('pressed');
           setIsSubmitted(true);
-          onClickSubmit();
+          if (!isGpaChanged) onClickSubmit();
         }}
         style={{background: '#D85888'}}
       >

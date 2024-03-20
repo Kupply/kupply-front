@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
-// import EditModal from './EditModals/OldEditModal';
+import EditModal from './EditModals/OldEditModal';
 //import EditModal from './EditModals/EditModal';
-import EditModal from './EditModals/OldEditModalModified';
+//import EditModal from './EditModals/OldEditModalModified';
 import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
@@ -32,7 +31,7 @@ const ProfileBox = ({ userData }: { userData: any }) => {
   // const majorKoreanName2 = majorNameMapping[major2][0];
   // const majorEngishName2 = majorNameMapping[major2][1];
 
-  const [isOpenEditModal, setOpenEditModal] = useState(false);
+  const [isOpenEditModal, setOpenEditModal] = useState(true);
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
 
   const onClickEditModal = () => {

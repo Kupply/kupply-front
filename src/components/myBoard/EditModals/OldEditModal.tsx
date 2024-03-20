@@ -194,6 +194,7 @@ export default function EditModal(props: ModalProps) {
         console.log(err);
       }
     }
+    setOpenModal(false);
   };
 
   // 고려대학교 전체 학과 리스트
@@ -328,7 +329,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      { isOpenModal && !isSubmitted &&(
+      { isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton

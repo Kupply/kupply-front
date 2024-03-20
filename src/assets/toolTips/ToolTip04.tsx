@@ -102,14 +102,14 @@ const MessageBox = styled.div<MessageBoxProps>`
   justify-content: flex-start;
   align-items: start;
   align-self: stretch;
-
+  height: auto;
   width: 24.323vw; //width: 467px;
   max-width: 467px;
-  height: auto; // 3.49vw; //height: 67px;
+  //height: 3.49vw; //height: 67px;
   max-height: 67px;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  padding: 10px 8px; //padding: 0.521vw 0.417vw;
+  padding: 10px 8px; 
   gap: 0.521vw; //gap: 10px;
   background: #fff;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));

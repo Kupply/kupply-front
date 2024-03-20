@@ -35,7 +35,7 @@ const ModalContainer = styled.div`
   width: 60vw;
   max-width: 814px;
   //height: 780px;
-  height: 72.22vh;
+  height: 72vh;
   position: fixed;
   //margin-top: -50px;
   ////margin-top: -4.63vh;
@@ -44,8 +44,19 @@ const ModalContainer = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 600px) {
-    width: 90vw;
-    height: 90vh;
+    width: 60vw;
+    height: 80%;
+    margin-top: 5vh;
+    top: 0px;
+
+    & > dialog {
+      position: relative;
+      height: 100%;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    width: 50vw;
+    height: 80%;
     margin-top: 5vh;
     top: 0px;
 
