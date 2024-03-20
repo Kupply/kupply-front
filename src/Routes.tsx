@@ -1,5 +1,5 @@
-//import MyBoardPage from './pages/myBoard/MyBoardPage';
-import MyBoardPage from './pages/myBoard/OldMyBoardPage';
+import MyBoardPage from './pages/myBoard/MyBoardPage';
+// import MyBoardPage from './pages/myBoard/OldMyBoardPage';
 import LandingPage from './pages/main/LandingPage';
 import LoginPage from './pages/login/OldLoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
