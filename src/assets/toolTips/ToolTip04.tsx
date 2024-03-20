@@ -63,9 +63,7 @@ function ToolTip04(props: MessageProps) {
 const MainWrapper = styled.div`
   display: flex;
   position: absolute;
-  //left: 260px;
   left: 13.542vw;
-  //top: 192px;
   top: 10vw;
 `;
 

@@ -9,15 +9,13 @@ interface MoveButtonProps{
   setOpenModal: (isOpenModal: boolean) => void;
   onClickSubmit: () => void; // 함수;
   isApplied: boolean; 
+  setIsSubmitted: (isSubmitted: boolean) => void;
   style?: React.CSSProperties
 };
 
-
 export default function MoveButton(props: MoveButtonProps){
-  const {isOpenModal, setOpenModal, isApplied, onClickSubmit, style } = props;
-  const [isSubmitted, setIsSubmitted] = useRecoilState(editSubmittedState);
-  const [isGpaChanged, setIsGpaChanged] = useRecoilState(isGpaChangedState);
-
+  const {isOpenModal, setOpenModal, isApplied, onClickSubmit, style,setIsSubmitted } = props;
+  console.log(isApplied);
   return (
     <MoveButtonWrapper style={style}>
       <Button04
@@ -29,13 +27,10 @@ export default function MoveButton(props: MoveButtonProps){
         취소
       </Button04>
       <Button03
-        state={!isApplied ? 'disabled': 'pressed'}
+        state={!isApplied ? 'disabled':'pressed'}
         onClick={() => {
-          // setOpenModal(!isOpenModal);
+          console.log('pressed');
           setIsSubmitted(true);
-          console.log('Hello There');
-          console.log(isGpaChanged); // 학점이 변경되어서 submit을 못한다??
-          // if (!isGpaChanged.changed) onClickSubmit();
           onClickSubmit();
         }}
         style={{background: '#D85888'}}

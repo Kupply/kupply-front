@@ -22,9 +22,7 @@ export default function SubmittedWrapper(props: SubmittedWrapperProps){
 const AlertWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  //width: 628px;
   width: 32.708vw;
-  //height: 796px;
   height: 41.458vw;
   align-items: center;
   text-align: center;
