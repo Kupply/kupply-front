@@ -55,6 +55,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
       } else {
         // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
         const data = await client.get('/dashboard/cards');
+
         setCards(
           cards.map((c) => {
             const res = data.data.find((ca: any) => ca.name === c.korName);
@@ -65,7 +66,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
               TO: c.TO,
               semester: prevSemester,
               avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
-              minPass: res.min,
+              minPass: res.passNum === 0 ? 0 : res.min,
               compRate: +(res.passNum / c.TO).toFixed(2),
             };
           }),
@@ -387,7 +388,7 @@ const mockCards = [
     semester: '23-2',
   },
   {
-    korName: '스마트보안학부',
+    korName: '스마트보안학부 스마트보안학부',
     engName: 'Division of Smart Security',
     filter: ['학부 전체보기', '독립학부'],
     TO: 3,
