@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
 import ProfileBox from '../../components/myBoard/ProfileBox';
@@ -9,10 +9,13 @@ import QuartileIndicator from '../../components/myBoard/QuartileIndicator';
 import PieChart from '../../components/myBoard/Graph/PieChart';
 import Scatter from '../../components/myBoard/Graph/Scatter';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton'; // 1지망 2지망 선택 버튼
+import MyboardPasserPageVer from './MyboardPasser';
 import client from '../../utils/HttpClient';
 import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
 import { MajorOptionsKR } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR } from '../../utils/Mappings';
+
+import Typography from '../../assets/OldTypography';
 
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
@@ -47,8 +50,15 @@ const MyBoardPage = () => {
   }, []);
 
   /////////////////////////////
-  const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
+  const [isApplied, setIsApplied] = useState<boolean>(false); // *********************** 개발 위해 잠시 수정 *************************
   const [CurrentPic, setCurrentPic] = useState('');
+
+  // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.
+  const onClickApplication = useCallback(() => {
+    setIsApplied(true);
+    console.log('모의지원 완료');
+  }, [isApplied]);
+
   const [userData, setUserData] = useState(() => ({
     userName: '고대빵',
     userNickname: '빵대고대빵',
@@ -342,43 +352,49 @@ const MyBoardPage = () => {
   ////////////////////////////
 
   return (
-    <Wrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
-      {/* <GlobalStyles /> */}
-      <ProfileWrapper>
-        <ProfileBox userData={userData} />
-      </ProfileWrapper>
+    <>
+      {userData.userRole === 'passer' ? (
+        <MyboardPasserPageVer />
+      ) : (
+        <Wrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
+          {/* <GlobalStyles /> */}
+          <ProfileWrapper>
+            <ProfileBox userData={userData} />
+          </ProfileWrapper>
 
-      <MainWrapper>
-        <InterestMajorBox>
-          <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
-          {userData.hopeMajor2 !== '희망 없음' ? (
-            <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
-              2지망
-            </InterestMajorButton>
-          ) : (
-            <></>
-          )}
-        </InterestMajorBox>
-        <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
-          <MajorBox onViewMajor={onViewMajor} userData={userData} />
-          <LiveWrapper>
-            <Application
-              onViewMajor={onViewMajor}
-              userData={userData}
-              curApplyNum={curData[onViewMajor - 1].curApplyNum}
-            />
-            <div style={{ marginTop: '0.35vw' }}></div>
-            <MockApply curCompetitionRate={curData[onViewMajor - 1].curCompetitionRate} />
-          </LiveWrapper>
-          <ThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
-        </div>
-        <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} />
-        <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
-          <PieChart onViewMajor={onViewMajor} curData={curData} />
-          <Scatter onViewMajor={onViewMajor} curData={curData} />
-        </div>
-      </MainWrapper>
-    </Wrapper>
+          <MainWrapper>
+            <InterestMajorBox>
+              <InterestMajorButton onView={onViewMajor === 1} onClick={onClickInterest1} style={{ zIndex: 2 }} />
+              {userData.hopeMajor2 !== '희망 없음' ? (
+                <InterestMajorButton onView={onViewMajor === 2} onClick={onClickInterest2} style={{ zIndex: 2 }}>
+                  2지망
+                </InterestMajorButton>
+              ) : (
+                <></>
+              )}
+            </InterestMajorBox>
+            <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
+              <MajorBox onViewMajor={onViewMajor} userData={userData} />
+              <LiveWrapper>
+                <Application
+                  onViewMajor={onViewMajor}
+                  userData={userData}
+                  curApplyNum={curData[onViewMajor - 1].curApplyNum}
+                />
+                <div style={{ marginTop: '0.35vw' }}></div>
+                <MockApply curCompetitionRate={curData[onViewMajor - 1].curCompetitionRate} />
+              </LiveWrapper>
+              <ThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
+            </div>
+            <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} />
+            <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
+              <PieChart onViewMajor={onViewMajor} curData={curData} />
+              <Scatter onViewMajor={onViewMajor} curData={curData} />
+            </div>
+          </MainWrapper>
+        </Wrapper>
+      )}
+    </>
   );
 };
 
@@ -443,6 +459,18 @@ const InterestMajorBox = styled.div`
   display: flex;
   margin-top: 58px;
   gap: 0.9375vw;
+`;
+
+const BlurWrapper = styled.div`
+  position: relative;
+
+  width: 500px;
+  height: 500px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  background: rgba(248, 248, 248, 0.45);
+
+  z-index: 1000;
 `;
 
 export default MyBoardPage;
