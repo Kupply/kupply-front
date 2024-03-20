@@ -401,7 +401,7 @@ const ButtonWrapper = styled.div`
 
 const PageWrapper = styled.div`
   width: fit-content;
-  height: auto;
+  height: fit-content;
   margin: 1.67vw 0 10.42vw 0;
   display: flex;
   align-items: center;

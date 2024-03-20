@@ -59,28 +59,10 @@ function Cards() {
               합격자의 자소서 키워드를 추출하여, <br /> 더 나은 자기소개서 작성을 도와드릴게요.
             </Typography>
             <img
-              width="60.61%"
-              height="37.65%"
+              width="100%"
+              height="100%"
               src="../../designImage/preview/preview_02_01.png"
               style={{ position: 'absolute', bottom: 0, right: 0 }}
-            />
-            <img
-              width="46.93%"
-              height="24.67%"
-              src="../../designImage/preview/preview_02_02.png"
-              style={{ position: 'absolute', bottom: '21.5%', right: '55.9%' }}
-            />
-            <img
-              width="29.18%"
-              height="16.15%"
-              src="../../designImage/preview/preview_02_03.png"
-              style={{ position: 'absolute', bottom: '77.7%', right: '14.37%' }}
-            />
-            <img
-              width="32.08%"
-              height="20.33%"
-              src="../../designImage/preview/preview_02_04.png"
-              style={{ position: 'absolute', bottom: '38.5%', right: '-4.72%' }}
             />
           </Box>
           <VerticalWrapper>
@@ -104,7 +86,7 @@ function Cards() {
                 이제껏 가져왔던
               </Typography>
               <Typography size="1.88vw" bold="700" color="#000" style={{ lineHeight: '2.4vw', marginTop: '-0.83vw' }}>
-                이중전공에 대한 궁금증, <br /> 다<span style={{ display: 'inline-block', width: '13.44%' }} />
+                이중전공에 대한 궁금증, <br /> <span style={{ display: 'inline-block', width: '26.44%' }} />
                 풀어드려요.
               </Typography>
               <img
@@ -125,10 +107,10 @@ function Cards() {
                 }}
               />
               <img
-                width="13.44%"
-                height="2.4%"
-                src="../../designImage/preview/preview_04_03.png"
-                style={{ position: 'absolute', bottom: '19.17%', right: '72.7%' }}
+                width="30.44%"
+                height="12.7%"
+                src="../../designImage/preview/preview_04_03.svg"
+                style={{ position: 'absolute', bottom: '13.28%', right: '65.7%' }}
               />
             </Box>
           </VerticalWrapper>

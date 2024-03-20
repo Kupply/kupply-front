@@ -5,6 +5,7 @@ import Typography from '../../assets/Typography';
 import Card01 from '../../assets/cards/Card01';
 import MainCard from './MainCard';
 import SubCard from './SubCards';
+import client from '../../utils/HttpClient';
 
 const mockCards = [
   {
@@ -104,6 +105,28 @@ function Banner() {
   const [isDetailed, setIsDetailed] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // const fetch = async () => {
+  //   const data = await client.get('/dashboard/cards');
+  //   setCards(
+  //     cards.map((c) => {
+  //       const res = data.data.find((ca: any) => ca.name === c.korName);
+  //       return {
+  //         korName: c.korName,
+  //         engName: c.engName,
+  //         filter: c.filter,
+  //         TO: c.TO,
+  //         semester: c.semester,
+  //         avgPass: res.avg,
+  //         minPass: res.min,
+  //         compRate: res.passNum,
+  //       };
+  //     }),
+  //   );
+  // };
+  // useEffect(() => {
+  //   fetch();
+  // });
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
@@ -191,6 +214,7 @@ const CellPhone = styled.div`
   z-index: 5;
   bottom: 0;
   left: 40.64vw;
+  box-shadow: -36px 0 36px rgba(0, 0, 0, 0.3);
 `;
 
 const Notch = styled.img`
@@ -222,7 +246,7 @@ const MainImage = styled.div`
 const SubImage = styled.div`
   width: 13vw;
   height: 17.5vw;
-  border-radius: 0.36vw;
+  border-radius: 0.42vw;
   background-color: aliceblue;
 `;
 

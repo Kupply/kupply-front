@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import Typography from '../OldTypography';
+
+import Typography from '../Typography';
 
 export interface PageNumberProps extends React.ComponentPropsWithRef<'div'> {
   active?: boolean;
@@ -8,9 +9,9 @@ export interface PageNumberProps extends React.ComponentPropsWithRef<'div'> {
 
 const Wrapper = styled.div<PageNumberProps>`
   display: flex;
-  width: 0.73vw;
-  height: 0.73vw;
-  padding: 0.94vw;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.94vw 1.2vw;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -26,7 +27,7 @@ export default function PageNumber(props: PageNumberProps) {
   const { active = false, page = '1', ...rest } = props;
   return (
     <Wrapper active={active} {...rest}>
-      <Typography size="bodyText" bold="500" color={active ? '#FFF' : 'rgba(67, 67, 67, 0.80)'}>
+      <Typography size="1.04vw" bold="500" color={active ? '#FFF' : 'rgba(67, 67, 67, 0.80)'}>
         {page}
       </Typography>
     </Wrapper>

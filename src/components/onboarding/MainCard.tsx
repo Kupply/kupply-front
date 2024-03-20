@@ -209,7 +209,8 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
   width: 14.63vw;
-  height: 20.59vw;
+  height: 19.59vw;
+  border-radius: 0.47vw;
   flex-shrink: 0;
   position: relative;
 `;
@@ -233,6 +234,7 @@ const CardImageBlurred = styled.div`
   margin-top: 0.05vw;
   width: 14.63vw;
   height: 19.69vw;
+  border-radius: 0.47vw;
   overflow: hidden;
 
   & img {
@@ -336,12 +338,12 @@ const ContentInner = styled.div`
 `;
 
 const Button = styled.button`
-  top: 15.89vw;
-  left: 1.78vw;
+  top: 15.29vw;
+  left: 2.3vw;
   display: flex;
-  width: 11.06vw;
-  height: 1.84;
-  padding: 1.13vw 1.59vw;
+  width: 9.95vw;
+  height: 1.66vw;
+  padding: 1.02vw 1.43vw;
   justify-content: center;
   align-items: center;
   gap: 0.38vw;

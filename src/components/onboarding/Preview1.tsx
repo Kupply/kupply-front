@@ -171,23 +171,23 @@ function Preview1() {
           color="rgba(20,20,20,0.6)"
           style={{ lineHeight: '120%', opacity: 0.8, marginBottom: '5.94vw' }}
         >
-          쿠플라이 모의지원 현황을 통해 얼마나 많은 인원이 내가 희망하는 학과의 <br /> 실시간 경쟁률을 확인하세요!
+          쿠플라이 모의지원 현황을 통해 <br /> 내가 희망하는 학과의 실시간 경쟁률을 확인하세요!
         </Typography>
         <RankingTable tableData={tableData} />
       </ContentWrapper>
       <Blur />
       <ButtonWrapper>
         <Typography size="1.57vw" bold="700" color="#2C323A" style={{ textAlign: 'center', lineHeight: '131.58%' }}>
-          지금 쿠플라이 회원가입하고 <br /> 이중전공 모의지원 현황을 확인해보세요.
+          지금은 모의지원 기간이 아닙니다. <br /> 모의지원 기능은 5월 달에 오픈해요!
         </Typography>
         <CTA02
           onClick={() => {
-            navigate('/signup0');
+            navigate('/archive');
           }}
           size="small"
-          style={{ marginTop: '0.42vw' }}
+          style={{ marginTop: '1.24vw' }}
         >
-          회원가입하러 가기
+          과거 합격자료 보러가기
         </CTA02>
       </ButtonWrapper>
     </MainWrapper>
@@ -215,7 +215,7 @@ const Blur = styled.div`
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(7.5px);
   position: absolute;
-  top: 40.82%;
+  top: 30.82%;
   left: 15.63%;
 `;
 
