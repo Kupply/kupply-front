@@ -16,7 +16,7 @@ function Preview3() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((currentImageIndex) => (currentImageIndex + 1) % images.length);
-    }, 1000);
+    }, 2000);
     return () => clearInterval(intervalId);
   }, []);
 

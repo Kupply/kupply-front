@@ -120,6 +120,9 @@ const Container = styled.div<ContainerProps>`
   height: 17.5vw;
   flex-shrink: 0;
   position: relative;
+  border-radius: 0.42vw;
+  box-shadow: 0px 14.857px 37.143px 0px rgba(76, 76, 76, 0.4);
+  backdrop-filter: blur(6.685710906982422px);
 `;
 
 const CardImageDefault = styled.div`

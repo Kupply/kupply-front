@@ -43,7 +43,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         bold="700"
         style={{ lineHeight: '120%', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
       >
-        쿠플라이 실시간 이중전공 모의지원 현황
+        지금은 모의지원 기간이 아닙니다.
       </Typography>
       <Typography
         size="1.04vw"
@@ -51,9 +51,11 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         color="rgba(20,20,20,0.6)"
         style={{ opacity: 0.8, lineHeight: '120%', margin: '0.63vw 0 1.72vw 0' }}
       >
-        이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.
+        모의지원 기능은 5월 달에 오픈해요!
       </Typography>
-      <CTA02 onClick={() => navigate('/myboard')} style={{ marginBottom: '3.8vw' }} />
+      <CTA02 onClick={() => navigate('/archive')} style={{ marginBottom: '3.8vw' }}>
+        기다리는 동안 과거 합격자료 보러가기
+      </CTA02>
       <TextWrapper>
         <div
           onClick={toggleOrder}
@@ -161,11 +163,13 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           </div>
         )}
       </div>
+      <Blur />
     </Wrapper>
   );
 });
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -236,6 +240,16 @@ const TextWrapper = styled.div`
   margin-bottom: 0.73vw;
   display: flex;
   justify-content: space-between;
+`;
+
+const Blur = styled.div`
+  width: 67.34vw;
+  height: 50vw;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(7.5px);
+  position: absolute;
+  top: 30.82%;
+  left: 0;
 `;
 
 export default RankingTable;
