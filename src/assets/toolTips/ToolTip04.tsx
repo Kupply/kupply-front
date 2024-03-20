@@ -49,6 +49,7 @@ function ToolTip04(props: MessageProps) {
         </div>
         <NormalText> 정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.</NormalText>
       </MessageBox>
+      {/*
       <NotchImage
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -56,6 +57,7 @@ function ToolTip04(props: MessageProps) {
         src="../../designImage/toolTips/ToolTip04Notch.svg"
         alt="NochIcon"
       />
+      */}
     </MainWrapper>
   );
 }
@@ -63,10 +65,12 @@ function ToolTip04(props: MessageProps) {
 const MainWrapper = styled.div`
   display: flex;
   position: absolute;
+
+  z-index: 100;
   //left: 260px;
-  left: 13.542vw;
+  //left: 13.542vw;
   //top: 192px;
-  top: 10vw;
+  //top: 10vw;
 `;
 
 const AlertImage = styled.img<{ isHovered: boolean }>`
@@ -92,27 +96,30 @@ const NotchImage = styled.img<{ isHovered: boolean }>`
 `;
 
 const MessageBox = styled.div<MessageBoxProps>`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  align-self: stretch;
+
+  width: 24.323vw; //width: 467px;
+  max-width: 467px;
+  height: auto; // 3.49vw; //height: 67px;
+  max-height: 67px;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  //padding: 10px 8px;
-  padding: 0.521vw 0.417vw;
-  justify-content: center;
-  align-items: center;
-  //gap: 10px;
-  gap: 0.521vw;
-  align-self: stretch;
-  position: absolute;
-  //top: -95px;
-  top: -4.948vw;
-  //right: -430px;
-  right: -22.396vw;
-  //width: 467px;
-  width: 24.323vw;
-  //height: 67px;
-  height: 3.49vw;
-  z-index: 1;
+  padding: 10px 8px; //padding: 0.521vw 0.417vw;
+  gap: 0.521vw; //gap: 10px;
   background: #fff;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
+  z-index: 1;
+  //top: -95px;
+  // top: -4.948vw;
+  //right: -430px;
+  top: 100%;
+  left: 20%;
+  transform: translate(-20%, -120%);
 `;
 
 const NormalText = styled.text`
@@ -121,7 +128,7 @@ const NormalText = styled.text`
   font-size: 0.83vw;
   font-style: normal;
   font-weight: 500;
-  //line-height: 22px;
+  line-height: 100%;
 `;
 
 const BordSmallText = styled.text`
@@ -130,7 +137,7 @@ const BordSmallText = styled.text`
   font-size: 0.83vw;
   font-style: normal;
   font-weight: 700;
-  //line-height: 22px;
+  line-height: 100%;
 `;
 
 const BordLargeText = styled.text`
