@@ -6,38 +6,19 @@ import SignUpLarge3 from "./modals/SignUpLarge3";
 import { sendEmail } from "../../utils/SignUpFunctions";
 import { currentModalState, isOpenModalState, sendNumState, userState } from "../../store/atom";
 import { useRecoilState } from "recoil";
+import { StateOptions } from "../../assets/OldTextFieldBox";
 
 interface ModalHandleProps {
   setBlank: () => void;
+  onClickToggleSmallModal: () => Promise<void>;
+  onClickToggleLargeModal: () => void;
 }
 
-export function ModalHandle ({setBlank}: ModalHandleProps) {
+export function ModalHandle ({setBlank, onClickToggleLargeModal, onClickToggleSmallModal}: ModalHandleProps) {
   const [currentModal, setCurrentModal] = useRecoilState(currentModalState);
   const [isOpenModal, setOpenModal] = useRecoilState(isOpenModalState);
-  const [sendNum, setSendNum] = useRecoilState(sendNumState);
-  const [email, setEmail] = useRecoilState(userState('kuEmail'));
-
-  const onClickToggleSmallModal = useCallback(async () => {
-    setOpenModal(!isOpenModal);
-    setCurrentModal(0);
-    console.log(isOpenModal);
-    //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
-    if (!isOpenModal) {
-      setSendNum(sendNum + 1);
-      await sendEmail(sessionStorage.getItem('kuEmail') || '');
-    }
-    setBlank();
-  }, [isOpenModal]);
-
-  console.log(isOpenModal);
-
-  // large modal 관련
-  const onClickToggleLargeModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-    setCurrentModal(1); // 현재 모달창 (step) 초기화
-    console.log(isOpenModal); // 디버그 목적
-  }, [isOpenModal]);
-
+  const [email, setEmail] = useRecoilState(userState('email'));
+  
   return (
     <>
       {

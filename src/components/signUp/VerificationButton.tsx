@@ -1,45 +1,22 @@
 import styled from "styled-components";
-import { useCallback, useState } from "react";
-import { useRecoilState } from "recoil";
-import { currentModalState, isOpenModalState, sendNumState } from "../../store/atom";
-import { sendEmail } from "../../utils/SignUpFunctions";
 
 type VerificationButtonProps = {
   onSetBlank: () => void;
+  onClickToggleSmallModal: () => Promise<void>;
+  onClickToggleLargeModal: () => void;
 };
 
-export default function VerificationButton({onSetBlank}:VerificationButtonProps){
-  const [currentModal, setCurrentModal] = useRecoilState(currentModalState);
-  const [isOpenModal, setOpenModal] = useRecoilState(isOpenModalState);
-  const [sendNum, setSendNum] = useRecoilState(sendNumState);
-
-  const onClickToggleSmallModal = useCallback(async () => {
-    setOpenModal(!isOpenModal);
-    setCurrentModal(0);
-    console.log(isOpenModal);
-    //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
-    if (!isOpenModal) {
-      setSendNum(sendNum + 1);
-      await sendEmail(sessionStorage.getItem('kuEmail') || '');
-    }
-    onSetBlank();
-  }, [isOpenModal]);
-
-  const onClickToggleLargeModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-    setCurrentModal(1); // 현재 모달창 (step) 초기화
-    console.log(isOpenModal); // 디버그 목적
-  }, [isOpenModal]);
+export default function VerificationButton({onSetBlank, onClickToggleLargeModal, onClickToggleSmallModal}:VerificationButtonProps){
 
   return (
     <SubContentsWrapper>
-        <TextButton onClick={onClickToggleSmallModal}>
+        <TextButton onClick={() => onClickToggleSmallModal()}>
           <div style={{ gap: '0.2588vw', display: 'flex'}}>
             <img src={process.env.PUBLIC_URL + `/designImage/VerificationAgain.svg`} alt="인증번호 다시받기 이미지" style={{width: '0.729vw', height: '0.729vw'}}/>
             인증번호 다시받기
           </div>
         </TextButton>
-        <TextButton onClick={onClickToggleLargeModal}>아직 인증번호를 받지 못하셨나요?</TextButton>
+        <TextButton onClick={() => onClickToggleLargeModal()}>아직 인증번호를 받지 못하셨나요?</TextButton>
       </SubContentsWrapper>
   )
 }

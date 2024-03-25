@@ -1,19 +1,13 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
-/* 모달의 큰 틀 1) Wrapper - 2) DialogBox - 3) Backdrop 으로 구성 */
-
-// Reference 1: https://velog.io/@april_5/React%EB%A1%9C-Modal-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
-// Reference 2 (중요): https://velog.io/@syncstar/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EB%AA%A8%EB%8B%AC%EC%B0%BD%EB%A7%8C%EB%93%A4%EA%B8%B0
 
 interface ModalProps {
   onClickToggleModal: () => void;
-  children: ReactNode; // Allow multiple children
-  // 아무 인자를 받지 않고, void 를 return (=no return) 하는 함수
-  // This kind of function is commonly used as a 'callback' or 'event handler' to specify what should happen when a modal is closed.
+  children: ReactNode;
 }
 
-export default function ModalLarge({ onClickToggleModal, children }: PropsWithChildren<ModalProps>) {
+export default function ModalMedium({ onClickToggleModal, children }: PropsWithChildren<ModalProps>) {
   return (
     <ModalContainer>
       <DialogBox>{children}</DialogBox>
@@ -31,13 +25,13 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 }
 
 // 모달창 위치 조정 목적의 컨테이너
+// 웃긴게 1200px의 지점에서 갑자기 margin-top이 바뀐다는 사실 
+// 그리고 그러면서 갑자기 width가 바뀜 
 const ModalContainer = styled.div`
-  width: 50vw;
+  width: 100%;
   max-width: 814px;
-  //height: 780px;
-  //height: 72.22vh;
-  position: fixed;
-  //margin-top: -50px;
+  //position: fixed;
+  margin-top: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +54,7 @@ const DialogBox = styled.dialog`
   width: 100%; // *전체화면에 대해 크기 조정 필요 43vw 814px
   //height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
   height: 30vw;
-  margin-top: -50vw;
+  //margin-top: -50vw;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;

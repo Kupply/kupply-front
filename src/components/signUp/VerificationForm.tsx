@@ -57,6 +57,7 @@ export const CodeVerification = () => {
     if(!!num1 && !!num2 && !!num3 && !!num4 && !!num5 && !!num6){ 
       // verify 되면 자동으로 signup2로 넘어간다 
       setNextButton(true);
+      
       handleVerification();
     } else {
       setNextButton(false);

@@ -27,6 +27,7 @@ import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
 import Icon02 from '../../assets/icons/Icon02';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
+import { GpaChangeModal } from '../../components/settings/GpaChangeModal';
 
 interface SettingsPageProps {
   selected: number;
@@ -83,7 +84,8 @@ const SettingsPage = () => {
     setSelected(index);
   };
   const [scrollActive, setActive] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  // 잠시 수정 
+  const [modalOpen, setModalOpen] = useState(true);
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
@@ -127,15 +129,16 @@ const SettingsPage = () => {
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
 
-  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
+  // 잠시 수정 
+  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
-      setIsGpaChanged(true);
-    } else {
-      setIsGpaChanged(false);
-    }
-  }, [GPA1, GPA2, GPA3]);
+  // useEffect(() => {
+  //   if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
+  //     setIsGpaChanged(true);
+  //   } else {
+  //     setIsGpaChanged(false);
+  //   }
+  // }, [GPA1, GPA2, GPA3]);
 
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
@@ -373,61 +376,11 @@ const SettingsPage = () => {
   return (
     <Wrapper>
       {modalOpen && isGpaChanged && (
-        <Main>
-          <ModalLarge
-            onClickToggleModal={() => {
-              setModalOpen(!modalOpen);
-            }}
-          >
-            <CloseButton
-              onClick={() => {
-                setModalOpen(!modalOpen);
-              }}
-            >
-              <Icon02/>
-            </CloseButton>
-            <AlertWrapper style={{ marginTop: '9.375vw' }}>
-              <AlertIconExclamation width="5.885vw" height="5.885vw" />
-              <Typography size="1.25vw" bold="700" style={{ marginTop: '1.302vw' }}>
-                변경한 정보를 저장하시겠습니까?
-              </Typography>
-              <Typography size="0.9375vw" bold="500" style={{ marginTop: '1.25vw', lineHeight: '136.111%' }}>
-                이중전공 지원 기간 동안에는 학점 수정이 최대 두 번까지만 가능해요.
-              </Typography>
-              <div style={{ display: 'flex', gap: '1.146vw', marginTop: '3.125vw' }}>
-                <div
-                  style={{ marginTop: '1.5625vw' }}
-                  onClick={() => {
-                    navigate('/settings');
-                  }}
-                >
-                  <Button01
-                    variant="outline"
-                    size="medium"
-                    onClick={() => {
-                      setModalOpen(false);
-                    }}
-                  >
-                    취소
-                  </Button01>
-                </div>
-                <div
-                  style={{ marginTop: '1.5625vw'}}
-                  onClick={() => {
-                    thirdSubmit(); 
-                    setModalOpen(false);
-                  }}
-                >
-                  <Button01 
-                    variant="solid" 
-                    size="medium">
-                    확인
-                  </Button01>
-                </div>
-              </div>
-            </AlertWrapper>
-          </ModalLarge>
-        </Main>
+        <GpaChangeModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          thirdSubmit={thirdSubmit}
+        />
       )}
       <Sidebar>
       <Content>
@@ -974,7 +927,8 @@ const AlertWrapper = styled.div`
 
 const TextOutBox = styled.div`
   //width: 628px;
-  width: 32.7083vw;
+  //width: 32.7083vw;
+  width: 31.7vw;
   height: 228px;
   //height: 11.875vw;
   flex-shrink: 0;
