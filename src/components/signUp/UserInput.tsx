@@ -85,6 +85,8 @@ export const UserInput: React.FC<UserInputProps> = ({
       : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
   );
   
+    console.log('this is the userinfo printed from UserInput', userInfo);
+
   const [firstMajor, setFirstMajor] = useRecoilState(
     locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'),
   );

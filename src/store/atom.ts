@@ -24,12 +24,12 @@ export const verificationCodeState = atom<NumStateType>({
 
 export const emailStateAtom = atom<StateOptions>({
   key: 'emailState',
-  default: sessionStorage.getItem('kuEmail') ? 'filled' : 'default'
+  default: sessionStorage.getItem('email') ? 'filled' : 'default'
 });
 
 export const emailAtom = atom({
   key: 'email',
-  default: sessionStorage.getItem('kuEmail') || ''
+  default: sessionStorage.getItem('email') || ''
 });
 
 export const sendNumState = atom<number>({
