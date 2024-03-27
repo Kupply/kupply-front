@@ -4,23 +4,46 @@ import styled from 'styled-components';
 import MyStageChart from '../../assets/tabMenu/TabMenu05';
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
 
-const QuartileIndicator = ({ onViewMajor, myStageData }: { onViewMajor: any; myStageData: any }) => {
+const QuartileIndicator = ({
+  onViewMajor,
+  myStageData,
+  isApplied,
+}: {
+  onViewMajor: any;
+  myStageData: any;
+  isApplied: boolean;
+}) => {
   return (
-    <Wrapper>
-      <TitleBox>
-        <TitleText>내 학점 위치 파악하기</TitleText>
-        <ToolTip05>
-          본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
-        </ToolTip05>
-        {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
-      </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="57.08vw" height="2" viewBox="0 0 1096 2" fill="none">
-        <path d="M0 1L1096 1" stroke="#DFDFDF" />
-      </StyleSvg>
-      <ChartBox>
-        <MyStageChart {...myStageData[onViewMajor - 1]} />
-      </ChartBox>
-    </Wrapper>
+    <>
+      {isApplied === false ? (
+        <Wrapper2>
+          <BlurWrapper />
+          <BlurMsg>
+            <BlurTitle>실시간 지원자 통계는 모의지원 후 열람 가능합니다.</BlurTitle>
+            <Blurtext>
+              좌측의 모의지원 버튼을 통해 모의지원을 완료해주세요. <br /> 모의지원을 완료하면 지원한 다른 지원자들의
+              정보를 확인하실 수 있습니다.
+            </Blurtext>
+          </BlurMsg>
+        </Wrapper2>
+      ) : (
+        <Wrapper>
+          <TitleBox>
+            <TitleText>내 학점 위치 파악하기</TitleText>
+            <ToolTip05>
+              본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
+            </ToolTip05>
+            {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
+          </TitleBox>
+          <StyleSvg xmlns="http://www.w3.org/2000/svg" width="57.08vw" height="2" viewBox="0 0 1096 2" fill="none">
+            <path d="M0 1L1096 1" stroke="#DFDFDF" />
+          </StyleSvg>
+          <ChartBox>
+            <MyStageChart {...myStageData[onViewMajor - 1]} />
+          </ChartBox>
+        </Wrapper>
+      )}
+    </>
   );
 };
 
@@ -52,6 +75,48 @@ const Wrapper = styled.div`
   }
 `;
 
+const Wrapper2 = styled.div`
+  position: relative;
+  display: flex;
+
+  width: 57.08vw;
+  height: 12.4vw;
+  flex-shrink: 0;
+  border-radius: 0.52vw;
+  border: 1px solid #dfdfdf;
+  backdrop-filter: blur(12px);
+`;
+
+const BlurWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  z-index: 10;
+`;
+
+const BlurMsg = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+`;
+
 const TitleBox = styled.div`
   position: absolute;
   display: flex;
@@ -79,6 +144,26 @@ const TitleText = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
+`;
+
+const BlurTitle = styled.div`
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const Blurtext = styled.div`
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.9375vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
 `;
 
 ///////////////// image /////////////////
