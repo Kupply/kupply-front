@@ -7,12 +7,6 @@ import ToolTip02 from '../../../assets/toolTips/Tooltip02';
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: string;
   engName: string;
-  filter: string[];
-  TO: number; // 자리 TO
-  avgPass: number;
-  minPass: number;
-  compRate: number; // competition ratio
-  semester: string;
 }
 
 const majorParamMappingImage = {
@@ -62,25 +56,7 @@ const majorParamMappingPath = {
   'Division of Smart Security': 'smartsec',
 };
 
-export default function Card01({ korName, engName, TO, avgPass, minPass, compRate, semester }: CardProps) {
-  const [hover, setHover] = useState(false);
-  const [svgHover, setSvgHover] = useState(false);
-
-  const onHover = () => {
-    setHover(true);
-  };
-
-  const onHoverOut = () => {
-    setHover(false);
-  };
-
-  const onSvgHover = () => {
-    setSvgHover(true);
-  };
-
-  const onSvgHoverOut = () => {
-    setSvgHover(false);
-  };
+export default function Card01({ korName, engName}: CardProps) {
 
   const navigate = useNavigate();
 
@@ -94,113 +70,43 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, compRat
   const handleClickDetail = () => {
     navigate('/archive/' + majorName);
   };
+
   return (
     <>
-      {hover ? (
-        <Container hover={hover} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
-          <CardImageBlurred>
-            <img
-              src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_blurred.png`}
-              alt="blurred major image"
-            />
-          </CardImageBlurred>
-          <CardImageSmall>
-            <img
-              src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_trans_small.png`}
-              alt="major image small"
-            />
-          </CardImageSmall>
-          <NameWrapper hover={true}>
-            <MajorNameKor hover={true}>{majorKorName}</MajorNameKor>
-            <DepNameEng hover={true}>{engName}</DepNameEng>
-          </NameWrapper>
-          <ContentInner style={{ top: '6.93vw', left: '1.98vw' }}>20{semester}R 모집정보</ContentInner>
-
-          <ContentTitle style={{ top: '9.28vw', left: '1.98vw' }}>{semester} 선발 인원</ContentTitle>
-          <ContentInner style={{ top: '10.52vw', left: '1.98vw' }}>{TO}명</ContentInner>
-
-          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>경쟁률</ContentTitle>
-          <ToolTip02
-            onMouseEnter={onSvgHover}
-            onMouseLeave={onSvgHoverOut}
-            hoverState={svgHover}
-            style={{ position: 'absolute', top: '9.05vw', left: '10.80vw' }}
-          >
-            쿠플라이에서 수집된 데이터 값으로, 실제 경쟁률과 차이가 있을 수 있습니다.
-          </ToolTip02>
-
-          <ContentInner style={{ top: '10.52vw', left: '8.80vw' }}>{compRate} : 1</ContentInner>
-
-          <ContentTitle style={{ top: '12.71vw', left: '1.98vw' }}>합격자 평균 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{avgPass}</ContentInner>
-
-          <ContentTitle style={{ top: '12.71vw', left: '8.80vw' }}>합격자 최저 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '8.80vw' }}>{minPass}</ContentInner>
-
-          <Button onClick={handleClickDetail}>
-            <svg
-              style={{
-                width: '1.04vw',
-                height: '1.04vw',
-              }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="none"
-            >
-              <path
-                d="M6.33301 14.1663L14.6663 5.83301"
-                stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M6.33301 5.83301H14.6663V14.1663"
-                stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            자세히 보기
-          </Button>
-        </Container>
-      ) : (
-        <Container hover={hover} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
+      <Container>
           <CardImageDefault>
             <img
               src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}.png`}
               alt="major image default"
             />
           </CardImageDefault>
-          <NameWrapper hover={false}>
-            <MajorNameKor hover={false}>{majorKorName}</MajorNameKor>
-            <DepNameEng hover={false}>{engName}</DepNameEng>
+          <NameWrapper>
+            <MajorNameKor>{majorKorName}</MajorNameKor>
+            <DepNameEng>{engName}</DepNameEng>
           </NameWrapper>
         </Container>
-      )}
     </>
   );
 }
 
-interface ContainerProps {
-  hover?: boolean;
-}
-
-const Container = styled.div<ContainerProps>`
-  width: 160px;
-  height: 215px;
+const Container = styled.div`
+  //width: 160px;
+  width: 44.444vw;
+  //height: 215px;
+  height: 59.722vw;
   flex-shrink: 0;
-  border-radius: ${(props) => (props.hover ? '5px' : '0px')};
-  box-shadow: ${(props) => (props.hover ? '0px 0px 3.12px 0px rgba(20, 20, 20, 0.25)' : undefined)};
+  border-radius: 0px;
   position: relative;
+  //align-items: center;
 `;
 
 const CardImageDefault = styled.div`
   position: absolute;
-  width: 160px;
-  height: 215px;
-  border-radius: 10px;
+  //width: 160px;
+  width: 44.444vw;
+  //height: 215px;
+  height: 59.722vw;
+  border-radius: 1.389vw;
   overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
 
   & img {
@@ -211,144 +117,41 @@ const CardImageDefault = styled.div`
 `;
 
 
-const CardImageBlurred = styled.div`
-  position: absolute;
-  margin-top: 15.6px;
-  width: 160px;
-  height: 215px;
-  overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
-
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Maintain aspect ratio while covering the container */
-    //filter: blur(5px); /* Apply a blur effect to the image */
-  }
-`;
-
-
-const CardImageSmall = styled.div`
-  position: absolute;
-  margin: 7px 37px 108px 6px; 
-  width: 6px; 
-  height: 8px; 
-  overflow: hidden; 
-
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Maintain aspect ratio while covering the container */
-  }
-`;
-
-
-const MajorNameKor = styled.div<ContainerProps>`
+const MajorNameKor = styled.div`
   color: #141414;
-  text-align: ${(props) => (props.hover ? undefined : 'center')};
+  text-align: center;
   font-family: Pretendard;
-  font-size: 1.25vw;
+  //font-size: 13px;
+  font-size: 3.611vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.25vw;
-  margin-bottom: ${(props) => (props.hover ? '0.52vw' : '0.625vw')};
+  //line-height: 12px;
+  line-height: 3.333vw;
+  //margin-bottom: 6px;
+  margin-bottom: 1.667vw;
   white-space: nowrap;
 `;
 
-const DepNameEng = styled.div<ContainerProps>`
-  ${(props) =>
-    !props.hover
-      ? `
+const DepNameEng = styled.div`
     flex-shrink: 0;
     color: #141414;
     text-align: center;
     font-family: Pretendard;
-    font-size: 0.833vw;
+    //font-size: 10px;
+    font-size: 2.778vw;
     font-style: normal;
     font-weight: 400;
-    line-height: 0.94vw; 
+    //line-height: 9px;
+    line-height: 2.5vw;
     opacity: 0.8;
     text-wrap: balance;
-    width: 13.23vw;
-    `
-      : `
-    color: #141414;
-    font-family: Pretendard;
-    font-size: 0.833vw;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 0.94vw; /* 112.5% */
-    opacity: 0.8;
-    text-wrap: balance;
-    width: 10.57vw;
-    `}
 `;
 
-const NameWrapper = styled.span<ContainerProps>`
-  ${(props) =>
-    !props.hover
-      ? `
-    position: absolute;
-    //margin: 317px 29px 50px 29px;
-    top: 16.51vw;
-    flex-shrink: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    `
-      : `
-    position: absolute;
-    margin: 2.395vw 5vw 16.823vw 5.16vw;
-    flex-shrink: 0;
-    `}
-`;
-
-const ContentTitle = styled.div`
+const NameWrapper = styled.div`
   position: absolute;
-  color: rgba(20, 20, 20, 0.6);
-  font-family: Pretendard;
-  font-size: 0.833vw;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 120%; /* 19.2px */
-`;
-
-const ContentInner = styled.div`
-  color: #141414;
-  font-family: Pretendard;
-  font-size: 1.04vw;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 120%; /* 1.25vw */
-  position: absolute;
-`;
-
-const Button = styled.button`
-  top: 17.66vw;
-  left: 1.98vw;
-  display: flex;
-  width: 12.29vw;
-  height: 2.4vw;
-  padding: 1.25vw 1.77vw;
-  justify-content: center;
-  align-items: center;
-  gap: 0.42vw;
+  //top: 162px;
+  top: 45vw;
   flex-shrink: 0;
-  position: absolute;
-  border-radius: 52.03vw;
-  background: var(--Primary-color, #d85888);
-  color: var(--White, #fff);
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 0.833vw;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 120%; /* 19.2px */
-`;
-
-const Svg = styled.div`
-  width: 0.94vw;
-  height: 0.94vw;
-  flex-shrink: 0;
-  position: absolute;
-  top: '9.28vw';
-  left: '11.10vw';
+  left: 50%;
+  transform: translateX(-50%);
 `;
