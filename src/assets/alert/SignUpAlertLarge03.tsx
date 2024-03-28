@@ -81,7 +81,7 @@ const ActionWrapper = styled.div`
   gap: 30px;
   margin-top: 72px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     width: 90%;
   }
 `;

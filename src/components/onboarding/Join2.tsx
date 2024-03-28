@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../assets/Typography';
 import Button02 from '../../assets/buttons/Button02';
+import Button11 from '../../assets/buttons/Button11';
 
 function Join2() {
+  const [isLogined, setIsLogined] = useState<boolean>(true);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
 
@@ -36,45 +38,81 @@ function Join2() {
 
   return (
     <MainWrapper>
-      <Typography
-        size="1.98vw"
-        bold="700"
-        color="#FFF"
-        style={{
-          textShadow:
-            '5px 3px 13px rgba(202, 63, 130, 0.25), 42px 30px 31px rgba(202, 63, 130, 0.13), 74px 53px 37px rgba(202, 63, 130, 0.04), 116px 83px 40px rgba(202, 63, 130, 0.00);',
-          lineHeight: '131.579%',
-          marginBottom: '0.73vw',
-        }}
-      >
-        간편 이메일 등록 후 이중전공에 대한 모든 정보 확인하기!
-      </Typography>
-      <Typography size="1.25vw" bold="500" color="#FFF">
-        몇가지 회원가입 단계를 거친 후, 쿠플라이만의 다양한 서비스를 이용해보세요.
-      </Typography>
-      <JoinBox>
-        <TextFieldBox
-          placeholder="Bright@Korea.ac.kr"
-          value={ID}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setID(e.target.value);
-          }}
-          onKeyDown={(e: React.KeyboardEvent) => {
-            if (e.key === 'Enter') {
-              handleButtonClick();
-            }
-          }}
-        ></TextFieldBox>
-        <Button02 onClick={handleButtonClick}></Button02>
-      </JoinBox>
+      {isLogined ? (
+        <>
+          <Banner>
+            <Typography size="1.98vw" bold="700" color="#FFF" style={{ lineHeight: '131.58%', marginTop: '2.44vw' }}>
+              경쟁자들과 비교하여 나의 합격 가능성 확인해볼까?
+            </Typography>
+            <Typography size="1.25vw" bold="500" color="#FFF" style={{ marginTop: '0.36vw', marginBottom: '1.61vw' }}>
+              쿠플라이 모의지원하고 나의 학점 위치 파악하기
+            </Typography>
+            <Button11 onClick={() => navigate('/myboard')} style={{ color: '#FFF' }}>
+              모의지원 바로가기
+            </Button11>
+          </Banner>
+        </>
+      ) : (
+        <PinkWrapper>
+          <Typography
+            size="1.98vw"
+            bold="700"
+            color="#FFF"
+            style={{
+              textShadow:
+                '5px 3px 13px rgba(202, 63, 130, 0.25), 42px 30px 31px rgba(202, 63, 130, 0.13), 74px 53px 37px rgba(202, 63, 130, 0.04), 116px 83px 40px rgba(202, 63, 130, 0.00);',
+              lineHeight: '131.579%',
+              marginBottom: '0.73vw',
+            }}
+          >
+            간편 이메일 등록 후 이중전공에 대한 모든 정보 확인하기!
+          </Typography>
+          <Typography size="1.25vw" bold="500" color="#FFF">
+            몇가지 회원가입 단계를 거친 후, 쿠플라이만의 다양한 서비스를 이용해보세요.
+          </Typography>
+          <JoinBox>
+            <TextFieldBox
+              placeholder="Bright@Korea.ac.kr"
+              value={ID}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setID(e.target.value);
+              }}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === 'Enter') {
+                  handleButtonClick();
+                }
+              }}
+            ></TextFieldBox>
+            <Button02 onClick={handleButtonClick}></Button02>
+          </JoinBox>
+        </PinkWrapper>
+      )}
     </MainWrapper>
   );
 }
 
 const MainWrapper = styled.div`
   width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+`;
+
+const Banner = styled.div`
+  width: 63.9vw;
+  height: 13.18vw;
+  padding-left: 4.85vw;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../designImage/onboarding/join2Banner.png');
+  background-size: cover;
+  margin-bottom: 10.1vw;
+`;
+
+const PinkWrapper = styled.div`
+  width: 100vw;
   height: 13.33vw;
-  padding-top: 3.39vw;
+  padding-top: 4.17vw;
   display: flex;
   flex-direction: column;
   align-items: center;

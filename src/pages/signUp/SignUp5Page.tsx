@@ -103,6 +103,7 @@ export function SignUp5Page(){
             <TermsText1 />
           </ScrollSmall>
         </TextOutBox>
+        <div style={{height: '2vw'}}></div>
         <CheckBoxButton01 
           isChecked={individualChecks.second}
           onCustomFunction=
@@ -156,7 +157,7 @@ export function SignUp5Complete(){
     
     <Wrapper2>
       <div style={{ textAlign: 'center', marginTop: '12.9629vh', marginBottom: '2.222vh', zIndex: 2}}>
-        <Typography size="2.5vw" bold="700" style={{ lineHeight: '50px' }}>
+        <Typography size="2.5vw" bold="700" style={{ lineHeight: '2.604vw' }}>
           축하합니다!
         </Typography>
       </div>
@@ -171,17 +172,19 @@ export function SignUp5Complete(){
           로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
         </Typography>
       </div>
+      <div>
       <img
         src="designImage/signUp/CheckAni.webp"
         alt="completeImage"
         style={{
           width: '40.677vw',
-          height: '43.542vw',
+          height: '100%',
           background: 'url(designImage/signUp/CheckAni.webp), lightgray 50% / cover no-repeat',
-          transform: 'translateY(-84px)',
+          transform: 'translateY(-4.375vw)',
         }}
       />
-      <div style={{ transform: 'translateY(-221px)' }}>
+      </div>
+      <div style={{ transform: 'translateY(-11.51vw)'}}>
         <CTA01 state="default" onClick={handleNext}>
           <Typography size="1.042vw" bold="700" color="var(--White, #FFF)">
             로그인하고 쿠플라이로 이동하기
@@ -243,7 +246,8 @@ const Wrapper2 = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw; // 100%
-  height: 100%;
+  height: auto;
+  padding-bottom: 5vw;
   box-sizing: 'border-box';
   //background: #FCFAFB;
   background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);

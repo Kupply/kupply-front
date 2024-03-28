@@ -10,13 +10,16 @@ import axios from "axios";
 import client from "../../utils/HttpClient";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../store/atom";
+import TextFieldBox from "../../assets/OldTextFieldBox";
 
 
 export function SignUp0Page(){
 
   // 형식에 맞는 이메일이 입력되면 인증메일 받기 버튼이 켜지도록 
   const {complete, idVerified} = useSignUp0Verification();
+  // 이걸 지금 받고 있는게 
   const ID = useRecoilValue(userState('kuEmail'));
+  console.log('Signup0', ID);
   const [next, setNext] = useState(false);
   const navigate = useNavigate();
 
@@ -28,9 +31,11 @@ export function SignUp0Page(){
       const url = 'https://api.kupply.devkor.club/auth/sendEmail';
       try {
         //await axios.post(url, { email: ID.info });
-        //await client.post('/auth/sendEmail', { email: ID.info });
+        await client.post('/auth/sendEmail', { email: ID.info });
 
         //sessionStorage에 입력받은 kuEmail을 저장한 후 다음 페이지로 넘어간다.
+        // 그래서 email은 잘 간다. 그리고 나서 
+        sessionStorage.setItem('kuEmail', ID.info);
         setNext(true);
         Promise.resolve().then(() => {
           navigate('/signup1');
@@ -39,7 +44,7 @@ export function SignUp0Page(){
         //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
         alert(err.response.data.error.message);
         if (err.response.data.error.message === '이미 회원가입이 완료된 이메일 입니다. 로그인해주세요.') {
-          navigate('./login');
+          navigate('/login');
         }
       }
     }else{

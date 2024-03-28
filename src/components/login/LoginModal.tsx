@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import ModalLarge from '../base/ModalLarge';
-import Typography from '../../assets/OldTypography';
-import NextButton from '../../assets/buttons/OldNextButton';
+//import Typography from '../../assets/OldTypography';
+import Typography from '../../assets/Typography';
+import Button03 from '../../assets/buttons/Button03';
 import axios from 'axios';
 
 const Wrapper = styled.main`
   width: 100%;
-  height: 1px;
+  //height: 1px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,57 +20,76 @@ const Wrapper = styled.main`
 
 const CloseButton = styled.button`
   display: flex;
-  width: 60px;
-  height: 60px;
+  //width: 60px;
+  width: 3.125vw;
+  //height: 60px;
+  height: 3.125vw;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 70px;
-  right: 50px;
+  //top: 70px;
+  top: 3.646vw;
+  //right: 50px;
+  right: 2.604vw;
   cursor: pointer;
 `;
 
 const LogoBox = styled.div`
   display: flex;
-  height: 46px;
+  //height: 46px;
+  height: 2.395vw;
   justify-content: center;
   align-items: center;
-  gap: 8.418px;
+  //gap: 8.418px;
+  gap: 0.438vw;
   flex-shrink: 0;
-  margin-top: 170px;
-  margin-bottom: 39px;
+  //margin-top: 170px;
+  margin-top: 8.854vw;
+  //margin-bottom: 39px;
+  margin-bottom: 2.03vw;
 `;
 
 const LogoImage = styled.img`
-  width: 188px;
-  height: 46px;
+  //width: 188px;
+  width: 9.79vw;
+  //height: 46px;
+  height: 2.396vw;
 `;
 
 const IDField = styled.input<{ isFilled: boolean }>`
   display: flex;
-  width: 592px;
-  padding: 25px 18px;
+  //width: 592px;
+  width: 27.833vw;
+  //padding: 25px 18px;
+  padding: 1.302vw 0.9375vw;
   align-items: flex-start;
-  gap: 8px;
+  //gap: 8px;
+  gap: 0.417vw;
   border-radius: 10px;
   border: ${(props) => (props.isFilled ? '1px solid #D85888' : '1px solid #b9b9b9')};
   background: #fff;
   box-shadow: 0px 0px 12px 0px rgba(216, 88 136, 0.1);
   color: #d85888;
   font-family: Pretendard;
-  font-size: 18px;
+  //font-size: 18px;
+  font-size: 0.9375vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
-  margin-top: 32px;
-  margin-bottom: 30px;
+  //line-height: 18px;
+  line-height: 100%;
+  //margin-top: 32px;
+  margin-top: 1.667vw;
+  //margin-bottom: 30px;
+  margin-bottom: 1.563vw;
   &::placeholder {
     color: rgba(185, 185, 185, 0.8);
     font-family: Pretendard;
-    font-size: 18px;
+    //font-size: 18px;
+    font-size: 0.9375vw;
     font-style: normal;
     font-weight: 500;
-    line-height: 18px;
+    //line-height: 18px;
+    line-height: 100%;
   }
 `;
 
@@ -112,9 +133,9 @@ export default function LoginModal() {
           </svg>
         </CloseButton>
         <LogoBox>
-          <LogoImage src="../../designImage/kupply/KupplyVer1.png" />
+          <LogoImage src="../../designImage/kupply/KupplyVer1.svg" />
         </LogoBox>
-        <Typography size="largeText">임시 비밀번호를 발급받을 고려대 이메일 주소를 입력해주세요.</Typography>
+        <Typography size={'1.25vw'} bold='700'>임시 비밀번호를 발급받을 고려대 이메일 주소를 입력해주세요.</Typography>
         <IDField
           placeholder="kupply@korea.ac.kr"
           value={ID}
@@ -123,13 +144,19 @@ export default function LoginModal() {
           }}
           isFilled={ID !== ''}
         />
-        <NextButton active={ID !== ''} disabled={ID === ''} style={{ marginBottom: '80px' }} onClick={forgotPassword}>
-          제출하기
-        </NextButton>
-        <Typography size="smallText" color="#B9b9b9">
+        <div style={{width: '29.9vw'}}>
+        <Button03 
+          state={ID !== '' ? 'pressed' : 'disabled'}
+          style={{marginBottom: '4.167vw', width: '100%'}}
+          onClick={forgotPassword}
+          >제출하기
+        </Button03>
+        </div>
+        <Typography size="0.729vw" bold='400' color="#B9b9b9">
           쿠플라이 아이디는 고려대학교 이메일 주소입니다
         </Typography>
       </ModalLarge>
+      Hello
     </Wrapper>
   ) : null;
 }

@@ -33,8 +33,7 @@ const ThreeYear = ({
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState(0);
 
   const navigate = useNavigate();
-  const major: keyof typeof majorNameMapping = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-  const majorKoreanName = majorNameMapping[major][0];
+  const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
 
   const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
     // Create a new object with updated isClicked values
@@ -110,7 +109,7 @@ const Wrapper = styled.div`
   width: 22.08vw;
   height: 17.37vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid var(--DF_Grey-2, #dfdfdf);
   backdrop-filter: blur(12px);
 
@@ -161,8 +160,7 @@ const Text1Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  top: 6.59vw;
+  top: 6vw; // top: 6.59vw;
   left: 2.5vw;
 `;
 

@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { VictoryTheme, VictoryScatter, VictoryChart, VictoryTooltip, VictoryAxis, VictoryLabel } from 'victory';
+import {
+  VictoryTheme,
+  VictoryScatter,
+  VictoryChart,
+  VictoryTooltip,
+  VictoryAxis,
+  VictoryLabel,
+  VictoryVoronoiContainer,
+} from 'victory';
 import { majorColorMapping } from '../../../utils/Mappings';
 import ToolTip05 from '../../../assets/toolTips/ToolTip05';
 import Typography from '../../../assets/Typography';
@@ -10,11 +18,35 @@ import Typography from '../../../assets/Typography';
 // 호버 tooltip 커스텀해야 됨 + 폰트 스타일 적용 X
 // plot 아래 학과 나타내기 X
 
-const Scatter = () => {
-  const maxValue = Math.max(...tmpData.map((item) => item.value));
-  const maxYValue = Math.ceil(maxValue / 10) * 10 + 10;
+interface Datum {
+  college: string;
+  curApplyNum: number;
+  curAccumGPA: number;
+}
 
-  const color = tmpData.map((item) => majorColorMapping[item.name as keyof typeof majorColorMapping].fill);
+interface Datum2 {
+  college: string;
+  curApplyNum: number;
+  avgGpa: number;
+}
+
+const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) => {
+  const sccatterData: Datum[] = curData[onViewMajor - 1].scatterChartData;
+  const filteredData: Datum2[] = sccatterData
+    .filter((item) => item.curApplyNum !== 0)
+    .map(({ college, curAccumGPA, curApplyNum }) => ({
+      college,
+      avgGpa: Number((curAccumGPA / curApplyNum).toFixed(2)),
+      curApplyNum,
+    }));
+
+  const maxApplyValue = Math.max(...filteredData.map((item) => item.curApplyNum));
+  const maxYValue = Math.ceil(maxApplyValue / 10) * 10;
+  const minGpaValue = Math.min(...filteredData.map((item) => item.avgGpa));
+  const minXValue = Math.floor(minGpaValue * 2) / 2;
+  const TicGap = (4.5 - minXValue) / 4;
+
+  const color = filteredData.map((item) => majorColorMapping[item.college as keyof typeof majorColorMapping].fill);
 
   return (
     <Wrapper>
@@ -30,11 +62,33 @@ const Scatter = () => {
       </StyleSvg>
 
       <ScatterBox>
-        <VictoryChart theme={VictoryTheme.material} domain={{ x: [0, 4.5], y: [0, maxYValue] }} origin={{ x: 0, y: 0 }}>
+        <VictoryChart
+          theme={VictoryTheme.material}
+          domain={{ x: [minXValue, 4.5], y: [0, maxYValue] }}
+          origin={{ x: 0, y: 0 }}
+          containerComponent={
+            <VictoryVoronoiContainer
+              labels={({ datum }) => `${datum.college}`}
+              labelComponent={
+                <VictoryTooltip
+                  flyoutComponent={<CustomTooltipLabel />}
+                  flyoutStyle={{ stroke: 'none', fill: 'white' }}
+                  style={{ fontSize: 0 }}
+                />
+              }
+            />
+          }
+        >
           <VictoryAxis
             label="지원자 평균 학점"
             axisComponent={<CustomAxis />}
-            tickValues={[0.5, 1.5, 2.5, 3.5, 4.5]}
+            tickValues={[
+              minXValue,
+              minXValue + TicGap,
+              minXValue + TicGap + TicGap,
+              minXValue + TicGap + TicGap + TicGap,
+              4.5,
+            ]}
             style={{
               grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
               axisLabel: {
@@ -63,26 +117,24 @@ const Scatter = () => {
           />
 
           <VictoryScatter
-            data={tmpData}
+            data={filteredData}
             x="avgGpa"
-            y="value"
+            y="curApplyNum"
             size={6}
-            labels={({ datum }) => `${datum.name}\n학점 ${datum.avgGpa}\n지원자 ${datum.value}명`} // 각 데이터 포인트에 대한 라벨 설정
+            // labels={({ datum }) => `${datum.college}`} // 각 점에 대한 학과 라벨
             labelComponent={
-              <VictoryTooltip
-                style={{ fontFamily: 'Pretendard', fontSize: 10, textAnchor: 'start' }} // 텍스트 스타일 설정
-                flyoutStyle={{
-                  fill: 'rgba(255, 255, 255, 0.80)',
-                  stroke: 'none',
-                  strokeWidth: 0,
-                  lineHeight: 22,
+              <VictoryLabel
+                dy={20}
+                style={{
+                  fontFamily: 'Pretendard',
+                  fontSize: 10,
+                  fill: 'rgba(67, 67, 67, 0.80)',
+                  //  fill: (args: any) => color[tmpData.findIndex((item) => item.name === args.datum.name)], 호버 이벤트 넣기 실패.. ㅠㅠ
                 }}
-                flyoutPadding={({ text }) => (text.length > 1 ? { top: 10, bottom: 10, left: 8, right: 8 } : 1)}
-                dy={-10}
               />
             }
             style={{
-              data: { fill: (args) => color[tmpData.findIndex((item) => item.name === args.datum.name)] }, // 각 데이터 포인트에 대한 fill 색상을 설정
+              data: { fill: (args) => color[filteredData.findIndex((item) => item.college === args.datum.college)] }, // 각 데이터 포인트에 대한 fill 색상을 설정
             }}
           />
         </VictoryChart>
@@ -119,38 +171,56 @@ const CustomAxis = (props: any) => {
   );
 };
 
-const tmpData = [
-  {
-    name: '경영대학',
-    value: 5,
-    avgGpa: 4.4,
-  },
-  {
-    name: '정경대학',
-    value: 10,
-    avgGpa: 3.5,
-  },
-  {
-    name: '의과대학',
-    value: 30,
-    avgGpa: 3.0,
-  },
-  {
-    name: '정보대학',
-    value: 14,
-    avgGpa: 4.2,
-  },
-  {
-    name: '미디어학부',
-    value: 24,
-    avgGpa: 4.0,
-  },
-  {
-    name: '스마트보안학부',
-    value: 45,
-    avgGpa: 3.8,
-  },
-];
+const CustomTooltipLabel = (props: any) => {
+  return (
+    <foreignObject x={props.x - 40} y={props.y - 70} width="80" height="75">
+      <TooltipContainer>
+        <p>
+          <ToolTipBordText>{props.datum.college}</ToolTipBordText>
+          <br />
+          <ToolTipNormalText>학점 </ToolTipNormalText>
+          <ToolTipBordText>{props.datum.avgGpa}</ToolTipBordText>
+          <br />
+          <ToolTipNormalText>지원자 </ToolTipNormalText>
+          <ToolTipBordText>{props.datum.curApplyNum}명</ToolTipBordText>
+        </p>
+      </TooltipContainer>
+    </foreignObject>
+  );
+};
+
+// const tmpData = [
+//   {
+//     name: '경영대학',
+//     value: 5,
+//     avgGpa: 4.4,
+//   },
+//   {
+//     name: '정경대학',
+//     value: 10,
+//     avgGpa: 3.5,
+//   },
+//   {
+//     name: '의과대학',
+//     value: 30,
+//     avgGpa: 3.0,
+//   },
+//   {
+//     name: '정보대학',
+//     value: 14,
+//     avgGpa: 4.2,
+//   },
+//   {
+//     name: '미디어학부',
+//     value: 24,
+//     avgGpa: 4.0,
+//   },
+//   {
+//     name: '스마트보안학부',
+//     value: 45,
+//     avgGpa: 3.8,
+//   },
+// ];
 
 const Wrapper = styled.div`
   position: relative;
@@ -159,7 +229,7 @@ const Wrapper = styled.div`
   width: 27.92vw;
   height: 40.75vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid #dfdfdf;
   fill: var(--, radial-gradient(230.3% 140.56% at 0% 1.23%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%));
   stroke-width: 1px;
@@ -208,6 +278,36 @@ const LabelBox = styled.div`
   left: 2.5vw;
 `;
 
+const TooltipContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.8);
+
+  & > p {
+    margin-top: -1px;
+    margin-bottom: 1px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(255, 255, 255, 0.8);
+    transform: translateX(-50%);
+  }
+`;
+
 ///////////////// text /////////////////
 
 const TitleText = styled.div`
@@ -219,7 +319,7 @@ const TitleText = styled.div`
   line-height: 100%;
 `;
 
-const PlotText = styled.div`
+const PlotTitleText = styled.text`
   color: rgba(67, 67, 67, 0.8);
   text-align: center;
 
@@ -231,6 +331,23 @@ const PlotText = styled.div`
   line-height: 100%;
 `;
 
+const ToolTipNormalText = styled.text`
+  color: #a8a8a8;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 157.143%;
+`;
+
+const ToolTipBordText = styled.text`
+  color: #141414;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 157.143%;
+`;
 ///////////////// image /////////////////
 
 const Information = styled.img`

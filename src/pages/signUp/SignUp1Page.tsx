@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
 import { sendEmail } from "../../utils/SignUpFunctions";
 import { useNavigate } from "react-router-dom";
@@ -13,11 +13,13 @@ import Button03 from "../../assets/buttons/Button03";
 import Button04 from "../../assets/buttons/Button04";
 import VerificationButton from "../../components/signUp/VerificationButton";
 import axios from "axios";
+import client from "../../utils/HttpClient";
 
 export function SignUp1Page(){
   const navigate = useNavigate();
-
-  const email = useRecoilValue(emailAtom);
+  // signup에서 가져오는 
+  const email = sessionStorage.getItem('kuEmail') || '';
+  console.log('email', email);
   const [codeNum, setCodeNum] = useRecoilState(verificationCodeState);
   const {num1, num2, num3, num4, num5, num6} = codeNum;
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
@@ -34,7 +36,6 @@ export function SignUp1Page(){
   //   sendFirst(email);
   // }, []);
 
-
   const setBlank = () => {
     setCodeNum({
       num1: '',
@@ -50,8 +51,8 @@ export function SignUp1Page(){
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
     const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     try {
-      await axios.post(url, { email: email, code: entireCode });
-      // await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
+      //await axios.post(url, { email: email, code: entireCode });
+      await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
 
       navigate('/signup2');
     } catch (err: any) {

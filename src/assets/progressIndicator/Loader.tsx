@@ -5,9 +5,11 @@ import client from '../../utils/HttpClient';
 type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 
 const baseButton = css`
-  height: 24px;
-  gap: 2px;
-  padding: 8px 10px;
+  //height: 24px;
+  height: 1.25vw;
+  //gap: 2px;
+  //padding: 8px 10px;
+  padding: 0.417vw 0.521vw;
   justify-content: center;
   align-items: center;
   border-radius: 999px;

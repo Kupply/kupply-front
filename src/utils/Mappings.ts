@@ -11,18 +11,40 @@ export const collegeNameMappingByEng = {
   mathematics: 'science',
   economics: 'political',
   statistics: 'political',
+  bioeng: 'bio',
+  lifesci: 'bio',
+  political: 'political',
+  pubadmin: 'political',
+  materials: 'engineering',
+  mechanical: 'engineering',
+  industrial: 'engineering',
+  electrical: 'engineering',
+  chembio: 'engineering',
+  datasci: 'info',
+  smartsec: 'smartsecurity'
 };
 
 export const collegeNameMappingByKR = {
   식품자원경제학과: 'bio',
   미디어학부: 'media',
   컴퓨터학과: 'info',
-  경영학과: 'bussiness',
+  경영학과: 'business',
   심리학부: 'psycho',
   화학과: 'science',
   수학과: 'science',
   경제학과: 'political',
   통계학과: 'political',
+  생명공학부: 'bio',
+  생명과학부: 'bio',
+  정치외교학과: 'political',
+  행정학과: 'political',
+  신소재공학부: 'engineering',
+  기계공학부: 'engineering',
+  산업경영공학부: 'engineering',
+  전기전자공학부: 'engineering',
+  화공생명공학부: 'engineering',
+  데이터과학과: 'info',
+  스마트보안학부: 'smartsecurity'
 };
 
 export const collegeAPIMappingByKR = {
@@ -35,6 +57,17 @@ export const collegeAPIMappingByKR = {
   수학과: 'mathematics',
   경제학과: 'economics',
   통계학과: 'statistics',
+  생명공학부: 'bioeng',
+  생명과학부: 'lifesci',
+  정치외교학과: 'political',
+  행정학과: 'pubadmin',
+  신소재공학부: 'materials',
+  기계공학부: 'mechanical',
+  산업경영공학부: 'industrial',
+  전기전자공학부: 'electrical',
+  화공생명공학부: 'chembio',
+  데이터과학과: 'datasci',
+  스마트보안학부: 'smartsec'
 };
 
 export const majorNameMapping = {
@@ -47,6 +80,40 @@ export const majorNameMapping = {
   media: ['미디어학부', 'School of Media & Communication'],
   foodecon: ['식품자원경제학과', 'Department of Food & Resources'],
   computer: ['컴퓨터학과', 'Department of Computer Science & Engineering'],
+  bioeng: ['생명공학부', 'Biological Engineering'],
+  lifesci: ['생명과학부', 'School of Life Sciences'],
+  political: ['정치외교학과', 'Department of Political Science & International Relations'],
+  pubadmin: ['행정학과', 'Department of Public Administration'],
+  materials: ['신소재공학부', 'School of Materials Science & Engineering'],
+  mechanical: ['기계공학부', 'School of Mechanical Engineering'],
+  industrial: ['산업경영공학부', 'School of Industrial Management Engineering'],
+  electrical: ['전기전자공학부', 'School of Electrical Engineering'],
+  chembio: ['화공생명공학부', 'Department of Chemical & Biological Engineering'],
+  datasci: ['데이터과학과', 'Department of Data Science'],
+  smartsec: ['스마트보안학부', 'Division of Smart Security']
+};
+
+export const majorNmaeMappingByKr = {
+  경영학과: 'Business School',
+  경제학과: 'Department of Economics',
+  심리학부: 'School of Psychology',
+  통계학과: 'Department of Statistics',
+  수학과: 'Department of Mathematics',
+  화학과: 'Department of Chemistry',
+  미디어학부: 'School of Media & Communication',
+  식품자원경제학과: 'Department of Food & Resources',
+  컴퓨터학과: 'Department of Computer Science & Engineering',
+  생명공학부: 'Biological Engineering',
+  생명과학부: 'School of Life Sciences',
+  정치외교학과: 'Department of Political Science & International Relations',
+  행정학과: 'Department of Public Administration',
+  신소재공학부: 'School of Materials Science & Engineering',
+  기계공학부: 'School of Mechanical Engineering',
+  산업경영공학부: 'School of Industrial Management Engineering',
+  전기전자공학부: 'School of Electrical Engineering',
+  화공생명공학부: 'Department of Chemical & Biological Engineering',
+  데이터과학과: 'Department of Data Science',
+  스마트보안학부: 'Division of Smart Security'
 };
 
 /*
@@ -65,7 +132,6 @@ export const semesterAPIMapping: string[] = [
   '2020-2',
   '2020-1',
 ];
-
 
 /*
   학과 색상
@@ -173,4 +239,3 @@ export const idColorMappingShadow: { [key: number]: string } = {
   21: 'rgba(255, 175, 189, 0.5)',
   20: 'rgba(253, 242, 242, 0.5)',
 };
-

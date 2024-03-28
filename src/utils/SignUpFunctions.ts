@@ -12,7 +12,7 @@ import { useEmailVerification, useNicknameVerification, usePassword2Verification
 export const sendEmail = async (email: string) => {
   const url = 'https://api.kupply.devkor.club/auth/sendEmail';
   try {
-    await axios.post(url, { email: email });
+    await client.post('/auth/sendEmail', { email: email });
     return true;
   } catch (e: any){
     alert(e.response.data.error.message);
@@ -35,8 +35,8 @@ export const join = async (role: string) => {
   if (role === 'passer') {
     await client.post('/auth/join', {
       ...commonData,
-      passSemester: sessionStorage.getItem('passerSemester'),
-      passGPA: parseFloat(sessionStorage.getItem('passerGPA') || ''),
+      passSemester: sessionStorage.getItem('passSemester'),
+      passGPA: parseFloat(sessionStorage.getItem('passGPA') || ''),
       secondMajor: sessionStorage.getItem('secondMajor'),
     });
   } else {
@@ -67,6 +67,7 @@ export function useSignUp0Verification(){
 
 export function useSignUp2Verification(){
   const [name, setName] = useRecoilState(userState('name'));
+  const [stdId, setStdId] = useRecoilState(userState('studentId'));
   const [firstM, setFirstM] = useRecoilState(userState('firstMajor'));
   const [complete, setComplete] = useState(false);
   const {stdIdVerified} = useStudentIdVerification('signUp');
@@ -147,8 +148,8 @@ export function useSignUp4Handler(){
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
     sessionStorage.removeItem('secondMajor');
-    sessionStorage.removeItem('passerGPA');
-    sessionStorage.removeItem('passerSemester');
+    sessionStorage.removeItem('passGPA');
+    sessionStorage.removeItem('passSemester');
   }, []);
   
   // buttonActive에서만 작동 

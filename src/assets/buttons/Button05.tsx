@@ -19,14 +19,16 @@ function Button05(props: Button05Props) {
 
 const ButtonWrapper = styled.button<Button05Props>`
   width: 32.71vw;
-  height: auto;
+  //height: auto;
+  height: 3.542vw;
   box-sizing: border-box;
   border: ${(props) => (props.state === 'default' ? '1px solid #D85888' : '0px')};
-  padding: 25px 0.94vw;
+  padding: 1.302vw 0.94vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  //border-radius: 10px;
+  border-radius: 0.521vw;
   background: ${(props) =>
     props.state === 'default'
       ? 'var(--White, #FFF)'

@@ -16,7 +16,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
     <Container>
       <InputBox>
         <SvgContainer>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.25vw" height="1.25vw" viewBox="0 0 24 24" fill="none">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -25,7 +25,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
             />
           </svg>
         </SvgContainer>
-        <Input ref={ref} value={value} onChange={onChange} placeholder="관심 학부 검색하기" />
+        <Input ref={ref} value={value} onChange={onChange} placeholder="   관심 학부 검색하기" />
 
         <Button
           onClick={() => {
@@ -41,10 +41,10 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
 };
 const Container = styled.div`
   display: flex;
-  margin-top: 4px;
+  margin-top: 0.21vw;
   flex-direction: row;
   gap: 0px;
-  width: 95%;
+  width: 100%;
   max-width: 1382px;
   z-index: 2;
 
@@ -53,7 +53,7 @@ const Container = styled.div`
   &,
   & div,
   & input {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 600px) {
       height: 40px;
     }
   }
@@ -62,8 +62,10 @@ const Container = styled.div`
 const InputBox = styled.div`
   width: 100%;
   max-width: 1382px;
-  height: 80px;
+  height: 4.17vw;
+  display: flex;
   position: relative;
+  gap: 10px;
 
   & > button {
     position: absolute;
@@ -81,18 +83,18 @@ const InputBox = styled.div`
 const SvgContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 70px;
-  height: 80px;
+  width: 3.65vw;
+  height: 4.17vw;
 
-  margin-left: 30px;
+  margin-left: 1.5625vw;
   position: absolute;
 
-  @media screen and (max-width: 768px) {
-    margin-left: 15px;
+  @media screen and (max-width: 600px) {
+    margin-left: 0.78125vw;
   }
 
   & > svg {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 600px) {
       width: 12px;
       height: 12px;
     }
@@ -108,7 +110,7 @@ const Button = styled.button`
     stroke: #d85888;
   }
   overflow: hidden;
-  border-radius: 32px;
+  border-radius: 1.67vw;
   background: rgba(255, 255, 255, 0.32);
   &:hover {
     box-shadow: 0px 0px 12px rgba(237, 162, 162, 0.35);
@@ -119,19 +121,19 @@ const Input = styled.input`
   width: 100%;
   max-width: 1382px;
   box-sizing: border-box;
-  height: 80px;
-  padding-left: 70px;
-  border-radius: 10px;
+  height: 4.17vw;
+  padding-left: 3.65vw;
+  border-radius: 0.52vw;
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
 
   transition: 0.3s ease-in-out;
   &::placeholder {
     color: #a8a8a8;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 1.25vw;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px; /* 100% */
+    line-height: 100%;
     opacity: 0.8;
   }
   &:hover {
@@ -148,7 +150,7 @@ const Input = styled.input`
 
     background: #ffffff;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 600px) {
       outline-style: solid;
       outline-color: rgba(232, 88, 136, 0.15);
       outline-width: 4px;
@@ -157,19 +159,19 @@ const Input = styled.input`
 
   color: #141414;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 100%;
 
-  @media screen and (max-width: 768px) {
-    padding-left: 55px;
-    font-size: 14px;
-    padding-left: 40px;
+  @media screen and (max-width: 600px) {
+    padding-left: 2.86vw;
+    font-size: 0.73vw;
+    padding-left: 2.08vw;
     background: #f3f3f3;
 
     &::placeholder {
-      font-size: 14px;
+      font-size: 0.73vw;
     }
   }
 `;

@@ -1,17 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import { collegeNameMappingByKR as collegeNameMapping, majorNmaeMappingByKr } from '../../utils/Mappings';
 
 const MajorBox = ({ onViewMajor, userData }: { onViewMajor: any; userData: any }) => {
   const titleText = onViewMajor === 1 ? '1지망 관심전공' : '2지망 관심전공';
-  const major: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
+  const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
 
-  const majorKoreanName = majorNameMapping[major][0];
-  const majorEngishName = majorNameMapping[major][1];
-  const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}Large.png`;
-  const majorShadowPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[major]}_ellipse.svg`;
+  const majorEngishName = majorNmaeMappingByKr[majorKoreanName];
+  const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorKoreanName]}Large.png`;
+  const majorShadowPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorKoreanName]}_ellipse.svg`;
   return (
     <Wrapper>
       <TextBox>
@@ -35,7 +34,7 @@ const Wrapper = styled.div`
   width: 16.2vw;
   height: 17.37vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid #dfdfdf;
   backdrop-filter: blur(12px);
   position: relative;
@@ -77,8 +76,10 @@ const MajorWrapper = styled.div`
 
 const MajorTextBox = styled.div`
   position: relative;
-  display: center;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   margin-top: 10.22vw;
 `;
@@ -111,7 +112,13 @@ const 전공Text = styled.div`
 
 const MajorText = styled.div`
   color: #141414;
+  justify-content: center;
   text-align: center;
+  width: 12vw; // 임의로 설정
+
+  word-wrap: break-word; /* Older browsers */
+  overflow-wrap: break-word; /* More recent browsers */
+  white-space: normal;
 
   /* normal_Regular */
   font-family: Pretendard;
@@ -138,6 +145,7 @@ const Major = styled.img`
   width: 4.61vw;
   height: 5.92vw;
   flex-shrink: 0;
+  z-index: 1;
 `;
 
 const Shadow = styled.img`

@@ -6,14 +6,25 @@ import Typography from '../../assets/Typography';
 function KupplyImage() {
   return (
     <MainWrapper>
-      <Typography size="4.17vw" bold="700" color="#000" style={{ lineHeight: '116.25%', marginTop: '10.21vw' }}>
-        당신이 찾던 이중전공의 모든 정보,
-      </Typography>
+      <div style={{ display: 'flex', marginTop: '26.82vw' }}>
+        <Typography size="4.17vw" color="rgba(20,20,20,0.8)">
+          당신이 찾는&nbsp;
+        </Typography>
+        <Typography size="4.17vw" bold="700">
+          이중전공에 대한 모든 정보,
+        </Typography>
+      </div>
       <img
-        width="68.13%"
-        height="41.75%"
+        src="../../designImage/landing/LandingMockup1.png"
+        width="29.33%"
+        height="5.37%"
+        style={{ marginTop: '3.13vw' }}
+      />
+      <img
+        width="100%"
+        height="100%"
         src="../../designImage/onboarding/KupplyImage.png"
-        style={{ position: 'absolute', bottom: '20.42%', right: '15.63%' }}
+        style={{ position: 'absolute', bottom: '0', right: '0' }}
       />
     </MainWrapper>
   );
@@ -21,12 +32,16 @@ function KupplyImage() {
 
 const MainWrapper = styled.div`
   width: 100vw;
-  height: 87.71vw;
+  height: 138.19vw;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #fff;
+`;
+
+const Logo = styled.div`
+  color: #fff;
 `;
 
 export default KupplyImage;

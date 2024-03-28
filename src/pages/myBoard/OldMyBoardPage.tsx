@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-
+import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import Typography from '../../assets/OldTypography';
@@ -11,8 +11,10 @@ import { PieChartComponent, HalfPieChartComponent, PlotChartComponent } from '..
 //import MyStageChart from '../../assets/myboardpage/MyStage';
 import MyStageChart from '../../assets/tabMenu/TabMenu05';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
-import EditModal from '../../components/myBoard/EditModals/EditModal';
-import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
+import EditModal from '../../components/myBoard/EditModals/OldEditModal';
+//import EditModal from '../../components/myBoard/EditModals/EditModal';
+//import EditModal from '../../components/myBoard/EditModals/OldEditModalModified';import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
+//import ApplicationModal from '../../components/myBoard/SubmitModals/OldApplicationModal';
 import { recruit } from '../../common/Recruiting';
 import MyboardPasserPageVer from './MyboardPasser';
 import client from '../../utils/HttpClient';
@@ -103,7 +105,7 @@ export default function MyBoardPage() {
   // Edit Modal 관련
   const [isOpenEditModal, setOpenEditModal] = useState<boolean>(false);
   // Application Modal 관련
-  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(false);
+  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(true);
 
   // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.
   const onClickApplication = useCallback(() => {
@@ -539,9 +541,10 @@ export default function MyBoardPage() {
               isOpenModal={isOpenEditModal}
               setOpenModal={setOpenEditModal}
               onClickModal={onClickEditModal}
-              isApplied={isApplied}
+              isApplied={isOpenEditModal}
             />
           ) : null}
+    
           {isOpenApcModal ? (
             <ApplicationModal
               isOpenModal={isOpenApcModal}

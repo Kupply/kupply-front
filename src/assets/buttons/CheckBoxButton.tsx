@@ -18,7 +18,6 @@ const CheckBoxButton01 = (props: CheckBoxButtonProps) => {
         <ButtonImage01 isChecked={isChecked} />
       </button>
       <ButtonText01 style={{ fontSize: `${textSize}`, fontWeight: `${textBold}` }}>{children}</ButtonText01>
-      <ArrowImage />
     </ButtonWrapper01>
   );
 };

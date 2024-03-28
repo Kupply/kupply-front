@@ -15,6 +15,17 @@ const majorParamMappingImage:{[key: string]: string} = {
   '미디어학부': 'media',
   '식품자원경제학과': 'bio',
   '컴퓨터학과': 'info',
+  'Biological Engineering': 'bio',
+  'School of Life Sciences': 'bio',
+  'Department of Political Science & International Relations': 'political',
+  'Department of Public Administration': 'political',
+  'School of Materials Science & Engineering': 'engineering',
+  'School of Mechanical Engineering': 'engineering',
+  'School of Industrial Management Engineering': 'engineering',
+  'School of Electrical Engineering': 'engineering',
+  'Department of Chemical & Biological Engineering': 'engineering',
+  'Department of Data Science': 'info',
+  'Division of Smart Security': 'smartsecurity'
 };
 
 export default function Card02({korName, hopeMajor}: CardProps){

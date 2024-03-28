@@ -5,7 +5,7 @@ import Pie from '../../../assets/Graph/Pie';
 import HalfPie from '../../../assets/Graph/HalfPie';
 import ToolTip05 from '../../../assets/toolTips/ToolTip05';
 
-const PieChart = () => {
+const PieChart = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) => {
   return (
     <Wrapper>
       <TitleBox>
@@ -19,13 +19,13 @@ const PieChart = () => {
         <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
       </StyleSvg>
       <PieBox>
-        <Pie />
+        <Pie onViewMajor={onViewMajor} curData={curData} />
       </PieBox>
       <StyleSvg2 xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="0.1vw" viewBox="0 0 534 2" fill="none">
         <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
       </StyleSvg2>
       <HalfPieBox>
-        <HalfPie />
+        <HalfPie onViewMajor={onViewMajor} curData={curData} />
       </HalfPieBox>
     </Wrapper>
   );
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   width: 27.92vw;
   height: 40.75vw;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.52vw;
   border: 1px solid #dfdfdf;
   fill: var(--, radial-gradient(230.3% 140.56% at 0% 1.23%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%));
   stroke-width: 1px;

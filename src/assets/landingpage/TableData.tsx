@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typography from '../OldTypography';
+
+import Typography from '../Typography';
 
 export interface TableDataProps {
   rank: number;
@@ -19,157 +20,177 @@ export interface TableDataProps {
 }
 
 export default function TableData(props: TableDataProps) {
-  const { rank, secondMajor, engName, recruitNumber, applyNumber, competition, pastmean, interest, interestedNum } =
-    props;
+  const {
+    rank,
+    secondMajor,
+    engName,
+    recruitNumber,
+    applyNumber,
+    competition,
+    pastCompetition,
+    pastmean,
+    interest,
+    interestedNum,
+  } = props;
+
+  const longNameThreshold = 5;
+
   return (
     <Wrapper>
       <RankCell>{rank > 10 ? rank : '0' + rank}</RankCell>
-      <DoubleMajorCell>
-        {interestedNum > 0 ? (
-          <Typography size="smallText" color="#E57C90" style={{ marginBottom: '6px' }}>
-            {interestedNum}지망
+      {secondMajor.length > longNameThreshold ? (
+        <DoubleMajorCell>
+          {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+          <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
+            {secondMajor}
           </Typography>
-        ) : (
-          <></>
-        )}
-        <Typography size="title1" style={{ fontSize: '32px', marginBottom: '6px' }}>
-          {secondMajor}
-        </Typography>
-        <Typography size="mediumText" style={{ fontWeight: '300' }}>
-          {engName}
-        </Typography>
-      </DoubleMajorCell>
+          <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+            {engName}
+          </Typography>
+        </DoubleMajorCell>
+      ) : (
+        <DoubleMajorCell>
+          <div style={{ display: 'flex', gap: '0.73vw', flexWrap: 'wrap' }}>
+            <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
+              {secondMajor}
+            </Typography>
+            {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+          </div>
+          <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+            {engName}
+          </Typography>
+        </DoubleMajorCell>
+      )}
       <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
       <AppliedNumberCell>{applyNumber}</AppliedNumberCell>
-      <CompetitionCell>
-        <Typography size="heading2" color="#D85888">
-          {competition}&nbsp;
-        </Typography>
-        <Typography style={{ fontSize: '32px', fontWeight: '300' }} color="#D85888">
-          : 1
-        </Typography>
-      </CompetitionCell>
+      <CompetitionCell>{competition} : 1</CompetitionCell>
+      <PastCompetitionCell>{pastCompetition} : 1</PastCompetitionCell>
       <PastMeanCell>{pastmean}</PastMeanCell>
-      <InterestCell>
-        <SvgCircle xmlns="http://www.w3.org/2000/svg" width="26" height="27" viewBox="0 0 26 27" fill="none">
-          <circle cx="13" cy="13.0137" r="13" fill="#FDF2F2" />
-        </SvgCircle>
-        <SvgHeart xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-          <path
-            d="M13.8941 3.08725C13.5536 2.74658 13.1493 2.47634 12.7043 2.29197C12.2593 2.10759 11.7824 2.0127 11.3007 2.0127C10.8191 2.0127 10.3421 2.10759 9.89716 2.29197C9.45219 2.47634 9.0479 2.74658 8.7074 3.08725L8.00073 3.79391L7.29406 3.08725C6.60627 2.39945 5.67342 2.01305 4.70073 2.01305C3.72804 2.01305 2.79519 2.39945 2.1074 3.08725C1.4196 3.77504 1.0332 4.70789 1.0332 5.68058C1.0332 6.65327 1.4196 7.58612 2.1074 8.27391L2.81406 8.98058L8.00073 14.1672L13.1874 8.98058L13.8941 8.27391C14.2347 7.93341 14.505 7.52912 14.6893 7.08415C14.8737 6.63918 14.9686 6.16224 14.9686 5.68058C14.9686 5.19892 14.8737 4.72198 14.6893 4.27701C14.505 3.83204 14.2347 3.42775 13.8941 3.08725Z"
-            fill="#F5BDBD"
-            stroke="#F5BDBD"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </SvgHeart>
-        {interest}
-      </InterestCell>
+      <InterestCell>{interest}</InterestCell>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 132px;
+  height: auto;
+  box-sizing: border-box;
   border: 1px solid rgba(223, 223, 223, 0.4);
-  border-radius: 10px;
+  border-radius: 0.52vw;
+  padding: 1.51vw 0 1.56vw 0;
   display: flex;
-  justify-content: start;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 0.63vw;
 `;
 
 const RankCell = styled.div`
-  width: 110px;
+  width: 6%;
+  justify-content: center;
+  align-items: center;
   color: var(--A8_Grey-4, #a8a8a8);
-  text-align: center;
+  display: flex;
   font-family: Pretendard;
-  font-size: 48px;
-  font-weight: 300;
-  line-height: 50px;
+  font-size: 1.67vw;
+  font-weight: 400;
+  line-height: 120%;
+`;
+
+const InterestNumCell = styled.div`
+  width: fit-content;
+  height: auto;
+  padding: 0.42vw 0.63vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 52.03vw;
+  background: rgba(216, 88, 136, 0.1);
+  color: #d85888;
+  font-family: Pretendard;
+  font-size: 0.63vw;
+  font-weight: 500;
 `;
 
 const DoubleMajorCell = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 60px;
-  width: 340px;
+  width: 18%;
 `;
 
 const RecruitNumberCell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 125px;
-  text-align: center;
+  width: 10%;
   font-family: Pretendard;
-  font-size: 32px;
+  font-size: 1.25vw;
   font-style: normal;
-  font-weight: 400;
-  line-height: 32px; /* 100% */
+  font-weight: 500;
+  line-height: 120%; /* 100% */
 `;
 
 const AppliedNumberCell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 160px;
+  width: 10%;
   text-align: center;
   font-family: Pretendard;
-  font-size: 32px;
+  font-size: 1.25vw;
   font-style: normal;
-  font-weight: 400;
-  line-height: 32px; /* 100% */
+  font-weight: 500;
+  line-height: 120%; /* 100% */
 `;
 
 const CompetitionCell = styled.div`
-  width: 175px;
-  padding-right: 94px;
+  width: 16%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  font-family: Pretendard;
+  color: #d85888;
+`;
+
+const PastCompetitionCell = styled.div`
+  width: 14%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  font-family: Pretendard;
+  color: #141414;
 `;
 
 const PastMeanCell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 175px;
-  padding-right: 100px;
+  width: 18%;
   text-align: center;
   font-family: Pretendard;
-  font-size: 32px;
+  font-size: 1.25vw;
   font-style: normal;
-  font-weight: 400;
-  line-height: 32px; /* 100% */
+  font-weight: 500;
+  line-height: 120%; /* 100% */
 `;
 
 const InterestCell = styled.div`
   position: relative;
   display: flex;
-  width: 90px;
-  gap: 8px;
+  width: 6%;
+  gap: 0.16vw;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-family: Pretendard;
-  font-size: 32px;
+  font-size: 1.25vw;
   font-style: normal;
-  font-weight: 400;
-  line-height: 32px; /* 100% */
-`;
-
-const SvgCircle = styled.svg`
-  position: absolute;
-  right: 73.5px;
-  top: 3.5px;
-  fill: var(--SECONDARY, #fdf2f2);
-`;
-
-const SvgHeart = styled.svg`
-  position: absolute;
-  right: 78px;
-  top: 8px;
+  font-weight: 500;
+  line-height: 120%; /* 100% */
 `;

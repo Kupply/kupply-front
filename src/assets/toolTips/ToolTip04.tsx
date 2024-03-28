@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import Typography from '../Typography';
 
 interface MessageBoxProps {
@@ -18,7 +17,7 @@ function ToolTip04(props: MessageProps) {
       setIsVisible(true);
       const hideTimeout = setTimeout(() => {
         setIsVisible(false);
-      }, 3000);
+      }, 30000);
 
       return () => {
         clearTimeout(hideTimeout);
@@ -42,30 +41,15 @@ function ToolTip04(props: MessageProps) {
       />
 
       <MessageBox isVisible={isVisible}>
-        <Typography
-          size="mediumText"
-          style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '122.222%' }}
-        >
-          주의하세요!
-        </Typography>
-        <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '2px', marginBottom: '2px' }}>
-          <Typography size="normalText" style={{ color: 'var(--Black2, #434343)', lineHeight: '22px' }}>
-            이중전공 지원 시즌에는 학점을
-          </Typography>
-          <Typography
-            size="normalText"
-            style={{ color: 'var(--Black2, #D85888)', fontWeight: '700', lineHeight: '22px' }}
-          >
-            최대 2번까지 변경
-          </Typography>
-          <Typography size="normalText" style={{ color: 'var(--Main-Black, #141414)', lineHeight: '22px' }}>
-            할 수 있어요.
-          </Typography>
+        <BordLargeText>주의하세요!</BordLargeText>
+        <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '0.104vw', marginBottom: '0.104vw' }}>
+          <NormalText> 이중전공 지원 시즌에는 학점을</NormalText>
+          <BordSmallText>최대 2번까지 변경</BordSmallText>
+          <NormalText>할 수 있어요.</NormalText>
         </div>
-        <Typography size="normalText" style={{ color: 'var(--Main-Black, #141414)', lineHeight: '22px' }}>
-          정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.
-        </Typography>
+        <NormalText> 정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.</NormalText>
       </MessageBox>
+      {/*
       <NotchImage
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -73,6 +57,7 @@ function ToolTip04(props: MessageProps) {
         src="../../designImage/toolTips/ToolTip04Notch.svg"
         alt="NochIcon"
       />
+      */}
     </MainWrapper>
   );
 }
@@ -80,20 +65,27 @@ function ToolTip04(props: MessageProps) {
 const MainWrapper = styled.div`
   display: flex;
   position: absolute;
-  left: 260px;
-  top: 192px;
+  z-index: 100;
+  //left: 260px;
+  //left: 13.542vw;
+  //top: 192px;
+  //top: 10vw;
+
 `;
 
 const AlertImage = styled.img<{ isHovered: boolean }>`
-  width: 18px;
-  height: 18px;
+  //width: 18px;
+  //height: 18px;
+  width: 0.9375vw;
+  height: 0.9375vw;
   cursor: pointer;
 `;
 
 const NotchImage = styled.img<{ isHovered: boolean }>`
   display: ${(props) => (props.isHovered ? 'flex' : 'none')};
   position: absolute;
-  top: -10px;
+  //top: -10px;
+  top: -0.521vw;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -104,21 +96,57 @@ const NotchImage = styled.img<{ isHovered: boolean }>`
 `;
 
 const MessageBox = styled.div<MessageBoxProps>`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  align-self: stretch;
+  height: auto;
+  width: 24.323vw; //width: 467px;
+  max-width: 467px;
+  //height: 3.49vw; //height: 67px;
+  max-height: 67px;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  padding: 10px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-  position: absolute;
-  top: -95px;
-  right: -430px;
-  width: 467px;
-  height: 67px;
-  z-index: 1;
+  padding: 10px 8px; 
+  gap: 0.521vw; //gap: 10px;
   background: #fff;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
+  z-index: 1;
+  //top: -95px;
+  // top: -4.948vw;
+  //right: -430px;
+  top: 100%;
+  left: 20%;
+  transform: translate(-20%, -120%);
+`;
+
+const NormalText = styled.text`
+  color: var(--Black2, #434343);
+  font-family: Pretendard;
+  font-size: 0.83vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+`;
+
+const BordSmallText = styled.text`
+  color: var(--Black2, #d85888);
+  font-family: Pretendard;
+  font-size: 0.83vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const BordLargeText = styled.text`
+  color: var(--Black2, #d85888);
+  font-family: Pretendard;
+  font-size: 0.9375vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 122.222%;
 `;
 
 export default ToolTip04;

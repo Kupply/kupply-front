@@ -17,7 +17,7 @@ const MailButtonWrapper = styled.button<{ activated: boolean }>`
           color: #141414;
           text-align: center;
           font-family: Pretendard;
-          font-size: 20px;
+          font-size: 16px; //20px;
           font-style: normal;
           font-weight: 700;
           line-height: normal;
@@ -28,7 +28,7 @@ const MailButtonWrapper = styled.button<{ activated: boolean }>`
           color: #141414;
           text-align: center;
           font-family: Pretendard;
-          font-size: 20px;
+          font-size: 16px; //20px;
           font-style: normal;
           font-weight: 500;
           line-height: normal;
@@ -40,7 +40,7 @@ const MailButtonWrapper = styled.button<{ activated: boolean }>`
             color: #d85888;
             text-align: center;
             font-family: Pretendard;
-            font-size: 20px;
+            font-size: 16px; //20px;
             font-style: normal;
             font-weight: 600;
             line-height: normal;
@@ -52,7 +52,7 @@ const MailButtonWrapper = styled.button<{ activated: boolean }>`
             color: #141414;
             text-align: center;
             font-family: Pretendard;
-            font-size: 20px;
+            font-size: 16px; //20px;
             font-style: normal;
             font-weight: 500;
             line-height: normal;
@@ -65,7 +65,7 @@ const MailButtonWrapper = styled.button<{ activated: boolean }>`
             color: #141414;
             text-align: center;
             font-family: Pretendard;
-            font-size: 20px;
+            font-size: 16px; //20px;
             font-style: normal;
             font-weight: 700;
             line-height: normal;

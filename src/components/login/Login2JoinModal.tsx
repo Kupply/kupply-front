@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import Typography from '../../assets/OldTypography';
+//import Typography from '../../assets/OldTypography';
+import Typography from '../../assets/Typography';
 import AlertIconCheck from '../../assets/icons/AlertIconCheck';
 import ModalSmall from '../base/ModalSmall';
 
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 26px;
+  //margin-left: 26px;
+  margin-left: 1.354vw;
 `;
 
 const fadeInAnimation = css`
@@ -125,13 +127,13 @@ export default function Login2JoinModal(props: ModalProps) {
   return (
     <ModalContainer isOpen={isOpenAlert}>
       <ModalSmall onClickToggleModal={onClickModal}>
-        <AlertIconCheck width="62px" height="62px" />
+        <AlertIconCheck width="3.23vw" height="3.23vw" />
         <TextWrapper>
-          <Typography size="mediumText" color="#141414" style={{ fontWeight: '700', lineHeight: '88.889%' }}>
+          <Typography size="0.9375vw" color="#141414" style={{ fontWeight: '700', lineHeight: '88.889%' }}>
             고려대학교 이메일을 입력해주세요.
           </Typography>
-          <div style={{ height: '8px' }}></div>
-          <Typography size="normalText" color="#141414">
+          <div style={{ height: '0.417vw' }}></div>
+          <Typography size="0.833vw" color="#141414">
             회원가입창
           </Typography>
         </TextWrapper>
