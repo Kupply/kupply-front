@@ -23,6 +23,8 @@ import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
 import SignUpPage0 from './mobile/pages/signup/SignupPage0';
 import SignUpPage2 from './mobile/pages/signup/SignupPage2';
+import SignUpPage3 from './mobile/pages/signup/SignupPage3';
+import SignUpPage4 from './mobile/pages/signup/SignupPage4';
 
 interface RouteConfig {
   path: string;
@@ -45,7 +47,7 @@ export default function App() {
   return (
     <RecoilRoot>
       {isMobile ? (
-        <SignUpPage2 />
+        <SignUpPage4 />
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />

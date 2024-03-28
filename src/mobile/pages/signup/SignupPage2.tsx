@@ -22,6 +22,8 @@ export default function SignUpPage2(){
   const handlePrev = () => {
     navigate('/signUp1');
   };
+
+  // button asset아직 준비가 안되서 안함
     return (
       <SignUpPageWrapper step={2} stepInfo="사용자 기본 정보 입력하기">
         <div style={{marginBottom: '61px'}}></div>

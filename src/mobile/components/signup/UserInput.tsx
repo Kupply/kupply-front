@@ -20,6 +20,7 @@ interface UserInputProps {
   children?: ReactNode;
   userInfoTypeManual?: string | undefined;
   onCustomFunction?: () => void;
+  valid?: boolean;
 }
 
 export const placeholderMapping: Record<UserTypeOptions, string> = {
@@ -72,6 +73,7 @@ export const UserInput: React.FC<UserInputProps> = ({
   children,
   userInfoTypeManual = undefined,
   onCustomFunction,
+  valid
 }) => {
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(
@@ -143,6 +145,8 @@ export const UserInput: React.FC<UserInputProps> = ({
               onCustomFunction?.();
             }
           }}
+          isCheckDuplicated={userInfoType === 'nickname' ? true : false}
+          valid={valid}
         />)}
     </>
   );

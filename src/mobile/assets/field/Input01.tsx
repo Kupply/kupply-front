@@ -394,7 +394,7 @@ function Input01(props: TextFieldBoxProps) {
 
   const onCheckDuplicated = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-
+  
     if (Math.random() > 0.5) {
       // 중복 아닐 경우
       if (valid) setState('filled');
