@@ -6,6 +6,7 @@ import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
 //import SettingsPage from './pages/setting/SettingsPage';
 import { SignUp0Page } from './pages/signUp/SignUp0Page';
+//import SignUpPage0 from './mobile/pages/signup/SignupPage0';
 //import { SettingsPage } from './pages/setting/SettingsPage';
 //import SettingsPage from './pages/setting/OldSettingsPage';
 import SettingsPage from './pages/setting/OldSettingsPageModified';

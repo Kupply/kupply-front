@@ -19,7 +19,7 @@ const baseWrapper = css`
   max-width: 328px;
   min-width: 250px;
   gap: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
 
   & > img {
     position: relative;

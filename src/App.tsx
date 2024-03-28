@@ -21,6 +21,8 @@ import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
+import SignUpPage0 from './mobile/pages/signup/SignupPage0';
+import SignUpPage2 from './mobile/pages/signup/SignupPage2';
 
 interface RouteConfig {
   path: string;
@@ -43,7 +45,7 @@ export default function App() {
   return (
     <RecoilRoot>
       {isMobile ? (
-        <MobilePage />
+        <SignUpPage2 />
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
