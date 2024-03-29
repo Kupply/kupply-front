@@ -5,29 +5,37 @@ import Pie from '../../../assets/Graph/Pie';
 import HalfPie from '../../../assets/Graph/HalfPie';
 import ToolTip05 from '../../../assets/toolTips/ToolTip05';
 
-const PieChart = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) => {
+const PieChart = ({ onViewMajor, curData, isApplied }: { onViewMajor: any; curData: any; isApplied: boolean }) => {
   return (
-    <Wrapper>
-      <TitleBox>
-        <TitleText>지원자 정보 살펴보기</TitleText>
-        <ToolTip05>
-          본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
-        </ToolTip05>
-        {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
-      </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.8125vw" height="2" viewBox="0 0 534 2" fill="none">
-        <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
-      </StyleSvg>
-      <PieBox>
-        <Pie onViewMajor={onViewMajor} curData={curData} />
-      </PieBox>
-      <StyleSvg2 xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="0.1vw" viewBox="0 0 534 2" fill="none">
-        <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
-      </StyleSvg2>
-      <HalfPieBox>
-        <HalfPie onViewMajor={onViewMajor} curData={curData} />
-      </HalfPieBox>
-    </Wrapper>
+    <>
+      {isApplied === false ? (
+        <Wrapper2>
+          <BlurWrapper />
+        </Wrapper2>
+      ) : (
+        <Wrapper>
+          <TitleBox>
+            <TitleText>지원자 정보 살펴보기</TitleText>
+            <ToolTip05>
+              본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
+            </ToolTip05>
+            {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
+          </TitleBox>
+          <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.8125vw" height="2" viewBox="0 0 534 2" fill="none">
+            <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
+          </StyleSvg>
+          <PieBox>
+            <Pie onViewMajor={onViewMajor} curData={curData} />
+          </PieBox>
+          <StyleSvg2 xmlns="http://www.w3.org/2000/svg" width="27.81vw" height="0.1vw" viewBox="0 0 534 2" fill="none">
+            <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
+          </StyleSvg2>
+          <HalfPieBox>
+            <HalfPie onViewMajor={onViewMajor} curData={curData} />
+          </HalfPieBox>
+        </Wrapper>
+      )}
+    </>
   );
 };
 
@@ -58,6 +66,50 @@ const Wrapper = styled.div`
     z-index: -1;
     filter: blur(8px);
   }
+`;
+
+const Wrapper2 = styled.div`
+  width: 27.92vw;
+  height: 40.75vw;
+  flex-shrink: 0;
+  border-radius: 0.52vw;
+  border: 1px solid #dfdfdf;
+  fill: var(--, radial-gradient(230.3% 140.56% at 0% 1.23%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%));
+  stroke-width: 1px;
+  stroke: #dfdfdf;
+  backdrop-filter: blur(12px);
+
+  z-index: 2;
+`;
+
+const BlurWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  z-index: 10;
+`;
+
+const BlurMsg = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 20;
 `;
 
 const TitleBox = styled.div`
@@ -100,6 +152,26 @@ const TitleText = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
+`;
+
+const BlurTitle = styled.div`
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const Blurtext = styled.div`
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.9375vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
 `;
 
 ///////////////// image /////////////////

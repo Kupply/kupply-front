@@ -30,7 +30,7 @@ interface Datum2 {
   avgGpa: number;
 }
 
-const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) => {
+const Scatter = ({ onViewMajor, curData, isApplied }: { onViewMajor: any; curData: any; isApplied: boolean }) => {
   const sccatterData: Datum[] = curData[onViewMajor - 1].scatterChartData;
   const filteredData: Datum2[] = sccatterData
     .filter((item) => item.curApplyNum !== 0)
@@ -49,102 +49,112 @@ const Scatter = ({ onViewMajor, curData }: { onViewMajor: any; curData: any }) =
   const color = filteredData.map((item) => majorColorMapping[item.college as keyof typeof majorColorMapping].fill);
 
   return (
-    <Wrapper>
-      <TitleBox>
-        <TitleText>이중전공 지원자 학과 분포</TitleText>
-        <ToolTip05>
-          본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
-        </ToolTip05>
-        {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
-      </TitleBox>
-      <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.8125vw" height="2" viewBox="0 0 534 2" fill="none">
-        <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
-      </StyleSvg>
+    <>
+      {isApplied === false ? (
+        <Wrapper2>
+          <BlurWrapper />
+        </Wrapper2>
+      ) : (
+        <Wrapper>
+          <TitleBox>
+            <TitleText>이중전공 지원자 학과 분포</TitleText>
+            <ToolTip05>
+              본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
+            </ToolTip05>
+            {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
+          </TitleBox>
+          <StyleSvg xmlns="http://www.w3.org/2000/svg" width="27.8125vw" height="2" viewBox="0 0 534 2" fill="none">
+            <path d="M-0.00195312 1H534.002" stroke="#DFDFDF" />
+          </StyleSvg>
 
-      <ScatterBox>
-        <VictoryChart
-          theme={VictoryTheme.material}
-          domain={{ x: [minXValue, 4.5], y: [0, maxYValue] }}
-          origin={{ x: 0, y: 0 }}
-          containerComponent={
-            <VictoryVoronoiContainer
-              labels={({ datum }) => `${datum.college}`}
-              labelComponent={
-                <VictoryTooltip
-                  flyoutComponent={<CustomTooltipLabel />}
-                  flyoutStyle={{ stroke: 'none', fill: 'white' }}
-                  style={{ fontSize: 0 }}
+          <ScatterBox>
+            <VictoryChart
+              theme={VictoryTheme.material}
+              domain={{ x: [minXValue, 4.5], y: [0, maxYValue] }}
+              origin={{ x: 0, y: 0 }}
+              containerComponent={
+                <VictoryVoronoiContainer
+                  labels={({ datum }) => `${datum.college}`}
+                  labelComponent={
+                    <VictoryTooltip
+                      flyoutComponent={<CustomTooltipLabel />}
+                      flyoutStyle={{ stroke: 'none', fill: 'white' }}
+                      style={{ fontSize: 0 }}
+                    />
+                  }
                 />
               }
-            />
-          }
-        >
-          <VictoryAxis
-            label="지원자 평균 학점"
-            axisComponent={<CustomAxis />}
-            tickValues={[
-              minXValue,
-              minXValue + TicGap,
-              minXValue + TicGap + TicGap,
-              minXValue + TicGap + TicGap + TicGap,
-              4.5,
-            ]}
-            style={{
-              grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
-              axisLabel: {
-                padding: 33,
-                transform: 'translate (90,0)',
-                color: 'var(--Black2, #434343)',
-                fontFamily: 'Pretendard',
-                fontSize: '1.04vw',
-              },
-            }}
-          />
-
-          <VictoryAxis
-            dependentAxis
-            // label="지원자"
-            axisComponent={<CustomAxis />}
-            style={{
-              grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
-              axisLabel: {
-                padding: -12,
-                transform: 'rotate(-90deg)',
-                color: 'var(--Black2, #434343)',
-                fontFamily: 'Pretendard',
-              }, // padding: -12, transform: 'rotate(-90deg) translate(0, -150)'
-            }}
-          />
-
-          <VictoryScatter
-            data={filteredData}
-            x="avgGpa"
-            y="curApplyNum"
-            size={6}
-            // labels={({ datum }) => `${datum.college}`} // 각 점에 대한 학과 라벨
-            labelComponent={
-              <VictoryLabel
-                dy={20}
+            >
+              <VictoryAxis
+                label="지원자 평균 학점"
+                axisComponent={<CustomAxis />}
+                tickValues={[
+                  minXValue,
+                  minXValue + TicGap,
+                  minXValue + TicGap + TicGap,
+                  minXValue + TicGap + TicGap + TicGap,
+                  4.5,
+                ]}
                 style={{
-                  fontFamily: 'Pretendard',
-                  fontSize: 10,
-                  fill: 'rgba(67, 67, 67, 0.80)',
-                  //  fill: (args: any) => color[tmpData.findIndex((item) => item.name === args.datum.name)], 호버 이벤트 넣기 실패.. ㅠㅠ
+                  grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
+                  axisLabel: {
+                    padding: 33,
+                    transform: 'translate (90,0)',
+                    color: 'var(--Black2, #434343)',
+                    fontFamily: 'Pretendard',
+                    fontSize: '1.04vw',
+                  },
                 }}
               />
-            }
-            style={{
-              data: { fill: (args) => color[filteredData.findIndex((item) => item.college === args.datum.college)] }, // 각 데이터 포인트에 대한 fill 색상을 설정
-            }}
-          />
-        </VictoryChart>
-      </ScatterBox>
-      <LabelBox>
-        <Typography color="var(--Black2, #434343)" bold="500" style={{ opacity: 0.8 }}>
-          지원자
-        </Typography>
-      </LabelBox>
-    </Wrapper>
+
+              <VictoryAxis
+                dependentAxis
+                // label="지원자"
+                axisComponent={<CustomAxis />}
+                style={{
+                  grid: { stroke: 'rgba(185, 185, 185, 0.80)' },
+                  axisLabel: {
+                    padding: -12,
+                    transform: 'rotate(-90deg)',
+                    color: 'var(--Black2, #434343)',
+                    fontFamily: 'Pretendard',
+                  }, // padding: -12, transform: 'rotate(-90deg) translate(0, -150)'
+                }}
+              />
+
+              <VictoryScatter
+                data={filteredData}
+                x="avgGpa"
+                y="curApplyNum"
+                size={6}
+                // labels={({ datum }) => `${datum.college}`} // 각 점에 대한 학과 라벨
+                labelComponent={
+                  <VictoryLabel
+                    dy={20}
+                    style={{
+                      fontFamily: 'Pretendard',
+                      fontSize: 10,
+                      fill: 'rgba(67, 67, 67, 0.80)',
+                      //  fill: (args: any) => color[tmpData.findIndex((item) => item.name === args.datum.name)], 호버 이벤트 넣기 실패.. ㅠㅠ
+                    }}
+                  />
+                }
+                style={{
+                  data: {
+                    fill: (args) => color[filteredData.findIndex((item) => item.college === args.datum.college)],
+                  }, // 각 데이터 포인트에 대한 fill 색상을 설정
+                }}
+              />
+            </VictoryChart>
+          </ScatterBox>
+          <LabelBox>
+            <Typography color="var(--Black2, #434343)" bold="500" style={{ opacity: 0.8 }}>
+              지원자
+            </Typography>
+          </LabelBox>
+        </Wrapper>
+      )}
+    </>
   );
 };
 
@@ -252,6 +262,51 @@ const Wrapper = styled.div`
   }
 `;
 
+const Wrapper2 = styled.div`
+  position: relative;
+  display: flex;
+
+  width: 27.92vw;
+  height: 40.75vw;
+  flex-shrink: 0;
+  border-radius: 0.52vw;
+  border: 1px solid #dfdfdf;
+  fill: var(--, radial-gradient(230.3% 140.56% at 0% 1.23%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%));
+  stroke-width: 1px;
+  stroke: #dfdfdf;
+  backdrop-filter: blur(12px);
+`;
+
+const BlurWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  z-index: 10;
+`;
+
+const BlurMsg = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+`;
+
 const TitleBox = styled.div`
   position: absolute;
   display: flex;
@@ -348,6 +403,27 @@ const ToolTipBordText = styled.text`
   font-weight: 700;
   line-height: 157.143%;
 `;
+
+const BlurTitle = styled.div`
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const Blurtext = styled.div`
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.9375vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
+`;
+
 ///////////////// image /////////////////
 
 const Information = styled.img`
