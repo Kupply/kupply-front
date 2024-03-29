@@ -6,7 +6,7 @@ import { majorAllList } from '../../../common/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../../store/atom';
 import { majorTargetList } from '../../../common/MajorTarget';
-//import { inputState } from '../../pages/signUp/SignUp4Page';
+import { inputState } from '../../pages/signup/SignupPage4';
 
 export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'id' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
 
@@ -17,6 +17,7 @@ interface UserInputProps {
   userInfoType: UserTypeOptions;
   toNext?: boolean;
   setValue?: (args: string) => void;
+  setStateValid?: (args: inputState) => void;
   children?: ReactNode;
   userInfoTypeManual?: string | undefined;
   onCustomFunction?: () => void;
@@ -73,7 +74,8 @@ export const UserInput: React.FC<UserInputProps> = ({
   children,
   userInfoTypeManual = undefined,
   onCustomFunction,
-  valid
+  valid,
+  setStateValid
 }) => {
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(
@@ -105,6 +107,12 @@ export const UserInput: React.FC<UserInputProps> = ({
 
   if (toNext) {
     sessionStorage.setItem(userInfoType, userInfo.info);
+  }
+
+  if (userInfo.info !== '') {
+    setStateValid?.('complete');
+  } else {
+    setStateValid?.('incomplete');
   }
 
   //console.log(userInfo);

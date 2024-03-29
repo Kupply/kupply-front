@@ -5,6 +5,7 @@ import Typography from "../../../assets/Typography";
 import Input01, { StateOptions } from "../../assets/field/Input01";
 import { useNavigate } from "react-router-dom";
 import client from "../../../utils/HttpClient";
+import Button05 from "../../assets/buttons/Button05";
 
 
 export default function SignUpPage0(){
@@ -12,7 +13,12 @@ export default function SignUpPage0(){
   const [IDState, setIDState] = useState<StateOptions>('default');
   const email = sessionStorage.getItem('email') || '';
   
+  // email의 유효성을 check하는게 필요하다 
+  // IDState에 대한 처리를 여기서 
+
   const navigate = useNavigate();
+
+  // 여기도 UserInput으로 바꿀지 고민중이다 
 
   const handleButtonClick = async () => {
     //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
@@ -71,7 +77,15 @@ export default function SignUpPage0(){
           />
         </ContentsWrapper>
       </ContentsList>
-
+      <ButtonsWrapper>
+        <Button05
+          state={IDState === 'filled' ? 'pressed' : 'default'} 
+          onClick={handleButtonClick} 
+          style={{width: '100%'}}
+        >
+          인증메일 받기
+        </Button05>
+      </ButtonsWrapper>
     </SignUpPageWrapper>
   )
 }
@@ -98,4 +112,12 @@ const ContentsWrapper = styled.div`
   flex-direction: column;
   gap: 9px;
   width: 328px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
+  // vh로 박아야 할 가능성이 클듯
+  margin-top: 228px;
+  width: 100%;
 `;

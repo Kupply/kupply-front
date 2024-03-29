@@ -2,12 +2,9 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
+
 //import EyeIcon from '../../../assets/icons/EyeIcon';
 //import EyeIcon from '../../../assets/icons/NewEyeIcon';
-import EyeIcon from '../../../assets/icons/OldEyeIcon';
-import Icon07 from '../../../assets/icons/Icon07';
-
-import Icon08 from '../../../assets/icons/Icon08';
 
 /* 
     Width는 부모 요소(Wrapper)의 width를 따라갑니다.

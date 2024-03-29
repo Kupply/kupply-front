@@ -9,6 +9,8 @@ import { userState } from "../../../store/atom";
 import { useSignUp3Verification } from "../../../utils/SignUpFunctions";
 import MobileNicknameCheckButton from "../../assets/progressIndicator/Loader";
 import { nicknameCheckAPI } from "../../assets/progressIndicator/Loader";
+import Button03 from "../../assets/buttons/Button03";
+import Button04 from "../../assets/buttons/Button04";
 
 type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 
@@ -19,6 +21,17 @@ export default function SignUpPage3(){
   const {complete} = useSignUp3Verification();
   const [valid, setValid] = useState(false);
 
+  const handleNext = () => {
+    setNext(true);
+    Promise.resolve().then(() => {
+      navigate('/signup4');
+    });
+  };
+
+  const handlePrev = () => {
+    navigate('/signup2');
+  };
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -74,7 +87,10 @@ export default function SignUpPage3(){
             <UserInput userInfoType="nickname" toNext={next} valid={valid}/>
           </ContentsWrapper>
         </ContentsList>
-  
+        <ButtonsWrapper>
+          <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
+          <Button03 state={complete? 'default' : 'disabled'} onClick={handleNext} style={{width: '74.418%'}}/>
+        </ButtonsWrapper>
       </SignUpPageWrapper>
   )
 }
@@ -90,4 +106,13 @@ const ContentsWrapper = styled.div`
   flex-direction: column;
   gap: 9px;
   width: 328px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
+  // vh로 박아야 할 가능성이 클듯
+  margin-top: 100px;
+  gap: 8px;
+  width: 100%;
 `;
