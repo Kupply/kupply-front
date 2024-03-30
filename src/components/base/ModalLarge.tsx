@@ -32,19 +32,22 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 
 // 모달창 위치 조정 목적의 컨테이너
 const ModalContainer = styled.div`
-  width: 60vw;
+  width: 70vw;
   max-width: 814px;
-  height: 780px;
-  //height: 60vh;
+
+  height: 60vh;
   position: fixed;
-  //margin-top: -50px;
-  margin-top: 20px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
 
-  @media screen and (min-width: 1201px) and (max-width: 1500px) {
+  /* @media screen and (min-width: 1201px) and (max-width: 1500px) {
     width: 50vw;
     height: 700px;
     margin-top: 30px;
@@ -69,7 +72,7 @@ const ModalContainer = styled.div`
     height: 400px;
     margin-top: 3vh;
     top: 0px;
-  }
+  } */
 `;
 
 // 모달 창 (흰 색 컨텐츠 창)
@@ -77,7 +80,7 @@ const DialogBox = styled.dialog`
   width: 100%; // *전체화면에 대해 크기 조정 필요 43vw 814px
   //height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
   // height: 39.0625vw;
-  height: 80vh;
+  height: 75vh;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -91,6 +94,9 @@ const DialogBox = styled.dialog`
   // position: fixed;
   // top: 75px;
   z-index: 10;
+
+  margin-top: auto;
+  margin-bottom: auto;
 
   // --------------이하 스크롤바 관련 코드-------------
 
@@ -141,11 +147,15 @@ const DialogBox = styled.dialog`
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
   @media screen and (max-width: 600px) {
+    position: fixed;
+    left: 0;
+    right: 0;
     width: 100vw;
     height: 100vh;
+    box-sizing: border-box;
   }
 
-  @media screen and (min-width: 601px) and (max-width: 800px) {
+  /* @media screen and (min-width: 601px) and (max-width: 800px) {
     height: 50vh;
   }
 
@@ -155,8 +165,7 @@ const DialogBox = styled.dialog`
 
   @media screen and (min-width: 1201px) and (max-width: 1500px) {
     height: 70vh;
-  }
-
+  } */
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요

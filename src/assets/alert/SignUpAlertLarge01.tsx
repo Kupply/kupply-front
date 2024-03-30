@@ -37,24 +37,26 @@ function SignUpAlertLarge01({
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon03 size={'3.125vw'} />
+          <Icon03 size={'45px'} />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size={'3.125vw'} />
+          <Icon02 size={'45px'} />
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '6.771vw' }}></div>
-      <AlertIconExclamation width="5.885vw" height="5.885vw" />
-      <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
-        아직 인증번호를 받지 못하셨나요?
-      </Typography>
-      <Typography size={'0.9375vw'} color="#141414" style={{ marginTop: '1.25vw' }}>
-        새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
-      </Typography>
+      <div style={{ height: '100px' }}></div>
+      <AlertIconExclamation width="120px" height="120px" />
+      <TypographyBox>
+        <Typography bold={'700'} color="#0a0606" style={{ marginTop: '32px' }}>
+          아직 인증번호를 받지 못하셨나요?
+        </Typography>
+        <Typography color="#141414" style={{ marginTop: '32px' }}>
+          새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
+        </Typography>
+      </TypographyBox>
       <ActionWrapper>
         <VerificationButton
           onClick={async () => {
@@ -92,8 +94,9 @@ const ActionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  bottom: 50px;
   gap: 1.5625vw;
-  margin-top: 3.75vw;
 `;
 
 const ButtonWrapper = styled.div`
@@ -101,6 +104,34 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const TypographyBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & > span:first-child {
+    display: block;
+    font-size: 30px;
+    @media screen and (max-width: 850px) {
+      font-size: 28px;
+    }
+    @media screen and (max-width: 768px) {
+      font-size: 26px;
+    }
+  }
+  & > span:last-child {
+    display: block;
+    font-size: 20px;
+    @media screen and (max-width: 850px) {
+      font-size: 18px;
+    }
+    @media screen and (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
 `;
 
 export default SignUpAlertLarge01;
