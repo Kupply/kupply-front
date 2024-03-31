@@ -18,10 +18,10 @@ function Button11(props: Button11Props) {
 }
 
 const MainWrapper = styled.button<Button11Props>`
-  width: 36.39vw;
+  width: auto;
   height: auto;
   box-sizing: border-box;
-  padding: 2.22vw 0;
+  padding: 2.22vw 5.56vw;
   border: 0.14vw solid #fff;
   display: flex;
   justify-content: center;
