@@ -359,11 +359,17 @@ const LoginContainer = styled.div`
     white-space: nowrap;
   }
 
+  .login {
+    height: 50%;
+    font-size: 16px;
+  }
+
   @media screen and (max-width: 600px) {
     height: 45px; /* 아이템의 높이를 부모 요소에 맞춤 */
     width: 20%;
     .login {
       padding: 8px 16px;
+      height: 75%;
       max-height: 36px;
     }
   }
