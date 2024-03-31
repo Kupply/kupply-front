@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
-
 interface ModalProps {
   onClickToggleModal: () => void;
   children: ReactNode;
@@ -25,8 +24,8 @@ export default function ModalMedium({ onClickToggleModal, children }: PropsWithC
 }
 
 // 모달창 위치 조정 목적의 컨테이너
-// 웃긴게 1200px의 지점에서 갑자기 margin-top이 바뀐다는 사실 
-// 그리고 그러면서 갑자기 width가 바뀜 
+// 웃긴게 1200px의 지점에서 갑자기 margin-top이 바뀐다는 사실
+// 그리고 그러면서 갑자기 width가 바뀜
 const ModalContainer = styled.div`
   width: 100%;
   max-width: 814px;
@@ -43,7 +42,8 @@ const ModalContainer = styled.div`
     top: 0px;
 
     & > dialog {
-      position: relative;
+      position: fixed;
+
       height: 100%;
     }
   }
@@ -110,9 +110,6 @@ const DialogBox = styled.dialog`
     background: transparent;
     pointer-events: none;
   }
-
-  /* Firefox에서 스크롤바 숨기기 */
-  scrollbar-width: thin;
 
   /* Internet Explorer에서 스크롤바 숨기기 */
   -ms-overflow-style: -ms-autohiding-scrollbar;

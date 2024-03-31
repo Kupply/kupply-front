@@ -84,7 +84,7 @@ const SettingsPage = () => {
     setSelected(index);
   };
   const [scrollActive, setActive] = useState(false);
-  // 잠시 수정 
+  // 잠시 수정
   const [modalOpen, setModalOpen] = useState(true);
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
@@ -129,7 +129,7 @@ const SettingsPage = () => {
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
 
-  // 잠시 수정 
+  // 잠시 수정
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(true);
 
   // useEffect(() => {
@@ -336,24 +336,24 @@ const SettingsPage = () => {
       const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
       const year = +(hopeSemester1 + hopeSemester2);
       const semester = +hopeSemester3;
-      if(year <= 23 || (semester !== 1 && semester !==2)){
+      if (year <= 23 || (semester !== 1 && semester !== 2)) {
         alert('유효한 학기를 입력해주세요!');
-      }else{
-      const updateData = {
-        newCurGPA: newGpa,
-        newHopeMajor1: hopeMajor1,
-        newHopeMajor2: hopeMajor2,
-        newHopeSemester: newHopeSemester,
-      };
-      try {
-        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-        await client.post('/user/updateMe', updateData, config);
-        window.location.reload(); // 페이지 새로고침.
-      } catch (err) {
-        console.log(err);
+      } else {
+        const updateData = {
+          newCurGPA: newGpa,
+          newHopeMajor1: hopeMajor1,
+          newHopeMajor2: hopeMajor2,
+          newHopeSemester: newHopeSemester,
+        };
+        try {
+          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+          await client.post('/user/updateMe', updateData, config);
+          window.location.reload(); // 페이지 새로고침.
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
-  }
   };
 
   const fourthSubmit = async () => {
@@ -376,17 +376,13 @@ const SettingsPage = () => {
   return (
     <Wrapper>
       {modalOpen && isGpaChanged && (
-        <GpaChangeModal
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          thirdSubmit={thirdSubmit}
-        />
+        <GpaChangeModal modalOpen={modalOpen} setModalOpen={setModalOpen} thirdSubmit={thirdSubmit} />
       )}
       <Sidebar>
-      <Content>
+        <Content>
           <Title>환경설정</Title>
           <Flex>
-          <TextButton04
+            <TextButton04
               selected={selected === 0}
               onCustomFunction={() => {
                 onClick(0);
@@ -419,32 +415,32 @@ const SettingsPage = () => {
               계정관리
             </TextButton04>
             <div style={{ marginTop: '8.333vw' }}>
-            <TextButton04
-              selected={selected === 4}
-              onCustomFunction={() => {
-                onClick(4);
-              }}
-            >
-              약관보기
-            </TextButton04>
+              <TextButton04
+                selected={selected === 4}
+                onCustomFunction={() => {
+                  onClick(4);
+                }}
+              >
+                약관보기
+              </TextButton04>
             </div>
             <div style={{ marginTop: 0 }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14.7916vw" height="2" viewBox="0 0 284 2" fill="none">
-              <path d="M283 1L0.999988 1" stroke="#DFDFDF" stroke-linecap="round" />
-            </svg>
-          </div>{' '}
-          <div style={{ marginTop: 0 }}>
-          <TextButton03Settings
-              selected={selected === 5}
-              onCustomFunction={() => {
-                navigate('/delete');
-              }}
-            >
-              계정 삭제
-            </TextButton03Settings>
-          </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14.7916vw" height="2" viewBox="0 0 284 2" fill="none">
+                <path d="M283 1L0.999988 1" stroke="#DFDFDF" stroke-linecap="round" />
+              </svg>
+            </div>{' '}
+            <div style={{ marginTop: 0 }}>
+              <TextButton03Settings
+                selected={selected === 5}
+                onCustomFunction={() => {
+                  navigate('/delete');
+                }}
+              >
+                계정 삭제
+              </TextButton03Settings>
+            </div>
           </Flex>
-          </Content>
+        </Content>
       </Sidebar>
       {selected === 0 && (
         <BodyContainer>
@@ -514,9 +510,9 @@ const SettingsPage = () => {
               <CandidateImgsWrapper>
                 {Array.from({ length: 4 }, (_, index) => (
                   <CandidateImg
-                    src={`designImage/character/rectProfile/RectProfile${index+1}.png`}
-                    alt={`candidate profile ${index+1}`}
-                    onClick={() => setUserProfilePic(`rectProfile${index+1}`)}
+                    src={`designImage/character/rectProfile/RectProfile${index + 1}.png`}
+                    alt={`candidate profile ${index + 1}`}
+                    onClick={() => setUserProfilePic(`rectProfile${index + 1}`)}
                   />
                 ))}
               </CandidateImgsWrapper>
@@ -524,7 +520,7 @@ const SettingsPage = () => {
             </div>
           </div>
           <ContentsWrapper>
-          <div style={{ display: 'flex', marginTop: '3.125vw' }}>
+            <div style={{ display: 'flex', marginTop: '3.125vw' }}>
               <Typography
                 size="0.9375vw"
                 style={{ color: 'var(--Main-Black, #141414)', fontWeight: 700, opacity: 0.8 }}
@@ -538,28 +534,28 @@ const SettingsPage = () => {
                 수정하기
               </Typography>
             </div>
-            <div style={{position: 'relative'}}>
-            <TextFieldBox
-              value={nickname}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setNickname(e.target.value);
-              }}
-              state={nicknameState}
-              setState={setNicknameState}
-              setValue={setNickname}
-              errorMessage={errorMessages.nicknameErrorMessage}
-            ></TextFieldBox>
-            {nickname === '' || nicknameState === 'filled' ? (
-              <></>
-            ) : (
-              <NicknameCheckButtonWrapper>
-                <NicknameCheckButton
-                  nickname={nickname}
-                  state={nicknameCheck}
-                  setState={setNicknameCheckState}
-                ></NicknameCheckButton>
-              </NicknameCheckButtonWrapper>
-            )}
+            <div style={{ position: 'relative' }}>
+              <TextFieldBox
+                value={nickname}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNickname(e.target.value);
+                }}
+                state={nicknameState}
+                setState={setNicknameState}
+                setValue={setNickname}
+                errorMessage={errorMessages.nicknameErrorMessage}
+              ></TextFieldBox>
+              {nickname === '' || nicknameState === 'filled' ? (
+                <></>
+              ) : (
+                <NicknameCheckButtonWrapper>
+                  <NicknameCheckButton
+                    nickname={nickname}
+                    state={nicknameCheck}
+                    setState={setNicknameCheckState}
+                  ></NicknameCheckButton>
+                </NicknameCheckButtonWrapper>
+              )}
             </div>
           </ContentsWrapper>
           <div>
@@ -633,14 +629,18 @@ const SettingsPage = () => {
               setValue={setHopeSemester2}
               isEntered={hopeSemester2 ? true : false}
             ></TextArea>
-            <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>년도</Typography>
+            <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
+              년도
+            </Typography>
             <TextArea
               name="semester-3"
               value={hopeSemester3}
               setValue={setHopeSemester3}
               isEntered={hopeSemester3 ? true : false}
             ></TextArea>
-            <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>학기</Typography>
+            <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
+              학기
+            </Typography>
           </VerifiBoxWrapper>
           <div>
             <Button03
@@ -724,50 +724,49 @@ const SettingsPage = () => {
       )}
       {selected === 4 && (
         <BodyContainer>
-        <BodyTitle>약관보기</BodyTitle>
-        <BodyContent>
-              다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관입니다.
-        </BodyContent>{' '}
-  
-        <ScrollLarge isChecked={false}>
-          <div style={{ marginTop: '1.56vw' }}>
-            <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
-              <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
-                서비스 이용약관
+          <BodyTitle>약관보기</BodyTitle>
+          <BodyContent>
+            다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관입니다.
+          </BodyContent>{' '}
+          <ScrollLarge isChecked={false}>
+            <div style={{ marginTop: '1.56vw' }}>
+              <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
+                <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
+                  서비스 이용약관
+                </Typography>
+              </div>
+            </div>
+
+            <TextOutBox>
+              <ScrollSmall isChecked={false}>
+                <TermsText1 />
+              </ScrollSmall>
+            </TextOutBox>
+
+            <div style={{ marginTop: '1.56vw' }}>
+              <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
+                <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
+                  개인정보 처리방침
+                </Typography>
+              </div>
+            </div>
+
+            <div style={{ width: '32.7083vw', height: 'auto', textAlign: 'left' }}>
+              <Typography size="0.9375vw" bold="500" style={{ fontWeight: '400', textAlign: 'left', color: '#a8a8a8' }}>
+                쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스를 이용함과 동시에
+                온라인 상에서 각 운영 서비스에 제공한 개인정보가 보호받을 수 있도록 최선을 다하고 있습니다.
+                <br />
+                <br />
               </Typography>
             </div>
-          </div>
-  
-          <TextOutBox>
-            <ScrollSmall isChecked={false}>
-              <TermsText1/>
-            </ScrollSmall>
-          </TextOutBox>
-  
-          <div style={{ marginTop: '1.56vw' }}>
-            <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
-              <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
-                개인정보 처리방침
-              </Typography>
-            </div>
-          </div>
-  
-          <div style={{ width: '32.7083vw', height: 'auto',  textAlign: 'left' }}>
-            <Typography size="0.9375vw" bold="500" style={{ fontWeight: '400', textAlign: 'left', color: '#a8a8a8' }}>
-              쿠플라이는 이용자들의 정보를 매우 중요시하며, 이용자가 쿠플라이에서 제공하는 서비스를 이용함과 동시에
-              온라인 상에서 각 운영 서비스에 제공한 개인정보가 보호받을 수 있도록 최선을 다하고 있습니다.
-              <br />
-              <br />
-            </Typography>
-          </div>
-  
-          <TextOutBox>
-            <ScrollSmall isChecked={false}>
-              <TermsText2/>
-            </ScrollSmall>
-          </TextOutBox>
-        </ScrollLarge>
-      </BodyContainer>
+
+            <TextOutBox>
+              <ScrollSmall isChecked={false}>
+                <TermsText2 />
+              </ScrollSmall>
+            </TextOutBox>
+          </ScrollLarge>
+        </BodyContainer>
       )}
     </Wrapper>
   );
@@ -788,6 +787,10 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100%;
   background: var(--White, #fff);
+  padding-top: 70px;
+  top: -70px;
+  box-sizing: border-box;
+  position: relative;
   display: flex;
 `;
 const Sidebar = styled.div`
@@ -899,7 +902,6 @@ const ContentsWrapper = styled.div`
   gap: 9px;
 `;
 
-
 const NicknameCheckButtonWrapper = styled.div`
   position: absolute;
   top: 1.12vw; //23px;
@@ -912,7 +914,6 @@ const VerifiBoxWrapper = styled.div`
   gap: 0.6771vw;
 `;
 
-
 const AlertWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -922,8 +923,6 @@ const AlertWrapper = styled.div`
   text-align: center;
   margin: auto auto;
 `;
-
-
 
 const TextOutBox = styled.div`
   //width: 628px;
@@ -942,6 +941,5 @@ const TextOutBox = styled.div`
   margin-right: 0.9375vw; //18px;
   line-height: 123.54%; /* 22.237px */
 `;
-
 
 export default SettingsPage;
