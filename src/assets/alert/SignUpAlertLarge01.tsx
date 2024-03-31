@@ -47,7 +47,7 @@ function SignUpAlertLarge01({
           <Icon02 size={'45px'} />
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '100px' }}></div>
+      <div style={{ height: '10%' }}></div>
       <AlertIconExclamation width="120px" height="120px" />
       <TypographyBox>
         <Typography bold={'700'} color="#0a0606" style={{ marginTop: '32px' }}>
