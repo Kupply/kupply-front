@@ -81,6 +81,7 @@ const DialogBox = styled.dialog`
   //height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
   // height: 39.0625vw;
   height: 75vh;
+  min-height: 600px;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
