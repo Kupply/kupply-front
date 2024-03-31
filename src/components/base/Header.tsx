@@ -360,7 +360,7 @@ const LoginContainer = styled.div`
   }
 
   .login {
-    height: 50%;
+    height: 60%;
     font-size: 16px;
   }
 
