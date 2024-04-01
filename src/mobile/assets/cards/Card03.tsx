@@ -12,6 +12,11 @@ export interface Card0302Props extends React.ComponentPropsWithoutRef<'div'>{
   passNum: number;
 };
 
+export interface Card0303Props extends React.ComponentPropsWithoutRef<'div'>{
+  currentApplications: number;  
+  TO: number;
+};
+
 export function Card0301({avgPassNum}: Card0301Props){
   return (
     <Container1>
@@ -57,6 +62,30 @@ export function Card0302({passNum, appliedNum}: Card0302Props){
         <Typography color="rgba(255, 255, 255, 0.50)" size="2.778vw" bold="500">/&nbsp;{appliedNum}&nbsp;명&nbsp;모의지원</Typography>
       </TextWrapper>
     </Container2>
+  )
+}
+
+export function Card0303({currentApplications,TO}: Card0303Props){
+  return (
+    <Container1>
+      <TextWrapper style={{top: '4.167vw'}}>
+        <Typography size="3.889vw" bold="600" color="rgba(255, 255, 255, 0.70)">
+          실시간 지원자
+        </Typography>
+      </TextWrapper>
+      <Image4Wrapper>
+        {/* 사진이 아직 구글 드라이브에 안들어와서 */}
+        <img src={process.env.PUBLIC_URL + `/designImage/character/cards/oyj 1.png`} alt="char 4" />
+      </Image4Wrapper>
+      <TextWrapper style={{top: '32.778vw'}}>
+        <Typography color="#D85888" size="5.556vw" bold="700">
+          {currentApplications}&nbsp;명
+        </Typography>
+      </TextWrapper>
+      <TextWrapper style={{top: '38.333vw'}}>
+        <Typography color="rgba(67, 67, 67, 0.80)" size="2.778vw" bold="500">/&nbsp;{TO}&nbsp;명&nbsp;정원</Typography>
+      </TextWrapper>
+    </Container1>
   )
 }
 const Container1 = styled.div`
