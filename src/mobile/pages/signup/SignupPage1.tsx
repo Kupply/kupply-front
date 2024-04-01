@@ -13,6 +13,7 @@ import { CodeVerification } from "../../components/signup/VerificationForm";
 import VerificationButton from "../../components/signup/VerificationButton";
 import Button03 from "../../assets/buttons/Button03";
 import Button04 from "../../assets/buttons/Button04";
+import { ModalHandle } from "../../components/signup/ModalHandle";
 
 export default function SignUpPage1(){
   const navigate = useNavigate();
@@ -92,7 +93,11 @@ export default function SignUpPage1(){
 
   return(
     <>
-    {/* Modal Handle에 대한 컴포넌트 넣어주기 */}
+    <ModalHandle
+      setBlank={setBlank} 
+      onClickToggleLargeModal={onClickToggleLargeModal} 
+      onClickToggleSmallModal={onClickToggleSmallModal}
+    />
     <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
       <MessageContent>
         <Typography size="16px" bold="700">인증번호가 전송되었습니다.</Typography>

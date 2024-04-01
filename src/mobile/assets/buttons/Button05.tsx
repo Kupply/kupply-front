@@ -27,7 +27,7 @@ const MainWrapper = styled.button<Button05Props>`
   width: ${(props) => (props.size === 'small' ? '81.67vw' : '91.11vw')};
   height: auto;
   box-sizing: border-box;
-  padding: 3.61vw 9.44vw;
+  padding: 0vw 9.44vw;
   border: ${(props) => (props.state === 'pressed' ? 'none' : '0.28vw solid #D85888')};
   display: flex;
   justify-content: center;

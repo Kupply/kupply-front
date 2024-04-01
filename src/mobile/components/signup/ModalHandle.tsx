@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from "react";
 //import SignUpSmall from "./modals/SignUpSmall";
-//import SignUpLarge1 from "./modals/SignUpLarge1";
+import SignUpLarge1 from "./modals/SignUpLarge1";
 //import SignUpLarge2 from "./modals/SignUpLarge2";
 //import SignUpLarge3 from "./modals/SignUpLarge3";
 import { sendEmail } from "../../../utils/SignUpFunctions";
@@ -39,16 +39,15 @@ export function ModalHandle ({setBlank, onClickToggleLargeModal, onClickToggleSm
   
             case 1:
               return (
-                <></>
-                // <SignUpLarge1
-                //   email={email.info}
-                //   setBlank={setBlank}
-                //   currentModal={currentModal}
-                //   isOpenModal={isOpenModal}
-                //   setCurrentModal={setCurrentModal}
-                //   setOpenModal={setOpenModal}
-                //   onClickModal={onClickToggleLargeModal}
-                // />
+                <SignUpLarge1
+                  email={email.info}
+                  setBlank={setBlank}
+                  currentModal={currentModal}
+                  isOpenModal={isOpenModal}
+                  setCurrentModal={setCurrentModal}
+                  setOpenModal={setOpenModal}
+                  onClickModal={onClickToggleLargeModal}
+                />
               );
             case 2:
               return (

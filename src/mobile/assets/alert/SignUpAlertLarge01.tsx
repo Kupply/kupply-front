@@ -1,13 +1,10 @@
-import ModalLarge from '../../../components/base/ModalLarge';
-
+import ModalLarge from '../../components/base/ModalLarge';
 import styled from 'styled-components';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import Typography from '../../../assets/Typography';
-import VerificationButton from '../../../assets/buttons/OldVerificationButton';
+import Button05 from '../buttons/Button05';
+import Icon02 from '../../../assets/icons/Icon02';
 
-
-//import Icon03 from '../icons/Icon03';
-//import Icon02 from '../icons/Icon02';
 
 interface SignUpAlertLargeProps {
   onClickModal: () => void;
@@ -20,7 +17,7 @@ interface SignUpAlertLargeProps {
   setBlank: () => void;
 }
 
-function SignUpAlertLarge01({
+function SignUpAlertMobileLarge01({
   onClickModal,
   setOpenModal,
   isOpenModal,
@@ -38,41 +35,36 @@ function SignUpAlertLarge01({
             setOpenModal(!isOpenModal);
           }}
         >
-          {/* <Icon03 size={'3.125vw'} /> */}
-        </TopButton>
-        <TopButton
-          onClick={() => {
-            setOpenModal(!isOpenModal);
-          }}
-        >
-          {/* <Icon02 size={'3.125vw'} /> */}
+          <Icon02 size='3.61vw'/>
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '6.771vw' }}></div>
-      <AlertIconExclamation width="5.885vw" height="5.885vw" />
-      <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
+      <div style={{ height: '20.833vw' }}></div>
+      <AlertIconExclamation width="22.22vw" height="22.22vw" />
+      <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
         아직 인증번호를 받지 못하셨나요?
       </Typography>
-      <Typography size={'0.9375vw'} color="#141414" style={{ marginTop: '1.25vw' }}>
+      <Typography size={'3.33vw'} color="#141414" style={{ marginTop: '4.44vw' }}>
         새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
       </Typography>
       <ActionWrapper>
-        <VerificationButton
+        <Button05
           onClick={async () => {
             setCurrentModal(currentModal + 2);
             setBlank();
             await sendEmail(email);
           }}
+          style={{width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw'}}
         >
           인증번호 다시 받기
-        </VerificationButton>
-        <VerificationButton
+        </Button05>
+        <Button05
           onClick={() => {
             setCurrentModal(currentModal + 1);
           }}
+          style={{width: '294px', height: '42px', padding: '0px 34px'}}
         >
           이메일 주소 변경하기
-        </VerificationButton>
+        </Button05>
       </ActionWrapper>
     </ModalLarge>
   );
@@ -80,8 +72,8 @@ function SignUpAlertLarge01({
 
 const TopButton = styled.button`
   display: flex;
-  width: 3.125vw;
-  height: 3.125vw;
+  width: 13px;
+  height: 13px;
   justify-content: center;
   align-items: center;
 
@@ -93,8 +85,8 @@ const ActionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5625vw;
-  margin-top: 3.75vw;
+  gap: 16px;
+  margin-top: 51px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -104,4 +96,4 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export default SignUpAlertLarge01;
+export default SignUpAlertMobileLarge01;

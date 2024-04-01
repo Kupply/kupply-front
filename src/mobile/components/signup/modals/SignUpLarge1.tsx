@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { sendEmail } from '../../../../utils/SignUpFunctions';
-import SignUpAlertLarge01 from '../../../../assets/alert/SignUpAlertLarge01';
+//import SignUpAlertLarge01 from '../../../../assets/alert/SignUpAlertLarge01';
+import SignUpAlertMobileLarge01 from '../../../assets/alert/SignUpAlertLarge01';
 
 export interface ModalProps {
   currentModal: number;
@@ -18,17 +19,16 @@ export default function SignUpLarge1(props: ModalProps) {
   return (
     <Main>
       {isOpenModal && (
-        // <SignUpAlertLarge
-        //   onClickModal={onClickModal}
-        //   setOpenModal={setOpenModal}
-        //   isOpenModal={isOpenModal}
-        //   setBlank={setBlank}
-        //   setCurrentModal={setCurrentModal}
-        //   currentModal={currentModal}
-        //   email={email}
-        //   sendEmail={sendEmail}
-        // />
-        <></>
+        <SignUpAlertMobileLarge01
+          onClickModal={onClickModal}
+          setOpenModal={setOpenModal}
+          isOpenModal={isOpenModal}
+          setBlank={setBlank}
+          setCurrentModal={setCurrentModal}
+          currentModal={currentModal}
+          email={email}
+          sendEmail={sendEmail}
+        />
       )}
     </Main>
   );
