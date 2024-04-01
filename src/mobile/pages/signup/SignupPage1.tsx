@@ -19,7 +19,6 @@ export default function SignUpPage1(){
   const navigate = useNavigate();
   // signup에서 가져오는 
   const email = sessionStorage.getItem('email') || '';
-  console.log('email', email);
   const [codeNum, setCodeNum] = useRecoilState(verificationCodeState);
   const {num1, num2, num3, num4, num5, num6} = codeNum;
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
@@ -74,9 +73,7 @@ export default function SignUpPage1(){
     //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
     if (!isOpenModal) {
       setSendNum(sendNum + 1);
-      console.log('this is from the onClickToggleSmallModal', sendNum);
       const email = sessionStorage.getItem('email') || '';
-      console.log('this is from the onClickToggleSmallModal testing email', email);
       await sendEmail(email);
     }
     setBlank();

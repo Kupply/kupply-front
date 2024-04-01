@@ -13,7 +13,7 @@ function Button15({ children = '합격자료' }) {
 }
 
 const MainWrapper = styled.button`
-  width: auto;
+  width: fit-content;
   height: auto;
   box-sizing: border-box;
   padding: 1.67vw 2.78vw;

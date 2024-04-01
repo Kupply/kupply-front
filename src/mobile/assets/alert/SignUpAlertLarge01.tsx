@@ -35,7 +35,7 @@ function SignUpAlertMobileLarge01({
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size='3.61vw'/>
+          <Icon02 size='100%'/>
         </TopButton>
       </ButtonWrapper>
       <div style={{ height: '20.833vw' }}></div>
@@ -61,7 +61,7 @@ function SignUpAlertMobileLarge01({
           onClick={() => {
             setCurrentModal(currentModal + 1);
           }}
-          style={{width: '294px', height: '42px', padding: '0px 34px'}}
+          style={{width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw'}}
         >
           이메일 주소 변경하기
         </Button05>
@@ -72,8 +72,6 @@ function SignUpAlertMobileLarge01({
 
 const TopButton = styled.button`
   display: flex;
-  width: 13px;
-  height: 13px;
   justify-content: center;
   align-items: center;
 
