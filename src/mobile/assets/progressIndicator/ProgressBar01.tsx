@@ -53,7 +53,7 @@ const StepItem = styled.div<StepProps>`
     background: ${(props) => (props.stepType === 'inactive' ? '#fcecee' : '#e57c90')};
     position: absolute;
     width: 100%;
-    height: 0.208vw; // 4px;
+    height: 4px;
     right: 50%;
     top: 33.3333%;
     transform: translateY(100%);

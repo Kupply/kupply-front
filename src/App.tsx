@@ -22,6 +22,8 @@ import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
 
+import MobileTest from './pages/mobile/MobileTest';
+
 interface RouteConfig {
   path: string;
   element: React.ReactNode;
@@ -43,7 +45,8 @@ export default function App() {
   return (
     <RecoilRoot>
       {isMobile ? (
-        <MobilePage />
+        // <MobilePage />
+        <MobileTest />
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
