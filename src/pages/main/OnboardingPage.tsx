@@ -23,10 +23,11 @@ function OnboardingPage() {
 }
 
 const MainWrapper = styled.div`
-  width: auto;
+  width: 100vw;
   height: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export default OnboardingPage;
