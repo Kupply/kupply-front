@@ -327,7 +327,7 @@ const ContentsWrapper = styled.div<{
   display: flex; // 가로 정렬
   flex-direction: row;
   justify-content: ${(props) => (props.justify ? props.justify : 'space-around')};
-  width: ${(props) => (props.size ? props.size : '50%')};
+  width: {(props) => (props.size ? props.size : '50%')};
   min-width: ${(props) => (props.minSize ? props.minSize : '')};
   max-width: ${(props) => (props.maxSize ? props.maxSize : '')};
 
