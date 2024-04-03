@@ -10,7 +10,7 @@ import { SidebarContent3 } from "../../components/settings/sidebar-content/Sideb
 import { SidebarContent4 } from "../../components/settings/sidebar-content/SidebarContent4";
 import { useEffect } from "react";
 import client from "../../utils/HttpClient";
-import { GpaChangeModal } from "../../components/settings/GpaChangeModal";
+//import { GpaChangeModal } from "../../components/settings/GpaChangeModal";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
@@ -62,7 +62,7 @@ export function SettingsPage(){
 
   return (
     <Wrapper>
-      {modalOpen && isGpaChanged.changed && <GpaChangeModal/>}
+      {/* {modalOpen && isGpaChanged.changed && <GpaChangeModal/>} */}
       <SideBar/>
       {(() => {
         switch(selected){

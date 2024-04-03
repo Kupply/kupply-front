@@ -64,7 +64,9 @@ export function SignUp5Page(){
   const handleNext = async () => {
     if (isButtonActive) {
       try {
-        await join(sessionStorage.getItem('role') || '');
+        const getRole = sessionStorage.getItem('role') || '';
+        await join(getRole);
+        console.log('signup5', getRole);
         navigate('/signupcomplete');
       } catch (e) {
         alert(e);
@@ -144,9 +146,9 @@ export function SignUp5Complete(){
 
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   // 잠시 수정
-  // useEffect(() => {
-  //   if (!sessionStorage.getItem('candidateGPA') && !sessionStorage.getItem('passerGPA')) navigate('/');
-  // }, []);
+  useEffect(() => {
+    if (!sessionStorage.getItem('candidateGPA') && !sessionStorage.getItem('passerGPA')) navigate('/');
+  }, []);
 
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {
@@ -204,7 +206,8 @@ const TextTitle = styled.div`
 `;
 
 const TextOutBox = styled.div`
-  width: 100%; // 32.7083vw; // (628/1920)*100vw  width: 628px;
+  //width: 100%; // 32.7083vw; // (628/1920)*100vw  width: 628px;
+  width: 31.7vw; 
   //max-width: 628px;
   height: 228px;
   flex-shrink: 0;
@@ -222,6 +225,7 @@ const TextOutBox = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 123.54%;
+  z-index: 1;
 `;
 
 const ButtonsWrapper = styled.div`

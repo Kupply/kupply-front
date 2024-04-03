@@ -1,4 +1,4 @@
-import ModalMedium from "../base/ModalLarge";
+import ModalMedium from "../base/ModalMedium";
 import Typography from "../../assets/Typography";
 import styled from "styled-components";
 import { settingsModalState } from "../../store/atom";
@@ -8,11 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { useSubmit2 } from "../../utils/SettingSubmitFunctions";
 import Button01 from "../../assets/buttons/Button01";
 
+interface GpaChangeModalProps{
+  modalOpen: boolean;
+  setModalOpen: (state: boolean) => void;
+  thirdSubmit: () => Promise<void>;
+};
 
-export function GpaChangeModal(){
-  const [modalOpen, setModalOpen] = useRecoilState(settingsModalState);
+export function GpaChangeModal(props: GpaChangeModalProps){
+  const {modalOpen, setModalOpen, thirdSubmit} = props;
   const navigate = useNavigate();
-  const {thirdSubmit} = useSubmit2();
 
   return (
     <Main>
@@ -74,17 +78,7 @@ export function GpaChangeModal(){
   )
 }
 
-// const CloseButton = styled.button`
-//   display: flex;
-//   width: 60px;
-//   height: 60px;
-//   justify-content: center;
-//   align-items: center;
-//   position: absolute;
-//   top: 32px;
-//   right: 40px;
-//   cursor: pointer;
-// `;
+
 const CloseButton = styled.button`
   display: flex;
   //width: 60px; 
@@ -117,6 +111,7 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
+  margin-top: 50px;
   left: 28.803vw;
   z-index: 1005;
 `;
