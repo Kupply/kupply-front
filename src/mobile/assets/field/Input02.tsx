@@ -13,7 +13,7 @@ import styled, { css } from 'styled-components';
 const baseWrapper = css`
   display: flex;
   width: 100%;
-  max-width: 328px;
+  //max-width: 328px;
   min-width: 250px;
   gap: 10px;
   border-radius: 10px;
@@ -23,7 +23,8 @@ const baseWrapper = css`
     right: 0.521vw; //10px;
   }
 
-  height: 42px;
+  //height: 42px;
+  height: 100%;
   box-sizing: border-box;
 
   padding: 12px 16px;
@@ -84,7 +85,7 @@ const FilledText = styled.span`
   font-weight: 500;
 `;
 
-type StateOptions = 'default' | 'filled' | 'focused' | 'typing';
+export type StateOptions = 'default' | 'filled' | 'focused' | 'typing' ;
 
 const stateMapping = {
   focused: focusedWrapper,

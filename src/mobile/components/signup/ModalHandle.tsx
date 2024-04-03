@@ -1,12 +1,12 @@
 import React, {useState, useCallback} from "react";
-//import SignUpSmall from "./modals/SignUpSmall";
+import SignUpSmall from "./modals/SignUpSmall";
 import SignUpLarge1 from "./modals/SignUpLarge1";
-//import SignUpLarge2 from "./modals/SignUpLarge2";
-//import SignUpLarge3 from "./modals/SignUpLarge3";
+import SignUpLarge2 from "./modals/SignUpLarge2";
+import SignUpLarge3 from "./modals/SignUpLarge3";
 import { sendEmail } from "../../../utils/SignUpFunctions";
 import { currentModalState, isOpenModalState,userState } from "../../../store/atom";
 import { useRecoilState } from "recoil";
-import { StateOptions } from "../../assets/field/Input01";
+import { StateOptions } from "../../assets/field/Input02";
 
 interface ModalHandleProps {
   setBlank: () => void;
@@ -27,13 +27,13 @@ export function ModalHandle ({setBlank, onClickToggleLargeModal, onClickToggleSm
             case 0:
               return (
                 <div style={{ background: 'red', width: '100%', zIndex: 20, transform: 'translateY(+35.375vw)', }}>
-                  {/* <SignUpSmall
+                  <SignUpSmall
                     currentModal={currentModal}
                     isOpenModal={isOpenModal}
                     setCurrentModal={setCurrentModal}
                     setOpenModal={setOpenModal}
                     onClickModal={onClickToggleSmallModal}
-                  /> */}
+                  />
                 </div>
               );
   
@@ -51,33 +51,31 @@ export function ModalHandle ({setBlank, onClickToggleLargeModal, onClickToggleSm
               );
             case 2:
               return (
-                <></>
-                // <SignUpLarge2
-                //   currentModal={currentModal}
-                //   isOpenModal={isOpenModal}
-                //   setCurrentModal={setCurrentModal}
-                //   setOpenModal={setOpenModal}
-                //   onClickModal={onClickToggleLargeModal}
-                //   email={email.info}
-                //   emailState={email.infoState}
-                //   setEmail={(v) => setEmail((prev) => ({...prev, info: v}))}
-                //   setEmailState={(s) => setEmail((prev) => ({...prev, infoState: s}))}
-                //   setBlank={setBlank}
-                // />
+                <SignUpLarge2
+                  currentModal={currentModal}
+                  isOpenModal={isOpenModal}
+                  setCurrentModal={setCurrentModal}
+                  setOpenModal={setOpenModal}
+                  onClickModal={onClickToggleLargeModal}
+                  email={email.info}
+                  emailState={email.infoState as StateOptions}
+                  setEmail={(v: string) => setEmail((prev) => ({...prev, info: v}))}
+                  setEmailState={(s: StateOptions) => setEmail((prev) => ({...prev, infoState: s}))}
+                  setBlank={setBlank}
+                />
               );
   
             case 3:
-              // setTimerTime(3);
+              //setTimerTime(3);
               return (
-                <></>
-                // <SignUpLarge3
-                //   currentModal={currentModal}
-                //   isOpenModal={isOpenModal}
-                //   setCurrentModal={setCurrentModal}
-                //   setOpenModal={setOpenModal}
-                //   onClickModal={onClickToggleLargeModal}
-                //   email={email.info}
-                // />
+                <SignUpLarge3
+                  currentModal={currentModal}
+                  isOpenModal={isOpenModal}
+                  setCurrentModal={setCurrentModal}
+                  setOpenModal={setOpenModal}
+                  onClickModal={onClickToggleLargeModal}
+                  email={email.info}
+                />
               );
   
             default:
