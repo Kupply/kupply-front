@@ -1,20 +1,15 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 
 import Typography from '../../../assets/Typography';
 
 export interface CheckBox01Props extends React.ComponentPropsWithoutRef<'div'> {
-  initialState?: 'default' | 'active';
+  state?: 'default' | 'active';
+  onImageClick?: () => void;
 }
+// parent component에서 state를 바꾸는 기능 추가시, props로 onClick 대신 onImageClick 사용 -> image를 눌렀을 시만 동작
 
 function CheckBox01(props: CheckBox01Props) {
-  const { initialState = 'default', children = '약관 전체동의 하기', ...rest } = props;
-
-  const [state, setState] = useState(initialState);
-
-  function handleButtonClick() {
-    setState((prevState) => (prevState === 'default' ? 'active' : 'default'));
-  }
+  const { state = 'default', children = '약관 전체동의 하기', onImageClick, ...rest } = props;
 
   return (
     <MainWrapper {...rest}>
@@ -24,7 +19,7 @@ function CheckBox01(props: CheckBox01Props) {
             ? '../../../designImage/mobile/checkBox/CheckBox1_2.svg'
             : '../../../designImage/mobile/checkBox/CheckBox1_1.svg'
         }
-        onClick={handleButtonClick}
+        onClick={onImageClick}
       />
       <Typography size="3.89vw" bold="700" style={{ lineHeight: '128.57%' }}>
         {children}
