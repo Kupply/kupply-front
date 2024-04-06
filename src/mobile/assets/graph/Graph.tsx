@@ -15,6 +15,26 @@ import { Context } from 'chartjs-plugin-datalabels';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
+// f(x) = -(x-3)^2*(x-4.5)
+const tmpRandomData = [
+  { gpa: 3, num: 0 },
+  { gpa: 3.1, num: 0.014 },
+  { gpa: 3.2, num: 0.052 },
+  { gpa: 3.3, num: 0.108 },
+  { gpa: 3.4, num: 0.176 },
+  { gpa: 3.5, num: 0.25 },
+  { gpa: 3.6, num: 0.324 },
+  { gpa: 3.7, num: 0.392 },
+  { gpa: 3.8, num: 0.448 },
+  { gpa: 3.9, num: 0.486 },
+  { gpa: 4, num: 0.5 },
+  { gpa: 4.1, num: 0.484 },
+  { gpa: 4.2, num: 0.432 },
+  { gpa: 4.3, num: 0.338 },
+  { gpa: 4.4, num: 0.196 },
+  { gpa: 4.5, num: 0 },
+];
+
 // 화살표
 const arrowPlugin = {
   id: 'arrowPlugin',
@@ -377,7 +397,7 @@ export default function MobileArchiveGraph(prop: GpaLineChartProps) {
           drawBorder: false, // x 축 경계선도 숨깁니다.
         },
         title: {
-          display: true, // x 축 가운데 선 타이틀
+          display: false, // x 축 가운데 선 타이틀
           text: '학점', // x 축 타이틀 텍스트입니다.
         },
         ticks: {
@@ -394,7 +414,7 @@ export default function MobileArchiveGraph(prop: GpaLineChartProps) {
           drawBorder: false, // y 축 경계선도 숨깁니다.
         },
         title: {
-          display: true, // y 축 가운데 선 타이틀
+          display: false, // y 축 가운데 선 타이틀
           text: '합격자', // y 축 타이틀을 표시합니다.
         },
         ticks: {
@@ -414,7 +434,7 @@ export default function MobileArchiveGraph(prop: GpaLineChartProps) {
         y: {
           display: true,
           text: '합격자',
-          offsetX: 40,
+          offsetX: 20,
         },
         x: {
           display: true,
@@ -497,20 +517,20 @@ export default function MobileArchiveGraph(prop: GpaLineChartProps) {
         const yMid = (yAxis.bottom - yAxis.top) / 2 + yAxis.top;
         ctx.save();
         // x 축 중앙 그리드 라인 그리기
-        ctx.beginPath();
-        ctx.moveTo(xMid, yAxis.top);
-        ctx.lineTo(xMid, yAxis.bottom);
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(0,0,0,0.1)'; // 색상과 불투명도 조절
-        ctx.stroke();
+        // ctx.beginPath();
+        //ctx.moveTo(xMid, yAxis.top);
+        //ctx.lineTo(xMid, yAxis.bottom);
+        //ctx.lineWidth = 1;
+        //ctx.strokeStyle = 'rgba(0,0,0,0.1)'; // 색상과 불투명도 조절
+        //ctx.stroke();
 
         // y 축 중앙 그리드 라인 그리기
-        ctx.beginPath();
-        ctx.moveTo(xAxis.left, yMid);
-        ctx.lineTo(xAxis.right, yMid);
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(0,0,0,0.1)'; // 색상과 불투명도 조절
-        ctx.stroke();
+        //ctx.beginPath();
+        //ctx.moveTo(xAxis.left, yMid);
+        //ctx.lineTo(xAxis.right, yMid);
+        //ctx.lineWidth = 1;
+        //ctx.strokeStyle = 'rgba(0,0,0,0.1)'; // 색상과 불투명도 조절
+        //ctx.stroke();
 
         ctx.restore();
       },
