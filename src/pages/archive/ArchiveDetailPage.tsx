@@ -779,7 +779,7 @@ const tmpMedianGpa = { gpa: 4.0, num: 7 };
 const tmpModeGpa = { gpa: 4.25, num: 11 };
 const tmpMinGpa = { gpa: 3.0, num: 2 };
 
-const tmpRandomData = [
+const tmpRandomData2 = [
   {
     gpa: 4.5,
     num: 7,
@@ -824,4 +824,23 @@ const tmpRandomData = [
     gpa: 3.0,
     num: 2,
   },
+];
+
+const tmpRandomData = [
+  { gpa: 3, num: 0 },
+  { gpa: 3.1, num: 0.014 },
+  { gpa: 3.2, num: 0.052 },
+  { gpa: 3.3, num: 0.108 },
+  { gpa: 3.4, num: 0.176 },
+  { gpa: 3.5, num: 0.25 },
+  { gpa: 3.6, num: 0.324 },
+  { gpa: 3.7, num: 0.392 },
+  { gpa: 3.8, num: 0.448 },
+  { gpa: 3.9, num: 0.486 },
+  { gpa: 4, num: 0.5 },
+  { gpa: 4.1, num: 0.484 },
+  { gpa: 4.2, num: 0.432 },
+  { gpa: 4.3, num: 0.338 },
+  { gpa: 4.4, num: 0.196 },
+  { gpa: 4.5, num: 0 },
 ];

@@ -1,10 +1,9 @@
-//CarouselKey부분 미완 - 에셋 완성 기다리는중
-
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
 import Typography from '../../../assets/Typography';
 import Button15 from '../buttons/Button15';
+import CarouselKey from '../CarouselKey';
 
 export interface Banner02Props extends React.ComponentPropsWithoutRef<'button'> {
   images?: string[];
@@ -67,6 +66,7 @@ function Banner02(props: Banner02Props) {
         onClick={RightArrowClick}
         style={{ right: '7.01%' }}
       />
+      <CarouselKey type={index} style={{ position: 'absolute', left: '41.77%', bottom: '4.27%' }} />
     </MainWrapper>
   );
 }
