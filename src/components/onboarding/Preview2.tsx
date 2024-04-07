@@ -109,10 +109,7 @@ const Image2 = styled.img<{ isVisible: boolean }>`
   top: 51.9%;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   transition: opacity 2s ease-in-out;
-  display: ${({ isVisible }) =>
-    isVisible
-      ? 'block'
-      : 'none'}; // Ensures that the element is not just transparent, but also not taking up space when not visible.
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 `;
 
 const Image3 = styled.img<{ isVisible: boolean }>`

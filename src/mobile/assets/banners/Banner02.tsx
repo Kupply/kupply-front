@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../../assets/Typography';
 import Button15 from '../buttons/Button15';
@@ -9,6 +10,7 @@ export interface Banner02Props extends React.ComponentPropsWithoutRef<'button'> 
   images?: string[];
   titles?: string[];
   contents?: string[][];
+  links?: string[];
 }
 
 function Banner02(props: Banner02Props) {
@@ -24,10 +26,13 @@ function Banner02(props: Banner02Props) {
       ['당신이 지원한 이중전공,', '실시간 지원현황에 대한 정보를 알려드릴게요.'],
       ['아직 1지망과 2지망을 고민중이신가요?', '지난 학기 성적 커트라인 한 눈에 비교하고', '결정하세요.'],
     ],
+    links = ['/archive', '/landing', '/myboard'],
   } = props;
 
   const [index, setIndex] = useState(0);
   const [resetIntervalFlag, setResetIntervalFlag] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,10 +51,14 @@ function Banner02(props: Banner02Props) {
     setResetIntervalFlag((prevFlag) => !prevFlag);
   }
 
+  function handleButtonClick() {
+    navigate(links[index]);
+  }
+
   return (
     <MainWrapper index={index} images={images}>
       <TextBox index={index}>
-        <Button15>{titles[index]}</Button15>
+        <Button15 onClick={() => navigate(links[index])}>{titles[index]}</Button15>
         <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%', opacity: '0.8' }}>
           {contents[index].map((sentence, sentenceIndex) => (
             <div key={sentenceIndex}>{sentence}</div>
