@@ -560,7 +560,7 @@ const SettingsPage = () => {
           </ContentsWrapper>
           <div>
             <Button03
-              style={{ marginTop: '12.760vw', width: '100%' }}
+              style={{ marginTop: '10vw', width: '100%' }}
               state={isApplied ? 'pressed' : 'disabled'}
               onClick={() => {
                 secondSubmit();
