@@ -95,6 +95,7 @@ const DialogBox = styled.dialog`
   // position: fixed;
   // top: 75px;
   z-index: 10;
+  padding: 0;
 
   margin-top: auto;
   margin-bottom: auto;
