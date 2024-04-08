@@ -6,7 +6,10 @@ import Input01, { StateOptions } from "../../assets/field/Input01";
 import { useNavigate } from "react-router-dom";
 import client from "../../../utils/HttpClient";
 import Button05 from "../../assets/buttons/Button05";
-
+import Card01 from "../../assets/cards/Card01";
+import Card02 from "../../assets/cards/Card02";
+import { Card0301, Card0302, Card0303 } from "../../assets/cards/Card03";
+import Card05 from "../../assets/cards/Card05";
 
 export default function SignUpPage0(){
   const [ID, setID] = useState('');
@@ -47,6 +50,12 @@ export default function SignUpPage0(){
   // CTA아직 안 만들어져서 빼고 만듦
   return (
     <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
+      {/* <Card01 korName="경영학과" engName="Business School"/>
+      <Card02 korName="심리학부" hopeMajor="2지망"/>
+      <Card0301 avgPassNum={31}/>
+      <Card0302 passNum={10} appliedNum={31}/>
+      <Card0303 currentApplications={10} TO={15}/>
+      <Card05 kind="Mode" text="합격자 최저 학점" textNumber={3.0}/> */}
       <MessageContent>
         <Typography size="20px" bold="700">환영합니다!</Typography>
         <Typography size="12px" bold="500" style={{lineHeight: '16px', wordBreak: 'break-all'}}>회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.</Typography>

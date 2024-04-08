@@ -49,7 +49,7 @@ export default function App() {
   return (
     <RecoilRoot>
       {isMobile ? (
-        <SignUpPage1/>
+        <SignUpPage0/>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
