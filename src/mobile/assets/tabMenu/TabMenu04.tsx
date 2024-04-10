@@ -30,7 +30,7 @@ const Container = styled.button<{ status: ButtonStatus }>`
   align-items: center;
   justify-content: center;
 
-  height: 30px;
+  height: 8.33vw;
   padding: 2.78vw 3.33vw;
   gap: 6px;
   flex-shrink: 0;

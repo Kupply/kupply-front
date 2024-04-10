@@ -24,6 +24,7 @@ import { RecoilRoot } from 'recoil';
 
 import MobileTest from './pages/mobile/MobileTest';
 import MobileArchivePage from './pages/mobile/MobileArchive';
+import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 
 interface RouteConfig {
   path: string;
@@ -48,6 +49,7 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
+        // <MobileArchiveDetailPage />
         <MobileArchivePage />
       ) : (
         <Wrapper>
