@@ -32,7 +32,7 @@ const ArchiveDetailPage = () => {
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [enoughData, setEnoughData] = useState<boolean>(true); // false 일시적 수정
+  const [enoughData, setEnoughData] = useState<boolean>(false); // false 일시적 수정
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
@@ -209,11 +209,7 @@ const ArchiveDetailPage = () => {
             <SelectionInfoContent>
               <Text>경쟁률</Text>
               <SelectionInfoValue>
-                {numOfSelection === 0
-                  ? '집계불가'
-                  : activeIdx === 0
-                  ? `${(numOfSelection / numOfApplication).toFixed(2)} : 1`
-                  : `1`}
+                {numOfSelection === 0 ? '집계불가' : `${(numOfApplication / numOfSelection).toFixed(2)} : 1`}
               </SelectionInfoValue>
             </SelectionInfoContent>
           </SelectionInfoContentsWrapper>
