@@ -15,6 +15,7 @@ import VerificationButton from "../../components/signUp/VerificationButton";
 import axios from "axios";
 import client from "../../utils/HttpClient";
 
+
 export function SignUp1Page(){
   const navigate = useNavigate();
   // signup에서 가져오는 
