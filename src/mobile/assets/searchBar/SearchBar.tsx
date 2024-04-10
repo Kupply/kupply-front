@@ -44,7 +44,7 @@ const Container = styled.div`
   flex-direction: row;
   gap: 0px;
   width: 95%;
-  max-width: 328px;
+  //max-width: 328px;
   z-index: 2;
 
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
@@ -58,7 +58,7 @@ const Container = styled.div`
 
 const InputBox = styled.div`
   width: 100%;
-  max-width: 328px;
+  //max-width: 328px;
   height: 36px;
   position: relative;
 
