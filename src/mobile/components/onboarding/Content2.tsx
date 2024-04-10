@@ -41,7 +41,7 @@ const Animation = keyframes`
 `;
 
 const MainWrapper = styled.div`
-  width: 100vw;
+  width: 90.56vw;
   height: 96.39vw;
   padding: 40.83vw 0 0 9.44vw;
   display: flex;

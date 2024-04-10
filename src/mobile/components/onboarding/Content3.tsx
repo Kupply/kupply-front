@@ -49,7 +49,7 @@ function Content3() {
 }
 
 const MainWrapper = styled.div`
-  width: 100vw;
+  width: 90.56vw;
   height: 99.17vw;
   padding: 53.33vw 0 0 9.44vw;
   display: flex;
