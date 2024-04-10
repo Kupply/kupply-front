@@ -35,7 +35,7 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
   const isSelected: boolean = !!value;
 
   return (
-    <div style={{ width: '80%', maxWidth: '328px', minWidth: '190px' }} ref={ref}>
+    <div style={{ width: '100%', maxWidth: '328px', minWidth: '190px' }} ref={ref}>
       <DropDownBtn isOpen={isOpen} isSelected={isSelected} onClick={toggleIsOpen} type="button" value={value || title}>
         {value || title}
         <AngleDown isOpen={isOpen} isSelected={isSelected}>
@@ -103,7 +103,7 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   width: 100%;
   max-width: 628px;
   height: 42px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #b9b9b9;
   background: #fff;
 

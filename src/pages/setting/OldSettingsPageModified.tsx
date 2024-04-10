@@ -28,6 +28,9 @@ import Icon02 from '../../assets/icons/Icon02';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
 import { GpaChangeModal } from '../../components/settings/GpaChangeModal';
+import {Card0301, Card0302} from '../../mobile/assets/cards/Card03';
+//import Card01 from '../../assets/cards/Card01';
+import Card01 from '../../mobile/assets/cards/Card01';
 
 interface SettingsPageProps {
   selected: number;
@@ -492,6 +495,10 @@ const SettingsPage = () => {
           >
             저장하기
           </Button03>
+          <Card0301 avgPassNum={30}/>
+          <Card0302 passNum={10} appliedNum={30}/>
+          <Card01 korName="경영학과"
+                  engName="Business School"/>
         </BodyContainer>
       )}
       {selected === 1 && (

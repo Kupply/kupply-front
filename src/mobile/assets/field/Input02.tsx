@@ -2,10 +2,9 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
-import EyeIcon from '../../../assets/icons/OldEyeIcon';
-import Icon07 from '../../../assets/icons/Icon07';
 
-import Icon08 from '../../../assets/icons/Icon08';
+//import EyeIcon from '../../../assets/icons/EyeIcon';
+//import EyeIcon from '../../../assets/icons/NewEyeIcon';
 
 /* 
     Width는 부모 요소(Wrapper)의 width를 따라갑니다.
@@ -14,7 +13,7 @@ import Icon08 from '../../../assets/icons/Icon08';
 const baseWrapper = css`
   display: flex;
   width: 100%;
-  max-width: 328px;
+  //max-width: 328px;
   min-width: 250px;
   gap: 10px;
   border-radius: 10px;
@@ -24,7 +23,8 @@ const baseWrapper = css`
     right: 0.521vw; //10px;
   }
 
-  height: 42px;
+  //height: 42px;
+  height: 100%;
   box-sizing: border-box;
 
   padding: 12px 16px;
@@ -85,7 +85,7 @@ const FilledText = styled.span`
   font-weight: 500;
 `;
 
-type StateOptions = 'default' | 'filled' | 'focused' | 'typing';
+export type StateOptions = 'default' | 'filled' | 'focused' | 'typing' ;
 
 const stateMapping = {
   focused: focusedWrapper,

@@ -115,7 +115,6 @@ const MainWrapper = styled.div<Banner03Props>`
   height: auto;
   margin-left: 0;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: ${(props) => (props.size === 'small' ? '1.67vw' : '5.28vw')};
 `;
