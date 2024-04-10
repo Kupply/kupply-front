@@ -192,7 +192,7 @@ function LoginPage(props: LoginPageProps) {
   return (
     <Wrapper>
       {isOpenAlert ? (
-        <div style={{transform: 'translateY(-10.375vw) translateX(+5vw)'}}>
+        <div style={{ transform: 'translateY(-10.375vw) translateX(+5vw)' }}>
           <Login2JoinModal isOpenAlert={isOpenAlert} setOpenAlert={setOpenAlert} onClickModal={handleLink2Click} />
         </div>
       ) : null}
