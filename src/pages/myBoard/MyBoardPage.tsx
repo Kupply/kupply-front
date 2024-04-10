@@ -15,8 +15,6 @@ import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (�
 import { MajorOptionsKR } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR } from '../../utils/Mappings';
 
-import Typography from '../../assets/OldTypography';
-
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
   const onClickInterest1 = useCallback(() => {
@@ -50,7 +48,7 @@ const MyBoardPage = () => {
   }, []);
 
   /////////////////////////////
-  const [isApplied, setIsApplied] = useState<boolean>(false); // *********************** 개발 위해 잠시 수정 *************************
+  const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [CurrentPic, setCurrentPic] = useState('');
 
   // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.
@@ -386,10 +384,10 @@ const MyBoardPage = () => {
               </LiveWrapper>
               <ThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
             </div>
-            <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} />
+            <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} isApplied={isApplied} />
             <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
-              <PieChart onViewMajor={onViewMajor} curData={curData} />
-              <Scatter onViewMajor={onViewMajor} curData={curData} />
+              <PieChart onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
+              <Scatter onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
             </div>
           </MainWrapper>
         </Wrapper>

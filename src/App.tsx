@@ -28,6 +28,8 @@ import SignUpPage3 from './mobile/pages/signup/SignupPage3';
 //import SignUpPage4 from './mobile/pages/signup/SignupPage4';
 import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
 
+import MobileTest from './pages/mobile/MobileTest';
+
 interface RouteConfig {
   path: string;
   element: React.ReactNode;
