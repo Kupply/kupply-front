@@ -29,6 +29,8 @@ import SignUpPage3 from './mobile/pages/signup/SignupPage3';
 import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
 
 import MobileTest from './pages/mobile/MobileTest';
+import MobileArchivePage from './pages/mobile/MobileArchive';
+import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 
 interface RouteConfig {
   path: string;
@@ -51,7 +53,10 @@ export default function App() {
   return (
     <RecoilRoot>
       {isMobile ? (
-        <SignUpPage0/>
+        // <MobilePage />
+        // <MobileTest />
+        // <MobileArchiveDetailPage />
+        <MobileArchivePage />
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
