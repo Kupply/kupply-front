@@ -56,8 +56,7 @@ const majorParamMappingPath = {
   'Division of Smart Security': 'smartsec',
 };
 
-export default function Card01({ korName, engName}: CardProps) {
-
+export default function Card01({ korName, engName }: CardProps) {
   const navigate = useNavigate();
 
   // 백엔드에서 korName이 경영대학 경영학과 이런 형태로 저장되어 있음. 이를 '경영학과'만 되도록 설정
@@ -74,17 +73,17 @@ export default function Card01({ korName, engName}: CardProps) {
   return (
     <>
       <Container>
-          <CardImageDefault>
-            <img
-              src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}.png`}
-              alt="major image default"
-            />
-          </CardImageDefault>
-          <NameWrapper>
-            <MajorNameKor>{majorKorName}</MajorNameKor>
-            <DepNameEng>{engName}</DepNameEng>
-          </NameWrapper>
-        </Container>
+        <CardImageDefault>
+          <img
+            src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}.png`}
+            alt="major image default"
+          />
+        </CardImageDefault>
+        <NameWrapper>
+          <MajorNameKor>{majorKorName}</MajorNameKor>
+          <DepNameEng>{engName}</DepNameEng>
+        </NameWrapper>
+      </Container>
     </>
   );
 }
@@ -116,7 +115,6 @@ const CardImageDefault = styled.div`
   }
 `;
 
-
 const MajorNameKor = styled.div`
   color: #141414;
   text-align: center;
@@ -133,18 +131,18 @@ const MajorNameKor = styled.div`
 `;
 
 const DepNameEng = styled.div`
-    flex-shrink: 0;
-    color: #141414;
-    text-align: center;
-    font-family: Pretendard;
-    //font-size: 10px;
-    font-size: 2.778vw;
-    font-style: normal;
-    font-weight: 400;
-    //line-height: 9px;
-    line-height: 2.5vw;
-    opacity: 0.8;
-    text-wrap: balance;
+  flex-shrink: 0;
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  //font-size: 10px;
+  font-size: 2.778vw;
+  font-style: normal;
+  font-weight: 400;
+  //line-height: 9px;
+  line-height: 2.5vw;
+  opacity: 0.8;
+  text-wrap: balance;
 `;
 
 const NameWrapper = styled.div`
@@ -154,4 +152,5 @@ const NameWrapper = styled.div`
   flex-shrink: 0;
   left: 50%;
   transform: translateX(-50%);
+  width: 80%; // 임의로 조정 (수정 필요?)
 `;
