@@ -210,7 +210,7 @@ const ContentWrapper = styled.div`
 `;
 
 const Blur = styled.div`
-  width: 67.34vw;
+  width: 68.56vw;
   height: 100vw;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(7.5px);

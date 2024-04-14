@@ -7,7 +7,7 @@ import Button02 from '../../assets/buttons/Button02';
 import Button11 from '../../assets/buttons/Button11';
 
 function Join2() {
-  const [isLogined, setIsLogined] = useState<boolean>(true);
+  const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
 
@@ -135,7 +135,7 @@ const TextFieldBox = styled.input`
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  border: 0.1vw solid #d85888;
+  border: 0.1vw solid #b9b9b9;
   padding: 1.3vw 0.94vw;
   border-radius: 0.52vw;
   background: rgba(255, 255, 255, 0.7);
@@ -152,6 +152,10 @@ const TextFieldBox = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: 100%;
+  }
+  &:focus {
+    outline: none;
+    border: 0.1vw solid #d85888;
   }
 `;
 
