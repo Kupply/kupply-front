@@ -106,7 +106,7 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
-
+  color: rgba(20, 20, 20, 0.8); // 설정이 안 되어 있어서 추가했습니다.
   cursor: pointer;
 
   position: relative;

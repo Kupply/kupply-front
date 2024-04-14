@@ -5,6 +5,8 @@ import { useCookies } from 'react-cookie';
 
 import DropDown02 from '../../mobile/assets/selectControl/DropDown02';
 import MobileArchiveGraph, { Data, LineData } from '../../mobile/assets/graph/Graph';
+import { Card0301, Card0302, Card0303 } from '../../mobile/assets/cards/Card03';
+import Card05 from '../../mobile/assets/cards/Card05';
 import { DBkeywords } from '../../common/Keyword';
 import client from '../../utils/HttpClient';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
@@ -15,7 +17,15 @@ import {
   majorNameMapping,
 } from '../../utils/Mappings';
 
-export const mockHashes = ['가나다순', '가나다순', '가나다순', '가나다순']; // 목록 모르겠음..
+// 이미지 교체 X
+// 합격자 학점 분석 수정
+// Card03 이미지 변경 -> 수정 X
+// 학기 선택에 따른 화면 전환 수정 X
+// 모자이크 X
+// 키워드 X
+// 뒤로가기 버튼 추가 X
+
+export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R'];
 
 const MobileArchiveDetailPage = () => {
   const [sortCriterion, setSortCriterion] = useState('가나다순');
@@ -39,7 +49,7 @@ const MobileArchiveDetailPage = () => {
         <DropDownText>학기선택</DropDownText>
         <DropDownBox>
           <DropDown02
-            optionList={['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순']}
+            optionList={['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R']}
             value={sortCriterion}
             setValue={setSortCriterion}
           />
@@ -51,8 +61,12 @@ const MobileArchiveDetailPage = () => {
           <RecruitText>이중전공 선발 정보</RecruitText>
         </RecruitTitleBox>
         <RecruitBox>
-          <RecruitLeftBox></RecruitLeftBox>
-          <RecruitRightBox></RecruitRightBox>
+          <RecruitLeftBox>
+            <Card0301 avgPassNum={0} /> {/*수정 필요*/}
+          </RecruitLeftBox>
+          <RecruitRightBox>
+            <Card0302 appliedNum={0} passNum={0} /> {/*수정 필요*/}
+          </RecruitRightBox>
         </RecruitBox>
 
         <RecruitTitleBox>
@@ -88,7 +102,12 @@ const MobileArchiveDetailPage = () => {
           <RecruitText>합격자 학점 분석</RecruitText>
         </RecruitTitleBox>
 
-        <GpaAnalysisBox></GpaAnalysisBox>
+        <GpaAnalysisBox>
+          <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={4.5} />
+          <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={4.5} />
+          <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={4.5} modeNumber={11} />
+          <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={4.5} />
+        </GpaAnalysisBox>
 
         <RecruitTitleBox>
           <IconImage src="../../designImage/icon/icon_19.svg" />
@@ -231,21 +250,18 @@ const GraphBox = styled.div`
 `;
 
 const GpaAnalysisBox = styled.div`
-  // Card 들어갈 박스
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 44.44vw; // 160px
-  margin-top: 5.56vw;
+  height: 45vw; // 160px 44.44vw
+  margin-top: 5vw;
 
-  border: 1px solid black;
-
-  .items {
-    flex: 1 1 160px;
-  }
+  flex-wrap: wrap;
+  column-gap: 2.22vw;
+  row-gap: 3.89vw;
 `;
 
 const KeywordBox = styled.div`

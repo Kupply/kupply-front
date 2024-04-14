@@ -1,24 +1,108 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import SearchBar from '../../mobile/assets/searchBar/SearchBar';
 import MobileTabMenu04 from '../../mobile/assets/tabMenu/TabMenu04';
 import DropDown02 from '../../mobile/assets/selectControl/DropDown02';
+import Card01 from '../../mobile/assets/cards/Card01';
+import { majorNameMapping } from '../../utils/Mappings';
+
+import client from '../../utils/HttpClient';
 
 // 이미지 화질 낮음
-// Card 적용 X
+// categoryMapping 정확하게 분류하기
+// handleSearch 역할 아직 모름.. ?
+// filteredCards 수정하기
+// 카드 누르면 해당 학과 페이지로 이동 구현 X
+
+interface CategoryMapping {
+  '인문계 캠퍼스': string[];
+  '자연계 캠퍼스': string[];
+  '독립 학부': string[];
+}
+
+export interface CardsProps {
+  clicked: number;
+  searchWord: string;
+}
 
 export const mockHashes = ['전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
 
+// 정확하게 분류 X
+const categoryMapping: CategoryMapping = {
+  '인문계 캠퍼스': [
+    '경영학과',
+    '경제학과',
+    '심리학부',
+    '미디어학부',
+    '정치외교학과',
+    '행정학과',
+    '식품자원경제학과',
+    '통계학과',
+  ],
+  '자연계 캠퍼스': [
+    '기계공학부',
+    '데이터과학과',
+    '산업경영공학부',
+    '스마트보안학부',
+    '수학과',
+    '화학과',
+    '생명과학부',
+    '생명공학부',
+    '화공생명공학부',
+    '신소재공학부',
+    '전자공학부',
+    '컴퓨터학과',
+  ],
+  '독립 학부': ['스마트보안학부'],
+};
+
 const MobileArchivePage = () => {
-  const [clicked, setClicked] = useState(1);
+  const [clicked, setClicked] = useState(0);
   const [sortCriterion, setSortCriterion] = useState('가나다순');
   const [searchWord, setSearchWord] = useState(''); // 검색어를 위한 상태
 
+  const category = mockHashes[clicked];
+  const majors = categoryMapping[category as keyof CategoryMapping] || [];
+
   const handleSearch = () => {
     console.log('검색 실행:', searchWord);
-    // 여기에 검색 로직을 추가하세요. 예: API 호출 등
   };
+
+  const cards = Object.entries(majorNameMapping).map(([key, [korName, engName]]) => ({
+    category: Object.keys(categoryMapping).find((category) => majors.includes(korName)),
+    korName,
+    engName,
+  }));
+
+  const filteredCards = cards
+    .filter((card) => {
+      if (category !== '전체보기' && !majors.includes(card.korName)) return false;
+      if (searchWord && !card.korName.toLowerCase().includes(searchWord.toLowerCase())) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      switch (sortCriterion) {
+        case '가나다순':
+          return a.korName.localeCompare(b.korName);
+        // case '선발인원순':
+        //   return a.TO - b.TO;
+        //  case '경쟁률순':
+        //    return a.compRate - b.compRate;
+        //  case '평균학점순':
+        //    return a.avgPass - b.avgPass;
+        //  case '최저학점순':
+        //    return a.minPass - b.minPass;
+        default:
+          return a.korName.localeCompare(b.korName);
+      }
+    });
+
+  const filteredSet = new Set(filteredCards.map((card) => card.korName));
+
+  const opaCards = cards.filter((card) => !filteredSet.has(card.korName));
+
   return (
     <MobilePageWrapper>
       <ImageBox>
@@ -59,7 +143,12 @@ const MobileArchivePage = () => {
             setValue={setSortCriterion}
           />
         </DropDownBox>
-        <CardWrapper></CardWrapper>
+
+        <CardWrapper>
+          {filteredCards.map((card) => (
+            <Card01 key={card.korName} korName={card.korName} engName={card.engName} />
+          ))}
+        </CardWrapper>
       </BodyBox>
     </MobilePageWrapper>
   );
@@ -98,7 +187,6 @@ const BodyBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 948px; //임의 조정
   flex-shrink: 0;
   border-radius: 3.89vw 3.89vw 0 0;
   background: #fff;
@@ -134,12 +222,12 @@ const DropDownBox = styled.div`
 const CardWrapper = styled.div`
   display: flex;
   position: relative;
+  flex-wrap: wrap;
   width: 91.11vw;
-  height: 100px;
 
   column-gap: 2.22vw;
   row-gap: 2.22vw;
-  border: 1px solid red;
+  padding-bottom: 10.28vw;
 `;
 
 //##################### TEXT #####################
