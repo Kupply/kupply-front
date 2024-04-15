@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../assets/Typography';
@@ -10,6 +10,11 @@ function Join2() {
   const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setIsLogined(true);
+    else setIsLogined(false);
+  }, []);
 
   const handleButtonClick = async () => {
     //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
@@ -135,7 +140,7 @@ const TextFieldBox = styled.input`
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  border: 0.1vw solid #b9b9b9;
+  border: 0.1vw solid #d85888;
   padding: 1.3vw 0.94vw;
   border-radius: 0.52vw;
   background: rgba(255, 255, 255, 0.7);
@@ -155,7 +160,6 @@ const TextFieldBox = styled.input`
   }
   &:focus {
     outline: none;
-    border: 0.1vw solid #d85888;
   }
 `;
 
