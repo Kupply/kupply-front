@@ -27,7 +27,7 @@ import SignUpPage2 from './mobile/pages/signup/SignupPage2';
 import SignUpPage3 from './mobile/pages/signup/SignupPage3';
 //import SignUpPage4 from './mobile/pages/signup/SignupPage4';
 import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
-
+import SignUpPage5 from './mobile/pages/signup/SignupPage5';
 
 import MobileTest from './pages/mobile/MobileTest';
 import MobileArchivePage from './pages/mobile/MobileArchive';
@@ -58,7 +58,7 @@ export default function App() {
         // <MobilePage />
         // <MobileTest />
         // <MobileArchiveDetailPage />
-        <SignUp5Page/>
+        <SignUpPage5/>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />

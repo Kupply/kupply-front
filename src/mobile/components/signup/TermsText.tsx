@@ -1,4 +1,4 @@
-import Typography from "../../assets/Typography";
+import Typography from "../../../assets/Typography";
 import styled from "styled-components";
 
 function TermsText1(){
@@ -6,7 +6,7 @@ function TermsText1(){
   return (
     <>
       <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
-      <Typography size="1.25vw" bold="700">
+      <Typography size="3.33vw" bold="700">
         제 1장 총칙
       </Typography>
       </div>
@@ -77,7 +77,7 @@ function TermsText1(){
       <br />
       <br />
       <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
-      <Typography size="1.25vw" bold="700" >
+      <Typography size="3.33vw" bold="700" >
         제 2장 서비스 이용 계약
       </Typography>
       </div>
@@ -162,7 +162,7 @@ function TermsText1(){
       <br />
       <br />
       <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
-      <Typography size="1.25vw" bold="700" >
+      <Typography size="3.33vw" bold="700" >
         제 3장 서비스 제공 및 변경
       </Typography>
       </div>
@@ -245,7 +245,7 @@ function TermsText1(){
       <br />
       <br />
       <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
-        <Typography size="1.25vw" bold="700" >
+        <Typography size="3.33vw" bold="700" >
           제 4장 서비스 관련 권한, 의무 관계
       </Typography>
       </div>
@@ -360,7 +360,7 @@ function TermsText1(){
       <br />
       <br />
       <div style={{textAlign: 'left', marginBottom: '0.521vw'}}>
-      <Typography size="1.25vw" bold="700">
+      <Typography size="3.33vw" bold="700">
         제 5장 기타
       </Typography>
       </div>
@@ -592,7 +592,7 @@ const ContentsText = styled.div`
   // mediumText
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 0.9375vw; // 18px
+  font-size: 2.78vw; // 18px
   font-style: normal;
   font-weight: 400;
   line-height: 122.836%;
@@ -603,7 +603,7 @@ const TitleText = styled.div`
   // bodyText
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 0.9375vw; //18px
+  font-size: 2.78vw; //18px
   font-style: normal;
   font-weight: 700;
   line-height: 122.836%; /* 22.11px */
@@ -613,7 +613,7 @@ const TitleText = styled.div`
 const StyledTable = styled.table`
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 0.625vw; //12px
+  font-size: 1.8vw; //12px
   font-style: normal;
   font-weight: 400;
   line-height: 123.54%;
