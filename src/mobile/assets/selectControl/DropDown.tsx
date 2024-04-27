@@ -35,7 +35,7 @@ function DropDown({ title, optionList, value, setValue }: DropDownProps) {
   const isSelected: boolean = !!value;
 
   return (
-    <div style={{ width: '100%', maxWidth: '328px', minWidth: '190px' }} ref={ref}>
+    <div style={{ width: '100%', minWidth: '190px' }} ref={ref}>
       <DropDownBtn isOpen={isOpen} isSelected={isSelected} onClick={toggleIsOpen} type="button" value={value || title}>
         {value || title}
         <AngleDown isOpen={isOpen} isSelected={isSelected}>
@@ -101,23 +101,23 @@ const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
 
 const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   width: 100%;
-  max-width: 628px;
-  height: 42px;
-  border-radius: 5px;
-  border: 1px solid #b9b9b9;
+  max-width: 174.444vw; /* 628px */
+  height: 11.667vw; /* 42px */
+  border-radius: 1.389vw; /* 5px */
+  border: 0.278vw solid #b9b9b9; /* 1px */
   background: #fff;
 
   display: flex;
   align-items: center;
   text-align: left;
-  padding-left: 18px;
+  padding-left: 5vw; /* 18px */
 
   color: #757575;
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 3.611vw; /* 13px */
   font-style: normal;
   font-weight: 500;
-  line-height: 18px; /* 100% */
+  line-height: 5vw; /* 18px */
 
   cursor: pointer;
   opacity: 0.8;
@@ -125,7 +125,7 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   ${(props) =>
     props.isOpen &&
     css`
-      border: 1px solid #d85888;
+      border: 0.278vw solid #d85888; /* 1px */
       color: #d85888;
       opacity: 1;
     `}
@@ -136,32 +136,29 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
 const SelectBoxContainer = styled.div`
   position: absolute;
   z-index: 999;
-  top: 30px;
+  top: 8.333vw; /* 30px */
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 629px;
-  height: 147px;
-  /* height 의 경우 옵션의 개수에 따라 동적으로 변화하게 설정 */
-  min-height: 0; /* 임의 설정 */
-  overflow-y: auto; /* 최대 높이를 초과할 경우 스크롤바 추가 */
-  max-height: 350px; /* 한 옵션 당 34 px * 9 = 306 px + ... 패딩값 등 고려하여 임의 설정 */
+  max-width: 174.722vw; /* 629px */
+  height: 40.833vw; /* 147px */
+  min-height: 0; /* arbitrary setting */
+  overflow-y: auto; /* adds scrollbar if height exceeds maximum */
+  max-height: 97.222vw; /* 350px */
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 7px;
+  padding-bottom: 1.944vw; /* 7px */
   box-sizing: border-box;
-  border-radius: 10px;
-  border: 1px solid rgba(216, 88, 136, 0.2);
+  border-radius: 2.778vw; /* 10px */
+  border: 0.278vw solid rgba(216, 88, 136, 0.2); /* 1px */
   background: #fff;
-  box-shadow: 0px 0px 15px 0px rgba(79, 13, 37, 0.15);
-  padding: 8px;
-  /* 
-    스크롤바 제거
-    ( 크롬, 사파리, 오페라, 엣지 ) 동작 
-  */
+  box-shadow: 0px 0px 4.167vw 0px rgba(79, 13, 37, 0.15); /* dynamic shadow scaling */
+  padding: 2.222vw; /* 8px */
+
+  /* Custom scroll bar handling for different browsers */
   &::-webkit-scrollbar {
     display: none;
   }
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;

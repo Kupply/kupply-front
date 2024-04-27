@@ -15,20 +15,20 @@ import Icon08 from '../../../assets/icons/Icon08';
 const baseWrapper = css`
   display: flex;
   width: 100%;
-  max-width: 328px;
-  min-width: 250px;
-  gap: 10px;
-  border-radius: 5px;
+  max-width: 91.111vw; /* 322.22vw */
+  min-width: 69.444vw; /* 250px */
+  gap: 2.778vw; /* 10px */
+  border-radius: 1.389vw; /* 5px */
 
   & > img {
     position: relative;
-    right: 0.521vw; //10px;
+    right: 0.521vw; /* 1.875vw for 10px */
   }
 
-  height: 42px;
+  height: 11.667vw; /* 42px */
   box-sizing: border-box;
 
-  padding: 12px 16px;
+  padding: 3.333vw 4.444vw; /* 3.33vw 16px */
 `;
 
 const defaultWrapper = css`
@@ -41,7 +41,7 @@ const hoverWrapper = css`
   align-items: center;
   border: 1px solid #eee;
   background: #fff;
-  box-shadow: 0px 0px 12px 0px rgba(216, 88, 136, 0.1);
+  box-shadow: 0px 0px 3.33vw 0px rgba(216, 88, 136, 0.1);
 `;
 
 const focusedWrapper = css`
@@ -88,10 +88,10 @@ const PlaceHolder = styled.text`
   width: 100%;
   color: #b9b9b9;
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 3.61vw;
   font-weight: 500;
   font-style: normal;
-  line-height: 18px;
+  line-height: 5vw;
   opacity: 0.8;
   white-space: nowrap;
 `;
@@ -101,9 +101,9 @@ const MessageBox = styled.div<{ isCheckDuplicated?: boolean }>`
   flex-direction: column;
   align-content: space-between;
   justify-content: center;
-  gap: 5px;
+  gap: 1.39vw;
   width: 70%;
-  padding: 1px 2px;
+  padding: 0.28vw 0.56vw;
   height: 100%;
   ${(props) =>
     props.isCheckDuplicated &&
@@ -131,28 +131,28 @@ const IconBundler = styled.div`
   flex-direction: row;
 
   & > button {
-    margin-right: 0.417vw; //8px;
+    margin-right: 0.417vw; //2.22vw;
   }
 `;
 
 const HelpMessage = styled.text`
   width: 100%;
-  height: 12px;
+  height: 3.33vw;
   color: #d85888;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 3.33vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 12px;
+  line-height: 3.33vw;
 `;
 
 const Input = styled.input`
   color: #141414;
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 3.611vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 5vw;
   opacity: 0.8;
   border: none;
   outline: none;
@@ -162,28 +162,28 @@ const Input = styled.input`
 
 const CorrectText = styled.input<{ type?: string }>`
   width: 70%;
-  height: 18px;
-  font-size: 13px;
+  height: 5vw;
+  font-size: 3.611vw;
   flex-shrink: 0;
   color: #d85888;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 5vw;
   background: #fff;
   ${(props) => props.type === 'password' && 'color: black;'}
 `;
 
 const ErrorText = styled.input`
   width: 70%;
-  height: 18px;
-  font-size: 13px;
+  height: 5vw;
+  font-size: 3.611vw;
   flex-shrink: 0;
   color: #141414;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 5vw;
   opacity: 0.8;
   background: #fff;
 `;
@@ -191,10 +191,10 @@ const ErrorText = styled.input`
 const ErrorMessageWrapper = styled.div`
   display: flex;
   align-items: center;
-  height: 12px;
-  padding-top: 5px;
-  padding-left: 13px;
-  gap: 4px;
+  height: 3.33vw;
+  padding-top: 1.39vw;
+  padding-left: 3.611vw;
+  gap: 1.11vw;
   border: none;
   background: none;
 
@@ -212,10 +212,10 @@ const ErrorMessageWrapper = styled.div`
 const ErrorMessage = styled.text`
   color: #ea0909;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 3.33vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 12px;
+  line-height: 3.33vw;
   opacity: 0.8;
 `;
 
@@ -233,43 +233,43 @@ const EyeIconWrapper = styled.div`
   right: 0px;
   top: 0px;
   & img {
-    margin-left: 5px;
-    width: 15px;
-    height: 15px;
+    margin-left: 1.39vw;
+    width: 4.167vw;
+    height: 4.167vw;
   }
 
   & svg {
-    margin-left: 5px;
-    width: 15px;
-    height: 15px;
+    margin-left: 1.39vw;
+    width: 4.167vw;
+    height: 4.167vw;
   }
 
   & > button {
-    margin-right: 10px;
+    margin-right: 2.78vw;
   }
 `;
 
 const CheckDuplicated = styled.div`
   display: flex;
 
-  width: 55px;
-  height: 22px;
+  width: 15.278vw;
+  height: 6.11vw;
 
-  padding: 8px 10px;
+  padding: 2.22vw 2.78vw;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
   white-space: nowrap;
-  gap: 8px;
+  gap: 2.22vw;
   color: #d85888;
 
   text-align: center;
   font-family: Pretendard;
-  font-size: 10px;
+  font-size: 2.78vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 5.56vw;
   border-radius: 999px;
   border: 1px solid #d85888;
   color: #d85888;
@@ -277,8 +277,8 @@ const CheckDuplicated = styled.div`
 
 const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
   display: flex;
-  width: 67px;
-  height: 22px;
+  width: 18.611vw;
+  height: 6.11vw;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
@@ -293,8 +293,8 @@ const CheckDuplicatedValidation = styled.div<{ valid: boolean }>`
   font-style: normal;
   font-weight: 500;
 
-  font-size: 10px;
-  padding: 2px 5px;
+  font-size: 2.78vw;
+  padding: 2px 1.39vw;
   margin-left: -16px;
   margin-bottom: 1px;
   z-index: 2;
@@ -419,8 +419,8 @@ function Input01(props: TextFieldBoxProps) {
     return (
       <img
         src="../../designImage/textField/XCircle.png"
-        width="15px"
-        height="15px"
+        width="4.167vw"
+        height="4.167vw"
         onMouseDown={() => {
           setValue('');
         }}
@@ -526,9 +526,9 @@ function Input01(props: TextFieldBoxProps) {
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
                   {!isCheckDuplicated && valid ? (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="15px" height="15px" />
+                    <img src="../../designImage/textField/CheckCircle96.png" width="4.167vw" height="4.167vw" />
                   ) : (
-                    <img src="../../designImage/textField/AlertCircle.png" width="15px" height="15px" />
+                    <img src="../../designImage/textField/AlertCircle.png" width="4.167vw" height="4.167vw" />
                   )}
                 </EyeIconWrapper>
               )}
@@ -537,9 +537,9 @@ function Input01(props: TextFieldBoxProps) {
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
                   {!isCheckDuplicated && valid ? (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="15px" height="15px" />
+                    <img src="../../designImage/textField/CheckCircle96.png" width="4.167vw" height="4.167vw" />
                   ) : (
-                    <img src="../../designImage/textField/AlertCircle.png" width="15px" height="15px" />
+                    <img src="../../designImage/textField/AlertCircle.png" width="4.167vw" height="4.167vw" />
                   )}
                   {isCheckDuplicated && valid && (
                     <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
@@ -589,10 +589,10 @@ function Input01(props: TextFieldBoxProps) {
               {textType === 'default' && (
                 <>
                   {!isCheckDuplicated && valid && (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="15px" height="15px" />
+                    <img src="../../designImage/textField/CheckCircle96.png" width="4.167vw" height="4.167vw" />
                   )}
                   {!isCheckDuplicated && !valid && (
-                    <img src="../../designImage/textField/AlertCircle.png" width="15px" height="15px" />
+                    <img src="../../designImage/textField/AlertCircle.png" width="4.167vw" height="4.167vw" />
                   )}
                   {isCheckDuplicated && valid && (
                     <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
@@ -647,17 +647,17 @@ function Input01(props: TextFieldBoxProps) {
             {textType === 'password' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
-                <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                <img src="../../designImage/textField/AlertCircle.png" width="6.67vw" height="6.67vw" />
               </EyeIconWrapper>
             )}
             {textType === 'text' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
-                <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                <img src="../../designImage/textField/AlertCircle.png" width="6.67vw" height="6.67vw" />
               </EyeIconWrapper>
             )}
             {textType === 'default' && !isCheckDuplicated && (
-              <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+              <img src="../../designImage/textField/AlertCircle.png" width="6.67vw" height="6.67vw" />
             )}
             {textType === 'default' && isCheckDuplicated && (
               <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
@@ -690,20 +690,20 @@ function Input01(props: TextFieldBoxProps) {
         {state === 'loading' && (
           <>
             <CorrectText>{value}</CorrectText>
-            <img src="../../designImage/textField/Loading.png" width="28px" height="28px" />
+            <img src="../../designImage/textField/Loading.png" width="7.78vw" height="7.78vw" />
           </>
         )}
       </TextFieldWrapper>
 
       {state === 'error' && (
         <ErrorMessageWrapper>
-          <img src="../../designImage/textField/X.png" width="12px" height="12px" />
+          <img src="../../designImage/textField/X.png" width="3.33vw" height="3.33vw" />
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}
       {state === 'focused' && !valid && (
         <ErrorMessageWrapper>
-          <img src="../../designImage/textField/AlertCircle.png" width="12px" height="12px" />
+          <img src="../../designImage/textField/AlertCircle.png" width="3.33vw" height="3.33vw" />
           <ErrorMessage>{validationMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}

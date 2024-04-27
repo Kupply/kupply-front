@@ -28,26 +28,26 @@ export default function SignUpPage2(){
   // button asset아직 준비가 안되서 안함
     return (
       <SignUpPageWrapper step={2} stepInfo="사용자 기본 정보 입력하기">
-        <div style={{marginBottom: '61px'}}></div>
+        <div style={{marginBottom: '16.94vw'}}></div>
         <ContentsList>
           <ContentsWrapper>
             <div>
-            <Typography size="12px" bold="700">이름</Typography>
-            <Typography size="12px" bold="400">을 입력해주세요.</Typography>
+            <Typography size="3.33vw" bold="700">이름</Typography>
+            <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
             </div>
             <UserInput userInfoType="name" toNext={next}/>
           </ContentsWrapper>
           <ContentsWrapper>
             <div>
-            <Typography size="12px" bold="700">고려대학교 학번</Typography>
-            <Typography size="12px" bold="400">을 입력해주세요.</Typography>
+            <Typography size="3.33vw" bold="700">고려대학교 학번</Typography>
+            <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
             </div>
             <UserInput userInfoType="studentId" toNext={next}/>
           </ContentsWrapper>
           <ContentsWrapper>
             <div>
-            <Typography size="12px" bold="700">본전공(1전공)</Typography>
-            <Typography size="12px" bold="400">을 입력해주세요.</Typography>
+            <Typography size="3.33vw" bold="700">본전공(1전공)</Typography>
+            <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
             </div>
             <UserInput userInfoType="firstMajor" toNext={next}/>
           </ContentsWrapper>
@@ -63,21 +63,19 @@ export default function SignUpPage2(){
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5.556vw; /* 20px */
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  width: 328px;
+  gap: 2.5vw; /* 9px */
+  width: 91.111vw; /* 328px */
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
-  // vh로 박아야 할 가능성이 클듯
-  margin-top: 100px;
-  gap: 8px;
+  margin-top: 27.778vw; /* 100px */
+  gap: 2.222vw; /* 8px */
   width: 100%;
 `;
