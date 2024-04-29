@@ -244,3 +244,8 @@ export const headerButtonState = atom<headerButtonStateType>({
 });
 
 
+export const MobileSelectedState = atom<number>({
+  key: 'MobileSelectedState',
+  default: 0
+});
+

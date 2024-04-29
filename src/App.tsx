@@ -10,7 +10,6 @@ import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
 import CommunityPage from './pages/community/CommunityPage';
 import MessagePage from './pages/message/MessagePage';
-import { SettingsPage } from './pages/setting/SettingsPage';
 import { SignUp1Page } from './pages/signUp/SignUp1Page';
 import SignUp2Page from './pages/signUp/SignUp2Page';
 import SignUp3Page from './pages/signUp/SignUp3Page';
@@ -28,6 +27,7 @@ import SignUpPage3 from './mobile/pages/signup/SignupPage3';
 //import SignUpPage4 from './mobile/pages/signup/SignupPage4';
 import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
 import SignUpPage5 from './mobile/pages/signup/SignupPage5';
+import { MobileSettingsPage } from './mobile/pages/SettingsPage';
 
 import MobileTest from './pages/mobile/MobileTest';
 import MobileArchivePage from './pages/mobile/MobileArchive';
@@ -58,7 +58,7 @@ export default function App() {
         // <MobilePage />
         // <MobileTest />
         // <MobileArchiveDetailPage />
-        <SignUpPage5/>
+        <MobileSettingsPage/>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />

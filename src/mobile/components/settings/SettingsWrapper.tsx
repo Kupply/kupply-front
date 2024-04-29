@@ -1,12 +1,19 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import Typography from "../../../assets/Typography";
+import { useRecoilState } from "recoil";
+import { MobileSelectedState } from "../../../store/atom";
 
 interface SettingsWrapperProps{
   selected: number;
+  children?: ReactNode;
 };
 
-export default function SettingsWrapper({selected}:SettingsWrapperProps){
+export default function SettingsWrapper({selected, children}:SettingsWrapperProps){
 
+  const navigate = useNavigate();
+  const [selectedNumber, setSelected] = useRecoilState(MobileSelectedState);
   let mainText = "";
   let subText = "";
 
@@ -38,11 +45,23 @@ export default function SettingsWrapper({selected}:SettingsWrapperProps){
   }
   return (
     <MainWrapper>
+      <TempHeader></TempHeader>
       <HeaderBar>
-        
+        <Button onClick={() => {
+          if(selected == 0) navigate('/');
+          else setSelected(0);
+        }}>
+          <Icon/>
+        </Button>
+        <div>
+          <Typography size="3.89vw" bold="700">{mainText}</Typography>
+        </div>
       </HeaderBar>
       <Contents>
-
+        <div>
+          <Typography size="3.89vw" bold="400" style={{lineHeight: '120%', opacity: 0.6}}>{subText}</Typography>
+        </div>
+        {children}
       </Contents>
     </MainWrapper>
   )
@@ -53,18 +72,40 @@ const MainWrapper = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const HeaderBar = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 34.167vw;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10.833vw;
 `;
 
 const Contents = styled.div`
-  width: 100%;
+  width: 91.11vw;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 5vw;
 `;
 
+const Icon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
+  <path d="M9.25 1L3.25 6.25" stroke="#434343" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M3.25 6.25L9.25 12.25" stroke="#434343" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+);
+
+const Button = styled.button`
+//margin-left: 5vw;
+position: absolute;
+left: 5vw;
+`;
+
+const TempHeader = styled.div`
+height: 43px;
+`;

@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled, {css} from "styled-components";
 import { useCookies } from "react-cookie";
 import { useRecoilState } from "recoil";
-import { SBContentState } from "../../store/atom";
+import { MobileSelectedState, SBContentState } from "../../store/atom";
 import client from "../../utils/HttpClient";
 import { StateOptions } from "../assets/field/Input01";
 import { majorAllList } from "../../common/MajorAll";
 import { majorTargetList } from "../../common/MajorTarget";
 import SettingsWrapper from "../components/settings/SettingsWrapper";
+import { MainTable } from "../components/settings/MainTable";
+import Typography from "../../assets/Typography";
 
 interface SettingsPageProps {
   selected: number;
@@ -57,9 +59,9 @@ const colorMapping = {
   `,
 };
 
-const SettingsPage = () => {
+export const MobileSettingsPage = () => {
   // selected == 0이면 main, 1이면 나의 기본정보 수정, 2이면 프로필 사진/닉네임 변경, 3이면 마이보드 프로필 수정, 4이면 계졍관리
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useRecoilState(MobileSelectedState);
   const navigate = useNavigate();
 
   const onClick = (index: number) => {
@@ -358,8 +360,24 @@ const SettingsPage = () => {
   return(
 
     <SettingsWrapper selected={selected}>
-
+      {selected == 0 && (
+        <>
+        <MainTable/>
+        <Line/>
+        <div style={{marginLeft: '4.44vw'}} onClick={() => {navigate('/delete')}}>
+          <Typography style={{color: '#EE6767', opacity: 0.6}} size="4.44vw">계졍삭제</Typography>
+        </div>
+        </>
+      )}
+      {selected == 1 && (
+        <></>
+      )}
     </SettingsWrapper>
   );
 }
 
+const Line = styled.div`
+height: 1px;
+width: 100%;
+background-color: var(--DF_Grey-2, #DFDFDF);
+`;

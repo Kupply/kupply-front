@@ -495,10 +495,6 @@ const SettingsPage = () => {
           >
             저장하기
           </Button03>
-          <Card0301 avgPassNum={30}/>
-          <Card0302 passNum={10} appliedNum={30}/>
-          <Card01 korName="경영학과"
-                  engName="Business School"/>
         </BodyContainer>
       )}
       {selected === 1 && (
