@@ -1,0 +1,37 @@
+<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="92"
+              height="70"
+              viewBox="0 0 92 70"
+              fill="none"
+              style={{ display: 'flex', justifyContent: 'center', marginTop: '37px', marginLeft: '268px' }}
+            >
+              <path
+                d="M61.3698 49L46.0365 35L30.7031 49"
+                stroke="#E57C90"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M46.0391 35V66.5"
+                stroke="#E57C90"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M78.2 57.3649C87.4767 52.7449 90.9267 42.1049 85.8667 33.6349C82.4934 27.9999 76.0534 24.4999 69.0384 24.4999H64.2084C59.9534 9.51995 43.24 0.524947 26.8334 4.40995C10.4267 8.29495 0.575035 23.5549 4.83004 38.4999C6.0567 42.7699 8.3567 46.7249 11.5384 50.0499"
+                stroke="#E57C90"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M61.3698 49L46.0365 35L30.7031 49"
+                stroke="#E57C90"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
