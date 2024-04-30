@@ -35,9 +35,11 @@ const MainWrapper = styled.button<CTA02Props>`
   background: ${(props) => (props.state === 'default' ? '#D85888' : '#D3D3D3')};
   border-radius: 1.39vw;
   box-shadow: ${(props) =>
-    props.size === 'large' &&
-    props.state === 'default' &&
-    '0px 21.11vw 5.83vw 0px rgba(240, 127, 169, 0.01), 0px 13.61vw 5.56vw 0px rgba(240, 127, 169, 0.04), 0px 7.5vw 4.44vw 0px rgba(240, 127, 169, 0.15), 0px 3.33vw 3.33vw 0px rgba(240, 127, 169, 0.26), 0px 0.83vw 1.94vw 0px rgba(240, 127, 169, 0.29)'};
+    props.size === 'large' && props.state === 'default'
+      ? '0px 21.11vw 5.83vw 0px rgba(240, 127, 169, 0.01), 0px 13.61vw 5.56vw 0px rgba(240, 127, 169, 0.04), 0px 7.5vw 4.44vw 0px rgba(240, 127, 169, 0.15), 0px 3.33vw 3.33vw 0px rgba(240, 127, 169, 0.26), 0px 0.83vw 1.94vw 0px rgba(240, 127, 169, 0.29)'
+      : props.size === 'small' && props.state === 'default'
+      ? '0 1.39vw 3.06vw 0 rgba(240, 127, 169, 0.29)'
+      : 'none'};
 `;
 
 const ImageWrapper = styled.img`
