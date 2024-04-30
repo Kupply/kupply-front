@@ -35,7 +35,6 @@ function PastInfo(props: PastInfoProps) {
         <Header>지난 경쟁률</Header>
         <Header>지난 합격자 평균</Header>
       </HeaderWrapper>
-      <Line />
       {visibleData.map((dictionary, dictionaryIndex) => (
         <BodyWrapper key={dictionaryIndex}>
           <Body>
@@ -69,7 +68,6 @@ function PastInfo(props: PastInfoProps) {
           </Body>
         </BodyWrapper>
       ))}
-      <Line />
     </MainWrapper>
   );
 }
@@ -84,7 +82,9 @@ const MainWrapper = styled.div`
 const HeaderWrapper = styled.div`
   width: 91.12vw;
   height: auto;
-  margin-bottom: 3.06vw;
+  padding-bottom: 3.06vw;
+  border-bottom: 0.28vw solid rgba(223, 223, 223, 0.4);
+  box-sizing: border-box;
   display: flex;
 `;
 
@@ -121,6 +121,8 @@ const Header = styled.div`
 const BodyWrapper = styled.div`
   width: 91.12vw;
   height: 15.28vw;
+  border-bottom: 0.28vw solid rgba(223, 223, 223, 0.4);
+  box-sizing: border-box;
   display: flex;
 `;
 
@@ -160,13 +162,6 @@ const ApplyOrderBox = styled.div`
   align-items: center;
   border-radius: 999px;
   background-color: rgba(216, 88, 136, 0.1);
-`;
-
-const Line = styled.div`
-  width: 91.12vw;
-  height: 0.28vw;
-  background-color: #dfdfdf;
-  opacity: 0.4;
 `;
 
 export default PastInfo;

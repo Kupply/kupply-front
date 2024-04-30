@@ -7,14 +7,10 @@ import Join2 from '../../components/onboarding/Join2';
 import KupplyImage from '../../components/onboarding/KupplyImage';
 import Banner from '../../components/onboarding/Banner';
 import Preview from '../../components/onboarding/Preview';
-import LandingMobile from '../../mobile/pages/LandingMobile';
-import OnboardingMobile from '../../mobile/pages/OnboardingMobile';
 
 function OnboardingPage() {
   return (
     <MainWrapper>
-      <OnboardingMobile />
-      <LandingMobile />
       <Carousel />
       <Join1 />
       <Cards />
