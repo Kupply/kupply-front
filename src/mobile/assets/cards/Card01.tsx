@@ -73,7 +73,7 @@ export default function Card01({ korName, engName }: CardProps) {
   return (
     <>
       <Container>
-        <CardImageDefault>
+        <CardImageDefault onClick={handleClickDetail}>
           <img
             src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}.png`}
             alt="major image default"

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import Typography from '../../../assets/Typography';
 
-function Header() {
+function MobileHeader() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -138,4 +138,4 @@ const HeaderButton = styled.div<{ state?: 'default' | 'pressed' | 'disabled' }>`
   cursor: pointer;
 `;
 
-export default Header;
+export default MobileHeader;
