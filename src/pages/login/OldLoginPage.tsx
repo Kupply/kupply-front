@@ -255,7 +255,12 @@ function LoginPage(props: LoginPageProps) {
         </TextFieldWrapper>
         <TextBox>
           <CheckButton checked={isChecked} onClick={() => setIsChecked((prevState) => !prevState)}></CheckButton>
-          <Typography size="0.94vw" bold="600" color={isChecked ? '#D85888' : '#A8A8A8'}>
+          <Typography
+            onClick={() => setIsChecked((prevState) => !prevState)}
+            size="0.94vw"
+            bold="600"
+            color={isChecked ? '#D85888' : '#A8A8A8'}
+          >
             로그인 상태 유지
           </Typography>
         </TextBox>

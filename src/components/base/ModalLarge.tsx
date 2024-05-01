@@ -24,41 +24,151 @@ export default function ModalLarge({ onClickToggleModal, children }: PropsWithCh
 }
 
 
-const Overlay = styled.div`
-  box-sizing: border-box;
+// 모달창 위치 조정 목적의 컨테이너
+const ModalContainer = styled.div`
+  width: 70vw;
+  max-width: 814px;
+
+  height: 60vh;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: rgba(52, 64, 84, 0.6);
-  backdrop-filter: blur(8px);
-  animation: fadein 0.5s;
 
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  /* @media screen and (min-width: 1201px) and (max-width: 1500px) {
+    width: 50vw;
+    height: 700px;
+    margin-top: 30px;
+    top: 0px;
   }
+  
+  @media screen and (min-width: '1001px') and (max-width: 1200px) {
+    width: 50vw;
+    height: 600px;
+    margin-top: 6vh;
+    top: 0px;
+  }
+
+  @media screen and (min-width: '801px') and (max-width: 1000px) {
+    width: 50vw;
+    height: 500px;
+    margin-top: 2vh;
+    top: 0px;
+  }
+  @media screen and (min-width: '601px') and (max-width: 800px) {
+    width: 50vw;
+    height: 400px;
+    margin-top: 3vh;
+    top: 0px;
+  } */
 `;
 
-const Modal = styled.div`
-  position: absolute;
+// 모달 창 (흰 색 컨텐츠 창)
+const DialogBox = styled.dialog`
+  width: 100%; // *전체화면에 대해 크기 조정 필요 43vw 814px
+  //height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
+  // height: 39.0625vw;
+  height: 75vh;
+  min-height: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70%;
-  height: 70%;
-  background: white;
-  border-radius: 0.75rem;
-  box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.1),
-    0px 8px 8px -4px rgba(16, 24, 40, 0.04);
-  transition: all 0.5s ease;
-  z-index: 1;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  background-color: white;
+  // position: fixed;
+  // top: 75px;
+  z-index: 10;
+  padding: 0;
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  // --------------이하 스크롤바 관련 코드-------------
+
+  /* Webkit 기반의 브라우저 Chrome, Safari */
+  &::-webkit-scrollbar {
+    width: 1px;
+    height: 10px; /* 스크롤바 높이를 10px로 수정 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent; /* 투명으로 설정 */
+    border-radius: 999px;
+    min-height: 30%;
+    box-shadow: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-button {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  .scrollbarWrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  /* Firefox에서 스크롤바 숨기기 */
+  scrollbar-width: thin;
+
+  /* Internet Explorer에서 스크롤바 숨기기 */
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  @media screen and (max-width: 600px) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
+  /* @media screen and (min-width: 601px) and (max-width: 800px) {
+    height: 50vh;
+  }
+
+  @media screen and (min-width: 801px) and (max-width: 1200px) {
+    height: 60vh;
+  }
+
+  @media screen and (min-width: 1201px) and (max-width: 1500px) {
+    height: 70vh;
+  } */
+`;
+
+// 모달 뒷 (검은) 배경 - 크기 문제 해결 필요
+const Backdrop = styled.div`
+  width: 100%; // 100vw;
+  height: 100%; // 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 9;
+  background: rgba(20, 16, 19, 0.55);
 `;

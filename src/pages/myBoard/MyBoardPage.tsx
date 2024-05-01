@@ -281,11 +281,6 @@ const MyBoardPage = () => {
       setPastData2(newPastData2);
     }
   };
-  useEffect(() => {
-    if (userData.hopeMajor1 && userData.hopeMajor2) {
-      getPastData();
-    }
-  }, [userData]);
 
   const getMyStageData = async () => {
     const APIresponse = await client.get('/dashboard/myStage');
@@ -310,7 +305,11 @@ const MyBoardPage = () => {
 
   useEffect(() => {
     try {
+      if (userData.hopeMajor1 && userData.hopeMajor2) {
+        getPastData();
+      }
       getMyStageData();
+      getCurData();
     } catch (err) {
       console.log(err);
     }
@@ -344,9 +343,7 @@ const MyBoardPage = () => {
       console.log(err);
     }
   };
-  useEffect(() => {
-    getCurData();
-  }, [userData]);
+
   ////////////////////////////
 
   return (
