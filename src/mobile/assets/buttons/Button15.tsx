@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import Typography from '../../../assets/Typography';
 
-function Button15({ children = '합격자료' }) {
+function Button15({ children = '합격자료', ...rest }) {
   return (
-    <MainWrapper>
+    <MainWrapper {...rest}>
       <Typography size="3.06vw" color="#D85888" style={{ lineHeight: '120%' }}>
         {children}
       </Typography>

@@ -15,20 +15,14 @@ interface ModalProps {
 
 export default function ModalLarge({ onClickToggleModal, children }: PropsWithChildren<ModalProps>) {
   return (
-    <ModalContainer>
-      <DialogBox>{children}</DialogBox>
-      <Backdrop
-        onClick={(e: React.MouseEvent) => {
-          e.preventDefault();
-
-          if (onClickToggleModal) {
-            onClickToggleModal();
-          }
-        }}
-      />
-    </ModalContainer>
+    <Overlay>
+      <Modal>
+        {children}
+      </Modal>
+    </Overlay>
   );
 }
+
 
 // 모달창 위치 조정 목적의 컨테이너
 const ModalContainer = styled.div`
@@ -37,9 +31,7 @@ const ModalContainer = styled.div`
 
   height: 60vh;
   position: fixed;
-
   display: flex;
-  align-items: center;
   justify-content: center;
 
   top: 0;

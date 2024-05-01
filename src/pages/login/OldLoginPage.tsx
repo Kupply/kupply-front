@@ -13,6 +13,7 @@ import Login2JoinModal from '../../components/login/Login2JoinModal';
 import { CheckBoxButton02 } from '../../assets/buttons/CheckBoxButton';
 import CTA01 from '../../assets/CTAs/CTA01';
 
+
 const Wrapper = styled.div`
   width: 100vw;
   height: 60.05vw;

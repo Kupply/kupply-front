@@ -37,7 +37,7 @@ const NicknameCheckButtonTextComponent = styled.div<NicknameCheckButtonTextProps
 `;
 
 // isSuccess가 success이면 성공, fail이면 실패이다.
-const nicknameCheckAPI = async (nickname: string) => {
+export const nicknameCheckAPI = async (nickname: string) => {
   // const url = 'http://localhost:8080/auth/nicknameCheck'; // 만든 API 주소로 바뀌어야 함.
   try {
     // const response = await axios.post(url, {
