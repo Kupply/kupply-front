@@ -11,6 +11,10 @@ import { majorTargetList } from "../../common/MajorTarget";
 import SettingsWrapper from "../components/settings/SettingsWrapper";
 import { MainTable } from "../components/settings/MainTable";
 import Typography from "../../assets/Typography";
+import Input01 from "../assets/field/Input01";
+import { placeholderMapping, helpMessageMapping, errorMessageMapping } from "../components/signup/UserInput";
+import DropDown from "../assets/selectControl/DropDown";
+
 
 interface SettingsPageProps {
   selected: number;
@@ -359,7 +363,12 @@ export const MobileSettingsPage = () => {
 
   return(
 
-    <SettingsWrapper selected={selected}>
+    <SettingsWrapper selected={selected} onClickFunction={
+      selected == 1 ? firstSubmit : 
+      selected == 2 ? secondSubmit : 
+      selected == 3 ? thirdSubmit : 
+      selected == 4 ? fourthSubmit : 
+      () => {}}>
       {selected == 0 && (
         <>
         <MainTable/>
@@ -370,6 +379,52 @@ export const MobileSettingsPage = () => {
         </>
       )}
       {selected == 1 && (
+        <>
+          <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">이름&nbsp;</Typography>
+            <Typography size="3.33vw" bold="500">수정하기</Typography>
+          </TextBox>
+          <Input01 
+            placeholder={placeholderMapping['name']}
+            value={name}
+            state={nameState}
+            setState={setNameState}
+            setValue={setName}
+            helpMessage={helpMessageMapping['name']}
+            errorMessage={errorMessageMapping['name']}
+            />
+          </ContentsWrapper>
+          <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">고려대학교 학번&nbsp;</Typography>
+            <Typography size="3.33vw" bold="500">수정하기</Typography>
+          </TextBox>
+          <Input01 
+            placeholder={placeholderMapping['studentId']}
+            value={stdID}
+            state={stdIDState}
+            setState={setStdIDState}
+            setValue={setStdID}
+            helpMessage={helpMessageMapping['studentId']}
+            errorMessage={errorMessageMapping['studentId']}
+            />
+          </ContentsWrapper>
+          <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">본전공(1전공)&nbsp;</Typography>
+            <Typography size="3.33vw" bold="500">수정하기</Typography>
+          </TextBox>
+            <DropDown
+              title={placeholderMapping['firstMajor']}
+              value={firstMajor}
+              setValue={setFirstMajor}
+              optionList={majorAllList}
+            />
+          </ContentsWrapper>
+        </>
+      )}
+      {selected == 2 && (
         <></>
       )}
     </SettingsWrapper>
@@ -381,3 +436,18 @@ height: 1px;
 width: 100%;
 background-color: var(--DF_Grey-2, #DFDFDF);
 `;
+
+const TextBox = styled.div`
+width: 100%;
+align-items: flex-start;
+`;
+
+const ContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vw; /* 9px */
+  width: 91.111vw; /* 328px */
+  margin-bottom: 2px;
+`;
+
+

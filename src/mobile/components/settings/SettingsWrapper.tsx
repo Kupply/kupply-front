@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Typography from "../../../assets/Typography";
 import { useRecoilState } from "recoil";
 import { MobileSelectedState } from "../../../store/atom";
+import CTA01 from "../../assets/CTAs/CTA01";
 
 interface SettingsWrapperProps{
   selected: number;
   children?: ReactNode;
+  onClickFunction?: () => void;
 };
 
-export default function SettingsWrapper({selected, children}:SettingsWrapperProps){
+export default function SettingsWrapper({selected, children, onClickFunction}:SettingsWrapperProps){
 
   const navigate = useNavigate();
   const [selectedNumber, setSelected] = useRecoilState(MobileSelectedState);
@@ -62,6 +64,11 @@ export default function SettingsWrapper({selected, children}:SettingsWrapperProp
           <Typography size="3.89vw" bold="400" style={{lineHeight: '120%', opacity: 0.6}}>{subText}</Typography>
         </div>
         {children}
+        {selected !== 0 && 
+          <div style={{marginTop: '174px'}}>
+            <CTA01 size="large" onClick={() => onClickFunction?.()}>저장하기</CTA01>
+          </div>
+        }
       </Contents>
     </MainWrapper>
   )

@@ -33,6 +33,7 @@ import MobileTest from './pages/mobile/MobileTest';
 import MobileArchivePage from './pages/mobile/MobileArchive';
 import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import { SignUp5Page } from './pages/signUp/SignUp5Page';
+import LoginPage from './mobile/pages/LoginPage';
 
 interface RouteConfig {
   path: string;
@@ -58,7 +59,7 @@ export default function App() {
         // <MobilePage />
         // <MobileTest />
         // <MobileArchiveDetailPage />
-        <MobileSettingsPage/>
+        <LoginPage setLogin={()=>{}}/>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
