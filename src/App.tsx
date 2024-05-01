@@ -31,6 +31,8 @@ import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/p
 import MobileTest from './pages/mobile/MobileTest';
 import MobileArchivePage from './pages/mobile/MobileArchive';
 import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
+import MobileFooter from './mobile/assets/base/Footer';
+import MobileHeader from './mobile/assets/base/Header';
 
 interface RouteConfig {
   path: string;
@@ -55,8 +57,15 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
-        // <MobileArchiveDetailPage />
-        <MobileArchivePage />
+        <>
+          <MobileHeader />
+          <Routes>
+            <Route path="/archive" element={<MobileArchivePage />} />
+            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+            <Route path="/test" element={<MobileTest />} />
+          </Routes>
+          <MobileFooter />
+        </>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />

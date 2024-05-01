@@ -7,6 +7,7 @@ import DropDown02 from '../../mobile/assets/selectControl/DropDown02';
 import MobileArchiveGraph, { Data, LineData } from '../../mobile/assets/graph/Graph';
 import { Card0301, Card0302, Card0303 } from '../../mobile/assets/cards/Card03';
 import Card05 from '../../mobile/assets/cards/Card05';
+import Banner01 from '../../mobile/assets/banners/Banner01';
 import { DBkeywords } from '../../common/Keyword';
 import client from '../../utils/HttpClient';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
@@ -20,15 +21,21 @@ import {
 // 이미지 교체 X
 // 합격자 학점 분석 수정
 // Card03 이미지 변경 -> 수정 X
-// 학기 선택에 따른 화면 전환 수정 X
+// 학기 선택에 따른 화면 전환 수정 X (베너 카드 등등)
 // 모자이크 X
 // 키워드 X
-// 뒤로가기 버튼 추가 X
 
 export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R'];
 
 const MobileArchiveDetailPage = () => {
-  const [sortCriterion, setSortCriterion] = useState('가나다순');
+  const navigate = useNavigate();
+  const { majorName } = useParams();
+
+  const handlePrev = () => {
+    navigate('/archive');
+  };
+
+  const [sortCriterion, setSortCriterion] = useState('전학기 누적');
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
   //const { majorName } = useParams() as { majorName: MajorOptions };
   //const majorKoreanName = majorNameMapping[majorName][0];
@@ -38,6 +45,7 @@ const MobileArchiveDetailPage = () => {
   return (
     <MobilePageWrapper>
       <BannerBox>
+        <BannerPrevious onClick={handlePrev} src="../../designImage/mobile/banner/BannerPrevious.svg" />
         <BannerImage src="../../designImage/mobile/banner/Banner1_1.png" /> {/* 학과별 적용 X */}
         <BannerTextBox>
           <BannerTitle>경영학과</BannerTitle> {/* 학과별 적용 X */}
@@ -340,6 +348,15 @@ const KeyWordText = styled.text`
 `;
 
 //##################### IMAGE #####################
+const BannerPrevious = styled.img`
+  position: absolute;
+  width: 3.61vw;
+  height: 3.61vw;
+
+  top: 5vw;
+  left: 5vw;
+`;
+
 const BannerImage = styled.img`
   width: 100%;
   height: 100%;
