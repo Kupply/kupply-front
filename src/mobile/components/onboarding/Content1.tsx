@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../../assets/Typography';
+import ApplyTable from '../landing/ApplyTable';
+import CTA02 from '../../assets/CTAs/CTA02';
 
 function Content1() {
+  const navigate = useNavigate();
+
   return (
     <MainWrapper>
       <Typography size="3.33vw" bold="700" color="#D85888" style={{ lineHeight: '120%' }}>
@@ -29,6 +34,15 @@ function Content1() {
         <br />
         내가 희망하는 학과의 실시간 경쟁률을 확인하세요!
       </Typography>
+      <ApplyTable />
+      <BlurBox>
+        <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>
+          지금 쿠플라이 회원가입하고
+          <br />
+          이중전공 모의지원 현황을 확인해보세요
+        </Typography>
+        <CTA02 onClick={() => navigate('/signup0')} />
+      </BlurBox>
     </MainWrapper>
   );
 }
@@ -40,6 +54,21 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+`;
+
+const BlurBox = styled.div`
+  width: 100vw;
+  height: 37.67vw;
+  padding-top: 6.39vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4.44vw;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(1.67vw);
+  position: absolute;
+  bottom: 0;
 `;
 
 export default Content1;

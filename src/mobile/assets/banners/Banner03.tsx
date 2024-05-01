@@ -19,25 +19,25 @@ function Banner03(props: Banner03Props) {
         buttonText: '마이페이지',
         title: ['같은 과를 지원한', '경쟁자 정보 살펴보기'],
         text: [],
-        image: { link: '../../../designImage/mobile/banner/Banner3_4.png', width: '33.13%', height: '50.55%' },
+        image: '../../../designImage/mobile/banner/Banner3_4.png',
       },
       {
         buttonText: '마이페이지',
         title: ['나의 이중전공', '합격 예측하기'],
         text: [],
-        image: { link: '../../../designImage/mobile/banner/Banner3_5.png', width: '50%', height: '64.12%' },
+        image: '../../../designImage/mobile/banner/Banner3_5.png',
       },
       {
         buttonText: '마이페이지',
         title: ['지난 이중전공', '모집정보 한 눈에 보기'],
         text: [],
-        image: { link: '../../../designImage/mobile/banner/Banner3_6.png', width: '44.38%', height: '65.21%' },
+        image: '../../../designImage/mobile/banner/Banner3_6.png',
       },
       {
         buttonText: '자소서 엿보기',
         title: ['나의 경쟁자들의', '자소서 엿보기'],
         text: [],
-        image: { link: '../../../designImage/mobile/banner/Banner3_7.png', width: '44.38%', height: '67.38%' },
+        image: '../../../designImage/mobile/banner/Banner3_7.png',
       },
     ],
     [
@@ -45,19 +45,19 @@ function Banner03(props: Banner03Props) {
         buttonText: '마이페이지',
         title: ['경쟁자들 중', '나의 등수 보기'],
         text: ['실시간으로 변하는 지원자들 중', '나의 등수를 예측해드릴게요.'],
-        image: { link: '../../../designImage/mobile/banner/Banner3_1.png', width: '100%', height: '54.79%' },
+        image: '../../../designImage/mobile/banner/Banner3_1.png',
       },
       {
         buttonText: '합격자료',
         title: ['자기소개서', '키워드 둘러보기'],
         text: ['합격 자소서 키워드를 통해 더 나은', '자기소개서 작성을 도와드릴게요.'],
-        image: { link: '../../../designImage/mobile/banner/Banner3_2.png', width: '100%', height: '100%' },
+        image: '../../../designImage/mobile/banner/Banner3_2.png',
       },
       {
         buttonText: '실시간 모의지원 현황',
         title: ['실시간 경쟁률', '살펴보기'],
         text: ['이번학기 나의 희망 학과(부)의', '실시간 지원자 수와 경쟁률을', '제공해드릴게요.'],
-        image: { link: '../../../designImage/mobile/banner/Banner3_3.png', width: '100%', height: '43.53%' },
+        image: '../../../designImage/mobile/banner/Banner3_3.png',
       },
     ],
   ];
@@ -65,7 +65,12 @@ function Banner03(props: Banner03Props) {
   return (
     <MainWrapper size={size} {...rest}>
       {contents[contentsIndex].map((dictionary, dictionaryIndex) => (
-        <CardBox size={size} cardIndex={dictionaryIndex} key={dictionaryIndex}>
+        <CardBox
+          size={size}
+          cardIndex={dictionaryIndex}
+          key={dictionaryIndex}
+          style={{ backgroundImage: `url(${dictionary.image})` }}
+        >
           <Button size={size} cardIndex={dictionaryIndex}>
             <Typography
               size={size === 'small' ? '1.88vw' : '2.13vw'}
@@ -99,11 +104,6 @@ function Banner03(props: Banner03Props) {
               <div key={sentenceIndex}>{sentence}</div>
             ))}
           </Typography>
-          <Image
-            size={size}
-            src={dictionary.image.link}
-            style={{ width: dictionary.image.width, height: dictionary.image.height }}
-          />
         </CardBox>
       ))}
     </MainWrapper>
@@ -126,12 +126,7 @@ const CardBox = styled.div<{ size: string; cardIndex: number }>`
   display: flex;
   flex-direction: column;
   gap: ${(props) => (props.size === 'small' ? '3.33vw' : '1.94vw')};
-  background: ${(props) =>
-    props.size === 'large' && props.cardIndex === 0
-      ? 'linear-gradient(159deg, #FFA9C5 13.78%, #FFD1C0 73.99%)'
-      : props.size === 'small' && props.cardIndex === 1
-      ? '#FEF2C0'
-      : '#FFF'};
+  background-size: cover;
   border-radius: 3.33vw;
   position: relative;
 `;
