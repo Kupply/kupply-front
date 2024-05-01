@@ -23,11 +23,16 @@ import {
 // 학기 선택에 따른 화면 전환 수정 X
 // 모자이크 X
 // 키워드 X
-// 뒤로가기 버튼 추가 X
 
 export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R'];
 
 const MobileArchiveDetailPage = () => {
+  const navigate = useNavigate();
+
+  const handlePrev = () => {
+    navigate('/archive');
+  };
+
   const [sortCriterion, setSortCriterion] = useState('가나다순');
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
   //const { majorName } = useParams() as { majorName: MajorOptions };
@@ -38,6 +43,7 @@ const MobileArchiveDetailPage = () => {
   return (
     <MobilePageWrapper>
       <BannerBox>
+        <BannerPrevious onClick={handlePrev} src="../../designImage/mobile/banner/BannerPrevious.svg" />
         <BannerImage src="../../designImage/mobile/banner/Banner1_1.png" /> {/* 학과별 적용 X */}
         <BannerTextBox>
           <BannerTitle>경영학과</BannerTitle> {/* 학과별 적용 X */}
@@ -340,6 +346,15 @@ const KeyWordText = styled.text`
 `;
 
 //##################### IMAGE #####################
+const BannerPrevious = styled.img`
+  position: absolute;
+  width: 3.61vw;
+  height: 3.61vw;
+
+  top: 5vw;
+  left: 5vw;
+`;
+
 const BannerImage = styled.img`
   width: 100%;
   height: 100%;

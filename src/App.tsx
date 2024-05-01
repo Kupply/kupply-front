@@ -55,8 +55,13 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
-        // <MobileArchiveDetailPage />
-        <MobileArchivePage />
+        <>
+          <Routes>
+            <Route path="/archive" element={<MobileArchivePage />} />
+            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+            <Route path="/test" element={<MobileTest />} />
+          </Routes>
+        </>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
