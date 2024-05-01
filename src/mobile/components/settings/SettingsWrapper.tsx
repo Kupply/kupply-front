@@ -65,9 +65,9 @@ export default function SettingsWrapper({selected, children, onClickFunction}:Se
         </div>
         {children}
         {selected !== 0 && 
-          <div style={{marginTop: '174px'}}>
+          <FixedCTA>
             <CTA01 size="large" onClick={() => onClickFunction?.()}>저장하기</CTA01>
-          </div>
+          </FixedCTA>
         }
       </Contents>
     </MainWrapper>
@@ -115,4 +115,12 @@ left: 5vw;
 
 const TempHeader = styled.div`
 height: 43px;
+`;
+
+const FixedCTA = styled.div`
+  position: fixed; // This makes the CTA button fixed at the bottom
+  bottom: 80px; // Distance from the bottom
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

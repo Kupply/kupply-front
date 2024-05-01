@@ -59,7 +59,7 @@ export default function App() {
         // <MobilePage />
         // <MobileTest />
         // <MobileArchiveDetailPage />
-        <LoginPage setLogin={()=>{}}/>
+        <MobileSettingsPage/>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />

@@ -14,6 +14,8 @@ import Typography from "../../assets/Typography";
 import Input01 from "../assets/field/Input01";
 import { placeholderMapping, helpMessageMapping, errorMessageMapping } from "../components/signup/UserInput";
 import DropDown from "../assets/selectControl/DropDown";
+import TextAreaBox from "../assets/textarea/TextArea01";
+
 
 
 interface SettingsPageProps {
@@ -68,9 +70,6 @@ export const MobileSettingsPage = () => {
   const [selected, setSelected] = useRecoilState(MobileSelectedState);
   const navigate = useNavigate();
 
-  const onClick = (index: number) => {
-    setSelected(index);
-  };
   const [scrollActive, setActive] = useState(false);
   // 잠시 수정 
   const [modalOpen, setModalOpen] = useState(true);
@@ -425,7 +424,159 @@ export const MobileSettingsPage = () => {
         </>
       )}
       {selected == 2 && (
-        <></>
+        <>
+        <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">프로필 사진&nbsp;</Typography>
+            <Typography size="3.33vw" bold="500">변경하기</Typography>
+          </TextBox>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+            <CurrentImg
+              src={
+                userProfilePic === 'customProfile'
+                  ? userProfileLink
+                  : `designImage/character/rectProfile/${userProfilePic}.png`
+              }
+              alt="current profile"
+            />
+            
+              <CandidateImgsWrapper>
+                {Array.from({ length: 4 }, (_, index) => (
+                  <CandidateImg
+                    src={`designImage/character/rectProfile/RectProfile${index+1}.png`}
+                    alt={`candidate profile ${index+1}`}
+                    onClick={() => setUserProfilePic(`rectProfile${index+1}`)}
+                  />
+                ))}
+              </CandidateImgsWrapper>
+            </div>
+        </ContentsWrapper>
+        <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">닉네임&nbsp;</Typography>
+            <Typography size="3.33vw" bold="500">수정하기</Typography>
+          </TextBox>
+          <Input01
+            state={nicknameState}
+            setState={setNicknameState}
+            value={nickname}
+            setValue={setNickname}
+          />
+        </ContentsWrapper>
+        </>
+      )}
+      {selected == 3 && (
+        <>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="500">희망하는&nbsp;</Typography>
+              <Typography size="3.33vw" bold="700">이중전공</Typography>
+              <Typography size="3.33vw" bold="500">을 선택해주세요.</Typography>
+            </TextBox>
+            <DropDown
+              title={placeholderMapping['hopeMajor1']}
+              optionList={majorTargetList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor)}
+              value={hopeMajor1}
+              setValue={setHopeMajor1}
+            />
+            <DropDown
+              title={placeholderMapping['hopeMajor2']}
+              optionList={majorTarget.filter((el) => el.value1 !== hopeMajor1 && el.value1 !== firstMajor)}
+              value={hopeMajor2}
+              setValue={setHopeMajor2}
+            />
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">학점&nbsp;</Typography>
+              <Typography size="3.33vw" bold="500">수정하기</Typography>
+            </TextBox>
+            <VerifiBoxWrapper>
+            <TextAreaBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
+            <div style={{ marginTop: '8vw', width: '2px', height: '2px' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none">
+                <circle cx="1" cy="1" r="1" fill="#141414" />
+              </svg>
+            </div>
+            <TextAreaBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
+            <TextAreaBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
+          </VerifiBoxWrapper>
+
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">희망 이중 지원학기&nbsp;</Typography>
+              <Typography size="3.33vw" bold="500">수정하기</Typography>
+            </TextBox>
+            <VerifiBoxWrapper>
+            <TextAreaBox
+              name="semester-1"
+              value={hopeSemester1}
+              setValue={setHopeSemester1}
+              isEntered={hopeSemester1 ? true : false}
+              />
+            <TextAreaBox
+              name="semester-2"
+              value={hopeSemester2}
+              setValue={setHopeSemester2}
+              isEntered={hopeSemester2 ? true : false}
+            />
+            <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>년도</Typography>
+            <TextAreaBox
+              name="semester-3"
+              value={hopeSemester3}
+              setValue={setHopeSemester3}
+              isEntered={hopeSemester3 ? true : false}
+            />
+            <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>학기</Typography>
+          </VerifiBoxWrapper>
+          </ContentsWrapper>
+        </>
+      )}
+      {selected == 4 && (
+        <>
+        <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">쿠플라이 아이디</Typography>
+          </TextBox>
+          <Input01
+            state={emailState}
+            setState={setEmailState}
+            value={email}
+            setValue={setEmail}
+          />
+        </ContentsWrapper>
+        <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">비밀번호&nbsp;</Typography>
+            <Typography size="3.33vw" bold="500">변경하기</Typography>
+          </TextBox>
+          <Input01
+            state={passwordState}
+            setState={setPasswordState}
+            value={pwd}
+            setValue={setPwd}
+            placeholder={placeholderMapping['password']}
+            errorMessage={errorMessageMapping['password']}
+            helpMessage={helpMessageMapping['password']}
+          />
+        </ContentsWrapper>
+        <ContentsWrapper>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">비밀번호 재확인</Typography>
+            <Typography size="3.33vw" bold="500">하기</Typography>
+          </TextBox>
+          <Input01
+          state={password2State}
+          setState={setPassword2State}
+          value={pwdConfirm}
+          setValue={setPwdConfirm}
+          placeholder={placeholderMapping['password2']}
+          errorMessage={errorMessageMapping['password2']}
+          helpMessage={helpMessageMapping['password2']}
+          />
+        </ContentsWrapper>
+        </>
       )}
     </SettingsWrapper>
   );
@@ -450,4 +601,27 @@ const ContentsWrapper = styled.div`
   margin-bottom: 2px;
 `;
 
+const CurrentImg = styled.img`
+  width: 27.5vw; //153px;
+  height: 27.5vw; //153px;
+  object-fit: cover;
+`;
+
+const CandidateImgsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+`;
+
+const CandidateImg = styled.img`
+  width: 13.33vw; //74px;
+  height: 13.33vw; //74px;
+  object-fit: cover;
+  cursor: pointer;
+`;
+
+const VerifiBoxWrapper = styled.div`
+  display: flex;
+  gap: 0.6771vw;
+`;
 
