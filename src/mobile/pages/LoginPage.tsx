@@ -5,12 +5,13 @@ import Input01, { StateOptions } from "../assets/field/Input01";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import client from "../../utils/HttpClient";
 import axios from "axios";
 import { placeholderMapping, helpMessageMapping, errorMessageMapping } from "../components/signup/UserInput";
 import CheckBox02 from "../assets/checkBoxes/CheckBox02";
 import CTA01 from "../assets/CTAs/CTA01";
 import Button05 from "../assets/buttons/Button05";
+import LoginModal from "../components/login/LoginModal";
+import { sendEmail } from "../../utils/SignUpFunctions";
 
 interface LoginPageProps{
   setLogin: (state: boolean) => void;
@@ -18,7 +19,6 @@ interface LoginPageProps{
 
 export default function LoginPage(props: LoginPageProps){
   const { setLogin } = props;
-  const [isOpenAlert, setOpenAlert] = useState<boolean>(true);
 
   const navigate = useNavigate();
   const handleLink2Click = () => {
@@ -70,6 +70,13 @@ export default function LoginPage(props: LoginPageProps){
   return (
     <Wrapper>
       <TempHeader></TempHeader>
+      {isModalVisible && 
+      <LoginModal 
+        isOpenModal={isModalVisible} 
+        setOpenModal={setIsModalVisible}
+        onClickModal={() => setIsModalVisible((prev) => !prev)}
+        sendEmail={sendEmail}
+      />}
       <ContentsList>
         <LogoContainer>
           <img src={process.env.PUBLIC_URL + '/designImage/kupply/KupplyVer1.svg'} alt="LOGO IMAGE" />
@@ -138,7 +145,11 @@ align-items: center;
 `;
 
 const LogoContainer = styled.div`
-margin-bottom: 50px;
+margin-bottom: 30px;
+margin-top: 50px;
+width: 34.167vw;
+height: 7.5vw;
+flex-shrink: 0;
 `;
 
 const ContentsList = styled.div`

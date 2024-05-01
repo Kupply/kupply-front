@@ -418,7 +418,7 @@ function Input01(props: TextFieldBoxProps) {
   const XCircle = () => {
     return (
       <img
-        src="../../designImage/textField/XCircle.png"
+        src={process.env.PUBLIC_URL + '/designImage/textField/XCircle.png'}
         width="4.167vw"
         height="4.167vw"
         onMouseDown={() => {
@@ -526,9 +526,13 @@ function Input01(props: TextFieldBoxProps) {
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
                   {!isCheckDuplicated && valid ? (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="4.167vw" height="4.167vw" />
+                    <img 
+                    src={process.env.PUBLIC_URL + '/designImage/textField/CheckCircle96.png'}
+                    width="4.167vw" height="4.167vw" />
                   ) : (
-                    <img src="../../designImage/textField/AlertCircle.png" width="4.167vw" height="4.167vw" />
+                    <img 
+                    src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'}
+                    width="4.167vw" height="4.167vw" />
                   )}
                 </EyeIconWrapper>
               )}
@@ -537,9 +541,9 @@ function Input01(props: TextFieldBoxProps) {
                   {isCheckDuplicated && <CheckDuplicated onMouseDown={onCheckDuplicated}>중복 확인</CheckDuplicated>}
                   <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
                   {!isCheckDuplicated && valid ? (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="4.167vw" height="4.167vw" />
+                    <img src={process.env.PUBLIC_URL + '/designImage/textField/CheckCircle96.png'} width="4.167vw" height="4.167vw" />
                   ) : (
-                    <img src="../../designImage/textField/AlertCircle.png" width="4.167vw" height="4.167vw" />
+                    <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="4.167vw" height="4.167vw" />
                   )}
                   {isCheckDuplicated && valid && (
                     <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
@@ -589,10 +593,10 @@ function Input01(props: TextFieldBoxProps) {
               {textType === 'default' && (
                 <>
                   {!isCheckDuplicated && valid && (
-                    <img src="../../designImage/textField/CheckCircle96.png" width="4.167vw" height="4.167vw" />
+                    <img src={process.env.PUBLIC_URL + '/designImage/textField/CheckCircle96.png'} width="4.167vw" height="4.167vw" />
                   )}
                   {!isCheckDuplicated && !valid && (
-                    <img src="../../designImage/textField/AlertCircle.png" width="4.167vw" height="4.167vw" />
+                    <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="4.167vw" height="4.167vw" />
                   )}
                   {isCheckDuplicated && valid && (
                     <CheckDuplicatedValidation valid={true} onMouseDown={onCheckDuplicated}>
@@ -647,17 +651,17 @@ function Input01(props: TextFieldBoxProps) {
             {textType === 'password' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
-                <img src="../../designImage/textField/AlertCircle.png" width="6.67vw" height="6.67vw" />
+                <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="6.67vw" height="6.67vw" />
               </EyeIconWrapper>
             )}
             {textType === 'text' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
-                <img src="../../designImage/textField/AlertCircle.png" width="6.67vw" height="6.67vw" />
+                <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="6.67vw" height="6.67vw" />
               </EyeIconWrapper>
             )}
             {textType === 'default' && !isCheckDuplicated && (
-              <img src="../../designImage/textField/AlertCircle.png" width="6.67vw" height="6.67vw" />
+              <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="6.67vw" height="6.67vw" />
             )}
             {textType === 'default' && isCheckDuplicated && (
               <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
@@ -690,20 +694,20 @@ function Input01(props: TextFieldBoxProps) {
         {state === 'loading' && (
           <>
             <CorrectText>{value}</CorrectText>
-            <img src="../../designImage/textField/Loading.png" width="7.78vw" height="7.78vw" />
+            <img src = {process.env.PUBLIC_URL + '/designImage/textField/Loading.png'} width="7.78vw" height="7.78vw" />
           </>
         )}
       </TextFieldWrapper>
 
       {state === 'error' && (
         <ErrorMessageWrapper>
-          <img src="../../designImage/textField/X.png" width="3.33vw" height="3.33vw" />
+          <img src = {process.env.PUBLIC_URL + '/designImage/textField/X.png'} width="5vw" height="5vw" />
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}
       {state === 'focused' && !valid && (
         <ErrorMessageWrapper>
-          <img src="../../designImage/textField/AlertCircle.png" width="3.33vw" height="3.33vw" />
+          <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="5vw" height="5vw" />
           <ErrorMessage>{validationMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}
