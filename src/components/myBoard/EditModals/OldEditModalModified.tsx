@@ -298,7 +298,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      {isOpenModal && !isSubmitted &&
+      {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton
@@ -308,23 +308,15 @@ export default function EditModal(props: ModalProps) {
             >
               <Icon02 />
             </CloseButton>
-            <Typography
-              size="1.042vw"
-              bold="700"
-              style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '2.083vw' }}
-            >
+            <Typography size="18px" bold="700" style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '16px' }}>
               프로필 정보 수정하기
             </Typography>
-            <div style={{ height: '2.083vw' }}></div>
+            <div style={{ height: '32px' }}></div>
             <HeaderBar />
           </HeaderWrapper>
 
           {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
-            <ContentsWrapper
-              style={{
-                marginBottom: '5.260vw',
-              }}
-            >
+            <ContentsWrapper>
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '1.042vw' }}>
@@ -407,7 +399,7 @@ export default function EditModal(props: ModalProps) {
                 onClickSubmit={onClickSubmit}
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
-                style={{ marginTop: '1.042vw' }}
+                style={{ marginTop: '16px', width: '100%', display: 'flex', justifyContent: 'space-between' }}
                 isGpaChanged={isGpaChanged}
               />
             </ContentsWrapper>
@@ -526,7 +518,7 @@ export default function EditModal(props: ModalProps) {
             </ContentsWrapper2>
           )}
         </ModalLarge>
-      }
+      )}
     </Main>
   );
 }
@@ -539,6 +531,8 @@ const Main = styled.main`
   align-items: center;
   position: fixed;
   z-index: 1005;
+  bottom: 0;
+  top: 0;
 `;
 
 const HeaderWrapper = styled.div`
@@ -546,13 +540,14 @@ const HeaderWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   //width: 814px;
-  width: 120%;
+  width: 100%;
+  box-sizing: border-box;
   //height: 134px;
-  height: 6.979vw;
+
   flex-shrink: 0;
   background-color: #fcfafb;
   border-bottom: 1px solid var(--DF_Grey-2, #dfdfdf);
-  margin-top: -20px;
+
   //margin-top: -0.833vw;
 `;
 
@@ -566,9 +561,9 @@ const CloseButton = styled.button`
   align-items: center;
   position: absolute;
   //top: 32px;
-  top: 1.667vw;
+
   //right: 40px;
-  right: 2.083vw;
+  right: 0px;
   cursor: pointer;
 `;
 
@@ -621,12 +616,13 @@ const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   //width: 628px;
-  width: 32.708vw;
+  width: 75%;
   align-items: left;
   margin-left: auto;
   margin-right: auto;
   //margin-top: 58px;
-  margin-top: 3.021vw;
+  margin-top: 32px;
+  margin-bottom: 32px;
   //gap: 35px;
   gap: 1.823vw;
 `;

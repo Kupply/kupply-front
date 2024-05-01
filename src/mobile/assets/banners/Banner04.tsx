@@ -77,9 +77,9 @@ const MainWrapper = styled.div<{ type: number; images: string[] }>`
   justify-content: flex-start;
   align-items: ${(props) => (props.type === 3 ? 'flex-start' : 'center')};
   border-radius: ${(props) => (props.type === 2 ? '0' : '3.33vw')};
-  background-color: #d85888;
   background-image: url(${(props) => props.images[props.type - 1]});
-  background-size: cover;
+  background-size: ${(props) => (props.type === 1 ? '120% 150%' : 'cover')};
+  background-position: ${(props) => props.type === 1 && 'center 31%'};
 `;
 
 export default Banner04;

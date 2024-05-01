@@ -5,7 +5,7 @@ import Typography from '../../../assets/Typography';
 import Banner04 from '../../assets/banners/Banner04';
 
 function Join2() {
-  const [isLogined, setIsLogined] = useState<boolean>(true);
+  const [isLogined, setIsLogined] = useState<boolean>(false);
 
   return (
     <MainWrapper>

@@ -14,7 +14,7 @@ const Button = styled.button<MobilePaginationButtonProps>`
   text-align: center;
   width: 9.44vw; // 34px;
   height: 9.44vw; // 34px;
-  border-radius: 0.26vw; // 5px
+  border-radius: 1.39vw; // 5px
   padding: 5vw; // 18px
   gap: 2.22vw; // 8px;
   flex-shrink: 0;
@@ -30,6 +30,7 @@ const Button = styled.button<MobilePaginationButtonProps>`
       ? `
       background: #D85888;
       color: rgba(255, 255, 255, 1);
+      box-shadow: 0 1.11vw 3.33vw 0 rgba(216,88,136,0.25)
       `
       : `
       background: #F5F5F5;

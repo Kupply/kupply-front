@@ -112,7 +112,7 @@ function Banner01(props: Banner01Props) {
           <div key={sentenceIndex}>{sentence}</div>
         ))}
       </Typography>
-      <XButton src="../../../designImage/icon/icon_02.svg" onClick={handleButtonClick} />
+      <PrevButton src="../../../designImage/icon/icon_02.svg" onClick={handleButtonClick} />
     </MainWrapper>
   );
 }
@@ -127,12 +127,12 @@ const MainWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   gap: 2.5vw;
-  background-image: url(${(props) => props.departments[props.departmentIndex].image});
+  :url(${(props) => props.departments[props.departmentIndex].image}) ;
   background-size: cover;
   position: relative;
 `;
 
-const XButton = styled.img`
+const PrevButton = styled.img`
   width: 8.89vw;
   height: 8.89vw;
   cursor: pointer;

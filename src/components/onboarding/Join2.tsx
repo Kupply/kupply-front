@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../assets/Typography';
@@ -7,9 +7,14 @@ import Button02 from '../../assets/buttons/Button02';
 import Button11 from '../../assets/buttons/Button11';
 
 function Join2() {
-  const [isLogined, setIsLogined] = useState<boolean>(true);
+  const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setIsLogined(true);
+    else setIsLogined(false);
+  }, []);
 
   const handleButtonClick = async () => {
     //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
@@ -152,6 +157,9 @@ const TextFieldBox = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: 100%;
+  }
+  &:focus {
+    outline: none;
   }
 `;
 
