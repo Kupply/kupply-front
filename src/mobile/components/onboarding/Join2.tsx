@@ -1,11 +1,16 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Typography from '../../../assets/Typography';
 import Banner04 from '../../assets/banners/Banner04';
 
 function Join2() {
   const [isLogined, setIsLogined] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setIsLogined(true);
+    else setIsLogined(false);
+  }, []);
 
   return (
     <MainWrapper>
