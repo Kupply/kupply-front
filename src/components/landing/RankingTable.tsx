@@ -36,6 +36,15 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
 
   const [mouseOn, setMouseOn] = useState(false);
 
+  const currentDate = new Date();
+  const startDate = new Date('2024-05-10');
+  const endDate = new Date('2024-05-17');
+  const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+
+  const handleButtonClick = () => {
+    isDateInRange ? navigate('/myboard') : navigate('/archive');
+  };
+
   return (
     <Wrapper ref={ref}>
       <Typography
@@ -43,7 +52,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         bold="700"
         style={{ lineHeight: '120%', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
       >
-        지금은 모의지원 기간이 아닙니다.
+        {isDateInRange ? '쿠플라이 실시간 이중전공 모의지원 현황' : '지금은 모의지원 기간이 아닙니다'}
       </Typography>
       <Typography
         size="1.04vw"
@@ -51,10 +60,12 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         color="rgba(20,20,20,0.6)"
         style={{ opacity: 0.8, lineHeight: '120%', margin: '0.63vw 0 1.72vw 0' }}
       >
-        모의지원 기능은 5월 달에 오픈해요!
+        {isDateInRange
+          ? '이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.'
+          : '모의지원 기능은 5월 10일에 오픈해요!'}
       </Typography>
-      <CTA02 onClick={() => navigate('/archive')} style={{ marginBottom: '3.8vw' }}>
-        기다리는 동안 과거 합격자료 보러가기
+      <CTA02 onClick={handleButtonClick} style={{ marginBottom: '3.8vw' }}>
+        {isDateInRange ? '나도 모의지원 하러가기!' : '기다리는 동안 과거 합격자료 보러가기!'}
       </CTA02>
       <TextWrapper>
         <div
@@ -163,7 +174,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           </div>
         )}
       </div>
-      <Blur />
+      {!isDateInRange && <Blur />}
     </Wrapper>
   );
 });

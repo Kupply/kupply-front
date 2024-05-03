@@ -25,6 +25,12 @@ export interface ITableData {
 
 function Preview1() {
   const navigate = useNavigate();
+
+  const currentDate = new Date();
+  const startDate = new Date('2024-05-10');
+  const endDate = new Date('2024-05-17');
+  const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+
   const [tableData, setTableData] = useState<ITableData[]>([
     {
       rank: 1,
@@ -175,21 +181,26 @@ function Preview1() {
         </Typography>
         <RankingTable tableData={tableData} />
       </ContentWrapper>
-      <Blur />
-      <ButtonWrapper>
-        <Typography size="1.57vw" bold="700" color="#2C323A" style={{ textAlign: 'center', lineHeight: '131.58%' }}>
-          지금은 모의지원 기간이 아닙니다. <br /> 모의지원 기능은 5월 달에 오픈해요!
-        </Typography>
-        <CTA02
-          onClick={() => {
-            navigate('/archive');
-          }}
-          size="small"
-          style={{ marginTop: '1.24vw' }}
-        >
-          과거 합격자료 보러가기
-        </CTA02>
-      </ButtonWrapper>
+      {!isDateInRange && (
+        <>
+          <Blur />
+          <ButtonWrapper>
+            <Typography size="1.57vw" bold="700" color="#2C323A" style={{ textAlign: 'center', lineHeight: '131.58%' }}>
+              모의지원 가능 기간은 5월 10일부터 5월 17일입니다. <br /> 기다리는 동안 과거 합격자료 살펴보며 이중전공을
+              준비해요!
+            </Typography>
+            <CTA02
+              onClick={() => {
+                navigate('/archive');
+              }}
+              size="small"
+              style={{ marginTop: '1.24vw' }}
+            >
+              과거 합격자료 보러가기
+            </CTA02>
+          </ButtonWrapper>
+        </>
+      )}
     </MainWrapper>
   );
 }
