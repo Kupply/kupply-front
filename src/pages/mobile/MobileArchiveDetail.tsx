@@ -159,16 +159,16 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox>
 
         {enoughData === false ? (
-          <Wrapper2>
-            <BlurWrapper />
-            <BlurMsg>
-              <BlurTitle>쿠플라이에서 아직 정보를 수집 중입니다!</BlurTitle>
-              <Blurtext>
+          <Wrapper1>
+            <BlurWrapper1 />
+            <BlurMsg1>
+              <BlurTitle1>쿠플라이에서 아직 정보를 수집 중입니다!</BlurTitle1>
+              <Blurtext1>
                 더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
                 <br />더 나은 서비스를 위해서 조금만 더 기다려주세요!
-              </Blurtext>
-            </BlurMsg>
-          </Wrapper2>
+              </Blurtext1>
+            </BlurMsg1>
+          </Wrapper1>
         ) : (
           <GraphBox>
             <MobileArchiveGraph
@@ -188,12 +188,25 @@ const MobileArchiveDetailPage = () => {
           <RecruitText>합격자 학점 분석</RecruitText>
         </RecruitTitleBox>
 
-        <GpaAnalysisBox>
-          <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={meanGpa.gpa} />
-          <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={modeGpa.gpa} modeNumber={modeGpa.num} />
-          <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={medianGpa.gpa} />
-          <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={minGpa.gpa} />
-        </GpaAnalysisBox>
+        {enoughData === false ? (
+          <Wrapper2>
+            <BlurWrapper2 />
+            <BlurMsg2>
+              <BlurTitle2>쿠플라이에서 아직 정보를 수집 중입니다!</BlurTitle2>
+              <Blurtext2>
+                더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
+                <br />더 나은 서비스를 위해서 조금만 더 기다려주세요!
+              </Blurtext2>
+            </BlurMsg2>
+          </Wrapper2>
+        ) : (
+          <GpaAnalysisBox>
+            <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={meanGpa.gpa} />
+            <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={modeGpa.gpa} modeNumber={modeGpa.num} />
+            <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={medianGpa.gpa} />
+            <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={minGpa.gpa} />
+          </GpaAnalysisBox>
+        )}
 
         {/* <RecruitTitleBox>
           <IconImage src="../../designImage/icon/icon_19.svg" />
@@ -207,7 +220,7 @@ const MobileArchiveDetailPage = () => {
 
 //##################### BOX #####################
 
-const Wrapper2 = styled.div`
+const Wrapper1 = styled.div`
   position: relative;
   display: flex;
 
@@ -219,7 +232,7 @@ const Wrapper2 = styled.div`
   backdrop-filter: blur(12px);
 `;
 
-const BlurWrapper = styled.div`
+const BlurWrapper1 = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -232,7 +245,53 @@ const BlurWrapper = styled.div`
   z-index: 10;
 `;
 
-const BlurMsg = styled.div`
+const BlurMsg1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+`;
+
+const Wrapper2 = styled.div`
+  border-radius: 2.78vw;
+  border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 45vw; // 160px 44.44vw
+  margin-top: 5vw;
+`;
+
+const BlurWrapper2 = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  z-index: 10;
+`;
+
+const BlurMsg2 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -416,7 +475,7 @@ const KeywordBox = styled.div`
 
 //##################### TEXT #####################
 
-const BlurTitle = styled.div`
+const BlurTitle1 = styled.div`
   color: #141414;
   text-align: center;
   font-family: Pretendard;
@@ -426,7 +485,27 @@ const BlurTitle = styled.div`
   line-height: 100%;
 `;
 
-const Blurtext = styled.div`
+const Blurtext1 = styled.div`
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2.5vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
+`;
+
+const BlurTitle2 = styled.div`
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 4vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const Blurtext2 = styled.div`
   color: rgba(20, 20, 20, 0.8);
   text-align: center;
   font-family: Pretendard;
