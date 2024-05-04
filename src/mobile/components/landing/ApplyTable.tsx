@@ -1,14 +1,46 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Typography from '../../../assets/Typography';
 import CurrentInfo from './CurrentInfo';
 import PastInfo from './PastInfo';
+import client from '../../../utils/HttpClient';
+
+export interface ITableData {
+  rank: number;
+  secondMajor: string;
+  engName: string;
+  pastRecruitNumber: number;
+  recruitNumber: number;
+  applyNumber: number;
+  competition: number;
+  pastCompetition: number;
+  pastPassedNum: number;
+  pastmin: number;
+  pastmean: number;
+  interest: number;
+  interestedNum: number;
+  imagesrc: string;
+}
 
 function ApplyTable() {
   const [isAscending, setIsAscending] = useState<boolean>(false);
   const [isCurrentInfo, setIsCurrentInfo] = useState<boolean>(true);
   const [isShowAll, setIsShowAll] = useState<boolean>(false);
+
+  const [tableData, setTableData] = useState<ITableData[]>([]);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await client.get('/landing');
+        setTableData(response.data.data);
+      } catch (e) {
+        alert(e);
+      }
+    };
+
+    loadData();
+  }, []);
 
   return (
     <MainWrapper>
@@ -36,9 +68,9 @@ function ApplyTable() {
         </MenuBox>
       </MenuWrapper>
       {isCurrentInfo ? (
-        <CurrentInfo isAscending={isAscending} isShowAll={isShowAll} />
+        <CurrentInfo isAscending={isAscending} isShowAll={isShowAll} tableData={tableData} />
       ) : (
-        <PastInfo isAscending={isAscending} isShowAll={isShowAll} />
+        <PastInfo isAscending={isAscending} isShowAll={isShowAll} tableData={tableData} />
       )}
       <ShowAllButton onClick={() => setIsShowAll((isShowAll) => !isShowAll)}>
         <Typography size="3.61vw" bold="500" color="#b9b9b9" style={{ lineHeight: '138.46%', position: 'absolute' }}>
