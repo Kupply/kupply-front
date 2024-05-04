@@ -33,12 +33,12 @@ function Carousel() {
   return (
     <MainWrapper page={page}>
       {page === 0 ? (
-        <CarouselWrapper
-          onClick={() => {
-            window.location.href = '/archive';
-          }}
-        >
-          <BannerButton>
+        <CarouselWrapper>
+          <BannerButton
+            onClick={() => {
+              window.location.href = '/archive';
+            }}
+          >
             <Typography size="1.04vw" bold="500" color="#D85888">
               합격자료
             </Typography>
@@ -56,13 +56,12 @@ function Carousel() {
           </div>
         </CarouselWrapper>
       ) : page === 1 ? (
-        <CarouselWrapper
-          align
-          onClick={() => {
-            window.location.href = '/landing';
-          }}
-        >
-          <BannerButton>
+        <CarouselWrapper align>
+          <BannerButton
+            onClick={() => {
+              window.location.href = '/landing';
+            }}
+          >
             <Typography size="1.04vw" bold="500" color="#D85888">
               실시간 비교
             </Typography>
@@ -80,12 +79,12 @@ function Carousel() {
           </div>
         </CarouselWrapper>
       ) : (
-        <CarouselWrapper
-          onClick={() => {
-            window.location.href = '/myboard';
-          }}
-        >
-          <BannerButton>
+        <CarouselWrapper>
+          <BannerButton
+            onClick={() => {
+              window.location.href = '/myboard';
+            }}
+          >
             <Typography size="1.04vw" bold="500" color="#D85888">
               마이보드
             </Typography>
@@ -188,6 +187,7 @@ const BannerButton = styled.div`
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0px 0px 40px 0px rgba(216, 88, 136, 0.2);
   margin: 7.24vw 0 1.77vw 0;
+  cursor: pointer;
 `;
 
 const CarouselWrapper = styled.div<{ align?: boolean }>`
@@ -199,7 +199,6 @@ const CarouselWrapper = styled.div<{ align?: boolean }>`
   width: 100%;
   box-sizing: border-box;
   align-items: ${(props) => (props.align ? 'flex-end' : '')};
-  cursor: pointer;
 `;
 
 export default Carousel;

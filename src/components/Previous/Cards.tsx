@@ -113,13 +113,15 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
     .sort((a, b) => {
       switch (sortCriterion) {
         case '가나다순':
-          return a.korName.localeCompare(b.korName);
+          const aName = a.korName.split(' ').length === 2 ? a.korName.split(' ')[1] : a.korName;
+          const bName = b.korName.split(' ').length === 2 ? b.korName.split(' ')[1] : b.korName;
+          return aName.localeCompare(bName);
         case '선발인원순':
-          return a.TO - b.TO;
+          return b.TO - a.TO;
         case '경쟁률순':
-          return a.compRate - b.compRate;
+          return b.compRate - a.compRate;
         case '평균학점순':
-          return a.avgPass - b.avgPass;
+          return b.avgPass - a.avgPass;
         case '최저학점순':
           return a.minPass - b.minPass;
         default:
@@ -147,7 +149,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
           <Card01 {...card} />
         ))}
       </FlexContainer>
-      <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '1.66vw' }}>
+      <FlexContainer style={{ marginTop: opaCards.length === 0 ? '0px' : '1.66vw' }}>
         {opaCards.map((card) => (
           <div style={{ opacity: 0.5 }}>
             <Card01 {...card} />
@@ -204,7 +206,7 @@ const mockCards = [
     semester: '23-2',
   },
   {
-    korName: '심리학부',
+    korName: '심리학부 심리학부',
     engName: 'School of Psychology',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 27,
@@ -234,7 +236,7 @@ const mockCards = [
     semester: '23-2',
   },
   {
-    korName: '미디어학부',
+    korName: '미디어학부 미디어학부',
     engName: 'School of Media & Communication',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 21,

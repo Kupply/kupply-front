@@ -76,12 +76,12 @@ function MobileHeader() {
 const MainWrapper = styled.div`
   width: 90.56vw;
   height: 20.55vw;
-  padding: 13.89vw 4.72vw 0 4.72vw;
+  padding: 2.78vw 4.72vw 0 4.72vw;
   display: flex;
   flex-direction: column;
   gap: 4.17vw;
   background-color: #fff;
-  box-shadow: 0 1.11vw 15.28vw 0 rgba(20, 20, 20, 0.1);
+  box-shadow: 0 1.11vw 15.28vw 0 rgba(20, 20, 20, 0.25);
   backdrop-filter: blur(50px);
 `;
 

@@ -7,11 +7,16 @@ import FAQ from '../components/landing/FAQ';
 import Footer from '../assets/base/Footer';
 
 function LandingMobile() {
+  const currentDate = new Date();
+  const startDate = new Date('2024-05-10');
+  const endDate = new Date('2024-05-17');
+  const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+
   return (
     <MainWrapper>
       <Header />
       <GoToApply />
-      <ApplyTable />
+      {isDateInRange && <ApplyTable />}
       <FAQ />
       <Footer />
     </MainWrapper>

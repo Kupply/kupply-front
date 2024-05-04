@@ -5,9 +5,14 @@ import Content2 from './Content2';
 import Content3 from './Content3';
 
 function Contents() {
+  const currentDate = new Date();
+  const startDate = new Date('2024-05-10');
+  const endDate = new Date('2024-05-17');
+  const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+
   return (
     <MainWrapper>
-      <Content1 />
+      {isDateInRange && <Content1 />}
       <Content2 />
       <Content3 />
     </MainWrapper>

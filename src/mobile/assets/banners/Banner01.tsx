@@ -127,7 +127,7 @@ const MainWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   gap: 2.5vw;
-  :url(${(props) => props.departments[props.departmentIndex].image});
+  background-image: url(${(props) => props.departments[props.departmentIndex].image});
   background-size: cover;
   position: relative;
 `;

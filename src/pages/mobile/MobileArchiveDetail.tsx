@@ -30,6 +30,46 @@ export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', 
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
+  const params = useParams();
+  const majorName =
+    params.majorName === 'business'
+      ? '경영학과'
+      : params.majorName === 'economics'
+      ? '경제학과'
+      : params.majorName === 'mechanical'
+      ? '기계공학부'
+      : params.majorName === 'datasci'
+      ? '데이터과학과'
+      : params.majorName === 'media'
+      ? '미디어학부'
+      : params.majorName === 'datasci'
+      ? '데이터과학과'
+      : params.majorName === 'industrial'
+      ? '산업경영공학부'
+      : params.majorName === 'bioeng'
+      ? '생명공학부'
+      : params.majorName === 'lifesci'
+      ? '생명과학부'
+      : params.majorName === 'mathematics'
+      ? '수학과'
+      : params.majorName === 'smartsec'
+      ? '스마트보안학부'
+      : params.majorName === 'foodecon'
+      ? '식품자원경제학과'
+      : params.majorName === 'materials'
+      ? '신소재공학부'
+      : params.majorName === 'electrical'
+      ? '전기전자공학부'
+      : params.majorName === 'political'
+      ? '정치외교학과'
+      : params.majorName === 'computer'
+      ? '컴퓨터학과'
+      : params.majorName === 'statistics'
+      ? '통계학과'
+      : params.majorName === 'chembio'
+      ? '화공생명공학부'
+      : '화학과';
+
   const handlePrev = () => {
     navigate('/archive');
   };
@@ -120,15 +160,7 @@ const MobileArchiveDetailPage = () => {
 
   return (
     <MobilePageWrapper>
-      <BannerBox>
-        <BannerPrevious onClick={handlePrev} src="../../designImage/mobile/banner/BannerPrevious.svg" />
-        <BannerImage src="../../designImage/mobile/banner/Banner1_1.png" /> {/* 학과별 적용 X */}
-        <BannerTextBox>
-          <BannerTitle>{majorKoreanName}</BannerTitle>
-          <div style={{ marginTop: '2.5vw' }} />
-          <BannerText>{majorEngishName}</BannerText>
-        </BannerTextBox>
-      </BannerBox>
+      <Banner01 major={majorName} />
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>
         <DropDownBox>
