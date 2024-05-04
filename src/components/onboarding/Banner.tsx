@@ -1,62 +1,8 @@
-import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 import Typography from '../../assets/Typography';
-import Card01 from '../../assets/cards/Card01';
-import MainCard from './MainCard';
-import SubCard from './SubCards';
-import client from '../../utils/HttpClient';
 
 function Banner() {
-  const [cards, setCards] = useState(mockCards);
-  const [isDetailed, setIsDetailed] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevSemester = '23-2';
-
-  const fetch = async () => {
-    const data = await client.get('/dashboard/cards');
-    console.log(data.data);
-    setCards(
-      cards.map((c) => {
-        const res = data.data.find((ca: any) => ca.name === c.korName);
-        return {
-          korName: c.korName,
-          engName: c.engName,
-          filter: c.filter,
-          TO: c.TO,
-          semester: prevSemester,
-          avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
-          minPass: res.passNum === 0 ? 0 : res.min,
-          compRate: +(res.passNum / c.TO).toFixed(2),
-        };
-      }),
-    );
-  };
-  useEffect(() => {
-    fetch();
-  });
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
-    }, 3000);
-    return () => clearInterval(intervalId);
-  }, [cards.length]);
-
-  useEffect(() => {
-    setIsDetailed(false);
-    const timeoutId = setTimeout(() => {
-      setIsDetailed(true);
-    }, 1500);
-    return () => clearTimeout(timeoutId);
-  }, [currentIndex]);
-
-  const calculateIndex = (index: number) => {
-    const length = cards.length;
-    return (index + length) % length;
-  };
-
   return (
     <MainWrapper>
       <Typography size="0.94vw" bold="700" color="rgba(255,255,255,0.5)" style={{ margin: '5.21vw 0 0.42vw 0' }}>
@@ -71,35 +17,264 @@ function Banner() {
         </Typography>
       </div>
       <Typography size="1.04vw" bold="500" color="#FFF" style={{ margin: '0.89vw 0 0.42vw 0' }}>
-        쿠플라이가 현재 서비스 제공 중인 이준전공 학과의 정보들이에요.
+        쿠플라이가 현재 서비스 제공 중인 고려대학교 학과들이에요.
       </Typography>
       <Typography size="1.04vw" bold="500" color="#FFF">
         앞으로 더 추가될 학과들을 기대해 주세요!
       </Typography>
-      <ImageWrapper>
-        <div style={{ display: 'flex', gap: '2.11vw' }}>
-          {[-3, -2, -1].map((offset) => (
-            <SubImage key={offset}>
-              <SubCard {...cards[calculateIndex(currentIndex + offset)]} />
-            </SubImage>
-          ))}
-        </div>
-        <div style={{ display: 'flex', gap: '2.11vw' }}>
-          {[1, 2, 3].map((offset) => (
-            <SubImage key={offset}>
-              <SubCard {...cards[calculateIndex(currentIndex + offset)]} />
-            </SubImage>
-          ))}
-        </div>
-      </ImageWrapper>
-      <CellPhone></CellPhone>
-      <Notch src="../../designImage/onboarding/Notch.png" />
-      <MainImage>
-        <MainCard isDetailed={isDetailed} {...cards[currentIndex]} />
-      </MainImage>
+      <Cards>
+        {Array.from({ length: 20 }, (_, index) => (
+          <Card key={index} />
+        ))}
+      </Cards>
+      <CellPhone />
+      <Notch />
+      <PowerButton />
+      <VolumeButton style={{ top: '29.58vw' }} />
+      <VolumeButton style={{ top: '32.33vw' }} />
     </MainWrapper>
   );
 }
+
+const Animation1 = keyframes`
+  0%, 4%, 100% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  5%, 9% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  10%, 14% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  15%, 19% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  20%, 24% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  25%, 29% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  30%, 34% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  35%, 50% {left: -32.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  50%, 99% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation2 = keyframes`
+  5%, 9% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  10%, 14% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  15%, 19% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  20%, 24% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  25%, 29% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  30%, 34% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  35%, 39% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  40%, 55% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  55%, 100%, 0%, 4% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation3 = keyframes`
+  10%, 14% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  15%, 19% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  20%, 24% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  25%, 29% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  30%, 34% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  35%, 39% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  40%, 44% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  45%, 60% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  60%, 100%, 0%, 9% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation4 = keyframes`
+  15%, 19% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  20%, 24% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  25%, 29% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  30%, 34% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  35%, 39% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  40%, 44% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  45%, 49% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  50%, 65% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  65%, 100%, 0%, 14% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation5 = keyframes`
+  20%, 24% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  25%, 29% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  30%, 34% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  35%, 39% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  40%, 44% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  45%, 49% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  50%, 54% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  55%, 70% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  70%, 100%, 0%, 19% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation6 = keyframes`
+  25%, 29% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  30%, 34% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  35%, 39% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  40%, 44% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  45%, 49% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  50%, 54% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  55%, 59% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  60%, 75% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  75%, 100%, 0%, 24% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation7 = keyframes`
+  30%, 34% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  35%, 39% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  40%, 44% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  45%, 49% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  50%, 54% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  55%, 59% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  60%, 64% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  65%, 80% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  80%, 100%, 0%, 29% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation8 = keyframes`
+  35%, 39% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  40%, 44% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  45%, 49% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  50%, 54% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  55%, 59% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  60%, 64% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  65%, 69% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  70%, 85% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  85%, 100%, 0%, 34% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation9 = keyframes`
+  40%, 44% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  45%, 49% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  50%, 54% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  55%, 59% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  60%, 64% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  65%, 69% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  70%, 74% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  75%, 90% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  90%, 100%, 0%, 39% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation10 = keyframes`
+  45%, 49% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  50%, 54% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  55%, 59% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  60%, 64% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  65%, 69% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  70%, 74% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  75%, 79% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  80%, 95% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  95%, 100%, 0%, 44% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation11 = keyframes`
+  50%, 54% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  55%, 59% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  60%, 64% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  65%, 69% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  70%, 74% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  75%, 79% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  80%, 84% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  85%, 100%, 0% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  0%, 49% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation12 = keyframes`
+  55%, 59% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  60%, 64% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  65%, 69% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  70%, 74% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  75%, 79% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  80%, 84% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  85%, 89% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  90%, 100%, 0%, 5% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  5%, 54% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation13 = keyframes`
+  60%, 64% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  65%, 69% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  70%, 74% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  75%, 79% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  80%, 84% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  85%, 89% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  90%, 94% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  95%, 100%, 0%, 10% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  10%, 59% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation14 = keyframes`
+  65%, 69% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  70%, 74% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  75%, 79% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  80%, 84% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  85%, 89% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  90%, 94% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  95%, 99% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  100%, 0%, 15% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  15%, 64% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation15 = keyframes`
+  70%, 74% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  75%, 79% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  80%, 84% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  85%, 89% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  90%, 94% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  95%, 99% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  100%, 0%, 4% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  5%, 20% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  20%, 69% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation16 = keyframes`
+  75%, 79% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  80%, 84% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  85%, 89% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  90%, 94% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  95%, 99% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  100%, 0%, 4% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  5%, 9% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  10%, 25% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  25%, 74% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation17 = keyframes`
+  80%, 84% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  85%, 89% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  90%, 94% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  95%, 99% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  100%, 0%, 4% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  5%, 9% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  10%, 14% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  15%, 30% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  30%, 79% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation18 = keyframes`
+  85%, 89% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  90%, 94% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  95%, 99% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  100%, 0%, 4% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  5%, 9% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  10%, 14% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  15%, 19% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  20%, 35% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  35%, 84% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation19 = keyframes`
+  90%, 94% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  95%, 99% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  100%, 0%, 4% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  5%, 9% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  10%, 14% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  15%, 19% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  20%, 24% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  25%, 40% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  40%, 89% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
+
+const Animation20 = keyframes`
+  95%, 99% {left: 88.23vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  100%, 0%, 4% {left: 73.02vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}  
+  5%, 9% {left: 57.79vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  10%, 14% {left: 42.57vw; opacity:1; width: 15.08vw; height: 19.42vw; z-index: 20; top: 0;}
+  15%, 19% {left: 29.4vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  20%, 24% {left: 14.17vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  25%, 29% {left: -1.04vw; opacity: 1; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+  30%, 45% {left: -22.78vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;} 
+  45%, 94% {left: 100vw; opacity: 0; width: 13.13vw; height: 16.88vw; z-index: 1; top: 1.56vw;}
+`;
 
 const MainWrapper = styled.div`
   width: 100vw;
@@ -123,248 +298,157 @@ const CellPhone = styled.div`
   position: absolute;
   z-index: 5;
   bottom: 0;
-  left: 40.64vw;
+  left: 39.93vw;
   box-shadow: -36px 0 36px rgba(0, 0, 0, 0.3);
 `;
 
-const Notch = styled.img`
+const Notch = styled.div`
   width: 8.1vw;
   height: 1.58vw;
+  border-radius: 0 0 0.9vw 0.9vw;
+  background-color: #f3f4f8;
   position: absolute;
-  top: 18.5vw;
-  left: 46.84vw;
   z-index: 10;
+  left: 46.14vw;
+  top: 18.57vw;
 `;
 
-const ImageWrapper = styled.div`
-  width: 102.08vw;
+const PowerButton = styled.div`
+  width: 0.36vw;
+  height: 3vw;
+  border-radius: 0.4vw 0 0 0.4vw;
+  background-color: #c6c8d4;
+  position: absolute;
+  left: 39.57vw;
+  top: 25.07vw;
+  z-index: 5;
+`;
+
+const VolumeButton = styled.div`
+  width: 0.28vw;
+  height: 2.75vw;
+  border-radius: 0.4vw 0 0 0.4vw;
+  background-color: #c6c8d4;
+  position: absolute;
+  left: 39.68vw;
+  z-index: 5;
+`;
+
+const Cards = styled.div`
+  width: 100vw;
+  height: 19.42vw;
+  margin-top: 12.8vw;
+  position: relative;
+`;
+
+const Card = styled.div`
+  width: 13.13vw;
   height: 16.88vw;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 14.36vw;
-`;
-
-const MainImage = styled.div`
-  width: 14.63vw;
-  height: 19.69vw;
+  border-radius: 0.36vw;
   position: absolute;
-  top: 25.82vw;
-  left: 43.41vw;
-  z-index: 10;
+  left: -30%;
+  top: 0%;
+  z-index: 20;
+
+  &:nth-child(1) {
+    background-color: pink;
+    animation: ${Animation1} 60s infinite;
+  }
+
+  &:nth-child(2) {
+    background-color: aliceblue;
+    animation: ${Animation2} 60s infinite;
+  }
+
+  &:nth-child(3) {
+    background-color: antiquewhite;
+    animation: ${Animation3} 60s infinite;
+  }
+
+  &:nth-child(4) {
+    background-color: aqua;
+    animation: ${Animation4} 60s infinite;
+  }
+
+  &:nth-child(5) {
+    background-color: aquamarine;
+    animation: ${Animation5} 60s infinite;
+  }
+
+  &:nth-child(6) {
+    background-color: azure;
+    animation: ${Animation6} 60s infinite;
+  }
+
+  &:nth-child(7) {
+    background-color: beige;
+    animation: ${Animation7} 60s infinite;
+  }
+
+  &:nth-child(8) {
+    background-color: bisque;
+    animation: ${Animation8} 60s infinite;
+  }
+
+  &:nth-child(9) {
+    background-color: black;
+    animation: ${Animation9} 60s infinite;
+  }
+
+  &:nth-child(10) {
+    background-color: blanchedalmond;
+    animation: ${Animation10} 60s infinite;
+  }
+
+  &:nth-child(11) {
+    background-color: blue;
+    animation: ${Animation11} 60s infinite;
+  }
+
+  &:nth-child(12) {
+    background-color: blueviolet;
+    animation: ${Animation12} 60s infinite;
+  }
+
+  &:nth-child(13) {
+    background-color: brown;
+    animation: ${Animation13} 60s infinite;
+  }
+
+  &:nth-child(14) {
+    background-color: burlywood;
+    animation: ${Animation14} 60s infinite;
+  }
+
+  &:nth-child(15) {
+    background-color: red;
+    animation: ${Animation15} 60s infinite;
+  }
+
+  &:nth-child(16) {
+    background-color: yellow;
+    animation: ${Animation16} 60s infinite;
+  }
+
+  &:nth-child(17) {
+    background-color: green;
+    animation: ${Animation17} 60s infinite;
+  }
+
+  &:nth-child(18) {
+    background-color: purple;
+    animation: ${Animation18} 60s infinite;
+  }
+
+  &:nth-child(19) {
+    background-color: chartreuse;
+    animation: ${Animation19} 60s infinite;
+  }
+
+  &:nth-child(20) {
+    background-color: mistyrose;
+    animation: ${Animation20} 60s infinite;
+  }
 `;
-
-const SubImage = styled.div`
-  width: 13vw;
-  height: 17.5vw;
-  border-radius: 0.42vw;
-  background-color: aliceblue;
-`;
-
-const mockCards = [
-  {
-    korName: '경영대학 경영학과',
-    engName: 'Business School',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 37,
-    compRate: 4.23,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '심리학부',
-    engName: 'School of Psychology',
-    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
-    TO: 27,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '정경대학 경제학과',
-    engName: 'Department of Economics',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 29,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '정경대학 통계학과',
-    engName: 'Department of Statistics',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 29,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '미디어학부',
-    engName: 'School of Media & Communication',
-    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
-    TO: 21,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '정보대학 컴퓨터학과',
-    engName: 'Department of Computer Science & Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 20,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '생명과학대학 식품자원경제학과',
-    engName: 'Department of Food & Resources',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 21,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '이과대학 수학과',
-    engName: 'Department of Mathematics',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 7,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '이과대학 화학과',
-    engName: 'Department of Chemistry',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 10,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-
-  ////// 학과 추가 (3/20) //////
-  ///////////////////////////
-
-  {
-    korName: '생명과학대학 생명공학부',
-    engName: 'Biological Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 11,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '생명과학대학 생명과학부',
-    engName: 'School of Life Sciences',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 3,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '정경대학 정치외교학과',
-    engName: 'Department of Political Science & International Relations',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 27,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '정경대학 행정학과',
-    engName: 'Department of Public Administration',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
-    TO: 7,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '공과대학 신소재공학부',
-    engName: 'School of Materials Science & Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 5,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '공과대학 기계공학부',
-    engName: 'School of Mechanical Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 6,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '공과대학 산업경영공학부',
-    engName: 'School of Industrial & Management Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 7,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '공과대학 전기전자공학부',
-    engName: 'School of Electrical Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 14,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '공과대학 화공생명공학부',
-    engName: 'Department of Chemical & Biological Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 7,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '정보대학 데이터과학과',
-    engName: 'Department of Data Science',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
-    TO: 9,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-  {
-    korName: '스마트보안학부 스마트보안학부',
-    engName: 'Division of Smart Security',
-    filter: ['학부 전체보기', '독립학부'],
-    TO: 3,
-    compRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
-];
 
 export default Banner;

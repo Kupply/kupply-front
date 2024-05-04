@@ -9,9 +9,11 @@ import Footer from '../assets/base/Footer';
 function LandingMobile() {
   return (
     <MainWrapper>
+      <Header />
       <GoToApply />
       <ApplyTable />
       <FAQ />
+      <Footer />
     </MainWrapper>
   );
 }
