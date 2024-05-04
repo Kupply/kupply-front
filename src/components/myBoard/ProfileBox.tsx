@@ -18,7 +18,16 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   hopeMajor: string;
 }
 
-const ProfileBox = ({ userData }: { userData: any }) => {
+const ProfileBox = ({
+  userData,
+  isOpenEditModal,
+  setOpenEditModal,
+  closeEditModal,
+  isOpenAppModal,
+  onClickEditModal,
+  setOpenAppModal,
+  closeAppModal,
+}: any) => {
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
   const major1: MajorOptions = userData.hopeMajor1;
@@ -33,25 +42,7 @@ const ProfileBox = ({ userData }: { userData: any }) => {
   // const majorKoreanName2 = majorNameMapping[major2][0];
   // const majorEngishName2 = majorNameMapping[major2][1];
 
-  const [isOpenEditModal, setOpenEditModal] = useState(true);
-  const [isOpenAppModal, setOpenAppModal] = useState(true);
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
-
-  const onClickEditModal = () => {
-    setOpenEditModal(true);
-  };
-
-  const onClickAppModal = () => {
-    setOpenAppModal(true);
-  };
-
-  const closeEditModal = () => {
-    setOpenEditModal(false);
-  };
-
-  const closeAppModal = () => {
-    setOpenAppModal(false);
-  };
 
   const adjustScrollPositionByWidth = (width: number, scrollPosition: number) => {
     let maxScrollValue;
@@ -107,13 +98,8 @@ const ProfileBox = ({ userData }: { userData: any }) => {
           />
         )}
         {isOpenAppModal && (
-          <ApplicationModal
-            isOpenModal={isOpenAppModal}
-            setOpenModal={setOpenAppModal}
-            onClickModal={closeAppModal}
-          />
-        )
-        }
+          <ApplicationModal isOpenModal={isOpenAppModal} setOpenModal={setOpenAppModal} onClickModal={closeAppModal} />
+        )}
       </ModalBox>
 
       <Wrapper translateY={scrollY}>

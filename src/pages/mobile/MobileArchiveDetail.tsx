@@ -30,6 +30,7 @@ export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', 
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
+
   const params = useParams();
   const major =
     params.majorName === 'business'
@@ -160,6 +161,7 @@ const MobileArchiveDetailPage = () => {
 
   return (
     <MobilePageWrapper>
+
       <Banner01 major={major} />
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>

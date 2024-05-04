@@ -20,6 +20,7 @@ import MoveButton from './MoveButton';
 import { useRecoilState } from 'recoil';
 import { editModalState } from '../../../store/atom';
 import ModalLarge from '../../base/ModalLarge';
+import ReactDOM from 'react-dom';
 
 /*
 남은 개발
@@ -253,7 +254,7 @@ export default function EditModal(props: ModalProps) {
     }
   }, [nicknameCheck]);
 
-  return (
+  return ReactDOM.createPortal(
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
@@ -519,7 +520,8 @@ export default function EditModal(props: ModalProps) {
           )}
         </ModalLarge>
       )}
-    </Main>
+    </Main>,
+    document.getElementById('root') as HTMLElement,
   );
 }
 
@@ -533,6 +535,11 @@ const Main = styled.main`
   z-index: 1005;
   bottom: 0;
   top: 0;
+
+  & > div > dialog {
+    top: 10%;
+    max-height: 80vh;
+  }
 `;
 
 const HeaderWrapper = styled.div`
