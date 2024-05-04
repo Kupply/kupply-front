@@ -48,7 +48,7 @@ const MyBoardPage = () => {
   }, []);
 
   /////////////////////////////
-  const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
+  const [isApplied, setIsApplied] = useState<boolean>(false); // *********************** 개발 위해 잠시 수정 *************************
   const [CurrentPic, setCurrentPic] = useState('');
 
   // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.

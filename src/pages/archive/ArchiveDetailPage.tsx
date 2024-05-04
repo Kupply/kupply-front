@@ -451,7 +451,7 @@ const MajorTextEnglish = styled.text`
 
 const WarningTextBox = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 0.21vw;
   // padding: 94px 0px 37px 0px;
   align-items: center;
 `;
@@ -466,8 +466,8 @@ const WarningText = styled.text`
 `;
 
 const WarningIcon = styled.img`
-  width: 14px;
-  height: 14px;
+  width: 0.73vw;
+  height: 0.73vw;
   background: none;
 `;
 
@@ -735,15 +735,15 @@ const CollectingWrapper = styled.div<{ keywordsLength: number }>`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
+  width: 87.5vw;
   max-width: 1665px;
-  height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
+  height: 45vw;
+  //height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
   background-color: #f7f7f773;
   box-shadow: 0px 0px 28px #1414140d;
   backdrop-filter: blur(10px);
   border-radius: 5px;
   gap: 24px;
-
   margin-top: 18px;
   top: 0;
   left: 0;

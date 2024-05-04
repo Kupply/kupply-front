@@ -9,9 +9,7 @@ const PieChart = ({ onViewMajor, curData, isApplied }: { onViewMajor: any; curDa
   return (
     <>
       {isApplied === false ? (
-        <Wrapper2>
-          <BlurWrapper />
-        </Wrapper2>
+        <></>
       ) : (
         <Wrapper>
           <TitleBox>
