@@ -33,6 +33,7 @@ import MobileArchivePage from './pages/mobile/MobileArchive';
 import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import MobileFooter from './mobile/assets/base/Footer';
 import MobileHeader from './mobile/assets/base/Header';
+import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
 
 interface RouteConfig {
   path: string;
@@ -62,6 +63,7 @@ export default function App() {
           <Routes>
             <Route path="/archive" element={<MobileArchivePage />} />
             <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+            <Route path="/m" element={<MobileMyBoard />} />
             <Route path="/test" element={<MobileTest />} />
           </Routes>
           <MobileFooter />
