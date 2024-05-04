@@ -63,7 +63,7 @@ export default function App() {
         // <MobileTest />
 
         // <MobileArchiveDetailPage />
-        <SignUpPage2/>
+        <SignUpPage4/>
         // <>
         //   <MobileHeader />
         //   <Routes>
