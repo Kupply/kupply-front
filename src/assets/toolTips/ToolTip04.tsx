@@ -9,7 +9,7 @@ interface MessageBoxProps {
 interface MessageProps extends React.ComponentPropsWithoutRef<'button'> {}
 
 function ToolTip04(props: MessageProps) {
-  const [isHovered, setIsHovered] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -23,10 +23,7 @@ function ToolTip04(props: MessageProps) {
         clearTimeout(hideTimeout);
       };
     } else {
-      setIsVisible(true);
-      const hideTimeout = setTimeout(() => {
-        setIsVisible(false);
-      }, 0);
+      setIsVisible(false);
     }
   }, [isHovered]);
 
@@ -43,7 +40,7 @@ function ToolTip04(props: MessageProps) {
       <MessageBox isVisible={isVisible}>
         <BordLargeText>주의하세요!</BordLargeText>
         <div style={{ display: 'flex', alignItems: 'baseline', marginTop: '0.104vw', marginBottom: '0.104vw' }}>
-          <NormalText> 이중전공 지원 시즌에는 학점을</NormalText>
+          <NormalText> 이중전공 지원 시즌에는 학점을&nbsp;</NormalText>
           <BordSmallText>최대 2번까지 변경</BordSmallText>
           <NormalText>할 수 있어요.</NormalText>
         </div>
@@ -70,7 +67,6 @@ const MainWrapper = styled.div`
   //left: 13.542vw;
   //top: 192px;
   //top: 10vw;
-
 `;
 
 const AlertImage = styled.img<{ isHovered: boolean }>`
@@ -106,10 +102,10 @@ const MessageBox = styled.div<MessageBoxProps>`
   width: 24.323vw; //width: 467px;
   max-width: 467px;
   //height: 3.49vw; //height: 67px;
-  max-height: 67px;
+
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  padding: 10px 8px; 
+  padding: 10px 8px;
   gap: 0.521vw; //gap: 10px;
   background: #fff;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
@@ -119,13 +115,13 @@ const MessageBox = styled.div<MessageBoxProps>`
   //right: -430px;
   top: 100%;
   left: 20%;
-  transform: translate(-20%, -120%);
+  transform: translate(5%, -80%);
 `;
 
 const NormalText = styled.text`
   color: var(--Black2, #434343);
   font-family: Pretendard;
-  font-size: 0.83vw;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 100%;
@@ -134,7 +130,7 @@ const NormalText = styled.text`
 const BordSmallText = styled.text`
   color: var(--Black2, #d85888);
   font-family: Pretendard;
-  font-size: 0.83vw;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
@@ -143,7 +139,7 @@ const BordSmallText = styled.text`
 const BordLargeText = styled.text`
   color: var(--Black2, #d85888);
   font-family: Pretendard;
-  font-size: 0.9375vw;
+  font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: 122.222%;

@@ -159,3 +159,4 @@ const ButtonsWrapper = styled.div`
   width: 100%;
   // Additional style using vh might be considered based on dynamic content or device orientation changes
 `;
+

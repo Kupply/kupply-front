@@ -47,6 +47,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: #fff;
 `;
 
 const ImageWrapper = styled.div`

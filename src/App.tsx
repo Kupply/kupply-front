@@ -35,6 +35,9 @@ import { SignUp5Page } from './pages/signUp/SignUp5Page';
 import LoginPage from './mobile/pages/LoginPage';
 import { SettingsPage } from './pages/setting/SettingsPage';
 
+import MobileFooter from './mobile/assets/base/Footer';
+import MobileHeader from './mobile/assets/base/Header';
+
 interface RouteConfig {
   path: string;
   element: React.ReactNode;
@@ -58,8 +61,19 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
+
         // <MobileArchiveDetailPage />
         <SignUpPage2/>
+      <>
+          <MobileHeader />
+          <Routes>
+            <Route path="/archive" element={<MobileArchivePage />} />
+            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+            <Route path="/test" element={<MobileTest />} />
+          </Routes>
+          <MobileFooter />
+        </>
+
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />

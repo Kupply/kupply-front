@@ -251,6 +251,7 @@ const ApplyBox = styled.div`
 
 const ModalBox = styled.div`
   position: fixed;
+
   top: 15%;
   left: 25%;
   -webkit-transform: translate(-20%, -50%);

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../../assets/Typography';
 
-function Footer() {
+function MobileFooter() {
   const navigate = useNavigate();
 
   const handleLinkClick1 = () => {
@@ -173,4 +173,4 @@ const KoreaImage2 = styled.img`
   height: 6.42vw;
 `;
 
-export default Footer;
+export default MobileFooter;

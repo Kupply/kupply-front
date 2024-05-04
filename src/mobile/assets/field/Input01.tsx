@@ -393,7 +393,7 @@ function Input01(props: TextFieldBoxProps) {
 
   const onCheckDuplicated = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-  
+
     if (Math.random() > 0.5) {
       // 중복 아닐 경우
       if (valid) setState('filled');
@@ -651,17 +651,21 @@ function Input01(props: TextFieldBoxProps) {
             {textType === 'password' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
+
                 <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="6.67vw" height="6.67vw" />
+
               </EyeIconWrapper>
             )}
             {textType === 'text' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
+
                 <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="6.67vw" height="6.67vw" />
               </EyeIconWrapper>
             )}
             {textType === 'default' && !isCheckDuplicated && (
               <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="6.67vw" height="6.67vw" />
+
             )}
             {textType === 'default' && isCheckDuplicated && (
               <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
@@ -701,13 +705,17 @@ function Input01(props: TextFieldBoxProps) {
 
       {state === 'error' && (
         <ErrorMessageWrapper>
+
           <img src = {process.env.PUBLIC_URL + '/designImage/textField/X.png'} width="5vw" height="5vw" />
+
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}
       {state === 'focused' && !valid && (
         <ErrorMessageWrapper>
+
           <img src = {process.env.PUBLIC_URL + '/designImage/textField/AlertCircle.png'} width="5vw" height="5vw" />
+
           <ErrorMessage>{validationMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}

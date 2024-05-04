@@ -13,7 +13,6 @@ import Login2JoinModal from '../../components/login/Login2JoinModal';
 import { CheckBoxButton02 } from '../../assets/buttons/CheckBoxButton';
 import CTA01 from '../../assets/CTAs/CTA01';
 
-
 const Wrapper = styled.div`
   width: 100vw;
   height: 60.05vw;
@@ -160,6 +159,7 @@ function LoginPage(props: LoginPageProps) {
 
   // login API 접근
   const onLoginClick = async () => {
+    if (ID === '' || password === '') return;
     const url = 'https://api.kupply.devkor.club/auth/login';
     try {
       await axios
@@ -255,7 +255,12 @@ function LoginPage(props: LoginPageProps) {
         </TextFieldWrapper>
         <TextBox>
           <CheckButton checked={isChecked} onClick={() => setIsChecked((prevState) => !prevState)}></CheckButton>
-          <Typography size="0.94vw" bold="600" color={isChecked ? '#D85888' : '#A8A8A8'}>
+          <Typography
+            onClick={() => setIsChecked((prevState) => !prevState)}
+            size="0.94vw"
+            bold="600"
+            color={isChecked ? '#D85888' : '#A8A8A8'}
+          >
             로그인 상태 유지
           </Typography>
         </TextBox>

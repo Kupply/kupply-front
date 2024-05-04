@@ -10,7 +10,6 @@ import { majorNameMapping } from '../../utils/Mappings';
 
 import client from '../../utils/HttpClient';
 
-// 이미지 화질 낮음
 // categoryMapping 정확하게 분류하기
 // handleSearch 역할 아직 모름.. ?
 // filteredCards 수정하기
@@ -60,6 +59,7 @@ const categoryMapping: CategoryMapping = {
 
 const MobileArchivePage = () => {
   const [clicked, setClicked] = useState(0);
+  const [cardClick, setCardClick] = useState(0);
   const [sortCriterion, setSortCriterion] = useState('가나다순');
   const [searchWord, setSearchWord] = useState(''); // 검색어를 위한 상태
 
@@ -111,7 +111,7 @@ const MobileArchivePage = () => {
           <div style={{ marginTop: '2.78vw' }} />
           <ImageText>쿠플라이에서 지원하는 학과별 합격지표를 한 눈에 비교해 보세요!</ImageText>
         </ImageTextBox>
-        <TitleImage src="../../designImage/mobile/archive/chick_monitor 24.png" />
+        <TitleImage src="../../designImage/mobile/banner/Banner3_6_1.png" />
       </ImageBox>
       <BodyBox>
         <SearchBarWrapper>
@@ -253,8 +253,9 @@ const ImageText = styled.text`
 
 //##################### IMAGE #####################
 const TitleImage = styled.img`
-  width: 36.11vw;
-  height: 29.72vw;
+  width: 40vw;
+  //width: 36.11vw;
+  //height: 29.72vw;
 `;
 
 export default MobileArchivePage;

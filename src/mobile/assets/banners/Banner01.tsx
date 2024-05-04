@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Typography from '../../../assets/Typography';
 
@@ -112,7 +112,7 @@ function Banner01(props: Banner01Props) {
           <div key={sentenceIndex}>{sentence}</div>
         ))}
       </Typography>
-      <XButton src="../../../designImage/icon/icon_02.svg" onClick={handleButtonClick} />
+      <PrevButton src="../../designImage/mobile/banner/BannerPrevious.svg" onClick={handleButtonClick} />
     </MainWrapper>
   );
 }
@@ -127,18 +127,19 @@ const MainWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   gap: 2.5vw;
-  background-image: url(${(props) => props.departments[props.departmentIndex].image});
+  :url(${(props) => props.departments[props.departmentIndex].image});
   background-size: cover;
   position: relative;
 `;
 
-const XButton = styled.img`
-  width: 8.89vw;
-  height: 8.89vw;
-  cursor: pointer;
+const PrevButton = styled.img`
   position: absolute;
-  top: 12.22vw;
-  right: 4.44vw;
+  cursor: pointer;
+  width: 3.61vw;
+  height: 3.61vw;
+
+  top: 5vw;
+  left: 5vw;
 `;
 
 export default Banner01;

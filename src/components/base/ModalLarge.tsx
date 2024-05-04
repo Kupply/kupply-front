@@ -31,7 +31,6 @@ const ModalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   @media screen and (max-width: 600px) {
     width: 90vw;
     height: 90vh;
@@ -107,6 +106,10 @@ const DialogBox = styled.dialog`
     pointer-events: none;
   }
 
+
+  /* Firefox에서 스크롤바 숨기기 */
+  scrollbar-width: thin;
+
   /* Internet Explorer에서 스크롤바 숨기기 */
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
@@ -114,6 +117,7 @@ const DialogBox = styled.dialog`
     width: 100vw;
     height: 100vh;
   }
+
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요
