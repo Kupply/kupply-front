@@ -123,7 +123,7 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   opacity: 0.8;
 
   ${(props) =>
-    props.isOpen &&
+    (props.isOpen || props.isSelected) &&
     css`
       border: 0.278vw solid #d85888; /* 1px */
       color: #d85888;

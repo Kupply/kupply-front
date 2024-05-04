@@ -15,7 +15,9 @@ import Input01 from "../assets/field/Input01";
 import { placeholderMapping, helpMessageMapping, errorMessageMapping } from "../components/signup/UserInput";
 import DropDown from "../assets/selectControl/DropDown";
 import TextAreaBox from "../assets/textarea/TextArea01";
-
+import SettingsModal from "../components/settings/SettingsModal";
+import { MobileScroll } from "../assets/scroll/MobileScroll";
+import { TermsText1, TermsText2 } from "../components/signup/TermsText";
 
 
 interface SettingsPageProps {
@@ -72,7 +74,7 @@ export const MobileSettingsPage = () => {
 
   const [scrollActive, setActive] = useState(false);
   // 잠시 수정 
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
@@ -365,9 +367,17 @@ export const MobileSettingsPage = () => {
     <SettingsWrapper selected={selected} onClickFunction={
       selected == 1 ? firstSubmit : 
       selected == 2 ? secondSubmit : 
-      selected == 3 ? thirdSubmit : 
+      selected == 3 ? () => {setModalOpen((prev) => !prev)} : 
       selected == 4 ? fourthSubmit : 
       () => {}}>
+      {modalOpen && (
+        <SettingsModal
+        isOpenModal={modalOpen}
+        setOpenModal={setModalOpen}
+        onClickModal={() => {setModalOpen(!modalOpen)}}
+        onCheck={thirdSubmit}
+        />
+      )}
       {selected == 0 && (
         <>
         <MainTable/>
@@ -578,6 +588,26 @@ export const MobileSettingsPage = () => {
         </ContentsWrapper>
         </>
       )}
+      {selected == 5 && (
+        <>
+        <TextBox>
+          <Typography size="3.33vw" bold="700">서비스 이용약관</Typography>
+        </TextBox>
+        <TextOutBox>
+          <MobileScroll height='30vw'>
+            <TermsText1 />
+          </MobileScroll>
+        </TextOutBox>
+        <TextBox>
+          <Typography size="3.33vw" bold="700">개인정보 처리방침</Typography>
+        </TextBox>
+        <TextOutBox>
+          <MobileScroll height='30vw'>
+            <TermsText2 />
+          </MobileScroll>
+        </TextOutBox>
+        </>
+      )}
     </SettingsWrapper>
   );
 }
@@ -625,3 +655,23 @@ const VerifiBoxWrapper = styled.div`
   gap: 0.6771vw;
 `;
 
+const TextOutBox = styled.div`
+  width: 91.11vw;
+  height: 38.9vw;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White, #fff);
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4167vw; // 8px;
+
+  color: var(--Main-Black, #141414);
+  font-family: Pretendard;
+  font-size: 2.78vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.54%;
+  z-index: 1;
+`;

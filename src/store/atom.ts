@@ -63,11 +63,19 @@ type InfoState = {
 // 이름, 비밀번호, 닉네임...
 export const userState = atomFamily<InfoState, string>({
   key: "userState", 
-  default: (kind: string) => ({
-    info: sessionStorage.getItem(kind) || '',
-    infoState: 'default',
-    infoCheck: 'default'
-  })
+  default: (kind: string) => {
+    let infoState:StateOptions = 'default';
+    let info:string = kind;
+    if(kind === 'kuEmail') {
+      info = 'email';
+      infoState = 'filled';
+    }
+    return {
+      info: sessionStorage.getItem(info) || '',
+      infoState: infoState,
+      infoCheck: 'default'
+    }
+  }
 });
 
 export const userSettingsState = atomFamily<InfoState, string>({

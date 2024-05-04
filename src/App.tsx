@@ -28,12 +28,12 @@ import SignUpPage3 from './mobile/pages/signup/SignupPage3';
 import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
 import SignUpPage5 from './mobile/pages/signup/SignupPage5';
 import { MobileSettingsPage } from './mobile/pages/SettingsPage';
-
 import MobileTest from './pages/mobile/MobileTest';
 import MobileArchivePage from './pages/mobile/MobileArchive';
 import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import { SignUp5Page } from './pages/signUp/SignUp5Page';
 import LoginPage from './mobile/pages/LoginPage';
+import { SettingsPage } from './pages/setting/SettingsPage';
 
 interface RouteConfig {
   path: string;
@@ -59,7 +59,7 @@ export default function App() {
         // <MobilePage />
         // <MobileTest />
         // <MobileArchiveDetailPage />
-        <MobileSettingsPage/>
+        <SignUpPage2/>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />

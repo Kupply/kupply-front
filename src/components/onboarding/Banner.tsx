@@ -14,28 +14,28 @@ function Banner() {
 
   const prevSemester = '23-2';
 
-  const fetch = async () => {
-    const data = await client.get('/dashboard/cards');
-    console.log(data.data);
-    setCards(
-      cards.map((c) => {
-        const res = data.data.find((ca: any) => ca.name === c.korName);
-        return {
-          korName: c.korName,
-          engName: c.engName,
-          filter: c.filter,
-          TO: c.TO,
-          semester: prevSemester,
-          avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
-          minPass: res.passNum === 0 ? 0 : res.min,
-          compRate: +(res.passNum / c.TO).toFixed(2),
-        };
-      }),
-    );
-  };
-  useEffect(() => {
-    fetch();
-  });
+  // const fetch = async () => {
+  //   const data = await client.get('/dashboard/cards');
+  //   console.log(data.data);
+  //   setCards(
+  //     cards.map((c) => {
+  //       const res = data.data.find((ca: any) => ca.name === c.korName);
+  //       return {
+  //         korName: c.korName,
+  //         engName: c.engName,
+  //         filter: c.filter,
+  //         TO: c.TO,
+  //         semester: prevSemester,
+  //         avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
+  //         minPass: res.passNum === 0 ? 0 : res.min,
+  //         compRate: +(res.passNum / c.TO).toFixed(2),
+  //       };
+  //     }),
+  //   );
+  // };
+  // useEffect(() => {
+  //   fetch();
+  // });
 
   useEffect(() => {
     const intervalId = setInterval(() => {

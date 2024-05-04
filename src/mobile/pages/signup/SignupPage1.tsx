@@ -150,7 +150,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
   // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
   // vh로 박아야 할 가능성이 클듯
-  margin-top: 27.78vw;
+  margin-top: 19.78vw;
   gap: 2.22vw;
   width: 100%;
 `;

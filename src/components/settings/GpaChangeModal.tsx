@@ -33,7 +33,7 @@ export function GpaChangeModal(props: GpaChangeModalProps){
               <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
             </CloseButton>
 
-            <AlertWrapper style={{ marginTop: '9.375vw' }}>
+            <AlertWrapper style={{ marginTop: '5.375vw' }}>
               <AlertIconExclamation width="5.885vw" height="5.885vw" />
               <Typography size="1.25vw" bold="700" style={{ marginTop: '1.302vw' }}>
                 변경한 정보를 저장하시겠습니까?

@@ -4,33 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
 import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
-import { ImgCtrlButton, ImgDelButton } from '../../assets/myboardpage/ImgCtrlButton';
 import DropDown from '../../assets/dropdown/DropDown';
-import VerificationBox from '../../assets/VerificationBox';
 import TextArea from '../../assets/TextArea';
-//import Typography from '../../assets/OldTypography';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
-import LabelButton from '../../assets/buttons/LabelButton';
 import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 import client from '../../utils/HttpClient';
 import { majorTargetList } from '../../common/MajorTarget';
 import { majorAllList } from '../../common/MajorAll';
-import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
-import MockApplicationButton from '../../assets/myboardpage/MockApplication';
-import ModalLarge from '../../components/base/ModalLarge';
-import SubmitButton from '../../assets/buttons/OldSubmitButton';
 import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 import Button03 from '../../assets/buttons/Button03';
-import Button01 from '../../assets/buttons/Button01';
 import Typography from '../../assets/Typography';
 import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
-import Icon02 from '../../assets/icons/Icon02';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
 import { GpaChangeModal } from '../../components/settings/GpaChangeModal';
-import {Card0301, Card0302} from '../../mobile/assets/cards/Card03';
-//import Card01 from '../../assets/cards/Card01';
-import Card01 from '../../mobile/assets/cards/Card01';
 
 interface SettingsPageProps {
   selected: number;
@@ -88,7 +75,7 @@ const SettingsPage = () => {
   };
   const [scrollActive, setActive] = useState(false);
   // 잠시 수정 
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
@@ -126,22 +113,23 @@ const SettingsPage = () => {
   const [password2State, setPassword2State] =
     useState<StateOptions>('default'); /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
-  const [isApplied, setIsApplied] = useState<boolean>(localStorage.getItem('isApplied') === 'true' || false);
+  // 원래는 || false인데 임시 수정 
+  const [isApplied, setIsApplied] = useState<boolean>(localStorage.getItem('isApplied') === 'true' || true);
 
   const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
 
   // 잠시 수정 
-  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(true);
+  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
-  //     setIsGpaChanged(true);
-  //   } else {
-  //     setIsGpaChanged(false);
-  //   }
-  // }, [GPA1, GPA2, GPA3]);
+  useEffect(() => {
+    if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
+      setIsGpaChanged(true);
+    } else {
+      setIsGpaChanged(false);
+    }
+  }, [GPA1, GPA2, GPA3]);
 
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
@@ -316,6 +304,11 @@ const SettingsPage = () => {
     }
   };
   const secondSubmit = async () => {
+    if(nicknameCheck === 'error'){
+      alert('닉네임 중복검사를 완료해 주세요!');
+      return;
+    }
+    console.log('nicknameCheck', nicknameCheck);
     const updateData = {
       newProfilePic: userProfilePic,
       newNickname: nickname,
@@ -474,8 +467,8 @@ const SettingsPage = () => {
               setStdID(e.target.value);
             }}
             state={stdIDState}
-            setState={setStdIDState}
-            setValue={setStdID}
+            setState={()=>{}}
+            setValue={()=>{}}
           ></TextFieldBox>
           <TextFieldTitle>
             <strong>본전공(1전공)</strong> 수정하기
