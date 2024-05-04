@@ -50,23 +50,18 @@ export default function SignUpPage0(){
   // CTA아직 안 만들어져서 빼고 만듦
   return (
     <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
-      {/* <Card01 korName="경영학과" engName="Business School"/>
-      <Card02 korName="심리학부" hopeMajor="2지망"/>
-      <Card0301 avgPassNum={31}/>
-      <Card0302 passNum={10} appliedNum={31}/>
-      <Card0303 currentApplications={10} TO={15}/>
-      <Card05 kind="Mode" text="합격자 최저 학점" textNumber={3.0}/> */}
       <MessageContent>
-        <Typography size="20px" bold="700">환영합니다!</Typography>
-        <Typography size="12px" bold="500" style={{lineHeight: '16px', wordBreak: 'break-all'}}>회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.</Typography>
+        <Typography size="5.56vw" bold="700">환영합니다!</Typography>
+        <Typography size="3.33vw" bold="500" style={{lineHeight: '4.44vw', wordBreak: 'break-all'}}>회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.</Typography>
       </MessageContent>
       <ContentsList>
         <ContentsWrapper>
           <div>
-          <Typography size="12px" bold="700">고려대학교 이메일</Typography>
-          <Typography size="12px" bold="400">을 입력해주세요.</Typography>
+          <Typography size="3.33vw" bold="700">고려대학교 이메일</Typography>
+          <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
           </div>
           <Input01 
+            style={{width: '100%'}}
             setState={setIDState}
             setValue={setID}
             state={IDState}
@@ -100,14 +95,14 @@ export default function SignUpPage0(){
 }
 
 const MessageContent = styled.div`
-gap: 11px;
-margin-top: 43px;
+gap: 3.05vw;
+margin-top: 11.944vw;
 display: flex;
 flex-direction: column;
 align-items: center;
-width: 181px;
+width: 50.278vw;
 text-align: center;
-margin-bottom: 43px;
+margin-bottom: 11.944vw;
 `;
 
 const ContentsList = styled.div`
@@ -119,14 +114,14 @@ const ContentsList = styled.div`
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  width: 328px;
+  gap: 2.5vw;
+  width: 91.11vw;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
   // vh로 박아야 할 가능성이 클듯
-  margin-top: 228px;
+  margin-top: 63.33vw;
   width: 100%;
 `;

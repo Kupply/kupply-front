@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import AlertIconExclamation from '../icons/AlertIconExclamation';
 import Typography from '../Typography';
 import VerificationButton from '../buttons/OldVerificationButton';
-
+import Button05 from '../buttons/Button05';
 import Icon03 from '../icons/Icon03';
 import Icon02 from '../icons/Icon02';
 
@@ -28,7 +28,7 @@ function SignUpAlertLarge01({
   currentModal,
   email,
   sendEmail,
-}: SignUpAlertLargeProps) {
+}: SignUpAlertLargeProps){
   return (
     <ModalLarge onClickToggleModal={onClickModal}>
       <ButtonWrapper>
@@ -58,22 +58,24 @@ function SignUpAlertLarge01({
         </Typography>
       </TypographyBox>
       <ActionWrapper>
-        <VerificationButton
+        <Button05
           onClick={async () => {
             setCurrentModal(currentModal + 2);
             setBlank();
             await sendEmail(email);
           }}
+          style={{width: '100%'}}
         >
           인증번호 다시 받기
-        </VerificationButton>
-        <VerificationButton
+        </Button05>
+        <Button05
           onClick={() => {
             setCurrentModal(currentModal + 1);
           }}
+          style={{width: '100%'}}
         >
           이메일 주소 변경하기
-        </VerificationButton>
+        </Button05>
       </ActionWrapper>
     </ModalLarge>
   );
@@ -90,7 +92,7 @@ const TopButton = styled.button`
 `;
 
 const ActionWrapper = styled.div`
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;

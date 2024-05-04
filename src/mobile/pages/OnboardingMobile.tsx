@@ -5,15 +5,19 @@ import Preview from '../components/onboarding/Preview';
 import Contents from '../components/onboarding/Contents';
 import Banner from '../components/onboarding/Banner';
 import Join2 from '../components/onboarding/Join2';
+import Header from '../assets/base/Header';
+import Footer from '../assets/base/Footer';
 
 function OnboardingMobile() {
   return (
     <MainWrapper>
+      <Header />
       <Join1 />
       <Preview />
       <Contents />
       <Banner />
       <Join2 />
+      <Footer />
     </MainWrapper>
   );
 }

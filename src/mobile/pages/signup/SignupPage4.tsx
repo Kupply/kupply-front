@@ -76,10 +76,10 @@ export default function SignUpPage4(){
       <ContentsList>
       <ContentsWrapper>
         <div style={{ display: 'flex' }}>
-          <Typography size="12px" bold="700">
+          <Typography size="3.33vw" bold="700">
             쿠플라이에서 원하는 서비스
           </Typography>
-          <Typography size="12px" bold="400">
+          <Typography size="3.33vw" bold="400">
             를 선택해주세요.
           </Typography>
         </div>
@@ -127,18 +127,18 @@ export function SignUp4PageCandidate(){
       <ContentsList>
         <ContentsWrapper>
             <div>
-            <Typography size="12px" bold="400">희망하는 </Typography>
-            <Typography size="12px" bold="700">이중전공</Typography>
-            <Typography size="12px" bold="400">을 입력해주세요.</Typography>
+            <Typography size="3.33vw" bold="400">희망하는 </Typography>
+            <Typography size="3.33vw" bold="700">이중전공</Typography>
+            <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
             </div>
           <UserInput userInfoType="hopeMajor1" toNext={next} setStateValid={setMajorState}/>
           <UserInput userInfoType="hopeMajor2" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
           <div>
-          <Typography size="12px" bold="400">현재 </Typography>
-          <Typography size="12px" bold="700">학점</Typography>
-          <Typography size="12px" bold="400">을 소수점 두 자리까지 입력해주세요.</Typography>
+          <Typography size="3.33vw" bold="400">현재 </Typography>
+          <Typography size="3.33vw" bold="700">학점</Typography>
+          <Typography size="3.33vw" bold="400">을 소수점 두 자리까지 입력해주세요.</Typography>
           </div>
           <GPAVerification 
             userType="candidate" 
@@ -147,8 +147,8 @@ export function SignUp4PageCandidate(){
         </ContentsWrapper>
         <ContentsWrapper>
           <div>
-          <Typography size="12px" bold="700">희망 이중 지원학기</Typography>
-          <Typography size="12px" bold="400">를 입력해주세요.</Typography>
+          <Typography size="3.33vw" bold="700">희망 이중 지원학기</Typography>
+          <Typography size="3.33vw" bold="400">를 입력해주세요.</Typography>
           </div>
           <SemesterVerification
             userType="candidate"
@@ -183,16 +183,16 @@ export function SignUp4PagePasser(){
       <ContentsList>
         <ContentsWrapper>
           <div>
-          <Typography size="12px" bold="700">진입한 이중전공</Typography>
-          <Typography size="12px" bold="400">을 선택해주세요.</Typography>
+          <Typography size="3.33vw" bold="700">진입한 이중전공</Typography>
+          <Typography size="3.33vw" bold="400">을 선택해주세요.</Typography>
           </div>
           <UserInput userInfoType="doubleMajor" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
           <div>
-          <Typography size="12px" bold="400">지원 당시의 </Typography>
-          <Typography size="12px" bold="700">학점</Typography>
-          <Typography size="12px" bold="400">을 소수점 두 자리까지 입력해주세요.</Typography>
+          <Typography size="3.33vw" bold="400">지원 당시의 </Typography>
+          <Typography size="3.33vw" bold="700">학점</Typography>
+          <Typography size="3.33vw" bold="400">을 소수점 두 자리까지 입력해주세요.</Typography>
           </div>
           <GPAVerification 
             userType="passer" 
@@ -201,8 +201,8 @@ export function SignUp4PagePasser(){
         </ContentsWrapper>
         <ContentsWrapper>
           <div>
-          <Typography size="12px" bold="700">이중전공 진입학기</Typography>
-          <Typography size="12px" bold="400">를 입력해주세요.</Typography>
+          <Typography size="3.33vw" bold="700">이중전공 진입학기</Typography>
+          <Typography size="3.33vw" bold="400">를 입력해주세요.</Typography>
           </div>
           <SemesterVerification
             userType="passer"
@@ -223,21 +223,22 @@ export function SignUp4PagePasser(){
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5.556vw; /* 20px converted to vw */
+  width: 91.111vw; /* 328px converted to vw */
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 328px;
+  gap: 3.333vw; /* 12px converted to vw */
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
-  // vh로 박아야 할 가능성이 클듯
-  margin-top: 100px;
-  gap: 8px;
+  margin-top: 27.778vw; /* 100px converted to vw */
+  gap: 2.222vw; /* 8px converted to vw */
   width: 100%;
+  // Additional style using vh might be considered based on dynamic content or device orientation changes
 `;
+
+
