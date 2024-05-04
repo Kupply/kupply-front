@@ -382,10 +382,10 @@ const MyBoardPage = () => {
               <ThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
             </div>
             <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} isApplied={isApplied} />
-            <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
+            {/* <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
               <PieChart onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
               <Scatter onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
-            </div>
+            </div> */}
           </MainWrapper>
         </Wrapper>
       )}

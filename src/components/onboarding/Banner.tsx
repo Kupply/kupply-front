@@ -3,6 +3,56 @@ import styled, { keyframes } from 'styled-components';
 import Typography from '../../assets/Typography';
 
 function Banner() {
+
+  const [cards, setCards] = useState(mockCards);
+  const [isDetailed, setIsDetailed] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevSemester = '23-2';
+
+  // const fetch = async () => {
+  //   const data = await client.get('/dashboard/cards');
+  //   console.log(data.data);
+  //   setCards(
+  //     cards.map((c) => {
+  //       const res = data.data.find((ca: any) => ca.name === c.korName);
+  //       return {
+  //         korName: c.korName,
+  //         engName: c.engName,
+  //         filter: c.filter,
+  //         TO: c.TO,
+  //         semester: prevSemester,
+  //         avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
+  //         minPass: res.passNum === 0 ? 0 : res.min,
+  //         compRate: +(res.passNum / c.TO).toFixed(2),
+  //       };
+  //     }),
+  //   );
+  // };
+  // useEffect(() => {
+  //   fetch();
+  // });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [cards.length]);
+
+  useEffect(() => {
+    setIsDetailed(false);
+    const timeoutId = setTimeout(() => {
+      setIsDetailed(true);
+    }, 1500);
+    return () => clearTimeout(timeoutId);
+  }, [currentIndex]);
+
+  const calculateIndex = (index: number) => {
+    const length = cards.length;
+    return (index + length) % length;
+  };
+
   return (
     <MainWrapper>
       <Typography size="0.94vw" bold="700" color="rgba(255,255,255,0.5)" style={{ margin: '5.21vw 0 0.42vw 0' }}>
