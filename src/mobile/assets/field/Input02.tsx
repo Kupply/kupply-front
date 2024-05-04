@@ -13,6 +13,7 @@ import styled, { css } from 'styled-components';
 const baseWrapper = css`
   display: flex;
   width: 100%;
+  align-items: center;
   //max-width: 328px;
   min-width: 250px;
   gap: 10px;
@@ -85,7 +86,7 @@ const FilledText = styled.span`
   font-weight: 500;
 `;
 
-export type StateOptions = 'default' | 'filled' | 'focused' | 'typing' ;
+export type StateOptions = 'default' | 'filled' | 'focused' | 'typing';
 
 const stateMapping = {
   focused: focusedWrapper,
