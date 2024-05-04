@@ -46,30 +46,15 @@ const ArchiveDetailPage = () => {
 
   const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || []);
 
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  };
-
   // 누적 데이터로 default 값 setting
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
         const APIresponse = await client.get(`/pastData/${majorName}/all`);
         const data = APIresponse.data.pastData;
 
         if (data.passedData.passedGPACountArray.length > 0) {
           const selectionNum = recruit[majorKoreanName][semesterForAPI[activeIdx]] || 0;
-          // let competitionRate = 0;
-          // if (selectionNum > 0) {
-          //   competitionRate = data.overallData.numberOfData / selectionNum;
-          // }
 
           setEnoughData(true);
           setNumOfApplication(data.overallData.numberOfData);
@@ -96,15 +81,10 @@ const ArchiveDetailPage = () => {
 
     try {
       const semester = semesterForAPI[idx];
-      // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
       const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
       const data = APIresponse.data.pastData;
 
       const selectionNum = recruit[majorKoreanName][semesterForAPI[idx]] || 0;
-      // let competitionRate = 0;
-      // if (selectionNum > 0) {
-      //   competitionRate = data.overallData.numberOfData / selectionNum;
-      // }
 
       setEnoughData(true);
       setNumOfApplication(data.overallData.numberOfData);
@@ -115,8 +95,6 @@ const ArchiveDetailPage = () => {
       setMedianGpa(data.passedData.passedMedianGPAData);
       setModeGpa(data.passedData.passedModeGPAData);
       setMinGpa(data.passedData.passedMinimumGPAData);
-
-      console.log(data.passedData.passedMedianGPAData);
 
       if (data.passedData.passedGPACountArray.length > 0) {
         setEnoughData(true);
@@ -192,7 +170,7 @@ const ArchiveDetailPage = () => {
                 {numOfSelection === 0
                   ? '집계불가'
                   : activeIdx === 0
-                  ? `${Math.floor(numOfSelection / 6)} 명`
+                  ? `${Math.floor(numOfSelection / 4)} 명`
                   : `${numOfSelection} 명`}
               </SelectionInfoValue>
             </SelectionInfoContent>

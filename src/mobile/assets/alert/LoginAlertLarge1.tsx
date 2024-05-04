@@ -8,34 +8,25 @@ import CTA01 from '../CTAs/CTA01';
 import Icon02 from '../../../assets/icons/Icon02';
 import Icon03 from '../../../assets/icons/Icon03';
 import { StateOptions } from '../field/Input02';
+import { useState } from 'react';
 
 interface LoginAlertLargeProps {
-  currentModal: number;
   isOpenModal: boolean;
-  setCurrentModal: (currentModal: number) => void;
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수;
-  email: string;
-  emailState: StateOptions;
-  setEmail: (email: string) => void;
-  setEmailState: (emailState: StateOptions) => void;
-  setBlank: () => void;
   sendEmail: (email: string) => Promise<boolean>;
 }
 
-function SignUpAlertMobileLarge01({
-  currentModal,
+function LoginAlertMobileLarge01({
   isOpenModal,
-  setCurrentModal,
   setOpenModal,
   onClickModal,
-  email,
-  emailState,
-  setEmail,
-  setEmailState,
-  setBlank,
   sendEmail,
 }: LoginAlertLargeProps) {
+
+  const [email, setEmail] = useState<string>('');
+  const [emailState, setEmailState] = useState<StateOptions>('default');
+
   return (
     <ModalLarge onClickToggleModal={onClickModal}>
       <ButtonWrapper>
@@ -55,10 +46,17 @@ function SignUpAlertMobileLarge01({
         </TopButton>
       </ButtonWrapper>
       <div style={{ height: '20.833vw' }}></div>
-      <img src={process.env.PUBLIC_URL + `/designImage/kupply/KupplyVer1.svg`} alt="Logo Image" />
-      <Typography size={'14px'} bold={'500'} color="#141414" style={{ marginTop: '4.44vw' }}>
-        임시 비밀번호를 발급받을 고려대 이메일 주소를 입력해주세요.
-      </Typography>
+      <LogoContainer>
+        <img src={process.env.PUBLIC_URL + `/designImage/kupply/KupplyVer1.svg`} alt="Logo Image" />
+      </LogoContainer>
+      <TextBox>
+        <Typography size='3.89vw' bold='500' >
+          임시 비밀번호를 발급받을<br></br>
+        </Typography>
+        <Typography size='3.89vw' bold='500'>
+          고려대 이메일 주소를 입력해주세요.
+        </Typography>
+      </TextBox>
       
       <ActionWrapper>
         <div style={{width: '81.667vw', height: '11.667vw'}}>
@@ -74,8 +72,7 @@ function SignUpAlertMobileLarge01({
           onClick={async () => {
             const IDPattern = /.+@korea\.ac\.kr$/;
             if (IDPattern.test(email)) {
-              setCurrentModal(currentModal + 1);
-              setBlank();
+              setEmail('');
               await sendEmail(email);
             } else {
               alert('형식에 맞지 않는 이메일 주소입니다.');
@@ -114,4 +111,16 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export default SignUpAlertMobileLarge01;
+const LogoContainer = styled.div`
+width: 41.67vw;
+height: 9.167vw;
+margin-bottom: 39px;
+`;
+
+const TextBox = styled.div`
+width: 54.44vw;
+text-align: center;
+line-height: 120%;
+`;
+
+export default LoginAlertMobileLarge01;

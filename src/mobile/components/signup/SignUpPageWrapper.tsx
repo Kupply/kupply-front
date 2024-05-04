@@ -23,12 +23,12 @@ export const SignUpPageWrapper:
         </CloseButton> */}
       <ContentsTitleWrapper>
         <StepIndicator>
-          <Typography color="#D85888" size="10px" bold="400">
+          <Typography color="#D85888" size="2.78vw" bold="400">
             Step {currentStep}
           </Typography>
         </StepIndicator>
-        <div style={{display: 'inline-block'}}>
-          <Typography size="14px" bold="700">{stepInfo}</Typography>
+        <div style={{display: 'inline-block', alignContent: 'center'}}>
+          <Typography size="3.89vw" bold="700">{stepInfo}</Typography>
         </div>
       </ContentsTitleWrapper>
       <MobileProgressBar numberOfSteps={5} currentStep={step} complete={step === 5}/>
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: auto;
   padding-bottom: 5vw;
   background-color: #FFF;
@@ -81,12 +81,13 @@ const ContentsTitleWrapper = styled.div`
 
 const StepIndicator = styled.div`
 display: flex;
-width: 45px;
-height: 21px;
-//padding: 4px 8px;
+//width: 45px;
+width: 12.5vw;
+//height: 21px;
+height: 5.83vw;
+//padding: 1.11vw 2.22vw;
 justify-content: center;
 align-items: center;
-gap: 4px;
 flex-shrink: 0;
 border-radius: 20px;
 border: 0.522px solid #D85888;

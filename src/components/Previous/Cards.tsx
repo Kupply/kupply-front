@@ -390,7 +390,7 @@ const mockCards = [
   {
     korName: '스마트보안학부 스마트보안학부',
     engName: 'Division of Smart Security',
-    filter: ['학부 전체보기', '독립학부'],
+    filter: ['학부 전체보기', '자연계 캠퍼스', '독립학부'],
     TO: 3,
     compRate: 7,
     avgPass: 4.23,

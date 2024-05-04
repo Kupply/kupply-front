@@ -97,12 +97,12 @@ export default function SignUpPage1(){
     />
     <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
       <MessageContent>
-        <Typography size="16px" bold="700">인증번호가 전송되었습니다.</Typography>
-        <Typography size="12px" bold="500" style={{lineHeight: '16px', wordBreak: 'break-all'}}>고려대학교 이메일 주소로 발송된 인증번호 여섯 자리를 입력해주세요.</Typography>
+        <Typography size="4.44vw" bold="700">인증번호가 전송되었습니다.</Typography>
+        <Typography size="3.33vw" bold="500" style={{lineHeight: '4.44vw', wordBreak: 'break-all'}}>고려대학교 이메일 주소로 발송된 인증번호 여섯 자리를 입력해주세요.</Typography>
       </MessageContent>
       <ContentsList>
         <div>
-          <Typography size="16px" color="#D85888" bold="700">
+          <Typography size="4.44vw" color="#D85888" bold="700">
             <Timer
               setTime={3}
               onTimerExpired={() => {navigate('/')}}
@@ -129,20 +129,20 @@ export default function SignUpPage1(){
 }
 
 const MessageContent = styled.div`
-gap: 11px;
-margin-top: 43px;
+gap: 3.05vw;
+margin-top: 11.944vw;
 display: flex;
 flex-direction: column;
 align-items: center;
-width: 181px;
+width: 50.28vw;
 text-align: center;
-margin-bottom: 19px;
+margin-bottom: 5.278vw;
 `;
 
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 9.44vw;
   align-items: center;
 `;
 
@@ -150,7 +150,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
   // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
   // vh로 박아야 할 가능성이 클듯
-  margin-top: 100px;
-  gap: 8px;
+  margin-top: 19.78vw;
+  gap: 2.22vw;
   width: 100%;
 `;

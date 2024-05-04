@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 import DropDown02 from '../../mobile/assets/selectControl/DropDown02';
 import MobileArchiveGraph, { Data, LineData } from '../../mobile/assets/graph/Graph';
@@ -9,8 +8,9 @@ import { Card0301, Card0302, Card0303 } from '../../mobile/assets/cards/Card03';
 import Card05 from '../../mobile/assets/cards/Card05';
 import Banner01 from '../../mobile/assets/banners/Banner01';
 import { DBkeywords } from '../../common/Keyword';
-import client from '../../utils/HttpClient';
+import { recruit } from '../../common/Recruiting';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import client from '../../utils/HttpClient';
 import {
   collegeNameMappingByEng as collegeNameMapping,
   semesterAPIMapping as semesterForAPI,
@@ -29,18 +29,94 @@ export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', 
 
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
-  const { majorName } = useParams();
 
   const handlePrev = () => {
     navigate('/archive');
   };
 
+  const { majorName } = useParams() as { majorName: MajorOptions };
   const [sortCriterion, setSortCriterion] = useState('전학기 누적');
+
+  const majorKoreanName = majorNameMapping[majorName][0];
+  const majorEngishName = majorNameMapping[majorName][1];
+
+  const [enoughData, setEnoughData] = useState<boolean>(false);
+
+  const [numOfSelection, setNumOfSelection] = useState<number>(0);
+  const [numOfApplication, setNumOfApplication] = useState<number>(0);
+  const [numOfPassed, setNumOfPassed] = useState<number>(0);
+
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
-  //const { majorName } = useParams() as { majorName: MajorOptions };
-  //const majorKoreanName = majorNameMapping[majorName][0];
-  //const majorEngishName = majorNameMapping[majorName][1];
-  //const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || []);
+  const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
+  const [medianGpa, setMedianGpa] = useState<Data>(tmpMedianGpa);
+  const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
+  const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const APIresponse = await client.get(`/pastData/${majorName}/all`);
+        const data = APIresponse.data.pastData;
+
+        if (data.passedData.passedGPACountArray.length > 0) {
+          const selectionNum = recruit[majorKoreanName]['all'] || 0;
+
+          setEnoughData(true);
+          setNumOfApplication(data.overallData.numberOfData);
+          setNumOfSelection(selectionNum);
+          setNumOfPassed(data.passedData.passedNumberOfData);
+          setLineData(data.passedData.passedGPACountArray);
+          setMeanGpa(data.passedData.passedMeanGPAData);
+          setMedianGpa(data.passedData.passedMedianGPAData);
+          setModeGpa(data.passedData.passedModeGPAData);
+          setMinGpa(data.passedData.passedMinimumGPAData);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchInitialData();
+  }, [majorName]);
+
+  useEffect(() => {
+    const handleButtonClick = async () => {
+      try {
+        let semester;
+        if (sortCriterion === '전학기 누적') semester = 'all';
+        else semester = sortCriterion.slice(0, -1);
+        const selectionNum = recruit[majorKoreanName][semester] || 0;
+
+        const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
+        const data = APIresponse.data.pastData;
+
+        setEnoughData(true);
+        setNumOfApplication(data.overallData.numberOfData);
+        setNumOfSelection(selectionNum);
+        setNumOfPassed(data.passedData.passedNumberOfData);
+        setLineData(data.passedData.passedGPACountArray);
+        setMeanGpa(data.passedData.passedMeanGPAData);
+        setMedianGpa(data.passedData.passedMedianGPAData);
+        setModeGpa(data.passedData.passedModeGPAData);
+        setMinGpa(data.passedData.passedMinimumGPAData);
+
+        if (data.passedData.passedGPACountArray.length > 0) {
+          setEnoughData(true);
+        } else {
+          setEnoughData(false);
+          setLineData(tmpRandomData);
+          setMeanGpa(tmpMeanGpa);
+          setMedianGpa(tmpMedianGpa);
+          setModeGpa(tmpModeGpa);
+          setMinGpa(tmpMinGpa);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleButtonClick();
+  }, [sortCriterion]);
 
   return (
     <MobilePageWrapper>
@@ -48,13 +124,13 @@ const MobileArchiveDetailPage = () => {
         <BannerPrevious onClick={handlePrev} src="../../designImage/mobile/banner/BannerPrevious.svg" />
         <BannerImage src="../../designImage/mobile/banner/Banner1_1.png" /> {/* 학과별 적용 X */}
         <BannerTextBox>
-          <BannerTitle>경영학과</BannerTitle> {/* 학과별 적용 X */}
+          <BannerTitle>{majorKoreanName}</BannerTitle>
           <div style={{ marginTop: '2.5vw' }} />
-          <BannerText>Business School</BannerText> {/* 학과별 적용 X */}
+          <BannerText>{majorEngishName}</BannerText>
         </BannerTextBox>
       </BannerBox>
       <DropDownWrapper>
-        <DropDownText>학기선택</DropDownText>
+        <DropDownText>학기 선택</DropDownText>
         <DropDownBox>
           <DropDown02
             optionList={['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R']}
@@ -70,10 +146,10 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox>
         <RecruitBox>
           <RecruitLeftBox>
-            <Card0301 avgPassNum={0} /> {/*수정 필요*/}
+            <Card0301 avgPassNum={sortCriterion === '전학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection} />
           </RecruitLeftBox>
           <RecruitRightBox>
-            <Card0302 appliedNum={0} passNum={0} /> {/*수정 필요*/}
+            <Card0302 appliedNum={numOfApplication} passNum={numOfPassed} />
           </RecruitRightBox>
         </RecruitBox>
 
@@ -81,53 +157,156 @@ const MobileArchiveDetailPage = () => {
           <IconImage src="../../designImage/icon/icon_17_03.svg" /> {/* 수정 필요 */}
           <RecruitText>합격자 학점 분포</RecruitText>
         </RecruitTitleBox>
-        <GraphBox>
-          <MobileArchiveGraph
-            lineData={tmpRandomData}
-            meanGpa={{
-              gpa: 3.7,
-              num: 0.392,
-            }}
-            medianGpa={{
-              gpa: 3.9,
-              num: 0.486,
-            }}
-            modeGpa={{
-              gpa: 4,
-              num: 0.5,
-            }}
-            minGpa={{
-              gpa: 3,
-              num: 0,
-            }}
-            width={0}
-            height={0}
-          />
-        </GraphBox>
+
+        {enoughData === false ? (
+          <Wrapper1>
+            <BlurWrapper1 />
+            <BlurMsg1>
+              <BlurTitle1>쿠플라이에서 아직 정보를 수집 중입니다!</BlurTitle1>
+              <Blurtext1>
+                더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
+                <br />더 나은 서비스를 위해서 조금만 더 기다려주세요!
+              </Blurtext1>
+            </BlurMsg1>
+          </Wrapper1>
+        ) : (
+          <GraphBox>
+            <MobileArchiveGraph
+              lineData={lineData}
+              meanGpa={meanGpa}
+              medianGpa={medianGpa}
+              modeGpa={modeGpa}
+              minGpa={minGpa}
+              width={0}
+              height={0}
+            />
+          </GraphBox>
+        )}
 
         <RecruitTitleBox>
           <IconImage src="../../designImage/previous/UChartGrowth.png" />
           <RecruitText>합격자 학점 분석</RecruitText>
         </RecruitTitleBox>
 
-        <GpaAnalysisBox>
-          <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={4.5} />
-          <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={4.5} />
-          <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={4.5} modeNumber={11} />
-          <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={4.5} />
-        </GpaAnalysisBox>
+        {enoughData === false ? (
+          <Wrapper2>
+            <BlurWrapper2 />
+            <BlurMsg2>
+              <BlurTitle2>쿠플라이에서 아직 정보를 수집 중입니다!</BlurTitle2>
+              <Blurtext2>
+                더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
+                <br />더 나은 서비스를 위해서 조금만 더 기다려주세요!
+              </Blurtext2>
+            </BlurMsg2>
+          </Wrapper2>
+        ) : (
+          <GpaAnalysisBox>
+            <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={meanGpa.gpa} />
+            <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={modeGpa.gpa} modeNumber={modeGpa.num} />
+            <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={medianGpa.gpa} />
+            <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={minGpa.gpa} />
+          </GpaAnalysisBox>
+        )}
 
-        <RecruitTitleBox>
+        {/* <RecruitTitleBox>
           <IconImage src="../../designImage/icon/icon_19.svg" />
           <RecruitText>자기소개서 합격 키워드</RecruitText>
-        </RecruitTitleBox>
-        <KeywordBox></KeywordBox>
+        </RecruitTitleBox> */}
+        {/* <KeywordBox></KeywordBox> */}
       </BodyBox>
     </MobilePageWrapper>
   );
 };
 
 //##################### BOX #####################
+
+const Wrapper1 = styled.div`
+  position: relative;
+  display: flex;
+
+  width: 100%;
+  height: 72.77vw;
+  border-radius: 2.78vw;
+  border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+`;
+
+const BlurWrapper1 = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  z-index: 10;
+`;
+
+const BlurMsg1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+`;
+
+const Wrapper2 = styled.div`
+  border-radius: 2.78vw;
+  border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 45vw; // 160px 44.44vw
+  margin-top: 5vw;
+`;
+
+const BlurWrapper2 = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  z-index: 10;
+`;
+
+const BlurMsg2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+`;
 
 const MobilePageWrapper = styled.div`
   display: flex;
@@ -173,7 +352,7 @@ const DropDownWrapper = styled.div`
   justify-content: flex-start;
   position: relative;
   width: 100vw;
-  height: 40px;
+  height: 60px;
   gap: 25px;
   background: #fff;
 `;
@@ -296,6 +475,46 @@ const KeywordBox = styled.div`
 
 //##################### TEXT #####################
 
+const BlurTitle1 = styled.div`
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 4vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const Blurtext1 = styled.div`
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2.5vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
+`;
+
+const BlurTitle2 = styled.div`
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 4vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const Blurtext2 = styled.div`
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2.5vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
+`;
+
 const BannerTitle = styled.text`
   color: #141414;
   /* BODY TEXT_Bold */
@@ -320,7 +539,7 @@ const DropDownText = styled.text`
   color: rgba(20, 20, 20, 0.5);
   text-align: center;
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 71.425%; /* 9.285px; */
@@ -389,5 +608,10 @@ const tmpRandomData = [
   { gpa: 4.4, num: 0.196 },
   { gpa: 4.5, num: 0 },
 ];
+
+const tmpMeanGpa = { gpa: 3.7, num: 0.392 };
+const tmpMedianGpa = { gpa: 3.9, num: 0.486 };
+const tmpModeGpa = { gpa: 4, num: 0.5 };
+const tmpMinGpa = { gpa: 3, num: 0 };
 
 export default MobileArchiveDetailPage;

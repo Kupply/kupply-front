@@ -2,29 +2,20 @@
 
 import styled from 'styled-components';
 import Typography from '../../../assets/Typography';
+import { ITableData } from '../../../pages/landing/LandingPage';
 
 export interface PastInfoProps {
   isAscending: boolean;
   isShowAll: boolean;
+  tableData: ITableData[];
 }
 
 function PastInfo(props: PastInfoProps) {
-  const { isAscending, isShowAll } = props;
-
-  const dummyData = [
-    { rank: 1, doubleMajor: '경영대학', applyOrder: 1, competition: 3.59, meanGrade: 4.46 },
-    { rank: 2, doubleMajor: '미디어학부', applyOrder: 0, competition: 3.59, meanGrade: 4.46 },
-    { rank: 3, doubleMajor: '식품자원경제학과', applyOrder: 2, competition: 3.59, meanGrade: 4.46 },
-    { rank: 4, doubleMajor: '보건환경융합과학부', applyOrder: 0, competition: 3.59, meanGrade: 4.46 },
-    { rank: 1, doubleMajor: '경영대학', applyOrder: 1, competition: 3.59, meanGrade: 4.46 },
-    { rank: 2, doubleMajor: '미디어학부', applyOrder: 0, competition: 3.59, meanGrade: 4.46 },
-    { rank: 3, doubleMajor: '식품자원경제학과', applyOrder: 2, competition: 3.59, meanGrade: 4.46 },
-    { rank: 4, doubleMajor: '보건환경융합과학부', applyOrder: 0, competition: 3.59, meanGrade: 4.46 },
-  ];
+  const { isAscending, isShowAll, tableData } = props;
 
   const arrangedData = isAscending
-    ? dummyData.sort((a, b) => a.competition - b.competition)
-    : dummyData.sort((a, b) => b.competition - a.competition);
+    ? tableData.sort((a, b) => a.pastCompetition - b.pastCompetition)
+    : tableData.sort((a, b) => b.pastCompetition - a.pastCompetition);
   const visibleData = isShowAll ? arrangedData : arrangedData.slice(0, 4);
 
   return (
@@ -44,12 +35,12 @@ function PastInfo(props: PastInfoProps) {
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.doubleMajor}
+              {dictionary.secondMajor}
             </Typography>
-            {dictionary.applyOrder ? (
+            {dictionary.interestedNum ? (
               <ApplyOrderBox>
                 <Typography size="3.06vw" bold="500" color="#d85888" style={{ lineHeight: '120%' }}>
-                  {dictionary.applyOrder + '지망'}
+                  {dictionary.interestedNum + '지망'}
                 </Typography>
               </ApplyOrderBox>
             ) : (
@@ -58,12 +49,12 @@ function PastInfo(props: PastInfoProps) {
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.competition} : 1
+              {dictionary.pastCompetition} : 1
             </Typography>
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.meanGrade}
+              {dictionary.pastmean}
             </Typography>
           </Body>
         </BodyWrapper>

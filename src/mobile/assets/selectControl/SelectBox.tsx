@@ -30,7 +30,7 @@ function SelectBox({ value, subValue, selectedValue, setSelectedValue, closeDrop
 const SubValueTypo = styled(Typography)<TypographyProps>`
   color: rgba(20, 20, 20, 0.8);
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 3.61vw;
   font-style: normal;
   font-weight: 400;
   opacity: 0.8;
@@ -41,20 +41,20 @@ const SelectBoxWrapper = styled.button<{
 }>`
   display: flex;
   justify-content: space-between;
-  max-width: 310px;
+  //max-width: 310px;
   width: 95%;
-  height: 28px;
+  height: 7.78vw;
 
   /* height: 25%; */
   align-items: center;
   border-radius: 5px;
 
-  padding: 8px;
+  padding: 2.22vw;
   margin-bottom: 4px;
 
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 3.61vw;
   font-style: normal;
   font-weight: 500;
 

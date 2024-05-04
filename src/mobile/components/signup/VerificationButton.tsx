@@ -11,8 +11,8 @@ export default function VerificationButton({onSetBlank, onClickToggleLargeModal,
   return (
     <SubContentsWrapper>
         <TextButton onClick={() => onClickToggleSmallModal()}>
-          <div style={{ gap: '1px', display: 'flex'}}>
-            <img src={process.env.PUBLIC_URL + `/designImage/VerificationAgain.svg`} alt="인증번호 다시받기 이미지" style={{width: '10px', height: '10px'}}/>
+          <div style={{ gap: '0.277vw', display: 'flex'}}>
+            <img src={process.env.PUBLIC_URL + `/designImage/VerificationAgain.svg`} alt="인증번호 다시받기 이미지" style={{width: '2.78vw', height: '2.78vw'}}/>
             인증번호 다시받기
           </div>
         </TextButton>
@@ -25,17 +25,17 @@ const SubContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 134px;
+  gap: 0.222vw; /* 8px */
+  margin-bottom: 37.222vw; /* 134px */
 `;
 
 const TextButton = styled.button`
   transition: 0.25s ease-in-out;
   display: flex;
-  gap: 4.97px;
+  gap: 0.0138vw; /* approximately 0.05vw for 4.97px */
   color: rgba(216, 88, 136, 0.8);
   font-family: Pretendard;
-  font-size: 10px;
+  font-size: 2.778vw; /* 10px */
   font-style: normal;
   font-weight: 400;
   line-height: 120%;

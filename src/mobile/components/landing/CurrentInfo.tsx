@@ -2,29 +2,22 @@
 
 import styled from 'styled-components';
 import Typography from '../../../assets/Typography';
+import { ITableData } from '../../../pages/landing/LandingPage';
 
 export interface CurrentInfoProps {
   isAscending: boolean;
   isShowAll: boolean;
+  tableData: ITableData[];
 }
 
-function CurrentInfo(props: CurrentInfoProps) {
-  const { isAscending, isShowAll } = props;
+export type tableProps = {};
 
-  const dummyData = [
-    { rank: 1, doubleMajor: '경영대학', applyOrder: 1, recruitNum: 12, applyNum: 32, competition: 2.7 },
-    { rank: 2, doubleMajor: '미디어학부', applyOrder: 0, recruitNum: 12, applyNum: 32, competition: 2.7 },
-    { rank: 3, doubleMajor: '식품자원경제학과', applyOrder: 2, recruitNum: 12, applyNum: 32, competition: 2.7 },
-    { rank: 4, doubleMajor: '보건환경융합과학부', applyOrder: 0, recruitNum: 12, applyNum: 32, competition: 2.7 },
-    { rank: 1, doubleMajor: '경영대학', applyOrder: 1, recruitNum: 12, applyNum: 32, competition: 2.7 },
-    { rank: 2, doubleMajor: '미디어학부', applyOrder: 0, recruitNum: 12, applyNum: 32, competition: 2.7 },
-    { rank: 3, doubleMajor: '식품자원경제학과', applyOrder: 2, recruitNum: 12, applyNum: 32, competition: 2.7 },
-    { rank: 4, doubleMajor: '보건환경융합과학부', applyOrder: 0, recruitNum: 12, applyNum: 32, competition: 2.7 },
-  ];
+function CurrentInfo(props: CurrentInfoProps) {
+  const { isAscending, isShowAll, tableData } = props;
 
   const arrangedData = isAscending
-    ? dummyData.sort((a, b) => a.competition - b.competition)
-    : dummyData.sort((a, b) => b.competition - a.competition);
+    ? tableData.sort((a, b) => a.competition - b.competition)
+    : tableData.sort((a, b) => b.competition - a.competition);
   const visibleData = isShowAll ? arrangedData : arrangedData.slice(0, 4);
 
   return (
@@ -45,12 +38,12 @@ function CurrentInfo(props: CurrentInfoProps) {
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.doubleMajor}
+              {dictionary.secondMajor}
             </Typography>
-            {dictionary.applyOrder ? (
+            {dictionary.interestedNum ? (
               <ApplyOrderBox>
                 <Typography size="3.06vw" bold="500" color="#d85888" style={{ lineHeight: '120%' }}>
-                  {dictionary.applyOrder + '지망'}
+                  {dictionary.interestedNum + '지망'}
                 </Typography>
               </ApplyOrderBox>
             ) : (
@@ -59,12 +52,12 @@ function CurrentInfo(props: CurrentInfoProps) {
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.recruitNum}
+              {dictionary.recruitNumber}
             </Typography>
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.applyNum}
+              {dictionary.applyNumber}
             </Typography>
           </Body>
           <Body>
