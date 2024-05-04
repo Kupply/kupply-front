@@ -38,7 +38,10 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  margin-top: 200px;
   z-index: 1005;
-`;
 
+  & > div > dialog {
+    top: 15%;
+    min-height: 600px;
+  }
+`;
