@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 import DropDown02 from '../../mobile/assets/selectControl/DropDown02';
 import MobileArchiveGraph, { Data, LineData } from '../../mobile/assets/graph/Graph';
@@ -9,8 +8,9 @@ import { Card0301, Card0302, Card0303 } from '../../mobile/assets/cards/Card03';
 import Card05 from '../../mobile/assets/cards/Card05';
 import Banner01 from '../../mobile/assets/banners/Banner01';
 import { DBkeywords } from '../../common/Keyword';
-import client from '../../utils/HttpClient';
+import { recruit } from '../../common/Recruiting';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import client from '../../utils/HttpClient';
 import {
   collegeNameMappingByEng as collegeNameMapping,
   semesterAPIMapping as semesterForAPI,
@@ -29,18 +29,94 @@ export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', 
 
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
-  const { majorName } = useParams();
 
   const handlePrev = () => {
     navigate('/archive');
   };
 
+  const { majorName } = useParams() as { majorName: MajorOptions };
   const [sortCriterion, setSortCriterion] = useState('전학기 누적');
+
+  const majorKoreanName = majorNameMapping[majorName][0];
+  const majorEngishName = majorNameMapping[majorName][1];
+
+  const [enoughData, setEnoughData] = useState<boolean>(false);
+
+  const [numOfSelection, setNumOfSelection] = useState<number>(0);
+  const [numOfApplication, setNumOfApplication] = useState<number>(0);
+  const [numOfPassed, setNumOfPassed] = useState<number>(0);
+
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
-  //const { majorName } = useParams() as { majorName: MajorOptions };
-  //const majorKoreanName = majorNameMapping[majorName][0];
-  //const majorEngishName = majorNameMapping[majorName][1];
-  //const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || []);
+  const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
+  const [medianGpa, setMedianGpa] = useState<Data>(tmpMedianGpa);
+  const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
+  const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const APIresponse = await client.get(`/pastData/${majorName}/all`);
+        const data = APIresponse.data.pastData;
+
+        if (data.passedData.passedGPACountArray.length > 0) {
+          const selectionNum = recruit[majorKoreanName]['all'] || 0;
+
+          setEnoughData(true);
+          setNumOfApplication(data.overallData.numberOfData);
+          setNumOfSelection(selectionNum);
+          setNumOfPassed(data.passedData.passedNumberOfData);
+          setLineData(data.passedData.passedGPACountArray);
+          setMeanGpa(data.passedData.passedMeanGPAData);
+          setMedianGpa(data.passedData.passedMedianGPAData);
+          setModeGpa(data.passedData.passedModeGPAData);
+          setMinGpa(data.passedData.passedMinimumGPAData);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchInitialData();
+  }, [majorName]);
+
+  useEffect(() => {
+    const handleButtonClick = async () => {
+      try {
+        let semester;
+        if (sortCriterion === '전학기 누적') semester = 'all';
+        else semester = sortCriterion.slice(0, -1);
+        const selectionNum = recruit[majorKoreanName][semester] || 0;
+
+        const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
+        const data = APIresponse.data.pastData;
+
+        setEnoughData(true);
+        setNumOfApplication(data.overallData.numberOfData);
+        setNumOfSelection(selectionNum);
+        setNumOfPassed(data.passedData.passedNumberOfData);
+        setLineData(data.passedData.passedGPACountArray);
+        setMeanGpa(data.passedData.passedMeanGPAData);
+        setMedianGpa(data.passedData.passedMedianGPAData);
+        setModeGpa(data.passedData.passedModeGPAData);
+        setMinGpa(data.passedData.passedMinimumGPAData);
+
+        if (data.passedData.passedGPACountArray.length > 0) {
+          setEnoughData(true);
+        } else {
+          setEnoughData(false);
+          setLineData(tmpRandomData);
+          setMeanGpa(tmpMeanGpa);
+          setMedianGpa(tmpMedianGpa);
+          setModeGpa(tmpModeGpa);
+          setMinGpa(tmpMinGpa);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleButtonClick();
+  }, [sortCriterion]);
 
   return (
     <MobilePageWrapper>
@@ -48,9 +124,9 @@ const MobileArchiveDetailPage = () => {
         <BannerPrevious onClick={handlePrev} src="../../designImage/mobile/banner/BannerPrevious.svg" />
         <BannerImage src="../../designImage/mobile/banner/Banner1_1.png" /> {/* 학과별 적용 X */}
         <BannerTextBox>
-          <BannerTitle>경영학과</BannerTitle> {/* 학과별 적용 X */}
+          <BannerTitle>{majorKoreanName}</BannerTitle>
           <div style={{ marginTop: '2.5vw' }} />
-          <BannerText>Business School</BannerText> {/* 학과별 적용 X */}
+          <BannerText>{majorEngishName}</BannerText>
         </BannerTextBox>
       </BannerBox>
       <DropDownWrapper>
@@ -70,10 +146,10 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox>
         <RecruitBox>
           <RecruitLeftBox>
-            <Card0301 avgPassNum={0} /> {/*수정 필요*/}
+            <Card0301 avgPassNum={sortCriterion === '전학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection} />
           </RecruitLeftBox>
           <RecruitRightBox>
-            <Card0302 appliedNum={0} passNum={0} /> {/*수정 필요*/}
+            <Card0302 appliedNum={numOfApplication} passNum={numOfPassed} />
           </RecruitRightBox>
         </RecruitBox>
 
@@ -83,23 +159,11 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox>
         <GraphBox>
           <MobileArchiveGraph
-            lineData={tmpRandomData}
-            meanGpa={{
-              gpa: 3.7,
-              num: 0.392,
-            }}
-            medianGpa={{
-              gpa: 3.9,
-              num: 0.486,
-            }}
-            modeGpa={{
-              gpa: 4,
-              num: 0.5,
-            }}
-            minGpa={{
-              gpa: 3,
-              num: 0,
-            }}
+            lineData={lineData}
+            meanGpa={meanGpa}
+            medianGpa={medianGpa}
+            modeGpa={modeGpa}
+            minGpa={minGpa}
             width={0}
             height={0}
           />
@@ -111,17 +175,17 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox>
 
         <GpaAnalysisBox>
-          <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={4.5} />
-          <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={4.5} />
-          <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={4.5} modeNumber={11} />
-          <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={4.5} />
+          <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={meanGpa.gpa} />
+          <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={modeGpa.gpa} modeNumber={modeGpa.num} />
+          <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={medianGpa.gpa} />
+          <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={minGpa.gpa} />
         </GpaAnalysisBox>
 
-        <RecruitTitleBox>
+        {/* <RecruitTitleBox>
           <IconImage src="../../designImage/icon/icon_19.svg" />
           <RecruitText>자기소개서 합격 키워드</RecruitText>
-        </RecruitTitleBox>
-        <KeywordBox></KeywordBox>
+        </RecruitTitleBox> */}
+        {/* <KeywordBox></KeywordBox> */}
       </BodyBox>
     </MobilePageWrapper>
   );
@@ -389,5 +453,10 @@ const tmpRandomData = [
   { gpa: 4.4, num: 0.196 },
   { gpa: 4.5, num: 0 },
 ];
+
+const tmpMeanGpa = { gpa: 3.7, num: 0.392 };
+const tmpMedianGpa = { gpa: 3.9, num: 0.486 };
+const tmpModeGpa = { gpa: 4, num: 0.5 };
+const tmpMinGpa = { gpa: 3, num: 0 };
 
 export default MobileArchiveDetailPage;
