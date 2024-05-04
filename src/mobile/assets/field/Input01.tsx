@@ -204,7 +204,7 @@ const ErrorMessageWrapper = styled.div`
   display: flex;
   justify-content: end;
   position: relative;
-  bottom: 62px;
+  bottom: 65px;
   right: 0px;
   padding: 0;
 `;
@@ -393,7 +393,7 @@ function Input01(props: TextFieldBoxProps) {
 
   const onCheckDuplicated = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-  
+
     if (Math.random() > 0.5) {
       // 중복 아닐 경우
       if (valid) setState('filled');
@@ -647,17 +647,17 @@ function Input01(props: TextFieldBoxProps) {
             {textType === 'password' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToText} onTouchStart={changeTextTypeToText} type="on" />
-                <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                <img src="../../designImage/textField/AlertCircle.png" width="15px" height="15px" />
               </EyeIconWrapper>
             )}
             {textType === 'text' && (
               <EyeIconWrapper>
                 <EyeIcon onMouseDown={changeTextTypeToPW} onTouchStart={changeTextTypeToPW} type="off" />
-                <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+                <img src="../../designImage/textField/AlertCircle.png" width="15px" height="15px" />
               </EyeIconWrapper>
             )}
             {textType === 'default' && !isCheckDuplicated && (
-              <img src="../../designImage/textField/AlertCircle.png" width="24px" height="24px" />
+              <img src="../../designImage/textField/AlertCircle.png" width="15px" height="15px" />
             )}
             {textType === 'default' && isCheckDuplicated && (
               <CheckDuplicatedValidation valid={false} onMouseDown={onCheckDuplicated}>
@@ -697,13 +697,13 @@ function Input01(props: TextFieldBoxProps) {
 
       {state === 'error' && (
         <ErrorMessageWrapper>
-          <img src="../../designImage/textField/X.png" width="12px" height="12px" />
+          <img src="../../designImage/textField/X.png" width="15px" height="15px" />
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}
       {state === 'focused' && !valid && (
         <ErrorMessageWrapper>
-          <img src="../../designImage/textField/AlertCircle.png" width="12px" height="12px" />
+          <img src="../../designImage/textField/AlertCircle.png" width="15px" height="15px" />
           <ErrorMessage>{validationMessage}</ErrorMessage>
         </ErrorMessageWrapper>
       )}
