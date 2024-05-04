@@ -200,7 +200,7 @@ const ErrorMessageWrapper = styled.div`
   display: flex;
   justify-content: end;
   position: relative;
-  bottom: 18.333vw;
+  bottom: 4px;
   right: 0px;
   padding: 0;
 `;
