@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { useState, useEffect } from 'react';
 
 import Typography from '../../assets/Typography';
 

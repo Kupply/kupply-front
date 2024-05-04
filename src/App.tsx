@@ -64,15 +64,15 @@ export default function App() {
 
         // <MobileArchiveDetailPage />
         <SignUpPage2/>
-      <>
-          <MobileHeader />
-          <Routes>
-            <Route path="/archive" element={<MobileArchivePage />} />
-            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
-            <Route path="/test" element={<MobileTest />} />
-          </Routes>
-          <MobileFooter />
-        </>
+        // <>
+        //   <MobileHeader />
+        //   <Routes>
+        //     <Route path="/archive" element={<MobileArchivePage />} />
+        //     <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+        //     <Route path="/test" element={<MobileTest />} />
+        //   </Routes>
+        //   <MobileFooter />
+        // </>
 
       ) : (
         <Wrapper>
