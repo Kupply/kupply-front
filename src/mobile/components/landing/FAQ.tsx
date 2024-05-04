@@ -182,6 +182,7 @@ function FAQ() {
 const MainWrapper = styled.div`
   width: 100vw;
   height: auto;
+  margin-top: 5vw;
   padding-bottom: 26.11vw;
   display: flex;
   flex-direction: column;

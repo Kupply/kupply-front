@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import client from "../../utils/HttpClient";
 import { useCookies } from "react-cookie";
+import Icon02 from "../../assets/icons/Icon02";
+import Typography from "../../assets/Typography";
+import Button04 from "../assets/buttons/Button04";
+import Button03 from "../assets/buttons/Button03";
+import AlertIconExclamation from "../../assets/icons/AlertIconExclamation";
 
+// Modal은 아니고 그냥 페이지지만 Modal의 디자인을 따옴 
 export default function DeletePage(){
   const navigate = useNavigate();
   const [cookies] = useCookies(['accessToken']);
@@ -38,7 +44,35 @@ export default function DeletePage(){
     <Main>
       <Overlay>
       <Modal>
-        
+      <ButtonWrapper>
+        <TopButton
+          onClick={() => {
+            navigate('/settings');
+          }}
+        >
+          <Icon02 size='100%'/>
+        </TopButton>
+      </ButtonWrapper>
+      <div style={{ height: '20.833vw' }}></div>
+      <AlertIconExclamation width="22.22vw" height="22.22vw" />
+      <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
+        변경한 학점을 저장하시겠습니까?
+      </Typography>
+      <div style={{width: '60.6vw', textAlign: 'center', marginTop: '4.44vw'}}>
+      <Typography size={'3.33vw'} color="#141414">
+        수정을 저장하면 이번 이중전공 지원 시즌 동안 단 한 번의 학점 수정 기회가 남아요.
+      </Typography>
+      </div>
+      <ActionWrapper>
+        <Button04 
+          onClick={() => {
+            navigate('/settings');
+          }}
+          style={{width: '39.17vw', height: '11.67vw'}}>취소</Button04>
+        <Button03
+          onClick={() => {deleteMe();}}
+          style={{width: '39.17vw', height: '11.67vw'}}>확인</Button03>
+      </ActionWrapper>
       </Modal>
     </Overlay>
     </Main>
@@ -93,3 +127,26 @@ const Modal = styled.div`
   z-index: 1;
 `;
 
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const TopButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+`;
+
+const ActionWrapper = styled.div`
+  width: 290px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-top: 51px;
+`;

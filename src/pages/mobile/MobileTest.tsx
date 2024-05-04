@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import MobileArchiveGraph, { Data, LineData } from '../../mobile/assets/graph/Graph';
 import { MobileScroll } from '../../mobile/assets/scroll/MobileScroll';
 import { TermsText1 } from '../../components/signUp/TermsText';
-import MobileTabMenu02 from '../../mobile/assets/tabMenu/TabMenu02';
+//import MobileTabMenu02 from '../../mobile/assets/tabMenu/TabMenu02';
 import MobileTabMenu04 from '../../mobile/assets/tabMenu/TabMenu04';
 import MobileTabMenu05 from '../../mobile/assets/tabMenu/TabMenu05';
 

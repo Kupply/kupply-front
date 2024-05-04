@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 import { ITableData } from '../../pages/landing/LandingPage';
-import { TextButton01 } from '../../assets/buttons/TextButton';
-import CTA01 from '../../assets/CTAs/CTA01';
 import CTA02 from '../../assets/CTAs/CTA02';
 
 type orderOptions = 'descending' | 'ascending';

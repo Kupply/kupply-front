@@ -108,6 +108,7 @@ export default function LoginPage(props: LoginPageProps){
             setValue={setPassword}
             setState={setPasswordState}
             state={passwordState}
+            type="password"
           />
         </ContentsWrapper>
         <SubContent>

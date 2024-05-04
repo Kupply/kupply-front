@@ -145,11 +145,4 @@ const Button = styled.div<{ size: string; cardIndex: number }>`
   border-radius: 5.56vw;
 `;
 
-const Image = styled.img<{ size: string }>`
-  position: absolute;
-  right: 0;
-  top: ${(props) => props.size === 'small' && '0'};
-  bottom: ${(props) => props.size === 'large' && '0'};
-`;
-
 export default Banner03;

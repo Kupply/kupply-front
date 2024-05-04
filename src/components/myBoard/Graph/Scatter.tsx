@@ -51,9 +51,7 @@ const Scatter = ({ onViewMajor, curData, isApplied }: { onViewMajor: any; curDat
   return (
     <>
       {isApplied === false ? (
-        <Wrapper2>
-          <BlurWrapper />
-        </Wrapper2>
+        <></>
       ) : (
         <Wrapper>
           <TitleBox>

@@ -34,9 +34,10 @@ import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import { SignUp5Page } from './pages/signUp/SignUp5Page';
 import LoginPage from './mobile/pages/LoginPage';
 import { SettingsPage } from './pages/setting/SettingsPage';
-
+import DeletePage from './mobile/pages/DeletePage';
 import MobileFooter from './mobile/assets/base/Footer';
 import MobileHeader from './mobile/assets/base/Header';
+import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
 
 interface RouteConfig {
   path: string;
@@ -62,17 +63,17 @@ export default function App() {
         // <MobilePage />
         // <MobileTest />
 
-        // <MobileArchiveDetailPage />
-        <SignUpPage2/>
-        // <>
-        //   <MobileHeader />
-        //   <Routes>
-        //     <Route path="/archive" element={<MobileArchivePage />} />
-        //     <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
-        //     <Route path="/test" element={<MobileTest />} />
-        //   </Routes>
-        //   <MobileFooter />
-        // </>
+
+        <>
+          <MobileHeader />
+          <Routes>
+            <Route path="/archive" element={<MobileArchivePage />} />
+            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+            <Route path="/m" element={<MobileMyBoard />} />
+            <Route path="/test" element={<MobileTest />} />
+          </Routes>
+          <MobileFooter />
+        </>
 
       ) : (
         <Wrapper>
