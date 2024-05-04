@@ -351,9 +351,9 @@ const MyBoardPage = () => {
       {userData.userRole === 'passer' ? (
         <MyboardPasserPageVer />
       ) : (
-        <Wrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
+        <Wrapper>
           {/* <GlobalStyles /> */}
-          <ProfileWrapper>
+          <ProfileWrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
             <ProfileBox userData={userData} />
           </ProfileWrapper>
 
@@ -382,10 +382,12 @@ const MyBoardPage = () => {
               <ThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
             </div>
             <QuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} isApplied={isApplied} />
-            <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
-              <PieChart onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
-              <Scatter onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
-            </div>
+            {isApplied && (
+              <div style={{ position: 'relative', display: 'flex', gap: '1.25vw' }}>
+                <PieChart onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
+                <Scatter onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
+              </div>
+            )}
           </MainWrapper>
         </Wrapper>
       )}
@@ -404,21 +406,20 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
 
-  width: 100%;
-  max-width: 1920px;
+  width: 100vw;
+
   overflow-x: hidden;
   //min-height: 200vh;
-  max-height: 200vh;
+  overflow-y: hidden;
 
   flex-shrink: 0;
   background: #fefafb;
   //background: black;
 
   background-image: url('designImage/myBoard/MyBoardBackground.png');
-  background-size: 100vw 100vh;
+  background-size: 100vw;
   background-repeat: no-repeat;
-  background-position: 0px;
-
+  background-position: 0px -100px;
   padding-bottom: 165px;
 `;
 

@@ -74,8 +74,8 @@ export default function TextAreaBox(props: TextAreaBoxProps) {
 
 // 그냥 inputWrapper안에 
 const InputWrapper = styled.input<TextAreaBoxProps>`
-  width: 42px;
-  height: 42px;
+  width: 11.67vw;
+  height: 11.67vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,7 +85,7 @@ const InputWrapper = styled.input<TextAreaBoxProps>`
   background: var(--white, #fff);
   color: var(--main-black, #141414);
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 5.56vw;
   font-style: normal;
   font-weight: 500;
   line-height: 100%;

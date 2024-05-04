@@ -93,7 +93,7 @@ const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
 `;
 
 const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
-  width: 100%;
+  width: 120%;
   height: 40px;
   background: #fff;
 
@@ -103,7 +103,7 @@ const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   text-align: left;
 
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   color: rgba(20, 20, 20, 0.8); // 설정이 안 되어 있어서 추가했습니다.
@@ -119,7 +119,7 @@ const SelectBoxContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 120%;
   /* height 의 경우 옵션의 개수에 따라 동적으로 변화하게 설정 */
   min-height: 0; /* 임의 설정 */
   overflow-y: auto; /* 최대 높이를 초과할 경우 스크롤바 추가 */
@@ -166,7 +166,7 @@ const SelectBoxWrapper = styled.button<{
   color: rgba(20, 20, 20, 0.3);
 
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 100%;

@@ -7,6 +7,8 @@ import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
+import ApplicationModal from './SubmitModals/ApplicationModal';
+//import OldApplicationModal from './SubmitModals/OldApplicationModal';
 
 // isApplied={isApplied}
 // editmodal 위치 수정 해야 됨
@@ -32,15 +34,25 @@ const ProfileBox = ({ userData }: { userData: any }) => {
   // const majorEngishName2 = majorNameMapping[major2][1];
 
   const [isOpenEditModal, setOpenEditModal] = useState(true);
+  const [isOpenAppModal, setOpenAppModal] = useState(true);
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
 
   const onClickEditModal = () => {
     setOpenEditModal(true);
   };
 
-  const closeModal = () => {
+  const onClickAppModal = () => {
+    setOpenAppModal(true);
+  };
+
+  const closeEditModal = () => {
     setOpenEditModal(false);
   };
+
+  const closeAppModal = () => {
+    setOpenAppModal(false);
+  };
+
   const adjustScrollPositionByWidth = (width: number, scrollPosition: number) => {
     let maxScrollValue;
 
@@ -90,10 +102,18 @@ const ProfileBox = ({ userData }: { userData: any }) => {
           <EditModal
             isOpenModal={isOpenEditModal}
             setOpenModal={setOpenEditModal}
-            onClickModal={closeModal}
+            onClickModal={closeEditModal}
             isApplied={false} /* 임시로 false */
           />
         )}
+        {isOpenAppModal && (
+          <ApplicationModal
+            isOpenModal={isOpenAppModal}
+            setOpenModal={setOpenAppModal}
+            onClickModal={closeAppModal}
+          />
+        )
+        }
       </ModalBox>
 
       <Wrapper translateY={scrollY}>
@@ -231,13 +251,14 @@ const ApplyBox = styled.div`
 
 const ModalBox = styled.div`
   position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+
+  top: 15%;
+  left: 25%;
+  -webkit-transform: translate(-20%, -50%);
+  -moz-transform: translate(-20%, -50%);
+  -ms-transform: translate(-20%, -50%);
+  -o-transform: translate(-20%, -50%);
+  transform: translate(-20%, -50%);
 
   z-index: 1;
 `;

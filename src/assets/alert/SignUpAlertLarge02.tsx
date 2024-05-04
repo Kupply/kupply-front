@@ -6,7 +6,8 @@ import type { StateOptions } from '../OldTextFieldBox';
 import Icon03 from '../icons/Icon03';
 import Icon02 from '../icons/Icon02';
 import TextFieldBox from '../OldTextFieldBox';
-import SubmitButton from '../buttons/SubmitButton';
+//import SubmitButton from '../buttons/SubmitButton';
+import Button05 from '../buttons/Button05';
 
 interface SignUpAlertLargeProps {
   currentModal: number;
@@ -43,23 +44,23 @@ function SignUpAlertLarge02({
             setCurrentModal(currentModal - 1);
           }}
         >
-          <Icon03 size={'60px'} />
+          <Icon03 size={'3.125vw'} />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size={'60px'} />
+          <Icon02 size={'3.125vw'} />
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '130px' }}></div>
-      <AlertIconExclamation width="113px" height="113px" />
+      <div style={{ height: '6.771vw' }}></div>
+      <AlertIconExclamation width="5.885vw" height="5.885vw" />
       <TextWrapper>
-        <Typography size={'24px'} bold={'700'} color="#141414" style={{ marginTop: '25px' }}>
+        <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
           인증번호를 받을 <span className="mobile"> 고려대 이메일 주소를 입력해주세요!</span>
         </Typography>
-        <Typography size={'18px'} color="#141414" style={{ marginTop: '24px' }}>
+        <Typography size={'0.9375vw'} color="#141414" style={{ marginTop: '1.25vw' }}>
           고려대학교 이메일 주소를 정확히 기입해주세요.
         </Typography>
       </TextWrapper>
@@ -74,7 +75,7 @@ function SignUpAlertLarge02({
           setState={setEmailState}
           setValue={setEmail}
         />
-        <SubmitButton
+        <Button05
           onClick={async () => {
             const IDPattern = /.+@korea\.ac\.kr$/;
             if (IDPattern.test(email)) {
@@ -85,10 +86,11 @@ function SignUpAlertLarge02({
               alert('형식에 맞지 않는 이메일 주소입니다.');
             }
           }}
-          size={'18px'}
+          state='pressed'
+          style={{width: '100%'}}
         >
           제출하기
-        </SubmitButton>
+        </Button05>
       </ActionWrapper>
     </ModalLarge>
   );
@@ -96,8 +98,8 @@ function SignUpAlertLarge02({
 
 const TopButton = styled.button`
   display: flex;
-  width: 60px;
-  height: 60px;
+  width: 3.125vw;
+  height: 3.125vw;
   justify-content: center;
   align-items: center;
 
@@ -105,16 +107,12 @@ const TopButton = styled.button`
 `;
 
 const ActionWrapper = styled.div`
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  margin-top: 72px;
-
-  @media screen and (max-width: 600px) {
-    width: 90%;
-  }
+  gap: 1.5625vw;
+  margin-top: 3.75vw;
 `;
 
 const ButtonWrapper = styled.div`

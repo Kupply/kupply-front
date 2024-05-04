@@ -8,8 +8,6 @@ import DropDown02 from '../../mobile/assets/selectControl/DropDown02';
 import Card01 from '../../mobile/assets/cards/Card01';
 import { majorNameMapping } from '../../utils/Mappings';
 
-import client from '../../utils/HttpClient';
-
 // categoryMapping 정확하게 분류하기
 // handleSearch 역할 아직 모름.. ?
 // filteredCards 수정하기
@@ -54,7 +52,7 @@ const categoryMapping: CategoryMapping = {
     '전자공학부',
     '컴퓨터학과',
   ],
-  '독립 학부': ['스마트보안학부'],
+  '독립 학부': ['심리학부', '미디어학부', '스마트보안학부'],
 };
 
 const MobileArchivePage = () => {
@@ -86,14 +84,6 @@ const MobileArchivePage = () => {
       switch (sortCriterion) {
         case '가나다순':
           return a.korName.localeCompare(b.korName);
-        // case '선발인원순':
-        //   return a.TO - b.TO;
-        //  case '경쟁률순':
-        //    return a.compRate - b.compRate;
-        //  case '평균학점순':
-        //    return a.avgPass - b.avgPass;
-        //  case '최저학점순':
-        //    return a.minPass - b.minPass;
         default:
           return a.korName.localeCompare(b.korName);
       }
@@ -137,11 +127,7 @@ const MobileArchivePage = () => {
           ))}
         </TagButtonWrapper>
         <DropDownBox>
-          <DropDown02
-            optionList={['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순']}
-            value={sortCriterion}
-            setValue={setSortCriterion}
-          />
+          <DropDown02 optionList={['가나다순']} value={sortCriterion} setValue={setSortCriterion} />
         </DropDownBox>
 
         <CardWrapper>

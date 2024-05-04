@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { SideBar } from "../../components/settings/Sidebar";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { SBContentState, isAppliedState, isGpaChangedState, settingsModalState } from "../../store/atom";
-import { SidebarContent0 } from "../../components/settings/sidebar-content/SidebarContent0";
-import { SidebarContent1 } from "../../components/settings/sidebar-content/SidebarContent1";
-import { SidebarContent2 } from "../../components/settings/sidebar-content/SidebarContent2";
-import { useState } from "react";
-import { SidebarContent3 } from "../../components/settings/sidebar-content/SidebarContent3";
-import { SidebarContent4 } from "../../components/settings/sidebar-content/SidebarContent4";
+// import { SidebarContent0 } from "../../components/settings/sidebar-content/SidebarContent0";
+// import { SidebarContent1 } from "../../components/settings/sidebar-content/SidebarContent1";
+// import { SidebarContent2 } from "../../components/settings/sidebar-content/SidebarContent2";
+// import { useState } from "react";
+// import { SidebarContent3 } from "../../components/settings/sidebar-content/SidebarContent3";
+// import { SidebarContent4 } from "../../components/settings/sidebar-content/SidebarContent4";
 import { useEffect } from "react";
 import client from "../../utils/HttpClient";
 //import { GpaChangeModal } from "../../components/settings/GpaChangeModal";
@@ -64,7 +64,7 @@ export function SettingsPage(){
     <Wrapper>
       {/* {modalOpen && isGpaChanged.changed && <GpaChangeModal/>} */}
       <SideBar/>
-      {(() => {
+      {/* {(() => {
         switch(selected){
           case 0:
             return <SidebarContent0/>
@@ -77,7 +77,7 @@ export function SettingsPage(){
           case 4:
             return <SidebarContent4/>
         }
-      })()}
+      })()} */}
     </Wrapper>
   )
 }

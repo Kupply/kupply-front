@@ -1,8 +1,8 @@
 import styled, { keyframes } from 'styled-components';
-
 import Typography from '../../assets/Typography';
 
 function Banner() {
+
   return (
     <MainWrapper>
       <Typography size="0.94vw" bold="700" color="rgba(255,255,255,0.5)" style={{ margin: '5.21vw 0 0.42vw 0' }}>
