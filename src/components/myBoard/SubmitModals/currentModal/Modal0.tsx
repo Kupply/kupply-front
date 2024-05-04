@@ -41,7 +41,7 @@ export default function CurrentModal0(props: CurrentModalProps){
           </Typography>
           <Typography size="0.9375vw">을 입력해주세요.</Typography>
         </div>
-        <GPAVerification userType="candidate" setState={setGpaState}/>
+        <GPAVerification userType="candidate" setState={setGpaState} locationUsed="Settings"/>
       </div>
       
       <div>

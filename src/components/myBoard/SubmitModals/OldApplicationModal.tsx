@@ -42,7 +42,7 @@ export interface UploadButtonProps extends React.ComponentPropsWithoutRef<'butto
   4 : 모의지원 완료 안내
   */
 
-export default function ApplicationModal(props: ModalProps) {
+export default function OldApplicationModal(props: ModalProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   function UploadButton(props: UploadButtonProps) {

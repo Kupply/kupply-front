@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
-import ModalLarge from '../../base/ModalLarge';
 import DropDown from '../../../assets/dropdown/DropDown';
 import TextArea from '../../../assets/TextArea';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
@@ -20,6 +19,7 @@ import HeaderBar from './HeaderBar';
 import MoveButton from './MoveButton';
 import { useRecoilState } from 'recoil';
 import { editModalState } from '../../../store/atom';
+import ModalLarge from '../../base/ModalLarge';
 
 /*
 남은 개발

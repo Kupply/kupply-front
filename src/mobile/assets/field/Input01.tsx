@@ -208,7 +208,7 @@ const ErrorMessageWrapper = styled.div`
 const ErrorMessage = styled.text`
   color: #ea0909;
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 3.33vw;
   font-style: normal;
   font-weight: 400;
   line-height: 3.33vw;
@@ -719,6 +719,7 @@ function Input01(props: TextFieldBoxProps) {
           <>
             <CorrectText>{value}</CorrectText>
             <img src={process.env.PUBLIC_URL + '/designImage/textField/Loading.png'} width="7.78vw" height="7.78vw" />
+
           </>
         )}
       </TextFieldWrapper>

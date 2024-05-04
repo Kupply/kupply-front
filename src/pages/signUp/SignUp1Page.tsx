@@ -29,17 +29,17 @@ export function SignUp1Page(){
   const [isOpenModal, setOpenModal] = useRecoilState(isOpenModalState);
   const [sendNum, setSendNum] = useRecoilState(sendNumState);
 
-  useEffect(() => {
-    if (!sessionStorage.getItem('email')) navigate('/');
-    async function sendFirst(email: string) {
-      const result = await sendEmail(email);
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem('email')) navigate('/');
+  //   async function sendFirst(email: string) {
+  //     const result = await sendEmail(email);
 
-      if (!result) {
-        navigate('/login');
-      }
-    }
-    sendFirst(email);
-  }, []);
+  //     if (!result) {
+  //       navigate('/login');
+  //     }
+  //   }
+  //   sendFirst(email);
+  // }, []);
 
   const setBlank = () => {
     setCodeNum({
@@ -94,13 +94,12 @@ export function SignUp1Page(){
 
   return (
     <>
+    <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
     <ModalHandle 
       setBlank={setBlank} 
       onClickToggleLargeModal={onClickToggleLargeModal} 
       onClickToggleSmallModal={onClickToggleSmallModal}
     />
-    <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
-      
       <ContentsList>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ContentsWrapper>
