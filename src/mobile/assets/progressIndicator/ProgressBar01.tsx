@@ -55,7 +55,7 @@ const StepItem = styled.div<StepProps>`
     width: 100%;
     height: 4px;
     right: 50%;
-    top: 33.3333%;
+    top: 20%;
     transform: translateY(100%);
   }
 `;

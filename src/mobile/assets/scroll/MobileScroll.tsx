@@ -17,7 +17,7 @@ interface ScrollContentProps {
 }
 
 export const MobileScroll: React.FC<MobileScrollProps> = ({ children, height = '250px' }) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   return (
     <ScrollContent

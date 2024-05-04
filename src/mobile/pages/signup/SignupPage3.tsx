@@ -54,7 +54,7 @@ export default function SignUpPage3(){
   }, [nickname]);
 
   return(
-    <SignUpPageWrapper step={2} stepInfo="사용자 기본 정보 입력하기">
+    <SignUpPageWrapper step={3} stepInfo="사용자 기본 정보 입력하기">
         <div style={{marginBottom: '61px'}}></div>
         <ContentsList>
           <ContentsWrapper>

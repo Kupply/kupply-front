@@ -65,7 +65,9 @@ export default function App() {
         // <MobileArchiveDetailPage />
         //<LoginPage setLogin={()=>{}}/>
         //<DeletePage/>
-        <MobileSettingsPage/>
+        //<MobileSettingsPage/>
+        //<SignUpPage3/>
+        <SignUpPage5/>
         // <>
         //   <MobileHeader />
         //   <Routes>
