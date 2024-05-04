@@ -34,7 +34,7 @@ import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import { SignUp5Page } from './pages/signUp/SignUp5Page';
 import LoginPage from './mobile/pages/LoginPage';
 import { SettingsPage } from './pages/setting/SettingsPage';
-
+import DeletePage from './mobile/pages/DeletePage';
 import MobileFooter from './mobile/assets/base/Footer';
 import MobileHeader from './mobile/assets/base/Header';
 
@@ -64,7 +64,7 @@ export default function App() {
 
         // <MobileArchiveDetailPage />
         // <LoginPage setLogin={()=>{}}/>
-        <MobileSettingsPage/>
+        <DeletePage/>
         // <>
         //   <MobileHeader />
         //   <Routes>
