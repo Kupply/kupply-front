@@ -568,7 +568,7 @@ export const MobileSettingsPage = () => {
             setValue={setPwd}
             placeholder={placeholderMapping['password']}
             errorMessage={errorMessageMapping['password']}
-            helpMessage={helpMessageMapping['password']}
+            helpMessage={'대소문자와 특수문자를 포함해주세요!'}
           />
         </ContentsWrapper>
         <ContentsWrapper>
