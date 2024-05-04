@@ -130,7 +130,7 @@ const MobileArchiveDetailPage = () => {
         </BannerTextBox>
       </BannerBox>
       <DropDownWrapper>
-        <DropDownText>학기선택</DropDownText>
+        <DropDownText>학기 선택</DropDownText>
         <DropDownBox>
           <DropDown02
             optionList={['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R']}
@@ -157,17 +157,31 @@ const MobileArchiveDetailPage = () => {
           <IconImage src="../../designImage/icon/icon_17_03.svg" /> {/* 수정 필요 */}
           <RecruitText>합격자 학점 분포</RecruitText>
         </RecruitTitleBox>
-        <GraphBox>
-          <MobileArchiveGraph
-            lineData={lineData}
-            meanGpa={meanGpa}
-            medianGpa={medianGpa}
-            modeGpa={modeGpa}
-            minGpa={minGpa}
-            width={0}
-            height={0}
-          />
-        </GraphBox>
+
+        {enoughData === false ? (
+          <Wrapper2>
+            <BlurWrapper />
+            <BlurMsg>
+              <BlurTitle>쿠플라이에서 아직 정보를 수집 중입니다!</BlurTitle>
+              <Blurtext>
+                더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
+                <br />더 나은 서비스를 위해서 조금만 더 기다려주세요!
+              </Blurtext>
+            </BlurMsg>
+          </Wrapper2>
+        ) : (
+          <GraphBox>
+            <MobileArchiveGraph
+              lineData={lineData}
+              meanGpa={meanGpa}
+              medianGpa={medianGpa}
+              modeGpa={modeGpa}
+              minGpa={minGpa}
+              width={0}
+              height={0}
+            />
+          </GraphBox>
+        )}
 
         <RecruitTitleBox>
           <IconImage src="../../designImage/previous/UChartGrowth.png" />
@@ -192,6 +206,48 @@ const MobileArchiveDetailPage = () => {
 };
 
 //##################### BOX #####################
+
+const Wrapper2 = styled.div`
+  position: relative;
+  display: flex;
+
+  width: 100%;
+  height: 72.77vw;
+  border-radius: 2.78vw;
+  border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+`;
+
+const BlurWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  z-index: 10;
+`;
+
+const BlurMsg = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0px 0px 28px 0px rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+`;
 
 const MobilePageWrapper = styled.div`
   display: flex;
@@ -237,7 +293,7 @@ const DropDownWrapper = styled.div`
   justify-content: flex-start;
   position: relative;
   width: 100vw;
-  height: 40px;
+  height: 60px;
   gap: 25px;
   background: #fff;
 `;
@@ -360,6 +416,26 @@ const KeywordBox = styled.div`
 
 //##################### TEXT #####################
 
+const BlurTitle = styled.div`
+  color: #141414;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 4vw;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+`;
+
+const Blurtext = styled.div`
+  color: rgba(20, 20, 20, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2.5vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 136.111%;
+`;
+
 const BannerTitle = styled.text`
   color: #141414;
   /* BODY TEXT_Bold */
@@ -384,7 +460,7 @@ const DropDownText = styled.text`
   color: rgba(20, 20, 20, 0.5);
   text-align: center;
   font-family: Pretendard;
-  font-size: 13px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 71.425%; /* 9.285px; */
