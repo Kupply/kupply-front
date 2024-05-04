@@ -124,7 +124,7 @@ const AngleDown = styled.div<{ isOpen: boolean; isSelected: boolean }>`
 
 const DropDownBtn = styled.button<{ isOpen: boolean; isSelected: boolean }>`
   width: 100%;
-  max-width: 628px;
+  /* max-width: 628px; */
   height: 3.542vw; //68px;
   border-radius: 0.521vw; //10px;
   border: 1px solid #b9b9b9;
@@ -213,7 +213,7 @@ const SelectBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 629px;
+  /* max-width: 629px; */
   height: 213px;
   /* height 의 경우 옵션의 개수에 따라 동적으로 변화하게 설정 */
   min-height: 0; /* 임의 설정 */

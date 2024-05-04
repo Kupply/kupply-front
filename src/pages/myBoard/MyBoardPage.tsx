@@ -17,6 +17,9 @@ import { collegeAPIMappingByKR } from '../../utils/Mappings';
 
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
+  const [isOpenEditModal, setOpenEditModal] = useState(true);
+  const [isOpenAppModal, setOpenAppModal] = useState(true);
+
   const onClickInterest1 = useCallback(() => {
     setOnViewMajor(1);
     console.log('1지망 선택');
@@ -28,6 +31,22 @@ const MyBoardPage = () => {
   }, [onViewMajor]);
 
   const [scrollY, setScrollY] = useState(window.scrollY + 20); // 배경 이미지 + 프로필 박스 화면 따라오기
+
+  const onClickEditModal = () => {
+    setOpenEditModal(true);
+  };
+
+  const onClickAppModal = () => {
+    setOpenAppModal(true);
+  };
+
+  const closeEditModal = () => {
+    setOpenEditModal(false);
+  };
+
+  const closeAppModal = () => {
+    setOpenAppModal(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -354,8 +373,18 @@ const MyBoardPage = () => {
         <Wrapper>
           {/* <GlobalStyles /> */}
           <ProfileWrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
-            <ProfileBox userData={userData} />
+            <ProfileBox
+              userData={userData}
+              isOpenEditModal={isOpenEditModal}
+              setOpenEditModal={setOpenEditModal}
+              closeEditModal={closeEditModal}
+              isOpenAppModal={isOpenAppModal}
+              onClickEditModal={onClickEditModal}
+              setOpenAppModal={setOpenAppModal}
+              closeAppModal={closeAppModal}
+            />
           </ProfileWrapper>
+          {/* {(isOpenAppModal || isOpenEditModal) && <Backdrop />} */}
 
           <MainWrapper>
             <InterestMajorBox>
@@ -467,6 +496,16 @@ const BlurWrapper = styled.div`
   background: rgba(248, 248, 248, 0.45);
 
   z-index: 1000;
+`;
+
+const Backdrop = styled.div`
+  width: 100%; // 100vw;
+  height: 100%; // 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 4;
+  background: rgba(20, 16, 19, 0.55);
 `;
 
 export default MyBoardPage;
