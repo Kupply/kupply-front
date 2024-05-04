@@ -43,14 +43,13 @@ const ModalContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-
   @media screen and (min-width: 1201px) and (max-width: 1500px) {
     width: 50vw;
     height: 700px;
     margin-top: 30px;
     top: 0px;
   }
-  
+
   @media screen and (min-width: '1001px') and (max-width: 1200px) {
     width: 50vw;
     height: 600px;
@@ -156,7 +155,6 @@ const DialogBox = styled.dialog`
   @media screen and (min-width: 1201px) and (max-width: 1500px) {
     height: 70vh;
   }
-
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요

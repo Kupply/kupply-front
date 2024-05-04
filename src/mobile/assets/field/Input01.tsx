@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
 import EyeIcon from '../../../assets/icons/OldEyeIcon';
+//import EyeIcon from '../../../assets/icons/EyeIcon';
 import Icon07 from '../../../assets/icons/Icon07';
 
 import Icon08 from '../../../assets/icons/Icon08';
@@ -17,7 +18,7 @@ const baseWrapper = css`
   max-width: 328px;
   min-width: 250px;
   gap: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
 
   & > img {
     position: relative;
@@ -392,7 +393,7 @@ function Input01(props: TextFieldBoxProps) {
 
   const onCheckDuplicated = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-
+  
     if (Math.random() > 0.5) {
       // 중복 아닐 경우
       if (valid) setState('filled');

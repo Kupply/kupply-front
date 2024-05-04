@@ -62,8 +62,10 @@ const StepItem = styled.div<StepProps>`
 
 // 원(step) 디자인
 const Step = styled.div<StepProps>`
-  width: 8.33vw; // 16px = 1rem 기준 1.875rem;
-  height: 8.33vw;
+  // width: 8.33vw; // 16px = 1rem 기준 1.875rem;
+  // height: 8.33vw;
+  width: 12px;
+  height: 12px;
   display: flex;
   justify-content: center;
   align-items: center;

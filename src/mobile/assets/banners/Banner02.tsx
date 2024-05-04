@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ export interface Banner02Props extends React.ComponentPropsWithoutRef<'button'> 
   images?: string[];
   titles?: string[];
   contents?: string[][];
+
   links?: string[];
 }
 

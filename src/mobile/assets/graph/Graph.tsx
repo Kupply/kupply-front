@@ -84,17 +84,7 @@ const hoverLinePlugin = {
   },
 };
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  hoverLinePlugin,
-  arrowPlugin,
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, arrowPlugin);
 
 export type Data = {
   gpa: number;
@@ -235,6 +225,7 @@ const externalTooltipHandler = (context: any) => {
   tooltipEl.style.background = 'white';
   tooltipEl.style.color = 'black';
   tooltipEl.style.boxShadow = '0px 0px 10px #b9b9b9';
+  tooltipEl.style.minWidth = '100px';
 
   const tableBody = tooltipEl.querySelector('tbody');
   if (tableBody) {
@@ -287,10 +278,12 @@ export default function MobileArchiveGraph(prop: GpaLineChartProps) {
 
   // graph 크기
   const chartContainerStyle = {
-    width: '91.11vw',
-    maxWidth: '328px',
-    height: '72.78vw',
-    maxHeight: '262px',
+    //width: '91.11vw',
+    //maxWidth: '328px',
+    //height: '72.78vw',
+    //maxHeight: '262px',
+    width: '85%',
+    height: '85%',
   };
 
   init();
@@ -404,7 +397,7 @@ export default function MobileArchiveGraph(prop: GpaLineChartProps) {
           display: false, // x 축 라벨을 숨깁니다.
         },
         afterFit: function (scale: any) {
-          scale.paddingRight = 20; // x 축 우측에 20px의 패딩을 추가합니다.
+          scale.paddingRight = 30; // x 축 우측에 20px의 패딩을 추가합니다.
           scale.paddingLeft = 20; // x 축 좌측에 20px의 패딩을 추가합니다.
         },
       },
@@ -418,10 +411,10 @@ export default function MobileArchiveGraph(prop: GpaLineChartProps) {
           text: '합격자', // y 축 타이틀을 표시합니다.
         },
         ticks: {
-          display: false, // x 축 라벨을 숨깁니다.
+          display: false, // y 축 라벨을 숨깁니다.
         },
         afterFit: function (scale: any) {
-          scale.paddingTop = 20; // y 축 상단에 20px의 패딩을 추가합니다.
+          scale.paddingTop = 50; // y 축 상단에 20px의 패딩을 추가합니다.
           scale.paddingBottom = 20; // y 축 하단에 20px의 패딩을 추가합니다.
         },
       },

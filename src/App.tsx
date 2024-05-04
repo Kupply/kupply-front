@@ -21,8 +21,18 @@ import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
+import SignUpPage0 from './mobile/pages/signup/SignupPage0';
+import SignUpPage1 from './mobile/pages/signup/SignupPage1';
+import SignUpPage2 from './mobile/pages/signup/SignupPage2';
+import SignUpPage3 from './mobile/pages/signup/SignupPage3';
+//import SignUpPage4 from './mobile/pages/signup/SignupPage4';
+import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
 
 import MobileTest from './pages/mobile/MobileTest';
+import MobileArchivePage from './pages/mobile/MobileArchive';
+import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
+import MobileFooter from './mobile/assets/base/Footer';
+import MobileHeader from './mobile/assets/base/Header';
 
 interface RouteConfig {
   path: string;
@@ -46,7 +56,16 @@ export default function App() {
     <RecoilRoot>
       {isMobile ? (
         // <MobilePage />
-        <MobileTest />
+        // <MobileTest />
+        <>
+          <MobileHeader />
+          <Routes>
+            <Route path="/archive" element={<MobileArchivePage />} />
+            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+            <Route path="/test" element={<MobileTest />} />
+          </Routes>
+          <MobileFooter />
+        </>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
