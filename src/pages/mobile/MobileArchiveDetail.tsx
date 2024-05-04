@@ -31,7 +31,7 @@ const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
   const params = useParams();
-  const majorName =
+  const major =
     params.majorName === 'business'
       ? '경영학과'
       : params.majorName === 'economics'
@@ -160,7 +160,7 @@ const MobileArchiveDetailPage = () => {
 
   return (
     <MobilePageWrapper>
-      <Banner01 major={majorName} />
+      <Banner01 major={major} />
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>
         <DropDownBox>
