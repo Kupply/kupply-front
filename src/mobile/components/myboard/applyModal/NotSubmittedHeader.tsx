@@ -40,8 +40,10 @@ const StepWrappper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  width: 77.78vw;
+  width: 70vw;
+  margin-left: 10vw;
+  margin-top: 0.83vw;
+  // border: 1px solid black;
 `;
 
 const ProgressBarTitle = styled.text`
@@ -61,10 +63,10 @@ const ProgressBarTitle = styled.text`
 
 // interface NotSubmittedHeaderProps{
 //   currentStep: number;
-  
+
 // }
 
-// // step별로 mapping해주는 것 추가 
+// // step별로 mapping해주는 것 추가
 // export default function NotSubmittedHeader(props: NotSubmittedHeaderProps){
 //   const {currentStep, } = props;
 
@@ -91,8 +93,8 @@ const ProgressBarTitle = styled.text`
 //           }}>
 //         <Typography
 //           size="0.9375vw"
-//           bold="500" 
-//           color={currentStep >= 2? '#E57C90' : 'var(--DF_Grey-2, #DFDFDF)'}  
+//           bold="500"
+//           color={currentStep >= 2? '#E57C90' : 'var(--DF_Grey-2, #DFDFDF)'}
 //         >
 //           STEP2
 //           {currentStep === 2 && <><br />
@@ -115,7 +117,7 @@ const ProgressBarTitle = styled.text`
 //           학업계획서 첨부하기</>}
 //         </Typography>
 //         </div>
-//       </ProgressBarTitle>              
+//       </ProgressBarTitle>
 //       </ProgressBarWrapper>
 //       {/* <DividingLine/> */}
 //     </ContentsWrapper>
@@ -139,7 +141,6 @@ const ProgressBarTitle = styled.text`
 //   margin-top: 0.417vw;
 // `;
 
-
 // // const DividingLine = styled.div`
 // //   //width: 860px;
 // //   widht: 44.792vw;
@@ -151,7 +152,7 @@ const ProgressBarTitle = styled.text`
 // //   top: 12.083vw;
 // // `;
 
-// // 지금 문제는 오직 얘다 
+// // 지금 문제는 오직 얘다
 // const ContentsWrapper = styled.div`
 //   display: flex;
 //   flex-direction: column;

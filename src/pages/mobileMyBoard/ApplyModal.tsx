@@ -32,7 +32,6 @@ export interface UploadButtonProps extends React.ComponentPropsWithoutRef<'butto
   children?: React.ReactNode;
 }
 
-
 export default function MobileApplicationModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
 
@@ -89,39 +88,34 @@ export default function MobileApplicationModal(props: ModalProps) {
       {isOpenModal && (
         <ModalLarge onClickToggleModal={onClickModal}>
           {!isSubmitted ? (
-          <TitleHeader>
-            <PrevButton
-              onClick={() => {
-                setOpenModal(!isOpenModal);
-              }}
-            >
-              <Icon03 size="100%" />
-            </PrevButton>
-            <TitleText>실지원 정보 확인하기</TitleText>
-            <CloseButton
-              onClick={() => {
-                setOpenModal(!isOpenModal);
-              }}
-            >
-              <Icon02 size="100%" />
-            </CloseButton>
-          </TitleHeader>) : 
-          <TitleHeader>
-            <PrevButton
-              onClick={() => {
-                setOpenModal(!isOpenModal);
-              }}
-            >
-              <Icon03 size="100%" />
-            </PrevButton>
-            <CloseButton
-              onClick={() => {
-                setOpenModal(!isOpenModal);
-              }}
-            >
-              <Icon02 size="100%" />
-            </CloseButton>
-          </TitleHeader>}
+            <TitleHeader>
+              <TitleText>실지원 정보 확인하기</TitleText>
+              <CloseButton
+                onClick={() => {
+                  setOpenModal(!isOpenModal);
+                }}
+              >
+                <Icon02 size="100%" />
+              </CloseButton>
+            </TitleHeader>
+          ) : (
+            <TitleHeader>
+              <PrevButton
+                onClick={() => {
+                  setOpenModal(!isOpenModal);
+                }}
+              >
+                <Icon03 size="100%" />
+              </PrevButton>
+              <CloseButton
+                onClick={() => {
+                  setOpenModal(!isOpenModal);
+                }}
+              >
+                <Icon02 size="100%" />
+              </CloseButton>
+            </TitleHeader>
+          )}
           {!isSubmitted ? (
             <>
               {(() => {
