@@ -44,7 +44,7 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   studentId: '학번 10자리',
   firstMajor: '',
   id: '',
-  password: '<8~20자/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다.',
+  password: '특수문자와 영문자를 포함해 주세요!',
   password2: '비밀번호 확인',
   nickname: '닉네임',
   hopeMajor1: '',

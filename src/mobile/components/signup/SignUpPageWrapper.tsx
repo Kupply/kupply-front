@@ -2,6 +2,7 @@ import { ReactNode, useState } from "react";
 import styled from "styled-components";
 import MobileProgressBar from "../../assets/progressIndicator/ProgressBar01";
 import Typography from "../../../assets/Typography";
+import { useNavigate } from "react-router-dom";
 
 interface SignUpPageWrapperProps {
   step: number;
@@ -11,16 +12,16 @@ interface SignUpPageWrapperProps {
 
 export const SignUpPageWrapper:
   React.FC<SignUpPageWrapperProps> = ({ step, stepInfo, children }) => {
-
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState<number>(step);
   const [complete, setComplete] = useState<boolean>(currentStep === 5 ? true : false);
 
   return (
     <Wrapper>
-      <TempHeader></TempHeader>
-      {/* <CloseButton>
+      <div style={{display: 'flex', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', width: '100%', position: 'relative'}}>
+      <CloseButton onClick={() => {navigate('/onboarding')}}>
           <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
-        </CloseButton> */}
+      </CloseButton>
       <ContentsTitleWrapper>
         <StepIndicator>
           <Typography color="#D85888" size="2.78vw" bold="400">
@@ -31,6 +32,7 @@ export const SignUpPageWrapper:
           <Typography size="3.89vw" bold="700">{stepInfo}</Typography>
         </div>
       </ContentsTitleWrapper>
+      </div>
       <MobileProgressBar numberOfSteps={5} currentStep={step} complete={step === 5}/>
       <FormWrapper>
         {children}
@@ -65,10 +67,10 @@ display: flex;
 width: 13.002px;
 height: 13.002px;
 flex-shrink: 0;
-cursor: pointer;
 position: absolute;
-left: 16px;
-top: 36px;
+top: -1vw;
+left: 1vw;
+cursor: pointer;
 `;
 
 const ContentsTitleWrapper = styled.div`

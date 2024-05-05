@@ -148,24 +148,7 @@ export function useNicknameVerification(locationUsed: verificationProps){
         ...errorMessages,
         nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
       });
-    } else if (nickname.infoCheck === 'error' && nickname.infoState !== 'focused') {
-      setNickname((prev) => ({...prev, infoState: 'error'}));
-      setNicknameVerified(false);
-
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    } else if (nickname.infoCheck !== 'filled') {
-      if (!(nickname.infoState === 'default' || nickname.infoState === 'focused' || nickname.infoState === 'hover')) {
-        setNickname((prev) => ({...prev, infoState: 'error'}));
-        setNicknameVerified(false);
-        setErrorMessages({
-          ...errorMessages,
-          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
-        });
-      }
-    }
+    } 
   }, [nickname.infoState]);
 
   //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
@@ -179,14 +162,6 @@ export function useNicknameVerification(locationUsed: verificationProps){
     if (nickname.infoCheck === 'filled') {
       setNickname((prev) => ({...prev, infoState: 'filled'}));
       setNicknameVerified(true);
-    }
-    else if (nickname.infoCheck === 'error') {
-      setNickname((prev) => ({...prev, infoState: 'error'}));
-      setNicknameVerified(false);
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
     }
   }, [nickname.infoCheck]);
 

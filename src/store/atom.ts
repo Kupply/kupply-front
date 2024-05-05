@@ -267,11 +267,20 @@ export const editModalState = atom<number>({
   key: 'editModalState',
   default: 0
 });
+export const editModalMobileState = atom<number>({
+  key: 'editModalMobileState',
+  default: 0
+});
 
 
 export type headerButtonStateType = 'basicMajor' | 'interestMajor' | 'currentGPA' | 'hopeSemester';
 
 export const headerButtonState = atom<headerButtonStateType>({
+  key: 'headerButtonState',
+  default: 'basicMajor'
+});
+
+export const headerButtonMobileState = atom<headerButtonStateType>({
   key: 'headerButtonState',
   default: 'basicMajor'
 });

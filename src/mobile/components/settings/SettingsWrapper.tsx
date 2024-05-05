@@ -47,7 +47,6 @@ export default function SettingsWrapper({selected, children, onClickFunction}:Se
   }
   return (
     <MainWrapper>
-      <TempHeader></TempHeader>
       <HeaderBar>
         <Button onClick={() => {
           if(selected == 0) navigate('/');
@@ -90,6 +89,7 @@ const HeaderBar = styled.div`
   align-items: center;
   position: relative;
   margin-bottom: 10.833vw;
+  margin-top: 2.5vw;
 `;
 
 const Contents = styled.div`

@@ -1,33 +1,23 @@
 import styled from 'styled-components';
 import React, { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
-import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
-import DropDown from '../../../assets/dropdown/DropDown';
-import TextArea from '../../../assets/TextArea';
-import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
-import ToolTip04 from '../../../assets/toolTips/ToolTip04';
-import { majorAllList } from '../../../common/MajorAll';
-import { majorTargetList } from '../../../common/MajorTarget';
-import client from '../../../utils/HttpClient';
-import NicknameCheckButton from '../../../assets/progressIndicator/Loader';
+import Input01 from '../../mobile/assets/field/Input01';
+import DropDown from '../../mobile/assets/selectControl/DropDown';
+import TextAreaBox from '../../mobile/assets/textarea/TextArea01';
+import { majorAllList } from '../../common/MajorAll';
+import { majorTargetList } from '../../common/MajorTarget';
+import client from '../../utils/HttpClient';
+import MoveButton from '../../mobile/components/myboard/MoveButton';
+import MobileHeaderBar from '../../mobile/components/myboard/EditModalHeaderBar';
+import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
+import Button03 from '../../mobile/assets/buttons/Button03';
+import Button04 from '../../mobile/assets/buttons/Button04';
 import { useNavigate } from 'react-router-dom';
-import Icon02 from '../../../assets/icons/Icon02';
-import Button01 from '../../../assets/buttons/Button01';
-import Typography from '../../../assets/Typography';
-import HeaderBar from './HeaderBar';
-import MoveButton from './MoveButton';
+import Icon02 from '../../assets/icons/Icon02';
+import Typography from '../../assets/Typography';
+import ModalLarge from '../../mobile/components/base/ModalLarge';
 import { useRecoilState } from 'recoil';
-import { editModalState } from '../../../store/atom';
-import ModalLarge from '../../base/ModalLarge';
-import ReactDOM from 'react-dom';
-
-/*
-남은 개발
-1. 프로필 사진 변경 - 버튼화
-2. 인포 메세지 (헬프 메세지) 버튼화
-3. 텍스트필드 입력값 유효성 조건 만족여부에 따른 아이콘 변화
-*/
+import { editModalMobileState } from '../../store/atom';
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -36,8 +26,9 @@ export interface ModalProps {
   isApplied: boolean;
 }
 
-export default function EditModal(props: ModalProps) {
+export default function MobileEditModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal, isApplied } = props;
+  // 임시로 true로 설정
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   // 닉네임 중복 체크
@@ -59,9 +50,6 @@ export default function EditModal(props: ModalProps) {
   });
 
   // 각 input들의 값을 state를 사용하여 관리
-  const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
-  const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
-  const [firstMajor, setFirstMajor] = useState<string>(localStorage.getItem('firstMajor') || '');
   const [hopeMajor1, setHopeMajor1] = useState<string>(localStorage.getItem('hopeMajor1') || '');
   const [hopeMajor2, setHopeMajor2] = useState<string>(localStorage.getItem('hopeMajor2') || '');
   const [GPA1, setGPA1] = useState<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
@@ -76,8 +64,6 @@ export default function EditModal(props: ModalProps) {
   const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
   const originNickname = useRef<string>(localStorage.getItem('nickname'));
-  const originstdId = useRef<string>(localStorage.getItem('studentId'));
-  const originFirstMajor = useRef<string>(localStorage.getItem('firstMajor'));
   const originHopeMajor1 = useRef<string>(localStorage.getItem('hopeMajor1'));
   const originHopeMajor2 = useRef<string>(localStorage.getItem('hopeMajor2'));
   const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
@@ -119,25 +105,12 @@ export default function EditModal(props: ModalProps) {
     }
   }, [GPA1, GPA2, GPA3]);
 
-  useEffect(() => {
-    const passwordCheck = /^\d{10}$/;
-    if (stdIDState === 'filled') {
-      if (!passwordCheck.test(stdID)) setStdIDState('error');
-      else setStdIDState('filled');
-    }
-  }, [stdID, stdIDState]);
 
   const onClickSubmit = async () => {
     let updateData = {};
 
     if (originNickname.current !== nickname) {
       updateData = { ...updateData, newNickname: nickname };
-    }
-    if (originstdId.current !== stdID) {
-      updateData = { ...updateData, newStudentId: stdID };
-    }
-    if (originFirstMajor.current !== firstMajor) {
-      updateData = { ...updateData, newFirstMajor: firstMajor };
     }
     if (originHopeMajor1.current !== hopeMajor1) {
       updateData = { ...updateData, newHopeMajor1: hopeMajor1 };
@@ -189,7 +162,7 @@ export default function EditModal(props: ModalProps) {
   const majorTarget = [...majorTargetList];
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
-  const [currentModal, setCurrentModal] = useRecoilState(editModalState);
+  const [currentModal, setCurrentModal] = useRecoilState(editModalMobileState);
 
   useEffect(() => {
     if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
@@ -197,8 +170,7 @@ export default function EditModal(props: ModalProps) {
       setErrorMessages({
         ...errorMessages,
         nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
-      });
-    } 
+      })};
   }, [nicknameState]);
 
   //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
@@ -233,73 +205,74 @@ export default function EditModal(props: ModalProps) {
     if (nicknameCheck === 'filled') setNicknameState('filled');
   }, [nicknameCheck]);
 
-  return ReactDOM.createPortal(
+  return (
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
-          <CloseButton
-            onClick={() => {
-              setOpenModal(!isOpenModal);
-            }}
-          >
-            <Icon02 />
-          </CloseButton>
-          <AlertWrapper>
-            <AlertIconExclamation width="5.885vw" height="5.885vw" />
-            <Typography size="1.25vw" bold="700" style={{ marginTop: '1.302vw' }}>
-              변경한 학점을 저장하시겠습니까?
-            </Typography>
-            <Typography size="0.9375vw" bold="500" style={{ marginTop: '1.25vw', lineHeight: '136.111%' }}>
-              수정을 저장하면 이번 이중전공 지원 시즌 동안
-              <br />단 한 번의 학점 수정 기회가 남아요.
-            </Typography>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '1.146vw', marginTop: '4.167vw' }}>
-              <Button01
-                variant="outline"
-                size="medium"
-                onClick={() => {
-                  setIsSubmitted(false);
-                }}
-              >
-                취소
-              </Button01>
-              <Button01
-                variant="solid"
-                size="medium"
-                onClick={() => {
-                  setOpenModal(!isOpenModal);
-                  setIsSubmitted(true);
-                  onClickSubmit();
-                }}
-              >
-                확인
-              </Button01>
-            </div>
-          </AlertWrapper>
+      <ButtonWrapper>
+        <TopButton
+          onClick={() => {
+            setOpenModal(!isOpenModal);
+          }}
+        >
+          <Icon02 size='100%'/>
+        </TopButton>
+      </ButtonWrapper>
+      <div style={{ height: '20.833vw' }}></div>
+      <AlertIconExclamation width="22.22vw" height="22.22vw" />
+      <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
+        변경한 학점을 저장하시겠습니까?
+      </Typography>
+      <div style={{width: '60.6vw', textAlign: 'center', marginTop: '4.44vw'}}>
+      <Typography size={'3.33vw'} color="#141414">
+        수정을 저장하면 이번 이중전공 지원 시즌 동안 단 한 번의 학점 수정 기회가 남아요.
+      </Typography>
+      </div>
+      <ActionWrapper>
+        <Button04 
+          onClick={() => {
+            setIsSubmitted(false);
+          }}
+          style={{width: '39.17vw', height: '11.67vw'}}>취소</Button04>
+          {/* onCheck가 onClick에 들어와야 하는데 잠시 수정 */}
+        <Button03
+          onClick={
+          () => {
+            setOpenModal(!isOpenModal);
+            setIsSubmitted(true);
+            onClickSubmit();
+          }}
+          style={{width: '39.17vw', height: '11.67vw'}}>확인</Button03>
+      </ActionWrapper>
         </ModalLarge>
       )}
       {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
-            <CloseButton
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative', marginTop: '5vw'}}>
+            <div>
+            <Typography size="3.88vw" bold="700" >
+              프로필 정보 수정하기
+            </Typography>
+            </div>
+            <TopButton
               onClick={() => {
                 setOpenModal(!isOpenModal);
               }}
+              style={{position: 'absolute', left: '50vw', zIndex: 10}}
             >
-              <Icon02 />
-            </CloseButton>
-            <Typography size="18px" bold="700" style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '16px' }}>
-              프로필 정보 수정하기
-            </Typography>
-            <div style={{ height: '32px' }}></div>
-            <HeaderBar />
+              <Icon02 size='100%'/>
+            </TopButton>
+            </div>
+            <div style={{ height: '8.83vw' }}></div>
+            <MobileHeaderBar />
           </HeaderWrapper>
 
           {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
             <ContentsWrapper>
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
-                <div style={{ display: 'flex', flexDirection: 'row', gap: '1.042vw' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '4vw' }}>
                   <CurrentImg
                     src={
                       userProfilePic === 'customProfile'
@@ -318,95 +291,55 @@ export default function EditModal(props: ModalProps) {
                         />
                       ))}
                     </CandidateImgsWrapper>
-                    <div style={{ gap: '0.260vw', marginTop: '2.708vw' }}></div>
-                    <div style={{ marginLeft: '4.427vw', marginTop: '-1.458vw' }}></div>
                   </div>
                 </div>
               </SubContentsWrapper>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
-                <SubContentsWrapper>
-                  <ContentsTitle>닉네임 변경하기</ContentsTitle>
-                  <div style={{ position: 'relative' }}>
-                    <TextFieldBox
-                      value={nickname}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setNickname(e.target.value);
-                      }}
-                      state={nicknameState}
-                      setState={setNicknameState}
-                      setValue={setNickname}
-                      errorMessage={errorMessages.nicknameErrorMessage}
-                    ></TextFieldBox>
-                    {nickname === '' || nicknameState === 'filled' ? (
-                      <></>
-                    ) : (
-                      <NicknameCheckButtonWrapper>
-                        <NicknameCheckButton
-                          nickname={nickname}
-                          state={nicknameCheck}
-                          setState={setNicknameCheckState}
-                        ></NicknameCheckButton>
-                      </NicknameCheckButtonWrapper>
-                    )}
-                  </div>
-                </SubContentsWrapper>
-                <SubContentsWrapper>
-                  <ContentsTitle>학번 변경하기</ContentsTitle>
-                  <TextFieldBox
-                    value={stdID}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setStdID(e.target.value);
-                    }}
-                    state={stdIDState}
-                    setState={setStdIDState}
-                    setValue={setStdID}
-                  ></TextFieldBox>
-                </SubContentsWrapper>
-                <SubContentsWrapper>
-                  <ContentsTitle>본전공 변경하기</ContentsTitle>
-                  <DropDown
-                    title="전공선택" // 수정필요
-                    optionList={majorAll}
-                    value={firstMajor}
-                    setValue={setFirstMajor}
-                  ></DropDown>
-                </SubContentsWrapper>
-              </div>
-              <MoveButton
-                isOpenModal={isOpenModal}
-                setOpenModal={setOpenModal}
-                onClickSubmit={onClickSubmit}
-                isApplied={isApplied}
-                setIsSubmitted={setIsSubmitted}
-                style={{ marginTop: '16px', width: '100%', display: 'flex', justifyContent: 'space-between' }}
-                isGpaChanged={isGpaChanged}
+          <SubContentsWrapper>
+            <ContentsTitle>닉네임 변경하기</ContentsTitle>
+              <Input01
+                value={nickname}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNickname(e.target.value);
+                }}
+                state={nicknameState}
+                setState={setNicknameState}
+                setValue={setNickname}
+                errorMessage={errorMessages.nicknameErrorMessage}
               />
+          </SubContentsWrapper>
+            <MoveButton
+              isOpenModal={isOpenModal}
+              setOpenModal={setOpenModal}
+              onClickSubmit={onClickSubmit}
+              isApplied={isApplied}
+              setIsSubmitted={setIsSubmitted}
+              style={{ marginTop: '16px', width: '100%', display: 'flex', justifyContent: 'space-between' }}
+              isGpaChanged={isGpaChanged}
+            />
             </ContentsWrapper>
           )}
           {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
             <ContentsWrapper2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>희망 관심전공 변경하기</ContentsTitle>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.667vw' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                     <DropDown
                       title="1지망 전공 선택"
                       optionList={majorTarget.filter(
-                        (el) => el.value1 !== '희망 없음' && el.value1 !== firstMajor && el.value1 !== hopeMajor2,
+                        (el) => el.value1 !== '희망 없음' &&  el.value1 !== hopeMajor2,
                       )}
                       value={hopeMajor1}
                       setValue={setHopeMajor1}
-                    ></DropDown>
+                    />
                     <DropDown
                       title="2지망 전공 선택"
-                      optionList={majorTarget.filter((el) => el.value1 !== firstMajor && el.value1 !== hopeMajor1)}
+                      optionList={majorTarget.filter((el) =>  el.value1 !== hopeMajor1)}
                       value={hopeMajor2}
                       setValue={setHopeMajor2}
-                    ></DropDown>
+                    />
                   </div>
                 </SubContentsWrapper>
-              </div>
               <MoveButton
                 isOpenModal={isOpenModal}
                 setOpenModal={setOpenModal}
@@ -420,20 +353,31 @@ export default function EditModal(props: ModalProps) {
           )}
           {currentModal === 2 && ( // '현재 내 학점' 버튼 클릭 시
             <ContentsWrapper2>
+              <ToolTip>
+                <Typography color='#D85888' size='3.89vw' bold='700'>
+                  주의하세요!<br/>
+                </Typography>
+                <Typography color='black' size='3.05vw' bold='400'>
+                  이중전공 지원 시즌에는 학점을&nbsp; 
+                </Typography>
+                <Typography color='#D85888' size='3.05vw' bold='400'>
+                  최대 2번까지&nbsp;
+                </Typography>
+                <Typography color='black' size='3.05vw' bold='400'>
+                  변경 할 수 있어요. 
+                  정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 
+                  받아보세요.
+                </Typography>
+              </ToolTip>
               <SubContentsWrapper>
-                <div style={{ display: 'flex', flexDirection: 'row', gap: '0.3vw' }}>
-                  <ContentsTitle>나의 지원학점 변경하기</ContentsTitle>
-                  <div style={{ marginLeft: '0.26vw' }}>
-                    <ToolTip04 />
-                  </div>
-                </div>
+                <ContentsTitle>현재 내 학점 변경하기</ContentsTitle>
                 <VerifiBoxWrapper>
-                  <TextArea name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
-                  <div style={{ marginTop: '3.125vw', height: '0.208vw', width: '0.208vw' }}>
+                  <TextAreaBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={GPA1 !== ''} />
+                  <div style={{ marginTop: '8.125vw', height: '0.6vw', width: '0.6vw' }}>
                     <img src="designImage/myBoard/Ellipse 981.svg" height="100%" width="100%" />
                   </div>
-                  <TextArea name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
-                  <TextArea
+                  <TextAreaBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={GPA2 !== ''} />
+                  <TextAreaBox
                     name="gpa-3"
                     value={GPA3}
                     setValue={setGPA3}
@@ -442,6 +386,8 @@ export default function EditModal(props: ModalProps) {
                   />
                 </VerifiBoxWrapper>
               </SubContentsWrapper>
+
+              <div style={{marginTop: '40.56vw'}}>
               <MoveButton
                 isOpenModal={isOpenModal}
                 setOpenModal={setOpenModal}
@@ -450,43 +396,43 @@ export default function EditModal(props: ModalProps) {
                 setIsSubmitted={setIsSubmitted}
                 isGpaChanged={isGpaChanged}
               />
+              </div>
             </ContentsWrapper2>
           )}
           {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
             <ContentsWrapper2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
-                <SubContentsWrapper>
-                  <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
+              <SubContentsWrapper>
+                <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
+                <VerifiBoxWrapper>
                   <VerifiBoxWrapper>
-                    <VerifiBoxWrapper>
-                      <TextArea
-                        name="semester-1"
-                        value={hopeSemester1}
-                        setValue={setHopeSemester1}
-                        isEntered={true}
-                      ></TextArea>
-                      <TextArea
-                        name="semester-2"
-                        value={hopeSemester2}
-                        setValue={setHopeSemester2}
-                        isEntered={true}
-                      ></TextArea>
-                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
-                        년도
-                      </Typography>
-                      <TextArea
-                        name="semester-3"
-                        value={hopeSemester3}
-                        setValue={setHopeSemester3}
-                        isEntered={true}
-                      ></TextArea>
-                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
-                        학기
-                      </Typography>
-                    </VerifiBoxWrapper>
+                    <TextAreaBox
+                      name="semester-1"
+                      value={hopeSemester1}
+                      setValue={setHopeSemester1}
+                      isEntered={true}
+                    />
+                    <TextAreaBox
+                      name="semester-2"
+                      value={hopeSemester2}
+                      setValue={setHopeSemester2}
+                      isEntered={true}
+                    />
+                    <Typography size="3.33vw" bold="400" style={{ marginTop: '8.021vw' }}>
+                      년도
+                    </Typography>
+                    <TextAreaBox
+                      name="semester-3"
+                      value={hopeSemester3}
+                      setValue={setHopeSemester3}
+                      isEntered={true}
+                    />
+                    <Typography size="3.33vw" bold="400" style={{ marginTop: '8.021vw' }}>
+                      학기
+                    </Typography>
                   </VerifiBoxWrapper>
-                </SubContentsWrapper>
-              </div>
+                </VerifiBoxWrapper>
+              </SubContentsWrapper>
+              <div style={{marginTop: '60.56vw'}}>
               <MoveButton
                 isOpenModal={isOpenModal}
                 setOpenModal={setOpenModal}
@@ -495,12 +441,12 @@ export default function EditModal(props: ModalProps) {
                 setIsSubmitted={setIsSubmitted}
                 isGpaChanged={isGpaChanged}
               />
+              </div>
             </ContentsWrapper2>
           )}
         </ModalLarge>
       )}
-    </Main>,
-    document.getElementById('root') as HTMLElement,
+    </Main>
   );
 }
 
@@ -514,86 +460,32 @@ const Main = styled.main`
   z-index: 1005;
   bottom: 0;
   top: 0;
-
-  & > div > dialog {
-    top: 10%;
-    max-height: 80vh;
-  }
 `;
 
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //width: 814px;
   width: 100%;
-  box-sizing: border-box;
-  //height: 134px;
-
-  flex-shrink: 0;
   background-color: #fcfafb;
+  border-radius: 2.78vw 2.78vw 0px 0px;
   border-bottom: 1px solid var(--DF_Grey-2, #dfdfdf);
-
-  //margin-top: -0.833vw;
 `;
 
-const CloseButton = styled.button`
+const TopButton = styled.button`
   display: flex;
-  //width: 60px;
-  width: 3.125vw;
-  //height: 60px;
-  height: 3.125vw;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  //top: 32px;
-
-  //right: 40px;
-  right: 0px;
+  align-items: flex-end;
   cursor: pointer;
-`;
-
-const AlertWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  //width: 628px;
-  width: 32.708vw;
-  align-items: center;
-  text-align: center;
-  margin: auto auto;
-`;
-
-const HeaderButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  //margin-top: 40px;
-  margin-top: 2.083vw;
-`;
-
-const MoveButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  //width: 628px;
-  width: 32.708vw;
-  //gap: 18px;
-  gap: 0.9375vw;
-  //margin-top: 280px;
-  margin-top: 14.583vw;
+  width: 10vw;
+  height: 10vw;
 `;
 
 const ContentsWrapper2 = styled.div`
   display: flex;
   flex-direction: column;
-  //width: 628px;
-  width: 32.708vw;
-  //align-items: left;
-  //margin-left: auto;
-  //margin-right: auto;
-  //margin-top: 58px;
-  margin-top: 3.021vw;
-  //gap: 35px;
-  //height: 796px;
-  height: 41.458vw;
+  width: 83.33vw;
+  margin-top: 8.33vw;
+  height: auto;
   overflow: auto;
   overflow-x: hidden;
 `;
@@ -601,30 +493,25 @@ const ContentsWrapper2 = styled.div`
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  //width: 628px;
-  width: 75%;
+  width: 83.33vw;
   align-items: left;
   margin-left: auto;
   margin-right: auto;
   //margin-top: 58px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  //gap: 35px;
-  gap: 1.823vw;
+  margin-top: 5.56vw;
+  gap: 5.56vw;
 `;
 
 const SubContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  //gap: 9px;
-  gap: 0.469vw;
+  gap: 2.5vw;
 `;
 
 const ContentsTitle = styled.text`
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  //font-size: 18px;
-  font-size: 0.9375vw;
+  font-size: 3.33vw;
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
@@ -632,18 +519,14 @@ const ContentsTitle = styled.text`
 `;
 
 const CurrentImg = styled.img`
-  //width: 153px;
-  width: 7.969vw;
-  //height: 153px;
-  height: 7.969vw;
+  width: 22.2vw;
+  height: 22.2vw;
   object-fit: cover;
 `;
 
 const CandidateImg = styled.img`
-  //width: 74px;
-  width: 3.854vw;
-  //height: 74px;
-  height: 3.854vw;
+  width: 12.5vw;
+  height: 12.5vw;
   object-fit: cover;
   cursor: pointer;
 `;
@@ -651,18 +534,34 @@ const CandidateImg = styled.img`
 const CandidateImgsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  //gap: 14px;
-  gap: 0.729vw;
+  gap: 2vw;
 `;
 
-const NicknameCheckButtonWrapper = styled.div`
-  position: absolute;
-  top: 1.15vw; //20.2px;
-  left: 25.3vw; //490px;
-  z-index: 2;
-`;
 
 const VerifiBoxWrapper = styled.div`
   display: flex;
   gap: 0.6771vw;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+`;
+
+const ActionWrapper = styled.div`
+  width: 290px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-top: 51px;
+`;
+
+const ToolTip = styled.div`
+width: 76.388vw;
+flex-direction: column;
+justify-content: flex-start;
+margin-bottom: 5.56vw;
 `;
