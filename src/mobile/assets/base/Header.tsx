@@ -1,18 +1,65 @@
 import styled from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import Typography from '../../../assets/Typography';
+import client from '../../../utils/HttpClient';
 
-function MobileHeader() {
+export interface HeaderProps {
+  logined: boolean;
+  setLogin: (state: boolean) => void;
+  setSelected: (selected: number) => void;
+}
+
+function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLogined, setIsLogined] = useState<boolean>(true);
-  const [userData, setUserData] = useState<{ userName: string; userProfilePic: string }>({
-    userName: '고대빵',
+  const [userData, setUserData] = useState<{ userNickname: string; userProfilePic: string }>({
+    userNickname: '',
     userProfilePic: 'rectProfile1',
   });
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        if (logined) {
+          await client.get('/user/getMe').then((res) => {
+            const userInfo = res.data.data.user;
+
+            setUserData({
+              ...userData,
+              userNickname: userInfo.nickname,
+              userProfilePic: userInfo.profilePic,
+            });
+
+            localStorage.setItem('userProfilePic', userInfo.profilePic);
+            localStorage.setItem('userProfileLink', userInfo.profileLink);
+            localStorage.setItem('name', userInfo.name);
+            localStorage.setItem('nickname', userInfo.nickname);
+            localStorage.setItem('studentId', userInfo.studentId);
+            localStorage.setItem('firstMajor', userInfo.firstMajor);
+            localStorage.setItem('role', userInfo.role);
+            if (userInfo.role === 'candidate') {
+              localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
+              localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
+              localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
+              localStorage.setItem('hopeSemester', userInfo.hopeSemester);
+              localStorage.setItem('isApplied', userInfo.isApplied);
+            } else {
+              localStorage.setItem('secondMajor', userInfo.secondMajor);
+              localStorage.setItem('passSemester', userInfo.passSemester);
+              localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
+            }
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getUserInfo();
+  }, [logined]);
 
   const [buttonStates, setButtonStates] = useState<('default' | 'pressed' | 'disabled')[]>([
     'default',
@@ -40,10 +87,10 @@ function MobileHeader() {
     <MainWrapper>
       <HorizontalWrapper>
         <Logo src="../../../../designImage/kupply/KupplyVer1.svg" onClick={() => navigate('/')} />
-        {isLogined ? (
+        {logined ? (
           <ProfileBox>
             <Typography size="3.33vw" bold="700">
-              {userData.userName}&nbsp;
+              {userData.userNickname}&nbsp;
             </Typography>
             <Typography size="3.33vw" bold="500" style={{ opacity: '0.8' }}>
               님
