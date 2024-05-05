@@ -38,6 +38,9 @@ import DeletePage from './mobile/pages/DeletePage';
 import MobileFooter from './mobile/assets/base/Footer';
 import MobileHeader from './mobile/assets/base/Header';
 import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
+import OnboardingMobile from './mobile/pages/OnboardingMobile';
+import LandingMobile from './mobile/pages/LandingMobile';
+import LoginPageMobile from './mobile/pages/LoginPage';
 
 interface RouteConfig {
   path: string;
@@ -63,18 +66,18 @@ export default function App() {
         // <MobilePage />
         // <MobileTest />
 
-
         <>
-          <MobileHeader />
+          <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
           <Routes>
+            <Route path="/" element={<OnboardingMobile />} />
+            <Route path="/login" element={<LoginPageMobile setLogin={setisLogined} />} />
+            <Route path="landing" element={<LandingMobile />} />
             <Route path="/archive" element={<MobileArchivePage />} />
             <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
             <Route path="/m" element={<MobileMyBoard />} />
-            <Route path="/test" element={<MobileTest />} />
           </Routes>
           <MobileFooter />
         </>
-
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
