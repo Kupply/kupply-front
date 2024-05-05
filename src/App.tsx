@@ -20,7 +20,6 @@ export default function App() {
   RouteChangeTracker();
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
   const [selected, setSelected] = useState(0);
-  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
@@ -32,7 +31,7 @@ export default function App() {
 
   return (
     <RecoilRoot>
-      {isMobile || vw < 600 ? (
+      {isMobile ? (
         <>
           <Routes>
             <Route element={<AuthRequired />}>{renderRoutes(mobileAuthRoutes)}</Route>

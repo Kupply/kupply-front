@@ -32,6 +32,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 23.33vw;
+  overflow-x: hidden;
 `;
 
 export default OnboardingMobile;

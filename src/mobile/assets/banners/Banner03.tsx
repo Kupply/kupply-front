@@ -9,7 +9,7 @@ export interface Banner03Props extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 function Banner03(props: Banner03Props) {
-  const { size = 'small' } = props;
+  const { size = 'small', ...rest } = props;
 
   const [smallCurrentOrder, setSmallCurrentOrder] = useState<number[]>([0, 1, 2, 3]);
   const [largeCurrentOrder, setLargeCurrentOrder] = useState<number[]>([0, 1, 2]);
@@ -86,7 +86,7 @@ function Banner03(props: Banner03Props) {
   ];
 
   return (
-    <MainWrapper size={size} {...(size === 'small' ? smallSwipeHandlers : largeSwipeHandlers)}>
+    <MainWrapper size={size} {...(size === 'small' ? smallSwipeHandlers : largeSwipeHandlers)} {...rest}>
       {(size === 'small' ? smallCurrentOrder : largeCurrentOrder).map((index) => (
         <CardBox
           cardIndex={index}

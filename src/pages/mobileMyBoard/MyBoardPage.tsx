@@ -321,7 +321,7 @@ const MobileMyBoard = () => {
     }
   };
 
-  const [isLogined, setisLogined] = useState<boolean>(true); // 개발 동안은 로그인 상태 유지
+  const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
   const [selected, setSelected] = useState(0);
 
   return (
@@ -354,9 +354,9 @@ const MobileMyBoard = () => {
           />
           <MobilePieChart onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
           <MobileScatter onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
+          <MobileFooter />
         </MobilePageWrapper>
       )}
-      <MobileFooter />
     </>
   );
 };

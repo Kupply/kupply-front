@@ -18,43 +18,39 @@ const MobileQuartileIndicator = ({
   }
 
   return (
-    <>
-      {isApplied === false ? (
-        <></>
-      ) : (
-        <Wrapper>
-          <TitleBox>
-            <Icon src="designImage/mobile/myboard/QuartileIcon.svg" alt="Icon" />
-            <TitleText>내 학점 위치 파악하기</TitleText>
-          </TitleBox>
+    <Wrapper>
+      {!isApplied && <BlurBox />}
+      <TitleBox>
+        <Icon src="designImage/mobile/myboard/QuartileIcon.svg" alt="Icon" />
+        <TitleText>내 학점 위치 파악하기</TitleText>
+      </TitleBox>
 
-          <BodyBox>
-            <ChartBox>
-              <MobileTabMenu05 {...myStageData} />
-            </ChartBox>
-            <BodyBodyBox>
-              <ContentBox>
-                <ContentText>고대빵님의 경영학과 이중 지원 시 지원안정도 점수는,</ContentText>
-              </ContentBox>
-              <PercentBox>
-                <NumText>{myPercentile.toFixed(2)}</NumText>
-                <PercentText>%</PercentText>
-              </PercentBox>
-            </BodyBodyBox>
-            <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
-          </BodyBox>
-        </Wrapper>
-      )}
-    </>
+      <BodyBox>
+        <ChartBox>
+          <MobileTabMenu05 {...myStageData} />
+        </ChartBox>
+        <BodyBodyBox>
+          <ContentBox>
+            <ContentText>고대빵님의 경영학과 이중 지원 시 지원안정도 점수는,</ContentText>
+          </ContentBox>
+          <PercentBox>
+            <NumText>{myPercentile.toFixed(2)}</NumText>
+            <PercentText>%</PercentText>
+          </PercentBox>
+        </BodyBodyBox>
+        <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
+      </BodyBox>
+    </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   position: relative;
   width: 91.11vw;
-  height: 64.44vw;
-
+  height: auto;
   margin-top: 16.67vw;
+  paddingBottom: isApplied ? '0' : '20.83vw'
+
 `;
 
 const BodyBox = styled.div`
@@ -181,6 +177,19 @@ const Icon = styled.img`
 
   width: 4.44vw;
   height: 4.44vw;
+`;
+
+const BlurBox = styled.div`
+  width: 91.11vw;
+  height: 59.44vw;
+  border-radius: 1.39vw;
+  background: rgba(248, 248, 248, 0.45);
+  box-shadow: 0 0 7.78vw 0 rgba(20, 20, 20, 0.05);
+  backdrop-filter: blur(3.33vw);
+  position: absolute;
+  top: 8.06vw;
+  left: 0;
+  z-index: 10;
 `;
 
 export default MobileQuartileIndicator;
