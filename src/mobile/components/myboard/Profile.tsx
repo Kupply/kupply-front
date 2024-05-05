@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 //import EditModal from './EditModals/OldEditModal';
 //import EditModal from './EditModals/EditModal';
 //import EditModal from './EditModals/OldEditModalModified';
+import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../../utils/Mappings';
@@ -29,7 +30,9 @@ const MobileProfile = ({ userData }: { userData: any }) => {
   // const majorKoreanName2 = majorNameMapping[major2][0];
   // const majorEngishName2 = majorNameMapping[major2][1];
 
-  const [isOpenEditModal, setOpenEditModal] = useState(true);
+  const [isOpenEditModal, setOpenEditModal] = useState(false);
+  const [isOpenApplyModal, setOpenApplyModal] = useState(false);
+  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(true);
 
   const onClickEditModal = () => {
     setOpenEditModal(true);
@@ -37,7 +40,17 @@ const MobileProfile = ({ userData }: { userData: any }) => {
 
   const closeModal = () => {
     setOpenEditModal(false);
+    setOpenApplyModal(false);
   };
+
+  const onClickApplyModal = useCallback(() => {
+    setOpenApplyModal(true);
+    setOpenApcModal(true);
+  }, []);
+
+  const onClickApcModal = useCallback(() => {
+    setOpenApcModal(!isOpenApcModal);
+  }, [isOpenApcModal]);
 
   return (
     <>
@@ -69,9 +82,19 @@ const MobileProfile = ({ userData }: { userData: any }) => {
         </SubTitleBox2>
 
         <ApplyBox>
-          <CTA02 size="large">나도 모의지원 하러가기!</CTA02>
+          <CTA02 size="large" onClick={onClickApplyModal}>
+            나도 모의지원 하러가기!
+          </CTA02>
         </ApplyBox>
       </Wrapper>
+      {isOpenApplyModal && (
+        <MobileApplicationModal
+          isOpenModal={isOpenApcModal}
+          setOpenModal={setOpenApcModal}
+          onClickModal={onClickApcModal}
+        />
+      )}
+      ;
     </>
   );
 };
