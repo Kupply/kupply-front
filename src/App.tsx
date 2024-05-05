@@ -38,7 +38,13 @@ import DeletePage from './mobile/pages/DeletePage';
 import MobileFooter from './mobile/assets/base/Footer';
 import MobileHeader from './mobile/assets/base/Header';
 import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
+<<<<<<< HEAD
 import MobileApplicationModal from './pages/mobileMyBoard/ApplyModal';
+=======
+import OnboardingMobile from './mobile/pages/OnboardingMobile';
+import LandingMobile from './mobile/pages/LandingMobile';
+import LoginPageMobile from './mobile/pages/LoginPage';
+>>>>>>> a8e1bcc0845c8d2a5b3029aa055b2f8a20302cd0
 
 interface RouteConfig {
   path: string;
@@ -63,19 +69,20 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
-        // <MobileApplicationModal isOpenModal={true} setOpenModal={()=>{}} onClickModal={()=>{}}/>
-        <SignUp5Complete/>
-        // <>
-        //   <MobileHeader />
-        //   <Routes>
-        //     <Route path="/archive" element={<MobileArchivePage />} />
-        //     <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
-        //     <Route path="/m" element={<MobileMyBoard />} />
-        //     <Route path="/test" element={<MobileTest />} />
-        //   </Routes>
-        //   <MobileFooter />
-        // </>
 
+
+        <>
+          <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
+          <Routes>
+            <Route path="/" element={<OnboardingMobile />} />
+            <Route path="/login" element={<LoginPageMobile setLogin={setisLogined} />} />
+            <Route path="landing" element={<LandingMobile />} />
+            <Route path="/archive" element={<MobileArchivePage />} />
+            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+            <Route path="/m" element={<MobileMyBoard />} />
+          </Routes>
+          <MobileFooter />
+        </>
       ) : (
         <Wrapper>
           <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
