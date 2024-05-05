@@ -23,9 +23,7 @@ export const mobileMainRoutes = [
 export const mobileAuthRoutes = [
   { path: '/myboard', element: <MobileMyBoard /> },
   { path: '/archive/:majorName', element: <MobileArchiveDetailPage /> },
-  // 상태관리 도입 예정으로, 잠시 삭제
   { path: '/settings', element: <MobileSettingsPage /> },
-  // { path: '/settings', element: <SettingsPage /> },
   { path: '/delete', element: <DeletePage /> },
 ];
 

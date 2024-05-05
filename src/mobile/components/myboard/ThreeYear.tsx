@@ -57,7 +57,7 @@ const MobileThreeYear = ({
     <Wrapper>
       <TitleBox>
         <Icon src="designImage/mobile/myboard/ThreeYear.svg" alt="Icon" />
-        <TitleText>3개년 합격지표</TitleText>
+        <TitleText>지난 합격지표</TitleText>
       </TitleBox>
 
       <BodyBox>
