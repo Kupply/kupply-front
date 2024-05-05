@@ -19,6 +19,25 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
     userNickname: '',
     userProfilePic: 'rectProfile1',
   });
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
+
+  const handleSettingsAndTerms = () => {
+    navigate('/settings');
+  };
+
+  const handleLogout = async () => {
+    try {
+      await client.get('/auth/logout');
+      window.localStorage.clear();
+      window.sessionStorage.clear();
+      setLogin(false);
+      navigate('/');
+      window.location.reload();
+    } catch (err) {
+      // 이후 수정 필요함.
+      alert(err);
+    }
+  };
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -87,23 +106,39 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
     <MainWrapper>
       <HorizontalWrapper>
         <Logo src="../../../../designImage/kupply/KupplyVer1.svg" onClick={() => navigate('/')} />
-        {logined ? (
-          <ProfileBox>
-            <Typography size="3.33vw" bold="700">
-              {userData.userNickname}&nbsp;
-            </Typography>
-            <Typography size="3.33vw" bold="500" style={{ opacity: '0.8' }}>
-              님
-            </Typography>
-            <ProfileImage userProfilePic={userData.userProfilePic} />
-          </ProfileBox>
-        ) : (
-          <LoginButton onClick={() => navigate('/login')}>
-            <Typography size="3.61vw" bold="700" color="#D85888">
-              로그인
-            </Typography>
-          </LoginButton>
-        )}
+        <div style={{ position: 'relative' }}>
+          {logined ? (
+            <>
+              <ProfileBox onClick={() => setIsToggleOpen(!isToggleOpen)}>
+                <Typography size="3.33vw" bold="700" color={isToggleOpen ? '#D85888' : 'inherit'}>
+                  {userData.userNickname}&nbsp;
+                </Typography>
+                <Typography
+                  size="3.33vw"
+                  bold="500"
+                  style={{ opacity: '0.8' }}
+                  color={isToggleOpen ? '#D85888' : 'inherit'}
+                >
+                  님
+                </Typography>
+                <ProfileImage userProfilePic={userData.userProfilePic} />
+              </ProfileBox>
+              {isToggleOpen && (
+                <ToggleMenu>
+                  <MenuOption onClick={handleSettingsAndTerms}>환경설정</MenuOption>
+                  <MenuOption onClick={handleSettingsAndTerms}>약관 보기</MenuOption>
+                  <MenuOption onClick={handleLogout}>로그아웃</MenuOption>
+                </ToggleMenu>
+              )}
+            </>
+          ) : (
+            <LoginButton onClick={() => navigate('/login')}>
+              <Typography size="3.61vw" bold="700" color="#D85888">
+                로그인
+              </Typography>
+            </LoginButton>
+          )}
+        </div>
       </HorizontalWrapper>
       <HorizontalWrapper>
         <HeaderButton state={buttonStates[0]} onClick={() => navigate('/landing')}>
@@ -119,6 +154,26 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
     </MainWrapper>
   );
 }
+
+const ToggleMenu = styled.div`
+  position: absolute;
+  top: 8vw;
+  left: 0;
+  width: 100%;
+  background-color: #fff; // Ensure it's not semi-transparent
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); // Stronger shadow for better separation
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+`;
+
+const MenuOption = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
 
 const MainWrapper = styled.div`
   width: 90.56vw;
