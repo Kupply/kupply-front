@@ -106,7 +106,6 @@ const DialogBox = styled.dialog`
     pointer-events: none;
   }
 
-
   /* Firefox에서 스크롤바 숨기기 */
   scrollbar-width: thin;
 
@@ -117,7 +116,6 @@ const DialogBox = styled.dialog`
     width: 100vw;
     height: 100vh;
   }
-
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요
@@ -130,5 +128,3 @@ const Backdrop = styled.div`
   z-index: 9;
   background: rgba(20, 16, 19, 0.55);
 `;
-
-
