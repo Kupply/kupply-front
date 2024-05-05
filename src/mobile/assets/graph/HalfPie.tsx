@@ -86,18 +86,7 @@ const MobileHalfPie = ({ onViewMajor, curData }: { onViewMajor: any; curData: an
             <SecondLineBox>
               <NumText>{item?.value}명</NumText>
             </SecondLineBox>
-            {index < newData.length - 1 && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="43.61vw"
-                height="2"
-                viewBox="0 0 223 2"
-                fill="none"
-                style={{ marginTop: '1.94vw', marginBottom: '2.22vw' }}
-              >
-                <path d="M0.887207 1H222.474" stroke="#DFDFDF" stroke-linecap="round" />
-              </svg>
-            )}
+            {index < newData.length - 1 && <Vector />}
           </Fragment>
         ))}
       </LabelsWrapper>
@@ -220,6 +209,20 @@ const LabelColor = styled.span<{ color: string }>`
   border-radius: 50%;
   background-color: ${(props) => props.color};
   margin-right: 1.94vw;
+`;
+
+const Vector = styled.div`
+  width: 43.61vw;
+  height: 0px;
+  flex-shrink: 0;
+  stroke-width: 1px;
+  color: #dfdfdf;
+  z-index: 1;
+
+  //margin-top: 3.61vw;
+  margin-top: 1.94vw;
+  margin-bottom: 2.22vw;
+  border: 1px solid #dfdfdf;
 `;
 
 export default MobileHalfPie;

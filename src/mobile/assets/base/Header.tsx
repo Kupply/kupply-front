@@ -183,7 +183,7 @@ const MainWrapper = styled.div`
   flex-direction: column;
   gap: 4.17vw;
   background-color: #fff;
-  box-shadow: 0 1.11vw 15.28vw 0 rgba(20, 20, 20, 0.25);
+  box-shadow: 0 1.11vw 15.28vw 0 rgba(20, 20, 20, 0.1);
   backdrop-filter: blur(50px);
 `;
 
