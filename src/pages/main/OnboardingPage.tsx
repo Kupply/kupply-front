@@ -12,7 +12,6 @@ import OnboardingMobile from '../../mobile/pages/OnboardingMobile';
 function OnboardingPage() {
   return (
     <MainWrapper>
-      <OnboardingMobile />
       <Carousel />
       <Join1 />
       <Cards />
@@ -30,6 +29,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow-x: hidden;
 `;
 
 export default OnboardingPage;

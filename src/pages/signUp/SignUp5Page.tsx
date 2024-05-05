@@ -1,18 +1,17 @@
-import React, {useState, useEffect, useRef} from "react";
-import { useNavigate } from "react-router-dom";
-import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
-import styled, {css} from "styled-components";
-import { CheckBoxButton01 } from "../../assets/buttons/CheckBoxButton";
-import { ScrollLarge, ScrollSmall } from "../../assets/scroll/Scroll";
-import { TermsText1, TermsText2 } from "../../components/signUp/TermsText";
-import Button04 from "../../assets/buttons/Button04";
-import Button03 from "../../assets/buttons/Button03";
-import CTA01 from "../../assets/CTAs/CTA01";
-import Typography from "../../assets/Typography";
-import { join } from "../../utils/SignUpFunctions";
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SignUpPageWrapper } from '../../components/signUp/SignUpPageWrapper';
+import styled, { css } from 'styled-components';
+import { CheckBoxButton01 } from '../../assets/buttons/CheckBoxButton';
+import { ScrollLarge, ScrollSmall } from '../../assets/scroll/Scroll';
+import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
+import Button04 from '../../assets/buttons/Button04';
+import Button03 from '../../assets/buttons/Button03';
+import CTA01 from '../../assets/CTAs/CTA01';
+import Typography from '../../assets/Typography';
+import { join } from '../../utils/SignUpFunctions';
 
-
-export function SignUp5Page(){
+export function SignUp5Page() {
   const [allChecked, setAllChecked] = useState(false);
   const [allUIChecked, setAllUIChecked] = useState(false);
   const [individualChecks, setIndividualChecks] = useState({
@@ -76,69 +75,72 @@ export function SignUp5Page(){
     }
   };
 
-  return(
+  return (
     <SignUpPageWrapper step={5} stepInfo="약관 읽고 서비스 이용하기">
       <TextTitle>
-        <CheckBoxButton01 
+        <CheckBoxButton01
           textSize="1.25vw"
           textBold="600"
           isChecked={allUIChecked}
           onCustomFunction={(isChecked) => {
-          handleAllCheckedClick(isChecked);
+            handleAllCheckedClick(isChecked);
             onClickCheck();
-          }}>아래 약관에 모두 동의합니다</CheckBoxButton01>
+          }}
+        >
+          아래 약관에 모두 동의합니다
+        </CheckBoxButton01>
       </TextTitle>
       <ScrollLarge isChecked={scrollActive}>
-        <CheckBoxButton01 
+        <CheckBoxButton01
           isChecked={individualChecks.first}
           onCustomFunction={(newCheckedValue) =>
-                setIndividualChecks((prev) => ({
-                  ...prev,
-                  first: newCheckedValue,
-                }))
-              }
-          >
-            서비스 이용약관 동의 (필수)
+            setIndividualChecks((prev) => ({
+              ...prev,
+              first: newCheckedValue,
+            }))
+          }
+        >
+          서비스 이용약관 동의 (필수)
         </CheckBoxButton01>
         <TextOutBox>
           <ScrollSmall isChecked={scrollActive}>
             <TermsText1 />
           </ScrollSmall>
         </TextOutBox>
-        <div style={{height: '2vw'}}></div>
-        <CheckBoxButton01 
+        <div style={{ height: '2vw' }}></div>
+        <CheckBoxButton01
           isChecked={individualChecks.second}
-          onCustomFunction=
-          {(newCheckedValue) =>
-                setIndividualChecks((prev) => ({
-                  ...prev,
-                  second: newCheckedValue,
-                }))
-              }>
+          onCustomFunction={(newCheckedValue) =>
+            setIndividualChecks((prev) => ({
+              ...prev,
+              second: newCheckedValue,
+            }))
+          }
+        >
           개인정보 수집 및 이용 동의 (필수)
-          </CheckBoxButton01>
-          <TextOutBox>
-            <ScrollSmall isChecked={scrollActive}>
-              <TermsText2 />
-            </ScrollSmall>
-          </TextOutBox>
-          <ButtonsWrapper>
-            <Button04 onClick={handlePrev} style={{width: '25.582%'}}/>
-            <NextButtonFixedWidth 
-              state={isButtonActive ? 'pressed' : 'disabled'} 
-              onClick={handleNext}
-              style={{width: '74.418%'}}
-            >
-              완료
-            </NextButtonFixedWidth>
-          </ButtonsWrapper>
+        </CheckBoxButton01>
+        <TextOutBox>
+          <ScrollSmall isChecked={scrollActive}>
+            <TermsText2 />
+          </ScrollSmall>
+        </TextOutBox>
+        <ButtonsWrapper>
+          <Button04 onClick={handlePrev} style={{ width: '25.582%' }} />
+          <NextButtonFixedWidth
+            state={isButtonActive ? 'pressed' : 'disabled'}
+            onClick={handleNext}
+            style={{ width: '74.418%' }}
+          >
+            완료
+          </NextButtonFixedWidth>
+        </ButtonsWrapper>
         <div ref={button} />
       </ScrollLarge>
     </SignUpPageWrapper>
-  )
+  );
 }
 
-export function SignUp5Complete(){
+export function SignUp5Complete() {
   const navigate = useNavigate();
   const handleNext = () => {
     navigate('/login');
@@ -156,37 +158,32 @@ export function SignUp5Complete(){
   }, []);
 
   return (
-    
     <Wrapper2>
-      <div style={{ textAlign: 'center', marginTop: '12.9629vh', marginBottom: '2.222vh', zIndex: 2}}>
+      <div style={{ textAlign: 'center', marginTop: '12.9629vh', marginBottom: '2.222vh', zIndex: 2 }}>
         <Typography size="2.5vw" bold="700" style={{ lineHeight: '2.604vw' }}>
           축하합니다!
         </Typography>
       </div>
-      <div style={{ textAlign: 'center',  zIndex: 1 }}>
-        <Typography
-          size="1.25vw"
-          bold="700"
-          style={{ opacity: '0.8', lineHeight: '125%', fontWeight: '500' }}
-        >
+      <div style={{ textAlign: 'center', zIndex: 1 }}>
+        <Typography size="1.25vw" bold="700" style={{ opacity: '0.8', lineHeight: '125%', fontWeight: '500' }}>
           이제 쿠플라이의 회원이 되셨습니다.
           <br />
           로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
         </Typography>
       </div>
       <div>
-      <img
-        src="designImage/signUp/CheckAni.webp"
-        alt="completeImage"
-        style={{
-          width: '40.677vw',
-          height: '100%',
-          background: 'url(designImage/signUp/CheckAni.webp), lightgray 50% / cover no-repeat',
-          transform: 'translateY(-4.375vw)',
-        }}
-      />
+        <img
+          src="designImage/signUp/CheckAni.webp"
+          alt="completeImage"
+          style={{
+            width: '40.677vw',
+            height: '100%',
+            background: 'url(designImage/signUp/CheckAni.webp), lightgray 50% / cover no-repeat',
+            transform: 'translateY(-4.375vw)',
+          }}
+        />
       </div>
-      <div style={{ transform: 'translateY(-11.51vw)'}}>
+      <div style={{ transform: 'translateY(-11.51vw)' }}>
         <CTA01 state="default" onClick={handleNext}>
           <Typography size="1.042vw" bold="700" color="var(--White, #FFF)">
             로그인하고 쿠플라이로 이동하기
@@ -194,7 +191,7 @@ export function SignUp5Complete(){
         </CTA01>
       </div>
     </Wrapper2>
-  )
+  );
 }
 
 const TextTitle = styled.div`
@@ -207,7 +204,7 @@ const TextTitle = styled.div`
 
 const TextOutBox = styled.div`
   //width: 100%; // 32.7083vw; // (628/1920)*100vw  width: 628px;
-  width: 31.7vw; 
+  width: 31.7vw;
   //max-width: 628px;
   height: 228px;
   flex-shrink: 0;
@@ -229,16 +226,16 @@ const TextOutBox = styled.div`
 `;
 
 const ButtonsWrapper = styled.div`
-display: flex;
-gap: 0.9375vw; // 18px;
-margin-top: 20px;
-margin-bottom: 50px;
-//margin-right: 0.9375vw; // 18px;
+  display: flex;
+  gap: 0.9375vw; // 18px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  //margin-right: 0.9375vw; // 18px;
 `;
 
 const NextFixedWidth = css`
   // 628px 너무 길어서 길이 조절했습니다
-  width: 23.65vw; 
+  width: 23.65vw;
 `;
 
 const NextButtonFixedWidth = styled(Button03)`
