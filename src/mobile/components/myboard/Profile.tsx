@@ -67,16 +67,15 @@ const MobileProfile = ({ userData }: { userData: any }) => {
           </NickNameBox>
         </HeadWrapper>
 
-        <VectorImage src="designImage/mobile/myboard/ProfileVector.svg" alt="vector" style={{ marginTop: '3.61vw' }} />
-
+        <Vector />
         <SubTitleBox style={{ marginTop: '5.28vw' }}>
-          <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
+          <IconImage src="designImage/mobile/myboard/Icon1.svg" alt="major" />
           <SubTitleText>현재 내 학점</SubTitleText>
           <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
         </SubTitleBox>
 
         <SubTitleBox2 style={{ marginTop: '5.56vw' }}>
-          <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
+          <IconImage src="designImage/mobile/myboard/Icon2.svg" alt="major" />
           <SubTitleText>희망 진입학기</SubTitleText>
           <GPAText>{userData.hopeSemester}R</GPAText>
         </SubTitleBox2>
@@ -94,7 +93,6 @@ const MobileProfile = ({ userData }: { userData: any }) => {
           onClickModal={onClickApcModal}
         />
       )}
-      ;
     </>
   );
 };
@@ -123,7 +121,7 @@ const NickNameBox = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  width: 41.11vw;
+  width: 50vw;
   height: 13.33vw;
   margin-left: 6.94vw;
 
@@ -206,6 +204,18 @@ const EditImage = styled.img`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const Vector = styled.div`
+  width: 91.11vw;
+  height: 0px;
+  flex-shrink: 0;
+  stroke-width: 1px;
+  color: #dfdfdf;
+  z-index: 1;
+
+  margin-top: 3.61vw;
+  border: 1px solid #dfdfdf;
 `;
 
 const VectorImage = styled.img`

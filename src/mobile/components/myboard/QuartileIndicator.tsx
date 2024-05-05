@@ -12,8 +12,8 @@ const MobileQuartileIndicator = ({
   myStageData: any;
   isApplied: boolean;
 }) => {
-  let myPercentile = (myStageData.rankNum / myStageData.applyNum) * 100;
-  if (myStageData.rankNum === myStageData.applyNum && myStageData.rankNum === 1) {
+  let myPercentile = (myStageData.rank / myStageData.applyNum) * 100;
+  if (myStageData.rank === myStageData.applyNum && myStageData.rank === 1) {
     myPercentile = 1;
   }
   return (

@@ -71,6 +71,15 @@ const MobileTabMenu05: React.FC<myStageData> = (data) => {
           </Wrapper>
         </MainWrapper>
       );
+
+    default:
+      return (
+        <MainWrapper>
+          <Wrapper>
+            <StageBox1 src="../../designImage/tabMenu/tabmenu_type_05_mobile_1.webp" />
+          </Wrapper>
+        </MainWrapper>
+      );
   }
 };
 
