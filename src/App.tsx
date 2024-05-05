@@ -26,7 +26,7 @@ import SignUpPage2 from './mobile/pages/signup/SignupPage2';
 import SignUpPage3 from './mobile/pages/signup/SignupPage3';
 //import SignUpPage4 from './mobile/pages/signup/SignupPage4';
 import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
-import SignUpPage5 from './mobile/pages/signup/SignupPage5';
+import SignUpPage5, {SignUp5Complete} from './mobile/pages/signup/SignupPage5';
 import { MobileSettingsPage } from './mobile/pages/SettingsPage';
 import MobileTest from './pages/mobile/MobileTest';
 import MobileArchivePage from './pages/mobile/MobileArchive';
@@ -63,7 +63,8 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
-        <MobileApplicationModal isOpenModal={true} setOpenModal={()=>{}} onClickModal={()=>{}}/>
+        // <MobileApplicationModal isOpenModal={true} setOpenModal={()=>{}} onClickModal={()=>{}}/>
+        <SignUp5Complete/>
         // <>
         //   <MobileHeader />
         //   <Routes>
