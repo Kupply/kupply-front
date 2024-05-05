@@ -1,9 +1,9 @@
 import {
-  appModalUserTypeState,
-  applicationModalState,
-  applicationSubmittedState,
+  appModalUserTypeMobileState,
+  applicationModalMobileState,
+  applicationSubmittedMobileState,
   gpaSettingsState,
-  selectedFileState,
+  selectedFileMobileState,
   userSettingsState,
 } from '../../store/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -11,11 +11,12 @@ import Typography from '../../assets/Typography';
 import styled from 'styled-components';
 import ModalLarge from '../../mobile/components/base/ModalLarge';
 import Icon02 from '../../assets/icons/Icon02';
+import Icon03 from '../../assets/icons/Icon03';
 import CurrentModal0 from '../../mobile/components/myboard/applyModal/CurrentModal0';
-import CurrentModal1 from '../../components/myBoard/SubmitModals/currentModal/Modal1';
-import CurrentModal2 from '../../components/myBoard/SubmitModals/currentModal/Modal2';
-import CurrentModal3 from '../../components/myBoard/SubmitModals/currentModal/Modal3';
-import CurrentModal4 from '../../components/myBoard/SubmitModals/currentModal/Modal4';
+import CurrentModal1 from '../../mobile/components/myboard/applyModal/CurrentModal1';
+import CurrentModal2 from '../../mobile/components/myboard/applyModal/CurrentModal2';
+import CurrentModal3 from '../../mobile/components/myboard/applyModal/CurrentModal3';
+import CurrentModal4 from '../../mobile/components/myboard/applyModal/CurrentModal4';
 import NotSubmittedHeader from '../../mobile/components/myboard/applyModal/NotSubmittedHeader';
 import client from '../../utils/HttpClient';
 import { useRef } from 'react';
@@ -31,75 +32,18 @@ export interface UploadButtonProps extends React.ComponentPropsWithoutRef<'butto
   children?: React.ReactNode;
 }
 
-export function UploadButton(props: UploadButtonProps) {
-  const { children = '첨부 파일 업로드', ...rest } = props;
-  const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFiles = e.target.files;
-    if (newFiles && newFiles.length > 0) {
-      const newFile = newFiles[0];
-      setSelectedFile(newFile);
-    }
-  };
-
-  return (
-    <div style={{ position: 'relative' }}>
-      {selectedFile! ? (
-        <div>
-          <img src={process.env.PUBLIC_URL + `/designImage/myBoard/SelectedFile.svg`} alt="selectedFile Image" />
-          <Typography
-            size="0.975vw"
-            bold="500"
-            style={{
-              display: 'flex',
-              color: '#E57C90',
-              marginTop: '5px',
-              textAlign: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {selectedFile.name}
-          </Typography>
-        </div>
-      ) : (
-        <div style={{ position: 'relative', alignItems: 'center' }}>
-          <img
-            src={process.env.PUBLIC_URL + `/designImage/myBoard/EmptySelectedFile.svg`}
-            alt="Empty Selected File Image"
-          />
-          <Typography
-            size="0.975vw"
-            bold="500"
-            style={{
-              display: 'flex',
-              color: '#E57C90',
-              marginTop: '0.885vw',
-              textAlign: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            학업계획서를 첨부해주세요 (선택)
-          </Typography>
-          <label htmlFor="fileInput">Custom Upload Button</label>
-          <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleFileChange} />
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default function MobileApplicationModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
 
-  const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
-  const [currentModal, setCurrentModal] = useRecoilState(applicationModalState);
-  const [isSubmitted, setIsSubmitted] = useRecoilState(applicationSubmittedState);
+  const [selectedFile, setSelectedFile] = useRecoilState(selectedFileMobileState);
+  const [currentModal, setCurrentModal] = useRecoilState(applicationModalMobileState);
+  const [isSubmitted, setIsSubmitted] = useRecoilState(applicationSubmittedMobileState);
 
   const hopeMajor1 = useRecoilValue(userSettingsState('hopeMajor1'));
   const hopeMajor2 = useRecoilValue(userSettingsState('hopeMajor2'));
   const gpa = useRecoilValue(gpaSettingsState('candidate'));
-  const candidateState = useRecoilValue(appModalUserTypeState).userState[0];
+  const candidateState = useRecoilValue(appModalUserTypeMobileState).userState[0];
 
   // 문제는 semester가 내가 생각한거랑 다름, 지원학기가 아니라 본인의 학년이란 말이지...
 
@@ -144,13 +88,14 @@ export default function MobileApplicationModal(props: ModalProps) {
     <Main>
       {isOpenModal && (
         <ModalLarge onClickToggleModal={onClickModal}>
+          {!isSubmitted ? (
           <TitleHeader>
             <PrevButton
               onClick={() => {
                 setOpenModal(!isOpenModal);
               }}
             >
-              <Icon02 size="3.61vw" />
+              <Icon03 size="100%" />
             </PrevButton>
             <TitleText>실지원 정보 확인하기</TitleText>
             <CloseButton
@@ -158,9 +103,25 @@ export default function MobileApplicationModal(props: ModalProps) {
                 setOpenModal(!isOpenModal);
               }}
             >
-              <Icon02 size="3.61vw" />
+              <Icon02 size="100%" />
             </CloseButton>
-          </TitleHeader>
+          </TitleHeader>) : 
+          <TitleHeader>
+            <PrevButton
+              onClick={() => {
+                setOpenModal(!isOpenModal);
+              }}
+            >
+              <Icon03 size="100%" />
+            </PrevButton>
+            <CloseButton
+              onClick={() => {
+                setOpenModal(!isOpenModal);
+              }}
+            >
+              <Icon02 size="100%" />
+            </CloseButton>
+          </TitleHeader>}
           {!isSubmitted ? (
             <>
               {(() => {
@@ -229,7 +190,6 @@ const TitleHeader = styled.div`
   align-items: center;
   width: 83.33vw;
   height: 6.67vw;
-
   margin-top: 3.61vw;
 `;
 
@@ -267,9 +227,8 @@ const CloseButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.125vw;
-  height: 3.125vw;
-
+  width: 10vw;
+  height: 10vw;
   cursor: pointer;
 `;
 
@@ -278,8 +237,7 @@ const PrevButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.125vw;
-  height: 3.125vw;
-
+  width: 10vw;
+  height: 10vw;
   cursor: pointer;
 `;

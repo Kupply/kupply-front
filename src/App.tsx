@@ -38,6 +38,7 @@ import DeletePage from './mobile/pages/DeletePage';
 import MobileFooter from './mobile/assets/base/Footer';
 import MobileHeader from './mobile/assets/base/Header';
 import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
+import MobileApplicationModal from './pages/mobileMyBoard/ApplyModal';
 
 interface RouteConfig {
   path: string;
@@ -62,18 +63,17 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
-
-
-        <>
-          <MobileHeader />
-          <Routes>
-            <Route path="/archive" element={<MobileArchivePage />} />
-            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
-            <Route path="/m" element={<MobileMyBoard />} />
-            <Route path="/test" element={<MobileTest />} />
-          </Routes>
-          <MobileFooter />
-        </>
+        <MobileApplicationModal isOpenModal={true} setOpenModal={()=>{}} onClickModal={()=>{}}/>
+        // <>
+        //   <MobileHeader />
+        //   <Routes>
+        //     <Route path="/archive" element={<MobileArchivePage />} />
+        //     <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
+        //     <Route path="/m" element={<MobileMyBoard />} />
+        //     <Route path="/test" element={<MobileTest />} />
+        //   </Routes>
+        //   <MobileFooter />
+        // </>
 
       ) : (
         <Wrapper>
