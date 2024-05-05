@@ -111,7 +111,7 @@ const CardImageDefault = styled.div`
   & img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Maintain aspect ratio while fitting the container */
+    object-fit: cover; /* Maintain aspect ratio while fitting the container */
   }
 `;
 

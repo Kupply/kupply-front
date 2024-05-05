@@ -87,14 +87,14 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
   ]);
 
   useEffect(() => {
-    switch (location.pathname) {
-      case '/landing':
+    switch (true) {
+      case location.pathname === '/landing':
         setButtonStates(['pressed', 'disabled', 'disabled']);
         break;
-      case '/archiving':
+      case location.pathname.startsWith('/archive'):
         setButtonStates(['disabled', 'pressed', 'disabled']);
         break;
-      case '/myboard':
+      case location.pathname === '/myboard':
         setButtonStates(['disabled', 'disabled', 'pressed']);
         break;
       default:
@@ -185,6 +185,9 @@ const MainWrapper = styled.div`
   background-color: #fff;
   box-shadow: 0 1.11vw 15.28vw 0 rgba(20, 20, 20, 0.1);
   backdrop-filter: blur(50px);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
 `;
 
 const HorizontalWrapper = styled.div`

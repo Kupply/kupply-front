@@ -3,48 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
-import OnboardingPage from './pages/main/OnboardingPage';
-import MyBoardPage from './pages/myBoard/MyBoardPage';
-import LandingPage from './pages/landing/LandingPage';
-import PreviousPage from './pages/archive/PreviousPage';
-import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
-import CommunityPage from './pages/community/CommunityPage';
-import MessagePage from './pages/message/MessagePage';
-import { SignUp1Page } from './pages/signUp/SignUp1Page';
-import SignUp2Page from './pages/signUp/SignUp2Page';
-import SignUp3Page from './pages/signUp/SignUp3Page';
 import { isMobile } from 'react-device-detect';
-import MobilePage from './pages/mobile/Mobile';
 import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
-import SignUpPage0 from './mobile/pages/signup/SignupPage0';
-import SignUpPage1 from './mobile/pages/signup/SignupPage1';
-import SignUpPage2 from './mobile/pages/signup/SignupPage2';
-import SignUpPage3 from './mobile/pages/signup/SignupPage3';
-//import SignUpPage4 from './mobile/pages/signup/SignupPage4';
-import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
-import SignUpPage5, {SignUp5Complete} from './mobile/pages/signup/SignupPage5';
-import { MobileSettingsPage } from './mobile/pages/SettingsPage';
-import MobileTest from './pages/mobile/MobileTest';
-import MobileArchivePage from './pages/mobile/MobileArchive';
-import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
-import { SignUp5Page } from './pages/signUp/SignUp5Page';
-import LoginPage from './mobile/pages/LoginPage';
-import { SettingsPage } from './pages/setting/SettingsPage';
-import DeletePage from './mobile/pages/DeletePage';
-import MobileFooter from './mobile/assets/base/Footer';
-import MobileHeader from './mobile/assets/base/Header';
-import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
-<<<<<<< HEAD
-import MobileApplicationModal from './pages/mobileMyBoard/ApplyModal';
-=======
-import OnboardingMobile from './mobile/pages/OnboardingMobile';
-import LandingMobile from './mobile/pages/LandingMobile';
-import LoginPageMobile from './mobile/pages/LoginPage';
->>>>>>> a8e1bcc0845c8d2a5b3029aa055b2f8a20302cd0
+import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes } from './MobileRoutes';
 
 interface RouteConfig {
   path: string;
@@ -53,8 +18,9 @@ interface RouteConfig {
 
 export default function App() {
   RouteChangeTracker();
-  const [isLogined, setisLogined] = useState<boolean>(true); // 개발 동안은 로그인 상태 유지
+  const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
   const [selected, setSelected] = useState(0);
+  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
@@ -66,22 +32,13 @@ export default function App() {
 
   return (
     <RecoilRoot>
-      {isMobile ? (
-        // <MobilePage />
-        // <MobileTest />
-
-
+      {isMobile || vw < 600 ? (
         <>
-          <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
           <Routes>
-            <Route path="/" element={<OnboardingMobile />} />
-            <Route path="/login" element={<LoginPageMobile setLogin={setisLogined} />} />
-            <Route path="landing" element={<LandingMobile />} />
-            <Route path="/archive" element={<MobileArchivePage />} />
-            <Route path="/archive/:majorName" element={<MobileArchiveDetailPage />} />
-            <Route path="/m" element={<MobileMyBoard />} />
+            <Route element={<AuthRequired />}>{renderRoutes(mobileAuthRoutes)}</Route>
+            {renderRoutes(mobileMainRoutes)}
+            {renderRoutes(mobileSignupRoutes)}
           </Routes>
-          <MobileFooter />
         </>
       ) : (
         <Wrapper>

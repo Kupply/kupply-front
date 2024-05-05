@@ -17,6 +17,8 @@ import {
   semesterMapping,
   majorNameMapping,
 } from '../../utils/Mappings';
+import MobileHeader from '../../mobile/assets/base/Header';
+import MobileFooter from '../../mobile/assets/base/Footer';
 
 // 이미지 교체 X
 // 합격자 학점 분석 수정
@@ -29,7 +31,6 @@ export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', 
 
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
-
 
   const params = useParams();
   const major =
@@ -159,9 +160,12 @@ const MobileArchiveDetailPage = () => {
     handleButtonClick();
   }, [sortCriterion]);
 
-  return (
-    <MobilePageWrapper>
+  const [isLogined, setisLogined] = useState<boolean>(true); // 개발 동안은 로그인 상태 유지
+  const [selected, setSelected] = useState(0);
 
+  return (
+    <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
+      <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
       <Banner01 major={major} />
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>
@@ -248,6 +252,7 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox> */}
         {/* <KeywordBox></KeywordBox> */}
       </BodyBox>
+      <MobileFooter />
     </MobilePageWrapper>
   );
 };
@@ -393,7 +398,7 @@ const DropDownWrapper = styled.div`
 
 const DropDownBox = styled.div`
   justify-content: flex-start;
-  width: 80%;
+  width: 70%;
 `;
 
 const RecruitTitleBox = styled.div`
