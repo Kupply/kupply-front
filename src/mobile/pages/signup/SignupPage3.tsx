@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../store/atom";
 import { useSignUp3Verification } from "../../../utils/SignUpFunctions";
-import MobileNicknameCheckButton from "../../assets/progressIndicator/Loader";
-import { nicknameCheckAPI } from "../../assets/progressIndicator/Loader";
 import Button03 from "../../assets/buttons/Button03";
 import Button04 from "../../assets/buttons/Button04";
 
@@ -63,7 +61,7 @@ export default function SignUpPage3(){
             <Typography size="3.33vw" bold="700">닉네임</Typography>
             <Typography size="3.33vw" bold="400">을 설정해주세요.</Typography>
             </div>
-            <UserInput userInfoType="nickname" toNext={next} valid={valid}/>
+            <UserInput userInfoType="nickname" toNext={next}/>
           </ContentsWrapper>
         </ContentsList>
         <ButtonsWrapper>

@@ -43,7 +43,7 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   studentId: '학번 10자리',
   firstMajor: '',
   id: '',
-  password: '<8~20자/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다.',
+  password: '특수문자와 영문자를 포함해 주세요!',
   password2: '비밀번호 확인',
   nickname: '닉네임',
   hopeMajor1: '',
@@ -142,8 +142,11 @@ export const UserInput: React.FC<UserInputProps> = ({
           value={userInfo.info}
           onChange={handleInputChange}
           state={userInfo.infoState}
-          setState={(s) => setUserInfo((prev) => ({ ...prev, infoState: s }))}
-          setValue={(v) => setUserInfo((prev) => ({ ...prev, info: v }))}
+          setState={userInfoTypeManual !== 'kuEmail' ?(s) => setUserInfo((prev) => ({ ...prev, infoState: s })) : () => {}}
+          setValue={
+            userInfoTypeManual !== 'kuEmail' ? 
+            (s) => setUserInfo((prev) => ({...prev, info: s})) : 
+            ()=>{}}
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
           type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}
@@ -153,8 +156,6 @@ export const UserInput: React.FC<UserInputProps> = ({
               onCustomFunction?.();
             }
           }}
-          isCheckDuplicated={userInfoType === 'nickname' ? true : false}
-          valid={valid}
         />)}
     </>
   );

@@ -12,16 +12,20 @@ import { join } from "../../../utils/SignUpFunctions";
 import { SignUpPageWrapper } from "../../components/signup/SignUpPageWrapper";
 
 // Scroll Asset이 만들어지기 전까지 하기 좀 그래서 일단 보류...
+interface IndividualChecks {
+  first: boolean;
+  second: boolean;
+}
 
 export default function SignUpPage5(){
   const [allChecked, setAllChecked] = useState(false);
   const [allUIChecked, setAllUIChecked] = useState(false);
-  const [individualChecks, setIndividualChecks] = useState({
+  const [individualChecks, setIndividualChecks] = useState<IndividualChecks>({
     first: false,
     second: false,
   });
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const button = useRef<HTMLDivElement>(null);
+  //const button = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
 
@@ -29,20 +33,26 @@ export default function SignUpPage5(){
     return Object.values(individualChecks).every((val) => val);
   };
 
-  const handleAllCheckedClick = (isChecked: boolean) => {
-    if (isChecked) {
-      setIndividualChecks({
-        first: true,
-        second: true,
-      });
-    } else {
-      setIndividualChecks({
-        first: false,
-        second: false,
-      });
-    }
-    setAllChecked(isChecked);
-    setAllUIChecked(isChecked);
+
+  const handleAllCheckedClick = () => {
+    const newState = !allChecked;
+    setAllChecked(newState);
+    setIndividualChecks({
+      first: newState,
+      second: newState,
+    });
+  };
+
+  const handleIndividualCheck = (check: keyof IndividualChecks) => {
+    setIndividualChecks(prev => {
+      const updatedChecks = {
+        ...prev,
+        [check]: !prev[check]
+      };
+      // Set allChecked based on the updated individual checks
+      setAllChecked(Object.values(updatedChecks).every(Boolean));
+      return updatedChecks;
+    });
   };
 
   useEffect(() => {
@@ -77,9 +87,9 @@ export default function SignUpPage5(){
         <CheckBox01 
           state={allChecked ? 'active' : 'default'}
           style={{fontSize: '3.89vw', fontWeight: '700'}}
-          onImageClick={() => {
-            
-          }}
+          onImageClick={
+            handleAllCheckedClick
+          }
           >약관 전체 동의하기</CheckBox01>
       </TextTitle>
       <div style={{height: '1px', backgroundColor: '#E7E7E7'}}></div>
@@ -87,6 +97,7 @@ export default function SignUpPage5(){
       <CheckBox01 
           state={individualChecks.first ? 'active' : 'default'}
           style={{fontSize: '3.33vw', fontWeight: '500'}}
+          onImageClick={() => handleIndividualCheck('first')}
           >
           개인정보 수집 및 이용 동의 (필수)
           </CheckBox01>
@@ -100,6 +111,7 @@ export default function SignUpPage5(){
       <CheckBox01 
           state={individualChecks.second ? 'active' : 'default'}
           style={{fontSize: '3.33vw', fontWeight: '500'}}
+          onImageClick={() => handleIndividualCheck('second')}
           >
             서비스 이용약관 동의 (필수)
         </CheckBox01>

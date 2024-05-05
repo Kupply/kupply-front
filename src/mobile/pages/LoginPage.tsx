@@ -69,7 +69,7 @@ export default function LoginPage(props: LoginPageProps){
   };
   return (
     <Wrapper>
-      <TempHeader></TempHeader>
+
       {isModalVisible && 
       <LoginModal 
         isOpenModal={isModalVisible} 

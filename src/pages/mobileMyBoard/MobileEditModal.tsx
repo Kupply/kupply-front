@@ -209,7 +209,7 @@ export default function MobileEditModal(props: ModalProps) {
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
-        <ButtonWrapper>
+      <ButtonWrapper>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
@@ -249,17 +249,22 @@ export default function MobileEditModal(props: ModalProps) {
       {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative', marginTop: '5vw'}}>
+            <div>
+            <Typography size="3.88vw" bold="700" >
+              프로필 정보 수정하기
+            </Typography>
+            </div>
             <TopButton
               onClick={() => {
                 setOpenModal(!isOpenModal);
               }}
+              style={{position: 'absolute', left: '50vw', zIndex: 10}}
             >
-              <Icon02 />
+              <Icon02 size='100%'/>
             </TopButton>
-            <Typography size="3.88vw" bold="700" style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '3.61vw' }}>
-              프로필 정보 수정하기
-            </Typography>
-            <div style={{ height: '5.83vw' }}></div>
+            </div>
+            <div style={{ height: '8.83vw' }}></div>
             <MobileHeaderBar />
           </HeaderWrapper>
 
@@ -471,6 +476,8 @@ const TopButton = styled.button`
   display: flex;
   align-items: flex-end;
   cursor: pointer;
+  width: 10vw;
+  height: 10vw;
 `;
 
 const ContentsWrapper2 = styled.div`

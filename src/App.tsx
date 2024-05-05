@@ -63,7 +63,8 @@ export default function App() {
       {isMobile ? (
         // <MobilePage />
         // <MobileTest />
-        <MobileEditModal isOpenModal={true} setOpenModal={()=>{}} onClickModal={()=>{}} isApplied={false}/>
+        // <MobileEditModal isOpenModal={true} setOpenModal={()=>{}} onClickModal={()=>{}} isApplied={false}/>
+        <LoginPage setLogin={()=>{}}/>
         // <>
         //   <MobileHeader />
         //   <Routes>
