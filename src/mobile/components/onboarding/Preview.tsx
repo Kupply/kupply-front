@@ -57,12 +57,6 @@ const TextBox = styled.div`
   align-items: center;
 `;
 
-const BannerScrollBox = styled.div`
-  width: 100vw;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-`;
-
 const BannerBox = styled.div`
   width: max-content;
   height: auto;
