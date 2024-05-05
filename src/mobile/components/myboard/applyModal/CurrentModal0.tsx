@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Button03 from '../../../assets/buttons/Button03';
 import Button04 from '../../../assets/buttons/Button04';
+
 import { UserInputText } from '../../../../components/signUp/UserInputText';
 import { UserInput } from '../../signup/UserInput';
 import { GPAVerification } from '../../signup/VerificationForm';
@@ -36,21 +37,21 @@ export default function CurrentModal0(props: CurrentModalProps) {
           <Content>실제 이중전공 지원 시 입력한 정보와 달라진 정보를 수정해주세요.</Content>
         </ContentBox>
         <div style={{ marginBottom: '2vw' }}>
-          <div style={{ display: 'flex', marginBottom: '0.521vw' }}>
-            <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
+          <div style={{ display: 'flex', marginBottom: '2.5vw' }}>
+            <Typography size="3.33vw" bold="700" style={{ opacity: '0.8' }}>
               학점
             </Typography>
-            <Typography size="0.9375vw">을 입력해주세요.</Typography>
+            <Typography size="3.33vw">을 입력해주세요.</Typography>
           </div>
           <GPAVerification userType="candidate" setState={setGpaState} />
         </div>
 
         <div>
-          <div style={{ display: 'flex', marginBottom: '0.521vw' }}>
-            <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
+          <div style={{ display: 'flex', marginBottom: '2.5vw' }}>
+            <Typography size="3.33vw" bold="700" style={{ opacity: '0.8' }}>
               고려대학교 학번
             </Typography>
-            <Typography size="0.9375vw">을 입력해주세요.</Typography>
+            <Typography size="3.33vw">을 입력해주세요.</Typography>
           </div>
           <div style={{ width: '100%' }}>
             <UserInput userInfoType="studentId" />
@@ -70,17 +71,14 @@ const LeftAlignedContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  //height: 15vw;
-  //margin-top: 7vw;
-  //margin-bottom: 3.5vw;
-  //margin-left: 3.89vw; // 14px
+  width: 90%;
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 1vw;
-  width: 70vw;
+  gap: 2.22vw;
+  width: 81.94vw;
   margin-top: 21.39vw;
 `;
 
@@ -89,7 +87,7 @@ const ContentBox = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 56.39vw;
-
+  margin-bottom: 5vw;
   margin-top: 9.44vw;
 `;
 

@@ -233,7 +233,7 @@ export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({
   return (
     <VerifiBoxWrapper>
       <TextAreaBox name="currentSemester-1" value={currentSemester1} setValue={setCurrentSemester1} />
-      <div style={{ marginTop: '1.263vw', width: '0.729vw', height: '0.1042vw' }}>
+      <div style={{ marginTop: '1vw', width: '2.22vw'}}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 2" fill="none">
           <path d="M0 1H14" stroke="#B9B9B9" />
         </svg>

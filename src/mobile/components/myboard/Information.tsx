@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import { recruit } from '../../../common/Recruiting';
 
-// Vector 크기 이상함... 왜 안 되는지 모르겠넹
-
 function formatTimeTo12HourFormat(date: Date) {
   var hours = date.getHours();
   var minutes: number | string = date.getMinutes();
@@ -76,7 +74,7 @@ const MobileApplication = ({
         <TitleWrapper>
           <TitleText>실시간 지원자</TitleText>
         </TitleWrapper>
-        <Vector src="designImage/mobile/myboard/InformationVector.svg" alt="vector" style={{ top: '11.39vw' }} />
+        <Vector style={{ top: '11.39vw' }} />
 
         <NumberBox style={{ top: '14.72vw' }}>
           <NumberText style={{ color: '#D85888' }}>{curApplyNum}</NumberText>
@@ -103,7 +101,7 @@ const MobileMockApply = ({ curCompetitionRate }: { curCompetitionRate: any }) =>
         <TitleWrapper>
           <TitleText>모의지원 실시간 경쟁률</TitleText>
         </TitleWrapper>
-        <Vector src="designImage/mobile/myboard/InformationVector.svg" alt="vector" style={{ top: '11.39vw' }} />
+        <Vector style={{ top: '11.39vw' }} />
 
         <NumberBox style={{ top: '16.67vw' }}>
           <NumberText style={{ color: '#D85888' }}>{curCompetitionRate}</NumberText>
@@ -270,11 +268,16 @@ const StyledSVG = styled.svg`
   }
 `;
 
-// 수정 필요
-const Vector = styled.img`
+const Vector = styled.div`
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
+  width: 91.11vw;
+  height: 0px;
+  flex-shrink: 0;
+  stroke-width: 1px;
+  color: #dfdfdf;
+  z-index: 1;
+
+  border: 1px solid #dfdfdf;
 `;
+
 export { MobileApplication, MobileMockApply };
