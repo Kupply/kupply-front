@@ -133,6 +133,15 @@ export const appModalUserTypeState = atom<
   }
 });
 
+export const appModalUserTypeMobileState = atom<
+{userType: userTypetype, userState: userStatetype[]}>({
+  key: 'userTypeAppMobileState',
+  default: {
+    userType: '',
+    userState: ['default', 'default']
+  }
+});
+
 type GpaSemesterType = {
   num1: string;
   num2: string;
@@ -223,13 +232,29 @@ export const selectedFileState = atom<File|null>({
   default: null
 });
 
+export const selectedFileMobileState = atom<File|null>({
+  key: 'selectedFileMobileState',
+  default: null
+});
+
 export const applicationModalState = atom<number>({
   key: 'applicationModalState',
   default: 0
 });
 
+export const applicationModalMobileState = atom<number>({
+  key: 'applicationModalMobileState',
+  default: 0
+});
+
 export const applicationSubmittedState = atom<boolean>({
   key: 'applicationSubmittedState',
+  default: false
+});
+
+export const applicationSubmittedMobileState = atom<boolean>({
+  key: 'applicationSubmittedMobileState',
+  // 잠시 true로 
   default: false
 });
 

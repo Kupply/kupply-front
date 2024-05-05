@@ -129,6 +129,62 @@ export default function SignUpPage5(){
     </SignUpPageWrapper>
   )
 }
+
+export function SignUp5Complete(){
+  const navigate = useNavigate();
+  const handleNext = () => {
+    navigate('/login');
+  };
+
+  //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
+  // 잠시 수정
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem('candidateGPA') && !sessionStorage.getItem('passerGPA')) navigate('/');
+  // }, []);
+
+  //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
+
+  return (
+    <Wrapper2>
+      <div style={{ textAlign: 'center', marginTop: '12.9629vh', marginBottom: '2.222vh', zIndex: 2}}>
+        <Typography size="5.55vw" bold="700" style={{ lineHeight: '2.604vw' }}>
+          축하합니다!
+        </Typography>
+      </div>
+      <div style={{ textAlign: 'center',  zIndex: 1 }}>
+        <Typography
+          size="3.89vw"
+          bold="700"
+          style={{ opacity: '0.8', lineHeight: '125%', fontWeight: '500' }}
+        >
+          이제 쿠플라이의 회원이 되셨습니다.
+          <br />
+          로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
+        </Typography>
+      </div>
+      <div>
+      <img
+        src="designImage/signUp/CheckAni.webp"
+        alt="completeImage"
+        style={{
+          width: '90vw',
+          height: '100%',
+          background: 'url(designImage/signUp/CheckAni.webp), lightgray 50% / cover no-repeat',
+          transform: 'translateY(-4.375vw)',
+        }}
+      />
+      </div>
+      <CTA01 state="default" onClick={handleNext}>
+          로그인하고 쿠플라이로 이동하기
+      </CTA01>
+      
+    </Wrapper2>
+  )
+}
+
 const TextOutBox = styled.div`
   width: 91.11vw;
   height: 38.9vw;
@@ -172,3 +228,14 @@ const ButtonsWrapper = styled.div`
   // Additional style using vh might be considered based on dynamic content or device orientation changes
 `;
 
+const Wrapper2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw; // 100%
+  height: auto;
+  padding-bottom: 5vw;
+  box-sizing: 'border-box';
+  //background: #FCFAFB;
+  background: linear-gradient(180deg, #fcfafb 69.56%, rgba(252, 250, 251, 0) 115.91%);
+`;

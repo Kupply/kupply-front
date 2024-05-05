@@ -27,6 +27,13 @@ export interface ITableData {
 function Preview1() {
   const navigate = useNavigate();
 
+  const [isLogined, setisLogined] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
+
   const [tableData, setTableData] = useState<ITableData[]>(dummyData);
   const currentDate = new Date();
   const startDate = new Date('2024-05-10');
@@ -43,8 +50,8 @@ function Preview1() {
       }
     };
 
-    if (window.localStorage.isLogin === 'true') loadData();
-  }, []);
+    if (isLogined) loadData();
+  }, [isLogined]);
 
   return (
     <MainWrapper>
@@ -65,7 +72,25 @@ function Preview1() {
         </Typography>
         <RankingTable tableData={tableData} />
       </ContentWrapper>
-      {!isDateInRange && (
+      {!isLogined ? (
+        <>
+          <Blur />
+          <ButtonWrapper>
+            <Typography size="1.57vw" bold="700" color="#2C323A" style={{ textAlign: 'center', lineHeight: '131.58%' }}>
+              지금 쿠플라이에 회원가입하고 <br /> 이중전공 모의지원 현황을 확인해보세요.
+            </Typography>
+            <CTA02
+              onClick={() => {
+                navigate('/signup0');
+              }}
+              size="small"
+              style={{ marginTop: '1.24vw' }}
+            >
+              회원가입하러 가기
+            </CTA02>
+          </ButtonWrapper>
+        </>
+      ) : isDateInRange ? null : (
         <>
           <Blur />
           <ButtonWrapper>

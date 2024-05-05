@@ -2,6 +2,108 @@ import styled, { keyframes } from 'styled-components';
 import Typography from '../../assets/Typography';
 
 function Banner() {
+  const cardData = [
+    {
+      korName: '경영학과',
+      engName: 'Business School',
+      image: '../../designImage/majorSymbol/newMajorImage/business.png',
+    },
+    {
+      korName: '심리학부',
+      engName: 'School of Psychology',
+      image: '../../designImage/majorSymbol/newMajorImage/psycho.png',
+    },
+    {
+      korName: '경제학과',
+      engName: 'Department of Economics',
+      image: '../../designImage/majorSymbol/newMajorImage/political.png',
+    },
+    {
+      korName: '통계학과',
+      engName: 'Department of Statistics',
+      image: '../../designImage/majorSymbol/newMajorImage/political.png',
+    },
+    {
+      korName: '미디어학부',
+      engName: 'School of Media & Communication',
+      image: '../../designImage/majorSymbol/newMajorImage/media.png',
+    },
+    {
+      korName: '산업경영공학부',
+      engName: 'School of Industrial & Management Engineering',
+      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
+    },
+    {
+      korName: '컴퓨터학과',
+      engName: 'Department of Computer Science & Engineering',
+      image: '../../designImage/majorSymbol/newMajorImage/info.png',
+    },
+    {
+      korName: '식품자원경제학과',
+      engName: 'Department of Food & Resources',
+      image: '../../designImage/majorSymbol/newMajorImage/bio.png',
+    },
+    {
+      korName: '전기전자공학부',
+      engName: 'School of Electrical Engineering',
+      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
+    },
+    {
+      korName: '화공생명공학부',
+      engName: 'Department of Chemical & Biological Engineering',
+      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
+    },
+    {
+      korName: '수학과',
+      engName: 'Department of Mathematics',
+      image: '../../designImage/majorSymbol/newMajorImage/science.png',
+    },
+    {
+      korName: '화학과',
+      engName: 'Department of Chemistry',
+      image: '../../designImage/majorSymbol/newMajorImage/science.png',
+    },
+    {
+      korName: '생명공학부',
+      engName: 'Biological Engineering',
+      image: '../../designImage/majorSymbol/newMajorImage/bio.png',
+    },
+    {
+      korName: '생명과학부',
+      engName: 'School of Life Sciences',
+      image: '../../designImage/majorSymbol/newMajorImage/bio.png',
+    },
+    {
+      korName: '정치외교학과',
+      engName: 'Department of Political Science & International Relations',
+      image: '../../designImage/majorSymbol/newMajorImage/political.png',
+    },
+    {
+      korName: '행정학과',
+      engName: 'Department of Public Administration',
+      image: '../../designImage/majorSymbol/newMajorImage/political.png',
+    },
+    {
+      korName: '신소재공학부',
+      engName: 'School of Materials Science & Engineering',
+      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
+    },
+    {
+      korName: '기계공학부',
+      engName: 'School of Mechanical Engineering',
+      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
+    },
+    {
+      korName: '데이터과학과',
+      engName: 'Department of Data Science',
+      image: '../../designImage/majorSymbol/newMajorImage/info.png',
+    },
+    {
+      korName: '스마트보안학부',
+      engName: 'Division of Smart Security',
+      image: '../../designImage/majorSymbol/newMajorImage/smartsecurity.png',
+    },
+  ];
 
   return (
     <MainWrapper>
@@ -23,8 +125,18 @@ function Banner() {
         앞으로 더 추가될 학과들을 기대해 주세요!
       </Typography>
       <Cards>
-        {Array.from({ length: 20 }, (_, index) => (
-          <Card key={index} />
+        {cardData.map((data, dataIndex) => (
+          <Card key={dataIndex} style={{ backgroundImage: `url(${data.image})` }}>
+            <Typography size="1.11vw" bold="700" style={{ marginTop: '98.85%', lineHeight: '112.5%' }}>
+              {data.korName}
+            </Typography>
+            <Typography
+              size="0.77vw"
+              style={{ opacity: '0.8', lineHeight: '112.5%', textAlign: 'center', margin: '0 0.77vw' }}
+            >
+              {data.engName}
+            </Typography>
+          </Card>
         ))}
       </Cards>
       <CellPhone />
@@ -344,109 +456,95 @@ const Cards = styled.div`
 const Card = styled.div`
   width: 13.13vw;
   height: 16.88vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 0.36vw;
   position: absolute;
   left: -30%;
   top: 0%;
   z-index: 20;
+  background-size: cover;
+  background-position: center;
 
   &:nth-child(1) {
-    background-color: pink;
     animation: ${Animation1} 60s infinite;
   }
 
   &:nth-child(2) {
-    background-color: aliceblue;
     animation: ${Animation2} 60s infinite;
   }
 
   &:nth-child(3) {
-    background-color: antiquewhite;
     animation: ${Animation3} 60s infinite;
   }
 
   &:nth-child(4) {
-    background-color: aqua;
     animation: ${Animation4} 60s infinite;
   }
 
   &:nth-child(5) {
-    background-color: aquamarine;
     animation: ${Animation5} 60s infinite;
   }
 
   &:nth-child(6) {
-    background-color: azure;
     animation: ${Animation6} 60s infinite;
   }
 
   &:nth-child(7) {
-    background-color: beige;
     animation: ${Animation7} 60s infinite;
   }
 
   &:nth-child(8) {
-    background-color: bisque;
     animation: ${Animation8} 60s infinite;
   }
 
   &:nth-child(9) {
-    background-color: black;
     animation: ${Animation9} 60s infinite;
   }
 
   &:nth-child(10) {
-    background-color: blanchedalmond;
     animation: ${Animation10} 60s infinite;
   }
 
   &:nth-child(11) {
-    background-color: blue;
     animation: ${Animation11} 60s infinite;
   }
 
   &:nth-child(12) {
-    background-color: blueviolet;
     animation: ${Animation12} 60s infinite;
   }
 
   &:nth-child(13) {
-    background-color: brown;
     animation: ${Animation13} 60s infinite;
   }
 
   &:nth-child(14) {
-    background-color: burlywood;
     animation: ${Animation14} 60s infinite;
   }
 
   &:nth-child(15) {
-    background-color: red;
     animation: ${Animation15} 60s infinite;
   }
 
   &:nth-child(16) {
-    background-color: yellow;
     animation: ${Animation16} 60s infinite;
   }
 
   &:nth-child(17) {
-    background-color: green;
     animation: ${Animation17} 60s infinite;
   }
 
   &:nth-child(18) {
-    background-color: purple;
     animation: ${Animation18} 60s infinite;
   }
 
   &:nth-child(19) {
-    background-color: chartreuse;
     animation: ${Animation19} 60s infinite;
   }
 
   &:nth-child(20) {
-    background-color: mistyrose;
     animation: ${Animation20} 60s infinite;
   }
 `;

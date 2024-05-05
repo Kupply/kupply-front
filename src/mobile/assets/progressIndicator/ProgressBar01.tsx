@@ -45,7 +45,7 @@ const StepItem = styled.div<StepProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 16.39vw; // 59px;
+  width: 40vw;
   height: 100%;
 
   &:not(:first-child):before {
@@ -62,9 +62,7 @@ const StepItem = styled.div<StepProps>`
 
 // 원(step) 디자인
 const Step = styled.div<StepProps>`
-  //width: 12px;
   width: 3.33vw;
-  //height: 12px;
   height: 3.33vw;
   display: flex;
   justify-content: center;
@@ -112,8 +110,9 @@ const Step = styled.div<StepProps>`
 `;
 
 const ProgressBarContainer = styled.div`
-  width: 77.78vw; // 280px
+  width: 90vw;
   height: auto;
   display: flex;
+  position: relative;
   justify-content: space-between;
 `;

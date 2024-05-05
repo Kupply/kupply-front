@@ -86,7 +86,7 @@ const MainWrapper = styled.div`
   width: 100vw;
   height: auto;
   box-sizing: border-box;
-  padding: 12.22vw 4.44vw 5vw 4.44vw;
+  padding: 12.22vw 4.44vw 0 4.44vw;
   display: flex;
   flex-direction: column;
 `;

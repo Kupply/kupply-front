@@ -14,6 +14,8 @@ import client from '../../utils/HttpClient';
 import { recruit } from '../../common/Recruiting';
 import { MajorOptionsKR } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR } from '../../utils/Mappings';
+import MobileHeader from '../../mobile/assets/base/Header';
+import MobileFooter from '../../mobile/assets/base/Footer';
 
 const MobileMyBoard = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
@@ -319,12 +321,16 @@ const MobileMyBoard = () => {
     }
   };
 
+  const [isLogined, setisLogined] = useState<boolean>(true); // 개발 동안은 로그인 상태 유지
+  const [selected, setSelected] = useState(0);
+
   return (
     <>
       {userData.userRole === 'passer' ? (
         <></>
       ) : (
-        <MobilePageWrapper>
+        <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
+          <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
           <MobileProfile userData={userData} />
           <MiddleVector />
           {userData.hopeMajor2 !== '희망 없음' ? (
@@ -341,11 +347,16 @@ const MobileMyBoard = () => {
           />
           <MobileMockApply curCompetitionRate={curData[onViewMajor - 1].curCompetitionRate} />
           <MobileThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
-          <MobileQuartileIndicator onViewMajor={onViewMajor} myStageData={myStageData} isApplied={isApplied} />
+          <MobileQuartileIndicator
+            onViewMajor={onViewMajor}
+            myStageData={myStageData[onViewMajor - 1]}
+            isApplied={isApplied}
+          />
           <MobilePieChart onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
           <MobileScatter onViewMajor={onViewMajor} curData={curData} isApplied={isApplied} />
         </MobilePageWrapper>
       )}
+      <MobileFooter />
     </>
   );
 };

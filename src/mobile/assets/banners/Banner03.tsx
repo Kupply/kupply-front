@@ -1,6 +1,6 @@
-// animation 작업 필요
-
 import styled from 'styled-components';
+import { useSwipeable } from 'react-swipeable';
+import { useState } from 'react';
 
 import Typography from '../../../assets/Typography';
 
@@ -9,9 +9,32 @@ export interface Banner03Props extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 function Banner03(props: Banner03Props) {
-  const { size = 'small', ...rest } = props;
+  const { size = 'small' } = props;
 
-  const contentsIndex = size === 'small' ? 0 : 1;
+  const [smallCurrentOrder, setSmallCurrentOrder] = useState<number[]>([0, 1, 2, 3]);
+  const [largeCurrentOrder, setLargeCurrentOrder] = useState<number[]>([0, 1, 2]);
+
+  const smallSwipeHandlers = useSwipeable({
+    onSwipedLeft: () => smallHandleSwipe(),
+    trackMouse: true,
+    trackTouch: true,
+  });
+  const largeSwipeHandlers = useSwipeable({
+    onSwipedLeft: () => largeHandleSwipe(),
+    trackMouse: true,
+    trackTouch: true,
+  });
+
+  const smallHandleSwipe = () => {
+    const newOrder = [...smallCurrentOrder];
+    newOrder.push(newOrder.shift() as number);
+    setSmallCurrentOrder(newOrder);
+  };
+  const largeHandleSwipe = () => {
+    const newOrder = [...largeCurrentOrder];
+    newOrder.push(newOrder.shift() as number);
+    setLargeCurrentOrder(newOrder);
+  };
 
   const contents = [
     [
@@ -63,44 +86,39 @@ function Banner03(props: Banner03Props) {
   ];
 
   return (
-    <MainWrapper size={size} {...rest}>
-      {contents[contentsIndex].map((dictionary, dictionaryIndex) => (
+    <MainWrapper size={size} {...(size === 'small' ? smallSwipeHandlers : largeSwipeHandlers)}>
+      {(size === 'small' ? smallCurrentOrder : largeCurrentOrder).map((index) => (
         <CardBox
+          cardIndex={index}
           size={size}
-          cardIndex={dictionaryIndex}
-          key={dictionaryIndex}
-          style={{ backgroundImage: `url(${dictionary.image})` }}
+          style={{ backgroundImage: `url(${contents[size === 'large' ? 1 : 0][index].image})` }}
         >
-          <Button size={size} cardIndex={dictionaryIndex}>
+          <Button size={size} cardIndex={index}>
             <Typography
               size={size === 'small' ? '1.88vw' : '2.13vw'}
               bold="500"
-              color={
-                (size === 'small' && dictionaryIndex === 1) || (size === 'large' && dictionaryIndex === 0)
-                  ? '#141414'
-                  : '#FFF'
-              }
+              color={(size === 'small' && index === 1) || (size === 'large' && index === 0) ? '#141414' : '#FFF'}
             >
-              {dictionary.buttonText}
+              {contents[size === 'large' ? 1 : 0][index].buttonText}
             </Typography>
           </Button>
           <Typography
             size={size === 'small' ? '3.89vw' : '4.44vw'}
             bold="700"
-            color={size === 'large' && dictionaryIndex === 0 ? '#FFF' : '#141414'}
+            color={size === 'large' && index === 0 ? '#FFF' : '#141414'}
             style={{ lineHeight: '120%' }}
           >
-            {dictionary.title.map((sentence, sentenceIndex) => (
+            {contents[size === 'large' ? 1 : 0][index].title.map((sentence, sentenceIndex) => (
               <div key={sentenceIndex}>{sentence}</div>
             ))}
           </Typography>
           <Typography
             size="3.06vw"
             bold="500"
-            color={size === 'large' && dictionaryIndex === 0 ? '#FFF' : '#141414'}
+            color={size === 'large' && index === 0 ? '#FFF' : '#141414'}
             style={{ lineHeight: '120%' }}
           >
-            {dictionary.text.map((sentence, sentenceIndex) => (
+            {contents[size === 'large' ? 1 : 0][index].text.map((sentence, sentenceIndex) => (
               <div key={sentenceIndex}>{sentence}</div>
             ))}
           </Typography>
@@ -111,7 +129,7 @@ function Banner03(props: Banner03Props) {
 }
 
 const MainWrapper = styled.div<Banner03Props>`
-  width: ${(props) => (props.size === 'small' ? '182.78vw' : '160.83vw')};
+  width: ${(props) => (props.size === 'small' ? '182.78vw' : '160.56vw')};
   height: auto;
   margin-left: 0;
   display: flex;
@@ -143,13 +161,6 @@ const Button = styled.div<{ size: string; cardIndex: number }>`
       ? '#FFF'
       : '#E57C90'};
   border-radius: 5.56vw;
-`;
-
-const Image = styled.img<{ size: string }>`
-  position: absolute;
-  right: 0;
-  top: ${(props) => props.size === 'small' && '0'};
-  bottom: ${(props) => props.size === 'large' && '0'};
 `;
 
 export default Banner03;

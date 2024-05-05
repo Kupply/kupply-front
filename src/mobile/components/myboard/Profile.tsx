@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 //import EditModal from './EditModals/OldEditModal';
 //import EditModal from './EditModals/EditModal';
 //import EditModal from './EditModals/OldEditModalModified';
+import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../../utils/Mappings';
@@ -29,7 +30,9 @@ const MobileProfile = ({ userData }: { userData: any }) => {
   // const majorKoreanName2 = majorNameMapping[major2][0];
   // const majorEngishName2 = majorNameMapping[major2][1];
 
-  const [isOpenEditModal, setOpenEditModal] = useState(true);
+  const [isOpenEditModal, setOpenEditModal] = useState(false);
+  const [isOpenApplyModal, setOpenApplyModal] = useState(false);
+  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(true);
 
   const onClickEditModal = () => {
     setOpenEditModal(true);
@@ -37,7 +40,17 @@ const MobileProfile = ({ userData }: { userData: any }) => {
 
   const closeModal = () => {
     setOpenEditModal(false);
+    setOpenApplyModal(false);
   };
+
+  const onClickApplyModal = useCallback(() => {
+    setOpenApplyModal(true);
+    setOpenApcModal(true);
+  }, []);
+
+  const onClickApcModal = useCallback(() => {
+    setOpenApcModal(!isOpenApcModal);
+  }, [isOpenApcModal]);
 
   return (
     <>
@@ -54,24 +67,32 @@ const MobileProfile = ({ userData }: { userData: any }) => {
           </NickNameBox>
         </HeadWrapper>
 
-        <VectorImage src="designImage/mobile/myboard/ProfileVector.svg" alt="vector" style={{ marginTop: '3.61vw' }} />
-
+        <Vector />
         <SubTitleBox style={{ marginTop: '5.28vw' }}>
-          <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
+          <IconImage src="designImage/mobile/myboard/Icon1.svg" alt="major" />
           <SubTitleText>현재 내 학점</SubTitleText>
           <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
         </SubTitleBox>
 
         <SubTitleBox2 style={{ marginTop: '5.56vw' }}>
-          <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
+          <IconImage src="designImage/mobile/myboard/Icon2.svg" alt="major" />
           <SubTitleText>희망 진입학기</SubTitleText>
           <GPAText>{userData.hopeSemester}R</GPAText>
         </SubTitleBox2>
 
         <ApplyBox>
-          <CTA02 size="large">나도 모의지원 하러가기!</CTA02>
+          <CTA02 size="large" onClick={onClickApplyModal}>
+            나도 모의지원 하러가기!
+          </CTA02>
         </ApplyBox>
       </Wrapper>
+      {isOpenApplyModal && (
+        <MobileApplicationModal
+          isOpenModal={isOpenApcModal}
+          setOpenModal={setOpenApcModal}
+          onClickModal={onClickApcModal}
+        />
+      )}
     </>
   );
 };
@@ -100,7 +121,7 @@ const NickNameBox = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  width: 41.11vw;
+  width: 50vw;
   height: 13.33vw;
   margin-left: 6.94vw;
 
@@ -183,6 +204,18 @@ const EditImage = styled.img`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const Vector = styled.div`
+  width: 91.11vw;
+  height: 0px;
+  flex-shrink: 0;
+  stroke-width: 1px;
+  color: #dfdfdf;
+  z-index: 1;
+
+  margin-top: 3.61vw;
+  border: 1px solid #dfdfdf;
 `;
 
 const VectorImage = styled.img`

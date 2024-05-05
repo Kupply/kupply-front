@@ -10,7 +10,7 @@ interface myStageData {
   rank: number;
 }
 
-function calculateRank(applyNum: number, recruitNum: number, rankNum: number, myPercentile: number): Rank {
+function calculateRank(myPercentile: number): Rank {
   if (myPercentile <= 25) {
     return '01';
   } else if (myPercentile <= 50) {
@@ -33,7 +33,7 @@ const MobileTabMenu05: React.FC<myStageData> = (data) => {
     myPercentile = 1;
   }
   // FIXME: applyNum 0일때?
-  let rank: Rank = calculateRank(applyNum, recruitNum, rankNum, myPercentile); // 4단계 중 현재 위치
+  let rank: Rank = calculateRank(myPercentile); // 4단계 중 현재 위치
 
   switch (rank) {
     case '01':
@@ -68,6 +68,15 @@ const MobileTabMenu05: React.FC<myStageData> = (data) => {
         <MainWrapper>
           <Wrapper>
             <StageBox1 src="../../designImage/tabMenu/tabmenu_type_05_mobile_4.webp" />
+          </Wrapper>
+        </MainWrapper>
+      );
+
+    default:
+      return (
+        <MainWrapper>
+          <Wrapper>
+            <StageBox1 src="../../designImage/tabMenu/tabmenu_type_05_mobile_1.webp" />
           </Wrapper>
         </MainWrapper>
       );

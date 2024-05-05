@@ -49,7 +49,7 @@ const ModalContainer = styled.div`
 const DialogBox = styled.dialog`
   width: 50vw; // *전체화면에 대해 크기 조정 필요 43vw 814px
   //height: 750px; // 81vh; // *전체화면에 대해 크기 조정 필요 40vw750px
-  height: 40vw;
+  /* height: 40vw; */
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
@@ -106,7 +106,6 @@ const DialogBox = styled.dialog`
     pointer-events: none;
   }
 
-
   /* Firefox에서 스크롤바 숨기기 */
   scrollbar-width: thin;
 
@@ -117,7 +116,6 @@ const DialogBox = styled.dialog`
     width: 100vw;
     height: 100vh;
   }
-
 `;
 
 // 모달 뒷 (검은) 배경 - 크기 문제 해결 필요
@@ -130,5 +128,3 @@ const Backdrop = styled.div`
   z-index: 9;
   background: rgba(20, 16, 19, 0.55);
 `;
-
-

@@ -7,6 +7,8 @@ import MobileTabMenu04 from '../../mobile/assets/tabMenu/TabMenu04';
 import DropDown02 from '../../mobile/assets/selectControl/DropDown02';
 import Card01 from '../../mobile/assets/cards/Card01';
 import { majorNameMapping } from '../../utils/Mappings';
+import MobileFooter from '../../mobile/assets/base/Footer';
+import MobileHeader from '../../mobile/assets/base/Header';
 
 // categoryMapping 정확하게 분류하기
 // handleSearch 역할 아직 모름.. ?
@@ -93,8 +95,12 @@ const MobileArchivePage = () => {
 
   const opaCards = cards.filter((card) => !filteredSet.has(card.korName));
 
+  const [isLogined, setisLogined] = useState<boolean>(true); // 개발 동안은 로그인 상태 유지
+  const [selected, setSelected] = useState(0);
+
   return (
     <MobilePageWrapper>
+      <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
       <ImageBox>
         <ImageTextBox>
           <ImageTitle>지난 학기 합격 지표 바로 보기</ImageTitle>
@@ -136,6 +142,7 @@ const MobileArchivePage = () => {
           ))}
         </CardWrapper>
       </BodyBox>
+      <MobileFooter />
     </MobilePageWrapper>
   );
 };
@@ -149,6 +156,7 @@ const MobilePageWrapper = styled.div`
   align-items: center;
   background: #313b80;
   width: 100%;
+  margin-top: 23.33vw;
 `;
 
 const ImageBox = styled.div`
