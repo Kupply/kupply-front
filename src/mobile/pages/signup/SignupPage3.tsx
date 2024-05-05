@@ -17,7 +17,6 @@ type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
 export default function SignUpPage3(){
   const navigate = useNavigate();
   const [next, setNext] = useState(false); 
-  const [nickname, setNickname] = useRecoilState(userState('nickname'));
   const {complete} = useSignUp3Verification();
   const [valid, setValid] = useState(false);
 
@@ -32,26 +31,6 @@ export default function SignUpPage3(){
     navigate('/signup2');
   };
   
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const APIResponse = await nicknameCheckAPI(nickname.info);
-        setTimeout(() => {
-          if (APIResponse?.data.isSuccess === true) setValid(true);
-          else setValid(false);
-        }, 1000);
-      } catch (error) {
-        // Handle error if necessary
-      }
-    };
-
-    fetchData();
-
-    // Cleanup function if needed
-    return () => {
-      // Cleanup code here if needed
-    };
-  }, [nickname]);
 
   return(
     <SignUpPageWrapper step={3} stepInfo="사용자 기본 정보 입력하기">

@@ -170,22 +170,7 @@ export default function MobileEditModal(props: ModalProps) {
       setErrorMessages({
         ...errorMessages,
         nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
-      });
-    } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    } else if (nicknameCheck !== 'filled') {
-      if (!(nicknameState === 'default' || nicknameState === 'focused' || nicknameState === 'hover')) {
-        setNicknameState('error');
-        setErrorMessages({
-          ...errorMessages,
-          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
-        });
-      }
-    }
+      })};
   }, [nicknameState]);
 
   //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
@@ -218,13 +203,6 @@ export default function MobileEditModal(props: ModalProps) {
   //중복 체크의 결과에 따라 nicknameState가 바뀐다.
   useEffect(() => {
     if (nicknameCheck === 'filled') setNicknameState('filled');
-    else if (nicknameCheck === 'error') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    }
   }, [nicknameCheck]);
 
   return (
@@ -491,9 +469,7 @@ const HeaderWrapper = styled.div`
 
 const TopButton = styled.button`
   display: flex;
-  justify-content: center;
-  align-items: center;
-
+  align-items: flex-end;
   cursor: pointer;
 `;
 
@@ -564,7 +540,7 @@ const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: end;
 `;
 
 const ActionWrapper = styled.div`

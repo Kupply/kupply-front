@@ -240,21 +240,7 @@ const SettingsPage = () => {
         ...errorMessages,
         nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
       });
-    } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    } else if (nicknameCheck !== 'filled') {
-      if (!(nicknameState === 'default' || nicknameState === 'focused' || nicknameState === 'hover')) {
-        setNicknameState('error');
-        setErrorMessages({
-          ...errorMessages,
-          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
-        });
-      }
-    }
+    } 
   }, [nicknameState]);
 
   //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
@@ -272,16 +258,8 @@ const SettingsPage = () => {
   //중복 체크의 결과에 따라 nicknameState가 바뀐다.
   useEffect(() => {
     if (nicknameCheck === 'filled') setNicknameState('filled');
-    else if (nicknameCheck === 'error') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    }
   }, [nicknameCheck]);
 
-  console.log('settings에서 뽑는', nickname, nicknameCheck, nicknameState);
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
 
@@ -307,11 +285,6 @@ const SettingsPage = () => {
     }
   };
   const secondSubmit = async () => {
-    if(nicknameCheck === 'error'){
-      alert('닉네임 중복검사를 완료해 주세요!');
-      return;
-    }
-    console.log('nicknameCheck', nicknameCheck);
     const updateData = {
       newProfilePic: userProfilePic,
       newNickname: nickname,
@@ -533,7 +506,6 @@ const SettingsPage = () => {
                 수정하기
               </Typography>
             </div>
-            <div style={{ position: 'relative' }}>
               <TextFieldBox
                 value={nickname}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -544,18 +516,6 @@ const SettingsPage = () => {
                 setValue={setNickname}
                 errorMessage={errorMessages.nicknameErrorMessage}
               ></TextFieldBox>
-              {nickname === '' || nicknameState === 'filled' ? (
-                <></>
-              ) : (
-                <NicknameCheckButtonWrapper>
-                  <NicknameCheckButton
-                    nickname={nickname}
-                    state={nicknameCheck}
-                    setState={setNicknameCheckState}
-                  ></NicknameCheckButton>
-                </NicknameCheckButtonWrapper>
-              )}
-            </div>
           </ContentsWrapper>
           <div>
             <Button03

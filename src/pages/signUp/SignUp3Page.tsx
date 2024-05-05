@@ -60,21 +60,7 @@ export default function SignUp3Page(){
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="nickname"/>
-          <div style={{position: 'relative'}}>
           <UserInput userInfoType="nickname" toNext={next}/>
-          {nickname.info === '' || 
-            nickname.infoState === 'filled' ? (<></>) : 
-            (
-              <NicknameCheckButtonWrapper>
-                <NicknameCheckButton
-                  nickname={nickname.info}
-                  state={nickname.infoCheck as StateOptions}
-                  setState={(so) => setNickname((prev) => ({...prev, infoCheck: so}))}
-                ></NicknameCheckButton>
-              </NicknameCheckButtonWrapper>
-                
-              )}
-          </div>
         </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
