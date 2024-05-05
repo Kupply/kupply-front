@@ -14,11 +14,9 @@ function LandingMobile() {
 
   return (
     <MainWrapper>
-      <Header />
       <GoToApply />
       {isDateInRange && <ApplyTable />}
       <FAQ />
-      <Footer />
     </MainWrapper>
   );
 }

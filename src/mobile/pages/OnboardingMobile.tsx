@@ -11,13 +11,11 @@ import Footer from '../assets/base/Footer';
 function OnboardingMobile() {
   return (
     <MainWrapper>
-      <Header />
       <Join1 />
       <Preview />
       <Contents />
       <Banner />
       <Join2 />
-      <Footer />
     </MainWrapper>
   );
 }
