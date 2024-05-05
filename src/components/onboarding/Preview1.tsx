@@ -90,7 +90,7 @@ function Preview1() {
             </CTA02>
           </ButtonWrapper>
         </>
-      ) : !isDateInRange ? null : (
+      ) : isDateInRange ? null : (
         <>
           <Blur />
           <ButtonWrapper>
