@@ -9,7 +9,6 @@ export interface TextAreaBoxProps extends React.ComponentPropsWithRef<'input'> {
   setRef?: (ref: React.Ref<HTMLInputElement>) => void;
 }
 
-
 export default function TextAreaBox(props: TextAreaBoxProps) {
   const { value, setValue, name, isEntered: initIsEntered, setRef, onPaste = undefined } = props;
   const [fieldName, fieldIndex] = name.split('-');
@@ -68,14 +67,16 @@ export default function TextAreaBox(props: TextAreaBoxProps) {
       setValue={setValue}
       name={name}
       ref={inputRef}
+      inputMode="numeric"
     />
   );
 }
 
-// 그냥 inputWrapper안에 
+// 그냥 inputWrapper안에
 const InputWrapper = styled.input<TextAreaBoxProps>`
   width: 11.67vw;
   height: 11.67vw;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,4 +97,3 @@ const InputWrapper = styled.input<TextAreaBoxProps>`
     box-shadow: 0px 0.208vw 0.625vw 0px rgba(216, 88, 136, 0.2);
   }
 `;
-

@@ -19,15 +19,15 @@ const ThreeYear = ({
   pastData2: any[];
 }) => {
   interface SemesterBtnStates {
+    '2023-2R': boolean;
     '2023-1R': boolean;
     '2022-2R': boolean;
-    '2022-1R': boolean;
   }
 
   const [semesterBtnStates, setSemesterBtnStates] = useState<SemesterBtnStates>({
-    '2023-1R': true,
+    '2023-2R': true,
+    '2023-1R': false,
     '2022-2R': false,
-    '2022-1R': false,
   });
 
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState(0);
@@ -44,9 +44,9 @@ const ThreeYear = ({
     setSemesterBtnStates(updatedBtnStates);
 
     const indexMap: { [key: string]: number } = {
-      '2023-1R': 0,
-      '2022-2R': 1,
-      '2022-1R': 2,
+      '2023-2R': 0,
+      '2023-1R': 1,
+      '2022-2R': 2,
     };
     setSelectedSemesterIndex(indexMap[buttonName]);
   };
@@ -62,20 +62,20 @@ const ThreeYear = ({
         <path d="M0 1L422 0.999963" stroke="#DFDFDF" />
       </StyleSvg>
       <EachYearHeadBox>
+        <SemesterButton isClicked={semesterBtnStates['2023-2R']} onClick={() => handleSemesterBtnClick('2023-2R')}>
+          2023-2R
+        </SemesterButton>
         <SemesterButton isClicked={semesterBtnStates['2023-1R']} onClick={() => handleSemesterBtnClick('2023-1R')}>
           2023-1R
         </SemesterButton>
         <SemesterButton isClicked={semesterBtnStates['2022-2R']} onClick={() => handleSemesterBtnClick('2022-2R')}>
           2022-2R
         </SemesterButton>
-        <SemesterButton isClicked={semesterBtnStates['2022-1R']} onClick={() => handleSemesterBtnClick('2022-1R')}>
-          2022-1R
-        </SemesterButton>
       </EachYearHeadBox>
 
       <Text1Box>
         <Text1>
-          {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
+          {semesterBtnStates['2023-2R'] ? '2023-2' : semesterBtnStates['2023-1R'] ? '2023-1' : '2022-2'}R{' '}
           {majorKoreanName} 모집정보{' '}
         </Text1>
         <button
@@ -88,7 +88,7 @@ const ThreeYear = ({
       </Text1Box>
 
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
-        {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발 인원
+        {semesterBtnStates['2023-2R'] ? '23-2' : semesterBtnStates['2023-1R'] ? '23-1' : '22-2'} 선발 인원
       </Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>경쟁률</Text2>

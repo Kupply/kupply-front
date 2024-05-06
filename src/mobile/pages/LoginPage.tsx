@@ -78,7 +78,7 @@ export default function LoginPage(props: LoginPageProps) {
         />
       )}
       <ContentsList>
-        <LogoContainer>
+        <LogoContainer onClick={() => navigate('/')}>
           <img src={process.env.PUBLIC_URL + '/designImage/kupply/KupplyVer1.svg'} alt="LOGO IMAGE" />
         </LogoContainer>
         <ContentsWrapper>
@@ -131,7 +131,9 @@ export default function LoginPage(props: LoginPageProps) {
             state={ID != '' && password !== '' ? 'default' : 'disabled'}
             onClick={onLoginClick}
             style={{ width: '100%' }}
-          />
+          >
+            로그인하기
+          </CTA01>
           <Button05
             size="large"
             onClick={() => {
