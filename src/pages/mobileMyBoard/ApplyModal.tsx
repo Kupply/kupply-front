@@ -5,6 +5,7 @@ import {
   gpaSettingsState,
   selectedFileMobileState,
   userSettingsState,
+  currentSemesterState
 } from '../../store/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Typography from '../../assets/Typography';
@@ -43,7 +44,7 @@ export default function MobileApplicationModal(props: ModalProps) {
   const hopeMajor2 = useRecoilValue(userSettingsState('hopeMajor2'));
   const gpa = useRecoilValue(gpaSettingsState('candidate'));
   const candidateState = useRecoilValue(appModalUserTypeMobileState).userState[0];
-
+  const curSemester = useRecoilValue(currentSemesterState('candidate'));
   // 문제는 semester가 내가 생각한거랑 다름, 지원학기가 아니라 본인의 학년이란 말이지...
 
   const handleNext = () => {
@@ -56,7 +57,18 @@ export default function MobileApplicationModal(props: ModalProps) {
     if (currentModal > 0) {
       setCurrentModal(currentModal - 1);
     }
+    if (currentModal == 3){
+      setIsSubmitted((prev) => !prev);
+    }
   };
+
+  // 모의지원 완료하기 확인에서 수행하는 function 
+  const closeModal = () => {
+    setCurrentModal(0);
+    setOpenModal(!isOpenModal);
+    setIsSubmitted(false);
+  };
+
   const submitApplication = async () => {
     try {
       const applyData = {
@@ -64,7 +76,7 @@ export default function MobileApplicationModal(props: ModalProps) {
         applyMajor2: hopeMajor2,
         applyGPA: parseFloat(gpa.num1 + '.' + gpa.num2 + gpa.num3),
         applyTimes: candidateState === 'clicked' ? 'First' : 'Reapply',
-        // applyGrade:  currentSemester1 + '-' + currentSemester2,
+        applyGrade:  curSemester.num1 + '-' + curSemester.num2,
       };
       await client.post('/dashboard', applyData);
 
@@ -101,9 +113,7 @@ export default function MobileApplicationModal(props: ModalProps) {
           ) : (
             <TitleHeader>
               <PrevButton
-                onClick={() => {
-                  setOpenModal(!isOpenModal);
-                }}
+                onClick={handlePrev}
               >
                 <Icon03 size="100%" />
               </PrevButton>
@@ -150,9 +160,15 @@ export default function MobileApplicationModal(props: ModalProps) {
             (() => {
               switch (currentModal) {
                 case 3:
-                  return <CurrentModal3 setOpenModal={setOpenModal} onCustomFunction={submitApplication} />;
+                  return <CurrentModal3 
+                  isOpenModal={isOpenModal}
+                  setOpenModal={setOpenModal} 
+                  onCustomFunction={submitApplication} />;
                 case 4:
-                  return <CurrentModal4 setOpenModal={setOpenModal} isOpenModal={isOpenModal} />;
+                  return <CurrentModal4 
+                  setOpenModal={setOpenModal} 
+                  isOpenModal={isOpenModal} 
+                  onCustomFunction={closeModal} />;
                 default:
                   return <></>;
               }
@@ -187,21 +203,6 @@ const TitleHeader = styled.div`
   margin-top: 3.61vw;
 `;
 
-const ModalTitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.221vw;
-
-  margin-top: 1.667vw;
-`;
-
-const StyledInput = styled.input`
-  position: absolute;
-  top: 6.771vw;
-  left: 12.031vw;
-  width: 100px; /* Default width */
-`;
 
 ///////////////// text /////////////////
 const TitleText = styled.text`

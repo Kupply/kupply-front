@@ -2,6 +2,7 @@ import {
   appModalUserTypeState,
   applicationModalState,
   applicationSubmittedState,
+  currentSemesterState,
   gpaSettingsState,
   selectedFileState,
   userSettingsState,
@@ -102,8 +103,7 @@ export default function ApplicationModal(props: ModalProps) {
   const hopeMajor2 = useRecoilValue(userSettingsState('hopeMajor2'));
   const gpa = useRecoilValue(gpaSettingsState('candidate'));
   const candidateState = useRecoilValue(appModalUserTypeState).userState[0];
-
-  // 문제는 semester가 내가 생각한거랑 다름, 지원학기가 아니라 본인의 학년이란 말이지...
+  const curSemester = useRecoilValue(currentSemesterState('candidate'));
 
   const handleNext = () => {
     if (currentModal < 4) {
@@ -116,6 +116,8 @@ export default function ApplicationModal(props: ModalProps) {
       setCurrentModal(currentModal - 1);
     }
   };
+
+
   const submitApplication = async () => {
     try {
       const applyData = {
@@ -123,7 +125,7 @@ export default function ApplicationModal(props: ModalProps) {
         applyMajor2: hopeMajor2,
         applyGPA: parseFloat(gpa.num1 + '.' + gpa.num2 + gpa.num3),
         applyTimes: candidateState === 'clicked' ? 'First' : 'Reapply',
-        // applyGrade:  currentSemester1 + '-' + currentSemester2,
+        applyGrade:  curSemester.num1 + '-' + curSemester.num2,
       };
       await client.post('/dashboard', applyData);
 
@@ -207,7 +209,10 @@ export default function ApplicationModal(props: ModalProps) {
                 case 3:
                   return <CurrentModal3 setOpenModal={setOpenModal} onCustomFunction={submitApplication} />;
                 case 4:
-                  return <CurrentModal4 setOpenModal={setOpenModal} isOpenModal={isOpenModal} />;
+                  return <CurrentModal4 
+                  setOpenModal={setOpenModal} 
+                  isOpenModal={isOpenModal}
+                  />;
                 default:
                   return <></>;
               }
