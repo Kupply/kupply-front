@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
+import Typography from '../../../assets/Typography';
 
 const MobileQuartileIndicator = ({
   userData,
@@ -23,8 +24,22 @@ const MobileQuartileIndicator = ({
   const major = myStageData.majorName;
 
   return (
-    <Wrapper>
-      {!isApplied && <BlurBox />}
+    <Wrapper isApplied={isApplied}>
+      {!isApplied && (
+        <BlurBox>
+          <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
+            쿠플라이에서 모의지원 후 열람 가능해요!
+          </Typography>
+          <Typography
+            size="3.06vw"
+            bold="400"
+            color="rgba(20,20,20,0.8)"
+            style={{ lineHeight: '120%', textAlign: 'center' }}
+          >
+            모의지원 완료 후, 나와 같은 학과를 지원한 <br /> 지원자의 실시간 통계를 열람해보세요!
+          </Typography>
+        </BlurBox>
+      )}
       <TitleBox>
         <Icon src="designImage/mobile/myboard/QuartileIcon.svg" alt="Icon" />
         <TitleText>내 학점 위치 파악하기</TitleText>
@@ -51,11 +66,12 @@ const MobileQuartileIndicator = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isApplied: boolean }>`
   position: relative;
   width: 91.11vw;
   height: auto;
   margin-top: 16.67vw;
+  margin-bottom: ${(props) => (props.isApplied ? '0' : '20.83vw')};
 `;
 
 const BodyBox = styled.div`
@@ -187,6 +203,12 @@ const Icon = styled.img`
 const BlurBox = styled.div`
   width: 91.11vw;
   height: 59.44vw;
+  box-sizing: border-box;
+  padding-top: 10vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5.56vw;
   border-radius: 1.39vw;
   background: rgba(248, 248, 248, 0.45);
   box-shadow: 0 0 7.78vw 0 rgba(20, 20, 20, 0.05);
@@ -195,6 +217,7 @@ const BlurBox = styled.div`
   top: 8.06vw;
   left: 0;
   z-index: 10;
+  -webkit-backdrop-filter: blur(3.33vw);
 `;
 
 export default MobileQuartileIndicator;

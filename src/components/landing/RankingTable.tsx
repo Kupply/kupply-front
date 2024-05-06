@@ -72,7 +72,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           onMouseLeave={() => setMouseOn(false)}
           style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '0.42vw' }}
         >
-          <img width="auto" height="auto" src="../../designImage/landing/rankTable1.png" />
+          <img width="10vw" height="10vw" src="../../designImage/landing/rankTable1.png" />
           {order === 'descending' ? (
             <Typography
               size="0.83vw"
@@ -94,7 +94,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           )}
         </div>
         <div style={{ display: 'flex', gap: '0.42vw', alignItems: 'center' }}>
-          <img width="auto" height="auto" src="../../designImage/landing/rankTable2.png" />
+          <img width="10vw" height="10vw" src="../../designImage/landing/rankTable2.png" />
           <Typography size="0.83vw" bold="400" color="#A8A8A8" style={{ lineHeight: '120%' }}>
             본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
           </Typography>

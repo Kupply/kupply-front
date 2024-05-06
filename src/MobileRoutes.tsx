@@ -15,14 +15,14 @@ import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
 
 export const mobileMainRoutes = [
   { path: '/', element: <OnboardingMobile /> },
-  { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
-  { path: '/landing', element: <LandingMobile /> },
-  { path: '/archive', element: <MobileArchivePage /> },
+  { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined === true} /> },
 ];
 
 export const mobileAuthRoutes = [
   { path: '/myboard', element: <MobileMyBoard /> },
   { path: '/archive/:majorName', element: <MobileArchiveDetailPage /> },
+  { path: '/landing', element: <LandingMobile /> },
+  { path: '/archive', element: <MobileArchivePage /> },
   { path: '/settings', element: <MobileSettingsPage /> },
   { path: '/delete', element: <DeletePage /> },
 ];
