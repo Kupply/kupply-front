@@ -23,14 +23,14 @@ function PastInfo(props: PastInfoProps) {
       <HeaderWrapper>
         <Header>순위</Header>
         <Header>이중전공</Header>
-        <Header>지난 경쟁률</Header>
+        <Header>지난 합격률</Header>
         <Header>지난 합격자 평균</Header>
       </HeaderWrapper>
       {visibleData.map((dictionary, dictionaryIndex) => (
         <BodyWrapper key={dictionaryIndex}>
           <Body>
             <Typography size="5vw" bold="500" color="#a8a8a8" style={{ lineHeight: '120%' }}>
-              {'0' + dictionary.rank}
+              {dictionary.rank < 10 ? '0' + dictionary.rank : dictionary.rank}
             </Typography>
           </Body>
           <Body>
@@ -49,7 +49,7 @@ function PastInfo(props: PastInfoProps) {
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.pastPassedRate} %
+              {dictionary.pastPassedRate < 0 ? '집계불가' : dictionary.pastPassedRate + '%'}
             </Typography>
           </Body>
           <Body>
