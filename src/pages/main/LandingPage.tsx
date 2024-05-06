@@ -148,27 +148,7 @@ function LandingPage() {
       getMe();
       loadData();
     }
-    // getMe();
   }, [isLogined]);
-
-  // const cardData = tableData.map((data) => ({
-  //   name: data.secondMajor,
-  //   eng: data.engName,
-  //   합격자수: data.pastPassedNum,
-  //   선발인원: data.pastRecruitNumber,
-  //   min: data.pastmin,
-  //   mean: data.pastmean,
-  //   semester: '23-1',
-  //   imagesrc: data.imagesrc,
-  // }));
-
-  // const tableContent = useRef<HTMLDivElement>(null);
-
-  // const onClickDownArrow = () => {
-  //   tableContent.current?.scrollIntoView({ behavior: 'smooth' });
-  // };
-
-  // const [scrollY, setScrollY] = useState(0);
 
   const faqRef = useRef<HTMLDivElement>(null);
   const rankRef = useRef<HTMLDivElement>(null);
