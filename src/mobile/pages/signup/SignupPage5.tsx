@@ -70,7 +70,7 @@ export default function SignUpPage5(){
       try {
         const getRole = sessionStorage.getItem('role') || '';
         await join(getRole);
-        console.log('signup5', getRole);
+        sessionStorage.setItem('toComplete', 'true');
         navigate('/signupcomplete');
       } catch (e) {
         alert(e);
@@ -79,9 +79,16 @@ export default function SignUpPage5(){
       alert('모든 약관에 동의해주세요.');
     }
   };
+
+  // 잠시 수정
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
    }, []);
+
+  // useEffect(()=>{
+  //   //sessionStorage.setItem('curGpa', '4.33');
+  //   sessionStorage.setItem('passGpa', '4.33');
+  // }, []);
 
   return(
     <SignUpPageWrapper step={5} stepInfo="약관 읽고 서비스 이용하기">
@@ -148,7 +155,7 @@ export function SignUp5Complete(){
       return;
     }
 
-    if (!sessionStorage.getItem('curGpa') && !sessionStorage.getItem('passGpa')){
+    if (sessionStorage.getItem('toComplete') !== 'true'){
       sessionStorage.clear();
       navigate('/');
     } else{
