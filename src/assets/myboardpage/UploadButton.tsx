@@ -11,6 +11,7 @@ export interface UploadButtonProps extends React.ComponentPropsWithoutRef<'butto
 
 const Button = styled.button<UploadButtonProps>`
   display: flex;
+  position: relative;
   //width: 170px;
   width: 8.854vw;
   //height: 36px;
@@ -165,7 +166,7 @@ export default function UploadButton(props: UploadButtonProps) {
 
           <Typography
             size="0.9375vw"
-            bold='500'
+            bold="500"
             style={{
               display: 'flex',
               color: '#E57C90',

@@ -17,7 +17,7 @@ import { collegeAPIMappingByKR } from '../../utils/Mappings';
 
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
-  const [isOpenEditModal, setOpenEditModal] = useState(true);
+  const [isOpenEditModal, setOpenEditModal] = useState(false);
   const [isOpenAppModal, setOpenAppModal] = useState(true);
 
   const onClickInterest1 = useCallback(() => {
@@ -371,17 +371,17 @@ const MyBoardPage = () => {
         <MyboardPasserPageVer />
       ) : (
         <Wrapper style={{ backgroundPosition: `0 ${scrollY - 100}px` }}>
-          {/* <GlobalStyles /> */}
           <ProfileWrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
             <ProfileBox
               userData={userData}
               isOpenEditModal={isOpenEditModal}
               setOpenEditModal={setOpenEditModal}
               closeEditModal={closeEditModal}
-              isOpenAppModal={isOpenAppModal}
               onClickEditModal={onClickEditModal}
+              isOpenAppModal={isOpenAppModal}
               setOpenAppModal={setOpenAppModal}
               closeAppModal={closeAppModal}
+              onClickAppModal={onClickAppModal}
             />
           </ProfileWrapper>
           {/* {(isOpenAppModal || isOpenEditModal) && <Backdrop />} */}

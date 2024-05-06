@@ -40,7 +40,9 @@ const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any;
         <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;/ {recruitNum}</NumberText>
         <NumberText2>명 정원</NumberText2>
       </NumberBox>
-      <Content>{curApplyNum}명의 지원자가 경영학과를 지원했습니다.</Content>
+      <Content>
+        {curApplyNum}명의 지원자가 {majorKoreanName}를 지원했습니다.
+      </Content>
       <UpdateBox style={{ top: '7.21vw' }}>
         <StyledSVG xmlns="http://www.w3.org/2000/svg" width="0.625vw" height="0.59vw" viewBox="0 0 12 12" fill="none">
           <path d="M11.5 2V5H8.5" stroke="#A8A8A8" stroke-linecap="round" stroke-linejoin="round" />

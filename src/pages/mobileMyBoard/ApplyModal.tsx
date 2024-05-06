@@ -137,7 +137,7 @@ export default function MobileApplicationModal(props: ModalProps) {
                   case 2:
                     return (
                       <>
-                        <NotSubmittedHeader currentStep={2} />
+                        <NotSubmittedHeader currentStep={3} />
                         <CurrentModal2 />
                       </>
                     );

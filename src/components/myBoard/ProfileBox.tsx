@@ -23,10 +23,11 @@ const ProfileBox = ({
   isOpenEditModal,
   setOpenEditModal,
   closeEditModal,
-  isOpenAppModal,
   onClickEditModal,
+  isOpenAppModal,
   setOpenAppModal,
   closeAppModal,
+  onClickAppModal,
 }: any) => {
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
@@ -149,7 +150,7 @@ const ProfileBox = ({
             </SubTitleBox>
 
             <ApplyBox>
-              <CTA02 size="small" />
+              <CTA02 size="small" onClick={onClickAppModal} />
             </ApplyBox>
           </>
         ) : (

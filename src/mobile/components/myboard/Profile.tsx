@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-//import EditModal from './EditModals/OldEditModal';
-//import EditModal from './EditModals/EditModal';
-//import EditModal from './EditModals/OldEditModalModified';
 import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
+import MobileEditModal from '../../../pages/mobileMyBoard/MobileEditModal';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../../utils/Mappings';
@@ -17,7 +15,17 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   hopeMajor: string;
 }
 
-const MobileProfile = ({ userData }: { userData: any }) => {
+const MobileProfile = ({
+  userData,
+  isOpenEditModal,
+  setOpenEditModal,
+  closeEditModal,
+  onClickEditModal,
+  isOpenAppModal,
+  setOpenAppModal,
+  closeAppModal,
+  onClickAppModal,
+}: any) => {
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
   const profilePic = userData.userProfilePic;
@@ -29,28 +37,6 @@ const MobileProfile = ({ userData }: { userData: any }) => {
 
   // const majorKoreanName2 = majorNameMapping[major2][0];
   // const majorEngishName2 = majorNameMapping[major2][1];
-
-  const [isOpenEditModal, setOpenEditModal] = useState(false);
-  const [isOpenApplyModal, setOpenApplyModal] = useState(false);
-  const [isOpenApcModal, setOpenApcModal] = useState<boolean>(true);
-
-  const onClickEditModal = () => {
-    setOpenEditModal(true);
-  };
-
-  const closeModal = () => {
-    setOpenEditModal(false);
-    setOpenApplyModal(false);
-  };
-
-  const onClickApplyModal = useCallback(() => {
-    setOpenApplyModal(true);
-    setOpenApcModal(true);
-  }, []);
-
-  const onClickApcModal = useCallback(() => {
-    setOpenApcModal(!isOpenApcModal);
-  }, [isOpenApcModal]);
 
   return (
     <>
@@ -81,16 +67,24 @@ const MobileProfile = ({ userData }: { userData: any }) => {
         </SubTitleBox2>
 
         <ApplyBox>
-          <CTA02 size="large" onClick={onClickApplyModal}>
+          <CTA02 size="large" onClick={onClickAppModal}>
             나도 모의지원 하러가기!
           </CTA02>
         </ApplyBox>
       </Wrapper>
-      {isOpenApplyModal && (
+      {isOpenEditModal && (
+        <MobileEditModal
+          isOpenModal={isOpenEditModal}
+          setOpenModal={setOpenEditModal}
+          onClickModal={closeEditModal}
+          isApplied={false} /* 임시로 false */
+        />
+      )}
+      {isOpenAppModal && (
         <MobileApplicationModal
-          isOpenModal={isOpenApcModal}
-          setOpenModal={setOpenApcModal}
-          onClickModal={onClickApcModal}
+          isOpenModal={isOpenAppModal}
+          setOpenModal={setOpenAppModal}
+          onClickModal={closeAppModal}
         />
       )}
     </>
