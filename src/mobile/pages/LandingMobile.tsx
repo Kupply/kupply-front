@@ -11,7 +11,7 @@ import MobileFooter from '../assets/base/Footer';
 function LandingMobile() {
   const currentDate = new Date();
   const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-17');
+  const endDate = new Date('2024-05-31');
   const isDateInRange = currentDate >= startDate && currentDate <= endDate;
 
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
