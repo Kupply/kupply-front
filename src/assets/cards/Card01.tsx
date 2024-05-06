@@ -119,7 +119,7 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, passRat
           <ContentTitle style={{ top: '9.28vw', left: '1.98vw' }}>{semester} 선발 인원</ContentTitle>
           <ContentInner style={{ top: '10.52vw', left: '1.98vw' }}>{TO}명</ContentInner>
 
-          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>힙격률</ContentTitle>
+          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>합격률</ContentTitle>
           <ToolTip02
             onMouseEnter={onSvgHover}
             onMouseLeave={onSvgHoverOut}
@@ -134,10 +134,10 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, passRat
           </ContentInner>
 
           <ContentTitle style={{ top: '12.71vw', left: '1.98vw' }}>합격자 평균 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{avgPass}</ContentInner>
+          <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{passRate <= 0 ? '집계불가' : avgPass}</ContentInner>
 
           <ContentTitle style={{ top: '12.71vw', left: '8.80vw' }}>합격자 최저 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '8.80vw' }}>{minPass}</ContentInner>
+          <ContentInner style={{ top: '13.96vw', left: '8.80vw' }}>{passRate <= 0 ? '집계불가' : minPass}</ContentInner>
 
           <Button onClick={handleClickDetail}>
             <svg
