@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
 
 const MobileQuartileIndicator = ({
+  userData,
   onViewMajor,
   myStageData,
   isApplied,
 }: {
+  userData: any;
   onViewMajor: any;
   myStageData: any;
   isApplied: boolean;
@@ -16,6 +18,9 @@ const MobileQuartileIndicator = ({
   if (myStageData.rank === myStageData.applyNum && myStageData.rank === 1) {
     myPercentile = 1;
   }
+
+  const name = userData.userName;
+  const major = myStageData.majorName;
 
   return (
     <Wrapper>
@@ -31,7 +36,9 @@ const MobileQuartileIndicator = ({
         </ChartBox>
         <BodyBodyBox>
           <ContentBox>
-            <ContentText>고대빵님의 경영학과 이중 지원 시 지원안정도 점수는,</ContentText>
+            <ContentText>
+              {name}님의 {major} 이중 지원 시 지원안정도 점수는,
+            </ContentText>
           </ContentBox>
           <PercentBox>
             <NumText>{myPercentile.toFixed(2)}</NumText>
@@ -49,8 +56,6 @@ const Wrapper = styled.div`
   width: 91.11vw;
   height: auto;
   margin-top: 16.67vw;
-  paddingBottom: isApplied ? '0' : '20.83vw'
-
 `;
 
 const BodyBox = styled.div`
