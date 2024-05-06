@@ -83,14 +83,12 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>
-                  {MyName}님의 {HopeMajor}&nbsp;
-                </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
@@ -128,19 +126,16 @@ const MyStageChart: React.FC<myStageData> = (data) => {
               </TextBoxNormal>
             </TextBox>
           </Wrapper>
-
           <DefaultWrapper>
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>
-                  {MyName}님의 {HopeMajor}&nbsp;
-                </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
@@ -183,14 +178,12 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>
-                  {MyName}님의 {HopeMajor}&nbsp;
-                </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
@@ -232,14 +225,12 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>
-                  {MyName}님의 {HopeMajor}&nbsp;
-                </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중 지원 시</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>상위 예상 퍼센트 </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>는,</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
