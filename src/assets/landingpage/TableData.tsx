@@ -37,7 +37,7 @@ export default function TableData(props: TableDataProps) {
 
   return (
     <Wrapper>
-      <RankCell>{rank > 10 ? rank : '0' + rank}</RankCell>
+      <RankCell>{rank > 9 ? rank : '0' + rank}</RankCell>
       {secondMajor.length > longNameThreshold ? (
         <DoubleMajorCell>
           {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}

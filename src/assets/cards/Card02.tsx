@@ -16,7 +16,6 @@ const majorParamMappingImage: { [key: string]: string } = {
   식품자원경제학과: 'bio',
   컴퓨터학과: 'info',
   생명공학부: 'bio',
->>>>>>> bbbf8d8af9f950ada879bd6e85a918b53e7e5e2b
   생명과학부: 'bio',
   정치외교학과: 'political',
   행정학과: 'political',
