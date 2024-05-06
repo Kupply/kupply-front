@@ -185,9 +185,9 @@ const ArchiveDetailPage = () => {
               <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
             </svg>
             <SelectionInfoContent>
-              <Text>경쟁률</Text>
+              <Text>합격률</Text>
               <SelectionInfoValue>
-                {numOfSelection === 0 ? '집계불가' : `${(numOfApplication / numOfSelection).toFixed(2)} : 1`}
+                {numOfApplication === 0 ? '집계불가' : `${((numOfPassed / numOfApplication) * 100).toFixed(2)} %`}
               </SelectionInfoValue>
             </SelectionInfoContent>
           </SelectionInfoContentsWrapper>
