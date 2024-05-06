@@ -97,7 +97,7 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, passRat
   return (
     <>
       {hover ? (
-        <Container hover={hover} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
+        <Container hover={hover} name={majorKorName} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
           <CardImageBlurred>
             <img
               src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_blurred.png`}
@@ -187,6 +187,7 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, passRat
 
 interface ContainerProps {
   hover?: boolean;
+  name?: string;
 }
 
 const Container = styled.div<ContainerProps>`
@@ -287,7 +288,7 @@ const DepNameEng = styled.div<ContainerProps>`
       : `
     color: #141414;
     font-family: Pretendard;
-    font-size: 0.833vw;
+    font-size: 0.73vw;
     font-style: normal;
     font-weight: 400;
     line-height: 0.94vw; /* 112.5% */
