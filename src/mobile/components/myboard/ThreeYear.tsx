@@ -96,9 +96,11 @@ const MobileThreeYear = ({
           {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발 인원
         </Text2>
         <Text3 style={{ position: 'absolute', top: '41.94vw', left: '5vw' }}>{selectedPastData.numOfSelection}명</Text3>
-        <Text2 style={{ position: 'absolute', top: '36.11vw', left: '52.22vw' }}>경쟁률</Text2>
+        <Text2 style={{ position: 'absolute', top: '36.11vw', left: '52.22vw' }}>합격률</Text2>
         <Text3 style={{ position: 'absolute', top: '41.11vw', left: '52.22vw' }}>
-          {selectedPastData.competitionRate} : 1
+          {selectedPastData.numOfApplied === 0
+            ? '집계불가'
+            : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
         </Text3>
         <Text2 style={{ position: 'absolute', top: '51.94vw', left: '5vw' }}>합격자 평균 학점</Text2>
         <Text3 style={{ position: 'absolute', top: '57.22vw', left: '5vw' }}>{selectedPastData.meanGpa}</Text3>
