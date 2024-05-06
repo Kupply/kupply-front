@@ -15,7 +15,7 @@ export interface ITableData {
   recruitNumber: number;
   applyNumber: number;
   competition: number;
-  pastCompetition: number;
+  pastPassedRate: number;
   pastPassedNum: number;
   pastmin: number;
   pastmean: number;
@@ -161,7 +161,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
@@ -177,7 +177,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
@@ -193,7 +193,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
@@ -209,7 +209,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
@@ -225,7 +225,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
@@ -241,7 +241,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
@@ -257,7 +257,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
@@ -273,7 +273,7 @@ const dummyData = [
     recruitNumber: 12,
     applyNumber: 32,
     competition: 2.7,
-    pastCompetition: 3.59,
+    pastPassedRate: 3.59,
     pastPassedNum: 4.46,
     pastmean: 4.46,
     pastmin: 4.46,
