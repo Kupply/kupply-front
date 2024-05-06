@@ -22,6 +22,11 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
   });
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setLogin(true);
+    else setLogin(false);
+  }, []);
+
   const handleSettingsAndTerms = () => {
     navigate('/settings');
   };
