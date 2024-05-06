@@ -153,8 +153,16 @@ export const UserInput: React.FC<UserInputProps> = ({
           value={userInfo.info}
           onChange={handleInputChange}
           state={userInfo.infoState}
-          setState={userInfoTypeManual !== 'kuEmail' ? (s) => setUserInfo((prev) => ({ ...prev, infoState: s })) : ()=>{}}
-          setValue={userInfoTypeManual !== 'kuEmail' ? (s) => setUserInfo((prev) => ({...prev, info: s})) : ()=>{}}
+          setState={
+            (userInfoTypeManual === 'kuEmail' || 
+            (locationUsed === 'settings' && userInfoType === 'studentId')) ?
+            () => {}: 
+            (s) => setUserInfo((prev) => ({ ...prev, infoState: s }))}
+          setValue={
+            (userInfoTypeManual === 'kuEmail' || 
+            (locationUsed === 'settings' && userInfoType === 'studentId')) ? 
+            () => {}: 
+            (s) => setUserInfo((prev) => ({ ...prev, info: s }))}
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
           type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}

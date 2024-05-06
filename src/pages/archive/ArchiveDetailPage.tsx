@@ -715,7 +715,7 @@ const CollectingWrapper = styled.div<{ keywordsLength: number }>`
   flex-direction: column;
   width: 87.5vw;
   max-width: 1665px;
-  height: 45vw;
+  height: 52vw;
   //height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
   background-color: #f7f7f773;
   box-shadow: 0px 0px 28px #1414140d;
