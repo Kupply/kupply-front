@@ -27,6 +27,24 @@ const MobileMyBoard = () => {
   /////////////////////////////
   const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
   const [CurrentPic, setCurrentPic] = useState('');
+  const [isOpenEditModal, setOpenEditModal] = useState(false);
+  const [isOpenAppModal, setOpenAppModal] = useState(false);
+
+  const onClickEditModal = () => {
+    setOpenEditModal(true);
+  };
+
+  const onClickAppModal = () => {
+    setOpenAppModal(true);
+  };
+
+  const closeEditModal = () => {
+    setOpenEditModal(false);
+  };
+
+  const closeAppModal = () => {
+    setOpenAppModal(false);
+  };
 
   // onClick 이벤트가 아닌, 사용자 모의지원 완료 여부에 따라 IsApplied 값이 바뀌도록 수정해야 한다.
   const onClickApplication = useCallback(() => {
@@ -331,7 +349,17 @@ const MobileMyBoard = () => {
       ) : (
         <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
           <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
-          <MobileProfile userData={userData} />
+          <MobileProfile
+            userData={userData}
+            isOpenEditModal={isOpenEditModal}
+            setOpenEditModal={setOpenEditModal}
+            closeEditModal={closeEditModal}
+            onClickEditModal={onClickEditModal}
+            isOpenAppModal={isOpenAppModal}
+            setOpenAppModal={setOpenAppModal}
+            closeAppModal={closeAppModal}
+            onClickAppModal={onClickAppModal}
+          />
           <MiddleVector />
           {userData.hopeMajor2 !== '희망 없음' ? (
             <MobileTabMenu02_1 onViewMajor={onViewMajor} onViewChange={handleViewChange} />

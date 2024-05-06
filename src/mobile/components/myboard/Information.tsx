@@ -81,7 +81,9 @@ const MobileApplication = ({
           <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;/ {recruitNum}</NumberText>
           <NumberText2>&nbsp; 명 정원</NumberText2>
         </NumberBox>
-        <Content>{curApplyNum}명의 지원자가 경영학과를 지원했습니다.</Content>
+        <Content>
+          {curApplyNum}명의 지원자가 {majorKoreanName}를 지원했습니다.
+        </Content>
       </BodyWrapper>
     </ApplyWrapper>
   );

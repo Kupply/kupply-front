@@ -192,7 +192,7 @@ export default function ApplicationModal(props: ModalProps) {
                   case 2:
                     return (
                       <>
-                        <NotSubmittedHeader currentStep={2} />
+                        <NotSubmittedHeader currentStep={3} />
                         <CurrentModal2 />
                       </>
                     );

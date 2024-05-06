@@ -105,7 +105,7 @@ const MessageBox = styled.div<MessageBoxProps>`
 
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  padding: 10px 8px;
+  padding: 0.52vw 0.42vw;
   gap: 0.521vw; //gap: 10px;
   background: #fff;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.1));
@@ -113,15 +113,16 @@ const MessageBox = styled.div<MessageBoxProps>`
   //top: -95px;
   // top: -4.948vw;
   //right: -430px;
+  // top: 100%;
   top: 100%;
-  left: 20%;
-  transform: translate(5%, -80%);
+  left: 100%;
+  transform: translate(-20%, -130%);
 `;
 
 const NormalText = styled.text`
   color: var(--Black2, #434343);
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 0.83vw;
   font-style: normal;
   font-weight: 500;
   line-height: 100%;
@@ -130,7 +131,7 @@ const NormalText = styled.text`
 const BordSmallText = styled.text`
   color: var(--Black2, #d85888);
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 0.83vw;
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
@@ -139,7 +140,7 @@ const BordSmallText = styled.text`
 const BordLargeText = styled.text`
   color: var(--Black2, #d85888);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 0.83vw;
   font-style: normal;
   font-weight: 700;
   line-height: 122.222%;
