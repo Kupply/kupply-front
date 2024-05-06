@@ -376,6 +376,7 @@ const MobileMyBoard = () => {
           <MobileMockApply curCompetitionRate={curData[onViewMajor - 1].curCompetitionRate} />
           <MobileThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />
           <MobileQuartileIndicator
+            userData={userData}
             onViewMajor={onViewMajor}
             myStageData={myStageData[onViewMajor - 1]}
             isApplied={isApplied}
