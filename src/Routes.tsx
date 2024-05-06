@@ -32,13 +32,13 @@ const isLogined = true;
 export const mainRoutes = [
   { path: '/', element: <OnboardingPage /> },
   { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
-  { path: '/landing', element: <LandingPage /> },
-  { path: '/archive', element: <PreviousPage /> },
 ];
 
 export const authRoutes = [
+  { path: '/landing', element: <LandingPage /> },
   { path: '/myboard', element: <MyBoardPage /> },
   { path: '/archive/:majorName', element: <ArchiveDetailPage /> },
+  { path: '/archive', element: <PreviousPage /> },
   // 상태관리 도입 예정으로, 잠시 삭제
   { path: '/settings', element: <SettingsPage /> },
   // { path: '/settings', element: <SettingsPage /> },
