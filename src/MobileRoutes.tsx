@@ -8,21 +8,21 @@ import SignUpPage1 from './mobile/pages/signup/SignupPage1';
 import SignUpPage2 from './mobile/pages/signup/SignupPage2';
 import SignUpPage3 from './mobile/pages/signup/SignupPage3';
 import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
-import SignUpPage5 from './mobile/pages/signup/SignupPage5';
+import SignUpPage5, { SignUp5Complete } from './mobile/pages/signup/SignupPage5';
 import MobileArchivePage from './pages/mobile/MobileArchive';
 import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
 
 export const mobileMainRoutes = [
   { path: '/', element: <OnboardingMobile /> },
-  { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
-  { path: '/landing', element: <LandingMobile /> },
-  { path: '/archive', element: <MobileArchivePage /> },
+  { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined === true} /> },
 ];
 
 export const mobileAuthRoutes = [
   { path: '/myboard', element: <MobileMyBoard /> },
   { path: '/archive/:majorName', element: <MobileArchiveDetailPage /> },
+  { path: '/landing', element: <LandingMobile /> },
+  { path: '/archive', element: <MobileArchivePage /> },
   { path: '/settings', element: <MobileSettingsPage /> },
   { path: '/delete', element: <DeletePage /> },
 ];
@@ -37,5 +37,5 @@ export const mobileSignupRoutes = [
   { path: '/signup4-candidate', element: <SignUp4PageCandidate /> },
   { path: '/signup4-passer', element: <SignUp4PagePasser /> },
   { path: '/signup5', element: <SignUpPage5 /> },
-  { path: '/signupcomplete', element: <SignUpPage5 /> },
+  { path: '/signupcomplete', element: <SignUp5Complete /> },
 ];

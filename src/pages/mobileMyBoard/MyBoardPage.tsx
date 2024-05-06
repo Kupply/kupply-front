@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+import MobileMyboardPasser from './MobileMyboardPasser';
 import MobileProfile from '../../mobile/components/myboard/Profile';
 import { MobileTabMenu02_1, MobileTabMenu02_2 } from '../../mobile/assets/tabMenu/TabMenu02';
 import MyboardBanner from '../../mobile/components/myboard/Banner';
@@ -25,7 +26,7 @@ const MobileMyBoard = () => {
   }, []);
 
   /////////////////////////////
-  const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
+  const [isApplied, setIsApplied] = useState<boolean>(false); // *********************** 개발 위해 잠시 수정 *************************
   const [CurrentPic, setCurrentPic] = useState('');
   const [isOpenEditModal, setOpenEditModal] = useState(false);
   const [isOpenAppModal, setOpenAppModal] = useState(false);
@@ -70,6 +71,7 @@ const MobileMyBoard = () => {
     {
       numOfSelection: 10,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -77,6 +79,7 @@ const MobileMyBoard = () => {
     {
       numOfSelection: 20,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -84,6 +87,7 @@ const MobileMyBoard = () => {
     {
       numOfSelection: 30,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -93,6 +97,7 @@ const MobileMyBoard = () => {
     {
       numOfSelection: 40,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -100,6 +105,7 @@ const MobileMyBoard = () => {
     {
       numOfSelection: 50,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -107,6 +113,7 @@ const MobileMyBoard = () => {
     {
       numOfSelection: 60,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -219,7 +226,7 @@ const MobileMyBoard = () => {
   }, []);
 
   const getPastData = async () => {
-    const semester = ['2023-1', '2022-2', '2022-1'];
+    const semester = ['2023-2', '2023-1', '2022-2'];
     const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
     let hopeMajor2 = '';
     if (userData.hopeMajor2 !== '희망 없음') {
@@ -240,6 +247,7 @@ const MobileMyBoard = () => {
         newPastData1[i] = {
           numOfSelection: newPastData1[i].numOfSelection,
           numOfPassed: data.passedData.passedNumberOfData,
+          numOfApplied: data.overallData.numberOfData,
           competitionRate: competitionRate,
           meanGpa: data.passedData.passedMeanGPAData.gpa,
           minGpa: data.passedData.passedMinimumGPAData.gpa,
@@ -265,6 +273,7 @@ const MobileMyBoard = () => {
           newPastData2[i] = {
             numOfSelection: newPastData2[i].numOfSelection,
             numOfPassed: data.passedData.passedNumberOfData,
+            numOfApplied: data.overallData.numberOfData,
             competitionRate: competitionRate,
             meanGpa: data.passedData.passedMeanGPAData.gpa,
             minGpa: data.passedData.passedMinimumGPAData.gpa,
@@ -345,12 +354,15 @@ const MobileMyBoard = () => {
   return (
     <>
       {userData.userRole === 'passer' ? (
-        <></>
+        <>
+          <MobileMyboardPasser />
+        </>
       ) : (
         <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
           <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
           <MobileProfile
             userData={userData}
+            isApplied={isApplied}
             isOpenEditModal={isOpenEditModal}
             setOpenEditModal={setOpenEditModal}
             closeEditModal={closeEditModal}

@@ -23,7 +23,7 @@ function KupplyImage() {
       <img
         width="100%"
         height="100%"
-        src="../../designImage/onboarding/KupplyImage.png"
+        src="../../../../designImage/mobile/onboarding/kupply.png"
         style={{ position: 'absolute', bottom: '0', right: '0' }}
       />
     </MainWrapper>

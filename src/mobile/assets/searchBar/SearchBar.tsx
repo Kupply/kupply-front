@@ -52,14 +52,14 @@ const Container = styled.div`
   &,
   & div,
   & input {
-    height: 40px;
+    height: 10vw;
   }
 `;
 
 const InputBox = styled.div`
   width: 100%;
   //max-width: 328px;
-  height: 36px;
+  height: 10vw;
   position: relative;
 
   & > button {
@@ -94,17 +94,18 @@ const Input = styled.input`
   width: 100%;
   max-width: 1382px;
   box-sizing: border-box;
-  height: 80px;
+  height: 22.22vw;
   padding-left: 70px;
   border-radius: 5px;
 
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
+  font-size: 3.61vw;
 
   transition: 0.3s ease-in-out;
   &::placeholder {
     color: #a8a8a8;
     font-family: Pretendard;
-    font-size: 13px;
+    font-size: s3.61vw;
     font-style: normal;
     font-weight: 500;
     opacity: 0.8;

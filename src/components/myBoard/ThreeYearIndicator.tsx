@@ -24,8 +24,8 @@ const ThreeYear = ({
   pastData1: any[];
   pastData2: any[];
 }) => {
+
   const semesters = LastThreeSemesters;
-  console.log(semesters);
 
   let initialState: SemesterBtnStates = {};
   semesters.forEach((semester, index) => {
@@ -55,6 +55,7 @@ const ThreeYear = ({
     if (index !== -1) {
       setSelectedSemesterIndex(index);
     }
+
   };
 
   // interface SemesterBtnStates {
@@ -101,6 +102,7 @@ const ThreeYear = ({
         <path d="M0 1L422 0.999963" stroke="#DFDFDF" />
       </StyleSvg>
       <EachYearHeadBox>
+
         {semesters.map((semester) => (
           <SemesterButton
             key={semester}
@@ -114,7 +116,9 @@ const ThreeYear = ({
 
       <Text1Box>
         <Text1>
+
           {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 모집정보
+
         </Text1>
         <button
           onClick={() => {
@@ -126,12 +130,16 @@ const ThreeYear = ({
       </Text1Box>
 
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
+
         {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발 인원
+
       </Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>경쟁률</Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>
-        {selectedPastData.competitionRate} : 1
+        {selectedPastData.numOfApplied === 0
+          ? '집계불가'
+          : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
       </Text3>
       <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 평균 학점</Text2>
       <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>{selectedPastData.meanGpa}</Text3>

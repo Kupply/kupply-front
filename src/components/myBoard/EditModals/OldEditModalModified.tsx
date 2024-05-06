@@ -183,7 +183,6 @@ export default function EditModal(props: ModalProps) {
     }
   }, [nicknameState, nickname]);
 
-
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
@@ -384,7 +383,7 @@ export default function EditModal(props: ModalProps) {
               />
             </ContentsWrapper2>
           )}
-          {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
+          {currentModal === 3 && ( // '희망 지원학기' 버튼 클릭 시
             <ContentsWrapper2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                 <SubContentsWrapper>

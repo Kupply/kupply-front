@@ -65,7 +65,6 @@ export function SignUp5Page() {
       try {
         const getRole = sessionStorage.getItem('role') || '';
         await join(getRole);
-        console.log('signup5', getRole);
         navigate('/signupcomplete');
       } catch (e) {
         alert(e);
@@ -75,9 +74,8 @@ export function SignUp5Page() {
     }
   };
   useEffect(() => {
-   if (!sessionStorage.getItem('role')) navigate('/');
+    if (!sessionStorage.getItem('role')) navigate('/');
   }, []);
-
 
   return (
     <SignUpPageWrapper step={5} stepInfo="약관 읽고 서비스 이용하기">
