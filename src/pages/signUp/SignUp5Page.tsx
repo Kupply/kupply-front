@@ -65,6 +65,7 @@ export function SignUp5Page() {
       try {
         const getRole = sessionStorage.getItem('role') || '';
         await join(getRole);
+        sessionStorage.setItem('toComplete', 'true');
         navigate('/signupcomplete');
       } catch (e) {
         alert(e);
@@ -158,7 +159,7 @@ export function SignUp5Complete() {
       return;
     }
 
-    if (!sessionStorage.getItem('curGpa') && !sessionStorage.getItem('passGpa')){
+    if (sessionStorage.getItem('toComplete') !== 'true'){
       sessionStorage.clear();
       navigate('/');
     } else{
