@@ -18,7 +18,7 @@ import { collegeAPIMappingByKR } from '../../utils/Mappings';
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
   const [isOpenEditModal, setOpenEditModal] = useState(false);
-  const [isOpenAppModal, setOpenAppModal] = useState(true);
+  const [isOpenAppModal, setOpenAppModal] = useState(false);
 
   const onClickInterest1 = useCallback(() => {
     setOnViewMajor(1);
@@ -38,6 +38,7 @@ const MyBoardPage = () => {
 
   const onClickAppModal = () => {
     setOpenAppModal(true);
+    console.log('myBoard desktop appModal button Click');
   };
 
   const closeEditModal = () => {
