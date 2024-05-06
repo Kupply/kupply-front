@@ -94,6 +94,7 @@ const MyBoardPage = () => {
     {
       numOfSelection: 10,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -101,6 +102,7 @@ const MyBoardPage = () => {
     {
       numOfSelection: 20,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -108,6 +110,7 @@ const MyBoardPage = () => {
     {
       numOfSelection: 30,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -117,6 +120,7 @@ const MyBoardPage = () => {
     {
       numOfSelection: 40,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -124,6 +128,7 @@ const MyBoardPage = () => {
     {
       numOfSelection: 50,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -131,6 +136,7 @@ const MyBoardPage = () => {
     {
       numOfSelection: 60,
       numOfPassed: 5,
+      numOfApplied: 0,
       competitionRate: 0,
       meanGpa: 0,
       minGpa: 0,
@@ -243,7 +249,7 @@ const MyBoardPage = () => {
   }, []);
 
   const getPastData = async () => {
-    const semester = ['2023-1', '2022-2', '2022-1'];
+    const semester = ['2023-2', '2023-1', '2022-2'];
     const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
     let hopeMajor2 = '';
     if (userData.hopeMajor2 !== '희망 없음') {
@@ -264,6 +270,7 @@ const MyBoardPage = () => {
         newPastData1[i] = {
           numOfSelection: newPastData1[i].numOfSelection,
           numOfPassed: data.passedData.passedNumberOfData,
+          numOfApplied: data.overallData.numberOfData,
           competitionRate: competitionRate,
           meanGpa: data.passedData.passedMeanGPAData.gpa,
           minGpa: data.passedData.passedMinimumGPAData.gpa,
@@ -289,6 +296,7 @@ const MyBoardPage = () => {
           newPastData2[i] = {
             numOfSelection: newPastData2[i].numOfSelection,
             numOfPassed: data.passedData.passedNumberOfData,
+            numOfApplied: data.overallData.numberOfData,
             competitionRate: competitionRate,
             meanGpa: data.passedData.passedMeanGPAData.gpa,
             minGpa: data.passedData.passedMinimumGPAData.gpa,
