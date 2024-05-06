@@ -1,5 +1,5 @@
-import ModalLarge from '../../components/base/ModalLarge';
-
+//import ModalLarge from '../../components/base/ModalLarge';
+import ModalMedium from '../../components/base/ModalMedium';
 import styled from 'styled-components';
 import AlertIconExclamation from '../icons/AlertIconExclamation';
 import Typography from '../Typography';
@@ -30,30 +30,29 @@ function SignUpAlertLarge01({
   sendEmail,
 }: SignUpAlertLargeProps){
   return (
-    <ModalLarge onClickToggleModal={onClickModal}>
+    <ModalMedium onClickToggleModal={onClickModal}>
       <ButtonWrapper>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon03 size={'45px'} />
+          <Icon03 size='100%' />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size={'45px'} />
+          <Icon02 size='100%' />
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '10%' }}></div>
-      <AlertIconExclamation width="120px" height="120px" />
+      <AlertIconExclamation width="5.885vw" height="5.885vw" />
       <TypographyBox>
-        <Typography bold={'700'} color="#0a0606" style={{ marginTop: '32px' }}>
+        <Typography bold={'700'} color="#0a0606" style={{ marginTop: '1.67vw' }}>
           아직 인증번호를 받지 못하셨나요?
         </Typography>
-        <Typography color="#141414" style={{ marginTop: '32px' }}>
+        <Typography color="#141414" style={{ marginTop: '1.67vw' }}>
           새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
         </Typography>
       </TypographyBox>
@@ -77,7 +76,7 @@ function SignUpAlertLarge01({
           이메일 주소 변경하기
         </Button05>
       </ActionWrapper>
-    </ModalLarge>
+    </ModalMedium>
   );
 }
 
@@ -96,8 +95,7 @@ const ActionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  bottom: 50px;
+  margin-top: 3vw;
   gap: 1.5625vw;
 `;
 
@@ -113,27 +111,6 @@ const TypographyBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  & > span:first-child {
-    display: block;
-    font-size: 30px;
-    @media screen and (max-width: 850px) {
-      font-size: 28px;
-    }
-    @media screen and (max-width: 768px) {
-      font-size: 26px;
-    }
-  }
-  & > span:last-child {
-    display: block;
-    font-size: 20px;
-    @media screen and (max-width: 850px) {
-      font-size: 18px;
-    }
-    @media screen and (max-width: 768px) {
-      font-size: 16px;
-    }
-  }
 `;
 
 export default SignUpAlertLarge01;

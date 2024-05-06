@@ -128,7 +128,6 @@ export function SignUp1Page(){
       <ButtonsWrapper>
         <Button04 style={{width:'25.582%'}} state="disabled"/>
         <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} style={{width:'74.418%'}}/>
-        {/* VerificationForm에서 자동으로 넘어갈 수 있게 설정해서 onClick일단 빼둠*/}
       </ButtonsWrapper>
     </SignUpPageWrapper>
     </>

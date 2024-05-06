@@ -19,7 +19,7 @@ export const SignUpPageWrapper:
   return (
     <Wrapper>
       <div style={{display: 'flex', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', width: '100%', position: 'relative'}}>
-      <CloseButton onClick={() => {navigate('/onboarding')}}>
+      <CloseButton onClick={() => {navigate('/')}}>
           <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
       </CloseButton>
       <ContentsTitleWrapper>

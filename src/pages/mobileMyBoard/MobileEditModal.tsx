@@ -42,7 +42,6 @@ export default function MobileEditModal(props: ModalProps) {
   };
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '고대빵');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
-  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('filled');
   const [currentNickname, setCurrentNickname] = useState('');
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: '',
@@ -165,18 +164,11 @@ export default function MobileEditModal(props: ModalProps) {
   const [currentModal, setCurrentModal] = useRecoilState(editModalMobileState);
 
   useEffect(() => {
-    if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
-      })};
-  }, [nicknameState]);
-
-  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
-  useEffect(() => {
-    setNicknameCheckState('default');
-  }, [nickname]);
+    if (nicknameState === 'filled') {
+      if (nickname.length === 1 || nickname.length > 7) setNicknameState('error');
+      else setNicknameState('filled');
+    }
+  }, [nicknameState, nickname]);
 
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
@@ -192,18 +184,6 @@ export default function MobileEditModal(props: ModalProps) {
     };
     getMe();
   }, []);
-
-  // nickname이 현재 닉네임과 같다면 중복 검사 스킵
-  useEffect(() => {
-    if (currentNickname === nickname) {
-      setNicknameCheckState('filled');
-    }
-  });
-
-  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
-  useEffect(() => {
-    if (nicknameCheck === 'filled') setNicknameState('filled');
-  }, [nicknameCheck]);
 
   return (
     <Main>

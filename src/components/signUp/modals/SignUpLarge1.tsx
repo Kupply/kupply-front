@@ -40,8 +40,8 @@ const Main = styled.main`
   position: fixed;
   z-index: 1005;
 
-  & > div > dialog {
+  /* & > div > dialog {
     top: 15%;
     min-height: 600px;
-  }
+  } */
 `;

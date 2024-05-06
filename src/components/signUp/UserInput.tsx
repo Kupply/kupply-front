@@ -46,7 +46,7 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   id: '',
   password: '특수문자와 영문자를 포함해 주세요!',
   password2: '비밀번호 확인',
-  nickname: '닉네임',
+  nickname: '닉네임 길이는 2자 이상 7자 이하로 해주세요!',
   hopeMajor1: '',
   hopeMajor2: '',
   doubleMajor: '',
@@ -59,7 +59,7 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   firstMajor: '',
   password: '',
   password2: '',
-  nickname: '',
+  nickname: '닉네임 길이가 맞지 않습니다',
   id: '',
   hopeMajor1: '',
   hopeMajor2: '',
@@ -102,7 +102,7 @@ export const UserInput: React.FC<UserInputProps> = ({
   ).info;
 
   errorMessageMapping.password = errorMessage.passwordErrorMessage;
-  errorMessageMapping.nickname = errorMessage.nicknameErrorMessage;
+
   errorMessageMapping.password2 = errorMessage.password2ErrorMessage;
 
   const updatedMajorTargetList = [...majorTargetList];
@@ -153,7 +153,7 @@ export const UserInput: React.FC<UserInputProps> = ({
           value={userInfo.info}
           onChange={handleInputChange}
           state={userInfo.infoState}
-          setState={(s) => setUserInfo((prev) => ({ ...prev, infoState: s }))}
+          setState={userInfoTypeManual !== 'kuEmail' ? (s) => setUserInfo((prev) => ({ ...prev, infoState: s })) : ()=>{}}
           setValue={userInfoTypeManual !== 'kuEmail' ? (s) => setUserInfo((prev) => ({...prev, info: s})) : ()=>{}}
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}

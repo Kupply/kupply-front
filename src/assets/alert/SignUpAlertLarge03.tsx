@@ -1,4 +1,4 @@
-import ModalLarge from '../../components/base/ModalLarge';
+import ModalMedium from '../../components/base/ModalMedium';
 import styled from 'styled-components';
 
 import Typography from '../Typography';
@@ -27,24 +27,23 @@ function SignUpAlertLarge03({
   email,
 }: SignUpAlertLargeProps) {
   return (
-    <ModalLarge onClickToggleModal={onClickModal}>
+    <ModalMedium onClickToggleModal={onClickModal}>
       <ButtonWrapper>
         <TopButton
           onClick={() => {
             setCurrentModal(currentModal - 1);
           }}
         >
-          <Icon03 size={'3.125vw'} />
+          <Icon03 size='100%' />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size={'3.125vw'} />
+          <Icon02 size='100%' />
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '6.771vw' }}></div>
       <AlertIconCheck width="5.885vw" height="5.885vw" />
       <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
         새로운 인증번호를 발송했습니다.
@@ -58,14 +57,14 @@ function SignUpAlertLarge03({
           확인
         </Button05>
       </ActionWrapper>
-    </ModalLarge>
+    </ModalMedium>
   );
 }
 
 const TopButton = styled.button`
   display: flex;
-  width: 60px;
-  height: 60px;
+  width: 3.125vw;
+  height: 3.125vw;
   justify-content: center;
   align-items: center;
 
@@ -77,12 +76,8 @@ const ActionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  margin-top: 72px;
-
-  @media screen and (max-width: 600px) {
-    width: 90%;
-  }
+  margin-top: 3vw;
+  gap: 1.5625vw;
 `;
 
 const ButtonWrapper = styled.div`
@@ -90,6 +85,13 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const TypographyBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default SignUpAlertLarge03;

@@ -1,4 +1,4 @@
-import ModalLarge from '../../components/base/ModalLarge';
+import ModalMedium from '../../components/base/ModalMedium';
 import styled from 'styled-components';
 import AlertIconExclamation from '../icons/AlertIconExclamation';
 import Typography from '../Typography';
@@ -37,33 +37,32 @@ function SignUpAlertLarge02({
   setEmailState,
 }: SignUpAlertLargeProps) {
   return (
-    <ModalLarge onClickToggleModal={onClickModal}>
+    <ModalMedium onClickToggleModal={onClickModal}>
       <ButtonWrapper>
         <TopButton
           onClick={() => {
             setCurrentModal(currentModal - 1);
           }}
         >
-          <Icon03 size={'3.125vw'} />
+          <Icon03 size='100%' />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size={'3.125vw'} />
+          <Icon02 size='100%' />
         </TopButton>
       </ButtonWrapper>
-      <div style={{ height: '6.771vw' }}></div>
       <AlertIconExclamation width="5.885vw" height="5.885vw" />
-      <TextWrapper>
+      <TypographyBox>
         <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
           인증번호를 받을 <span className="mobile"> 고려대 이메일 주소를 입력해주세요!</span>
         </Typography>
         <Typography size={'0.9375vw'} color="#141414" style={{ marginTop: '1.25vw' }}>
           고려대학교 이메일 주소를 정확히 기입해주세요.
         </Typography>
-      </TextWrapper>
+      </TypographyBox>
       <ActionWrapper>
         <TextFieldBox
           placeholder="bright@korea.ac.kr"
@@ -92,7 +91,7 @@ function SignUpAlertLarge02({
           제출하기
         </Button05>
       </ActionWrapper>
-    </ModalLarge>
+    </ModalMedium>
   );
 }
 
@@ -111,8 +110,8 @@ const ActionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 3vw;
   gap: 1.5625vw;
-  margin-top: 3.75vw;
 `;
 
 const ButtonWrapper = styled.div`
@@ -122,23 +121,11 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const TextWrapper = styled.div`
-  width: 100%;
-
+const TypographyBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  & > span {
-    text-align: center;
-  }
-  @media screen and (max-width: 600px) {
-    .mobile {
-      display: block;
-      margin-top: 8px;
-    }
-  }
 `;
 
 export default SignUpAlertLarge02;

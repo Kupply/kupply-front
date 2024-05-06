@@ -78,7 +78,6 @@ export const MobileSettingsPage = () => {
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
-  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('filled');
   const [currentNickname, setCurrentNickname] = useState('');
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: '',
@@ -121,13 +120,13 @@ export const MobileSettingsPage = () => {
   // 잠시 수정 
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(true);
 
-  // useEffect(() => {
-  //   if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
-  //     setIsGpaChanged(true);
-  //   } else {
-  //     setIsGpaChanged(false);
-  //   }
-  // }, [GPA1, GPA2, GPA3]);
+  useEffect(() => {
+    if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
+      setIsGpaChanged(true);
+    } else {
+      setIsGpaChanged(false);
+    }
+  }, [GPA1, GPA2, GPA3]);
 
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
@@ -229,31 +228,11 @@ export const MobileSettingsPage = () => {
   }, [stdID, stdIDState]);
 
   useEffect(() => {
-    if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
-      });
-    } 
-  }, [nicknameState]);
-
-  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
-  useEffect(() => {
-    setNicknameCheckState('default');
-  }, [nickname]);
-
-  // nickname이 현재 닉네임과 같다면 중복 검사 스킵
-  useEffect(() => {
-    if (currentNickname === nickname) {
-      setNicknameCheckState('filled');
+    if (nicknameState === 'filled') {
+      if (nickname.length === 1 || nickname.length > 7) setNicknameState('error');
+      else setNicknameState('filled');
     }
-  });
-
-  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
-  useEffect(() => {
-    if (nicknameCheck === 'filled') setNicknameState('filled');
-  }, [nicknameCheck]);
+  }, [nicknameState, nickname]);
 
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;

@@ -45,7 +45,7 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   id: '',
   password: '특수문자와 영문자를 포함해 주세요!',
   password2: '비밀번호 확인',
-  nickname: '닉네임',
+  nickname: '2자 이상 7자 이하로 설정해 주세요!',
   hopeMajor1: '',
   hopeMajor2: '',
   doubleMajor: '',
@@ -58,7 +58,7 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   firstMajor: '',
   password: '',
   password2: '',
-  nickname: '',
+  nickname: '닉네임 길이가 맞지 않습니다.',
   id: '',
   hopeMajor1: '',
   hopeMajor2: '',
@@ -91,7 +91,6 @@ export const UserInput: React.FC<UserInputProps> = ({
   const hopeMajor2 = useRecoilValue(userState('hopeMajor2')).info;
 
   errorMessageMapping.password = errorMessage.passwordErrorMessage;
-  errorMessageMapping.nickname = errorMessage.nicknameErrorMessage;
   errorMessageMapping.password2 = errorMessage.password2ErrorMessage;
 
   const updatedMajorTargetList = [...majorTargetList];

@@ -10,7 +10,6 @@ import ToolTip04 from '../../../assets/toolTips/ToolTip04';
 import { majorAllList } from '../../../common/MajorAll';
 import { majorTargetList } from '../../../common/MajorTarget';
 import client from '../../../utils/HttpClient';
-import NicknameCheckButton from '../../../assets/progressIndicator/Loader';
 import { useNavigate } from 'react-router-dom';
 import Icon02 from '../../../assets/icons/Icon02';
 import Button01 from '../../../assets/buttons/Button01';
@@ -51,7 +50,6 @@ export default function EditModal(props: ModalProps) {
   };
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '고대빵');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
-  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('filled');
   const [currentNickname, setCurrentNickname] = useState('');
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: '',
@@ -192,19 +190,12 @@ export default function EditModal(props: ModalProps) {
   const [currentModal, setCurrentModal] = useRecoilState(editModalState);
 
   useEffect(() => {
-    if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
-      });
-    } 
-  }, [nicknameState]);
+    if (nicknameState === 'filled') {
+      if (nickname.length === 1 || nickname.length > 7) setNicknameState('error');
+      else setNicknameState('filled');
+    }
+  }, [nicknameState, nickname]);
 
-  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
-  useEffect(() => {
-    setNicknameCheckState('default');
-  }, [nickname]);
 
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
@@ -220,18 +211,6 @@ export default function EditModal(props: ModalProps) {
     };
     getMe();
   }, []);
-
-  // nickname이 현재 닉네임과 같다면 중복 검사 스킵
-  useEffect(() => {
-    if (currentNickname === nickname) {
-      setNicknameCheckState('filled');
-    }
-  });
-
-  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
-  useEffect(() => {
-    if (nicknameCheck === 'filled') setNicknameState('filled');
-  }, [nicknameCheck]);
 
   return ReactDOM.createPortal(
     <Main>
@@ -336,19 +315,8 @@ export default function EditModal(props: ModalProps) {
                       state={nicknameState}
                       setState={setNicknameState}
                       setValue={setNickname}
-                      errorMessage={errorMessages.nicknameErrorMessage}
-                    ></TextFieldBox>
-                    {nickname === '' || nicknameState === 'filled' ? (
-                      <></>
-                    ) : (
-                      <NicknameCheckButtonWrapper>
-                        <NicknameCheckButton
-                          nickname={nickname}
-                          state={nicknameCheck}
-                          setState={setNicknameCheckState}
-                        ></NicknameCheckButton>
-                      </NicknameCheckButtonWrapper>
-                    )}
+                      errorMessage={'닉네임 길이는 2자 이상 7자 이하이어야 합니다'}
+                    />
                   </div>
                 </SubContentsWrapper>
                 <SubContentsWrapper>
@@ -361,7 +329,7 @@ export default function EditModal(props: ModalProps) {
                     state={stdIDState}
                     setState={setStdIDState}
                     setValue={setStdID}
-                  ></TextFieldBox>
+                  />
                 </SubContentsWrapper>
                 <SubContentsWrapper>
                   <ContentsTitle>본전공 변경하기</ContentsTitle>

@@ -76,15 +76,18 @@ export function useSignUp2Verification(){
   const navigate = useNavigate();
 
   // 잠시 수정 
-  useEffect(() => {
-    if (!sessionStorage.getItem('email')) navigate('/');
-    else {
-      sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
-      if (name.info !== '') setName((prev) => ({...prev, infoState: 'filled'}));
-      if (stdId.info !== '') setStdId((prev) => ({...prev, infoState: 'filled'}));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem('email')) navigate('/');
+  //   else {
+  //     sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
+  //     if (name.info !== '') setName((prev) => ({...prev, infoState: 'filled'}));
+  //     if (stdId.info !== '') setStdId((prev) => ({...prev, infoState: 'filled'}));
+  //   }
+  // }, []);
   // name, stdId, firstMajor의 completed 여부
+
+  // 이건 정말로 임시로 보내는거
+  sessionStorage.setItem('email', 'faiith7001@korea.ac.kr');
 
   useEffect(() => {
     if (name.infoState === 'filled' && stdIdVerified && !!firstM.info && !complete) {
@@ -119,13 +122,13 @@ export function useSignUp3Verification(){
   }, [passwordVerified, password2Verified, nicknameVerified, complete, idVerified]);
 
 
-  useEffect(() => {
-  if (!sessionStorage.getItem('name')) navigate('/');
-  else {
-    sessionStorage.removeItem('password'); //비밀번호는 삭제
-    if (nickname.info !== '') setNickname((prev) => ({...prev, infoState: 'filled'}));
-  }
-  }, []);
+  // useEffect(() => {
+  // if (!sessionStorage.getItem('name')) navigate('/');
+  // else {
+  //   sessionStorage.removeItem('password'); //비밀번호는 삭제
+  //   if (nickname.info !== '') setNickname((prev) => ({...prev, infoState: 'filled'}));
+  // }
+  // }, []);
 
   return {complete};
 
