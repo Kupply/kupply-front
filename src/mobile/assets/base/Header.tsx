@@ -56,6 +56,7 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
               ...userData,
               userNickname: userInfo.nickname,
               userProfilePic: userInfo.profilePic,
+              userRole: userInfo.role,
             });
 
             localStorage.setItem('userProfilePic', userInfo.profilePic);
