@@ -15,7 +15,7 @@ const majorParamMappingImage: { [key: string]: string } = {
   미디어학부: 'media',
   식품자원경제학과: 'bio',
   컴퓨터학과: 'info',
-  생명공학부: 'engineering',
+  생명공학부: 'bio',
   생명과학부: 'bio',
   정치외교학과: 'political',
   행정학과: 'political',

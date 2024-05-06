@@ -102,23 +102,34 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   const navigate = useNavigate();
 
   const handleMenu1Click = () => {
-    navigate('/archive');
-  };
-  const handleMenu2Click = () => {
-    // 원래는 if(logined)이지만 임시적으로 수정
     if (logined) {
-      navigate('/myboard');
-    } // 로그인 상태
-    else {
+      navigate('/archive');
+    } else {
       const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
       if (confirmation) {
         navigate('/login');
       }
-      // 미로그인 상태
+    }
+  };
+  const handleMenu2Click = () => {
+    if (logined) {
+      navigate('/myboard');
+    } else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
     }
   };
   const handleMenu3Click = () => {
-    navigate('/landing');
+    if (logined) {
+      navigate('/landing');
+    } else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
+    }
   };
   const handleSettingsClick = () => {
     setSelected(0);

@@ -85,6 +85,7 @@ function LandingPage() {
     curGPA: 4.5,
     hopeSemester: '2023-2',
   }));
+  const [tableData, setTableData] = useState<ITableData[]>(dummyData);
 
   // 로그인한 유저 정보 localStorage에
   const getMe = async () => {
@@ -131,44 +132,23 @@ function LandingPage() {
       console.log(err);
     }
   };
+
+  const loadData = async () => {
+    try {
+      // const response = await axios.get('http://localhost:8080/landing');
+      const response = await client.get('/landing');
+      setTableData(response.data.data);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   useEffect(() => {
-    if (isLogined) getMe();
-  }, []);
-
-  const [tableData, setTableData] = useState<ITableData[]>(dummyData);
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        // const response = await axios.get('http://localhost:8080/landing');
-        const response = await client.get('/landing');
-        setTableData(response.data.data);
-      } catch (e) {
-        alert(e);
-      }
-    };
-
-    if (isLogined) loadData();
-  }, []);
-
-  // const cardData = tableData.map((data) => ({
-  //   name: data.secondMajor,
-  //   eng: data.engName,
-  //   합격자수: data.pastPassedNum,
-  //   선발인원: data.pastRecruitNumber,
-  //   min: data.pastmin,
-  //   mean: data.pastmean,
-  //   semester: '23-1',
-  //   imagesrc: data.imagesrc,
-  // }));
-
-  // const tableContent = useRef<HTMLDivElement>(null);
-
-  // const onClickDownArrow = () => {
-  //   tableContent.current?.scrollIntoView({ behavior: 'smooth' });
-  // };
-
-  // const [scrollY, setScrollY] = useState(0);
+    if (isLogined) {
+      getMe();
+      loadData();
+    }
+  }, [isLogined]);
 
   const faqRef = useRef<HTMLDivElement>(null);
   const rankRef = useRef<HTMLDivElement>(null);
