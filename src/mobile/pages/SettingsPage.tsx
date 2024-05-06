@@ -271,15 +271,48 @@ export const MobileSettingsPage = () => {
       console.log(err);
     }
   };
-  const thirdSubmit = async () => {
+
+  const thirdSubmit1 = async () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
+
     if(oldGpa !== newGpa){
       console.log('it is different'); //여기까지는 감지 
       setIsGpaChanged(true);
       setModalOpen(true);
       return;
     }
+
+    if (Math.abs(oldGpa - newGpa) >= 1.5) {
+      alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
+      navigate('/settings');
+    } else {
+      const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
+      const year = +(hopeSemester1 + hopeSemester2);
+      const semester = +hopeSemester3;
+      if(year <= 23 || (semester !== 1 && semester !==2)){
+        alert('유효한 학기를 입력해주세요!');
+      }else{
+      const updateData = {
+        newCurGPA: newGpa,
+        newHopeMajor1: hopeMajor1,
+        newHopeMajor2: hopeMajor2,
+        newHopeSemester: newHopeSemester,
+      };
+      try {
+        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        await client.post('/user/updateMe', updateData, config);
+        window.location.reload(); // 페이지 새로고침.
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+  };
+  const thirdSubmit2 = async () => {
+    const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
+    const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
+
     if (Math.abs(oldGpa - newGpa) >= 1.5) {
       alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
       navigate('/settings');
@@ -324,15 +357,11 @@ export const MobileSettingsPage = () => {
   const majorTarget = [...majorTargetList];
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
-  {/* 
-    지금 문제가 selected == 3를 thirdSubmit으로 보내야 저장하기가 돼
-    근데 () => {setModalOpen(!modalOpen)} 를 안하면 gpachanged에서 modal이 안열려 
-   */}
   return(
     <SettingsWrapper selected={selected} onClickFunction={
       selected == 1 ? firstSubmit : 
       selected == 2 ? secondSubmit : 
-      selected == 3 ?  thirdSubmit: 
+      selected == 3 ?  thirdSubmit1: 
       selected == 4 ? fourthSubmit : 
       () => {}}>
       {modalOpen && isGpaChanged && (
@@ -340,7 +369,7 @@ export const MobileSettingsPage = () => {
         isOpenModal={modalOpen}
         setOpenModal={setModalOpen}
         onClickModal={() => {setModalOpen(!modalOpen)}}
-        thirdSubmit={thirdSubmit}
+        thirdSubmit={thirdSubmit2}
         />
       )}
       {selected == 0 && (
