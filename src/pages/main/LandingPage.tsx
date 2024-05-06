@@ -58,17 +58,12 @@ function LandingPage() {
     requestAnimationFrame(animation);
   };
 
-  // useEffect(() => {
-  //   if (location.state?.fromButton) {
-  //     smoothScrollTo(1100, 1500);
-  //   }
-  // }, [location.state]);
+  const [isLogined, setisLogined] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   if (location.state?.fromButton) {
-  //     window.scrollTo(0, 1100);
-  //   }
-  // }, [location.state]);
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
 
   useEffect(() => {
     if (location.state?.fromButton) {
@@ -137,7 +132,7 @@ function LandingPage() {
     }
   };
   useEffect(() => {
-    getMe();
+    if (isLogined) getMe();
   }, []);
 
   const [tableData, setTableData] = useState<ITableData[]>(dummyData);
@@ -152,7 +147,8 @@ function LandingPage() {
         alert(e);
       }
     };
-    loadData();
+
+    if (isLogined) loadData();
   }, []);
 
   // const cardData = tableData.map((data) => ({
