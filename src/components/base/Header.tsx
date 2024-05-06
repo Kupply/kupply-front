@@ -106,7 +106,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   };
   const handleMenu2Click = () => {
     // 원래는 if(logined)이지만 임시적으로 수정
-    if (true) {
+    if (logined) {
       navigate('/myboard');
     } // 로그인 상태
     else {

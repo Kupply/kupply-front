@@ -95,6 +95,7 @@ const BlurBox = styled.div`
   backdrop-filter: blur(1.67vw);
   position: absolute;
   bottom: 0;
+  -webkit-backdrop-filter: blur(1.67vw);
 `;
 
 export default Content1;
