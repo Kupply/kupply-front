@@ -18,6 +18,7 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
 
 const ProfileBox = ({
   userData,
+  isApplied,
   isOpenEditModal,
   setOpenEditModal,
   closeEditModal,
@@ -27,11 +28,28 @@ const ProfileBox = ({
   closeAppModal,
   onClickAppModal,
 }: any) => {
+  const [freshman, setFreshman] = useState(isApplied);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<'default' | 'disabled'>('default');
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
   const major1: MajorOptions = userData.hopeMajor1;
   const major2: MajorOptions = userData.hopeMajor2;
   const profilePic = userData.userProfilePic;
+
+  const currentDate = new Date();
+  const startDate = new Date('2024-05-10');
+  const endDate = new Date('2024-05-17');
+  const isDateInRange = currentDate >= startDate && currentDate <= endDate; // 해당 기간에만 True
+
+  useEffect(() => {
+    if (id === '24' || isApplied || !isDateInRange) {
+      setFreshman(false);
+      setIsButtonDisabled('disabled');
+    } else {
+      setFreshman(true);
+      setIsButtonDisabled('default');
+    }
+  }, [id, isApplied]);
 
   // const majorKoreanName = majorNameMapping[major][0];
 
@@ -96,11 +114,8 @@ const ProfileBox = ({
             isApplied={false} /* 임시로 false */
           />
         )}
-        {isOpenAppModal && (
-          <ApplicationModal 
-            isOpenModal={isOpenAppModal} 
-            setOpenModal={setOpenAppModal} 
-            onClickModal={closeAppModal} />
+        {freshman && !isApplied && isOpenAppModal && isDateInRange && (
+          <ApplicationModal isOpenModal={isOpenAppModal} setOpenModal={setOpenAppModal} onClickModal={closeAppModal} />
         )}
       </ModalBox>
 
@@ -151,7 +166,7 @@ const ProfileBox = ({
             </SubTitleBox>
 
             <ApplyBox>
-              <CTA02 size="small" onClick={onClickAppModal} />
+              <CTA02 size="small" onClick={onClickAppModal} state={isButtonDisabled} />
             </ApplyBox>
           </>
         ) : (
@@ -170,7 +185,7 @@ const ProfileBox = ({
             </SubTitleBox>
 
             <ApplyBox style={{ top: '27.28vw' }}>
-              <CTA02 size="small" onClick={onClickAppModal}/>
+              <CTA02 size="small" onClick={onClickAppModal} state={isButtonDisabled} />
             </ApplyBox>
           </>
         )}
