@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+import MobileMyboardPasser from './MobileMyboardPasser';
 import MobileProfile from '../../mobile/components/myboard/Profile';
 import { MobileTabMenu02_1, MobileTabMenu02_2 } from '../../mobile/assets/tabMenu/TabMenu02';
 import MyboardBanner from '../../mobile/components/myboard/Banner';
@@ -345,7 +346,9 @@ const MobileMyBoard = () => {
   return (
     <>
       {userData.userRole === 'passer' ? (
-        <></>
+        <>
+          <MobileMyboardPasser />
+        </>
       ) : (
         <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
           <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
