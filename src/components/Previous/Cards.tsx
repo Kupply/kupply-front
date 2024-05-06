@@ -206,7 +206,7 @@ const mockCards = [
     semester: '23-2',
   },
   {
-    korName: '심리학부 심리학부',
+    korName: '심리학부',
     engName: 'School of Psychology',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 27,
@@ -236,7 +236,7 @@ const mockCards = [
     semester: '23-2',
   },
   {
-    korName: '미디어학부 미디어학부',
+    korName: '미디어학부',
     engName: 'School of Media & Communication',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 21,
