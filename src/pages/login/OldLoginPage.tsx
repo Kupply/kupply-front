@@ -105,8 +105,7 @@ const CheckButton = styled.button<{ checked: boolean }>`
   width: 0.94vw;
   height: 0.94vw;
   flex-shrink: 0;
-  background-image: url(${(props) =>
-    props.checked ? 'designImage/textField/CheckCircle28.png' : 'designImage/login/DCheckCircle.png'});
+  background-image: url(${(props) => props.checked ? 'designImage/textField/CheckCircle28.png' : 'designImage/login/DCheckCircle.png'});
   background-size: cover;
   border: none;
   cursor: pointer;
