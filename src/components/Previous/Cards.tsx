@@ -50,7 +50,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
       const isLogined = window.localStorage.getItem('isLogin');
 
       if (isLogined !== 'true') {
-        alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+        // alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
         // navigate('/login'); FIXME => 배포 시 수정 필요
       } else {
         // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
