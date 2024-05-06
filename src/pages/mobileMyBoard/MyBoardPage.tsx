@@ -26,7 +26,7 @@ const MobileMyBoard = () => {
   }, []);
 
   /////////////////////////////
-  const [isApplied, setIsApplied] = useState<boolean>(true); // *********************** 개발 위해 잠시 수정 *************************
+  const [isApplied, setIsApplied] = useState<boolean>(false); // *********************** 개발 위해 잠시 수정 *************************
   const [CurrentPic, setCurrentPic] = useState('');
   const [isOpenEditModal, setOpenEditModal] = useState(false);
   const [isOpenAppModal, setOpenAppModal] = useState(false);
@@ -354,6 +354,7 @@ const MobileMyBoard = () => {
           <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
           <MobileProfile
             userData={userData}
+            isApplied={isApplied}
             isOpenEditModal={isOpenEditModal}
             setOpenEditModal={setOpenEditModal}
             closeEditModal={closeEditModal}

@@ -375,6 +375,7 @@ const MyBoardPage = () => {
           <ProfileWrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
             <ProfileBox
               userData={userData}
+              isApplied={isApplied}
               isOpenEditModal={isOpenEditModal}
               setOpenEditModal={setOpenEditModal}
               closeEditModal={closeEditModal}
