@@ -12,7 +12,6 @@ import { RecoilRoot } from 'recoil';
 
 import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes } from './MobileRoutes';
 
-
 interface RouteConfig {
   path: string;
   element: React.ReactNode;

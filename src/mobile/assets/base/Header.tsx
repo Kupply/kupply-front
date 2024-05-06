@@ -165,7 +165,7 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
           )}
         </div>
       </HorizontalWrapper>
-      <HorizontalWrapper>
+      <ButtonWrapper>
         <HeaderButton state={buttonStates[0]} onClick={() => navigate('/landing')}>
           실시간 지원 현황
         </HeaderButton>
@@ -175,7 +175,7 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
         <HeaderButton state={buttonStates[2]} onClick={() => navigate('/myboard')}>
           마이보드
         </HeaderButton>
-      </HorizontalWrapper>
+      </ButtonWrapper>
     </MainWrapper>
   );
 }
@@ -201,6 +201,14 @@ const HorizontalWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const ButtonWrapper = styled.div`
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 7.5vw;
 `;
 
 const Logo = styled.img`
