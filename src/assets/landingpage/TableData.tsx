@@ -11,7 +11,7 @@ export interface TableDataProps {
   recruitNumber: number;
   applyNumber: number;
   competition: number;
-  pastCompetition: number;
+  pastPassedRate: number;
   pastmin: number;
   pastmean: number;
   interest: number;
@@ -27,7 +27,7 @@ export default function TableData(props: TableDataProps) {
     recruitNumber,
     applyNumber,
     competition,
-    pastCompetition,
+    pastPassedRate,
     pastmean,
     interest,
     interestedNum,
@@ -64,8 +64,8 @@ export default function TableData(props: TableDataProps) {
       <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
       <AppliedNumberCell>{applyNumber}</AppliedNumberCell>
       <CompetitionCell>{competition} : 1</CompetitionCell>
-      <PastCompetitionCell>{pastCompetition} : 1</PastCompetitionCell>
-      <PastMeanCell>{pastmean}</PastMeanCell>
+      <PastPassedRateCell>{pastPassedRate < 0 ? '집계불가' : pastPassedRate + ' %'} </PastPassedRateCell>
+      <PastMeanCell>{pastmean === 0 ? '집계불가' : pastmean}</PastMeanCell>
       <InterestCell>{interest}</InterestCell>
     </Wrapper>
   );
@@ -156,7 +156,7 @@ const CompetitionCell = styled.div`
   color: #d85888;
 `;
 
-const PastCompetitionCell = styled.div`
+const PastPassedRateCell = styled.div`
   width: 14%;
   display: flex;
   align-items: center;

@@ -14,8 +14,8 @@ function PastInfo(props: PastInfoProps) {
   const { isAscending, isShowAll, tableData } = props;
 
   const arrangedData = isAscending
-    ? tableData.sort((a, b) => a.pastCompetition - b.pastCompetition)
-    : tableData.sort((a, b) => b.pastCompetition - a.pastCompetition);
+    ? tableData.sort((a, b) => a.pastPassedRate - b.pastPassedRate)
+    : tableData.sort((a, b) => b.pastPassedRate - a.pastPassedRate);
   const visibleData = isShowAll ? arrangedData : arrangedData.slice(0, 4);
 
   return (
@@ -49,7 +49,7 @@ function PastInfo(props: PastInfoProps) {
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.pastCompetition} : 1
+              {dictionary.pastPassedRate} %
             </Typography>
           </Body>
           <Body>

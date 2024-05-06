@@ -11,7 +11,7 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   TO: number; // 자리 TO
   avgPass: number;
   minPass: number;
-  compRate: number; // competition ratio
+  passRate: number; // pass ratio
   semester: string;
 }
 
@@ -62,7 +62,7 @@ const majorParamMappingPath = {
   'Division of Smart Security': 'smartsec',
 };
 
-export default function Card01({ korName, engName, TO, avgPass, minPass, compRate, semester }: CardProps) {
+export default function Card01({ korName, engName, TO, avgPass, minPass, passRate, semester }: CardProps) {
   const [hover, setHover] = useState(false);
   const [svgHover, setSvgHover] = useState(false);
 
@@ -119,17 +119,19 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, compRat
           <ContentTitle style={{ top: '9.28vw', left: '1.98vw' }}>{semester} 선발 인원</ContentTitle>
           <ContentInner style={{ top: '10.52vw', left: '1.98vw' }}>{TO}명</ContentInner>
 
-          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>경쟁률</ContentTitle>
+          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>힙격률</ContentTitle>
           <ToolTip02
             onMouseEnter={onSvgHover}
             onMouseLeave={onSvgHoverOut}
             hoverState={svgHover}
             style={{ position: 'absolute', top: '9.05vw', left: '10.80vw' }}
           >
-            쿠플라이에서 수집된 데이터 값으로, 실제 경쟁률과 차이가 있을 수 있습니다.
+            쿠플라이에서 수집된 데이터 값으로, 실제 합격률과 차이가 있을 수 있습니다.
           </ToolTip02>
 
-          <ContentInner style={{ top: '10.52vw', left: '8.80vw' }}>{compRate} : 1</ContentInner>
+          <ContentInner style={{ top: '10.52vw', left: '8.80vw' }}>
+            {passRate < 0 ? '집계불가' : passRate + ' %'}
+          </ContentInner>
 
           <ContentTitle style={{ top: '12.71vw', left: '1.98vw' }}>합격자 평균 학점</ContentTitle>
           <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{avgPass}</ContentInner>
