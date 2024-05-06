@@ -3,7 +3,7 @@ import Typography from "../../../../assets/Typography";
 import Button01 from "../../../../assets/buttons/Button01";
 import MockApplicationButton from "../../../../assets/myboardpage/MockApplication";
 import { useRecoilState } from "recoil";
-import { applicationModalState } from "../../../../store/atom";
+import { applicationModalMobileState } from "../../../../store/atom";
 import Button05 from "../../../assets/buttons/Button05";
 import CTA01 from "../../../assets/CTAs/CTA01";
 
@@ -15,7 +15,7 @@ export interface CurrentModalSubmittedProps{
 
 export default function CurrentModal3(props: CurrentModalSubmittedProps){
   const {setOpenModal, onCustomFunction} = props;
-  const [currentModal, setCurrentModal] = useRecoilState(applicationModalState);
+  const [currentModal, setCurrentModal] = useRecoilState(applicationModalMobileState);
 
   return (
     <SubmittedWrapper currentModal={3}>
@@ -45,6 +45,7 @@ export default function CurrentModal3(props: CurrentModalSubmittedProps){
           onClick={() => {
             setCurrentModal(4); // 다음 창으로 이동
             onCustomFunction?.();
+            console.log('is this pressed?');
           }}
         >
             모의지원 완료하기

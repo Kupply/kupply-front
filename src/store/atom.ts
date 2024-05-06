@@ -189,6 +189,20 @@ export const semesterSettingsState = atomFamily<GpaSemesterType, userType>({
   })
 })
 
+type CurrentSemesterType = {
+  num1: string;
+  num2: string;
+}
+
+
+export const currentSemesterState = atomFamily<CurrentSemesterType, userType>({
+  key: "CurrentSemesterState",
+  default: (kind: userType) => ({
+    num1: localStorage.getItem('currentSemester')?.charAt(0) || '',
+    num2: localStorage.getItem('currentSemester')?.charAt(2) || ''
+  })
+})
+
 // settings의 sidebar에서 어떤 번호가 selected인지
 export const SBContentState = atom<number>({
   key: 'SideBarContentSelectedNumberState',

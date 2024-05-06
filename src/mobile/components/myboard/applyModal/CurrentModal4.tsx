@@ -1,7 +1,7 @@
 import SubmittedWrapper from "./SubmittedWrapper";
 import Typography from "../../../../assets/Typography";
 import { useRecoilState } from "recoil";
-import { applicationModalState } from "../../../../store/atom";
+import { applicationModalMobileState } from "../../../../store/atom";
 import CTA01 from "../../../assets/CTAs/CTA01";
 
 export interface CurrentModalSubmittedProps{
@@ -12,7 +12,7 @@ export interface CurrentModalSubmittedProps{
 
 export default function CurrentModal4(props: CurrentModalSubmittedProps){
   const {setOpenModal, onCustomFunction} = props;
-  const [currentModal, setCurrentModal] = useRecoilState(applicationModalState);
+  const [currentModal, setCurrentModal] = useRecoilState(applicationModalMobileState);
 
   return (
     <SubmittedWrapper currentModal={3}>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TextAreaBox from "../../assets/textarea/TextArea01";
 import React, { useEffect, useState, useRef } from "react";
-import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState, userState, userSettingsState } from "../../../store/atom"
+import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState, userState, currentSemesterState, userSettingsState } from "../../../store/atom"
 import { useRecoilState } from "recoil";
 import { useNavigate, useRouteError } from "react-router-dom";
 import axios from "axios";
@@ -212,36 +212,39 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
 
 /* --------------------------------------- */
 export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({userType, setState, toNext}) => {
-  const [currentSemester1, setCurrentSemester1] = useState<string>(
-    localStorage.getItem('currentSemester')?.charAt(0) || '',
-  );
-  const [currentSemester2, setCurrentSemester2] = useState<string>(
-    localStorage.getItem('currentSemester')?.charAt(2) || '',
-  );
+
+  const [curSemester, setCurSemester] = useRecoilState(currentSemesterState(userType));
+
   useEffect(() => {
     if (
-      !!currentSemester1 && !!currentSemester2 && 
-      (+currentSemester1 >= 1 && +currentSemester1 <=4) && (+currentSemester2 === 1 || +currentSemester2 === 2)
+      !!curSemester.num1 && !!curSemester.num2 && 
+      (+curSemester.num1 >= 1 && +curSemester.num1 <=4) && (+curSemester.num2 === 1 || +curSemester.num2 === 2)
     ) {
       setState?.('complete');
     } else{
       setState?.('error');
     }
-  }, [currentSemester1, currentSemester2]);
+  }, [curSemester]);
+
+  const handleSemesterState = (num:string, value:string) => {
+    setCurSemester((prev) => ({
+      ...prev,
+      [num]: value
+    }))
+  };
 
   return (
     <VerifiBoxWrapper>
-      <TextAreaBox name="currentSemester-1" value={currentSemester1} setValue={setCurrentSemester1} />
-      <div style={{ marginTop: '1vw', width: '2.22vw'}}>
+      <TextAreaBox name="currentSemester-1" value={curSemester.num1} setValue={(value) => handleSemesterState('num1', value)} />
+      <div style={{ marginTop: '1.263vw', width: '0.729vw', height: '0.1042vw' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 2" fill="none">
           <path d="M0 1H14" stroke="#B9B9B9" />
         </svg>
       </div>
-      <TextAreaBox name="currentSemester-2" value={currentSemester2} setValue={setCurrentSemester2} />
+      <TextAreaBox name="currentSemester-2" value={curSemester.num2} setValue={(value) => handleSemesterState('num2', value)} />
     </VerifiBoxWrapper>
   )
 }
-
 const CodeVerifiBoxWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
