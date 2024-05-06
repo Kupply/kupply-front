@@ -179,7 +179,7 @@ const ArchiveDetailPage = () => {
             </svg>
             <SelectionInfoContent>
               <Text>지원자 수</Text>
-              <SelectionInfoValue>{numOfApplication === 0 ? '집계불가' : `${numOfApplication}명`}</SelectionInfoValue>
+              <SelectionInfoValue>{`${numOfApplication}명`}</SelectionInfoValue>
             </SelectionInfoContent>
             <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
               <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
