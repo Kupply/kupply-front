@@ -221,9 +221,6 @@ const MobileMyBoard = () => {
       console.log(err);
     }
   };
-  useEffect(() => {
-    getMe();
-  }, []);
 
   const getPastData = async () => {
     const semester = ['2023-2', '2023-1', '2022-2'];
@@ -307,18 +304,6 @@ const MobileMyBoard = () => {
     }
   };
 
-  useEffect(() => {
-    try {
-      if (userData.hopeMajor1 && userData.hopeMajor2) {
-        getPastData();
-      }
-      getMyStageData();
-      getCurData();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [userData]);
-
   const getCurData = async () => {
     try {
       const APIresponse = await client.get('/dashboard/hopeMajorsCurrentInfo');
@@ -350,6 +335,24 @@ const MobileMyBoard = () => {
 
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
   const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    if (isLogined) {
+      try {
+        if (userData.hopeMajor1 && userData.hopeMajor2) {
+          getPastData();
+        }
+        getMyStageData();
+        getCurData();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [userData, isLogined]);
+
+  useEffect(() => {
+    if (isLogined) getMe();
+  }, [isLogined]);
 
   return (
     <>

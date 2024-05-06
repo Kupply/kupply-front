@@ -4,14 +4,15 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { applicationModalMobileState, userSettingsState } from "../../../../store/atom";
 import CTA01 from "../../../assets/CTAs/CTA01";
 
-export interface CurrentModalSubmittedProps{
+
+export interface CurrentModalSubmittedProps {
   setOpenModal: (isOpened: boolean) => void;
   isOpenModal?: boolean;
   onCustomFunction?: () => void;
 }
 
-export default function CurrentModal4(props: CurrentModalSubmittedProps){
-  const {setOpenModal, onCustomFunction} = props;
+export default function CurrentModal4(props: CurrentModalSubmittedProps) {
+  const { setOpenModal, onCustomFunction } = props;
   const [currentModal, setCurrentModal] = useRecoilState(applicationModalMobileState);
   const name = useRecoilValue(userSettingsState('name'));
 
@@ -22,12 +23,13 @@ export default function CurrentModal4(props: CurrentModalSubmittedProps){
       </Typography>
       <Typography size="3.33vw" bold="500" style={{ marginTop: '3.33vw' }}>
         {name.info}님의 이중전공 합격을 기원합니다.
+
       </Typography>
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          marginTop: '40.77vw'
+          marginTop: '40.77vw',
         }}
       >
         <CTA01
@@ -36,9 +38,9 @@ export default function CurrentModal4(props: CurrentModalSubmittedProps){
             onCustomFunction?.();
           }}
         >
-            모의지원 완료하기
+          모의지원 완료하기
         </CTA01>
       </div>
     </SubmittedWrapper>
-  )
+  );
 }
