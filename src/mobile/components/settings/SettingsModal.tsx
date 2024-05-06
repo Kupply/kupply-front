@@ -11,11 +11,11 @@ interface SettingsModalProps{
   isOpenModal: boolean;
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수;
-  onCheck: () => Promise<void>;
+  thirdSubmit: () => Promise<void>;
 }
 
 export default function SettingsModal(props:SettingsModalProps){
-  const {isOpenModal, setOpenModal, onClickModal, onCheck} = props;
+  const {isOpenModal, setOpenModal, onClickModal, thirdSubmit} = props;
 
 return(
   <Main>
@@ -46,7 +46,10 @@ return(
           }}
           style={{width: '39.17vw', height: '11.67vw'}}>취소</Button04>
         <Button03
-          onClick={onCheck}
+          onClick={() => {
+            thirdSubmit(); 
+            setOpenModal(false);
+          }}
           style={{width: '39.17vw', height: '11.67vw'}}>확인</Button03>
       </ActionWrapper>
     </ModalLarge>

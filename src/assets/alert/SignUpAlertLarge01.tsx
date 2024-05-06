@@ -49,7 +49,7 @@ function SignUpAlertLarge01({
       </ButtonWrapper>
       <AlertIconExclamation width="5.885vw" height="5.885vw" />
       <TypographyBox>
-        <Typography bold={'700'} color="#0a0606" style={{ marginTop: '1.67vw' }}>
+        <Typography size='1.25vw' bold={'700'} color="#0a0606" style={{ marginTop: '1.67vw' }}>
           아직 인증번호를 받지 못하셨나요?
         </Typography>
         <Typography color="#141414" style={{ marginTop: '1.67vw' }}>

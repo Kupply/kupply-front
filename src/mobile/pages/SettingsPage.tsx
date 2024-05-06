@@ -118,7 +118,7 @@ export const MobileSettingsPage = () => {
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
 
   // 잠시 수정 
-  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(true);
+  const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
 
   useEffect(() => {
     if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
@@ -271,7 +271,45 @@ export const MobileSettingsPage = () => {
       console.log(err);
     }
   };
-  const thirdSubmit = async () => {
+
+  const thirdSubmit1 = async () => {
+    const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
+    const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
+
+    if(oldGpa !== newGpa){
+      console.log('it is different'); //여기까지는 감지 
+      setIsGpaChanged(true);
+      setModalOpen(true);
+      return;
+    }
+
+    if (Math.abs(oldGpa - newGpa) >= 1.5) {
+      alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
+      navigate('/settings');
+    } else {
+      const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
+      const year = +(hopeSemester1 + hopeSemester2);
+      const semester = +hopeSemester3;
+      if(year <= 23 || (semester !== 1 && semester !==2)){
+        alert('유효한 학기를 입력해주세요!');
+      }else{
+      const updateData = {
+        newCurGPA: newGpa,
+        newHopeMajor1: hopeMajor1,
+        newHopeMajor2: hopeMajor2,
+        newHopeSemester: newHopeSemester,
+      };
+      try {
+        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        await client.post('/user/updateMe', updateData, config);
+        window.location.reload(); // 페이지 새로고침.
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+  };
+  const thirdSubmit2 = async () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
@@ -320,19 +358,18 @@ export const MobileSettingsPage = () => {
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   return(
-
     <SettingsWrapper selected={selected} onClickFunction={
       selected == 1 ? firstSubmit : 
       selected == 2 ? secondSubmit : 
-      selected == 3 ? () => {setModalOpen((prev) => !prev)} : 
+      selected == 3 ?  thirdSubmit1: 
       selected == 4 ? fourthSubmit : 
       () => {}}>
-      {modalOpen && (
+      {modalOpen && isGpaChanged && (
         <SettingsModal
         isOpenModal={modalOpen}
         setOpenModal={setModalOpen}
         onClickModal={() => {setModalOpen(!modalOpen)}}
-        onCheck={thirdSubmit}
+        thirdSubmit={thirdSubmit2}
         />
       )}
       {selected == 0 && (
@@ -525,7 +562,7 @@ export const MobileSettingsPage = () => {
             setValue={setPwd}
             placeholder={placeholderMapping['password']}
             errorMessage={errorMessageMapping['password']}
-            helpMessage={'대소문자와 특수문자를 포함해주세요!'}
+            helpMessage={helpMessageMapping['password']}
           />
         </ContentsWrapper>
         <ContentsWrapper>

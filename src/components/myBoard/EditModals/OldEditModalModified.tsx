@@ -117,25 +117,12 @@ export default function EditModal(props: ModalProps) {
     }
   }, [GPA1, GPA2, GPA3]);
 
-  useEffect(() => {
-    const passwordCheck = /^\d{10}$/;
-    if (stdIDState === 'filled') {
-      if (!passwordCheck.test(stdID)) setStdIDState('error');
-      else setStdIDState('filled');
-    }
-  }, [stdID, stdIDState]);
 
   const onClickSubmit = async () => {
     let updateData = {};
 
     if (originNickname.current !== nickname) {
       updateData = { ...updateData, newNickname: nickname };
-    }
-    if (originstdId.current !== stdID) {
-      updateData = { ...updateData, newStudentId: stdID };
-    }
-    if (originFirstMajor.current !== firstMajor) {
-      updateData = { ...updateData, newFirstMajor: firstMajor };
     }
     if (originHopeMajor1.current !== hopeMajor1) {
       updateData = { ...updateData, newHopeMajor1: hopeMajor1 };
@@ -275,7 +262,7 @@ export default function EditModal(props: ModalProps) {
           </HeaderWrapper>
 
           {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
-            <ContentsWrapper>
+            <ContentsWrapper2>
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '1.042vw' }}>
@@ -297,13 +284,11 @@ export default function EditModal(props: ModalProps) {
                         />
                       ))}
                     </CandidateImgsWrapper>
-                    <div style={{ gap: '0.260vw', marginTop: '2.708vw' }}></div>
-                    <div style={{ marginLeft: '4.427vw', marginTop: '-1.458vw' }}></div>
                   </div>
                 </div>
               </SubContentsWrapper>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw', marginTop: '2vw' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>닉네임 변경하기</ContentsTitle>
                   <div style={{ position: 'relative' }}>
@@ -319,27 +304,6 @@ export default function EditModal(props: ModalProps) {
                     />
                   </div>
                 </SubContentsWrapper>
-                <SubContentsWrapper>
-                  <ContentsTitle>학번 변경하기</ContentsTitle>
-                  <TextFieldBox
-                    value={stdID}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setStdID(e.target.value);
-                    }}
-                    state={stdIDState}
-                    setState={setStdIDState}
-                    setValue={setStdID}
-                  />
-                </SubContentsWrapper>
-                <SubContentsWrapper>
-                  <ContentsTitle>본전공 변경하기</ContentsTitle>
-                  <DropDown
-                    title="전공선택" // 수정필요
-                    optionList={majorAll}
-                    value={firstMajor}
-                    setValue={setFirstMajor}
-                  ></DropDown>
-                </SubContentsWrapper>
               </div>
               <MoveButton
                 isOpenModal={isOpenModal}
@@ -347,10 +311,10 @@ export default function EditModal(props: ModalProps) {
                 onClickSubmit={onClickSubmit}
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
-                style={{ marginTop: '16px', width: '100%', display: 'flex', justifyContent: 'space-between' }}
+                style={{ marginTop: '4vw', width: '100%' }}
                 isGpaChanged={isGpaChanged}
               />
-            </ContentsWrapper>
+            </ContentsWrapper2>
           )}
           {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
             <ContentsWrapper2>

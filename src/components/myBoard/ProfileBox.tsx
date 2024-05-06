@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-//import EditModal from './EditModals/OldEditModal';
-//import EditModal from './EditModals/EditModal';
 import EditModal from './EditModals/OldEditModalModified';
 import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
@@ -23,10 +21,11 @@ const ProfileBox = ({
   isOpenEditModal,
   setOpenEditModal,
   closeEditModal,
-  isOpenAppModal,
   onClickEditModal,
+  isOpenAppModal,
   setOpenAppModal,
   closeAppModal,
+  onClickAppModal,
 }: any) => {
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
@@ -98,7 +97,10 @@ const ProfileBox = ({
           />
         )}
         {isOpenAppModal && (
-          <ApplicationModal isOpenModal={isOpenAppModal} setOpenModal={setOpenAppModal} onClickModal={closeAppModal} />
+          <ApplicationModal 
+            isOpenModal={isOpenAppModal} 
+            setOpenModal={setOpenAppModal} 
+            onClickModal={closeAppModal} />
         )}
       </ModalBox>
 
@@ -149,7 +151,7 @@ const ProfileBox = ({
             </SubTitleBox>
 
             <ApplyBox>
-              <CTA02 size="small" />
+              <CTA02 size="small" onClick={onClickAppModal} />
             </ApplyBox>
           </>
         ) : (
@@ -168,7 +170,7 @@ const ProfileBox = ({
             </SubTitleBox>
 
             <ApplyBox style={{ top: '27.28vw' }}>
-              <CTA02 size="small" />
+              <CTA02 size="small" onClick={onClickAppModal}/>
             </ApplyBox>
           </>
         )}

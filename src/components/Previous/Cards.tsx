@@ -1,9 +1,6 @@
 import { styled } from 'styled-components';
 import { mockHashes } from './Header';
-import Card from '../../assets/Card';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
 import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 import Card01 from '../../assets/cards/Card01';
@@ -26,23 +23,15 @@ export interface CardsProps {
 // pass: res.passNum,
 
 // Card01의 prop과 맞도록 수정
-// 지원자 수에 대한 데이터가 없어서 경쟁률은 계산하지 못함
+// 지원자 수에 대한 데이터가 없어서 합격률은 계산하지 못함
 
-// const sortOptions = ['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순'];
+// const sortOptions = ['가나다순', '선발인원순', '합격률순', '평균학점순', '최저학점순'];
 
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
   const [sortCriterion, setSortCriterion] = useState('가나다순');
   const navigate = useNavigate();
   const prevSemester = '23-2';
-  // const [cookies] = useCookies(['accessToken']);
-  // const accessToken = cookies.accessToken;
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${accessToken}`,
-  //   },
-  //   withCredentials: true,
-  // };
 
   // 이게 원래 fetch function 이지만 /archive access를 위해 임시로 fetch function 만듦
   const fetch = async () => {
@@ -53,7 +42,6 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
         // alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
         // navigate('/login'); FIXME => 배포 시 수정 필요
       } else {
-        // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
         const data = await client.get('/dashboard/cards');
 
         setCards(
@@ -67,7 +55,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
               semester: prevSemester,
               avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
               minPass: res.passNum === 0 ? 0 : res.min,
-              compRate: +(res.passNum / c.TO).toFixed(2),
+              passRate: res.applyNum === 0 ? -1 : +((res.passNum / res.applyNum) * 100).toFixed(2),
             };
           }),
         );
@@ -91,7 +79,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   //         semester: c.semester,
   //         avgPass: res.avg,
   //         minPass: res.min,
-  //         compRate: res.passNum,
+  //         passRate: res.passNum,
   //       };
   //     }),
   //   );
@@ -118,8 +106,8 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
           return aName.localeCompare(bName);
         case '선발인원순':
           return b.TO - a.TO;
-        case '경쟁률순':
-          return b.compRate - a.compRate;
+        case '합격률순':
+          return b.passRate - a.passRate;
         case '평균학점순':
           return b.avgPass - a.avgPass;
         case '최저학점순':
@@ -140,7 +128,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
           {/*{mockHashes[clicked]}*/}
           {/*{clicked > 0 && clicked < 4 && ' 정렬'}*/}
           <DropDown02
-            optionList={['가나다순', '선발인원순', '경쟁률순', '평균학점순', '최저학점순']}
+            optionList={['가나다순', '선발인원순', '합격률순', '평균학점순', '최저학점순']}
             value={sortCriterion}
             setValue={setSortCriterion}
           />
@@ -200,17 +188,17 @@ const mockCards = [
     engName: 'Business School',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 37,
-    compRate: 4.23,
+    passRate: 4.23,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
   },
   {
-    korName: '심리학부 심리학부',
+    korName: '심리학부',
     engName: 'School of Psychology',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 27,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -220,7 +208,7 @@ const mockCards = [
     engName: 'Department of Economics',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 29,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -230,17 +218,17 @@ const mockCards = [
     engName: 'Department of Statistics',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 29,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
   },
   {
-    korName: '미디어학부 미디어학부',
+    korName: '미디어학부',
     engName: 'School of Media & Communication',
     filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 21,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -250,7 +238,7 @@ const mockCards = [
     engName: 'Department of Computer Science & Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 20,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -260,7 +248,7 @@ const mockCards = [
     engName: 'Department of Food & Resources',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 21,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -270,7 +258,7 @@ const mockCards = [
     engName: 'Department of Mathematics',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 7,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -280,7 +268,7 @@ const mockCards = [
     engName: 'Department of Chemistry',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 10,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -294,7 +282,7 @@ const mockCards = [
     engName: 'Biological Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 11,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -304,7 +292,7 @@ const mockCards = [
     engName: 'School of Life Sciences',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 3,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -314,7 +302,7 @@ const mockCards = [
     engName: 'Department of Political Science & International Relations',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 27,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -324,7 +312,7 @@ const mockCards = [
     engName: 'Department of Public Administration',
     filter: ['학부 전체보기', '인문계 캠퍼스'],
     TO: 7,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -334,7 +322,7 @@ const mockCards = [
     engName: 'School of Materials Science & Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 5,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -344,7 +332,7 @@ const mockCards = [
     engName: 'School of Mechanical Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 6,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -354,7 +342,7 @@ const mockCards = [
     engName: 'School of Industrial & Management Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 7,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -364,7 +352,7 @@ const mockCards = [
     engName: 'School of Electrical Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 14,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -374,7 +362,7 @@ const mockCards = [
     engName: 'Department of Chemical & Biological Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 7,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -384,7 +372,7 @@ const mockCards = [
     engName: 'Department of Data Science',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 9,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',
@@ -394,7 +382,7 @@ const mockCards = [
     engName: 'Division of Smart Security',
     filter: ['학부 전체보기', '자연계 캠퍼스', '독립학부'],
     TO: 3,
-    compRate: 7,
+    passRate: 7,
     avgPass: 4.23,
     minPass: 4.12,
     semester: '23-2',

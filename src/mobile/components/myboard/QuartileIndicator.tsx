@@ -5,10 +5,12 @@ import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
 import Typography from '../../../assets/Typography';
 
 const MobileQuartileIndicator = ({
+  userData,
   onViewMajor,
   myStageData,
   isApplied,
 }: {
+  userData: any;
   onViewMajor: any;
   myStageData: any;
   isApplied: boolean;
@@ -17,6 +19,9 @@ const MobileQuartileIndicator = ({
   if (myStageData.rank === myStageData.applyNum && myStageData.rank === 1) {
     myPercentile = 1;
   }
+
+  const name = userData.userName;
+  const major = myStageData.majorName;
 
   return (
     <Wrapper isApplied={isApplied}>
@@ -46,7 +51,9 @@ const MobileQuartileIndicator = ({
         </ChartBox>
         <BodyBodyBox>
           <ContentBox>
-            <ContentText>고대빵님의 경영학과 이중 지원 시 지원안정도 점수는,</ContentText>
+            <ContentText>
+              {name}님의 {major} 이중 지원 시 지원안정도 점수는,
+            </ContentText>
           </ContentBox>
           <PercentBox>
             <NumText>{myPercentile.toFixed(2)}</NumText>

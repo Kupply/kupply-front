@@ -34,7 +34,7 @@ export function SignUp0Page(){
 
         //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
         window.sessionStorage.setItem('email', ID);
-        navigate('/join');
+        navigate('/signup1');
       } catch (err: any) {
         //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
         alert(err.response.data.error.message);
@@ -60,7 +60,6 @@ export function SignUp0Page(){
               }}
               onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.key === 'Enter') {
-                  console.log('This is the onKeyDown');
                   handleButtonClick();
                 }
               }}

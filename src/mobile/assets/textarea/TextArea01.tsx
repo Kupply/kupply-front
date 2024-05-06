@@ -74,6 +74,7 @@ export default function TextAreaBox(props: TextAreaBoxProps) {
 
 // 그냥 inputWrapper안에
 const InputWrapper = styled.input<TextAreaBoxProps>`
+  //width: 11.67vw;
   width: 11.67vw;
   height: 11.67vw;
   box-sizing: border-box;

@@ -137,7 +137,7 @@ export default function LoginPage(props: LoginPageProps) {
           <Button05
             size="large"
             onClick={() => {
-              navigate('/signup1');
+              navigate('/signup0');
             }}
           >
             포털 이메일로 회원가입

@@ -143,7 +143,7 @@ function LoginPage(props: LoginPageProps) {
 
   const navigate = useNavigate();
   const handleLink2Click = () => {
-    navigate('/', { state: { showModal: true } });
+    navigate('/signup0', { state: { showModal: true } });
   };
 
   const [ID, setID] = useState<string>('');

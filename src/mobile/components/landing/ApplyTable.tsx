@@ -14,7 +14,7 @@ export interface ITableData {
   recruitNumber: number;
   applyNumber: number;
   competition: number;
-  pastCompetition: number;
+  pastPassedRate: number;
   pastPassedNum: number;
   pastmin: number;
   pastmean: number;
