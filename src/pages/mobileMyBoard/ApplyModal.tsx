@@ -67,6 +67,7 @@ export default function MobileApplicationModal(props: ModalProps) {
     setCurrentModal(0);
     setOpenModal(!isOpenModal);
     setIsSubmitted(false);
+    window.location.reload();
   };
 
   const submitApplication = async () => {
@@ -79,7 +80,7 @@ export default function MobileApplicationModal(props: ModalProps) {
         applyGrade:  curSemester.num1 + '-' + curSemester.num2,
       };
       await client.post('/dashboard', applyData);
-
+      console.log(parseFloat(gpa.num1 + '.' + gpa.num2 + gpa.num3));
       if (selectedFile) {
         const formData = new FormData();
         formData.append('document', selectedFile);

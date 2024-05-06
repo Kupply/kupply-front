@@ -1,6 +1,6 @@
 import Input01 from '../../assets/field/Input01';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { userState } from '../../../store/atom';
+import { userState, userSettingsState } from '../../../store/atom';
 import DropDown from '../../assets/selectControl/DropDown';
 import { majorAllList } from '../../../common/MajorAll';
 import { ReactNode, useEffect } from 'react';
@@ -20,6 +20,7 @@ interface UserInputProps {
   setStateValid?: (args: inputState) => void;
   children?: ReactNode;
   userInfoTypeManual?: string | undefined;
+  locationUsed?: 'signUp' | 'settings';
   onCustomFunction?: () => void;
   valid?: boolean;
 }
@@ -73,13 +74,16 @@ export const UserInput: React.FC<UserInputProps> = ({
   toNext,
   children,
   userInfoTypeManual = undefined,
+  locationUsed = 'signUp',
   onCustomFunction,
   valid,
   setStateValid
 }) => {
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(
-    userState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
+    locationUsed === 'signUp'
+      ? userState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
+      : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
   );
   
   const [firstMajor, setFirstMajor] = useRecoilState(userState('firstMajor'));
@@ -141,11 +145,17 @@ export const UserInput: React.FC<UserInputProps> = ({
           value={userInfo.info}
           onChange={handleInputChange}
           state={userInfo.infoState}
-          setState={userInfoTypeManual !== 'kuEmail' ?(s) => setUserInfo((prev) => ({ ...prev, infoState: s })) : () => {}}
+          setState={
+            (userInfoTypeManual === 'kuEmail' || 
+            (locationUsed === 'settings' && userInfoType === 'studentId')) ?
+            () => {}: 
+            (s) => setUserInfo((prev) => ({ ...prev, infoState: s }))}
           setValue={
-            userInfoTypeManual !== 'kuEmail' ? 
-            (s) => setUserInfo((prev) => ({...prev, info: s})) : 
-            ()=>{}}
+            (userInfoTypeManual === 'kuEmail' || 
+            (locationUsed === 'settings' && userInfoType === 'studentId')) ? 
+            () => {}: 
+            (s) => setUserInfo((prev) => ({ ...prev, info: s }))}
+
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
           type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}

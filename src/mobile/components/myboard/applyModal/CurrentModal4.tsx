@@ -1,7 +1,7 @@
 import SubmittedWrapper from "./SubmittedWrapper";
 import Typography from "../../../../assets/Typography";
-import { useRecoilState } from "recoil";
-import { applicationModalMobileState } from "../../../../store/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { applicationModalMobileState, userSettingsState } from "../../../../store/atom";
 import CTA01 from "../../../assets/CTAs/CTA01";
 
 export interface CurrentModalSubmittedProps{
@@ -13,14 +13,15 @@ export interface CurrentModalSubmittedProps{
 export default function CurrentModal4(props: CurrentModalSubmittedProps){
   const {setOpenModal, onCustomFunction} = props;
   const [currentModal, setCurrentModal] = useRecoilState(applicationModalMobileState);
+  const name = useRecoilValue(userSettingsState('name'));
 
   return (
     <SubmittedWrapper currentModal={3}>
       <Typography size="4.44vw" bold="700" style={{ marginTop: '4.44vw' }}>
-        모의지원을 완료 하시겠습니까?
+        모의지원이 완료되었습니다.
       </Typography>
       <Typography size="3.33vw" bold="500" style={{ marginTop: '3.33vw' }}>
-      고대빵 님의 이중전공 합격을 기원합니다.
+        {name.info}님의 이중전공 합격을 기원합니다.
       </Typography>
       <div
         style={{

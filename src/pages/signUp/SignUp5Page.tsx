@@ -73,6 +73,8 @@ export function SignUp5Page() {
       alert('모든 약관에 동의해주세요.');
     }
   };
+
+  // 잠시 수정
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
   }, []);
@@ -147,17 +149,23 @@ export function SignUp5Complete() {
   const handleNext = () => {
     navigate('/login');
   };
-
+  const isMountedRef = useRef(false);
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  // 잠시 수정
-  useEffect(() => {
-    if (!sessionStorage.getItem('role')) navigate('/');
-  }, []);
-
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {
-    sessionStorage.clear();
+    if(!isMountedRef.current){
+      isMountedRef.current = true;
+      return;
+    }
+
+    if (!sessionStorage.getItem('curGpa') && !sessionStorage.getItem('passGpa')){
+      sessionStorage.clear();
+      navigate('/');
+    } else{
+      sessionStorage.clear();
+    }
   }, []);
+
 
   return (
     <Wrapper2>

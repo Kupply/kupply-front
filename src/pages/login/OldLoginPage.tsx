@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-
 import Typography from '../../assets/Typography';
 import NextButton from '../../assets/buttons/OldNextButton';
 import LoginModal from '../../components/login/LoginModal';
