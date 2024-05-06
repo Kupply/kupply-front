@@ -370,7 +370,7 @@ const MyBoardPage = () => {
       {userData.userRole === 'passer' ? (
         <MyboardPasserPageVer />
       ) : (
-        <Wrapper>
+        <Wrapper style={{ backgroundPosition: `0 ${scrollY - 100}px` }}>
           {/* <GlobalStyles /> */}
           <ProfileWrapper style={{ backgroundPosition: `0 ${scrollY - 200}px` }}>
             <ProfileBox
