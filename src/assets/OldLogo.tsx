@@ -7,7 +7,7 @@ const LogoWrapper = styled.button`
   align-items: center; // 수직 중앙
   border: none;
   background: none;
-  width: 188px;
+  padding: 0 16px;
   height: 46px;
   flex-shrink: 0;
 `;

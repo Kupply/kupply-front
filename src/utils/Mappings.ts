@@ -21,7 +21,7 @@ export const collegeNameMappingByEng = {
   electrical: 'engineering',
   chembio: 'engineering',
   datasci: 'info',
-  smartsec: 'smartsecurity'
+  smartsec: 'smartsecurity',
 };
 
 export const collegeNameMappingByKR = {
@@ -44,7 +44,7 @@ export const collegeNameMappingByKR = {
   전기전자공학부: 'engineering',
   화공생명공학부: 'engineering',
   데이터과학과: 'info',
-  스마트보안학부: 'smartsecurity'
+  스마트보안학부: 'smartsecurity',
 };
 
 export const collegeAPIMappingByKR = {
@@ -67,7 +67,7 @@ export const collegeAPIMappingByKR = {
   전기전자공학부: 'electrical',
   화공생명공학부: 'chembio',
   데이터과학과: 'datasci',
-  스마트보안학부: 'smartsec'
+  스마트보안학부: 'smartsec',
 };
 
 export const majorNameMapping = {
@@ -86,11 +86,11 @@ export const majorNameMapping = {
   pubadmin: ['행정학과', 'Department of Public Administration'],
   materials: ['신소재공학부', 'School of Materials Science & Engineering'],
   mechanical: ['기계공학부', 'School of Mechanical Engineering'],
-  industrial: ['산업경영공학부', 'School of Industrial Management Engineering'],
+  industrial: ['산업경영공학부', 'School of Industrial & Management Engineering'],
   electrical: ['전기전자공학부', 'School of Electrical Engineering'],
   chembio: ['화공생명공학부', 'Department of Chemical & Biological Engineering'],
   datasci: ['데이터과학과', 'Department of Data Science'],
-  smartsec: ['스마트보안학부', 'Division of Smart Security']
+  smartsec: ['스마트보안학부', 'Division of Smart Security'],
 };
 
 export const majorNmaeMappingByKr = {
@@ -113,7 +113,7 @@ export const majorNmaeMappingByKr = {
   전기전자공학부: 'School of Electrical Engineering',
   화공생명공학부: 'Department of Chemical & Biological Engineering',
   데이터과학과: 'Department of Data Science',
-  스마트보안학부: 'Division of Smart Security'
+  스마트보안학부: 'Division of Smart Security',
 };
 
 /*

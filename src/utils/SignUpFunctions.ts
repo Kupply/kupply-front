@@ -21,6 +21,7 @@ export const sendEmail = async (email: string) => {
   }
 }
 
+// candidate이나 passer가 들어옴
 export const join = async (role: string) => {
   const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
   const commonData = {
@@ -32,6 +33,7 @@ export const join = async (role: string) => {
     firstMajor: sessionStorage.getItem('firstMajor'),
     role: sessionStorage.getItem('role'),
   };
+  console.log(commonData);
   if (role === 'passer') {
     await client.post('/auth/join', {
       ...commonData,
@@ -39,13 +41,13 @@ export const join = async (role: string) => {
       passGPA: parseFloat(sessionStorage.getItem('passGPA') || ''),
       secondMajor: sessionStorage.getItem('secondMajor'),
     });
-  } else {
+  } else if(role === 'candidate'){
     await client.post('/auth/join', {
       ...commonData,
-      curGPA: sessionStorage.getItem('candidateGPA'),
+      curGPA: sessionStorage.getItem('curGPA'),
       hopeMajor1: sessionStorage.getItem('hopeMajor1'),
       hopeMajor2: sessionStorage.getItem('hopeMajor2'),
-      hopeSemester: sessionStorage.getItem('candidateSemester'),
+      hopeSemester: sessionStorage.getItem('hopeSemester'),
     });
   }
 };
@@ -83,6 +85,9 @@ export function useSignUp2Verification(){
   //   }
   // }, []);
   // name, stdId, firstMajor의 completed 여부
+
+  // 이건 정말로 임시로 보내는거
+  sessionStorage.setItem('email', 'faiith7001@korea.ac.kr');
 
   useEffect(() => {
     if (name.infoState === 'filled' && stdIdVerified && !!firstM.info && !complete) {

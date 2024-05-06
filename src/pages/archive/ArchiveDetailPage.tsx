@@ -32,7 +32,7 @@ const ArchiveDetailPage = () => {
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [enoughData, setEnoughData] = useState<boolean>(true); // false 일시적 수정
+  const [enoughData, setEnoughData] = useState<boolean>(false); // false 일시적 수정
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
@@ -46,30 +46,15 @@ const ArchiveDetailPage = () => {
 
   const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || []);
 
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  };
-
   // 누적 데이터로 default 값 setting
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/all`, config);
         const APIresponse = await client.get(`/pastData/${majorName}/all`);
         const data = APIresponse.data.pastData;
 
         if (data.passedData.passedGPACountArray.length > 0) {
           const selectionNum = recruit[majorKoreanName][semesterForAPI[activeIdx]] || 0;
-          // let competitionRate = 0;
-          // if (selectionNum > 0) {
-          //   competitionRate = data.overallData.numberOfData / selectionNum;
-          // }
 
           setEnoughData(true);
           setNumOfApplication(data.overallData.numberOfData);
@@ -96,15 +81,10 @@ const ArchiveDetailPage = () => {
 
     try {
       const semester = semesterForAPI[idx];
-      // const APIresponse = await axios.get(`http://localhost:8080/pastData/${majorName}/${semester}`, config);
       const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
       const data = APIresponse.data.pastData;
 
       const selectionNum = recruit[majorKoreanName][semesterForAPI[idx]] || 0;
-      // let competitionRate = 0;
-      // if (selectionNum > 0) {
-      //   competitionRate = data.overallData.numberOfData / selectionNum;
-      // }
 
       setEnoughData(true);
       setNumOfApplication(data.overallData.numberOfData);
@@ -115,8 +95,6 @@ const ArchiveDetailPage = () => {
       setMedianGpa(data.passedData.passedMedianGPAData);
       setModeGpa(data.passedData.passedModeGPAData);
       setMinGpa(data.passedData.passedMinimumGPAData);
-
-      console.log(data.passedData.passedMedianGPAData);
 
       if (data.passedData.passedGPACountArray.length > 0) {
         setEnoughData(true);
@@ -192,7 +170,7 @@ const ArchiveDetailPage = () => {
                 {numOfSelection === 0
                   ? '집계불가'
                   : activeIdx === 0
-                  ? `${Math.floor(numOfSelection / 6)} 명`
+                  ? `${Math.floor(numOfSelection / 4)} 명`
                   : `${numOfSelection} 명`}
               </SelectionInfoValue>
             </SelectionInfoContent>
@@ -201,7 +179,7 @@ const ArchiveDetailPage = () => {
             </svg>
             <SelectionInfoContent>
               <Text>지원자 수</Text>
-              <SelectionInfoValue>{numOfApplication === 0 ? '집계불가' : `${numOfApplication}명`}</SelectionInfoValue>
+              <SelectionInfoValue>{`${numOfApplication}명`}</SelectionInfoValue>
             </SelectionInfoContent>
             <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
               <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
@@ -209,11 +187,7 @@ const ArchiveDetailPage = () => {
             <SelectionInfoContent>
               <Text>경쟁률</Text>
               <SelectionInfoValue>
-                {numOfSelection === 0
-                  ? '집계불가'
-                  : activeIdx === 0
-                  ? `${(numOfSelection / numOfApplication).toFixed(2)} : 1`
-                  : `1`}
+                {numOfSelection === 0 ? '집계불가' : `${(numOfApplication / numOfSelection).toFixed(2)} : 1`}
               </SelectionInfoValue>
             </SelectionInfoContent>
           </SelectionInfoContentsWrapper>
@@ -455,7 +429,7 @@ const MajorTextEnglish = styled.text`
 
 const WarningTextBox = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 0.21vw;
   // padding: 94px 0px 37px 0px;
   align-items: center;
 `;
@@ -470,8 +444,8 @@ const WarningText = styled.text`
 `;
 
 const WarningIcon = styled.img`
-  width: 14px;
-  height: 14px;
+  width: 0.73vw;
+  height: 0.73vw;
   background: none;
 `;
 
@@ -739,15 +713,15 @@ const CollectingWrapper = styled.div<{ keywordsLength: number }>`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
+  width: 87.5vw;
   max-width: 1665px;
-  height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
+  height: 45vw;
+  //height: ${(props) => (props.keywordsLength === 0 ? '555px' : '699px')};
   background-color: #f7f7f773;
   box-shadow: 0px 0px 28px #1414140d;
   backdrop-filter: blur(10px);
   border-radius: 5px;
   gap: 24px;
-
   margin-top: 18px;
   top: 0;
   left: 0;
@@ -779,7 +753,7 @@ const tmpMedianGpa = { gpa: 4.0, num: 7 };
 const tmpModeGpa = { gpa: 4.25, num: 11 };
 const tmpMinGpa = { gpa: 3.0, num: 2 };
 
-const tmpRandomData = [
+const tmpRandomData2 = [
   {
     gpa: 4.5,
     num: 7,
@@ -824,4 +798,23 @@ const tmpRandomData = [
     gpa: 3.0,
     num: 2,
   },
+];
+
+const tmpRandomData = [
+  { gpa: 3, num: 0 },
+  { gpa: 3.1, num: 0.014 },
+  { gpa: 3.2, num: 0.052 },
+  { gpa: 3.3, num: 0.108 },
+  { gpa: 3.4, num: 0.176 },
+  { gpa: 3.5, num: 0.25 },
+  { gpa: 3.6, num: 0.324 },
+  { gpa: 3.7, num: 0.392 },
+  { gpa: 3.8, num: 0.448 },
+  { gpa: 3.9, num: 0.486 },
+  { gpa: 4, num: 0.5 },
+  { gpa: 4.1, num: 0.484 },
+  { gpa: 4.2, num: 0.432 },
+  { gpa: 4.3, num: 0.338 },
+  { gpa: 4.4, num: 0.196 },
+  { gpa: 4.5, num: 0 },
 ];

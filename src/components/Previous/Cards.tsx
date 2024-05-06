@@ -50,7 +50,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
       const isLogined = window.localStorage.getItem('isLogin');
 
       if (isLogined !== 'true') {
-        alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+        // alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
         // navigate('/login'); FIXME => 배포 시 수정 필요
       } else {
         // const data = await axios.get('http://localhost:8080/dashboard/cards', config);
@@ -113,13 +113,15 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
     .sort((a, b) => {
       switch (sortCriterion) {
         case '가나다순':
-          return a.korName.localeCompare(b.korName);
+          const aName = a.korName.split(' ').length === 2 ? a.korName.split(' ')[1] : a.korName;
+          const bName = b.korName.split(' ').length === 2 ? b.korName.split(' ')[1] : b.korName;
+          return aName.localeCompare(bName);
         case '선발인원순':
-          return a.TO - b.TO;
+          return b.TO - a.TO;
         case '경쟁률순':
-          return a.compRate - b.compRate;
+          return b.compRate - a.compRate;
         case '평균학점순':
-          return a.avgPass - b.avgPass;
+          return b.avgPass - a.avgPass;
         case '최저학점순':
           return a.minPass - b.minPass;
         default:
@@ -147,7 +149,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
           <Card01 {...card} />
         ))}
       </FlexContainer>
-      <FlexContainer style={{ marginTop: opaCards.length == 0 ? '0px' : '1.66vw' }}>
+      <FlexContainer style={{ marginTop: opaCards.length === 0 ? '0px' : '1.66vw' }}>
         {opaCards.map((card) => (
           <div style={{ opacity: 0.5 }}>
             <Card01 {...card} />
@@ -390,7 +392,7 @@ const mockCards = [
   {
     korName: '스마트보안학부 스마트보안학부',
     engName: 'Division of Smart Security',
-    filter: ['학부 전체보기', '독립학부'],
+    filter: ['학부 전체보기', '자연계 캠퍼스', '독립학부'],
     TO: 3,
     compRate: 7,
     avgPass: 4.23,

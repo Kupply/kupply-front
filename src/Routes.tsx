@@ -4,21 +4,12 @@ import LandingPage from './pages/main/LandingPage';
 import LoginPage from './pages/login/OldLoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
-//import SettingsPage from './pages/setting/SettingsPage';
 import { SignUp0Page } from './pages/signUp/SignUp0Page';
-//import { SettingsPage } from './pages/setting/SettingsPage';
-//import SettingsPage from './pages/setting/OldSettingsPage';
-import SettingsPage from './pages/setting/OldSettingsPageModified';
+import SettingsPage from './pages/setting/SettingsPage';
 import { SignUp1Page } from './pages/signUp/SignUp1Page';
-//import SignUp1Page from './pages/signUp/old/OldSignUp1Page';
 import SignUp2Page from './pages/signUp/SignUp2Page';
-//import SignUp2Page from './pages/signUp/old/OldSignUp2Page';
 import SignUp3Page from './pages/signUp/SignUp3Page';
-//import SignUp3Page from './pages/signUp/old/OldSignUp3Page';
-//import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/old/OldSignUp4Page';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './pages/signUp/SignUp4Page';
-
-//import { SignUp5Page, SignUp5Complete } from './pages/signUp/old/OldSignUp5Page';
 import { SignUp5Page, SignUp5Complete } from './pages/signUp/SignUp5Page';
 import DeletePage from './pages/delete/DeletePage';
 //import DashboardMainPage from './admin/AdminPage';
@@ -31,13 +22,13 @@ const isLogined = true;
 export const mainRoutes = [
   { path: '/', element: <OnboardingPage /> },
   { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
-  { path: '/landing', element: <LandingPage /> },
-  { path: '/archive', element: <PreviousPage /> },
 ];
 
 export const authRoutes = [
+  { path: '/landing', element: <LandingPage /> },
   { path: '/myboard', element: <MyBoardPage /> },
   { path: '/archive/:majorName', element: <ArchiveDetailPage /> },
+  { path: '/archive', element: <PreviousPage /> },
   // 상태관리 도입 예정으로, 잠시 삭제
   { path: '/settings', element: <SettingsPage /> },
   // { path: '/settings', element: <SettingsPage /> },

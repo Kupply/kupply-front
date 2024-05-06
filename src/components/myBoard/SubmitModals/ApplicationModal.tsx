@@ -1,17 +1,25 @@
-import { appModalUserTypeState, applicationModalState, applicationSubmittedState, gpaSettingsState, selectedFileState, userSettingsState } from "../../../store/atom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import Typography from "../../../assets/Typography";
-import styled from "styled-components";
-import ModalLarge from "../../base/ModalLarge";
-import Icon02 from "../../../assets/icons/Icon02";
-import CurrentModal0 from "./currentModal/Modal0";
-import CurrentModal1 from "./currentModal/Modal1";
-import CurrentModal2 from "./currentModal/Modal2";
-import CurrentModal3 from "./currentModal/Modal3";
-import CurrentModal4 from "./currentModal/Modal4";
-import client from "../../../utils/HttpClient";
-import NotSubmittedHeader from "./currentModal/NotSubmittedHeader";
-import { useRef } from "react";
+import {
+  appModalUserTypeState,
+  applicationModalState,
+  applicationSubmittedState,
+  gpaSettingsState,
+  selectedFileState,
+  userSettingsState,
+} from '../../../store/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import Typography from '../../../assets/Typography';
+import styled from 'styled-components';
+import ModalLarge from '../../base/ModalLarge';
+import Icon02 from '../../../assets/icons/Icon02';
+import CurrentModal0 from './currentModal/Modal0';
+import CurrentModal1 from './currentModal/Modal1';
+import CurrentModal2 from './currentModal/Modal2';
+import CurrentModal3 from './currentModal/Modal3';
+import CurrentModal4 from './currentModal/Modal4';
+import client from '../../../utils/HttpClient';
+import NotSubmittedHeader from './currentModal/NotSubmittedHeader';
+import { useRef } from 'react';
+import ReactDOM from 'react-dom';
 
 export interface ModalProps {
   isOpenModal: boolean;
@@ -25,7 +33,7 @@ export interface UploadButtonProps extends React.ComponentPropsWithoutRef<'butto
   children?: React.ReactNode;
 }
 
-export function UploadButton(props: UploadButtonProps){
+export function UploadButton(props: UploadButtonProps) {
   const { children = '첨부 파일 업로드', ...rest } = props;
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
 
@@ -37,60 +45,55 @@ export function UploadButton(props: UploadButtonProps){
     }
   };
 
-    return (
-      <div style={{ position: 'relative' }}>
-        {selectedFile! ? (
-          <div>
-            <img src={process.env.PUBLIC_URL + `/designImage/myBoard/SelectedFile.svg`} alt="selectedFile Image" />
-            <Typography
-              size="0.975vw"
-              bold="500"
-              style={{
-                display: 'flex',
-                color: '#E57C90',
-                marginTop: '5px',
-                textAlign: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              {selectedFile.name}
-            </Typography>
-          </div>
-        ) : (
-          <div style={{ position: 'relative', alignItems: 'center' }}>
-            <img src={process.env.PUBLIC_URL + `/designImage/myBoard/EmptySelectedFile.svg`} alt="Empty Selected File Image" />
-            <Typography
-              size="0.975vw"
-              bold="500"
-              style={{
-                display: 'flex',
-                color: '#E57C90',
-                marginTop: '0.885vw',
-                textAlign: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              학업계획서를 첨부해주세요 (선택)
-            </Typography>
-            <label htmlFor="fileInput">
-              Custom Upload Button
-            </label>
-            <input
-              type="file"
-              id="fileInput"
-              style={{display: 'none'}}
-              onChange={handleFileChange}
-            />
-          </div>
-        )}
-      </div>
-    );
+  return (
+    <div style={{ position: 'relative' }}>
+      {selectedFile! ? (
+        <div>
+          <img src={process.env.PUBLIC_URL + `/designImage/myBoard/SelectedFile.svg`} alt="selectedFile Image" />
+          <Typography
+            size="0.975vw"
+            bold="500"
+            style={{
+              display: 'flex',
+              color: '#E57C90',
+              marginTop: '5px',
+              textAlign: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {selectedFile.name}
+          </Typography>
+        </div>
+      ) : (
+        <div style={{ position: 'relative', alignItems: 'center' }}>
+          <img
+            src={process.env.PUBLIC_URL + `/designImage/myBoard/EmptySelectedFile.svg`}
+            alt="Empty Selected File Image"
+          />
+          <Typography
+            size="0.975vw"
+            bold="500"
+            style={{
+              display: 'flex',
+              color: '#E57C90',
+              marginTop: '0.885vw',
+              textAlign: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            학업계획서를 첨부해주세요 (선택)
+          </Typography>
+          <label htmlFor="fileInput">Custom Upload Button</label>
+          <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleFileChange} />
+        </div>
+      )}
+    </div>
+  );
 }
 
-
-export default function ApplicationModal(props: ModalProps){
+export default function ApplicationModal(props: ModalProps) {
   const { isOpenModal, setOpenModal, onClickModal } = props;
-  
+
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
   const [currentModal, setCurrentModal] = useRecoilState(applicationModalState);
   const [isSubmitted, setIsSubmitted] = useRecoilState(applicationSubmittedState);
@@ -139,76 +142,82 @@ export default function ApplicationModal(props: ModalProps){
     }
   };
 
-  return (
+  return ReactDOM.createPortal(
     <Main>
-      {isOpenModal && 
-      <ModalLarge onClickToggleModal={onClickModal}>
-
-      <CloseButton
-        onClick={() => {
-          setOpenModal(!isOpenModal);
-        }}
-      >
-        <Icon02/>
-      </CloseButton>
-        {!isSubmitted ? 
-        <>
-        <ModalTitleWrapper>
-          <Typography size="1.25vw" bold="700">
-            지원 정보 확인하기
-          </Typography>
-          <Typography
-            size="0.9375vw"
-            bold="500"
-            style={{
-              textAlign: 'center',
-              marginTop: '0.521vw',
-              color: 'rgba(20, 20, 20, 0.80)',
-              lineHeight: ' 136.111% ',
+      {isOpenModal && (
+        <ModalLarge onClickToggleModal={onClickModal}>
+          <CloseButton
+            onClick={() => {
+              setOpenModal(!isOpenModal);
             }}
           >
-            실제 이중전공 지원과 동일한 정보를 입력해주세요.
-          </Typography>
-        </ModalTitleWrapper>
-        
-        {(()=>{
-            switch(currentModal){
-              case 0: 
-                return <>
-                <NotSubmittedHeader currentStep={1}/>
-                <CurrentModal0 handleNext={handleNext} handlePrev={handlePrev}/>
-                </>
-              case 1:
-                return <>
-                <NotSubmittedHeader currentStep={2}/>
-                <CurrentModal1 handleNext={handleNext} handlePrev={handlePrev}/>
-                </>
-              case 2: 
-                return <>
-                <NotSubmittedHeader currentStep={2}/>
-                <CurrentModal2/>
-                </>
-              default:
-                return <></>
-            }
-          })()}
+            <Icon02 />
+          </CloseButton>
+          {!isSubmitted ? (
+            <>
+              <ModalTitleWrapper>
+                <Typography size="1.25vw" bold="700">
+                  지원 정보 확인하기
+                </Typography>
+                <Typography
+                  size="0.9375vw"
+                  bold="500"
+                  style={{
+                    textAlign: 'center',
+                    marginTop: '0.521vw',
+                    color: 'rgba(20, 20, 20, 0.80)',
+                    lineHeight: ' 136.111% ',
+                  }}
+                >
+                  실제 이중전공 지원과 동일한 정보를 입력해주세요.
+                </Typography>
+              </ModalTitleWrapper>
 
-        </>
-          : 
-        (()=>{
-            switch(currentModal){
-              case 3: 
-                return <CurrentModal3 setOpenModal={setOpenModal} onCustomFunction={submitApplication}/>
-              case 4:
-                return <CurrentModal4 setOpenModal={setOpenModal} isOpenModal={isOpenModal}/>
-              default:
-                return <></>
-            }
-          })()
-        }
-      </ModalLarge>}
-    </Main>
-  )
+              {(() => {
+                switch (currentModal) {
+                  case 0:
+                    return (
+                      <>
+                        <NotSubmittedHeader currentStep={1} />
+                        <CurrentModal0 handleNext={handleNext} handlePrev={handlePrev} />
+                      </>
+                    );
+                  case 1:
+                    return (
+                      <>
+                        <NotSubmittedHeader currentStep={2} />
+                        <CurrentModal1 handleNext={handleNext} handlePrev={handlePrev} />
+                      </>
+                    );
+                  case 2:
+                    return (
+                      <>
+                        <NotSubmittedHeader currentStep={2} />
+                        <CurrentModal2 />
+                      </>
+                    );
+                  default:
+                    return <></>;
+                }
+              })()}
+            </>
+          ) : (
+            (() => {
+              switch (currentModal) {
+                case 3:
+                  return <CurrentModal3 setOpenModal={setOpenModal} onCustomFunction={submitApplication} />;
+                case 4:
+                  return <CurrentModal4 setOpenModal={setOpenModal} isOpenModal={isOpenModal} />;
+                default:
+                  return <></>;
+              }
+            })()
+          )}
+        </ModalLarge>
+      )}
+    </Main>,
+    document.getElementById('root') as HTMLElement,
+  );
 }
 
 // ModalLarge안에 들어가는게 부모는 position이 없고 조상은 fixed
@@ -221,12 +230,15 @@ const Main = styled.main`
   align-items: center;
   overflow-y: scroll;
   z-index: 1005;
-`;
 
+  & > div > dialog {
+    top: 10%;
+  }
+`;
 
 const CloseButton = styled.button`
   display: flex;
-  //width: 60px; 
+  //width: 60px;
   width: 3.125vw;
   //height: 60px;
   height: 3.125vw;
@@ -254,4 +266,3 @@ const StyledInput = styled.input`
   left: 12.031vw;
   width: 100px; /* Default width */
 `;
-

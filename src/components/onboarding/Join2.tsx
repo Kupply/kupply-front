@@ -1,5 +1,6 @@
+import axios from 'axios';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../assets/Typography';
@@ -7,9 +8,14 @@ import Button02 from '../../assets/buttons/Button02';
 import Button11 from '../../assets/buttons/Button11';
 
 function Join2() {
-  const [isLogined, setIsLogined] = useState<boolean>(true);
+  const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setIsLogined(true);
+    else setIsLogined(false);
+  }, []);
 
   const handleButtonClick = async () => {
     //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
@@ -18,8 +24,7 @@ function Join2() {
       //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
       const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
       try {
-        // await axios.post(url, { email: ID });
-        // await client.post('/auth/sendEmail', { email: ID });
+        await axios.post(url, { email: ID });
 
         //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
         window.sessionStorage.setItem('email', ID);
@@ -152,6 +157,9 @@ const TextFieldBox = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: 100%;
+  }
+  &:focus {
+    outline: none;
   }
 `;
 

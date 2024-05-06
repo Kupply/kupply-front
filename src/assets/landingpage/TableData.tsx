@@ -81,6 +81,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.63vw;
+  user-select: none;
 `;
 
 const RankCell = styled.div`
@@ -93,6 +94,7 @@ const RankCell = styled.div`
   font-size: 1.67vw;
   font-weight: 400;
   line-height: 120%;
+  cursor: default;
 `;
 
 const InterestNumCell = styled.div`

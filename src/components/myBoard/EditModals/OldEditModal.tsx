@@ -279,7 +279,7 @@ export default function EditModal(props: ModalProps) {
 
   return (
     <Main>
-      {(isOpenModal && isSubmitted && isGpaChanged &&
+      {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton
             onClick={() => {
@@ -329,7 +329,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      { isOpenModal && !isSubmitted && (
+      {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton

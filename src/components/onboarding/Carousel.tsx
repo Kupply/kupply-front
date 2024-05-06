@@ -33,8 +33,12 @@ function Carousel() {
   return (
     <MainWrapper page={page}>
       {page === 0 ? (
-        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '15.63vw' }}>
-          <BannerButton>
+        <CarouselWrapper>
+          <BannerButton
+            onClick={() => {
+              window.location.href = '/archive';
+            }}
+          >
             <Typography size="1.04vw" bold="500" color="#D85888">
               합격자료
             </Typography>
@@ -50,10 +54,14 @@ function Carousel() {
               보여드릴게요.
             </Typography>
           </div>
-        </div>
+        </CarouselWrapper>
       ) : page === 1 ? (
-        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '15.63vw', alignItems: 'flex-end' }}>
-          <BannerButton>
+        <CarouselWrapper align>
+          <BannerButton
+            onClick={() => {
+              window.location.href = '/landing';
+            }}
+          >
             <Typography size="1.04vw" bold="500" color="#D85888">
               실시간 비교
             </Typography>
@@ -69,10 +77,14 @@ function Carousel() {
               에 대한 정보를 알려드릴게요.
             </Typography>
           </div>
-        </div>
+        </CarouselWrapper>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '15.63vw' }}>
-          <BannerButton>
+        <CarouselWrapper>
+          <BannerButton
+            onClick={() => {
+              window.location.href = '/myboard';
+            }}
+          >
             <Typography size="1.04vw" bold="500" color="#D85888">
               마이보드
             </Typography>
@@ -91,7 +103,7 @@ function Carousel() {
               하고 결정하세요.
             </Typography>
           </div>
-        </div>
+        </CarouselWrapper>
       )}
       <ArrowButton
         onClick={handleLeftClick}
@@ -175,6 +187,18 @@ const BannerButton = styled.div`
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0px 0px 40px 0px rgba(216, 88, 136, 0.2);
   margin: 7.24vw 0 1.77vw 0;
+  cursor: pointer;
+`;
+
+const CarouselWrapper = styled.div<{ align?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  padding-left: 12vw;
+  padding-right: 12vw;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: ${(props) => (props.align ? 'flex-end' : '')};
 `;
 
 export default Carousel;

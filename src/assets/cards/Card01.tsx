@@ -191,7 +191,7 @@ const Container = styled.div<ContainerProps>`
   width: 16.25vw;
   height: 21.88vw;
   flex-shrink: 0;
-  border-radius: ${(props) => (props.hover ? '0.26vw' : '0px')};
+  border-radius: ${(props) => (props.hover ? '0.52vw' : '0px')};
   box-shadow: ${(props) => (props.hover ? '0px 0px 1.04vw 0px rgba(20, 20, 20, 0.25)' : undefined)};
   position: relative;
 `;
@@ -206,7 +206,8 @@ const CardImageDefault = styled.div`
   & img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Maintain aspect ratio while fitting the container */
+    object-fit: cover; /* Maintain aspect ratio while fitting the container */
+    object-position: center;
   }
 `;
 
@@ -220,10 +221,9 @@ const CardImageDefault = styled.div`
 
 const CardImageBlurred = styled.div`
   position: absolute;
-  margin-top: 0.052vw;
   width: 16.25vw;
   height: 21.88vw;
-  overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
+  border-radius: 0.52vw;
 
   & img {
     width: 100%;
@@ -247,11 +247,10 @@ const CardImageSmall = styled.div`
   width: 2.14vw;
   height: 2.812vw;
   overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
-
   & img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Maintain aspect ratio while covering the container */
+    //object-fit: 100% 100%; /* Maintain aspect ratio while covering the container */
   }
 `;
 

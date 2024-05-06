@@ -7,6 +7,8 @@ import Card02 from '../../assets/cards/Card02';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
+import ApplicationModal from './SubmitModals/ApplicationModal';
+//import OldApplicationModal from './SubmitModals/OldApplicationModal';
 
 // isApplied={isApplied}
 // editmodal 위치 수정 해야 됨
@@ -16,7 +18,16 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   hopeMajor: string;
 }
 
-const ProfileBox = ({ userData }: { userData: any }) => {
+const ProfileBox = ({
+  userData,
+  isOpenEditModal,
+  setOpenEditModal,
+  closeEditModal,
+  isOpenAppModal,
+  onClickEditModal,
+  setOpenAppModal,
+  closeAppModal,
+}: any) => {
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
   const major1: MajorOptions = userData.hopeMajor1;
@@ -31,16 +42,8 @@ const ProfileBox = ({ userData }: { userData: any }) => {
   // const majorKoreanName2 = majorNameMapping[major2][0];
   // const majorEngishName2 = majorNameMapping[major2][1];
 
-  const [isOpenEditModal, setOpenEditModal] = useState(true);
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
 
-  const onClickEditModal = () => {
-    setOpenEditModal(true);
-  };
-
-  const closeModal = () => {
-    setOpenEditModal(false);
-  };
   const adjustScrollPositionByWidth = (width: number, scrollPosition: number) => {
     let maxScrollValue;
 
@@ -90,9 +93,12 @@ const ProfileBox = ({ userData }: { userData: any }) => {
           <EditModal
             isOpenModal={isOpenEditModal}
             setOpenModal={setOpenEditModal}
-            onClickModal={closeModal}
+            onClickModal={closeEditModal}
             isApplied={false} /* 임시로 false */
           />
+        )}
+        {isOpenAppModal && (
+          <ApplicationModal isOpenModal={isOpenAppModal} setOpenModal={setOpenAppModal} onClickModal={closeAppModal} />
         )}
       </ModalBox>
 
@@ -231,8 +237,9 @@ const ApplyBox = styled.div`
 
 const ModalBox = styled.div`
   position: fixed;
-  top: 20%;
-  left: 50%;
+
+  top: 15%;
+  left: 25%;
   -webkit-transform: translate(-20%, -50%);
   -moz-transform: translate(-20%, -50%);
   -ms-transform: translate(-20%, -50%);

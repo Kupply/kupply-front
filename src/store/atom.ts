@@ -24,12 +24,12 @@ export const verificationCodeState = atom<NumStateType>({
 
 export const emailStateAtom = atom<StateOptions>({
   key: 'emailState',
-  default: sessionStorage.getItem('kuEmail') ? 'filled' : 'default'
+  default: sessionStorage.getItem('email') ? 'filled' : 'default'
 });
 
 export const emailAtom = atom({
   key: 'email',
-  default: sessionStorage.getItem('kuEmail') || ''
+  default: sessionStorage.getItem('email') || ''
 });
 
 export const sendNumState = atom<number>({
@@ -63,11 +63,19 @@ type InfoState = {
 // 이름, 비밀번호, 닉네임...
 export const userState = atomFamily<InfoState, string>({
   key: "userState", 
-  default: (kind: string) => ({
-    info: sessionStorage.getItem(kind) || '',
-    infoState: 'default',
-    infoCheck: 'default'
-  })
+  default: (kind: string) => {
+    let infoState:StateOptions = 'default';
+    let info:string = kind;
+    if(kind === 'kuEmail') {
+      info = 'email';
+      infoState = 'filled';
+    }
+    return {
+      info: sessionStorage.getItem(info) || '',
+      infoState: infoState,
+      infoCheck: 'default'
+    }
+  }
 });
 
 export const userSettingsState = atomFamily<InfoState, string>({
@@ -119,6 +127,15 @@ export const userTypeState = atom<
 export const appModalUserTypeState = atom<
 {userType: userTypetype, userState: userStatetype[]}>({
   key: 'userTypeAppState',
+  default: {
+    userType: '',
+    userState: ['default', 'default']
+  }
+});
+
+export const appModalUserTypeMobileState = atom<
+{userType: userTypetype, userState: userStatetype[]}>({
+  key: 'userTypeAppMobileState',
   default: {
     userType: '',
     userState: ['default', 'default']
@@ -215,13 +232,29 @@ export const selectedFileState = atom<File|null>({
   default: null
 });
 
+export const selectedFileMobileState = atom<File|null>({
+  key: 'selectedFileMobileState',
+  default: null
+});
+
 export const applicationModalState = atom<number>({
   key: 'applicationModalState',
   default: 0
 });
 
+export const applicationModalMobileState = atom<number>({
+  key: 'applicationModalMobileState',
+  default: 0
+});
+
 export const applicationSubmittedState = atom<boolean>({
   key: 'applicationSubmittedState',
+  default: false
+});
+
+export const applicationSubmittedMobileState = atom<boolean>({
+  key: 'applicationSubmittedMobileState',
+  // 잠시 true로 
   default: false
 });
 
@@ -234,6 +267,10 @@ export const editModalState = atom<number>({
   key: 'editModalState',
   default: 0
 });
+export const editModalMobileState = atom<number>({
+  key: 'editModalMobileState',
+  default: 0
+});
 
 
 export type headerButtonStateType = 'basicMajor' | 'interestMajor' | 'currentGPA' | 'hopeSemester';
@@ -243,4 +280,13 @@ export const headerButtonState = atom<headerButtonStateType>({
   default: 'basicMajor'
 });
 
+export const headerButtonMobileState = atom<headerButtonStateType>({
+  key: 'headerButtonState',
+  default: 'basicMajor'
+});
+
+export const MobileSelectedState = atom<number>({
+  key: 'MobileSelectedState',
+  default: 0
+});
 

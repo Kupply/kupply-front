@@ -1,18 +1,22 @@
-import ModalMedium from "../base/ModalLarge";
-import Typography from "../../assets/Typography";
-import styled from "styled-components";
-import { settingsModalState } from "../../store/atom";
-import { useRecoilState } from "recoil";
-import AlertIconExclamation from "../../assets/icons/AlertIconExclamation";
-import { useNavigate } from "react-router-dom";
-import { useSubmit2 } from "../../utils/SettingSubmitFunctions";
-import Button01 from "../../assets/buttons/Button01";
+import ModalMedium from '../base/ModalMedium';
+import Typography from '../../assets/Typography';
+import styled from 'styled-components';
+import { settingsModalState } from '../../store/atom';
+import { useRecoilState } from 'recoil';
+import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
+import { useNavigate } from 'react-router-dom';
+import { useSubmit2 } from '../../utils/SettingSubmitFunctions';
+import Button01 from '../../assets/buttons/Button01';
 
+interface GpaChangeModalProps {
+  modalOpen: boolean;
+  setModalOpen: (state: boolean) => void;
+  thirdSubmit: () => Promise<void>;
+}
 
-export function GpaChangeModal(){
-  const [modalOpen, setModalOpen] = useRecoilState(settingsModalState);
+export function GpaChangeModal(props: GpaChangeModalProps) {
+  const { modalOpen, setModalOpen, thirdSubmit } = props;
   const navigate = useNavigate();
-  const {thirdSubmit} = useSubmit2();
 
   return (
     <Main>
@@ -29,7 +33,7 @@ export function GpaChangeModal(){
               <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
             </CloseButton>
 
-            <AlertWrapper style={{ marginTop: '9.375vw' }}>
+            <AlertWrapper style={{ marginTop: '5.375vw' }}>
               <AlertIconExclamation width="5.885vw" height="5.885vw" />
               <Typography size="1.25vw" bold="700" style={{ marginTop: '1.302vw' }}>
                 변경한 정보를 저장하시겠습니까?
@@ -74,20 +78,9 @@ export function GpaChangeModal(){
   )
 }
 
-// const CloseButton = styled.button`
-//   display: flex;
-//   width: 60px;
-//   height: 60px;
-//   justify-content: center;
-//   align-items: center;
-//   position: absolute;
-//   top: 32px;
-//   right: 40px;
-//   cursor: pointer;
-// `;
 const CloseButton = styled.button`
   display: flex;
-  //width: 60px; 
+  //width: 60px;
   width: 3.125vw;
   //height: 60px;
   height: 3.125vw;
@@ -113,10 +106,13 @@ const AlertWrapper = styled.div`
 
 const Main = styled.main`
   width: 42.3958vw;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
+  margin-top: 50px;
+  top: calc(50% - 140px);
   left: 28.803vw;
   z-index: 1005;
 `;

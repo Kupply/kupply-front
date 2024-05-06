@@ -23,7 +23,6 @@ export const CodeVerification = () => {
       ...prev,
       [boxNum]: value
     }))
-    console.log(boxNum, value, codeState);
   };
 
   const handlePaste = (e:React.ClipboardEvent<HTMLInputElement>) => {
@@ -57,6 +56,7 @@ export const CodeVerification = () => {
     if(!!num1 && !!num2 && !!num3 && !!num4 && !!num5 && !!num6){ 
       // verify 되면 자동으로 signup2로 넘어간다 
       setNextButton(true);
+      
       handleVerification();
     } else {
       setNextButton(false);
@@ -71,7 +71,7 @@ export const CodeVerification = () => {
             name={`pin-${index + 1}`}
             value={eval(`num${index + 1}`)}
             setValue={(value) => handleCodeState(`num${index + 1}`, value)}
-            onPaste={index === 0 ? handlePaste: undefined}
+            onPaste={index == 0 ? handlePaste: undefined}
           />
         ))}
     </CodeVerifiBoxWrapper>
@@ -268,7 +268,7 @@ export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({
 
 const CodeVerifiBoxWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 const VerifiBoxWrapper = styled.div`
