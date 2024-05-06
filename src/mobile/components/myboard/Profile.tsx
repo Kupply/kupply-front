@@ -62,7 +62,7 @@ const MobileProfile = ({
 
         <SubTitleBox2 style={{ marginTop: '5.56vw' }}>
           <IconImage src="designImage/mobile/myboard/Icon2.svg" alt="major" />
-          <SubTitleText>희망 진입학기</SubTitleText>
+          <SubTitleText>희망 지원학기</SubTitleText>
           <GPAText>{userData.hopeSemester}R</GPAText>
         </SubTitleBox2>
 

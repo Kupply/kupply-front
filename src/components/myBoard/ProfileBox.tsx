@@ -145,7 +145,7 @@ const ProfileBox = ({
 
             <SubTitleBox style={{ top: '29.82vw' }}>
               <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
-              <SubTitleText>희망 진입학기</SubTitleText>
+              <SubTitleText>희망 지원학기</SubTitleText>
               <GPAText>{userData.hopeSemester}R</GPAText>
             </SubTitleBox>
 
@@ -164,7 +164,7 @@ const ProfileBox = ({
 
             <SubTitleBox style={{ top: '24.82vw' }}>
               <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
-              <SubTitleText>희망 진입학기</SubTitleText>
+              <SubTitleText>희망 지원학기</SubTitleText>
               <GPAText>{userData.hopeSemester}R</GPAText>
             </SubTitleBox>
 
