@@ -86,13 +86,14 @@ interface GpaSemesterVerificationProps{
   state?: inputState;
   setState?: (args:inputState) => void;
   toNext?: boolean;
+  locationUsed? : LocationUsed;
 };
 
 
-export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext}) => {
+export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userType, setState, toNext, locationUsed = 'SignUp'}) => {
 
-  const [userGpa, setUserGpa] = useRecoilState(gpaState(userType));
-  const [userStdId, setUserStdId] = useRecoilState(userState('studentId'));
+  const [userGpa, setUserGpa] = useRecoilState(locationUsed === 'SignUp' ? gpaState(userType) : gpaSettingsState(userType));
+  const [userStdId, setUserStdId] = useRecoilState(locationUsed === 'SignUp' ? userState('studentId') : userSettingsState('studentId'));
   const [fixedGpa, setFixedGpa] = useState(false);
   const [isGpaChanged, setIsGpaChanged] = useRecoilState(isGpaChangedState);
   const {num1, num2, num3} = userGpa;
@@ -149,7 +150,7 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   return (
     <VerifiBoxWrapper>
       <TextAreaBox name="gpa-1" value={num1} setValue={fixedGpa ? ()=>{} : (value) => handleGPAState(`num1`, value)}/>
-      <div style={{ marginTop: '11.11vw', width: '5px', height: '10px', alignItems: 'center' }}>
+      <div style={{ marginTop: '10.11vw', width: '5px', height: '10px', alignItems: 'center' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none">
           <circle cx="1" cy="1" r="1" fill="#141414" />
         </svg>
@@ -236,7 +237,7 @@ export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({
   return (
     <VerifiBoxWrapper>
       <TextAreaBox name="currentSemester-1" value={curSemester.num1} setValue={(value) => handleSemesterState('num1', value)} />
-      <div style={{ marginTop: '1.263vw', width: '0.729vw', height: '0.1042vw' }}>
+      <div style={{ marginTop: '3vw', width: '1.729vw', height: '2vw' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 2" fill="none">
           <path d="M0 1H14" stroke="#B9B9B9" />
         </svg>

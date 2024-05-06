@@ -2,8 +2,8 @@ import SubmittedWrapper from "./SubmittedWrapper";
 import Typography from "../../../../assets/Typography";
 import Button01 from "../../../../assets/buttons/Button01";
 import MockApplicationButton from "../../../../assets/myboardpage/MockApplication";
-import { useRecoilState } from "recoil";
-import { applicationModalMobileState } from "../../../../store/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { applicationModalMobileState, userSettingsState, applicationSubmittedMobileState } from "../../../../store/atom";
 import Button05 from "../../../assets/buttons/Button05";
 import CTA01 from "../../../assets/CTAs/CTA01";
 
@@ -16,6 +16,7 @@ export interface CurrentModalSubmittedProps{
 export default function CurrentModal3(props: CurrentModalSubmittedProps){
   const {setOpenModal, onCustomFunction} = props;
   const [currentModal, setCurrentModal] = useRecoilState(applicationModalMobileState);
+  const [isSubmitted, setIsSubmitted] = useRecoilState(applicationSubmittedMobileState);
 
   return (
     <SubmittedWrapper currentModal={3}>
@@ -37,6 +38,8 @@ export default function CurrentModal3(props: CurrentModalSubmittedProps){
           style={{ width: '100%'}}
           onClick={() => {
             setOpenModal(false);
+            setCurrentModal(0);
+            setIsSubmitted(false);
           }}
         >
           취소하기

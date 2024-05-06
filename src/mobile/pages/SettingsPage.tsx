@@ -407,8 +407,8 @@ export const MobileSettingsPage = () => {
             placeholder={placeholderMapping['studentId']}
             value={stdID}
             state={stdIDState}
-            setState={setStdIDState}
-            setValue={setStdID}
+            setState={()=>{}}
+            setValue={()=>{}}
             helpMessage={helpMessageMapping['studentId']}
             errorMessage={errorMessageMapping['studentId']}
             />
@@ -545,9 +545,9 @@ export const MobileSettingsPage = () => {
           </TextBox>
           <Input01
             state={emailState}
-            setState={setEmailState}
+            setState={()=>{}}
             value={email}
-            setValue={setEmail}
+            setValue={()=>{}}
           />
         </ContentsWrapper>
         <ContentsWrapper>

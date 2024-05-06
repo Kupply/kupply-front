@@ -132,10 +132,6 @@ export default function Login2JoinModal(props: ModalProps) {
           <Typography size="0.9375vw" color="#141414" style={{ fontWeight: '700', lineHeight: '88.889%' }}>
             고려대학교 이메일을 입력해주세요.
           </Typography>
-          <div style={{ height: '0.417vw' }}></div>
-          <Typography size="0.833vw" color="#141414">
-            회원가입창
-          </Typography>
         </TextWrapper>
       </ModalSmall>
     </ModalContainer>
