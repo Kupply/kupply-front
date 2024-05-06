@@ -25,7 +25,6 @@ const MobileThreeYear = ({
   pastData2: any[];
 }) => {
   const semesters = LastThreeSemesters;
-  console.log(semesters);
 
   let initialState: SemesterBtnStates = {};
   semesters.forEach((semester, index) => {
