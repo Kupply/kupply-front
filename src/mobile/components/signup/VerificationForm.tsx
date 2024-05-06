@@ -2,8 +2,7 @@ import styled from "styled-components";
 import TextAreaBox from "../../assets/textarea/TextArea01";
 import React, { useEffect, useState, useRef } from "react";
 import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState, userState, userSettingsState } from "../../../store/atom"
-import { useRecoilState, useRecoilValue } from "recoil";
-import { emailAtom } from "../../../store/atom";
+import { useRecoilState } from "recoil";
 import { useNavigate, useRouteError } from "react-router-dom";
 import axios from "axios";
 import { inputState } from "../../../pages/signUp/SignUp4Page";
@@ -12,7 +11,7 @@ import Typography from "../../../assets/Typography";
 export const CodeVerification = () => {
 
   const [codeState, setCodeState] = useRecoilState(verificationCodeState);
-  const email = useRecoilValue(emailAtom);
+  const email = sessionStorage.getItem('email') || '';
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
   const {num1, num2, num3, num4, num5, num6} = codeState;
   const navigate = useNavigate();
@@ -245,7 +244,7 @@ export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({
 
 const CodeVerifiBoxWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   gap: 2.22vw;
 `;
 

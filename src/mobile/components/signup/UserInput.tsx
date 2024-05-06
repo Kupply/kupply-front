@@ -26,7 +26,7 @@ interface UserInputProps {
 
 export const placeholderMapping: Record<UserTypeOptions, string> = {
   name: '홍길동',
-  password: '대소문자, 특수문자를 최소 하나씩 조합하여 8글자 이상',
+  password: '대소문자 숫자 특수문자를 최소 하나씩 조합하여 8글자 이상',
   password2: '비밀번호 확인',
   nickname: '닉네임',
   studentId: '학번 10자리',
@@ -43,7 +43,7 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   studentId: '학번 10자리',
   firstMajor: '',
   id: '',
-  password: '특수문자와 영문자를 포함해 주세요!',
+  password: '특수문자 영문자 숫자를 포함해주세요',
   password2: '비밀번호 확인',
   nickname: '2자 이상 7자 이하로 설정해 주세요!',
   hopeMajor1: '',
