@@ -89,6 +89,7 @@ export default function MobileApplicationModal(props: ModalProps) {
         <ModalLarge onClickToggleModal={onClickModal}>
           {!isSubmitted ? (
             <TitleHeader>
+              <CloseButton />
               <TitleText>실지원 정보 확인하기</TitleText>
               <CloseButton
                 onClick={() => {
