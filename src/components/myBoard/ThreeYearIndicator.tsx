@@ -26,7 +26,6 @@ const ThreeYear = ({
 }) => {
 
   const semesters = LastThreeSemesters;
-  console.log(semesters);
 
   let initialState: SemesterBtnStates = {};
   semesters.forEach((semester, index) => {
@@ -138,7 +137,9 @@ const ThreeYear = ({
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>경쟁률</Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>
-        {selectedPastData.competitionRate} : 1
+        {selectedPastData.numOfApplied === 0
+          ? '집계불가'
+          : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
       </Text3>
       <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 평균 학점</Text2>
       <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>{selectedPastData.meanGpa}</Text3>
