@@ -9,7 +9,7 @@ import CTA01 from "../../assets/CTAs/CTA01";
 interface SettingsWrapperProps{
   selected: number;
   children?: ReactNode;
-  onClickFunction?: () => void;
+  onClickFunction: () => void;
 };
 
 export default function SettingsWrapper({selected, children, onClickFunction}:SettingsWrapperProps){
@@ -65,7 +65,7 @@ export default function SettingsWrapper({selected, children, onClickFunction}:Se
         {children}
         { (selected !== 0 && selected !== 5) && 
           <FixedCTA>
-            <CTA01 size="large" onClick={() => onClickFunction?.()}>저장하기</CTA01>
+            <CTA01 size="large" onClick={() => {onClickFunction();}}>저장하기</CTA01>
           </FixedCTA>
         }
       </Contents>

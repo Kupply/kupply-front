@@ -29,14 +29,6 @@ export default function SignUpPage1(){
 
   useEffect(() => {
     if (!sessionStorage.getItem('email')) navigate('/');
-    async function sendFirst(email: string) {
-      const result = await sendEmail(email);
-
-      if (!result) {
-        navigate('/login');
-      }
-    }
-    sendFirst(email);
   }, []);
 
   const setBlank = () => {
@@ -56,7 +48,6 @@ export default function SignUpPage1(){
     const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     try {
       //await axios.post(url, { email: email, code: entireCode });
-      console.log(email, entireCode, 'signup1');
       await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
 
       navigate('/signup2');
@@ -79,7 +70,6 @@ export default function SignUpPage1(){
     setBlank();
   }, [isOpenModal]);
 
-  console.log('isOpenModal', isOpenModal, 'currentModal', currentModal);
 
   // large modal 관련
   const onClickToggleLargeModal = useCallback(() => {
@@ -100,15 +90,15 @@ export default function SignUpPage1(){
         <Typography size="4.44vw" bold="700">인증번호가 전송되었습니다.</Typography>
         <Typography size="3.33vw" bold="500" style={{lineHeight: '4.44vw', wordBreak: 'break-all'}}>고려대학교 이메일 주소로 발송된 인증번호 여섯 자리를 입력해주세요.</Typography>
       </MessageContent>
-      <ContentsList>
-        <div>
-          <Typography size="4.44vw" color="#D85888" bold="700">
-            <Timer
-              setTime={3}
-              onTimerExpired={() => {navigate('/')}}
-            />
-          </Typography>
-        </div>
+        <ContentsList>
+          <div>
+            <Typography size="4.44vw" color="#D85888" bold="700">
+              <Timer
+                setTime={3}
+                onTimerExpired={() => {navigate('/')}}
+              />
+            </Typography>
+          </div>
         <CodeVerification/>
         <VerificationButton 
         onSetBlank={setBlank} 
@@ -148,8 +138,6 @@ const ContentsList = styled.div`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
-  // vh로 박아야 할 가능성이 클듯
   margin-top: 19.78vw;
   gap: 2.22vw;
   width: 100%;

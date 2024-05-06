@@ -3,7 +3,6 @@ import TextAreaBox from "../../assets/TextArea";
 import React, { useEffect, useState, useRef } from "react";
 import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState, userState, userSettingsState } from "../../store/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { emailAtom } from "../../store/atom";
 import { useNavigate, useRouteError } from "react-router-dom";
 import axios from "axios";
 import { inputState } from "../../pages/signUp/SignUp4Page";
@@ -13,7 +12,7 @@ import Typography from "../../assets/Typography";
 export const CodeVerification = () => {
 
   const [codeState, setCodeState] = useRecoilState(verificationCodeState);
-  const email = useRecoilValue(emailAtom);
+  const email = sessionStorage.getItem('email') || '';
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
   const {num1, num2, num3, num4, num5, num6} = codeState;
   const navigate = useNavigate();

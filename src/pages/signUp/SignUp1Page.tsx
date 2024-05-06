@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
 import { sendEmail } from "../../utils/SignUpFunctions";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +15,9 @@ import VerificationButton from "../../components/signUp/VerificationButton";
 import axios from "axios";
 import client from "../../utils/HttpClient";
 
-
 export function SignUp1Page(){
   const navigate = useNavigate();
+  const isMountedRef = useRef(false);
   // signup에서 가져오는 
   const email = sessionStorage.getItem('email') || '';
   console.log('email', email);
@@ -29,17 +29,15 @@ export function SignUp1Page(){
   const [isOpenModal, setOpenModal] = useRecoilState(isOpenModalState);
   const [sendNum, setSendNum] = useRecoilState(sendNumState);
 
-  // useEffect(() => {
-  //   if (!sessionStorage.getItem('email')) navigate('/');
-  //   async function sendFirst(email: string) {
-  //     const result = await sendEmail(email);
+  // 얘만 email을 보내야 함 - mount하면서 돌아가니까 
+  useEffect(() => {
+    if(!isMountedRef.current){
+      isMountedRef.current = true;
+      return;
+    }
 
-  //     if (!result) {
-  //       navigate('/login');
-  //     }
-  //   }
-  //   sendFirst(email);
-  // }, []);
+    if (!sessionStorage.getItem('email')) navigate('/');
+  }, []);
 
   const setBlank = () => {
     setCodeNum({
@@ -52,13 +50,12 @@ export function SignUp1Page(){
     })
   }
   
+  // 얘는 클릭할 때에만 판단 
   const handleNext = async () => {
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
-    console.log(entireCode, 'entireCode');
     const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
     try {
       //await axios.post(url, { email: email, code: entireCode });
-      console.log(email, entireCode, 'signup1');
       await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();
 
       navigate('/signup2');
@@ -71,35 +68,30 @@ export function SignUp1Page(){
   const onClickToggleSmallModal = useCallback(async () => {
     setOpenModal(!isOpenModal);
     setCurrentModal(0);
-    console.log(isOpenModal);
-    //setState가 마지막에 실행되므로, 첫 번째 재전송 시엔 email 값이 빈 문자열이 된다.
     if (!isOpenModal) {
       setSendNum(sendNum + 1);
-      console.log('this is from the onClickToggleSmallModal', sendNum);
       const email = sessionStorage.getItem('email') || '';
-      console.log('this is from the onClickToggleSmallModal testing email', email);
       await sendEmail(email);
     }
     setBlank();
   }, [isOpenModal]);
 
-  console.log('isOpenModal', isOpenModal, 'currentModal', currentModal);
 
   // large modal 관련
   const onClickToggleLargeModal = useCallback(() => {
     setOpenModal(!isOpenModal);
     setCurrentModal(1); // 현재 모달창 (step) 초기화
-    console.log(isOpenModal); // 디버그 목적
   }, [isOpenModal]);
 
   return (
     <>
-    <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
     <ModalHandle 
       setBlank={setBlank} 
       onClickToggleLargeModal={onClickToggleLargeModal} 
       onClickToggleSmallModal={onClickToggleSmallModal}
     />
+    <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
+      
       <ContentsList>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ContentsWrapper>
@@ -149,7 +141,6 @@ const ButtonsWrapper = styled.div`
   display: flex;
   gap: 0.9375vw;
 `;
-
 
 
 

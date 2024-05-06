@@ -301,6 +301,7 @@ const SettingsPage = () => {
           // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
           await client.post('/user/updateMe', updateData, config);
           window.location.reload(); // 페이지 새로고침.
+          console.log('is this third submit even working??');
         } catch (err) {
           console.log(err);
         }
@@ -328,7 +329,10 @@ const SettingsPage = () => {
   return (
     <Wrapper>
       {modalOpen && isGpaChanged && (
-        <GpaChangeModal modalOpen={modalOpen} setModalOpen={setModalOpen} thirdSubmit={thirdSubmit} />
+        <GpaChangeModal 
+        modalOpen={modalOpen} 
+        setModalOpen={setModalOpen} 
+        thirdSubmit={thirdSubmit} />
       )}
       <Sidebar>
         <Content>
@@ -629,7 +633,7 @@ const SettingsPage = () => {
             state={passwordState}
             setState={setPasswordState}
             setValue={setPwd}
-            helpMessage="비밀번호는 <8자 이상 20자 이하/1개 이상의 영문자/1개 이상의 숫자/1개 이상의 특수문자>가 포함되어야 합니다."
+            helpMessage="특수문자와 영문자를 포함해서 8~20자로 해주세요!"
             type="password"
           ></TextFieldBox>
           <TextFieldTitle>
