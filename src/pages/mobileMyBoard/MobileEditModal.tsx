@@ -104,7 +104,6 @@ export default function MobileEditModal(props: ModalProps) {
     }
   }, [GPA1, GPA2, GPA3]);
 
-
   const onClickSubmit = async () => {
     let updateData = {};
 
@@ -189,60 +188,73 @@ export default function MobileEditModal(props: ModalProps) {
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
-      <ButtonWrapper>
-        <TopButton
-          onClick={() => {
-            setOpenModal(!isOpenModal);
-          }}
-        >
-          <Icon02 size='100%'/>
-        </TopButton>
-      </ButtonWrapper>
-      <div style={{ height: '20.833vw' }}></div>
-      <AlertIconExclamation width="22.22vw" height="22.22vw" />
-      <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
-        변경한 학점을 저장하시겠습니까?
-      </Typography>
-      <div style={{width: '60.6vw', textAlign: 'center', marginTop: '4.44vw'}}>
-      <Typography size={'3.33vw'} color="#141414">
-        수정을 저장하면 이번 이중전공 지원 시즌 동안 단 한 번의 학점 수정 기회가 남아요.
-      </Typography>
-      </div>
-      <ActionWrapper>
-        <Button04 
-          onClick={() => {
-            setIsSubmitted(false);
-          }}
-          style={{width: '39.17vw', height: '11.67vw'}}>취소</Button04>
-          {/* onCheck가 onClick에 들어와야 하는데 잠시 수정 */}
-        <Button03
-          onClick={
-          () => {
-            setOpenModal(!isOpenModal);
-            setIsSubmitted(true);
-            onClickSubmit();
-          }}
-          style={{width: '39.17vw', height: '11.67vw'}}>확인</Button03>
-      </ActionWrapper>
+          <ButtonWrapper>
+            <TopButton
+              onClick={() => {
+                setOpenModal(!isOpenModal);
+              }}
+            >
+              <Icon02 size="100%" />
+            </TopButton>
+          </ButtonWrapper>
+          <div style={{ height: '20.833vw' }}></div>
+          <AlertIconExclamation width="22.22vw" height="22.22vw" />
+          <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
+            변경한 학점을 저장하시겠습니까?
+          </Typography>
+          <div style={{ width: '60.6vw', textAlign: 'center', marginTop: '4.44vw' }}>
+            <Typography size={'3.33vw'} color="#141414">
+              수정을 저장하면 이번 이중전공 지원 시즌 동안 단 한 번의 학점 수정 기회가 남아요.
+            </Typography>
+          </div>
+          <ActionWrapper>
+            <Button04
+              onClick={() => {
+                setIsSubmitted(false);
+              }}
+              style={{ width: '39.17vw', height: '11.67vw' }}
+            >
+              취소
+            </Button04>
+            {/* onCheck가 onClick에 들어와야 하는데 잠시 수정 */}
+            <Button03
+              onClick={() => {
+                setOpenModal(!isOpenModal);
+                setIsSubmitted(true);
+                onClickSubmit();
+              }}
+              style={{ width: '39.17vw', height: '11.67vw' }}
+            >
+              확인
+            </Button03>
+          </ActionWrapper>
         </ModalLarge>
       )}
       {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
-            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative', marginTop: '5vw'}}>
-            <div>
-            <Typography size="3.88vw" bold="700" >
-              프로필 정보 수정하기
-            </Typography>
-            </div>
-            <TopButton
-              onClick={() => {
-                setOpenModal(!isOpenModal);
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                position: 'relative',
+                marginTop: '5vw',
               }}
-              style={{position: 'absolute', left: '50vw', zIndex: 10}}
             >
-              <Icon02 size='100%'/>
-            </TopButton>
+              <div>
+                <Typography size="3.88vw" bold="700">
+                  프로필 정보 수정하기
+                </Typography>
+              </div>
+              <TopButton
+                onClick={() => {
+                  setOpenModal(!isOpenModal);
+                }}
+                style={{ position: 'absolute', left: '50vw', zIndex: 10 }}
+              >
+                <Icon02 size="100%" />
+              </TopButton>
             </div>
             <div style={{ height: '8.83vw' }}></div>
             <MobileHeaderBar />
@@ -275,51 +287,49 @@ export default function MobileEditModal(props: ModalProps) {
                 </div>
               </SubContentsWrapper>
 
-          <SubContentsWrapper>
-            <ContentsTitle>닉네임 변경하기</ContentsTitle>
-              <Input01
-                value={nickname}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNickname(e.target.value);
-                }}
-                state={nicknameState}
-                setState={setNicknameState}
-                setValue={setNickname}
-                errorMessage={errorMessages.nicknameErrorMessage}
+              <SubContentsWrapper>
+                <ContentsTitle>닉네임 변경하기</ContentsTitle>
+                <Input01
+                  value={nickname}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNickname(e.target.value);
+                  }}
+                  state={nicknameState}
+                  setState={setNicknameState}
+                  setValue={setNickname}
+                  errorMessage={errorMessages.nicknameErrorMessage}
+                />
+              </SubContentsWrapper>
+              <MoveButton
+                isOpenModal={isOpenModal}
+                setOpenModal={setOpenModal}
+                onClickSubmit={onClickSubmit}
+                isApplied={isApplied}
+                setIsSubmitted={setIsSubmitted}
+                style={{ marginTop: '16px', width: '100%', display: 'flex', justifyContent: 'space-between' }}
+                isGpaChanged={isGpaChanged}
               />
-          </SubContentsWrapper>
-            <MoveButton
-              isOpenModal={isOpenModal}
-              setOpenModal={setOpenModal}
-              onClickSubmit={onClickSubmit}
-              isApplied={isApplied}
-              setIsSubmitted={setIsSubmitted}
-              style={{ marginTop: '16px', width: '100%', display: 'flex', justifyContent: 'space-between' }}
-              isGpaChanged={isGpaChanged}
-            />
             </ContentsWrapper>
           )}
           {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
             <ContentsWrapper2>
-                <SubContentsWrapper>
-                  <ContentsTitle>희망 관심전공 변경하기</ContentsTitle>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
-                    <DropDown
-                      title="1지망 전공 선택"
-                      optionList={majorTarget.filter(
-                        (el) => el.value1 !== '희망 없음' &&  el.value1 !== hopeMajor2,
-                      )}
-                      value={hopeMajor1}
-                      setValue={setHopeMajor1}
-                    />
-                    <DropDown
-                      title="2지망 전공 선택"
-                      optionList={majorTarget.filter((el) =>  el.value1 !== hopeMajor1)}
-                      value={hopeMajor2}
-                      setValue={setHopeMajor2}
-                    />
-                  </div>
-                </SubContentsWrapper>
+              <SubContentsWrapper>
+                <ContentsTitle>희망 관심전공 변경하기</ContentsTitle>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
+                  <DropDown
+                    title="1지망 전공 선택"
+                    optionList={majorTarget.filter((el) => el.value1 !== '희망 없음' && el.value1 !== hopeMajor2)}
+                    value={hopeMajor1}
+                    setValue={setHopeMajor1}
+                  />
+                  <DropDown
+                    title="2지망 전공 선택"
+                    optionList={majorTarget.filter((el) => el.value1 !== hopeMajor1)}
+                    value={hopeMajor2}
+                    setValue={setHopeMajor2}
+                  />
+                </div>
+              </SubContentsWrapper>
               <MoveButton
                 isOpenModal={isOpenModal}
                 setOpenModal={setOpenModal}
@@ -334,19 +344,18 @@ export default function MobileEditModal(props: ModalProps) {
           {currentModal === 2 && ( // '현재 내 학점' 버튼 클릭 시
             <ContentsWrapper2>
               <ToolTip>
-                <Typography color='#D85888' size='3.89vw' bold='700'>
-                  주의하세요!<br/>
+                <Typography color="#D85888" size="3.89vw" bold="700">
+                  주의하세요!
+                  <br />
                 </Typography>
-                <Typography color='black' size='3.05vw' bold='400'>
-                  이중전공 지원 시즌에는 학점을&nbsp; 
+                <Typography color="black" size="3.05vw" bold="400">
+                  이중전공 지원 시즌에는 학점을&nbsp;
                 </Typography>
-                <Typography color='#D85888' size='3.05vw' bold='400'>
+                <Typography color="#D85888" size="3.05vw" bold="400">
                   최대 2번까지&nbsp;
                 </Typography>
-                <Typography color='black' size='3.05vw' bold='400'>
-                  변경 할 수 있어요. 
-                  정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 
-                  받아보세요.
+                <Typography color="black" size="3.05vw" bold="400">
+                  변경 할 수 있어요. 정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.
                 </Typography>
               </ToolTip>
               <SubContentsWrapper>
@@ -367,60 +376,45 @@ export default function MobileEditModal(props: ModalProps) {
                 </VerifiBoxWrapper>
               </SubContentsWrapper>
 
-              <div style={{marginTop: '40.56vw'}}>
-              <MoveButton
-                isOpenModal={isOpenModal}
-                setOpenModal={setOpenModal}
-                onClickSubmit={onClickSubmit}
-                isApplied={isApplied}
-                setIsSubmitted={setIsSubmitted}
-                isGpaChanged={isGpaChanged}
-              />
+              <div style={{ marginTop: '40.56vw' }}>
+                <MoveButton
+                  isOpenModal={isOpenModal}
+                  setOpenModal={setOpenModal}
+                  onClickSubmit={onClickSubmit}
+                  isApplied={isApplied}
+                  setIsSubmitted={setIsSubmitted}
+                  isGpaChanged={isGpaChanged}
+                />
               </div>
             </ContentsWrapper2>
           )}
-          {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
+          {currentModal === 3 && ( // '희망 지원학기' 버튼 클릭 시
             <ContentsWrapper2>
               <SubContentsWrapper>
                 <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
                 <VerifiBoxWrapper>
                   <VerifiBoxWrapper>
-                    <TextAreaBox
-                      name="semester-1"
-                      value={hopeSemester1}
-                      setValue={setHopeSemester1}
-                      isEntered={true}
-                    />
-                    <TextAreaBox
-                      name="semester-2"
-                      value={hopeSemester2}
-                      setValue={setHopeSemester2}
-                      isEntered={true}
-                    />
+                    <TextAreaBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1} isEntered={true} />
+                    <TextAreaBox name="semester-2" value={hopeSemester2} setValue={setHopeSemester2} isEntered={true} />
                     <Typography size="3.33vw" bold="400" style={{ marginTop: '8.021vw' }}>
                       년도
                     </Typography>
-                    <TextAreaBox
-                      name="semester-3"
-                      value={hopeSemester3}
-                      setValue={setHopeSemester3}
-                      isEntered={true}
-                    />
+                    <TextAreaBox name="semester-3" value={hopeSemester3} setValue={setHopeSemester3} isEntered={true} />
                     <Typography size="3.33vw" bold="400" style={{ marginTop: '8.021vw' }}>
                       학기
                     </Typography>
                   </VerifiBoxWrapper>
                 </VerifiBoxWrapper>
               </SubContentsWrapper>
-              <div style={{marginTop: '60.56vw'}}>
-              <MoveButton
-                isOpenModal={isOpenModal}
-                setOpenModal={setOpenModal}
-                onClickSubmit={onClickSubmit}
-                isApplied={isApplied}
-                setIsSubmitted={setIsSubmitted}
-                isGpaChanged={isGpaChanged}
-              />
+              <div style={{ marginTop: '60.56vw' }}>
+                <MoveButton
+                  isOpenModal={isOpenModal}
+                  setOpenModal={setOpenModal}
+                  onClickSubmit={onClickSubmit}
+                  isApplied={isApplied}
+                  setIsSubmitted={setIsSubmitted}
+                  isGpaChanged={isGpaChanged}
+                />
               </div>
             </ContentsWrapper2>
           )}
@@ -517,7 +511,6 @@ const CandidateImgsWrapper = styled.div`
   gap: 2vw;
 `;
 
-
 const VerifiBoxWrapper = styled.div`
   display: flex;
   gap: 0.6771vw;
@@ -540,8 +533,8 @@ const ActionWrapper = styled.div`
 `;
 
 const ToolTip = styled.div`
-width: 76.388vw;
-flex-direction: column;
-justify-content: flex-start;
-margin-bottom: 5.56vw;
+  width: 76.388vw;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 5.56vw;
 `;

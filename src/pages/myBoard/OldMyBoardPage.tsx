@@ -28,7 +28,7 @@ import {
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
 
 도전생 : 희망 1지망, 2지망 전공, 현재 학점, 희망 이중 지원학기
-진입생 : 제2전공, 지원 당시 학점, 진입학기
+진입생 : 제2전공, 지원 당시 학점, 지원학기
 */
 
 /* 
@@ -544,7 +544,7 @@ export default function MyBoardPage() {
               isApplied={isOpenEditModal}
             />
           ) : null}
-    
+
           {isOpenApcModal ? (
             <ApplicationModal
               isOpenModal={isOpenApcModal}
@@ -895,7 +895,7 @@ export default function MyBoardPage() {
                     size="bodyText"
                     style={{ color: 'rgba(67, 67, 67, 0.60)', fontWeight: '400px', marginLeft: '9.97px' }}
                   >
-                    희망 진입학기
+                    희망 지원학기
                   </Typography>
                   <Typography
                     size="bodyText"
