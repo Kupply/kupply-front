@@ -73,13 +73,13 @@ function Join1() {
       </Typography>
       {isLogined ? (
         <CTA02 size="large" onClick={handleMyboardButtonClick}>
-          나도 모의지원 하러가기!
+          나도 모의지원 하러가기
         </CTA02>
       ) : (
         <JoinWrapper>
           <TextFieldWrapper>
             <TextFieldBox
-              placeholder="Bright@korea.ac.kr"
+              placeholder="kupply@korea.ac.kr"
               value={ID}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setID(e.target.value);

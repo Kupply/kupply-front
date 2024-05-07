@@ -165,8 +165,8 @@ export function SignUp4PagePasser(){
     <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
       <ContentsList>
         <ContentsWrapper>
-          <UserInputText userInfoType="doubleMajor"/>
-          <UserInput userInfoType="doubleMajor" toNext={next} setStateValid={setMajorState}/>
+          <UserInputText userInfoType="secondMajor"/>
+          <UserInput userInfoType="secondMajor" toNext={next} setStateValid={setMajorState}/>
         </ContentsWrapper>
         <ContentsWrapper>
           <UserInputText userInfoType="passGPA"/>

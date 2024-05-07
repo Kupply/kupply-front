@@ -54,14 +54,14 @@ const MobileMyBoard = () => {
   }, [isApplied]);
 
   const [userData, setUserData] = useState(() => ({
-    userName: '고대빵',
-    userNickname: '고대빵',
-    userProfilePic: CurrentPic,
+    userName: '',
+    userNickname: '',
+    userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: '미디어학부',
-    studentId: '2021160009',
-    hopeMajor1: '수학과',
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '경영학과',
     hopeMajor2: '컴퓨터학과',
     curGPA: 4.5,
     hopeSemester: '2023-2',

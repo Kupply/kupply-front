@@ -240,7 +240,8 @@ const ProfileImage = styled.div<{ userProfilePic?: string }>`
   width: 6.67vw;
   height: 6.67vw;
   margin-left: 2.06vw;
-  background-image: url('../../../../designImage/character/rectProfile/${(props) => props.userProfilePic}.png');
+  background-image: url('${process.env.PUBLIC_URL}/designImage/character/rectProfile/${(props) =>
+    props.userProfilePic}.png');
   background-size: cover;
   border-radius: 1vw;
 `;

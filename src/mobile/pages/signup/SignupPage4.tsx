@@ -180,7 +180,7 @@ export function SignUp4PagePasser() {
               을 선택해주세요.
             </Typography>
           </div>
-          <UserInput userInfoType="doubleMajor" toNext={next} setStateValid={setMajorState} />
+          <UserInput userInfoType="secondMajor" toNext={next} setStateValid={setMajorState} />
         </ContentsWrapper>
         <ContentsWrapper>
           <div>

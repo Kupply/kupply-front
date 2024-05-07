@@ -10,7 +10,7 @@ export interface Button07Props extends React.ComponentPropsWithoutRef<'button'> 
 
 function Button07(props: Button07Props) {
   const {
-    title = '이중전공 진입생',
+    title = '이중전공 합격생',
     content = '이중전공 진입에 성공했고, 다양한 정보를 공유하고 싶어요!',
     state = 'default',
     ...rest
