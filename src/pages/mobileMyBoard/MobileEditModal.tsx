@@ -277,7 +277,7 @@ export default function MobileEditModal(props: ModalProps) {
                     <CandidateImgsWrapper>
                       {Array.from({ length: 4 }, (_, index) => (
                         <CandidateImg
-                          src={`designImage/character/rectProfile/RectProfile${index + 1}.png`}
+                          src={`designImage/character/rectProfile/rectProfile${index + 1}.png`}
                           alt={`candidate profile ${index + 1}`}
                           onClick={() => setUserProfilePic(`rectProfile${index + 1}`)}
                         />
