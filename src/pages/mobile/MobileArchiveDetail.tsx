@@ -267,11 +267,12 @@ const Wrapper1 = styled.div`
   display: flex;
 
   width: 100%;
-  height: 72.77vw;
+  height: 70.77vw;
   border-radius: 2.78vw;
   border: 1px solid #fff;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
+  margin-top: 5vw;
 `;
 
 const BlurWrapper1 = styled.div`
