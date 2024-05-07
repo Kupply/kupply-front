@@ -117,7 +117,7 @@ function Preview() {
         <CardList style={{ gap: '42px', marginTop: '189.5px' }}>
           <Card>
             <Typography size="smallText" bold="500" color="#E57C90" style={{ marginBottom: '11px' }}>
-              합격지표
+              합격자료
             </Typography>
             <Typography size="title2" style={{ marginBottom: '2px' }}>
               희망 이중전공
@@ -140,7 +140,7 @@ function Preview() {
           </Card>
           <Card>
             <Typography size="smallText" bold="500" color="#E57C90" style={{ marginBottom: '11px' }}>
-              마이페이지
+              마이보드
             </Typography>
             <Typography size="title2" style={{ marginBottom: '2px' }}>
               나의 이중전공
@@ -163,7 +163,7 @@ function Preview() {
           </Card>
           <Card>
             <Typography size="smallText" bold="500" color="#E57C90" style={{ marginBottom: '11px' }}>
-              마이페이지
+              마이보드
             </Typography>
             <Typography size="title2" style={{ marginBottom: '2px' }}>
               경쟁자들 중
@@ -211,7 +211,7 @@ function Preview() {
           </Card>
           <Card>
             <Typography size="smallText" bold="500" color="#E57C90" style={{ marginBottom: '11px' }}>
-              마이페이지
+              마이보드
             </Typography>
             <Typography size="title2" style={{ marginBottom: '2px' }}>
               같은 과를 지원한

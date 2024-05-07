@@ -39,19 +39,19 @@ function Banner03(props: Banner03Props) {
   const contents = [
     [
       {
-        buttonText: '마이페이지',
+        buttonText: '마이보드',
         title: ['같은 과를 지원한', '경쟁자 정보 살펴보기'],
         text: [],
         image: '../../../designImage/mobile/banner/Banner3_4.png',
       },
       {
-        buttonText: '마이페이지',
+        buttonText: '마이보드',
         title: ['나의 이중전공', '합격 예측하기'],
         text: [],
         image: '../../../designImage/mobile/banner/Banner3_5.png',
       },
       {
-        buttonText: '마이페이지',
+        buttonText: '마이보드',
         title: ['지난 이중전공', '모집정보 한 눈에 보기'],
         text: [],
         image: '../../../designImage/mobile/banner/Banner3_6.png',
@@ -65,7 +65,7 @@ function Banner03(props: Banner03Props) {
     ],
     [
       {
-        buttonText: '마이페이지',
+        buttonText: '마이보드',
         title: ['경쟁자들 중', '나의 등수 보기'],
         text: ['실시간으로 변하는 지원자들 중', '나의 등수를 예측해드릴게요.'],
         image: '../../../designImage/mobile/banner/Banner3_1.png',
