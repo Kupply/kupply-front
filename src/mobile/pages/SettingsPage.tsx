@@ -101,7 +101,7 @@ export const MobileSettingsPage = () => {
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
-  const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
+
 
   const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
   const [emailState, setEmailState] = useState<StateOptions>('filled');
@@ -137,7 +137,7 @@ export const MobileSettingsPage = () => {
         const userInfo = APIresponse.data.data.user;
 
         localStorage.setItem('userProfilePic', userInfo.profilePic);
-        localStorage.setItem('userProfileLink', userInfo.profileLink);
+        //localStorage.setItem('userProfileLink', userInfo.profileLink);
         localStorage.setItem('name', userInfo.name);
         localStorage.setItem('nickname', userInfo.nickname);
         localStorage.setItem('studentId', userInfo.studentId);
@@ -168,7 +168,7 @@ export const MobileSettingsPage = () => {
         setHopeSemester2(userInfo.hopeSemester.charAt(3));
         setHopeSemester3(userInfo.hopeSemester.charAt(5));
         setUserProfilePic(userInfo.profilePic);
-        setUserProfileLink(userInfo.profileLink);
+        //setUserProfileLink(userInfo.profileLink);
         setCurrentNickname(userInfo.nickname);
       } catch (err) {
         console.log(err);
@@ -437,9 +437,7 @@ export const MobileSettingsPage = () => {
           <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
             <CurrentImg
               src={
-                userProfilePic === 'customProfile'
-                  ? userProfileLink
-                  : `designImage/character/rectProfile/${userProfilePic}.png`
+                `designImage/character/rectProfile/${userProfilePic}.png`
               }
               alt="current profile"
             />
