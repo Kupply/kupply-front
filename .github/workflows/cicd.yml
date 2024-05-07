@@ -40,15 +40,15 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:latest
 
-  #deploy:
-  #needs: build
-  #runs-on: self-hosted
-  #steps:
-  #- name: setup .env
-  #run: | # command to be executed
-  #echo "REACT_APP_GOOGLE_ANALYTICS=${{ secrets.REACT_APP_GOOGLE_ANALYTICS }}" >> .env
-  #cat .env
-  #- name: Run Docker
-  #run: |
-  #docker stop ${{env.DOCKER_CONTAINER}} && docker rm ${{env.DOCKER_CONTAINER}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
-  #docker run --env-file ./.env -d -p 3000:3000 --name ${{env.DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:latest
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: setup .env
+        run: |
+          echo "REACT_APP_GOOGLE_ANALYTICS=${{ secrets.REACT_APP_GOOGLE_ANALYTICS }}" >> .env
+          cat .env
+      - name: Run Docker
+        run: |
+          docker stop ${{env.DOCKER_CONTAINER}} && docker rm ${{env.DOCKER_CONTAINER}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
+          docker run --env-file ./.env -d -p 3000:3000 --name ${{env.DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:latest
