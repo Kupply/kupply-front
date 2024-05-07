@@ -184,7 +184,10 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox>
         <RecruitBox>
           <RecruitLeftBox>
-            <Card0301 avgPassNum={sortCriterion === '전학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection} />
+            <Card0301
+              cardType={sortCriterion === '전학기 누적' ? '0' : '1'}
+              avgPassNum={sortCriterion === '전학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection}
+            />
           </RecruitLeftBox>
           <RecruitRightBox>
             <Card0302 appliedNum={numOfApplication} passNum={numOfPassed} />
