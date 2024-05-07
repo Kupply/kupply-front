@@ -47,8 +47,8 @@ function ApplyTable() {
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (isLogined) loadData();
+  }, [isLogined]);
 
   return (
     <MainWrapper>
