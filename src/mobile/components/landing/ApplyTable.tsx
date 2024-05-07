@@ -59,7 +59,13 @@ function ApplyTable() {
         >
           <AscendingImage src="../../../../designImage/landing/rankTable1.png" />
           <Typography size="3.06vw" color="#a8a8a8" style={{ lineHeight: '120%' }}>
-            {isAscending ? '낮은 경쟁률 순' : '높은 경쟁률 순'}
+            {isCurrentInfo
+              ? isAscending
+                ? '낮은 경쟁률 순'
+                : '높은 경쟁률 순'
+              : isAscending
+              ? '낮은 합격률 순'
+              : '높은 합격률 순'}
           </Typography>
         </MenuBox>
         <MenuBox style={{ gap: '1.67vw' }}>
