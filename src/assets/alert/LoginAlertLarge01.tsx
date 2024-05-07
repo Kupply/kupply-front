@@ -60,7 +60,7 @@ function LoginAlertLarge01({
       </Typography>
       <ActionWrapper>
         <TextFieldBox
-          placeholder="bright@korea.ac.kr"
+          placeholder="kupply@korea.ac.kr"
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setEmail(e.target.value);

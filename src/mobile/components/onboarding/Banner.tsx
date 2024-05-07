@@ -125,7 +125,7 @@ function Banner() {
         쿠플라이가 모아주는 고려대학교 인기 <br /> 이중전공 정보모음.zip
       </Typography>
       <Typography size="3.06vw" bold="500" color="#FFF" style={{ lineHeight: '120%' }}>
-        모두의 성공적인 이중전공 진입 메이트 쿠플라이와 함께해요!
+        모두의 성공적인 이중전공 지원 메이트 쿠플라이와 함께해요!
       </Typography>
       <Cards>
         {cardData.map((data, dataIndex) => (

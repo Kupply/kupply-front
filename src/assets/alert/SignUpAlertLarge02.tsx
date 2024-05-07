@@ -44,14 +44,14 @@ function SignUpAlertLarge02({
             setCurrentModal(currentModal - 1);
           }}
         >
-          <Icon03 size='100%' />
+          <Icon03 size="100%" />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size='100%' />
+          <Icon02 size="100%" />
         </TopButton>
       </ButtonWrapper>
       <AlertIconExclamation width="5.885vw" height="5.885vw" />
@@ -65,7 +65,7 @@ function SignUpAlertLarge02({
       </TypographyBox>
       <ActionWrapper>
         <TextFieldBox
-          placeholder="bright@korea.ac.kr"
+          placeholder="kupply@korea.ac.kr"
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setEmail(e.target.value);
@@ -85,8 +85,8 @@ function SignUpAlertLarge02({
               alert('형식에 맞지 않는 이메일 주소입니다.');
             }
           }}
-          state='pressed'
-          style={{width: '100%'}}
+          state="pressed"
+          style={{ width: '100%' }}
         >
           제출하기
         </Button05>

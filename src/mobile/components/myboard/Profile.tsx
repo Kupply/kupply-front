@@ -87,7 +87,7 @@ const MobileProfile = ({
 
         <ApplyBox>
           <CTA02 size="large" onClick={onClickAppModal} state={isButtonDisabled}>
-            나도 모의지원 하러가기!
+            나도 모의지원 하러가기
           </CTA02>
         </ApplyBox>
       </Wrapper>

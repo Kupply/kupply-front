@@ -8,7 +8,7 @@ export interface CTA02Props extends React.ComponentPropsWithoutRef<'button'> {
 }
 
 function CTA02(props: CTA02Props) {
-  const { children = '나도 모의지원 하러가기!', size = 'large', state = 'default', ...rest } = props;
+  const { children = '나도 모의지원 하러가기', size = 'large', state = 'default', ...rest } = props;
   return (
     <ButtonWrapper size={size} state={state} {...rest}>
       <ImageWrapper

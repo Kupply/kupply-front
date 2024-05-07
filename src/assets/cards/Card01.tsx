@@ -124,7 +124,7 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, passRat
             hoverState={svgHover}
             style={{ position: 'absolute', top: '9.05vw', left: '10.80vw' }}
           >
-            쿠플라이에서 수집된 데이터 값으로, 실제 합격률과 차이가 있을 수 있습니다.
+            해당 학기 지원한 쿠플라이 회원들의 합격률로, 실제와는 상이할 수 있습니다.
           </ToolTip02>
           <ContentInner style={{ top: '10.52vw', left: '8.80vw' }}>
             {passRate < 0 ? '집계불가' : passRate + ' %'}
