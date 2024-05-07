@@ -20,7 +20,7 @@ function Cards() {
         쿠플라이의 핵심 기능을 소개합니다
       </Typography>
       <Typography bold="500" color="rgba(20, 20, 20, 0.6)" style={{ marginTop: '1.46vw', opacity: '0.8' }}>
-        모두의 성공적인 이중전공 진입 메이트 쿠플라이와 함께해요!
+        모두의 성공적인 이중전공 지원 메이트 쿠플라이와 함께해요!
       </Typography>
       <ContentWrapper>
         <HorizontalWrapper>

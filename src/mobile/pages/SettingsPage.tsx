@@ -1,24 +1,23 @@
-import React, {useState, useEffect, useRef} from "react";
-import { useNavigate } from "react-router-dom";
-import styled, {css} from "styled-components";
-import { useCookies } from "react-cookie";
-import { useRecoilState } from "recoil";
-import { MobileSelectedState, SBContentState } from "../../store/atom";
-import client from "../../utils/HttpClient";
-import { StateOptions } from "../assets/field/Input01";
-import { majorAllList } from "../../common/MajorAll";
-import { majorTargetList } from "../../common/MajorTarget";
-import SettingsWrapper from "../components/settings/SettingsWrapper";
-import { MainTable } from "../components/settings/MainTable";
-import Typography from "../../assets/Typography";
-import Input01 from "../assets/field/Input01";
-import { placeholderMapping, helpMessageMapping, errorMessageMapping } from "../components/signup/UserInput";
-import DropDown from "../assets/selectControl/DropDown";
-import TextAreaBox from "../assets/textarea/TextArea01";
-import SettingsModal from "../components/settings/SettingsModal";
-import { MobileScroll } from "../assets/scroll/MobileScroll";
-import { TermsText1, TermsText2 } from "../components/signup/TermsText";
-
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { useCookies } from 'react-cookie';
+import { useRecoilState } from 'recoil';
+import { MobileSelectedState, SBContentState } from '../../store/atom';
+import client from '../../utils/HttpClient';
+import { StateOptions } from '../assets/field/Input01';
+import { majorAllList } from '../../common/MajorAll';
+import { majorTargetList } from '../../common/MajorTarget';
+import SettingsWrapper from '../components/settings/SettingsWrapper';
+import { MainTable } from '../components/settings/MainTable';
+import Typography from '../../assets/Typography';
+import Input01 from '../assets/field/Input01';
+import { placeholderMapping, helpMessageMapping, errorMessageMapping } from '../components/signup/UserInput';
+import DropDown from '../assets/selectControl/DropDown';
+import TextAreaBox from '../assets/textarea/TextArea01';
+import SettingsModal from '../components/settings/SettingsModal';
+import { MobileScroll } from '../assets/scroll/MobileScroll';
+import { TermsText1, TermsText2 } from '../components/signup/TermsText';
 
 interface SettingsPageProps {
   selected: number;
@@ -73,7 +72,7 @@ export const MobileSettingsPage = () => {
   const navigate = useNavigate();
 
   const [scrollActive, setActive] = useState(false);
-  // 잠시 수정 
+  // 잠시 수정
   const [modalOpen, setModalOpen] = useState(false);
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
@@ -102,7 +101,6 @@ export const MobileSettingsPage = () => {
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
 
-
   const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
   const [emailState, setEmailState] = useState<StateOptions>('filled');
   const [pwd, setPwd] = useState<string>('');
@@ -117,7 +115,7 @@ export const MobileSettingsPage = () => {
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
 
-  // 잠시 수정 
+  // 잠시 수정
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
 
   useEffect(() => {
@@ -276,8 +274,8 @@ export const MobileSettingsPage = () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-    if(oldGpa !== newGpa){
-      console.log('it is different'); //여기까지는 감지 
+    if (oldGpa !== newGpa) {
+      console.log('it is different'); //여기까지는 감지
       setIsGpaChanged(true);
       setModalOpen(true);
       return;
@@ -290,24 +288,24 @@ export const MobileSettingsPage = () => {
       const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
       const year = +(hopeSemester1 + hopeSemester2);
       const semester = +hopeSemester3;
-      if(year <= 23 || (semester !== 1 && semester !==2)){
+      if (year <= 23 || (semester !== 1 && semester !== 2)) {
         alert('유효한 학기를 입력해주세요!');
-      }else{
-      const updateData = {
-        newCurGPA: newGpa,
-        newHopeMajor1: hopeMajor1,
-        newHopeMajor2: hopeMajor2,
-        newHopeSemester: newHopeSemester,
-      };
-      try {
-        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-        await client.post('/user/updateMe', updateData, config);
-        window.location.reload(); // 페이지 새로고침.
-      } catch (err) {
-        console.log(err);
+      } else {
+        const updateData = {
+          newCurGPA: newGpa,
+          newHopeMajor1: hopeMajor1,
+          newHopeMajor2: hopeMajor2,
+          newHopeSemester: newHopeSemester,
+        };
+        try {
+          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+          await client.post('/user/updateMe', updateData, config);
+          window.location.reload(); // 페이지 새로고침.
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
-  }
   };
   const thirdSubmit2 = async () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
@@ -320,24 +318,24 @@ export const MobileSettingsPage = () => {
       const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
       const year = +(hopeSemester1 + hopeSemester2);
       const semester = +hopeSemester3;
-      if(year <= 23 || (semester !== 1 && semester !==2)){
+      if (year <= 23 || (semester !== 1 && semester !== 2)) {
         alert('유효한 학기를 입력해주세요!');
-      }else{
-      const updateData = {
-        newCurGPA: newGpa,
-        newHopeMajor1: hopeMajor1,
-        newHopeMajor2: hopeMajor2,
-        newHopeSemester: newHopeSemester,
-      };
-      try {
-        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-        await client.post('/user/updateMe', updateData, config);
-        window.location.reload(); // 페이지 새로고침.
-      } catch (err) {
-        console.log(err);
+      } else {
+        const updateData = {
+          newCurGPA: newGpa,
+          newHopeMajor1: hopeMajor1,
+          newHopeMajor2: hopeMajor2,
+          newHopeSemester: newHopeSemester,
+        };
+        try {
+          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+          await client.post('/user/updateMe', updateData, config);
+          window.location.reload(); // 페이지 새로고침.
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
-  }
   };
 
   const fourthSubmit = async () => {
@@ -357,67 +355,96 @@ export const MobileSettingsPage = () => {
   const majorTarget = [...majorTargetList];
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
-  return(
-    <SettingsWrapper selected={selected} onClickFunction={
-      selected == 1 ? firstSubmit : 
-      selected == 2 ? secondSubmit : 
-      selected == 3 ?  thirdSubmit1: 
-      selected == 4 ? fourthSubmit : 
-      () => {}}>
+  return (
+    <SettingsWrapper
+      selected={selected}
+      onClickFunction={
+        selected == 1
+          ? firstSubmit
+          : selected == 2
+          ? secondSubmit
+          : selected == 3
+          ? thirdSubmit1
+          : selected == 4
+          ? fourthSubmit
+          : () => {}
+      }
+    >
       {modalOpen && isGpaChanged && (
         <SettingsModal
-        isOpenModal={modalOpen}
-        setOpenModal={setModalOpen}
-        onClickModal={() => {setModalOpen(!modalOpen)}}
-        thirdSubmit={thirdSubmit2}
+          isOpenModal={modalOpen}
+          setOpenModal={setModalOpen}
+          onClickModal={() => {
+            setModalOpen(!modalOpen);
+          }}
+          thirdSubmit={thirdSubmit2}
         />
       )}
       {selected == 0 && (
         <>
-        <MainTable/>
-        <Line/>
-        <div style={{marginLeft: '4.44vw'}} onClick={() => {navigate('/delete')}}>
-          <Typography style={{color: '#EE6767', opacity: 0.6}} size="4.44vw">계졍삭제</Typography>
-        </div>
+          <MainTable />
+          <Line />
+          <div
+            style={{ marginLeft: '4.44vw' }}
+            onClick={() => {
+              navigate('/delete');
+            }}
+          >
+            <Typography style={{ color: '#EE6767', opacity: 0.6 }} size="4.44vw">
+              계졍삭제
+            </Typography>
+          </div>
         </>
       )}
       {selected == 1 && (
         <>
           <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">이름&nbsp;</Typography>
-            <Typography size="3.33vw" bold="500">수정하기</Typography>
-          </TextBox>
-          <Input01 
-            placeholder={placeholderMapping['name']}
-            value={name}
-            state={nameState}
-            setState={setNameState}
-            setValue={setName}
-            helpMessage={helpMessageMapping['name']}
-            errorMessage={errorMessageMapping['name']}
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                이름&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                수정하기
+              </Typography>
+            </TextBox>
+            <Input01
+              placeholder={placeholderMapping['name']}
+              value={name}
+              state={nameState}
+              setState={setNameState}
+              setValue={setName}
+              helpMessage={helpMessageMapping['name']}
+              errorMessage={errorMessageMapping['name']}
             />
           </ContentsWrapper>
           <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">고려대학교 학번&nbsp;</Typography>
-            <Typography size="3.33vw" bold="500">수정하기</Typography>
-          </TextBox>
-          <Input01 
-            placeholder={placeholderMapping['studentId']}
-            value={stdID}
-            state={stdIDState}
-            setState={()=>{}}
-            setValue={()=>{}}
-            helpMessage={helpMessageMapping['studentId']}
-            errorMessage={errorMessageMapping['studentId']}
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                고려대학교 학번&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                수정하기
+              </Typography>
+            </TextBox>
+            <Input01
+              placeholder={placeholderMapping['studentId']}
+              value={stdID}
+              state={stdIDState}
+              setState={() => {}}
+              setValue={() => {}}
+              helpMessage={helpMessageMapping['studentId']}
+              errorMessage={errorMessageMapping['studentId']}
             />
           </ContentsWrapper>
           <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">본전공(1전공)&nbsp;</Typography>
-            <Typography size="3.33vw" bold="500">수정하기</Typography>
-          </TextBox>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                본전공(1전공)&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                수정하기
+              </Typography>
+            </TextBox>
             <DropDown
               title={placeholderMapping['firstMajor']}
               value={firstMajor}
@@ -429,51 +456,58 @@ export const MobileSettingsPage = () => {
       )}
       {selected == 2 && (
         <>
-        <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">프로필 사진&nbsp;</Typography>
-            <Typography size="3.33vw" bold="500">변경하기</Typography>
-          </TextBox>
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-            <CurrentImg
-              src={
-                `designImage/character/rectProfile/${userProfilePic}.png`
-              }
-              alt="current profile"
-            />
-            
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                프로필 사진&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                변경하기
+              </Typography>
+            </TextBox>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+              <CurrentImg
+                src={process.env.PUBLIC_URL + `/designImage/character/rectProfile/${userProfilePic}.png`}
+                alt="current profile"
+              />
+
               <CandidateImgsWrapper>
                 {Array.from({ length: 4 }, (_, index) => (
                   <CandidateImg
-                    src={`designImage/character/rectProfile/RectProfile${index+1}.png`}
-                    alt={`candidate profile ${index+1}`}
-                    onClick={() => setUserProfilePic(`rectProfile${index+1}`)}
+                    src={`designImage/character/rectProfile/RectProfile${index + 1}.png`}
+                    alt={`candidate profile ${index + 1}`}
+                    onClick={() => setUserProfilePic(`rectProfile${index + 1}`)}
                   />
                 ))}
               </CandidateImgsWrapper>
             </div>
-        </ContentsWrapper>
-        <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">닉네임&nbsp;</Typography>
-            <Typography size="3.33vw" bold="500">수정하기</Typography>
-          </TextBox>
-          <Input01
-            state={nicknameState}
-            setState={setNicknameState}
-            value={nickname}
-            setValue={setNickname}
-          />
-        </ContentsWrapper>
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                닉네임&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                수정하기
+              </Typography>
+            </TextBox>
+            <Input01 state={nicknameState} setState={setNicknameState} value={nickname} setValue={setNickname} />
+          </ContentsWrapper>
         </>
       )}
       {selected == 3 && (
         <>
           <ContentsWrapper>
             <TextBox>
-              <Typography size="3.33vw" bold="500">희망하는&nbsp;</Typography>
-              <Typography size="3.33vw" bold="700">이중전공</Typography>
-              <Typography size="3.33vw" bold="500">을 선택해주세요.</Typography>
+              <Typography size="3.33vw" bold="500">
+                희망하는&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="700">
+                이중전공
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                을 선택해주세요.
+              </Typography>
             </TextBox>
             <DropDown
               title={placeholderMapping['hopeMajor1']}
@@ -490,129 +524,149 @@ export const MobileSettingsPage = () => {
           </ContentsWrapper>
           <ContentsWrapper>
             <TextBox>
-              <Typography size="3.33vw" bold="700">학점&nbsp;</Typography>
-              <Typography size="3.33vw" bold="500">수정하기</Typography>
+              <Typography size="3.33vw" bold="700">
+                학점&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                수정하기
+              </Typography>
             </TextBox>
             <VerifiBoxWrapper>
-            <TextAreaBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
-            <div style={{ marginTop: '8vw', width: '2px', height: '2px' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none">
-                <circle cx="1" cy="1" r="1" fill="#141414" />
-              </svg>
-            </div>
-            <TextAreaBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
-            <TextAreaBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
-          </VerifiBoxWrapper>
-
+              <TextAreaBox name="gpa-1" value={GPA1} setValue={setGPA1} isEntered={true} />
+              <div style={{ marginTop: '8vw', width: '2px', height: '2px' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none">
+                  <circle cx="1" cy="1" r="1" fill="#141414" />
+                </svg>
+              </div>
+              <TextAreaBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
+              <TextAreaBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
+            </VerifiBoxWrapper>
           </ContentsWrapper>
           <ContentsWrapper>
             <TextBox>
-              <Typography size="3.33vw" bold="700">희망 이중 지원학기&nbsp;</Typography>
-              <Typography size="3.33vw" bold="500">수정하기</Typography>
+              <Typography size="3.33vw" bold="700">
+                희망 이중 지원학기&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                수정하기
+              </Typography>
             </TextBox>
             <VerifiBoxWrapper>
-            <TextAreaBox
-              name="semester-1"
-              value={hopeSemester1}
-              setValue={setHopeSemester1}
-              isEntered={hopeSemester1 ? true : false}
+              <TextAreaBox
+                name="semester-1"
+                value={hopeSemester1}
+                setValue={setHopeSemester1}
+                isEntered={hopeSemester1 ? true : false}
               />
-            <TextAreaBox
-              name="semester-2"
-              value={hopeSemester2}
-              setValue={setHopeSemester2}
-              isEntered={hopeSemester2 ? true : false}
-            />
-            <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>년도</Typography>
-            <TextAreaBox
-              name="semester-3"
-              value={hopeSemester3}
-              setValue={setHopeSemester3}
-              isEntered={hopeSemester3 ? true : false}
-            />
-            <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>학기</Typography>
-          </VerifiBoxWrapper>
+              <TextAreaBox
+                name="semester-2"
+                value={hopeSemester2}
+                setValue={setHopeSemester2}
+                isEntered={hopeSemester2 ? true : false}
+              />
+              <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>
+                년도
+              </Typography>
+              <TextAreaBox
+                name="semester-3"
+                value={hopeSemester3}
+                setValue={setHopeSemester3}
+                isEntered={hopeSemester3 ? true : false}
+              />
+              <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>
+                학기
+              </Typography>
+            </VerifiBoxWrapper>
           </ContentsWrapper>
         </>
       )}
       {selected == 4 && (
         <>
-        <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">쿠플라이 아이디</Typography>
-          </TextBox>
-          <Input01
-            state={emailState}
-            setState={()=>{}}
-            value={email}
-            setValue={()=>{}}
-          />
-        </ContentsWrapper>
-        <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">비밀번호&nbsp;</Typography>
-            <Typography size="3.33vw" bold="500">변경하기</Typography>
-          </TextBox>
-          <Input01
-            state={passwordState}
-            setState={setPasswordState}
-            value={pwd}
-            setValue={setPwd}
-            placeholder={placeholderMapping['password']}
-            errorMessage={errorMessageMapping['password']}
-            helpMessage={helpMessageMapping['password']}
-          />
-        </ContentsWrapper>
-        <ContentsWrapper>
-          <TextBox>
-            <Typography size="3.33vw" bold="700">비밀번호 재확인</Typography>
-            <Typography size="3.33vw" bold="500">하기</Typography>
-          </TextBox>
-          <Input01
-          state={password2State}
-          setState={setPassword2State}
-          value={pwdConfirm}
-          setValue={setPwdConfirm}
-          placeholder={placeholderMapping['password2']}
-          errorMessage={errorMessageMapping['password2']}
-          helpMessage={helpMessageMapping['password2']}
-          />
-        </ContentsWrapper>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                쿠플라이 아이디
+              </Typography>
+            </TextBox>
+            <Input01 state={emailState} setState={() => {}} value={email} setValue={() => {}} />
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                비밀번호&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                변경하기
+              </Typography>
+            </TextBox>
+            <Input01
+              state={passwordState}
+              setState={setPasswordState}
+              value={pwd}
+              setValue={setPwd}
+              placeholder={placeholderMapping['password']}
+              errorMessage={errorMessageMapping['password']}
+              helpMessage={helpMessageMapping['password']}
+            />
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                비밀번호 재확인
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                하기
+              </Typography>
+            </TextBox>
+            <Input01
+              state={password2State}
+              setState={setPassword2State}
+              value={pwdConfirm}
+              setValue={setPwdConfirm}
+              placeholder={placeholderMapping['password2']}
+              errorMessage={errorMessageMapping['password2']}
+              helpMessage={helpMessageMapping['password2']}
+            />
+          </ContentsWrapper>
         </>
       )}
       {selected == 5 && (
         <>
-        <TextBox>
-          <Typography size="3.33vw" bold="700">서비스 이용약관</Typography>
-        </TextBox>
-        <TextOutBox>
-          <MobileScroll height='30vw'>
-            <TermsText1 />
-          </MobileScroll>
-        </TextOutBox>
-        <TextBox>
-          <Typography size="3.33vw" bold="700">개인정보 처리방침</Typography>
-        </TextBox>
-        <TextOutBox>
-          <MobileScroll height='30vw'>
-            <TermsText2 />
-          </MobileScroll>
-        </TextOutBox>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">
+              서비스 이용약관
+            </Typography>
+          </TextBox>
+          <TextOutBox>
+            <MobileScroll height="30vw">
+              <TermsText1 />
+            </MobileScroll>
+          </TextOutBox>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">
+              개인정보 처리방침
+            </Typography>
+          </TextBox>
+          <TextOutBox>
+            <MobileScroll height="30vw">
+              <TermsText2 />
+            </MobileScroll>
+          </TextOutBox>
         </>
       )}
     </SettingsWrapper>
   );
-}
+};
 
 const Line = styled.div`
-height: 1px;
-width: 100%;
-background-color: var(--DF_Grey-2, #DFDFDF);
+  height: 1px;
+  width: 100%;
+  background-color: var(--DF_Grey-2, #dfdfdf);
 `;
 
 const TextBox = styled.div`
-width: 100%;
-align-items: flex-start;
+  width: 100%;
+  align-items: flex-start;
 `;
 
 const ContentsWrapper = styled.div`

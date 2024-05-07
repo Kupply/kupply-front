@@ -51,7 +51,7 @@ export default function CurrentModal2() {
           size="large"
           style={{ width: '100%' }}
         >
-          나도 모의지원 하러가기!
+          나도 모의지원 하러가기
         </CTA02>
       </div>
     </>

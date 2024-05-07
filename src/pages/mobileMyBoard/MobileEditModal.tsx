@@ -269,7 +269,7 @@ export default function MobileEditModal(props: ModalProps) {
                     src={
                       userProfilePic === 'customProfile'
                         ? userProfileLink
-                        : `designImage/character/rectProfile/${userProfilePic}.png`
+                        : process.env.PUBLIC_URL + `/designImage/character/rectProfile/${userProfilePic}.png`
                     }
                     alt="current profile"
                   />
@@ -459,7 +459,7 @@ const ContentsWrapper2 = styled.div`
   flex-direction: column;
   width: 83.33vw;
   margin-top: 8.33vw;
-  height: auto;
+  height: 100%; // auto;
   overflow: auto;
   overflow-x: hidden;
 `;

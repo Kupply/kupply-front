@@ -23,7 +23,7 @@ function Preview() {
           쿠플라이의 핵심 기능을 소개합니다
         </Typography>
         <Typography size="3.06vw" bold="500" color="rgba(20,20,20,0.6)" style={{ lineHeight: '120%', opacity: '0.8' }}>
-          모두의 성공적인 이중전공 진입 메이트 쿠플라이와 함께해요!
+          모두의 성공적인 이중전공 지원 메이트 쿠플라이와 함께해요!
         </Typography>
       </TextBox>
       <BannerBox>
