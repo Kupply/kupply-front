@@ -36,7 +36,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     },
     withCredentials: true,
   };
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState(() => ({
     userName: '',
     userNickname: '',
     userProfilePic: 'rectProfile1',
@@ -44,11 +44,11 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     userRole: 'candidate',
     firstMajor: '',
     studentId: '',
-    hopeMajor1: '',
-    hopeMajor2: '',
-    curGPA: 0,
-    hopeSemester: '',
-  });
+    hopeMajor1: '경영학과',
+    hopeMajor2: '컴퓨터학과',
+    curGPA: 4.5,
+    hopeSemester: '2023-2',
+  }));
   useEffect(() => {
     const getUserInfo = async () => {
       try {

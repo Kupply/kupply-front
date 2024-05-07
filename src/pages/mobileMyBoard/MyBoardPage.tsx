@@ -53,7 +53,7 @@ const MobileMyBoard = () => {
     console.log('모의지원 완료');
   }, [isApplied]);
 
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState(() => ({
     userName: '',
     userNickname: '',
     userProfilePic: 'rectProfile1',
@@ -61,11 +61,11 @@ const MobileMyBoard = () => {
     userRole: 'candidate',
     firstMajor: '',
     studentId: '',
-    hopeMajor1: '',
-    hopeMajor2: '',
-    curGPA: 0,
-    hopeSemester: '',
-  });
+    hopeMajor1: '경영학과',
+    hopeMajor2: '컴퓨터학과',
+    curGPA: 4.5,
+    hopeSemester: '2023-2',
+  }));
 
   const [pastData1, setPastData1] = useState([
     {
