@@ -459,7 +459,7 @@ const ContentsWrapper2 = styled.div`
   flex-direction: column;
   width: 83.33vw;
   margin-top: 8.33vw;
-  height: auto;
+  height: 100%; // auto;
   overflow: auto;
   overflow-x: hidden;
 `;
