@@ -72,7 +72,7 @@ function LandingPage() {
   }, [location.state]);
 
   const [CurrentPic, setCurrentPic] = useState('');
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState(() => ({
     userName: '',
     userNickname: '',
     userProfilePic: 'rectProfile1',
@@ -80,11 +80,11 @@ function LandingPage() {
     userRole: 'candidate',
     firstMajor: '',
     studentId: '',
-    hopeMajor1: '',
-    hopeMajor2: '',
-    curGPA: 0,
-    hopeSemester: '',
-  });
+    hopeMajor1: '경영학과',
+    hopeMajor2: '컴퓨터학과',
+    curGPA: 4.5,
+    hopeSemester: '2023-2',
+  }));
   const [tableData, setTableData] = useState<ITableData[]>(dummyData);
 
   // 로그인한 유저 정보 localStorage에
