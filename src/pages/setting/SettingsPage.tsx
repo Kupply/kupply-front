@@ -73,7 +73,6 @@ const SettingsPage = () => {
   const onClick = (index: number) => {
     setSelected(index);
   };
-  const [scrollActive, setActive] = useState(false);
 
   // 잠시 수정 
   const [modalOpen, setModalOpen] = useState(false);
@@ -103,7 +102,7 @@ const SettingsPage = () => {
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
-  const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
+  // const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
 
   const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
   const [emailState, setEmailState] = useState<StateOptions>('filled');
@@ -173,7 +172,7 @@ const SettingsPage = () => {
         setHopeSemester2(userInfo.hopeSemester.charAt(3));
         setHopeSemester3(userInfo.hopeSemester.charAt(5));
         setUserProfilePic(userInfo.profilePic);
-        setUserProfileLink(userInfo.profileLink);
+        // setUserProfileLink(userInfo.profileLink);
         setCurrentNickname(userInfo.nickname);
       } catch (err) {
         console.log(err);
@@ -456,9 +455,7 @@ const SettingsPage = () => {
           <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
             <CurrentImg
               src={
-                userProfilePic === 'customProfile'
-                  ? userProfileLink
-                  : `designImage/character/rectProfile/${userProfilePic}.png`
+                `designImage/character/rectProfile/${userProfilePic}.png`
               }
               alt="current profile"
             />
