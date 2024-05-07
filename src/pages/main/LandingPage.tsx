@@ -154,28 +154,56 @@ function LandingPage() {
   const rankRef = useRef<HTMLDivElement>(null);
 
   return (
-    <MainWrapper>
-      <Side>
-        <ProfileBox userData={userData} />
-      </Side>
-      <Content>
-        <Banner
-          scrollToFAQ={() => {
-            if (faqRef.current) {
-              const yOffset = -100;
-              const y = faqRef.current.getBoundingClientRect().top + yOffset;
-              window.scrollTo({ top: y, behavior: 'smooth' });
-            }
-          }}
-        />
-        <RankingTable tableData={tableData} ref={rankRef} />
-        <FAQ ref={faqRef} />
-      </Content>
-    </MainWrapper>
+    <>
+      {userData.userRole === 'passer' ? (
+        <MainWrapper2>
+          <Content>
+            <Banner
+              scrollToFAQ={() => {
+                if (faqRef.current) {
+                  const yOffset = -100;
+                  const y = faqRef.current.getBoundingClientRect().top + yOffset;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+              }}
+            />
+            <FAQ ref={faqRef} />
+          </Content>
+        </MainWrapper2>
+      ) : (
+        <MainWrapper>
+          <Side>
+            <ProfileBox userData={userData} />
+          </Side>
+          <Content>
+            <Banner
+              scrollToFAQ={() => {
+                if (faqRef.current) {
+                  const yOffset = -100;
+                  const y = faqRef.current.getBoundingClientRect().top + yOffset;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+              }}
+            />
+            <RankingTable tableData={tableData} ref={rankRef} />
+            <FAQ ref={faqRef} />
+          </Content>
+        </MainWrapper>
+      )}
+    </>
   );
 }
 
 const MainWrapper = styled.div`
+  width: 100vw;
+  height: auto;
+  display: flex;
+  background: #fefafb;
+`;
+
+const MainWrapper2 = styled.div`
+  position: relative;
+  justify-content: center;
   width: 100vw;
   height: auto;
   display: flex;
