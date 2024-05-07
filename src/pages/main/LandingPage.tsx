@@ -72,19 +72,19 @@ function LandingPage() {
   }, [location.state]);
 
   const [CurrentPic, setCurrentPic] = useState('');
-  const [userData, setUserData] = useState(() => ({
-    userName: '고대빵',
-    userNickname: '빵대고대빵',
-    userProfilePic: CurrentPic,
+  const [userData, setUserData] = useState({
+    userName: '',
+    userNickname: '',
+    userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: 'media',
-    studentId: '2021160009',
-    hopeMajor1: 'business',
-    hopeMajor2: 'computer',
-    curGPA: 4.5,
-    hopeSemester: '2023-2',
-  }));
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '',
+    hopeMajor2: '',
+    curGPA: 0,
+    hopeSemester: '',
+  });
   const [tableData, setTableData] = useState<ITableData[]>(dummyData);
 
   // 로그인한 유저 정보 localStorage에

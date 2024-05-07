@@ -53,19 +53,19 @@ const MobileMyBoard = () => {
     console.log('모의지원 완료');
   }, [isApplied]);
 
-  const [userData, setUserData] = useState(() => ({
-    userName: '고대빵',
-    userNickname: '고대빵',
-    userProfilePic: CurrentPic,
+  const [userData, setUserData] = useState({
+    userName: '',
+    userNickname: '',
+    userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: '미디어학부',
-    studentId: '2021160009',
-    hopeMajor1: '수학과',
-    hopeMajor2: '컴퓨터학과',
-    curGPA: 4.5,
-    hopeSemester: '2023-2',
-  }));
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '',
+    hopeMajor2: '',
+    curGPA: 0,
+    hopeSemester: '',
+  });
 
   const [pastData1, setPastData1] = useState([
     {

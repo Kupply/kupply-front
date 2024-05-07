@@ -61,7 +61,10 @@ const MobileProfile = ({
     <>
       <Wrapper>
         <HeadWrapper>
-          <CharacterImage src={`designImage/character/rectProfile/${profilePic}.png`} alt="profile" />
+          <CharacterImage
+            src={process.env.PUBLIC_URL + `designImage/character/rectProfile/${profilePic}.png`}
+            alt="profile"
+          />
           <NickNameBox>
             <NickNameText>{userData.userNickname}</NickNameText>
             <RoleText>{userData.userRole === 'candidate' ? '도전자' : '합격자'} 님</RoleText>
