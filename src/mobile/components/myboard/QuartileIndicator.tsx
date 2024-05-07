@@ -28,7 +28,7 @@ const MobileQuartileIndicator = ({
       {!isApplied && (
         <BlurBox>
           <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
-            쿠플라이에서 모의지원 후 열람 가능해요!
+            쿠플라이에서 모의지원(5/10 오픈) 후 열람 가능해요!
           </Typography>
           <Typography
             size="3.06vw"
@@ -208,6 +208,7 @@ const BlurBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 5.56vw;
   border-radius: 1.39vw;
   background: rgba(248, 248, 248, 0.45);

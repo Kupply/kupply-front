@@ -19,7 +19,7 @@ const QuartileIndicator = ({
         <Wrapper2>
           <BlurWrapper />
           <BlurMsg>
-            <BlurTitle>실시간 지원자 통계는 모의지원 후 열람 가능합니다.</BlurTitle>
+            <BlurTitle>실시간 지원자 통계는 모의지원(5/10 오픈) 후 열람 가능합니다.</BlurTitle>
             <Blurtext>
               좌측의 모의지원 버튼을 통해 모의지원을 완료해주세요. <br /> 모의지원을 완료하면 지원한 다른 지원자들의
               정보를 확인하실 수 있습니다.

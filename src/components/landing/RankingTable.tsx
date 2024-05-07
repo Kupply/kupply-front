@@ -50,7 +50,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         bold="700"
         style={{ lineHeight: '120%', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
       >
-        {isDateInRange ? '쿠플라이 실시간 이중전공 모의지원 현황' : '지금은 모의지원 기간이 아닙니다'}
+        {isDateInRange ? '쿠플라이 실시간 이중전공 모의지원 현황' : '지금은 모의지원 기간이 아닙니다!'}
       </Typography>
       <Typography
         size="1.04vw"
@@ -60,10 +60,10 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
       >
         {isDateInRange
           ? '이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.'
-          : '모의지원 기능은 5월 10일에 오픈해요!'}
+          : '모의지원 기능은 5월 10일에 오픈해요.'}
       </Typography>
       <CTA02 onClick={handleButtonClick} style={{ marginBottom: '3.8vw' }}>
-        {isDateInRange ? '나도 모의지원 하러가기!' : '기다리는 동안 과거 합격자료 보러가기!'}
+        {isDateInRange ? '나도 모의지원 하러가기' : '기다리는 동안 과거 합격자료 보러가기'}
       </CTA02>
       <TextWrapper>
         <div

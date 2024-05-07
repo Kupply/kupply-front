@@ -58,10 +58,10 @@ function SignUpAlertMobileLarge02({
       <div style={{ height: '20.833vw' }}></div>
       <AlertIconExclamation width="22.22vw" height="22.22vw" />
       <TextWrapper>
-        <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw'}}>
+        <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
           인증번호를 받을
         </Typography>
-        <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{marginTop: '12px'}}>
+        <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '12px' }}>
           고려대 이메일 주소를 입력해주세요!
         </Typography>
         <Typography size={'3.33vw'} color="#141414" style={{ marginTop: '4.44vw' }}>
@@ -69,14 +69,14 @@ function SignUpAlertMobileLarge02({
         </Typography>
       </TextWrapper>
       <ActionWrapper>
-        <div style={{width: '81.667vw', height: '11.667vw'}}>
-        <Input02
-          state={emailState as StateOptions}
-          setState={setEmailState}
-          setValue={setEmail}
-          value={email}
-          placeholder="bright@korea.ac.kr"
-        />
+        <div style={{ width: '81.667vw', height: '11.667vw' }}>
+          <Input02
+            state={emailState as StateOptions}
+            setState={setEmailState}
+            setValue={setEmail}
+            value={email}
+            placeholder="kupply@korea.ac.kr"
+          />
         </div>
         <CTA01
           onClick={async () => {
@@ -89,7 +89,7 @@ function SignUpAlertMobileLarge02({
               alert('형식에 맞지 않는 이메일 주소입니다.');
             }
           }}
-          style={{width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw'}}
+          style={{ width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw' }}
         >
           제출하기
         </CTA01>

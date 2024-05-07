@@ -105,7 +105,10 @@ const MobileThreeYear = ({
         <Text3 style={{ position: 'absolute', top: '57.22vw', left: '5vw' }}>{selectedPastData.meanGpa}</Text3>
         <Text2 style={{ position: 'absolute', top: '51.94vw', left: '52.22vw' }}>합격자 최저 학점</Text2>
         <Text3 style={{ position: 'absolute', top: '57.22vw', left: '52.22vw' }}>{selectedPastData.minGpa}</Text3>
-        <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
+        <Text4>
+          설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다. <br /> (합격률은 해당 학기 지원한
+          쿠플라이 회원들의 합격률입니다.)
+        </Text4>
       </BodyBox>
     </Wrapper>
   );
