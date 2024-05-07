@@ -226,9 +226,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                 <SettingToggleWrapper ref={headerToggleRef}>
                   <Profile>
                     <img
-                      src={
-                        `designImage/character/rectProfile/${userData.userProfilePic}.png`
-                      }
+                      src={process.env.PUBLIC_URL + `/designImage/character/rectProfile/${userData.userProfilePic}.png`}
                       width={112}
                       alt="profile"
                     />

@@ -117,7 +117,6 @@ export default function EditModal(props: ModalProps) {
     }
   }, [GPA1, GPA2, GPA3]);
 
-
   const onClickSubmit = async () => {
     let updateData = {};
 
@@ -253,7 +252,11 @@ export default function EditModal(props: ModalProps) {
             >
               <Icon02 />
             </CloseButton>
-            <Typography size="0.9375vw" bold="700" style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '0.833vw' }}>
+            <Typography
+              size="0.9375vw"
+              bold="700"
+              style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '0.833vw' }}
+            >
               프로필 정보 수정하기
             </Typography>
             <div style={{ height: '1.67vw' }}></div>
@@ -269,7 +272,7 @@ export default function EditModal(props: ModalProps) {
                     src={
                       userProfilePic === 'customProfile'
                         ? userProfileLink
-                        : `designImage/character/rectProfile/${userProfilePic}.png`
+                        : process.env.PUBLIC_URL + `/designImage/character/rectProfile/${userProfilePic}.png`
                     }
                     alt="current profile"
                   />

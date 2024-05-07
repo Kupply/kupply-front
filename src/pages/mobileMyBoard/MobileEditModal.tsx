@@ -269,7 +269,7 @@ export default function MobileEditModal(props: ModalProps) {
                     src={
                       userProfilePic === 'customProfile'
                         ? userProfileLink
-                        : `designImage/character/rectProfile/${userProfilePic}.png`
+                        : process.env.PUBLIC_URL + `/designImage/character/rectProfile/${userProfilePic}.png`
                     }
                     alt="current profile"
                   />
