@@ -102,23 +102,34 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   const navigate = useNavigate();
 
   const handleMenu1Click = () => {
-    navigate('/archive');
-  };
-  const handleMenu2Click = () => {
-    // 원래는 if(logined)이지만 임시적으로 수정
-    if (true) {
-      navigate('/myboard');
-    } // 로그인 상태
-    else {
+    if (logined) {
+      navigate('/archive');
+    } else {
       const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
       if (confirmation) {
         navigate('/login');
       }
-      // 미로그인 상태
+    }
+  };
+  const handleMenu2Click = () => {
+    if (logined) {
+      navigate('/myboard');
+    } else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
     }
   };
   const handleMenu3Click = () => {
-    navigate('/landing');
+    if (logined) {
+      navigate('/landing');
+    } else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
+    }
   };
   const handleSettingsClick = () => {
     setSelected(0);
@@ -359,11 +370,17 @@ const LoginContainer = styled.div`
     white-space: nowrap;
   }
 
+  .login {
+    height: 60%;
+    font-size: 16px;
+  }
+
   @media screen and (max-width: 600px) {
     height: 45px; /* 아이템의 높이를 부모 요소에 맞춤 */
     width: 20%;
     .login {
       padding: 8px 16px;
+      height: 75%;
       max-height: 36px;
     }
   }

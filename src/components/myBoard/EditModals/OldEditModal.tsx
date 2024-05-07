@@ -207,7 +207,7 @@ export default function EditModal(props: ModalProps) {
   0: 나의 기본정보
   1: 관심 전공
   2: 현재 내 학점
-  3: 희망 진입학기
+  3: 희망 지원학기
   */
   const [currentModal, setCurrentModal] = useState<number>(0);
   // const [currentSrc, setCurrentSrc] = useState('designImage/character/rectProfile/RectProfile1.png');
@@ -279,7 +279,7 @@ export default function EditModal(props: ModalProps) {
 
   return (
     <Main>
-      {(isOpenModal && isSubmitted && isGpaChanged &&
+      {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <CloseButton
             onClick={() => {
@@ -329,7 +329,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      { isOpenModal && !isSubmitted && (
+      {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton
@@ -632,7 +632,7 @@ export default function EditModal(props: ModalProps) {
               </MoveButtonWrapper>
             </ContentsWrapper2>
           )}
-          {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
+          {currentModal === 3 && ( // '희망 지원학기' 버튼 클릭 시
             <ContentsWrapper2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
                 <SubContentsWrapper>

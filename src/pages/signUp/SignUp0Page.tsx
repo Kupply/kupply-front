@@ -10,58 +10,67 @@ import axios from "axios";
 import client from "../../utils/HttpClient";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../store/atom";
-import TextFieldBox from "../../assets/OldTextFieldBox";
+import TextFieldBox, { StateOptions } from "../../assets/OldTextFieldBox";
+import { sendEmail } from "../../utils/SignUpFunctions";
+
 
 
 export function SignUp0Page(){
-
-  // 형식에 맞는 이메일이 입력되면 인증메일 받기 버튼이 켜지도록 
-  const {complete, idVerified} = useSignUp0Verification();
-  // 이걸 지금 받고 있는게 
-  const ID = useRecoilValue(userState('kuEmail'));
-  console.log('Signup0', ID);
-  const [next, setNext] = useState(false);
+  const [ID, setID] = useState<string>('');
+  const [IDstate, setIDState] = useState<StateOptions>('default');
+  const email = sessionStorage.getItem('email') || '';
+  
   const navigate = useNavigate();
 
-  const handleNext = async () => {
+  const handleButtonClick = async () => {
+    //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
     const IDPattern = /.+@korea\.ac\.kr$/;
-
-    // onKeyDown에서 complete가 아직 update가 안된 상태라 || 뒤에 추가 
-    if(complete || IDPattern.test(ID.info)){
-      const url = 'https://api.kupply.devkor.club/auth/sendEmail';
+    if (IDPattern.test(ID)) {
+      //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
+      const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
       try {
-        //await axios.post(url, { email: ID.info });
-        await client.post('/auth/sendEmail', { email: ID.info });
+        // await axios.post(url, { email: ID });
+        await client.post('/auth/sendEmail', { email: ID });
 
-        //sessionStorage에 입력받은 kuEmail을 저장한 후 다음 페이지로 넘어간다.
-        // 그래서 email은 잘 간다. 그리고 나서 
-        sessionStorage.setItem('kuEmail', ID.info);
-        setNext(true);
-        Promise.resolve().then(() => {
-          navigate('/signup1');
-        });
-      } catch(err:any){
+        //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
+        window.sessionStorage.setItem('email', ID);
+        navigate('/signup1');
+      } catch (err: any) {
         //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
         alert(err.response.data.error.message);
         if (err.response.data.error.message === '이미 회원가입이 완료된 이메일 입니다. 로그인해주세요.') {
           navigate('/login');
         }
       }
-    }else{
+    } else {
       alert('형식에 맞는 이메일이 아닙니다.');
     }
-  }
+  };
 
   return (
     <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
       <ContentsList>
           <ContentsWrapper>
             <UserInputText userInfoType="kuEmail"/>
-            <UserInput userInfoType="kuEmail" toNext={next} onCustomFunction={handleNext}/>
+            <TextFieldBox
+              placeholder="고려대학교 이메일 주소"
+              value={ID}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setID(e.target.value);
+              }}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === 'Enter') {
+                  handleButtonClick();
+                }
+              }}
+              state={IDstate}
+              setState={setIDState}
+              setValue={setID}
+            />
           </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
-        <Button03 state={complete? 'pressed' : 'disabled'} onClick={handleNext} style={{width: '100%'}}>
+        <Button03 state={IDstate === 'filled' ? 'pressed' : 'disabled'} onClick={handleButtonClick} style={{width: '100%'}}>
           인증메일 받기 
         </Button03>
       </ButtonsWrapper>

@@ -39,9 +39,6 @@ export function useStudentIdVerification(locationUsed: verificationProps){
 
   useEffect(() => {
     const passwordCheck = /^\d{10}$/;
-    console.log('stdId', stdId);
-    console.log(localStorage.getItem('studentId'));
-    console.log('stdId again', stdId);
     if (stdId.infoState === 'filled') {
       if (!passwordCheck.test(stdId.info)){
         setStdId((prev) => ({...prev, infoState: 'error'}));
@@ -136,59 +133,20 @@ export function useNicknameVerification(locationUsed: verificationProps){
   const [nickname, setNickname] = useRecoilState(locationUsed === 'signUp' ? userState('nickname') : userSettingsState('nickname'));
   const [errorMessages, setErrorMessages] = useRecoilState(errorMessageState);
   const [nicknameVerified, setNicknameVerified] = useState(false);
-  
-  //nicknameState가 바뀔 때, 즉 창을 클릭할 때에 대한 대처이다.
-  // infoCheck해주는 내용은 이미 따로 중복확인 버튼에서 구현이 되어 있다 
+
   useEffect(() => {
-    if ((nickname.info.length === 1 || nickname.info.length > 7) && nickname.infoState !== 'focused') {
-      setNickname((prev) => ({...prev, infoState: 'error'}));
-      setNicknameVerified(false);
-
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
-      });
-    } else if (nickname.infoCheck === 'error' && nickname.infoState !== 'focused') {
-      setNickname((prev) => ({...prev, infoState: 'error'}));
-      setNicknameVerified(false);
-
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    } else if (nickname.infoCheck !== 'filled') {
-      if (!(nickname.infoState === 'default' || nickname.infoState === 'focused' || nickname.infoState === 'hover')) {
+    if (nickname.infoState === 'filled') {
+      if ((nickname.info.length === 1 || nickname.info.length > 7)){
         setNickname((prev) => ({...prev, infoState: 'error'}));
         setNicknameVerified(false);
-        setErrorMessages({
-          ...errorMessages,
-          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
-        });
+      }
+      else {
+        setNickname((prev) => ({...prev, infoState: 'filled'}));
+        setNicknameVerified(true);
       }
     }
-  }, [nickname.infoState]);
+  }, [nickname.info, nickname.infoState]);
 
-  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
-  useEffect(() => {
-    setNickname((prev) => ({...prev, infoCheck: 'default'}));
-  }, [nickname.info]);
-
-
-  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
-  useEffect(() => {
-    if (nickname.infoCheck === 'filled') {
-      setNickname((prev) => ({...prev, infoState: 'filled'}));
-      setNicknameVerified(true);
-    }
-    else if (nickname.infoCheck === 'error') {
-      setNickname((prev) => ({...prev, infoState: 'error'}));
-      setNicknameVerified(false);
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    }
-  }, [nickname.infoCheck]);
-
+  console.log('nicknameverified state', nicknameVerified);
   return {nicknameVerified, errorMessages, nickname, setNickname};
 }

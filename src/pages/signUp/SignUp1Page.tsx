@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
 import { sendEmail } from "../../utils/SignUpFunctions";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { CodeVerification } from "../../components/signUp/VerificationForm";
 import Typography from "../../assets/Typography";
 import Timer from "../../components/signUp/Timer";
 import { ModalHandle } from "../../components/signUp/ModalHandle";
-import { emailAtom, nextButtonState, verificationCodeState  } from '../../store/atom'; 
+import { emailAtom, nextButtonState, verificationCodeState, currentModalState, isOpenModalState, sendNumState  } from '../../store/atom'; 
 import { useRecoilState, useRecoilValue } from "recoil";
 import Button03 from "../../assets/buttons/Button03";
 import Button04 from "../../assets/buttons/Button04";
@@ -17,24 +17,27 @@ import client from "../../utils/HttpClient";
 
 export function SignUp1Page(){
   const navigate = useNavigate();
+  const isMountedRef = useRef(false);
   // signup에서 가져오는 
-  const email = sessionStorage.getItem('kuEmail') || '';
+  const email = sessionStorage.getItem('email') || '';
   console.log('email', email);
   const [codeNum, setCodeNum] = useRecoilState(verificationCodeState);
   const {num1, num2, num3, num4, num5, num6} = codeNum;
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
 
-  // 잠시 설정 - backend와 연결하면 확인할 수 있을까? 
-  // useEffect(() => {
-  //   async function sendFirst(email: string) {
-  //     const result = await sendEmail(email);
+  const [currentModal, setCurrentModal] = useRecoilState(currentModalState);
+  const [isOpenModal, setOpenModal] = useRecoilState(isOpenModalState);
+  const [sendNum, setSendNum] = useRecoilState(sendNumState);
 
-  //     if (!result) {
-  //       navigate('/login');
-  //     }
-  //   }
-  //   sendFirst(email);
-  // }, []);
+  // 얘만 email을 보내야 함 - mount하면서 돌아가니까 
+  useEffect(() => {
+    if(!isMountedRef.current){
+      isMountedRef.current = true;
+      return;
+    }
+
+    if (!sessionStorage.getItem('email')) navigate('/');
+  }, []);
 
   const setBlank = () => {
     setCodeNum({
@@ -47,6 +50,7 @@ export function SignUp1Page(){
     })
   }
   
+  // 얘는 클릭할 때에만 판단 
   const handleNext = async () => {
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
     const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
@@ -61,9 +65,31 @@ export function SignUp1Page(){
     }
   };
 
+  const onClickToggleSmallModal = useCallback(async () => {
+    setOpenModal(!isOpenModal);
+    setCurrentModal(0);
+    if (!isOpenModal) {
+      setSendNum(sendNum + 1);
+      const email = sessionStorage.getItem('email') || '';
+      await sendEmail(email);
+    }
+    setBlank();
+  }, [isOpenModal]);
+
+
+  // large modal 관련
+  const onClickToggleLargeModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+    setCurrentModal(1); // 현재 모달창 (step) 초기화
+  }, [isOpenModal]);
+
   return (
     <>
-    <ModalHandle setBlank={setBlank}/>
+    <ModalHandle 
+      setBlank={setBlank} 
+      onClickToggleLargeModal={onClickToggleLargeModal} 
+      onClickToggleSmallModal={onClickToggleSmallModal}
+    />
     <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
       
       <ContentsList>
@@ -87,11 +113,13 @@ export function SignUp1Page(){
         </div>
         <CodeVerification />
       </ContentsList>
-      <VerificationButton onSetBlank={setBlank}/>
+      <VerificationButton 
+        onSetBlank={setBlank} 
+        onClickToggleLargeModal={onClickToggleLargeModal} 
+        onClickToggleSmallModal={onClickToggleSmallModal}/>
       <ButtonsWrapper>
         <Button04 style={{width:'25.582%'}} state="disabled"/>
         <Button03 state={nextButton ? 'pressed' : 'disabled'} onClick={handleNext} style={{width:'74.418%'}}/>
-        {/* VerificationForm에서 자동으로 넘어갈 수 있게 설정해서 onClick일단 빼둠*/}
       </ButtonsWrapper>
     </SignUpPageWrapper>
     </>
@@ -113,7 +141,6 @@ const ButtonsWrapper = styled.div`
   display: flex;
   gap: 0.9375vw;
 `;
-
 
 
 

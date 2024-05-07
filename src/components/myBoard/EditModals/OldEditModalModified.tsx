@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import TextFieldBox, { StateOptions } from '../../../assets/OldTextFieldBox';
-import ModalLarge from '../../base/ModalLarge';
 import DropDown from '../../../assets/dropdown/DropDown';
 import TextArea from '../../../assets/TextArea';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
@@ -11,7 +10,6 @@ import ToolTip04 from '../../../assets/toolTips/ToolTip04';
 import { majorAllList } from '../../../common/MajorAll';
 import { majorTargetList } from '../../../common/MajorTarget';
 import client from '../../../utils/HttpClient';
-import NicknameCheckButton from '../../../assets/progressIndicator/Loader';
 import { useNavigate } from 'react-router-dom';
 import Icon02 from '../../../assets/icons/Icon02';
 import Button01 from '../../../assets/buttons/Button01';
@@ -20,6 +18,8 @@ import HeaderBar from './HeaderBar';
 import MoveButton from './MoveButton';
 import { useRecoilState } from 'recoil';
 import { editModalState } from '../../../store/atom';
+import ModalLarge from '../../base/ModalLarge';
+import ReactDOM from 'react-dom';
 
 /*
 남은 개발
@@ -50,7 +50,6 @@ export default function EditModal(props: ModalProps) {
   };
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '고대빵');
   const [nicknameState, setNicknameState] = useState<StateOptions>('filled');
-  const [nicknameCheck, setNicknameCheckState] = useState<NicknameCheckStateOptions>('filled');
   const [currentNickname, setCurrentNickname] = useState('');
   const [errorMessages, setErrorMessages] = useState<errorMessageType>({
     passwordErrorMessage: '',
@@ -118,25 +117,12 @@ export default function EditModal(props: ModalProps) {
     }
   }, [GPA1, GPA2, GPA3]);
 
-  useEffect(() => {
-    const passwordCheck = /^\d{10}$/;
-    if (stdIDState === 'filled') {
-      if (!passwordCheck.test(stdID)) setStdIDState('error');
-      else setStdIDState('filled');
-    }
-  }, [stdID, stdIDState]);
 
   const onClickSubmit = async () => {
     let updateData = {};
 
     if (originNickname.current !== nickname) {
       updateData = { ...updateData, newNickname: nickname };
-    }
-    if (originstdId.current !== stdID) {
-      updateData = { ...updateData, newStudentId: stdID };
-    }
-    if (originFirstMajor.current !== firstMajor) {
-      updateData = { ...updateData, newFirstMajor: firstMajor };
     }
     if (originHopeMajor1.current !== hopeMajor1) {
       updateData = { ...updateData, newHopeMajor1: hopeMajor1 };
@@ -191,33 +177,11 @@ export default function EditModal(props: ModalProps) {
   const [currentModal, setCurrentModal] = useRecoilState(editModalState);
 
   useEffect(() => {
-    if ((nickname.length === 1 || nickname.length > 7) && nicknameState !== 'focused') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '닉네임은 2자 이상 7자 이하여야 해요.',
-      });
-    } else if (nicknameCheck === 'error' && nicknameState !== 'focused') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    } else if (nicknameCheck !== 'filled') {
-      if (!(nicknameState === 'default' || nicknameState === 'focused' || nicknameState === 'hover')) {
-        setNicknameState('error');
-        setErrorMessages({
-          ...errorMessages,
-          nicknameErrorMessage: '닉네임 중복 검사를 완료해 주세요.',
-        });
-      }
+    if (nicknameState === 'filled') {
+      if (nickname.length === 1 || nickname.length > 7) setNicknameState('error');
+      else setNicknameState('filled');
     }
-  }, [nicknameState]);
-
-  //nickname이 바뀌면 중복 확인 검사 결과도 처음으로 돌아가야 함.
-  useEffect(() => {
-    setNicknameCheckState('default');
-  }, [nickname]);
+  }, [nicknameState, nickname]);
 
   useEffect(() => {
     // 로그인한 유저 정보 localStorage에
@@ -234,26 +198,7 @@ export default function EditModal(props: ModalProps) {
     getMe();
   }, []);
 
-  // nickname이 현재 닉네임과 같다면 중복 검사 스킵
-  useEffect(() => {
-    if (currentNickname === nickname) {
-      setNicknameCheckState('filled');
-    }
-  });
-
-  //중복 체크의 결과에 따라 nicknameState가 바뀐다.
-  useEffect(() => {
-    if (nicknameCheck === 'filled') setNicknameState('filled');
-    else if (nicknameCheck === 'error') {
-      setNicknameState('error');
-      setErrorMessages({
-        ...errorMessages,
-        nicknameErrorMessage: '중복되는 닉네임이에요!',
-      });
-    }
-  }, [nicknameCheck]);
-
-  return (
+  return ReactDOM.createPortal(
     <Main>
       {isOpenModal && isSubmitted && isGpaChanged && (
         <ModalLarge onClickToggleModal={onClickModal}>
@@ -298,7 +243,7 @@ export default function EditModal(props: ModalProps) {
           </AlertWrapper>
         </ModalLarge>
       )}
-      {isOpenModal && !isSubmitted &&
+      {isOpenModal && !isSubmitted && (
         <ModalLarge onClickToggleModal={onClickModal}>
           <HeaderWrapper>
             <CloseButton
@@ -308,23 +253,15 @@ export default function EditModal(props: ModalProps) {
             >
               <Icon02 />
             </CloseButton>
-            <Typography
-              size="1.042vw"
-              bold="700"
-              style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '2.083vw' }}
-            >
+            <Typography size="0.9375vw" bold="700" style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '0.833vw' }}>
               프로필 정보 수정하기
             </Typography>
-            <div style={{ height: '2.083vw' }}></div>
+            <div style={{ height: '1.67vw' }}></div>
             <HeaderBar />
           </HeaderWrapper>
 
           {currentModal === 0 && ( // '나의 기본전공' 버튼 클릭 시
-            <ContentsWrapper
-              style={{
-                marginBottom: '5.260vw',
-              }}
-            >
+            <ContentsWrapper2>
               <SubContentsWrapper>
                 <ContentsTitle>프로필 사진 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '1.042vw' }}>
@@ -346,13 +283,11 @@ export default function EditModal(props: ModalProps) {
                         />
                       ))}
                     </CandidateImgsWrapper>
-                    <div style={{ gap: '0.260vw', marginTop: '2.708vw' }}></div>
-                    <div style={{ marginLeft: '4.427vw', marginTop: '-1.458vw' }}></div>
                   </div>
                 </div>
               </SubContentsWrapper>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw', marginTop: '2vw' }}>
                 <SubContentsWrapper>
                   <ContentsTitle>닉네임 변경하기</ContentsTitle>
                   <div style={{ position: 'relative' }}>
@@ -364,41 +299,9 @@ export default function EditModal(props: ModalProps) {
                       state={nicknameState}
                       setState={setNicknameState}
                       setValue={setNickname}
-                      errorMessage={errorMessages.nicknameErrorMessage}
-                    ></TextFieldBox>
-                    {nickname === '' || nicknameState === 'filled' ? (
-                      <></>
-                    ) : (
-                      <NicknameCheckButtonWrapper>
-                        <NicknameCheckButton
-                          nickname={nickname}
-                          state={nicknameCheck}
-                          setState={setNicknameCheckState}
-                        ></NicknameCheckButton>
-                      </NicknameCheckButtonWrapper>
-                    )}
+                      errorMessage={'닉네임 길이는 2자 이상 7자 이하이어야 합니다'}
+                    />
                   </div>
-                </SubContentsWrapper>
-                <SubContentsWrapper>
-                  <ContentsTitle>학번 변경하기</ContentsTitle>
-                  <TextFieldBox
-                    value={stdID}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setStdID(e.target.value);
-                    }}
-                    state={stdIDState}
-                    setState={setStdIDState}
-                    setValue={setStdID}
-                  ></TextFieldBox>
-                </SubContentsWrapper>
-                <SubContentsWrapper>
-                  <ContentsTitle>본전공 변경하기</ContentsTitle>
-                  <DropDown
-                    title="전공선택" // 수정필요
-                    optionList={majorAll}
-                    value={firstMajor}
-                    setValue={setFirstMajor}
-                  ></DropDown>
                 </SubContentsWrapper>
               </div>
               <MoveButton
@@ -407,10 +310,10 @@ export default function EditModal(props: ModalProps) {
                 onClickSubmit={onClickSubmit}
                 isApplied={isApplied}
                 setIsSubmitted={setIsSubmitted}
-                style={{ marginTop: '1.042vw' }}
+                style={{ marginTop: '4vw', width: '100%' }}
                 isGpaChanged={isGpaChanged}
               />
-            </ContentsWrapper>
+            </ContentsWrapper2>
           )}
           {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
             <ContentsWrapper2>
@@ -480,7 +383,7 @@ export default function EditModal(props: ModalProps) {
               />
             </ContentsWrapper2>
           )}
-          {currentModal === 3 && ( // '희망 진입학기' 버튼 클릭 시
+          {currentModal === 3 && ( // '희망 지원학기' 버튼 클릭 시
             <ContentsWrapper2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                 <SubContentsWrapper>
@@ -526,8 +429,9 @@ export default function EditModal(props: ModalProps) {
             </ContentsWrapper2>
           )}
         </ModalLarge>
-      }
-    </Main>
+      )}
+    </Main>,
+    document.getElementById('root') as HTMLElement,
   );
 }
 
@@ -539,6 +443,13 @@ const Main = styled.main`
   align-items: center;
   position: fixed;
   z-index: 1005;
+  bottom: 0;
+  top: 0;
+
+  & > div > dialog {
+    top: 10%;
+    max-height: 80vh;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -546,13 +457,14 @@ const HeaderWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   //width: 814px;
-  width: 120%;
+  width: 100%;
+  box-sizing: border-box;
   //height: 134px;
-  height: 6.979vw;
+
   flex-shrink: 0;
   background-color: #fcfafb;
   border-bottom: 1px solid var(--DF_Grey-2, #dfdfdf);
-  margin-top: -20px;
+
   //margin-top: -0.833vw;
 `;
 
@@ -566,9 +478,9 @@ const CloseButton = styled.button`
   align-items: center;
   position: absolute;
   //top: 32px;
-  top: 1.667vw;
+
   //right: 40px;
-  right: 2.083vw;
+  right: 0px;
   cursor: pointer;
 `;
 
@@ -621,12 +533,13 @@ const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   //width: 628px;
-  width: 32.708vw;
+  width: 75%;
   align-items: left;
   margin-left: auto;
   margin-right: auto;
   //margin-top: 58px;
-  margin-top: 3.021vw;
+  margin-top: 32px;
+  margin-bottom: 32px;
   //gap: 35px;
   gap: 1.823vw;
 `;

@@ -21,7 +21,7 @@ export const collegeNameMappingByEng = {
   electrical: 'engineering',
   chembio: 'engineering',
   datasci: 'info',
-  smartsec: 'smartsecurity'
+  smartsec: 'smartsecurity',
 };
 
 export const collegeNameMappingByKR = {
@@ -44,7 +44,7 @@ export const collegeNameMappingByKR = {
   전기전자공학부: 'engineering',
   화공생명공학부: 'engineering',
   데이터과학과: 'info',
-  스마트보안학부: 'smartsecurity'
+  스마트보안학부: 'smartsecurity',
 };
 
 export const collegeAPIMappingByKR = {
@@ -67,7 +67,7 @@ export const collegeAPIMappingByKR = {
   전기전자공학부: 'electrical',
   화공생명공학부: 'chembio',
   데이터과학과: 'datasci',
-  스마트보안학부: 'smartsec'
+  스마트보안학부: 'smartsec',
 };
 
 export const majorNameMapping = {
@@ -86,11 +86,11 @@ export const majorNameMapping = {
   pubadmin: ['행정학과', 'Department of Public Administration'],
   materials: ['신소재공학부', 'School of Materials Science & Engineering'],
   mechanical: ['기계공학부', 'School of Mechanical Engineering'],
-  industrial: ['산업경영공학부', 'School of Industrial Management Engineering'],
+  industrial: ['산업경영공학부', 'School of Industrial & Management Engineering'],
   electrical: ['전기전자공학부', 'School of Electrical Engineering'],
   chembio: ['화공생명공학부', 'Department of Chemical & Biological Engineering'],
   datasci: ['데이터과학과', 'Department of Data Science'],
-  smartsec: ['스마트보안학부', 'Division of Smart Security']
+  smartsec: ['스마트보안학부', 'Division of Smart Security'],
 };
 
 export const majorNmaeMappingByKr = {
@@ -113,7 +113,7 @@ export const majorNmaeMappingByKr = {
   전기전자공학부: 'School of Electrical Engineering',
   화공생명공학부: 'Department of Chemical & Biological Engineering',
   데이터과학과: 'Department of Data Science',
-  스마트보안학부: 'Division of Smart Security'
+  스마트보안학부: 'Division of Smart Security',
 };
 
 /*
@@ -140,13 +140,13 @@ export const semesterAPIMapping: string[] = [
 export const majorColorMapping = {
   경영대학: { fill: '#787071', boxShadow: 'rgba(120, 112, 113, 0.5)' },
   정경대학: { fill: '#CC668C', boxShadow: 'rgba(204, 102, 140, 0.5)' },
-  의과대학: { fill: '#99D88E', boxShadow: 'rgba(147, 216, 136, 0.5)' },
+  의과대학: { fill: '#99D88E', boxShadow: 'rgb(153, 216, 142, 0.5)' },
   정보대학: { fill: '#FFD35F', boxShadow: 'rgba(255, 211, 95, 0.5)' },
   미디어학부: { fill: '#EEA6BC', boxShadow: ' rgba(238, 166, 188, 0.5)' },
   스마트보안학부: { fill: '#F1A351', boxShadow: 'rgba(241, 163, 81, 0.5)' },
   문과대학: { fill: '#DFDFDF', boxShadow: 'rgba(223, 223, 223, 0.5)' },
   이과대학: { fill: '#7287AB', boxShadow: 'rgba(114, 135, 171, 0.5)' },
-  사범대학: { fill: '#4C8ECC', boxShadow: 'rgba(233, 77, 94, 0.5)' },
+  사범대학: { fill: '#4C8ECC', boxShadow: 'rgb(76, 142, 204, 0.5)' },
   디자인조형학부: { fill: '#A667AE', boxShadow: 'rgba(166, 103, 174, 0.5)' },
   보건과학대학: { fill: '#E9808C', boxShadow: 'rgba(233, 128, 140, 0.5)' },
   심리학부: { fill: '#89D7E1', boxShadow: 'rgba(137, 215, 225, 0.5)' },
@@ -156,7 +156,7 @@ export const majorColorMapping = {
   국제대학: { fill: '#58A2C6', boxShadow: ' rgba(88, 162, 198, 0.5)' },
   자유전공학부: { fill: '#7BBEEE', boxShadow: 'rgba(123, 190, 238, 0.5)' },
   스마트모빌리티학부: { fill: '#3F87F3', boxShadow: 'rgba(63, 135, 243, 0.5)' },
-  기타: { fill: '#A8A8A8', boxShadow: 'rgba(223, 223, 223, 0.5)' },
+  기타: { fill: '#A8A8A8', boxShadow: 'rgb(168, 168, 168,0.5)' },
 };
 
 // 학번, fill
@@ -197,7 +197,7 @@ export const majorNameMappingBySID: Record<number, string> = {
   1601: '물리학과',
   1602: '화학과',
   1603: '지구환경과학과',
-  1700: '화공생명공학과',
+  1700: '화공생명공학부',
   1701: '신소재공학부',
   1702: '건축사회환경공학부',
   1703: '건축학과',

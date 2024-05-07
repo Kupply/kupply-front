@@ -6,6 +6,12 @@ import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR as collegeAPIMapping } from '../../utils/Mappings';
 import { majorNameMapping } from '../../utils/Mappings';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
+import { LastThreeSemesters } from '../../common/LastThreeSemesters';
+
+interface SemesterBtnStates {
+  [key: string]: boolean;
+  // Use an index signature to allow dynamic keys
+}
 
 const ThreeYear = ({
   onViewMajor,
@@ -18,65 +24,96 @@ const ThreeYear = ({
   pastData1: any[];
   pastData2: any[];
 }) => {
-  interface SemesterBtnStates {
-    '2023-1R': boolean;
-    '2022-2R': boolean;
-    '2022-1R': boolean;
-  }
+  const semesters = LastThreeSemesters;
 
-  const [semesterBtnStates, setSemesterBtnStates] = useState<SemesterBtnStates>({
-    '2023-1R': true,
-    '2022-2R': false,
-    '2022-1R': false,
+  let initialState: SemesterBtnStates = {};
+  semesters.forEach((semester, index) => {
+    initialState[semester] = index === 0;
+    // set true for the first semester, false for others
   });
 
+  const [semesterBtnStates, setSemesterBtnStates] = React.useState<SemesterBtnStates>(initialState);
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState(0);
 
   const navigate = useNavigate();
   const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
 
-  const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
-    // Create a new object with updated isClicked values
+  const getSemesterLabel = (semesterKey: string) => {
+    return semesterKey.replace(/(\d{4})-(\d)/, '$1-$2');
+  };
+
+  const handleSemesterBtnClick = (buttonName: string) => {
     const updatedBtnStates: SemesterBtnStates = { ...semesterBtnStates };
-    for (const key in semesterBtnStates) {
-      updatedBtnStates[key as keyof SemesterBtnStates] = key === buttonName;
-    }
+    Object.keys(semesterBtnStates).forEach((key) => {
+      updatedBtnStates[key] = key === buttonName;
+    });
     setSemesterBtnStates(updatedBtnStates);
 
-    const indexMap: { [key: string]: number } = {
-      '2023-1R': 0,
-      '2022-2R': 1,
-      '2022-1R': 2,
-    };
-    setSelectedSemesterIndex(indexMap[buttonName]);
+    // Finding the index safely assuming all keys are valid and are from `semesters`
+    const index = semesters.indexOf(buttonName);
+    if (index !== -1) {
+      setSelectedSemesterIndex(index);
+    }
   };
+
+  // interface SemesterBtnStates {
+  //   '2023-1R': boolean;
+  //   '2022-2R': boolean;
+  //   '2022-1R': boolean;
+  // }
+
+  // const [semesterBtnStates, setSemesterBtnStates] = useState<SemesterBtnStates>({
+  //   '2023-1R': true,
+  //   '2022-2R': false,
+  //   '2022-1R': false,
+  // });
+
+  // const [selectedSemesterIndex, setSelectedSemesterIndex] = useState(0);
+
+  // const navigate = useNavigate();
+  // const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
+
+  // const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
+  //   // Create a new object with updated isClicked values
+  //   const updatedBtnStates: SemesterBtnStates = { ...semesterBtnStates };
+  //   for (const key in semesterBtnStates) {
+  //     updatedBtnStates[key as keyof SemesterBtnStates] = key === buttonName;
+  //   }
+  //   setSemesterBtnStates(updatedBtnStates);
+
+  //   const indexMap: { [key: string]: number } = {
+  //     '2023-1R': 0,
+  //     '2022-2R': 1,
+  //     '2022-1R': 2,
+  //   };
+  //   setSelectedSemesterIndex(indexMap[buttonName]);
+  // };
 
   const selectedPastData = onViewMajor === 1 ? pastData1[selectedSemesterIndex] : pastData2[selectedSemesterIndex];
 
   return (
     <Wrapper>
       <TitleBox>
-        <TitleText>3개년 합격지표</TitleText>
+        <TitleText>지난 합격지표</TitleText>
       </TitleBox>
       <StyleSvg xmlns="http://www.w3.org/2000/svg" width="21.98vw" height="2" viewBox="0 0 422 2" fill="none">
         <path d="M0 1L422 0.999963" stroke="#DFDFDF" />
       </StyleSvg>
       <EachYearHeadBox>
-        <SemesterButton isClicked={semesterBtnStates['2023-1R']} onClick={() => handleSemesterBtnClick('2023-1R')}>
-          2023-1R
-        </SemesterButton>
-        <SemesterButton isClicked={semesterBtnStates['2022-2R']} onClick={() => handleSemesterBtnClick('2022-2R')}>
-          2022-2R
-        </SemesterButton>
-        <SemesterButton isClicked={semesterBtnStates['2022-1R']} onClick={() => handleSemesterBtnClick('2022-1R')}>
-          2022-1R
-        </SemesterButton>
+        {semesters.map((semester) => (
+          <SemesterButton
+            key={semester}
+            isClicked={semesterBtnStates[semester]}
+            onClick={() => handleSemesterBtnClick(semester)}
+          >
+            {semester}
+          </SemesterButton>
+        ))}
       </EachYearHeadBox>
 
       <Text1Box>
         <Text1>
-          {semesterBtnStates['2023-1R'] ? '2023-1' : semesterBtnStates['2022-2R'] ? '2022-2' : '2022-1'}R{' '}
-          {majorKoreanName} 모집정보{' '}
+          {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 모집정보
         </Text1>
         <button
           onClick={() => {
@@ -88,12 +125,14 @@ const ThreeYear = ({
       </Text1Box>
 
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
-        {semesterBtnStates['2023-1R'] ? '23-1' : semesterBtnStates['2022-2R'] ? '22-2' : '22-1'} 선발 인원
+        {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발 인원
       </Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
-      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>경쟁률</Text2>
+      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>합격률</Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>
-        {selectedPastData.competitionRate} : 1
+        {selectedPastData.numOfApplied === 0
+          ? '집계불가'
+          : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
       </Text3>
       <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 평균 학점</Text2>
       <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>{selectedPastData.meanGpa}</Text3>

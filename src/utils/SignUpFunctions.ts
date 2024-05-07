@@ -21,6 +21,7 @@ export const sendEmail = async (email: string) => {
   }
 }
 
+// candidate이나 passer가 들어옴
 export const join = async (role: string) => {
   const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
   const commonData = {
@@ -32,6 +33,7 @@ export const join = async (role: string) => {
     firstMajor: sessionStorage.getItem('firstMajor'),
     role: sessionStorage.getItem('role'),
   };
+  console.log(commonData);
   if (role === 'passer') {
     await client.post('/auth/join', {
       ...commonData,
@@ -39,13 +41,13 @@ export const join = async (role: string) => {
       passGPA: parseFloat(sessionStorage.getItem('passGPA') || ''),
       secondMajor: sessionStorage.getItem('secondMajor'),
     });
-  } else {
+  } else if(role === 'candidate'){
     await client.post('/auth/join', {
       ...commonData,
-      curGPA: sessionStorage.getItem('candidateGPA'),
+      curGPA: sessionStorage.getItem('curGPA'),
       hopeMajor1: sessionStorage.getItem('hopeMajor1'),
       hopeMajor2: sessionStorage.getItem('hopeMajor2'),
-      hopeSemester: sessionStorage.getItem('candidateSemester'),
+      hopeSemester: sessionStorage.getItem('hopeSemester'),
     });
   }
 };
@@ -74,14 +76,14 @@ export function useSignUp2Verification(){
   const navigate = useNavigate();
 
   // 잠시 수정 
-  // useEffect(() => {
-  //   if (!sessionStorage.getItem('email')) navigate('/');
-  //   else {
-  //     sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
-  //     if (name.info !== '') setName((prev) => ({...prev, infoState: 'filled'}));
-  //     if (stdId.info !== '') setStdId((prev) => ({...prev, infoState: 'filled'}));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!sessionStorage.getItem('email')) navigate('/');
+    else {
+      sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
+      if (name.info !== '') setName((prev) => ({...prev, infoState: 'filled'}));
+      if (stdId.info !== '') setStdId((prev) => ({...prev, infoState: 'filled'}));
+    }
+  }, []);
   // name, stdId, firstMajor의 completed 여부
 
   useEffect(() => {
@@ -117,13 +119,13 @@ export function useSignUp3Verification(){
   }, [passwordVerified, password2Verified, nicknameVerified, complete, idVerified]);
 
 
-  // useEffect(() => {
-  // if (!sessionStorage.getItem('name')) navigate('/');
-  // else {
-  //   sessionStorage.removeItem('password'); //비밀번호는 삭제
-  //   if (nickname.info !== '') setNickname((prev) => ({...prev, infoState: 'filled'}));
-  // }
-  // }, []);
+  useEffect(() => {
+  if (!sessionStorage.getItem('name')) navigate('/');
+  else {
+    sessionStorage.removeItem('password'); //비밀번호는 삭제
+    if (nickname.info !== '') setNickname((prev) => ({...prev, infoState: 'filled'}));
+  }
+  }, []);
 
   return {complete};
 

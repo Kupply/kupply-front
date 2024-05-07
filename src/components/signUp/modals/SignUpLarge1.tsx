@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { sendEmail } from '../../../utils/SignUpFunctions';
-import SignUpAlertLarge from '../../../assets/alert/SignUpAlertLarge01';
+import SignUpAlertLarge01 from '../../../assets/alert/SignUpAlertLarge01';
 
 export interface ModalProps {
   currentModal: number;
@@ -18,7 +18,7 @@ export default function SignUpLarge1(props: ModalProps) {
   return (
     <Main>
       {isOpenModal && (
-        <SignUpAlertLarge
+        <SignUpAlertLarge01
           onClickModal={onClickModal}
           setOpenModal={setOpenModal}
           isOpenModal={isOpenModal}
@@ -34,12 +34,14 @@ export default function SignUpLarge1(props: ModalProps) {
 }
 
 const Main = styled.main`
-  width: 100%;
-  height: 1px; // 버튼 안눌림 이슈 수정
   display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 1005; // Modal.tsx 와 상이한 stacking context
-`;
+  z-index: 1005;
 
+  /* & > div > dialog {
+    top: 15%;
+    min-height: 600px;
+  } */
+`;

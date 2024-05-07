@@ -16,7 +16,7 @@ export interface ITableData {
   recruitNumber: number;
   applyNumber: number;
   competition: number;
-  pastCompetition: number;
+  pastPassedRate: number;
   pastPassedNum: number;
   pastmin: number;
   pastmean: number;
@@ -58,17 +58,12 @@ function LandingPage() {
     requestAnimationFrame(animation);
   };
 
-  // useEffect(() => {
-  //   if (location.state?.fromButton) {
-  //     smoothScrollTo(1100, 1500);
-  //   }
-  // }, [location.state]);
+  const [isLogined, setisLogined] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   if (location.state?.fromButton) {
-  //     window.scrollTo(0, 1100);
-  //   }
-  // }, [location.state]);
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
 
   useEffect(() => {
     if (location.state?.fromButton) {
@@ -90,6 +85,7 @@ function LandingPage() {
     curGPA: 4.5,
     hopeSemester: '2023-2',
   }));
+  const [tableData, setTableData] = useState<ITableData[]>(dummyData);
 
   // 로그인한 유저 정보 localStorage에
   const getMe = async () => {
@@ -136,172 +132,23 @@ function LandingPage() {
       console.log(err);
     }
   };
-  useEffect(() => {
-    getMe();
-  }, []);
 
-  const [tableData, setTableData] = useState<ITableData[]>([
-    {
-      rank: 1,
-      secondMajor: '경영대학',
-      engName: 'Business School',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 1,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-    {
-      rank: 2,
-      secondMajor: '미디어학부',
-      engName: 'School of Media & Communication',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 2,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-    {
-      rank: 3,
-      secondMajor: '컴퓨터학과',
-      engName: 'Department of Computer Science & Engineering',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 0,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-    {
-      rank: 4,
-      secondMajor: '식품자원경제학과',
-      engName: 'Business School',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 0,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-    {
-      rank: 1,
-      secondMajor: '경영대학',
-      engName: 'Business School',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 1,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-    {
-      rank: 2,
-      secondMajor: '미디어학부',
-      engName: 'School of Media & Communication',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 2,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-    {
-      rank: 3,
-      secondMajor: '컴퓨터학과',
-      engName: 'Department of Computer Science & Engineering',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 0,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-    {
-      rank: 4,
-      secondMajor: '식품자원경제학과',
-      engName: 'Business School',
-      pastRecruitNumber: 12,
-      recruitNumber: 12,
-      applyNumber: 32,
-      competition: 2.7,
-      pastCompetition: 3.59,
-      pastPassedNum: 4.46,
-      pastmean: 4.46,
-      pastmin: 4.46,
-      interest: 56,
-      interestedNum: 0,
-      imagesrc: '../../designImage/landing/interest.svg',
-    },
-  ]);
+  const loadData = async () => {
+    try {
+      // const response = await axios.get('http://localhost:8080/landing');
+      const response = await client.get('/landing');
+      setTableData(response.data.data);
+    } catch (e) {
+      alert(e);
+    }
+  };
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        // const response = await axios.get('http://localhost:8080/landing');
-        const response = await client.get('/landing');
-        setTableData(response.data.data);
-      } catch (e) {
-        alert(e);
-      }
-    };
-    loadData();
-  }, []);
-
-  // const cardData = tableData.map((data) => ({
-  //   name: data.secondMajor,
-  //   eng: data.engName,
-  //   합격자수: data.pastPassedNum,
-  //   선발인원: data.pastRecruitNumber,
-  //   min: data.pastmin,
-  //   mean: data.pastmean,
-  //   semester: '23-1',
-  //   imagesrc: data.imagesrc,
-  // }));
-
-  // const tableContent = useRef<HTMLDivElement>(null);
-
-  // const onClickDownArrow = () => {
-  //   tableContent.current?.scrollIntoView({ behavior: 'smooth' });
-  // };
-
-  // const [scrollY, setScrollY] = useState(0);
+    if (isLogined) {
+      getMe();
+      loadData();
+    }
+  }, [isLogined]);
 
   const faqRef = useRef<HTMLDivElement>(null);
   const rankRef = useRef<HTMLDivElement>(null);
@@ -348,5 +195,136 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const dummyData = [
+  {
+    rank: 1,
+    secondMajor: '경영대학',
+    engName: 'Business School',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 1,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+  {
+    rank: 2,
+    secondMajor: '미디어학부',
+    engName: 'School of Media & Communication',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 2,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+  {
+    rank: 3,
+    secondMajor: '컴퓨터학과',
+    engName: 'Department of Computer Science & Engineering',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 0,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+  {
+    rank: 4,
+    secondMajor: '식품자원경제학과',
+    engName: 'Business School',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 0,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+  {
+    rank: 1,
+    secondMajor: '경영대학',
+    engName: 'Business School',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 1,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+  {
+    rank: 2,
+    secondMajor: '미디어학부',
+    engName: 'School of Media & Communication',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 2,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+  {
+    rank: 3,
+    secondMajor: '컴퓨터학과',
+    engName: 'Department of Computer Science & Engineering',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 0,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+  {
+    rank: 4,
+    secondMajor: '식품자원경제학과',
+    engName: 'Business School',
+    pastRecruitNumber: 12,
+    recruitNumber: 12,
+    applyNumber: 32,
+    competition: 2.7,
+    pastPassedRate: 3.59,
+    pastPassedNum: 4.46,
+    pastmean: 4.46,
+    pastmin: 4.46,
+    interest: 56,
+    interestedNum: 0,
+    imagesrc: '../../designImage/landing/interest.svg',
+  },
+];
 
 export default LandingPage;

@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 import { text } from 'stream/consumers';
 import styled, { css } from 'styled-components';
 import EyeIcon from './icons/OldEyeIcon';
+
 /* 
-    Width는 부모 요소(Wrapper)의 width를 따라갑니다.
+  Width는 부모 요소(Wrapper)의 width를 따라갑니다.
 */
 
 const baseWrapper = css`

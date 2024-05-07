@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import TextAreaBox from "../../assets/TextArea";
 import React, { useEffect, useState, useRef } from "react";
-import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState, userState, userSettingsState } from "../../store/atom";
+import { nextButtonState, verificationCodeState, gpaState, semesterState, isGpaChangedState, gpaSettingsState, semesterSettingsState, userState, userSettingsState, currentSemesterState } from "../../store/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { emailAtom } from "../../store/atom";
 import { useNavigate, useRouteError } from "react-router-dom";
 import axios from "axios";
 import { inputState } from "../../pages/signUp/SignUp4Page";
@@ -13,7 +12,7 @@ import Typography from "../../assets/Typography";
 export const CodeVerification = () => {
 
   const [codeState, setCodeState] = useRecoilState(verificationCodeState);
-  const email = useRecoilValue(emailAtom);
+  const email = sessionStorage.getItem('email') || '';
   const [nextButton, setNextButton] = useRecoilState(nextButtonState);
   const {num1, num2, num3, num4, num5, num6} = codeState;
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ export const CodeVerification = () => {
       ...prev,
       [boxNum]: value
     }))
-    console.log(boxNum, value, codeState);
   };
 
   const handlePaste = (e:React.ClipboardEvent<HTMLInputElement>) => {
@@ -57,6 +55,7 @@ export const CodeVerification = () => {
     if(!!num1 && !!num2 && !!num3 && !!num4 && !!num5 && !!num6){ 
       // verify 되면 자동으로 signup2로 넘어간다 
       setNextButton(true);
+      
       handleVerification();
     } else {
       setNextButton(false);
@@ -71,7 +70,7 @@ export const CodeVerification = () => {
             name={`pin-${index + 1}`}
             value={eval(`num${index + 1}`)}
             setValue={(value) => handleCodeState(`num${index + 1}`, value)}
-            onPaste={index === 0 ? handlePaste: undefined}
+            onPaste={index == 0 ? handlePaste: undefined}
           />
         ))}
     </CodeVerifiBoxWrapper>
@@ -235,40 +234,44 @@ export const SemesterVerification:React.FC<GpaSemesterVerificationProps> =  ({us
 }
 
 /* --------------------------------------- */
-export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({userType, setState, toNext, locationUsed = 'Settings'}) => {
-  const [currentSemester1, setCurrentSemester1] = useState<string>(
-    localStorage.getItem('currentSemester')?.charAt(0) || '',
-  );
-  const [currentSemester2, setCurrentSemester2] = useState<string>(
-    localStorage.getItem('currentSemester')?.charAt(2) || '',
-  );
+export const CurSemesterVerification:React.FC<GpaSemesterVerificationProps> = ({userType, setState, toNext}) => {
+
+  const [curSemester, setCurSemester] = useRecoilState(currentSemesterState(userType));
+
   useEffect(() => {
     if (
-      !!currentSemester1 && !!currentSemester2 && 
-      (+currentSemester1 >= 1 && +currentSemester1 <=4) && (+currentSemester2 === 1 || +currentSemester2 === 2)
+      !!curSemester.num1 && !!curSemester.num2 && 
+      (+curSemester.num1 >= 1 && +curSemester.num1 <=4) && (+curSemester.num2 === 1 || +curSemester.num2 === 2)
     ) {
       setState?.('complete');
     } else{
       setState?.('error');
     }
-  }, [currentSemester1, currentSemester2]);
+  }, [curSemester]);
+
+  const handleSemesterState = (num:string, value:string) => {
+    setCurSemester((prev) => ({
+      ...prev,
+      [num]: value
+    }))
+  };
 
   return (
     <VerifiBoxWrapper>
-      <TextAreaBox name="currentSemester-1" value={currentSemester1} setValue={setCurrentSemester1} />
+      <TextAreaBox name="currentSemester-1" value={curSemester.num1} setValue={(value) => handleSemesterState('num1', value)} />
       <div style={{ marginTop: '1.263vw', width: '0.729vw', height: '0.1042vw' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 2" fill="none">
           <path d="M0 1H14" stroke="#B9B9B9" />
         </svg>
       </div>
-      <TextAreaBox name="currentSemester-2" value={currentSemester2} setValue={setCurrentSemester2} />
+      <TextAreaBox name="currentSemester-2" value={curSemester.num2} setValue={(value) => handleSemesterState('num2', value)} />
     </VerifiBoxWrapper>
   )
 }
 
 const CodeVerifiBoxWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 const VerifiBoxWrapper = styled.div`

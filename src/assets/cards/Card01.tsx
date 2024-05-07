@@ -11,7 +11,7 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   TO: number; // 자리 TO
   avgPass: number;
   minPass: number;
-  compRate: number; // competition ratio
+  passRate: number; // pass ratio
   semester: string;
 }
 
@@ -62,7 +62,7 @@ const majorParamMappingPath = {
   'Division of Smart Security': 'smartsec',
 };
 
-export default function Card01({ korName, engName, TO, avgPass, minPass, compRate, semester }: CardProps) {
+export default function Card01({ korName, engName, TO, avgPass, minPass, passRate, semester }: CardProps) {
   const [hover, setHover] = useState(false);
   const [svgHover, setSvgHover] = useState(false);
 
@@ -97,7 +97,7 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, compRat
   return (
     <>
       {hover ? (
-        <Container hover={hover} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
+        <Container hover={hover} name={majorKorName} onMouseEnter={onHover} onMouseLeave={onHoverOut}>
           <CardImageBlurred>
             <img
               src={process.env.PUBLIC_URL + `/designImage/majorSymbol/newMajorImage/${depName}_blurred.png`}
@@ -115,28 +115,25 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, compRat
             <DepNameEng hover={true}>{engName}</DepNameEng>
           </NameWrapper>
           <ContentInner style={{ top: '6.93vw', left: '1.98vw' }}>20{semester}R 모집정보</ContentInner>
-
           <ContentTitle style={{ top: '9.28vw', left: '1.98vw' }}>{semester} 선발 인원</ContentTitle>
           <ContentInner style={{ top: '10.52vw', left: '1.98vw' }}>{TO}명</ContentInner>
-
-          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>경쟁률</ContentTitle>
+          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>합격률</ContentTitle>
           <ToolTip02
             onMouseEnter={onSvgHover}
             onMouseLeave={onSvgHoverOut}
             hoverState={svgHover}
             style={{ position: 'absolute', top: '9.05vw', left: '10.80vw' }}
           >
-            쿠플라이에서 수집된 데이터 값으로, 실제 경쟁률과 차이가 있을 수 있습니다.
+            쿠플라이에서 수집된 데이터 값으로, 실제 합격률과 차이가 있을 수 있습니다.
           </ToolTip02>
-
-          <ContentInner style={{ top: '10.52vw', left: '8.80vw' }}>{compRate} : 1</ContentInner>
-
+          <ContentInner style={{ top: '10.52vw', left: '8.80vw' }}>
+            {passRate < 0 ? '집계불가' : passRate + ' %'}
+          </ContentInner>
           <ContentTitle style={{ top: '12.71vw', left: '1.98vw' }}>합격자 평균 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{avgPass}</ContentInner>
+          <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{passRate <= 0 ? '집계불가' : avgPass}</ContentInner>
 
           <ContentTitle style={{ top: '12.71vw', left: '8.80vw' }}>합격자 최저 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '8.80vw' }}>{minPass}</ContentInner>
-
+          <ContentInner style={{ top: '13.96vw', left: '8.80vw' }}>{passRate <= 0 ? '집계불가' : minPass}</ContentInner>
           <Button onClick={handleClickDetail}>
             <svg
               style={{
@@ -185,13 +182,14 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, compRat
 
 interface ContainerProps {
   hover?: boolean;
+  name?: string;
 }
 
 const Container = styled.div<ContainerProps>`
   width: 16.25vw;
   height: 21.88vw;
   flex-shrink: 0;
-  border-radius: ${(props) => (props.hover ? '0.26vw' : '0px')};
+  border-radius: ${(props) => (props.hover ? '0.52vw' : '0px')};
   box-shadow: ${(props) => (props.hover ? '0px 0px 1.04vw 0px rgba(20, 20, 20, 0.25)' : undefined)};
   position: relative;
 `;
@@ -206,7 +204,8 @@ const CardImageDefault = styled.div`
   & img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Maintain aspect ratio while fitting the container */
+    object-fit: cover; /* Maintain aspect ratio while fitting the container */
+    object-position: center;
   }
 `;
 
@@ -220,10 +219,9 @@ const CardImageDefault = styled.div`
 
 const CardImageBlurred = styled.div`
   position: absolute;
-  margin-top: 0.052vw;
   width: 16.25vw;
   height: 21.88vw;
-  overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
+  border-radius: 0.52vw;
 
   & img {
     width: 100%;
@@ -247,11 +245,10 @@ const CardImageSmall = styled.div`
   width: 2.14vw;
   height: 2.812vw;
   overflow: hidden; /* Ensure the image is clipped to the container's dimensions */
-
   & img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Maintain aspect ratio while covering the container */
+    //object-fit: 100% 100%; /* Maintain aspect ratio while covering the container */
   }
 `;
 
@@ -286,7 +283,7 @@ const DepNameEng = styled.div<ContainerProps>`
       : `
     color: #141414;
     font-family: Pretendard;
-    font-size: 0.833vw;
+    font-size: 0.73vw;
     font-style: normal;
     font-weight: 400;
     line-height: 0.94vw; /* 112.5% */

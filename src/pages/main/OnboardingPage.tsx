@@ -7,6 +7,7 @@ import Join2 from '../../components/onboarding/Join2';
 import KupplyImage from '../../components/onboarding/KupplyImage';
 import Banner from '../../components/onboarding/Banner';
 import Preview from '../../components/onboarding/Preview';
+import OnboardingMobile from '../../mobile/pages/OnboardingMobile';
 
 function OnboardingPage() {
   return (
@@ -23,10 +24,12 @@ function OnboardingPage() {
 }
 
 const MainWrapper = styled.div`
-  width: auto;
+  width: 100vw;
   height: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
 `;
 
 export default OnboardingPage;
