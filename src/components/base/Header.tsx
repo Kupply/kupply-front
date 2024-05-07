@@ -72,7 +72,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
             });
 
             localStorage.setItem('userProfilePic', userInfo.profilePic);
-            localStorage.setItem('userProfileLink', userInfo.profileLink);
+            //localStorage.setItem('userProfileLink', userInfo.profileLink);
             localStorage.setItem('name', userInfo.name);
             localStorage.setItem('nickname', userInfo.nickname);
             localStorage.setItem('studentId', userInfo.studentId);
@@ -227,9 +227,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                   <Profile>
                     <img
                       src={
-                        userData.userProfilePic === 'customProfile'
-                          ? userData.userProfileLink
-                          : `designImage/character/rectProfile/${userData.userProfilePic}.png`
+                        `designImage/character/rectProfile/${userData.userProfilePic}.png`
                       }
                       width={112}
                       alt="profile"

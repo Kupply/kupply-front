@@ -60,7 +60,7 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
             });
 
             localStorage.setItem('userProfilePic', userInfo.profilePic);
-            localStorage.setItem('userProfileLink', userInfo.profileLink);
+            //localStorage.setItem('userProfileLink', userInfo.profileLink);
             localStorage.setItem('name', userInfo.name);
             localStorage.setItem('nickname', userInfo.nickname);
             localStorage.setItem('studentId', userInfo.studentId);
