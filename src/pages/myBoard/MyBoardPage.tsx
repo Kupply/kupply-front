@@ -178,6 +178,11 @@ const MyBoardPage = () => {
     },
   ]);
 
+  const [isLogined, setisLogined] = useState<boolean>(false);
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
   // 로그인한 유저 정보 localStorage에
   const getMe = async () => {
     try {
@@ -245,8 +250,8 @@ const MyBoardPage = () => {
     }
   };
   useEffect(() => {
-    getMe();
-  }, []);
+    if (isLogined) getMe();
+  }, [isLogined]);
 
   const getPastData = async () => {
     const semester = ['2023-2', '2023-1', '2022-2'];
@@ -331,16 +336,18 @@ const MyBoardPage = () => {
   };
 
   useEffect(() => {
-    try {
-      if (userData.hopeMajor1 && userData.hopeMajor2) {
-        getPastData();
+    if (isLogined) {
+      try {
+        if (userData.hopeMajor1 && userData.hopeMajor2) {
+          getPastData();
+        }
+        getMyStageData();
+        getCurData();
+      } catch (err) {
+        console.log(err);
       }
-      getMyStageData();
-      getCurData();
-    } catch (err) {
-      console.log(err);
     }
-  }, [userData]);
+  }, [userData, isLogined]);
 
   const getCurData = async () => {
     try {
