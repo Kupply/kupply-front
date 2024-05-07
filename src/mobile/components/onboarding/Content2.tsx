@@ -62,7 +62,7 @@ const Image2 = styled.img`
   z-index: 10;
   position: absolute;
   left: 50.7%;
-  top: 71%;
+  top: 70.7%;
   opacity: 0;
   animation: ${Animation} 6s infinite;
 `;
