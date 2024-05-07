@@ -6,11 +6,12 @@ interface LoginModalProps{
   isOpenModal: boolean;
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수;
-  sendEmail: (email: string) => Promise<boolean>;
+  sendEmail: (email: string) => Promise<void>;
 }
 
 export default function LoginModal(props: LoginModalProps){
   const {isOpenModal, setOpenModal, onClickModal, sendEmail} = props;
+  
   return (
     <Main>
       <LoginAlertMobileLarge01

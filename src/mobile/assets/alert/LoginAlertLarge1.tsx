@@ -14,7 +14,7 @@ interface LoginAlertLargeProps {
   isOpenModal: boolean;
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수;
-  sendEmail: (email: string) => Promise<boolean>;
+  sendEmail: (email: string) => Promise<void>;
 }
 
 function LoginAlertMobileLarge01({

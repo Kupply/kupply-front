@@ -67,6 +67,20 @@ export default function LoginPage(props: LoginPageProps) {
       }
     }
   };
+
+  const forgotPassword = async () => {
+    try {
+      const url = 'https://api.kupply.devkor.club/auth/forgotPassword';
+      await axios.post(url, { userEmail: ID });
+
+      setIsModalVisible(!isModalVisible);
+      alert('입력하신 이메일로 임시 비밀번호를 보냈습니다!');
+    } catch (err: any) {
+      if (err.response.data.error.message) {
+        alert(err.response.data.error.message);
+      }
+    }
+  };
   return (
     <Wrapper>
       {isModalVisible && (
@@ -74,7 +88,7 @@ export default function LoginPage(props: LoginPageProps) {
           isOpenModal={isModalVisible}
           setOpenModal={setIsModalVisible}
           onClickModal={() => setIsModalVisible((prev) => !prev)}
-          sendEmail={sendEmail}
+          sendEmail={forgotPassword}
         />
       )}
       <ContentsList>

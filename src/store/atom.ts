@@ -295,7 +295,7 @@ export const headerButtonState = atom<headerButtonStateType>({
 });
 
 export const headerButtonMobileState = atom<headerButtonStateType>({
-  key: 'headerButtonState',
+  key: 'headerButtonMobileState',
   default: 'basicMajor'
 });
 
