@@ -87,7 +87,7 @@ const MobileThreeYear = ({
               navigate('/archive/' + collegeAPIMapping[majorKoreanName as MajorOptions]);
             }}
           >
-            <Arrow src="designImage/mobile/myBoard/Arrow.svg" alt="arrow" />
+            <Arrow src="designImage/mobile/myboard/Arrow.svg" alt="arrow" />
           </button>
         </Text1Box>
 
