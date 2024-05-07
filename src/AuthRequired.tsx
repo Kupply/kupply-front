@@ -5,7 +5,7 @@ function AuthRequired() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isLogined = window.localStorage.getItem('isLogin');
+    const isLogined = window.sessionStorage.getItem('isLogin');
     if (isLogined !== 'true') {
       alert('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
       navigate('/login');
