@@ -137,6 +137,7 @@ const Blur = styled.div`
   position: absolute;
   top: 30.82%;
   left: 15.63%;
+  -webkit-backdrop-filter: blur(10px);
 `;
 
 const ButtonWrapper = styled.div`
