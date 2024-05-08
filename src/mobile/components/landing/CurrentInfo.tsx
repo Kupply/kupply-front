@@ -77,6 +77,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   user-select: none;
+  -webkit-user-select: none;
 `;
 
 const HeaderWrapper = styled.div`

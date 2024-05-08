@@ -82,6 +82,7 @@ const Wrapper = styled.div`
   align-items: center;
   margin-bottom: 0.63vw;
   user-select: none;
+  -webkit-user-select: none;
 `;
 
 const RankCell = styled.div`
