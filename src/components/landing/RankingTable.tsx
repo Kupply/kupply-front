@@ -259,6 +259,7 @@ const Blur = styled.div`
   position: absolute;
   top: 30.82%;
   left: 0;
+  -webkit-backdrop-filter: blur(10px);
 `;
 
 export default RankingTable;
