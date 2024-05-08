@@ -6,8 +6,11 @@ import Logo from '../../assets/OldLogo';
 import Typography, { TypographyProps } from '../../assets/OldTypography';
 import { sizeMapping } from '../../assets/OldTypography';
 import { TextButton05 } from '../../assets/buttons/TextButton';
+import { useRecoilState } from 'recoil';
+import { SBContentState } from '../../store/atom';
 
-export default function Footer({ setSelected }: { setSelected: React.Dispatch<React.SetStateAction<number>> }) {
+export default function Footer() {
+  const [selected, setSelected] = useRecoilState(SBContentState);
   const navigate = useNavigate();
   const handleMenu1Click = () => {
     navigate('/archive');

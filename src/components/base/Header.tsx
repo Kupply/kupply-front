@@ -11,14 +11,17 @@ import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
 import client from '../../utils/HttpClient';
 import { TextButton02, TextButton03LNB, TextButton06 } from '../../assets/buttons/TextButton';
+import { useRecoilState } from 'recoil';
+import { SBContentState } from '../../store/atom';
 
 export interface HeaderProps {
   logined: boolean;
   setLogin: (state: boolean) => void;
-  setSelected: (selected: number) => void;
+  //setSelected: (selected: number) => void;
 }
 
-export default function Header({ logined, setLogin, setSelected }: HeaderProps) {
+export default function Header({ logined, setLogin }: HeaderProps) {
+  const [selected, setSelected] = useRecoilState(SBContentState);
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
 
