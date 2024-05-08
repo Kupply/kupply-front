@@ -10,6 +10,8 @@ import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
 import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes } from './MobileRoutes';
+import { useRecoilState } from 'recoil';
+import { SBContentState } from './store/atom';
 
 interface RouteConfig {
   path: string;
@@ -19,7 +21,6 @@ interface RouteConfig {
 export default function App() {
   RouteChangeTracker();
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
-  const [selected, setSelected] = useState(0);
 
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
@@ -41,14 +42,14 @@ export default function App() {
         </>
       ) : (
         <Wrapper>
-          <Header logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
+          <Header logined={isLogined} setLogin={setisLogined}/>
           <Routes>
             <Route element={<AuthRequired />}>{renderRoutes(authRoutes)}</Route>
             <Route element={<AdminRequired />}>{renderRoutes(adminRoutes)}</Route>
             {renderRoutes(mainRoutes)}
             {renderRoutes(signupRoutes)}
           </Routes>
-          <Footer setSelected={setSelected} />
+          <Footer />
         </Wrapper>
       )}
     </RecoilRoot>
