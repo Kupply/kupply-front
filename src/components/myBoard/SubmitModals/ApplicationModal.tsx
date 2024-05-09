@@ -148,13 +148,16 @@ export default function ApplicationModal(props: ModalProps) {
     <Main>
       {isOpenModal && (
         <ModalLarge onClickToggleModal={onClickModal}>
+          {currentModal !== 4 ? 
           <CloseButton
             onClick={() => {
               setOpenModal(!isOpenModal);
+              setCurrentModal(0);
+              if(currentModal === 3) setIsSubmitted(false);
             }}
           >
             <Icon02 />
-          </CloseButton>
+          </CloseButton> : <></>}
           {!isSubmitted ? (
             <>
               <ModalTitleWrapper>
