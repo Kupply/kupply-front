@@ -253,7 +253,7 @@ export default function EditModal(props: ModalProps) {
               <Icon02 />
             </CloseButton>
             <Typography
-              size="0.9375vw"
+              size="1.04vw"
               bold="700"
               style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '0.833vw' }}
             >
