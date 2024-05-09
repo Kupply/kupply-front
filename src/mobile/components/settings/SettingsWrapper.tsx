@@ -60,7 +60,7 @@ export default function SettingsWrapper({selected, children, onClickFunction}:Se
       </HeaderBar>
       <Contents>
         <div>
-          <Typography size="3.89vw" bold="400" style={{lineHeight: '120%', opacity: 0.6}}>{subText}</Typography>
+          <Typography size="3.89vw" bold="400" style={{lineHeight: '120%', opacity: 0.6, wordBreak: 'keep-all'}}>{subText}</Typography>
         </div>
         {children}
         { (selected !== 0 && selected !== 5) && 
@@ -89,7 +89,7 @@ const HeaderBar = styled.div`
   align-items: center;
   position: relative;
   margin-bottom: 10.833vw;
-  margin-top: 2.5vw;
+  margin-top: 5vw;
 `;
 
 const Contents = styled.div`
