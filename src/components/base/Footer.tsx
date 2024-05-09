@@ -125,6 +125,12 @@ export default function Footer() {
               >
                 개인정보 처리방침
               </MenuButton>
+              <MenuButton
+                style={{ color: '#A8A8A8' }}
+                onClick={() => window.open('https://naver.com', '_blank', 'noopener noreferrer')}
+              >
+                개발팀 소개
+              </MenuButton>
             </MenuWrapper>
           </ContentsWrapper>
           <ContentsTypoWrapper order="2">
