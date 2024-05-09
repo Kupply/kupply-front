@@ -63,7 +63,7 @@ export default function SettingsWrapper({selected, children, onClickFunction}:Se
           <Typography size="3.89vw" bold="400" style={{lineHeight: '120%', opacity: 0.6, wordBreak: 'keep-all'}}>{subText}</Typography>
         </div>
         {children}
-        { (selected !== 0 && selected !== 5) && 
+        {(selected !== 0 && selected !== 5) && 
           <FixedCTA>
             <CTA01 size="large" onClick={() => {onClickFunction();}}>저장하기</CTA01>
           </FixedCTA>
