@@ -22,7 +22,7 @@ function MobileFooter() {
     window.location.href = 'https://forms.gle/7agPn1bgCjHumVER9';
   };
   const handleButtonClick3 = () => {
-    window.location.href = 'https://www.instagram.com/kupply_ku/';
+    window.location.href = 'https://candle-mulberry-ea5.notion.site/c78d3f50dc014f34a9dacfe2acea8a10?pvs=4';
   };
 
   return (
@@ -80,7 +80,7 @@ function MobileFooter() {
       <HorizontalWrapper style={{ margin: '9.08vw 0 3.61vw 0', gap: '3.89vw' }}>
         <TextButton2 onClick={handleButtonClick1}>이용약관</TextButton2>
         <TextButton2 onClick={handleButtonClick2}>버그리포트</TextButton2>
-        <TextButton2 onClick={handleButtonClick3}>인스타그램</TextButton2>
+        <TextButton2 onClick={handleButtonClick3}>쿠플라이 팀소개</TextButton2>
       </HorizontalWrapper>
       <Typography size="2.22vw" color="#A8a8a8" style={{ marginBottom: '0.56vw' }}>
         고려대학교 소프트웨어 개발학회 DevKor&nbsp;&nbsp;&nbsp;&nbsp;서울특별시 성북구 안암로 145 고려대학교
