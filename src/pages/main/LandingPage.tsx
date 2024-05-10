@@ -71,6 +71,7 @@ function LandingPage() {
     }
   }, [location.state]);
 
+  const [isApplied, setIsApplied] = useState<boolean>(false);
   const [CurrentPic, setCurrentPic] = useState('');
   const [userData, setUserData] = useState(() => ({
     userName: '',
@@ -108,6 +109,9 @@ function LandingPage() {
         hopeSemester: userInfo.hopeSemester,
       }));
       setCurrentPic(userInfo.profilePic);
+
+      // 모의지원 했는지.
+      setIsApplied(userInfo.isApplied);
 
       localStorage.setItem('userProfilePic', userInfo.profilePic);
       localStorage.setItem('userProfileLink', userInfo.profileLink);
@@ -173,7 +177,7 @@ function LandingPage() {
       ) : (
         <MainWrapper>
           <Side>
-            <ProfileBox userData={userData} />
+            <ProfileBox userData={userData} isApplied={isApplied} />
           </Side>
           <Content>
             <Banner
