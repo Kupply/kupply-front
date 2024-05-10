@@ -36,7 +36,7 @@ return(
       </Typography>
       <div style={{width: '60.6vw', textAlign: 'center', marginTop: '4.44vw'}}>
       <Typography size={'3.33vw'} color="#141414">
-        수정을 저장하면 이번 이중전공 지원 시즌 동안 단 한 번의 학점 수정 기회가 남아요.
+      이중전공 지원 기간 동안에는 학점 수정이 최대 두 번까지만 가능해요.
       </Typography>
       </div>
       <ActionWrapper>
