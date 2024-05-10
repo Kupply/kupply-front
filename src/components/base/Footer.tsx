@@ -125,6 +125,18 @@ export default function Footer() {
               >
                 개인정보 처리방침
               </MenuButton>
+              <MenuButton
+                style={{ color: '#A8A8A8' }}
+                onClick={() => {
+                  window.open(
+                    'https://candle-mulberry-ea5.notion.site/c78d3f50dc014f34a9dacfe2acea8a10?pvs=4',
+                    '_blank',
+                    'noopener,noreferrer',
+                  );
+                }}
+              >
+                쿠플라이 팀소개
+              </MenuButton>
             </MenuWrapper>
           </ContentsWrapper>
           <ContentsTypoWrapper order="2">
