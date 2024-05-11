@@ -279,7 +279,7 @@ export default function MobileEditModal(props: ModalProps) {
                         <CandidateImg
                           src={`designImage/character/rectProfile/rectProfile${index + 1}.png`}
                           alt={`candidate profile ${index + 1}`}
-                          onClick={() => setUserProfilePic(`rectProfile${index + 1}`)}
+                          onClick={() => setUserProfilePic(`RectProfile${index + 1}`)} //case sensitivity?
                         />
                       ))}
                     </CandidateImgsWrapper>
