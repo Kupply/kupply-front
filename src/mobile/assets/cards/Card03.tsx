@@ -3,6 +3,7 @@ import Typography from '../../../assets/Typography';
 
 export interface Card0301Props extends React.ComponentPropsWithoutRef<'div'> {
   avgPassNum: number;
+  cardType: '0' | '1';
 }
 
 export interface Card0302Props extends React.ComponentPropsWithoutRef<'div'> {
@@ -15,12 +16,12 @@ export interface Card0303Props extends React.ComponentPropsWithoutRef<'div'> {
   TO: number;
 }
 
-export function Card0301({ avgPassNum }: Card0301Props) {
+export function Card0301({ avgPassNum, cardType }: Card0301Props) {
   return (
     <Container1>
       <TextWrapper style={{ top: '4.567vw' }}>
         <Typography size="3.889vw" color="rgba(20, 20, 20, 0.70)" bold="500">
-          평균 선발 인원
+          {cardType === '0' ? '평균 선발 인원' : '선발 인원'}
         </Typography>
       </TextWrapper>
       <ImageWrapper style={{ top: '1.8vw' }}>

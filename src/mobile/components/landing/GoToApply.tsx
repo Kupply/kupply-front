@@ -12,7 +12,7 @@ function GoToApply() {
 
   const currentDate = new Date();
   const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-17');
+  const endDate = new Date('2024-05-31');
   const isDateInRange = currentDate >= startDate && currentDate <= endDate;
 
   const handleButtonClick = () => {
@@ -30,7 +30,7 @@ function GoToApply() {
         color="rgba(20,20,20,0.6)"
         style={{ lineHeight: '133.33%', textAlign: 'center', margin: '3.33vw 0 6.39vw 0' }}
       >
-        {isDateInRange ? '이번학기 나의 희망 학과의' : '모의지원 기능은 5월 10일에 오픈해요'}
+        {isDateInRange ? '이번학기 나의 희망 학과의' : '모의지원 기능은 5월 10일에 오픈해요!'}
         <br />
         {isDateInRange
           ? '실시간 지원자 수와 경쟁률을 제공해 드릴게요'

@@ -7,6 +7,7 @@ import { collegeAPIMappingByKR as collegeAPIMapping } from '../../utils/Mappings
 import { majorNameMapping } from '../../utils/Mappings';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
+import ToolTip02 from '../../assets/toolTips/Tooltip02';
 
 interface SemesterBtnStates {
   [key: string]: boolean;
@@ -24,6 +25,24 @@ const ThreeYear = ({
   pastData1: any[];
   pastData2: any[];
 }) => {
+  const [hover, setHover] = useState(false);
+  const [svgHover, setSvgHover] = useState(false);
+
+  const onHover = () => {
+    setHover(true);
+  };
+
+  const onHoverOut = () => {
+    setHover(false);
+  };
+
+  const onSvgHover = () => {
+    setSvgHover(true);
+  };
+
+  const onSvgHoverOut = () => {
+    setSvgHover(false);
+  };
 
   const semesters = LastThreeSemesters;
 
@@ -55,41 +74,7 @@ const ThreeYear = ({
     if (index !== -1) {
       setSelectedSemesterIndex(index);
     }
-
   };
-
-  // interface SemesterBtnStates {
-  //   '2023-1R': boolean;
-  //   '2022-2R': boolean;
-  //   '2022-1R': boolean;
-  // }
-
-  // const [semesterBtnStates, setSemesterBtnStates] = useState<SemesterBtnStates>({
-  //   '2023-1R': true,
-  //   '2022-2R': false,
-  //   '2022-1R': false,
-  // });
-
-  // const [selectedSemesterIndex, setSelectedSemesterIndex] = useState(0);
-
-  // const navigate = useNavigate();
-  // const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-
-  // const handleSemesterBtnClick = (buttonName: keyof SemesterBtnStates) => {
-  //   // Create a new object with updated isClicked values
-  //   const updatedBtnStates: SemesterBtnStates = { ...semesterBtnStates };
-  //   for (const key in semesterBtnStates) {
-  //     updatedBtnStates[key as keyof SemesterBtnStates] = key === buttonName;
-  //   }
-  //   setSemesterBtnStates(updatedBtnStates);
-
-  //   const indexMap: { [key: string]: number } = {
-  //     '2023-1R': 0,
-  //     '2022-2R': 1,
-  //     '2022-1R': 2,
-  //   };
-  //   setSelectedSemesterIndex(indexMap[buttonName]);
-  // };
 
   const selectedPastData = onViewMajor === 1 ? pastData1[selectedSemesterIndex] : pastData2[selectedSemesterIndex];
 
@@ -102,7 +87,6 @@ const ThreeYear = ({
         <path d="M0 1L422 0.999963" stroke="#DFDFDF" />
       </StyleSvg>
       <EachYearHeadBox>
-
         {semesters.map((semester) => (
           <SemesterButton
             key={semester}
@@ -116,9 +100,7 @@ const ThreeYear = ({
 
       <Text1Box>
         <Text1>
-
           {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 모집정보
-
         </Text1>
         <button
           onClick={() => {
@@ -130,12 +112,18 @@ const ThreeYear = ({
       </Text1Box>
 
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
-
         {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발 인원
-
       </Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
-      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>경쟁률</Text2>
+      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>합격률</Text2>
+      <ToolTip02
+        onMouseEnter={onSvgHover}
+        onMouseLeave={onSvgHoverOut}
+        hoverState={svgHover}
+        style={{ position: 'absolute', top: '8.40vw', left: '14.30vw' }}
+      >
+        해당 학기 지원한 쿠플라이 회원들의 합격률로, 실제와는 상이할 수 있습니다.
+      </ToolTip02>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>
         {selectedPastData.numOfApplied === 0
           ? '집계불가'

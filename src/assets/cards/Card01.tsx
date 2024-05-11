@@ -115,30 +115,25 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, passRat
             <DepNameEng hover={true}>{engName}</DepNameEng>
           </NameWrapper>
           <ContentInner style={{ top: '6.93vw', left: '1.98vw' }}>20{semester}R 모집정보</ContentInner>
-
           <ContentTitle style={{ top: '9.28vw', left: '1.98vw' }}>{semester} 선발 인원</ContentTitle>
           <ContentInner style={{ top: '10.52vw', left: '1.98vw' }}>{TO}명</ContentInner>
-
-          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>힙격률</ContentTitle>
+          <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>합격률</ContentTitle>
           <ToolTip02
             onMouseEnter={onSvgHover}
             onMouseLeave={onSvgHoverOut}
             hoverState={svgHover}
             style={{ position: 'absolute', top: '9.05vw', left: '10.80vw' }}
           >
-            쿠플라이에서 수집된 데이터 값으로, 실제 합격률과 차이가 있을 수 있습니다.
+            해당 학기 지원한 쿠플라이 회원들의 합격률로, 실제와는 상이할 수 있습니다.
           </ToolTip02>
-
           <ContentInner style={{ top: '10.52vw', left: '8.80vw' }}>
             {passRate < 0 ? '집계불가' : passRate + ' %'}
           </ContentInner>
-
           <ContentTitle style={{ top: '12.71vw', left: '1.98vw' }}>합격자 평균 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{avgPass}</ContentInner>
+          <ContentInner style={{ top: '13.96vw', left: '1.98vw' }}>{passRate <= 0 ? '집계불가' : avgPass}</ContentInner>
 
           <ContentTitle style={{ top: '12.71vw', left: '8.80vw' }}>합격자 최저 학점</ContentTitle>
-          <ContentInner style={{ top: '13.96vw', left: '8.80vw' }}>{minPass}</ContentInner>
-
+          <ContentInner style={{ top: '13.96vw', left: '8.80vw' }}>{passRate <= 0 ? '집계불가' : minPass}</ContentInner>
           <Button onClick={handleClickDetail}>
             <svg
               style={{

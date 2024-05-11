@@ -61,7 +61,10 @@ const MobileProfile = ({
     <>
       <Wrapper>
         <HeadWrapper>
-          <CharacterImage src={`designImage/character/rectProfile/${profilePic}.png`} alt="profile" />
+          <CharacterImage
+            src={process.env.PUBLIC_URL + `designImage/character/rectProfile/${profilePic}.png`}
+            alt="profile"
+          />
           <NickNameBox>
             <NickNameText>{userData.userNickname}</NickNameText>
             <RoleText>{userData.userRole === 'candidate' ? '도전자' : '합격자'} 님</RoleText>
@@ -87,7 +90,7 @@ const MobileProfile = ({
 
         <ApplyBox>
           <CTA02 size="large" onClick={onClickAppModal} state={isButtonDisabled}>
-            나도 모의지원 하러가기!
+            나도 모의지원 하러가기
           </CTA02>
         </ApplyBox>
       </Wrapper>

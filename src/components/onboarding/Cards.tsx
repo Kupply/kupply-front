@@ -20,7 +20,7 @@ function Cards() {
         쿠플라이의 핵심 기능을 소개합니다
       </Typography>
       <Typography bold="500" color="rgba(20, 20, 20, 0.6)" style={{ marginTop: '1.46vw', opacity: '0.8' }}>
-        모두의 성공적인 이중전공 진입 메이트 쿠플라이와 함께해요!
+        모두의 성공적인 이중전공 지원 메이트 쿠플라이와 함께해요!
       </Typography>
       <ContentWrapper>
         <HorizontalWrapper>
@@ -29,9 +29,13 @@ function Cards() {
               width: '20.2vw',
               height: '29.27vw',
               background: 'linear-gradient(159deg, #FFA9C5 13.78%, #FFD1C0 73.99%)',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              navigate('/myboard', { state: { fromButton: true } });
             }}
           >
-            <Menu style={{ color: '#141414', background: '#FFF' }}>마이페이지</Menu>
+            <Menu style={{ color: '#141414', background: '#FFF' }}>마이보드</Menu>
             <Typography size="1.88vw" bold="700" color="#FFF" style={{ lineHeight: '2.4vw' }}>
               경쟁자들 중 <br /> 나의 등수 보기
             </Typography>
@@ -50,7 +54,12 @@ function Cards() {
               style={{ position: 'absolute', bottom: 0, right: 0 }}
             />
           </Box>
-          <Box style={{ width: '20.2vw', height: '29.27vw', background: '#FFF' }}>
+          <Box
+            style={{ width: '20.2vw', height: '29.27vw', background: '#FFF', cursor: 'pointer' }}
+            onClick={() => {
+              navigate('/archive', { state: { fromButton: true } });
+            }}
+          >
             <Menu style={{ color: '#FFF', background: '#E57C90' }}>합격자료</Menu>
             <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
               자기소개서 <br /> 키워드 둘러보기
@@ -66,8 +75,20 @@ function Cards() {
             />
           </Box>
           <VerticalWrapper>
-            <Box style={{ width: '20.1vw', height: '13.75vw', background: '#FFF' }}>
-              <Menu style={{ color: '#FFF', background: '#E57C90' }}>마이페이지</Menu>
+            <Box
+              style={{ width: '20.1vw', height: '13.75vw', background: '#FFF', cursor: 'pointer' }}
+              onClick={() => {
+                navigate('/archive', { state: { fromButton: true } });
+              }}
+            >
+              <Menu
+                style={{ color: '#FFF', background: '#E57C90' }}
+                onClick={() => {
+                  navigate('/archive', { state: { fromButton: true } });
+                }}
+              >
+                합격자료
+              </Menu>
               <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
                 희망 이중전공 <br /> 최신 합격컷 모아보기
               </Typography>
@@ -118,8 +139,13 @@ function Cards() {
         <HorizontalWrapper>
           <VerticalWrapper>
             <HorizontalWrapper>
-              <Box style={{ width: '20.1vw', height: '13.75vw', background: '#FFF' }}>
-                <Menu style={{ color: '#FFF', background: '#E57C90' }}>마이페이지</Menu>
+              <Box
+                style={{ width: '20.1vw', height: '13.75vw', background: '#FFF', cursor: 'pointer' }}
+                onClick={() => {
+                  navigate('/myboard', { state: { fromButton: true } });
+                }}
+              >
+                <Menu style={{ color: '#FFF', background: '#E57C90' }}>마이보드</Menu>
                 <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
                   같은 과를 지원한 <br /> 경쟁자 정보 살펴보기
                 </Typography>
@@ -140,9 +166,13 @@ function Cards() {
                   background: '#fef2c0',
                   boxShadow: ' 0px 14.857px 37.143px 0px rgba(223, 223, 223, 0.4)',
                   backdropFilter: 'blur(6.685710906982422px)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  navigate('/myboard', { state: { fromButton: true } });
                 }}
               >
-                <Menu style={{ color: '#141414', background: '#FFF' }}>마이페이지</Menu>
+                <Menu style={{ color: '#141414', background: '#FFF' }}>마이보드</Menu>
                 <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
                   나의 이중전공
                   <br /> 합격 예측하기
@@ -165,6 +195,10 @@ function Cards() {
                 background: '#FFF',
                 boxShadow: '0px 14.857px 37.143px 0px rgba(223, 223, 223, 0.4)',
                 backdropFilter: 'blur(6.685710906982422px)',
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                navigate('/archive', { state: { fromButton: true } });
               }}
             >
               <Menu style={{ color: '#FFF', background: '#E57C90' }}>합격자료</Menu>
@@ -182,7 +216,12 @@ function Cards() {
               />
             </Box>
           </VerticalWrapper>
-          <Box style={{ width: '20.2vw', height: '29.27vw', background: '#FFF' }}>
+          <Box
+            style={{ width: '20.2vw', height: '29.27vw', background: '#FFF', cursor: 'pointer' }}
+            onClick={() => {
+              navigate('/landing');
+            }}
+          >
             <Menu style={{ color: '#FFF', background: '#E57C90' }}>실시간 모의지원 현황</Menu>
             <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
               실시간 경쟁률 <br /> 살펴보기
@@ -206,6 +245,7 @@ function Cards() {
             justifyContent: 'center',
             alignItems: 'center',
             background: '#D85888',
+            cursor: 'pointer',
           }}
         >
           <Typography size="1.98vw" bold="700" color="#FFF" style={{ zIndex: '10' }}>

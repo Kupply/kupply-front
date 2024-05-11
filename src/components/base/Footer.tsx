@@ -6,8 +6,11 @@ import Logo from '../../assets/OldLogo';
 import Typography, { TypographyProps } from '../../assets/OldTypography';
 import { sizeMapping } from '../../assets/OldTypography';
 import { TextButton05 } from '../../assets/buttons/TextButton';
+import { useRecoilState } from 'recoil';
+import { SBContentState } from '../../store/atom';
 
-export default function Footer({ setSelected }: { setSelected: React.Dispatch<React.SetStateAction<number>> }) {
+export default function Footer() {
+  const [selected, setSelected] = useRecoilState(SBContentState);
   const navigate = useNavigate();
   const handleMenu1Click = () => {
     navigate('/archive');
@@ -121,6 +124,18 @@ export default function Footer({ setSelected }: { setSelected: React.Dispatch<Re
                 }}
               >
                 개인정보 처리방침
+              </MenuButton>
+              <MenuButton
+                style={{ color: '#A8A8A8' }}
+                onClick={() => {
+                  window.open(
+                    'https://candle-mulberry-ea5.notion.site/c78d3f50dc014f34a9dacfe2acea8a10?pvs=4',
+                    '_blank',
+                    'noopener,noreferrer',
+                  );
+                }}
+              >
+                쿠플라이 팀소개
               </MenuButton>
             </MenuWrapper>
           </ContentsWrapper>
@@ -327,7 +342,7 @@ const ContentsWrapper = styled.div<{
   display: flex; // 가로 정렬
   flex-direction: row;
   justify-content: ${(props) => (props.justify ? props.justify : 'space-around')};
-  width: {(props) => (props.size ? props.size : '50%')};
+  width: ${(props) => (props.size ? props.size : '50%')};
   min-width: ${(props) => (props.minSize ? props.minSize : '')};
   max-width: ${(props) => (props.maxSize ? props.maxSize : '')};
 
@@ -375,7 +390,7 @@ const BottomContentsWrapper = styled.div`
 const ContentsTypoWrapper = styled.div<{ order?: string }>`
   display: flex; // 가로 정렬
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   width: 55%;
 
   & > svg {

@@ -14,16 +14,10 @@ interface LoginAlertLargeProps {
   isOpenModal: boolean;
   setOpenModal: (isOpenModal: boolean) => void;
   onClickModal: () => void; // 함수;
-  sendEmail: (email: string) => Promise<boolean>;
+  sendEmail: (email: string) => Promise<void>;
 }
 
-function LoginAlertMobileLarge01({
-  isOpenModal,
-  setOpenModal,
-  onClickModal,
-  sendEmail,
-}: LoginAlertLargeProps) {
-
+function LoginAlertMobileLarge01({ isOpenModal, setOpenModal, onClickModal, sendEmail }: LoginAlertLargeProps) {
   const [email, setEmail] = useState<string>('');
   const [emailState, setEmailState] = useState<StateOptions>('default');
 
@@ -35,14 +29,14 @@ function LoginAlertMobileLarge01({
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon03 size='100%' />
+          <Icon03 size="100%" />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size='100%'/>
+          <Icon02 size="100%" />
         </TopButton>
       </ButtonWrapper>
       <div style={{ height: '20.833vw' }}></div>
@@ -50,23 +44,23 @@ function LoginAlertMobileLarge01({
         <img src={process.env.PUBLIC_URL + `/designImage/kupply/KupplyVer1.svg`} alt="Logo Image" />
       </LogoContainer>
       <TextBox>
-        <Typography size='3.89vw' bold='500' >
+        <Typography size="3.89vw" bold="500">
           임시 비밀번호를 발급받을<br></br>
         </Typography>
-        <Typography size='3.89vw' bold='500'>
+        <Typography size="3.89vw" bold="500">
           고려대 이메일 주소를 입력해주세요.
         </Typography>
       </TextBox>
-      
+
       <ActionWrapper>
-        <div style={{width: '81.667vw', height: '11.667vw'}}>
-        <Input02
-          state={emailState as StateOptions}
-          setState={setEmailState}
-          setValue={setEmail}
-          value={email}
-          placeholder="bright@korea.ac.kr"
-        />
+        <div style={{ width: '81.667vw', height: '11.667vw' }}>
+          <Input02
+            state={emailState as StateOptions}
+            setState={setEmailState}
+            setValue={setEmail}
+            value={email}
+            placeholder="kupply@korea.ac.kr"
+          />
         </div>
         <CTA01
           onClick={async () => {
@@ -78,7 +72,7 @@ function LoginAlertMobileLarge01({
               alert('형식에 맞지 않는 이메일 주소입니다.');
             }
           }}
-          style={{width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw'}}
+          style={{ width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw' }}
         >
           제출하기
         </CTA01>
@@ -112,15 +106,15 @@ const ButtonWrapper = styled.div`
 `;
 
 const LogoContainer = styled.div`
-width: 41.67vw;
-height: 9.167vw;
-margin-bottom: 39px;
+  width: 41.67vw;
+  height: 9.167vw;
+  margin-bottom: 39px;
 `;
 
 const TextBox = styled.div`
-width: 54.44vw;
-text-align: center;
-line-height: 120%;
+  width: 54.44vw;
+  text-align: center;
+  line-height: 120%;
 `;
 
 export default LoginAlertMobileLarge01;

@@ -54,14 +54,14 @@ const MobileMyBoard = () => {
   }, [isApplied]);
 
   const [userData, setUserData] = useState(() => ({
-    userName: '고대빵',
-    userNickname: '고대빵',
-    userProfilePic: CurrentPic,
+    userName: '',
+    userNickname: '',
+    userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: '미디어학부',
-    studentId: '2021160009',
-    hopeMajor1: '수학과',
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '경영학과',
     hopeMajor2: '컴퓨터학과',
     curGPA: 4.5,
     hopeSemester: '2023-2',
@@ -221,9 +221,6 @@ const MobileMyBoard = () => {
       console.log(err);
     }
   };
-  useEffect(() => {
-    getMe();
-  }, []);
 
   const getPastData = async () => {
     const semester = ['2023-2', '2023-1', '2022-2'];
@@ -307,18 +304,6 @@ const MobileMyBoard = () => {
     }
   };
 
-  useEffect(() => {
-    try {
-      if (userData.hopeMajor1 && userData.hopeMajor2) {
-        getPastData();
-      }
-      getMyStageData();
-      getCurData();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [userData]);
-
   const getCurData = async () => {
     try {
       const APIresponse = await client.get('/dashboard/hopeMajorsCurrentInfo');
@@ -349,7 +334,25 @@ const MobileMyBoard = () => {
   };
 
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
-  const [selected, setSelected] = useState(0);
+  //const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    if (isLogined) {
+      try {
+        if (userData.hopeMajor1 && userData.hopeMajor2) {
+          getPastData();
+        }
+        getMyStageData();
+        getCurData();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [userData, isLogined]);
+
+  useEffect(() => {
+    if (isLogined) getMe();
+  }, [isLogined]);
 
   return (
     <>
@@ -359,7 +362,7 @@ const MobileMyBoard = () => {
         </>
       ) : (
         <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
-          <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
+          <MobileHeader logined={isLogined} setLogin={setisLogined} />
           <MobileProfile
             userData={userData}
             isApplied={isApplied}

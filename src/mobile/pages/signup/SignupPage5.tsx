@@ -70,7 +70,7 @@ export default function SignUpPage5(){
       try {
         const getRole = sessionStorage.getItem('role') || '';
         await join(getRole);
-        console.log('signup5', getRole);
+        sessionStorage.setItem('toComplete', 'true');
         navigate('/signupcomplete');
       } catch (e) {
         alert(e);
@@ -79,9 +79,16 @@ export default function SignUpPage5(){
       alert('모든 약관에 동의해주세요.');
     }
   };
+
+  // 잠시 수정
   useEffect(() => {
     if (!sessionStorage.getItem('role')) navigate('/');
    }, []);
+
+  // useEffect(()=>{
+  //   //sessionStorage.setItem('curGpa', '4.33');
+  //   sessionStorage.setItem('passGpa', '4.33');
+  // }, []);
 
   return(
     <SignUpPageWrapper step={5} stepInfo="약관 읽고 서비스 이용하기">
@@ -139,17 +146,23 @@ export function SignUp5Complete(){
     navigate('/login');
   };
 
+  const isMountedRef = useRef(false);
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
-  // 잠시 수정
-  useEffect(() => {
-    if (!sessionStorage.getItem('role')) navigate('/');
-  }, []);
-
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {
-    sessionStorage.clear();
-  }, []);
+    if(!isMountedRef.current){
+      isMountedRef.current = true;
+      return;
+    }
 
+    if (sessionStorage.getItem('toComplete') !== 'true'){
+      sessionStorage.clear();
+      navigate('/');
+    } else{
+      sessionStorage.clear();
+    }
+  }, []);
+  
   return (
     <Wrapper2>
       <div style={{ textAlign: 'center', marginTop: '12.9629vh', marginBottom: '2.222vh', zIndex: 2}}>

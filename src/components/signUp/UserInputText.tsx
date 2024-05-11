@@ -11,7 +11,7 @@ const userTypeMapping: Record<UserTypeOptions, string> = {
   id: '쿠플라이 아이디를',
   hopeMajor1: '이중전공',
   hopeMajor2: '이중전공',
-  doubleMajor: '이중전공',
+  secondMajor: '이중전공',
   kuEmail: '고려대학교 이메일을',
 };
 
@@ -77,7 +77,7 @@ export const UserInputText: React.FC<UserInputTextProps> = ({ userInfoType }) =>
                 <Typography size="0.9375vw">를 입력해주세요.</Typography>
               </>
             );
-          case 'doubleMajor':
+          case 'secondMajor':
             return (
               <>
                 <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>

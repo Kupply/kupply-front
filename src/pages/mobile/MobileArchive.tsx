@@ -96,11 +96,11 @@ const MobileArchivePage = () => {
   const opaCards = cards.filter((card) => !filteredSet.has(card.korName));
 
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
-  const [selected, setSelected] = useState(0);
+  //const [selected, setSelected] = useState(0);
 
   return (
     <MobilePageWrapper>
-      <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
+      <MobileHeader logined={isLogined} setLogin={setisLogined}  />
       <ImageBox>
         <ImageTextBox>
           <ImageTitle>지난 학기 합격 지표 바로 보기</ImageTitle>

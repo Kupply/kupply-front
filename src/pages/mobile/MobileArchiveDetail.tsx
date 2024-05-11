@@ -161,11 +161,11 @@ const MobileArchiveDetailPage = () => {
   }, [sortCriterion]);
 
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
-  const [selected, setSelected] = useState(0);
+  //const [selected, setSelected] = useState(0);
 
   return (
     <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
-      <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
+      <MobileHeader logined={isLogined} setLogin={setisLogined}/>
       <Banner01 major={major} />
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>
@@ -184,7 +184,10 @@ const MobileArchiveDetailPage = () => {
         </RecruitTitleBox>
         <RecruitBox>
           <RecruitLeftBox>
-            <Card0301 avgPassNum={sortCriterion === '전학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection} />
+            <Card0301
+              cardType={sortCriterion === '전학기 누적' ? '0' : '1'}
+              avgPassNum={sortCriterion === '전학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection}
+            />
           </RecruitLeftBox>
           <RecruitRightBox>
             <Card0302 appliedNum={numOfApplication} passNum={numOfPassed} />
@@ -264,11 +267,12 @@ const Wrapper1 = styled.div`
   display: flex;
 
   width: 100%;
-  height: 72.77vw;
+  height: 70.77vw;
   border-radius: 2.78vw;
   border: 1px solid #fff;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
+  margin-top: 5vw;
 `;
 
 const BlurWrapper1 = styled.div`

@@ -38,7 +38,6 @@ const MyBoardPage = () => {
 
   const onClickAppModal = () => {
     setOpenAppModal(true);
-    console.log('myBoard desktop appModal button Click');
   };
 
   const closeEditModal = () => {
@@ -78,13 +77,13 @@ const MyBoardPage = () => {
   }, [isApplied]);
 
   const [userData, setUserData] = useState(() => ({
-    userName: '고대빵',
-    userNickname: '빵대고대빵',
-    userProfilePic: CurrentPic,
+    userName: '',
+    userNickname: '',
+    userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: '미디어학부',
-    studentId: '2021160009',
+    firstMajor: '',
+    studentId: '',
     hopeMajor1: '경영학과',
     hopeMajor2: '컴퓨터학과',
     curGPA: 4.5,
@@ -179,6 +178,11 @@ const MyBoardPage = () => {
     },
   ]);
 
+  const [isLogined, setisLogined] = useState<boolean>(false);
+  useEffect(() => {
+    if (window.localStorage.isLogin === 'true') setisLogined(true);
+    else setisLogined(false);
+  }, []);
   // 로그인한 유저 정보 localStorage에
   const getMe = async () => {
     try {
@@ -246,8 +250,8 @@ const MyBoardPage = () => {
     }
   };
   useEffect(() => {
-    getMe();
-  }, []);
+    if (isLogined) getMe();
+  }, [isLogined]);
 
   const getPastData = async () => {
     const semester = ['2023-2', '2023-1', '2022-2'];
@@ -332,16 +336,18 @@ const MyBoardPage = () => {
   };
 
   useEffect(() => {
-    try {
-      if (userData.hopeMajor1 && userData.hopeMajor2) {
-        getPastData();
+    if (isLogined) {
+      try {
+        if (userData.hopeMajor1 && userData.hopeMajor2) {
+          getPastData();
+        }
+        getMyStageData();
+        getCurData();
+      } catch (err) {
+        console.log(err);
       }
-      getMyStageData();
-      getCurData();
-    } catch (err) {
-      console.log(err);
     }
-  }, [userData]);
+  }, [userData, isLogined]);
 
   const getCurData = async () => {
     try {

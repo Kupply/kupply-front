@@ -54,13 +54,13 @@ export default function DeletePage(){
         </TopButton>
       </ButtonWrapper>
       <div style={{ height: '20.833vw' }}></div>
-      <AlertIconExclamation width="22.22vw" height="22.22vw" />
+      <img src="/designImage/textField/AlertWarning.png" alt="delete" style={{ height: '22.2vw', width: '22.22vw' }} />
       <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
-        변경한 학점을 저장하시겠습니까?
+        계정을 삭제하시겠습니까?
       </Typography>
       <div style={{width: '60.6vw', textAlign: 'center', marginTop: '4.44vw'}}>
       <Typography size={'3.33vw'} color="#141414">
-        수정을 저장하면 이번 이중전공 지원 시즌 동안 단 한 번의 학점 수정 기회가 남아요.
+        {userNickname}님, 계정을 삭제하시면 철회가 불가능합니다. 정말 계정을 삭제하시겠어요?
       </Typography>
       </div>
       <ActionWrapper>

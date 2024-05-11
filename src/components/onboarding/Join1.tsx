@@ -75,7 +75,7 @@ function Join1() {
           <JoinBox>
             <TextFieldWrapper>
               <TextFieldBox
-                placeholder="Bright@Korea.ac.kr"
+                placeholder="kupply@korea.ac.kr"
                 value={ID}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setID(e.target.value);

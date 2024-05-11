@@ -3,7 +3,7 @@ import Typography from "../../../../assets/Typography";
 import Button01 from "../../../../assets/buttons/Button01";
 import MockApplicationButton from "../../../../assets/myboardpage/MockApplication";
 import { useRecoilState } from "recoil";
-import { applicationModalState } from "../../../../store/atom";
+import { applicationModalState, applicationSubmittedState } from "../../../../store/atom";
 
 export interface CurrentModalSubmittedProps{
   setOpenModal: (isOpened: boolean) => void;
@@ -14,6 +14,7 @@ export interface CurrentModalSubmittedProps{
 export default function CurrentModal3(props: CurrentModalSubmittedProps){
   const {setOpenModal, onCustomFunction} = props;
   const [currentModal, setCurrentModal] = useRecoilState(applicationModalState);
+  const [isSubmitted, setIsSubmitted] = useRecoilState(applicationSubmittedState);
 
   return (
     <SubmittedWrapper currentModal={3}>
@@ -37,6 +38,8 @@ export default function CurrentModal3(props: CurrentModalSubmittedProps){
           style={{ width: '32.668vw', height: '3.542vw' }}
           onClick={() => {
             setOpenModal(false);
+            setIsSubmitted(false);
+            setCurrentModal(0);
           }}
         >
           <Typography size="bodyText" style={{ fontWeight: 500, lineHeight: '100%', color: '#D85888' }}>
@@ -47,7 +50,6 @@ export default function CurrentModal3(props: CurrentModalSubmittedProps){
           onClick={() => {
             setCurrentModal(4); // 다음 창으로 이동
             onCustomFunction?.();
-            console.log('this has to be pressed this is Modal3')
           }}
           style={{ width: '32.668vw', height: '3.542vw' }}
           // 글자 디자인 수정 필요

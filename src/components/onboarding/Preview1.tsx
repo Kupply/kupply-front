@@ -37,7 +37,7 @@ function Preview1() {
   const [tableData, setTableData] = useState<ITableData[]>(dummyData);
   const currentDate = new Date();
   const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-17');
+  const endDate = new Date('2024-05-31');
   const isDateInRange = currentDate >= startDate && currentDate <= endDate;
 
   useEffect(() => {
@@ -137,6 +137,7 @@ const Blur = styled.div`
   position: absolute;
   top: 30.82%;
   left: 15.63%;
+  -webkit-backdrop-filter: blur(10px);
 `;
 
 const ButtonWrapper = styled.div`

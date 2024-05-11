@@ -5,7 +5,7 @@ import {
   gpaSettingsState,
   selectedFileMobileState,
   userSettingsState,
-  currentSemesterState
+  currentSemesterState,
 } from '../../store/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Typography from '../../assets/Typography';
@@ -57,16 +57,17 @@ export default function MobileApplicationModal(props: ModalProps) {
     if (currentModal > 0) {
       setCurrentModal(currentModal - 1);
     }
-    if (currentModal == 3){
+    if (currentModal == 3) {
       setIsSubmitted((prev) => !prev);
     }
   };
 
-  // 모의지원 완료하기 확인에서 수행하는 function 
+  // 모의지원 완료하기 확인에서 수행하는 function
   const closeModal = () => {
     setCurrentModal(0);
     setOpenModal(!isOpenModal);
     setIsSubmitted(false);
+    window.location.reload();
   };
 
   const submitApplication = async () => {
@@ -76,10 +77,10 @@ export default function MobileApplicationModal(props: ModalProps) {
         applyMajor2: hopeMajor2,
         applyGPA: parseFloat(gpa.num1 + '.' + gpa.num2 + gpa.num3),
         applyTimes: candidateState === 'clicked' ? 'First' : 'Reapply',
-        applyGrade:  curSemester.num1 + '-' + curSemester.num2,
+        applyGrade: curSemester.num1 + '-' + curSemester.num2,
       };
       await client.post('/dashboard', applyData);
-
+      console.log(parseFloat(gpa.num1 + '.' + gpa.num2 + gpa.num3));
       if (selectedFile) {
         const formData = new FormData();
         formData.append('document', selectedFile);
@@ -113,9 +114,7 @@ export default function MobileApplicationModal(props: ModalProps) {
             </TitleHeader>
           ) : (
             <TitleHeader>
-              <PrevButton
-                onClick={handlePrev}
-              >
+              <PrevButton onClick={handlePrev}>
                 <Icon03 size="100%" />
               </PrevButton>
               <CloseButton
@@ -161,15 +160,21 @@ export default function MobileApplicationModal(props: ModalProps) {
             (() => {
               switch (currentModal) {
                 case 3:
-                  return <CurrentModal3 
-                  isOpenModal={isOpenModal}
-                  setOpenModal={setOpenModal} 
-                  onCustomFunction={submitApplication} />;
+                  return (
+                    <CurrentModal3
+                      isOpenModal={isOpenModal}
+                      setOpenModal={setOpenModal}
+                      onCustomFunction={submitApplication}
+                    />
+                  );
                 case 4:
-                  return <CurrentModal4 
-                  setOpenModal={setOpenModal} 
-                  isOpenModal={isOpenModal} 
-                  onCustomFunction={closeModal} />;
+                  return (
+                    <CurrentModal4
+                      setOpenModal={setOpenModal}
+                      isOpenModal={isOpenModal}
+                      onCustomFunction={closeModal}
+                    />
+                  );
                 default:
                   return <></>;
               }
@@ -203,7 +208,6 @@ const TitleHeader = styled.div`
   height: 6.67vw;
   margin-top: 3.61vw;
 `;
-
 
 ///////////////// text /////////////////
 const TitleText = styled.text`

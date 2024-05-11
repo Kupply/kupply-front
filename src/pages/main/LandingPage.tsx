@@ -71,20 +71,22 @@ function LandingPage() {
     }
   }, [location.state]);
 
+  const [isApplied, setIsApplied] = useState<boolean>(false);
   const [CurrentPic, setCurrentPic] = useState('');
   const [userData, setUserData] = useState(() => ({
-    userName: '고대빵',
-    userNickname: '빵대고대빵',
-    userProfilePic: CurrentPic,
+    userName: '',
+    userNickname: '',
+    userProfilePic: 'rectProfile1',
     userProfileLink: '',
     userRole: 'candidate',
-    firstMajor: 'media',
-    studentId: '2021160009',
-    hopeMajor1: 'business',
-    hopeMajor2: 'computer',
+    firstMajor: '',
+    studentId: '',
+    hopeMajor1: '경영학과',
+    hopeMajor2: '컴퓨터학과',
     curGPA: 4.5,
     hopeSemester: '2023-2',
   }));
+  const [tableData, setTableData] = useState<ITableData[]>(dummyData);
 
   // 로그인한 유저 정보 localStorage에
   const getMe = async () => {
@@ -107,6 +109,9 @@ function LandingPage() {
         hopeSemester: userInfo.hopeSemester,
       }));
       setCurrentPic(userInfo.profilePic);
+
+      // 모의지원 했는지.
+      setIsApplied(userInfo.isApplied);
 
       localStorage.setItem('userProfilePic', userInfo.profilePic);
       localStorage.setItem('userProfileLink', userInfo.profileLink);
@@ -131,71 +136,78 @@ function LandingPage() {
       console.log(err);
     }
   };
+
+  const loadData = async () => {
+    try {
+      // const response = await axios.get('http://localhost:8080/landing');
+      const response = await client.get('/landing');
+      setTableData(response.data.data);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   useEffect(() => {
-    if (isLogined) getMe();
-  }, []);
-
-  const [tableData, setTableData] = useState<ITableData[]>(dummyData);
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        // const response = await axios.get('http://localhost:8080/landing');
-        const response = await client.get('/landing');
-        setTableData(response.data.data);
-      } catch (e) {
-        alert(e);
-      }
-    };
-
-    if (isLogined) loadData();
-  }, []);
-
-  // const cardData = tableData.map((data) => ({
-  //   name: data.secondMajor,
-  //   eng: data.engName,
-  //   합격자수: data.pastPassedNum,
-  //   선발인원: data.pastRecruitNumber,
-  //   min: data.pastmin,
-  //   mean: data.pastmean,
-  //   semester: '23-1',
-  //   imagesrc: data.imagesrc,
-  // }));
-
-  // const tableContent = useRef<HTMLDivElement>(null);
-
-  // const onClickDownArrow = () => {
-  //   tableContent.current?.scrollIntoView({ behavior: 'smooth' });
-  // };
-
-  // const [scrollY, setScrollY] = useState(0);
+    if (isLogined) {
+      getMe();
+      loadData();
+    }
+  }, [isLogined]);
 
   const faqRef = useRef<HTMLDivElement>(null);
   const rankRef = useRef<HTMLDivElement>(null);
 
   return (
-    <MainWrapper>
-      <Side>
-        <ProfileBox userData={userData} />
-      </Side>
-      <Content>
-        <Banner
-          scrollToFAQ={() => {
-            if (faqRef.current) {
-              const yOffset = -100;
-              const y = faqRef.current.getBoundingClientRect().top + yOffset;
-              window.scrollTo({ top: y, behavior: 'smooth' });
-            }
-          }}
-        />
-        <RankingTable tableData={tableData} ref={rankRef} />
-        <FAQ ref={faqRef} />
-      </Content>
-    </MainWrapper>
+    <>
+      {userData.userRole === 'passer' ? (
+        <MainWrapper2>
+          <Content>
+            <Banner
+              scrollToFAQ={() => {
+                if (faqRef.current) {
+                  const yOffset = -100;
+                  const y = faqRef.current.getBoundingClientRect().top + yOffset;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+              }}
+            />
+            <FAQ ref={faqRef} />
+          </Content>
+        </MainWrapper2>
+      ) : (
+        <MainWrapper>
+          <Side>
+            <ProfileBox userData={userData} isApplied={isApplied} />
+          </Side>
+          <Content>
+            <Banner
+              scrollToFAQ={() => {
+                if (faqRef.current) {
+                  const yOffset = -100;
+                  const y = faqRef.current.getBoundingClientRect().top + yOffset;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+              }}
+            />
+            <RankingTable tableData={tableData} ref={rankRef} />
+            <FAQ ref={faqRef} />
+          </Content>
+        </MainWrapper>
+      )}
+    </>
   );
 }
 
 const MainWrapper = styled.div`
+  width: 100vw;
+  height: auto;
+  display: flex;
+  background: #fefafb;
+`;
+
+const MainWrapper2 = styled.div`
+  position: relative;
+  justify-content: center;
   width: 100vw;
   height: auto;
   display: flex;

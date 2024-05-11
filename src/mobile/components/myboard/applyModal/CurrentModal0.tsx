@@ -43,7 +43,7 @@ export default function CurrentModal0(props: CurrentModalProps) {
             </Typography>
             <Typography size="3.33vw">을 입력해주세요.</Typography>
           </div>
-          <GPAVerification userType="candidate" setState={setGpaState} />
+          <GPAVerification userType="candidate" setState={setGpaState} locationUsed="Settings"/>
         </div>
 
         <div>
@@ -54,7 +54,7 @@ export default function CurrentModal0(props: CurrentModalProps) {
             <Typography size="3.33vw">을 입력해주세요.</Typography>
           </div>
           <div style={{ width: '100%' }}>
-            <UserInput userInfoType="studentId" />
+            <UserInput userInfoType="studentId" locationUsed="settings"/>
           </div>
         </div>
       </LeftAlignedContainer>

@@ -9,7 +9,7 @@ import { majorTargetList } from '../../common/MajorTarget';
 import { inputState } from '../../pages/signUp/SignUp4Page';
 import NewTextFieldBox from '../../assets/NewTextFieldBox';
 
-export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'id' | 'hopeMajor1' | 'hopeMajor2' | 'doubleMajor' | 'kuEmail';
+export type UserTypeOptions = 'name' | 'password' | 'password2' | 'nickname' | 'studentId' | 'firstMajor' | 'id' | 'hopeMajor1' | 'hopeMajor2' | 'secondMajor' | 'kuEmail';
 
 // localStorage이나 sessionStorage에서 가져올 때 각 페이지별로 설정해 둔 이름들이 모두 다른 관계로
 // 강제적으로 원하는 정보를 가져올 수 있도록 userInfoTypeManual을 만들어둠
@@ -35,7 +35,7 @@ export const placeholderMapping: Record<UserTypeOptions, string> = {
   id: '쿠플라이 아이디',
   hopeMajor1: '1지망 이중전공 선택',
   hopeMajor2: '2지망 이중전공 선택',
-  doubleMajor: '진입 이중전공 선택',
+  secondMajor: '진입 이중전공 선택',
   kuEmail: '고려대학교 이메일',
 };
 
@@ -49,7 +49,7 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   nickname: '닉네임 길이는 2자 이상 7자 이하로 해주세요!',
   hopeMajor1: '',
   hopeMajor2: '',
-  doubleMajor: '',
+  secondMajor: '',
   kuEmail: '',
 };
 
@@ -63,7 +63,7 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   id: '',
   hopeMajor1: '',
   hopeMajor2: '',
-  doubleMajor: '',
+  secondMajor: '',
   kuEmail: '유효하지 않은 이메일 주소입니다',
 };
 
@@ -132,13 +132,13 @@ export const UserInput: React.FC<UserInputProps> = ({
       {userInfoType === 'firstMajor' ||
       userInfoType === 'hopeMajor1' ||
       userInfoType === 'hopeMajor2' ||
-      userInfoType === 'doubleMajor' ? (
+      userInfoType === 'secondMajor' ? (
         <DropDown
           title={placeholderMapping[userInfoType]}
           optionList={
             userInfoType === 'firstMajor'
               ? majorAllList
-              : userInfoType === 'doubleMajor'
+              : userInfoType === 'secondMajor'
               ? optionList
               : userInfoType === 'hopeMajor1'
               ? optionList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor.info)
@@ -153,8 +153,16 @@ export const UserInput: React.FC<UserInputProps> = ({
           value={userInfo.info}
           onChange={handleInputChange}
           state={userInfo.infoState}
-          setState={userInfoTypeManual !== 'kuEmail' ? (s) => setUserInfo((prev) => ({ ...prev, infoState: s })) : ()=>{}}
-          setValue={userInfoTypeManual !== 'kuEmail' ? (s) => setUserInfo((prev) => ({...prev, info: s})) : ()=>{}}
+          setState={
+            (userInfoTypeManual === 'kuEmail' || 
+            (locationUsed === 'settings' && userInfoType === 'studentId')) ?
+            () => {}: 
+            (s) => setUserInfo((prev) => ({ ...prev, infoState: s }))}
+          setValue={
+            (userInfoTypeManual === 'kuEmail' || 
+            (locationUsed === 'settings' && userInfoType === 'studentId')) ? 
+            () => {}: 
+            (s) => setUserInfo((prev) => ({ ...prev, info: s }))}
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
           type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}

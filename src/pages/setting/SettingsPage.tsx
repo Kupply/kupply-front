@@ -19,11 +19,6 @@ import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
 import { GpaChangeModal } from '../../components/settings/GpaChangeModal';
 
-interface SettingsPageProps {
-  selected: number;
-  setSelected: (selected: number) => void;
-}
-
 type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
 type errorMessageType = {
@@ -73,9 +68,8 @@ const SettingsPage = () => {
   const onClick = (index: number) => {
     setSelected(index);
   };
-  const [scrollActive, setActive] = useState(false);
 
-  // 잠시 수정 
+  // 잠시 수정
   const [modalOpen, setModalOpen] = useState(false);
 
   const [nickname, setNickname] = useState<string>(localStorage.getItem('nickname') || '');
@@ -103,7 +97,7 @@ const SettingsPage = () => {
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
-  const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
+  // const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
 
   const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
   const [emailState, setEmailState] = useState<StateOptions>('filled');
@@ -113,17 +107,15 @@ const SettingsPage = () => {
   const [password2State, setPassword2State] =
     useState<StateOptions>('default'); /* password의 유효성 검사 + 알맞은 errorMessage 설정 */
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
-  // 원래는 || false인데 임시 수정 
+  // 원래는 || false인데 임시 수정
   const [isApplied, setIsApplied] = useState<boolean>(localStorage.getItem('isApplied') === 'true' || true);
 
   const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
 
-
-  // 잠시 수정 
+  // 잠시 수정
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
-
 
   useEffect(() => {
     if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
@@ -173,7 +165,7 @@ const SettingsPage = () => {
         setHopeSemester2(userInfo.hopeSemester.charAt(3));
         setHopeSemester3(userInfo.hopeSemester.charAt(5));
         setUserProfilePic(userInfo.profilePic);
-        setUserProfileLink(userInfo.profileLink);
+        // setUserProfileLink(userInfo.profileLink);
         setCurrentNickname(userInfo.nickname);
       } catch (err) {
         console.log(err);
@@ -238,7 +230,6 @@ const SettingsPage = () => {
       else setNicknameState('filled');
     }
   }, [nicknameState, nickname]);
-
 
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
@@ -329,10 +320,7 @@ const SettingsPage = () => {
   return (
     <Wrapper>
       {modalOpen && isGpaChanged && (
-        <GpaChangeModal 
-        modalOpen={modalOpen} 
-        setModalOpen={setModalOpen} 
-        thirdSubmit={thirdSubmit} />
+        <GpaChangeModal modalOpen={modalOpen} setModalOpen={setModalOpen} thirdSubmit={thirdSubmit} />
       )}
       <Sidebar>
         <Content>
@@ -423,8 +411,8 @@ const SettingsPage = () => {
               setStdID(e.target.value);
             }}
             state={stdIDState}
-            setState={()=>{}}
-            setValue={()=>{}}
+            setState={() => {}}
+            setValue={() => {}}
           ></TextFieldBox>
           <TextFieldTitle>
             <strong>본전공(1전공)</strong> 수정하기
@@ -455,18 +443,14 @@ const SettingsPage = () => {
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
             <CurrentImg
-              src={
-                userProfilePic === 'customProfile'
-                  ? userProfileLink
-                  : `designImage/character/rectProfile/${userProfilePic}.png`
-              }
+              src={process.env.PUBLIC_URL + `/designImage/character/rectProfile/${userProfilePic}.png`}
               alt="current profile"
             />
             <div>
               <CandidateImgsWrapper>
                 {Array.from({ length: 4 }, (_, index) => (
                   <CandidateImg
-                    src={`designImage/character/rectProfile/RectProfile${index + 1}.png`}
+                    src={`designImage/character/rectProfile/rectProfile${index + 1}.png`}
                     alt={`candidate profile ${index + 1}`}
                     onClick={() => setUserProfilePic(`rectProfile${index + 1}`)}
                   />
@@ -490,16 +474,16 @@ const SettingsPage = () => {
                 수정하기
               </Typography>
             </div>
-              <TextFieldBox
-                value={nickname}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNickname(e.target.value);
-                }}
-                state={nicknameState}
-                setState={setNicknameState}
-                setValue={setNickname}
-                errorMessage={'닉네임 길이는 2자 이상 7자 이하입니다'}
-              ></TextFieldBox>
+            <TextFieldBox
+              value={nickname}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setNickname(e.target.value);
+              }}
+              state={nicknameState}
+              setState={setNicknameState}
+              setValue={setNickname}
+              errorMessage={'닉네임 길이는 2자 이상 7자 이하입니다'}
+            ></TextFieldBox>
           </ContentsWrapper>
           <div>
             <Button03

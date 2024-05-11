@@ -11,14 +11,17 @@ import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
 import client from '../../utils/HttpClient';
 import { TextButton02, TextButton03LNB, TextButton06 } from '../../assets/buttons/TextButton';
+import { useRecoilState } from 'recoil';
+import { SBContentState } from '../../store/atom';
 
 export interface HeaderProps {
   logined: boolean;
   setLogin: (state: boolean) => void;
-  setSelected: (selected: number) => void;
+  //setSelected: (selected: number) => void;
 }
 
-export default function Header({ logined, setLogin, setSelected }: HeaderProps) {
+export default function Header({ logined, setLogin }: HeaderProps) {
+  const [selected, setSelected] = useRecoilState(SBContentState);
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
 
@@ -36,7 +39,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     },
     withCredentials: true,
   };
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState(() => ({
     userName: '',
     userNickname: '',
     userProfilePic: 'rectProfile1',
@@ -44,11 +47,11 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
     userRole: 'candidate',
     firstMajor: '',
     studentId: '',
-    hopeMajor1: '',
-    hopeMajor2: '',
-    curGPA: 0,
-    hopeSemester: '',
-  });
+    hopeMajor1: '경영학과',
+    hopeMajor2: '컴퓨터학과',
+    curGPA: 4.5,
+    hopeSemester: '2023-2',
+  }));
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -72,7 +75,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
             });
 
             localStorage.setItem('userProfilePic', userInfo.profilePic);
-            localStorage.setItem('userProfileLink', userInfo.profileLink);
+            //localStorage.setItem('userProfileLink', userInfo.profileLink);
             localStorage.setItem('name', userInfo.name);
             localStorage.setItem('nickname', userInfo.nickname);
             localStorage.setItem('studentId', userInfo.studentId);
@@ -102,23 +105,34 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
   const navigate = useNavigate();
 
   const handleMenu1Click = () => {
-    navigate('/archive');
-  };
-  const handleMenu2Click = () => {
-    // 원래는 if(logined)이지만 임시적으로 수정
     if (logined) {
-      navigate('/myboard');
-    } // 로그인 상태
-    else {
+      navigate('/archive');
+    } else {
       const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
       if (confirmation) {
         navigate('/login');
       }
-      // 미로그인 상태
+    }
+  };
+  const handleMenu2Click = () => {
+    if (logined) {
+      navigate('/myboard');
+    } else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
     }
   };
   const handleMenu3Click = () => {
-    navigate('/landing');
+    if (logined) {
+      navigate('/landing');
+    } else {
+      const confirmation = window.confirm('로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.');
+      if (confirmation) {
+        navigate('/login');
+      }
+    }
   };
   const handleSettingsClick = () => {
     setSelected(0);
@@ -215,11 +229,7 @@ export default function Header({ logined, setLogin, setSelected }: HeaderProps) 
                 <SettingToggleWrapper ref={headerToggleRef}>
                   <Profile>
                     <img
-                      src={
-                        userData.userProfilePic === 'customProfile'
-                          ? userData.userProfileLink
-                          : `designImage/character/rectProfile/${userData.userProfilePic}.png`
-                      }
+                      src={process.env.PUBLIC_URL + `/designImage/character/rectProfile/${userData.userProfilePic}.png`}
                       width={112}
                       alt="profile"
                     />

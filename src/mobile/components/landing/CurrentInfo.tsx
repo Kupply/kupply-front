@@ -33,7 +33,7 @@ function CurrentInfo(props: CurrentInfoProps) {
         <BodyWrapper key={dictionaryIndex}>
           <Body>
             <Typography size="5vw" bold="500" color="#a8a8a8" style={{ lineHeight: '120%' }}>
-              {dictionary.rank < 10 ? '0' + dictionary.rank : dictionary.rank}
+              {dictionaryIndex + 1 < 10 ? '0' + (dictionaryIndex + 1) : dictionaryIndex + 1}
             </Typography>
           </Body>
           <Body>
@@ -77,6 +77,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   user-select: none;
+  -webkit-user-select: none;
 `;
 
 const HeaderWrapper = styled.div`
