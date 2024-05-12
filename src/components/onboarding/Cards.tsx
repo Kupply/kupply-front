@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import Typography from '../../assets/Typography';
 import Button11 from '../../assets/buttons/Button11';
 
 function Cards() {
   const navigate = useNavigate();
+
+  const [buttonState, setButtonState] = useState<'hover' | 'default'>('default');
 
   return (
     <MainWrapper>
@@ -212,9 +215,12 @@ function Cards() {
             다른 지원자들은 어떤 정보를 궁금해하고 있을까?
           </Typography>
           <Button11
+            state={buttonState}
             onClick={() => {
               navigate('/landing', { state: { fromButton: true } });
             }}
+            onMouseEnter={() => setButtonState('hover')}
+            onMouseLeave={() => setButtonState('default')}
             style={{ color: '#FFF', zIndex: '10' }}
           >
             이중전공 A to Z 바로가기
