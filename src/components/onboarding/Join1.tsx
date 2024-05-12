@@ -11,6 +11,7 @@ function Join1() {
   const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
+  const [buttonState, setButtonState] = useState<'disabled' | 'default' | 'hover'>('default');
 
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setIsLogined(true);
@@ -56,7 +57,13 @@ function Join1() {
           <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8 }}>
             간단한 모의지원으로 나의 학점 위치와 자소서까지, 오직 쿠플라이에서 제공해드릴게요.
           </Typography>
-          <CTA02 onClick={() => navigate('/myboard')} style={{ margin: '2.29vw 0 5.63vw 0' }} />
+          <CTA02
+            state={buttonState}
+            onClick={() => navigate('/myboard')}
+            onMouseEnter={() => setButtonState('hover')}
+            onMouseLeave={() => setButtonState('default')}
+            style={{ margin: '2.29vw 0 5.63vw 0' }}
+          />
         </>
       ) : (
         <>
