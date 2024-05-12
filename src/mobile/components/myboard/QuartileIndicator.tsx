@@ -210,7 +210,7 @@ const BlurBox = styled.div`
   align-items: center;
   gap: 5.56vw;
   border-radius: 1.39vw;
-  background: rgba(248, 248, 248, 0.45);
+  background: rgba(248, 248, 248, 1);
   box-shadow: 0 0 7.78vw 0 rgba(20, 20, 20, 0.05);
   backdrop-filter: blur(3.33vw);
   position: absolute;
