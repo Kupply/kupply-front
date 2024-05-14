@@ -68,6 +68,10 @@ const MobileArchiveDetailPage = () => {
       ? '컴퓨터학과'
       : params.majorName === 'statistics'
       ? '통계학과'
+      : params.majorName === 'psychology'
+      ? '심리학부'
+      : params.majorName === 'pubadmin'
+      ? '행정학과'
       : params.majorName === 'chembio'
       ? '화공생명공학부'
       : '화학과';
