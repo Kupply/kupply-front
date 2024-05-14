@@ -52,7 +52,7 @@ const MobileQuartileIndicator = ({
         <BodyBodyBox>
           <ContentBox>
             <ContentText>
-              {name}님의 {major} 이중 지원 시 지원안정도 점수는,
+              {major} 이중전공 지원자들 중 {name}님의 학점은, 상위
             </ContentText>
           </ContentBox>
           <PercentBox>

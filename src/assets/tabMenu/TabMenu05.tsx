@@ -83,8 +83,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
@@ -130,8 +130,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
@@ -178,8 +178,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
@@ -225,8 +225,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
