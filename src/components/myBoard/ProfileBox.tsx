@@ -6,6 +6,7 @@ import CTA02 from '../../assets/CTAs/CTA02';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../utils/Mappings';
 import ApplicationModal from './SubmitModals/ApplicationModal';
+import { useNavigate } from 'react-router-dom';
 //import OldApplicationModal from './SubmitModals/OldApplicationModal';
 
 // isApplied={isApplied}
@@ -27,6 +28,7 @@ const ProfileBox = ({
   setOpenAppModal,
   closeAppModal,
   onClickAppModal,
+  locationUsed
 }: any) => {
   const [freshman, setFreshman] = useState(isApplied);
   const [isButtonDisabled, setIsButtonDisabled] = useState<'default' | 'disabled'>('default');
@@ -40,7 +42,7 @@ const ProfileBox = ({
   const startDate = new Date('2024-05-10');
   const endDate = new Date('2024-05-31');
   const isDateInRange = currentDate >= startDate && currentDate <= endDate; // 해당 기간에만 True
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (id === '24' || isApplied || !isDateInRange) {
       setFreshman(false);
@@ -166,7 +168,11 @@ const ProfileBox = ({
             </SubTitleBox>
 
             <ApplyBox>
-              <CTA02 size="small" onClick={onClickAppModal} state={isButtonDisabled} />
+              <CTA02 
+                size="small" 
+                onClick={locationUsed === 'Landing' ? () => {navigate('/myboard')}: onClickAppModal} 
+                state={isButtonDisabled}
+              />
             </ApplyBox>
           </>
         ) : (
@@ -185,7 +191,7 @@ const ProfileBox = ({
             </SubTitleBox>
 
             <ApplyBox style={{ top: '27.28vw' }}>
-              <CTA02 size="small" onClick={onClickAppModal} state={isButtonDisabled} />
+              <CTA02 size="small" onClick={locationUsed === 'Landing' ? () => {navigate('/myboard')}: onClickAppModal} state={isButtonDisabled} />
             </ApplyBox>
           </>
         )}
