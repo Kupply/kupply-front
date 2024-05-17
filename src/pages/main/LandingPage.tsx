@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Banner from '../../components/landing/Banner';
@@ -157,6 +157,14 @@ function LandingPage() {
   const faqRef = useRef<HTMLDivElement>(null);
   const rankRef = useRef<HTMLDivElement>(null);
 
+  const [isOpenEditModal, setOpenEditModal] = useState(false);
+  const onClickEditModal = () => {
+    setOpenEditModal(true);
+  };
+  const closeEditModal = () => {
+    setOpenEditModal(false);
+  };
+
   return (
     <>
       {userData.userRole === 'passer' ? (
@@ -177,7 +185,15 @@ function LandingPage() {
       ) : (
         <MainWrapper>
           <Side>
-            <ProfileBox userData={userData} isApplied={isApplied} />
+            <ProfileBox 
+              userData={userData} 
+              isApplied={isApplied}
+              isOpenEditModal={isOpenEditModal}
+              setOpenEditModal={setOpenEditModal}
+              closeEditModal={closeEditModal}
+              onClickEditModal={onClickEditModal}
+              locationUsed="Landing"
+              />
           </Side>
           <Content>
             <Banner
