@@ -403,6 +403,7 @@ const MajorTextBox = styled.div`
   align-items: flex-end;
   gap: 0.98vw;
   margin-left: 1.5625vw;
+  align-items: center;
 `;
 
 const MajorTextKorean = styled.text`
@@ -413,7 +414,8 @@ const MajorTextKorean = styled.text`
   font-size: 1.875vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 104.167%;
+  line-height: 100%;
+  white-space: nowrap;
 `;
 
 const MajorTextEnglish = styled.text`
@@ -422,9 +424,8 @@ const MajorTextEnglish = styled.text`
   font-size: 1.5625vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 66.667%;
-
-  margin-bottom: 0.42vw;
+  //line-height: 66.667%;
+  line-height: 100%;
 `;
 
 const WarningTextBox = styled.div`
@@ -432,6 +433,7 @@ const WarningTextBox = styled.div`
   gap: 0.21vw;
   // padding: 94px 0px 37px 0px;
   align-items: center;
+  white-space: nowrap;
 `;
 
 const WarningText = styled.text`
