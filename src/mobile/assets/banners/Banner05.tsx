@@ -17,7 +17,7 @@ function Banner05(props: Banner05Props) {
     },
     {
       department: '공과대학',
-      majors: ['기계공학부', '산업경영공학부', '신소재공학부', '전기전자공학부', '화공생명공학부'],
+      majors: ['기계공학부', '산업경영공학부', '신소재공학부', '전기전자공학부', '화공생명공학과'],
       engNames: [
         ['School of', 'Mechanical Engineering'],
         ['College of Engineering Industrial', '& Management Engineering'],
@@ -93,7 +93,7 @@ function Banner05(props: Banner05Props) {
         size={
           major === '미디어학과' || major === '식품자원경제학과'
             ? '3.61vw'
-            : major === '컴퓨터학과' || major === '화공생명공학부'
+            : major === '컴퓨터학과' || major === '화공생명공학과'
             ? '3.33vw'
             : major === '산업경영공학부' || major === '정치외교학과'
             ? '3.06vw'

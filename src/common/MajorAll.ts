@@ -59,7 +59,7 @@ export const majorAllList = [
   { value1: '한국사학과', value2: '문과대학' },
   { value1: '한문학과', value2: '문과대학' },
   { value1: '행정학과', value2: '정경대학' },
-  { value1: '화공생명공학부', value2: '공과대학' },
+  { value1: '화공생명공학과', value2: '공과대학' },
   { value1: '화학과', value2: '이과대학' },
   { value1: '환경생태공학부', value2: '생명과학대학' },
 ];

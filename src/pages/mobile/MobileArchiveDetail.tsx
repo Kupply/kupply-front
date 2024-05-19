@@ -73,7 +73,7 @@ const MobileArchiveDetailPage = () => {
       : params.majorName === 'pubadmin'
       ? '행정학과'
       : params.majorName === 'chembio'
-      ? '화공생명공학부'
+      ? '화공생명공학과'
       : '화학과';
 
   const handlePrev = () => {
@@ -169,7 +169,7 @@ const MobileArchiveDetailPage = () => {
 
   return (
     <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
-      <MobileHeader logined={isLogined} setLogin={setisLogined}/>
+      <MobileHeader logined={isLogined} setLogin={setisLogined} />
       <Banner01 major={major} />
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>

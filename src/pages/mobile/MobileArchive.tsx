@@ -49,7 +49,7 @@ const categoryMapping: CategoryMapping = {
     '화학과',
     '생명과학부',
     '생명공학부',
-    '화공생명공학부',
+    '화공생명공학과',
     '신소재공학부',
     '전자공학부',
     '컴퓨터학과',
@@ -100,7 +100,7 @@ const MobileArchivePage = () => {
 
   return (
     <MobilePageWrapper>
-      <MobileHeader logined={isLogined} setLogin={setisLogined}  />
+      <MobileHeader logined={isLogined} setLogin={setisLogined} />
       <ImageBox>
         <ImageTextBox>
           <ImageTitle>지난 학기 합격 지표 바로 보기</ImageTitle>

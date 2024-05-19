@@ -23,7 +23,7 @@ const majorParamMappingImage: { [key: string]: string } = {
   기계공학부: 'engineering',
   산업경영공학부: 'engineering',
   전기전자공학부: 'engineering',
-  화공생명공학부: 'engineering',
+  화공생명공학과: 'engineering',
   데이터과학과: 'info',
   스마트보안학부: 'smartsecurity',
 };
