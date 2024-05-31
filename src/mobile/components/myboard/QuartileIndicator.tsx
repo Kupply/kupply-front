@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
 import Typography from '../../../assets/Typography';
+import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
+import { applicationPeriod } from '../../../common/ApplicationPeriod';
 
 const MobileQuartileIndicator = ({
   userData,
@@ -23,23 +24,42 @@ const MobileQuartileIndicator = ({
   const name = userData.userName;
   const major = myStageData.majorName;
 
+  const currentDate = new Date();
+  const endDate = applicationPeriod['endDate'];
+  const isPeriodPassed = currentDate > endDate;
+
   return (
     <Wrapper isApplied={isApplied}>
-      {!isApplied && (
-        <BlurBox>
-          <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
-            쿠플라이에서 모의지원(5/10 오픈) 후 열람 가능해요!
-          </Typography>
-          <Typography
-            size="3.06vw"
-            bold="400"
-            color="rgba(20,20,20,0.8)"
-            style={{ lineHeight: '120%', textAlign: 'center' }}
-          >
-            모의지원 완료 후, 나와 같은 학과를 지원한 <br /> 지원자의 실시간 통계를 열람해보세요!
-          </Typography>
-        </BlurBox>
-      )}
+      {!isApplied &&
+        (isPeriodPassed ? (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
+              이번 학기 모의지원 기간이 종료되었어요.
+            </Typography>
+            <Typography
+              size="3.06vw"
+              bold="400"
+              color="rgba(20,20,20,0.8)"
+              style={{ lineHeight: '120%', textAlign: 'center' }}
+            >
+              다음 학기에 지원해주세요!
+            </Typography>
+          </BlurBox>
+        ) : (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
+              쿠플라이에서 모의지원(5/10 오픈) 후 열람 가능해요!
+            </Typography>
+            <Typography
+              size="3.06vw"
+              bold="400"
+              color="rgba(20,20,20,0.8)"
+              style={{ lineHeight: '120%', textAlign: 'center' }}
+            >
+              모의지원 완료 후, 나와 같은 학과를 지원한 <br /> 지원자의 실시간 통계를 열람해보세요!
+            </Typography>
+          </BlurBox>
+        ))}
       <TitleBox>
         <Icon src="designImage/mobile/myboard/QuartileIcon.svg" alt="Icon" />
         <TitleText>내 학점 위치 파악하기</TitleText>

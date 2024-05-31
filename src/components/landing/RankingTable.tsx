@@ -2,10 +2,11 @@ import React, { useMemo, useState, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import CTA02 from '../../assets/CTAs/CTA02';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 import { ITableData } from '../../pages/landing/LandingPage';
-import CTA02 from '../../assets/CTAs/CTA02';
+import { applicationPeriod } from '../../common/ApplicationPeriod';
 
 type orderOptions = 'descending' | 'ascending';
 type tableProps = {
@@ -37,9 +38,10 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
   const [buttonState, setButtonState] = useState<'disabled' | 'default' | 'hover'>('default');
 
   const currentDate = new Date();
-  const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-31');
+  const startDate = applicationPeriod['startDate'];
+  const endDate = applicationPeriod['endDate'];
   const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+  const isPeriodPassed = currentDate > endDate;
 
   const handleButtonClick = () => {
     isDateInRange ? navigate('/myboard') : navigate('/archive');
@@ -68,6 +70,8 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
       >
         {isDateInRange
           ? '이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.'
+          : isPeriodPassed
+          ? '이번 학기 모의지원 기간이 종료되었어요. 다음 학기에 지원해주세요!'
           : '모의지원 기능은 5월 10일에 오픈해요!'}
       </Typography>
       <CTA02
@@ -186,7 +190,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           </div>
         )}
       </div>
-      {!isDateInRange && <Blur />}
+      {!isDateInRange && !isPeriodPassed && <Blur />}
     </Wrapper>
   );
 });

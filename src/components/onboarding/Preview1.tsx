@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Typography from '../../assets/Typography';
 import RankingTable from './RankingTable';
 import CTA02 from '../../assets/CTAs/CTA02';
 import client from '../../utils/HttpClient';
+import Typography from '../../assets/Typography';
+import { applicationPeriod } from '../../common/ApplicationPeriod';
 
 export interface ITableData {
   rank: number;
@@ -36,9 +37,10 @@ function Preview1() {
 
   const [tableData, setTableData] = useState<ITableData[]>(dummyData);
   const currentDate = new Date();
-  const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-31');
+  const startDate = applicationPeriod['startDate'];
+  const endDate = applicationPeriod['endDate'];
   const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+  const isPeriodPassed = currentDate > endDate;
 
   useEffect(() => {
     const loadData = async () => {
@@ -90,7 +92,7 @@ function Preview1() {
             </CTA02>
           </ButtonWrapper>
         </>
-      ) : isDateInRange ? null : (
+      ) : isDateInRange ? null : isPeriodPassed ? null : (
         <>
           <Blur />
           <ButtonWrapper>
