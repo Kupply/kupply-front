@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Typography from '../../../assets/Typography';
-import ApplyTable from '../landing/ApplyTable';
 import CTA02 from '../../assets/CTAs/CTA02';
+import ApplyTable from '../landing/ApplyTable';
+import Typography from '../../../assets/Typography';
+import { applicationPeriod } from '../../../common/ApplicationPeriod';
 
 function Content1() {
   const navigate = useNavigate();
@@ -17,9 +18,10 @@ function Content1() {
   }, []);
 
   const currentDate = new Date();
-  const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-31');
+  const startDate = applicationPeriod['startDate'];
+  const endDate = applicationPeriod['endDate'];
   const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+  const isPeriodPassed = currentDate > endDate;
 
   return (
     <MainWrapper>
@@ -57,7 +59,7 @@ function Content1() {
           </Typography>
           <CTA02 onClick={() => navigate('/signup0')}>회원가입하러 가기</CTA02>
         </BlurBox>
-      ) : isDateInRange ? null : (
+      ) : isDateInRange ? null : isPeriodPassed ? null : (
         <>
           <BlurBox>
             <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>

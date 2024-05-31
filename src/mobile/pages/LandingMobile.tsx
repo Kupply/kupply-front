@@ -1,18 +1,19 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
 
-import ApplyTable from '../components/landing/ApplyTable';
-import GoToApply from '../components/landing/GoToApply';
 import FAQ from '../components/landing/FAQ';
-import Footer from '../assets/base/Footer';
 import MobileHeader from '../assets/base/Header';
 import MobileFooter from '../assets/base/Footer';
+import GoToApply from '../components/landing/GoToApply';
+import ApplyTable from '../components/landing/ApplyTable';
+import { applicationPeriod } from '../../common/ApplicationPeriod';
 
 function LandingMobile() {
   const currentDate = new Date();
-  const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-31');
+  const startDate = applicationPeriod['startDate'];
+  const endDate = applicationPeriod['endDate'];
   const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+  const isPeriodPassed = currentDate > endDate;
 
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
   //const [selected, setSelected] = useState(0);
@@ -21,7 +22,7 @@ function LandingMobile() {
     <MainWrapper>
       <MobileHeader logined={isLogined} setLogin={setisLogined} />
       <GoToApply />
-      {isDateInRange && <ApplyTable />}
+      {(isDateInRange || isPeriodPassed) && <ApplyTable />}
       <FAQ />
       <MobileFooter />
     </MainWrapper>

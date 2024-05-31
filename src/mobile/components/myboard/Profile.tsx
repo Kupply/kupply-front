@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
-import MobileEditModal from '../../../pages/mobileMyBoard/MobileEditModal';
+import React, { useState, useEffect, useCallback } from 'react';
+
 import CTA02 from '../../assets/CTAs/CTA02';
+import { applicationPeriod } from '../../../common/ApplicationPeriod';
+import MobileEditModal from '../../../pages/mobileMyBoard/MobileEditModal';
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../../utils/Mappings';
-import { textChangeRangeIsUnchanged } from 'typescript';
+import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
 // isApplied={isApplied}
 // editmodal 위치 수정 해야 됨
 
@@ -35,8 +35,8 @@ const MobileProfile = ({
   const profilePic = userData.userProfilePic;
 
   const currentDate = new Date();
-  const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-31');
+  const startDate = applicationPeriod['startDate'];
+  const endDate = applicationPeriod['endDate'];
   const isDateInRange = currentDate >= startDate && currentDate <= endDate; // 해당 기간에만 True
 
   useEffect(() => {
