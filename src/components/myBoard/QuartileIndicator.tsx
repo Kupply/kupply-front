@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
 import MyStageChart from '../../assets/tabMenu/TabMenu05';
-import { applicationPeriod } from '../../common/ApplicationPeriod';
+import { isPeriodPassed } from '../../common/ApplicationPeriod';
 
 const QuartileIndicator = ({
   onViewMajor,
@@ -13,10 +13,6 @@ const QuartileIndicator = ({
   myStageData: any;
   isApplied: boolean;
 }) => {
-  const currentDate = new Date();
-  const endDate = applicationPeriod['endDate'];
-  const isPeriodPassed = currentDate > endDate;
-
   return (
     <>
       {isApplied === false ? (

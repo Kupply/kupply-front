@@ -6,7 +6,7 @@ import CTA02 from '../../assets/CTAs/CTA02';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 import { ITableData } from '../../pages/landing/LandingPage';
-import { applicationPeriod } from '../../common/ApplicationPeriod';
+import { isDateInRange, isPeriodPassed } from '../../common/ApplicationPeriod';
 
 type orderOptions = 'descending' | 'ascending';
 type tableProps = {
@@ -36,12 +36,6 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
   const [mouseOn, setMouseOn] = useState(false);
 
   const [buttonState, setButtonState] = useState<'disabled' | 'default' | 'hover'>('default');
-
-  const currentDate = new Date();
-  const startDate = applicationPeriod['startDate'];
-  const endDate = applicationPeriod['endDate'];
-  const isDateInRange = currentDate >= startDate && currentDate <= endDate;
-  const isPeriodPassed = currentDate > endDate;
 
   const handleButtonClick = () => {
     isDateInRange ? navigate('/myboard') : navigate('/archive');

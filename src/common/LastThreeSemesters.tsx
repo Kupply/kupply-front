@@ -4,7 +4,12 @@ function getLastThreeSemesters(): [string, string, string] {
   const currentMonth = currentDate.getMonth(); // January is 0, December is 11
 
   // Determine the current semester based on the current month (assuming semester 1 is Jan-Jun, semester 2 is Jul-Dec)
-  const currentSemester = currentMonth < 6 ? 1 : 2;
+  let currentSemester;
+  if (currentMonth >= 2 && currentMonth <= 7) {
+    currentSemester = 1; // First semester (Spring)
+  } else {
+    currentSemester = 2; // Second semester (Fall)
+  }
 
   // Calculate the semesters
   if (currentSemester === 1) {
@@ -17,8 +22,3 @@ function getLastThreeSemesters(): [string, string, string] {
 }
 
 export const LastThreeSemesters = getLastThreeSemesters();
-
-// Usage example
-// const [year1, year2, year3] = getLastThreeSemesters();
-// console.log(year1, year2, year3);
-// Logs something like '2023-2R', '2023-1R', '2022-2R'

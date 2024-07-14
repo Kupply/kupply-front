@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import CTA02 from '../../assets/CTAs/CTA02';
 import ApplyTable from '../landing/ApplyTable';
 import Typography from '../../../assets/Typography';
-import { applicationPeriod } from '../../../common/ApplicationPeriod';
+import { isDateInRange, isPeriodPassed } from '../../../common/ApplicationPeriod';
 
 function Content1() {
   const navigate = useNavigate();
@@ -16,12 +16,6 @@ function Content1() {
     if (window.localStorage.isLogin === 'true') setisLogined(true);
     else setisLogined(false);
   }, []);
-
-  const currentDate = new Date();
-  const startDate = applicationPeriod['startDate'];
-  const endDate = applicationPeriod['endDate'];
-  const isDateInRange = currentDate >= startDate && currentDate <= endDate;
-  const isPeriodPassed = currentDate > endDate;
 
   return (
     <MainWrapper>

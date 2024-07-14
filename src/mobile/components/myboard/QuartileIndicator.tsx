@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Typography from '../../../assets/Typography';
 import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
-import { applicationPeriod } from '../../../common/ApplicationPeriod';
+import { isPeriodPassed } from '../../../common/ApplicationPeriod';
 
 const MobileQuartileIndicator = ({
   userData,
@@ -23,10 +23,6 @@ const MobileQuartileIndicator = ({
 
   const name = userData.userName;
   const major = myStageData.majorName;
-
-  const currentDate = new Date();
-  const endDate = applicationPeriod['endDate'];
-  const isPeriodPassed = currentDate > endDate;
 
   return (
     <Wrapper isApplied={isApplied}>
