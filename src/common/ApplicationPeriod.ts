@@ -17,4 +17,4 @@ if (currentMonth === 5 || currentMonth === 11) {
   isPeriodPassed = true;
 }
 
-export { isDateInRange, isPeriodPassed };
+export { isDateInRange, isPeriodPassed, currentMonth };

@@ -5,6 +5,7 @@ import Typography from '../../../assets/Typography';
 import CurrentInfo from './CurrentInfo';
 import PastInfo from './PastInfo';
 import client from '../../../utils/HttpClient';
+import { isDateInRange } from '../../../common/ApplicationPeriod';
 
 export interface ITableData {
   rank: number;

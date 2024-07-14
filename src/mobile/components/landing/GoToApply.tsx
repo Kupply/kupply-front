@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import CTA02 from '../../assets/CTAs/CTA02';
 import Typography from '../../../assets/Typography';
-import { isDateInRange, isPeriodPassed } from '../../../common/ApplicationPeriod';
+import { isDateInRange, isPeriodPassed, currentMonth } from '../../../common/ApplicationPeriod';
 
 function GoToApply() {
   const navigate = useNavigate();
@@ -30,7 +30,9 @@ function GoToApply() {
           ? '이번 학기 나의 희망 학과의'
           : isPeriodPassed
           ? '이번 학기 모의지원 기간이 종료되었어요.'
-          : '모의지원 기능은 5월 10일에 오픈해요!'}
+          : currentMonth < 5
+          ? '1학기 모의지원 서비스는 5월에 오픈해요!'
+          : '2학기 모의지원 서비스는 11월에 오픈해요!'}
         <br />
         {isDateInRange
           ? '실시간 지원자 수와 경쟁률을 제공해 드릴게요'

@@ -6,7 +6,7 @@ import CTA02 from '../../assets/CTAs/CTA02';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 import { ITableData } from '../../pages/landing/LandingPage';
-import { isDateInRange, isPeriodPassed } from '../../common/ApplicationPeriod';
+import { isDateInRange, isPeriodPassed, currentMonth } from '../../common/ApplicationPeriod';
 
 type orderOptions = 'descending' | 'ascending';
 type tableProps = {
@@ -66,7 +66,9 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           ? '이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.'
           : isPeriodPassed
           ? '이번 학기 모의지원 기간이 종료되었어요. 다음 학기에 지원해주세요!'
-          : '모의지원 기능은 5월 10일에 오픈해요!'}
+          : currentMonth < 5
+          ? '1학기 모의지원 서비스는 5월에 오픈해요!'
+          : '2학기 모의지원 서비스는 11월에 오픈해요!'}
       </Typography>
       <CTA02
         state={buttonState}
@@ -75,7 +77,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         onMouseLeave={handleButtonLeave}
         style={{ marginBottom: '3.8vw' }}
       >
-        {isDateInRange ? '나도 모의지원 하러가기!' : '기다리는 동안 과거 합격자료 보러가기!'}
+        {isDateInRange ? '나도 모의지원 하러가기' : '기다리는 동안 과거 합격자료 보러가기'}
       </CTA02>
       <TextWrapper>
         <div
@@ -184,7 +186,8 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           </div>
         )}
       </div>
-      {!isDateInRange && !isPeriodPassed && <Blur />}
+      {/* {!isDateInRange && !isPeriodPassed && <Blur />} */}
+      {!isDateInRange && <Blur />}
     </Wrapper>
   );
 });
