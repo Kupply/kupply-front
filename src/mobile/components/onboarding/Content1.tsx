@@ -17,6 +17,15 @@ function Content1() {
     else setisLogined(false);
   }, []);
 
+  // 회원의 모의지원 여부에 따라 테이블 블러 여부를 결정한다.
+  const [isApplied, setIsApplied] = useState(false);
+  useEffect(() => {
+    const appliedValue = localStorage.getItem('isApplied');
+    if (appliedValue !== null) {
+      setIsApplied(appliedValue === 'false');
+    }
+  }, []);
+
   return (
     <MainWrapper>
       <Typography size="3.33vw" bold="700" color="#D85888" style={{ lineHeight: '120%' }}>
@@ -53,7 +62,19 @@ function Content1() {
           </Typography>
           <CTA02 onClick={() => navigate('/signup0')}>회원가입 하러가기</CTA02>
         </BlurBox>
-      ) : isDateInRange ? null : isPeriodPassed ? (
+      ) : isDateInRange ? (
+        // 모의지원 기간 내
+        isApplied ? null : (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>
+              지금 희망 전공에 모의지원하고
+              <br />
+              실시간 전체 모의지원 현황을 확인해보세요.
+            </Typography>
+            <CTA02 onClick={() => navigate('/myboard')}>나도 모의지원 하러가기</CTA02>
+          </BlurBox>
+        )
+      ) : isPeriodPassed ? (
         currentMonth === 6 || currentMonth === 7 ? ( // 1학기 모의지원 종료 후 (6월, 7월)
           <>
             <BlurBox>

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, forwardRef } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -29,9 +29,16 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
     else setOrder('descending');
   };
 
-  const navigate = useNavigate();
+  // 회원의 모의지원 여부에 따라 테이블 블러 여부를 결정한다.
+  const [isApplied, setIsApplied] = useState(false);
+  useEffect(() => {
+    const appliedValue = localStorage.getItem('isApplied');
+    if (appliedValue !== null) {
+      setIsApplied(appliedValue === 'false');
+    }
+  }, []);
 
-  const [isInfoVisible, setInfoVisible] = useState(false);
+  const navigate = useNavigate();
 
   const [mouseOn, setMouseOn] = useState(false);
 
@@ -187,7 +194,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         )}
       </div>
       {/* {!isDateInRange && !isPeriodPassed && <Blur />} */}
-      {!isDateInRange && <Blur />}
+      {(!isDateInRange || !isApplied) && <Blur />}
     </Wrapper>
   );
 });

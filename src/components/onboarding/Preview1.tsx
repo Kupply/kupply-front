@@ -50,6 +50,15 @@ function Preview1() {
     if (isLogined) loadData();
   }, [isLogined]);
 
+  // 회원의 모의지원 여부에 따라 테이블 블러 여부를 결정한다.
+  const [isApplied, setIsApplied] = useState(false);
+  useEffect(() => {
+    const appliedValue = localStorage.getItem('isApplied');
+    if (appliedValue !== null) {
+      setIsApplied(appliedValue === 'false');
+    }
+  }, []);
+
   return (
     <MainWrapper>
       <ContentWrapper>
@@ -87,7 +96,33 @@ function Preview1() {
             </CTA02>
           </ButtonWrapper>
         </>
-      ) : isDateInRange ? null : isPeriodPassed ? (
+      ) : isDateInRange ? (
+        // 모의지원 기간 내
+        isApplied ? null : (
+          <>
+            <Blur />
+            <ButtonWrapper>
+              <Typography
+                size="1.57vw"
+                bold="700"
+                color="#2C323A"
+                style={{ textAlign: 'center', lineHeight: '131.58%' }}
+              >
+                지금 희망 전공에 모의지원하고 <br /> 실시간 전체 모의지원 현황을 확인해보세요.
+              </Typography>
+              <CTA02
+                onClick={() => {
+                  navigate('/myboard');
+                }}
+                size="small"
+                style={{ marginTop: '1.24vw' }}
+              >
+                나도 모의지원 하러가기
+              </CTA02>
+            </ButtonWrapper>
+          </>
+        )
+      ) : isPeriodPassed ? (
         currentMonth === 6 || currentMonth === 7 ? ( // 1학기 모의지원 종료 후 (6월, 7월)
           <>
             <Blur>

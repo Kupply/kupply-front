@@ -1,6 +1,5 @@
 // 배경이미지 디자인 문의하기: 상단 붉은색, 하단 opacity\
-// 모의지원 날짜 수정 필요
-
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 

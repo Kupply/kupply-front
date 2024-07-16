@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import FAQ from '../components/landing/FAQ';
@@ -6,11 +6,21 @@ import MobileHeader from '../assets/base/Header';
 import MobileFooter from '../assets/base/Footer';
 import GoToApply from '../components/landing/GoToApply';
 import ApplyTable from '../components/landing/ApplyTable';
-import { isDateInRange, isPeriodPassed } from '../../common/ApplicationPeriod';
+import { isDateInRange } from '../../common/ApplicationPeriod';
+import Typography from '../../assets/Typography';
 
 function LandingMobile() {
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
   //const [selected, setSelected] = useState(0);
+
+  // 회원의 모의지원 여부에 따라 테이블 블러 여부를 결정한다.
+  const [isApplied, setIsApplied] = useState(false);
+  useEffect(() => {
+    const appliedValue = localStorage.getItem('isApplied');
+    if (appliedValue !== null) {
+      setIsApplied(appliedValue === 'false');
+    }
+  }, []);
 
   return (
     <MainWrapper>
@@ -18,7 +28,17 @@ function LandingMobile() {
       <GoToApply />
       {/* {(isDateInRange || isPeriodPassed) && <ApplyTable />} */}
       <ApplyTable />
-      {isDateInRange ? null : <BlurBox />}
+      {isDateInRange ? (
+        isApplied ? null : (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>
+              모의지원 후 열람 가능합니다.
+            </Typography>
+          </BlurBox>
+        )
+      ) : (
+        <BlurBox />
+      )}
       <FAQ />
       <MobileFooter />
     </MainWrapper>
