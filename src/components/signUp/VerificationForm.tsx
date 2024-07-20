@@ -104,16 +104,16 @@ export const GPAVerification:React.FC<GpaSemesterVerificationProps>  = ({userTyp
   const originGPA2 = useRef<string>(localStorage.getItem(userType === 'candidate' ? 'curGPA' : 'passGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem(userType === 'candidate' ? 'curGPA' : 'passGPA')?.charAt(3) || '');
 
-  useEffect(()=>{
-    if(+userStdId.info.slice(2, 4) === 24){
-      setUserGpa({
-        num1: '0',
-        num2: '0',
-        num3: '0'
-      });
-      setFixedGpa(true);
-    }
-  },[]);
+  // useEffect(()=>{
+  //   if(+userStdId.info.slice(2, 4) === 24){
+  //     setUserGpa({
+  //       num1: '0',
+  //       num2: '0',
+  //       num3: '0'
+  //     });
+  //     setFixedGpa(true);
+  //   }
+  // },[]);
 
   useEffect(() => {
     if(parseFloat(`${num1}.${num2}${num3}`) > 4.5){
