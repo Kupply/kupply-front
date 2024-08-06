@@ -49,7 +49,7 @@ const cardData = [
     image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
   },
   {
-    korName: '화공생명공학부',
+    korName: '화공생명공학과',
     engName: 'Department of Chemical & Biological Engineering',
     image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
   },

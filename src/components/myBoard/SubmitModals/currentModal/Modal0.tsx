@@ -75,7 +75,7 @@ const LeftAlignedContainer = styled.div`
   align-items: flex-start; /* Align children to the left */
   height: 15vw;
   margin-top: 7vw;
-  margin-bottom: 3.5vw;
+  margin-bottom: 3vw;
   margin-left: 4.5vw;
   width: 36vw;
 `;

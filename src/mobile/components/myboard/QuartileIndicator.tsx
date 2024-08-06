@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
 import Typography from '../../../assets/Typography';
+import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
+import { isPeriodPassed } from '../../../common/ApplicationPeriod';
 
 const MobileQuartileIndicator = ({
   userData,
@@ -25,21 +26,36 @@ const MobileQuartileIndicator = ({
 
   return (
     <Wrapper isApplied={isApplied}>
-      {!isApplied && (
-        <BlurBox>
-          <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
-            쿠플라이에서 모의지원(5/10 오픈) 후 열람 가능해요!
-          </Typography>
-          <Typography
-            size="3.06vw"
-            bold="400"
-            color="rgba(20,20,20,0.8)"
-            style={{ lineHeight: '120%', textAlign: 'center' }}
-          >
-            모의지원 완료 후, 나와 같은 학과를 지원한 <br /> 지원자의 실시간 통계를 열람해보세요!
-          </Typography>
-        </BlurBox>
-      )}
+      {!isApplied &&
+        (isPeriodPassed ? (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
+              이번 학기 모의지원 기간이 종료되었어요.
+            </Typography>
+            <Typography
+              size="3.06vw"
+              bold="400"
+              color="rgba(20,20,20,0.8)"
+              style={{ lineHeight: '120%', textAlign: 'center' }}
+            >
+              다음 학기에 지원해주세요!
+            </Typography>
+          </BlurBox>
+        ) : (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
+              쿠플라이에서 모의지원(5/10 오픈) 후 열람 가능해요!
+            </Typography>
+            <Typography
+              size="3.06vw"
+              bold="400"
+              color="rgba(20,20,20,0.8)"
+              style={{ lineHeight: '120%', textAlign: 'center' }}
+            >
+              모의지원 완료 후, 나와 같은 학과를 지원한 <br /> 지원자의 실시간 통계를 열람해보세요!
+            </Typography>
+          </BlurBox>
+        ))}
       <TitleBox>
         <Icon src="designImage/mobile/myboard/QuartileIcon.svg" alt="Icon" />
         <TitleText>내 학점 위치 파악하기</TitleText>
@@ -52,7 +68,7 @@ const MobileQuartileIndicator = ({
         <BodyBodyBox>
           <ContentBox>
             <ContentText>
-              {name}님의 {major} 이중 지원 시 지원안정도 점수는,
+              {major} 이중전공 지원자들 중 {name}님의 학점은, 상위
             </ContentText>
           </ContentBox>
           <PercentBox>
@@ -211,7 +227,7 @@ const BlurBox = styled.div`
   justify-content: center;
   gap: 5.56vw;
   border-radius: 1.39vw;
-  background: rgba(248, 248, 248, 0.45);
+  background: rgba(248, 248, 248, 1);
   box-shadow: 0 0 7.78vw 0 rgba(20, 20, 20, 0.05);
   backdrop-filter: blur(3.33vw);
   position: absolute;

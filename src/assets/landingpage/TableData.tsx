@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Typography from '../Typography';
+import client from '../../utils/HttpClient';
 
 export interface TableDataProps {
   rank: number;
@@ -35,39 +36,85 @@ export default function TableData(props: TableDataProps) {
 
   const longNameThreshold = 5;
 
+  const [isApplied, setIsApplied] = useState(false);
+
+  useEffect(() => {
+    const appliedValue = localStorage.getItem('isApplied');
+    if (appliedValue !== null) {
+      setIsApplied(appliedValue === 'false');
+    }
+  }, []);
+
   return (
-    <Wrapper>
-      <RankCell>{rank > 9 ? rank : '0' + rank}</RankCell>
-      {secondMajor.length > longNameThreshold ? (
-        <DoubleMajorCell>
-          {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
-          <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
-            {secondMajor}
-          </Typography>
-          <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
-            {engName}
-          </Typography>
-        </DoubleMajorCell>
+    <>
+      {isApplied ? (
+        <Wrapper>
+          <RankCell>{rank > 9 ? rank : '0' + rank}</RankCell>
+          {secondMajor.length > longNameThreshold ? (
+            <DoubleMajorCell>
+              {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+              <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
+                {secondMajor}
+              </Typography>
+              <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+                {engName}
+              </Typography>
+            </DoubleMajorCell>
+          ) : (
+            <DoubleMajorCell>
+              <div style={{ display: 'flex', gap: '0.73vw', flexWrap: 'wrap' }}>
+                <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
+                  {secondMajor}
+                </Typography>
+                {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+              </div>
+              <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+                {engName}
+              </Typography>
+            </DoubleMajorCell>
+          )}
+          <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
+          <AppliedCompeteBlur>모의지원 완료 후 공개!</AppliedCompeteBlur>
+
+          <PastPassedRateCell>{pastPassedRate < 0 ? '집계불가' : pastPassedRate + ' %'} </PastPassedRateCell>
+          <PastMeanCell>{pastmean === 0 ? '집계불가' : pastmean}</PastMeanCell>
+          <InterestCell>{interest}</InterestCell>
+        </Wrapper>
       ) : (
-        <DoubleMajorCell>
-          <div style={{ display: 'flex', gap: '0.73vw', flexWrap: 'wrap' }}>
-            <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
-              {secondMajor}
-            </Typography>
-            {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
-          </div>
-          <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
-            {engName}
-          </Typography>
-        </DoubleMajorCell>
+        <Wrapper>
+          <RankCell>{rank > 9 ? rank : '0' + rank}</RankCell>
+          {secondMajor.length > longNameThreshold ? (
+            <DoubleMajorCell>
+              {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+              <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
+                {secondMajor}
+              </Typography>
+              <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+                {engName}
+              </Typography>
+            </DoubleMajorCell>
+          ) : (
+            <DoubleMajorCell>
+              <div style={{ display: 'flex', gap: '0.73vw', flexWrap: 'wrap' }}>
+                <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
+                  {secondMajor}
+                </Typography>
+                {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+              </div>
+              <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
+                {engName}
+              </Typography>
+            </DoubleMajorCell>
+          )}
+          <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
+          <AppliedNumberCell>{applyNumber}</AppliedNumberCell>
+          <CompetitionCell>{competition} : 1</CompetitionCell>
+          <PastPassedRateCell>{pastPassedRate < 0 ? '집계불가' : pastPassedRate + ' %'} </PastPassedRateCell>
+          <PastMeanCell>{pastmean === 0 ? '집계불가' : pastmean}</PastMeanCell>
+          <InterestCell>{interest}</InterestCell>
+        </Wrapper>
       )}
-      <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
-      <AppliedNumberCell>{applyNumber}</AppliedNumberCell>
-      <CompetitionCell>{competition} : 1</CompetitionCell>
-      <PastPassedRateCell>{pastPassedRate < 0 ? '집계불가' : pastPassedRate + ' %'} </PastPassedRateCell>
-      <PastMeanCell>{pastmean === 0 ? '집계불가' : pastmean}</PastMeanCell>
-      <InterestCell>{interest}</InterestCell>
-    </Wrapper>
+    </>
   );
 }
 
@@ -155,6 +202,21 @@ const CompetitionCell = styled.div`
   line-height: 120%;
   font-family: Pretendard;
   color: #d85888;
+`;
+
+const AppliedCompeteBlur = styled.text`
+  width: 18vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--Main-Black, #141414);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.25vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 21.6px */
 `;
 
 const PastPassedRateCell = styled.div`

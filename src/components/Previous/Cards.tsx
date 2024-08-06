@@ -358,7 +358,7 @@ const mockCards = [
     semester: '23-2',
   },
   {
-    korName: '공과대학 화공생명공학부',
+    korName: '공과대학 화공생명공학과',
     engName: 'Department of Chemical & Biological Engineering',
     filter: ['학부 전체보기', '자연계 캠퍼스'],
     TO: 7,

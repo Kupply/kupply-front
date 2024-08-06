@@ -8,17 +8,17 @@ export const majorTargetList = [
   { value1: '컴퓨터학과', value2: '정보대학' },
   { value1: '통계학과', value2: '정경대학' },
   { value1: '화학과', value2: '이과대학' },
-  { value1: '생명공학부', value2: '생명과학대학'},
-  { value1: '생명과학부', value2: '생명과학대학'},
-  { value1: '정치외교학과', value2: '정경대학'},
-  { value1: '행정학과', value2: '정경대학'},
-  { value1: '신소재공학부', value2: '공과대학'},
-  { value1: '기계공학부', value2: '공과대학'},
-  { value1: '산업경영공학부', value2: '공과대학'},
-  { value1: '전기전자공학부', value2: '공과대학'},
-  { value1: '화공생명공학부', value2: '공과대학'},
-  { value1: '데이터과학과', value2: '정보대학'},
-  { value1: '스마트보안학부', value2: '스마트보안학부'}
+  { value1: '생명공학부', value2: '생명과학대학' },
+  { value1: '생명과학부', value2: '생명과학대학' },
+  { value1: '정치외교학과', value2: '정경대학' },
+  { value1: '행정학과', value2: '정경대학' },
+  { value1: '신소재공학부', value2: '공과대학' },
+  { value1: '기계공학부', value2: '공과대학' },
+  { value1: '산업경영공학부', value2: '공과대학' },
+  { value1: '전기전자공학부', value2: '공과대학' },
+  { value1: '화공생명공학과', value2: '공과대학' },
+  { value1: '데이터과학과', value2: '정보대학' },
+  { value1: '스마트보안학부', value2: '스마트보안학부' },
 ];
 
 export const major계열: { [key: string]: string } = {
@@ -39,7 +39,7 @@ export const major계열: { [key: string]: string } = {
   기계공학부: '자연계',
   산업경영공학부: '자연계',
   전기전자공학부: '자연계',
-  화공생명공학부: '자연계',
+  화공생명공학과: '자연계',
   데이터과학과: '자연계',
-  스마트보안학부: '자연계'
+  스마트보안학부: '자연계',
 };

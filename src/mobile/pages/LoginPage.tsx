@@ -105,9 +105,9 @@ export default function LoginPage(props: LoginPageProps) {
             </Typography>
           </TextBox>
           <Input01
-            placeholder={placeholderMapping['id']}
-            helpMessage={helpMessageMapping['id']}
-            errorMessage={errorMessageMapping['id']}
+            placeholder={''}
+            helpMessage={'쿠플라이 아이디는 고려대학교 이메일입니다'}
+            errorMessage={''}
             value={ID}
             setValue={setID}
             state={IdState}
@@ -124,8 +124,8 @@ export default function LoginPage(props: LoginPageProps) {
             </Typography>
           </TextBox>
           <Input01
-            placeholder={placeholderMapping['password']}
-            errorMessage={errorMessageMapping['password']}
+            placeholder={''}
+            errorMessage={''}
             value={password}
             setValue={setPassword}
             setState={setPasswordState}

@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import { MobileSelectedState } from '../../../store/atom';
+import { useRecoilState } from 'recoil';
 import Typography from '../../../assets/Typography';
 import client from '../../../utils/HttpClient';
 
 export interface HeaderProps {
   logined: boolean;
   setLogin: (state: boolean) => void;
-  setSelected: (selected: number) => void;
+  // setSelected: (selected: number) => void;
 }
 
-function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
+function MobileHeader({ logined, setLogin }: HeaderProps) {
+  const [selected, setSelected] = useRecoilState(MobileSelectedState);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,9 +29,18 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
     else setLogin(false);
   }, []);
 
-  const handleSettingsAndTerms = () => {
+  // const handleSettingsAndTerms = () => {
+  //   navigate('/settings');
+  // };
+
+  const handleSettings = () => {
+    setSelected(0);
     navigate('/settings');
-  };
+  }
+  const handleTerms = () => {
+    setSelected(5);
+    navigate('/settings');
+  }
 
   const handleLogout = async () => {
     try {
@@ -140,7 +151,7 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
                     </TitleText>
                   </TitleBox>
                   <BodyBox>
-                    <MenuOption onClick={handleSettingsAndTerms}>
+                    <MenuOption onClick={handleSettings}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width=" 4.44vw"
@@ -156,7 +167,7 @@ function MobileHeader({ logined, setLogin, setSelected }: HeaderProps) {
                       </svg>
                       <MenuText1>환경설정</MenuText1>
                     </MenuOption>
-                    <MenuOption onClick={handleSettingsAndTerms} style={{ marginTop: '3.06vw' }}>
+                    <MenuOption onClick={handleTerms} style={{ marginTop: '3.06vw' }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width=" 4.44vw"

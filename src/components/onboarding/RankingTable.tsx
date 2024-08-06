@@ -25,16 +25,16 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
   //정렬 여부와 정렬 버튼의 색상을 설정한다.
   const [order, setOrder] = useState<orderOptions>('descending');
 
-  const toggleOrder = () => {
-    if (order === 'descending') setOrder('ascending');
-    else setOrder('descending');
-  };
+  // const toggleOrder = () => {
+  //   if (order === 'descending') setOrder('ascending');
+  //   else setOrder('descending');
+  // };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const [isInfoVisible, setInfoVisible] = useState(false);
+  // const [isInfoVisible, setInfoVisible] = useState(false);
 
-  const [mouseOn, setMouseOn] = useState(false);
+  // const [mouseOn, setMouseOn] = useState(false);
 
   return (
     <Wrapper ref={ref}>

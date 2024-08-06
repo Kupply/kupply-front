@@ -391,7 +391,7 @@ export const MobileSettingsPage = () => {
             }}
           >
             <Typography style={{ color: '#EE6767', opacity: 0.6 }} size="4.44vw">
-              계졍삭제
+              계정 삭제
             </Typography>
           </div>
         </>

@@ -27,8 +27,6 @@ import MobileFooter from '../../mobile/assets/base/Footer';
 // 모자이크 X
 // 키워드 X
 
-export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R'];
-
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
@@ -68,8 +66,12 @@ const MobileArchiveDetailPage = () => {
       ? '컴퓨터학과'
       : params.majorName === 'statistics'
       ? '통계학과'
+      : params.majorName === 'psychology'
+      ? '심리학부'
+      : params.majorName === 'pubadmin'
+      ? '행정학과'
       : params.majorName === 'chembio'
-      ? '화공생명공학부'
+      ? '화공생명공학과'
       : '화학과';
 
   const handlePrev = () => {
@@ -161,20 +163,16 @@ const MobileArchiveDetailPage = () => {
   }, [sortCriterion]);
 
   const [isLogined, setisLogined] = useState<boolean>(false); // 개발 동안은 로그인 상태 유지
-  const [selected, setSelected] = useState(0);
+  //const [selected, setSelected] = useState(0);
 
   return (
     <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
-      <MobileHeader logined={isLogined} setLogin={setisLogined} setSelected={setSelected} />
+      <MobileHeader logined={isLogined} setLogin={setisLogined} />
       <Banner01 major={major} />
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>
         <DropDownBox>
-          <DropDown02
-            optionList={['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R']}
-            value={sortCriterion}
-            setValue={setSortCriterion}
-          />
+          <DropDown02 optionList={semesterMapping} value={sortCriterion} setValue={setSortCriterion} />
         </DropDownBox>
       </DropDownWrapper>
       <BodyBox>

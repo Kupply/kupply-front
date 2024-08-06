@@ -19,11 +19,6 @@ import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
 import { GpaChangeModal } from '../../components/settings/GpaChangeModal';
 
-interface SettingsPageProps {
-  selected: number;
-  setSelected: (selected: number) => void;
-}
-
 type NicknameCheckStateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
 type errorMessageType = {

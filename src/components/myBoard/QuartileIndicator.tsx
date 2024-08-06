@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import MyStageChart from '../../assets/tabMenu/TabMenu05';
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
+import MyStageChart from '../../assets/tabMenu/TabMenu05';
+import { isPeriodPassed } from '../../common/ApplicationPeriod';
 
 const QuartileIndicator = ({
   onViewMajor,
@@ -16,16 +16,26 @@ const QuartileIndicator = ({
   return (
     <>
       {isApplied === false ? (
-        <Wrapper2>
-          <BlurWrapper />
-          <BlurMsg>
-            <BlurTitle>실시간 지원자 통계는 모의지원(5/10 오픈) 후 열람 가능합니다.</BlurTitle>
-            <Blurtext>
-              좌측의 모의지원 버튼을 통해 모의지원을 완료해주세요. <br /> 모의지원을 완료하면 지원한 다른 지원자들의
-              정보를 확인하실 수 있습니다.
-            </Blurtext>
-          </BlurMsg>
-        </Wrapper2>
+        isPeriodPassed ? (
+          <Wrapper2>
+            <BlurWrapper />
+            <BlurMsg>
+              <BlurTitle>이번 학기 모의지원 기간이 종료되었어요.</BlurTitle>
+              <Blurtext>다음 학기에 지원해주세요!</Blurtext>
+            </BlurMsg>
+          </Wrapper2>
+        ) : (
+          <Wrapper2>
+            <BlurWrapper />
+            <BlurMsg>
+              <BlurTitle>실시간 지원자 통계는 모의지원(5/10 오픈) 후 열람 가능합니다.</BlurTitle>
+              <Blurtext>
+                좌측의 모의지원 버튼을 통해 모의지원을 완료해주세요. <br /> 모의지원을 완료하면 지원한 다른 지원자들의
+                정보를 확인하실 수 있습니다.
+              </Blurtext>
+            </BlurMsg>
+          </Wrapper2>
+        )
       ) : (
         <Wrapper>
           <TitleBox>
