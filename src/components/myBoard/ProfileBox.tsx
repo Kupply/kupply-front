@@ -6,7 +6,7 @@ import CTA02 from '../../assets/CTAs/CTA02';
 import Card02 from '../../assets/cards/Card02';
 import EditModal from './EditModals/OldEditModalModified';
 import ApplicationModal from './SubmitModals/ApplicationModal';
-import { applicationPeriod } from '../../common/ApplicationPeriod';
+import { isDateInRange } from '../../common/ApplicationPeriod';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
@@ -34,11 +34,6 @@ const ProfileBox = ({
   const major1: MajorOptions = userData.hopeMajor1;
   const major2: MajorOptions = userData.hopeMajor2;
   const profilePic = userData.userProfilePic;
-
-  const currentDate = new Date();
-  const startDate = applicationPeriod['startDate'];
-  const endDate = applicationPeriod['endDate'];
-  const isDateInRange = currentDate >= startDate && currentDate <= endDate; // 해당 기간에만 True
   const navigate = useNavigate();
   useEffect(() => {
     if (id === '24' || isApplied || !isDateInRange) {

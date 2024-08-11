@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useState, useEffect, useCallback } from 'react';
 
 import CTA02 from '../../assets/CTAs/CTA02';
-import { applicationPeriod } from '../../../common/ApplicationPeriod';
+import { isDateInRange } from '../../../common/ApplicationPeriod';
 import MobileEditModal from '../../../pages/mobileMyBoard/MobileEditModal';
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
@@ -33,11 +33,6 @@ const MobileProfile = ({
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
   const profilePic = userData.userProfilePic;
-
-  const currentDate = new Date();
-  const startDate = applicationPeriod['startDate'];
-  const endDate = applicationPeriod['endDate'];
-  const isDateInRange = currentDate >= startDate && currentDate <= endDate; // 해당 기간에만 True
 
   useEffect(() => {
     if (id === '24' || isApplied || !isDateInRange) {

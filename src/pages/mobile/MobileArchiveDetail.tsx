@@ -27,8 +27,6 @@ import MobileFooter from '../../mobile/assets/base/Footer';
 // 모자이크 X
 // 키워드 X
 
-export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R'];
-
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
@@ -174,11 +172,7 @@ const MobileArchiveDetailPage = () => {
       <DropDownWrapper>
         <DropDownText>학기 선택</DropDownText>
         <DropDownBox>
-          <DropDown02
-            optionList={['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R']}
-            value={sortCriterion}
-            setValue={setSortCriterion}
-          />
+          <DropDown02 optionList={semesterMapping} value={sortCriterion} setValue={setSortCriterion} />
         </DropDownBox>
       </DropDownWrapper>
       <BodyBox>
