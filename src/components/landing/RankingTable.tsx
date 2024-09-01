@@ -65,6 +65,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
     setButtonState('default');
   };
 
+
   return (
     <Wrapper ref={ref}>
       <Typography

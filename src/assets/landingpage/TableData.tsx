@@ -52,7 +52,7 @@ export default function TableData(props: TableDataProps) {
           <RankCell>{rank > 9 ? rank : '0' + rank}</RankCell>
           {secondMajor.length > longNameThreshold ? (
             <DoubleMajorCell>
-              {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+              {interestedNum > 0 ? <InterestNumCell>{interestedNum}지망</InterestNumCell> : <></>}
               <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
                 {secondMajor}
               </Typography>
@@ -66,7 +66,7 @@ export default function TableData(props: TableDataProps) {
                 <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
                   {secondMajor}
                 </Typography>
-                {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+                {interestedNum > 0 ? <InterestNumCell>{interestedNum}지망</InterestNumCell> : <></>}
               </div>
               <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
                 {engName}
@@ -87,7 +87,7 @@ export default function TableData(props: TableDataProps) {
           <RankCell>{rank > 9 ? rank : '0' + rank}</RankCell>
           {secondMajor.length > longNameThreshold ? (
             <DoubleMajorCell>
-              {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+              {interestedNum > 0 ? <InterestNumCell>{interestedNum}지망</InterestNumCell> : <></>}
               <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
                 {secondMajor}
               </Typography>
@@ -101,7 +101,7 @@ export default function TableData(props: TableDataProps) {
                 <Typography size="1.25vw" bold="700" style={{ lineHeight: '120%', marginBottom: '0.21vw' }}>
                   {secondMajor}
                 </Typography>
-                {interestedNum > 0 ? <InterestNumCell> 나의 {interestedNum}지망</InterestNumCell> : <></>}
+                {interestedNum > 0 ? <InterestNumCell>{interestedNum}지망</InterestNumCell> : <></>}
               </div>
               <Typography size="0.63vw" style={{ lineHeight: '120%' }}>
                 {engName}
