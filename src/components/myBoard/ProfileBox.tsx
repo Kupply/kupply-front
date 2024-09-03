@@ -147,18 +147,11 @@ const ProfileBox = ({
         {userData.hopeMajor2 !== '희망 없음' ? (
           <>
             <VectorImage src="designImage/myBoard/ProfileBoxVector.svg" alt="vector" style={{ top: '26.38vw' }} />
-            <SubTitleBox style={{ top: '27.85vw' }}>
+            <SubTitleBox style={{ top: '28.85vw' }}>
               <IconImage src="designImage/myBoard/ProfileBoxGPAIcon.svg" alt="major" />
               <SubTitleText>현재 내 학점</SubTitleText>
               <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
             </SubTitleBox>
-
-            <SubTitleBox style={{ top: '29.82vw' }}>
-              <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
-              <SubTitleText>희망 지원학기</SubTitleText>
-              <GPAText>{userData.hopeSemester}R</GPAText>
-            </SubTitleBox>
-
             <ApplyBox>
               <CTA02
                 size="small"
@@ -181,14 +174,7 @@ const ProfileBox = ({
               <SubTitleText>현재 내 학점</SubTitleText>
               <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
             </SubTitleBox>
-
-            <SubTitleBox style={{ top: '24.82vw' }}>
-              <IconImage src="designImage/myBoard/ProfileBoxSemester.svg" alt="major" />
-              <SubTitleText>희망 지원학기</SubTitleText>
-              <GPAText>{userData.hopeSemester}R</GPAText>
-            </SubTitleBox>
-
-            <ApplyBox style={{ top: '27.28vw' }}>
+            <ApplyBox style={{ top: '28.28vw' }}>
               <CTA02
                 size="small"
                 onClick={

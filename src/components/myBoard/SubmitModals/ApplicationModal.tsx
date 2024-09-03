@@ -117,7 +117,6 @@ export default function ApplicationModal(props: ModalProps) {
     }
   };
 
-
   const submitApplication = async () => {
     try {
       const applyData = {
@@ -125,7 +124,7 @@ export default function ApplicationModal(props: ModalProps) {
         applyMajor2: hopeMajor2,
         applyGPA: parseFloat(gpa.num1 + '.' + gpa.num2 + gpa.num3),
         applyTimes: candidateState === 'clicked' ? 'First' : 'Reapply',
-        applyGrade:  curSemester.num1 + '-' + curSemester.num2,
+        applyGrade: curSemester.num1 + '-' + curSemester.num2,
       };
       await client.post('/dashboard', applyData);
 
@@ -148,21 +147,24 @@ export default function ApplicationModal(props: ModalProps) {
     <Main>
       {isOpenModal && (
         <ModalLarge onClickToggleModal={onClickModal}>
-          {currentModal !== 4 ? 
-          <CloseButton
-            onClick={() => {
-              setOpenModal(!isOpenModal);
-              setCurrentModal(0);
-              if(currentModal === 3) setIsSubmitted(false);
-            }}
-          >
-            <Icon02 />
-          </CloseButton> : <></>}
+          {currentModal !== 4 ? (
+            <CloseButton
+              onClick={() => {
+                setOpenModal(!isOpenModal);
+                setCurrentModal(0);
+                if (currentModal === 3) setIsSubmitted(false);
+              }}
+            >
+              <Icon02 />
+            </CloseButton>
+          ) : (
+            <></>
+          )}
           {!isSubmitted ? (
             <>
               <ModalTitleWrapper>
                 <Typography size="1.25vw" bold="700">
-                  지원 정보 확인하기
+                  지원 정보를 확인해주세요
                 </Typography>
                 <Typography
                   size="0.9375vw"
@@ -212,10 +214,7 @@ export default function ApplicationModal(props: ModalProps) {
                 case 3:
                   return <CurrentModal3 setOpenModal={setOpenModal} onCustomFunction={submitApplication} />;
                 case 4:
-                  return <CurrentModal4 
-                  setOpenModal={setOpenModal} 
-                  isOpenModal={isOpenModal}
-                  />;
+                  return <CurrentModal4 setOpenModal={setOpenModal} isOpenModal={isOpenModal} />;
                 default:
                   return <></>;
               }

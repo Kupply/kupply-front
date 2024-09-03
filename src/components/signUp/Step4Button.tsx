@@ -68,24 +68,24 @@ function Step4Button(props: Step4ButtonProps) {
         </Title>
         <Passage state={state} double={double}>
           {!double
-            ? '이중전공 지원 전, 이중전공에 대한 정보가 궁금해요!'
-            : '이중전공 진입에 성공했고, 다양한 정보를 공유하고 싶어요!'}
+            ? '이중전공 지원 전, 이중전공에 대한 정보가 궁금해요.'
+            : '이중전공 진입에 성공했고, 다양한 정보를 공유하고 싶어요.'}
         </Passage>
       </TextBox>
       {(state === 'default' || state === 'clicked') && !double ? (
-        <div style={{width: '4.688vw', height: '4.668vw'}}>
+        <div style={{ width: '4.688vw', height: '4.668vw' }}>
           <img src="../../designImage/character/Chick1StandSide.png" width="100%" height="100%" />
         </div>
       ) : (state === 'default' || state === 'clicked') && double ? (
-        <div style={{width: '4.688vw', height: '4.668vw'}}>
+        <div style={{ width: '4.688vw', height: '4.668vw' }}>
           <img src="../../designImage/character/Chick2StandSide.png" width="100%" height="100%" />
         </div>
       ) : state === 'inactive' && !double ? (
-        <div style={{width: '4.688vw', height: '4.668vw'}}>
-        <img src="../../designImage/character/Chick1StandSideOpacity.png" width="100%" height="100%" />
+        <div style={{ width: '4.688vw', height: '4.668vw' }}>
+          <img src="../../designImage/character/Chick1StandSideOpacity.png" width="100%" height="100%" />
         </div>
       ) : (
-        <div style={{width: '4.668vw', height: '4.668vw'}}>
+        <div style={{ width: '4.668vw', height: '4.668vw' }}>
           <img src="../../designImage/character/Chick2StandSideOpacity.png" width="100%" height="100%" />
         </div>
       )}

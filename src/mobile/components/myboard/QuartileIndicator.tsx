@@ -76,7 +76,7 @@ const MobileQuartileIndicator = ({
             <PercentText>%</PercentText>
           </PercentBox>
         </BodyBodyBox>
-        <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
+        <Text4>해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 실제 통계와 다를 수 있어요.</Text4>
       </BodyBox>
     </Wrapper>
   );

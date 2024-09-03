@@ -8,9 +8,6 @@ function Preview() {
   return (
     <MainWrapper>
       <TextBox>
-        <Typography size="3.33vw" bold="700" color="#D85888" style={{ lineHeight: '120%' }}>
-          쿠플라이 미리보기
-        </Typography>
         <Typography
           size="5vw"
           bold="700"
@@ -20,10 +17,10 @@ function Preview() {
             margin: '1.67vw 0 0.83vw 0',
           }}
         >
-          쿠플라이의 핵심 기능을 소개합니다
+          쿠플라이 핵심 기능 미리보기
         </Typography>
         <Typography size="3.06vw" bold="500" color="rgba(20,20,20,0.6)" style={{ lineHeight: '120%', opacity: '0.8' }}>
-          모두의 성공적인 이중전공 지원 메이트 쿠플라이와 함께해요!
+          카드를 클릭하여 쿠플라이의 다양한 기능들을 직접 만나보세요.
         </Typography>
       </TextBox>
       <BannerBox>

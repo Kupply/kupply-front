@@ -5,7 +5,6 @@ import Typography from '../../../assets/Typography';
 import Button05 from '../buttons/Button05';
 import Icon02 from '../../../assets/icons/Icon02';
 
-
 interface SignUpAlertLargeProps {
   onClickModal: () => void;
   setOpenModal: (isOpenModal: boolean) => void;
@@ -35,7 +34,7 @@ function SignUpAlertMobileLarge01({
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size='100%'/>
+          <Icon02 size="100%" />
         </TopButton>
       </ButtonWrapper>
       <div style={{ height: '20.833vw' }}></div>
@@ -44,7 +43,7 @@ function SignUpAlertMobileLarge01({
         아직 인증번호를 받지 못하셨나요?
       </Typography>
       <Typography size={'3.33vw'} color="#141414" style={{ marginTop: '4.44vw' }}>
-        새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
+        새로운 인증번호를 받기 전, 스팸 메일함을 먼저 확인해주세요.
       </Typography>
       <ActionWrapper>
         <Button05
@@ -53,7 +52,7 @@ function SignUpAlertMobileLarge01({
             setBlank();
             await sendEmail(email);
           }}
-          style={{width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw'}}
+          style={{ width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw' }}
         >
           인증번호 다시 받기
         </Button05>
@@ -61,7 +60,7 @@ function SignUpAlertMobileLarge01({
           onClick={() => {
             setCurrentModal(currentModal + 1);
           }}
-          style={{width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw'}}
+          style={{ width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw' }}
         >
           이메일 주소 변경하기
         </Button05>

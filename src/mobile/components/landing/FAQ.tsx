@@ -27,7 +27,7 @@ function FAQ() {
         color="rgba(20,20,20,0.6)"
         style={{ lineHeight: '133.33%', textAlign: 'center' }}
       >
-        이중전공을 준비하는 당신이 가장 궁금해할 질문들에 <br /> 쿠플라이가 답해줄게요.
+        이중전공 지원자들이 가장 많이 묻는 <br /> 질문들에 대한 답변을 정리했어요.
       </Typography>
       <SegmentedControl>
         <MobileTabMenuButton isClicked={menuStates[0]} onClick={() => setMenuStates([true, false, false])}>

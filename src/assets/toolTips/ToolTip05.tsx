@@ -46,7 +46,7 @@ const MessageBox = styled.div`
   position: absolute;
   justify-content: flex-start;
   align-items: center;
-  width: 28vw; //27.5vw;
+  width: 28.5vw; //27.5vw;
   height: auto;
   box-sizing: border-box;
   padding: 0.52vw 0.42vw;

@@ -77,12 +77,6 @@ const MobileProfile = ({
           <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
         </SubTitleBox>
 
-        <SubTitleBox2 style={{ marginTop: '5.56vw' }}>
-          <IconImage src="designImage/mobile/myboard/Icon2.svg" alt="major" />
-          <SubTitleText>희망 지원학기</SubTitleText>
-          <GPAText>{userData.hopeSemester}R</GPAText>
-        </SubTitleBox2>
-
         <ApplyBox>
           <CTA02 size="large" onClick={onClickAppModal} state={isButtonDisabled}>
             나도 모의지원 하러가기
@@ -115,7 +109,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: #fefefe;
   width: 100vw;
-  height: 90.56vw;
+  height: 75.56vw;
   overflow: hidden;
 `;
 

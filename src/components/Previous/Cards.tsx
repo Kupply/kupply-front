@@ -186,7 +186,7 @@ const mockCards = [
   {
     korName: '경영대학 경영학과',
     engName: 'Business School',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    filter: ['학과 전체보기', '인문계 캠퍼스'],
     TO: 37,
     passRate: 4.23,
     avgPass: 4.23,
@@ -196,7 +196,7 @@ const mockCards = [
   {
     korName: '심리학부',
     engName: 'School of Psychology',
-    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
+    filter: ['학과 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 27,
     passRate: 7,
     avgPass: 4.23,
@@ -206,7 +206,7 @@ const mockCards = [
   {
     korName: '정경대학 경제학과',
     engName: 'Department of Economics',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    filter: ['학과 전체보기', '인문계 캠퍼스'],
     TO: 29,
     passRate: 7,
     avgPass: 4.23,
@@ -216,7 +216,7 @@ const mockCards = [
   {
     korName: '정경대학 통계학과',
     engName: 'Department of Statistics',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    filter: ['학과 전체보기', '인문계 캠퍼스'],
     TO: 29,
     passRate: 7,
     avgPass: 4.23,
@@ -226,7 +226,7 @@ const mockCards = [
   {
     korName: '미디어학부',
     engName: 'School of Media & Communication',
-    filter: ['학부 전체보기', '인문계 캠퍼스', '독립 학부'],
+    filter: ['학과 전체보기', '인문계 캠퍼스', '독립 학부'],
     TO: 21,
     passRate: 7,
     avgPass: 4.23,
@@ -236,7 +236,7 @@ const mockCards = [
   {
     korName: '정보대학 컴퓨터학과',
     engName: 'Department of Computer Science & Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 20,
     passRate: 7,
     avgPass: 4.23,
@@ -246,7 +246,7 @@ const mockCards = [
   {
     korName: '생명과학대학 식품자원경제학과',
     engName: 'Department of Food & Resources',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 21,
     passRate: 7,
     avgPass: 4.23,
@@ -256,7 +256,7 @@ const mockCards = [
   {
     korName: '이과대학 수학과',
     engName: 'Department of Mathematics',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 7,
     passRate: 7,
     avgPass: 4.23,
@@ -266,7 +266,7 @@ const mockCards = [
   {
     korName: '이과대학 화학과',
     engName: 'Department of Chemistry',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 10,
     passRate: 7,
     avgPass: 4.23,
@@ -280,7 +280,7 @@ const mockCards = [
   {
     korName: '생명과학대학 생명공학부',
     engName: 'Biological Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 11,
     passRate: 7,
     avgPass: 4.23,
@@ -290,7 +290,7 @@ const mockCards = [
   {
     korName: '생명과학대학 생명과학부',
     engName: 'School of Life Sciences',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 3,
     passRate: 7,
     avgPass: 4.23,
@@ -300,7 +300,7 @@ const mockCards = [
   {
     korName: '정경대학 정치외교학과',
     engName: 'Department of Political Science & International Relations',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    filter: ['학과 전체보기', '인문계 캠퍼스'],
     TO: 27,
     passRate: 7,
     avgPass: 4.23,
@@ -310,7 +310,7 @@ const mockCards = [
   {
     korName: '정경대학 행정학과',
     engName: 'Department of Public Administration',
-    filter: ['학부 전체보기', '인문계 캠퍼스'],
+    filter: ['학과 전체보기', '인문계 캠퍼스'],
     TO: 7,
     passRate: 7,
     avgPass: 4.23,
@@ -320,7 +320,7 @@ const mockCards = [
   {
     korName: '공과대학 신소재공학부',
     engName: 'School of Materials Science & Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 5,
     passRate: 7,
     avgPass: 4.23,
@@ -330,7 +330,7 @@ const mockCards = [
   {
     korName: '공과대학 기계공학부',
     engName: 'School of Mechanical Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 6,
     passRate: 7,
     avgPass: 4.23,
@@ -340,7 +340,7 @@ const mockCards = [
   {
     korName: '공과대학 산업경영공학부',
     engName: 'School of Industrial & Management Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 7,
     passRate: 7,
     avgPass: 4.23,
@@ -350,7 +350,7 @@ const mockCards = [
   {
     korName: '공과대학 전기전자공학부',
     engName: 'School of Electrical Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 14,
     passRate: 7,
     avgPass: 4.23,
@@ -360,7 +360,7 @@ const mockCards = [
   {
     korName: '공과대학 화공생명공학과',
     engName: 'Department of Chemical & Biological Engineering',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 7,
     passRate: 7,
     avgPass: 4.23,
@@ -370,7 +370,7 @@ const mockCards = [
   {
     korName: '정보대학 데이터과학과',
     engName: 'Department of Data Science',
-    filter: ['학부 전체보기', '자연계 캠퍼스'],
+    filter: ['학과 전체보기', '자연계 캠퍼스'],
     TO: 9,
     passRate: 7,
     avgPass: 4.23,
@@ -380,7 +380,7 @@ const mockCards = [
   {
     korName: '스마트보안학부 스마트보안학부',
     engName: 'Division of Smart Security',
-    filter: ['학부 전체보기', '자연계 캠퍼스', '독립학부'],
+    filter: ['학과 전체보기', '자연계 캠퍼스', '독립학부'],
     TO: 3,
     passRate: 7,
     avgPass: 4.23,

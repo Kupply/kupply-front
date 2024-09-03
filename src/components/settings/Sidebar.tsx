@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { TextButton04, TextButton03Settings, } from "../../assets/buttons/TextButton";
-import { SBContentState } from "../../store/atom";
-import { useRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import { TextButton04, TextButton03Settings } from '../../assets/buttons/TextButton';
+import { SBContentState } from '../../store/atom';
+import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
-export function SideBar(){
+export function SideBar() {
   const [selected, setSelected] = useRecoilState(SBContentState);
   const navigate = useNavigate();
   const onClick = (index: number) => {
@@ -14,57 +14,57 @@ export function SideBar(){
   return (
     <Sidebar>
       <Content>
-          <Title>환경설정</Title>
-          <Flex>
+        <Title>환경설정</Title>
+        <Flex>
           <TextButton04
-              selected={selected === 0}
-              onCustomFunction={() => {
-                onClick(0);
-              }}
-            >
-              나의 기본정보 수정하기
-            </TextButton04>
-            <TextButton04
-              selected={selected === 1}
-              onCustomFunction={() => {
-                onClick(1);
-              }}
-            >
-              프로필 사진 / 닉네임 변경하기
-            </TextButton04>
-            <TextButton04
-              selected={selected === 2}
-              onCustomFunction={() => {
-                onClick(2);
-              }}
-            >
-              마이보드 프로필 수정하기
-            </TextButton04>
-            <TextButton04
-              selected={selected === 3}
-              onCustomFunction={() => {
-                onClick(3);
-              }}
-            >
-              계정관리
-            </TextButton04>
-            <div style={{ marginTop: 160 }}>
+            selected={selected === 0}
+            onCustomFunction={() => {
+              onClick(0);
+            }}
+          >
+            나의 기본정보 수정하기
+          </TextButton04>
+          <TextButton04
+            selected={selected === 1}
+            onCustomFunction={() => {
+              onClick(1);
+            }}
+          >
+            프로필 수정하기
+          </TextButton04>
+          <TextButton04
+            selected={selected === 2}
+            onCustomFunction={() => {
+              onClick(2);
+            }}
+          >
+            마이보드 프로필 수정하기
+          </TextButton04>
+          <TextButton04
+            selected={selected === 3}
+            onCustomFunction={() => {
+              onClick(3);
+            }}
+          >
+            보안
+          </TextButton04>
+          <div style={{ marginTop: 160 }}>
             <TextButton04
               selected={selected === 4}
               onCustomFunction={() => {
                 onClick(4);
               }}
             >
-              약관보기
+              약관 보기
             </TextButton04>
-            </div>
-            <div style={{ marginTop: 0 }}>
+          </div>
+          <div style={{ marginTop: 0 }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="14.7916vw" height="2" viewBox="0 0 284 2" fill="none">
               <path d="M283 1L0.999988 1" stroke="#DFDFDF" stroke-linecap="round" />
             </svg>
           </div>{' '}
           <div style={{ marginTop: 0 }}>
-          <TextButton03Settings
+            <TextButton03Settings
               selected={selected === 5}
               onCustomFunction={() => {
                 navigate('/delete');
@@ -73,10 +73,10 @@ export function SideBar(){
               계정 삭제
             </TextButton03Settings>
           </div>
-          </Flex>
-          </Content>
+        </Flex>
+      </Content>
     </Sidebar>
-  )
+  );
 }
 
 const Sidebar = styled.div`
