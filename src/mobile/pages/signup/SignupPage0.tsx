@@ -49,13 +49,14 @@ export default function SignUpPage0() {
   };
   // CTA아직 안 만들어져서 빼고 만듦
   return (
-    <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
+    <SignUpPageWrapper step={1} stepInfo="고려대학교 학생 인증하기">
       <MessageContent>
         <Typography size="5.56vw" bold="700">
           환영합니다!
         </Typography>
         <Typography size="3.33vw" bold="500" style={{ lineHeight: '4.44vw', wordBreak: 'break-all' }}>
-          회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
+          간단한 회원가입을 통해 쿠플라이의 <br />
+          다양한 서비스를 이용해보세요.
         </Typography>
       </MessageContent>
       <ContentsList>

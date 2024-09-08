@@ -57,7 +57,7 @@ function SignUpAlertLarge02({
       <AlertIconExclamation width="5.885vw" height="5.885vw" />
       <TypographyBox>
         <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
-          인증번호를 받을 <span className="mobile"> 고려대 이메일 주소를 입력해주세요!</span>
+          <span className="mobile"> 고려대학교 이메일 주소를 입력해주세요.</span>
         </Typography>
         <Typography size={'0.9375vw'} color="#141414" style={{ marginTop: '1.25vw' }}>
           고려대학교 이메일 주소를 정확히 기입해주세요.

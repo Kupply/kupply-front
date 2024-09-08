@@ -63,10 +63,10 @@ function Preview1() {
     <MainWrapper>
       <ContentWrapper>
         <Typography size="0.94vw" bold="700" color="#D85888">
-          실시간 모의지원
+          실시간 지원현황
         </Typography>
         <Typography size="2.5vw" bold="700" style={{ lineHeight: '121.88%', margin: '0.42vw 0 1.46vw 0' }}>
-          모의지원 현황을 실시간으로 확인하세요.
+          쿠플라이 모의지원 현황을 실시간으로 확인해보세요
         </Typography>
         <Typography
           size="1.04vw"
@@ -74,7 +74,7 @@ function Preview1() {
           color="rgba(20,20,20,0.6)"
           style={{ lineHeight: '120%', opacity: 0.8, marginBottom: '5.94vw' }}
         >
-          쿠플라이 모의지원 현황을 통해 <br /> 내가 희망하는 학과의 실시간 경쟁률을 확인하세요!
+          쿠플라이 모의지원 현황을 통해 <br /> 이중전공 학과의 이번 학기 경쟁률을 예측할 수 있어요.
         </Typography>
         <RankingTable tableData={tableData} />
       </ContentWrapper>
@@ -83,7 +83,7 @@ function Preview1() {
           <Blur />
           <ButtonWrapper>
             <Typography size="1.57vw" bold="700" color="#2C323A" style={{ textAlign: 'center', lineHeight: '131.58%' }}>
-              지금 쿠플라이에 회원가입하고 <br /> 이중전공 모의지원 현황을 확인해보세요.
+              쿠플라이 회원가입을 통해 <br /> 이중전공 모의지원 현황을 확인해보세요
             </Typography>
             <CTA02
               onClick={() => {
@@ -92,7 +92,7 @@ function Preview1() {
               size="small"
               style={{ marginTop: '1.24vw' }}
             >
-              회원가입 하러가기
+              회원가입하러 가기
             </CTA02>
           </ButtonWrapper>
         </>
@@ -155,7 +155,11 @@ function Preview1() {
       ) : (
         <>
           <Blur>
-            <Typography size="1.57vw" bold="700" style={{ textAlign: 'center', lineHeight: '131.58%', opacity: 0.8 }}>
+            <Typography
+              size="1.57vw"
+              bold="700"
+              style={{ textAlign: 'center', lineHeight: '131.58%', opacity: 0.8, marginBottom: '1vw' }}
+            >
               2학기 모의지원 서비스는 11월 1일 오픈됩니다.
               <br /> 기다리는 동안 과거 합격자료를 살펴보며 이중전공을 준비해요!
             </Typography>

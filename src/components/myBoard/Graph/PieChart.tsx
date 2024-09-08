@@ -15,7 +15,7 @@ const PieChart = ({ onViewMajor, curData, isApplied }: { onViewMajor: any; curDa
           <TitleBox>
             <TitleText>지원자 정보 살펴보기</TitleText>
             <ToolTip05>
-              본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
+              해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 실제 통계와 다를 수 있어요.
             </ToolTip05>
             {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
           </TitleBox>

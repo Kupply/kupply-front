@@ -25,7 +25,7 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
             />
           </svg>
         </SvgContainer>
-        <Input ref={ref} value={value} onChange={onChange} placeholder="   관심 학부 검색하기" />
+        <Input ref={ref} value={value} onChange={onChange} placeholder="   관심 학과 검색하기" />
 
         <Button
           onClick={() => {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Typography from '../../../assets/Typography';
 import MobileTabMenu05 from '../../assets/tabMenu/TabMenu05';
-import { isPeriodPassed } from '../../../common/ApplicationPeriod';
+import { isPeriodPassed, currentMonth } from '../../../common/ApplicationPeriod';
 
 const MobileQuartileIndicator = ({
   userData,
@@ -41,10 +41,24 @@ const MobileQuartileIndicator = ({
               다음 학기에 지원해주세요!
             </Typography>
           </BlurBox>
+        ) : currentMonth < 5 ? (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
+              쿠플라이에서 모의지원(5월 오픈) 후 열람 가능해요!
+            </Typography>
+            <Typography
+              size="3.06vw"
+              bold="400"
+              color="rgba(20,20,20,0.8)"
+              style={{ lineHeight: '120%', textAlign: 'center' }}
+            >
+              모의지원 완료 후, 나와 같은 학과를 지원한 <br /> 지원자의 실시간 통계를 열람해보세요!
+            </Typography>
+          </BlurBox>
         ) : (
           <BlurBox>
             <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
-              쿠플라이에서 모의지원(5/10 오픈) 후 열람 가능해요!
+              쿠플라이에서 모의지원(11월 오픈) 후 열람 가능해요!
             </Typography>
             <Typography
               size="3.06vw"
@@ -76,7 +90,7 @@ const MobileQuartileIndicator = ({
             <PercentText>%</PercentText>
           </PercentBox>
         </BodyBodyBox>
-        <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
+        <Text4>해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 실제 통계와 다를 수 있어요.</Text4>
       </BodyBox>
     </Wrapper>
   );

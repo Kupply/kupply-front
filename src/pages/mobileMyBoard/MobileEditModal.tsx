@@ -314,7 +314,7 @@ export default function MobileEditModal(props: ModalProps) {
           {currentModal === 1 && ( // '관심전공' 버튼 클릭 시
             <ContentsWrapper2>
               <SubContentsWrapper>
-                <ContentsTitle>희망 관심전공 변경하기</ContentsTitle>
+                <ContentsTitle>희망하는 관심전공 변경하기</ContentsTitle>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                   <DropDown
                     title="1지망 전공 선택"
@@ -352,10 +352,10 @@ export default function MobileEditModal(props: ModalProps) {
                   이중전공 지원 시즌에는 학점을&nbsp;
                 </Typography>
                 <Typography color="#D85888" size="3.05vw" bold="400">
-                  최대 2번까지&nbsp;
+                  최대 2번까지만&nbsp;
                 </Typography>
                 <Typography color="black" size="3.05vw" bold="400">
-                  변경 할 수 있어요. 정확한 나의 학점을 입력해서 확실한 지원정보 데이터를 제공 받아보세요.
+                  변경 할 수 있어요. 정확한 나의 학점을 입력하면 확실한 지원정보 데이터를 제공받을 수 있어요.
                 </Typography>
               </ToolTip>
               <SubContentsWrapper>
@@ -391,7 +391,7 @@ export default function MobileEditModal(props: ModalProps) {
           {currentModal === 3 && ( // '희망 지원학기' 버튼 클릭 시
             <ContentsWrapper2>
               <SubContentsWrapper>
-                <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
+                <ContentsTitle>희망하는 이중 지원학기 변경하기</ContentsTitle>
                 <VerifiBoxWrapper>
                   <VerifiBoxWrapper>
                     <TextAreaBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1} isEntered={true} />

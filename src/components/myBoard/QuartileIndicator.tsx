@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
 import MyStageChart from '../../assets/tabMenu/TabMenu05';
-import { isPeriodPassed } from '../../common/ApplicationPeriod';
+import { isPeriodPassed, currentMonth } from '../../common/ApplicationPeriod';
 
 const QuartileIndicator = ({
   onViewMajor,
@@ -15,7 +15,7 @@ const QuartileIndicator = ({
 }) => {
   return (
     <>
-      {isApplied === false ? (
+      {!isApplied ? (
         isPeriodPassed ? (
           <Wrapper2>
             <BlurWrapper />
@@ -24,11 +24,22 @@ const QuartileIndicator = ({
               <Blurtext>다음 학기에 지원해주세요!</Blurtext>
             </BlurMsg>
           </Wrapper2>
+        ) : currentMonth < 5 ? (
+          <Wrapper2>
+            <BlurWrapper />
+            <BlurMsg>
+              <BlurTitle>실시간 지원자 통계는 모의지원(5월 오픈) 후 열람 가능합니다.</BlurTitle>
+              <Blurtext>
+                좌측의 모의지원 버튼을 통해 모의지원을 완료해주세요. <br /> 모의지원을 완료하면 지원한 다른 지원자들의
+                정보를 확인하실 수 있습니다.
+              </Blurtext>
+            </BlurMsg>
+          </Wrapper2>
         ) : (
           <Wrapper2>
             <BlurWrapper />
             <BlurMsg>
-              <BlurTitle>실시간 지원자 통계는 모의지원(5/10 오픈) 후 열람 가능합니다.</BlurTitle>
+              <BlurTitle>실시간 지원자 통계는 모의지원(11월 오픈) 후 열람 가능합니다.</BlurTitle>
               <Blurtext>
                 좌측의 모의지원 버튼을 통해 모의지원을 완료해주세요. <br /> 모의지원을 완료하면 지원한 다른 지원자들의
                 정보를 확인하실 수 있습니다.
@@ -41,7 +52,7 @@ const QuartileIndicator = ({
           <TitleBox>
             <TitleText>내 학점 위치 파악하기</TitleText>
             <ToolTip05>
-              본 통계는 서비스 이용자의 수집된 정보를 기반으로 한 것으로, 실제 통계와 상이할 수 있습니다.
+              해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 실제 통계와 다를 수 있어요.
             </ToolTip05>
             {/*<Information src="designImage/myBoard/InformationCircle.svg" alt="information" />*/}
           </TitleBox>

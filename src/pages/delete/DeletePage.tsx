@@ -46,24 +46,24 @@ const DeletePage = () => {
               navigate('/settings');
             }}
           >
-            <img src={process.env.PUBLIC_URL + "designImage/icon/icon_03.svg"} alt="Go Back Button" />
+            <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_03.svg'} alt="Go Back Button" />
           </Button>
           <Button
             onClick={() => {
               navigate('/settings');
             }}
           >
-            <img src={process.env.PUBLIC_URL + "designImage/icon/icon_02.svg"} alt="Close Button" />
+            <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
           </Button>
         </ButtonContainer>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-          <img src="/designImage/textField/AlertWarning.png" alt="delete" style={{ marginTop: '3.125vw', width: '6.667vw' }} />
+          <img
+            src="/designImage/textField/AlertWarning.png"
+            alt="delete"
+            style={{ marginTop: '3.125vw', width: '6.667vw' }}
+          />
           <Title>계정을 삭제하시겠습니까?</Title>
-          <Description>
-            {userNickname} 님, 계정을 삭제하시면 철회가 불가능합니다.
-            <br />
-            정말 계정을 삭제하시겠어요?
-          </Description>
+          <Description>{userNickname} 님, 계정 삭제 후 철회가 불가능해요. 정말 계정을 삭제하시겠습니까?</Description>
           <div
             style={{ marginTop: '2.76vw' }}
             onClick={() => {

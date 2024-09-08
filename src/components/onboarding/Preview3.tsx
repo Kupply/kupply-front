@@ -27,10 +27,10 @@ function Preview3() {
           마이보드
         </Typography>
         <Typography size="2.5vw" bold="700" style={{ lineHeight: '121.88%', margin: '0.42vw 0 1.46vw 0' }}>
-          '내 학점으로 붙을 수 있을까?' <br /> 쿠플라이가 답해드려요.
+          '내 학점으로 <br /> 이 학과 붙을 수 있을까?' <br /> 쿠플라이에게 물어보세요
         </Typography>
         <Typography size="1.04vw" bold="500" color="rgba(20,20,20,0.6)" style={{ lineHeight: '120%', opacity: 0.8 }}>
-          마이보드에서 쿠플라이 모의지원 완료하여 <br /> 경쟁 지원자 대비 나의 학점 백분위를 파악해보세요.
+          쿠플라이 모의지원을 통해 <br /> 나와 같은 학과를 희망하는 지원자들 사이에서 학점 백분위를 파악할 수 있어요.
         </Typography>
       </TextWrapper>
       <Image src={images[currentImageIndex]} />

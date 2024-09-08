@@ -76,8 +76,8 @@ export default function TableData(props: TableDataProps) {
           <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
           <AppliedCompeteBlur>모의지원 완료 후 공개!</AppliedCompeteBlur>
 
-          <PastPassedRateCell>{pastPassedRate < 0 ? '집계불가' : pastPassedRate + ' %'} </PastPassedRateCell>
-          <PastMeanCell>{pastmean === 0 ? '집계불가' : pastmean}</PastMeanCell>
+          <PastPassedRateCell>{pastPassedRate < 0 ? '데이터 수집 중' : pastPassedRate + ' %'} </PastPassedRateCell>
+          <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean}</PastMeanCell>
           <InterestCell>{interest}</InterestCell>
         </Wrapper>
       ) : (
@@ -109,8 +109,8 @@ export default function TableData(props: TableDataProps) {
           <RecruitNumberCell>{recruitNumber}</RecruitNumberCell>
           <AppliedNumberCell>{applyNumber}</AppliedNumberCell>
           <CompetitionCell>{competition} : 1</CompetitionCell>
-          <PastPassedRateCell>{pastPassedRate < 0 ? '집계불가' : pastPassedRate + ' %'} </PastPassedRateCell>
-          <PastMeanCell>{pastmean === 0 ? '집계불가' : pastmean}</PastMeanCell>
+          <PastPassedRateCell>{pastPassedRate < 0 ? '데이터 수집 중' : pastPassedRate + ' %'} </PastPassedRateCell>
+          <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean}</PastMeanCell>
           <InterestCell>{interest}</InterestCell>
         </Wrapper>
       )}

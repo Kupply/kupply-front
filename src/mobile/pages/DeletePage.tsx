@@ -1,16 +1,16 @@
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import client from "../../utils/HttpClient";
-import { useCookies } from "react-cookie";
-import Icon02 from "../../assets/icons/Icon02";
-import Typography from "../../assets/Typography";
-import Button04 from "../assets/buttons/Button04";
-import Button03 from "../assets/buttons/Button03";
-import AlertIconExclamation from "../../assets/icons/AlertIconExclamation";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import client from '../../utils/HttpClient';
+import { useCookies } from 'react-cookie';
+import Icon02 from '../../assets/icons/Icon02';
+import Typography from '../../assets/Typography';
+import Button04 from '../assets/buttons/Button04';
+import Button03 from '../assets/buttons/Button03';
+import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
 
-// Modal은 아니고 그냥 페이지지만 Modal의 디자인을 따옴 
-export default function DeletePage(){
+// Modal은 아니고 그냥 페이지지만 Modal의 디자인을 따옴
+export default function DeletePage() {
   const navigate = useNavigate();
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
@@ -40,43 +40,55 @@ export default function DeletePage(){
     }
   };
 
-  return(
+  return (
     <Main>
       <Overlay>
-      <Modal>
-      <ButtonWrapper>
-        <TopButton
-          onClick={() => {
-            navigate('/settings');
-          }}
-        >
-          <Icon02 size='100%'/>
-        </TopButton>
-      </ButtonWrapper>
-      <div style={{ height: '20.833vw' }}></div>
-      <img src="/designImage/textField/AlertWarning.png" alt="delete" style={{ height: '22.2vw', width: '22.22vw' }} />
-      <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
-        계정을 삭제하시겠습니까?
-      </Typography>
-      <div style={{width: '60.6vw', textAlign: 'center', marginTop: '4.44vw'}}>
-      <Typography size={'3.33vw'} color="#141414">
-        {userNickname}님, 계정을 삭제하시면 철회가 불가능합니다. 정말 계정을 삭제하시겠어요?
-      </Typography>
-      </div>
-      <ActionWrapper>
-        <Button04 
-          onClick={() => {
-            navigate('/settings');
-          }}
-          style={{width: '39.17vw', height: '11.67vw'}}>취소</Button04>
-        <Button03
-          onClick={() => {deleteMe();}}
-          style={{width: '39.17vw', height: '11.67vw'}}>확인</Button03>
-      </ActionWrapper>
-      </Modal>
-    </Overlay>
+        <Modal>
+          <ButtonWrapper>
+            <TopButton
+              onClick={() => {
+                navigate('/settings');
+              }}
+            >
+              <Icon02 size="100%" />
+            </TopButton>
+          </ButtonWrapper>
+          <div style={{ height: '20.833vw' }}></div>
+          <img
+            src="/designImage/textField/AlertWarning.png"
+            alt="delete"
+            style={{ height: '22.2vw', width: '22.22vw' }}
+          />
+          <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
+            계정을 삭제하시겠습니까?
+          </Typography>
+          <div style={{ width: '60.6vw', textAlign: 'center', marginTop: '4.44vw' }}>
+            <Typography size={'3.33vw'} color="#141414">
+              {userNickname}님, 계정 삭제 후 철회가 불가능해요. 정말 계정을 삭제하시겠습니까?
+            </Typography>
+          </div>
+          <ActionWrapper>
+            <Button04
+              onClick={() => {
+                navigate('/settings');
+              }}
+              style={{ width: '39.17vw', height: '11.67vw' }}
+            >
+              취소하기
+            </Button04>
+            <Button03
+              onClick={() => {
+                deleteMe();
+              }}
+              style={{ width: '39.17vw', height: '11.67vw' }}
+            >
+              삭제하기
+            </Button03>
+          </ActionWrapper>
+        </Modal>
+      </Overlay>
     </Main>
-  )
+  );
 }
 const Main = styled.main`
   width: 100%;
@@ -121,8 +133,7 @@ const Modal = styled.div`
   height: 80%;
   background: white;
   border-radius: 0.75rem;
-  box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.1),
-    0px 8px 8px -4px rgba(16, 24, 40, 0.04);
+  box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.1), 0px 8px 8px -4px rgba(16, 24, 40, 0.04);
   transition: all 0.5s ease;
   z-index: 1;
 `;

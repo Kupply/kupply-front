@@ -49,9 +49,7 @@ function FirstReAppliedButton(props: StepProps) {
     <ButtonWrapper state={state} {...rest}>
       <TextBox>
         <Passage state={state} double={double}>
-          {!double
-            ? '아니요, 이번이 첫 지원이에요.'
-            : '네, 재지원이에요.'}
+          {!double ? '아니요, 이번이 첫 지원이에요.' : '네, 지원해본 경험이 있어요.'}
         </Passage>
       </TextBox>
     </ButtonWrapper>

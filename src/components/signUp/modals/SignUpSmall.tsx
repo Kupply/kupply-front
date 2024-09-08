@@ -135,12 +135,12 @@ export default function SignUpSmall(props: ModalProps) {
       <ModalSmall onClickToggleModal={onClickModal}>
         <AlertIconCheck width="3.23vw" height="3.23vw" />
         <TextWrapper>
-          <Typography size="0.9375vw" bold='700' color="#141414" style={{ lineHeight: '88.889%' }}>
-            새로운 인증번호를 발송했습니다.
+          <Typography size="0.9375vw" bold="700" color="#141414" style={{ lineHeight: '88.889%' }}>
+            새로운 인증번호가 전송되었어요.
           </Typography>
           <div style={{ height: '8px' }}></div>
-          <Typography size="0.8333vw" bold='500' color="#141414">
-            메일함을 확인해주세요!
+          <Typography size="0.8333vw" bold="500" color="#141414">
+            메일함을 확인해주세요.
           </Typography>
         </TextWrapper>
       </ModalSmall>

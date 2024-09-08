@@ -28,7 +28,7 @@ function SignUpAlertLarge01({
   currentModal,
   email,
   sendEmail,
-}: SignUpAlertLargeProps){
+}: SignUpAlertLargeProps) {
   return (
     <ModalMedium onClickToggleModal={onClickModal}>
       <ButtonWrapper>
@@ -37,23 +37,23 @@ function SignUpAlertLarge01({
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon03 size='100%' />
+          <Icon03 size="100%" />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size='100%' />
+          <Icon02 size="100%" />
         </TopButton>
       </ButtonWrapper>
       <AlertIconExclamation width="5.885vw" height="5.885vw" />
       <TypographyBox>
-        <Typography size='1.25vw' bold={'700'} color="#0a0606" style={{ marginTop: '1.67vw' }}>
+        <Typography size="1.25vw" bold={'700'} color="#0a0606" style={{ marginTop: '1.67vw' }}>
           아직 인증번호를 받지 못하셨나요?
         </Typography>
         <Typography color="#141414" style={{ marginTop: '1.67vw' }}>
-          새로운 인증번호를 받기 전, 먼저 스팸 메일함을 확인해주세요!
+          새로운 인증번호를 받기 전, 스팸 메일함을 먼저 확인해주세요.
         </Typography>
       </TypographyBox>
       <ActionWrapper>
@@ -63,7 +63,7 @@ function SignUpAlertLarge01({
             setBlank();
             await sendEmail(email);
           }}
-          style={{width: '100%'}}
+          style={{ width: '100%' }}
         >
           인증번호 다시 받기
         </Button05>
@@ -71,7 +71,7 @@ function SignUpAlertLarge01({
           onClick={() => {
             setCurrentModal(currentModal + 1);
           }}
-          style={{width: '100%'}}
+          style={{ width: '100%' }}
         >
           이메일 주소 변경하기
         </Button05>

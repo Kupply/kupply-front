@@ -34,14 +34,14 @@ function Content3() {
           margin: '1.67vw 0 0.83vw 0',
         }}
       >
-        '내 학점으로 붙을 수 있을까?'
+        '내 학점으로 이 학과 붙을 수 있을까?'
         <br />
-        쿠플라이가 답해드려요
+        쿠플라이에게 물어보세요
       </Typography>
       <Typography size="3.06vw" bold="500" color="rgba(20,20,20,0.6)" style={{ lineHeight: '120%', opacity: '0.8' }}>
-        마이보드에서 쿠플라이 모의지원 완료하여
+        쿠플라이 모의지원을 통해 나와 같은 학과를
         <br />
-        경쟁 지원자 대비 나의 학점 백분위를 파악해보세요.
+        희망하는 지원자들 사이에서 학점 백분위를 파악할 수 있어요.
       </Typography>
       <Image src={images[currentImageIndex]} />
     </MainWrapper>

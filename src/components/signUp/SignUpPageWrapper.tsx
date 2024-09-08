@@ -1,9 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { ReactNode } from "react";
-import styled from "styled-components";
-import Typography from "../../assets/Typography";
-import MultiStepProgressBar from "../../assets/progressIndicator/ProgressBar";
+import React from 'react';
+import { useState } from 'react';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+import MultiStepProgressBar from '../../assets/progressIndicator/ProgressBar';
 
 interface SignUpPageWrapperProps {
   step: number;
@@ -11,60 +11,63 @@ interface SignUpPageWrapperProps {
   children?: ReactNode;
 }
 
-export const SignUpPageWrapper:
-  React.FC<SignUpPageWrapperProps> = ({ step, stepInfo, children }) => {
-
+export const SignUpPageWrapper: React.FC<SignUpPageWrapperProps> = ({ step, stepInfo, children }) => {
   const [currentStep, setCurrentStep] = useState<number>(step);
   const [complete, setComplete] = useState<boolean>(currentStep === 5 ? true : false);
 
-  
   return (
     <Wrapper>
       <TitleWrapper>
-        {currentStep !== 5 ? 
-        <>
-          <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>환영합니다!</Typography>
-          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
-          회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.
-        </Typography>
-        </> : 
-        <>
-          <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
-            거의 다왔습니다!
-          </Typography>
-          <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
-            쿠플라이의 몇 가지 약관을 확인하면 서비스를 이용하실 수 있어요.
-          </Typography>
-        </>
-        }
+        {currentStep !== 5 ? (
+          <>
+            <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
+              환영합니다!
+            </Typography>
+            <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
+              간단한 회원가입을 통해 쿠플라이의 다양한 서비스를 이용해보세요.
+            </Typography>
+          </>
+        ) : (
+          <>
+            <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
+              거의 다왔습니다!
+            </Typography>
+            <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
+              약관을 확인하고 쿠플라이의 다양한 서비스를 이용하세요.
+            </Typography>
+          </>
+        )}
       </TitleWrapper>
-      <MultiStepProgressBar numberOfSteps={5} currentStep={currentStep} complete={complete}/>
+      <MultiStepProgressBar numberOfSteps={5} currentStep={currentStep} complete={complete} />
       <FormWrapper>
         <ContentsTitleWrapper>
           <StepIndicator>Step {currentStep}</StepIndicator>
           <div>
-          <Typography size="1.25vw" bold="700">{stepInfo}</Typography>
+            <Typography size="1.25vw" bold="700">
+              {stepInfo}
+            </Typography>
           </div>
-          {currentStep === 5 ? 
-          <>
-          <HeaderBar>
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 630 2" fill="none">
-              <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
-            </svg>
-          </HeaderBar>
-          </> : 
-          <>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 630 2" fill="none">
-            <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
-          </svg>
-          </>}
+          {currentStep === 5 ? (
+            <>
+              <HeaderBar>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 630 2" fill="none">
+                  <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
+                </svg>
+              </HeaderBar>
+            </>
+          ) : (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 630 2" fill="none">
+                <path d="M1 1H629" stroke="#D85888" stroke-linecap="round" />
+              </svg>
+            </>
+          )}
         </ContentsTitleWrapper>
         {children}
       </FormWrapper>
     </Wrapper>
-  )
-}
-
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;

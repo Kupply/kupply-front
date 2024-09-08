@@ -61,7 +61,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         bold="700"
         style={{ lineHeight: '120%', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
       >
-        {isDateInRange ? '쿠플라이 실시간 이중전공 모의지원 현황' : '지금은 모의지원 기간이 아닙니다'}
+        {isDateInRange ? '쿠플라이 실시간 이중전공 모의지원 현황' : '지난 학기 이중전공 모의지원 현황'}
       </Typography>
       <Typography
         size="1.04vw"
@@ -70,12 +70,12 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         style={{ opacity: 0.8, lineHeight: '120%', margin: '0.63vw 0 1.72vw 0' }}
       >
         {isDateInRange
-          ? '이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.'
+          ? '쿠플라이 실시간 모의지원 경쟁률을 참고하여 실지원 경쟁률을 예측해보세요.'
           : isPeriodPassed
-          ? '이번 학기 모의지원 기간이 종료되었어요. 다음 학기에 지원해주세요!'
+          ? '이번 학기 모의지원 기간이 종료되었어요.'
           : currentMonth < 5
-          ? '1학기 모의지원 서비스는 5월에 오픈해요!'
-          : '2학기 모의지원 서비스는 11월에 오픈해요!'}
+          ? '1학기 모의지원 서비스는 5월에 오픈해요.'
+          : '2학기 모의지원 서비스는 11월에 오픈해요'}
       </Typography>
       <CTA02
         state={buttonState}

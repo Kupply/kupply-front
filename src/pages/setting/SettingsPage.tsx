@@ -340,7 +340,7 @@ const SettingsPage = () => {
                 onClick(1);
               }}
             >
-              프로필 사진 / 닉네임 변경하기
+              프로필 수정하기
             </TextButton04>
             <TextButton04
               selected={selected === 2}
@@ -356,7 +356,7 @@ const SettingsPage = () => {
                 onClick(3);
               }}
             >
-              계정관리
+              보안
             </TextButton04>
             <div style={{ marginTop: '8.333vw' }}>
               <TextButton04
@@ -365,7 +365,7 @@ const SettingsPage = () => {
                   onClick(4);
                 }}
               >
-                약관보기
+                약관 보기
               </TextButton04>
             </div>
             <div style={{ marginTop: 0 }}>
@@ -415,7 +415,7 @@ const SettingsPage = () => {
             setValue={() => {}}
           ></TextFieldBox>
           <TextFieldTitle>
-            <strong>본전공(1전공)</strong> 수정하기
+            <strong>본전공 (제 1전공)</strong> 수정하기
           </TextFieldTitle>
           <DropDown
             title="전공선택" // 수정필요
@@ -436,10 +436,10 @@ const SettingsPage = () => {
       )}
       {selected === 1 && (
         <BodyContainer>
-          <BodyTitle>프로필 사진 / 닉네임 변경하기</BodyTitle>
-          <BodyContent>쿠플라이에서 사용할 닉네임과 프로필을 수정하세요.</BodyContent>
+          <BodyTitle>프로필 수정하기</BodyTitle>
+          <BodyContent>쿠플라이에서 사용할 프로필 사진과 닉네임을 수정하세요.</BodyContent>
           <TextFieldTitle>
-            <strong>프로필 사진</strong> 변경하기
+            <strong>프로필 사진</strong> 수정하기
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
             <CurrentImg
@@ -502,12 +502,13 @@ const SettingsPage = () => {
         <BodyContainer>
           <BodyTitle>마이보드 프로필 수정하기</BodyTitle>
           <BodyContent>
-            마이보드는 도전자님이 작성하신 정보를 바탕으로, 도전자님의 희망 이중전공 진입을 도울
+            쿠플라이는 도전자님이 작성하신 정보를 바탕으로, 도전자님의 성공적인 이중전공 진입을 위한 다양한 정보를
+            제공합니다.
             <br />
-            다양한 정보를 제공합니다. 신뢰할 수 있는 마이보드를 제공받기 위해 정보를 수정하세요.
+            신뢰할 수 있는 마이보드를 제공받기 위해 정확한 정보를 입력해주세요.
           </BodyContent>
           <TextFieldTitle>
-            <strong>희망 이중전공</strong> 수정하기
+            <strong>관심전공</strong> 수정하기
           </TextFieldTitle>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
             <DropDown
@@ -540,35 +541,7 @@ const SettingsPage = () => {
             <TextArea name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
             <TextArea name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
           </VerifiBoxWrapper>
-          <TextFieldTitle>
-            <strong>희망 지원학기</strong> 수정하기
-          </TextFieldTitle>
-          <VerifiBoxWrapper>
-            <TextArea
-              name="semester-1"
-              value={hopeSemester1}
-              setValue={setHopeSemester1}
-              isEntered={hopeSemester1 ? true : false}
-            ></TextArea>
-            <TextArea
-              name="semester-2"
-              value={hopeSemester2}
-              setValue={setHopeSemester2}
-              isEntered={hopeSemester2 ? true : false}
-            ></TextArea>
-            <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
-              년도
-            </Typography>
-            <TextArea
-              name="semester-3"
-              value={hopeSemester3}
-              setValue={setHopeSemester3}
-              isEntered={hopeSemester3 ? true : false}
-            ></TextArea>
-            <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
-              학기
-            </Typography>
-          </VerifiBoxWrapper>
+
           <div>
             <Button03
               style={{ marginTop: '60px', width: '100%' }}
@@ -588,10 +561,10 @@ const SettingsPage = () => {
       )}
       {selected === 3 && (
         <BodyContainer>
-          <BodyTitle>계정관리</BodyTitle>
+          <BodyTitle>보안</BodyTitle>
           <BodyContent>
-            안전한 개인정보 보호를 위해 비밀번호를 변경하세요. 쿠플라이의 아이디는 고려대학교 <br />
-            이메일 입니다.
+            안전한 개인정보 보호를 위해 비밀번호를 변경하세요. <br />
+            쿠플라이 아이디는 고려대학교 이메일 주소입니다.
           </BodyContent>
           <TextFieldTitle>
             <strong>쿠플라이 아이디</strong>
@@ -609,7 +582,7 @@ const SettingsPage = () => {
             <strong>비밀번호</strong> 변경하기
           </TextFieldTitle>
           <TextFieldBox
-            placeholder="대소문자, 특수문자를 최소 하나씩 조합하여 8글자 이상"
+            placeholder="대소문자, 숫자, 특수문자를 최소 하나씩 포함하여 8글자 이상"
             value={pwd}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPwd(e.target.value);
@@ -617,14 +590,14 @@ const SettingsPage = () => {
             state={passwordState}
             setState={setPasswordState}
             setValue={setPwd}
-            helpMessage="특수문자와 영문자를 포함해서 8~20자로 해주세요!"
+            helpMessage="대소문자, 숫자, 특수문자를 최소 하나씩 포함하여 8글자 이상"
             type="password"
           ></TextFieldBox>
           <TextFieldTitle>
-            <strong>비밀번호 재확인</strong>하기
+            <strong>비밀번호 확인</strong>하기
           </TextFieldTitle>
           <TextFieldBox
-            placeholder="비밀번호 확인"
+            placeholder="대소문자, 숫자, 특수문자를 최소 하나씩 포함하여 8글자 이상"
             value={pwdConfirm}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPwdConfirm(e.target.value);
@@ -632,7 +605,7 @@ const SettingsPage = () => {
             state={password2State}
             setState={setPassword2State}
             setValue={setPwdConfirm}
-            helpMessage="비밀번호 확인"
+            helpMessage="대소문자, 숫자, 특수문자를 최소 하나씩 포함하여 8글자 이상"
             errorMessage="비밀번호가 일치하지 않아요!"
             type="password"
           ></TextFieldBox>
@@ -651,12 +624,10 @@ const SettingsPage = () => {
       )}
       {selected === 4 && (
         <BodyContainer>
-          <BodyTitle>약관보기</BodyTitle>
-          <BodyContent>
-            다음은 고려대학교 이중전공 지원/합격정보 통계 서비스 쿠플라이의 이용약관입니다.
-          </BodyContent>{' '}
+          <BodyTitle>약관 보기</BodyTitle>
+          <BodyContent>다음은 고려대학교 이중전공 지원/합격 정보 통계 서비스 쿠플라이의 이용약관입니다.</BodyContent>
           <ScrollLarge isChecked={false}>
-            <div style={{ marginTop: '1.56vw' }}>
+            <div style={{ marginTop: '0vw' }}>
               <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
                 <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
                   서비스 이용약관

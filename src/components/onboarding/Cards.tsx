@@ -12,18 +12,15 @@ function Cards() {
 
   return (
     <MainWrapper>
-      <Typography size="0.94vw" bold="700" color="#D85888" style={{ marginTop: '6.56vw' }}>
-        쿠플라이 미리보기
-      </Typography>
       <Typography
         size="2.5vw"
         bold="700"
-        style={{ marginTop: '8px', lineHeight: '2.6vw', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
+        style={{ marginTop: '5.31vw', lineHeight: '2.6vw', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
       >
-        쿠플라이의 핵심 기능을 소개합니다
+        쿠플라이 핵심 기능 미리보기
       </Typography>
       <Typography bold="500" color="rgba(20, 20, 20, 0.6)" style={{ marginTop: '1.46vw', opacity: '0.8' }}>
-        모두의 성공적인 이중전공 지원 메이트 쿠플라이와 함께해요!
+        카드를 클릭하여 쿠플라이의 다양한 기능들을 직접 만나보세요.
       </Typography>
       <ContentWrapper>
         <HorizontalWrapper>
@@ -40,7 +37,7 @@ function Cards() {
           >
             <Menu style={{ color: '#141414', background: '#FFF' }}>마이보드</Menu>
             <Typography size="1.88vw" bold="700" color="#FFF" style={{ lineHeight: '2.4vw' }}>
-              경쟁자들 중 <br /> 나의 등수 보기
+              지원자들 중 <br /> 나의 등수 보기
             </Typography>
             <Typography
               size="0.94vw"
@@ -48,7 +45,7 @@ function Cards() {
               color="#FFF"
               style={{ lineHeight: '1.56vw', opacity: '0.8', zIndex: 10 }}
             >
-              실시간으로 변하는 지원자들 중 <br /> 나의 등수를 예측하여 제공해 드릴게요.
+              '내 학점은 몇 등일까?' <br /> 지원자들 중 나의 학점 백분위를 확인하세요.
             </Typography>
             <img
               width="100%"
@@ -65,10 +62,10 @@ function Cards() {
           >
             <Menu style={{ color: '#FFF', background: '#E57C90' }}>합격자료</Menu>
             <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
-              자기소개서 <br /> 키워드 둘러보기
+              학업계획서 <br /> 키워드 둘러보기
             </Typography>
             <Typography size="0.94vw" bold="500" style={{ lineHeight: '1.56vw', opacity: '0.8', zIndex: 10 }}>
-              합격자의 자소서 키워드를 추출하여, <br /> 더 나은 자기소개서 작성을 도와드릴게요.
+              합격자 학업계획서에서 추출한 <br /> 공통 키워드를 참고하여, <br /> 학업계획서를 효과적으로 작성해보세요.
             </Typography>
             <img
               width="100%"
@@ -93,10 +90,10 @@ function Cards() {
                 합격자료
               </Menu>
               <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
-                희망 이중전공 <br /> 최신 합격컷 모아보기
+                이중전공 <br /> 최신 합격 컷 모아보기
               </Typography>
               <Typography size="0.94vw" bold="500" style={{ lineHeight: '1.56vw', opacity: '0.8', zIndex: 10 }}>
-                학과 별 합격자의 최저학점, 평균, <br /> 중위값, 최빈값을 정리해드릴게요.
+                합격자 학점 평균값, 최저값, 중위값, 최빈값까지, <br /> 신뢰할 수 있는 데이터로 정리해 드릴게요.
               </Typography>
               <img
                 width="34.43%"
@@ -153,7 +150,7 @@ function Cards() {
                   같은 과를 지원한 <br /> 경쟁자 정보 살펴보기
                 </Typography>
                 <Typography size="0.94vw" bold="500" style={{ lineHeight: '1.56vw', opacity: '0.8', zIndex: 10 }}>
-                  지원자들의 출신 단과대 분포와 <br /> 단과대별 평균 학점 분포를 살펴보세요.
+                  나와 같은 이중전공을 지원한 경쟁자들의 <br /> 평균 학점과 학점 분포도를 살펴보세요.
                 </Typography>
                 <img
                   width="33.49%"
@@ -181,7 +178,7 @@ function Cards() {
                   <br /> 합격 예측하기
                 </Typography>
                 <Typography size="0.94vw" bold="500" style={{ lineHeight: '1.56vw', opacity: '0.8', zIndex: 10 }}>
-                  최신 3학기의 합격자료들을 바탕으로, <br /> 학점에 맞는 적정지원인지 예측해드릴게요.
+                  최신 3학기의 합격자료들을 바탕으로, <br /> 학점에 맞는 적정지원인지 예측 해드릴게요.
                 </Typography>
                 <img
                   width="50%"
@@ -209,7 +206,7 @@ function Cards() {
                 지난 이중전공 <br /> 모집정보 한 눈에 보기
               </Typography>
               <Typography size="0.94vw" bold="500" style={{ lineHeight: '1.56vw', opacity: '0.8', zIndex: 10 }}>
-                흩어져 있던 지난 모집정원, 경쟁률에 대한 정보를 모아드릴게요.
+                흩어져 있던 지난 모집 정원, 경쟁률에 대한 정보를 모아드릴게요.
               </Typography>
               <img
                 width="44.5%"
@@ -225,13 +222,13 @@ function Cards() {
               navigate('/landing');
             }}
           >
-            <Menu style={{ color: '#FFF', background: '#E57C90' }}>실시간 모의지원 현황</Menu>
+            <Menu style={{ color: '#FFF', background: '#E57C90' }}>실시간 지원현황</Menu>
             <Typography size="1.88vw" bold="700" style={{ lineHeight: '2.4vw' }}>
-              실시간 경쟁률 <br /> 살펴보기
+              실시간 모의지원 경쟁률 <br /> 살펴보기
             </Typography>
             <Typography size="0.94vw" bold="500" style={{ lineHeight: '1.56vw', opacity: '0.8', zIndex: 10 }}>
-              이번학기 나의 희망 학과(부)의
-              <br /> 실시간 지원자 수와 경쟁률을 제공해드릴게요.
+              쿠플라이의 실시간 모의지원 경쟁률을 토대로
+              <br /> 지원하는 이중전공의 실제 경쟁률을 <br /> 참고하실 수 있어요.
             </Typography>
             <img
               width="100%"
@@ -252,7 +249,7 @@ function Cards() {
           }}
         >
           <Typography size="1.98vw" bold="700" color="#FFF" style={{ zIndex: '10' }}>
-            다른 지원자들은 어떤 정보를 궁금해하고 있을까?
+            다른 지원자들은 어떤 정보를 궁금해할까?
           </Typography>
           <Button11
             state={buttonState}

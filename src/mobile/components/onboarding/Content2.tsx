@@ -22,9 +22,9 @@ function Content2() {
         어떤 스펙을 가지고 있었을까?
       </Typography>
       <Typography size="3.06vw" bold="500" color="rgba(20,20,20,0.6)" style={{ lineHeight: '120%', opacity: '0.8' }}>
-        내 학점으로 원하는 학과를 지원하는 것이 안정적인지,
+        지난 학기 합격자들의 학점 그래프와 학업계획서 키워드를 참고하여
         <br />
-        객관적인 통계자료를 통해 정확하게 예측하세요.
+        이중전공 지원을 준비할 수 있어요.
       </Typography>
       <Image1 src="../../../../designImage/mobile/onboarding/graph.png" />
       <Image2 src="../../../../designImage/onboarding/Preview_02_03.svg" />

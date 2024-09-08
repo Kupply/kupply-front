@@ -147,7 +147,7 @@ const getSemesterMapping = () => {
     semesters.push(semesterString);
   }
 
-  semesters.unshift('전학기 누적'); // Add "전학기 누적" at the beginning
+  semesters.unshift('모든 학기 누적'); // Add "전학기 누적" at the beginning
   return semesters;
 };
 export const semesterMapping: string[] = getSemesterMapping();
