@@ -17,7 +17,8 @@ function getLastThreeSemesters(): [string, string, string] {
     return [`${currentYear - 1}-2R`, `${currentYear - 1}-1R`, `${currentYear - 2}-2R`];
   } else {
     // If it's the second semester
-    return [`${currentYear}-1R`, `${currentYear}-2R`, `${currentYear - 1}-1R`];
+    // return [`${currentYear}-1R`, `${currentYear}-2R`, `${currentYear - 1}-1R`];
+    return [`${currentYear}-1R`, `${currentYear - 1}-2R`, `${currentYear - 1}-1R`];
   }
 }
 
