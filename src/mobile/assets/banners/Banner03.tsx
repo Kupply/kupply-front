@@ -106,7 +106,7 @@ function Banner03(props: Banner03Props) {
             size={size === 'small' ? '3.89vw' : '4.44vw'}
             bold="700"
             color={size === 'large' && index === 0 ? '#FFF' : '#141414'}
-            style={{ lineHeight: '120%' }}
+            style={{ lineHeight: '140%' }}
           >
             {contents[size === 'large' ? 1 : 0][index].title.map((sentence, sentenceIndex) => (
               <div key={sentenceIndex}>{sentence}</div>
@@ -116,7 +116,7 @@ function Banner03(props: Banner03Props) {
             size="3.06vw"
             bold="500"
             color={size === 'large' && index === 0 ? '#FFF' : '#141414'}
-            style={{ lineHeight: '120%' }}
+            style={{ lineHeight: '140%' }}
           >
             {contents[size === 'large' ? 1 : 0][index].text.map((sentence, sentenceIndex) => (
               <div key={sentenceIndex}>{sentence}</div>
