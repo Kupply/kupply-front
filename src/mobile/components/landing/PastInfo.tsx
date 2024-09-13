@@ -33,7 +33,7 @@ function PastInfo(props: PastInfoProps) {
               {dictionaryIndex + 1 < 10 ? '0' + (dictionaryIndex + 1) : dictionaryIndex + 1}
             </Typography>
           </Body>
-          <Body>
+          <Body style={{width:'39%', marginLeft: '5%'}}>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
               {dictionary.secondMajor}
             </Typography>

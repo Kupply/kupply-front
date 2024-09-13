@@ -321,6 +321,11 @@ const Box = styled.div`
   position: relative;
   padding: 1.98vw 0 0 1.88vw;
   border-radius: 1.56vw;
+  transition: transform 0.3s;  
+  &:hover {
+    transform: scale(1.07);  
+    transition-duration: 0.5s;  
+  }
 `;
 
 const Menu = styled.div`

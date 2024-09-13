@@ -143,7 +143,7 @@ const Input = styled.input`
 
   &:focus {
     border: 1px solid var(--Primary-V, #e85888);
-    border-radius: 2px;
+    border-radius: 0.52vw;
 
     box-shadow: 0px 10px 30px 0px rgba(232, 88, 136, 0.15);
     outline: none;

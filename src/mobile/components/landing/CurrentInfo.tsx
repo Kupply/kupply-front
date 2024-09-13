@@ -20,12 +20,12 @@ function CurrentInfo(props: CurrentInfoProps) {
     : tableData.sort((a, b) => b.competition - a.competition);
   const visibleData = isShowAll ? arrangedData : arrangedData.slice(0, 4);
 
-  const [isApplied, setIsApplied] = useState(false);
+  const [isApplied, setIsApplied] = useState(false); // 디자인 수정을 위해 잠시 수정 원래는 false
 
   useEffect(() => {
     const appliedValue = localStorage.getItem('isApplied');
     if (appliedValue !== null) {
-      setIsApplied(appliedValue === 'false');
+      setIsApplied(appliedValue === 'false'); // 디자인 수정을 위해 잠시 수정 원래는 false
     }
   }, []);
   console.log(localStorage);
@@ -47,7 +47,7 @@ function CurrentInfo(props: CurrentInfoProps) {
                   {dictionaryIndex + 1 < 10 ? '0' + (dictionaryIndex + 1) : dictionaryIndex + 1}
                 </Typography>
               </Body>
-              <Body>
+              <Body style={{width:'39%', marginLeft: '5%'}}>
                 <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
                   {dictionary.secondMajor}
                 </Typography>
@@ -65,9 +65,12 @@ function CurrentInfo(props: CurrentInfoProps) {
                 <Typography size="2.78vw" bold="700" color="#141414" style={{ lineHeight: '120%' }}>
                   모의지원 후 공개!
                 </Typography>
-                <Typography size="3.89vw" bold="700" color="#141414" style={{ lineHeight: '120%' }}>
+                <div style={{display: 'flex', flexDirection: 'row', width: '20%', marginLeft: '-7%'}}>
+                  <HeartIcon/>
+                  <Typography size="3.89vw" bold="700" color="#141414" style={{ lineHeight: '120%' }}>
                   {dictionary.interest}
                 </Typography>
+                </div>
               </Body2>
             </BodyWrapper>
           ))}
@@ -88,7 +91,7 @@ function CurrentInfo(props: CurrentInfoProps) {
                   {dictionaryIndex + 1 < 10 ? '0' + (dictionaryIndex + 1) : dictionaryIndex + 1}
                 </Typography>
               </Body>
-              <Body>
+              <Body style={{width:'39%', marginLeft: '5%'}}>
                 <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
                   {dictionary.secondMajor}
                 </Typography>
@@ -296,5 +299,44 @@ const ApplyOrderBox = styled.div`
   border-radius: 999px;
   background-color: rgba(216, 88, 136, 0.1);
 `;
+
+const OuterEllipse = styled.svg`
+  width: 4.43vw; //26.6px;
+  height: 4.4vw; //26px;
+`;
+
+const HeartShape = styled.svg`
+  width: 2.83vw; //17px;
+  height: 2.8vw; //16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const HeartIconContainer = styled.div`
+  position: relative;
+  width: 5vw; //28px;
+  height: 4.4vw; //26px;
+  margin-right: 3px;
+`;
+
+const HeartIcon = () => (
+  <HeartIconContainer >
+    <OuterEllipse xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 26" fill="none">
+      <ellipse cx="13.7557" cy="13" rx="13.2806" ry="13" fill="#FDF2F2"/>
+    </OuterEllipse>
+    <HeartShape xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 16" fill="none">
+      <g clipPath="url(#clip0_338_1223)">
+        <path d="M14.7759 3.07357C14.428 2.73291 14.015 2.46267 13.5604 2.2783C13.1059 2.09392 12.6186 1.99902 12.1266 1.99902C11.6345 1.99902 11.1473 2.09392 10.6927 2.2783C10.2381 2.46267 9.82512 2.73291 9.47727 3.07357L8.75535 3.78024L8.03343 3.07357C7.33079 2.38578 6.37781 1.99938 5.38413 1.99938C4.39045 1.99938 3.43747 2.38578 2.73483 3.07357C2.03219 3.76137 1.63745 4.69422 1.63745 5.66691C1.63745 6.6396 2.03219 7.57245 2.73483 8.26024L3.45675 8.96691L8.75535 14.1536L14.054 8.96691L14.7759 8.26024C15.1239 7.91974 15.4 7.51545 15.5883 7.07048C15.7767 6.6255 15.8736 6.14857 15.8736 5.66691C15.8736 5.18525 15.7767 4.70831 15.5883 4.26334C15.4 3.81836 15.1239 3.41408 14.7759 3.07357V3.07357Z" fill="#F5BDBD" stroke="#F5BDBD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_338_1223">
+          <rect width="16.3453" height="16" fill="white" transform="translate(0.582703)"/>
+        </clipPath>
+      </defs>
+    </HeartShape>
+  </HeartIconContainer>
+);
 
 export default CurrentInfo;

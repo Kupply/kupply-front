@@ -30,7 +30,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
   };
 
   // 회원의 모의지원 여부에 따라 테이블 블러 여부를 결정한다.
-  const [isApplied, setIsApplied] = useState(false);
+  const [isApplied, setIsApplied] = useState(false); // 디자인 수정사항을 위해 잠시 수정 원래는 false
   useEffect(() => {
     const appliedValue = localStorage.getItem('isApplied');
     if (appliedValue !== null) {

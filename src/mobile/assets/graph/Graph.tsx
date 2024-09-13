@@ -224,7 +224,7 @@ const externalTooltipHandler = (context: any) => {
   tooltipEl.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
   tooltipEl.style.background = 'white';
   tooltipEl.style.color = 'black';
-  tooltipEl.style.boxShadow = '0px 0px 10px #b9b9b9';
+  tooltipEl.style.boxShadow = '0px 0px 30px rgba(0, 0, 0, 0.10)';
   tooltipEl.style.minWidth = '100px';
 
   const tableBody = tooltipEl.querySelector('tbody');
