@@ -194,7 +194,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         )}
       </div>
       {/* {!isDateInRange && !isPeriodPassed && <Blur />} */}
-      {(!isDateInRange || !isApplied) && <Blur />}
+      {/*(!isDateInRange || !isApplied) && <Blur />*/}
     </Wrapper>
   );
 });
