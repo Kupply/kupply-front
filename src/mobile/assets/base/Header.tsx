@@ -36,11 +36,11 @@ function MobileHeader({ logined, setLogin }: HeaderProps) {
   const handleSettings = () => {
     setSelected(0);
     navigate('/settings');
-  }
+  };
   const handleTerms = () => {
     setSelected(5);
     navigate('/settings');
-  }
+  };
 
   const handleLogout = async () => {
     try {
@@ -180,7 +180,7 @@ function MobileHeader({ logined, setLogin }: HeaderProps) {
                           fill="black"
                         />
                       </svg>
-                      <MenuText1>약관보기</MenuText1>
+                      <MenuText1>약관 보기</MenuText1>
                     </MenuOption>
                     <Vector />
                     <MenuOption onClick={handleLogout} style={{ marginTop: '3.89vw' }}>

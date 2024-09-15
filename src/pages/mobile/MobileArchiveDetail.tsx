@@ -27,8 +27,6 @@ import MobileFooter from '../../mobile/assets/base/Footer';
 // 모자이크 X
 // 키워드 X
 
-export const mockHashes = ['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R'];
-
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
@@ -68,8 +66,12 @@ const MobileArchiveDetailPage = () => {
       ? '컴퓨터학과'
       : params.majorName === 'statistics'
       ? '통계학과'
+      : params.majorName === 'psychology'
+      ? '심리학부'
+      : params.majorName === 'pubadmin'
+      ? '행정학과'
       : params.majorName === 'chembio'
-      ? '화공생명공학부'
+      ? '화공생명공학과'
       : '화학과';
 
   const handlePrev = () => {
@@ -77,7 +79,7 @@ const MobileArchiveDetailPage = () => {
   };
 
   const { majorName } = useParams() as { majorName: MajorOptions };
-  const [sortCriterion, setSortCriterion] = useState('전학기 누적');
+  const [sortCriterion, setSortCriterion] = useState('모든 학기 누적');
 
   const majorKoreanName = majorNameMapping[majorName][0];
   const majorEngishName = majorNameMapping[majorName][1];
@@ -125,7 +127,7 @@ const MobileArchiveDetailPage = () => {
     const handleButtonClick = async () => {
       try {
         let semester;
-        if (sortCriterion === '전학기 누적') semester = 'all';
+        if (sortCriterion === '모든 학기 누적') semester = 'all';
         else semester = sortCriterion.slice(0, -1);
         const selectionNum = recruit[majorKoreanName][semester] || 0;
 
@@ -165,16 +167,12 @@ const MobileArchiveDetailPage = () => {
 
   return (
     <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
-      <MobileHeader logined={isLogined} setLogin={setisLogined}/>
+      <MobileHeader logined={isLogined} setLogin={setisLogined} />
       <Banner01 major={major} />
       <DropDownWrapper>
-        <DropDownText>학기 선택</DropDownText>
+        <DropDownText>지원학기 선택</DropDownText>
         <DropDownBox>
-          <DropDown02
-            optionList={['전학기 누적', '2023-2R', '2023-1R', '2022-2R', '2022-1R']}
-            value={sortCriterion}
-            setValue={setSortCriterion}
-          />
+          <DropDown02 optionList={semesterMapping} value={sortCriterion} setValue={setSortCriterion} />
         </DropDownBox>
       </DropDownWrapper>
       <BodyBox>
@@ -185,8 +183,8 @@ const MobileArchiveDetailPage = () => {
         <RecruitBox>
           <RecruitLeftBox>
             <Card0301
-              cardType={sortCriterion === '전학기 누적' ? '0' : '1'}
-              avgPassNum={sortCriterion === '전학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection}
+              cardType={sortCriterion === '모든 학기 누적' ? '0' : '1'}
+              avgPassNum={sortCriterion === '모든 학기 누적' ? Math.floor(numOfSelection / 4) : numOfSelection}
             />
           </RecruitLeftBox>
           <RecruitRightBox>
@@ -242,10 +240,10 @@ const MobileArchiveDetailPage = () => {
           </Wrapper2>
         ) : (
           <GpaAnalysisBox>
-            <Card05 kind={'Mean'} text={'합격자 평균 학점'} textNumber={meanGpa.gpa} />
+            <Card05 kind={'Mean'} text={'합격자 학점 평균값'} textNumber={meanGpa.gpa} />
             <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={modeGpa.gpa} modeNumber={modeGpa.num} />
             <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={medianGpa.gpa} />
-            <Card05 kind={'Min'} text={'합격자 최저 학점'} textNumber={minGpa.gpa} />
+            <Card05 kind={'Min'} text={'합격자 학점 최저값'} textNumber={minGpa.gpa} />
           </GpaAnalysisBox>
         )}
 

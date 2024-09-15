@@ -65,9 +65,7 @@ function Join1() {
         color="rgba(20,20,20,0.6)"
         style={{ lineHeight: '133.33%', textAlign: 'center', marginBottom: isLogined ? '6.39vw' : '0' }}
       >
-        {isLogined
-          ? '간단한 모의지원으로 나의 학점 위치와 자소서까지,'
-          : '이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등,'}
+        {isLogined ? '실시간 이중전공 지원현황과 나의 학점 백분위 정보까지,' : '고려대학교 이메일 주소입력으로'}
         <br />
         {isLogined ? '오직 쿠플라이에서 제공해 드릴게요.' : '쿠플라이만의 다양한 서비스를 이용해보세요.'}
       </Typography>

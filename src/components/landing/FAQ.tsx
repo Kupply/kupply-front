@@ -35,13 +35,13 @@ const FAQ = forwardRef<HTMLDivElement, {}>((props, ref) => {
   return (
     <MainWrapper ref={ref}>
       <Typography size="0.94vw" bold="700" color="#D85888">
-        쿠플라이 FAQ
+        이중전공 A to Z
       </Typography>
       <Typography size="2.08vw" bold="700" style={{ marginTop: '1.23vw', lineHeight: '120%' }}>
         이중전공 지원 전, 이런게 궁금해요!
       </Typography>
       <Typography size="1.04vw" bold="500" color="rgba(20,20,20,0.6)" style={{ marginTop: '0.73vw', opacity: 0.8 }}>
-        이중전공을 준비하는 당신이 가장 궁금해할 질문들에 쿠플라이가 답해줄게요.
+        이중전공 지원자들이 가장 많이 묻는 질문들에 대한 답변을 정리했어요.
       </Typography>
       <SegmentedSlider>
         <SegmentedPicker

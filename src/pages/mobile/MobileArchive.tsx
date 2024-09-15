@@ -26,7 +26,7 @@ export interface CardsProps {
   searchWord: string;
 }
 
-export const mockHashes = ['전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
+export const mockHashes = ['학과 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
 
 // 정확하게 분류 X
 const categoryMapping: CategoryMapping = {
@@ -49,7 +49,7 @@ const categoryMapping: CategoryMapping = {
     '화학과',
     '생명과학부',
     '생명공학부',
-    '화공생명공학부',
+    '화공생명공학과',
     '신소재공학부',
     '전자공학부',
     '컴퓨터학과',
@@ -78,7 +78,7 @@ const MobileArchivePage = () => {
 
   const filteredCards = cards
     .filter((card) => {
-      if (category !== '전체보기' && !majors.includes(card.korName)) return false;
+      if (category !== '학과 전체보기' && !majors.includes(card.korName)) return false;
       if (searchWord && !card.korName.toLowerCase().includes(searchWord.toLowerCase())) return false;
       return true;
     })
@@ -100,12 +100,15 @@ const MobileArchivePage = () => {
 
   return (
     <MobilePageWrapper>
-      <MobileHeader logined={isLogined} setLogin={setisLogined}  />
+      <MobileHeader logined={isLogined} setLogin={setisLogined} />
       <ImageBox>
         <ImageTextBox>
-          <ImageTitle>지난 학기 합격 지표 바로 보기</ImageTitle>
+          <ImageTitle>과거 합격지표 바로 보기</ImageTitle>
           <div style={{ marginTop: '2.78vw' }} />
-          <ImageText>쿠플라이에서 지원하는 학과별 합격지표를 한 눈에 비교해 보세요!</ImageText>
+          <ImageText>
+            쿠플라이에서 지원하는 학과 별 <br />
+            합격지표를 한 눈에 비교할 수 있어요.
+          </ImageText>
         </ImageTextBox>
         <TitleImage src="../../designImage/mobile/banner/Banner3_6_1.png" />
       </ImageBox>
@@ -114,7 +117,7 @@ const MobileArchivePage = () => {
           <SearchBar
             value={searchWord}
             setValue={setSearchWord}
-            placeholder="관심 학부 검색하기"
+            placeholder="관심 학과 검색하기"
             onSearch={handleSearch}
           />
         </SearchBarWrapper>

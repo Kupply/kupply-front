@@ -54,7 +54,7 @@ const MobileApplication = ({
               stroke-linejoin="round"
             />
           </svg>
-          <UpdateTitle>이중전공 선발 정보</UpdateTitle>
+          <UpdateTitle>{majorKoreanName} 선발 정보</UpdateTitle>
         </UpdateBox>
         <UpdateBox>
           <StyledSVG xmlns="http://www.w3.org/2000/svg" width="3.33vw" height="3.33vw" viewBox="0 0 12 12" fill="none">
@@ -82,7 +82,7 @@ const MobileApplication = ({
           <NumberText2>&nbsp; 명 정원</NumberText2>
         </NumberBox>
         <Content>
-          {curApplyNum}명의 지원자가 {majorKoreanName}를 지원했습니다.
+          {curApplyNum}명의 지원자가 {majorKoreanName}를 지원했어요.
         </Content>
       </BodyWrapper>
     </ApplyWrapper>

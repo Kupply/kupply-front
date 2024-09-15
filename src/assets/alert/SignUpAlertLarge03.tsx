@@ -34,26 +34,26 @@ function SignUpAlertLarge03({
             setCurrentModal(currentModal - 1);
           }}
         >
-          <Icon03 size='100%' />
+          <Icon03 size="100%" />
         </TopButton>
         <TopButton
           onClick={() => {
             setOpenModal(!isOpenModal);
           }}
         >
-          <Icon02 size='100%' />
+          <Icon02 size="100%" />
         </TopButton>
       </ButtonWrapper>
       <AlertIconCheck width="5.885vw" height="5.885vw" />
       <Typography size={'1.25vw'} bold={'700'} color="#141414" style={{ marginTop: '1.25vw' }}>
-        새로운 인증번호를 발송했습니다.
+        새로운 인증번호가 전송되었어요.
       </Typography>
       <Typography size={'0.9375vw'} color="#141414" style={{ marginTop: '1.25vw' }}>
         {email} 메일함을 다시 확인해주세요.
-        <span style={{ display: 'block', marginTop: '8px' }} /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요!{' '}
+        <span style={{ display: 'block', marginTop: '8px' }} /> 아직 메일을 받지 못했다면 스팸 메일함을 확인해주세요.{' '}
       </Typography>
       <ActionWrapper>
-        <Button05 onClick={onClickModal} style={{width: '100%'}}>
+        <Button05 onClick={onClickModal} style={{ width: '100%' }}>
           확인
         </Button05>
       </ActionWrapper>

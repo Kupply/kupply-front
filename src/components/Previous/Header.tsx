@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import HashtagButton from '../../assets/tabMenu/TabMenu04';
 import SearchBar from '../../assets/SearchBar';
 
-export const mockHashes = ['학부 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
+export const mockHashes = ['학과 전체보기', '인문계 캠퍼스', '자연계 캠퍼스', '독립 학부'];
 
 // searchbar 크기 조절해야 됨 폰트 적용 X
 
@@ -19,9 +19,9 @@ function Header({ clicked, setClicked, searchWord, setSearchWord }: HeaderProps)
   return (
     <Container>
       <Title>
-        <TitleText>지난 학기 합격 지표 바로 보기</TitleText>
+        <TitleText>과거 합격지표 바로 보기</TitleText>
       </Title>
-      <SubTitleText>쿠플라이에서 지원하는 학과 별 합격지표를 한 눈에 비교 해보세요!</SubTitleText>
+      <SubTitleText>쿠플라이에서 지원하는 학과 별 합격지표를 한 눈에 비교할 수 있어요.</SubTitleText>
       <TagButtonWrapper>
         {mockHashes.map((hash, index) => (
           <HashtagButton

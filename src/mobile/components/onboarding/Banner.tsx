@@ -49,7 +49,7 @@ const cardData = [
     image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
   },
   {
-    korName: '화공생명공학부',
+    korName: '화공생명공학과',
     engName: 'Department of Chemical & Biological Engineering',
     image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
   },
@@ -108,9 +108,6 @@ const cardData = [
 function Banner() {
   return (
     <MainWrapper>
-      <Typography size="3.33vw" bold="700" color="rgba(255,255,255,0.5)" style={{ lineHeight: '120%' }}>
-        합격자료
-      </Typography>
       <Typography
         size="5vw"
         bold="700"
@@ -124,8 +121,9 @@ function Banner() {
       >
         쿠플라이가 모아주는 고려대학교 인기 <br /> 이중전공 정보모음.zip
       </Typography>
-      <Typography size="3.06vw" bold="500" color="#FFF" style={{ lineHeight: '120%' }}>
-        모두의 성공적인 이중전공 지원 메이트 쿠플라이와 함께해요!
+      <Typography size="3.06vw" bold="500" color="#FFF" style={{ lineHeight: '120%', textAlign: 'center' }}>
+        당신의 이중전공 메이트, <br />
+        쿠플라이가 인기 학과에 성공적으로 진입할 수 있도록 도울게요.
       </Typography>
       <Cards>
         {cardData.map((data, dataIndex) => (

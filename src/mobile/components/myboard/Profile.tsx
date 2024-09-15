@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
-import MobileEditModal from '../../../pages/mobileMyBoard/MobileEditModal';
+import React, { useState, useEffect, useCallback } from 'react';
+
 import CTA02 from '../../assets/CTAs/CTA02';
+import { isDateInRange } from '../../../common/ApplicationPeriod';
+import MobileEditModal from '../../../pages/mobileMyBoard/MobileEditModal';
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../../utils/Mappings';
-import { textChangeRangeIsUnchanged } from 'typescript';
+import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
 // isApplied={isApplied}
 // editmodal 위치 수정 해야 됨
 
@@ -33,11 +33,6 @@ const MobileProfile = ({
   const id = userData.studentId.slice(2, 4);
   const major: MajorOptions = userData.firstMajor;
   const profilePic = userData.userProfilePic;
-
-  const currentDate = new Date();
-  const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-17');
-  const isDateInRange = currentDate >= startDate && currentDate <= endDate; // 해당 기간에만 True
 
   useEffect(() => {
     if (id === '24' || isApplied || !isDateInRange) {
@@ -82,12 +77,6 @@ const MobileProfile = ({
           <HopeSemesterText>{userData.curGPA}</HopeSemesterText>
         </SubTitleBox>
 
-        <SubTitleBox2 style={{ marginTop: '5.56vw' }}>
-          <IconImage src="designImage/mobile/myboard/Icon2.svg" alt="major" />
-          <SubTitleText>희망 지원학기</SubTitleText>
-          <GPAText>{userData.hopeSemester}R</GPAText>
-        </SubTitleBox2>
-
         <ApplyBox>
           <CTA02 size="large" onClick={onClickAppModal} state={isButtonDisabled}>
             나도 모의지원 하러가기
@@ -120,7 +109,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: #fefefe;
   width: 100vw;
-  height: 90.56vw;
+  height: 75.56vw;
   overflow: hidden;
 `;
 

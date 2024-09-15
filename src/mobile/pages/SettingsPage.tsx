@@ -391,7 +391,7 @@ export const MobileSettingsPage = () => {
             }}
           >
             <Typography style={{ color: '#EE6767', opacity: 0.6 }} size="4.44vw">
-              계졍삭제
+              계정 삭제
             </Typography>
           </div>
         </>
@@ -439,7 +439,7 @@ export const MobileSettingsPage = () => {
           <ContentsWrapper>
             <TextBox>
               <Typography size="3.33vw" bold="700">
-                본전공(1전공)&nbsp;
+                본전공 (제 1전공)&nbsp;
               </Typography>
               <Typography size="3.33vw" bold="500">
                 수정하기
@@ -462,7 +462,7 @@ export const MobileSettingsPage = () => {
                 프로필 사진&nbsp;
               </Typography>
               <Typography size="3.33vw" bold="500">
-                변경하기
+                수정하기
               </Typography>
             </TextBox>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
@@ -499,14 +499,11 @@ export const MobileSettingsPage = () => {
         <>
           <ContentsWrapper>
             <TextBox>
-              <Typography size="3.33vw" bold="500">
-                희망하는&nbsp;
-              </Typography>
               <Typography size="3.33vw" bold="700">
-                이중전공
+                관심전공
               </Typography>
               <Typography size="3.33vw" bold="500">
-                을 선택해주세요.
+                수정하기
               </Typography>
             </TextBox>
             <DropDown
@@ -540,42 +537,6 @@ export const MobileSettingsPage = () => {
               </div>
               <TextAreaBox name="gpa-2" value={GPA2} setValue={setGPA2} isEntered={true} />
               <TextAreaBox name="gpa-3" value={GPA3} setValue={setGPA3} isEntered={true} setRef={setLastBoxRef} />
-            </VerifiBoxWrapper>
-          </ContentsWrapper>
-          <ContentsWrapper>
-            <TextBox>
-              <Typography size="3.33vw" bold="700">
-                희망 이중 지원학기&nbsp;
-              </Typography>
-              <Typography size="3.33vw" bold="500">
-                수정하기
-              </Typography>
-            </TextBox>
-            <VerifiBoxWrapper>
-              <TextAreaBox
-                name="semester-1"
-                value={hopeSemester1}
-                setValue={setHopeSemester1}
-                isEntered={hopeSemester1 ? true : false}
-              />
-              <TextAreaBox
-                name="semester-2"
-                value={hopeSemester2}
-                setValue={setHopeSemester2}
-                isEntered={hopeSemester2 ? true : false}
-              />
-              <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>
-                년도
-              </Typography>
-              <TextAreaBox
-                name="semester-3"
-                value={hopeSemester3}
-                setValue={setHopeSemester3}
-                isEntered={hopeSemester3 ? true : false}
-              />
-              <Typography size="3.33vw" bold="500" style={{ marginTop: '7.5vw' }}>
-                학기
-              </Typography>
             </VerifiBoxWrapper>
           </ContentsWrapper>
         </>
@@ -612,7 +573,7 @@ export const MobileSettingsPage = () => {
           <ContentsWrapper>
             <TextBox>
               <Typography size="3.33vw" bold="700">
-                비밀번호 재확인
+                비밀번호 확인
               </Typography>
               <Typography size="3.33vw" bold="500">
                 하기

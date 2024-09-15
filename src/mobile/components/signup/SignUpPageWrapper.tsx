@@ -18,6 +18,7 @@ export const SignUpPageWrapper:
 
   return (
     <Wrapper>
+      <TempHeader></TempHeader>
       <div style={{display: 'flex', alignItems: 'center', flexDirection: 'row', justifyContent: 'center', width: '100%', position: 'relative'}}>
       <CloseButton onClick={() => {navigate('/')}}>
           <img src={process.env.PUBLIC_URL + 'designImage/icon/icon_02.svg'} alt="Close Button" />
@@ -59,7 +60,7 @@ const Wrapper = styled.div`
 `;
 
 const TempHeader = styled.div`
-height: 43px;
+height: 2vw;
 `;
 // Wrapper내에서의 align은 나중에 생각
 const CloseButton = styled.button`

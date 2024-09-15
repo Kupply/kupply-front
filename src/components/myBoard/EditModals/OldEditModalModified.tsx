@@ -253,7 +253,7 @@ export default function EditModal(props: ModalProps) {
               <Icon02 />
             </CloseButton>
             <Typography
-              size="0.9375vw"
+              size="1.04vw"
               bold="700"
               style={{ marginLeft: 'auto', marginRight: 'auto', paddingTop: '0.833vw' }}
             >
@@ -459,31 +459,21 @@ const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //width: 814px;
   width: 100%;
   box-sizing: border-box;
-  //height: 134px;
-
   flex-shrink: 0;
   background-color: #fcfafb;
   border-bottom: 1px solid var(--DF_Grey-2, #dfdfdf);
-
-  //margin-top: -0.833vw;
 `;
 
 const CloseButton = styled.button`
   display: flex;
-  //width: 60px;
   width: 3.125vw;
-  //height: 60px;
   height: 3.125vw;
   justify-content: center;
   align-items: center;
   position: absolute;
-  //top: 32px;
-
-  //right: 40px;
-  right: 0px;
+  right: 5px;
   cursor: pointer;
 `;
 
@@ -495,24 +485,6 @@ const AlertWrapper = styled.div`
   align-items: center;
   text-align: center;
   margin: auto auto;
-`;
-
-const HeaderButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  //margin-top: 40px;
-  margin-top: 2.083vw;
-`;
-
-const MoveButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  //width: 628px;
-  width: 32.708vw;
-  //gap: 18px;
-  gap: 0.9375vw;
-  //margin-top: 280px;
-  margin-top: 14.583vw;
 `;
 
 const ContentsWrapper2 = styled.div`
@@ -530,21 +502,6 @@ const ContentsWrapper2 = styled.div`
   height: 41.458vw;
   overflow: auto;
   overflow-x: hidden;
-`;
-
-const ContentsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  //width: 628px;
-  width: 75%;
-  align-items: left;
-  margin-left: auto;
-  margin-right: auto;
-  //margin-top: 58px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  //gap: 35px;
-  gap: 1.823vw;
 `;
 
 const SubContentsWrapper = styled.div`

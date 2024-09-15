@@ -43,17 +43,20 @@ function Carousel() {
               합격자료
             </Typography>
           </BannerButton>
-          <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
-            지난학기, 지지난학기 경영학과 커트라인까지
-          </Typography>
           <div style={{ display: 'flex' }}>
+            <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
+              최근 3학기&nbsp;
+            </Typography>
             <Typography size="1.67vw" bold="700" color="#121212" style={{ lineHeight: '120%' }}>
-              한번에 모아서&nbsp;
+              이중전공 합격 커트라인
             </Typography>
             <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
-              보여드릴게요.
+              ,
             </Typography>
           </div>
+          <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
+            쿠플라이가 한 번에 보여드릴게요.
+          </Typography>
         </CarouselWrapper>
       ) : page === 1 ? (
         <CarouselWrapper align>
@@ -63,18 +66,21 @@ function Carousel() {
             }}
           >
             <Typography size="1.04vw" bold="500" color="#D85888">
-              실시간 비교
+              실시간 지원현황
             </Typography>
           </BannerButton>
           <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
-            당신이 지원한 이중전공,
+            당신이 지원한 이중전공 학과,
           </Typography>
           <div style={{ display: 'flex' }}>
+            <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
+              쿠플라이가&nbsp;
+            </Typography>
             <Typography size="1.67vw" bold="700" color="#121212" style={{ lineHeight: '120%' }}>
-              실시간 지원현황
+              실시간 모의지원현황
             </Typography>
             <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
-              에 대한 정보를 알려드릴게요.
+              을 알려드릴게요.
             </Typography>
           </div>
         </CarouselWrapper>
@@ -90,17 +96,17 @@ function Carousel() {
             </Typography>
           </BannerButton>
           <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
-            아직 1지망과 2지망을 고민중이신가요?
+            지원자들 중 나는 몇 등일까?
           </Typography>
           <div style={{ display: 'flex' }}>
             <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
-              지난학기&nbsp;
+              쿠플라이가&nbsp;
             </Typography>
             <Typography size="1.67vw" bold="700" color="#121212" style={{ lineHeight: '120%' }}>
-              성적 커트라인 한눈에 비교
+              나의 학점 백분위
             </Typography>
             <Typography size="1.67vw" bold="300" color="#121212" style={{ lineHeight: '120%' }}>
-              하고 결정하세요.
+              를 비교해드릴게요.
             </Typography>
           </div>
         </CarouselWrapper>

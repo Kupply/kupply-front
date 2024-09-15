@@ -38,7 +38,7 @@ export default function Footer() {
           <Logo />
         </LogoWrapper>
         <Contents>
-          <ContentsWrapper justify="space-between" size="58%" maxSize="580px">
+          <ContentsWrapper justify="space-between" size="58%" maxSize="616px">
             <SiteMap>
               <Typography size="smallText" bold="600">
                 사이트맵
@@ -96,7 +96,7 @@ export default function Footer() {
           <HorizontalLine></HorizontalLine>
         </HorizentalWrapper>
         <BottomContentsWrapper>
-          <ContentsWrapper minSize="223px" maxSize="290px" size="25%" justify="flex-start" order="3">
+          <ContentsWrapper size="25%" minSize="223px" maxSize="290px" justify="flex-start" order="3">
             <Typography size="smallText" color="#A8A8A8">
               Copyright ⓒ 2023 kupply. all rights reserved.
             </Typography>
@@ -127,9 +127,15 @@ export default function Footer() {
               </MenuButton>
               <MenuButton
                 style={{ color: '#A8A8A8' }}
-                onClick={() => window.open('https://naver.com', '_blank', 'noopener noreferrer')}
+                onClick={() => {
+                  window.open(
+                    'https://candle-mulberry-ea5.notion.site/c78d3f50dc014f34a9dacfe2acea8a10?pvs=4',
+                    '_blank',
+                    'noopener,noreferrer',
+                  );
+                }}
               >
-                개발팀 소개
+                쿠플라이 팀소개
               </MenuButton>
             </MenuWrapper>
           </ContentsWrapper>

@@ -140,7 +140,7 @@ const ArchiveDetailPage = () => {
           <WarningTextBox>
             <WarningIcon src="../../designImage/previous/D_alert-circle.png" />
             <WarningText>
-              본 통계는 서비스 자체 설문조사를 통해 수집된 정보를 기반으로 한 것으로서 실제 통계와 상이할 수 있습니다.
+              해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 실제 통계와 다를 수 있어요.
             </WarningText>
           </WarningTextBox>
         </MajorWrapper>
@@ -220,7 +220,7 @@ const ArchiveDetailPage = () => {
                 <PasserGPAInfoBox>
                   <PasserMeanGPAIcon />
                   <PasserGPAInfoTextBox>
-                    <Text>합격자 평균 학점</Text>
+                    <Text>합격자 학점 평균값</Text>
                     <TextNumber>{meanGpa.gpa.toFixed(2)}</TextNumber>
                   </PasserGPAInfoTextBox>
                 </PasserGPAInfoBox>
@@ -268,9 +268,9 @@ const ArchiveDetailPage = () => {
           )}
           {!enoughData && (
             <CollectingWrapper keywordsLength={keywords.length}>
-              <CollectingTitleText>쿠플라이에서 아직 정보를 수집 중입니다!</CollectingTitleText>
+              <CollectingTitleText>쿠플라이에서 정보를 수집하고 있어요</CollectingTitleText>
               <CollectingDetailText>
-                더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집 중입니다.
+                더 정확한 정보를 제공하기 위해서 쿠플라이에서 정보를 수집하고 있어요.
                 {'\n'}더 나은 서비스를 위해서 조금만 더 기다려주세요!
               </CollectingDetailText>
             </CollectingWrapper>
@@ -403,6 +403,7 @@ const MajorTextBox = styled.div`
   align-items: flex-end;
   gap: 0.98vw;
   margin-left: 1.5625vw;
+  align-items: center;
 `;
 
 const MajorTextKorean = styled.text`
@@ -413,7 +414,8 @@ const MajorTextKorean = styled.text`
   font-size: 1.875vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 104.167%;
+  line-height: 100%;
+  white-space: nowrap;
 `;
 
 const MajorTextEnglish = styled.text`
@@ -422,9 +424,8 @@ const MajorTextEnglish = styled.text`
   font-size: 1.5625vw;
   font-style: normal;
   font-weight: 500;
-  line-height: 66.667%;
-
-  margin-bottom: 0.42vw;
+  //line-height: 66.667%;
+  line-height: 100%;
 `;
 
 const WarningTextBox = styled.div`
@@ -432,6 +433,7 @@ const WarningTextBox = styled.div`
   gap: 0.21vw;
   // padding: 94px 0px 37px 0px;
   align-items: center;
+  white-space: nowrap;
 `;
 
 const WarningText = styled.text`

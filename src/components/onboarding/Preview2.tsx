@@ -60,7 +60,8 @@ function Preview2() {
           지난 학기 합격자들은 <br /> 어떤 스펙을 <br /> 가지고 있었을까?
         </Typography>
         <Typography size="1.04vw" bold="500" color="rgba(20,20,20,0.6)" style={{ lineHeight: '120%', opacity: 0.8 }}>
-          내 학점으로 원하는 학과를 지원하는 것이 안정적인지, <br /> 객관적인 통계자료를 통해 정확하게 예측하세요.
+          지난 학기 합격자들의 학점 분석 그래프와 <br /> 학업계획서 키워드를 참고하여 <br /> 이중전공 지원을 준비 할 수
+          있어요.
         </Typography>
       </TextBox1>
       <TextBox2 isVisible={transitionState === 'transitioning' || transitionState === 'allVisible'}>
@@ -80,7 +81,7 @@ function Preview2() {
           color="rgba(20,20,20,0.6)"
           style={{ lineHeight: '120%', opacity: 0.8, textAlign: 'center' }}
         >
-          내 학점으로 원하는 학과를 지원하는 것이 안정적인지, <br /> 객관적인 통계자료를 통해 정확하게 예측하세요.
+          지난 학기 합격자들의 학점 분석 그래프와 학업계획서 키워드를 참고하여 <br /> 이중전공 지원을 준비 할 수 있어요.
         </Typography>
       </TextBox2>
     </MainWrapper>

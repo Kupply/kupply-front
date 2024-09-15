@@ -47,10 +47,10 @@ function Join2() {
         <>
           <Banner>
             <Typography size="1.98vw" bold="700" color="#FFF" style={{ lineHeight: '131.58%', marginTop: '2.44vw' }}>
-              경쟁자들과 비교하여 나의 합격 가능성 확인해볼까?
+              경쟁자들과 비교해서 나의 합격 가능성을 확인해볼까요?
             </Typography>
             <Typography size="1.25vw" bold="500" color="#FFF" style={{ marginTop: '0.36vw', marginBottom: '1.61vw' }}>
-              쿠플라이 모의지원하고 나의 학점 위치 파악하기
+              쿠플라이 모의지원 완료 후 내 학점 백분위 파악하기
             </Typography>
             <Button11 onClick={() => navigate('/myboard')} style={{ color: '#FFF' }}>
               모의지원 바로가기
@@ -70,10 +70,10 @@ function Join2() {
               marginBottom: '0.73vw',
             }}
           >
-            간편 이메일 등록 후 이중전공에 대한 모든 정보 확인하기!
+            고려대학교 이메일 등록 후, 이중전공에 대한 모든 정보 확인하기
           </Typography>
           <Typography size="1.25vw" bold="500" color="#FFF">
-            몇가지 회원가입 단계를 거친 후, 쿠플라이만의 다양한 서비스를 이용해보세요.
+            간단한 회원가입을 통해 쿠플라이의 다양한 서비스를 이용해보세요.
           </Typography>
           <JoinBox>
             <TextFieldBox

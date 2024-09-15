@@ -39,7 +39,7 @@ export default function HeaderBar() {
             src={`designImage/myBoard/${button.icon}${currentModal === button.modalId ? 'Active' : ''}.svg`}
             style={{ marginRight: '0.7vw', width: '1vw', height: '1vw' }}
           />
-          <BtnText>{button.text}</BtnText>
+          <BtnText isClicked={headerButton === button.id}>{button.text}</BtnText>
         </EditModalHeaderButton>
       ))}
     </HeaderButtonWrapper>
@@ -54,11 +54,11 @@ const HeaderButtonWrapper = styled.div`
   //margin-top: 40px;
 `;
 
-const BtnText = styled.text`
+const BtnText = styled.span<{ isClicked: boolean }>`
   color: var(--Black2, #434343);
   font-family: Pretendard;
   font-size: 1.042vw;
   font-style: normal;
-  font-weight: 700;
+  font-weight: ${(props) => (props.isClicked ? '700' : '400')};
   line-height: 100%;
 `;

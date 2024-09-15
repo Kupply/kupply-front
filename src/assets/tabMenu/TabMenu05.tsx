@@ -58,23 +58,23 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <StageBox1 src="../../designImage/tabMenu/tabmenu_type_05_1.webp" />
             <TextBox>
               <TextBoxColor style={{ color: 'rgba(58, 213, 78, 0.80)' }}>
-                도전자님의 학점에 맞는 <br />
-                적정지원이에요.
+                도전자님의 학점에 <br />
+                안정적인 지원이에요.
               </TextBoxColor>
               <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
-                도전자님의 학점보다 조금
+                도전자님의 학점보다
                 <br />
-                상향지원이에요.
+                조금 상향지원이에요.
               </TextBoxNormal>
               <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
-                도전자님의 학점보다 상향지원
-                <br />
-                이에요.
-              </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
-                도전자님의 학점보다 매우 높은
+                도전자님의 학점보다
                 <br />
                 상향지원이에요.
+              </TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
+                도전자님의 학점보다
+                <br />
+                매우 높은 상향지원이에요.
               </TextBoxNormal>
             </TextBox>
           </Wrapper>
@@ -83,8 +83,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
@@ -106,23 +106,23 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <StageBox2 src="../../designImage/tabMenu/tabmenu_type_05_2.webp" />
             <TextBox>
               <TextBoxNormal>
-                도전자님의 학점에 맞는 <br />
-                적정지원이에요.
+                도전자님의 학점에 <br />
+                안정적인 지원이에요.
               </TextBoxNormal>
               <TextBoxColor style={{ color: 'rgba(72, 148, 227, 0.80)', marginLeft: '2.20vw' }}>
-                도전자님의 학점보다 조금
+                도전자님의 학점보다
                 <br />
-                상향지원이에요.
+                조금 상향지원이에요.
               </TextBoxColor>
               <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
-                도전자님의 학점보다 상향지원
-                <br />
-                이에요.
-              </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
-                도전자님의 학점보다 매우 높은
+                도전자님의 학점보다
                 <br />
                 상향지원이에요.
+              </TextBoxNormal>
+              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
+                도전자님의 학점보다
+                <br />
+                매우 높은 상향지원이에요.
               </TextBoxNormal>
             </TextBox>
           </Wrapper>
@@ -130,8 +130,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
@@ -153,23 +153,24 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <StageBox2 src="../../designImage/tabMenu/tabmenu_type_05_3.webp" />
             <TextBox>
               <TextBoxNormal>
-                도전자님의 학점에 맞는 <br />
-                적정지원이에요.
+                도전자님의 학점에
+                <br />
+                안정적인 지원이에요.
               </TextBoxNormal>
               <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
-                도전자님의 학점보다 조금
+                도전자님의 학점보다
                 <br />
-                상향지원이에요.
+                조금 상향지원이에요.
               </TextBoxNormal>
               <TextBoxColor style={{ color: 'rgba(216, 88, 136, 0.80)', marginLeft: '1.05vw' }}>
-                도전자님의 학점보다 상향지원
-                <br />
-                이에요.
-              </TextBoxColor>
-              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
-                도전자님의 학점보다 매우 높은
+                도전자님의 학점보다
                 <br />
                 상향지원이에요.
+              </TextBoxColor>
+              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
+                도전자님의 학점보다
+                <br />
+                매우 높은 상향지원이에요.
               </TextBoxNormal>
             </TextBox>
           </Wrapper>
@@ -178,8 +179,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
@@ -201,23 +202,23 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <StageBox2 src="../../designImage/tabMenu/tabmenu_type_05_4.webp" />
             <TextBox>
               <TextBoxNormal>
-                도전자님의 학점에 맞는 <br />
-                적정지원이에요.
+                도전자님의 학점에 <br />
+                안정적인 지원이에요.
               </TextBoxNormal>
               <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
-                도전자님의 학점보다 조금
+                도전자님의 학점보다
                 <br />
-                상향지원이에요.
+                조금 상향지원이에요.
               </TextBoxNormal>
               <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
-                도전자님의 학점보다 상향지원
-                <br />
-                이에요.
-              </TextBoxNormal>
-              <TextBoxColor style={{ color: '#E84549', marginLeft: '0.53vw' }}>
-                도전자님의 학점보다 매우 높은
+                도전자님의 학점보다
                 <br />
                 상향지원이에요.
+              </TextBoxNormal>
+              <TextBoxColor style={{ color: '#E84549', marginLeft: '0.53vw' }}>
+                도전자님의 학점보다
+                <br />
+                매우 높은 상향지원이에요.
               </TextBoxColor>
             </TextBox>
           </Wrapper>
@@ -225,8 +226,8 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
                 <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>

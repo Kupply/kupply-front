@@ -24,20 +24,21 @@ export default function SignUpPage4() {
 
   // 넘겨받는 데이터가 없는 경우 돌려보내기 위해
   // 잠시 수정
+
   useEffect(() => {
     if (!sessionStorage.getItem('nickname')) navigate('/');
     else sessionStorage.removeItem('role');
   }, []);
 
-  useEffect(() => {
-    if (+userStdId.info.slice(2, 4) === 24) {
-      setUser({
-        userType: 'candidate',
-        userState: ['clicked', 'inactive'],
-      });
-      setFixedUserType(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (+userStdId.info.slice(2, 4) === 24) {
+  //     setUser({
+  //       userType: 'candidate',
+  //       userState: ['clicked', 'inactive'],
+  //     });
+  //     setFixedUserType(true);
+  //   }
+  // }, []);
 
   const handleButtonClick = (inputType: string) => {
     if (inputType === 'candidate' && user.userState[0] !== 'clicked') {
@@ -115,14 +116,11 @@ export function SignUp4PageCandidate() {
       <ContentsList>
         <ContentsWrapper>
           <div>
-            <Typography size="3.33vw" bold="400">
-              희망하는{' '}
-            </Typography>
             <Typography size="3.33vw" bold="700">
-              이중전공
+              관심전공
             </Typography>
             <Typography size="3.33vw" bold="400">
-              을 입력해주세요.
+              을 선택해주세요.
             </Typography>
           </div>
           <UserInput userInfoType="hopeMajor1" toNext={next} setStateValid={setMajorState} />
@@ -137,21 +135,10 @@ export function SignUp4PageCandidate() {
               학점
             </Typography>
             <Typography size="3.33vw" bold="400">
-              을 소수점 두 자리까지 입력해주세요.
+              을 소수점 둘째자리까지 입력해주세요.
             </Typography>
           </div>
           <GPAVerification userType="candidate" setState={setGpaState} toNext={next} />
-        </ContentsWrapper>
-        <ContentsWrapper>
-          <div>
-            <Typography size="3.33vw" bold="700">
-              희망 이중 지원학기
-            </Typography>
-            <Typography size="3.33vw" bold="400">
-              를 입력해주세요.
-            </Typography>
-          </div>
-          <SemesterVerification userType="candidate" setState={setSemesterState} toNext={next} />
         </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>

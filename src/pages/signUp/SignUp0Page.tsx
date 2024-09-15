@@ -1,25 +1,23 @@
-import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { UserInput } from "../../components/signUp/UserInput";
-import { UserInputText } from "../../components/signUp/UserInputText";
-import Button03 from "../../assets/buttons/Button03";
-import { useCallback, useEffect, useState } from "react";
-import { useSignUp0Verification } from "../../utils/SignUpFunctions";
-import axios from "axios";
-import client from "../../utils/HttpClient";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../store/atom";
-import TextFieldBox, { StateOptions } from "../../assets/OldTextFieldBox";
-import { sendEmail } from "../../utils/SignUpFunctions";
+import { SignUpPageWrapper } from '../../components/signUp/SignUpPageWrapper';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { UserInput } from '../../components/signUp/UserInput';
+import { UserInputText } from '../../components/signUp/UserInputText';
+import Button03 from '../../assets/buttons/Button03';
+import { useCallback, useEffect, useState } from 'react';
+import { useSignUp0Verification } from '../../utils/SignUpFunctions';
+import axios from 'axios';
+import client from '../../utils/HttpClient';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../store/atom';
+import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
+import { sendEmail } from '../../utils/SignUpFunctions';
 
-
-
-export function SignUp0Page(){
+export function SignUp0Page() {
   const [ID, setID] = useState<string>('');
   const [IDstate, setIDState] = useState<StateOptions>('default');
   const email = sessionStorage.getItem('email') || '';
-  
+
   const navigate = useNavigate();
 
   const handleButtonClick = async () => {
@@ -48,34 +46,38 @@ export function SignUp0Page(){
   };
 
   return (
-    <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
+    <SignUpPageWrapper step={1} stepInfo="고려대학교 학생 인증하기">
       <ContentsList>
-          <ContentsWrapper>
-            <UserInputText userInfoType="kuEmail"/>
-            <TextFieldBox
-              placeholder="고려대학교 이메일 주소"
-              value={ID}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setID(e.target.value);
-              }}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === 'Enter') {
-                  handleButtonClick();
-                }
-              }}
-              state={IDstate}
-              setState={setIDState}
-              setValue={setID}
-            />
-          </ContentsWrapper>
+        <ContentsWrapper>
+          <UserInputText userInfoType="kuEmail" />
+          <TextFieldBox
+            placeholder="kupply@korea.ac.kr"
+            value={ID}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setID(e.target.value);
+            }}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                handleButtonClick();
+              }
+            }}
+            state={IDstate}
+            setState={setIDState}
+            setValue={setID}
+          />
+        </ContentsWrapper>
       </ContentsList>
       <ButtonsWrapper>
-        <Button03 state={IDstate === 'filled' ? 'pressed' : 'disabled'} onClick={handleButtonClick} style={{width: '100%'}}>
-          인증메일 받기 
+        <Button03
+          state={IDstate === 'filled' ? 'pressed' : 'disabled'}
+          onClick={handleButtonClick}
+          style={{ width: '100%' }}
+        >
+          인증메일 받기
         </Button03>
       </ButtonsWrapper>
     </SignUpPageWrapper>
-  )
+  );
 }
 
 const ContentsList = styled.div`

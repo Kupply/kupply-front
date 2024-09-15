@@ -140,7 +140,7 @@ export default function LoginModal() {
           <LogoImage src="../../designImage/kupply/KupplyVer1.svg" />
         </LogoBox>
         <Typography size={'1.25vw'} bold="700">
-          임시 비밀번호를 발급받을 고려대 이메일 주소를 입력해주세요.
+          임시 비밀번호를 발급받을 고려대학교 이메일 주소를 입력해주세요.
         </Typography>
         <IDField
           placeholder="kupply@korea.ac.kr"
@@ -160,7 +160,7 @@ export default function LoginModal() {
           </Button03>
         </div>
         <Typography size="0.729vw" bold="400" color="#B9b9b9">
-          쿠플라이 아이디는 고려대학교 이메일 주소입니다
+          쿠플라이 아이디는 고려대학교 이메일 주소입니다.
         </Typography>
       </ModalLarge>
     </Wrapper>

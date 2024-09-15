@@ -1,11 +1,12 @@
-import React, { useMemo, useState, forwardRef } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import CTA02 from '../../assets/CTAs/CTA02';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 import { ITableData } from '../../pages/landing/LandingPage';
-import CTA02 from '../../assets/CTAs/CTA02';
+import { isDateInRange, isPeriodPassed, currentMonth } from '../../common/ApplicationPeriod';
 
 type orderOptions = 'descending' | 'ascending';
 type tableProps = {
@@ -28,19 +29,29 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
     else setOrder('descending');
   };
 
-  const navigate = useNavigate();
+  // 회원의 모의지원 여부에 따라 테이블 블러 여부를 결정한다.
+  const [isApplied, setIsApplied] = useState(false);
+  useEffect(() => {
+    const appliedValue = localStorage.getItem('isApplied');
+    if (appliedValue !== null) {
+      setIsApplied(appliedValue === 'false');
+    }
+  }, []);
 
-  const [isInfoVisible, setInfoVisible] = useState(false);
+  const navigate = useNavigate();
 
   const [mouseOn, setMouseOn] = useState(false);
 
-  const currentDate = new Date();
-  const startDate = new Date('2024-05-10');
-  const endDate = new Date('2024-05-31');
-  const isDateInRange = currentDate >= startDate && currentDate <= endDate;
+  const [buttonState, setButtonState] = useState<'disabled' | 'default' | 'hover'>('default');
 
   const handleButtonClick = () => {
     isDateInRange ? navigate('/myboard') : navigate('/archive');
+  };
+  const handleButtonEnter = () => {
+    setButtonState('hover');
+  };
+  const handleButtonLeave = () => {
+    setButtonState('default');
   };
 
   return (
@@ -50,7 +61,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         bold="700"
         style={{ lineHeight: '120%', textShadow: '0px 4px 16px rgba(255, 255, 255, 0.33)' }}
       >
-        {isDateInRange ? '쿠플라이 실시간 이중전공 모의지원 현황' : '지금은 모의지원 기간이 아닙니다'}
+        {isDateInRange ? '쿠플라이 실시간 이중전공 모의지원 현황' : '지난 학기 이중전공 모의지원 현황'}
       </Typography>
       <Typography
         size="1.04vw"
@@ -59,10 +70,20 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         style={{ opacity: 0.8, lineHeight: '120%', margin: '0.63vw 0 1.72vw 0' }}
       >
         {isDateInRange
-          ? '이번 학기 나의 희망 학과의 실시간 지원자 수와 경쟁률을 제공해 드릴게요.'
-          : '모의지원 기능은 5월 10일에 오픈해요!'}
+          ? '쿠플라이 실시간 모의지원 경쟁률을 참고하여 실지원 경쟁률을 예측해보세요.'
+          : isPeriodPassed
+          ? '이번 학기 모의지원 기간이 종료되었어요.'
+          : currentMonth < 5
+          ? '1학기 모의지원 서비스는 5월에 오픈해요.'
+          : '2학기 모의지원 서비스는 11월에 오픈해요'}
       </Typography>
-      <CTA02 onClick={handleButtonClick} style={{ marginBottom: '3.8vw' }}>
+      <CTA02
+        state={buttonState}
+        onClick={handleButtonClick}
+        onMouseEnter={handleButtonEnter}
+        onMouseLeave={handleButtonLeave}
+        style={{ marginBottom: '3.8vw' }}
+      >
         {isDateInRange ? '나도 모의지원 하러가기' : '기다리는 동안 과거 합격자료 보러가기'}
       </CTA02>
       <TextWrapper>
@@ -172,7 +193,8 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
           </div>
         )}
       </div>
-      {!isDateInRange && <Blur />}
+      {/* {!isDateInRange && !isPeriodPassed && <Blur />} */}
+      {(!isDateInRange || !isApplied) && <Blur />}
     </Wrapper>
   );
 });

@@ -7,7 +7,6 @@ import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import { collegeAPIMappingByKR as collegeAPIMapping } from '../../../utils/Mappings';
 import { majorNameMapping } from '../../../utils/Mappings';
 import { LastThreeSemesters } from '../../../common/LastThreeSemesters';
-
 interface SemesterBtnStates {
   [key: string]: boolean;
   // Use an index signature to allow dynamic keys
@@ -80,7 +79,7 @@ const MobileThreeYear = ({
 
         <Text1Box>
           <Text1>
-            {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 모집정보
+            {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 선발정보
           </Text1>
           <button
             onClick={() => {
@@ -92,7 +91,7 @@ const MobileThreeYear = ({
         </Text1Box>
 
         <Text2 style={{ position: 'absolute', top: '36.11vw', left: '5vw' }}>
-          {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발 인원
+          {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발인원
         </Text2>
         <Text3 style={{ position: 'absolute', top: '41.94vw', left: '5vw' }}>{selectedPastData.numOfSelection}명</Text3>
         <Text2 style={{ position: 'absolute', top: '36.11vw', left: '52.22vw' }}>합격률</Text2>
@@ -101,13 +100,14 @@ const MobileThreeYear = ({
             ? '집계불가'
             : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
         </Text3>
-        <Text2 style={{ position: 'absolute', top: '51.94vw', left: '5vw' }}>합격자 평균 학점</Text2>
+        <Text2 style={{ position: 'absolute', top: '51.94vw', left: '5vw' }}>합격자 학점 평균값</Text2>
         <Text3 style={{ position: 'absolute', top: '57.22vw', left: '5vw' }}>{selectedPastData.meanGpa}</Text3>
-        <Text2 style={{ position: 'absolute', top: '51.94vw', left: '52.22vw' }}>합격자 최저 학점</Text2>
+        <Text2 style={{ position: 'absolute', top: '51.94vw', left: '52.22vw' }}>합격자 학점 최저값</Text2>
         <Text3 style={{ position: 'absolute', top: '57.22vw', left: '52.22vw' }}>{selectedPastData.minGpa}</Text3>
         <Text4>
-          설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다. <br /> (합격률은 해당 학기 지원한
-          쿠플라이 회원들의 합격률입니다.)
+          해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 <br /> 실제 통계와 다를 수 있어요.
+          <br /> (합격률은 해당 학기에 쿠플라이에서 모의 지원한 회원들의 합격률로, <br />
+          실제 합격률과는 다를 수 있어요.)
         </Text4>
       </BodyBox>
     </Wrapper>

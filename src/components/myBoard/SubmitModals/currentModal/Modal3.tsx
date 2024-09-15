@@ -50,7 +50,6 @@ export default function CurrentModal3(props: CurrentModalSubmittedProps){
           onClick={() => {
             setCurrentModal(4); // 다음 창으로 이동
             onCustomFunction?.();
-            console.log('this has to be pressed this is Modal3')
           }}
           style={{ width: '32.668vw', height: '3.542vw' }}
           // 글자 디자인 수정 필요

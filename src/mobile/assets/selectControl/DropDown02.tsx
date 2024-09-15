@@ -29,7 +29,7 @@ function DropDown02({ optionList, value, setValue }: DropDownProps) {
   if (!value && optionList) value = optionList[0];
 
   return (
-    <div style={{ maxWidth: '89px' }} ref={ref}>
+    <div style={{ maxWidth: '99px' }} ref={ref}>
       <DropDownBtn isOpen={isOpen} isSelected={isSelected} onClick={toggleIsOpen} type="button" value={value}>
         {value}
         <AngleDown isOpen={isOpen} isSelected={isSelected}>

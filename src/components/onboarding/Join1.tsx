@@ -11,6 +11,7 @@ function Join1() {
   const [isLogined, setIsLogined] = useState<boolean>(false);
   const [ID, setID] = useState<string>('');
   const navigate = useNavigate();
+  const [buttonState, setButtonState] = useState<'disabled' | 'default' | 'hover'>('default');
 
   useEffect(() => {
     if (window.localStorage.isLogin === 'true') setIsLogined(true);
@@ -54,9 +55,15 @@ function Join1() {
             쿠플라이 모의지원을 통해 당신의 합격 가능성을 확인하세요!
           </Typography>
           <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8 }}>
-            간단한 모의지원으로 나의 학점 위치와 자소서까지, 오직 쿠플라이에서 제공해드릴게요.
+            실시간 이중전공 지원현황과 나의 학점 백분위 정보까지, 오직 쿠플라이에서 제공해 드릴게요.
           </Typography>
-          <CTA02 onClick={() => navigate('/myboard')} style={{ margin: '2.29vw 0 5.63vw 0' }} />
+          <CTA02
+            state={buttonState}
+            onClick={() => navigate('/myboard')}
+            onMouseEnter={() => setButtonState('hover')}
+            onMouseLeave={() => setButtonState('default')}
+            style={{ margin: '2.29vw 0 5.63vw 0' }}
+          />
         </>
       ) : (
         <>
@@ -66,11 +73,11 @@ function Join1() {
             color="#2C323A"
             style={{ margin: '4.95vw 0 0.42vw 0', lineHeight: '131.58%' }}
           >
-            당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서.
+            당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서
           </Typography>
           <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8 }}>
-            이메일 주소 입력으로 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
-            이용해보세요.
+            고려대학교 이메일 주소 입력으로 실시간 이중전공 지원현황 확인과 간편한 학점 비교 등, 쿠플라이만의 다양한
+            서비스를 이용해보세요.
           </Typography>
           <JoinBox>
             <TextFieldWrapper>

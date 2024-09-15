@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -24,9 +23,9 @@ function Banner02(props: Banner02Props) {
     ],
     titles = ['합격자료', '실시간 지원현황', '마이보드'],
     contents = [
-      ['지난학기, 지지난학기 경영학과 커트라인까지', '한번에 모아서 보여드릴게요.'],
-      ['당신이 지원한 이중전공,', '실시간 지원현황에 대한 정보를 알려드릴게요.'],
-      ['아직 1지망과 2지망을 고민중이신가요?', '지난 학기 성적 커트라인 한 눈에 비교하고', '결정하세요.'],
+      ['최근 3학기 이중전공 합격 커트라인,', '쿠플라이가 한 번에 보여드릴게요.'],
+      ['당신이 지원한 이중전공 학과,', '쿠플라이가 실시간 모의지원현황을 알려드릴게요.'],
+      ['지원자들 중 나는 몇 등일까?', '쿠플라이가 나의 학점 백분위를 비교 해드릴게요.'],
     ],
     links = ['/archive', '/landing', '/myboard'],
   } = props;

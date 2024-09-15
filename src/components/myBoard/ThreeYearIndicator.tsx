@@ -8,7 +8,6 @@ import { majorNameMapping } from '../../utils/Mappings';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
 import ToolTip02 from '../../assets/toolTips/Tooltip02';
-
 interface SemesterBtnStates {
   [key: string]: boolean;
   // Use an index signature to allow dynamic keys
@@ -100,7 +99,7 @@ const ThreeYear = ({
 
       <Text1Box>
         <Text1>
-          {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 모집정보
+          {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 선발정보
         </Text1>
         <button
           onClick={() => {
@@ -112,7 +111,7 @@ const ThreeYear = ({
       </Text1Box>
 
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
-        {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발 인원
+        {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발인원
       </Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>합격률</Text2>
@@ -122,18 +121,20 @@ const ThreeYear = ({
         hoverState={svgHover}
         style={{ position: 'absolute', top: '8.40vw', left: '14.30vw' }}
       >
-        해당 학기 지원한 쿠플라이 회원들의 합격률로, 실제와는 상이할 수 있습니다.
+        해당 학기에 쿠플라이에서 <br /> 모의지원한 회원들의 합격률로, <br /> 실제 합격률과는 다를 수 있어요.
       </ToolTip02>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '12.14vw' }}>
         {selectedPastData.numOfApplied === 0
           ? '집계불가'
           : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
       </Text3>
-      <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 평균 학점</Text2>
+      <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 학점 평균값</Text2>
       <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>{selectedPastData.meanGpa}</Text3>
-      <Text2 style={{ position: 'absolute', top: '11.81vw', left: '12.14vw' }}>합격자 최저 학점</Text2>
+      <Text2 style={{ position: 'absolute', top: '11.81vw', left: '12.14vw' }}>합격자 학점 최저값</Text2>
       <Text3 style={{ position: 'absolute', top: '12.99vw', left: '12.14vw' }}>{selectedPastData.minGpa}</Text3>
-      <Text4>설문조사를 통해 제공되는 자체 통계로 실제 통계와 상이할 수 있습니다.</Text4>
+      <Text4>
+        해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 <br /> 실제 통계와 다를 수 있어요.
+      </Text4>
     </Wrapper>
   );
 };

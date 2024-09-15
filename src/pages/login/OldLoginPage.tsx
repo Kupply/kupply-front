@@ -104,7 +104,8 @@ const CheckButton = styled.button<{ checked: boolean }>`
   width: 0.94vw;
   height: 0.94vw;
   flex-shrink: 0;
-  background-image: url(${(props) => props.checked ? 'designImage/textField/CheckCircle28.png' : 'designImage/login/DCheckCircle.png'});
+  background-image: url(${(props) =>
+    props.checked ? 'designImage/textField/CheckCircle28.png' : 'designImage/login/DCheckCircle.png'});
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -201,7 +202,7 @@ function LoginPage(props: LoginPageProps) {
           style={{ marginTop: '6.2vw', marginBottom: '0.6vw' }}
         />
         <Typography size="0.94vw" bold="500">
-          고려대학교 메일로 이용하는 쿠플라이의 모든 서비스
+          고려대학교 이메일로 이용하는 쿠플라이의 모든 서비스
         </Typography>
         <TextFieldWrapper>
           <TextBox style={{ height: '5.47vw' }}>
@@ -212,7 +213,7 @@ function LoginPage(props: LoginPageProps) {
             <AlertMessage>쿠플라이 아이디는 고려대학교 이메일 주소입니다.</AlertMessage>
           </TextBox>
           <IDField
-            placeholder="0000@korea.ac.kr"
+            placeholder="kupply@korea.ac.kr"
             value={ID}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);
@@ -236,7 +237,7 @@ function LoginPage(props: LoginPageProps) {
           </TextBox>
           <PasswordField
             type="password"
-            placeholder="비밀번호 입력"
+            placeholder="쿠플라이 비밀번호"
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);

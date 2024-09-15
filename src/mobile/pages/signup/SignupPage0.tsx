@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { SignUpPageWrapper } from "../../components/signup/SignUpPageWrapper";
-import styled from "styled-components";
-import Typography from "../../../assets/Typography";
-import Input01, { StateOptions } from "../../assets/field/Input01";
-import { useNavigate } from "react-router-dom";
-import client from "../../../utils/HttpClient";
-import Button05 from "../../assets/buttons/Button05";
-import Card01 from "../../assets/cards/Card01";
-import Card02 from "../../assets/cards/Card02";
-import { Card0301, Card0302, Card0303 } from "../../assets/cards/Card03";
-import Card05 from "../../assets/cards/Card05";
+import React, { useState } from 'react';
+import { SignUpPageWrapper } from '../../components/signup/SignUpPageWrapper';
+import styled from 'styled-components';
+import Typography from '../../../assets/Typography';
+import Input01, { StateOptions } from '../../assets/field/Input01';
+import { useNavigate } from 'react-router-dom';
+import client from '../../../utils/HttpClient';
+import Button05 from '../../assets/buttons/Button05';
+import Card01 from '../../assets/cards/Card01';
+import Card02 from '../../assets/cards/Card02';
+import { Card0301, Card0302, Card0303 } from '../../assets/cards/Card03';
+import Card05 from '../../assets/cards/Card05';
 
-export default function SignUpPage0(){
+export default function SignUpPage0() {
   const [ID, setID] = useState('');
   const [IDState, setIDState] = useState<StateOptions>('default');
   const email = sessionStorage.getItem('email') || '';
-  
-  // email의 유효성을 check하는게 필요하다 
-  // IDState에 대한 처리를 여기서 
+
+  // email의 유효성을 check하는게 필요하다
+  // IDState에 대한 처리를 여기서
 
   const navigate = useNavigate();
 
-  // 여기도 UserInput으로 바꿀지 고민중이다 
+  // 여기도 UserInput으로 바꿀지 고민중이다
 
   const handleButtonClick = async () => {
     //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
@@ -49,24 +49,33 @@ export default function SignUpPage0(){
   };
   // CTA아직 안 만들어져서 빼고 만듦
   return (
-    <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
+    <SignUpPageWrapper step={1} stepInfo="고려대학교 학생 인증하기">
       <MessageContent>
-        <Typography size="5.56vw" bold="700">환영합니다!</Typography>
-        <Typography size="3.33vw" bold="500" style={{lineHeight: '4.44vw', wordBreak: 'break-all'}}>회원가입을 위한 몇가지 절차를 거친 후 다양한 서비스를 이용하세요.</Typography>
+        <Typography size="5.56vw" bold="700">
+          환영합니다!
+        </Typography>
+        <Typography size="3.33vw" bold="500" style={{ lineHeight: '4.44vw', wordBreak: 'break-all' }}>
+          간단한 회원가입을 통해 쿠플라이의 <br />
+          다양한 서비스를 이용해보세요.
+        </Typography>
       </MessageContent>
       <ContentsList>
         <ContentsWrapper>
           <div>
-          <Typography size="3.33vw" bold="700">고려대학교 이메일</Typography>
-          <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
+            <Typography size="3.33vw" bold="700">
+              고려대학교 이메일
+            </Typography>
+            <Typography size="3.33vw" bold="400">
+              을 입력해주세요.
+            </Typography>
           </div>
-          <Input01 
-            style={{width: '100%'}}
+          <Input01
+            style={{ width: '100%' }}
             setState={setIDState}
             setValue={setID}
             state={IDState}
             value={ID}
-            placeholder="OOOO@korea.ac.kr"
+            placeholder="kupply@korea.ac.kr"
             errorMessage="유효하지 않은 이메일 주소입니다"
             isCheckDuplicated={false}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,26 +92,26 @@ export default function SignUpPage0(){
       </ContentsList>
       <ButtonsWrapper>
         <Button05
-          state={IDState === 'filled' ? 'pressed' : 'default'} 
-          onClick={handleButtonClick} 
-          style={{width: '100%'}}
+          state={IDState === 'filled' ? 'pressed' : 'default'}
+          onClick={handleButtonClick}
+          style={{ width: '100%' }}
         >
           인증메일 받기
         </Button05>
       </ButtonsWrapper>
     </SignUpPageWrapper>
-  )
+  );
 }
 
 const MessageContent = styled.div`
-gap: 3.05vw;
-margin-top: 11.944vw;
-display: flex;
-flex-direction: column;
-align-items: center;
-width: 50.278vw;
-text-align: center;
-margin-bottom: 11.944vw;
+  gap: 3.05vw;
+  margin-top: 11.944vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50.278vw;
+  text-align: center;
+  margin-bottom: 11.944vw;
 `;
 
 const ContentsList = styled.div`
@@ -120,7 +129,7 @@ const ContentsWrapper = styled.div`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중 
+  // 이거 핸드폰 height 따라 달라져야 해서 padding으로 박을 지를 고민중
   // vh로 박아야 할 가능성이 클듯
   margin-top: 63.33vw;
   width: 100%;

@@ -74,7 +74,7 @@ export default function LoginPage(props: LoginPageProps) {
       await axios.post(url, { userEmail: ID });
 
       setIsModalVisible(!isModalVisible);
-      alert('입력하신 이메일로 임시 비밀번호를 보냈습니다!');
+      alert('입력하신 이메일로 임시 비밀번호를 보냈습니다.');
     } catch (err: any) {
       if (err.response.data.error.message) {
         alert(err.response.data.error.message);
@@ -101,12 +101,12 @@ export default function LoginPage(props: LoginPageProps) {
               쿠플라이&nbsp;아이디
             </Typography>
             <Typography size="3.33vw" bold="500">
-              를 입력해주세요
+              를 입력해주세요.
             </Typography>
           </TextBox>
           <Input01
-            placeholder={''}
-            helpMessage={'쿠플라이 아이디는 고려대학교 이메일입니다'}
+            placeholder={'kupply@korea.ac.kr'}
+            helpMessage={'쿠플라이 아이디는 고려대학교 이메일 주소입니다.'}
             errorMessage={''}
             value={ID}
             setValue={setID}
@@ -120,11 +120,11 @@ export default function LoginPage(props: LoginPageProps) {
               비밀번호
             </Typography>
             <Typography size="3.33vw" bold="500">
-              를 입력해주세요
+              를 입력해주세요.
             </Typography>
           </TextBox>
           <Input01
-            placeholder={''}
+            placeholder={'쿠플라이 비밀번호'}
             errorMessage={''}
             value={password}
             setValue={setPassword}
@@ -146,7 +146,7 @@ export default function LoginPage(props: LoginPageProps) {
             onClick={onLoginClick}
             style={{ width: '100%' }}
           >
-            로그인하기
+            로그인
           </CTA01>
           <Button05
             size="large"

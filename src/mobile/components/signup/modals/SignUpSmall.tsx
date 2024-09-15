@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import Typography from '../../../../assets/Typography';
 import ModalSmall from '../../base/ModalSmall';
 
-
 // ref: https://velog.io/@chlgdnd/%EB%AA%A8%EB%8B%AC-%EC%B0%BD-Fade-out-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0Feat.-React-Typescript
 
 const TextWrapper = styled.div`
@@ -135,13 +134,23 @@ export default function SignUpSmall(props: ModalProps) {
       <ModalSmall onClickToggleModal={onClickModal}>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <path d="M5.0992 9.08268C7.35437 9.08268 9.18254 7.25451 9.18254 4.99935C9.18254 2.74419 7.35437 0.916016 5.0992 0.916016C2.84404 0.916016 1.01587 2.74419 1.01587 4.99935C1.01587 7.25451 2.84404 9.08268 5.0992 9.08268Z" stroke="#D85888" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d ="M6.46032 3.97852L4.58879 5.85004L3.7381 4.99935" stroke="#D85888" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              d="M5.0992 9.08268C7.35437 9.08268 9.18254 7.25451 9.18254 4.99935C9.18254 2.74419 7.35437 0.916016 5.0992 0.916016C2.84404 0.916016 1.01587 2.74419 1.01587 4.99935C1.01587 7.25451 2.84404 9.08268 5.0992 9.08268Z"
+              stroke="#D85888"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6.46032 3.97852L4.58879 5.85004L3.7381 4.99935"
+              stroke="#D85888"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
         <TextWrapper>
-          <Typography size="10px" bold='500' color="#D85888">
-            새로운 인증번호를 발송했습니다.
+          <Typography size="10px" bold="500" color="#D85888">
+            새로운 인증번호가 전송되었어요.
           </Typography>
         </TextWrapper>
       </ModalSmall>

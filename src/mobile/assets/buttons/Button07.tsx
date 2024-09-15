@@ -11,7 +11,7 @@ export interface Button07Props extends React.ComponentPropsWithoutRef<'button'> 
 function Button07(props: Button07Props) {
   const {
     title = '이중전공 합격생',
-    content = '이중전공 진입에 성공했고, 다양한 정보를 공유하고 싶어요!',
+    content = '이중전공 진입에 성공했고, 다양한 정보를 공유하고 싶어요.',
     state = 'default',
     ...rest
   } = props;
@@ -36,7 +36,7 @@ const MainWrapper = styled.button<Button07Props>`
   width: 91.11vw; // This was already set to vw
   height: 25vw; // Converted from 90px
   box-sizing: border-box;
-  
+
   padding: 2.77vw 2.77vw 2.77vw 6.11vw; // This is already in vw
   border: ${(props) => (props.state === 'clicked' ? '0.28vw solid #D85888' : 'none')};
   display: flex;
@@ -60,13 +60,11 @@ const TextWrapper = styled.div`
 const ImageWrapper = styled.div`
   width: 12.5vw; // Converted from 45px
   height: 19.444vw; // Converted from 70px
-  & > img{
+  & > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 `;
-
-
 
 export default Button07;

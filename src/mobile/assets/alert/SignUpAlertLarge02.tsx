@@ -58,11 +58,10 @@ function SignUpAlertMobileLarge02({
       <div style={{ height: '20.833vw' }}></div>
       <AlertIconExclamation width="22.22vw" height="22.22vw" />
       <TextWrapper>
-        <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}>
-          인증번호를 받을
-        </Typography>
+        <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '4.44vw' }}></Typography>
         <Typography size={'4.44vw'} bold={'700'} color="#141414" style={{ marginTop: '12px' }}>
-          고려대 이메일 주소를 입력해주세요!
+          인증번호를 받을 <br />
+          고려대학교 이메일 주소를 입력해주세요.
         </Typography>
         <Typography size={'3.33vw'} color="#141414" style={{ marginTop: '4.44vw' }}>
           고려대학교 이메일 주소를 정확히 기입해주세요.

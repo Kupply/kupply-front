@@ -92,7 +92,7 @@ export function SignUp5Page() {
             onClickCheck();
           }}
         >
-          아래 약관에 모두 동의합니다
+          아래 약관에 모두 동의합니다.
         </CheckBoxButton01>
       </TextTitle>
       <ScrollLarge isChecked={scrollActive}>
@@ -154,19 +154,18 @@ export function SignUp5Complete() {
   //넘겨받은 데이터가 없는 경우 올바른 경로가 아니므로 main으로 돌려보낸다.
   //회원가입 때 입력된 정보는 회원가입이 완료되면 지워져야 함.
   useEffect(() => {
-    if(!isMountedRef.current){
+    if (!isMountedRef.current) {
       isMountedRef.current = true;
       return;
     }
 
-    if (sessionStorage.getItem('toComplete') !== 'true'){
+    if (sessionStorage.getItem('toComplete') !== 'true') {
       sessionStorage.clear();
       navigate('/');
-    } else{
+    } else {
       sessionStorage.clear();
     }
   }, []);
-
 
   return (
     <Wrapper2>
@@ -179,7 +178,7 @@ export function SignUp5Complete() {
         <Typography size="1.25vw" bold="700" style={{ opacity: '0.8', lineHeight: '125%', fontWeight: '500' }}>
           이제 쿠플라이의 회원이 되셨습니다.
           <br />
-          로그인 후, 다양한 쿠플라이의 서비스를 이용해보세요!
+          로그인 후, 쿠플라이의 다양한 서비스를 이용해보세요.
         </Typography>
       </div>
       <div>
@@ -197,7 +196,7 @@ export function SignUp5Complete() {
       <div style={{ transform: 'translateY(-11.51vw)' }}>
         <CTA01 state="default" onClick={handleNext}>
           <Typography size="1.042vw" bold="700" color="var(--White, #FFF)">
-            로그인하고 쿠플라이로 이동하기
+            로그인하고 쿠플라이 이용하기
           </Typography>
         </CTA01>
       </div>

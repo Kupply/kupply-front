@@ -57,8 +57,8 @@ function Banner03(props: Banner03Props) {
         image: '../../../designImage/mobile/banner/Banner3_6.png',
       },
       {
-        buttonText: '자소서 엿보기',
-        title: ['나의 경쟁자들의', '자소서 엿보기'],
+        buttonText: '합격자료',
+        title: ['이중전공', '최신 합격 컷 모아보기'],
         text: [],
         image: '../../../designImage/mobile/banner/Banner3_7.png',
       },
@@ -66,20 +66,20 @@ function Banner03(props: Banner03Props) {
     [
       {
         buttonText: '마이보드',
-        title: ['경쟁자들 중', '나의 등수 보기'],
-        text: ['실시간으로 변하는 지원자들 중', '나의 등수를 예측해드릴게요.'],
+        title: ['지원자들 중', '나의 등수 보기'],
+        text: ["'지원자들 중 나의 학점 백분위를'", '확인하세요.'],
         image: '../../../designImage/mobile/banner/Banner3_1.png',
       },
       {
         buttonText: '합격자료',
-        title: ['자기소개서', '키워드 둘러보기'],
-        text: ['합격 자소서 키워드를 통해 더 나은', '자기소개서 작성을 도와드릴게요.'],
+        title: ['학업계획서', '키워드 둘러보기'],
+        text: ['합격자 공통 키워드를 참고하여,', '나의 학업계획서를 작성해보세요.'],
         image: '../../../designImage/mobile/banner/Banner3_2.png',
       },
       {
-        buttonText: '실시간 모의지원 현황',
-        title: ['실시간 경쟁률', '살펴보기'],
-        text: ['이번학기 나의 희망 학과(부)의', '실시간 지원자 수와 경쟁률을', '제공해드릴게요.'],
+        buttonText: '실시간 지원현황',
+        title: ['실시간 모의지원', '경쟁률 살펴보기'],
+        text: ['쿠플라이의 모의지원을 통해', '실제 경쟁률을 예측해보세요.'],
         image: '../../../designImage/mobile/banner/Banner3_3.png',
       },
     ],
