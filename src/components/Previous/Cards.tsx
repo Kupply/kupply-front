@@ -31,7 +31,6 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
   const [sortCriterion, setSortCriterion] = useState('가나다순');
   const navigate = useNavigate();
-  const prevSemester = '23-2';
 
   // 이게 원래 fetch function 이지만 /archive access를 위해 임시로 fetch function 만듦
   const fetch = async () => {
@@ -52,7 +51,7 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
               engName: c.engName,
               filter: c.filter,
               TO: c.TO,
-              semester: prevSemester,
+              semester: res.semester,
               avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
               minPass: res.passNum === 0 ? 0 : res.min,
               passRate: res.applyNum === 0 ? -1 : +((res.passNum / res.applyNum) * 100).toFixed(2),
@@ -183,6 +182,8 @@ const Sort = styled.div`
 `;
 
 const mockCards = [
+  // korName, engName, filter, TO만 실제로 반영되는 값.
+  // passRate, avgPass, minPass, semester는 받아노는 값으로 대체됨.
   {
     korName: '경영대학 경영학과',
     engName: 'Business School',

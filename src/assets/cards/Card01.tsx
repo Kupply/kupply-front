@@ -114,7 +114,7 @@ export default function Card01({ korName, engName, TO, avgPass, minPass, passRat
             <MajorNameKor hover={true}>{majorKorName}</MajorNameKor>
             <DepNameEng hover={true}>{engName}</DepNameEng>
           </NameWrapper>
-          <ContentInner style={{ top: '6.93vw', left: '1.98vw' }}>20{semester}R 선발정보</ContentInner>
+          <ContentInner style={{ top: '6.93vw', left: '1.98vw' }}>{semester}R 선발정보</ContentInner>
           <ContentTitle style={{ top: '9.28vw', left: '1.98vw' }}>선발 인원</ContentTitle>
           <ContentInner style={{ top: '10.52vw', left: '1.98vw' }}>{TO}명</ContentInner>
           <ContentTitle style={{ top: '9.28vw', left: '8.80vw' }}>합격률</ContentTitle>
