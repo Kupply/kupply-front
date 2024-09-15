@@ -30,15 +30,11 @@ function LandingMobile() {
       <ApplyTable />
       {isDateInRange ? (
         isApplied ? null : (
-          <BlurBox>
-            <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>
-              모의지원 후 열람 가능합니다.
-            </Typography>
-          </BlurBox>
+          <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>
+            모의지원 후 열람 가능합니다.
+          </Typography>
         )
-      ) : (
-        <BlurBox />
-      )}
+      ) : null}
       <FAQ />
       <MobileFooter />
     </MainWrapper>
