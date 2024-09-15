@@ -72,14 +72,14 @@ const MobileThreeYear = ({
               isClicked={semesterBtnStates[semester]}
               onClick={() => handleSemesterBtnClick(semester)}
             >
-              {semester}
+              {semester}R
             </MobileTabMenuButton>
           ))}
         </EachYearHeadBox>
 
         <Text1Box>
           <Text1>
-            {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 선발정보
+            {getSemesterLabel(semesters[selectedSemesterIndex])}R {majorKoreanName} 선발정보
           </Text1>
           <button
             onClick={() => {
@@ -90,9 +90,7 @@ const MobileThreeYear = ({
           </button>
         </Text1Box>
 
-        <Text2 style={{ position: 'absolute', top: '36.11vw', left: '5vw' }}>
-          {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발인원
-        </Text2>
+        <Text2 style={{ position: 'absolute', top: '36.11vw', left: '5vw' }}>선발인원</Text2>
         <Text3 style={{ position: 'absolute', top: '41.94vw', left: '5vw' }}>{selectedPastData.numOfSelection}명</Text3>
         <Text2 style={{ position: 'absolute', top: '36.11vw', left: '52.22vw' }}>합격률</Text2>
         <Text3 style={{ position: 'absolute', top: '41.11vw', left: '52.22vw' }}>

@@ -92,14 +92,14 @@ const ThreeYear = ({
             isClicked={semesterBtnStates[semester]}
             onClick={() => handleSemesterBtnClick(semester)}
           >
-            {semester}
+            {semester}R
           </SemesterButton>
         ))}
       </EachYearHeadBox>
 
       <Text1Box>
         <Text1>
-          {getSemesterLabel(semesters[selectedSemesterIndex])} {majorKoreanName} 선발정보
+          {getSemesterLabel(semesters[selectedSemesterIndex])}R {majorKoreanName} 선발정보
         </Text1>
         <button
           onClick={() => {
@@ -110,9 +110,7 @@ const ThreeYear = ({
         </button>
       </Text1Box>
 
-      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>
-        {getSemesterLabel(semesters[selectedSemesterIndex]).split('-')[1]} 선발인원
-      </Text2>
+      <Text2 style={{ position: 'absolute', top: '8.56vw', left: '2.5vw' }}>선발인원</Text2>
       <Text3 style={{ position: 'absolute', top: '9.74vw', left: '2.5vw' }}>{selectedPastData.numOfSelection}명</Text3>
       <Text2 style={{ position: 'absolute', top: '8.56vw', left: '12.14vw' }}>합격률</Text2>
       <ToolTip02
