@@ -28,6 +28,18 @@ function LandingMobile() {
       <GoToApply />
       {/* {(isDateInRange || isPeriodPassed) && <ApplyTable />} */}
       <ApplyTable />
+      {/* {isDateInRange ? (
+        isApplied ? null : (
+          <BlurBox>
+            <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>
+              모의지원 후 열람 가능합니다.
+            </Typography>
+          </BlurBox>
+        )
+      ) : (
+        <BlurBox />
+      )} */}
+      {/* 임시로 Blur 안 쓰게 */}
       {isDateInRange ? (
         isApplied ? null : (
           <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>

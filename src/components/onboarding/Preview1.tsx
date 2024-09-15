@@ -41,7 +41,9 @@ function Preview1() {
     const loadData = async () => {
       try {
         const response = await client.get('/landing');
-        setTableData(response.data.data);
+        if (response.data.data.length > 0) {
+          setTableData(response.data.data);
+        }
       } catch (e) {
         alert(e);
       }

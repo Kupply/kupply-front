@@ -15,7 +15,7 @@ import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (�
 import { MajorOptionsKR } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR } from '../../utils/Mappings';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
-import { currentSemesterKey } from '../../common/CurrentSemester';
+import { LastFourSameSemesters } from '../../common/LastFourSameSemesters';
 
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
@@ -224,10 +224,26 @@ const MyBoardPage = () => {
       setPastData2(pastData2Copy);
 
       const curDataCopy = [...curData];
-      // curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1]['2024-1'];
-      // curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2]['2024-1'];
-      curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1][currentSemesterKey];
-      curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2][currentSemesterKey];
+      const lastFourSameSemesters = LastFourSameSemesters;
+      const hopeMajor1LastFourRecruitNum = lastFourSameSemesters.map((semester) => {
+        return recruit[userInfo.hopeMajor1][semester];
+      });
+      const hopeMajor2LastFourRecruitNum = lastFourSameSemesters.map((semester) => {
+        return recruit[userInfo.hopeMajor2][semester];
+      });
+
+      curDataCopy[0].curNumOfSelection = Math.floor(
+        hopeMajor1LastFourRecruitNum
+          .sort((a, b) => a - b)
+          .slice(1, 3)
+          .reduce((a, b) => a + b) / 2,
+      );
+      curDataCopy[1].curNumOfSelection = Math.floor(
+        hopeMajor2LastFourRecruitNum
+          .sort((a, b) => a - b)
+          .slice(1, 3)
+          .reduce((a, b) => a + b) / 2,
+      );
       setCurData(curDataCopy);
 
       // 모의지원 했는지.
@@ -432,6 +448,7 @@ const MyBoardPage = () => {
                   onViewMajor={onViewMajor}
                   userData={userData}
                   curApplyNum={curData[onViewMajor - 1].curApplyNum}
+                  curNumOfSelection={curData[onViewMajor - 1].curNumOfSelection}
                 />
                 <div style={{ marginTop: '0.35vw' }}></div>
                 <MockApply curCompetitionRate={curData[onViewMajor - 1].curCompetitionRate} />

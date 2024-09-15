@@ -3,9 +3,18 @@ import styled from 'styled-components';
 
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
-import { recruit } from '../../common/Recruiting';
 
-const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any; userData: any; curApplyNum: any }) => {
+const Application = ({
+  onViewMajor,
+  userData,
+  curApplyNum,
+  curNumOfSelection,
+}: {
+  onViewMajor: any;
+  userData: any;
+  curApplyNum: any;
+  curNumOfSelection: any;
+}) => {
   function formatTimeTo12HourFormat(date: Date) {
     var hours = date.getHours();
     var minutes: number | string = date.getMinutes();
@@ -23,7 +32,6 @@ const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any;
   };
 
   const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-  const recruitNum = recruit[majorKoreanName]['2024-1'];
 
   return (
     <AppliWrapper>
@@ -37,7 +45,7 @@ const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any;
       <Vector src="designImage/myBoard/MajorBoxVector.svg" alt="vector" style={{ top: '3.05vw' }} />
       <NumberBox style={{ top: '3.59vw' }}>
         <NumberText style={{ color: '#D85888' }}>{curApplyNum}</NumberText>
-        <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;/ {recruitNum}</NumberText>
+        <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;/ {curNumOfSelection}</NumberText>
         <NumberText2>명 정원</NumberText2>
       </NumberBox>
       <Content>

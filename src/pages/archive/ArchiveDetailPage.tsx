@@ -9,12 +9,7 @@ import { recruit } from '../../common/Recruiting';
 import { DBkeywords } from '../../common/Keyword';
 import client from '../../utils/HttpClient';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import {
-  collegeNameMappingByEng as collegeNameMapping,
-  semesterAPIMapping as semesterForAPI,
-  semesterMapping,
-  majorNameMapping,
-} from '../../utils/Mappings';
+import { collegeNameMappingByEng as collegeNameMapping, semesterMapping, majorNameMapping } from '../../utils/Mappings';
 
 // 경쟁률 적용 X (디자인 나와서 고치면서 수정할 예정)
 
@@ -54,7 +49,7 @@ const ArchiveDetailPage = () => {
         const data = APIresponse.data.pastData;
 
         if (data.passedData.passedGPACountArray.length > 0) {
-          const selectionNum = recruit[majorKoreanName][semesterForAPI[activeIdx]] || 0;
+          const selectionNum = recruit[majorKoreanName]['all'] || 0;
 
           setEnoughData(true);
           setNumOfApplication(data.overallData.numberOfData);
@@ -90,7 +85,7 @@ const ArchiveDetailPage = () => {
       const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
       const data = APIresponse.data.pastData;
 
-      const selectionNum = recruit[majorKoreanName][semesterForAPI[idx]] || 0;
+      const selectionNum = recruit[majorKoreanName][semester] || 0;
 
       setEnoughData(true);
       setNumOfApplication(data.overallData.numberOfData);
