@@ -7,7 +7,6 @@ import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import { collegeAPIMappingByKR as collegeAPIMapping } from '../../../utils/Mappings';
 import { majorNameMapping } from '../../../utils/Mappings';
 import { LastThreeSemesters } from '../../../common/LastThreeSemesters';
-
 interface SemesterBtnStates {
   [key: string]: boolean;
   // Use an index signature to allow dynamic keys

@@ -14,6 +14,8 @@ import client from '../../utils/HttpClient';
 import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
 import { MajorOptionsKR } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR } from '../../utils/Mappings';
+import { LastThreeSemesters } from '../../common/LastThreeSemesters';
+import { currentSemesterKey } from '../../common/CurrentSemester';
 
 const MyBoardPage = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
@@ -189,6 +191,9 @@ const MyBoardPage = () => {
       const APIresponse = await client.get('/user/getMe');
       const userInfo = APIresponse.data.data.user;
 
+      // Fetch the last three semesters dynamically
+      const lastThreeSemesters = LastThreeSemesters;
+
       setUserData((prevUserData) => ({
         ...prevUserData,
         userName: userInfo.name,
@@ -207,20 +212,22 @@ const MyBoardPage = () => {
 
       // 학기 별 모집인원 수
       const pastData1Copy = [...pastData1];
-      pastData1Copy[0].numOfSelection = recruit[userInfo.hopeMajor1]['2023-2'];
-      pastData1Copy[1].numOfSelection = recruit[userInfo.hopeMajor1]['2023-1'];
-      pastData1Copy[2].numOfSelection = recruit[userInfo.hopeMajor1]['2022-2'];
+      pastData1Copy[0].numOfSelection = recruit[userInfo.hopeMajor1][lastThreeSemesters[0]];
+      pastData1Copy[1].numOfSelection = recruit[userInfo.hopeMajor1][lastThreeSemesters[1]];
+      pastData1Copy[2].numOfSelection = recruit[userInfo.hopeMajor1][lastThreeSemesters[2]];
       setPastData1(pastData1Copy);
 
       const pastData2Copy = [...pastData2];
-      pastData2Copy[0].numOfSelection = recruit[userInfo.hopeMajor2]['2023-2'];
-      pastData2Copy[1].numOfSelection = recruit[userInfo.hopeMajor2]['2023-1'];
-      pastData2Copy[2].numOfSelection = recruit[userInfo.hopeMajor2]['2022-2'];
+      pastData2Copy[0].numOfSelection = recruit[userInfo.hopeMajor2][lastThreeSemesters[0]];
+      pastData2Copy[1].numOfSelection = recruit[userInfo.hopeMajor2][lastThreeSemesters[1]];
+      pastData2Copy[2].numOfSelection = recruit[userInfo.hopeMajor2][lastThreeSemesters[2]];
       setPastData2(pastData2Copy);
 
       const curDataCopy = [...curData];
-      curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1]['2024-1'];
-      curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2]['2024-1'];
+      // curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1]['2024-1'];
+      // curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2]['2024-1'];
+      curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1][currentSemesterKey];
+      curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2][currentSemesterKey];
       setCurData(curDataCopy);
 
       // 모의지원 했는지.
@@ -254,7 +261,8 @@ const MyBoardPage = () => {
   }, [isLogined]);
 
   const getPastData = async () => {
-    const semester = ['2023-2', '2023-1', '2022-2'];
+    // const semester = ['2023-2', '2023-1', '2022-2'];
+    const semester = LastThreeSemesters; // Fetch last three semesters dynamically
     const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
     let hopeMajor2 = '';
     if (userData.hopeMajor2 !== '희망 없음') {
@@ -317,17 +325,21 @@ const MyBoardPage = () => {
   const getMyStageData = async () => {
     const APIresponse = await client.get('/dashboard/myStage');
     const data = APIresponse.data.data;
+
+    // Get the last three semesters dynamically
+    const semester = LastThreeSemesters;
+
     if (userData.hopeMajor1 && userData.hopeMajor2) {
       setMyStageData([
         {
           majorName: userData.hopeMajor1,
-          recruitNum: recruit[userData.hopeMajor1]['2023-2'] || 0,
+          recruitNum: recruit[userData.hopeMajor1][semester[0]] || 0, // Fetch for the latest semester dynamically
           applyNum: data[0].applyNum,
           rank: data[0].rank,
         },
         {
           majorName: userData.hopeMajor2,
-          recruitNum: recruit[userData.hopeMajor2]['2023-2'] || 0,
+          recruitNum: recruit[userData.hopeMajor2][semester[0]] || 0,
           applyNum: data[1].applyNum,
           rank: data[1].rank,
         },

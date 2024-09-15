@@ -80,7 +80,13 @@ const ArchiveDetailPage = () => {
     }
 
     try {
-      const semester = semesterForAPI[idx];
+      const semesterStr = semesterMapping[idx];
+      let semester;
+      if (semesterStr === '모든 학기 누적') {
+        semester = 'all';
+      } else {
+        semester = semesterStr.slice(0, -1);
+      }
       const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
       const data = APIresponse.data.pastData;
 

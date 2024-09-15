@@ -8,7 +8,6 @@ import { majorNameMapping } from '../../utils/Mappings';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
 import ToolTip02 from '../../assets/toolTips/Tooltip02';
-
 interface SemesterBtnStates {
   [key: string]: boolean;
   // Use an index signature to allow dynamic keys
