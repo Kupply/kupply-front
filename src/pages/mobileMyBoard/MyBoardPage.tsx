@@ -18,7 +18,7 @@ import { collegeAPIMappingByKR } from '../../utils/Mappings';
 import MobileHeader from '../../mobile/assets/base/Header';
 import MobileFooter from '../../mobile/assets/base/Footer';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
-import { currentSemesterKey } from '../../common/CurrentSemester';
+import { LastFourSameSemesters } from '../../common/LastFourSameSemesters';
 
 const MobileMyBoard = () => {
   const [onViewMajor, setOnViewMajor] = useState<number>(1); // (1): 1지망 (2): 2지망
@@ -196,8 +196,26 @@ const MobileMyBoard = () => {
       setPastData2(pastData2Copy);
 
       const curDataCopy = [...curData];
-      curDataCopy[0].curNumOfSelection = recruit[userInfo.hopeMajor1][currentSemesterKey];
-      curDataCopy[1].curNumOfSelection = recruit[userInfo.hopeMajor2][currentSemesterKey];
+      const lastFourSameSemesters = LastFourSameSemesters;
+      const hopeMajor1LastFourRecruitNum = lastFourSameSemesters.map((semester) => {
+        return recruit[userInfo.hopeMajor1][semester];
+      });
+      const hopeMajor2LastFourRecruitNum = lastFourSameSemesters.map((semester) => {
+        return recruit[userInfo.hopeMajor2][semester];
+      });
+
+      curDataCopy[0].curNumOfSelection = Math.floor(
+        hopeMajor1LastFourRecruitNum
+          .sort((a, b) => a - b)
+          .slice(1, 3)
+          .reduce((a, b) => a + b) / 2,
+      );
+      curDataCopy[1].curNumOfSelection = Math.floor(
+        hopeMajor2LastFourRecruitNum
+          .sort((a, b) => a - b)
+          .slice(1, 3)
+          .reduce((a, b) => a + b) / 2,
+      );
       setCurData(curDataCopy);
 
       // 모의지원 했는지.
@@ -397,6 +415,7 @@ const MobileMyBoard = () => {
             onViewMajor={onViewMajor}
             userData={userData}
             curApplyNum={curData[onViewMajor - 1].curApplyNum}
+            curNumOfSelection={curData[onViewMajor - 1].curNumOfSelection}
           />
           <MobileMockApply curCompetitionRate={curData[onViewMajor - 1].curCompetitionRate} />
           <MobileThreeYear onViewMajor={onViewMajor} userData={userData} pastData1={pastData1} pastData2={pastData2} />

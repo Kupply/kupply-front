@@ -2,8 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
-import { recruit } from '../../../common/Recruiting';
-import { currentSemesterKey } from '../../../common/CurrentSemester';
 
 function formatTimeTo12HourFormat(date: Date) {
   var hours = date.getHours();
@@ -20,10 +18,12 @@ const MobileApplication = ({
   onViewMajor,
   userData,
   curApplyNum,
+  curNumOfSelection,
 }: {
   onViewMajor: any;
   userData: any;
   curApplyNum: any;
+  curNumOfSelection: any;
 }) => {
   const [updateTime, setUpdateTime] = useState(formatTimeTo12HourFormat(new Date()));
   const handleClick = () => {
@@ -31,7 +31,6 @@ const MobileApplication = ({
   };
 
   const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-  const recruitNum = recruit[majorKoreanName][currentSemesterKey];
 
   return (
     <ApplyWrapper>
@@ -79,7 +78,7 @@ const MobileApplication = ({
 
         <NumberBox style={{ top: '14.72vw' }}>
           <NumberText style={{ color: '#D85888' }}>{curApplyNum}</NumberText>
-          <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;/ {recruitNum}</NumberText>
+          <NumberText style={{ color: 'rgba(67, 67, 67, 0.80)' }}>&nbsp;/ {curNumOfSelection}</NumberText>
           <NumberText2>&nbsp; 명 정원</NumberText2>
         </NumberBox>
         <Content>
