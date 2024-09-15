@@ -139,9 +139,10 @@ function LandingPage() {
 
   const loadData = async () => {
     try {
-      // const response = await axios.get('http://localhost:8080/landing');
       const response = await client.get('/landing');
-      setTableData(response.data.data);
+      if (response.data.data.length > 0) {
+        setTableData(response.data.data);
+      }
     } catch (e) {
       alert(e);
     }
@@ -185,15 +186,15 @@ function LandingPage() {
       ) : (
         <MainWrapper>
           <Side>
-            <ProfileBox 
-              userData={userData} 
+            <ProfileBox
+              userData={userData}
               isApplied={isApplied}
               isOpenEditModal={isOpenEditModal}
               setOpenEditModal={setOpenEditModal}
               closeEditModal={closeEditModal}
               onClickEditModal={onClickEditModal}
               locationUsed="Landing"
-              />
+            />
           </Side>
           <Content>
             <Banner
