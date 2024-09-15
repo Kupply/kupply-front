@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
 import { recruit } from '../../../common/Recruiting';
+import { currentSemesterKey } from '../../../common/CurrentSemester';
 
 function formatTimeTo12HourFormat(date: Date) {
   var hours = date.getHours();
@@ -30,7 +31,7 @@ const MobileApplication = ({
   };
 
   const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-  const recruitNum = recruit[majorKoreanName]['2024-1'];
+  const recruitNum = recruit[majorKoreanName][currentSemesterKey];
 
   return (
     <ApplyWrapper>

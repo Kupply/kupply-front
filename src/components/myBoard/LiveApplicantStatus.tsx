@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import { recruit } from '../../common/Recruiting';
+import { currentSemesterKey } from '../../common/CurrentSemester';
 
 const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any; userData: any; curApplyNum: any }) => {
   function formatTimeTo12HourFormat(date: Date) {
@@ -23,7 +24,7 @@ const Application = ({ onViewMajor, userData, curApplyNum }: { onViewMajor: any;
   };
 
   const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
-  const recruitNum = recruit[majorKoreanName]['2024-1'];
+  const recruitNum = recruit[majorKoreanName][currentSemesterKey];
 
   return (
     <AppliWrapper>
