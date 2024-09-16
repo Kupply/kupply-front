@@ -133,9 +133,55 @@ export function useSignUp3Verification() {
   return { complete };
 }
 
-export function useSignUp4Handler() {
+export function useSignUp4CandidateHandler() {
   const [gpaState, setGpaState] = useState<inputState>('incomplete');
-  const [semesterState, setSemesterState] = useState<inputState>('complete');
+  const [majorState, setMajorState] = useState<inputState>('incomplete');
+  const [complete, setComplete] = useState(false);
+  const [next, setNext] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  // 먼저 모두 찼는지 확인 - error은 complete된걸 imply한다 VerificationForm에서 확인가능
+  useEffect(() => {
+    if ((gpaState === 'complete' || gpaState === 'error') && majorState === 'complete') setComplete(true);
+  }, [gpaState, majorState]);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem('role')) navigate('/');
+    sessionStorage.removeItem('secondMajor');
+    sessionStorage.removeItem('passGPA');
+    sessionStorage.removeItem('passSemester');
+  }, []);
+
+  // buttonActive에서만 작동
+  const handleNext = () => {
+    if (gpaState === 'error') alert('유효한 학점을 입력해주세요.');
+    if (gpaState === 'complete') {
+      setNext(true);
+      Promise.resolve().then(() => {
+        navigate('/signup5');
+      });
+    }
+  };
+
+  const handlePrev = () => {
+    navigate('/signup4');
+  };
+
+  return {
+    gpaState,
+    setGpaState,
+    majorState,
+    setMajorState,
+    complete,
+    next,
+    handleNext,
+    handlePrev,
+  };
+}
+
+export function useSignUp4PasserHandler() {
+  const [gpaState, setGpaState] = useState<inputState>('incomplete');
+  const [semesterState, setSemesterState] = useState<inputState>('incomplete');
   const [majorState, setMajorState] = useState<inputState>('incomplete');
   const [complete, setComplete] = useState(false);
   const [next, setNext] = useState<boolean>(false);

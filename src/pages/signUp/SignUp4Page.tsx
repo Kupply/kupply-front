@@ -10,7 +10,7 @@ import Button03 from '../../assets/buttons/Button03';
 import { UserInput } from '../../components/signUp/UserInput';
 import { UserInputText } from '../../components/signUp/UserInputText';
 import { GPAVerification, SemesterVerification } from '../../components/signUp/VerificationForm';
-import { useSignUp4Handler } from '../../utils/SignUpFunctions';
+import { useSignUp4CandidateHandler, useSignUp4PasserHandler } from '../../utils/SignUpFunctions';
 import { useEffect, useState } from 'react';
 
 export function SignUp4Page() {
@@ -102,7 +102,7 @@ export function SignUp4Page() {
 export type inputState = 'incomplete' | 'error' | 'complete';
 
 export function SignUp4PageCandidate() {
-  const { setGpaState, setSemesterState, setMajorState, complete, next, handleNext, handlePrev } = useSignUp4Handler();
+  const { setGpaState, setMajorState, complete, next, handleNext, handlePrev } = useSignUp4CandidateHandler();
 
   return (
     <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
@@ -129,7 +129,8 @@ export function SignUp4PageCandidate() {
 /* ---------------------------------------- */
 
 export function SignUp4PagePasser() {
-  const { setGpaState, setSemesterState, setMajorState, complete, next, handleNext, handlePrev } = useSignUp4Handler();
+  const { setGpaState, setSemesterState, setMajorState, complete, next, handleNext, handlePrev } =
+    useSignUp4PasserHandler();
 
   return (
     <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
