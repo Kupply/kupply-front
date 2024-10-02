@@ -4,9 +4,6 @@ import styled from 'styled-components';
 import Typography from '../OldTypography';
 import { TableUnique } from 'typeorm';
 
-// 기존 코드 간소화 vw 변환
-// px -> vw 대충 변환해서 아직까지는 잘 작동 X
-
 type Rank = '01' | '02' | '03' | '04';
 type StudentData = {
   name: string;
@@ -83,18 +80,25 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}&nbsp; </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 지원자들 중</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
-                <PercentText>%</PercentText>
+                <DefaultText style={{ fontWeight: '700' }}> {MyName}&nbsp; 님의 학점은</DefaultText>
               </span>
             </DefaultTextBox>
+            <DefaultTextBox2>
+              <span>
+                <DefaultText style={{ fontWeight: '400', color: 'rgba(67, 67, 67, 0.80)' }}>상위</DefaultText>
+              </span>
+              <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <NumText>{myPercentile.toFixed(0)}</NumText>
+                <PercentText>%</PercentText>
+              </span>
+            </DefaultTextBox2>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -130,18 +134,25 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}&nbsp; </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 지원자들 중</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
-                <PercentText>%</PercentText>
+                <DefaultText style={{ fontWeight: '700' }}> {MyName}&nbsp; 님의 학점은</DefaultText>
               </span>
             </DefaultTextBox>
+            <DefaultTextBox2>
+              <span>
+                <DefaultText style={{ fontWeight: '400', color: 'rgba(67, 67, 67, 0.80)' }}>상위</DefaultText>
+              </span>
+              <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <NumText>{myPercentile.toFixed(0)}</NumText>
+                <PercentText>%</PercentText>
+              </span>
+            </DefaultTextBox2>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -179,18 +190,25 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}&nbsp; </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 지원자들 중</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
-                <PercentText>%</PercentText>
+                <DefaultText style={{ fontWeight: '700' }}> {MyName}&nbsp; 님의 학점은</DefaultText>
               </span>
             </DefaultTextBox>
+            <DefaultTextBox2>
+              <span>
+                <DefaultText style={{ fontWeight: '400', color: 'rgba(67, 67, 67, 0.80)' }}>상위</DefaultText>
+              </span>
+              <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <NumText>{myPercentile.toFixed(0)}</NumText>
+                <PercentText>%</PercentText>
+              </span>
+            </DefaultTextBox2>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -226,18 +244,25 @@ const MyStageChart: React.FC<myStageData> = (data) => {
             <Bar src="../../designImage/tabMenu/TabMenu05Bar.svg" alt="Vector" />
             <DefaultTextBox>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor} </DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}> 이중전공 지원자들 중&nbsp;</DefaultText>
+                <DefaultText style={{ fontWeight: '700' }}>{HopeMajor}&nbsp; </DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 이중전공</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <DefaultText style={{ fontWeight: '700' }}>{MyName}님의 학점</DefaultText>
-                <DefaultText style={{ fontWeight: '400' }}>은, 상위</DefaultText>
+                <DefaultText style={{ fontWeight: '400' }}> 지원자들 중</DefaultText>
               </span>
               <span style={{ display: 'flex' }}>
-                <NumText>{myPercentile.toFixed(2)}&nbsp;</NumText>
-                <PercentText>%</PercentText>
+                <DefaultText style={{ fontWeight: '700' }}> {MyName}&nbsp; 님의 학점은</DefaultText>
               </span>
             </DefaultTextBox>
+            <DefaultTextBox2>
+              <span>
+                <DefaultText style={{ fontWeight: '400', color: 'rgba(67, 67, 67, 0.80)' }}>상위</DefaultText>
+              </span>
+              <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <NumText>{myPercentile.toFixed(0)}</NumText>
+                <PercentText>%</PercentText>
+              </span>
+            </DefaultTextBox2>
           </DefaultWrapper>
         </MainWrapper>
       );
@@ -304,18 +329,28 @@ const TextBoxColor = styled.div`
 //////////////// Default ////////////////
 
 const DefaultWrapper = styled.div`
-  position: absolute;
-  width: 21.51vw; // 413px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.3vw;
+  width: 15vw; // 413px;
   height: 4.91vw;
 
-  left: 39.08vw;
+  //left: 39.08vw;
+  margin-left: -2vw;
   //border: 1px solid black;
 `;
 
 const DefaultTextBox = styled.div`
   position: absolute;
-  top: 0.25vw;
+  top: 0.73vw;
   left: 1.25vw;
+`;
+
+const DefaultTextBox2 = styled.div`
+  position: relative;
+  text-align: right;
+  top: 0.73vw;
 `;
 
 const DefaultText = styled.div`
@@ -335,17 +370,17 @@ const NumText = styled.div`
   font-size: 2.5vw;
   font-style: normal;
   font-weight: 700;
-  line-height: 104.167%;
+  line-height: 120%;
   margin: 0;
 `;
 
 const PercentText = styled.div`
   color: rgba(67, 67, 67, 0.8);
   font-family: Pretendard;
-  font-size: 2.5vw;
+  font-size: 2.08vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 104.167%;
+  line-height: 120%;
   margin: 0;
 `;
 
