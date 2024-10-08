@@ -61,6 +61,23 @@ const getOrCreateTooltip = (chart: any) => {
     tooltipEl.style.transform = 'translate(-50%, 0)';
     tooltipEl.style.transition = 'all .1s ease';
 
+    tooltipEl.style.fontSize = '1.04vw';
+
+    // 말풍선의 화살표 만들기
+    const arrow = document.createElement('div');
+    arrow.style.content = '';
+    arrow.style.position = 'absolute';
+    arrow.style.width = '0';
+    arrow.style.height = '0';
+    arrow.style.borderLeft = '10px solid transparent';
+    arrow.style.borderRight = '10px solid transparent';
+    arrow.style.borderTop = '10px solid rgba(255, 255, 255, 1)'; // 말풍선의 화살표 색상
+    arrow.style.bottom = '-8px';
+    arrow.style.left = '50%';
+    arrow.style.transform = 'translateX(-50%)';
+
+    tooltipEl.appendChild(arrow);
+
     const table = document.createElement('table');
     table.style.margin = '5px';
 

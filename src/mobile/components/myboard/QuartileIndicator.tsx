@@ -21,7 +21,7 @@ const MobileQuartileIndicator = ({
     myPercentile = 1;
   }
 
-  const name = userData.userName;
+  const name = userData.userNickname;
   const major = myStageData.majorName;
 
   return (
@@ -86,7 +86,7 @@ const MobileQuartileIndicator = ({
             </ContentText>
           </ContentBox>
           <PercentBox>
-            <NumText>{myPercentile.toFixed(2)}</NumText>
+            <NumText>{myPercentile.toFixed(0)}</NumText>
             <PercentText>%</PercentText>
           </PercentBox>
         </BodyBodyBox>
@@ -232,7 +232,7 @@ const Icon = styled.img`
 
 const BlurBox = styled.div`
   width: 91.11vw;
-  height: 59.44vw;
+  height: 62vw;
   box-sizing: border-box;
   padding-top: 10vw;
   display: flex;

@@ -78,7 +78,9 @@ export default function TableData(props: TableDataProps) {
 
           <PastPassedRateCell>{pastPassedRate < 0 ? '데이터 수집 중' : pastPassedRate + ' %'} </PastPassedRateCell>
           <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean}</PastMeanCell>
-          <InterestCell>{interest}</InterestCell>
+          <InterestCell>
+            <Heartimg src="/designImage/toolTips/Heart.svg" alt="Heart icon" /> {interest}
+          </InterestCell>
         </Wrapper>
       ) : (
         <Wrapper>
@@ -111,7 +113,10 @@ export default function TableData(props: TableDataProps) {
           <CompetitionCell>{competition} : 1</CompetitionCell>
           <PastPassedRateCell>{pastPassedRate < 0 ? '데이터 수집 중' : pastPassedRate + ' %'} </PastPassedRateCell>
           <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean}</PastMeanCell>
-          <InterestCell>{interest}</InterestCell>
+          <InterestCell>
+            <Heartimg src="/designImage/toolTips/Heart.svg" alt="Heart icon" />
+            {interest}
+          </InterestCell>
         </Wrapper>
       )}
     </>
@@ -205,8 +210,7 @@ const CompetitionCell = styled.div`
 `;
 
 const AppliedCompeteBlur = styled.text`
-  width: 18vw;
-
+  width: 24%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,7 +224,7 @@ const AppliedCompeteBlur = styled.text`
 `;
 
 const PastPassedRateCell = styled.div`
-  width: 14%;
+  width: 19%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,7 +240,7 @@ const PastMeanCell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18%;
+  width: 12%;
   text-align: center;
   font-family: Pretendard;
   font-size: 1.25vw;
@@ -248,7 +252,7 @@ const PastMeanCell = styled.div`
 const InterestCell = styled.div`
   position: relative;
   display: flex;
-  width: 6%;
+  width: 11%;
   gap: 0.16vw;
   justify-content: center;
   align-items: center;
@@ -258,4 +262,11 @@ const InterestCell = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 120%; /* 100% */
+`;
+
+const Heartimg = styled.img`
+  width: 1.35vw;
+  height: 1.35vw;
+  margin-right: 0.58vw;
+  flex-shrink: 0;
 `;
