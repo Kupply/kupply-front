@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import CTA02 from '../../assets/CTAs/CTA02';
+import ToolTip06 from '../../assets/toolTips/ToolTip06';
 import Typography from '../../assets/Typography';
 import TableData from '../../assets/landingpage/TableData';
 import { ITableData } from '../../pages/landing/LandingPage';
@@ -14,6 +15,16 @@ type tableProps = {
 };
 
 const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
+  const [svgHover, setSvgHover] = useState(false);
+
+  const onSvgHover = () => {
+    setSvgHover(true);
+  };
+
+  const onSvgHoverOut = () => {
+    setSvgHover(false);
+  };
+
   //표의 데이터는 최초 한 번만 렌더링하도록 한다.
   const data = props.tableData;
   const ascendingData = data.map((item) => ({ ...item, rank: data.length + 1 - item.rank })).reverse();
@@ -129,7 +140,17 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
         <HeaderData>실시간 경쟁률</HeaderData>
         <HeaderData>지난 합격률</HeaderData>
         <HeaderData>지난 합격자 평균</HeaderData>
-        <HeaderData>관심</HeaderData>
+        <HeaderData>
+          관심
+          <ToolTip06
+            onMouseEnter={onSvgHover}
+            onMouseLeave={onSvgHoverOut}
+            hoverState={svgHover}
+            style={{ marginLeft: '0.18vw' }}
+          >
+            사용자들의 희망 이중전공을 기준으로 집계된 것으로, <br /> 실제 지원과 차이가 있을 수 있습니다.
+          </ToolTip06>
+        </HeaderData>
       </TableHeader>
       {isShowAll && order === 'descending'
         ? data && data.map((row) => <TableData {...row}></TableData>)
