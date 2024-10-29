@@ -27,7 +27,7 @@ const ArchiveDetailPage = () => {
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [enoughData, setEnoughData] = useState<boolean>(false); // false 일시적 수정
+  const [enoughData, setEnoughData] = useState<boolean>(false);
 
   const [numOfSelection, setNumOfSelection] = useState<number>(0);
   const [numOfApplication, setNumOfApplication] = useState<number>(0);

@@ -79,14 +79,12 @@ const SvgContainer = styled.div`
   width: 70px;
   height: 80px;
 
-  margin-left: 30px;
+  margin-left: 1.5vw;
   position: absolute;
 
-  margin-left: 15px;
-
   & > svg {
-    width: 12px;
-    height: 12px;
+    width: 3vw;
+    height: 3vw;
   }
 `;
 
@@ -95,7 +93,7 @@ const Input = styled.input`
   max-width: 1382px;
   box-sizing: border-box;
   height: 22.22vw;
-  padding-left: 70px;
+  padding-left: 5vw;
   border-radius: 5px;
 
   box-shadow: 0px 10px 30px 0px rgba(20, 20, 20, 0.05);
@@ -105,7 +103,7 @@ const Input = styled.input`
   &::placeholder {
     color: #a8a8a8;
     font-family: Pretendard;
-    font-size: s3.61vw;
+    font-size: 3.61vw;
     font-style: normal;
     font-weight: 500;
     opacity: 0.8;
@@ -134,14 +132,12 @@ const Input = styled.input`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-
-  padding-left: 55px;
-  font-size: 13px;
-  padding-left: 40px;
+  padding-left: 6vw;
+  font-size: 3vw;
   background: #f3f3f3;
 
   &::placeholder {
-    font-size: 13px;
+    font-size: 3vw;
   }
 `;
 
