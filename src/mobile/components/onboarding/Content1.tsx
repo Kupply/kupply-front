@@ -63,7 +63,9 @@ function Content1() {
         </BlurBox>
       ) : isDateInRange ? (
         // 모의지원 기간 내
-        isApplied ? null : (
+        !isApplied ? (
+          <></>
+        ) : (
           <BlurBox>
             <Typography size="3.89vw" bold="700" style={{ textAlign: 'center', lineHeight: '120%', opacity: 0.8 }}>
               지금 희망 전공에 모의지원하고

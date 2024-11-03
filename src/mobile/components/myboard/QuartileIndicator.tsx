@@ -232,7 +232,7 @@ const Icon = styled.img`
 
 const BlurBox = styled.div`
   width: 91.11vw;
-  height: 62vw;
+  height: 66vw;
   box-sizing: border-box;
   padding-top: 10vw;
   display: flex;

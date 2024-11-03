@@ -100,7 +100,7 @@ function Preview1() {
         </>
       ) : isDateInRange ? (
         // 모의지원 기간 내
-        isApplied ? null : (
+        !isApplied ? null : (
           <>
             <Blur />
             <ButtonWrapper>
