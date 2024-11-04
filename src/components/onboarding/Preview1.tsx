@@ -36,8 +36,8 @@ function Preview1() {
     else setisLogined(false);
   }, []);
 
-  //const [tableData, setTableData] = useState<ITableData[]>(dummyData);
-  const [tableData, setTableData] = useState<ITableData[]>([]);
+  const [tableData, setTableData] = useState<ITableData[]>(dummyData);
+  //const [tableData, setTableData] = useState<ITableData[]>([]);
 
   useEffect(() => {
     const loadData = async () => {

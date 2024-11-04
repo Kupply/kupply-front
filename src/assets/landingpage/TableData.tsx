@@ -168,7 +168,7 @@ const InterestNumCell = styled.div`
 const DoubleMajorCell = styled.div`
   display: flex;
   flex-direction: column;
-  width: 18%;
+  width: 19%;
 `;
 
 const RecruitNumberCell = styled.div`
@@ -240,7 +240,7 @@ const PastMeanCell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 12%;
+  width: 13%;
   text-align: center;
   font-family: Pretendard;
   font-size: 1.25vw;
