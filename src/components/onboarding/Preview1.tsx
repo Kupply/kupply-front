@@ -7,6 +7,7 @@ import CTA02 from '../../assets/CTAs/CTA02';
 import client from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import { isDateInRange, isPeriodPassed, currentMonth } from '../../common/ApplicationPeriod';
+import { tab } from '@testing-library/user-event/dist/tab';
 
 export interface ITableData {
   rank: number;
@@ -35,7 +36,8 @@ function Preview1() {
     else setisLogined(false);
   }, []);
 
-  const [tableData, setTableData] = useState<ITableData[]>(dummyData);
+  //const [tableData, setTableData] = useState<ITableData[]>(dummyData);
+  const [tableData, setTableData] = useState<ITableData[]>([]);
 
   useEffect(() => {
     const loadData = async () => {

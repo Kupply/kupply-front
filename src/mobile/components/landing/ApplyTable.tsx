@@ -36,8 +36,8 @@ function ApplyTable() {
     else setisLogined(false);
   }, []);
 
-  const [tableData, setTableData] = useState<ITableData[]>(dummyData); // blur 고친 후에 이것으로 바꾸기
-  // const [tableData, setTableData] = useState<ITableData[]>([]);
+  //const [tableData, setTableData] = useState<ITableData[]>(dummyData); // blur 고친 후에 이것으로 바꾸기
+  const [tableData, setTableData] = useState<ITableData[]>([]);
 
   const loadData = async () => {
     try {
