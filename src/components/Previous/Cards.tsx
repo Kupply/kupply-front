@@ -5,6 +5,8 @@ import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 import Card01 from '../../assets/cards/Card01';
 import DropDown02 from '../../assets/dropdown/DropDown02';
+import { recruit } from '../../common/Recruiting';
+import { getPrevSemester } from '../../common/Semester';
 
 // 정렬 임의로 넣어 둠 (에셋 완성되면 적용할 예정)
 
@@ -32,6 +34,8 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [sortCriterion, setSortCriterion] = useState('가나다순');
   const navigate = useNavigate();
 
+  const prevSemester = getPrevSemester();
+
   // 이게 원래 fetch function 이지만 /archive access를 위해 임시로 fetch function 만듦
   const fetch = async () => {
     try {
@@ -46,11 +50,12 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
         setCards(
           cards.map((c) => {
             const res = data.data.find((ca: any) => ca.name === c.korName);
+            const shortKorName = c.korName.split(' ').length === 2 ? c.korName.split(' ')[1] : c.korName;
             return {
               korName: c.korName,
               engName: c.engName,
               filter: c.filter,
-              TO: c.TO,
+              TO: recruit[shortKorName][prevSemester],
               semester: res.semester,
               avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
               minPass: res.passNum === 0 ? 0 : res.min,
