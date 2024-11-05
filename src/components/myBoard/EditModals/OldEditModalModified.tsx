@@ -386,51 +386,6 @@ export default function EditModal(props: ModalProps) {
               />
             </ContentsWrapper2>
           )}
-          {currentModal === 3 && ( // '희망 지원학기' 버튼 클릭 시
-            <ContentsWrapper2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
-                <SubContentsWrapper>
-                  <ContentsTitle>희망 이중 지원학기 변경하기</ContentsTitle>
-                  <VerifiBoxWrapper>
-                    <VerifiBoxWrapper>
-                      <TextArea
-                        name="semester-1"
-                        value={hopeSemester1}
-                        setValue={setHopeSemester1}
-                        isEntered={true}
-                      ></TextArea>
-                      <TextArea
-                        name="semester-2"
-                        value={hopeSemester2}
-                        setValue={setHopeSemester2}
-                        isEntered={true}
-                      ></TextArea>
-                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
-                        년도
-                      </Typography>
-                      <TextArea
-                        name="semester-3"
-                        value={hopeSemester3}
-                        setValue={setHopeSemester3}
-                        isEntered={true}
-                      ></TextArea>
-                      <Typography size="0.833vw" bold="500" style={{ marginTop: '3.021vw' }}>
-                        학기
-                      </Typography>
-                    </VerifiBoxWrapper>
-                  </VerifiBoxWrapper>
-                </SubContentsWrapper>
-              </div>
-              <MoveButton
-                isOpenModal={isOpenModal}
-                setOpenModal={setOpenModal}
-                onClickSubmit={onClickSubmit}
-                isApplied={isApplied}
-                setIsSubmitted={setIsSubmitted}
-                isGpaChanged={isGpaChanged}
-              />
-            </ContentsWrapper2>
-          )}
         </ModalLarge>
       )}
     </Main>,
