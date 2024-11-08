@@ -65,9 +65,6 @@ export default function EditModal(props: ModalProps) {
   const [GPA1, setGPA1] = useState<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const [GPA2, setGPA2] = useState<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const [GPA3, setGPA3] = useState<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
-  const [hopeSemester1, setHopeSemester1] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
-  const [hopeSemester2, setHopeSemester2] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const [hopeSemester3, setHopeSemester3] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
@@ -81,9 +78,6 @@ export default function EditModal(props: ModalProps) {
   const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
-  const originHopeSemester1 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
-  const originHopeSemester2 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const originHopeSemester3 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const originUserProfilePic = useRef<string>(localStorage.getItem('userProfilePic'));
 
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
@@ -139,18 +133,6 @@ export default function EditModal(props: ModalProps) {
       } else {
         updateData = { ...updateData, newCurGPA: newGpa };
       }
-    }
-    if (
-      originHopeSemester1.current !== hopeSemester1 ||
-      originHopeSemester2.current !== hopeSemester2 ||
-      originHopeSemester3.current !== hopeSemester3
-    ) {
-      const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
-      const year = +(hopeSemester1 + hopeSemester2);
-      const semester = +hopeSemester3;
-      if (year <= 23 || (semester !== 1 && semester !== 2)) {
-        alert('유효한 학기를 입력해주세요!');
-      } else updateData = { ...updateData, newHopeSemester: newHopeSemester };
     }
     if (originUserProfilePic.current !== userProfilePic) {
       updateData = { ...updateData, newProfilePic: userProfilePic };
