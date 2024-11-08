@@ -91,9 +91,6 @@ const SettingsPage = () => {
   const [GPA1, setGPA1] = useState<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const [GPA2, setGPA2] = useState<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const [GPA3, setGPA3] = useState<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
-  const [hopeSemester1, setHopeSemester1] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
-  const [hopeSemester2, setHopeSemester2] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const [hopeSemester3, setHopeSemester3] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
@@ -144,11 +141,9 @@ const SettingsPage = () => {
           localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
           localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
           localStorage.setItem('curGPA', userInfo.curGPA.toFixed(2));
-          localStorage.setItem('hopeSemester', userInfo.hopeSemester);
           localStorage.setItem('isApplied', userInfo.isApplied);
         } else {
           localStorage.setItem('secondMajor', userInfo.secondMajor);
-          localStorage.setItem('passSemester', userInfo.passSemester);
           localStorage.setItem('passGPA', userInfo.passGPA.toFixed(2));
         }
 
@@ -161,9 +156,6 @@ const SettingsPage = () => {
         setGPA1(userInfo.curGPA.toFixed(2).charAt(0));
         setGPA2(userInfo.curGPA.toFixed(2).charAt(2));
         setGPA3(userInfo.curGPA.toFixed(2).charAt(3));
-        setHopeSemester1(userInfo.hopeSemester.charAt(2));
-        setHopeSemester2(userInfo.hopeSemester.charAt(3));
-        setHopeSemester3(userInfo.hopeSemester.charAt(5));
         setUserProfilePic(userInfo.profilePic);
         // setUserProfileLink(userInfo.profileLink);
         setCurrentNickname(userInfo.nickname);
@@ -276,17 +268,11 @@ const SettingsPage = () => {
       alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
       navigate('/settings');
     } else {
-      const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
-      const year = +(hopeSemester1 + hopeSemester2);
-      const semester = +hopeSemester3;
-      if (year <= 23 || (semester !== 1 && semester !== 2)) {
-        alert('유효한 학기를 입력해주세요!');
-      } else {
+       {
         const updateData = {
           newCurGPA: newGpa,
           newHopeMajor1: hopeMajor1,
           newHopeMajor2: hopeMajor2,
-          newHopeSemester: newHopeSemester,
         };
         try {
           // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
