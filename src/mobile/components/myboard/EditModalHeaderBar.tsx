@@ -14,7 +14,7 @@ const buttonData: buttonDataType[] = [
   { id: 'basicMajor', modalId: 0, text: '나의 기본정보' },
   { id: 'interestMajor', modalId: 1, text: '관심 전공' },
   { id: 'currentGPA', modalId: 2, text: '현재 내 학점' },
-  { id: 'hopeSemester', modalId: 3, text: '희망 지원학기'},
+  //{ id: 'hopeSemester', modalId: 3, text: '희망 지원학기'},
 ];
 
 export default function MobileHeaderBar() {

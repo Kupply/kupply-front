@@ -54,9 +54,6 @@ export default function MobileEditModal(props: ModalProps) {
   const [GPA1, setGPA1] = useState<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const [GPA2, setGPA2] = useState<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const [GPA3, setGPA3] = useState<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
-  const [hopeSemester1, setHopeSemester1] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
-  const [hopeSemester2, setHopeSemester2] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const [hopeSemester3, setHopeSemester3] = useState<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
@@ -68,9 +65,6 @@ export default function MobileEditModal(props: ModalProps) {
   const originGPA1 = useRef<string>(localStorage.getItem('curGPA')?.charAt(0) || '');
   const originGPA2 = useRef<string>(localStorage.getItem('curGPA')?.charAt(2) || '');
   const originGPA3 = useRef<string>(localStorage.getItem('curGPA')?.charAt(3) || '');
-  const originHopeSemester1 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(2) || '');
-  const originHopeSemester2 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(3) || '');
-  const originHopeSemester3 = useRef<string>(localStorage.getItem('hopeSemester')?.charAt(5) || '');
   const originUserProfilePic = useRef<string>(localStorage.getItem('userProfilePic'));
 
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
@@ -127,18 +121,7 @@ export default function MobileEditModal(props: ModalProps) {
         updateData = { ...updateData, newCurGPA: newGpa };
       }
     }
-    if (
-      originHopeSemester1.current !== hopeSemester1 ||
-      originHopeSemester2.current !== hopeSemester2 ||
-      originHopeSemester3.current !== hopeSemester3
-    ) {
-      const newHopeSemester = '20' + hopeSemester1 + hopeSemester2 + '-' + hopeSemester3;
-      const year = +(hopeSemester1 + hopeSemester2);
-      const semester = +hopeSemester3;
-      if (year <= 23 || (semester !== 1 && semester !== 2)) {
-        alert('유효한 학기를 입력해주세요!');
-      } else updateData = { ...updateData, newHopeSemester: newHopeSemester };
-    }
+
     if (originUserProfilePic.current !== userProfilePic) {
       updateData = { ...updateData, newProfilePic: userProfilePic };
     }
@@ -388,36 +371,7 @@ export default function MobileEditModal(props: ModalProps) {
               </div>
             </ContentsWrapper2>
           )}
-          {currentModal === 3 && ( // '희망 지원학기' 버튼 클릭 시
-            <ContentsWrapper2>
-              <SubContentsWrapper>
-                <ContentsTitle>희망하는 이중 지원학기 변경하기</ContentsTitle>
-                <VerifiBoxWrapper>
-                  <VerifiBoxWrapper>
-                    <TextAreaBox name="semester-1" value={hopeSemester1} setValue={setHopeSemester1} isEntered={true} />
-                    <TextAreaBox name="semester-2" value={hopeSemester2} setValue={setHopeSemester2} isEntered={true} />
-                    <Typography size="3.33vw" bold="400" style={{ marginTop: '8.021vw' }}>
-                      년도
-                    </Typography>
-                    <TextAreaBox name="semester-3" value={hopeSemester3} setValue={setHopeSemester3} isEntered={true} />
-                    <Typography size="3.33vw" bold="400" style={{ marginTop: '8.021vw' }}>
-                      학기
-                    </Typography>
-                  </VerifiBoxWrapper>
-                </VerifiBoxWrapper>
-              </SubContentsWrapper>
-              <div style={{ marginTop: '60.56vw' }}>
-                <MoveButton
-                  isOpenModal={isOpenModal}
-                  setOpenModal={setOpenModal}
-                  onClickSubmit={onClickSubmit}
-                  isApplied={isApplied}
-                  setIsSubmitted={setIsSubmitted}
-                  isGpaChanged={isGpaChanged}
-                />
-              </div>
-            </ContentsWrapper2>
-          )}
+        
         </ModalLarge>
       )}
     </Main>
