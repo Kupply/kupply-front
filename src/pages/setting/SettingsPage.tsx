@@ -264,10 +264,7 @@ const SettingsPage = () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-    if (Math.abs(oldGpa - newGpa) >= 1.5) {
-      alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
-      navigate('/settings');
-    } else {
+    
        {
         const updateData = {
           newCurGPA: newGpa,
@@ -283,7 +280,7 @@ const SettingsPage = () => {
           console.log(err);
         }
       }
-    }
+    
   };
 
   const fourthSubmit = async () => {
