@@ -104,10 +104,7 @@ export function useSubmit2(){
 
   const thirdSubmit = async () => {
     
-    if (isGpaChange.strange) {
-      alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
-      navigate('/settings');
-    } else {
+    
       const newHopeSemester = '20' + semester.num1 + semester.num2 + '-' + semester.num3;
 
       const updateData = {
@@ -125,7 +122,7 @@ export function useSubmit2(){
       } catch (err) {
         console.log(err);
       }
-    }
+    
   };
   return {thirdSubmit};
 }
