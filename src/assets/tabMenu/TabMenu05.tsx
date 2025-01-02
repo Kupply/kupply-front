@@ -58,17 +58,17 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 도전자님의 학점에 <br />
                 안정적인 지원이에요.
               </TextBoxColor>
-              <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 조금 상향지원이에요.
               </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 매우 높은 상향지원이에요.
@@ -113,17 +113,17 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 도전자님의 학점에 <br />
                 안정적인 지원이에요.
               </TextBoxNormal>
-              <TextBoxColor style={{ color: 'rgba(72, 148, 227, 0.80)', marginLeft: '2.20vw' }}>
+              <TextBoxColor style={{ color: 'rgba(72, 148, 227, 0.80)', marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 조금 상향지원이에요.
               </TextBoxColor>
-              <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 매우 높은 상향지원이에요.
@@ -168,17 +168,17 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 <br />
                 안정적인 지원이에요.
               </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 조금 상향지원이에요.
               </TextBoxNormal>
-              <TextBoxColor style={{ color: 'rgba(216, 88, 136, 0.80)', marginLeft: '1.05vw' }}>
+              <TextBoxColor style={{ color: 'rgba(216, 88, 136, 0.80)', marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 상향지원이에요.
               </TextBoxColor>
-              <TextBoxNormal style={{ marginLeft: '0.53vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 매우 높은 상향지원이에요.
@@ -223,17 +223,17 @@ const MyStageChart: React.FC<myStageData> = (data) => {
                 도전자님의 학점에 <br />
                 안정적인 지원이에요.
               </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '2.20vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 조금 상향지원이에요.
               </TextBoxNormal>
-              <TextBoxNormal style={{ marginLeft: '1.05vw' }}>
+              <TextBoxNormal style={{ marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 상향지원이에요.
               </TextBoxNormal>
-              <TextBoxColor style={{ color: '#E84549', marginLeft: '0.53vw' }}>
+              <TextBoxColor style={{ color: '#E84549', marginLeft: '3.0vw' }}>
                 도전자님의 학점보다
                 <br />
                 매우 높은 상향지원이에요.
