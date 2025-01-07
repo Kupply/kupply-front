@@ -53,7 +53,19 @@ function SignUpAlertLarge01({
           아직 인증번호를 받지 못하셨나요?
         </Typography>
         <Typography color="#141414" style={{ marginTop: '1.67vw' }}>
-          새로운 인증번호를 받기 전, 스팸 메일함을 먼저 확인해주세요.
+          새로운 인증번호를 받기 전, 네이버웍스 계정 생성 여부와 스팸 메일함을 먼저 확인해주세요.
+        </Typography>
+        <Typography size="0.85vw" color="#141414" style={{ marginTop: '0.67vw' }}>
+          <a
+            href="https://docs.google.com/presentation/d/1ZgkrJFw1n3kPsG_sU1iEipcu7BxfPaPd/edit#slide=id.p1"
+            target="_blank"
+            style={{
+              textDecoration: 'underline',
+              color: '#D85888',
+            }}
+          >
+            네이버웍스 계정 생성 방법
+          </a>
         </Typography>
       </TypographyBox>
       <ActionWrapper>
