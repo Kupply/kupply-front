@@ -273,10 +273,7 @@ export const MobileSettingsPage = () => {
       return;
     }
 
-    if (Math.abs(oldGpa - newGpa) >= 1.5) {
-      alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
-      navigate('/settings');
-    } else {
+    
         const updateData = {
           newCurGPA: newGpa,
           newHopeMajor1: hopeMajor1,
@@ -288,17 +285,14 @@ export const MobileSettingsPage = () => {
           window.location.reload(); // 페이지 새로고침.
         } catch (err) {
           console.log(err);
-        }
+        
       }
     }
   const thirdSubmit2 = async () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-    if (Math.abs(oldGpa - newGpa) >= 1.5) {
-      alert('비정상적인 학점 변경이 감지되었습니다. 이메일로 문의바랍니다.');
-      navigate('/settings');
-    } else {
+    
         const updateData = {
           newCurGPA: newGpa,
           newHopeMajor1: hopeMajor1,
@@ -311,7 +305,6 @@ export const MobileSettingsPage = () => {
         } catch (err) {
           console.log(err);
         }
-      }
     }
 
   const fourthSubmit = async () => {

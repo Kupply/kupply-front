@@ -55,7 +55,7 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
       <TableHeader>
         <HeaderData>순위</HeaderData>
         <HeaderData>이중전공</HeaderData>
-        <HeaderData>최종정원</HeaderData>
+        <HeaderData>예상 모집정원</HeaderData>
         <HeaderData>지원 현황</HeaderData>
         <HeaderData>실시간 경쟁률</HeaderData>
         <HeaderData>지난 합격률</HeaderData>
