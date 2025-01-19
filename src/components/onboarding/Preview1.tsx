@@ -149,7 +149,11 @@ function Preview1() {
       currentMonth < 5 ? (
         <>
           <Blur>
-            <Typography size="1.57vw" bold="700" style={{ textAlign: 'center', lineHeight: '131.58%', opacity: 0.8 }}>
+            <Typography
+              size="1.57vw"
+              bold="700"
+              style={{ textAlign: 'center', lineHeight: '131.58%', opacity: 0.8, marginBottom: '1.5%' }}
+            >
               1학기 모의지원 서비스는 5월 1일 오픈됩니다.
               <br /> 기다리는 동안 과거 합격자료를 살펴보며 이중전공을 준비해요!
             </Typography>

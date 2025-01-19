@@ -65,7 +65,6 @@ const RankingTable = forwardRef<HTMLDivElement, tableProps>((props, ref) => {
     setButtonState('default');
   };
 
-
   return (
     <Wrapper ref={ref}>
       <Typography
@@ -300,7 +299,7 @@ const Blur = styled.div`
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(7.5px);
   position: absolute;
-  top: 30.82%;
+  top: 33.5%; // 30.82%;
   left: 0;
   -webkit-backdrop-filter: blur(10px);
 `;

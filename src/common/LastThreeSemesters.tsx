@@ -5,7 +5,13 @@ function getLastThreeSemesters(): [string, string, string] {
 
   // Determine the current semester based on the current month (assuming semester 1 is Jan-Jun, semester 2 is Jul-Dec)
   let currentSemester;
-  if (currentMonth >= 2 && currentMonth <= 7) {
+  // if (currentMonth >= 2 && currentMonth <= 7) {
+  //   currentSemester = 1; // First semester (Spring)
+  // } else {
+  //   currentSemester = 2; // Second semester (Fall)
+  // }
+
+  if (currentMonth <= 5) {
     currentSemester = 1; // First semester (Spring)
   } else {
     currentSemester = 2; // Second semester (Fall)
