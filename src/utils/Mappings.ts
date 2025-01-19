@@ -123,33 +123,55 @@ export const majorNmaeMappingByKr = {
 const getSemesterMapping = () => {
   const today = new Date();
   let currentYear = today.getFullYear();
-  const currentMonth = today.getMonth() + 1; // getMonth() returns 0-based month
+  const currentMonth = today.getMonth(); // getMonth() returns 0-based month
 
   let currentSemester;
-  if (currentMonth >= 2 && currentMonth <= 7) {
+  if (currentMonth <= 5) {
     currentSemester = 1; // First semester (Spring)
   } else {
     currentSemester = 2; // Second semester (Fall)
   }
 
-  const semesters = [];
-  for (let i = 0; i < 4; i++) {
-    // 지난 N 개 학기 수에 따라 i index 의 loop range 조정
-    // Decrement the semester and year correctly
-    if (currentSemester === 1) {
-      currentSemester = 2;
-      currentYear--;
-    } else {
-      currentSemester = 1;
-    }
+  const semesters: string[] = [];
 
-    const semesterString = `${currentYear}-${currentSemester}R`;
-    semesters.push(semesterString);
+  for (let i = 0; i < 4; i++) {
+    let semesterString: string; //  = `YEAR-R`;
+    // 지난 N 개 (현재는 N=4) 학기 수에 따라 i index 의 loop range 조정
+    // Decrement the semester and year correctly
+
+    // Logic for first semester (Spring)
+    if (currentSemester === 1) {
+      const q = i / 2; // 몫 (quotient)
+      if (q === 0) {
+        semesterString = `${currentYear - 1}-${2 - (i % 2)}R`;
+        semesters.push(semesterString);
+      } else {
+        semesterString = `${currentYear - 2}-${2 - (i % 2)}R`;
+        semesters.push(semesterString);
+      }
+
+      // Logic for second semester (Fall)
+    } else {
+      if (i === 0) {
+        semesterString = `${currentYear}-${currentSemester - 1}R`;
+        semesters.push(semesterString);
+      } else if (i === 1) {
+        semesterString = `${currentYear - 1}-${currentSemester}R`;
+        semesters.push(semesterString);
+      } else if (i === 2) {
+        semesterString = `${currentYear - 1}-${currentSemester - 1}R`;
+        semesters.push(semesterString);
+      } else if (i === 3) {
+        semesterString = `${currentYear - 2}-${currentSemester}R`;
+        semesters.push(semesterString);
+      }
+    }
   }
 
   semesters.unshift('모든 학기 누적'); // Add "전학기 누적" at the beginning
   return semesters;
 };
+
 export const semesterMapping: string[] = getSemesterMapping();
 
 export const semesterAPIMapping: string[] = [
