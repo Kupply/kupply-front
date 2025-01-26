@@ -64,7 +64,7 @@ const MainWrapper = styled.div`
 const BlurBox = styled.div`
   width: 100vw;
   height: 82vw;
-  top: 68%;
+  top: 116vw; //68%;
   display: flex;
   flex-direction: column;
   align-items: center;

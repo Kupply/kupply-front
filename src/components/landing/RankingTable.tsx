@@ -295,13 +295,13 @@ const TextWrapper = styled.div`
 
 const Blur = styled.div`
   width: 67.34vw;
-  height: 50vw;
+  height: 46vw;
   background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(7.5px);
+  backdrop-filter: blur(10px); // blur(7.5px);
   position: absolute;
-  top: 33.5%; // 30.82%;
+  top: 19vw; // 33.5%; // 30.82%;
   left: 0;
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // blur(10px);
 `;
 
 export default RankingTable;
