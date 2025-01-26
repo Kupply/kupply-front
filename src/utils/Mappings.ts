@@ -141,12 +141,26 @@ const getSemesterMapping = () => {
 
     // Logic for first semester (Spring)
     if (currentSemester === 1) {
-      const q = i / 2; // 몫 (quotient)
-      if (q === 0) {
-        semesterString = `${currentYear - 1}-${2 - (i % 2)}R`;
+      // 오류 코드
+      // const q = i / 2; // 몫 (quotient)
+      // if (q === 0) {
+      //   semesterString = `${currentYear - 1}-${2 - (i % 2)}R`;
+      //   semesters.push(semesterString);
+      // } else {
+      //   semesterString = `${currentYear - 2}-${2 - (i % 2)}R`;
+      //   semesters.push(semesterString);
+      // }
+      if (i === 0) {
+        semesterString = `${currentYear - 1}-${currentSemester + 1}R`;
         semesters.push(semesterString);
-      } else {
-        semesterString = `${currentYear - 2}-${2 - (i % 2)}R`;
+      } else if (i === 1) {
+        semesterString = `${currentYear - 1}-${currentSemester}R`;
+        semesters.push(semesterString);
+      } else if (i === 2) {
+        semesterString = `${currentYear - 2}-${currentSemester + 1}R`;
+        semesters.push(semesterString);
+      } else if (i === 3) {
+        semesterString = `${currentYear - 2}-${currentSemester}R`;
         semesters.push(semesterString);
       }
 
