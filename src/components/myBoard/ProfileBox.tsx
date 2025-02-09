@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 import CTA02 from '../../assets/CTAs/CTA02';
-import Card02 from '../../assets/cards/Card02';
+import { Card02 } from '../../assets/cards/Card02';
 import EditModal from './EditModals/OldEditModalModified';
 import ApplicationModal from './SubmitModals/ApplicationModal';
 import { isDateInRange } from '../../common/ApplicationPeriod';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import { collegeNameMappingByKR } from '../../utils/Mappings';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
-  korName: string;
+  korName: keyof typeof collegeNameMappingByKR;
   hopeMajor: string;
 }
 
@@ -44,14 +45,6 @@ const ProfileBox = ({
       setIsButtonDisabled('default');
     }
   }, [id, isApplied]);
-
-  // const majorKoreanName = majorNameMapping[major][0];
-
-  // const majorKoreanName1 = majorNameMapping[major1][0];
-  // const majorEngishName1 = majorNameMapping[major1][1];
-
-  // const majorKoreanName2 = majorNameMapping[major2][0];
-  // const majorEngishName2 = majorNameMapping[major2][1];
 
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
 
@@ -135,12 +128,12 @@ const ProfileBox = ({
         <InterestMajorBox>
           {userData.hopeMajor2 !== '희망 없음' ? (
             <>
-              <Card02 korName={major1} hopeMajor="1지망" />
-              <Card02 korName={major2} hopeMajor="2지망" />
+              <Card02 korName={major1} hopeMajor="1지망"/>
+              <Card02 korName={major2} hopeMajor="2지망"/>
             </>
           ) : (
             <>
-              <Card02 korName={major1} hopeMajor="1지망" />
+              <Card02 korName={major1} hopeMajor="1지망"/>
             </>
           )}
         </InterestMajorBox>

@@ -1,35 +1,17 @@
 import styled from 'styled-components';
+import { collegeNameMappingByKR } from '../../utils/Mappings';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
-  korName: string;
+  korName: keyof typeof collegeNameMappingByKR;
   hopeMajor: string;
 }
 
-const majorParamMappingImage: { [key: string]: string } = {
-  경영학과: 'business',
-  경제학과: 'political',
-  심리학부: 'psycho',
-  통계학과: 'political',
-  수학과: 'science',
-  화학과: 'science',
-  미디어학부: 'media',
-  식품자원경제학과: 'bio',
-  컴퓨터학과: 'info',
-  생명공학부: 'bio',
-  생명과학부: 'bio',
-  정치외교학과: 'political',
-  행정학과: 'political',
-  신소재공학부: 'engineering',
-  기계공학부: 'engineering',
-  산업경영공학부: 'engineering',
-  전기전자공학부: 'engineering',
-  화공생명공학과: 'engineering',
-  데이터과학과: 'info',
-  스마트보안학부: 'smartsecurity',
+const getDepartmentName = (korName: keyof typeof collegeNameMappingByKR): string => {
+  return collegeNameMappingByKR[korName];
 };
 
-export default function Card02({ korName, hopeMajor }: CardProps) {
-  const depName = majorParamMappingImage[korName];
+export const Card02: React.FC<CardProps> = ({ korName, hopeMajor, ...props }) => {
+  const depName: string = getDepartmentName(korName);
 
   // svg가 자꾸 달아나서...
   return (

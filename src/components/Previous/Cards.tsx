@@ -15,20 +15,6 @@ export interface CardsProps {
   searchWord: string;
 }
 
-// korName: c.korName,
-// engName: c.engName,
-// filter: c.filter,
-// TO: c.TO,
-// semester: c.semester,
-// avgPass: res.avg,
-// minPass: res.min,
-// pass: res.passNum,
-
-// Card01의 prop과 맞도록 수정
-// 지원자 수에 대한 데이터가 없어서 합격률은 계산하지 못함
-
-// const sortOptions = ['가나다순', '선발인원순', '합격률순', '평균학점순', '최저학점순'];
-
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
   const [sortCriterion, setSortCriterion] = useState('가나다순');
@@ -71,25 +57,6 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
     }
   };
 
-  // // 임시적으로 만든 fetch function
-  // const fetch = async () => {
-  //   const data = await client.get('/dashboard/cards');
-  //   setCards(
-  //     cards.map((c) => {
-  //       const res = data.data.find((ca: any) => ca.name === c.korName);
-  //       return {
-  //         korName: c.korName,
-  //         engName: c.engName,
-  //         filter: c.filter,
-  //         TO: c.TO,
-  //         semester: c.semester,
-  //         avgPass: res.avg,
-  //         minPass: res.min,
-  //         passRate: res.passNum,
-  //       };
-  //     }),
-  //   );
-  // };
   useEffect(() => {
     fetch();
   });
