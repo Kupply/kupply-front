@@ -38,6 +38,7 @@ const majorParamMappingImage = {
   'Division of Smart Security': 'smartsecurity',
 };
 
+
 // 각각의 path 받아서 수정
 const majorParamMappingPath = {
   'Business School': 'business',
