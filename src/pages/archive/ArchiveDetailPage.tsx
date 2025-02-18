@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import GpaLineChart, { Data, LineData } from '../../assets/GpaLineChart';
-import { recruit } from '../../common/Recruiting';
 import { DBkeywords } from '../../common/Keyword';
-import client from '../../utils/HttpClient';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
 import { collegeNameMappingByEng as collegeNameMapping, semesterMapping, majorNameMapping } from '../../utils/Mappings';
+import { usePastApplyData } from '../../store/query';
 
 // 경쟁률 적용 X (디자인 나와서 고치면서 수정할 예정)
 
@@ -26,6 +24,7 @@ const ArchiveDetailPage = () => {
   const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorName]}_trans_small.png`;
 
   const [activeIdx, setActiveIdx] = useState<number>(0);
+  const [selectedSemester, setSelectedSemester] = useState<string>('all');
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [enoughData, setEnoughData] = useState<boolean>(false);
 
@@ -33,41 +32,13 @@ const ArchiveDetailPage = () => {
   const [numOfApplication, setNumOfApplication] = useState<number>(0);
   const [numOfPassed, setNumOfPassed] = useState<number>(0);
 
-  const [lineData, setLineData] = useState<LineData>(tmpRandomData);
-  const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
+  const [lineData, setLineData] = useState<LineData>(tmpRandomData2);
+  const [avgGpa, setAvgGpa] = useState<Data>(tmpMeanGpa);
   const [medianGpa, setMedianGpa] = useState<Data>(tmpMedianGpa);
   const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
   const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
 
   const [keywords, setKeywords] = useState<string[]>(DBkeywords[majorKoreanName] || []);
-
-  // 누적 데이터로 default 값 setting
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        const APIresponse = await client.get(`/pastData/${majorName}/all`);
-        const data = APIresponse.data.pastData;
-
-        if (data.passedData.passedGPACountArray.length > 0) {
-          const selectionNum = recruit[majorKoreanName]['all'] || 0;
-
-          setEnoughData(true);
-          setNumOfApplication(data.overallData.numberOfData);
-          setNumOfSelection(selectionNum);
-          setNumOfPassed(data.passedData.passedNumberOfData);
-          setLineData(data.passedData.passedGPACountArray);
-          setMeanGpa(data.passedData.passedMeanGPAData);
-          setMedianGpa(data.passedData.passedMedianGPAData);
-          setModeGpa(data.passedData.passedModeGPAData);
-          setMinGpa(data.passedData.passedMinimumGPAData);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchInitialData();
-  }, [majorName]);
 
   const handleButtonClick = async (idx: number) => {
     if (activeIdx !== idx) {
@@ -76,37 +47,8 @@ const ArchiveDetailPage = () => {
 
     try {
       const semesterStr = semesterMapping[idx];
-      let semester;
-      if (semesterStr === '모든 학기 누적') {
-        semester = 'all';
-      } else {
-        semester = semesterStr.slice(0, -1);
-      }
-      const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
-      const data = APIresponse.data.pastData;
-
-      const selectionNum = recruit[majorKoreanName][semester] || 0;
-
-      setEnoughData(true);
-      setNumOfApplication(data.overallData.numberOfData);
-      setNumOfSelection(selectionNum);
-      setNumOfPassed(data.passedData.passedNumberOfData);
-      setLineData(data.passedData.passedGPACountArray);
-      setMeanGpa(data.passedData.passedMeanGPAData);
-      setMedianGpa(data.passedData.passedMedianGPAData);
-      setModeGpa(data.passedData.passedModeGPAData);
-      setMinGpa(data.passedData.passedMinimumGPAData);
-
-      if (data.passedData.passedGPACountArray.length > 0) {
-        setEnoughData(true);
-      } else {
-        setEnoughData(false);
-        setLineData(tmpRandomData);
-        setMeanGpa(tmpMeanGpa);
-        setMedianGpa(tmpMedianGpa);
-        setModeGpa(tmpModeGpa);
-        setMinGpa(tmpMinGpa);
-      }
+      const semester = semesterStr === '모든 학기 누적' ? 'all' : semesterStr.slice(0, -1);
+      setSelectedSemester(semester);
     } catch (err) {
       console.log(err);
     }
@@ -120,9 +62,35 @@ const ArchiveDetailPage = () => {
     setHoveredIdx(null);
   };
 
+  const { data } = usePastApplyData(majorName, selectedSemester);
+  useEffect(() => {
+    if (data) {
+      const { metadata, passedData } = data.pastData;
+
+      setNumOfSelection(metadata.recruitNumber);
+      setNumOfApplication(metadata.appliedNumber);
+      setNumOfPassed(metadata.passedNumber);
+      if (passedData.length > 0) {
+        setEnoughData(true);
+        setAvgGpa(metadata.passedAvgGPAData);
+        setMedianGpa(metadata.passedMedianGPAData);
+        setModeGpa(metadata.passedModeGPAData);
+        setMinGpa(metadata.passedMinimumGPAData);
+        setLineData(passedData);
+      } else {
+        // 데이터가 없을 때, 블러 뒤에 띄울 임시 데이터
+        setEnoughData(false);
+        setAvgGpa(tmpMeanGpa);
+        setMedianGpa(tmpMedianGpa);
+        setModeGpa(tmpModeGpa);
+        setMinGpa(tmpMinGpa);
+        setLineData(tmpRandomData2);
+      }
+    }
+  }, [data]);
+
   return (
     <Wrapper>
-      {/* <GlobalStyles /> */}
       <InnerWrapper>
         <MajorWrapper>
           <LeftBox>
@@ -179,14 +147,16 @@ const ArchiveDetailPage = () => {
               <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
             </svg>
             <SelectionInfoContent>
-              <Text>지원자 수</Text>
-              <SelectionInfoValue>{`${numOfApplication}명`}</SelectionInfoValue>
+              <Text>{activeIdx === 0 ? '평균 지원자 수' : '지원자 수'}</Text>
+              <SelectionInfoValue>
+                {activeIdx === 0 ? `${Math.floor(numOfApplication / 4)} 명` : `${numOfApplication} 명`}
+              </SelectionInfoValue>
             </SelectionInfoContent>
             <svg xmlns="http://www.w3.org/2000/svg" width="2" height="3.75vw" fill="none">
               <path stroke="#DFDFDF" stroke-linecap="round" d="M1 1v72" />
             </svg>
             <SelectionInfoContent>
-              <Text>합격률</Text>
+              <Text>{activeIdx === 0 ? '평균 합격률' : '합격률'}</Text>
               <SelectionInfoValue>
                 {numOfApplication === 0 ? '집계불가' : `${((numOfPassed / numOfApplication) * 100).toFixed(2)} %`}
               </SelectionInfoValue>
@@ -209,7 +179,7 @@ const ArchiveDetailPage = () => {
               <PasserGPAInfoGraphWrapper>
                 <GpaLineChart
                   lineData={lineData}
-                  meanGpa={meanGpa}
+                  meanGpa={avgGpa}
                   medianGpa={medianGpa}
                   modeGpa={modeGpa}
                   minGpa={minGpa}
@@ -222,7 +192,7 @@ const ArchiveDetailPage = () => {
                   <PasserMeanGPAIcon />
                   <PasserGPAInfoTextBox>
                     <Text>합격자 학점 평균값</Text>
-                    <TextNumber>{meanGpa.gpa.toFixed(2)}</TextNumber>
+                    <TextNumber>{avgGpa.gpa.toFixed(2)}</TextNumber>
                   </PasserGPAInfoTextBox>
                 </PasserGPAInfoBox>
 
