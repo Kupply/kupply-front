@@ -5,11 +5,11 @@ import { useCookies } from 'react-cookie';
 
 import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import GpaLineChart, { Data, LineData } from '../../assets/GpaLineChart';
-import { recruit } from '../../common/Recruiting';
+import { recruit } from '../../mappings/Recruiting';
 import { DBkeywords } from '../../common/Keyword';
 import client from '../../utils/HttpClient';
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, semesterMapping, majorNameMapping } from '../../utils/Mappings';
+import { MajorOptionsShortEng as MajorOptions } from '../../mappings/MajorTypes';
+import { collegeNameMappingByEng as collegeNameMapping, semesterMapping, majorNameMapping } from '../../mappings/Mappings';
 
 // 경쟁률 적용 X (디자인 나와서 고치면서 수정할 예정)
 

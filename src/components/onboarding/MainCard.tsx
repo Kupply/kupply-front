@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { MajorOptionsLongEng as MajorOptions } from '../../types/MajorTypes';
+import { MajorOptionsLongEng as MajorOptions } from '../../mappings/MajorTypes';
 import ToolTip02 from '../../assets/toolTips/Tooltip02';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {

@@ -2,10 +2,10 @@ import Input01 from '../../assets/field/Input01';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState, userSettingsState } from '../../../store/atom';
 import DropDown from '../../assets/selectControl/DropDown';
-import { majorAllList } from '../../../common/MajorAll';
+import { majorAllList } from '../../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../../store/atom';
-import { majorTargetList } from '../../../common/MajorTarget';
+import { majorTargetList } from '../../../mappings/MajorTarget';
 import { inputState } from '../../pages/signup/SignupPage4';
 
 export type UserTypeOptions =

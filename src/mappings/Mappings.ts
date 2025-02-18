@@ -1,6 +1,41 @@
 /* 
   단과대 / 전공명
 */
+
+export interface CategoryMapping {
+  '인문계 캠퍼스': string[];
+  '자연계 캠퍼스': string[];
+  '독립 학부': string[];
+}
+
+export const categoryMapping: CategoryMapping = {
+  '인문계 캠퍼스': [
+    '경영학과',
+    '경제학과',
+    '심리학부',
+    '미디어학부',
+    '정치외교학과',
+    '행정학과',
+    '식품자원경제학과',
+    '통계학과',
+  ],
+  '자연계 캠퍼스': [
+    '기계공학부',
+    '데이터과학과',
+    '산업경영공학부',
+    '스마트보안학부',
+    '수학과',
+    '화학과',
+    '생명과학부',
+    '생명공학부',
+    '화공생명공학과',
+    '신소재공학부',
+    '전자공학부',
+    '컴퓨터학과',
+  ],
+  '독립 학부': ['심리학부', '미디어학부', '스마트보안학부'],
+};
+
 export const collegeNameMappingByEng = {
   foodecon: 'bio',
   media: 'media',
@@ -47,7 +82,7 @@ export const collegeNameMappingByKR = {
   스마트보안학부: 'smartsecurity',
 };
 
-export const collegeAPIMappingByKR = {
+export const majorAPIMappingByKR = {
   식품자원경제학과: 'foodecon',
   미디어학부: 'media',
   컴퓨터학과: 'computer',
@@ -93,7 +128,7 @@ export const majorNameMapping = {
   smartsec: ['스마트보안학부', 'Division of Smart Security'],
 };
 
-export const majorNmaeMappingByKr = {
+export const majorNameMappingByKr = {
   경영학과: 'Business School',
   경제학과: 'Department of Economics',
   심리학부: 'School of Psychology',

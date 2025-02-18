@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import MobileTabMenuButton from '../../assets/tabMenu/TabMenu';
 import { useNavigate } from 'react-router-dom';
-import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
-import { collegeAPIMappingByKR as collegeAPIMapping } from '../../../utils/Mappings';
-import { majorNameMapping } from '../../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../../mappings/MajorTypes';
+import { majorAPIMappingByKR as collegeAPIMapping } from '../../../mappings/Mappings';
+import { majorNameMapping } from '../../../mappings/Mappings';
 import { LastThreeSemesters } from '../../../common/LastThreeSemesters';
 interface SemesterBtnStates {
   [key: string]: boolean;

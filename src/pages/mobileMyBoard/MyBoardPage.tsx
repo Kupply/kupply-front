@@ -12,9 +12,9 @@ import MobileQuartileIndicator from '../../mobile/components/myboard/QuartileInd
 import MobileScatter from '../../mobile/components/myboard/Scatter';
 import MobilePieChart from '../../mobile/components/myboard/PieChart';
 import client from '../../utils/HttpClient';
-import { recruit } from '../../common/Recruiting';
-import { MajorOptionsKR } from '../../types/MajorTypes';
-import { collegeAPIMappingByKR } from '../../utils/Mappings';
+import { recruit } from '../../mappings/Recruiting';
+import { MajorOptionsKR } from '../../mappings/MajorTypes';
+import { majorAPIMappingByKR } from '../../mappings/Mappings';
 import MobileHeader from '../../mobile/assets/base/Header';
 import MobileFooter from '../../mobile/assets/base/Footer';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
@@ -248,10 +248,10 @@ const MobileMyBoard = () => {
   const getPastData = async () => {
     // const semester = ['2023-2', '2023-1', '2022-2'];
     const semester = LastThreeSemesters; // Fetch last three semesters dynamically
-    const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
+    const hopeMajor1 = majorAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
     let hopeMajor2 = '';
     if (userData.hopeMajor2 !== '희망 없음') {
-      hopeMajor2 = collegeAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
+      hopeMajor2 = majorAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
     }
 
     const newPastData1 = [...pastData1];

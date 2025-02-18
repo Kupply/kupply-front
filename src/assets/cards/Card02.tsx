@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { collegeNameMappingByKR } from '../../utils/Mappings';
+import { collegeNameMappingByKR } from '../../mappings/Mappings';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: keyof typeof collegeNameMappingByKR;

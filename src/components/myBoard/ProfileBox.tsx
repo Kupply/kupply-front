@@ -7,8 +7,8 @@ import { Card02 } from '../../assets/cards/Card02';
 import EditModal from './EditModals/OldEditModalModified';
 import ApplicationModal from './SubmitModals/ApplicationModal';
 import { isDateInRange } from '../../common/ApplicationPeriod';
-import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
-import { collegeNameMappingByKR } from '../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../mappings/MajorTypes';
+import { collegeNameMappingByKR } from '../../mappings/Mappings';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: keyof typeof collegeNameMappingByKR;

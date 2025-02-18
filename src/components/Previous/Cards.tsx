@@ -5,7 +5,7 @@ import client from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 import Card01 from '../../assets/cards/Card01';
 import DropDown02 from '../../assets/dropdown/DropDown02';
-import { recruit } from '../../common/Recruiting';
+import { recruit } from '../../mappings/Recruiting';
 import { getPrevSemester } from '../../common/Semester';
 
 // 정렬 임의로 넣어 둠 (에셋 완성되면 적용할 예정)

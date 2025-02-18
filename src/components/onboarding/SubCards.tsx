@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MajorOptionsLongEng as MajorOptions } from '../../types/MajorTypes';
+import { MajorOptionsLongEng as MajorOptions } from '../../mappings/MajorTypes';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: string;

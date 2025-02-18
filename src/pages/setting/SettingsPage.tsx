@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -7,10 +6,9 @@ import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 import DropDown from '../../assets/dropdown/DropDown';
 import TextArea from '../../assets/TextArea';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
-import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 import client from '../../utils/HttpClient';
-import { majorTargetList } from '../../common/MajorTarget';
-import { majorAllList } from '../../common/MajorAll';
+import { majorTargetList } from '../../mappings/MajorTarget';
+import { majorAllList } from '../../mappings/MajorAll';
 import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 import Button03 from '../../assets/buttons/Button03';
 import Typography from '../../assets/Typography';
@@ -280,7 +278,6 @@ const SettingsPage = () => {
           console.log(err);
         }
       }
-    
   };
 
   const fourthSubmit = async () => {

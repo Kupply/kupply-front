@@ -11,9 +11,9 @@ import Scatter from '../../components/myBoard/Graph/Scatter';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton'; // 1지망 2지망 선택 버튼
 import MyboardPasserPageVer from './MyboardPasser';
 import client from '../../utils/HttpClient';
-import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
-import { MajorOptionsKR } from '../../types/MajorTypes';
-import { collegeAPIMappingByKR } from '../../utils/Mappings';
+import { recruit } from '../../mappings/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
+import { MajorOptionsKR } from '../../mappings/MajorTypes';
+import { majorAPIMappingByKR } from '../../mappings/Mappings';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
 import { LastFourSameSemesters } from '../../common/LastFourSameSemesters';
 
@@ -279,10 +279,10 @@ const MyBoardPage = () => {
   const getPastData = async () => {
     // const semester = ['2023-2', '2023-1', '2022-2'];
     const semester = LastThreeSemesters; // Fetch last three semesters dynamically
-    const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
+    const hopeMajor1 = majorAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
     let hopeMajor2 = '';
     if (userData.hopeMajor2 !== '희망 없음') {
-      hopeMajor2 = collegeAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
+      hopeMajor2 = majorAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
     }
 
     const newPastData1 = [...pastData1];

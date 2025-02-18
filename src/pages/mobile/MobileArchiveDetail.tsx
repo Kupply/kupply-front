@@ -7,16 +7,15 @@ import MobileArchiveGraph, { Data, LineData } from '../../mobile/assets/graph/Gr
 import { Card0301, Card0302, Card0303 } from '../../mobile/assets/cards/Card03';
 import Card05 from '../../mobile/assets/cards/Card05';
 import Banner01 from '../../mobile/assets/banners/Banner01';
-import { DBkeywords } from '../../common/Keyword';
-import { recruit } from '../../common/Recruiting';
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
+import { recruit } from '../../mappings/Recruiting';
+import { MajorOptionsShortEng as MajorOptions } from '../../mappings/MajorTypes';
 import client from '../../utils/HttpClient';
 import {
   collegeNameMappingByEng as collegeNameMapping,
   semesterAPIMapping as semesterForAPI,
   semesterMapping,
   majorNameMapping,
-} from '../../utils/Mappings';
+} from '../../mappings/Mappings';
 import MobileHeader from '../../mobile/assets/base/Header';
 import MobileFooter from '../../mobile/assets/base/Footer';
 
@@ -29,50 +28,6 @@ import MobileFooter from '../../mobile/assets/base/Footer';
 
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
-
-  const params = useParams();
-  const major =
-    params.majorName === 'business'
-      ? '경영학과'
-      : params.majorName === 'economics'
-      ? '경제학과'
-      : params.majorName === 'mechanical'
-      ? '기계공학부'
-      : params.majorName === 'datasci'
-      ? '데이터과학과'
-      : params.majorName === 'media'
-      ? '미디어학부'
-      : params.majorName === 'datasci'
-      ? '데이터과학과'
-      : params.majorName === 'industrial'
-      ? '산업경영공학부'
-      : params.majorName === 'bioeng'
-      ? '생명공학부'
-      : params.majorName === 'lifesci'
-      ? '생명과학부'
-      : params.majorName === 'mathematics'
-      ? '수학과'
-      : params.majorName === 'smartsec'
-      ? '스마트보안학부'
-      : params.majorName === 'foodecon'
-      ? '식품자원경제학과'
-      : params.majorName === 'materials'
-      ? '신소재공학부'
-      : params.majorName === 'electrical'
-      ? '전기전자공학부'
-      : params.majorName === 'political'
-      ? '정치외교학과'
-      : params.majorName === 'computer'
-      ? '컴퓨터학과'
-      : params.majorName === 'statistics'
-      ? '통계학과'
-      : params.majorName === 'psychology'
-      ? '심리학부'
-      : params.majorName === 'pubadmin'
-      ? '행정학과'
-      : params.majorName === 'chembio'
-      ? '화공생명공학과'
-      : '화학과';
 
   const handlePrev = () => {
     navigate('/archive');
@@ -168,7 +123,7 @@ const MobileArchiveDetailPage = () => {
   return (
     <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
       <MobileHeader logined={isLogined} setLogin={setisLogined} />
-      <Banner01 major={major} />
+      <Banner01 major={majorKoreanName} />
       <DropDownWrapper>
         <DropDownText>지원학기 선택</DropDownText>
         <DropDownBox>
