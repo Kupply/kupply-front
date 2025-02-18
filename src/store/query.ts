@@ -6,7 +6,7 @@ const fetchPastApplyData = async (majorName: string, semester: string) => {
     throw new Error('Major name and semester are required');
   }
 
-  console.log(`time: ${new Date().toLocaleTimeString()} / fetching ${majorName} ${semester}`);
+  // console.log(`time: ${new Date().toLocaleTimeString()} / fetching ${majorName} ${semester}`);
   const response = await client.get(`/pastData/${majorName}/${semester}`);
   return response.data;
 };
