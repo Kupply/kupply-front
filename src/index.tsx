@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalStyle } from './GlobalStyle';
 import App from './App';
 import ScrollToTop from './components/ScrollToTop';
@@ -13,14 +14,18 @@ if (process.env.REACT_APP_GOOGLE_ANALYTICS) {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const queryClient = new QueryClient();
+
 root.render(
   <React.StrictMode>
-    <CookiesProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <GlobalStyle />
-        <App />
-      </BrowserRouter>
-    </CookiesProvider>
+    <QueryClientProvider client={queryClient}>
+      <CookiesProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <GlobalStyle />
+          <App />
+        </BrowserRouter>
+      </CookiesProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );
