@@ -74,10 +74,11 @@ function Banner01(props: Banner01Props) {
     },
     {
       department: '정보대학',
-      majors: ['데이터과학과', '컴퓨터학과'],
+      majors: ['데이터과학과', '컴퓨터학과', '인공지능학과'],
       engNames: [
         ['Department of', 'Data Science'],
         ['Department of Computer', 'Science & Engineering'],
+        ['Department of', 'Artificial Intelligence']
       ],
       image: '../../../designImage/mobile/banner/Banner1_9.png',
     },

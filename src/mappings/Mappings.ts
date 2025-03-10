@@ -32,6 +32,7 @@ export const categoryMapping: CategoryMapping = {
     '신소재공학부',
     '전자공학부',
     '컴퓨터학과',
+    '인공지능학과'
   ],
   '독립 학부': ['심리학부', '미디어학부', '스마트보안학부'],
 };
@@ -57,6 +58,7 @@ export const collegeNameMappingByEng = {
   chembio: 'engineering',
   datasci: 'info',
   smartsec: 'smartsecurity',
+  ai: 'info'
 };
 
 export const collegeNameMappingByKR = {
@@ -80,6 +82,7 @@ export const collegeNameMappingByKR = {
   화공생명공학과: 'engineering',
   데이터과학과: 'info',
   스마트보안학부: 'smartsecurity',
+  인공지능학과: 'info'
 };
 
 export const majorAPIMappingByKR = {
@@ -103,6 +106,7 @@ export const majorAPIMappingByKR = {
   화공생명공학과: 'chembio',
   데이터과학과: 'datasci',
   스마트보안학부: 'smartsec',
+  인공지능학과: 'ai'
 };
 
 export const majorNameMapping = {
@@ -126,6 +130,7 @@ export const majorNameMapping = {
   chembio: ['화공생명공학과', 'Department of Chemical & Biological Engineering'],
   datasci: ['데이터과학과', 'Department of Data Science'],
   smartsec: ['스마트보안학부', 'Division of Smart Security'],
+  ai: ['인공지능학과', 'Department of Artificial Intelligence']
 };
 
 export const majorNameMappingByKr = {
@@ -149,6 +154,7 @@ export const majorNameMappingByKr = {
   화공생명공학과: 'Department of Chemical & Biological Engineering',
   데이터과학과: 'Department of Data Science',
   스마트보안학부: 'Division of Smart Security',
+  인공지능학과: 'Department of Artificial Intelligence'
 };
 
 /*
@@ -293,6 +299,7 @@ export const majorNameMappingBySID: Record<number, string> = {
   2503: '보건정책관리학부',
   3200: '컴퓨터학과',
   3201: '데이터과학과',
+  3202: '인공지능학과', // 아직 확실치 않음 
   3400: '심리학부',
   3500: '사이버국방학과',
   3501: '스마트보안학부',

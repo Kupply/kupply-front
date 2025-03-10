@@ -62,4 +62,5 @@ export const majorAllList = [
   { value1: '화공생명공학과', value2: '공과대학' },
   { value1: '화학과', value2: '이과대학' },
   { value1: '환경생태공학부', value2: '생명과학대학' },
+  { value1: '인공지능학과', value2: '정보대학' },
 ];

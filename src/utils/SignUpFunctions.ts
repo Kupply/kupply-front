@@ -28,7 +28,7 @@ export const sendEmail = async (email: string) => {
 
 // candidate이나 passer가 들어옴
 export const join = async (role: string) => {
-  const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
+  //const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
   const commonData = {
     name: sessionStorage.getItem('name'),
     studentId: Number(sessionStorage.getItem('studentId')),

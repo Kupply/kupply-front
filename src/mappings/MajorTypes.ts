@@ -17,7 +17,8 @@ export type MajorOptionsShortEng =
   | 'electrical'
   | 'chembio'
   | 'datasci'
-  | 'smartsec';
+  | 'smartsec'
+  | 'ai';
 
 export type MajorOptionsLongEng =
   | 'Business School'
@@ -39,7 +40,8 @@ export type MajorOptionsLongEng =
   | 'School of Electrical Engineering'
   | 'Department of Chemical & Biological Engineering'
   | 'Department of Data Science'
-  | 'Division of Smart Security';
+  | 'Division of Smart Security'
+  | 'Department of Artificial Intelligence';
 
 export type MajorOptionsKR =
   | '경영학과'
@@ -61,4 +63,5 @@ export type MajorOptionsKR =
   | '전기전자공학부'
   | '화공생명공학과'
   | '데이터과학과'
-  | '스마트보안학부';
+  | '스마트보안학부'
+  | '인공지능학과';
