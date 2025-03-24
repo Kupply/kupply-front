@@ -10,7 +10,7 @@ on:
     branches: ['main', 'develop']
 
 env:
-  DOCKER_IMAGE: ghcr.io/YoonJunHyeok/kupply-front
+  DOCKER_IMAGE: ghcr.io/yoonjunhyeok/kupply-front
   DOCKER_CONTAINER: kupply-front
   DEV_DOCKER_CONTAINER: kupply-front-dev
 
