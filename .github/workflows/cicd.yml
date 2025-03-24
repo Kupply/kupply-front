@@ -18,7 +18,7 @@ env:
 # 작업은 종속성에 따라 병렬 또는 순차적으로 실행될 수 있다.
 jobs:
   build: # define a job name
-    runs-on: ubuntu-20.04+
+    runs-on: ubuntu-20.04
     outputs:
       image_tag: ${{ steps.set_tag.outputs.tag }}
     steps:
