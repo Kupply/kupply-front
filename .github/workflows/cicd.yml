@@ -61,6 +61,9 @@ jobs:
         run: |
           echo "REACT_APP_GOOGLE_ANALYTICS=${{ secrets.REACT_APP_GOOGLE_ANALYTICS }}" >> .env
           cat .env
+      - name: Docker login to GHCR
+        run: |
+          echo ${{ secrets.GHCR_ACCESS_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Run Docker (Production)
         run: |
           docker stop ${{env.DOCKER_CONTAINER}} && docker rm ${{env.DOCKER_CONTAINER}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
@@ -71,6 +74,9 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
+      - name: Docker login to GHCR
+        run: |
+          echo ${{ secrets.GHCR_ACCESS_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Run Docker (Development)
         run: |
           docker stop ${{env.DEV_DOCKER_CONTAINER}} && docker rm ${{env.DEV_DOCKER_CONTAINER}} && docker rmi ${{env.DOCKER_IMAGE}}:dev
