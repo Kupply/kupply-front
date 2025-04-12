@@ -1,3 +1,6 @@
+// TODO: Link 버튼에 기호 추가
+// TODO: Link 버튼에 onClick 이벤트 추가
+
 import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -71,37 +74,29 @@ function Join1() {
             size="1.98vw"
             bold="700"
             color="#2C323A"
-            style={{ margin: '4.95vw 0 0.42vw 0', lineHeight: '131.58%' }}
+            style={{ margin: '5vw 0 0.9375vw 0', lineHeight: '131.58%' }} // margin 순서: top right bottom left
           >
-            당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서
+            당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서.
           </Typography>
-          <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8 }}>
-            고려대학교 이메일 주소 입력으로 실시간 이중전공 지원현황 확인과 간편한 학점 비교 등, 쿠플라이만의 다양한
-            서비스를 이용해보세요.
+          <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8, textAlign: 'center', margin: '0 0 2.865vw 0'}}>
+            쿠플라이는 고파스 계정으로 이용 가능합니다.<br/>고파스 계정으로 로그인하고, 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.
+            {/* 고려대학교 이메일 주소 입력으로 실시간 이중전공 지원현황 확인과 간편한 학점 비교 등, 쿠플라이만의 다양한
+            서비스를 이용해보세요. */}
           </Typography>
           <JoinBox>
-            <TextFieldWrapper>
-              <TextFieldBox
-                placeholder="kupply@korea.ac.kr"
-                value={ID}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setID(e.target.value);
-                }}
-                onKeyDown={(e: React.KeyboardEvent) => {
-                  if (e.key === 'Enter') {
-                    handleButtonClick();
-                  }
-                }}
-              />
-            </TextFieldWrapper>
             <Button02
               onClick={handleButtonClick}
               style={{
+                width: '23.33vw',
                 boxShadow:
                   '7px 3px 16px 0px rgba(216, 88, 136, 0.20), 26px 11px 28px 0px rgba(216, 88, 136, 0.17), 59px 25px 38px 0px rgba(216, 88, 136, 0.10), 105px 45px 46px 0px rgba(216, 88, 136, 0.03), 164px 70px 50px 0px rgba(216, 88, 136, 0.00)',
               }}
-            />
+            ></Button02>
           </JoinBox>
+          <LinkBox>
+          <Link>고파스 아이디/비밀번호 찾기</Link> 
+          <Link>쿠플라이의 기존 회원이신가요?</Link>
+          </LinkBox>
         </>
       )}
     </MainWrapper>
@@ -121,10 +116,34 @@ const JoinBox = styled.div`
   height: auto;
   display: flex;
   gap: 1.15vw;
-  margin: 0 0 3.34vw 0;
+  margin: 0 0 2.865vw 0;
   align-items: center;
 `;
 
+// 출처: src/pages/login/OldLoginPage.tsx
+const Link = styled.button`
+  color: rgba(216, 88, 136, 0.8);
+  font-family: Pretendard;
+  font-size: 0.73vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 100% */
+  text-decoration-line: underline;
+  text-transform: uppercase;
+`;
+
+
+const LinkBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.78vw;
+  margin-bottom: 5.83vw;
+`;
+
+
+// 삭제 예정
 const TextFieldWrapper = styled.div`
   width: 32.99vw; //33.33vw;
   height: 10.15vw; //4.48vw;

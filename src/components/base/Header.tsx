@@ -5,8 +5,6 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Logo from '../../assets/OldLogo';
 import HeaderButton from '../../assets/buttons/header/HeaderButton';
-import MailButton from '../../assets/buttons/header/MailButton';
-import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
 import client from '../../utils/HttpClient';
@@ -134,6 +132,9 @@ export default function Header({ logined, setLogin }: HeaderProps) {
       }
     }
   };
+  const handleMenu4Click = () => {
+    navigate('/notice'); // TODO: 고객센터의 로그인 필요 여부에 대해 논의 필요
+  };
   const handleSettingsClick = () => {
     setSelected(0);
     setToggle(false);
@@ -210,6 +211,9 @@ export default function Header({ logined, setLogin }: HeaderProps) {
             </HeaderButton>
             <HeaderButton onClick={handleMenu2Click} activated={location.pathname === '/myboard'}>
               마이보드
+            </HeaderButton>
+            <HeaderButton onClick={handleMenu4Click} activated={location.pathname === '/notice'}>
+              고객센터
             </HeaderButton>
             {/* <HeaderButton onClick={handleAdminClick} activated={location.pathname === '/admin'}>
               관리자
