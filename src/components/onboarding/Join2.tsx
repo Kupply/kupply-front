@@ -70,25 +70,13 @@ function Join2() {
               marginBottom: '0.73vw',
             }}
           >
-            고려대학교 이메일 등록 후, 이중전공에 대한 모든 정보 확인하기
+            고파스 계정 등록 후, 이중전공에 대한 모든 정보 확인하기
           </Typography>
           <Typography size="1.25vw" bold="500" color="#FFF">
-            간단한 회원가입을 통해 쿠플라이의 다양한 서비스를 이용해보세요.
+            고파스 통합 로그인을 통해 쿠플라이의 다양한 서비스를 이용해보세요.
           </Typography>
           <JoinBox>
-            <TextFieldBox
-              placeholder="kupply@korea.ac.kr"
-              value={ID}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setID(e.target.value);
-              }}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === 'Enter') {
-                  handleButtonClick();
-                }
-              }}
-            ></TextFieldBox>
-            <Button02 onClick={handleButtonClick}></Button02>
+            <Button02 onClick={handleButtonClick} style={{width: '23.33vw'}}></Button02>
           </JoinBox>
         </PinkWrapper>
       )}

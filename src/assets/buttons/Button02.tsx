@@ -5,14 +5,16 @@ import Typography from '../Typography';
 export interface Button02Props extends React.ComponentPropsWithoutRef<'button'> {
   // variant?: 'solid' | 'outline';
   state?: 'default' | 'hover' | 'pressed' | 'disabled';
+  size?:  string;
 }
 
 // 고파스 통합 후 Join 버튼 (w/ 고파스 로고)
 function Button02(props: Button02Props) {
-  const { children = '고파스 아이디로 로그인하기', state = 'default', ...rest } = props;
+  const { children = '고파스 아이디로 로그인하기', state = 'default', size ='1.30vw', ...rest } = props;
   return (
     <ButtonWrapper state={state} {...rest}>
       <ImageWrapper
+        size={size}
         src={'../../designImage/ButtonKoreapas.svg'}
       />
       <Typography
@@ -47,9 +49,9 @@ const ButtonWrapper = styled.button<Button02Props>`
     props.state === 'hover' ? '0px 4px 12px 0px rgba(216, 88, 136, 0.25)' : 'none'};
 `;
 
-const ImageWrapper = styled.img`
-  width: 1.30vw;
-  height: 1.30vw;
+const ImageWrapper = styled.img<Button02Props>`
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
 `;
 
 export default Button02;

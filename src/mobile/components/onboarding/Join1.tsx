@@ -7,6 +7,8 @@ import Typography from '../../../assets/Typography';
 import Banner02 from '../../assets/banners/Banner02';
 import Button02 from '../../assets/buttons/Button02';
 import CTA02 from '../../assets/CTAs/CTA02';
+import IconButton04 from '../../../assets/iconButtons/IconButton04';
+import { Icon } from '@mui/material';
 
 function Join1() {
   const [isLogined, setIsLogined] = useState<boolean>(false);
@@ -57,7 +59,7 @@ function Join1() {
       >
         {isLogined ? '쿠플라이 모의지원을 통해' : '당신이 찾고있던 이중전공에 대한'}
         <br />
-        {isLogined ? '당신의 합격 가능성을 확인하세요!' : '모든 정보, 오직 쿠플라이에서'}
+        {isLogined ? '당신의 합격 가능성을 확인하세요!' : '모든 정보, 오직 쿠플라이에서.'}
       </Typography>
       <Typography
         size="3.33vw"
@@ -65,38 +67,34 @@ function Join1() {
         color="rgba(20,20,20,0.6)"
         style={{ lineHeight: '133.33%', textAlign: 'center', marginBottom: isLogined ? '6.39vw' : '0' }}
       >
-        {isLogined ? '실시간 이중전공 지원현황과 나의 학점 백분위 정보까지,' : '고려대학교 이메일 주소입력으로'}
+        {isLogined ? '실시간 이중전공 지원현황과 나의 학점 백분위 정보까지,' : '쿠플라이는 고파스 계정으로 이용이 가능합니다.'}
         <br />
-        {isLogined ? '오직 쿠플라이에서 제공해 드릴게요.' : '쿠플라이만의 다양한 서비스를 이용해보세요.'}
+        {isLogined ? '오직 쿠플라이에서 제공해 드릴게요.' : ''}
       </Typography>
       {isLogined ? (
         <CTA02 size="large" onClick={handleMyboardButtonClick}>
           나도 모의지원 하러가기
         </CTA02>
       ) : (
+        <>
         <JoinWrapper>
-          <TextFieldWrapper>
-            <TextFieldBox
-              placeholder="kupply@korea.ac.kr"
-              value={ID}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setID(e.target.value);
-              }}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === 'Enter') {
-                  handleJoinButtonClick();
-                }
-              }}
-            />
-          </TextFieldWrapper>
           <Button02
+            imgSize="6.11vw"
             onClick={handleJoinButtonClick}
             style={{
               boxShadow:
                 '9.72vw 11.94vw 4.44vw 0 rgba(216, 88, 136, 0.00), 6.11vw 7.78vw 3.89vw 0 rgba(216, 88, 136, 0.03), 3.33vw 4.44vw 3.33vw 0 rgba(216, 88, 136, 0.10), 1.67vw 1.94vw 2.5vw 0 rgba(216, 88, 136, 0.17), 0.28vw 0.56vw 1.39vw 0 rgba(216, 88, 136, 0.20)',
             }}
-          />
+          ></Button02>
         </JoinWrapper>
+          <LinkBox>
+          <div style={{display: 'flex', gap: '0.83vw', alignItems: 'center'}}>
+            <IconButton04 size='2.77vw'/>
+          <Link>고파스 아이디/비밀번호 찾기</Link>
+          </div>
+          <Link>쿠플라이의 기존 회원이신가요?</Link>
+          </LinkBox>
+        </>
       )}
     </MainWrapper>
   );
@@ -120,7 +118,32 @@ const JoinWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2.22vw;
+  margin-top: 7.22vw;
 `;
+
+// 출처: src/pages/login/OldLoginPage.tsx
+const Link = styled.button`
+  color: rgba(216, 88, 136, 0.8);
+  font-family: Pretendard;
+  font-size: 2.77vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; 
+  text-decoration-line: underline;
+  text-transform: uppercase;
+`;
+
+
+const LinkBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.38vw;
+  margin-top: 7.22vw;
+  margin-bottom: 5.83vw;
+`;
+
 
 const TextFieldWrapper = styled.div`
   width: 70vw;

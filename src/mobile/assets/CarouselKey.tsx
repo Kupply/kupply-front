@@ -8,7 +8,7 @@ function CarouselKey(props: CarouselKeyProps) {
   const { type = 0, ...rest } = props;
   // default 값 지정이 안됨... 이유는 모름... props로 값 적어주면 정상 작동
 
-  const types = [0, 1, 2];
+  const types = [0, 1, 2, 3];
 
   return (
     <MainWrapper {...rest}>
@@ -20,7 +20,7 @@ function CarouselKey(props: CarouselKeyProps) {
 }
 
 const MainWrapper = styled.div<CarouselKeyProps>`
-  width: 15vw;
+  width: 20vw;
   height: 2.78vw;
   display: flex;
   justify-content: space-between;
@@ -28,8 +28,6 @@ const MainWrapper = styled.div<CarouselKeyProps>`
 `;
 
 const CircleWrapper = styled.div`
-  width: 2.78vw;
-  height: 2.78vw;
   display: flex;
   justify-content: center;
   align-items: center;

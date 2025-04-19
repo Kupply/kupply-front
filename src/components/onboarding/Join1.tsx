@@ -1,4 +1,3 @@
-// TODO: Link 버튼에 기호 추가
 // TODO: Link 버튼에 onClick 이벤트 추가
 
 import axios from 'axios';
@@ -9,6 +8,7 @@ import { useState, useEffect } from 'react';
 import Typography from '../../assets/Typography';
 import Button02 from '../../assets/buttons/Button02';
 import CTA02 from '../../assets/CTAs/CTA02';
+import IconButton04 from '../../assets/iconButtons/IconButton04';
 
 function Join1() {
   const [isLogined, setIsLogined] = useState<boolean>(false);
@@ -78,7 +78,7 @@ function Join1() {
           >
             당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서.
           </Typography>
-          <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8, textAlign: 'center', margin: '0 0 2.865vw 0'}}>
+          <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8, textAlign: 'center', margin: '0 0 2.865vw 0', lineHeight: '1.56vw' }}>
             쿠플라이는 고파스 계정으로 이용 가능합니다.<br/>고파스 계정으로 로그인하고, 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.
             {/* 고려대학교 이메일 주소 입력으로 실시간 이중전공 지원현황 확인과 간편한 학점 비교 등, 쿠플라이만의 다양한
             서비스를 이용해보세요. */}
@@ -91,10 +91,13 @@ function Join1() {
                 boxShadow:
                   '7px 3px 16px 0px rgba(216, 88, 136, 0.20), 26px 11px 28px 0px rgba(216, 88, 136, 0.17), 59px 25px 38px 0px rgba(216, 88, 136, 0.10), 105px 45px 46px 0px rgba(216, 88, 136, 0.03), 164px 70px 50px 0px rgba(216, 88, 136, 0.00)',
               }}
-            ></Button02>
+            />
           </JoinBox>
           <LinkBox>
+          <div style={{ display: 'flex', gap: '0.26vw', alignItems: 'center' }}>
+          <IconButton04/>
           <Link>고파스 아이디/비밀번호 찾기</Link> 
+          </div>
           <Link>쿠플라이의 기존 회원이신가요?</Link>
           </LinkBox>
         </>
@@ -130,6 +133,7 @@ const Link = styled.button`
   line-height: 100%; /* 100% */
   text-decoration-line: underline;
   text-transform: uppercase;
+  
 `;
 
 
@@ -140,6 +144,11 @@ const LinkBox = styled.div`
   justify-content: center;
   gap: 0.78vw;
   margin-bottom: 5.83vw;
+`;
+
+const ImageWrapper = styled.img`
+  width: 1.30vw;
+  height: 1.30vw;
 `;
 
 

@@ -41,7 +41,7 @@ function MobileFooter() {
         문의
       </Typography>
       <Typography size="2.78vw" color="rgba(20,20,20,0.7)" style={{ lineHeight: '140%', margin: '1.11vw 0 6.11vw 0' }}>
-        kupply@gmail.com
+        kupply.devkor@gmail.com
       </Typography>
       <HorizontalWrapper style={{ gap: '5.22vw' }}>
         <HorizontalWrapper style={{ gap: '1.32vw' }}>
