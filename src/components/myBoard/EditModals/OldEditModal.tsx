@@ -16,7 +16,7 @@ import LabelButton from '../../../assets/buttons/LabelButton';
 import ToolTip04 from '../../../assets/toolTips/ToolTip04';
 import { majorAllList } from '../../../common/MajorAll';
 import { majorTargetList } from '../../../common/MajorTarget';
-import client from '../../../utils/HttpClient';
+import { client } from '../../../utils/HttpClient';
 import NicknameCheckButton from '../../../assets/progressIndicator/Loader';
 import { useNavigate } from 'react-router-dom';
 
@@ -165,9 +165,7 @@ export default function EditModal(props: ModalProps) {
       const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
       const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-      
-        updateData = { ...updateData, newCurGPA: newGpa };
-      
+      updateData = { ...updateData, newCurGPA: newGpa };
     }
     if (
       originHopeSemester1.current !== hopeSemester1 ||

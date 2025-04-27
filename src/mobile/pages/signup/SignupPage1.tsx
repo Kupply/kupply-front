@@ -1,6 +1,10 @@
 import React from 'react';
+import { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
+
+import { api_url, client } from '../../../utils/HttpClient';
 import {
   verificationCodeState,
   nextButtonState,
@@ -8,11 +12,8 @@ import {
   isOpenModalState,
   sendNumState,
 } from '../../../store/atom';
-import { useEffect, useCallback } from 'react';
 import { sendEmail } from '../../../utils/SignUpFunctions';
-import client from '../../../utils/HttpClient';
 import { SignUpPageWrapper } from '../../components/signup/SignUpPageWrapper';
-import styled from 'styled-components';
 import Typography from '../../../assets/Typography';
 import Timer from '../../../components/signUp/Timer';
 import { CodeVerification } from '../../components/signup/VerificationForm';
@@ -51,7 +52,7 @@ export default function SignUpPage1() {
   const handleNext = async () => {
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
     console.log(entireCode, 'entireCode');
-    const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
+    const url = `${api_url}/auth/certifyEmail`;
     try {
       //await axios.post(url, { email: email, code: entireCode });
       await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();

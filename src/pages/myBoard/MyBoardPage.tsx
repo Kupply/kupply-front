@@ -10,7 +10,7 @@ import PieChart from '../../components/myBoard/Graph/PieChart';
 import Scatter from '../../components/myBoard/Graph/Scatter';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton'; // 1지망 2지망 선택 버튼
 import MyboardPasserPageVer from './MyboardPasser';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
 import { MajorOptionsKR } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR } from '../../utils/Mappings';

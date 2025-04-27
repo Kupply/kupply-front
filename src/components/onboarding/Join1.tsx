@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+import { api_url } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import Button02 from '../../assets/buttons/Button02';
 import CTA02 from '../../assets/CTAs/CTA02';
@@ -26,7 +27,7 @@ function Join1() {
     const IDPattern = /.+@korea\.ac\.kr$/;
     if (IDPattern.test(ID)) {
       //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
-      const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+      const url = `${api_url}/auth/sendEmail`;
       try {
         await axios.post(url, { email: ID });
 
@@ -78,8 +79,16 @@ function Join1() {
           >
             당신이 찾고있던 이중전공에 대한 모든 정보, 오직 쿠플라이에서.
           </Typography>
-          <Typography size="1.25vw" bold="500" color="#2C323A" style={{ opacity: 0.8, textAlign: 'center', margin: '0 0 2.865vw 0', lineHeight: '1.56vw' }}>
-            쿠플라이는 고파스 계정으로 이용 가능합니다.<br/>고파스 계정으로 로그인하고, 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를 이용해보세요.
+          <Typography
+            size="1.25vw"
+            bold="500"
+            color="#2C323A"
+            style={{ opacity: 0.8, textAlign: 'center', margin: '0 0 2.865vw 0', lineHeight: '1.56vw' }}
+          >
+            쿠플라이는 고파스 계정으로 이용 가능합니다.
+            <br />
+            고파스 계정으로 로그인하고, 실시간 이중전공 지원현황과 간편한 학점 비교 등, 쿠플라이만의 다양한 서비스를
+            이용해보세요.
             {/* 고려대학교 이메일 주소 입력으로 실시간 이중전공 지원현황 확인과 간편한 학점 비교 등, 쿠플라이만의 다양한
             서비스를 이용해보세요. */}
           </Typography>
@@ -94,11 +103,11 @@ function Join1() {
             />
           </JoinBox>
           <LinkBox>
-          <div style={{ display: 'flex', gap: '0.26vw', alignItems: 'center' }}>
-          <IconButton04/>
-          <Link>고파스 아이디/비밀번호 찾기</Link> 
-          </div>
-          <Link>쿠플라이의 기존 회원이신가요?</Link>
+            <div style={{ display: 'flex', gap: '0.26vw', alignItems: 'center' }}>
+              <IconButton04 />
+              <Link>고파스 아이디/비밀번호 찾기</Link>
+            </div>
+            <Link>쿠플라이의 기존 회원이신가요?</Link>
           </LinkBox>
         </>
       )}
@@ -133,9 +142,7 @@ const Link = styled.button`
   line-height: 100%; /* 100% */
   text-decoration-line: underline;
   text-transform: uppercase;
-  
 `;
-
 
 const LinkBox = styled.div`
   display: flex;
@@ -147,10 +154,9 @@ const LinkBox = styled.div`
 `;
 
 const ImageWrapper = styled.img`
-  width: 1.30vw;
-  height: 1.30vw;
+  width: 1.3vw;
+  height: 1.3vw;
 `;
-
 
 // 삭제 예정
 const TextFieldWrapper = styled.div`

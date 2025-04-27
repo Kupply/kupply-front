@@ -8,7 +8,7 @@ import DropDown from '../../assets/dropdown/DropDown';
 import TextArea from '../../assets/TextArea';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import NicknameCheckButton from '../../assets/progressIndicator/Loader';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { majorTargetList } from '../../common/MajorTarget';
 import { majorAllList } from '../../common/MajorAll';
 import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
@@ -264,23 +264,21 @@ const SettingsPage = () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-    
-       {
-        const updateData = {
-          newCurGPA: newGpa,
-          newHopeMajor1: hopeMajor1,
-          newHopeMajor2: hopeMajor2,
-        };
-        try {
-          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-          await client.post('/user/updateMe', updateData, config);
-          window.location.reload(); // 페이지 새로고침.
-          console.log('is this third submit even working??');
-        } catch (err) {
-          console.log(err);
-        }
+    {
+      const updateData = {
+        newCurGPA: newGpa,
+        newHopeMajor1: hopeMajor1,
+        newHopeMajor2: hopeMajor2,
+      };
+      try {
+        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+        await client.post('/user/updateMe', updateData, config);
+        window.location.reload(); // 페이지 새로고침.
+        console.log('is this third submit even working??');
+      } catch (err) {
+        console.log(err);
       }
-    
+    }
   };
 
   const fourthSubmit = async () => {

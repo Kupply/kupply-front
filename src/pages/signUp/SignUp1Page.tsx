@@ -1,8 +1,12 @@
+import axios from 'axios';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+
+import { api_url, client } from '../../utils/HttpClient';
 import { SignUpPageWrapper } from '../../components/signUp/SignUpPageWrapper';
 import { sendEmail } from '../../utils/SignUpFunctions';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { CodeVerification } from '../../components/signUp/VerificationForm';
 import Typography from '../../assets/Typography';
 import Timer from '../../components/signUp/Timer';
@@ -15,12 +19,9 @@ import {
   isOpenModalState,
   sendNumState,
 } from '../../store/atom';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import Button03 from '../../assets/buttons/Button03';
 import Button04 from '../../assets/buttons/Button04';
 import VerificationButton from '../../components/signUp/VerificationButton';
-import axios from 'axios';
-import client from '../../utils/HttpClient';
 
 export function SignUp1Page() {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ export function SignUp1Page() {
   // 얘는 클릭할 때에만 판단
   const handleNext = async () => {
     const entireCode = num1 + num2 + num3 + num4 + num5 + num6;
-    const url = 'https://api.kupply.devkor.club/auth/certifyEmail'; // 만든 API 주소로 바뀌어야 함.
+    const url = `${api_url}/auth/certifyEmail`;
     try {
       //await axios.post(url, { email: email, code: entireCode });
       await client.post('/auth/certifyEmail', { email: email, code: entireCode }).then();

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import client from '../../../utils/HttpClient';
+import { client } from '../../../utils/HttpClient';
 
 type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
@@ -208,10 +208,7 @@ const loadingRotate = keyframes`
 const LoadingImage = styled.svg`
   position: relative;
   z-index: 1;
-  animation:
-    ${loadingMove} 0.25s ease,
-    ${loadingRotate} 1s linear infinite,
-    forwards;
+  animation: ${loadingMove} 0.25s ease, ${loadingRotate} 1s linear infinite, forwards;
 `;
 
 const ButtonText = css`

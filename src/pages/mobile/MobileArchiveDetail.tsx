@@ -10,7 +10,7 @@ import Banner01 from '../../mobile/assets/banners/Banner01';
 import { DBkeywords } from '../../common/Keyword';
 import { recruit } from '../../common/Recruiting';
 import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import {
   collegeNameMappingByEng as collegeNameMapping,
   semesterAPIMapping as semesterForAPI,

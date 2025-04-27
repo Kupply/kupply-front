@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 import { MobileSelectedState, SBContentState } from '../../store/atom';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { StateOptions } from '../assets/field/Input01';
 import { majorAllList } from '../../common/MajorAll';
 import { majorTargetList } from '../../common/MajorTarget';
@@ -273,39 +273,36 @@ export const MobileSettingsPage = () => {
       return;
     }
 
-    
-        const updateData = {
-          newCurGPA: newGpa,
-          newHopeMajor1: hopeMajor1,
-          newHopeMajor2: hopeMajor2,
-        };
-        try {
-          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-          await client.post('/user/updateMe', updateData, config);
-          window.location.reload(); // 페이지 새로고침.
-        } catch (err) {
-          console.log(err);
-        
-      }
+    const updateData = {
+      newCurGPA: newGpa,
+      newHopeMajor1: hopeMajor1,
+      newHopeMajor2: hopeMajor2,
+    };
+    try {
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
+      window.location.reload(); // 페이지 새로고침.
+    } catch (err) {
+      console.log(err);
     }
+  };
   const thirdSubmit2 = async () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-    
-        const updateData = {
-          newCurGPA: newGpa,
-          newHopeMajor1: hopeMajor1,
-          newHopeMajor2: hopeMajor2,
-        };
-        try {
-          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-          await client.post('/user/updateMe', updateData, config);
-          window.location.reload(); // 페이지 새로고침.
-        } catch (err) {
-          console.log(err);
-        }
+    const updateData = {
+      newCurGPA: newGpa,
+      newHopeMajor1: hopeMajor1,
+      newHopeMajor2: hopeMajor2,
+    };
+    try {
+      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
+      window.location.reload(); // 페이지 새로고침.
+    } catch (err) {
+      console.log(err);
     }
+  };
 
   const fourthSubmit = async () => {
     const updateData = {

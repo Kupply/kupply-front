@@ -9,7 +9,7 @@ import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import ToolTip04 from '../../../assets/toolTips/ToolTip04';
 import { majorAllList } from '../../../common/MajorAll';
 import { majorTargetList } from '../../../common/MajorTarget';
-import client from '../../../utils/HttpClient';
+import { client } from '../../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 import Icon02 from '../../../assets/icons/Icon02';
 import Button01 from '../../../assets/buttons/Button01';
@@ -127,9 +127,7 @@ export default function EditModal(props: ModalProps) {
       const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
       const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-      
       updateData = { ...updateData, newCurGPA: newGpa };
-      
     }
     if (originUserProfilePic.current !== userProfilePic) {
       updateData = { ...updateData, newProfilePic: userProfilePic };

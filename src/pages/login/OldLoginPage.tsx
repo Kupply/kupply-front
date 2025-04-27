@@ -1,13 +1,14 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
+
+import { api_url, client } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import NextButton from '../../assets/buttons/OldNextButton';
 import LoginModal from '../../components/login/LoginModal';
 import AlertMessage from '../../assets/toolTips/ToolTip01';
-import client from '../../utils/HttpClient';
 import Login2JoinModal from '../../components/login/Login2JoinModal';
 import { CheckBoxButton02 } from '../../assets/buttons/CheckBoxButton';
 import CTA01 from '../../assets/CTAs/CTA01';
@@ -159,7 +160,8 @@ function LoginPage(props: LoginPageProps) {
   // login API 접근
   const onLoginClick = async () => {
     if (ID === '' || password === '') return;
-    const url = 'https://api.kupply.devkor.club/auth/login';
+    const url = `${api_url}/auth/login`;
+    console.log(url);
     try {
       await axios
         .post(url, {
@@ -183,9 +185,10 @@ function LoginPage(props: LoginPageProps) {
     } catch (err: any) {
       // 이후 수정 필요함.
       setPassword('');
-      if (err.response.data.error.message) {
-        alert(err.response.data.error.message);
-      }
+      console.log(err);
+      // if (err.response.data.error.message) {
+      //   alert(err.response.data.error.message);
+      // }
     }
   };
 

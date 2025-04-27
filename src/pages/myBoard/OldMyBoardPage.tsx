@@ -17,7 +17,7 @@ import EditModal from '../../components/myBoard/EditModals/OldEditModal';
 //import ApplicationModal from '../../components/myBoard/SubmitModals/OldApplicationModal';
 import { recruit } from '../../common/Recruiting';
 import MyboardPasserPageVer from './MyboardPasser';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
 import {
   collegeNameMappingByKR as collegeNameMapping,

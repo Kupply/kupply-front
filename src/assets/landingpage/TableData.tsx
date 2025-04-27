@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Typography from '../Typography';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 
 export interface TableDataProps {
   rank: number;

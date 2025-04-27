@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { SignUpPageWrapper } from '../../components/signup/SignUpPageWrapper';
 import styled from 'styled-components';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { api_url, client } from '../../../utils/HttpClient';
+import { SignUpPageWrapper } from '../../components/signup/SignUpPageWrapper';
 import Typography from '../../../assets/Typography';
 import Input01, { StateOptions } from '../../assets/field/Input01';
-import { useNavigate } from 'react-router-dom';
-import client from '../../../utils/HttpClient';
 import Button05 from '../../assets/buttons/Button05';
 import Card01 from '../../assets/cards/Card01';
 import Card02 from '../../assets/cards/Card02';
@@ -28,7 +29,7 @@ export default function SignUpPage0() {
     const IDPattern = /.+@korea\.ac\.kr$/;
     if (IDPattern.test(ID)) {
       //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
-      const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+      const url = `${api_url}/auth/sendEmail`;
       try {
         // await axios.post(url, { email: ID });
         await client.post('/auth/sendEmail', { email: ID });

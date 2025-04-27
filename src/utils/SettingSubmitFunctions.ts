@@ -1,10 +1,16 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { gpaSettingsState, isGpaChangedState, semesterSettingsState, userProfileState, userState, userSettingsState } from "../store/atom";
-import client from "./HttpClient";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  gpaSettingsState,
+  isGpaChangedState,
+  semesterSettingsState,
+  userProfileState,
+  userState,
+  userSettingsState,
+} from '../store/atom';
+import { client } from './HttpClient';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export function useSubmit0() {
   const [cookies] = useCookies(['accessToken']);
@@ -23,9 +29,8 @@ export function useSubmit0() {
   const firstMajor = useRecoilValue(userSettingsState('firstMajor'));
 
   const firstSubmit = async () => {
-
     const updateData = {
-      newName:name.info,
+      newName: name.info,
       newStudentId: stdID.info,
       newFirstMajor: firstMajor.info,
     };
@@ -39,14 +44,10 @@ export function useSubmit0() {
     }
   };
 
-  return {firstSubmit};
+  return { firstSubmit };
 }
 
-
-
-
-
-export function useSubmit1(){
+export function useSubmit1() {
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
   const navigate = useNavigate();
@@ -62,7 +63,6 @@ export function useSubmit1(){
   const nickname = useRecoilValue(userSettingsState('nickname'));
 
   const secondSubmit = async () => {
-
     const updateData = {
       newProfilePic: userProfile.pic,
       newNickname: nickname.info,
@@ -77,17 +77,13 @@ export function useSubmit1(){
     }
   };
 
-  return {secondSubmit};
+  return { secondSubmit };
 }
 
-
-
-
-export function useSubmit2(){
+export function useSubmit2() {
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
   const navigate = useNavigate();
-
 
   const config = {
     headers: {
@@ -99,42 +95,35 @@ export function useSubmit2(){
   const semester = useRecoilValue(semesterSettingsState('candidate'));
   const hopeMajor1 = useRecoilValue(userSettingsState('hopeMajor1'));
   const hopeMajor2 = useRecoilValue(userSettingsState('hopeMajor2'));
-  const {num1, num2, num3} = useRecoilValue(gpaSettingsState('candidate'));
+  const { num1, num2, num3 } = useRecoilValue(gpaSettingsState('candidate'));
   const isGpaChange = useRecoilValue(isGpaChangedState);
 
   const thirdSubmit = async () => {
-    
-    
-      const newHopeSemester = '20' + semester.num1 + semester.num2 + '-' + semester.num3;
+    const newHopeSemester = '20' + semester.num1 + semester.num2 + '-' + semester.num3;
 
-      const updateData = {
-        newCurGPA: parseFloat(num1 + '.' + num2 + num3),
-        newHopeMajor1: hopeMajor1.info,
-        newHopeMajor2: hopeMajor2.info,
-        newHopeSemester: newHopeSemester,
-      };
+    const updateData = {
+      newCurGPA: parseFloat(num1 + '.' + num2 + num3),
+      newHopeMajor1: hopeMajor1.info,
+      newHopeMajor2: hopeMajor2.info,
+      newHopeSemester: newHopeSemester,
+    };
 
-      try {
-        //await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-        await client.post('/user/updateMe', updateData, config);
-        //console.log('ok');
-        window.location.reload(); // 페이지 새로고침.
-      } catch (err) {
-        console.log(err);
-      }
-    
+    try {
+      //await axios.post('http://localhost:8080/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData, config);
+      //console.log('ok');
+      window.location.reload(); // 페이지 새로고침.
+    } catch (err) {
+      console.log(err);
+    }
   };
-  return {thirdSubmit};
+  return { thirdSubmit };
 }
 
-
-
-
-export function useSubmit3(){
+export function useSubmit3() {
   const [cookies] = useCookies(['accessToken']);
   const accessToken = cookies.accessToken;
   const navigate = useNavigate();
-
 
   const config = {
     headers: {
@@ -157,7 +146,5 @@ export function useSubmit3(){
     }
   };
 
-  return {fourthSubmit};
+  return { fourthSubmit };
 }
-
-

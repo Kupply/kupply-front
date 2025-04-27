@@ -18,7 +18,7 @@ env:
 # 작업은 종속성에 따라 병렬 또는 순차적으로 실행될 수 있다.
 jobs:
   build: # define a job name
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     outputs:
       image_tag: ${{ steps.set_tag.outputs.tag }}
     steps:
@@ -60,6 +60,7 @@ jobs:
       - name: setup .env
         run: |
           echo "REACT_APP_GOOGLE_ANALYTICS=${{ secrets.REACT_APP_GOOGLE_ANALYTICS }}" >> .env
+          echo "REACT_APP_PHASE=prod" >> .env
           cat .env
       - name: Docker login to GHCR
         run: |
@@ -77,6 +78,7 @@ jobs:
       - name: setup .env
         run: |
           echo "PORT=3001" >> .env
+          echo "REACT_APP_PHASE=dev" >> .env
           cat .env
       - name: Docker login to GHCR
         run: |

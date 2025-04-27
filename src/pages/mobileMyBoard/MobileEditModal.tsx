@@ -6,7 +6,7 @@ import DropDown from '../../mobile/assets/selectControl/DropDown';
 import TextAreaBox from '../../mobile/assets/textarea/TextArea01';
 import { majorAllList } from '../../common/MajorAll';
 import { majorTargetList } from '../../common/MajorTarget';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import MoveButton from '../../mobile/components/myboard/MoveButton';
 import MobileHeaderBar from '../../mobile/components/myboard/EditModalHeaderBar';
 import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
@@ -114,9 +114,7 @@ export default function MobileEditModal(props: ModalProps) {
       const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
       const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-      
-        updateData = { ...updateData, newCurGPA: newGpa };
-      
+      updateData = { ...updateData, newCurGPA: newGpa };
     }
 
     if (originUserProfilePic.current !== userProfilePic) {
@@ -368,7 +366,6 @@ export default function MobileEditModal(props: ModalProps) {
               </div>
             </ContentsWrapper2>
           )}
-        
         </ModalLarge>
       )}
     </Main>

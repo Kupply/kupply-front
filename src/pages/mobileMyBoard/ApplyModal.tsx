@@ -19,7 +19,7 @@ import CurrentModal2 from '../../mobile/components/myboard/applyModal/CurrentMod
 import CurrentModal3 from '../../mobile/components/myboard/applyModal/CurrentModal3';
 import CurrentModal4 from '../../mobile/components/myboard/applyModal/CurrentModal4';
 import NotSubmittedHeader from '../../mobile/components/myboard/applyModal/NotSubmittedHeader';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { useRef } from 'react';
 
 export interface ModalProps {

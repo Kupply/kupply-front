@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import RankingTable from './RankingTable';
 import CTA02 from '../../assets/CTAs/CTA02';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import { isDateInRange, isPeriodPassed, currentMonth } from '../../common/ApplicationPeriod';
 import { tab } from '@testing-library/user-event/dist/tab';
