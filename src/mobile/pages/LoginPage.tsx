@@ -1,11 +1,13 @@
+import axios from 'axios';
 import React from 'react';
-import styled from 'styled-components';
-import Typography from '../../assets/Typography';
-import Input01, { StateOptions } from '../assets/field/Input01';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import styled from 'styled-components';
+import Typography from '../../assets/Typography';
+
+import { api_url } from '../../utils/HttpClient';
+import Input01, { StateOptions } from '../assets/field/Input01';
 import { placeholderMapping, helpMessageMapping, errorMessageMapping } from '../components/signup/UserInput';
 import CheckBox02 from '../assets/checkBoxes/CheckBox02';
 import CTA01 from '../assets/CTAs/CTA01';
@@ -38,7 +40,7 @@ export default function LoginPage(props: LoginPageProps) {
   };
 
   const onLoginClick = async () => {
-    const url = 'https://api.kupply.devkor.club/auth/login';
+    const url = `${api_url}/auth/login`;
     try {
       await axios
         .post(url, {
@@ -70,7 +72,7 @@ export default function LoginPage(props: LoginPageProps) {
 
   const forgotPassword = async () => {
     try {
-      const url = 'https://api.kupply.devkor.club/auth/forgotPassword';
+      const url = `${api_url}/auth/forgotPassword`;
       await axios.post(url, { userEmail: ID });
 
       setIsModalVisible(!isModalVisible);

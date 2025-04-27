@@ -7,7 +7,7 @@ import Logo from '../../assets/OldLogo';
 import HeaderButton from '../../assets/buttons/header/HeaderButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { TextButton02, TextButton03LNB, TextButton06 } from '../../assets/buttons/TextButton';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';

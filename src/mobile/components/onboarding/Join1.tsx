@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { api_url } from '../../../utils/HttpClient';
 import Typography from '../../../assets/Typography';
 import Banner02 from '../../assets/banners/Banner02';
 import Button02 from '../../assets/buttons/Button02';
@@ -26,7 +27,7 @@ function Join1() {
     const IDPattern = /.+@korea\.ac\.kr$/;
     if (IDPattern.test(ID)) {
       //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
-      const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
+      const url = `${api_url}/auth/sendEmail`;
       try {
         await axios.post(url, { email: ID });
 
@@ -67,7 +68,9 @@ function Join1() {
         color="rgba(20,20,20,0.6)"
         style={{ lineHeight: '133.33%', textAlign: 'center', marginBottom: isLogined ? '6.39vw' : '0' }}
       >
-        {isLogined ? '실시간 이중전공 지원현황과 나의 학점 백분위 정보까지,' : '쿠플라이는 고파스 계정으로 이용이 가능합니다.'}
+        {isLogined
+          ? '실시간 이중전공 지원현황과 나의 학점 백분위 정보까지,'
+          : '쿠플라이는 고파스 계정으로 이용이 가능합니다.'}
         <br />
         {isLogined ? '오직 쿠플라이에서 제공해 드릴게요.' : ''}
       </Typography>
@@ -77,22 +80,22 @@ function Join1() {
         </CTA02>
       ) : (
         <>
-        <JoinWrapper>
-          <Button02
-            imgSize="6.11vw"
-            onClick={handleJoinButtonClick}
-            style={{
-              boxShadow:
-                '9.72vw 11.94vw 4.44vw 0 rgba(216, 88, 136, 0.00), 6.11vw 7.78vw 3.89vw 0 rgba(216, 88, 136, 0.03), 3.33vw 4.44vw 3.33vw 0 rgba(216, 88, 136, 0.10), 1.67vw 1.94vw 2.5vw 0 rgba(216, 88, 136, 0.17), 0.28vw 0.56vw 1.39vw 0 rgba(216, 88, 136, 0.20)',
-            }}
-          ></Button02>
-        </JoinWrapper>
+          <JoinWrapper>
+            <Button02
+              imgSize="6.11vw"
+              onClick={handleJoinButtonClick}
+              style={{
+                boxShadow:
+                  '9.72vw 11.94vw 4.44vw 0 rgba(216, 88, 136, 0.00), 6.11vw 7.78vw 3.89vw 0 rgba(216, 88, 136, 0.03), 3.33vw 4.44vw 3.33vw 0 rgba(216, 88, 136, 0.10), 1.67vw 1.94vw 2.5vw 0 rgba(216, 88, 136, 0.17), 0.28vw 0.56vw 1.39vw 0 rgba(216, 88, 136, 0.20)',
+              }}
+            ></Button02>
+          </JoinWrapper>
           <LinkBox>
-          <div style={{display: 'flex', gap: '0.83vw', alignItems: 'center'}}>
-            <IconButton04 size='2.77vw'/>
-          <Link>고파스 아이디/비밀번호 찾기</Link>
-          </div>
-          <Link>쿠플라이의 기존 회원이신가요?</Link>
+            <div style={{ display: 'flex', gap: '0.83vw', alignItems: 'center' }}>
+              <IconButton04 size="2.77vw" />
+              <Link>고파스 아이디/비밀번호 찾기</Link>
+            </div>
+            <Link>쿠플라이의 기존 회원이신가요?</Link>
           </LinkBox>
         </>
       )}
@@ -128,11 +131,10 @@ const Link = styled.button`
   font-size: 2.77vw;
   font-style: normal;
   font-weight: 400;
-  line-height: 120%; 
+  line-height: 120%;
   text-decoration-line: underline;
   text-transform: uppercase;
 `;
-
 
 const LinkBox = styled.div`
   display: flex;
@@ -143,7 +145,6 @@ const LinkBox = styled.div`
   margin-top: 7.22vw;
   margin-bottom: 5.83vw;
 `;
-
 
 const TextFieldWrapper = styled.div`
   width: 70vw;

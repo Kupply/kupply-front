@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { MobileSelectedState } from '../../../store/atom';
 import { useRecoilState } from 'recoil';
 import Typography from '../../../assets/Typography';
-import client from '../../../utils/HttpClient';
+import { client } from '../../../utils/HttpClient';
 
 export interface HeaderProps {
   logined: boolean;

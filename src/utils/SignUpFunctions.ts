@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { emailAtom, errorMessageState, userState } from '../store/atom';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { api_url, client } from './HttpClient';
+import { emailAtom, errorMessageState, userState } from '../store/atom';
 import { inputState } from '../pages/signUp/SignUp4Page';
 import { userType } from '../store/atom';
-import client from './HttpClient';
 import {
   useEmailVerification,
   useNicknameVerification,
@@ -15,7 +16,7 @@ import {
 } from './UserInputVerification';
 
 export const sendEmail = async (email: string) => {
-  const url = 'https://api.kupply.devkor.club/auth/sendEmail';
+  const url = `${api_url}/auth/sendEmail`;
   try {
     await client.post('/auth/sendEmail', { email: email });
     return true;
@@ -28,7 +29,7 @@ export const sendEmail = async (email: string) => {
 
 // candidate이나 passer가 들어옴
 export const join = async (role: string) => {
-  const url = 'https://api.kupply.devkor.club/auth/join'; // 만든 API 주소로 바뀌어야 함.
+  const url = `${api_url}/auth/join`;
   const commonData = {
     name: sessionStorage.getItem('name'),
     studentId: Number(sessionStorage.getItem('studentId')),

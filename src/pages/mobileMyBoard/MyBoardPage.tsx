@@ -11,7 +11,7 @@ import MobileThreeYear from '../../mobile/components/myboard/ThreeYear';
 import MobileQuartileIndicator from '../../mobile/components/myboard/QuartileIndicator';
 import MobileScatter from '../../mobile/components/myboard/Scatter';
 import MobilePieChart from '../../mobile/components/myboard/PieChart';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { recruit } from '../../common/Recruiting';
 import { MajorOptionsKR } from '../../types/MajorTypes';
 import { collegeAPIMappingByKR } from '../../utils/Mappings';

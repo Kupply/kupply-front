@@ -1,11 +1,12 @@
+import axios from 'axios';
 import React from 'react';
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+
 import ModalLarge from '../base/ModalLarge';
-//import Typography from '../../assets/OldTypography';
+import { api_url } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import Button03 from '../../assets/buttons/Button03';
-import axios from 'axios';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -107,7 +108,7 @@ export default function LoginModal() {
 
   const forgotPassword = async () => {
     try {
-      const url = 'https://api.kupply.devkor.club/auth/forgotPassword';
+      const url = `${api_url}/auth/forgotPassword`;
       await axios.post(url, { userEmail: ID });
 
       setIsOpen(!isOpen);

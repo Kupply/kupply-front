@@ -6,7 +6,7 @@ import Banner from '../../components/landing/Banner';
 import RankingTable from '../../components/landing/RankingTable';
 import FAQ from '../../components/landing/FAQ';
 import ProfileBox from '../../components/myBoard/ProfileBox';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 
 export interface ITableData {
   rank: number;

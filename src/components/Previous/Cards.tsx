@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { mockHashes } from './Header';
 import { useEffect, useState } from 'react';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 import Card01 from '../../assets/cards/Card01';
 import DropDown02 from '../../assets/dropdown/DropDown02';
