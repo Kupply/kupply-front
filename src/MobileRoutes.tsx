@@ -12,10 +12,12 @@ import SignUpPage5, { SignUp5Complete } from './mobile/pages/signup/SignupPage5'
 import MobileArchivePage from './pages/mobile/MobileArchive';
 import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
+import OAuthPage from './pages/login/OAuthPage';
 
 export const mobileMainRoutes = [
   { path: '/', element: <OnboardingMobile /> },
   { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined === true} /> },
+  { path: '/oauth-koreapas/:koreapasUUID?', element: <OAuthPage /> },
 ];
 
 export const mobileAuthRoutes = [

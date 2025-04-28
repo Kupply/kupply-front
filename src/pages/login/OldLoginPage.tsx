@@ -161,7 +161,6 @@ function LoginPage(props: LoginPageProps) {
   const onLoginClick = async () => {
     if (ID === '' || password === '') return;
     const url = `${api_url}/auth/login`;
-    console.log(url);
     try {
       await axios
         .post(url, {
@@ -185,10 +184,9 @@ function LoginPage(props: LoginPageProps) {
     } catch (err: any) {
       // 이후 수정 필요함.
       setPassword('');
-      console.log(err);
-      // if (err.response.data.error.message) {
-      //   alert(err.response.data.error.message);
-      // }
+      if (err.response.data.error.message) {
+        alert(err.response.data.error.message);
+      }
     }
   };
 

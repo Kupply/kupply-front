@@ -42,7 +42,7 @@ export default function App() {
         </>
       ) : (
         <Wrapper>
-          <Header logined={isLogined} setLogin={setisLogined}/>
+          <Header logined={isLogined} setLogin={setisLogined} />
           <Routes>
             <Route element={<AuthRequired />}>{renderRoutes(authRoutes)}</Route>
             <Route element={<AdminRequired />}>{renderRoutes(adminRoutes)}</Route>
