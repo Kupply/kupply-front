@@ -16,12 +16,14 @@ import DeletePage from './pages/delete/DeletePage';
 import UserPage from './admin/pages/user';
 import { IndexPage } from './admin/routes/sections';
 import OnboardingPage from './pages/main/OnboardingPage';
+import OAuthPage from './pages/login/OAuthPage';
 
 const isLogined = true;
 
 export const mainRoutes = [
   { path: '/', element: <OnboardingPage /> },
   { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
+  { path: '/oauth-koreapas/:koreapasUUID?', element: <OAuthPage /> },
 ];
 
 export const authRoutes = [
