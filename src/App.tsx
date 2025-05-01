@@ -9,7 +9,7 @@ import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
-import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes } from './MobileRoutes';
+import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes, mobileSyncRoutes } from './MobileRoutes';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from './store/atom';
 
@@ -38,6 +38,7 @@ export default function App() {
             <Route element={<AuthRequired />}>{renderRoutes(mobileAuthRoutes)}</Route>
             {renderRoutes(mobileMainRoutes)}
             {renderRoutes(mobileSignupRoutes)}
+            {renderRoutes(mobileSyncRoutes)}
           </Routes>
         </>
       ) : (
