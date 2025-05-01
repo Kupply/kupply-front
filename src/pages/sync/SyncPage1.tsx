@@ -8,7 +8,7 @@ import { SyncPageWrapper } from '../../components/sync/SyncPageWrapper';
 import Typography from '../../assets/Typography';
 import CTA01 from '../../assets/CTAs/CTA01';
 
-export default function SyncPage0() {
+export default function SyncPage1() {
   const [ID, setID] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
