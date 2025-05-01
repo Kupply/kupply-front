@@ -7,11 +7,9 @@ import { SyncPageWrapper } from '../../components/sync/SyncPageWrapper';
 import { CheckBoxButton01 } from '../../assets/buttons/CheckBoxButton';
 import { ScrollLarge, ScrollSmall } from '../../assets/scroll/Scroll';
 import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
-import Button04 from '../../assets/buttons/Button04';
 import Button03 from '../../assets/buttons/Button03';
 import CTA01 from '../../assets/CTAs/CTA01';
 import Typography from '../../assets/Typography';
-import { join } from '../../utils/SignUpFunctions';
 import { api_url } from '../../utils/HttpClient';
 
 export default function SyncPage2() {
