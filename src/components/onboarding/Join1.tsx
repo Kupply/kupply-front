@@ -46,6 +46,13 @@ function Join1() {
     }
   };
 
+  const handleForgetClick = () => {
+    window.open('https://www.koreapas.com/bbs/lostid_new.php', '_blank', 'noopener,noreferrer');
+  };
+  const handleSyncClick = () => {
+    navigate('/sync0');
+  };
+
   return (
     <MainWrapper>
       {isLogined ? (
@@ -94,7 +101,7 @@ function Join1() {
           </Typography>
           <JoinBox>
             <Button02
-              onClick={handleButtonClick}
+              onClick={() => navigate('/login')}
               style={{
                 width: '23.33vw',
                 boxShadow:
@@ -105,9 +112,9 @@ function Join1() {
           <LinkBox>
             <div style={{ display: 'flex', gap: '0.26vw', alignItems: 'center' }}>
               <IconButton04 />
-              <Link>고파스 아이디/비밀번호 찾기</Link>
+              <Link onClick={handleForgetClick}>고파스 아이디/비밀번호 찾기</Link>
             </div>
-            <Link>쿠플라이의 기존 회원이신가요?</Link>
+            <Link onClick={handleSyncClick}>쿠플라이의 기존 회원이신가요?</Link>
           </LinkBox>
         </>
       )}
