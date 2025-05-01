@@ -32,67 +32,83 @@ export default function LoginPage(props: LoginPageProps) {
   const [password, setPassword] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
   const [isChecked, setIsChecked] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false); // 고파스 연동 전 사용했던 모달
   const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken', 'accessTokenExpire']);
 
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  // const toggleModal = () => {
+  //   setIsModalVisible(!isModalVisible);
+  // };  // 고파스 연동 전 사용했던 모달
 
   const onLoginClick = async () => {
-    const url = `${api_url}/auth/login`;
+    if (ID === '' || password === '') return;
+    const url = `${api_url}/auth/koreapasLogin`;
     try {
       await axios
         .post(url, {
-          email: ID,
+          id: ID,
           password: password,
           isRememberOn: isChecked,
         })
         .then((res) => {
-          if (res.data.data) {
+          if (!res.data.data.isKupply) {
+            alert('쿠플라이 회원이 아니에요. \n고파스 아이디로 쿠플라이 서비스에 회원가입 해주세요.');
+            localStorage.setItem('isKupply', res.data.data.isKupply);
+            localStorage.setItem('firstMajorCampus', res.data.data.koreapasData.firstMajorCampus);
+            localStorage.setItem('firstMajorCode', res.data.data.koreapasData.firstMajorCode);
+            localStorage.setItem('firstMajorName', res.data.data.koreapasData.firstMajorName);
+            localStorage.setItem('nickname', res.data.data.koreapasData.nickname);
+            localStorage.setItem('studentId', res.data.data.koreapasData.studentId);
+            localStorage.setItem('koreapasUUID', res.data.data.koreapasData.koreapasUUID);
+            navigate('/signup1'); // 약관 동의 페이지로
+          } else {
             localStorage.setItem('accessToken', res.data.data.accessToken);
             localStorage.setItem('refreshToken', res.data.data.refreshToken);
+            localStorage.setItem('isLogin', 'true');
+            setLogin(true);
+            navigate('/');
+            window.location.reload();
           }
         });
-
-      //로그인 상태를 유지하기 위해 localStorage에 로그인 여부와 ID를 저장 후 login 상태를 true로 바꾸고 메인 페이지로 보낸다.
-      window.localStorage.setItem('isLogin', 'true');
-      window.localStorage.setItem('loginedUser', ID);
-      setLogin(true);
-      navigate('/');
-      window.location.reload();
     } catch (err: any) {
-      // 이후 수정 필요함.
       setPassword('');
-      if (err.response.data.error.message) {
-        alert(err.response.data.error.message);
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
+        alert('유효하지 않은 고파스 아이디 혹은 비밀번호에요.');
+      } else if (axios.isAxiosError(err) && err.response?.status === 403) {
+        alert('고파스 강등 또는 미인증 회원은 쿠플라이 서비스를 이용할 수 없어요.');
+      } else {
+        alert('알 수 없는 오류가 발생했어요. 잠시 후 다시 시도해 주세요.');
       }
     }
   };
 
-  const forgotPassword = async () => {
-    try {
-      const url = `${api_url}/auth/forgotPassword`;
-      await axios.post(url, { userEmail: ID });
+  // const forgotPassword = async () => {
+  //   try {
+  //     const url = `${api_url}/auth/forgotPassword`;
+  //     await axios.post(url, { userEmail: ID });
 
-      setIsModalVisible(!isModalVisible);
-      alert('입력하신 이메일로 임시 비밀번호를 보냈습니다.');
-    } catch (err: any) {
-      if (err.response.data.error.message) {
-        alert(err.response.data.error.message);
-      }
-    }
+  //     setIsModalVisible(!isModalVisible);
+  //     alert('입력하신 이메일로 임시 비밀번호를 보냈습니다.');
+  //   } catch (err: any) {
+  //     if (err.response.data.error.message) {
+  //       alert(err.response.data.error.message);
+  //     }
+  //   }
+  // };
+
+  const handleForgetClick = () => {
+    window.open('https://www.koreapas.com/bbs/lostid_new.php', '_blank', 'noopener,noreferrer');
   };
+
   return (
     <Wrapper>
-      {isModalVisible && (
+      {/* {isModalVisible && (
         <LoginModal
           isOpenModal={isModalVisible}
           setOpenModal={setIsModalVisible}
           onClickModal={() => setIsModalVisible((prev) => !prev)}
           sendEmail={forgotPassword}
         />
-      )}
+      )} */}
       <ContentsList>
         <LogoContainer onClick={() => navigate('/')}>
           <img src={process.env.PUBLIC_URL + '/designImage/kupply/KupplyVer1.svg'} alt="LOGO IMAGE" />
@@ -100,15 +116,15 @@ export default function LoginPage(props: LoginPageProps) {
         <ContentsWrapper>
           <TextBox>
             <Typography size="3.33vw" bold="700">
-              쿠플라이&nbsp;아이디
+              고파스&nbsp;아이디
             </Typography>
             <Typography size="3.33vw" bold="500">
               를 입력해주세요.
             </Typography>
           </TextBox>
           <Input01
-            placeholder={'kupply@korea.ac.kr'}
-            helpMessage={'쿠플라이 아이디는 고려대학교 이메일 주소입니다.'}
+            placeholder={'쿠플라이'}
+            helpMessage={'쿠플라이 아이디는 고파스 아이디입니다.'}
             errorMessage={''}
             value={ID}
             setValue={setID}
@@ -119,14 +135,14 @@ export default function LoginPage(props: LoginPageProps) {
         <ContentsWrapper>
           <TextBox>
             <Typography size="3.33vw" bold="700">
-              비밀번호
+              고파스 비밀번호
             </Typography>
             <Typography size="3.33vw" bold="500">
               를 입력해주세요.
             </Typography>
           </TextBox>
           <Input01
-            placeholder={'쿠플라이 비밀번호'}
+            placeholder={'비밀번호'}
             errorMessage={''}
             value={password}
             setValue={setPassword}
@@ -140,7 +156,7 @@ export default function LoginPage(props: LoginPageProps) {
             state={isChecked ? 'active' : 'default'}
             onImageClick={() => setIsChecked((prevState) => !prevState)}
           />
-          <PasswordButton onClick={toggleModal}>비밀번호를 잊으셨나요?</PasswordButton>
+          <PasswordButton onClick={handleForgetClick}>고파스 아이디/비밀번호를 잊으셨나요?</PasswordButton>
         </SubContent>
         <ButtonsWrapper>
           <CTA01
@@ -156,7 +172,7 @@ export default function LoginPage(props: LoginPageProps) {
               navigate('/signup0');
             }}
           >
-            포털 이메일로 회원가입
+            고파스 아이디로 회원가입
           </Button05>
         </ButtonsWrapper>
       </ContentsList>
