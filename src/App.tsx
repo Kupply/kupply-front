@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
 import { isMobile } from 'react-device-detect';
-import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './Routes';
+import { mainRoutes, authRoutes, signupRoutes, adminRoutes, syncRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
@@ -48,6 +48,7 @@ export default function App() {
             <Route element={<AdminRequired />}>{renderRoutes(adminRoutes)}</Route>
             {renderRoutes(mainRoutes)}
             {renderRoutes(signupRoutes)}
+            {renderRoutes(syncRoutes)}
           </Routes>
           <Footer />
         </Wrapper>
