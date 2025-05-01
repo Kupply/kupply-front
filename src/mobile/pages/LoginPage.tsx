@@ -174,6 +174,14 @@ export default function LoginPage(props: LoginPageProps) {
           >
             고파스 아이디로 회원가입
           </Button05>
+          <Button05
+            size="large"
+            onClick={() => {
+              navigate('/sync0');
+            }}
+          >
+            쿠플라이의 기존 회원이신가요?
+          </Button05>
         </ButtonsWrapper>
       </ContentsList>
     </Wrapper>
