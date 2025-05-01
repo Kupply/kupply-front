@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -8,12 +7,10 @@ import Typography from '../../assets/Typography';
 
 import { api_url } from '../../utils/HttpClient';
 import Input01, { StateOptions } from '../assets/field/Input01';
-import { placeholderMapping, helpMessageMapping, errorMessageMapping } from '../components/signup/UserInput';
 import CheckBox02 from '../assets/checkBoxes/CheckBox02';
 import CTA01 from '../assets/CTAs/CTA01';
 import Button05 from '../assets/buttons/Button05';
-import LoginModal from '../components/login/LoginModal';
-import { sendEmail } from '../../utils/SignUpFunctions';
+import IconButton04 from '../../assets/iconButtons/IconButton04';
 
 interface LoginPageProps {
   setLogin: (state: boolean) => void;
@@ -156,7 +153,10 @@ export default function LoginPage(props: LoginPageProps) {
             state={isChecked ? 'active' : 'default'}
             onImageClick={() => setIsChecked((prevState) => !prevState)}
           />
-          <PasswordButton onClick={handleForgetClick}>고파스 아이디/비밀번호를 잊으셨나요?</PasswordButton>
+          <div style={{ display: 'flex', gap: '0.83vw', alignItems: 'center' }}>
+            <IconButton04 size="2.77vw" />
+            <PasswordButton onClick={handleForgetClick}>고파스 아이디/비밀번호 찾기</PasswordButton>
+          </div>
         </SubContent>
         <ButtonsWrapper>
           <CTA01

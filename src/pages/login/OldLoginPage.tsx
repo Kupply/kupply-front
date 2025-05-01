@@ -4,14 +4,11 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { api_url, client } from '../../utils/HttpClient';
+import { api_url } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
-import NextButton from '../../assets/buttons/OldNextButton';
-import LoginModal from '../../components/login/LoginModal';
 import AlertMessage from '../../assets/toolTips/ToolTip01';
-import Login2JoinModal from '../../components/login/Login2JoinModal';
-import { CheckBoxButton02 } from '../../assets/buttons/CheckBoxButton';
 import CTA01 from '../../assets/CTAs/CTA01';
+import IconButton04 from '../../assets/iconButtons/IconButton04';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -118,7 +115,7 @@ const LinkBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.31vw;
+  gap: 0.78vw;
   margin-top: 4.11vw;
   margin-bottom: 4.53vw;
 `;
@@ -281,8 +278,11 @@ function LoginPage(props: LoginPageProps) {
           </Typography>
         </TextBox>
         <LinkBox>
+          <div style={{ display: 'flex', gap: '0.26vw', alignItems: 'center' }}>
+            <IconButton04 />
+            <Link onClick={handleForgetClick}>고파스 아이디/비밀번호 찾기</Link>
+          </div>
           <Link onClick={handleSyncClick}>쿠플라이의 기존 회원이신가요?</Link>
-          <Link onClick={handleForgetClick}>고파스 아이디/비밀번호를 잊으셨나요?</Link>
           <Link onClick={handleJoinClick}>고파스 아이디로 회원가입</Link>
         </LinkBox>
         <CTA01 state={ID != '' && password !== '' ? 'default' : 'disabled'} onClick={onLoginClick}>
