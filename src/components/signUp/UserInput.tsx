@@ -2,10 +2,10 @@ import TextFieldBox from '../../assets/OldTextFieldBox';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userSettingsState, userState } from '../../store/atom';
 import DropDown from '../../assets/dropdown/DropDown';
-import { majorAllList } from '../../common/MajorAll';
+import { majorAllList } from '../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../store/atom';
-import { majorTargetList } from '../../common/MajorTarget';
+import { majorTargetList } from '../../mappings/MajorTarget';
 import { inputState } from '../../pages/signUp/SignUp4Page';
 import NewTextFieldBox from '../../assets/NewTextFieldBox';
 

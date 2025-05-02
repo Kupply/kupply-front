@@ -4,37 +4,6 @@ import styled from 'styled-components';
 import Typography from '../OldTypography';
 import { TableUnique } from 'typeorm';
 
-// 학과별 색생
-const MajorColor = [
-  { name: '경영학과', fill: '#787071', boxShadow: ' 0px 16px 18px 0px rgba(120, 112, 113, 0.25)' },
-  { name: '정경대', fill: '#CC668C', boxShadow: '0px 16px 18px 0px rgba(204, 102, 140, 0.25)' },
-  { name: '의과대학', fill: '#99D88E', boxShadow: '0px 16px 18px 0px rgba(147, 216, 136, 0.25)' },
-  { name: '정보대학', fill: '#FFD35F', boxShadow: '0px 16px 18px 0px rgba(255, 211, 95, 0.25)' },
-  { name: '미디어학부', fill: '#EEA6BC', boxShadow: '0px 16px 18px 0px rgba(238, 166, 188, 0.25)' },
-  { name: '스마트보안', fill: '#F1A351', boxShadow: '0px 16px 18px 0px rgba(241, 163, 81, 0.25)' },
-  { name: '문과대', fill: '#DFDFDF', boxShadow: '0px 18px 16px 0px rgba(223, 223, 223, 0.25)' },
-  { name: '이과대학', fill: '#7287AB', boxShadow: '0px 16px 18px 0px rgba(114, 135, 171, 0.25)' },
-  { name: '사범대학', fill: '#4C8ECC', boxShadow: '0px 16px 18px 0px rgba(233, 77, 94, 0.25)' },
-  { name: '디자인조형학부', fill: '#A667AE', boxShadow: '0px 16px 18px 0px rgba(166, 103, 174, 0.25)' },
-  { name: '보건과학대학', fill: '#E9808C', boxShadow: '0px 16px 18px 0px rgba(233, 128, 140, 0.25)' },
-  { name: '심리학부', fill: '#89D7E1', boxShadow: '0px 16px 18px 0px rgba(137, 215, 225, 0.25)' },
-  { name: '생명과학대학', fill: '#78BE94', boxShadow: '0px 16px 18px 0px rgba(120, 190, 148, 0.25)' },
-  { name: '공과대학', fill: '#FF8461', boxShadow: '0px 16px 18px 0px rgba(255, 132, 97, 0.25)' },
-  { name: '간호대학', fill: '#F5BDBD', boxShadow: '0px 16px 18px 0px rgba(245, 189, 189, 0.25)' },
-  { name: '국제대학', fill: '#58A2C6', boxShadow: '0px 16px 18px 0px rgba(88, 162, 198, 0.25)' },
-  { name: '자유전공학부', fill: '#7BBEEE', boxShadow: '0px 16px 18px 0px rgba(123, 190, 238, 0.25)' },
-  { name: '스마트모빌리티학부', fill: '#3F87F3', boxShadow: '0px 16px 18px 0px rgba(63, 135, 243, 0.25)' },
-  { name: '기타', fill: '#A8A8A8', boxShadow: '0px 18px 16px 0px rgba(223, 223, 223, 0.25)' },
-];
-
-// 학번별 색상
-const GradeColor = [
-  { name: '23학번', fill: '#D85888' },
-  { name: '22학번', fill: '#E57C90' },
-  { name: '21학번', fill: '#FFAFBD' },
-  { name: '20학번 이상', fill: 'var(--SECONDARY, #FDF2F2)' },
-];
-
 //////////////////////////////////////////////////////////////////////
 
 /* 

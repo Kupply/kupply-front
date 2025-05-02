@@ -11,7 +11,7 @@ import axios from 'axios';
 import { client } from '../../utils/HttpClient';
 import { ICardData } from '../../components/landing/PassedDataCard';
 import { Card } from '@mui/material';
-import Card02 from '../../assets/cards/Card02';
+import {Card02} from '../../assets/cards/Card02';
 
 export interface ITableData {
   rank: number;

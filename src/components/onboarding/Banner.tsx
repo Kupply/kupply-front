@@ -1,110 +1,15 @@
 import styled, { keyframes } from 'styled-components';
 import Typography from '../../assets/Typography';
+import { collegeNameMappingByKR } from '../../mappings/Mappings';
+import { majorNameMappingByKr } from '../../mappings/Mappings';
 
 function Banner() {
-  const cardData = [
-    {
-      korName: '경영학과',
-      engName: 'Business School',
-      image: '../../designImage/majorSymbol/newMajorImage/business.png',
-    },
-    {
-      korName: '심리학부',
-      engName: 'School of Psychology',
-      image: '../../designImage/majorSymbol/newMajorImage/psycho.png',
-    },
-    {
-      korName: '경제학과',
-      engName: 'Department of Economics',
-      image: '../../designImage/majorSymbol/newMajorImage/political.png',
-    },
-    {
-      korName: '통계학과',
-      engName: 'Department of Statistics',
-      image: '../../designImage/majorSymbol/newMajorImage/political.png',
-    },
-    {
-      korName: '미디어학부',
-      engName: 'School of Media & Communication',
-      image: '../../designImage/majorSymbol/newMajorImage/media.png',
-    },
-    {
-      korName: '산업경영공학부',
-      engName: 'School of Industrial & Management Engineering',
-      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
-    },
-    {
-      korName: '컴퓨터학과',
-      engName: 'Department of Computer Science & Engineering',
-      image: '../../designImage/majorSymbol/newMajorImage/info.png',
-    },
-    {
-      korName: '식품자원경제학과',
-      engName: 'Department of Food & Resources',
-      image: '../../designImage/majorSymbol/newMajorImage/bio.png',
-    },
-    {
-      korName: '전기전자공학부',
-      engName: 'School of Electrical Engineering',
-      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
-    },
-    {
-      korName: '화공생명공학과',
-      engName: 'Department of Chemical & Biological Engineering',
-      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
-    },
-    {
-      korName: '수학과',
-      engName: 'Department of Mathematics',
-      image: '../../designImage/majorSymbol/newMajorImage/science.png',
-    },
-    {
-      korName: '화학과',
-      engName: 'Department of Chemistry',
-      image: '../../designImage/majorSymbol/newMajorImage/science.png',
-    },
-    {
-      korName: '생명공학부',
-      engName: 'Biological Engineering',
-      image: '../../designImage/majorSymbol/newMajorImage/bio.png',
-    },
-    {
-      korName: '생명과학부',
-      engName: 'School of Life Sciences',
-      image: '../../designImage/majorSymbol/newMajorImage/bio.png',
-    },
-    {
-      korName: '정치외교학과',
-      engName: 'Department of Political Science & International Relations',
-      image: '../../designImage/majorSymbol/newMajorImage/political.png',
-    },
-    {
-      korName: '행정학과',
-      engName: 'Department of Public Administration',
-      image: '../../designImage/majorSymbol/newMajorImage/political.png',
-    },
-    {
-      korName: '신소재공학부',
-      engName: 'School of Materials Science & Engineering',
-      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
-    },
-    {
-      korName: '기계공학부',
-      engName: 'School of Mechanical Engineering',
-      image: '../../designImage/majorSymbol/newMajorImage/engineering.png',
-    },
-    {
-      korName: '데이터과학과',
-      engName: 'Department of Data Science',
-      image: '../../designImage/majorSymbol/newMajorImage/info.png',
-    },
-    {
-      korName: '스마트보안학부',
-      engName: 'Division of Smart Security',
-      image: '../../designImage/majorSymbol/newMajorImage/smartsecurity.png',
-    },
-  ];
-
+  const cardData = Object.keys(majorNameMappingByKr).map((korName) => ({
+    korName,
+    engName: (majorNameMappingByKr as Record<string, string>)[korName], // Type assertion
+    image: `../../designImage/majorSymbol/newMajorImage/${(collegeNameMappingByKR as Record<string, string>)[korName]}.png`,
+  }));  
+  
   return (
     <MainWrapper>
       <div style={{ display: 'felx', marginTop: '6.56vw' }}>

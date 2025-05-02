@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { CallbackArgs, VictoryPie } from 'victory';
-import { idColorMapping, idColorMappingShadow } from '../../utils/Mappings';
+import { idColorMapping, idColorMappingShadow } from '../../mappings/Mappings';
 
 // 하드코딩
 // 커스텀하기 너무 귀차나... 일단 파이차트랑 비슷한 형태로

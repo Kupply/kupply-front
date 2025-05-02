@@ -8,7 +8,7 @@ import Typography from '../../../assets/Typography';
 import Input01, { StateOptions } from '../../assets/field/Input01';
 import Button05 from '../../assets/buttons/Button05';
 import Card01 from '../../assets/cards/Card01';
-import Card02 from '../../assets/cards/Card02';
+import {Card02} from '../../assets/cards/Card02';
 import { Card0301, Card0302, Card0303 } from '../../assets/cards/Card03';
 import Card05 from '../../assets/cards/Card05';
 

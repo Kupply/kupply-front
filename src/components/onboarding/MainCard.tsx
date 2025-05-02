@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { MajorOptionsLongEng as MajorOptions } from '../../types/MajorTypes';
+import { MajorOptionsLongEng as MajorOptions } from '../../mappings/MajorTypes';
 import ToolTip02 from '../../assets/toolTips/Tooltip02';
+import { engMajorParamMappingImage, engMajorParamMappingPath } from '../../mappings/Mappings';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: string;
@@ -17,51 +18,6 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   isDetailed: boolean;
 }
 
-const majorParamMappingImage = {
-  'Business School': 'business',
-  'Department of Economics': 'political',
-  'School of Psychology': 'psycho',
-  'Department of Statistics': 'political',
-  'Department of Mathematics': 'science',
-  'Department of Chemistry': 'science',
-  'School of Media & Communication': 'media',
-  'Department of Food & Resources': 'bio',
-  'Department of Computer Science & Engineering': 'info',
-  'Biological Engineering': 'bio',
-  'School of Life Sciences': 'bio',
-  'Department of Political Science & International Relations': 'political',
-  'Department of Public Administration': 'political',
-  'School of Materials Science & Engineering': 'engineering',
-  'School of Mechanical Engineering': 'engineering',
-  'School of Industrial & Management Engineering': 'engineering',
-  'School of Electrical Engineering': 'engineering',
-  'Department of Chemical & Biological Engineering': 'engineering',
-  'Department of Data Science': 'info',
-  'Division of Smart Security': 'smartsecurity',
-};
-
-const majorParamMappingPath = {
-  'Business School': 'business',
-  'Department of Economics': 'economics',
-  'School of Psychology': 'psychology',
-  'Department of Statistics': 'statistics',
-  'Department of Mathematics': 'mathematics',
-  'Department of Chemistry': 'chemistry',
-  'School of Media & Communication': 'media',
-  'Department of Food & Resources': 'foodecon',
-  'Department of Computer Science & Engineering': 'computer',
-  'Biological Engineering': 'bioeng',
-  'School of Life Sciences': 'lifesci',
-  'Department of Political Science & International Relations': 'political',
-  'Department of Public Administration': 'pubadmin',
-  'School of Materials Science & Engineering': 'materials',
-  'School of Mechanical Engineering': 'mechanical',
-  'School of Industrial & Management Engineering': 'industrial',
-  'School of Electrical Engineering': 'electrical',
-  'Department of Chemical & Biological Engineering': 'chembio',
-  'Department of Data Science': 'datasci',
-  'Division of Smart Security': 'smartsec',
-};
 
 export default function MainCard({
   korName,
@@ -134,8 +90,8 @@ export default function MainCard({
   // }, []);
 
   const majorKorName = korName.split(' ').at(-1);
-  const majorName = majorParamMappingPath[engName as MajorOptions];
-  const depName = majorParamMappingImage[engName as MajorOptions];
+  const majorName = engMajorParamMappingPath[engName as MajorOptions];
+  const depName = engMajorParamMappingImage[engName as MajorOptions];
 
   const handleClickDetail = () => {
     navigate('/archive/' + majorName);

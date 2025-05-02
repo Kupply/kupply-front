@@ -5,8 +5,8 @@ import styled, { createGlobalStyle } from 'styled-components';
 import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import GpaLineChart, { Data, LineData } from '../../assets/GpaLineChart';
 import { DBkeywords } from '../../common/Keyword';
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, semesterMapping, majorNameMapping } from '../../utils/Mappings';
+import { MajorOptionsShortEng as MajorOptions } from '../../mappings/MajorTypes';
+import { collegeNameMappingByEng as collegeNameMapping, semesterMapping, majorNameMapping } from '../../mappings/Mappings';
 import { usePastApplyData } from '../../store/query';
 
 // 경쟁률 적용 X (디자인 나와서 고치면서 수정할 예정)

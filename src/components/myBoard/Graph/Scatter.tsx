@@ -10,7 +10,7 @@ import {
   VictoryLabel,
   VictoryVoronoiContainer,
 } from 'victory';
-import { majorColorMapping } from '../../../utils/Mappings';
+import { majorColorMapping } from '../../../mappings/Mappings';
 import ToolTip05 from '../../../assets/toolTips/ToolTip05';
 import Typography from '../../../assets/Typography';
 

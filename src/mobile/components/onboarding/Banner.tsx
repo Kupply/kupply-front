@@ -103,6 +103,11 @@ const cardData = [
     engName: 'Division of Smart Security',
     image: '../../designImage/majorSymbol/newMajorImage/smartsecurity.png',
   },
+  {
+    korName: '인공지능학과',
+    engName: 'Department of Artificial Intelligence',
+    image: '../../designImage/majorSymbol/newMajorImage/info.png',
+  },
 ];
 
 function Banner() {

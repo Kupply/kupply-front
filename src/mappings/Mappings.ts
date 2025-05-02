@@ -1,6 +1,42 @@
 /* 
   단과대 / 전공명
 */
+
+export interface CategoryMapping {
+  '인문계 캠퍼스': string[];
+  '자연계 캠퍼스': string[];
+  '독립 학부': string[];
+}
+
+export const categoryMapping: CategoryMapping = {
+  '인문계 캠퍼스': [
+    '경영학과',
+    '경제학과',
+    '심리학부',
+    '미디어학부',
+    '정치외교학과',
+    '행정학과',
+    '식품자원경제학과',
+    '통계학과',
+  ],
+  '자연계 캠퍼스': [
+    '기계공학부',
+    '데이터과학과',
+    '산업경영공학부',
+    '스마트보안학부',
+    '수학과',
+    '화학과',
+    '생명과학부',
+    '생명공학부',
+    '화공생명공학과',
+    '신소재공학부',
+    '전자공학부',
+    '컴퓨터학과',
+    '인공지능학과'
+  ],
+  '독립 학부': ['심리학부', '미디어학부', '스마트보안학부'],
+};
+
 export const collegeNameMappingByEng = {
   foodecon: 'bio',
   media: 'media',
@@ -22,6 +58,7 @@ export const collegeNameMappingByEng = {
   chembio: 'engineering',
   datasci: 'info',
   smartsec: 'smartsecurity',
+  ai: 'info'
 };
 
 export const collegeNameMappingByKR = {
@@ -45,9 +82,10 @@ export const collegeNameMappingByKR = {
   화공생명공학과: 'engineering',
   데이터과학과: 'info',
   스마트보안학부: 'smartsecurity',
+  인공지능학과: 'info'
 };
 
-export const collegeAPIMappingByKR = {
+export const majorAPIMappingByKR = {
   식품자원경제학과: 'foodecon',
   미디어학부: 'media',
   컴퓨터학과: 'computer',
@@ -68,6 +106,7 @@ export const collegeAPIMappingByKR = {
   화공생명공학과: 'chembio',
   데이터과학과: 'datasci',
   스마트보안학부: 'smartsec',
+  인공지능학과: 'ai'
 };
 
 export const majorNameMapping = {
@@ -91,9 +130,58 @@ export const majorNameMapping = {
   chembio: ['화공생명공학과', 'Department of Chemical & Biological Engineering'],
   datasci: ['데이터과학과', 'Department of Data Science'],
   smartsec: ['스마트보안학부', 'Division of Smart Security'],
+  ai: ['인공지능학과', 'Department of Artificial Intelligence']
 };
 
-export const majorNmaeMappingByKr = {
+export const engMajorParamMappingImage = {
+  'Business School': 'business',
+  'Department of Economics': 'political',
+  'School of Psychology': 'psycho',
+  'Department of Statistics': 'political',
+  'Department of Mathematics': 'science',
+  'Department of Chemistry': 'science',
+  'School of Media & Communication': 'media',
+  'Department of Food & Resources': 'bio',
+  'Department of Computer Science & Engineering': 'info',
+  'Biological Engineering': 'bio',
+  'School of Life Sciences': 'bio',
+  'Department of Political Science & International Relations': 'political',
+  'Department of Public Administration': 'political',
+  'School of Materials Science & Engineering': 'engineering',
+  'School of Mechanical Engineering': 'engineering',
+  'School of Industrial & Management Engineering': 'engineering',
+  'School of Electrical Engineering': 'engineering',
+  'Department of Chemical & Biological Engineering': 'engineering',
+  'Department of Data Science': 'info',
+  'Division of Smart Security': 'smartsecurity',
+  'Department of Artificial Intelligence': 'info'
+};
+
+export const engMajorParamMappingPath = {
+  'Business School': 'business',
+  'Department of Economics': 'economics',
+  'School of Psychology': 'psychology',
+  'Department of Statistics': 'statistics',
+  'Department of Mathematics': 'mathematics',
+  'Department of Chemistry': 'chemistry',
+  'School of Media & Communication': 'media',
+  'Department of Food & Resources': 'foodecon',
+  'Department of Computer Science & Engineering': 'computer',
+  'Biological Engineering': 'bioeng',
+  'School of Life Sciences': 'lifesci',
+  'Department of Political Science & International Relations': 'political',
+  'Department of Public Administration': 'pubadmin',
+  'School of Materials Science & Engineering': 'materials',
+  'School of Mechanical Engineering': 'mechanical',
+  'School of Industrial & Management Engineering': 'industrial',
+  'School of Electrical Engineering': 'electrical',
+  'Department of Chemical & Biological Engineering': 'chembio',
+  'Department of Data Science': 'datasci',
+  'Division of Smart Security': 'smartsec',
+  'Department of Artificial Intelligence': 'ai'
+};
+
+export const majorNameMappingByKr = {
   경영학과: 'Business School',
   경제학과: 'Department of Economics',
   심리학부: 'School of Psychology',
@@ -114,6 +202,7 @@ export const majorNmaeMappingByKr = {
   화공생명공학과: 'Department of Chemical & Biological Engineering',
   데이터과학과: 'Department of Data Science',
   스마트보안학부: 'Division of Smart Security',
+  인공지능학과: 'Department of Artificial Intelligence'
 };
 
 /*
@@ -294,6 +383,7 @@ export const majorNameMappingBySID: Record<number, string> = {
   2503: '보건정책관리학부',
   3200: '컴퓨터학과',
   3201: '데이터과학과',
+  3202: '인공지능학과', // 아직 확실치 않음 
   3400: '심리학부',
   3500: '사이버국방학과',
   3501: '스마트보안학부',

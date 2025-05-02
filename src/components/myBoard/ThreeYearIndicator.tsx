@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
-import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
-import { collegeAPIMappingByKR as collegeAPIMapping } from '../../utils/Mappings';
-import { majorNameMapping } from '../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../mappings/MajorTypes';
+import { collegeNameMappingByKR as collegeAPIMapping } from '../../mappings/Mappings';
+import { majorNameMapping } from '../../mappings/Mappings';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
 import ToolTip02 from '../../assets/toolTips/Tooltip02';
