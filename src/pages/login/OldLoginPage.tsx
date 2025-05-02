@@ -143,7 +143,7 @@ function LoginPage(props: LoginPageProps) {
 
   const navigate = useNavigate();
   const handleLink2Click = () => {
-    navigate('/signup0', { state: { showModal: true } });
+    navigate('/signup1', { state: { showModal: true } });
   };
 
   const [ID, setID] = useState<string>('');
@@ -207,10 +207,10 @@ function LoginPage(props: LoginPageProps) {
         <TextFieldWrapper>
           <TextBox style={{ height: '5.47vw' }}>
             <Typography size="0.94vw" bold="700">
-              쿠플라이 아이디
+              고파스 아이디
             </Typography>
             <Typography size="0.94vw">를 입력해주세요.</Typography>
-            <AlertMessage>쿠플라이 아이디는 고려대학교 이메일 주소입니다.</AlertMessage>
+            <AlertMessage>쿠플라이 아이디는 고파스 아이디와 동일합니다.</AlertMessage>
           </TextBox>
           <IDField
             placeholder="kupply@korea.ac.kr"
@@ -231,7 +231,7 @@ function LoginPage(props: LoginPageProps) {
         <TextFieldWrapper>
           <TextBox>
             <Typography size="0.94vw" bold="700">
-              비밀번호
+              고파스 비밀번호
             </Typography>
             <Typography size="0.94vw">를 입력해주세요.</Typography>
           </TextBox>
@@ -264,8 +264,8 @@ function LoginPage(props: LoginPageProps) {
           </Typography>
         </TextBox>
         <LinkBox>
-          <Link onClick={toggleModal}>비밀번호를 잊으셨나요?</Link>
-          <Link onClick={handleLink2Click}>회원가입</Link>
+          <Link onClick={toggleModal}>고파스 아이디/비밀번호를 잊으셨나요?</Link>
+          <Link onClick={handleLink2Click}>고파스 아이디로 회원가입</Link>
         </LinkBox>
         <CTA01 state={ID != '' && password !== '' ? 'default' : 'disabled'} onClick={onLoginClick}>
           로그인

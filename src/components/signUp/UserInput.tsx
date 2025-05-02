@@ -20,7 +20,9 @@ export type UserTypeOptions =
   | 'hopeMajor1'
   | 'hopeMajor2'
   | 'secondMajor'
-  | 'kuEmail';
+  | 'kuEmail'
+  | 'koreapasID'
+  | 'koreapasPass';
 
 // localStorage이나 sessionStorage에서 가져올 때 각 페이지별로 설정해 둔 이름들이 모두 다른 관계로
 // 강제적으로 원하는 정보를 가져올 수 있도록 userInfoTypeManual을 만들어둠
@@ -48,6 +50,8 @@ export const placeholderMapping: Record<UserTypeOptions, string> = {
   hopeMajor2: '2지망 관심전공 선택',
   secondMajor: '진입 이중전공 선택',
   kuEmail: '고려대학교 이메일',
+  koreapasID: '고파스 아이디',
+  koreapasPass: '고파스 비밀번호'
 };
 
 export const helpMessageMapping: Record<UserTypeOptions, string> = {
@@ -62,6 +66,8 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   hopeMajor2: '',
   secondMajor: '',
   kuEmail: '',
+  koreapasID: '',
+  koreapasPass: ''
 };
 
 export const errorMessageMapping: Record<UserTypeOptions, string> = {
@@ -76,6 +82,8 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   hopeMajor2: '',
   secondMajor: '',
   kuEmail: '유효하지 않은 이메일 주소입니다',
+  koreapasID: '아이디 또는 비밀번호가 일치하지 않습니다',
+  koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다'
 };
 
 const optionList = majorTargetList;
@@ -96,7 +104,7 @@ export const UserInput: React.FC<UserInputProps> = ({
       : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
   );
 
-  console.log('this is the userinfo printed from UserInput', userInfo);
+  //console.log('this is the userinfo printed from UserInput', userInfo);
 
   const [firstMajor, setFirstMajor] = useRecoilState(
     locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'),
@@ -113,7 +121,6 @@ export const UserInput: React.FC<UserInputProps> = ({
   ).info;
 
   errorMessageMapping.password = errorMessage.passwordErrorMessage;
-
   errorMessageMapping.password2 = errorMessage.password2ErrorMessage;
 
   const updatedMajorTargetList = [...majorTargetList];
@@ -176,7 +183,7 @@ export const UserInput: React.FC<UserInputProps> = ({
           }
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
-          type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}
+          type={userInfoType === 'password' || userInfoType === 'password2' || userInfoType === 'koreapasPass' ? 'password' : undefined}
           onKeyDown={(e: React.KeyboardEvent) => {
             if (e.key === 'Enter') {
               console.log('This is the onKeyDown');

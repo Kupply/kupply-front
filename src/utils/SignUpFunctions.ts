@@ -72,6 +72,31 @@ export function useSignUp0Verification() {
   return { idVerified, complete };
 }
 
+export function useNewSignUp0Verification(){
+  const [ID, setID] = useRecoilState(userState('koreapasID')); // 지금 얘만 문제인데? 
+  const [pass, setPass] = useRecoilState(userState('koreapasPass'));
+  const [complete, setComplete] = useState(false);
+
+  useEffect(() => {
+    if (ID.info !== '') setID((prev) => ({ ...prev, infoState: 'filled' }));
+    if (pass.info !== '') setPass((prev) => ({ ...prev, infoState: 'filled' }));
+  }, []);
+
+  useEffect(()=> {
+    console.log('ID.infostate: ', ID.infoState, 'pass.infostate: ', pass.infoState);
+    if (ID.infoState === 'filled' && pass.infoState === 'filled' && !complete) {
+      setComplete(true);
+    } else if (!(ID.infoState === 'filled' && pass.infoState === 'filled') && complete) {
+      setComplete(false);
+    }
+  }, [ID.infoState, pass.infoState, complete]);
+  
+  return {
+    complete,
+    ID: ID.info,
+    pass: pass.info
+   }
+}
 export function useSignUp2Verification() {
   const [name, setName] = useRecoilState(userState('name'));
   const [stdId, setStdId] = useRecoilState(userState('studentId'));
@@ -81,14 +106,14 @@ export function useSignUp2Verification() {
   const navigate = useNavigate();
 
   // 잠시 수정
-  useEffect(() => {
-    if (!sessionStorage.getItem('email')) navigate('/');
-    else {
-      sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
-      if (name.info !== '') setName((prev) => ({ ...prev, infoState: 'filled' }));
-      if (stdId.info !== '') setStdId((prev) => ({ ...prev, infoState: 'filled' }));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem('email')) navigate('/');
+  //   else {
+  //     sessionStorage.removeItem('firstMajor'); //dropdown value는 초기화
+  //     if (name.info !== '') setName((prev) => ({ ...prev, infoState: 'filled' }));
+  //     if (stdId.info !== '') setStdId((prev) => ({ ...prev, infoState: 'filled' }));
+  //   }
+  // }, []);
   // name, stdId, firstMajor의 completed 여부
 
   useEffect(() => {
@@ -232,4 +257,31 @@ export function useSignUp4PasserHandler() {
     handleNext,
     handlePrev,
   };
+}
+
+export function useNewSignUp5Verification() {
+  const { idVerified } = useEmailVerification('signUp');
+  const { nicknameVerified } = useNicknameVerification('signUp');
+  const [nickname, setNickname] = useRecoilState(userState('nickname'));
+  const [complete, setComplete] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (nicknameVerified && idVerified && !complete) {
+      setComplete(true);
+    } else if (!(nicknameVerified && idVerified) && complete) {
+      setComplete(false);
+    }
+  }, [nicknameVerified, complete, idVerified]);
+
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem('name')) navigate('/'); 
+  //   else {
+  //     if (nickname.info !== '') setNickname((prev) => ({ ...prev, infoState: 'filled' }));
+  //   }
+  // }, []);
+
+  return {
+    complete
+  }
 }
