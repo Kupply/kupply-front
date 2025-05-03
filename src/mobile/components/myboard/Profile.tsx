@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import CTA02 from '../../assets/CTAs/CTA02';
 import { isDateInRange } from '../../../common/ApplicationPeriod';
 import MobileEditModal from '../../../pages/mobileMyBoard/MobileEditModal';
-import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
+import { MajorOptionsKR as MajorOptions } from '../../../mappings/MajorTypes';
 import MobileApplicationModal from '../../../pages/mobileMyBoard/ApplyModal';
 // isApplied={isApplied}
 // editmodal 위치 수정 해야 됨

@@ -9,7 +9,7 @@ import TextArea from '../../assets/TextArea';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 import { client } from '../../utils/HttpClient';
-import { majorTargetList, majorTargetList_sejong } from '../../common/MajorTarget';
+import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
 import { majorAllList } from '../../common/MajorAll';
 import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 import Button03 from '../../assets/buttons/Button03';

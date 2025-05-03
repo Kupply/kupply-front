@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { VictoryTheme, VictoryScatter, VictoryChart, VictoryTooltip, VictoryAxis } from 'victory';
-import { majorColorMapping } from '../../../utils/Mappings';
+import { majorColorMapping } from '../../../mappings/Mappings';
 import Typography from '../../../assets/Typography';
 
 interface Datum {

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 import LabelButton from './buttons/LabelButton';
 import { useNavigate } from 'react-router-dom';
-import { MajorOptionsLongEng as MajorOptions } from '../types/MajorTypes';
+import { MajorOptionsLongEng as MajorOptions } from '../mappings/MajorTypes';
+import { engMajorParamMappingImage, engMajorParamMappingPath } from '../mappings/Mappings';
 
 export interface CardsProps extends React.ComponentPropsWithRef<'div'> {
   name: string;
@@ -58,7 +59,8 @@ const Card = ({ name, eng, filter, TO, pass, avg, min, src, semester, titleSrc }
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/archive/' + majorParamMapping[eng as MajorOptions]);
+
+    navigate('/archive/' + engMajorParamMappingPath[eng as MajorOptions]);
   };
   return (
     <Container onMouseEnter={onHover} onMouseLeave={onHoverOut}>
