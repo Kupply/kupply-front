@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import CheckBox01 from '../../assets/checkBoxes/CheckBox01';
 import { MobileScroll } from '../../assets/scroll/MobileScroll';
-import { TermsText1, TermsText2 } from '../../components/signup/TermsText';
+import { TermsText } from '../../../components/sync/TermsText';
 import Button03 from '../../assets/buttons/Button03';
 import CTA01 from '../../assets/CTAs/CTA01';
 import Typography from '../../../assets/Typography';
@@ -22,7 +22,7 @@ export default function SyncPage2() {
   const [allUIChecked, setAllUIChecked] = useState(false);
   const [individualChecks, setIndividualChecks] = useState<IndividualChecks>({
     first: false,
-    second: false,
+    second: true,
   });
   const [isButtonActive, setIsButtonActive] = useState(false);
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function SyncPage2() {
     setAllChecked(newState);
     setIndividualChecks({
       first: newState,
-      second: newState,
+      second: true,
     });
   };
 
@@ -92,6 +92,8 @@ export default function SyncPage2() {
     if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
   }, []);
 
+  const nickname = sessionStorage.getItem('nickname')!;
+
   return (
     <SyncPageWrapper step={3} stepInfo="약관 읽고 서비스 이용하기">
       <ContentsList>
@@ -111,25 +113,11 @@ export default function SyncPage2() {
             style={{ fontSize: '3.33vw', fontWeight: '500' }}
             onImageClick={() => handleIndividualCheck('first')}
           >
-            개인정보 수집 및 이용 동의 (필수)
+            고파스 개인정보 수집 및 이용 동의 (필수)
           </CheckBox01>
           <TextOutBox>
             <MobileScroll height="30vw">
-              <TermsText1 />
-            </MobileScroll>
-          </TextOutBox>
-        </>
-        <>
-          <CheckBox01
-            state={individualChecks.second ? 'active' : 'default'}
-            style={{ fontSize: '3.33vw', fontWeight: '500' }}
-            onImageClick={() => handleIndividualCheck('second')}
-          >
-            서비스 이용약관 동의 (필수)
-          </CheckBox01>
-          <TextOutBox>
-            <MobileScroll height="30vw">
-              <TermsText2 />
+              <TermsText koreapasNickname={nickname} />
             </MobileScroll>
           </TextOutBox>
         </>
