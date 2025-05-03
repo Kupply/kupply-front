@@ -258,20 +258,20 @@ const MobileMyBoard = () => {
     for (let i = 0; i < semester.length; i++) {
       try {
         const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
-        const data = APIresponse.data.pastData;
+        const { metadata, _ } = APIresponse.data.pastData;
 
         let competitionRate = 0;
-        if (data.overallData.numberOfData > 0) {
-          competitionRate = +(data.overallData.numberOfData / newPastData1[i].numOfSelection).toFixed(2);
+        if (metadata.recruitNumber > 0) {
+          competitionRate = +(metadata.appliedNumber / metadata.recruitNumber).toFixed(2);
         }
 
         newPastData1[i] = {
-          numOfSelection: newPastData1[i].numOfSelection,
-          numOfPassed: data.passedData.passedNumberOfData,
-          numOfApplied: data.overallData.numberOfData,
+          numOfSelection: metadata.recruitNumber,
+          numOfPassed: metadata.passedNumber,
+          numOfApplied: metadata.appliedNumber,
           competitionRate: competitionRate,
-          meanGpa: data.passedData.passedMeanGPAData.gpa,
-          minGpa: data.passedData.passedMinimumGPAData.gpa,
+          meanGpa: metadata.passedAvgGPAData.gpa,
+          minGpa: metadata.passedMinimumGPAData.gpa,
         };
       } catch (err) {
         console.log(err);
@@ -284,20 +284,20 @@ const MobileMyBoard = () => {
       for (let i = 0; i < semester.length; i++) {
         try {
           const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
-          const data = APIresponse.data.pastData;
+          const { metadata, _ } = APIresponse.data.pastData;
 
           let competitionRate = 0;
-          if (data.overallData.numberOfData > 0) {
-            competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
+          if (metadata.recruitNumber > 0) {
+            competitionRate = +(metadata.appliedNumber / metadata.recruitNumber).toFixed(2);
           }
 
           newPastData2[i] = {
-            numOfSelection: newPastData2[i].numOfSelection,
-            numOfPassed: data.passedData.passedNumberOfData,
-            numOfApplied: data.overallData.numberOfData,
+            numOfSelection: metadata.recruitNumber,
+            numOfPassed: metadata.passedNumber,
+            numOfApplied: metadata.appliedNumber,
             competitionRate: competitionRate,
-            meanGpa: data.passedData.passedMeanGPAData.gpa,
-            minGpa: data.passedData.passedMinimumGPAData.gpa,
+            meanGpa: metadata.passedAvgGPAData.gpa,
+            minGpa: metadata.passedMinimumGPAData.gpa,
           };
         } catch (err) {
           console.log(err);

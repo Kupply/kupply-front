@@ -9,8 +9,8 @@ import TextArea from '../../assets/TextArea';
 import { ScrollSmall, ScrollLarge } from '../../assets/scroll/Scroll';
 import NicknameCheckButton from '../../assets/progressIndicator/Loader';
 import { client } from '../../utils/HttpClient';
-import { majorTargetList } from '../../mappings/MajorTarget';
-import { majorAllList } from '../../mappings/MajorAll';
+import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
+import { majorAllList } from '../../common/MajorAll';
 import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextButton';
 import Button03 from '../../assets/buttons/Button03';
 import Typography from '../../assets/Typography';
@@ -95,8 +95,9 @@ const SettingsPage = () => {
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
   // const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
+  const [campus, setCampus] = useState<string>(localStorage.getItem('campus') || '');
 
-  const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
+  const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
   const [emailState, setEmailState] = useState<StateOptions>('filled');
   const [pwd, setPwd] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
@@ -126,7 +127,6 @@ const SettingsPage = () => {
     // 로그인한 유저 정보 localStorage에
     const getMe = async () => {
       try {
-        //const APIresponse = await axios.get(`http://localhost:8080/user/getMe`, config);
         const APIresponse = await client.get('/user/getMe');
         const userInfo = APIresponse.data.data.user;
 
@@ -137,6 +137,8 @@ const SettingsPage = () => {
         localStorage.setItem('studentId', userInfo.studentId);
         localStorage.setItem('firstMajor', userInfo.firstMajor);
         localStorage.setItem('role', userInfo.role);
+        localStorage.setItem('email', userInfo.email);
+        localStorage.setItem('campus', userInfo.campus);
         if (userInfo.role === 'candidate') {
           localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
           localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
@@ -159,6 +161,8 @@ const SettingsPage = () => {
         setUserProfilePic(userInfo.profilePic);
         // setUserProfileLink(userInfo.profileLink);
         setCurrentNickname(userInfo.nickname);
+        setEmail(userInfo.email);
+        setCampus(userInfo.campus);
       } catch (err) {
         console.log(err);
       }
@@ -223,25 +227,23 @@ const SettingsPage = () => {
     }
   }, [nicknameState, nickname]);
 
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  };
+  useEffect(() => {
+    if (emailState === 'filled') {
+      const emailCheck = /^[a-zA-Z0-9._%+-]+@korea.ac.kr$/;
+      if (!emailCheck.test(email)) setEmailState('error');
+      else setEmailState('filled');
+    }
+  }, [email, emailState]);
 
   const firstSubmit = async () => {
     const updateData = {
       newName: name,
       newStudentId: stdID,
       newFirstMajor: firstMajor,
+      newEmail: email,
     };
     try {
-      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -253,8 +255,7 @@ const SettingsPage = () => {
       newNickname: nickname,
     };
     try {
-      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -271,8 +272,7 @@ const SettingsPage = () => {
         newHopeMajor2: hopeMajor2,
       };
       try {
-        // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-        await client.post('/user/updateMe', updateData, config);
+        await client.post('/user/updateMe', updateData);
         window.location.reload(); // 페이지 새로고침.
         console.log('is this third submit even working??');
       } catch (err) {
@@ -286,8 +286,7 @@ const SettingsPage = () => {
       newPassword: pwd,
     };
     try {
-      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/resetPassword', updateData, config);
+      await client.post('/user/resetPassword', updateData);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -295,7 +294,12 @@ const SettingsPage = () => {
   };
 
   const majorAll = majorAllList;
-  const majorTarget = [...majorTargetList];
+  let majorTarget;
+  if (campus === 'S') {
+    majorTarget = [...majorTargetList_sejong];
+  } else {
+    majorTarget = [...majorTargetList];
+  }
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   return (
@@ -331,14 +335,14 @@ const SettingsPage = () => {
             >
               마이보드 프로필 수정하기
             </TextButton04>
-            <TextButton04
+            {/* <TextButton04
               selected={selected === 3}
               onCustomFunction={() => {
                 onClick(3);
               }}
             >
               보안
-            </TextButton04>
+            </TextButton04> */}
             <div style={{ marginTop: '8.333vw' }}>
               <TextButton04
                 selected={selected === 4}
@@ -392,18 +396,29 @@ const SettingsPage = () => {
               setStdID(e.target.value);
             }}
             state={stdIDState}
-            setState={() => {}}
-            setValue={() => {}}
+            setState={setStdIDState}
+            setValue={setStdID}
+            helpMessage="고려대학교 학번을 입력해주세요."
+            errorMessage="올바른 학번 형식이 아니에요!"
           ></TextFieldBox>
           <TextFieldTitle>
-            <strong>본전공 (제 1전공)</strong> 수정하기
+            <strong>고려대학교 이메일</strong> 수정하기
           </TextFieldTitle>
-          <DropDown
-            title="전공선택" // 수정필요
-            optionList={majorAll}
-            value={firstMajor}
-            setValue={setFirstMajor}
-          ></DropDown>
+          <TextFieldBox
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setEmail(e.target.value);
+            }}
+            state={emailState}
+            setState={setEmailState}
+            setValue={setEmail}
+            helpMessage="고려대학교 이메일 주소를 입력해주세요."
+            errorMessage="올바른 이메일 형식이 아니에요!"
+          ></TextFieldBox>
+          <TextFieldTitle>
+            <strong>본전공 (제 1전공)</strong>
+          </TextFieldTitle>
+          <TextFieldBox value={firstMajor} state={'filled'} setState={() => {}} setValue={() => {}}></TextFieldBox>
           <Button03
             style={{ marginTop: '60px', width: '100%' }}
             state={isApplied ? 'pressed' : 'disabled'}

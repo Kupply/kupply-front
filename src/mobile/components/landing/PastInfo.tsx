@@ -54,7 +54,7 @@ function PastInfo(props: PastInfoProps) {
           </Body>
           <Body>
             <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%' }}>
-              {dictionary.pastmean}
+              {dictionary.pastmean.toFixed(2)}
             </Typography>
           </Body>
         </BodyWrapper>

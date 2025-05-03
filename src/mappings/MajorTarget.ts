@@ -22,6 +22,16 @@ export const majorTargetList = [
   { value1: '인공지능학과', value2: '정보대학' },
 ];
 
+export const majorTargetList_sejong = [
+  { value1: '미디어학부', value2: '미디어학부' },
+  { value1: '식품자원경제학과', value2: '생명과학대학' },
+  { value1: '심리학부', value2: '심리학부' },
+  { value1: '정치외교학과', value2: '정경대학' },
+  { value1: '신소재공학부', value2: '공과대학' },
+  { value1: '화공생명공학과', value2: '공과대학' },
+  { value1: '기계공학부', value2: '공과대학' },
+];
+
 export const major계열: { [key: string]: string } = {
   경영학과: '인문계',
   경제학과: '인문계',

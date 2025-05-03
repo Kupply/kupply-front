@@ -48,10 +48,11 @@ type TableProps = {
 };
 
 const MyTable: React.FC<TableProps> = ({ rows }) => {
+  const policy_idx = 3;
   return (
     <>
       <Table>
-        {rows.slice(0, 4).map((row) => (
+        {rows.slice(0, policy_idx).map((row) => (
           <Row key={row.id} onClick={row.onClick}>
             <Typography size="4.44vw" bold="400" style={{ color: 'black' }}>
               {row.title}
@@ -61,9 +62,9 @@ const MyTable: React.FC<TableProps> = ({ rows }) => {
         ))}
       </Table>
       <Table>
-        <Row key={rows[4].id} onClick={rows[4].onClick}>
+        <Row key={rows[policy_idx].id} onClick={rows[policy_idx].onClick}>
           <Typography size="4.44vw" bold="400" style={{ color: 'black' }}>
-            {rows[4].title}
+            {rows[policy_idx].title}
           </Typography>
           <RightArrow />
         </Row>
@@ -82,7 +83,7 @@ export const MainTable: React.FC = () => {
     { id: 1, title: '나의 기본정보 수정하기', onClick: () => handleRowClick(1) },
     { id: 2, title: '프로필 수정하기', onClick: () => handleRowClick(2) },
     { id: 3, title: '마이보드 프로필 수정하기', onClick: () => handleRowClick(3) },
-    { id: 4, title: '보안', onClick: () => handleRowClick(4) },
+    // { id: 4, title: '보안', onClick: () => handleRowClick(4) },
     { id: 5, title: '약관 보기', onClick: () => handleRowClick(5) },
   ];
 
