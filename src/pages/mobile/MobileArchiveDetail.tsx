@@ -30,8 +30,6 @@ import MobileFooter from '../../mobile/assets/base/Footer';
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
-  
-
   const handlePrev = () => {
     navigate('/archive');
   };
@@ -96,7 +94,7 @@ const MobileArchiveDetailPage = () => {
         if (sortCriterion === '모든 학기 누적') semester = 'all';
         else semester = sortCriterion.slice(0, -1);
 
-        const APIresponse = await client.get(`/pastData/${majorName}/all`);
+        const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
         if (APIresponse) {
           const { metadata, passedData } = APIresponse.data.pastData;
 
