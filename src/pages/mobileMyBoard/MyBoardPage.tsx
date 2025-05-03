@@ -14,7 +14,7 @@ import MobilePieChart from '../../mobile/components/myboard/PieChart';
 import { client } from '../../utils/HttpClient';
 import { recruit } from '../../mappings/Recruiting';
 import { MajorOptionsKR } from '../../mappings/MajorTypes';
-import {  majorAPIMappingByKR } from '../../mappings/Mappings';
+import { majorAPIMappingByKR } from '../../mappings/Mappings';
 import MobileHeader from '../../mobile/assets/base/Header';
 import MobileFooter from '../../mobile/assets/base/Footer';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
@@ -229,6 +229,8 @@ const MobileMyBoard = () => {
       localStorage.setItem('studentId', userInfo.studentId);
       localStorage.setItem('firstMajor', userInfo.firstMajor);
       localStorage.setItem('role', userInfo.role);
+      localStorage.setItem('email', userInfo.email);
+      localStorage.setItem('campus', userInfo.campus);
       if (userInfo.role === 'candidate') {
         localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
         localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
