@@ -65,7 +65,7 @@ export const userState = atomFamily<InfoState, string>({
   key: "userState", 
   default: (kind: string) => {
     let infoState:StateOptions = 'default';
-    let info:string = kind;
+    let info:string = '';
     if(kind === 'kuEmail') {
       info = 'email';
       infoState = 'filled';

@@ -147,7 +147,7 @@ function LoginPage(props: LoginPageProps) {
     window.open('https://www.koreapas.com/bbs/lostid_new.php', '_blank', 'noopener,noreferrer');
   };
   const handleJoinClick = () => {
-    navigate('/signup0');
+    navigate('/signup1');
   };
 
   const [ID, setID] = useState<string>('');
