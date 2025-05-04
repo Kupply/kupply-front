@@ -65,11 +65,11 @@ export const userState = atomFamily<InfoState, string>({
   key: "userState", 
   default: (kind: string) => {
     let infoState:StateOptions = 'default';
-    let info:string = kind;
-    if(kind === 'kuEmail') {
-      info = 'email';
-      infoState = 'filled';
-    }
+    let info:string = '';
+    // if(kind === 'kuEmail') {
+    //   info = 'email';
+    //   infoState = 'filled';
+    // }
     return {
       info: sessionStorage.getItem(info) || '',
       infoState: infoState,
