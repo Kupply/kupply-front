@@ -5,7 +5,7 @@ import DropDown from '../../assets/dropdown/DropDown';
 import { majorAllList } from '../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../store/atom';
-import { majorTargetList } from '../../mappings/MajorTarget';
+import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
 import { inputState } from '../../pages/signUp/SignUp4Page';
 import NewTextFieldBox from '../../assets/NewTextFieldBox';
 
@@ -86,7 +86,6 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
    koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다'
 };
 
-const optionList = majorTargetList;
 
 export const UserInput: React.FC<UserInputProps> = ({
   userInfoType,
@@ -124,7 +123,13 @@ export const UserInput: React.FC<UserInputProps> = ({
 
   errorMessageMapping.password2 = errorMessage.password2ErrorMessage;
 
-  const updatedMajorTargetList = [...majorTargetList];
+  var optionList = majorTargetList;
+  const campus = sessionStorage.getItem('firstMajorCampus')
+  if (campus !== 'A') {
+    optionList = majorTargetList_sejong;
+  }
+
+  const updatedMajorTargetList = [...optionList];
   updatedMajorTargetList.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -173,12 +178,14 @@ export const UserInput: React.FC<UserInputProps> = ({
           onChange={handleInputChange}
           state={userInfo.infoState}
           setState={
-            userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
+            //userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
+            (locationUsed === 'settings' && userInfoType === 'studentId')
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, infoState: s }))
           }
           setValue={
-            userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
+            //userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
+            (locationUsed === 'settings' && userInfoType === 'studentId')
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, info: s }))
           }

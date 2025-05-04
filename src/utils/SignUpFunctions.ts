@@ -58,6 +58,41 @@ export const join = async (role: string) => {
   }
 };
 
+export const koreapasJoin = async (role: string, nickname: string) => {
+  const userData: any = {
+    koreapasUUID: sessionStorage.getItem('koreapasUUID'),
+    name: sessionStorage.getItem('name'),
+    studentId: Number(sessionStorage.getItem('studentId')),
+    firstMajorCode: sessionStorage.getItem('firstMajorCode'),
+    nickname,
+    role,
+  };
+
+  if (role === 'passer') {
+    Object.assign(userData, {
+      secondMajor: sessionStorage.getItem('secondMajor'),
+      passSemester: sessionStorage.getItem('passSemester'),
+      passGPA: parseFloat(sessionStorage.getItem('passGPA') || '0'),
+      passDescription: sessionStorage.getItem('passDescription'),
+    });
+  } else if (role === 'candidate') {
+    Object.assign(userData, {
+      curGPA: parseFloat(sessionStorage.getItem('curGPA') || '0'),
+      hopeMajor1: sessionStorage.getItem('hopeMajor1'),
+      hopeMajor2: sessionStorage.getItem('hopeMajor2'),
+    });
+  }
+
+  try {
+    console.log('THIS IS FROM SIGNUPFUNCTION KOREAPASJOIN', userData);
+    await client.post('/auth/koreapasJoin', userData);
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+
 export function useSignUp0Verification() {
   const { idVerified } = useEmailVerification('signUp');
   const [complete, setComplete] = useState(false);
@@ -261,9 +296,9 @@ export function useSignUp4PasserHandler() {
 }
 
 export function useNewSignUp5Verification() {
-  const { idVerified } = useEmailVerification('signUp');
-  const { nicknameVerified } = useNicknameVerification('signUp');
-  const [nickname, setNickname] = useRecoilState(userState('nickname'));
+  const { idVerified, ID, setID } = useEmailVerification('signUp');
+  const { nicknameVerified, nickname, setNickname } = useNicknameVerification('signUp');
+  // const [nickname, setNickname] = useRecoilState(userState('nickname'));
   const [complete, setComplete] = useState(false);
   const navigate = useNavigate();
 
@@ -283,6 +318,8 @@ export function useNewSignUp5Verification() {
   // }, []);
 
   return {
-    complete
+    complete, 
+    ID,
+    nickname
   }
 }

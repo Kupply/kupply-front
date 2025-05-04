@@ -9,20 +9,29 @@ import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
  import { UserInputText } from "../../components/signUp/UserInputText";
  import Typography from "../../assets/Typography";
  import CTA01 from "../../assets/CTAs/CTA01";
+ import { koreapasJoin } from "../../utils/SignUpFunctions";
+
  
  export default function SignUp5Page(){
  
    const navigate = useNavigate();
    const [next, setNext] = useState(false);
-   const {complete} = useNewSignUp5Verification();
-   
-   // setNext에 대한 re-render가 이루어지고 navigate가 일어나도록 이렇게 짬 
-   const handleNext = () => {
-     setNext(true);
-     Promise.resolve().then(() => {
-       navigate('/signupcomplete');
-     });
-   };
+   const {complete, nickname:nickname, ID:kuEmail} = useNewSignUp5Verification();
+  
+
+   const handleNext = async () => {
+    try {
+      const role = sessionStorage.getItem('role') || '';
+      await koreapasJoin(role, nickname.info);  // nickname is passed from input
+      // 이렇게 하고 안 넘어간거 같은데...
+      setNext(true);
+      sessionStorage.setItem('toComplete', 'true');
+      navigate('/signupcomplete');
+    } catch (e: any) {
+      alert(e?.message || '회원가입에 실패했습니다.');
+    }
+  };
+
  
    const handlePrev = () => {
      navigate('/signUp4');
