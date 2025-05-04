@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { SyncPageWrapper } from '../../components/sync/SyncPageWrapper';
 import { CheckBoxButton01 } from '../../assets/buttons/CheckBoxButton';
 import { ScrollLarge, ScrollSmall } from '../../assets/scroll/Scroll';
-import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
+import { TermsText } from '../../components/sync/TermsText';
 import Button03 from '../../assets/buttons/Button03';
 import CTA01 from '../../assets/CTAs/CTA01';
 import Typography from '../../assets/Typography';
@@ -17,7 +17,7 @@ export default function SyncPage2() {
   const [allUIChecked, setAllUIChecked] = useState(false);
   const [individualChecks, setIndividualChecks] = useState({
     first: false,
-    second: false,
+    second: true,
   });
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [scrollActive, setActive] = useState(false);
@@ -44,7 +44,7 @@ export default function SyncPage2() {
     } else {
       setIndividualChecks({
         first: false,
-        second: false,
+        second: true,
       });
     }
     setAllChecked(isChecked);
@@ -91,6 +91,8 @@ export default function SyncPage2() {
     if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
   }, []);
 
+  const nickname = sessionStorage.getItem('nickname')!;
+
   return (
     <SyncPageWrapper step={3} stepInfo="약관 읽고 연동하기">
       <TextTitle>
@@ -116,30 +118,14 @@ export default function SyncPage2() {
             }))
           }
         >
-          서비스 이용약관 동의 (필수)
+          고파스 개인정보 수집 및 이용 동의 (필수)
         </CheckBoxButton01>
         <TextOutBox>
           <ScrollSmall isChecked={scrollActive}>
-            <TermsText1 />
+            <TermsText koreapasNickname={nickname} />
           </ScrollSmall>
         </TextOutBox>
         <div style={{ height: '2vw' }}></div>
-        <CheckBoxButton01
-          isChecked={individualChecks.second}
-          onCustomFunction={(newCheckedValue) =>
-            setIndividualChecks((prev) => ({
-              ...prev,
-              second: newCheckedValue,
-            }))
-          }
-        >
-          개인정보 수집 및 이용 동의 (필수)
-        </CheckBoxButton01>
-        <TextOutBox>
-          <ScrollSmall isChecked={scrollActive}>
-            <TermsText2 />
-          </ScrollSmall>
-        </TextOutBox>
         <ButtonsWrapper>
           <NextButtonFixedWidth
             state={isButtonActive ? 'pressed' : 'disabled'}

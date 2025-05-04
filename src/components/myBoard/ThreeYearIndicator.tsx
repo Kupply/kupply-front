@@ -127,9 +127,13 @@ const ThreeYear = ({
           : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
       </Text3>
       <Text2 style={{ position: 'absolute', top: '11.81vw', left: '2.5vw' }}>합격자 학점 평균값</Text2>
-      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>{selectedPastData.meanGpa}</Text3>
+      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '2.5vw' }}>
+        {selectedPastData.meanGpa.toFixed(2)}
+      </Text3>
       <Text2 style={{ position: 'absolute', top: '11.81vw', left: '12.14vw' }}>합격자 학점 최저값</Text2>
-      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '12.14vw' }}>{selectedPastData.minGpa}</Text3>
+      <Text3 style={{ position: 'absolute', top: '12.99vw', left: '12.14vw' }}>
+        {selectedPastData.minGpa.toFixed(2)}
+      </Text3>
       <Text4>
         해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 <br /> 실제 통계와 다를 수 있어요.
       </Text4>

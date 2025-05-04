@@ -77,7 +77,7 @@ export default function TableData(props: TableDataProps) {
           <AppliedCompeteBlur>모의지원 완료 후 공개!</AppliedCompeteBlur>
 
           <PastPassedRateCell>{pastPassedRate < 0 ? '데이터 수집 중' : pastPassedRate + ' %'} </PastPassedRateCell>
-          <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean}</PastMeanCell>
+          <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean.toFixed(2)}</PastMeanCell>
           <InterestCell>
             <Heartimg src="/designImage/toolTips/Heart.svg" alt="Heart icon" /> {interest}
           </InterestCell>
@@ -112,7 +112,7 @@ export default function TableData(props: TableDataProps) {
           <AppliedNumberCell>{applyNumber}</AppliedNumberCell>
           <CompetitionCell>{competition} : 1</CompetitionCell>
           <PastPassedRateCell>{pastPassedRate < 0 ? '데이터 수집 중' : pastPassedRate + ' %'} </PastPassedRateCell>
-          <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean}</PastMeanCell>
+          <PastMeanCell>{pastmean === 0 ? '데이터 수집 중' : pastmean.toFixed(2)}</PastMeanCell>
           <InterestCell>
             <Heartimg src="/designImage/toolTips/Heart.svg" alt="Heart icon" />
             {interest}

@@ -30,8 +30,6 @@ import MobileFooter from '../../mobile/assets/base/Footer';
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
 
-  
-
   const handlePrev = () => {
     navigate('/archive');
   };
@@ -49,7 +47,7 @@ const MobileArchiveDetailPage = () => {
   const [numOfPassed, setNumOfPassed] = useState<number>(0);
 
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
-  const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
+  const [avgGpa, setAvgGpa] = useState<Data>(tmpMeanGpa);
   const [medianGpa, setMedianGpa] = useState<Data>(tmpMedianGpa);
   const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
   const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
@@ -58,20 +56,28 @@ const MobileArchiveDetailPage = () => {
     const fetchInitialData = async () => {
       try {
         const APIresponse = await client.get(`/pastData/${majorName}/all`);
-        const data = APIresponse.data.pastData;
+        if (APIresponse) {
+          const { metadata, passedData } = APIresponse.data.pastData;
 
-        if (data.passedData.passedGPACountArray.length > 0) {
-          const selectionNum = recruit[majorKoreanName]['all'] || 0;
-
-          setEnoughData(true);
-          setNumOfApplication(data.overallData.numberOfData);
-          setNumOfSelection(selectionNum);
-          setNumOfPassed(data.passedData.passedNumberOfData);
-          setLineData(data.passedData.passedGPACountArray);
-          setMeanGpa(data.passedData.passedMeanGPAData);
-          setMedianGpa(data.passedData.passedMedianGPAData);
-          setModeGpa(data.passedData.passedModeGPAData);
-          setMinGpa(data.passedData.passedMinimumGPAData);
+          setNumOfSelection(metadata.recruitNumber);
+          setNumOfApplication(metadata.appliedNumber);
+          setNumOfPassed(metadata.passedNumber);
+          if (passedData.length > 0) {
+            setEnoughData(true);
+            setAvgGpa(metadata.passedAvgGPAData);
+            setMedianGpa(metadata.passedMedianGPAData);
+            setModeGpa(metadata.passedModeGPAData);
+            setMinGpa(metadata.passedMinimumGPAData);
+            setLineData(passedData);
+          } else {
+            // 데이터가 없을 때, 블러 뒤에 띄울 임시 데이터
+            setEnoughData(false);
+            setAvgGpa(tmpMeanGpa);
+            setMedianGpa(tmpMedianGpa);
+            setModeGpa(tmpModeGpa);
+            setMinGpa(tmpMinGpa);
+            setLineData(tmpRandomData);
+          }
         }
       } catch (err) {
         console.log(err);
@@ -87,30 +93,30 @@ const MobileArchiveDetailPage = () => {
         let semester;
         if (sortCriterion === '모든 학기 누적') semester = 'all';
         else semester = sortCriterion.slice(0, -1);
-        const selectionNum = recruit[majorKoreanName][semester] || 0;
 
         const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
-        const data = APIresponse.data.pastData;
+        if (APIresponse) {
+          const { metadata, passedData } = APIresponse.data.pastData;
 
-        setEnoughData(true);
-        setNumOfApplication(data.overallData.numberOfData);
-        setNumOfSelection(selectionNum);
-        setNumOfPassed(data.passedData.passedNumberOfData);
-        setLineData(data.passedData.passedGPACountArray);
-        setMeanGpa(data.passedData.passedMeanGPAData);
-        setMedianGpa(data.passedData.passedMedianGPAData);
-        setModeGpa(data.passedData.passedModeGPAData);
-        setMinGpa(data.passedData.passedMinimumGPAData);
-
-        if (data.passedData.passedGPACountArray.length > 0) {
-          setEnoughData(true);
-        } else {
-          setEnoughData(false);
-          setLineData(tmpRandomData);
-          setMeanGpa(tmpMeanGpa);
-          setMedianGpa(tmpMedianGpa);
-          setModeGpa(tmpModeGpa);
-          setMinGpa(tmpMinGpa);
+          setNumOfSelection(metadata.recruitNumber);
+          setNumOfApplication(metadata.appliedNumber);
+          setNumOfPassed(metadata.passedNumber);
+          if (passedData.length > 0) {
+            setEnoughData(true);
+            setAvgGpa(metadata.passedAvgGPAData);
+            setMedianGpa(metadata.passedMedianGPAData);
+            setModeGpa(metadata.passedModeGPAData);
+            setMinGpa(metadata.passedMinimumGPAData);
+            setLineData(passedData);
+          } else {
+            // 데이터가 없을 때, 블러 뒤에 띄울 임시 데이터
+            setEnoughData(false);
+            setAvgGpa(tmpMeanGpa);
+            setMedianGpa(tmpMedianGpa);
+            setModeGpa(tmpModeGpa);
+            setMinGpa(tmpMinGpa);
+            setLineData(tmpRandomData);
+          }
         }
       } catch (err) {
         console.log(err);
@@ -170,7 +176,7 @@ const MobileArchiveDetailPage = () => {
           <GraphBox>
             <MobileArchiveGraph
               lineData={lineData}
-              meanGpa={meanGpa}
+              meanGpa={avgGpa}
               medianGpa={medianGpa}
               modeGpa={modeGpa}
               minGpa={minGpa}
@@ -198,7 +204,7 @@ const MobileArchiveDetailPage = () => {
           </Wrapper2>
         ) : (
           <GpaAnalysisBox>
-            <Card05 kind={'Mean'} text={'합격자 학점 평균값'} textNumber={meanGpa.gpa} />
+            <Card05 kind={'Mean'} text={'합격자 학점 평균값'} textNumber={avgGpa.gpa} />
             <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={modeGpa.gpa} modeNumber={modeGpa.num} />
             <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={medianGpa.gpa} />
             <Card05 kind={'Min'} text={'합격자 학점 최저값'} textNumber={minGpa.gpa} />

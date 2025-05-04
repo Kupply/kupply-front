@@ -6,8 +6,12 @@ import SegmentedPicker from '../../assets/tabMenu/TabMenu01';
 import GpaLineChart, { Data, LineData } from '../../assets/GpaLineChart';
 import { DBkeywords } from '../../common/Keyword';
 import { MajorOptionsShortEng as MajorOptions } from '../../mappings/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, semesterMapping, majorNameMapping } from '../../mappings/Mappings';
-import { usePastApplyData } from '../../store/query';
+import {
+  collegeNameMappingByEng as collegeNameMapping,
+  semesterMapping,
+  majorNameMapping,
+} from '../../mappings/Mappings';
+import { client } from '../../utils/HttpClient';
 
 // 경쟁률 적용 X (디자인 나와서 고치면서 수정할 예정)
 
@@ -62,32 +66,40 @@ const ArchiveDetailPage = () => {
     setHoveredIdx(null);
   };
 
-  const { data } = usePastApplyData(majorName, selectedSemester);
   useEffect(() => {
-    if (data) {
-      const { metadata, passedData } = data.pastData;
+    const fetchData = async () => {
+      try {
+        const APIresponse = await client.get(`/pastData/${majorName}/${selectedSemester}`);
+        if (APIresponse) {
+          const { metadata, passedData } = APIresponse.data.pastData;
 
-      setNumOfSelection(metadata.recruitNumber);
-      setNumOfApplication(metadata.appliedNumber);
-      setNumOfPassed(metadata.passedNumber);
-      if (passedData.length > 0) {
-        setEnoughData(true);
-        setAvgGpa(metadata.passedAvgGPAData);
-        setMedianGpa(metadata.passedMedianGPAData);
-        setModeGpa(metadata.passedModeGPAData);
-        setMinGpa(metadata.passedMinimumGPAData);
-        setLineData(passedData);
-      } else {
-        // 데이터가 없을 때, 블러 뒤에 띄울 임시 데이터
-        setEnoughData(false);
-        setAvgGpa(tmpMeanGpa);
-        setMedianGpa(tmpMedianGpa);
-        setModeGpa(tmpModeGpa);
-        setMinGpa(tmpMinGpa);
-        setLineData(tmpRandomData2);
+          setNumOfSelection(metadata.recruitNumber);
+          setNumOfApplication(metadata.appliedNumber);
+          setNumOfPassed(metadata.passedNumber);
+          if (passedData.length > 0) {
+            setEnoughData(true);
+            setAvgGpa(metadata.passedAvgGPAData);
+            setMedianGpa(metadata.passedMedianGPAData);
+            setModeGpa(metadata.passedModeGPAData);
+            setMinGpa(metadata.passedMinimumGPAData);
+            setLineData(passedData);
+          } else {
+            // 데이터가 없을 때, 블러 뒤에 띄울 임시 데이터
+            setEnoughData(false);
+            setAvgGpa(tmpMeanGpa);
+            setMedianGpa(tmpMedianGpa);
+            setModeGpa(tmpModeGpa);
+            setMinGpa(tmpMinGpa);
+            setLineData(tmpRandomData2);
+          }
+        }
+      } catch (err) {
+        console.error(err);
       }
-    }
-  }, [data]);
+    };
+
+    fetchData();
+  }, [majorName, selectedSemester]);
 
   return (
     <Wrapper>
