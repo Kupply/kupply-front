@@ -107,7 +107,37 @@ export function SignUp1Page() {
 
   return (
     <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
-    <div style={{marginBottom: '16.94vw'}}></div>
+    <div style={{marginTop: '14.5vw', marginBottom: '12.3vw', textAlign: 'center'}}>
+      <Typography
+        size="6.66vw"
+        bold="700"
+        style={{ lineHeight: '131.579%', textAlign: 'center' }}
+      >
+        환영합니다!
+      </Typography>
+
+      <div style={{ marginTop: '4.6vw', textAlign: 'center' }}>
+        <span style={{ fontSize: '4vw', fontWeight: 500, opacity: 0.8 }}>
+          쿠플라이는
+        </span>
+        <img
+          src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+          alt="tigerEmoji"
+          style={{
+            height: '4.329vw',
+            verticalAlign: 'middle',
+            margin: '0 0.4vw',
+          }}
+        />
+        <span style={{ fontSize: '4vw', fontWeight: 700, opacity: 0.8 }}>
+          고파스 아이디/비밀번호
+        </span>
+        <br />
+        <span style={{ fontSize: '4vw', fontWeight: 500, opacity: 0.8 }}>
+          로 서비스 이용이 가능합니다.
+        </span>
+      </div>
+    </div>
     <ContentsList>
       <ContentsWrapper>
         <div>

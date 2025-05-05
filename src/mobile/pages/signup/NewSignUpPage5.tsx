@@ -41,10 +41,8 @@ export function SignUp5Page(){
         <ContentsList>
             <ContentsWrapper>
             <div>
-            <Typography size="3.33vw" bold="700">쿠플라이 아이디</Typography>
-            <Typography size="3.33vw" bold="400">는</Typography>
-            <Typography size="3.33vw" bold="700"> 고파스 아이디/비밀번호</Typography>
-            <Typography size="3.33vw" bold="400">입니다.</Typography>
+            <Typography size="3.33vw" bold="700">고려대학교 이메일</Typography>
+            <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
             </div>
             <UserInput userInfoType="kuEmail" toNext={next}/>
             </ContentsWrapper>

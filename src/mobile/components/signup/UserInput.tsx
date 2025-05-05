@@ -184,7 +184,7 @@ export const UserInput: React.FC<UserInputProps> = ({
           }
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
-          type={userInfoType === 'password' || userInfoType === 'password2' ? 'password' : undefined}
+          type={userInfoType === 'password' || userInfoType === 'password2' || userInfoType === 'koreapasPass' ? 'password' : undefined}
           onKeyDown={(e: React.KeyboardEvent) => {
             if (e.key === 'Enter') {
               //console.log('This is the onKeyDown');
