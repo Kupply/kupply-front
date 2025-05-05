@@ -41,7 +41,7 @@ const MobileQuartileIndicator = ({
               다음 학기에 지원해주세요!
             </Typography>
           </BlurBox>
-        ) : currentMonth < 5 ? (
+        ) : currentMonth <= 5 ? (
           <BlurBox>
             <Typography size="3.89vw" bold="700" style={{ lineHeight: '120%' }}>
               쿠플라이에서 모의지원(5월 오픈) 후 열람 가능해요!
