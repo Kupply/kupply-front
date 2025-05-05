@@ -21,18 +21,18 @@ function Banner04(props: Banner04Props) {
   ];
   const titles = [
     '다른 지원자들은 어떤 정보를 궁금해할까?',
-//    '고려대학교 이메일 등록 후, 이중전공에 대한 모든 정보 확인하기',
-    '고파스 계정 등록 후 이중전공에 대한 모든 정보 확인하기',
+    //    '고려대학교 이메일 등록 후, 이중전공에 대한 모든 정보 확인하기',
+    '고파스 계정 등록 후, 이중전공에 대한 모든 정보 확인하기',
     '경쟁자들과 비교해서 나의 합격 가능성을 확인해볼까요?',
   ];
   const contents = [
     '',
-//    '간단한 회원가입을 통해 쿠플라이의 다양한 서비스를 이용해보세요.',
+    //    '간단한 회원가입을 통해 쿠플라이의 다양한 서비스를 이용해보세요.',
     '고파스 통합 로그인을 통해 쿠플라이의 다양한 서비스를 이용해보세요.',
     '쿠플라이 모의지원 완료 후 내 학점 백분위 파악하기',
   ];
-  const buttonTitles = ['이중전공 A to Z 바로가기', '회원가입 바로가기', '모의지원 바로가기'];
-  const buttonLinks = ['/landing', '/signup1', '/myboard'];
+  const buttonTitles = ['이중전공 A to Z 바로가기', '고파스 아이디로 로그인하기', '모의지원 바로가기'];
+  const buttonLinks = ['/landing', '/login', '/myboard'];
 
   const navigate = useNavigate();
   const [buttonState, setButtonState] = useState<'default' | 'pressed' | undefined>('default');
@@ -64,13 +64,13 @@ function Banner04(props: Banner04Props) {
       <Typography size="3.06vw" color="#FFF" style={{ lineHeight: '120%', marginTop: type === 1 ? '0' : '1.11vw' }}>
         {contents[type - 1]}
       </Typography>
-      
+
       {type === 2 ? (
         <Button02
           width="43.44vw"
-          height='6.38vw'
+          height="6.38vw"
           fontSize="2.5vw"
-          fontBold='500'
+          fontBold="500"
           imgSize="3.8vw"
           onClick={handleButtonClick}
           style={{
@@ -90,7 +90,6 @@ function Banner04(props: Banner04Props) {
           {buttonTitles[type - 1]}
         </Button11>
       )}
-
     </MainWrapper>
   );
 }
