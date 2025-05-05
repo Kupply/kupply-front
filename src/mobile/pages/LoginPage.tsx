@@ -169,7 +169,7 @@ export default function LoginPage(props: LoginPageProps) {
           <Button05
             size="large"
             onClick={() => {
-              navigate('/signup0');
+              navigate('/signup1');
             }}
           >
             고파스 아이디로 회원가입

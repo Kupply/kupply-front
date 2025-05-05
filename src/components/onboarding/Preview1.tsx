@@ -91,7 +91,7 @@ function Preview1() {
             </Typography>
             <CTA02
               onClick={() => {
-                navigate('/signup0');
+                navigate('/signup1');
               }}
               size="small"
               style={{ marginTop: '1.24vw' }}

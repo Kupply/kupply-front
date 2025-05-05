@@ -7,13 +7,13 @@ import {useState } from 'react';
 import axios from 'axios';
 import Button04 from '../../assets/buttons/Button04';
 import Button03 from '../../assets/buttons/Button03';
-import { useNewSignUp0Verification } from '../../utils/SignUpFunctions';
+import { useNewSignUp1Verification } from '../../utils/SignUpFunctions';
 import { api_url } from '../../utils/HttpClient';
 import { SimpleConsoleLogger } from 'typeorm';
 
 export function SignUp1Page() {
   const [next, setNext] = useState(false);
-  const {complete, ID, pass} = useNewSignUp0Verification();
+  const {complete, ID, pass} = useNewSignUp1Verification();
   const navigate = useNavigate();
 
   const handleSyncClick = () => {

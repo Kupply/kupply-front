@@ -23,11 +23,10 @@ export function SignUp4Page() {
    // 넘겨받는 데이터가 없는 경우 돌려보내기 위해
    // 잠시 수정
  
- //   useEffect(() => {
- //     if (!sessionStorage.getItem('nickname')) navigate('/');
- //     else sessionStorage.removeItem('role');
- //   }, []);
- 
+   useEffect(() => {
+     if (!sessionStorage.getItem('studentId')) navigate('/');
+   }, []);
+   
    useEffect(() => {
      if (+userStdId.info.slice(2, 4) === 24) {
        setUser({
@@ -107,6 +106,13 @@ export type inputState = 'incomplete' | 'error' | 'complete';
  
  export function SignUp4PageCandidate() {
    const { setGpaState, setMajorState, complete, next, handleNext, handlePrev } = useSignUp4CandidateHandler();
+
+   const navigate = useNavigate();
+   useEffect(() => {
+    if (!sessionStorage.getItem('studentId')) navigate('/');
+  }, []);
+
+  
      return (
        <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">
          <div style={{ marginBottom: '50px' }}></div>
@@ -149,6 +155,11 @@ export type inputState = 'incomplete' | 'error' | 'complete';
    export function SignUp4PagePasser() {
     const { setGpaState, setSemesterState, setMajorState, complete, next, handleNext, handlePrev } =
       useSignUp4PasserHandler();
+
+      const navigate = useNavigate();
+      useEffect(() => {
+       if (!sessionStorage.getItem('studentId')) navigate('/');
+     }, []);
   
     return (
       <SignUpPageWrapper step={4} stepInfo="마이보드 프로필 생성하기">

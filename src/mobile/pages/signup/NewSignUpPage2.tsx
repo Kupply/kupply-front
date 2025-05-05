@@ -65,11 +65,16 @@ interface IndividualChecks {
 
 const handleNext = async () => {
     if (isButtonActive) {
+        sessionStorage.setItem('agreeTerms', 'true'); // 모든 약관에 동의할 경우 - signuppag3에서 확인용
         navigate('/signup3');
     } else {
     alert('모든 약관에 동의해주세요.');
     }
-};
+  };
+
+  useEffect(() => {
+  if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
+  }, []);
  
    return (
 <SignUpPageWrapper step={2} stepInfo="약관 읽고 서비스 이용하기">

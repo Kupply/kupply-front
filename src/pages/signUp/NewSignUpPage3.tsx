@@ -4,7 +4,7 @@ import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
  import Button04 from "../../assets/buttons/Button04";
  import Button03 from "../../assets/buttons/Button03";
  import { useNavigate } from "react-router-dom";
- import { useState } from "react";
+ import { useState, useEffect } from "react";
  import { useSignUp2Verification } from "../../utils/SignUpFunctions";
  import { UserInputText } from "../../components/signUp/UserInputText";
  
@@ -25,6 +25,10 @@ import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
    const handlePrev = () => {
      navigate('/signUp2');
    };
+
+  useEffect(() => {
+       if (!sessionStorage.getItem('agreeTerms')) navigate('/');
+      }, []);
  
    return (
      <SignUpPageWrapper step={3} stepInfo="사용자 기본 정보 입력하기"> 

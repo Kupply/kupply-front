@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSignUp2Verification } from "../../../utils/SignUpFunctions";
 import styled from "styled-components";
 import { SignUpPageWrapper } from "../../components/signup/SignUpPageWrapper";
@@ -26,6 +26,10 @@ export default function SignUp3Page(){
    const handlePrev = () => {
      navigate('/signUp2');
    };
+
+     useEffect(() => {
+          if (!sessionStorage.getItem('agreeTerms')) navigate('/');
+         }, []);
  
    return (
      <SignUpPageWrapper step={3} stepInfo="사용자 기본 정보 입력하기">

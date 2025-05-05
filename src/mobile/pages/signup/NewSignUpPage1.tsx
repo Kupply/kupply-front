@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNewSignUp0Verification } from "../../../utils/SignUpFunctions";
+import { useNewSignUp1Verification } from "../../../utils/SignUpFunctions";
 import { useNavigate } from "react-router-dom";
 import { api_url } from "../../../utils/HttpClient";
 import axios from "axios";
@@ -12,7 +12,7 @@ import { UserInput } from "../../components/signup/UserInput";
 
 export function SignUp1Page() {
   const [next, setNext] = useState(false);
-  const {complete, ID, pass} = useNewSignUp0Verification();
+  const {complete, ID, pass} = useNewSignUp1Verification();
   const navigate = useNavigate();
 
   const handleSyncClick = () => {

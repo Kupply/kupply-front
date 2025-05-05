@@ -16,6 +16,9 @@ export function SignUp5Page(){
    const [next, setNext] = useState(false);
    const {complete, nickname:nickname, ID:kuEmail} = useNewSignUp5Verification();
   
+   useEffect(() => {
+    if(!sessionStorage.getItem('role')) navigate('/');
+   }, []);
 
    const handleNext = async () => {
     try {
