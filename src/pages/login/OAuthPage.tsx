@@ -30,7 +30,7 @@ export default function OAuthPage() {
           window.location.reload();
         } else {
           setError('쿠플라이 회원이 아니에요. \n고파스 아이디로 쿠플라이 서비스에 회원가입 해주세요.');
-          setRedirectPath('/signup0');
+          setRedirectPath('/signup1');
         }
       } catch (err) {
         if (axios.isAxiosError(err) && err.response?.status === 401) {

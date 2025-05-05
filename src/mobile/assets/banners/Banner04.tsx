@@ -32,7 +32,7 @@ function Banner04(props: Banner04Props) {
     '쿠플라이 모의지원 완료 후 내 학점 백분위 파악하기',
   ];
   const buttonTitles = ['이중전공 A to Z 바로가기', '회원가입 바로가기', '모의지원 바로가기'];
-  const buttonLinks = ['/landing', '/signup0', '/myboard'];
+  const buttonLinks = ['/landing', '/signup1', '/myboard'];
 
   const navigate = useNavigate();
   const [buttonState, setButtonState] = useState<'default' | 'pressed' | undefined>('default');

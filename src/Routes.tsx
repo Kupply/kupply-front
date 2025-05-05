@@ -43,7 +43,7 @@ export const authRoutes = [
 
 export const signupRoutes = [
   { path: '/join', element: <SignUp1Page /> },
-  { path: '/signup0', element: <SignUp0Page /> },
+  // { path: '/signup0', element: <SignUp0Page /> },
   { path: '/signup1', element: <SignUp1Page /> },
   { path: '/signup2', element: <SignUp2Page /> },
   { path: '/signup3', element: <SignUp3Page /> },

@@ -1,15 +1,14 @@
-import { SignUpPageWrapper } from '../../components/signUp/SignUpPageWrapper';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { UserInput } from '../../components/signUp/UserInput';
-import { UserInputText } from '../../components/signUp/UserInputText';
-import {useState } from 'react';
-import axios from 'axios';
-import Button04 from '../../assets/buttons/Button04';
-import Button03 from '../../assets/buttons/Button03';
-import { useNewSignUp1Verification } from '../../utils/SignUpFunctions';
-import { api_url } from '../../utils/HttpClient';
-import { SimpleConsoleLogger } from 'typeorm';
+import { useState } from "react";
+import { useNewSignUp1Verification } from "../../../utils/SignUpFunctions";
+import { useNavigate } from "react-router-dom";
+import { api_url } from "../../../utils/HttpClient";
+import axios from "axios";
+import { SignUpPageWrapper } from "../../components/signup/SignUpPageWrapper";
+import styled from "styled-components";
+import Button03 from "../../assets/buttons/Button03";
+import Button04 from "../../assets/buttons/Button04";
+import Typography from "../../../assets/Typography";
+import { UserInput } from "../../components/signup/UserInput";
 
 export function SignUp1Page() {
   const [next, setNext] = useState(false);
@@ -105,67 +104,107 @@ export function SignUp1Page() {
     window.open('https://www.koreapas.com/bbs/lostid_new.php', '_blank', 'noopener,noreferrer');
   };
 
+
   return (
-    <SignUpPageWrapper step={1} stepInfo="고려대학생 인증하기">
-      <ContentsList>
-        <ContentsWrapper>
-          <UserInputText userInfoType="koreapasID" />
-          <UserInput userInfoType='koreapasID' toNext={next}/>
-        </ContentsWrapper>
-        <ContentsWrapper>
-        <UserInputText userInfoType="koreapasPass"/>
-        <UserInput userInfoType='koreapasPass' toNext={next}/>
-        </ContentsWrapper> 
-      </ContentsList>
+    <SignUpPageWrapper step={1} stepInfo="고려대 학생 인증하기">
+    <div style={{marginTop: '14.5vw', marginBottom: '12.3vw', textAlign: 'center'}}>
+      <Typography
+        size="6.66vw"
+        bold="700"
+        style={{ lineHeight: '131.579%', textAlign: 'center' }}
+      >
+        환영합니다!
+      </Typography>
+
+      <div style={{ marginTop: '4.6vw', textAlign: 'center' }}>
+        <span style={{ fontSize: '4vw', fontWeight: 500, opacity: 0.8 }}>
+          쿠플라이는
+        </span>
+        <img
+          src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+          alt="tigerEmoji"
+          style={{
+            height: '4.329vw',
+            verticalAlign: 'middle',
+            margin: '0 0.4vw',
+          }}
+        />
+        <span style={{ fontSize: '4vw', fontWeight: 700, opacity: 0.8 }}>
+          고파스 아이디/비밀번호
+        </span>
+        <br />
+        <span style={{ fontSize: '4vw', fontWeight: 500, opacity: 0.8 }}>
+          로 서비스 이용이 가능합니다.
+        </span>
+      </div>
+    </div>
+    <ContentsList>
+      <ContentsWrapper>
+        <div>
+        <Typography size="3.33vw" bold="700">고파스 아이디</Typography>
+        <Typography size="3.33vw" bold="400">를 입력해주세요.</Typography>
+        </div>
+        <UserInput userInfoType="koreapasID" toNext={next}/>
+      </ContentsWrapper>
+      <ContentsWrapper>
+        <div>
+        <Typography size="3.33vw" bold="700">고파스 비밀번호</Typography>
+        <Typography size="3.33vw" bold="400">를 입력해주세요.</Typography>
+        </div>
+        <UserInput userInfoType="koreapasPass" toNext={next}/>
+      </ContentsWrapper>
       <LinkBox>
           <Link onClick={handleForgetClick}>고파스 아이디 비밀번호 찾기</Link> 
           <Link onClick={handleSyncClick}>쿠플라이의 기존 회원이신가요?</Link>
       </LinkBox>
-      <ButtonsWrapper>
-        <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
-        <Button03 state={complete? 'pressed' : 'disabled'} onClick={handleNext} style={{width: '74.418%'}}/>
-      </ButtonsWrapper>
-    </SignUpPageWrapper>
+    </ContentsList>
+    <ButtonsWrapper>
+      <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>
+      <Button03 state={complete? 'default' : 'disabled'} onClick={handleNext} style={{width: '74.418%'}}/>
+    </ButtonsWrapper>
+  </SignUpPageWrapper>
   );
 }
 
 const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.823vw; //35px;
+  gap: 5.556vw; /* 20px */
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.417vw; //8px;
-  //margin-top: 5.21vw; //100px;
+  gap: 2.5vw; /* 9px */
+  width: 91.111vw; /* 328px */
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  gap: 0.9375vw;
-  //margin-top: 18.073vw; //347px;
+  margin-top: 20.778vw; /* 100px */
+  gap: 2.222vw; /* 8px */
   width: 100%;
 `;
+
 
 const LinkBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.31vw;
-  margin-top: 4.11vw;
-  margin-bottom: 4.53vw;
+  gap: 2.5vw;
+  margin-top: 12.11vw;
+//   margin-bottom: 2.53vw;
 `;
 
 const Link = styled.button`
   color: rgba(216, 88, 136, 0.8);
   font-family: Pretendard;
-  font-size: 0.73vw;
+  font-size: 2.78vw;
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 100% */
   text-decoration-line: underline;
   text-transform: uppercase;
 `;
+

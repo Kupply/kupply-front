@@ -19,6 +19,10 @@ import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
    const {complete, nickname:nickname, ID:kuEmail} = useNewSignUp5Verification();
   
 
+    useEffect(() => {
+      if(!sessionStorage.getItem('role')) navigate('/');
+    }, []);
+
    const handleNext = async () => {
     try {
       const role = sessionStorage.getItem('role') || '';

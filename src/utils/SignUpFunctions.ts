@@ -107,7 +107,7 @@ export function useSignUp0Verification() {
 
   return { idVerified, complete };
 }
-export function useNewSignUp0Verification(){
+export function useNewSignUp1Verification(){
   const [ID, setID] = useRecoilState(userState('koreapasID')); // 지금 얘만 문제인데? 
   const [pass, setPass] = useRecoilState(userState('koreapasPass'));
   const [complete, setComplete] = useState(false);
