@@ -24,9 +24,22 @@ export const SyncPageWrapper: React.FC<SyncPageWrapperProps> = ({ step, stepInfo
             <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
               환영합니다!
             </Typography>
-            <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
-              간단한 인증을 통해 고파스 아이디와 쿠플라이 아이디를 연동하세요.
-            </Typography>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4vw', marginTop: '0.5vw' }}>
+              <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
+                간단한 인증을 통해
+              </Typography>
+              <img
+                src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+                alt="tigerEmoji"
+                style={{ height: '1.5vw' }} // adjust size as needed
+              />
+              <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
+                고파스 아이디와 쿠플라이 아이디
+              </Typography>
+              <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
+                를 연동하세요.
+              </Typography>
+            </div>
           </>
         ) : (
           <>

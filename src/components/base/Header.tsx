@@ -214,9 +214,9 @@ export default function Header({ logined, setLogin }: HeaderProps) {
             <HeaderButton onClick={handleMenu2Click} activated={location.pathname === '/myboard'}>
               마이보드
             </HeaderButton>
-            <HeaderButton onClick={handleMenu4Click} activated={location.pathname === '/notice'}>
+            {/* <HeaderButton onClick={handleMenu4Click} activated={location.pathname === '/notice'}>
               고객센터
-            </HeaderButton>
+            </HeaderButton> */}
             {/* <HeaderButton onClick={handleAdminClick} activated={location.pathname === '/admin'}>
               관리자
             </HeaderButton> */}

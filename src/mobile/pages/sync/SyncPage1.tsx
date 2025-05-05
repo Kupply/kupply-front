@@ -43,7 +43,7 @@ export default function SyncPage1() {
     } catch (err: any) {
       setPassword('');
       if (axios.isAxiosError(err) && err.response?.status === 401) {
-        alert('유효하지 않은 고파스 아이디 혹은 비밀번호에요.');
+        alert('유효하지 않은 고파스 아이디 혹은 비밀번호예요.');
       } else if (axios.isAxiosError(err) && err.response?.status === 403) {
         alert('고파스 강등 또는 미인증 회원은 쿠플라이 서비스를 이용할 수 없어요.');
       } else {
@@ -62,10 +62,23 @@ export default function SyncPage1() {
         <Typography size="5.56vw" bold="700">
           환영합니다!
         </Typography>
-        <Typography size="3.33vw" bold="500" style={{ lineHeight: '4.44vw', wordBreak: 'break-all' }}>
-          간단한 인증을 통해 고파스 아이디와 <br />
-          쿠플라이 아이디를 연동하세요.
-        </Typography>
+        <div style={{ textAlign: 'center' }}>
+          <Typography size="3.33vw" bold="500" style={{ lineHeight: '4.44vw', wordBreak: 'break-all' }}>
+            간단한 인증을 통해
+          </Typography>
+          <img
+            src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+            alt="tigerEmoji"
+            style={{
+              height: '4.329vw',
+              verticalAlign: 'middle',
+              margin: '0 0.4vw',
+            }}
+          />
+          <Typography size="3.33vw" bold="500" style={{ lineHeight: '4.44vw', wordBreak: 'break-all' }}>
+            고파스 아이디와 <br /> 쿠플라이 아이디를 연동하세요.
+          </Typography>
+        </div>
       </MessageContent>
       <ContentsList>
         <ContentsWrapper>
@@ -129,7 +142,7 @@ const MessageContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50.278vw;
+  width: 52.278vw;
   text-align: center;
   margin-bottom: 11.944vw;
 `;

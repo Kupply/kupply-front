@@ -33,18 +33,19 @@ function Banner02(props: Banner02Props) {
     links = ['/archive', '/landing', '/myboard', '/notice'],
   } = props;
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(3);
   const [resetIntervalFlag, setResetIntervalFlag] = useState(false);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % 4);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [resetIntervalFlag]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setIndex((prevIndex) => (prevIndex + 1) % 4);
+  //   }, 3000);
+  //   return () => clearInterval(interval);
+  // }, [resetIntervalFlag]);
   // 3초마다 캐러셀 변경
+  // 고파스 회원 전환 공지 고정되도록 timer 임시 제거
 
   function LeftArrowClick() {
     setIndex((prevIndex) => (prevIndex - 1 + 4) % 4);
@@ -62,15 +63,15 @@ function Banner02(props: Banner02Props) {
   return (
     <MainWrapper index={index} images={images}>
       {index !== 3 && (
-      <TextBox index={index}>
-        <Button15 onClick={() => navigate(links[index])}>{titles[index]}</Button15>
-        <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%', opacity: '0.8' }}>
-          {contents[index].map((sentence, sentenceIndex) => (
-            <div key={sentenceIndex}>{sentence}</div>
-          ))}
-        </Typography>
-      </TextBox>
-    )}
+        <TextBox index={index}>
+          <Button15 onClick={() => navigate(links[index])}>{titles[index]}</Button15>
+          <Typography size="3.89vw" bold="500" style={{ lineHeight: '120%', opacity: '0.8' }}>
+            {contents[index].map((sentence, sentenceIndex) => (
+              <div key={sentenceIndex}>{sentence}</div>
+            ))}
+          </Typography>
+        </TextBox>
+      )}
       <ArrowButton
         src="../../designImage/carousel/CarouselLeftButton.png"
         onClick={LeftArrowClick}
