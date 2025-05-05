@@ -92,7 +92,6 @@ export const UserInput: React.FC<UserInputProps> = ({
   userInfoType,
   toNext,
   children,
-  userInfoTypeManual = undefined,
   locationUsed = 'signUp',
   onCustomFunction,
   valid,
@@ -101,8 +100,8 @@ export const UserInput: React.FC<UserInputProps> = ({
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(
     locationUsed === 'signUp'
-      ? userState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
-      : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
+      ? userState(userInfoType)
+      : userSettingsState(userInfoType),
   );
 
   const [firstMajor, setFirstMajor] = useRecoilState(userState('firstMajor'));
@@ -146,16 +145,14 @@ export const UserInput: React.FC<UserInputProps> = ({
   //console.log(userInfo);
   return (
     <>
-      {userInfoType === 'firstMajor' ||
+      {
       userInfoType === 'hopeMajor1' ||
       userInfoType === 'hopeMajor2' ||
       userInfoType === 'secondMajor' ? (
         <DropDown
           title={placeholderMapping[userInfoType]}
           optionList={
-            userInfoType === 'firstMajor'
-              ? majorAllList
-              : userInfoType === 'secondMajor'
+              userInfoType === 'secondMajor'
               ? optionList
               : userInfoType === 'hopeMajor1'
               ? optionList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor.info)
@@ -171,14 +168,12 @@ export const UserInput: React.FC<UserInputProps> = ({
           onChange={handleInputChange}
           state={userInfo.infoState}
           setState={
-            //userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
-            (locationUsed === 'settings' && userInfoType === 'studentId')
+            ((locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor')
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, infoState: s }))
           }
           setValue={
-            //userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
-            (locationUsed === 'settings' && userInfoType === 'studentId')
+            ((locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor')
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, info: s }))
           }

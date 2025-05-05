@@ -32,7 +32,7 @@ export const categoryMapping: CategoryMapping = {
     '신소재공학부',
     '전자공학부',
     '컴퓨터학과',
-    '인공지능학과'
+    // '인공지능학과'
   ],
   '독립 학부': ['심리학부', '미디어학부', '스마트보안학부'],
 };
@@ -58,7 +58,7 @@ export const collegeNameMappingByEng = {
   chembio: 'engineering',
   datasci: 'info',
   smartsec: 'smartsecurity',
-  ai: 'info'
+  // ai: 'info'
 };
 
 export const collegeNameMappingByKR = {
@@ -82,7 +82,7 @@ export const collegeNameMappingByKR = {
   화공생명공학과: 'engineering',
   데이터과학과: 'info',
   스마트보안학부: 'smartsecurity',
-  인공지능학과: 'info'
+  // 인공지능학과: 'info'
 };
 
 export const majorAPIMappingByKR = {
@@ -106,7 +106,7 @@ export const majorAPIMappingByKR = {
   화공생명공학과: 'chembio',
   데이터과학과: 'datasci',
   스마트보안학부: 'smartsec',
-  인공지능학과: 'ai'
+  // 인공지능학과: 'ai'
 };
 
 export const majorNameMapping = {
@@ -130,7 +130,7 @@ export const majorNameMapping = {
   chembio: ['화공생명공학과', 'Department of Chemical & Biological Engineering'],
   datasci: ['데이터과학과', 'Department of Data Science'],
   smartsec: ['스마트보안학부', 'Division of Smart Security'],
-  ai: ['인공지능학과', 'Department of Artificial Intelligence']
+  // ai: ['인공지능학과', 'Department of Artificial Intelligence']
 };
 
 export const engMajorParamMappingImage = {
@@ -154,7 +154,7 @@ export const engMajorParamMappingImage = {
   'Department of Chemical & Biological Engineering': 'engineering',
   'Department of Data Science': 'info',
   'Division of Smart Security': 'smartsecurity',
-  'Department of Artificial Intelligence': 'info'
+  // 'Department of Artificial Intelligence': 'info'
 };
 
 export const engMajorParamMappingPath = {
@@ -178,7 +178,7 @@ export const engMajorParamMappingPath = {
   'Department of Chemical & Biological Engineering': 'chembio',
   'Department of Data Science': 'datasci',
   'Division of Smart Security': 'smartsec',
-  'Department of Artificial Intelligence': 'ai'
+  // 'Department of Artificial Intelligence': 'ai'
 };
 
 export const majorNameMappingByKr = {
@@ -202,7 +202,7 @@ export const majorNameMappingByKr = {
   화공생명공학과: 'Department of Chemical & Biological Engineering',
   데이터과학과: 'Department of Data Science',
   스마트보안학부: 'Division of Smart Security',
-  인공지능학과: 'Department of Artificial Intelligence'
+  // 인공지능학과: 'Department of Artificial Intelligence'
 };
 
 /*
@@ -322,6 +322,108 @@ export const idColorMapping: { [key: number]: string } = {
   21: '#FFAFBD',
   20: 'var(--SECONDARY, #FDF2F2)',
 };
+
+export const majorCodeToNameMapping: Record<string, string> = {
+  "HEED": "가정교육과",
+  "NRSG": "간호학과",
+  "ACEE": "건축사회환경공학부",
+  "ARCH": "건축학과",
+  "BUSS": "경영학과",
+  "ECON": "경제학과",
+  "EDUC": "교육학과",
+  "KLLE": "국어교육과",
+  "KORE": "국어국문학과",
+  "DISS": "국제학부",
+  "MECH": "기계공학부",
+  "RUSS": "노어노문학과",
+  "GERM": "독어독문학과",
+  "ARDE": "디자인조형학부",
+  "PHYS": "물리학과",
+  "JMCO": "미디어학부",
+  "BSMS": "바이오시스템의과학부",
+  "BMED": "바이오의공학부",
+  "KHPM": "보건정책관리학부",
+  "KHES": "보건환경융합과학부",
+  "FRAN": "불어불문학과",
+  "CYDF": "사이버국방학과",
+  "HOEW": "사학과",
+  "SOCI": "사회학과",
+  "IMEN": "산업경영공학부",
+  "LIBT": "생명공학부",
+  "LIBS": "생명과학부",
+  "SPAN": "서어서문학과",
+  "MATH": "수학과",
+  "MATE": "수학교육과",
+  "LIFS": "식품공학과",
+  "LESE": "식품자원경제학과",
+  "AMSE": "신소재공학부",
+  "PSYC": "심리학부",
+  "LING": "언어학과",
+  "HISE": "역사교육과",
+  "ELED": "영어교육과",
+  "ENGL": "영어영문학과",
+  "PMED": "의예과",
+  "JAPN": "일어일문학과",
+  "FREE": "자유전공학부",
+  "KECE": "전기전자공학부",
+  "POLI": "정치외교학과",
+  "CHIN": "중어중문학과",
+  "EAES": "지구환경과학과",
+  "GEOG": "지리교육과",
+  "PHIL": "철학과",
+  "PHEK": "체육교육과",
+  "COSE": "컴퓨터학과",
+  "STAT": "통계학과",
+  "HOKA": "한국사학과",
+  "HANM": "한문학과",
+  "PAPP": "행정학과",
+  "CHBE": "화공생명공학과",
+  "CHEM": "화학과",
+  "LIET": "환경생태공학부",
+  "SEMI": "반도체공학과",
+  "ENGY": "융합에너지공학과",
+  "DATA": "데이터과학과",
+  "SMRT": "스마트보안학부",
+  "GKSS": "글로벌한국융합학부",
+  "COMM": "차세대통신학과",
+  "MOBI": "스마트모빌리티학부",
+  "GFRE": "글로벌자율학부",
+  "KUAI": "인공지능학과",
+  "GMES": "글로벌엔터테인먼트학부",
+  "EGRN": "공과대학",
+  "UNIV": "학부대학",
+  "SJ01": "경제통계학부",
+  "SJ02": "공공사회·통일외교학부",
+  "SJ03": "국가통계전공",
+  "SJ04": "국제스포츠학부",
+  "SJ05": "글로벌학부",
+  "SJ07": "디스플레이·반도체물리학부",
+  "SJ08": "문화창의학부",
+  "SJ09": "미래모빌리티학과",
+  "SJ10": "빅데이터사이언스학부",
+  "SJ11": "사회복지융합전공",
+  "SJ12": "생명정보공학과",
+  "SJ13": "스마트도시학부",
+  "SJ14": "식품생명공학과",
+  "SJ15": "신소재화학과",
+  "SJ16": "약학과",
+  "SJ17": "융합경영학부",
+  "SJ18": "응용수리과학부",
+  "SJ19": "인공지능사이버보안학과",
+  "SJ20": "자유공학부",
+  "SJ21": "전자·기계융합공학과",
+  "SJ22": "전자및정보공학과",
+  "SJ23": "정부행정학부",
+  "SJ24": "지능형반도체공학과",
+  "SJ25": "컴퓨터융합소프트웨어학과",
+  "SJ26": "환경시스템공학과",
+  "SJ27": "표준·지식학과",
+  "SJ28": "디지털헬스케어공학과",
+  "SJ29": "첨단융합신약학과",
+  "SJ30": "문화유산융합학부",
+  "SJ00": "-해당학과없음",
+};
+
 
 export const majorNameMappingBySID: Record<number, string> = {
   1000: '자유전공학부',

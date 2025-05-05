@@ -7,9 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
  import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
  import Button04 from '../../assets/buttons/Button04';
  import Button03 from '../../assets/buttons/Button03';
- import CTA01 from '../../assets/CTAs/CTA01';
- import Typography from '../../assets/Typography';
- import { join } from '../../utils/SignUpFunctions';
+import { majorCodeToNameMapping } from '../../mappings/Mappings';
  
  // 거의 완전히 수정해야할 것으로 보임 
  export function SignUp2Page() {
@@ -68,6 +66,9 @@ import React, { useState, useEffect, useRef } from 'react';
 
    useEffect(() => {
     if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
+    const firstMajorCode = sessionStorage.getItem('firstMajorCode') || '';
+    const firstMajor = majorCodeToNameMapping[firstMajorCode];
+    sessionStorage.setItem('firstMajor', firstMajor);
    }, []);
  
    return (

@@ -19,7 +19,7 @@ export const majorTargetList = [
   { value1: '화공생명공학과', value2: '공과대학' },
   { value1: '데이터과학과', value2: '정보대학' },
   { value1: '스마트보안학부', value2: '스마트보안학부' },
-  { value1: '인공지능학과', value2: '정보대학' },
+  // { value1: '인공지능학과', value2: '정보대학' },
 ];
 
 export const majorTargetList_sejong = [
@@ -53,5 +53,5 @@ export const major계열: { [key: string]: string } = {
   화공생명공학과: '자연계',
   데이터과학과: '자연계',
   스마트보안학부: '자연계',
-  인공지능학과: '자연계'
+  // 인공지능학과: '자연계'
 };

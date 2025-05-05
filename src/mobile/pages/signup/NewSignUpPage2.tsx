@@ -10,6 +10,7 @@ import CTA01 from '../../assets/CTAs/CTA01';
 import Typography from '../../../assets/Typography';
 import { join } from '../../../utils/SignUpFunctions';
 import { SignUpPageWrapper } from '../../components/signup/SignUpPageWrapper';
+import { majorCodeToNameMapping } from '../../../mappings/Mappings';
 
 interface IndividualChecks {
     first: boolean;
@@ -74,6 +75,9 @@ const handleNext = async () => {
 
   useEffect(() => {
   if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
+  const firstMajorCode = sessionStorage.getItem('firstMajorCode') || '';
+  const firstMajor = majorCodeToNameMapping[firstMajorCode];
+  sessionStorage.setItem('firstMajor', firstMajor);
   }, []);
  
    return (

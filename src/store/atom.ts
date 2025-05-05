@@ -70,6 +70,10 @@ export const userState = atomFamily<InfoState, string>({
     //   info = 'email';
     //   infoState = 'filled';
     // }
+    if (kind === 'firstMajor') {
+      info = 'firstMajor'; // sessionStorage에서 가져온 firstMajorCode를 다시 firstMajor로 저장 
+      infoState = 'filled';
+    }
     return {
       info: sessionStorage.getItem(info) || '',
       infoState: infoState,
