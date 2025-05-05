@@ -65,8 +65,8 @@ height: 2vw;
 // Wrapper내에서의 align은 나중에 생각
 const CloseButton = styled.button`
 display: flex;
-width: 13.002px;
-height: 13.002px;
+width: 8.5vw;
+height: 8.5vw;
 flex-shrink: 0;
 position: absolute;
 top: -1vw;
