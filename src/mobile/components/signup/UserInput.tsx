@@ -6,8 +6,9 @@ import { majorAllList } from '../../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../../store/atom';
 import { majorTargetList } from '../../../mappings/MajorTarget';
-import { inputState } from '../../pages/signup/SignupPage4';
 import { majorTargetList_sejong } from '../../../mappings/MajorTarget';
+
+export type inputState = 'incomplete' | 'error' | 'complete';
 
 export type UserTypeOptions =
   | 'name'

@@ -7,7 +7,7 @@ import { useNavigate, useRouteError } from 'react-router-dom';
 import { api_url } from '../../utils/HttpClient';
 import TextAreaBox from '../../assets/TextArea';
 import Typography from '../../assets/Typography';
-import { inputState } from '../../pages/signUp/SignUp4Page';
+import { inputState } from './UserInput';
 import {
   nextButtonState,
   verificationCodeState,

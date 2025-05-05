@@ -4,7 +4,6 @@ import LandingPage from './pages/main/LandingPage';
 import LoginPage from './pages/login/OldLoginPage';
 import PreviousPage from './pages/archive/PreviousPage';
 import ArchiveDetailPage from './pages/archive/ArchiveDetailPage';
-import { SignUp0Page } from './pages/signUp/SignUp0Page'; // will not need this anymore because indexing now starts from 1 
 import { SignUp1Page } from './pages/signUp/NewSignUpPage1';
 import { SignUp2Page } from './pages/signUp/NewSignUpPage2';
 import SignUp3Page from './pages/signUp/NewSignUpPage3';

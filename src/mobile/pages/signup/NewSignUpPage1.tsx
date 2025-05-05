@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNewSignUp1Verification } from "../../../utils/SignUpFunctions";
 import { useNavigate } from "react-router-dom";
 import { api_url } from "../../../utils/HttpClient";
@@ -14,6 +14,16 @@ export function SignUp1Page() {
   const [next, setNext] = useState(false);
   const {complete, ID, pass} = useNewSignUp1Verification();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // 최초 로그인 후 sign up1을 건너뛰고 싶다는 거자나 
+    // 그러니까 로그인을 하려고 입력을 했는데 아직 회원은 아닌 경우 
+    const uuid = localStorage.getItem('koreapasUUID');
+    if (uuid) {
+      sessionStorage.setItem('koreapasUUID', uuid);
+      navigate('/signUp2');
+    }
+  }, []);
 
   const handleSyncClick = () => {
     navigate('/sync0');

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { api_url, client } from './HttpClient';
 import { emailAtom, errorMessageState, userState } from '../store/atom';
-import { inputState } from '../pages/signUp/SignUp4Page';
+import { inputState } from '../components/signUp/UserInput';
 import { userType } from '../store/atom';
 import {
   useEmailVerification,

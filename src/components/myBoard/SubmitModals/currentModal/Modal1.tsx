@@ -3,7 +3,7 @@ import { CurrentModalProps } from './Modal0';
 import Typography from '../../../../assets/Typography';
 import { CurSemesterVerification, SemesterVerification } from '../../../signUp/VerificationForm';
 import { useEffect, useState } from 'react';
-import { inputState } from '../../../../pages/signUp/SignUp4Page';
+import { inputState } from '../../../signUp/UserInput';
 import FirstReAppliedButton from '../../../../assets/myboardpage/FirstReAppliedButton';
 import styled from 'styled-components';
 import { appModalUserTypeState } from '../../../../store/atom';

@@ -6,8 +6,9 @@ import { majorAllList } from '../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../store/atom';
 import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
-import { inputState } from '../../pages/signUp/SignUp4Page';
 import NewTextFieldBox from '../../assets/NewTextFieldBox';
+
+export type inputState = 'incomplete' | 'error' | 'complete';
 
 export type UserTypeOptions =
   | 'name'
