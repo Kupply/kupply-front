@@ -59,7 +59,7 @@ function Preview1() {
   useEffect(() => {
     const appliedValue = localStorage.getItem('isApplied');
     if (appliedValue !== null) {
-      setIsApplied(appliedValue === 'false');
+      setIsApplied(appliedValue === 'true');
     }
   }, []);
 
@@ -102,7 +102,7 @@ function Preview1() {
         </>
       ) : isDateInRange ? (
         // 모의지원 기간 내
-        !isApplied ? null : (
+        isApplied ? null : (
           <>
             <Blur />
             <ButtonWrapper>
