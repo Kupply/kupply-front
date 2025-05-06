@@ -9,6 +9,7 @@ import Typography from '../../assets/Typography';
 import AlertMessage from '../../assets/toolTips/ToolTip01';
 import CTA01 from '../../assets/CTAs/CTA01';
 import IconButton04 from '../../assets/iconButtons/IconButton04';
+import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -152,6 +153,8 @@ function LoginPage(props: LoginPageProps) {
 
   const [ID, setID] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [idState, setIdState] = useState<StateOptions>('filled');
+  const [passwordState, setPasswordState] = useState<StateOptions>('filled');
   const [isChecked, setIsChecked] = useState(false);
   // const [isModalVisible, setIsModalVisible] = useState(false); // 고파스 연동 전 사용했던 모달
   const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken', 'accessTokenExpire']);
@@ -233,9 +236,12 @@ function LoginPage(props: LoginPageProps) {
             <Typography size="0.94vw">를 입력해주세요.</Typography>
             <AlertMessage>쿠플라이 아이디는 고파스 아이디입니다.</AlertMessage>
           </TextBox>
-          <IDField
+          <TextFieldBox
             placeholder="쿠플라이"
             value={ID}
+            setValue={setID}
+            state={idState}
+            setState={setIdState}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);
             }}
@@ -246,7 +252,7 @@ function LoginPage(props: LoginPageProps) {
                 }
               }
             }}
-            isFilled={ID !== ''}
+            // isFilled={ID !== ''}
           />
         </TextFieldWrapper>
         <TextFieldWrapper>
@@ -256,10 +262,13 @@ function LoginPage(props: LoginPageProps) {
             </Typography>
             <Typography size="0.94vw">를 입력해주세요.</Typography>
           </TextBox>
-          <PasswordField
+          <TextFieldBox
             type="password"
             placeholder="비밀번호"
             value={password}
+            setValue={setPassword}
+            state={passwordState}
+            setState={setPasswordState}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);
             }}
@@ -270,7 +279,7 @@ function LoginPage(props: LoginPageProps) {
                 }
               }
             }}
-            isFilled={password !== ''}
+            // isFilled={password !== ''}
           />
         </TextFieldWrapper>
         <TextBox>

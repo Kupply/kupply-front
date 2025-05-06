@@ -9,10 +9,13 @@ import Typography from '../../assets/Typography';
 import AlertMessage from '../../assets/toolTips/ToolTip01';
 import LoginModal from '../../components/login/LoginModal';
 import CTA01 from '../../assets/CTAs/CTA01';
+import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 
 export default function SyncPage0() {
   const [ID, setID] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [idState, setIdState] = useState<StateOptions>('filled');
+  const [passwordState, setPasswordState] = useState<StateOptions>('filled');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const navigate = useNavigate();
@@ -58,9 +61,12 @@ export default function SyncPage0() {
               <Typography size="0.94vw">를 입력해주세요.</Typography>
               <AlertMessage>기존 쿠플라이 아이디는 고려대학교 이메일 주소입니다.</AlertMessage>
             </TextBox>
-            <IDField
+            <TextFieldBox
               placeholder="kupply@korea.ac.kr"
               value={ID}
+              setValue={setID}
+              state={idState}
+              setState={setIdState}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setID(e.target.value);
               }}
@@ -71,7 +77,7 @@ export default function SyncPage0() {
                   }
                 }
               }}
-              isFilled={ID !== ''}
+              // isFilled={ID !== ''}
             />
           </TextFieldWrapper>
           <TextFieldWrapper>
@@ -81,10 +87,13 @@ export default function SyncPage0() {
               </Typography>
               <Typography size="0.94vw">를 입력해주세요.</Typography>
             </TextBox>
-            <PasswordField
+            <TextFieldBox
               type="password"
               placeholder="쿠플라이 비밀번호"
               value={password}
+              setValue={setPassword}
+              state={passwordState}
+              setState={setPasswordState}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPassword(e.target.value);
               }}
@@ -95,7 +104,7 @@ export default function SyncPage0() {
                   }
                 }
               }}
-              isFilled={password !== ''}
+              // isFilled={password !== ''}
             />
           </TextFieldWrapper>
         </ContentsWrapper>
