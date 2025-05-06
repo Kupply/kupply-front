@@ -4,84 +4,86 @@ import styled, { css } from 'styled-components';
 import CheckBox01 from '../../assets/checkBoxes/CheckBox01';
 import { MobileScroll } from '../../assets/scroll/MobileScroll';
 import { TermsText1, TermsText2 } from '../../components/signup/TermsText';
+import { TermsText } from '../../components/sync/TermsText';
 import Button04 from '../../assets/buttons/Button04';
 import Button03 from '../../assets/buttons/Button03';
 import { SignUpPageWrapper } from '../../components/signup/SignUpPageWrapper';
 import { majorCodeToNameMapping } from '../../../mappings/Mappings';
 
 interface IndividualChecks {
-    first: boolean;
-    second: boolean;
-    third: boolean;
-  }
+  first: boolean;
+  second: boolean;
+  third: boolean;
+}
 
- export function SignUp2Page() {
-
-    const [allChecked, setAllChecked] = useState(false);
-    const [allUIChecked, setAllUIChecked] = useState(false);
-    const [individualChecks, setIndividualChecks] = useState<IndividualChecks>({
+export function SignUp2Page() {
+  const [allChecked, setAllChecked] = useState(false);
+  const [allUIChecked, setAllUIChecked] = useState(false);
+  const [individualChecks, setIndividualChecks] = useState<IndividualChecks>({
     first: false,
     second: false,
-    third: false
-    });
-    const [isButtonActive, setIsButtonActive] = useState(false);
-    //const button = useRef<HTMLDivElement>(null);
-    const navigate = useNavigate();
+    third: false,
+  });
+  const [isButtonActive, setIsButtonActive] = useState(false);
+  //const button = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
-    const allStateAgreed = () => {
+  const allStateAgreed = () => {
     return Object.values(individualChecks).every((val) => val);
-    };
+  };
 
-    const handleAllCheckedClick = () => {
+  const handleAllCheckedClick = () => {
     const newState = !allChecked;
     setAllChecked(newState);
     setIndividualChecks({
-        first: newState,
-        second: newState,
-        third: newState
+      first: newState,
+      second: newState,
+      third: newState,
     });
-    };
+  };
 
-    const handleIndividualCheck = (check: keyof IndividualChecks) => {
+  const handleIndividualCheck = (check: keyof IndividualChecks) => {
     setIndividualChecks((prev) => {
-        const updatedChecks = {
+      const updatedChecks = {
         ...prev,
         [check]: !prev[check],
-        };
-        // Set allChecked based on the updated individual checks
-        setAllChecked(Object.values(updatedChecks).every(Boolean));
-        return updatedChecks;
+      };
+      // Set allChecked based on the updated individual checks
+      setAllChecked(Object.values(updatedChecks).every(Boolean));
+      return updatedChecks;
     });
-    };
+  };
 
-    useEffect(() => {
+  useEffect(() => {
     const isAllChecked = allStateAgreed();
     setIsButtonActive(individualChecks.first && individualChecks.second);
     setAllUIChecked(isAllChecked);
-    }, [individualChecks]);
+  }, [individualChecks]);
 
-    const handlePrev = () => {
+  const handlePrev = () => {
     navigate('/signUp4');
-    };
+  };
 
-const handleNext = async () => {
+  const handleNext = async () => {
     if (isButtonActive) {
-        sessionStorage.setItem('agreeTerms', 'true'); // 모든 약관에 동의할 경우 - signuppag3에서 확인용
-        navigate('/signup3');
+      sessionStorage.setItem('agreeTerms', 'true'); // 모든 약관에 동의할 경우 - signuppag3에서 확인용
+      navigate('/signup3');
     } else {
-    alert('모든 약관에 동의해주세요.');
+      alert('모든 약관에 동의해주세요.');
     }
   };
 
   useEffect(() => {
-  if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
-  const firstMajorCode = sessionStorage.getItem('firstMajorCode') || '';
-  const firstMajor = majorCodeToNameMapping[firstMajorCode];
-  sessionStorage.setItem('firstMajor', firstMajor);
+    if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
+    const firstMajorCode = sessionStorage.getItem('firstMajorCode') || '';
+    const firstMajor = majorCodeToNameMapping[firstMajorCode];
+    sessionStorage.setItem('firstMajor', firstMajor);
   }, []);
- 
-   return (
-<SignUpPageWrapper step={2} stepInfo="약관 읽고 서비스 이용하기">
+
+  const nickname = sessionStorage.getItem('nickname')!;
+
+  return (
+    <SignUpPageWrapper step={2} stepInfo="약관 읽고 서비스 이용하기">
       <ContentsList>
         <TextTitle>
           <CheckBox01
@@ -131,7 +133,7 @@ const handleNext = async () => {
           </CheckBox01>
           <TextOutBox>
             <MobileScroll height="30vw">
-              <TermsText1 />
+              <TermsText koreapasNickname={nickname} />
             </MobileScroll>
           </TextOutBox>
         </>
@@ -141,10 +143,10 @@ const handleNext = async () => {
         <Button03 state={allChecked ? 'default' : 'disabled'} onClick={handleNext} style={{ width: '74.418%' }} />
       </ButtonsWrapper>
     </SignUpPageWrapper>
-   );
- }
+  );
+}
 
- const TextOutBox = styled.div`
+const TextOutBox = styled.div`
   width: 91.11vw;
   height: 38.9vw;
   flex-shrink: 0;

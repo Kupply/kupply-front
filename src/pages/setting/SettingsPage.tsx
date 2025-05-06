@@ -15,6 +15,7 @@ import { TextButton03Settings, TextButton04 } from '../../assets/buttons/TextBut
 import Button03 from '../../assets/buttons/Button03';
 import Typography from '../../assets/Typography';
 import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
+import { TermsText } from '../../components/sync/TermsText';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
 import { GpaChangeModal } from '../../components/settings/GpaChangeModal';
@@ -663,14 +664,14 @@ const SettingsPage = () => {
             <div style={{ marginTop: '1.56vw' }}>
               <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
                 <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
-                  서비스 이용약관
+                  고파스 개인정보 처리방침
                 </Typography>
               </div>
             </div>
 
             <TextOutBox>
               <ScrollSmall isChecked={false}>
-                <TermsText1 />
+                <TermsText />
               </ScrollSmall>
             </TextOutBox>
           </>
