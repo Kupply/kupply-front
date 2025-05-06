@@ -61,43 +61,122 @@ type InfoState = {
 }
 
 // 이름, 비밀번호, 닉네임...
-export const userState = atomFamily<InfoState, string>({
-  key: "userState", 
-  default: (kind: string) => {
-    let infoState:StateOptions = 'default';
-    let info:string = '';
-    // if(kind === 'kuEmail') {
-    //   info = 'email';
-    //   infoState = 'filled';
-    // }
-    if (kind === 'firstMajor') {
-      info = 'firstMajor'; // sessionStorage에서 가져온 firstMajorCode를 다시 firstMajor로 저장 
-      infoState = 'filled';
-    }
-    return {
-      info: sessionStorage.getItem(info) || '',
-      infoState: infoState,
-      infoCheck: 'default'
-    }
-  }
+// export const userState = atomFamily<InfoState, string>({
+//   key: "userState", 
+//   default: (kind: string) => {
+//     let infoState:StateOptions = 'default';
+//     let info:string = '';
+//     if (kind === 'firstMajor') {
+//       info = 'firstMajor'; // sessionStorage에서 가져온 firstMajorCode를 다시 firstMajor로 저장 
+//       infoState = 'filled';
+//     }
+//     return {
+//       info: sessionStorage.getItem(info) || '',
+//       infoState: infoState,
+//       infoCheck: 'default'
+//     }
+//   }
+// });
+// 내부 저장용 atom
+export const rawUserState = atomFamily<InfoState, string>({
+  key: 'rawUserState',
+  default: {
+    info: '',
+    infoState: 'default',
+    infoCheck: 'default',
+  },
 });
 
-export const userSettingsState = atomFamily<InfoState, string>({
-  key: "userSettingsState",
-  default: (kind: string) => {
-    let infoState:StateOptions = 'default';
-    if(kind === 'name' || kind === 'studentId' || kind === 'nickname' || kind === 'kuEmail' || kind === 'loginedUser'){
+
+
+// selectorFamily: firstMajor일 경우에만 sessionStorage 값으로 override
+export const userState = selectorFamily<InfoState, string>({
+  key: 'userState',
+  get: (kind: string) => ({ get }) => {
+    if (kind === 'firstMajor') {
+      // ✅ firstMajor는 sessionStorage에서 가져온 값을 무조건 사용하고, 'filled'로 표시
+      const stored = sessionStorage.getItem('firstMajor') || '';
+      return {
+        info: stored,
+        infoState: 'filled',
+        infoCheck: 'default',
+      };
+    } else {
+      // ✅ 나머지 키들은 내부 atom에 저장된 값을 반환
+      return get(rawUserState(kind));
+    }
+  },
+  set: (kind: string) => ({ set }, newValue) => {
+    // ❌ firstMajor는 수정 불가
+    if (kind === 'firstMajor') return;
+
+    // ✅ 나머지 키들은 atom에 쓰기 허용
+    set(rawUserState(kind), newValue as InfoState);
+  },
+});
+
+// export const userSettingsState = atomFamily<InfoState, string>({
+//   key: "userSettingsState",
+//   default: (kind: string) => {
+//     let infoState:StateOptions = 'default';
+//     if(kind === 'name' || kind === 'studentId' || kind === 'nickname' || kind === 'kuEmail' || kind === 'loginedUser'){
+//       infoState = 'filled';
+//     }
+//     let infoCheck:StateOptions = 'default';
+//     if(kind === 'nickname')
+//       infoCheck = 'filled';
+//     return {
+//       info: localStorage.getItem(kind) || '',
+//       infoState: infoState,
+//       infoCheck: infoCheck
+//     };
+//   }
+// });
+
+// 1. 내부 저장 전용 atom
+export const rawUserSettingsState = atomFamily<InfoState, string>({
+  key: 'rawUserSettingsState',
+  default: {
+    info: '',
+    infoState: 'default',
+    infoCheck: 'default',
+  },
+});
+
+// 2. 초기화 + 읽기/쓰기 지원 selector
+export const userSettingsState = selectorFamily<InfoState, string>({
+  key: 'userSettingsState',
+  get: (kind: string) => ({ get }) => {
+    const storedValue = localStorage.getItem(kind) || '';
+
+    let infoState: StateOptions = 'default';
+    if (
+      kind === 'name' ||
+      kind === 'studentId' ||
+      kind === 'nickname' ||
+      kind === 'kuEmail' ||
+      kind === 'loginedUser'
+    ) {
       infoState = 'filled';
     }
-    let infoCheck:StateOptions = 'default';
-    if(kind === 'nickname')
-      infoCheck = 'filled';
+
+    let infoCheck: StateOptions = kind === 'nickname' ? 'filled' : 'default';
+
     return {
-      info: localStorage.getItem(kind) || '',
-      infoState: infoState,
-      infoCheck: infoCheck
+      info: storedValue,
+      infoState,
+      infoCheck,
     };
-  }
+  },
+
+  // 쓰기 지원
+  set: (kind: string) => ({ set }, newValue) => {
+    if (typeof newValue === 'object' && newValue !== null && 'info' in newValue) {
+      const val = newValue as InfoState;
+      localStorage.setItem(kind, val.info); // localStorage에도 반영
+      set(rawUserSettingsState(kind), val);  // atom에도 저장
+    }
+  },
 });
 
 type errorMessageType = {

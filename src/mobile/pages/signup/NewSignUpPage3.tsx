@@ -49,13 +49,13 @@ export default function SignUp3Page(){
             </div>
             <UserInput userInfoType="studentId" toNext={next}/>
         </ContentsWrapper>
-        <ContentsWrapper>
+        {/* <ContentsWrapper>
             <div>
             <Typography size="3.33vw" bold="700">본전공(1전공)</Typography>
             <Typography size="3.33vw" bold="400">을 입력해주세요.</Typography>
             </div>
             <UserInput userInfoType="firstMajor" toNext={next}/>
-        </ContentsWrapper>
+        </ContentsWrapper> */}
         </ContentsList>
         <ButtonsWrapper>
         <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>

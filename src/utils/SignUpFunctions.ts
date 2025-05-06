@@ -58,12 +58,14 @@ export const join = async (role: string) => {
   }
 };
 
-export const koreapasJoin = async (role: string, nickname: string) => {
+export const koreapasJoin = async (role: string, nickname: string, email: string) => {
   const userData: any = {
     koreapasUUID: sessionStorage.getItem('koreapasUUID'),
     name: sessionStorage.getItem('name'),
     studentId: Number(sessionStorage.getItem('studentId')),
     firstMajorCode: sessionStorage.getItem('firstMajorCode'),
+    campus: sessionStorage.getItem('firstMajorCampus'),
+    email,
     nickname,
     role,
   };
@@ -73,7 +75,6 @@ export const koreapasJoin = async (role: string, nickname: string) => {
       secondMajor: sessionStorage.getItem('secondMajor'),
       passSemester: sessionStorage.getItem('passSemester'),
       passGPA: parseFloat(sessionStorage.getItem('passGPA') || '0'),
-      passDescription: sessionStorage.getItem('passDescription'),
     });
   } else if (role === 'candidate') {
     Object.assign(userData, {
@@ -88,7 +89,7 @@ export const koreapasJoin = async (role: string, nickname: string) => {
     await client.post('/auth/koreapasJoin', userData);
   } catch (e) {
     console.error(e);
-    throw e;
+    throw e;  // 여기서 return이 아니라 throw 해야 try/catch에서 catch됨
   }
 };
 
@@ -136,7 +137,7 @@ export function useNewSignUp1Verification(){
 export function useSignUp2Verification() {
   const [name, setName] = useRecoilState(userState('name'));
   const [stdId, setStdId] = useRecoilState(userState('studentId'));
-  const [firstM, setFirstM] = useRecoilState(userState('firstMajor'));
+  // const [firstM, setFirstM] = useRecoilState(userState('firstMajor'));
   const [complete, setComplete] = useState(false);
   const { stdIdVerified } = useStudentIdVerification('signUp');
   const navigate = useNavigate();
@@ -153,12 +154,12 @@ export function useSignUp2Verification() {
   // name, stdId, firstMajor의 completed 여부
 
   useEffect(() => {
-    if (name.infoState === 'filled' && stdIdVerified && !!firstM.info && !complete) {
+    if (name.infoState === 'filled' && stdIdVerified  && !complete) {
       setComplete(true);
-    } else if (!(name.infoState === 'filled' && stdIdVerified && !!firstM.info) && complete) {
+    } else if (!(name.infoState === 'filled' && stdIdVerified) && complete) {
       setComplete(false);
     }
-  }, [name.infoState, stdIdVerified, firstM.info, complete]);
+  }, [name.infoState, stdIdVerified, complete]);
 
   return {
     complete,

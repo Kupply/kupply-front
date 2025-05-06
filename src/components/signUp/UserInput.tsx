@@ -1,10 +1,10 @@
 import TextFieldBox from '../../assets/OldTextFieldBox';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState, } from 'recoil';
 import { userSettingsState, userState } from '../../store/atom';
 import DropDown from '../../assets/dropdown/DropDown';
 import { majorAllList } from '../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
-import { errorMessageState } from '../../store/atom';
+import { errorMessageState, rawUserState } from '../../store/atom';
 import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
 import NewTextFieldBox from '../../assets/NewTextFieldBox';
 
@@ -108,6 +108,7 @@ export const UserInput: React.FC<UserInputProps> = ({
   const [firstMajor, setFirstMajor] = useRecoilState(
     locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'),
   );
+
 
   const errorMessage = useRecoilValue(errorMessageState);
 

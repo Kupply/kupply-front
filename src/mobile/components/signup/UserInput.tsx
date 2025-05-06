@@ -84,8 +84,8 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   hopeMajor2: '',
   secondMajor: '',
   kuEmail: '유효하지 않은 이메일 주소입니다',
-      koreapasID: '아이디 또는 비밀번호가 일치하지 않습니다',
-   koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다'
+  koreapasID: '아이디 또는 비밀번호가 일치하지 않습니다',
+  koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다'
 };
 
 

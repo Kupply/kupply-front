@@ -424,7 +424,12 @@ export const majorCodeToNameMapping: Record<string, string> = {
   "SJ00": "-해당학과없음",
 };
 
-
+export const nameToMajorCodeMapping: Record<string, string> = Object.entries(majorCodeToNameMapping)
+  .reduce((acc, [code, name]) => {
+    acc[name] = code;
+    return acc;
+  }, {} as Record<string, string>);
+  
 export const majorNameMappingBySID: Record<number, string> = {
   1000: '자유전공학부',
   1200: '경영학과',

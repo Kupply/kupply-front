@@ -41,10 +41,10 @@ import { SignUpPageWrapper } from "../../components/signUp/SignUpPageWrapper";
            <UserInputText userInfoType="studentId"/>
            <UserInput userInfoType="studentId" toNext={next}/>
          </ContentsWrapper>
-         <ContentsWrapper>
+         {/* <ContentsWrapper>
            <UserInputText userInfoType="firstMajor"/>
            <UserInput userInfoType="firstMajor" toNext={next}/>
-         </ContentsWrapper>
+         </ContentsWrapper> */}
        </ContentsList>
        <ButtonsWrapper>
          <Button04 onClick={handlePrev} style={{width:'25.582%'}}/>

@@ -16,6 +16,7 @@ import { majorCodeToNameMapping } from '../../mappings/Mappings';
    const [individualChecks, setIndividualChecks] = useState({
      first: false,
      second: false,
+     third: false
    });
    const [isButtonActive, setIsButtonActive] = useState(false);
    const [scrollActive, setActive] = useState(false);
@@ -38,11 +39,13 @@ import { majorCodeToNameMapping } from '../../mappings/Mappings';
        setIndividualChecks({
          first: true,
          second: true,
+         third: true
        });
      } else {
        setIndividualChecks({
          first: false,
          second: false,
+         third: false
        });
      }
      setAllChecked(isChecked);
@@ -118,6 +121,23 @@ import { majorCodeToNameMapping } from '../../mappings/Mappings';
          <TextOutBox>
            <ScrollSmall isChecked={scrollActive}>
              <TermsText2 />
+           </ScrollSmall>
+         </TextOutBox>
+         <div style={{ height: '2vw' }}></div>
+         <CheckBoxButton01
+           isChecked={individualChecks.third}
+           onCustomFunction={(newCheckedValue) =>
+             setIndividualChecks((prev) => ({
+               ...prev,
+               third: newCheckedValue,
+             }))
+           }
+         >
+           서비스 이용약관 동의 (필수)
+         </CheckBoxButton01>
+         <TextOutBox>
+           <ScrollSmall isChecked={scrollActive}>
+             <TermsText1 />
            </ScrollSmall>
          </TextOutBox>
          <ButtonsWrapper>

@@ -23,13 +23,14 @@ export function SignUp5Page(){
    const handleNext = async () => {
     try {
       const role = sessionStorage.getItem('role') || '';
-      await koreapasJoin(role, nickname.info);  // nickname is passed from input
-      // 이렇게 하고 안 넘어간거 같은데...
+      const res = await koreapasJoin(role, nickname.info, kuEmail.info);
+  
+      // 성공한 경우만 아래 실행
       setNext(true);
       sessionStorage.setItem('toComplete', 'true');
       navigate('/signupcomplete');
     } catch (e: any) {
-      alert(e?.message || '회원가입에 실패했습니다.');
+      alert(e?.response?.data?.message || e?.message || '회원가입에 실패했습니다.');
     }
   };
 

@@ -16,15 +16,15 @@ export function SignUp1Page() {
   const {complete, ID, pass} = useNewSignUp1Verification();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // 최초 로그인 후 sign up1을 건너뛰고 싶다는 거자나 
-    // 그러니까 로그인을 하려고 입력을 했는데 아직 회원은 아닌 경우 
-    const uuid = localStorage.getItem('koreapasUUID');
-    if (uuid) {
-      sessionStorage.setItem('koreapasUUID', uuid);
-      navigate('/signUp2');
-    }
-  }, []);
+  // useEffect(() => {
+  //   // 최초 로그인 후 sign up1을 건너뛰고 싶다는 거자나 
+  //   // 그러니까 로그인을 하려고 입력을 했는데 아직 회원은 아닌 경우 
+  //   const uuid = localStorage.getItem('koreapasUUID');
+  //   if (uuid) {
+  //     sessionStorage.setItem('koreapasUUID', uuid);
+  //     navigate('/signUp2');
+  //   }
+  // }, []);
 
   const handleSyncClick = () => {
     navigate('/sync0');
@@ -61,34 +61,21 @@ export function SignUp1Page() {
       // Step 2: UUID로 기존 가입 여부 확인
       const joinedRes = await axios.post(joinedUrl, { koreapasUUID });
       const alreadyJoined = joinedRes.data.data.alreadyJoined;
-  
+      console.log('AlreadyJoined?: ', alreadyJoined)
       if (alreadyJoined) {
         // ✅ 이미 가입한 유저 → 로그인 API 호출
+        alert('이미 가입된 사용자입니다. 자동으로 로그인됩니다!')
         const loginRes = await axios.post(loginUrl, {
           id: ID,
           password: pass,
           isRememberOn: false, // 또는 isChecked (checkbox 상태) 전달
         });
   
-        if (!loginRes.data.data.isKupply) {
-          // alert('쿠플라이 회원이 아니에요.\n고파스 아이디로 쿠플라이 서비스에 회원가입 해주세요.');
-          const kpData = loginRes.data.data.koreapasData;
-  
-          localStorage.setItem('isKupply', 'false');
-          localStorage.setItem('firstMajorCampus', kpData.firstMajorCampus);
-          localStorage.setItem('firstMajorCode', kpData.firstMajorCode);
-          localStorage.setItem('firstMajorName', kpData.firstMajorName);
-          localStorage.setItem('nickname', kpData.nickname);
-          localStorage.setItem('studentId', kpData.studentId);
-          localStorage.setItem('koreapasUUID', kpData.koreapasUUID);
-          navigate('/signup1'); // 약관 동의 페이지
-        } else {
-          localStorage.setItem('accessToken', loginRes.data.data.accessToken);
-          localStorage.setItem('refreshToken', loginRes.data.data.refreshToken);
-          localStorage.setItem('isLogin', 'true');
-          navigate('/');
-          window.location.reload();
-        }
+        localStorage.setItem('accessToken', loginRes.data.data.accessToken);
+        localStorage.setItem('refreshToken', loginRes.data.data.refreshToken);
+        localStorage.setItem('isLogin', 'true');
+        navigate('/');
+        window.location.reload();
       } else {
         // ❌ 신규 유저 → sign-up flow로
         navigate('/signUp2');
