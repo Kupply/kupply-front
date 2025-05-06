@@ -174,13 +174,13 @@ function LoginPage(props: LoginPageProps) {
         .then((res) => {
           if (!res.data.data.isKupply) {
             alert('쿠플라이 회원이 아니에요. \n고파스 아이디로 쿠플라이 서비스에 회원가입 해주세요.');
-            localStorage.setItem('isKupply', res.data.data.isKupply);
-            localStorage.setItem('firstMajorCampus', res.data.data.koreapasData.firstMajorCampus);
-            localStorage.setItem('firstMajorCode', res.data.data.koreapasData.firstMajorCode);
-            localStorage.setItem('firstMajorName', res.data.data.koreapasData.firstMajorName);
-            localStorage.setItem('nickname', res.data.data.koreapasData.nickname);
-            localStorage.setItem('studentId', res.data.data.koreapasData.studentId);
-            localStorage.setItem('koreapasUUID', res.data.data.koreapasData.koreapasUUID);
+            sessionStorage.setItem('isKupply', res.data.data.isKupply);
+            sessionStorage.setItem('firstMajorCampus', res.data.data.koreapasData.firstMajorCampus);
+            sessionStorage.setItem('firstMajorCode', res.data.data.koreapasData.firstMajorCode);
+            sessionStorage.setItem('firstMajorName', res.data.data.koreapasData.firstMajorName);
+            sessionStorage.setItem('nickname', res.data.data.koreapasData.nickname);
+            sessionStorage.setItem('studentId', res.data.data.koreapasData.studentId);
+            sessionStorage.setItem('koreapasUUID', res.data.data.koreapasData.koreapasUUID);
             navigate('/signup2'); // 약관 동의 페이지로
           } else {
             localStorage.setItem('accessToken', res.data.data.accessToken);
