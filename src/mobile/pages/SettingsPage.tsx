@@ -18,6 +18,7 @@ import TextAreaBox from '../assets/textarea/TextArea01';
 import SettingsModal from '../components/settings/SettingsModal';
 import { MobileScroll } from '../assets/scroll/MobileScroll';
 import { TermsText1, TermsText2 } from '../components/signup/TermsText';
+import { TermsText } from '../components/sync/TermsText';
 
 interface SettingsPageProps {
   selected: number;
@@ -600,12 +601,12 @@ export const MobileSettingsPage = () => {
           </TextOutBox>
           <TextBox>
             <Typography size="3.33vw" bold="700">
-              서비스 이용약관
+              고파스 개인정보 처리방침
             </Typography>
           </TextBox>
           <TextOutBox>
             <MobileScroll height="30vw">
-              <TermsText1 />
+              <TermsText />
             </MobileScroll>
           </TextOutBox>
         </>

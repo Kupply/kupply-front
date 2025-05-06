@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import CheckBox01 from '../../assets/checkBoxes/CheckBox01';
 import { MobileScroll } from '../../assets/scroll/MobileScroll';
-import { TermsText } from '../../../components/sync/TermsText';
+import { TermsText } from '../../components/sync/TermsText';
 import Button03 from '../../assets/buttons/Button03';
 import CTA01 from '../../assets/CTAs/CTA01';
 import Typography from '../../../assets/Typography';

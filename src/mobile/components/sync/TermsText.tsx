@@ -1,4 +1,4 @@
-import Typography from '../../assets/Typography';
+import Typography from '../../../assets/Typography';
 import styled from 'styled-components';
 
 type TermsTextProps = {
@@ -10,7 +10,7 @@ function TermsText({ koreapasNickname }: TermsTextProps) {
     <>
       {koreapasNickname && (
         <div style={{ textAlign: 'left', marginBottom: '0.521vw' }}>
-          <Typography size="1.25vw" bold="700">
+          <Typography size="3.33vw" bold="700">
             쿠플라이에서 {koreapasNickname} 님의 개인정보에 접근하는 것을 동의하십니까 ?
           </Typography>
         </div>
@@ -47,7 +47,7 @@ const ContentsText = styled.div`
   // mediumText
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 0.9375vw; // 18px
+  font-size: 2.78vw; // 18px
   font-style: normal;
   font-weight: 400;
   line-height: 122.836%;
@@ -58,7 +58,7 @@ const TitleText = styled.div`
   // bodyText
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 0.9375vw; //18px
+  font-size: 2.78vw; //18px
   font-style: normal;
   font-weight: 700;
   line-height: 122.836%; /* 22.11px */
@@ -68,7 +68,7 @@ const TitleText = styled.div`
 const StyledTable = styled.table`
   color: var(--Main-Black, #141414);
   font-family: Pretendard;
-  font-size: 0.625vw; //12px
+  font-size: 1.8vw; //12px
   font-style: normal;
   font-weight: 400;
   line-height: 123.54%;
