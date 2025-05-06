@@ -215,9 +215,16 @@ function LoginPage(props: LoginPageProps) {
           src="../../designImage/kupply/KupplyVer1.svg"
           style={{ marginTop: '6.2vw', marginBottom: '0.6vw' }}
         />
-        <Typography size="0.94vw" bold="500">
-          고파스 아이디로 이용하는 쿠플라이의 모든 서비스
-        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4vw' }}>
+          <img
+            src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+            alt="tigerEmoji"
+            style={{ height: '1.5vw' }}
+          />
+          <Typography size="0.94vw" bold="500">
+            고파스 아이디로 이용하는 쿠플라이의 모든 서비스
+          </Typography>
+        </div>
         <TextFieldWrapper>
           <TextBox style={{ height: '5.47vw' }}>
             <Typography size="0.94vw" bold="700">

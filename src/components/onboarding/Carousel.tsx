@@ -7,7 +7,7 @@ interface MainWrapperProps {
 }
 
 function Carousel() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(3);
   const totalPages = 4; // 3; 고파스 회원 전환 공지 배너 추가
   const [autoChange, setAutoChange] = useState(false);
 
@@ -21,14 +21,14 @@ function Carousel() {
     setAutoChange(false);
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setAutoChange(true);
-      setPage((prevPage) => (prevPage + 1) % totalPages);
-    }, 5000);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setAutoChange(true);
+  //     setPage((prevPage) => (prevPage + 1) % totalPages);
+  //   }, 5000);
 
-    return () => clearInterval(timer);
-  }, [page, autoChange]);
+  //   return () => clearInterval(timer);
+  // }, [page, autoChange]); // 고파스 회원 전환 공지 고정되도록 timer 임시 제거
 
   return (
     <MainWrapper page={page}>
@@ -110,9 +110,10 @@ function Carousel() {
             </Typography>
           </div>
         </CarouselWrapper>
-      ) :  // 고파스 회원 전환 배너 추가 (4번째 페이지) - 이미지 자체에 배너 버튼 포함
-      (<CarouselWrapper>
-      </CarouselWrapper>)}
+      ) : (
+        // 고파스 회원 전환 배너 추가 (4번째 페이지) - 이미지 자체에 배너 버튼 포함
+        <CarouselWrapper></CarouselWrapper>
+      )}
       <ArrowButton
         onClick={handleLeftClick}
         src="../designImage/carousel/CarouselLeftButton.png"
@@ -167,14 +168,13 @@ const MainWrapper = styled.div<MainWrapperProps>`
   background-position: center;
   background-image: ${(props) =>
     props.page === 0
-    ? `url('../designImage/carousel/Carousel1.png')`
-    : props.page === 1
-    ? `url('../designImage/carousel/Carousel2.png')`
-    : props.page === 2
-    ? `url('../designImage/carousel/Carousel3.png')`
-    : `url('../designImage/carousel/Carousel4.png')`};
+      ? `url('../designImage/carousel/Carousel1.png')`
+      : props.page === 1
+      ? `url('../designImage/carousel/Carousel2.png')`
+      : props.page === 2
+      ? `url('../designImage/carousel/Carousel3.png')`
+      : `url('../designImage/carousel/Carousel4.png')`};
 `;
-
 
 const ArrowButton = styled.img`
   width: 1.67vw;
