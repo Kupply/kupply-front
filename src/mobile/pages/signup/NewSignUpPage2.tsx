@@ -6,14 +6,13 @@ import { MobileScroll } from '../../assets/scroll/MobileScroll';
 import { TermsText1, TermsText2 } from '../../components/signup/TermsText';
 import Button04 from '../../assets/buttons/Button04';
 import Button03 from '../../assets/buttons/Button03';
-import CTA01 from '../../assets/CTAs/CTA01';
-import Typography from '../../../assets/Typography';
-import { join } from '../../../utils/SignUpFunctions';
 import { SignUpPageWrapper } from '../../components/signup/SignUpPageWrapper';
+import { majorCodeToNameMapping } from '../../../mappings/Mappings';
 
 interface IndividualChecks {
     first: boolean;
     second: boolean;
+    third: boolean;
   }
 
  export function SignUp2Page() {
@@ -23,6 +22,7 @@ interface IndividualChecks {
     const [individualChecks, setIndividualChecks] = useState<IndividualChecks>({
     first: false,
     second: false,
+    third: false
     });
     const [isButtonActive, setIsButtonActive] = useState(false);
     //const button = useRef<HTMLDivElement>(null);
@@ -38,6 +38,7 @@ interface IndividualChecks {
     setIndividualChecks({
         first: newState,
         second: newState,
+        third: newState
     });
     };
 
@@ -74,6 +75,9 @@ const handleNext = async () => {
 
   useEffect(() => {
   if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
+  const firstMajorCode = sessionStorage.getItem('firstMajorCode') || '';
+  const firstMajor = majorCodeToNameMapping[firstMajorCode];
+  sessionStorage.setItem('firstMajor', firstMajor);
   }, []);
  
    return (
@@ -114,6 +118,20 @@ const handleNext = async () => {
           <TextOutBox>
             <MobileScroll height="30vw">
               <TermsText2 />
+            </MobileScroll>
+          </TextOutBox>
+        </>
+        <>
+          <CheckBox01
+            state={individualChecks.third ? 'active' : 'default'}
+            style={{ fontSize: '3.33vw', fontWeight: '500' }}
+            onImageClick={() => handleIndividualCheck('third')}
+          >
+            개인정보 수집 및 이용 동의 (필수)
+          </CheckBox01>
+          <TextOutBox>
+            <MobileScroll height="30vw">
+              <TermsText1 />
             </MobileScroll>
           </TextOutBox>
         </>

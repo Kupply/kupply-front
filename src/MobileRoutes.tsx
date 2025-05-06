@@ -3,18 +3,11 @@ import LandingMobile from './mobile/pages/LandingMobile';
 import LoginPage from './mobile/pages/LoginPage';
 import OnboardingMobile from './mobile/pages/OnboardingMobile';
 import { MobileSettingsPage } from './mobile/pages/SettingsPage';
-import SignUpPage0 from './mobile/pages/signup/SignupPage0';
-//import SignUpPage1 from './mobile/pages/signup/SignupPage1';
-import { SignUp1Page } from './mobile/pages/signup/NewSignUpPage1'; // added this
+import { SignUp1Page } from './mobile/pages/signup/NewSignUpPage1'; 
 import { SignUp2Page } from './mobile/pages/signup/NewSignUpPage2';
 import SignUp3Page from './mobile/pages/signup/NewSignUpPage3';
 import { SignUp4Page, SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/NewSignUpPage4';
 import {SignUp5Complete, SignUp5Page} from './mobile/pages/signup/NewSignUpPage5';
-
-//import SignUpPage2 from './mobile/pages/signup/SignupPage2';
-//import SignUpPage3 from './mobile/pages/signup/SignupPage3';
-//import SignUpPage4, { SignUp4PageCandidate, SignUp4PagePasser } from './mobile/pages/signup/SignupPage4';
-//import SignUpPage5, { SignUp5Complete } from './mobile/pages/signup/SignupPage5';
 import SyncPage0 from './mobile/pages/sync/SyncPage0';
 import SyncPage1 from './mobile/pages/sync/SyncPage1';
 import SyncPage2, { Sync2Complete } from './mobile/pages/sync/SyncPage2';

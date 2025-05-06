@@ -401,17 +401,5 @@ const mockCards = [
     minPass: 4.12,
     semester: '23-2',
   },
-  {
-    korName: '정보대학 인공지능학과',
-    engName: 'Department of Artificial Intelligence',
-    majorEngShort: 'ai',
-    collegeEngShort: 'info',
-    filter: ['학과 전체보기', '자연계 캠퍼스'],
-    TO: 9,
-    passRate: 7,
-    avgPass: 4.23,
-    minPass: 4.12,
-    semester: '23-2',
-  },
 ];
 export default Cards;

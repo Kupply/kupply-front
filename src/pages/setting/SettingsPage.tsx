@@ -622,8 +622,8 @@ const SettingsPage = () => {
         <BodyContainer>
           <BodyTitle>약관 보기</BodyTitle>
           <BodyContent>다음은 고려대학교 이중전공 지원/합격 정보 통계 서비스 쿠플라이의 이용약관입니다.</BodyContent>
-          <ScrollLarge isChecked={false}>
-            <div style={{ marginTop: '0vw' }}>
+          <>
+            <div style={{ marginTop: '1vw' }}>
               <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
                 <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
                   서비스 이용약관
@@ -659,7 +659,21 @@ const SettingsPage = () => {
                 <TermsText2 />
               </ScrollSmall>
             </TextOutBox>
-          </ScrollLarge>
+
+            <div style={{ marginTop: '1.56vw' }}>
+              <div style={{ marginBottom: '1.146vw', display: 'flex', gap: '0.417vw', alignItems: 'center' }}>
+                <Typography size="1.0416vw" bold="700" style={{ textAlign: 'left' }}>
+                  서비스 이용약관
+                </Typography>
+              </div>
+            </div>
+
+            <TextOutBox>
+              <ScrollSmall isChecked={false}>
+                <TermsText1 />
+              </ScrollSmall>
+            </TextOutBox>
+          </>
         </BodyContainer>
       )}
     </Wrapper>

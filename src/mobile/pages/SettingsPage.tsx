@@ -598,6 +598,16 @@ export const MobileSettingsPage = () => {
               <TermsText2 />
             </MobileScroll>
           </TextOutBox>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">
+              서비스 이용약관
+            </Typography>
+          </TextBox>
+          <TextOutBox>
+            <MobileScroll height="30vw">
+              <TermsText1 />
+            </MobileScroll>
+          </TextOutBox>
         </>
       )}
     </SettingsWrapper>

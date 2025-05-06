@@ -6,8 +6,9 @@ import { majorAllList } from '../../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState } from '../../../store/atom';
 import { majorTargetList } from '../../../mappings/MajorTarget';
-import { inputState } from '../../pages/signup/SignupPage4';
 import { majorTargetList_sejong } from '../../../mappings/MajorTarget';
+
+export type inputState = 'incomplete' | 'error' | 'complete';
 
 export type UserTypeOptions =
   | 'name'
@@ -83,8 +84,8 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   hopeMajor2: '',
   secondMajor: '',
   kuEmail: '유효하지 않은 이메일 주소입니다',
-      koreapasID: '아이디 또는 비밀번호가 일치하지 않습니다',
-   koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다'
+  koreapasID: '아이디 또는 비밀번호가 일치하지 않습니다',
+  koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다'
 };
 
 
@@ -92,7 +93,6 @@ export const UserInput: React.FC<UserInputProps> = ({
   userInfoType,
   toNext,
   children,
-  userInfoTypeManual = undefined,
   locationUsed = 'signUp',
   onCustomFunction,
   valid,
@@ -101,8 +101,8 @@ export const UserInput: React.FC<UserInputProps> = ({
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(
     locationUsed === 'signUp'
-      ? userState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType)
-      : userSettingsState(userInfoTypeManual !== undefined ? userInfoTypeManual : userInfoType),
+      ? userState(userInfoType)
+      : userSettingsState(userInfoType),
   );
 
   const [firstMajor, setFirstMajor] = useRecoilState(userState('firstMajor'));
@@ -146,16 +146,14 @@ export const UserInput: React.FC<UserInputProps> = ({
   //console.log(userInfo);
   return (
     <>
-      {userInfoType === 'firstMajor' ||
+      {
       userInfoType === 'hopeMajor1' ||
       userInfoType === 'hopeMajor2' ||
       userInfoType === 'secondMajor' ? (
         <DropDown
           title={placeholderMapping[userInfoType]}
           optionList={
-            userInfoType === 'firstMajor'
-              ? majorAllList
-              : userInfoType === 'secondMajor'
+              userInfoType === 'secondMajor'
               ? optionList
               : userInfoType === 'hopeMajor1'
               ? optionList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor.info)
@@ -171,14 +169,12 @@ export const UserInput: React.FC<UserInputProps> = ({
           onChange={handleInputChange}
           state={userInfo.infoState}
           setState={
-            //userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
-            (locationUsed === 'settings' && userInfoType === 'studentId')
+            ((locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor')
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, infoState: s }))
           }
           setValue={
-            //userInfoTypeManual === 'kuEmail' || (locationUsed === 'settings' && userInfoType === 'studentId')
-            (locationUsed === 'settings' && userInfoType === 'studentId')
+            ((locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor')
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, info: s }))
           }

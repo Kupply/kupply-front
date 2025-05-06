@@ -56,7 +56,7 @@ export default function LoginPage(props: LoginPageProps) {
             localStorage.setItem('nickname', res.data.data.koreapasData.nickname);
             localStorage.setItem('studentId', res.data.data.koreapasData.studentId);
             localStorage.setItem('koreapasUUID', res.data.data.koreapasData.koreapasUUID);
-            navigate('/signup1'); // 약관 동의 페이지로
+            navigate('/signup2'); // 약관 동의 페이지로
           } else {
             localStorage.setItem('accessToken', res.data.data.accessToken);
             localStorage.setItem('refreshToken', res.data.data.refreshToken);

@@ -7,9 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
  import { TermsText1, TermsText2 } from '../../components/signUp/TermsText';
  import Button04 from '../../assets/buttons/Button04';
  import Button03 from '../../assets/buttons/Button03';
- import CTA01 from '../../assets/CTAs/CTA01';
- import Typography from '../../assets/Typography';
- import { join } from '../../utils/SignUpFunctions';
+import { majorCodeToNameMapping } from '../../mappings/Mappings';
  
  // 거의 완전히 수정해야할 것으로 보임 
  export function SignUp2Page() {
@@ -18,6 +16,7 @@ import React, { useState, useEffect, useRef } from 'react';
    const [individualChecks, setIndividualChecks] = useState({
      first: false,
      second: false,
+     third: false
    });
    const [isButtonActive, setIsButtonActive] = useState(false);
    const [scrollActive, setActive] = useState(false);
@@ -40,11 +39,13 @@ import React, { useState, useEffect, useRef } from 'react';
        setIndividualChecks({
          first: true,
          second: true,
+         third: true
        });
      } else {
        setIndividualChecks({
          first: false,
          second: false,
+         third: false
        });
      }
      setAllChecked(isChecked);
@@ -68,6 +69,9 @@ import React, { useState, useEffect, useRef } from 'react';
 
    useEffect(() => {
     if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
+    const firstMajorCode = sessionStorage.getItem('firstMajorCode') || '';
+    const firstMajor = majorCodeToNameMapping[firstMajorCode];
+    sessionStorage.setItem('firstMajor', firstMajor);
    }, []);
  
    return (
@@ -117,6 +121,23 @@ import React, { useState, useEffect, useRef } from 'react';
          <TextOutBox>
            <ScrollSmall isChecked={scrollActive}>
              <TermsText2 />
+           </ScrollSmall>
+         </TextOutBox>
+         <div style={{ height: '2vw' }}></div>
+         <CheckBoxButton01
+           isChecked={individualChecks.third}
+           onCustomFunction={(newCheckedValue) =>
+             setIndividualChecks((prev) => ({
+               ...prev,
+               third: newCheckedValue,
+             }))
+           }
+         >
+           서비스 이용약관 동의 (필수)
+         </CheckBoxButton01>
+         <TextOutBox>
+           <ScrollSmall isChecked={scrollActive}>
+             <TermsText1 />
            </ScrollSmall>
          </TextOutBox>
          <ButtonsWrapper>

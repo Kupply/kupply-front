@@ -7,7 +7,7 @@ import { useNavigate, useRouteError } from 'react-router-dom';
 import { api_url } from '../../utils/HttpClient';
 import TextAreaBox from '../../assets/TextArea';
 import Typography from '../../assets/Typography';
-import { inputState } from '../../pages/signUp/SignUp4Page';
+import { inputState } from './UserInput';
 import {
   nextButtonState,
   verificationCodeState,
@@ -237,8 +237,8 @@ export const SemesterVerification: React.FC<GpaSemesterVerificationProps> = ({
 
       // 학기가 1, 2가 아니면 안되고 바라는 학기가 24보다 작으면 안된다
       if (!(num3 === '1' || num3 === '2') || (semesterYear < 24 && userType === 'candidate')) setState?.('error');
-      // 통과한 사람은 학기가 1, 2가 아니면 안되고 24이후에 통과한 사람이면 안되지
-      else if ((!(num3 === '1' || num3 === '2') || semesterYear >= 24) && userType === 'passer') {
+      // 통과한 사람은 학기가 1, 2가 아니면 안돼
+      else if ((!(num3 === '1' || num3 === '2') || semesterYear >= 25) && userType === 'passer') {
         setState?.('error');
       }
     }
