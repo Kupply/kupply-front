@@ -15,7 +15,6 @@ export interface CardsProps {
   searchWord: string;
 }
 
-
 const Cards = ({ clicked, searchWord }: CardsProps) => {
   const [cards, setCards] = useState(mockCards);
   const [sortCriterion, setSortCriterion] = useState('가나다순');
@@ -44,9 +43,9 @@ const Cards = ({ clicked, searchWord }: CardsProps) => {
               majorEngShort: c.majorEngShort,
               collegeEngShort: c.collegeEngShort,
               filter: c.filter,
-              TO: recruit[shortKorName][prevSemester],
+              TO: res.recruitNum,
               semester: res.semester,
-              avgPass: res.passNum === 0 ? 0 : +(res.avg / res.passNum).toFixed(2),
+              avgPass: res.passNum === 0 ? 0 : +res.avg.toFixed(2),
               minPass: res.passNum === 0 ? 0 : res.min,
               passRate: res.applyNum === 0 ? -1 : +((res.passNum / res.applyNum) * 100).toFixed(2),
             };
