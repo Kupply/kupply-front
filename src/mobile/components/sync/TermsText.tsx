@@ -11,7 +11,7 @@ function TermsText({ koreapasNickname }: TermsTextProps) {
       {koreapasNickname && (
         <div style={{ textAlign: 'left', marginBottom: '0.521vw' }}>
           <Typography size="3.33vw" bold="700">
-            쿠플라이에서 {koreapasNickname} 님의 개인정보에 접근하는 것을 동의하십니까 ?
+            쿠플라이에서 {koreapasNickname}님의 개인정보에 접근하는 것을 동의하십니까 ?
           </Typography>
         </div>
       )}
