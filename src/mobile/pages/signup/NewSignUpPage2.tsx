@@ -61,7 +61,7 @@ export function SignUp2Page() {
   }, [individualChecks]);
 
   const handlePrev = () => {
-    navigate('/signUp4');
+    navigate('/signUp1');
   };
 
   const handleNext = async () => {
