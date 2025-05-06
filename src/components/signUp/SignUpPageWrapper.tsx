@@ -18,27 +18,27 @@ export const SignUpPageWrapper: React.FC<SignUpPageWrapperProps> = ({ step, step
   return (
     <Wrapper>
       <TitleWrapper>
-        {currentStep !== 2 ? (
+        {currentStep !== 5 ? (
           <>
             <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
               환영합니다!
             </Typography>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4vw', marginTop: '0.5vw' }}>
-               <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8' }}>
-                 쿠플라이는
-               </Typography>
-               <img
-                 src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
-                 alt="tigerEmoji"
-                 style={{ height: '1.5vw' }} // adjust size as needed
-               />
-               <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
-                 고파스 아이디/비밀번호
-               </Typography>
-               <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8' }}>
-                 로 서비스 이용이 가능합니다.
-               </Typography>
-             </div>
+              <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8' }}>
+                쿠플라이는
+              </Typography>
+              <img
+                src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+                alt="tigerEmoji"
+                style={{ height: '1.5vw' }} // adjust size as needed
+              />
+              <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
+                고파스 아이디/비밀번호
+              </Typography>
+              <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8' }}>
+                로 서비스 이용이 가능합니다.
+              </Typography>
+            </div>
           </>
         ) : (
           <>
@@ -46,7 +46,7 @@ export const SignUpPageWrapper: React.FC<SignUpPageWrapperProps> = ({ step, step
               거의 다왔습니다!
             </Typography>
             <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
-              약관을 확인하고 쿠플라이의 다양한 서비스를 이용하세요.
+              마지막으로 정보를 입력하고 쿠플라이의 다양한 서비스를 이용하세요.
             </Typography>
           </>
         )}
