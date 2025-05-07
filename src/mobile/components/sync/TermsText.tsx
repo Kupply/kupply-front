@@ -11,10 +11,11 @@ function TermsText({ koreapasNickname }: TermsTextProps) {
       {koreapasNickname && (
         <div style={{ textAlign: 'left', marginBottom: '0.521vw' }}>
           <Typography size="3.33vw" bold="700">
-            쿠플라이에서 {koreapasNickname}님의 개인정보에 접근하는 것을 동의하십니까 ?
+            쿠플라이에서 '{koreapasNickname}'님의 개인정보에 접근하는 것을 동의하십니까 ?
           </Typography>
         </div>
       )}
+      <br />
       <ContentsText>
         제공된 정보는 이용자 식별, 계정 연동 및 CS 등을 위해 서비스 이용기간 동안 활용/보관됩니다. <br />
         <br />
@@ -36,7 +37,7 @@ function TermsText({ koreapasNickname }: TermsTextProps) {
       <ContentsText>
         동의 후에는 해당 서비스의 이용약관 및 개인정보처리방침에 따라 정보가 관리됩니다. <br />
         <br />
-        * 로그인이 사용되는 고파스 아이디와 비밀번호는 쿠플라이에서 수집하지 않습니다. <br />
+        * 로그인에 사용되는 고파스 아이디와 비밀번호는 쿠플라이에서 수집하지 않습니다. <br />
       </ContentsText>
     </>
   );

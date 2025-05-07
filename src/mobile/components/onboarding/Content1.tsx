@@ -59,7 +59,7 @@ function Content1() {
             <br />
             이중전공 모의지원 현황을 확인해보세요
           </Typography>
-          <CTA02 onClick={() => navigate('/signup1')}>회원가입하러 가기</CTA02>
+          <CTA02 onClick={() => navigate('/login')}>로그인하러 가기</CTA02>
         </BlurBox>
       ) : isDateInRange ? (
         // 모의지원 기간 내

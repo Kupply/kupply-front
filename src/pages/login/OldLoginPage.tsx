@@ -237,7 +237,7 @@ function LoginPage(props: LoginPageProps) {
             <AlertMessage>쿠플라이 아이디는 고파스 아이디입니다.</AlertMessage>
           </TextBox>
           <TextFieldBox
-            placeholder="쿠플라이"
+            placeholder="고파스 아이디"
             value={ID}
             setValue={setID}
             state={idState}
@@ -264,7 +264,7 @@ function LoginPage(props: LoginPageProps) {
           </TextBox>
           <TextFieldBox
             type="password"
-            placeholder="비밀번호"
+            placeholder="고파스 비밀번호"
             value={password}
             setValue={setPassword}
             state={passwordState}
