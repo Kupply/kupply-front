@@ -86,4 +86,4 @@ jobs:
       - name: Run Docker (Development)
         run: |
           docker stop ${{env.DEV_DOCKER_CONTAINER}} && docker rm ${{env.DEV_DOCKER_CONTAINER}} && docker rmi ${{env.DOCKER_IMAGE}}:dev
-          docker run --env-file ./dev.env -d -p 3001:3001--name ${{env.DEV_DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:dev
+          docker run --env-file ./dev.env -d -p 3001:3001 --name ${{env.DEV_DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:dev
