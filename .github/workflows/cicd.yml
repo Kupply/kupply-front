@@ -59,16 +59,16 @@ jobs:
     steps:
       - name: setup .env
         run: |
-          echo "REACT_APP_GOOGLE_ANALYTICS=${{ secrets.REACT_APP_GOOGLE_ANALYTICS }}" >> .env
-          echo "REACT_APP_PHASE=prod" >> .env
-          cat .env
+          echo "REACT_APP_GOOGLE_ANALYTICS=${{ secrets.REACT_APP_GOOGLE_ANALYTICS }}" >> prod.env
+          echo "REACT_APP_PHASE=prod" >> prod.env
+          cat prod.env
       - name: Docker login to GHCR
         run: |
           echo ${{ secrets.GHCR_ACCESS_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Run Docker (Production)
         run: |
           docker stop ${{env.DOCKER_CONTAINER}} && docker rm ${{env.DOCKER_CONTAINER}} && docker rmi ${{env.DOCKER_IMAGE}}:latest
-          docker run --env-file ./.env -d -p 3000:3000 --name ${{env.DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:latest
+          docker run --env-file ./prod.env -d -p 3000:3000 --name ${{env.DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:latest
 
   deploy-dev:
     if: github.ref == 'refs/heads/develop'
@@ -77,13 +77,13 @@ jobs:
     steps:
       - name: setup .env
         run: |
-          echo "PORT=3001" >> .env
-          echo "REACT_APP_PHASE=dev" >> .env
-          cat .env
+          echo "PORT=3001" >> dev.env
+          echo "REACT_APP_PHASE=dev" >> dev.env
+          cat dev.env
       - name: Docker login to GHCR
         run: |
           echo ${{ secrets.GHCR_ACCESS_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Run Docker (Development)
         run: |
           docker stop ${{env.DEV_DOCKER_CONTAINER}} && docker rm ${{env.DEV_DOCKER_CONTAINER}} && docker rmi ${{env.DOCKER_IMAGE}}:dev
-          docker run --env-file ./.env -d --name ${{env.DEV_DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:dev
+          docker run --env-file ./dev.env -d -p 3001:3001--name ${{env.DEV_DOCKER_CONTAINER}} --network host --restart always ${{env.DOCKER_IMAGE}}:dev
