@@ -96,7 +96,7 @@ export default function SyncPage1() {
             setValue={setID}
             state={IDState}
             value={ID}
-            placeholder="쿠플라이"
+            placeholder="고파스 아이디"
             isCheckDuplicated={false}
           />
         </ContentsWrapper>
@@ -115,7 +115,7 @@ export default function SyncPage1() {
             setValue={setPassword}
             state={passwordState}
             value={password}
-            placeholder="비밀번호"
+            placeholder="고파스 비밀번호"
             type="password"
           />
         </ContentsWrapper>

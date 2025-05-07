@@ -20,6 +20,7 @@ interface LoginAlertLargeProps {
 function LoginAlertMobileLarge01({ isOpenModal, setOpenModal, onClickModal, sendEmail }: LoginAlertLargeProps) {
   const [email, setEmail] = useState<string>('');
   const [emailState, setEmailState] = useState<StateOptions>('default');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <ModalLarge onClickToggleModal={onClickModal}>
@@ -67,11 +68,17 @@ function LoginAlertMobileLarge01({ isOpenModal, setOpenModal, onClickModal, send
             const IDPattern = /.+@korea\.ac\.kr$/;
             if (IDPattern.test(email)) {
               setEmail('');
-              await sendEmail(email);
+              setIsSubmitting(true);
+              try {
+                await sendEmail(email);
+              } finally {
+                setIsSubmitting(false);
+              }
             } else {
               alert('형식에 맞지 않는 이메일 주소입니다.');
             }
           }}
+          state={email !== '' ? (isSubmitting ? 'disabled' : 'default') : 'disabled'}
           style={{ width: '81.667vw', height: '11.667vw', padding: '0px 9.44vw' }}
         >
           제출하기

@@ -120,7 +120,7 @@ export default function LoginPage(props: LoginPageProps) {
             </Typography>
           </TextBox>
           <Input01
-            placeholder={'쿠플라이'}
+            placeholder={'고파스 아이디'}
             helpMessage={'쿠플라이 아이디는 고파스 아이디입니다.'}
             errorMessage={''}
             value={ID}
@@ -139,7 +139,7 @@ export default function LoginPage(props: LoginPageProps) {
             </Typography>
           </TextBox>
           <Input01
-            placeholder={'비밀번호'}
+            placeholder={'고파스 비밀번호'}
             errorMessage={''}
             value={password}
             setValue={setPassword}
