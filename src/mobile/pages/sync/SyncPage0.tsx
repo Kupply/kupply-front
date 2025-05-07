@@ -48,7 +48,7 @@ export default function SyncPage0() {
     setIsModalVisible(!isModalVisible);
   };
 
-  const forgotPassword = async () => {
+  const forgotPassword = async (ID: string) => {
     try {
       const url = `${api_url}/auth/forgotPassword`;
       await axios.post(url, { userEmail: ID });
@@ -139,6 +139,7 @@ export default function SyncPage0() {
         </SubContent>
         <ButtonsWrapper>
           <Button05
+            value={ID}
             state={IDState === 'filled' ? 'pressed' : 'default'}
             onClick={handleButtonClick}
             style={{ width: '100%' }}
