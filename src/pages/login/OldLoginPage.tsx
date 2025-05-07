@@ -117,8 +117,8 @@ const LinkBox = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.78vw;
-  margin-top: 4.11vw;
-  margin-bottom: 4.53vw;
+  margin-top: 3.81vw;
+  margin-bottom: 4.03vw;
 `;
 
 const Link = styled.button`
@@ -298,11 +298,18 @@ function LoginPage(props: LoginPageProps) {
             <IconButton04 />
             <Link onClick={handleForgetClick}>고파스 아이디/비밀번호 찾기</Link>
           </div>
-          <Link onClick={handleSyncClick}>쿠플라이의 기존 회원이신가요?</Link>
+          {/* <Link onClick={handleSyncClick}>쿠플라이의 기존 회원이신가요?</Link> */}
           <Link onClick={handleJoinClick}>고파스 아이디로 회원가입</Link>
         </LinkBox>
-        <CTA01 state={ID != '' && password !== '' ? 'default' : 'disabled'} onClick={onLoginClick}>
+        <CTA01
+          state={ID != '' && password !== '' ? 'default' : 'disabled'}
+          onClick={onLoginClick}
+          style={{ marginBottom: '1vw' }}
+        >
           로그인
+        </CTA01>
+        <CTA01 state={'default'} onClick={handleSyncClick}>
+          쿠플라이의 기존 회원이신가요?
         </CTA01>
       </LoginBox>
       {/* {isModalVisible && <LoginModal />} */}
