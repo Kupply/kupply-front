@@ -7,9 +7,9 @@ import DropDown from '../../../assets/dropdown/DropDown';
 import TextArea from '../../../assets/TextArea';
 import AlertIconExclamation from '../../../assets/icons/AlertIconExclamation';
 import ToolTip04 from '../../../assets/toolTips/ToolTip04';
-import { majorAllList } from '../../../common/MajorAll';
-import { majorTargetList } from '../../../common/MajorTarget';
-import client from '../../../utils/HttpClient';
+import { majorAllList } from '../../../mappings/MajorAll';
+import { majorTargetList, majorTargetList_sejong } from '../../../mappings/MajorTarget';
+import { client } from '../../../utils/HttpClient';
 import { useNavigate } from 'react-router-dom';
 import Icon02 from '../../../assets/icons/Icon02';
 import Button01 from '../../../assets/buttons/Button01';
@@ -68,6 +68,8 @@ export default function EditModal(props: ModalProps) {
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
+  const [campus, setCampus] = useState<string>(localStorage.getItem('campus') || '');
+
   const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
   const originNickname = useRef<string>(localStorage.getItem('nickname'));
@@ -82,17 +84,7 @@ export default function EditModal(props: ModalProps) {
 
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
 
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
   const navigate = useNavigate();
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  };
 
   useEffect(() => {
     if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
@@ -127,9 +119,7 @@ export default function EditModal(props: ModalProps) {
       const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
       const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-      
       updateData = { ...updateData, newCurGPA: newGpa };
-      
     }
     if (originUserProfilePic.current !== userProfilePic) {
       updateData = { ...updateData, newProfilePic: userProfilePic };
@@ -149,7 +139,12 @@ export default function EditModal(props: ModalProps) {
 
   // 고려대학교 전체 학과 리스트
   const majorAll = majorAllList;
-  const majorTarget = [...majorTargetList];
+  let majorTarget;
+  if (campus === 'S') {
+    majorTarget = [...majorTargetList_sejong];
+  } else {
+    majorTarget = [...majorTargetList];
+  }
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   const [currentModal, setCurrentModal] = useRecoilState(editModalState);

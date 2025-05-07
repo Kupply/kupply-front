@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
 import Button05 from '../../assets/buttons/Button05';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { useRecoilValue } from 'recoil';
 import { userSettingsState } from '../../store/atom';
 

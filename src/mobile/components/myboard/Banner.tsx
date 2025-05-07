@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Banner05 from '../../assets/banners/Banner05';
-import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
-import { collegeNameMappingByEng as collegeNameMapping, majorNameMapping } from '../../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../../mappings/MajorTypes';
 
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   korName: string;

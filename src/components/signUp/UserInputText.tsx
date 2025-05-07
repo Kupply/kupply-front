@@ -13,6 +13,8 @@ const userTypeMapping: Record<UserTypeOptions, string> = {
   hopeMajor2: '이중전공',
   secondMajor: '이중전공',
   kuEmail: '고려대학교 이메일을',
+  koreapasID: '고파스 아이디를',
+   koreapasPass: '고파스 비밀번호를'
 };
 
 interface UserInputTextProps {

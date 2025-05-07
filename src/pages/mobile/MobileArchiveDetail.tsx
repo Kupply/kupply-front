@@ -8,15 +8,15 @@ import { Card0301, Card0302, Card0303 } from '../../mobile/assets/cards/Card03';
 import Card05 from '../../mobile/assets/cards/Card05';
 import Banner01 from '../../mobile/assets/banners/Banner01';
 import { DBkeywords } from '../../common/Keyword';
-import { recruit } from '../../common/Recruiting';
-import { MajorOptionsShortEng as MajorOptions } from '../../types/MajorTypes';
-import client from '../../utils/HttpClient';
+import { recruit } from '../../mappings/Recruiting';
+import { MajorOptionsShortEng as MajorOptions } from '../../mappings/MajorTypes';
+import { client } from '../../utils/HttpClient';
 import {
   collegeNameMappingByEng as collegeNameMapping,
   semesterAPIMapping as semesterForAPI,
   semesterMapping,
   majorNameMapping,
-} from '../../utils/Mappings';
+} from '../../mappings/Mappings';
 import MobileHeader from '../../mobile/assets/base/Header';
 import MobileFooter from '../../mobile/assets/base/Footer';
 
@@ -29,50 +29,6 @@ import MobileFooter from '../../mobile/assets/base/Footer';
 
 const MobileArchiveDetailPage = () => {
   const navigate = useNavigate();
-
-  const params = useParams();
-  const major =
-    params.majorName === 'business'
-      ? '경영학과'
-      : params.majorName === 'economics'
-      ? '경제학과'
-      : params.majorName === 'mechanical'
-      ? '기계공학부'
-      : params.majorName === 'datasci'
-      ? '데이터과학과'
-      : params.majorName === 'media'
-      ? '미디어학부'
-      : params.majorName === 'datasci'
-      ? '데이터과학과'
-      : params.majorName === 'industrial'
-      ? '산업경영공학부'
-      : params.majorName === 'bioeng'
-      ? '생명공학부'
-      : params.majorName === 'lifesci'
-      ? '생명과학부'
-      : params.majorName === 'mathematics'
-      ? '수학과'
-      : params.majorName === 'smartsec'
-      ? '스마트보안학부'
-      : params.majorName === 'foodecon'
-      ? '식품자원경제학과'
-      : params.majorName === 'materials'
-      ? '신소재공학부'
-      : params.majorName === 'electrical'
-      ? '전기전자공학부'
-      : params.majorName === 'political'
-      ? '정치외교학과'
-      : params.majorName === 'computer'
-      ? '컴퓨터학과'
-      : params.majorName === 'statistics'
-      ? '통계학과'
-      : params.majorName === 'psychology'
-      ? '심리학부'
-      : params.majorName === 'pubadmin'
-      ? '행정학과'
-      : params.majorName === 'chembio'
-      ? '화공생명공학과'
-      : '화학과';
 
   const handlePrev = () => {
     navigate('/archive');
@@ -91,7 +47,7 @@ const MobileArchiveDetailPage = () => {
   const [numOfPassed, setNumOfPassed] = useState<number>(0);
 
   const [lineData, setLineData] = useState<LineData>(tmpRandomData);
-  const [meanGpa, setMeanGpa] = useState<Data>(tmpMeanGpa);
+  const [avgGpa, setAvgGpa] = useState<Data>(tmpMeanGpa);
   const [medianGpa, setMedianGpa] = useState<Data>(tmpMedianGpa);
   const [modeGpa, setModeGpa] = useState<Data>(tmpModeGpa);
   const [minGpa, setMinGpa] = useState<Data>(tmpMinGpa);
@@ -100,20 +56,28 @@ const MobileArchiveDetailPage = () => {
     const fetchInitialData = async () => {
       try {
         const APIresponse = await client.get(`/pastData/${majorName}/all`);
-        const data = APIresponse.data.pastData;
+        if (APIresponse) {
+          const { metadata, passedData } = APIresponse.data.pastData;
 
-        if (data.passedData.passedGPACountArray.length > 0) {
-          const selectionNum = recruit[majorKoreanName]['all'] || 0;
-
-          setEnoughData(true);
-          setNumOfApplication(data.overallData.numberOfData);
-          setNumOfSelection(selectionNum);
-          setNumOfPassed(data.passedData.passedNumberOfData);
-          setLineData(data.passedData.passedGPACountArray);
-          setMeanGpa(data.passedData.passedMeanGPAData);
-          setMedianGpa(data.passedData.passedMedianGPAData);
-          setModeGpa(data.passedData.passedModeGPAData);
-          setMinGpa(data.passedData.passedMinimumGPAData);
+          setNumOfSelection(metadata.recruitNumber);
+          setNumOfApplication(metadata.appliedNumber);
+          setNumOfPassed(metadata.passedNumber);
+          if (passedData.length > 0) {
+            setEnoughData(true);
+            setAvgGpa(metadata.passedAvgGPAData);
+            setMedianGpa(metadata.passedMedianGPAData);
+            setModeGpa(metadata.passedModeGPAData);
+            setMinGpa(metadata.passedMinimumGPAData);
+            setLineData(passedData);
+          } else {
+            // 데이터가 없을 때, 블러 뒤에 띄울 임시 데이터
+            setEnoughData(false);
+            setAvgGpa(tmpMeanGpa);
+            setMedianGpa(tmpMedianGpa);
+            setModeGpa(tmpModeGpa);
+            setMinGpa(tmpMinGpa);
+            setLineData(tmpRandomData);
+          }
         }
       } catch (err) {
         console.log(err);
@@ -129,30 +93,30 @@ const MobileArchiveDetailPage = () => {
         let semester;
         if (sortCriterion === '모든 학기 누적') semester = 'all';
         else semester = sortCriterion.slice(0, -1);
-        const selectionNum = recruit[majorKoreanName][semester] || 0;
 
         const APIresponse = await client.get(`/pastData/${majorName}/${semester}`);
-        const data = APIresponse.data.pastData;
+        if (APIresponse) {
+          const { metadata, passedData } = APIresponse.data.pastData;
 
-        setEnoughData(true);
-        setNumOfApplication(data.overallData.numberOfData);
-        setNumOfSelection(selectionNum);
-        setNumOfPassed(data.passedData.passedNumberOfData);
-        setLineData(data.passedData.passedGPACountArray);
-        setMeanGpa(data.passedData.passedMeanGPAData);
-        setMedianGpa(data.passedData.passedMedianGPAData);
-        setModeGpa(data.passedData.passedModeGPAData);
-        setMinGpa(data.passedData.passedMinimumGPAData);
-
-        if (data.passedData.passedGPACountArray.length > 0) {
-          setEnoughData(true);
-        } else {
-          setEnoughData(false);
-          setLineData(tmpRandomData);
-          setMeanGpa(tmpMeanGpa);
-          setMedianGpa(tmpMedianGpa);
-          setModeGpa(tmpModeGpa);
-          setMinGpa(tmpMinGpa);
+          setNumOfSelection(metadata.recruitNumber);
+          setNumOfApplication(metadata.appliedNumber);
+          setNumOfPassed(metadata.passedNumber);
+          if (passedData.length > 0) {
+            setEnoughData(true);
+            setAvgGpa(metadata.passedAvgGPAData);
+            setMedianGpa(metadata.passedMedianGPAData);
+            setModeGpa(metadata.passedModeGPAData);
+            setMinGpa(metadata.passedMinimumGPAData);
+            setLineData(passedData);
+          } else {
+            // 데이터가 없을 때, 블러 뒤에 띄울 임시 데이터
+            setEnoughData(false);
+            setAvgGpa(tmpMeanGpa);
+            setMedianGpa(tmpMedianGpa);
+            setModeGpa(tmpModeGpa);
+            setMinGpa(tmpMinGpa);
+            setLineData(tmpRandomData);
+          }
         }
       } catch (err) {
         console.log(err);
@@ -168,7 +132,7 @@ const MobileArchiveDetailPage = () => {
   return (
     <MobilePageWrapper style={{ marginTop: '23.33vw' }}>
       <MobileHeader logined={isLogined} setLogin={setisLogined} />
-      <Banner01 major={major} />
+      <Banner01 major={majorKoreanName} />
       <DropDownWrapper>
         <DropDownText>지원학기 선택</DropDownText>
         <DropDownBox>
@@ -212,7 +176,7 @@ const MobileArchiveDetailPage = () => {
           <GraphBox>
             <MobileArchiveGraph
               lineData={lineData}
-              meanGpa={meanGpa}
+              meanGpa={avgGpa}
               medianGpa={medianGpa}
               modeGpa={modeGpa}
               minGpa={minGpa}
@@ -240,7 +204,7 @@ const MobileArchiveDetailPage = () => {
           </Wrapper2>
         ) : (
           <GpaAnalysisBox>
-            <Card05 kind={'Mean'} text={'합격자 학점 평균값'} textNumber={meanGpa.gpa} />
+            <Card05 kind={'Mean'} text={'합격자 학점 평균값'} textNumber={avgGpa.gpa} />
             <Card05 kind={'Mode'} text={'합격자 학점 최빈값'} textNumber={modeGpa.gpa} modeNumber={modeGpa.num} />
             <Card05 kind={'Median'} text={'합격자 학점 중위값'} textNumber={medianGpa.gpa} />
             <Card05 kind={'Min'} text={'합격자 학점 최저값'} textNumber={minGpa.gpa} />

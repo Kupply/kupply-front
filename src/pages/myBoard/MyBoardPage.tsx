@@ -10,10 +10,10 @@ import PieChart from '../../components/myBoard/Graph/PieChart';
 import Scatter from '../../components/myBoard/Graph/Scatter';
 import InterestMajorButton from '../../assets/myboardpage/InterestMajorButton'; // 1지망 2지망 선택 버튼
 import MyboardPasserPageVer from './MyboardPasser';
-import client from '../../utils/HttpClient';
-import { recruit } from '../../common/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
-import { MajorOptionsKR } from '../../types/MajorTypes';
-import { collegeAPIMappingByKR } from '../../utils/Mappings';
+import { client } from '../../utils/HttpClient';
+import { recruit } from '../../mappings/Recruiting'; // 2024-1 아직 갱신 X (몇명 뽑는다는 공지가 없어 아직 반영 X) + 과거데이터 (실제로 몇명 뽑았는지 갱신 X)
+import { MajorOptionsKR } from '../../mappings/MajorTypes';
+import { majorAPIMappingByKR } from '../../mappings/Mappings';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
 import { LastFourSameSemesters } from '../../common/LastFourSameSemesters';
 
@@ -257,6 +257,8 @@ const MyBoardPage = () => {
       localStorage.setItem('studentId', userInfo.studentId);
       localStorage.setItem('firstMajor', userInfo.firstMajor);
       localStorage.setItem('role', userInfo.role);
+      localStorage.setItem('email', userInfo.email);
+      localStorage.setItem('campus', userInfo.campus);
       if (userInfo.role === 'candidate') {
         localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
         localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
@@ -279,30 +281,30 @@ const MyBoardPage = () => {
   const getPastData = async () => {
     // const semester = ['2023-2', '2023-1', '2022-2'];
     const semester = LastThreeSemesters; // Fetch last three semesters dynamically
-    const hopeMajor1 = collegeAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
+    const hopeMajor1 = majorAPIMappingByKR[userData.hopeMajor1 as MajorOptionsKR];
     let hopeMajor2 = '';
     if (userData.hopeMajor2 !== '희망 없음') {
-      hopeMajor2 = collegeAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
+      hopeMajor2 = majorAPIMappingByKR[userData.hopeMajor2 as MajorOptionsKR];
     }
 
     const newPastData1 = [...pastData1];
     for (let i = 0; i < semester.length; i++) {
       try {
         const APIresponse = await client.get(`/pastData/${hopeMajor1}/${semester[i]}`);
-        const data = APIresponse.data.pastData;
+        const { metadata, _ } = APIresponse.data.pastData;
 
         let competitionRate = 0;
-        if (data.overallData.numberOfData > 0) {
-          competitionRate = +(data.overallData.numberOfData / newPastData1[i].numOfSelection).toFixed(2);
+        if (metadata.recruitNumber > 0) {
+          competitionRate = +(metadata.appliedNumber / metadata.recruitNumber).toFixed(2);
         }
 
         newPastData1[i] = {
-          numOfSelection: newPastData1[i].numOfSelection,
-          numOfPassed: data.passedData.passedNumberOfData,
-          numOfApplied: data.overallData.numberOfData,
+          numOfSelection: metadata.recruitNumber,
+          numOfPassed: metadata.passedNumber,
+          numOfApplied: metadata.appliedNumber,
           competitionRate: competitionRate,
-          meanGpa: data.passedData.passedMeanGPAData.gpa,
-          minGpa: data.passedData.passedMinimumGPAData.gpa,
+          meanGpa: metadata.passedAvgGPAData.gpa,
+          minGpa: metadata.passedMinimumGPAData.gpa,
         };
       } catch (err) {
         console.log(err);
@@ -315,20 +317,20 @@ const MyBoardPage = () => {
       for (let i = 0; i < semester.length; i++) {
         try {
           const APIresponse = await client.get(`/pastData/${hopeMajor2}/${semester[i]}`);
-          const data = APIresponse.data.pastData;
+          const { metadata, _ } = APIresponse.data.pastData;
 
           let competitionRate = 0;
-          if (data.overallData.numberOfData > 0) {
-            competitionRate = +(data.overallData.numberOfData / newPastData2[i].numOfSelection).toFixed(2);
+          if (metadata.recruitNumber > 0) {
+            competitionRate = +(metadata.appliedNumber / metadata.recruitNumber).toFixed(2);
           }
 
           newPastData2[i] = {
-            numOfSelection: newPastData2[i].numOfSelection,
-            numOfPassed: data.passedData.passedNumberOfData,
-            numOfApplied: data.overallData.numberOfData,
+            numOfSelection: metadata.recruitNumber,
+            numOfPassed: metadata.passedNumber,
+            numOfApplied: metadata.appliedNumber,
             competitionRate: competitionRate,
-            meanGpa: data.passedData.passedMeanGPAData.gpa,
-            minGpa: data.passedData.passedMinimumGPAData.gpa,
+            meanGpa: metadata.passedAvgGPAData.gpa,
+            minGpa: metadata.passedMinimumGPAData.gpa,
           };
         } catch (err) {
           console.log(err);

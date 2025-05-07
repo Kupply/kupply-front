@@ -7,8 +7,8 @@ interface MainWrapperProps {
 }
 
 function Carousel() {
-  const [page, setPage] = useState(0);
-  const totalPages = 3;
+  const [page, setPage] = useState(3);
+  const totalPages = 4; // 3; 고파스 회원 전환 공지 배너 추가
   const [autoChange, setAutoChange] = useState(false);
 
   const handleLeftClick = () => {
@@ -21,14 +21,14 @@ function Carousel() {
     setAutoChange(false);
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setAutoChange(true);
-      setPage((prevPage) => (prevPage + 1) % totalPages);
-    }, 5000);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setAutoChange(true);
+  //     setPage((prevPage) => (prevPage + 1) % totalPages);
+  //   }, 5000);
 
-    return () => clearInterval(timer);
-  }, [page, autoChange]);
+  //   return () => clearInterval(timer);
+  // }, [page, autoChange]); // 고파스 회원 전환 공지 고정되도록 timer 임시 제거
 
   return (
     <MainWrapper page={page}>
@@ -84,7 +84,7 @@ function Carousel() {
             </Typography>
           </div>
         </CarouselWrapper>
-      ) : (
+      ) : page === 2 ? (
         <CarouselWrapper>
           <BannerButton
             onClick={() => {
@@ -110,6 +110,9 @@ function Carousel() {
             </Typography>
           </div>
         </CarouselWrapper>
+      ) : (
+        // 고파스 회원 전환 배너 추가 (4번째 페이지) - 이미지 자체에 배너 버튼 포함
+        <CarouselWrapper></CarouselWrapper>
       )}
       <ArrowButton
         onClick={handleLeftClick}
@@ -145,6 +148,14 @@ function Carousel() {
         style={{ left: '52%' }}
         active={page === 2}
       />
+      <CircleButton
+        onClick={() => {
+          setPage(3);
+          setAutoChange(false);
+        }}
+        style={{ left: '54%' }}
+        active={page === 3}
+      />
     </MainWrapper>
   );
 }
@@ -160,7 +171,9 @@ const MainWrapper = styled.div<MainWrapperProps>`
       ? `url('../designImage/carousel/Carousel1.png')`
       : props.page === 1
       ? `url('../designImage/carousel/Carousel2.png')`
-      : `url('../designImage/carousel/Carousel3.png')`};
+      : props.page === 2
+      ? `url('../designImage/carousel/Carousel3.png')`
+      : `url('../designImage/carousel/Carousel4.png')`};
 `;
 
 const ArrowButton = styled.img`

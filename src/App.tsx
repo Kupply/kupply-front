@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
 import { isMobile } from 'react-device-detect';
-import { mainRoutes, authRoutes, signupRoutes, adminRoutes } from './Routes';
+import { mainRoutes, authRoutes, signupRoutes, adminRoutes, syncRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
 import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
-import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes } from './MobileRoutes';
+import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes, mobileSyncRoutes } from './MobileRoutes';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from './store/atom';
 
@@ -38,16 +38,18 @@ export default function App() {
             <Route element={<AuthRequired />}>{renderRoutes(mobileAuthRoutes)}</Route>
             {renderRoutes(mobileMainRoutes)}
             {renderRoutes(mobileSignupRoutes)}
+            {renderRoutes(mobileSyncRoutes)}
           </Routes>
         </>
       ) : (
         <Wrapper>
-          <Header logined={isLogined} setLogin={setisLogined}/>
+          <Header logined={isLogined} setLogin={setisLogined} />
           <Routes>
             <Route element={<AuthRequired />}>{renderRoutes(authRoutes)}</Route>
             <Route element={<AdminRequired />}>{renderRoutes(adminRoutes)}</Route>
             {renderRoutes(mainRoutes)}
             {renderRoutes(signupRoutes)}
+            {renderRoutes(syncRoutes)}
           </Routes>
           <Footer />
         </Wrapper>

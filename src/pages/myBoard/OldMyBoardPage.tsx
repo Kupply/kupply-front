@@ -15,14 +15,14 @@ import EditModal from '../../components/myBoard/EditModals/OldEditModal';
 //import EditModal from '../../components/myBoard/EditModals/EditModal';
 //import EditModal from '../../components/myBoard/EditModals/OldEditModalModified';import ApplicationModal from '../../components/myBoard/SubmitModals/ApplicationModal';
 //import ApplicationModal from '../../components/myBoard/SubmitModals/OldApplicationModal';
-import { recruit } from '../../common/Recruiting';
+import { recruit } from '../../mappings/Recruiting';
 import MyboardPasserPageVer from './MyboardPasser';
-import client from '../../utils/HttpClient';
-import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import { client } from '../../utils/HttpClient';
+import { MajorOptionsKR as MajorOptions } from '../../mappings/MajorTypes';
 import {
   collegeNameMappingByKR as collegeNameMapping,
-  collegeAPIMappingByKR as collegeAPIMapping,
-} from '../../utils/Mappings';
+  collegeNameMappingByKR as collegeAPIMapping,
+} from '../../mappings/Mappings';
 
 /* 
 공통 정보: 이름, 학번, 1전공, 전화번호, 아이디, 비밀번호, 도전생 or 진입생
@@ -309,6 +309,8 @@ export default function MyBoardPage() {
         localStorage.setItem('studentId', userInfo.studentId);
         localStorage.setItem('firstMajor', userInfo.firstMajor);
         localStorage.setItem('role', userInfo.role);
+        localStorage.setItem('email', userInfo.email);
+        localStorage.setItem('campus', userInfo.campus);
         if (userInfo.role === 'candidate') {
           localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
           localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);

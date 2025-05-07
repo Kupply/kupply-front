@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { CallbackArgs, VictoryPie } from 'victory';
-import { majorColorMapping } from '../../utils/Mappings';
+import { majorColorMapping } from '../../mappings/Mappings';
 
 // 하드코딩
 

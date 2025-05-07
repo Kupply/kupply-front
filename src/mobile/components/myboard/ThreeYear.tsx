@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import MobileTabMenuButton from '../../assets/tabMenu/TabMenu';
 import { useNavigate } from 'react-router-dom';
-import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
-import { collegeAPIMappingByKR as collegeAPIMapping } from '../../../utils/Mappings';
-import { majorNameMapping } from '../../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../../mappings/MajorTypes';
+import { collegeNameMappingByKR as collegeAPIMapping } from '../../../mappings/Mappings';
+import { majorNameMapping } from '../../../mappings/Mappings';
 import { LastThreeSemesters } from '../../../common/LastThreeSemesters';
 interface SemesterBtnStates {
   [key: string]: boolean;
@@ -99,9 +99,13 @@ const MobileThreeYear = ({
             : +((selectedPastData.numOfPassed / selectedPastData.numOfApplied) * 100).toFixed(2) + '%'}
         </Text3>
         <Text2 style={{ position: 'absolute', top: '51.94vw', left: '5vw' }}>합격자 학점 평균값</Text2>
-        <Text3 style={{ position: 'absolute', top: '57.22vw', left: '5vw' }}>{selectedPastData.meanGpa}</Text3>
+        <Text3 style={{ position: 'absolute', top: '57.22vw', left: '5vw' }}>
+          {selectedPastData.meanGpa.toFixed(2)}
+        </Text3>
         <Text2 style={{ position: 'absolute', top: '51.94vw', left: '52.22vw' }}>합격자 학점 최저값</Text2>
-        <Text3 style={{ position: 'absolute', top: '57.22vw', left: '52.22vw' }}>{selectedPastData.minGpa}</Text3>
+        <Text3 style={{ position: 'absolute', top: '57.22vw', left: '52.22vw' }}>
+          {selectedPastData.minGpa.toFixed(2)}
+        </Text3>
         <Text4>
           해당 통계는 쿠플라이 서비스를 통해 모은 정보를 바탕으로 한 것으로 <br /> 실제 통계와 다를 수 있어요.
           <br /> (합격률은 해당 학기에 쿠플라이에서 모의 지원한 회원들의 합격률로, <br />

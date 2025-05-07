@@ -10,7 +10,7 @@ import { UserInputText } from '../../../../components/signUp/UserInputText';
 import { UserInput } from '../../signup/UserInput';
 import { GPAVerification } from '../../signup/VerificationForm';
 import { useStudentIdVerification } from '../../../../utils/UserInputVerification';
-import { inputState } from '../../../pages/signup/SignupPage4';
+import { inputState } from '../../signup/UserInput';
 import Typography from '../../../../assets/Typography';
 import { appModalUserTypeMobileState } from '../../../../store/atom';
 import { useRecoilState } from 'recoil';

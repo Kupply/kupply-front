@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { CallbackArgs, VictoryPie } from 'victory';
-import { idColorMapping, idColorMappingShadow } from '../../../utils/Mappings';
+import { idColorMapping, idColorMappingShadow } from '../../../mappings/Mappings';
 
 // Vector 수정 필요 !
 

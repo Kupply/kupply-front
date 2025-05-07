@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import ToolTip05 from '../../assets/toolTips/ToolTip05';
-import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
+import { MajorOptionsKR as MajorOptions } from '../../mappings/MajorTypes';
 
 const Application = ({
   onViewMajor,

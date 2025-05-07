@@ -19,7 +19,7 @@ import AlertIconCheck from '../../../assets/icons/AlertIconCheck';
 import FirstReAppliedButton from '../../../assets/myboardpage/FirstReAppliedButton';
 // import UploadButton from '../../../assets/myboardpage/UploadButton';
 import CompleteMockApplicationButton from '../../../assets/myboardpage/CompleteMockApplication';
-import client from '../../../utils/HttpClient';
+import { client } from '../../../utils/HttpClient';
 
 export interface ModalProps {
   isOpenModal: boolean;

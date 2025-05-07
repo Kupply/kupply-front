@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 
-type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error' ;
+type StateOptions = 'default' | 'hover' | 'loading' | 'filled' | 'error';
 
 const baseButton = css`
   //height: 24px;
@@ -177,7 +177,7 @@ const filledButtonStyle = css`
 
 const errorButtonStyle = css`
   display: flex;
-  width: 4.5312vw; // 87px; 
+  width: 4.5312vw; // 87px;
   background: rgba(234, 9, 9, 0.7);
   color: white;
   transition: all 0.3s ease 0s;
@@ -186,7 +186,7 @@ const errorButtonStyle = css`
 const loadingButtonStyle = css`
   display: flex;
   background: rgba(216, 88, 136, 0.1);
-  width: 4.5312vw; // 87px; 
+  width: 4.5312vw; // 87px;
   transition: width 0.25s ease 0s;
 `;
 
@@ -211,10 +211,7 @@ const loadingRotate = keyframes`
 const LoadingImage = styled.svg`
   position: relative;
   z-index: 1;
-  animation:
-    ${loadingMove} 0.25s ease,
-    ${loadingRotate} 1s linear infinite,
-    forwards;
+  animation: ${loadingMove} 0.25s ease, ${loadingRotate} 1s linear infinite, forwards;
 `;
 
 const ButtonText = css`

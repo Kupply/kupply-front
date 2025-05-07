@@ -5,11 +5,9 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Logo from '../../assets/OldLogo';
 import HeaderButton from '../../assets/buttons/header/HeaderButton';
-import MailButton from '../../assets/buttons/header/MailButton';
-import SettingButton from '../../assets/buttons/header/SettingButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { TextButton02, TextButton03LNB, TextButton06 } from '../../assets/buttons/TextButton';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
@@ -81,6 +79,8 @@ export default function Header({ logined, setLogin }: HeaderProps) {
             localStorage.setItem('studentId', userInfo.studentId);
             localStorage.setItem('firstMajor', userInfo.firstMajor);
             localStorage.setItem('role', userInfo.role);
+            localStorage.setItem('email', userInfo.email);
+            localStorage.setItem('campus', userInfo.campus);
             if (userInfo.role === 'candidate') {
               localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
               localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
@@ -133,6 +133,9 @@ export default function Header({ logined, setLogin }: HeaderProps) {
         navigate('/login');
       }
     }
+  };
+  const handleMenu4Click = () => {
+    navigate('/notice'); // TODO: 고객센터의 로그인 필요 여부에 대해 논의 필요
   };
   const handleSettingsClick = () => {
     setSelected(0);
@@ -211,6 +214,9 @@ export default function Header({ logined, setLogin }: HeaderProps) {
             <HeaderButton onClick={handleMenu2Click} activated={location.pathname === '/myboard'}>
               마이보드
             </HeaderButton>
+            {/* <HeaderButton onClick={handleMenu4Click} activated={location.pathname === '/notice'}>
+              고객센터
+            </HeaderButton> */}
             {/* <HeaderButton onClick={handleAdminClick} activated={location.pathname === '/admin'}>
               관리자
             </HeaderButton> */}

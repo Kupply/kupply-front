@@ -24,7 +24,7 @@ const QuartileIndicator = ({
               <Blurtext>다음 학기에 지원해주세요!</Blurtext>
             </BlurMsg>
           </Wrapper2>
-        ) : currentMonth < 5 ? (
+        ) : currentMonth <= 5 ? (
           <Wrapper2>
             <BlurWrapper />
             <BlurMsg>

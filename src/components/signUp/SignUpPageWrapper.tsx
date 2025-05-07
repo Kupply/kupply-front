@@ -23,9 +23,22 @@ export const SignUpPageWrapper: React.FC<SignUpPageWrapperProps> = ({ step, step
             <Typography size="1.98vw" bold="700" style={{ lineHeight: '131.579%' }}>
               환영합니다!
             </Typography>
-            <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
-              간단한 회원가입을 통해 쿠플라이의 다양한 서비스를 이용해보세요.
-            </Typography>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4vw', marginTop: '0.5vw' }}>
+              <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8' }}>
+                쿠플라이는
+              </Typography>
+              <img
+                src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+                alt="tigerEmoji"
+                style={{ height: '1.5vw' }} // adjust size as needed
+              />
+              <Typography size="0.9375vw" bold="700" style={{ opacity: '0.8' }}>
+                고파스 아이디/비밀번호
+              </Typography>
+              <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8' }}>
+                로 서비스 이용이 가능합니다.
+              </Typography>
+            </div>
           </>
         ) : (
           <>
@@ -33,7 +46,7 @@ export const SignUpPageWrapper: React.FC<SignUpPageWrapperProps> = ({ step, step
               거의 다왔습니다!
             </Typography>
             <Typography size="0.9375vw" bold="500" style={{ opacity: '0.8', marginTop: '0.2604vw' }}>
-              약관을 확인하고 쿠플라이의 다양한 서비스를 이용하세요.
+              마지막으로 정보를 입력하고 쿠플라이의 다양한 서비스를 이용하세요.
             </Typography>
           </>
         )}
@@ -47,7 +60,7 @@ export const SignUpPageWrapper: React.FC<SignUpPageWrapperProps> = ({ step, step
               {stepInfo}
             </Typography>
           </div>
-          {currentStep === 5 ? (
+          {currentStep === 2 ? (
             <>
               <HeaderBar>
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 630 2" fill="none">

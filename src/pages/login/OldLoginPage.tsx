@@ -1,16 +1,15 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
+
+import { api_url } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
-import NextButton from '../../assets/buttons/OldNextButton';
-import LoginModal from '../../components/login/LoginModal';
 import AlertMessage from '../../assets/toolTips/ToolTip01';
-import client from '../../utils/HttpClient';
-import Login2JoinModal from '../../components/login/Login2JoinModal';
-import { CheckBoxButton02 } from '../../assets/buttons/CheckBoxButton';
 import CTA01 from '../../assets/CTAs/CTA01';
+import IconButton04 from '../../assets/iconButtons/IconButton04';
+import TextFieldBox, { StateOptions } from '../../assets/OldTextFieldBox';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -117,7 +116,7 @@ const LinkBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.31vw;
+  gap: 0.78vw;
   margin-top: 4.11vw;
   margin-bottom: 4.53vw;
 `;
@@ -142,79 +141,107 @@ function LoginPage(props: LoginPageProps) {
   const [isOpenAlert, setOpenAlert] = useState<boolean>(true);
 
   const navigate = useNavigate();
-  const handleLink2Click = () => {
-    navigate('/signup0', { state: { showModal: true } });
+  const handleSyncClick = () => {
+    navigate('/sync0');
+  };
+  const handleForgetClick = () => {
+    window.open('https://www.koreapas.com/bbs/lostid_new.php', '_blank', 'noopener,noreferrer');
+  };
+  const handleJoinClick = () => {
+    navigate('/signup1');
   };
 
   const [ID, setID] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [idState, setIdState] = useState<StateOptions>('filled');
+  const [passwordState, setPasswordState] = useState<StateOptions>('filled');
   const [isChecked, setIsChecked] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false); // 고파스 연동 전 사용했던 모달
   const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken', 'accessTokenExpire']);
 
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  // const toggleModal = () => {
+  //   setIsModalVisible(!isModalVisible);
+  // }; // 고파스 연동 전 사용했던 모달
 
   // login API 접근
   const onLoginClick = async () => {
     if (ID === '' || password === '') return;
-    const url = 'https://api.kupply.devkor.club/auth/login';
+    const url = `${api_url}/auth/koreapasLogin`;
     try {
       await axios
         .post(url, {
-          email: ID,
+          id: ID,
           password: password,
           isRememberOn: isChecked,
         })
         .then((res) => {
-          if (res.data.data) {
+          if (!res.data.data.isKupply) {
+            alert('쿠플라이 회원이 아니에요. \n고파스 아이디로 쿠플라이 서비스에 회원가입 해주세요.');
+            sessionStorage.setItem('isKupply', res.data.data.isKupply);
+            sessionStorage.setItem('firstMajorCampus', res.data.data.koreapasData.firstMajorCampus);
+            sessionStorage.setItem('firstMajorCode', res.data.data.koreapasData.firstMajorCode);
+            sessionStorage.setItem('firstMajorName', res.data.data.koreapasData.firstMajorName);
+            sessionStorage.setItem('nickname', res.data.data.koreapasData.nickname);
+            sessionStorage.setItem('studentId', res.data.data.koreapasData.studentId);
+            sessionStorage.setItem('koreapasUUID', res.data.data.koreapasData.koreapasUUID);
+            navigate('/signup2'); // 약관 동의 페이지로
+          } else {
             localStorage.setItem('accessToken', res.data.data.accessToken);
             localStorage.setItem('refreshToken', res.data.data.refreshToken);
+            localStorage.setItem('isLogin', 'true');
+            setLogin(true);
+            navigate('/');
+            window.location.reload();
           }
         });
-
-      //로그인 상태를 유지하기 위해 localStorage에 로그인 여부와 ID를 저장 후 login 상태를 true로 바꾸고 메인 페이지로 보낸다.
-      window.localStorage.setItem('isLogin', 'true');
-      window.localStorage.setItem('loginedUser', ID);
-      setLogin(true);
-      navigate('/');
-      window.location.reload();
     } catch (err: any) {
-      // 이후 수정 필요함.
       setPassword('');
-      if (err.response.data.error.message) {
-        alert(err.response.data.error.message);
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
+        alert('유효하지 않은 고파스 아이디 혹은 비밀번호에요.');
+      } else if (axios.isAxiosError(err) && err.response?.status === 403) {
+        alert('고파스 강등 또는 미인증 회원은 쿠플라이 서비스를 이용할 수 없어요.');
+      } else {
+        alert('알 수 없는 오류가 발생했어요. 잠시 후 다시 시도해 주세요.');
       }
     }
   };
 
   return (
     <Wrapper>
-      {isOpenAlert ? (
+      {/* {isOpenAlert ? (
         <div style={{ transform: 'translateY(-10.375vw) translateX(+5vw)' }}>
           <Login2JoinModal isOpenAlert={isOpenAlert} setOpenAlert={setOpenAlert} onClickModal={handleLink2Click} />
         </div>
-      ) : null}
+      ) : null} */}
       <LoginBox>
         <LogoImage
           src="../../designImage/kupply/KupplyVer1.svg"
           style={{ marginTop: '6.2vw', marginBottom: '0.6vw' }}
         />
-        <Typography size="0.94vw" bold="500">
-          고려대학교 이메일로 이용하는 쿠플라이의 모든 서비스
-        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4vw' }}>
+          <img
+            src={process.env.PUBLIC_URL + `/designImage/login/tigerEmoji.png`}
+            alt="tigerEmoji"
+            style={{ height: '1.5vw' }}
+          />
+          <Typography size="0.94vw" bold="500">
+            고파스 아이디로 이용하는 쿠플라이의 모든 서비스
+          </Typography>
+        </div>
         <TextFieldWrapper>
           <TextBox style={{ height: '5.47vw' }}>
             <Typography size="0.94vw" bold="700">
-              쿠플라이 아이디
+              고파스 아이디
             </Typography>
             <Typography size="0.94vw">를 입력해주세요.</Typography>
-            <AlertMessage>쿠플라이 아이디는 고려대학교 이메일 주소입니다.</AlertMessage>
+            <AlertMessage>쿠플라이 아이디는 고파스 아이디입니다.</AlertMessage>
           </TextBox>
-          <IDField
-            placeholder="kupply@korea.ac.kr"
+          <TextFieldBox
+            placeholder="고파스 아이디"
             value={ID}
+            setValue={setID}
+            state={idState}
+            setState={setIdState}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setID(e.target.value);
             }}
@@ -225,20 +252,23 @@ function LoginPage(props: LoginPageProps) {
                 }
               }
             }}
-            isFilled={ID !== ''}
+            // isFilled={ID !== ''}
           />
         </TextFieldWrapper>
         <TextFieldWrapper>
           <TextBox>
             <Typography size="0.94vw" bold="700">
-              비밀번호
+              고파스 비밀번호
             </Typography>
             <Typography size="0.94vw">를 입력해주세요.</Typography>
           </TextBox>
-          <PasswordField
+          <TextFieldBox
             type="password"
-            placeholder="쿠플라이 비밀번호"
+            placeholder="고파스 비밀번호"
             value={password}
+            setValue={setPassword}
+            state={passwordState}
+            setState={setPasswordState}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);
             }}
@@ -249,7 +279,7 @@ function LoginPage(props: LoginPageProps) {
                 }
               }
             }}
-            isFilled={password !== ''}
+            // isFilled={password !== ''}
           />
         </TextFieldWrapper>
         <TextBox>
@@ -264,14 +294,18 @@ function LoginPage(props: LoginPageProps) {
           </Typography>
         </TextBox>
         <LinkBox>
-          <Link onClick={toggleModal}>비밀번호를 잊으셨나요?</Link>
-          <Link onClick={handleLink2Click}>회원가입</Link>
+          <div style={{ display: 'flex', gap: '0.26vw', alignItems: 'center' }}>
+            <IconButton04 />
+            <Link onClick={handleForgetClick}>고파스 아이디/비밀번호 찾기</Link>
+          </div>
+          <Link onClick={handleSyncClick}>쿠플라이의 기존 회원이신가요?</Link>
+          <Link onClick={handleJoinClick}>고파스 아이디로 회원가입</Link>
         </LinkBox>
         <CTA01 state={ID != '' && password !== '' ? 'default' : 'disabled'} onClick={onLoginClick}>
           로그인
         </CTA01>
       </LoginBox>
-      {isModalVisible && <LoginModal />}
+      {/* {isModalVisible && <LoginModal />} */}
     </Wrapper>
   );
 }

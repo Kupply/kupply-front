@@ -19,16 +19,21 @@ export function useEmailVerification(locationUsed: verificationProps){
         setIdVerified(true);
       }
       else {
-        console.log('test passed');
+        // console.log('test passed');
         setID((prev) => ({...prev, infoState: 'filled'}));
         setIdVerified(true);
       }
-    }else{
-      setIdVerified(false);
-    }
+    } 
+    // else{
+    //   setIdVerified(false);
+    // }
   }, [ID.info, ID.infoState]);
 
-  return {idVerified};
+  return {
+    idVerified,
+    ID,
+    setID
+  };
 }
 
 
@@ -48,7 +53,6 @@ export function useStudentIdVerification(locationUsed: verificationProps){
       else {
         setStdId((prev) => ({...prev, infoState: 'filled'}));
         setStdIdVerified(true);
-        
       }
     }
   }, [stdId.info, stdId.infoState]);
@@ -147,6 +151,11 @@ export function useNicknameVerification(locationUsed: verificationProps){
     }
   }, [nickname.info, nickname.infoState]);
 
-  console.log('nicknameverified state', nicknameVerified);
-  return {nicknameVerified, errorMessages, nickname, setNickname};
+  // console.log('nicknameverified state', nicknameVerified);
+  return {
+    nicknameVerified, 
+    errorMessages, 
+    nickname, 
+    setNickname
+  };
 }

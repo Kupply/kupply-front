@@ -7,7 +7,7 @@ import { GPAVerification } from '../../../signUp/VerificationForm';
 import styled from 'styled-components';
 import { useStudentIdVerification } from '../../../../utils/UserInputVerification';
 import { useEffect, useState } from 'react';
-import { inputState } from '../../../../pages/signUp/SignUp4Page';
+import { inputState } from '../../../signUp/UserInput';
 import Typography from '../../../../assets/Typography';
 
 // GpaVerification userType은 임의로 지정해 놓은 상태

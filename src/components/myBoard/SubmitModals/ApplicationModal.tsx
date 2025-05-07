@@ -17,7 +17,7 @@ import CurrentModal1 from './currentModal/Modal1';
 import CurrentModal2 from './currentModal/Modal2';
 import CurrentModal3 from './currentModal/Modal3';
 import CurrentModal4 from './currentModal/Modal4';
-import client from '../../../utils/HttpClient';
+import { client } from '../../../utils/HttpClient';
 import NotSubmittedHeader from './currentModal/NotSubmittedHeader';
 import { useRef } from 'react';
 import ReactDOM from 'react-dom';

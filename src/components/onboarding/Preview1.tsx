@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import RankingTable from './RankingTable';
 import CTA02 from '../../assets/CTAs/CTA02';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import { isDateInRange, isPeriodPassed, currentMonth } from '../../common/ApplicationPeriod';
 import { tab } from '@testing-library/user-event/dist/tab';
@@ -59,7 +59,7 @@ function Preview1() {
   useEffect(() => {
     const appliedValue = localStorage.getItem('isApplied');
     if (appliedValue !== null) {
-      setIsApplied(appliedValue === 'false');
+      setIsApplied(appliedValue === 'true');
     }
   }, []);
 
@@ -87,22 +87,22 @@ function Preview1() {
           <Blur />
           <ButtonWrapper>
             <Typography size="1.57vw" bold="700" color="#2C323A" style={{ textAlign: 'center', lineHeight: '131.58%' }}>
-              쿠플라이 회원가입을 통해 <br /> 이중전공 모의지원 현황을 확인해보세요
+              고파스 아이디로 로그인하고 <br /> 이중전공 모의지원 현황을 확인해보세요
             </Typography>
             <CTA02
               onClick={() => {
-                navigate('/signup0');
+                navigate('/login');
               }}
               size="small"
               style={{ marginTop: '1.24vw' }}
             >
-              회원가입하러 가기
+              로그인하러 가기
             </CTA02>
           </ButtonWrapper>
         </>
       ) : isDateInRange ? (
         // 모의지원 기간 내
-        !isApplied ? null : (
+        isApplied ? null : (
           <>
             <Blur />
             <ButtonWrapper>

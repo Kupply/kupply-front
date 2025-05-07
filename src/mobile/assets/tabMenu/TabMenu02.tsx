@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { MajorOptionsKR as MajorOptions } from '../../../types/MajorTypes';
+import { MajorOptionsKR as MajorOptions } from '../../../mappings/MajorTypes';
 
 export interface MobileTabMenuButtonProps {
   children?: React.ReactNode;

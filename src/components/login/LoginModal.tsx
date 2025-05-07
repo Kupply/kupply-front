@@ -1,11 +1,12 @@
+import axios from 'axios';
 import React from 'react';
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+
 import ModalLarge from '../base/ModalLarge';
-//import Typography from '../../assets/OldTypography';
+import { api_url } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import Button03 from '../../assets/buttons/Button03';
-import axios from 'axios';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -100,14 +101,16 @@ const IDField = styled.input<{ isFilled: boolean }>`
 export default function LoginModal() {
   const [isOpen, setIsOpen] = useState(true);
   const [ID, setID] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
   const forgotPassword = async () => {
+    const url = `${api_url}/auth/forgotPassword`;
+    setIsSubmitting(true);
     try {
-      const url = 'https://api.kupply.devkor.club/auth/forgotPassword';
       await axios.post(url, { userEmail: ID });
 
       setIsOpen(!isOpen);
@@ -116,6 +119,8 @@ export default function LoginModal() {
       if (err.response.data.error.message) {
         alert(err.response.data.error.message);
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -152,7 +157,7 @@ export default function LoginModal() {
         />
         <div style={{ width: '29.9vw' }}>
           <Button03
-            state={ID !== '' ? 'pressed' : 'disabled'}
+            state={ID !== '' ? (isSubmitting ? 'disabled' : 'pressed') : 'disabled'}
             style={{ marginBottom: '4.167vw', width: '100%' }}
             onClick={forgotPassword}
           >

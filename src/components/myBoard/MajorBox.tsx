@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { MajorOptionsKR as MajorOptions } from '../../types/MajorTypes';
-import { collegeNameMappingByKR as collegeNameMapping, majorNmaeMappingByKr } from '../../utils/Mappings';
+import { MajorOptionsKR as MajorOptions } from '../../mappings/MajorTypes';
+import { collegeNameMappingByKR as collegeNameMapping, majorNameMappingByKr } from '../../mappings/Mappings';
 
 const MajorBox = ({ onViewMajor, userData }: { onViewMajor: any; userData: any }) => {
   const titleText = onViewMajor === 1 ? '1지망 관심전공' : '2지망 관심전공';
   const majorKoreanName: MajorOptions = onViewMajor === 1 ? userData.hopeMajor1 : userData.hopeMajor2;
 
-  const majorEngishName = majorNmaeMappingByKr[majorKoreanName];
+  const majorEngishName = majorNameMappingByKr[majorKoreanName];
   const majorSymbolPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorKoreanName]}Large.png`;
   const majorShadowPath = `../../designImage/majorSymbol/newMajorImage/${collegeNameMapping[majorKoreanName]}_ellipse.svg`;
   return (

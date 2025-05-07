@@ -4,20 +4,35 @@ import Typography from '../../../assets/Typography';
 
 export interface Button02Props extends React.ComponentPropsWithoutRef<'button'> {
   state?: 'default' | 'pressed' | 'disabled';
+  width?: string;
+  height?: string;
+  fontSize?: string;
+  fontBold?: string;
+  imgSize?: string;
 }
 
+// 고파스 통합 후 Join 버튼 (w/ 고파스 로고)
 function Button02(props: Button02Props) {
-  const { children = 'Join', state = 'default', ...rest } = props;
+  const { children = '고파스 아이디로 로그인하기', 
+    state = 'default', 
+    width = '90.83vw',
+    height = 'auto',
+    fontSize = '3.61vw',
+    fontBold = '700',
+    imgSize='6.11vw', ...rest } = props;
+
   return (
-    <MainWrapper state={state} {...rest}>
+    <MainWrapper state={state} width={width} height={height} {...rest}>
       <ImageWrapper
+        imgSize={imgSize}
         src={
-          state === 'pressed' ? '../../../designImage/ButtonIconPink.svg' : '../../../designImage/ButtonIconWhite.svg'
+          '../../../designImage/ButtonKoreapas.svg'
+          // state === 'pressed' ? '../../../designImage/ButtonIconPink.svg' : '../../../designImage/ButtonIconWhite.svg'
         }
       />
       <Typography
-        size="3.61vw"
-        bold="700"
+        size={fontSize}
+        bold={fontBold}
         color={state === 'pressed' ? '#D85888' : '#FFF'}
         style={{ lineHeight: '120%' }}
       >
@@ -28,8 +43,8 @@ function Button02(props: Button02Props) {
 }
 
 const MainWrapper = styled.button<Button02Props>`
-  width: 21.11vw;
-  height: auto;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   box-sizing: border-box;
   padding: 3.61vw 4.44vw;
   display: flex;
@@ -41,9 +56,9 @@ const MainWrapper = styled.button<Button02Props>`
   border-radius: 1.39vw;
 `;
 
-const ImageWrapper = styled.img`
-  width: 2.78vw;
-  height: 2.78vw;
+const ImageWrapper = styled.img<Button02Props>`
+  width: ${(props) => props.imgSize};
+  height: ${(props) => props.imgSize};
 `;
 
 export default Button02;

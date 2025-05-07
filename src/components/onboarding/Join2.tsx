@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { api_url } from '../../utils/HttpClient';
 import Typography from '../../assets/Typography';
 import Button02 from '../../assets/buttons/Button02';
 import Button11 from '../../assets/buttons/Button11';
@@ -18,27 +19,7 @@ function Join2() {
   }, []);
 
   const handleButtonClick = async () => {
-    //버튼 클릭 시 고려대 이메일인지 검사하고 맞다면 pass, 틀리면 alert를 내보낸다.
-    const IDPattern = /.+@korea\.ac\.kr$/;
-    if (IDPattern.test(ID)) {
-      //페이지 이동 전 email을 보낼 것을 요청하고, 에러가 발생하면 alert를 띄운다.
-      const url = 'https://api.kupply.devkor.club/auth/sendEmail'; // 만든 API 주소로 바뀌어야 함.
-      try {
-        await axios.post(url, { email: ID });
-
-        //sessionStorage에 입력받은 email을 저장한 후 다음 페이지로 넘어간다.
-        window.sessionStorage.setItem('email', ID);
-        navigate('/join');
-      } catch (err: any) {
-        //이 코드는 이메일이 이미 인증된, 즉 겹치는 경우를 처리한다.
-        alert(err.response.data.error.message);
-        if (err.response.data.error.message === '이미 회원가입이 완료된 이메일 입니다. 로그인해주세요.') {
-          navigate('/login');
-        }
-      }
-    } else {
-      alert('형식에 맞는 이메일이 아닙니다.');
-    }
+    navigate('/login');
   };
 
   return (
@@ -70,25 +51,13 @@ function Join2() {
               marginBottom: '0.73vw',
             }}
           >
-            고려대학교 이메일 등록 후, 이중전공에 대한 모든 정보 확인하기
+            고파스 계정 등록 후, 이중전공에 대한 모든 정보 확인하기
           </Typography>
           <Typography size="1.25vw" bold="500" color="#FFF">
-            간단한 회원가입을 통해 쿠플라이의 다양한 서비스를 이용해보세요.
+            고파스 통합 로그인을 통해 쿠플라이의 다양한 서비스를 이용해보세요.
           </Typography>
           <JoinBox>
-            <TextFieldBox
-              placeholder="kupply@korea.ac.kr"
-              value={ID}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setID(e.target.value);
-              }}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === 'Enter') {
-                  handleButtonClick();
-                }
-              }}
-            ></TextFieldBox>
-            <Button02 onClick={handleButtonClick}></Button02>
+            <Button02 onClick={handleButtonClick} style={{ width: '23.33vw' }}></Button02>
           </JoinBox>
         </PinkWrapper>
       )}

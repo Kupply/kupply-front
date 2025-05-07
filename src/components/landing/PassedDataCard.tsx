@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Typography from '../../assets/OldTypography';
 import DepartmentCard from '../../assets/landingpage/DepartmentCard';
 import { Navigate } from 'react-router-dom';
-import { major계열 } from '../../common/MajorTarget';
+import { major계열 } from '../../mappings/MajorTarget';
 
 type buttonOptions = 'default' | 'hover' | 'active';
 

@@ -6,7 +6,7 @@ import Banner from '../../components/landing/Banner';
 import RankingTable from '../../components/landing/RankingTable';
 import FAQ from '../../components/landing/FAQ';
 import ProfileBox from '../../components/myBoard/ProfileBox';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 
 export interface ITableData {
   rank: number;
@@ -121,6 +121,8 @@ function LandingPage() {
       localStorage.setItem('studentId', userInfo.studentId);
       localStorage.setItem('firstMajor', userInfo.firstMajor);
       localStorage.setItem('role', userInfo.role);
+      localStorage.setItem('email', userInfo.email);
+      localStorage.setItem('campus', userInfo.campus);
       if (userInfo.role === 'candidate') {
         localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
         localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);

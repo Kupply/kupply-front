@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { useCookies } from 'react-cookie';
 import Icon02 from '../../assets/icons/Icon02';
 import Typography from '../../assets/Typography';

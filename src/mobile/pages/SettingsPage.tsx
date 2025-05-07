@@ -4,10 +4,10 @@ import styled, { css } from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 import { MobileSelectedState, SBContentState } from '../../store/atom';
-import client from '../../utils/HttpClient';
+import { client } from '../../utils/HttpClient';
 import { StateOptions } from '../assets/field/Input01';
-import { majorAllList } from '../../common/MajorAll';
-import { majorTargetList } from '../../common/MajorTarget';
+import { majorAllList } from '../../mappings/MajorAll';
+import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
 import SettingsWrapper from '../components/settings/SettingsWrapper';
 import { MainTable } from '../components/settings/MainTable';
 import Typography from '../../assets/Typography';
@@ -18,6 +18,7 @@ import TextAreaBox from '../assets/textarea/TextArea01';
 import SettingsModal from '../components/settings/SettingsModal';
 import { MobileScroll } from '../assets/scroll/MobileScroll';
 import { TermsText1, TermsText2 } from '../components/signup/TermsText';
+import { TermsText } from '../components/sync/TermsText';
 
 interface SettingsPageProps {
   selected: number;
@@ -84,7 +85,6 @@ export const MobileSettingsPage = () => {
   });
 
   const [name, setName] = useState<string>(localStorage.getItem('name') || '');
-  console.log('firstPrintName', name);
   const [nameState, setNameState] = useState<StateOptions>('filled');
   const [stdID, setStdID] = useState<string>(localStorage.getItem('studentId') || '');
   const [stdIDState, setStdIDState] = useState<StateOptions>('filled');
@@ -97,8 +97,9 @@ export const MobileSettingsPage = () => {
   const [userProfilePic, setUserProfilePic] = useState<string>(
     localStorage.getItem('userProfilePic') || 'rectProfile1',
   );
+  const [campus, setCampus] = useState<string>(localStorage.getItem('campus') || '');
 
-  const [email, setEmail] = useState<string>(localStorage.getItem('loginedUser') || '');
+  const [email, setEmail] = useState<string>(localStorage.getItem('email') || '');
   const [emailState, setEmailState] = useState<StateOptions>('filled');
   const [pwd, setPwd] = useState<string>('');
   const [passwordState, setPasswordState] = useState<StateOptions>('default');
@@ -138,6 +139,8 @@ export const MobileSettingsPage = () => {
         localStorage.setItem('studentId', userInfo.studentId);
         localStorage.setItem('firstMajor', userInfo.firstMajor);
         localStorage.setItem('role', userInfo.role);
+        localStorage.setItem('email', userInfo.email);
+        localStorage.setItem('campus', userInfo.campus);
         if (userInfo.role === 'candidate') {
           localStorage.setItem('hopeMajor1', userInfo.hopeMajor1);
           localStorage.setItem('hopeMajor2', userInfo.hopeMajor2);
@@ -160,6 +163,8 @@ export const MobileSettingsPage = () => {
         setUserProfilePic(userInfo.profilePic);
         //setUserProfileLink(userInfo.profileLink);
         setCurrentNickname(userInfo.nickname);
+        setEmail(userInfo.email);
+        setCampus(userInfo.campus);
       } catch (err) {
         console.log(err);
       }
@@ -224,25 +229,23 @@ export const MobileSettingsPage = () => {
     }
   }, [nicknameState, nickname]);
 
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  };
+  useEffect(() => {
+    if (emailState === 'filled') {
+      const emailCheck = /^[a-zA-Z0-9._%+-]+@korea.ac.kr$/;
+      if (!emailCheck.test(email)) setEmailState('error');
+      else setEmailState('filled');
+    }
+  }, [email, emailState]);
 
   const firstSubmit = async () => {
     const updateData = {
       newName: name,
       newStudentId: stdID,
       newFirstMajor: firstMajor,
+      newEmail: email,
     };
     try {
-      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -254,8 +257,7 @@ export const MobileSettingsPage = () => {
       newNickname: nickname,
     };
     try {
-      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/updateMe', updateData, config);
+      await client.post('/user/updateMe', updateData);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -273,47 +275,41 @@ export const MobileSettingsPage = () => {
       return;
     }
 
-    
-        const updateData = {
-          newCurGPA: newGpa,
-          newHopeMajor1: hopeMajor1,
-          newHopeMajor2: hopeMajor2,
-        };
-        try {
-          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-          await client.post('/user/updateMe', updateData, config);
-          window.location.reload(); // 페이지 새로고침.
-        } catch (err) {
-          console.log(err);
-        
-      }
+    const updateData = {
+      newCurGPA: newGpa,
+      newHopeMajor1: hopeMajor1,
+      newHopeMajor2: hopeMajor2,
+    };
+    try {
+      await client.post('/user/updateMe', updateData);
+      window.location.reload(); // 페이지 새로고침.
+    } catch (err) {
+      console.log(err);
     }
+  };
   const thirdSubmit2 = async () => {
     const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
     const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-    
-        const updateData = {
-          newCurGPA: newGpa,
-          newHopeMajor1: hopeMajor1,
-          newHopeMajor2: hopeMajor2,
-        };
-        try {
-          // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-          await client.post('/user/updateMe', updateData, config);
-          window.location.reload(); // 페이지 새로고침.
-        } catch (err) {
-          console.log(err);
-        }
+    const updateData = {
+      newCurGPA: newGpa,
+      newHopeMajor1: hopeMajor1,
+      newHopeMajor2: hopeMajor2,
+    };
+    try {
+      await client.post('/user/updateMe', updateData);
+      window.location.reload(); // 페이지 새로고침.
+    } catch (err) {
+      console.log(err);
     }
+  };
 
   const fourthSubmit = async () => {
     const updateData = {
       newPassword: pwd,
     };
     try {
-      // await axios.post('http://localhost:8080/user/updateMe', updateData, config);
-      await client.post('/user/resetPassword', updateData, config);
+      await client.post('/user/resetPassword', updateData);
       window.location.reload(); // 페이지 새로고침.
     } catch (err) {
       console.log(err);
@@ -321,7 +317,12 @@ export const MobileSettingsPage = () => {
   };
 
   const majorAll = majorAllList;
-  const majorTarget = [...majorTargetList];
+  let majorTarget;
+  if (campus === 'S') {
+    majorTarget = [...majorTargetList_sejong];
+  } else {
+    majorTarget = [...majorTargetList];
+  }
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   return (
@@ -382,7 +383,7 @@ export const MobileSettingsPage = () => {
               state={nameState}
               setState={setNameState}
               setValue={setName}
-              helpMessage={helpMessageMapping['name']}
+              // helpMessage={helpMessageMapping['name']}
               errorMessage={errorMessageMapping['name']}
             />
           </ContentsWrapper>
@@ -399,10 +400,26 @@ export const MobileSettingsPage = () => {
               placeholder={placeholderMapping['studentId']}
               value={stdID}
               state={stdIDState}
-              setState={() => {}}
-              setValue={() => {}}
-              helpMessage={helpMessageMapping['studentId']}
+              setState={setStdIDState}
+              setValue={setStdID}
               errorMessage={errorMessageMapping['studentId']}
+            />
+          </ContentsWrapper>
+          <ContentsWrapper>
+            <TextBox>
+              <Typography size="3.33vw" bold="700">
+                고려대학교 이메일&nbsp;
+              </Typography>
+              <Typography size="3.33vw" bold="500">
+                수정하기
+              </Typography>
+            </TextBox>
+            <Input01
+              value={email}
+              state={emailState}
+              setState={setEmailState}
+              setValue={setEmail}
+              errorMessage={errorMessageMapping['kuEmail']}
             />
           </ContentsWrapper>
           <ContentsWrapper>
@@ -410,15 +427,13 @@ export const MobileSettingsPage = () => {
               <Typography size="3.33vw" bold="700">
                 본전공 (제 1전공)&nbsp;
               </Typography>
-              <Typography size="3.33vw" bold="500">
-                수정하기
-              </Typography>
             </TextBox>
-            <DropDown
+            <Input01
               title={placeholderMapping['firstMajor']}
               value={firstMajor}
-              setValue={setFirstMajor}
-              optionList={majorAllList}
+              state={'filled'}
+              setValue={() => {}}
+              setState={() => {}}
             />
           </ContentsWrapper>
         </>
@@ -477,7 +492,9 @@ export const MobileSettingsPage = () => {
             </TextBox>
             <DropDown
               title={placeholderMapping['hopeMajor1']}
-              optionList={majorTargetList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor)}
+              optionList={majorTarget.filter(
+                (el) => el.value1 !== '희망 없음' && el.value1 !== hopeMajor2 && el.value1 !== firstMajor,
+              )}
               value={hopeMajor1}
               setValue={setHopeMajor1}
             />
@@ -580,6 +597,16 @@ export const MobileSettingsPage = () => {
           <TextOutBox>
             <MobileScroll height="30vw">
               <TermsText2 />
+            </MobileScroll>
+          </TextOutBox>
+          <TextBox>
+            <Typography size="3.33vw" bold="700">
+              고파스 개인정보 처리방침
+            </Typography>
+          </TextBox>
+          <TextOutBox>
+            <MobileScroll height="30vw">
+              <TermsText />
             </MobileScroll>
           </TextOutBox>
         </>

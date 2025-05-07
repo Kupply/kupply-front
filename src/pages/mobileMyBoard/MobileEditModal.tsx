@@ -4,9 +4,9 @@ import { useCookies } from 'react-cookie';
 import Input01 from '../../mobile/assets/field/Input01';
 import DropDown from '../../mobile/assets/selectControl/DropDown';
 import TextAreaBox from '../../mobile/assets/textarea/TextArea01';
-import { majorAllList } from '../../common/MajorAll';
-import { majorTargetList } from '../../common/MajorTarget';
-import client from '../../utils/HttpClient';
+import { majorAllList } from '../../mappings/MajorAll';
+import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
+import { client } from '../../utils/HttpClient';
 import MoveButton from '../../mobile/components/myboard/MoveButton';
 import MobileHeaderBar from '../../mobile/components/myboard/EditModalHeaderBar';
 import AlertIconExclamation from '../../assets/icons/AlertIconExclamation';
@@ -59,6 +59,8 @@ export default function MobileEditModal(props: ModalProps) {
   );
   const [userProfileLink, setUserProfileLink] = useState<string>(localStorage.getItem('userProfileLink') || '');
   const [isGpaChanged, setIsGpaChanged] = useState<boolean>(false);
+  const [campus, setCampus] = useState<string>(localStorage.getItem('campus') || '');
+
   const originNickname = useRef<string>(localStorage.getItem('nickname'));
   const originHopeMajor1 = useRef<string>(localStorage.getItem('hopeMajor1'));
   const originHopeMajor2 = useRef<string>(localStorage.getItem('hopeMajor2'));
@@ -69,17 +71,7 @@ export default function MobileEditModal(props: ModalProps) {
 
   const [lastBoxRef, setLastBoxRef] = useState<any>(null);
 
-  const [cookies] = useCookies(['accessToken']);
-  const accessToken = cookies.accessToken;
-
   const navigate = useNavigate();
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  };
 
   useEffect(() => {
     if (originGPA1.current !== GPA1 || originGPA2.current !== GPA2 || originGPA3.current !== GPA3) {
@@ -114,9 +106,7 @@ export default function MobileEditModal(props: ModalProps) {
       const newGpa = parseFloat(GPA1 + '.' + GPA2 + GPA3);
       const oldGpa = parseFloat(originGPA1.current + '.' + originGPA2.current + originGPA3.current);
 
-      
-        updateData = { ...updateData, newCurGPA: newGpa };
-      
+      updateData = { ...updateData, newCurGPA: newGpa };
     }
 
     if (originUserProfilePic.current !== userProfilePic) {
@@ -137,7 +127,12 @@ export default function MobileEditModal(props: ModalProps) {
 
   // 고려대학교 전체 학과 리스트
   const majorAll = majorAllList;
-  const majorTarget = [...majorTargetList];
+  let majorTarget;
+  if (campus === 'S') {
+    majorTarget = [...majorTargetList_sejong];
+  } else {
+    majorTarget = [...majorTargetList];
+  }
   majorTarget.unshift({ value1: '희망 없음', value2: '희망 없음' });
 
   const [currentModal, setCurrentModal] = useRecoilState(editModalMobileState);
@@ -368,7 +363,6 @@ export default function MobileEditModal(props: ModalProps) {
               </div>
             </ContentsWrapper2>
           )}
-        
         </ModalLarge>
       )}
     </Main>

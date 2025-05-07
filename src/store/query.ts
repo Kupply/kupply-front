@@ -1,5 +1,5 @@
 import { useQuery, useQueries } from 'react-query';
-import client from '../utils/HttpClient';
+import { client } from '../utils/HttpClient';
 
 const fetchPastApplyData = async (majorName: string, semester: string) => {
   if (!majorName || !semester) {

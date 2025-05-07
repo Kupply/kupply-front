@@ -1,12 +1,15 @@
 import axios from 'axios';
 
+const phase = (process.env.REACT_APP_PHASE as string) || 'dev';
+export const api_url = phase === 'dev' ? 'https://dev.api.kupply.devkor.club' : 'https://api.kupply.devkor.club';
+
 export const refresh = async () => {
   const accessToken = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
 
   try {
     const res = await axios.post(
-      'https://api.kupply.devkor.club/auth/refreshAccessToken',
+      `${api_url}/auth/refreshAccessToken`,
       { accessToken: accessToken },
       { headers: { Authorization: `Bearer ${refreshToken}` }, withCredentials: true },
     );
@@ -23,8 +26,8 @@ export const refresh = async () => {
   return false;
 };
 
-const client = axios.create({
-  baseURL: 'https://api.kupply.devkor.club',
+export const client = axios.create({
+  baseURL: api_url,
 });
 
 client.interceptors.request.use((config) => {
@@ -53,5 +56,3 @@ client.interceptors.response.use(
     } else return error.response;
   },
 );
-
-export default client;
