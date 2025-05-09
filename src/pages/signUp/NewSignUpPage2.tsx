@@ -71,6 +71,14 @@ export function SignUp2Page() {
   useEffect(() => {
     if (!sessionStorage.getItem('koreapasUUID')) navigate('/');
     const firstMajorCode = sessionStorage.getItem('firstMajorCode') || '';
+
+    if (!firstMajorCode) {
+      alert('고파스의 ‘꽈톡’ 페이지에 접속 후 다시 회원가입을 시도해주세요.');
+      sessionStorage.clear();
+      navigate('/');
+      return;
+    }
+
     const firstMajor = majorCodeToNameMapping[firstMajorCode];
     sessionStorage.setItem('firstMajor', firstMajor);
   }, []);
