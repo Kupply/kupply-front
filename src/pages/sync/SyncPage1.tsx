@@ -33,6 +33,13 @@ export default function SyncPage1() {
           password: password,
         })
         .then((res) => {
+          if (!res.data.data.firstMajorCode) {
+            alert('고파스의 ‘꽈톡’ 페이지에 접속 후 다시 연동을 시도해주세요.');
+            sessionStorage.clear();
+            navigate('/');
+            return;
+          }
+
           sessionStorage.setItem('koreapasUUID', res.data.data.koreapasUUID);
           sessionStorage.setItem('nickname', res.data.data.nickname);
           sessionStorage.setItem('studentId', res.data.data.studentId);
