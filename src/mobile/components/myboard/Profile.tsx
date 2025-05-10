@@ -35,7 +35,8 @@ const MobileProfile = ({
   const profilePic = userData.userProfilePic;
 
   useEffect(() => {
-    if (id === '24' || isApplied || !isDateInRange) {
+    const currentYearLastTwoDigits = new Date().getFullYear().toString().slice(-2);
+    if (id === currentYearLastTwoDigits || isApplied || !isDateInRange) {
       setFreshman(false);
       setIsButtonDisabled('disabled');
     } else {
