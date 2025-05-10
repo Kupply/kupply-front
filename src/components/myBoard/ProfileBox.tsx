@@ -37,7 +37,8 @@ const ProfileBox = ({
   const profilePic = userData.userProfilePic;
   const navigate = useNavigate();
   useEffect(() => {
-    if (id === '24' || isApplied || !isDateInRange) {
+    const currentYearLastTwoDigits = new Date().getFullYear().toString().slice(-2);
+    if (id === currentYearLastTwoDigits || isApplied || !isDateInRange) {
       setFreshman(false);
       setIsButtonDisabled('disabled');
     } else {
@@ -45,7 +46,6 @@ const ProfileBox = ({
       setIsButtonDisabled('default');
     }
   }, [id, isApplied]);
-
 
   const [scrollY, setScrollY] = useState(window.scrollY + 62.02);
 
