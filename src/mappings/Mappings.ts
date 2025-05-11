@@ -296,13 +296,13 @@ export const semesterAPIMapping: string[] = [
 export const majorColorMapping = {
   경영대학: { fill: '#787071', boxShadow: 'rgba(120, 112, 113, 0.5)' },
   정경대학: { fill: '#CC668C', boxShadow: 'rgba(204, 102, 140, 0.5)' },
-  의과대학: { fill: '#99D88E', boxShadow: 'rgb(153, 216, 142, 0.5)' },
+  의과대학: { fill: '#99D88E', boxShadow: 'rgba(153, 216, 142, 0.5)' },
   정보대학: { fill: '#FFD35F', boxShadow: 'rgba(255, 211, 95, 0.5)' },
   미디어학부: { fill: '#EEA6BC', boxShadow: ' rgba(238, 166, 188, 0.5)' },
   스마트보안학부: { fill: '#F1A351', boxShadow: 'rgba(241, 163, 81, 0.5)' },
   문과대학: { fill: '#DFDFDF', boxShadow: 'rgba(223, 223, 223, 0.5)' },
   이과대학: { fill: '#7287AB', boxShadow: 'rgba(114, 135, 171, 0.5)' },
-  사범대학: { fill: '#4C8ECC', boxShadow: 'rgb(76, 142, 204, 0.5)' },
+  사범대학: { fill: '#4C8ECC', boxShadow: 'rgba(76, 142, 204, 0.5)' },
   디자인조형학부: { fill: '#A667AE', boxShadow: 'rgba(166, 103, 174, 0.5)' },
   보건과학대학: { fill: '#E9808C', boxShadow: 'rgba(233, 128, 140, 0.5)' },
   심리학부: { fill: '#89D7E1', boxShadow: 'rgba(137, 215, 225, 0.5)' },
@@ -312,8 +312,8 @@ export const majorColorMapping = {
   국제대학: { fill: '#58A2C6', boxShadow: ' rgba(88, 162, 198, 0.5)' },
   자유전공학부: { fill: '#7BBEEE', boxShadow: 'rgba(123, 190, 238, 0.5)' },
   스마트모빌리티학부: { fill: '#3F87F3', boxShadow: 'rgba(63, 135, 243, 0.5)' },
-  세종캠퍼스: { fill: '#A8A8A8', boxShadow: 'rgba(168, 168, 168, 0.5)' },
-  기타: { fill: '#A8A8A8', boxShadow: 'rgb(168, 168, 168,0.5)' },
+  세종캠퍼스: { fill: '#B8A8A8', boxShadow: 'rgba(168, 168, 168,0.5)' },
+  기타: { fill: '#A8A8A8', boxShadow: 'rgba(168, 168, 168,0.5)' },
 };
 
 // 학번, fill
