@@ -104,6 +104,7 @@ function MobileHeader({ logined, setLogin }: HeaderProps) {
     'default',
     'default',
     'default',
+    'default',
   ]);
 
   useEffect(() => {
@@ -231,6 +232,9 @@ function MobileHeader({ logined, setLogin }: HeaderProps) {
         </HeaderButton>
         <HeaderButton state={buttonStates[2]} onClick={() => navigate('/myboard')}>
           마이보드
+        </HeaderButton>
+        <HeaderButton state={buttonStates[3]} onClick={() => navigate('/notice')}>
+          고객센터
         </HeaderButton>
       </ButtonWrapper>
     </MainWrapper>

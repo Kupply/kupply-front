@@ -20,6 +20,7 @@ import UserPage from './admin/pages/user';
 import { IndexPage } from './admin/routes/sections';
 import OnboardingPage from './pages/main/OnboardingPage';
 import OAuthPage from './pages/login/OAuthPage';
+import NoticePage from './pages/notice/noticePage';
 
 const isLogined = true;
 
@@ -27,6 +28,7 @@ export const mainRoutes = [
   { path: '/', element: <OnboardingPage /> },
   { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined == true} /> },
   { path: '/oauth-koreapas/:koreapasUUID?', element: <OAuthPage /> },
+  { path: '/notice', element: <NoticePage /> }, // 고객센터 페이지 추가 
 ];
 
 export const authRoutes = [
