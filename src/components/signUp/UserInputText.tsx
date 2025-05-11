@@ -8,13 +8,14 @@ const userTypeMapping: Record<UserTypeOptions, string> = {
   nickname: '닉네임을',
   studentId: '고려대학교 학번을',
   firstMajor: '본전공(1전공)을',
+  firstMajorSejong: '본전공(1전공)을',
   id: '쿠플라이 아이디를',
   hopeMajor1: '이중전공',
   hopeMajor2: '이중전공',
   secondMajor: '이중전공',
   kuEmail: '고려대학교 이메일을',
   koreapasID: '고파스 아이디를',
-   koreapasPass: '고파스 비밀번호를'
+  koreapasPass: '고파스 비밀번호를',
 };
 
 interface UserInputTextProps {

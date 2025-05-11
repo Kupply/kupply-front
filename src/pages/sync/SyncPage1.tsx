@@ -33,7 +33,12 @@ export default function SyncPage1() {
           password: password,
         })
         .then((res) => {
-          if (!res.data.data.firstMajorCode) {
+          if (res.data.data.firstMajorCampus === 'S') {
+            alert('세종캠퍼스 학우는 새로 회원가입 후 이용해주세요.');
+            sessionStorage.clear();
+            navigate('/signup1');
+            return;
+          } else if (!res.data.data.firstMajorCode) {
             alert('고파스의 ‘꽈톡’ 페이지에 접속 후 다시 연동을 시도해주세요.');
             sessionStorage.clear();
             navigate('/');
