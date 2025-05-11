@@ -2,7 +2,7 @@ import TextFieldBox from '../../assets/OldTextFieldBox';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userSettingsState, userState } from '../../store/atom';
 import DropDown from '../../assets/dropdown/DropDown';
-import { majorAllList } from '../../mappings/MajorAll';
+import { majorAllList, majorAllListSejong } from '../../mappings/MajorAll';
 import { ReactNode, useEffect } from 'react';
 import { errorMessageState, rawUserState } from '../../store/atom';
 import { majorTargetList, majorTargetList_sejong } from '../../mappings/MajorTarget';
@@ -17,6 +17,7 @@ export type UserTypeOptions =
   | 'nickname'
   | 'studentId'
   | 'firstMajor'
+  | 'firstMajorSejong'
   | 'id'
   | 'hopeMajor1'
   | 'hopeMajor2'
@@ -46,6 +47,7 @@ export const placeholderMapping: Record<UserTypeOptions, string> = {
   nickname: '2자 이상 7자 이하',
   studentId: '2024000000',
   firstMajor: '전공 선택',
+  firstMajorSejong: '전공 선택',
   id: '쿠플라이 아이디',
   hopeMajor1: '1지망 관심전공 선택',
   hopeMajor2: '2지망 관심전공 선택',
@@ -59,6 +61,7 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   name: '홍길동',
   studentId: '2024000000',
   firstMajor: '',
+  firstMajorSejong: '',
   id: '',
   password: '대소문자, 숫자, 특수문자를 최소 하나씩 포함하여 8글자 이상',
   password2: '대소문자, 숫자, 특수문자를 최소 하나씩 포함하여 8글자 이상',
@@ -75,6 +78,7 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   name: '',
   studentId: '학번이 10자리 숫자가 아닙니다.',
   firstMajor: '',
+  firstMajorSejong: '',
   password: '',
   password2: '',
   nickname: '닉네임 길이가 맞지 않습니다',
@@ -150,7 +154,10 @@ export const UserInput: React.FC<UserInputProps> = ({
   //console.log(userInfo);
   return (
     <>
-      {userInfoType === 'hopeMajor1' || userInfoType === 'hopeMajor2' || userInfoType === 'secondMajor' ? (
+      {userInfoType === 'hopeMajor1' ||
+      userInfoType === 'hopeMajor2' ||
+      userInfoType === 'secondMajor' ||
+      userInfoType === 'firstMajorSejong' ? (
         <DropDown
           title={placeholderMapping[userInfoType]}
           optionList={
@@ -158,7 +165,9 @@ export const UserInput: React.FC<UserInputProps> = ({
               ? optionList
               : userInfoType === 'hopeMajor1'
               ? optionList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor.info)
-              : updatedMajorTargetList.filter((el) => el.value1 !== hopeMajor1 && el.value1 !== firstMajor.info)
+              : userInfoType === 'hopeMajor2'
+              ? updatedMajorTargetList.filter((el) => el.value1 !== hopeMajor1 && el.value1 !== firstMajor.info)
+              : majorAllListSejong
           }
           value={userInfo.info}
           setValue={(v) => setUserInfo((prev) => ({ ...prev, info: v }))}
