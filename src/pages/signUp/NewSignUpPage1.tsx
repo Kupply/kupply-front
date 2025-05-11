@@ -44,7 +44,8 @@ export function SignUp1Page() {
         password: pass,
       });
 
-      let { koreapasUUID, nickname, studentId, firstMajorCode, firstMajorCampus } = res.data.data;
+      const { koreapasUUID, nickname, studentId, firstMajorCode, firstMajorCampus } = res.data.data;
+
       if (firstMajorCampus === 'A' && !firstMajorCode) {
         alert('고파스의 ‘꽈톡’ 페이지에 접속 후 다시 회원가입을 시도해주세요.');
         sessionStorage.clear();
