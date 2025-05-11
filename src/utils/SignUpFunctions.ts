@@ -14,6 +14,7 @@ import {
   usePasswordVerification,
   useStudentIdVerification,
 } from './UserInputVerification';
+import { nameToMajorCodeMapping } from '../mappings/Mappings';
 
 export const sendEmail = async (email: string) => {
   const url = `${api_url}/auth/sendEmail`;
@@ -59,16 +60,37 @@ export const join = async (role: string) => {
 };
 
 export const koreapasJoin = async (role: string, nickname: string, email: string) => {
-  const userData: any = {
-    koreapasUUID: sessionStorage.getItem('koreapasUUID'),
-    name: sessionStorage.getItem('name'),
-    studentId: Number(sessionStorage.getItem('studentId')),
-    firstMajorCode: sessionStorage.getItem('firstMajorCode'),
-    campus: sessionStorage.getItem('firstMajorCampus'),
-    email,
-    nickname,
-    role,
-  };
+  const campus = sessionStorage.getItem('firstMajorCampus');
+
+  let userData;
+
+  if (campus === 'A') {
+    userData = {
+      koreapasUUID: sessionStorage.getItem('koreapasUUID'),
+      name: sessionStorage.getItem('name'),
+      studentId: Number(sessionStorage.getItem('studentId')),
+      firstMajorCode: sessionStorage.getItem('firstMajorCode'),
+      campus,
+      email,
+      nickname,
+      role,
+    };
+  } else {
+    // campus === 'S'
+    const firstMajorName = sessionStorage.getItem('firstMajorSejong') || '';
+    const firstMajorCode = nameToMajorCodeMapping[firstMajorName];
+
+    userData = {
+      koreapasUUID: sessionStorage.getItem('koreapasUUID'),
+      name: sessionStorage.getItem('name'),
+      studentId: Number(sessionStorage.getItem('studentId')),
+      firstMajorCode: firstMajorCode,
+      campus,
+      email,
+      nickname,
+      role,
+    };
+  }
 
   if (role === 'passer') {
     Object.assign(userData, {
@@ -89,10 +111,9 @@ export const koreapasJoin = async (role: string, nickname: string, email: string
     await client.post('/auth/koreapasJoin', userData);
   } catch (e) {
     console.error(e);
-    throw e;  // 여기서 return이 아니라 throw 해야 try/catch에서 catch됨
+    throw e; // 여기서 return이 아니라 throw 해야 try/catch에서 catch됨
   }
 };
-
 
 export function useSignUp0Verification() {
   const { idVerified } = useEmailVerification('signUp');
@@ -108,8 +129,8 @@ export function useSignUp0Verification() {
 
   return { idVerified, complete };
 }
-export function useNewSignUp1Verification(){
-  const [ID, setID] = useRecoilState(userState('koreapasID')); // 지금 얘만 문제인데? 
+export function useNewSignUp1Verification() {
+  const [ID, setID] = useRecoilState(userState('koreapasID')); // 지금 얘만 문제인데?
   const [pass, setPass] = useRecoilState(userState('koreapasPass'));
   const [complete, setComplete] = useState(false);
 
@@ -118,7 +139,7 @@ export function useNewSignUp1Verification(){
     if (pass.info !== '') setPass((prev) => ({ ...prev, infoState: 'filled' }));
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     console.log('ID.infostate: ', ID.infoState, 'pass.infostate: ', pass.infoState);
     if (ID.infoState === 'filled' && pass.infoState === 'filled' && !complete) {
       setComplete(true);
@@ -126,12 +147,12 @@ export function useNewSignUp1Verification(){
       setComplete(false);
     }
   }, [ID.infoState, pass.infoState, complete]);
-  
+
   return {
     complete,
     ID: ID.info,
-    pass: pass.info
-   }
+    pass: pass.info,
+  };
 }
 
 export function useSignUp2Verification() {
@@ -154,7 +175,7 @@ export function useSignUp2Verification() {
   // name, stdId, firstMajor의 completed 여부
 
   useEffect(() => {
-    if (name.infoState === 'filled' && stdIdVerified  && !complete) {
+    if (name.infoState === 'filled' && stdIdVerified && !complete) {
       setComplete(true);
     } else if (!(name.infoState === 'filled' && stdIdVerified) && complete) {
       setComplete(false);
@@ -312,15 +333,15 @@ export function useNewSignUp5Verification() {
   }, [nicknameVerified, complete, idVerified]);
 
   // useEffect(() => {
-  //   if (!sessionStorage.getItem('name')) navigate('/'); 
+  //   if (!sessionStorage.getItem('name')) navigate('/');
   //   else {
   //     if (nickname.info !== '') setNickname((prev) => ({ ...prev, infoState: 'filled' }));
   //   }
   // }, []);
 
   return {
-    complete, 
+    complete,
     ID,
-    nickname
-  }
+    nickname,
+  };
 }
