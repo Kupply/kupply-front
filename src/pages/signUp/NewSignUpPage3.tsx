@@ -29,6 +29,8 @@ export default function SignUp3Page() {
     if (!sessionStorage.getItem('agreeTerms')) navigate('/');
   }, []);
 
+  const firstMajorCampus = sessionStorage.getItem('firstMajorCampus');
+
   return (
     <SignUpPageWrapper step={3} stepInfo="사용자 기본 정보 입력하기">
       <ContentsList>
@@ -40,10 +42,12 @@ export default function SignUp3Page() {
           <UserInputText userInfoType="studentId" />
           <UserInput userInfoType="studentId" toNext={next} />
         </ContentsWrapper>
-        {/* <ContentsWrapper>
-           <UserInputText userInfoType="firstMajor"/>
-           <UserInput userInfoType="firstMajor" toNext={next}/>
-         </ContentsWrapper> */}
+        {firstMajorCampus === 'S' && (
+          <ContentsWrapper>
+            <UserInputText userInfoType="firstMajorSejong" />
+            <UserInput userInfoType="firstMajorSejong" toNext={next} />
+          </ContentsWrapper>
+        )}
       </ContentsList>
       <ButtonsWrapper>
         <Button04 onClick={handlePrev} style={{ width: '25.582%' }} />
