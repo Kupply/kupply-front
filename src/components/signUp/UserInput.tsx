@@ -1,5 +1,5 @@
 import TextFieldBox from '../../assets/OldTextFieldBox';
-import { useRecoilState, useRecoilValue, useSetRecoilState, } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { userSettingsState, userState } from '../../store/atom';
 import DropDown from '../../assets/dropdown/DropDown';
 import { majorAllList } from '../../mappings/MajorAll';
@@ -52,7 +52,7 @@ export const placeholderMapping: Record<UserTypeOptions, string> = {
   secondMajor: '진입 이중전공 선택',
   kuEmail: '고려대학교 이메일',
   koreapasID: '고파스 아이디',
-  koreapasPass: '고파스 비밀번호'
+  koreapasPass: '고파스 비밀번호',
 };
 
 export const helpMessageMapping: Record<UserTypeOptions, string> = {
@@ -67,8 +67,8 @@ export const helpMessageMapping: Record<UserTypeOptions, string> = {
   hopeMajor2: '',
   secondMajor: '',
   kuEmail: '',
-    koreapasID: '',
-   koreapasPass: ''
+  koreapasID: '',
+  koreapasPass: '',
 };
 
 export const errorMessageMapping: Record<UserTypeOptions, string> = {
@@ -84,9 +84,8 @@ export const errorMessageMapping: Record<UserTypeOptions, string> = {
   secondMajor: '',
   kuEmail: '유효하지 않은 이메일 주소입니다',
   koreapasID: '아이디 또는 비밀번호가 일치하지 않습니다',
-  koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다'
+  koreapasPass: '아이디 또는 비밀번호가 일치하지 않습니다',
 };
-
 
 export const UserInput: React.FC<UserInputProps> = ({
   userInfoType,
@@ -98,9 +97,7 @@ export const UserInput: React.FC<UserInputProps> = ({
 }) => {
   // info = {info: , infoState:, infoCheck: }
   const [userInfo, setUserInfo] = useRecoilState(
-    locationUsed === 'signUp'
-      ? userState(userInfoType)
-      : userSettingsState(userInfoType),
+    locationUsed === 'signUp' ? userState(userInfoType) : userSettingsState(userInfoType),
   );
 
   //console.log('this is the userinfo printed from UserInput', userInfo);
@@ -108,7 +105,6 @@ export const UserInput: React.FC<UserInputProps> = ({
   const [firstMajor, setFirstMajor] = useRecoilState(
     locationUsed === 'signUp' ? userState('firstMajor') : userSettingsState('firstMajor'),
   );
-
 
   const errorMessage = useRecoilValue(errorMessageState);
 
@@ -125,15 +121,13 @@ export const UserInput: React.FC<UserInputProps> = ({
   errorMessageMapping.password2 = errorMessage.password2ErrorMessage;
 
   var optionList = majorTargetList;
-  const campus = sessionStorage.getItem('firstMajorCampus')
+  const campus = sessionStorage.getItem('firstMajorCampus');
   if (campus !== 'A') {
     optionList = majorTargetList_sejong;
   }
 
   const updatedMajorTargetList = [...optionList];
   updatedMajorTargetList.unshift({ value1: '희망 없음', value2: '희망 없음' });
-
-
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newData = e.target.value;
@@ -156,23 +150,18 @@ export const UserInput: React.FC<UserInputProps> = ({
   //console.log(userInfo);
   return (
     <>
-      {
-      userInfoType === 'hopeMajor1' ||
-      userInfoType === 'hopeMajor2' ||
-      userInfoType === 'secondMajor' ? (
+      {userInfoType === 'hopeMajor1' || userInfoType === 'hopeMajor2' || userInfoType === 'secondMajor' ? (
         <DropDown
           title={placeholderMapping[userInfoType]}
           optionList={
-              userInfoType === 'secondMajor'
+            userInfoType === 'secondMajor'
               ? optionList
               : userInfoType === 'hopeMajor1'
               ? optionList.filter((el) => el.value1 !== hopeMajor2 && el.value1 !== firstMajor.info)
               : updatedMajorTargetList.filter((el) => el.value1 !== hopeMajor1 && el.value1 !== firstMajor.info)
           }
           value={userInfo.info}
-          setValue={
-            (v) => setUserInfo((prev) => ({ ...prev, info: v }))
-          }
+          setValue={(v) => setUserInfo((prev) => ({ ...prev, info: v }))}
         />
       ) : (
         <TextFieldBox
@@ -181,18 +170,22 @@ export const UserInput: React.FC<UserInputProps> = ({
           onChange={handleInputChange}
           state={userInfo.infoState}
           setState={
-            ((locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor')
+            (locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor'
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, infoState: s }))
           }
           setValue={
-            ((locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor')
+            (locationUsed === 'settings' && userInfoType === 'studentId') || userInfoType === 'firstMajor'
               ? () => {}
               : (s) => setUserInfo((prev) => ({ ...prev, info: s }))
           }
           helpMessage={helpMessageMapping[userInfoType]}
           errorMessage={errorMessageMapping[userInfoType]}
-          type={userInfoType === 'password' || userInfoType === 'password2' || userInfoType === 'koreapasPass' ? 'password' : undefined}
+          type={
+            userInfoType === 'password' || userInfoType === 'password2' || userInfoType === 'koreapasPass'
+              ? 'password'
+              : undefined
+          }
           onKeyDown={(e: React.KeyboardEvent) => {
             if (e.key === 'Enter') {
               //console.log('This is the onKeyDown');
