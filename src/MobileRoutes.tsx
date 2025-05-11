@@ -22,11 +22,13 @@ import MobileArchivePage from './pages/mobile/MobileArchive';
 import MobileArchiveDetailPage from './pages/mobile/MobileArchiveDetail';
 import MobileMyBoard from './pages/mobileMyBoard/MyBoardPage';
 import OAuthPage from './pages/login/OAuthPage';
+import NoticePage from './mobile/pages/NoticePage';
 
 export const mobileMainRoutes = [
   { path: '/', element: <OnboardingMobile /> },
   { path: '/login', element: <LoginPage setLogin={(isLogined) => isLogined === true} /> },
   { path: '/oauth-koreapas/:koreapasUUID?', element: <OAuthPage /> },
+  { path: '/notice', element: <NoticePage /> },
 ];
 
 export const mobileAuthRoutes = [
