@@ -215,7 +215,16 @@ const getSemesterMapping = () => {
   const currentMonth = today.getMonth(); // getMonth() returns 0-based month
 
   let currentSemester;
-  if (currentMonth <= 5) {
+
+  // Correct ver.
+  // if (currentMonth <= 5) {
+  //   currentSemester = 1; // First semester (Spring)
+  // } else {
+  //   currentSemester = 2; // Second semester (Fall)
+  // }
+
+  // Temporary ver. (2025.08.31 과도기 버전)
+  if (currentMonth <= 8) {
     currentSemester = 1; // First semester (Spring)
   } else {
     currentSemester = 2; // Second semester (Fall)
