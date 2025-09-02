@@ -8,7 +8,7 @@ import HeaderButton from '../../assets/buttons/header/HeaderButton';
 import LabelButton from '../../assets/buttons/LabelButton';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '../../utils/HttpClient';
-import { TextButton02, TextButton03LNB, TextButton06 } from '../../assets/buttons/TextButton';
+import { TextButton02, TextButton02LNB, TextButton03LNB, TextButton06 } from '../../assets/buttons/TextButton';
 import { useRecoilState } from 'recoil';
 import { SBContentState } from '../../store/atom';
 
@@ -147,6 +147,14 @@ export default function Header({ logined, setLogin }: HeaderProps) {
     setToggle(false);
     navigate('/settings');
   };
+  const handleKoreapasClick = () => {
+    setToggle(false);
+      window.open(
+        "https://www.koreapas.com/bbs/zboard.php?id=club",
+        "_blank",
+        "noopener,noreferrer"
+      ); // 고파스 이중전공 게시판 PC 버전 링크
+  };
   const handleLoginClick = () => {
     navigate('/login');
   };
@@ -246,38 +254,18 @@ export default function Header({ logined, setLogin }: HeaderProps) {
                     </ProfileText>
                   </Profile>
                   <ProfileButtons>
-                    {/* <ProfileButton onClick={handleSettingsClick}>환경설정</ProfileButton>
-                  <ProfileButton onClick={handleMessageClick}>약관 보기</ProfileButton> */}
                     <TextButton03LNB onClick={handleSettingsClick} style={{ paddingLeft: '19px' }}>
                       환경설정
                     </TextButton03LNB>
                     <TextButton03LNB onClick={handleMessageClick} style={{ paddingLeft: '19px' }}>
                       약관 보기
                     </TextButton03LNB>
-
+                    <TextButton02LNB onClick={handleKoreapasClick} color="#E283A7" style={{ paddingLeft: '19px' }}>
+                      고파스 이중전공 게시판 바로가기
+                    </TextButton02LNB>
                     <svg xmlns="http://www.w3.org/2000/svg" width="328" height="2" viewBox="0 0 328 2" fill="none">
                       <path d="M327 1.20996L0.999993 1.20996" stroke="#DFDFDF" stroke-linecap="round" />
                     </svg>
-                    {/* <ProfileButton onClick={onLogoutClick}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M14.0406 5.12639C13.6501 4.73587 13.0169 4.73587 12.6264 5.12639C12.2359 5.51691 12.2359 6.15008 12.6264 6.5406L15.0859 9.00012H7.5C6.94772 9.00012 6.5 9.44784 6.5 10.0001C6.5 10.5524 6.94772 11.0001 7.5 11.0001H15.086L12.6264 13.4597C12.2359 13.8502 12.2359 14.4834 12.6264 14.8739C13.0169 15.2645 13.6501 15.2645 14.0406 14.8739L18.2073 10.7073C18.5978 10.3167 18.5978 9.68358 18.2073 9.29306L14.0406 5.12639Z"
-                        fill="#141414"
-                      />
-                      <path
-                        d="M7.5 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V4.16667C2.5 3.72464 2.67559 3.30072 2.98816 2.98816C3.30072 2.67559 3.72464 2.5 4.16667 2.5H7.5"
-                        stroke="#141414"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        className="arrow"
-                      />
-                    </svg>
-                    로그아웃
-                  </ProfileButton> */}
-
                     <TextButton02 onClick={onLogoutClick} style={{ paddingLeft: '0.989vw' }}>
                       로그아웃
                     </TextButton02>
@@ -460,7 +448,7 @@ const ProfileButtons = styled.div`
   width: 326px;
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 25px;
 `;
 
 const ProfileButton = styled.div`

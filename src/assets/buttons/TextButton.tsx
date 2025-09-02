@@ -124,6 +124,32 @@ const TextButton02 = (props: ButtonProps) => {
   );
 };
 
+
+const TextButton02LNB = (props: ButtonProps) => {
+  const { children, fontSize = '1.04vw', fontWeight = '500', color = '#141414', ...rest } = props;
+  const [buttonState, setButtonState] = useState('default');
+  const handleHover = () => {
+    setButtonState('hover');
+  };
+  const handleHoverOut = () => {
+    setButtonState('default');
+  };
+  return (
+    <Container02 onMouseOver={handleHover} onMouseLeave={handleHoverOut} {...rest}>
+      <div style={{ marginRight: '0.21vw' }}>
+          <img
+          src="../../designImage/iconButton/iconbutton_04.svg"
+          alt="icon"
+          style={{ width: fontSize, height: fontSize }}
+        />
+      </div>
+      <Typography02 state={buttonState} style={{ fontSize: `${fontSize}`, fontWeight: `${fontWeight}`, color: `${color}` }}>
+        {children}
+      </Typography02>
+    </Container02>
+  );
+};
+
 // 작동 잘함 기존의 Header.tsx에서
 const TextButton03LNB = (props: ButtonProps) => {
   const { children, fontSize = '1.04vw', fontWeight = '500', ...rest } = props;
@@ -457,4 +483,4 @@ const Typography06 = styled.div<{ state: string }>`
   text-transform: uppercase;
 `;
 
-export { TextButton01, TextButton02, TextButton03LNB, TextButton03Settings, TextButton04, TextButton05, TextButton06 };
+export { TextButton01, TextButton02, TextButton02LNB, TextButton03LNB, TextButton03Settings, TextButton04, TextButton05, TextButton06 };
