@@ -24,6 +24,9 @@ function MobileFooter() {
   const handleButtonClick3 = () => {
     window.location.href = 'https://candle-mulberry-ea5.notion.site/c78d3f50dc014f34a9dacfe2acea8a10?pvs=4';
   };
+  const handleKoreapasClick = () => {
+    window.location.href = "https://www.koreapas.com/m/mlist.php?id=club"; // 고파스 이중전공 게시판 모바일 버전 링크
+  };
 
   return (
     <MainWrapper>
@@ -36,6 +39,7 @@ function MobileFooter() {
         <TextButton1 onClick={() => navigate('/myboard')}>마이보드</TextButton1>
         <TextButton1 onClick={() => navigate('/archive')}>합격자료</TextButton1>
         <TextButton1 onClick={() => navigate('/settings')}>환경설정</TextButton1>
+        <TextButton1 onClick={handleKoreapasClick}>고파스 바로가기</TextButton1>
       </HorizontalWrapper>
       <Typography size="2.78vw" bold="600" style={{ lineHeight: '140%' }}>
         문의
