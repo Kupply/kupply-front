@@ -24,6 +24,10 @@ export default function Footer() {
   const handleSettingsClick = () => {
     if (isLogined) navigate('/settings');
   };
+  const handleKoreapasClick = () => {
+    window.location.href = "https://www.koreapas.com/bbs/zboard.php?id=club"; // 고파스 이중전공 게시판
+  };
+
 
   const [isLogined, setisLogined] = useState<boolean>(false);
   useEffect(() => {
@@ -38,7 +42,7 @@ export default function Footer() {
           <Logo />
         </LogoWrapper>
         <Contents>
-          <ContentsWrapper justify="space-between" size="58%" maxSize="616px">
+          <ContentsWrapper justify="space-between" size="58%" maxSize="750px">
             <SiteMap>
               <Typography size="smallText" bold="600">
                 사이트맵
@@ -49,6 +53,7 @@ export default function Footer() {
                 <MenuButton onClick={handleMenu1Click}>합격자료</MenuButton>
                 <MenuButton onClick={handleMenu2Click}>마이보드</MenuButton>
                 <MenuButton onClick={handleSettingsClick}>환경설정</MenuButton>
+                <MenuButton onClick={handleKoreapasClick}>고파스 이중전공 게시판</MenuButton>
               </MenuWrapper>
             </SiteMap>
             <QNAWrapper>
