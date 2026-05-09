@@ -8,6 +8,7 @@ name: docker-build # name of workflow
 on:
   push:
     branches: ['main', 'develop']
+  workflow_dispatch:
 
 env:
   DOCKER_IMAGE: ghcr.io/yoonjunhyeok/kupply-front
