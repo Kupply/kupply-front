@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer';
+import FloatingNotice from './components/base/FloatingNotice';
 import { isMobile } from 'react-device-detect';
 import { mainRoutes, authRoutes, signupRoutes, adminRoutes, syncRoutes } from './Routes';
 import AuthRequired from './AuthRequired';
@@ -10,8 +11,6 @@ import AdminRequired from './AdminRequred';
 import RouteChangeTracker from './RouteChangeTracker';
 import { RecoilRoot } from 'recoil';
 import { mobileAuthRoutes, mobileMainRoutes, mobileSignupRoutes, mobileSyncRoutes } from './MobileRoutes';
-import { useRecoilState } from 'recoil';
-import { SBContentState } from './store/atom';
 
 interface RouteConfig {
   path: string;
@@ -32,6 +31,7 @@ export default function App() {
 
   return (
     <RecoilRoot>
+      <FloatingNotice />
       {isMobile ? (
         <>
           <Routes>
