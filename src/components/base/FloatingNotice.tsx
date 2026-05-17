@@ -67,40 +67,43 @@ export default function FloatingNotice() {
   if (!isVisible) return null;
 
   return (
-    <Wrapper
-      ref={noticeRef}
-      role="status"
-      aria-live="polite"
-      $isDragging={Boolean(dragState)}
-      style={
-        position ? { left: position.x, top: position.y, right: 'auto', bottom: 'auto', transform: 'none' } : undefined
-      }
-    >
-      <NoticeHeader onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp}>
-        <Badge>NOTICE</Badge>
-        <CloseButton type="button" onClick={handleClose} aria-label="공지 닫기">
-          ×
-        </CloseButton>
-      </NoticeHeader>
-      <Title>쿠플라이 서비스 운영 종료 안내</Title>
-      <Description>
-        <Paragraph>안녕하세요, 쿠플라이 개발팀입니다.</Paragraph>
-        <Paragraph>
-          쿠플라이는 고려대학교 이중전공 지원 정보를 더 편리하게 확인할 수 있도록 DevKor 소속 개발자 5명과 디자이너
-          3명이 함께 만들고 운영해 온 서비스입니다. 그동안 많은 학우분들께서 서비스를 이용해 주시고 응원해 주신 덕분에
-          지금까지 운영을 이어올 수 있었습니다.
-        </Paragraph>
-        <Paragraph>
-          다만 운영진 대부분이 졸업 이후 취업 등으로 각자의 업무를 이어가게 되면서, 지속적인 유지보수와 데이터 관리를
-          안정적으로 수행하기 어렵다고 판단하여 서비스 종료를 결정하게 되었습니다.
-        </Paragraph>
-        <Paragraph>
-          쿠플라이는 2026년 5월을 끝으로 운영이 종료되며, 이후 서버 접속이 중단됩니다. 서비스 운영 중 수집된 모든
-          데이터는 외부에 노출되지 않도록 안전하게 삭제한 뒤 폐쇄 절차를 마무리하겠습니다.
-        </Paragraph>
-        <Paragraph>짧지 않은 시간 동안 쿠플라이를 믿고 함께해 주신 모든 분들께 진심으로 감사드립니다.</Paragraph>
-      </Description>
-    </Wrapper>
+    <>
+      <Backdrop aria-hidden="true" />
+      <Wrapper
+        ref={noticeRef}
+        role="status"
+        aria-live="polite"
+        $isDragging={Boolean(dragState)}
+        style={
+          position ? { left: position.x, top: position.y, right: 'auto', bottom: 'auto', transform: 'none' } : undefined
+        }
+      >
+        <NoticeHeader onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp}>
+          <Badge>NOTICE</Badge>
+          <CloseButton type="button" onClick={handleClose} aria-label="공지 닫기">
+            ×
+          </CloseButton>
+        </NoticeHeader>
+        <Title>쿠플라이 서비스 운영 종료 안내</Title>
+        <Description>
+          <Paragraph>안녕하세요, 쿠플라이 개발팀입니다.</Paragraph>
+          <Paragraph>
+            쿠플라이는 고려대학교 이중전공 지원 정보를 더 편리하게 확인할 수 있도록 DevKor 소속 개발자 5명과 디자이너
+            3명이 함께 만들고 운영해 온 서비스입니다. 그동안 많은 학우분들께서 서비스를 이용해 주시고 응원해 주신 덕분에
+            지금까지 운영을 이어올 수 있었습니다.
+          </Paragraph>
+          <Paragraph>
+            다만 운영진 대부분이 졸업 이후 취업 등으로 각자의 업무를 이어가게 되면서, 지속적인 유지보수와 데이터 관리를
+            안정적으로 수행하기 어렵다고 판단하여 서비스 종료를 결정하게 되었습니다.
+          </Paragraph>
+          <Paragraph>
+            쿠플라이는 2026년 5월을 끝으로 운영이 종료되며, 이후 서버 접속이 중단됩니다. 서비스 운영 중 수집된 모든
+            데이터는 외부에 노출되지 않도록 안전하게 삭제한 뒤 폐쇄 절차를 마무리하겠습니다.
+          </Paragraph>
+          <Paragraph>짧지 않은 시간 동안 쿠플라이를 믿고 함께해 주신 모든 분들께 진심으로 감사드립니다.</Paragraph>
+        </Description>
+      </Wrapper>
+    </>
   );
 }
 
@@ -113,6 +116,13 @@ const floatIn = keyframes`
     opacity: 1;
     transform: translateY(0);
   }
+`;
+
+const Backdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 1090;
+  background: rgba(0, 0, 0, 0.60);
 `;
 
 const Wrapper = styled.aside<{ $isDragging: boolean }>`
