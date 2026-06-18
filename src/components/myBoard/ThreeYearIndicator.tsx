@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
 import { MajorOptionsKR as MajorOptions } from '../../mappings/MajorTypes';
-import { collegeNameMappingByKR as collegeAPIMapping } from '../../mappings/Mappings';
+import { collegeNameMappingByKR as collegeAPIMapping, majorAPIMappingByKR } from '../../mappings/Mappings';
+import { majorNameMappingByKr } from '../../mappings/Mappings';
 import { majorNameMapping } from '../../mappings/Mappings';
 import SemesterButton from '../../assets/tabMenu/TabMenu02';
 import { LastThreeSemesters } from '../../common/LastThreeSemesters';
@@ -103,7 +104,7 @@ const ThreeYear = ({
         </Text1>
         <button
           onClick={() => {
-            navigate('/archive/' + collegeAPIMapping[majorKoreanName as MajorOptions]);
+            navigate(`/archive/${majorAPIMappingByKR[majorKoreanName as MajorOptions]}`);
           }}
         >
           <Arrow src="designImage/myBoard/RightArrow.svg" alt="arrow" />
