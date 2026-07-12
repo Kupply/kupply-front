@@ -84,23 +84,29 @@ export default function FloatingNotice() {
             ×
           </CloseButton>
         </NoticeHeader>
-        <Title>쿠플라이 서비스 운영 종료 안내</Title>
+        <Title>쿠플라이 운영 주체 변경 안내</Title>
         <Description>
           <Paragraph>안녕하세요, 쿠플라이 개발팀입니다.</Paragraph>
           <Paragraph>
             쿠플라이는 고려대학교 이중전공 지원 정보를 더 편리하게 확인할 수 있도록 DevKor 소속 개발자 5명과 디자이너
-            3명이 함께 만들고 운영해 온 서비스입니다. 그동안 많은 학우분들께서 서비스를 이용해 주시고 응원해 주신 덕분에
+            3명이 함께 만들고 운영해 온 서비스입니다. 그동안 많은 학우분께서 서비스를 이용해 주시고 응원해 주신 덕분에
             지금까지 운영을 이어올 수 있었습니다.
           </Paragraph>
           <Paragraph>
-            다만 운영진 대부분이 졸업 이후 취업 등으로 각자의 업무를 이어가게 되면서, 지속적인 유지보수와 데이터 관리를
-            안정적으로 수행하기 어렵다고 판단하여 서비스 종료를 결정하게 되었습니다.
+            다만 운영진 대부분이 졸업 이후 취업 등으로 각자의 업무를 이어가게 되면서, 기존 개발팀이 지속적인 유지보수와
+            데이터 관리를 안정적으로 수행하기 어려운 상황이 되었습니다. 이에 서비스를 종료하는 대신, 쿠플라이가 안정적으로
+            계속 운영될 수 있도록 운영 주체를 고파스로 이전하기로 했습니다.
           </Paragraph>
           <Paragraph>
-            쿠플라이는 2026년 5월을 끝으로 운영이 종료되며, 이후 서버 접속이 중단됩니다. 서비스 운영 중 수집된 모든
-            데이터는 외부에 노출되지 않도록 안전하게 삭제한 뒤 폐쇄 절차를 마무리하겠습니다.
+            쿠플라이는 기존에도 고파스 계정을 기반으로 로그인해 왔기 때문에 별도의 재가입은 필요하지 않습니다. 운영 주체가
+            변경된 이후에도 주요 기능과 이용 방식은 현재와 동일하게 유지될 예정입니다.
           </Paragraph>
-          <Paragraph>짧지 않은 시간 동안 쿠플라이를 믿고 함께해 주신 모든 분들께 진심으로 감사드립니다.</Paragraph>
+          <Paragraph>
+            운영 이전 이후 서비스 이용 및 개인정보 관련 문의는 고파스 측 문의 채널을 통해 부탁드립니다.
+          </Paragraph>
+          <Paragraph>
+            짧지 않은 시간 동안 쿠플라이를 믿고 함께해 주신 모든 분께 진심으로 감사드립니다.
+          </Paragraph>
         </Description>
       </Wrapper>
     </>
@@ -110,11 +116,9 @@ export default function FloatingNotice() {
 const floatIn = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(18px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
   }
 `;
 
@@ -122,42 +126,42 @@ const Backdrop = styled.div`
   position: fixed;
   inset: 0;
   z-index: 1090;
-  background: rgba(0, 0, 0, 0.60);
+  background: rgba(20, 16, 19, 0.55);
 `;
 
 const Wrapper = styled.aside<{ $isDragging: boolean }>`
   position: fixed;
-  top: 92px;
+  top: 4.792vw;
   left: 50%;
   z-index: 1100;
-  width: min(640px, calc(100vw - 32px));
-  padding: 26px 28px 28px;
+  width: 43vw;
+  padding: 1.458vw 1.667vw 1.563vw;
   box-sizing: border-box;
-  border: 1px solid rgba(229, 124, 144, 0.22);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 20px 50px rgba(223, 223, 223, 0.5);
-  backdrop-filter: blur(9px);
+  border: none;
+  border-radius: 1.042vw;
+  background: #fff;
+  box-shadow: 0 0 1.563vw rgba(0, 0, 0, 0.1);
   color: #141414;
   font-family: Pretendard;
   animation: ${floatIn} 260ms ease-out;
   transition: box-shadow 160ms ease;
   transform: translateX(-50%);
   user-select: none;
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 6.25vw);
   overflow-y: auto;
   overscroll-behavior: contain;
 
   ${({ $isDragging }) =>
     $isDragging &&
     `
-      box-shadow: 0 24px 60px rgba(223, 223, 223, 0.72);
+      box-shadow: 0 0 1.875vw rgba(0, 0, 0, 0.16);
     `}
 
   @media screen and (max-width: 900px) {
     top: 84px;
-    width: min(560px, calc(100vw - 32px));
-    padding: 24px 24px 26px;
+    width: min(640px, calc(100vw - 32px));
+    padding: 24px 28px 26px;
+    border-radius: 20px;
   }
 
   @media screen and (max-width: 600px) {
@@ -175,26 +179,36 @@ const NoticeHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 0.625vw;
   cursor: grab;
   touch-action: none;
 
   &:active {
     cursor: grabbing;
   }
+
+  @media screen and (max-width: 900px) {
+    gap: 12px;
+  }
 `;
 
 const Badge = styled.span`
   display: inline-flex;
   align-items: center;
-  height: 24px;
-  padding: 0 10px;
+  height: 1.25vw;
+  padding: 0 0.521vw;
   border-radius: 999px;
   background: rgba(229, 124, 144, 0.12);
   color: #e57c90;
-  font-size: 12px;
+  font-size: 0.625vw;
   font-weight: 700;
   line-height: 1;
+
+  @media screen and (max-width: 900px) {
+    height: 24px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
 
   @media screen and (max-width: 600px) {
     height: 22px;
@@ -207,20 +221,26 @@ const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 1.458vw;
+  height: 1.458vw;
   padding: 0;
   border: 0;
   border-radius: 50%;
   background: transparent;
   color: rgba(20, 20, 20, 0.5);
-  font-size: 24px;
+  font-size: 1.25vw;
   line-height: 1;
   cursor: pointer;
 
   &:hover {
     background: rgba(20, 20, 20, 0.05);
     color: #141414;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 28px;
+    height: 28px;
+    font-size: 24px;
   }
 
   @media screen and (max-width: 600px) {
@@ -231,13 +251,14 @@ const CloseButton = styled.button`
 `;
 
 const Title = styled.h2`
-  margin: 18px 0 16px;
+  margin: 0.938vw 0 0.833vw;
   color: #141414;
-  font-size: 24px;
+  font-size: 1.25vw;
   font-weight: 700;
   line-height: 1.35;
 
   @media screen and (max-width: 900px) {
+    margin: 18px 0 16px;
     font-size: 22px;
   }
 
@@ -251,10 +272,11 @@ const Title = styled.h2`
 const Description = styled.div`
   margin: 0;
   color: rgba(20, 20, 20, 0.72);
-  font-size: 15px;
+  font-size: 0.781vw;
   font-weight: 500;
-  line-height: 1.72;
+  line-height: 1.68;
   word-break: keep-all;
+  text-wrap: pretty;
 
   @media screen and (max-width: 900px) {
     font-size: 14px;
@@ -268,7 +290,11 @@ const Description = styled.div`
 `;
 
 const Paragraph = styled.p`
-  margin: 0 0 10px;
+  margin: 0 0 0.521vw;
+
+  @media screen and (max-width: 900px) {
+    margin-bottom: 10px;
+  }
 
   &:last-child {
     margin-bottom: 0;
